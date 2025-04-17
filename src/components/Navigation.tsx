@@ -18,6 +18,9 @@ const Navigation = () => {
         <nav>
           <ul className="flex space-x-6">
             <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
+            </motion.li>
+            <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <Link href="/portfolio" className="hover:text-blue-400 transition-colors">Portfolio</Link>
             </motion.li>
             <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
