@@ -47,9 +47,9 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
           {quote && (
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50">
               <p className="text-lg text-gray-300 italic relative">
-                <span className="absolute -left-2 -top-2 text-blue-400 text-4xl">"</span>
+                <span className="absolute -left-4 top-0 text-blue-400 text-3xl">&ldquo;</span>
                 {quote.text}
-                <span className="absolute -bottom-4 -right-2 text-blue-400 text-4xl">"</span>
+                <span className="absolute -bottom-4 right-0 text-blue-400 text-3xl">&rdquo;</span>
               </p>
               <p className="text-blue-400 mt-6 text-right">— {quote.author}</p>
             </div>

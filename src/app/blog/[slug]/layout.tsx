@@ -2,12 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { posts } from '../posts/data';
 
-interface Props {
-  params: { slug: string }
-}
-
-// Get metadata from our posts data
-function getPostMetadata(slug: string) {
+async function getPostMetadata(slug: string) {
   const post = posts.find(p => p.slug === slug);
   if (!post) return null;
   
@@ -15,13 +10,19 @@ function getPostMetadata(slug: string) {
     title: post.title,
     description: post.description,
     image: post.image,
-    type: 'article' as const, // Explicitly type as OpenGraph type
+    type: 'article' as const,
     publishedTime: new Date(post.publishedDate).toISOString()
   };
 }
 
+type Props = {
+  params: Promise<{ slug: string }>;
+  children: React.ReactNode;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostMetadata(params.slug);
+  const resolvedParams = await params;
+  const post = await getPostMetadata(resolvedParams.slug);
   
   if (!post) {
     return notFound();
@@ -55,10 +56,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function BlogPostLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function BlogPostLayout({ children }: Props) {
   return children;
 }

@@ -13,6 +13,14 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
       transition={{ duration: 0.8 }}
       className="container mx-auto px-4 text-center relative z-10"
     >
+      <div className="text-center max-w-4xl mx-auto">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          Hi, I&apos;m Ali Al-Zuhairi
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-300 mb-8">
+          I&apos;m a designer and developer who loves creating beautiful digital experiences.
+        </p>
+      </div>
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -34,9 +42,9 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto relative">
-            <span className="absolute -left-4 top-0 text-blue-400 text-3xl">"</span>
+            <span className="absolute -left-4 top-0 text-blue-400 text-3xl">&ldquo;</span>
             {quote.text}
-            <span className="absolute -bottom-4 right-0 text-blue-400 text-3xl">"</span>
+            <span className="absolute -bottom-4 right-0 text-blue-400 text-3xl">&rdquo;</span>
             <motion.span 
               className="block text-blue-400 mt-4"
               initial={{ x: -10, opacity: 0 }}

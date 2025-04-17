@@ -1,17 +1,15 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
-import { motion } from 'framer-motion';
+import BlogPostClient from '@/components/blog/BlogPostClient';
 import { posts } from '../posts/data';
-import {
-  TwitterShareButton,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-} from 'next-share';
+
+// Add generateStaticParams export
+export function generateStaticParams() {
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 // Helper function to convert markdown-style content to JSX
 function formatContent(content: string) {
@@ -44,12 +42,15 @@ function formatContent(content: string) {
   });
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const router = useRouter();
-  const post = posts.find(p => p.slug === params.slug);
+type Props = {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function BlogPost({ params }: Props) {
+  const resolvedParams = await params;
+  const post = posts.find(p => p.slug === resolvedParams.slug);
 
   if (!post) {
-    router.push('/blog');
     return null;
   }
 
@@ -61,11 +62,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       
       <article className="pt-24 pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <BlogPostClient shareUrl={shareUrl} title={post.title}>
             {/* Article Header */}
             <div className="mb-8">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
@@ -89,14 +86,6 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                   </svg>
                   {post.readTime}
                 </span>
-              </div>
-              <div className="flex gap-4 mb-6">
-                <TwitterShareButton url={shareUrl} title={post.title}>
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-                <LinkedinShareButton url={shareUrl} title={post.title}>
-                  <LinkedinIcon size={32} round />
-                </LinkedinShareButton>
               </div>
               <div className="flex flex-wrap gap-2 mb-8">
                 {post.tags.map((tag, index) => (
@@ -126,7 +115,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             <div className="prose prose-invert max-w-none">
               {formatContent(post.content)}
             </div>
-          </motion.div>
+          </BlogPostClient>
         </div>
       </article>
 

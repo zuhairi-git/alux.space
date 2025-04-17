@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
@@ -13,8 +13,26 @@ interface CareerHighlight {
   imageQuery: string;
 }
 
-export default async function JobseekingPage() {
-  const highlights: CareerHighlight[] = [
+interface UnsplashPhoto {
+  urls: {
+    regular: string;
+  };
+  user: {
+    name: string;
+    links: {
+      html: string;
+    };
+  };
+}
+
+interface HighlightWithPhoto extends CareerHighlight {
+  photo: UnsplashPhoto | null;
+}
+
+export default function JobseekingPage() {
+  const [highlightsWithPhotos, setHighlightsWithPhotos] = useState<HighlightWithPhoto[]>([]);
+
+  const highlights = useMemo<CareerHighlight[]>(() => [
     {
       title: 'Professional Development Journey',
       description: 'Continuous growth through certifications, workshops, and hands-on experience in product design and management.',
@@ -33,17 +51,24 @@ export default async function JobseekingPage() {
       ],
       imageQuery: 'leadership mentoring team'
     }
-  ];
+  ], []);
 
-  const highlightsWithPhotos = await Promise.all(
-    highlights.map(async (highlight) => {
-      const photo = await getUnsplashPhoto(highlight.imageQuery);
-      return {
-        ...highlight,
-        photo: photo || null,
-      };
-    })
-  );
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const photosData = await Promise.all(
+        highlights.map(async (highlight) => {
+          const photo = await getUnsplashPhoto(highlight.imageQuery);
+          return {
+            ...highlight,
+            photo: photo || null,
+          };
+        })
+      );
+      setHighlightsWithPhotos(photosData);
+    };
+
+    fetchPhotos();
+  }, [highlights]);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -123,7 +148,7 @@ export default async function JobseekingPage() {
                         </>
                       ) : (
                         <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                          <span className="text-gray-600">Image unavailable</span>
+                          <span className="text-gray-600">Loading...</span>
                         </div>
                       )}
                     </div>
