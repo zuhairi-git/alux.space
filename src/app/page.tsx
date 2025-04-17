@@ -2,29 +2,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
+import Hero from '@/components/hero/Hero';
+import type { HeroConfig } from '@/types/hero';
+
+const heroConfig: HeroConfig = {
+  variant: 'design',
+  title: 'Product Owner & Design Leader',
+  subtitle: 'Transforming Ideas into Exceptional Digital Experiences',
+  quote: {
+    text: 'Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what\'s possible.',
+    author: 'Ali'
+  },
+  backgroundEffect: 'design-code',
+  cta: {
+    text: 'Explore My Work',
+    href: '/portfolio'
+  }
+};
 
 const HomePage = () => {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white">
       <Navigation />
-
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-700/20 via-purple-500/20 to-transparent"></div>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto px-4 text-center relative z-10"
-        >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6">Product Owner & Design Leader</h2>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            " Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what's possible.
-            
-            <span className="text-blue-400"> — Ali</span>
-          </p>
-        </motion.div>
-      </section>
+      <Hero config={heroConfig} />
 
       {/* About Section */}
       <motion.section 
