@@ -148,15 +148,15 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="relative group"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
-              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-purple-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
+              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
                 <div className="flex flex-col md:flex-row gap-6 items-start">
-                  <span className="material-symbols text-3xl text-blue-400 p-3 bg-blue-400/10 rounded-lg">
+                  <span className="material-symbols text-3xl text-purple-400 p-3 bg-purple-400/10 rounded-lg">
                     rocket_launch
                   </span>
                   <div className="flex-1">
                     <div className="flex flex-col md:flex-row justify-between mb-4">
-                      <h4 className="text-xl font-semibold text-blue-400 mb-2 md:mb-0">Product Designer | Product Owner</h4>
+                      <h4 className="text-xl font-semibold text-purple-400 mb-2 md:mb-0">Product Designer | Product Owner</h4>
                       <span className="text-gray-400 flex items-center gap-2">
                         <span className="material-symbols text-sm">schedule</span>
                         2023 - Present
@@ -179,15 +179,15 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="relative group"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
-              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-blue-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
+              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
                 <div className="flex flex-col md:flex-row gap-6 items-start">
-                  <span className="material-symbols text-3xl text-purple-400 p-3 bg-purple-400/10 rounded-lg">
+                  <span className="material-symbols text-3xl text-blue-400 p-3 bg-blue-400/10 rounded-lg">
                     insights
                   </span>
                   <div className="flex-1">
                     <div className="flex flex-col md:flex-row justify-between mb-4">
-                      <h4 className="text-xl font-semibold text-purple-400 mb-2 md:mb-0">Professional Product Designer</h4>
+                      <h4 className="text-xl font-semibold text-blue-400 mb-2 md:mb-0">Professional Product Designer</h4>
                       <span className="text-gray-400 flex items-center gap-2">
                         <span className="material-symbols text-sm">schedule</span>
                         2017 - 2023
