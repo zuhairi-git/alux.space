@@ -84,98 +84,158 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 bg-black/30"
+        className="py-20 bg-black/30 relative overflow-hidden"
       >
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
+        <div className="absolute h-full w-1 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-transparent left-1/2 transform -translate-x-1/2 md:left-[20%] top-0" />
+        
         <div className="container mx-auto px-4">
-          <h3 className="text-3xl font-bold mb-12 text-center">Work Experience</h3>
-          <div className="max-w-4xl mx-auto space-y-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+          <div className="text-center mb-16">
+            <motion.span 
+              className="material-symbols text-4xl text-blue-400 mb-4 inline-block"
+              initial={{ rotateY: 0 }}
+              animate={{ rotateY: 360 }}
+              transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
             >
-              <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h4 className="text-xl font-semibold text-blue-400">Product Designer | Product Owner</h4>
-                <span className="text-gray-400">2023 - Present</span>
+              work_history
+            </motion.span>
+            <h3 className="text-3xl font-bold mb-4">Work Experience</h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">A journey through my professional career, showcasing my growth and expertise in design and technology.</p>
+          </div>
+
+          <div className="max-w-5xl mx-auto space-y-12">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
+              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <span className="material-symbols text-3xl text-blue-400 p-3 bg-blue-400/10 rounded-lg">
+                    rocket_launch
+                  </span>
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row justify-between mb-4">
+                      <h4 className="text-xl font-semibold text-blue-400 mb-2 md:mb-0">Product Designer | Product Owner</h4>
+                      <span className="text-gray-400 flex items-center gap-2">
+                        <span className="material-symbols text-sm">schedule</span>
+                        2023 - Present
+                      </span>
+                    </div>
+                    <h5 className="text-lg text-gray-300 mb-3 flex items-center gap-2">
+                      <span className="material-symbols text-sm">location_on</span>
+                      Webropol, Helsinki, Finland
+                    </h5>
+                    <p className="text-gray-400">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
+                  </div>
+                </div>
               </div>
-              <h5 className="text-lg text-gray-300 mb-2">Webropol, Helsinki, Finland</h5>
-              <p className="text-gray-400">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+              className="relative group"
             >
-              <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h4 className="text-xl font-semibold text-blue-400">Professional Product Designer</h4>
-                <span className="text-gray-400">2017 - 2023</span>
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
+              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <span className="material-symbols text-3xl text-purple-400 p-3 bg-purple-400/10 rounded-lg">
+                    insights
+                  </span>
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row justify-between mb-4">
+                      <h4 className="text-xl font-semibold text-purple-400 mb-2 md:mb-0">Professional Product Designer</h4>
+                      <span className="text-gray-400 flex items-center gap-2">
+                        <span className="material-symbols text-sm">schedule</span>
+                        2017 - 2023
+                      </span>
+                    </div>
+                    <h5 className="text-lg text-gray-300 mb-3 flex items-center gap-2">
+                      <span className="material-symbols text-sm">location_on</span>
+                      Reslink, Espoo, Finland
+                    </h5>
+                    <p className="text-gray-400">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
+                  </div>
+                </div>
               </div>
-              <h5 className="text-lg text-gray-300 mb-2">Reslink, Espoo, Finland</h5>
-              <p className="text-gray-400">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+              className="relative group"
             >
-              <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h4 className="text-xl font-semibold text-blue-400">Senior UI/UX Designer & IT Expert</h4>
-                <span className="text-gray-400">2016 - 2023</span>
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
+              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <span className="material-symbols text-3xl text-blue-400 p-3 bg-blue-400/10 rounded-lg">
+                    grid_view
+                  </span>
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row justify-between mb-4">
+                      <h4 className="text-xl font-semibold text-blue-400 mb-2 md:mb-0">Senior UI/UX Designer & IT Expert</h4>
+                      <span className="text-gray-400 flex items-center gap-2">
+                        <span className="material-symbols text-sm">schedule</span>
+                        2016 - 2023
+                      </span>
+                    </div>
+                    <h5 className="text-lg text-gray-300 mb-3 flex items-center gap-2">
+                      <span className="material-symbols text-sm">location_on</span>
+                      Reslink, Helsinki, Finland
+                    </h5>
+                    <p className="text-gray-400">Web Application, Android UI Development, and VPN Management.</p>
+                  </div>
+                </div>
               </div>
-              <h5 className="text-lg text-gray-300 mb-2">Reslink, Helsinki, Finland</h5>
-              <p className="text-gray-400">Web Application, Android UI Development, and VPN Management.</p>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+              className="relative group opacity-90 hover:opacity-100"
             >
-              <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h4 className="text-xl font-semibold text-blue-400">Graphic Designer UI/UX & IT Expert</h4>
-                <span className="text-gray-400">2014 - 2016</span>
+              <div className="absolute -inset-1 bg-gradient-to-r from-gray-500/20 to-gray-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70" />
+              <div className="relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 hover:border-gray-400/50 transition-all duration-300">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <span className="material-symbols text-3xl text-gray-400 p-3 bg-gray-400/10 rounded-lg">
+                    history
+                  </span>
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row justify-between mb-4">
+                      <h4 className="text-xl font-semibold text-gray-300 mb-2 md:mb-0">Earlier Positions</h4>
+                      <span className="text-gray-400 flex items-center gap-2">
+                        <span className="material-symbols text-sm">schedule</span>
+                        2000 - 2016
+                      </span>
+                    </div>
+                    <div className="space-y-4">
+                      <div>
+                        <h5 className="text-lg text-gray-400 mb-1">Graphic Designer UI/UX & IT Expert</h5>
+                        <p className="text-gray-500">Reslink, Helsinki, Finland (2014 - 2016)</p>
+                      </div>
+                      <div>
+                        <h5 className="text-lg text-gray-400 mb-1">Freelance IT Expert & UI Developer</h5>
+                        <p className="text-gray-500">From Damascus to Espoo (2000 - 2014)</p>
+                      </div>
+                      <div>
+                        <h5 className="text-lg text-gray-400 mb-1">Graphic Designer & IT Expert</h5>
+                        <p className="text-gray-500">Various Magazines and Newspapers — Tehran, Iran</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h5 className="text-lg text-gray-300 mb-2">Reslink, Helsinki, Finland</h5>
-              <p className="text-gray-400">Graphic & Website Designer, Android and iOS Prototyping, & MDM Management.</p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
-            >
-              <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h4 className="text-xl font-semibold text-blue-400">Freelance IT Expert & UI Developer</h4>
-                <span className="text-gray-400">2000 - 2014</span>
-              </div>
-              <h5 className="text-lg text-gray-300 mb-2">From Damascus to Espoo</h5>
-              <p className="text-gray-400">Website and Android Developer.</p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl opacity-80"
-            >
-              <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h4 className="text-xl font-semibold text-blue-400">Graphic Designer & IT Expert</h4>
-                <span className="text-gray-400">Early Career</span>
-              </div>
-              <h5 className="text-lg text-gray-300 mb-2">Various Magazines and Newspapers — Tehran, Iran</h5>
             </motion.div>
           </div>
         </div>
