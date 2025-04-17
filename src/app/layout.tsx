@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 
+// Google Material Symbols Rounded CSS import
+const MATERIAL_SYMBOLS = 'Material Symbols Rounded';
+
+// Add Material Symbols stylesheet
+const materialSymbolsUrl = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,200,0..1,-50..200';
+
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ['400', '500', '600', '700'],
@@ -45,6 +51,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href={materialSymbolsUrl} />
+      </head>
       <body className={`${poppins.variable} ${roboto.variable}`}>
         {children}
       </body>
