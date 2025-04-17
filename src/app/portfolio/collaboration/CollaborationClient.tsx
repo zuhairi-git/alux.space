@@ -4,47 +4,27 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
-import { getUnsplashPhoto } from '@/utils/unsplash';
 
-interface CareerHighlight {
+interface Achievement {
   title: string;
   description: string;
-  achievements: string[];
+  metrics: string[];
   imageQuery: string;
+  photo?: {
+    url: string;
+    author: {
+      name: string;
+      username: string;
+      link: string;
+    };
+  };
 }
 
-export default async function JobseekingPage() {
-  const highlights: CareerHighlight[] = [
-    {
-      title: 'Professional Development Journey',
-      description: 'Continuous growth through certifications, workshops, and hands-on experience in product design and management.',
-      achievements: [
-        'Advanced certification in UX Design',
-        'Product Management certification'
-      ],
-      imageQuery: 'professional development learning'
-    },
-    {
-      title: 'Leadership Growth',
-      description: 'Evolution from individual contributor to team leader, driving innovation and mentoring future talents.',
-      achievements: [
-        'Mentored 15+ junior designers',
-        'Led 3 major organizational initiatives'
-      ],
-      imageQuery: 'leadership mentoring team'
-    }
-  ];
+interface Props {
+  achievements: Achievement[];
+}
 
-  const highlightsWithPhotos = await Promise.all(
-    highlights.map(async (highlight) => {
-      const photo = await getUnsplashPhoto(highlight.imageQuery);
-      return {
-        ...highlight,
-        photo: photo || null,
-      };
-    })
-  );
-
+export default function CollaborationClient({ achievements }: Props) {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -68,34 +48,34 @@ export default async function JobseekingPage() {
           >
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
             >
-              Career Development & Growth
+              Collaboration & Leadership
             </motion.h1>
 
             <motion.p 
               variants={fadeInUp}
               className="text-xl text-gray-300 mb-12"
             >
-              Continuous learning and professional development in product design and leadership.
+              Building bridges between design, development, and business through effective collaboration and leadership.
             </motion.p>
 
             <motion.div 
               variants={fadeInUp}
               className="grid gap-12"
             >
-              {highlightsWithPhotos.map((highlight, index) => (
+              {achievements.map((achievement, index) => (
                 <div 
                   key={index}
-                  className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                  className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                 >
                   <div className="flex flex-col md:flex-row gap-8">
                     <div className="relative w-full md:w-1/3 h-48 rounded-lg overflow-hidden">
-                      {highlight.photo ? (
+                      {achievement.photo ? (
                         <>
                           <Image
-                            src={highlight.photo.urls.regular}
-                            alt={highlight.title}
+                            src={achievement.photo.url}
+                            alt={achievement.title}
                             fill
                             className="object-cover transform group-hover:scale-105 transition-transform duration-300"
                             sizes="(max-width: 768px) 100vw, 33vw"
@@ -103,12 +83,12 @@ export default async function JobseekingPage() {
                           <div className="absolute bottom-2 right-2 text-xs text-white/70">
                             Photo by{' '}
                             <a
-                              href={highlight.photo.user.links.html}
+                              href={achievement.photo.author.link}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="hover:text-white"
                             >
-                              {highlight.photo.user.name}
+                              {achievement.photo.author.name}
                             </a>
                             {' '}on{' '}
                             <a
@@ -128,15 +108,15 @@ export default async function JobseekingPage() {
                       )}
                     </div>
                     <div className="md:w-2/3">
-                      <h3 className="text-2xl font-semibold mb-4 text-purple-400">{highlight.title}</h3>
-                      <p className="text-gray-300 mb-4">{highlight.description}</p>
+                      <h3 className="text-2xl font-semibold mb-4 text-blue-400">{achievement.title}</h3>
+                      <p className="text-gray-300 mb-4">{achievement.description}</p>
                       <ul className="space-y-2 text-gray-400">
-                        {highlight.achievements.map((achievement, idx) => (
+                        {achievement.metrics.map((metric, idx) => (
                           <li key={idx} className="flex items-center">
-                            <svg className="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
                             </svg>
-                            {achievement}
+                            {metric}
                           </li>
                         ))}
                       </ul>

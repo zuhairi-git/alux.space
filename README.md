@@ -1,24 +1,49 @@
+# Portfolio Website
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+1. First, set up your environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit `.env` and add your Unsplash API credentials from https://unsplash.com/developers
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
+
+The following environment variables are required:
+
+- `NEXT_PUBLIC_UNSPLASH_ACCESS_KEY`: Your Unsplash API access key
+- `NEXT_PUBLIC_BASE_URL`: The base URL of your website (defaults to http://localhost:3000 in development)
+
+## Image Attribution
+
+This project uses images from Unsplash. All images are properly attributed according to the [Unsplash Guidelines](https://unsplash.com/license).
 
 ## Learn More
 
