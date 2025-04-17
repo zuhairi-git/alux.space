@@ -19,8 +19,8 @@ const MaterialIcon = ({ icon, className = "", delay = 0 }) => (
 );
 
 const DesignCodeEffect = () => {
-  const designIcons = ['palette', 'brush', 'design_services', 'style'];
-  const codeIcons = ['code', 'terminal', 'developer_mode', 'data_object'];
+  const designIcons = ['design_services', 'developer_board_chip', 'gesture', 'lens_blur', 'motion_photos_on', 'spatial_tracking'];
+  const codeIcons = ['code', 'terminal', 'deployed_code', 'data_object', 'memory', 'integration_instructions'];
   const [showDesign, setShowDesign] = useState(true);
 
   useEffect(() => {
@@ -31,7 +31,10 @@ const DesignCodeEffect = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden opacity-20">
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Very light base overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/20 to-transparent z-0" />
+      
       <AnimatePresence mode="wait">
         {showDesign ? (
           <motion.div
@@ -39,19 +42,35 @@ const DesignCodeEffect = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center z-10"
           >
             {designIcons.map((icon, index) => (
-              <MaterialIcon
+              <motion.div
                 key={icon}
-                icon={icon}
-                delay={index * 0.2}
-                className="text-6xl absolute transform -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
+                className="absolute"
+                initial={{ 
+                  opacity: 0,
+                  scale: 0.5,
+                  x: `${Math.random() * 100}%`,
+                  y: `${Math.random() * 100}%`
                 }}
-              />
+                animate={{ 
+                  opacity: [0.1, 0.2, 0.1],
+                  scale: [1, 1.2, 1],
+                  x: `${Math.random() * 100}%`,
+                  y: `${Math.random() * 100}%`
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: index * 0.2
+                }}
+              >
+                <span className="material-symbols text-6xl text-blue-400/20">
+                  {icon}
+                </span>
+              </motion.div>
             ))}
           </motion.div>
         ) : (
@@ -60,23 +79,55 @@ const DesignCodeEffect = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center z-10"
           >
             {codeIcons.map((icon, index) => (
-              <MaterialIcon
+              <motion.div
                 key={icon}
-                icon={icon}
-                delay={index * 0.2}
-                className="text-6xl absolute transform -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
+                className="absolute"
+                initial={{ 
+                  opacity: 0,
+                  scale: 0.5,
+                  x: `${Math.random() * 100}%`,
+                  y: `${Math.random() * 100}%`
                 }}
-              />
+                animate={{ 
+                  opacity: [0.1, 0.2, 0.1],
+                  scale: [1, 1.2, 1],
+                  x: `${Math.random() * 100}%`,
+                  y: `${Math.random() * 100}%`
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: index * 0.2
+                }}
+              >
+                <span className="material-symbols text-6xl text-purple-400/20">
+                  {icon}
+                </span>
+              </motion.div>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Subtle ambient light */}
+      <motion.div
+        className="absolute inset-0 z-10"
+        animate={{
+          background: [
+            'radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 70%)',
+            'radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.03) 0%, transparent 70%)'
+          ]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      />
     </div>
   );
 };
