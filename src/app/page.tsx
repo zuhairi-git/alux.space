@@ -10,7 +10,7 @@ const heroConfig: HeroConfig = {
   title: 'Product Owner & Design Leader',
   subtitle: 'Transforming Ideas into Exceptional Digital Experiences',
   quote: {
-    text: 'Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what\'s possible.',
+    text: 'Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what&apos;s possible.',
     author: 'Ali'
   },
   backgroundEffect: 'design-code',

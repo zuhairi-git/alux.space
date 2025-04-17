@@ -7,17 +7,6 @@ interface Props {
   type: 'particles' | 'design-code' | 'gradient' | 'none';
 }
 
-const MaterialIcon = ({ icon, className = "", delay = 0 }) => (
-  <motion.span
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5, delay }}
-    className={`material-symbols-outlined ${className}`}
-  >
-    {icon}
-  </motion.span>
-);
-
 const DesignCodeEffect = () => {
   const designIcons = ['design_services', 'developer_board_chip', 'gesture', 'lens_blur', 'motion_photos_on', 'spatial_tracking'];
   const codeIcons = ['code', 'terminal', 'deployed_code', 'data_object', 'memory', 'integration_instructions'];

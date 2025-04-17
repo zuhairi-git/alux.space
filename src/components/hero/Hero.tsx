@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import DefaultHero from './variants/DefaultHero';
 import DesignHero from './variants/DesignHero';
