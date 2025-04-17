@@ -13,7 +13,7 @@ const heroConfig: HeroConfig = {
     text: 'Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what\'s possible.',
     author: 'Ali'
   },
-  backgroundEffect: 'design-code',
+  //backgroundEffect: 'design-code',
   cta: {
     text: 'Explore My Work',
     href: '/portfolio'
