@@ -78,6 +78,109 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* Work Experience Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 bg-black/30"
+      >
+        <div className="container mx-auto px-4">
+          <h3 className="text-3xl font-bold mb-12 text-center">Work Experience</h3>
+          <div className="max-w-4xl mx-auto space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+            >
+              <div className="flex flex-col md:flex-row justify-between mb-2">
+                <h4 className="text-xl font-semibold text-blue-400">Product Designer | Product Owner</h4>
+                <span className="text-gray-400">2023 - Present</span>
+              </div>
+              <h5 className="text-lg text-gray-300 mb-2">Webropol, Helsinki, Finland</h5>
+              <p className="text-gray-400">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+            >
+              <div className="flex flex-col md:flex-row justify-between mb-2">
+                <h4 className="text-xl font-semibold text-blue-400">Professional Product Designer</h4>
+                <span className="text-gray-400">2017 - 2023</span>
+              </div>
+              <h5 className="text-lg text-gray-300 mb-2">Reslink, Espoo, Finland</h5>
+              <p className="text-gray-400">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+            >
+              <div className="flex flex-col md:flex-row justify-between mb-2">
+                <h4 className="text-xl font-semibold text-blue-400">Senior UI/UX Designer & IT Expert</h4>
+                <span className="text-gray-400">2016 - 2023</span>
+              </div>
+              <h5 className="text-lg text-gray-300 mb-2">Reslink, Helsinki, Finland</h5>
+              <p className="text-gray-400">Web Application, Android UI Development, and VPN Management.</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+            >
+              <div className="flex flex-col md:flex-row justify-between mb-2">
+                <h4 className="text-xl font-semibold text-blue-400">Graphic Designer UI/UX & IT Expert</h4>
+                <span className="text-gray-400">2014 - 2016</span>
+              </div>
+              <h5 className="text-lg text-gray-300 mb-2">Reslink, Helsinki, Finland</h5>
+              <p className="text-gray-400">Graphic & Website Designer, Android and iOS Prototyping, & MDM Management.</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl"
+            >
+              <div className="flex flex-col md:flex-row justify-between mb-2">
+                <h4 className="text-xl font-semibold text-blue-400">Freelance IT Expert & UI Developer</h4>
+                <span className="text-gray-400">2000 - 2014</span>
+              </div>
+              <h5 className="text-lg text-gray-300 mb-2">From Damascus to Espoo</h5>
+              <p className="text-gray-400">Website and Android Developer.</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl opacity-80"
+            >
+              <div className="flex flex-col md:flex-row justify-between mb-2">
+                <h4 className="text-xl font-semibold text-blue-400">Graphic Designer & IT Expert</h4>
+                <span className="text-gray-400">Early Career</span>
+              </div>
+              <h5 className="text-lg text-gray-300 mb-2">Various Magazines and Newspapers — Tehran, Iran</h5>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Additional Sections */}
       <motion.section 
         initial={{ opacity: 0 }}
