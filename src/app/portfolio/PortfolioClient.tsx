@@ -14,7 +14,7 @@ interface PortfolioItem {
   gradient: string;
   photo?: {
     url: string;
-    author: {
+    author?: {
       name: string;
       username: string;
       link: string;
@@ -81,26 +81,28 @@ export default function PortfolioClient({ items }: Props) {
                               sizes="(max-width: 768px) 100vw, 50vw"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
-                            <div className="absolute bottom-2 right-2 text-xs text-white/70">
-                              Photo by{' '}
-                              <a
-                                href={item.photo.author.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-white"
-                              >
-                                {item.photo.author.name}
-                              </a>
-                              {' '}on{' '}
-                              <a
-                                href="https://unsplash.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-white"
-                              >
-                                Unsplash
-                              </a>
-                            </div>
+                            {item.photo.author && (
+                              <div className="absolute bottom-2 right-2 text-xs text-white/70">
+                                Photo by{' '}
+                                <a
+                                  href={item.photo.author.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="hover:text-white"
+                                >
+                                  {item.photo.author.name}
+                                </a>
+                                {' '}on{' '}
+                                <a
+                                  href="https://unsplash.com"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="hover:text-white"
+                                >
+                                  Unsplash
+                                </a>
+                              </div>
+                            )}
                           </>
                         ) : (
                           <div className="w-full h-full bg-gray-800 flex items-center justify-center">
