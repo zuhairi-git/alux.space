@@ -7,7 +7,7 @@ interface Props {
 }
 
 // Get metadata from our posts data
-async function getPostMetadata(slug: string) {
+function getPostMetadata(slug: string) {
   const post = posts.find(p => p.slug === slug);
   if (!post) return null;
   
@@ -21,7 +21,7 @@ async function getPostMetadata(slug: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostMetadata(params.slug);
+  const post = getPostMetadata(params.slug);
   
   if (!post) {
     return notFound();
