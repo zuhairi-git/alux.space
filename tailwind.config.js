@@ -3,7 +3,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ['var(--font-poppins)'],
+        roboto: ['var(--font-roboto)'],
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
