@@ -19,7 +19,9 @@ const HomePage = () => {
         >
           <h2 className="text-5xl md:text-7xl font-bold mb-6">Product Owner & Design Leader</h2>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            "A reminder from Ali to always seek inspiration from the world, pushing the boundaries of creativity and imagination without fear."
+            " Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what's possible.
+            
+            <span className="text-blue-400"> — Ali</span>
           </p>
         </motion.div>
       </section>
