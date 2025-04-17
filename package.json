@@ -1,10 +1,7 @@
 {
   "name": "cvlanes.com",
   "version": "0.1.0",
-  "private": false,
-  "engines": {
-  "node": ">=20.0.0"
-  },
+  "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
