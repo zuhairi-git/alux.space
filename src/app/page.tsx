@@ -30,16 +30,52 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 bg-black/30"
+        className="py-20 bg-black/30 relative overflow-hidden"
       >
         <div className="container mx-auto px-4">
-          <h3 className="text-3xl font-bold mb-8 text-center">About Me</h3>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            With 10 years of experience in product design, Ali specializes in the Double Diamond design model, 
-            focusing on divergent thinking and innovative product creation. His design philosophy revolves around 
-            simplicity, elegance, and functionality. Ali is also a skilled problem-solver, adept at turning complex 
-            challenges into intuitive, user-centric solutions.
-          </p>
+          <div className="relative">
+            <div className="max-w-4xl mx-auto text-center">
+              <h3 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Crafting Digital Dreams into Reality
+              </h3>
+              
+              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  Hey there! I'm Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about more than just aesthetics; it's about touching hearts and solving real problems.
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="text-blue-400 italic"
+                >
+                  "Every pixel has a purpose, every interaction tells a story."
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  Over the past decade, I've had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical. ✨
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="pt-4"
+                >
+                  <span className="text-gray-400">When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better.</span>
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
       </motion.section>
 
