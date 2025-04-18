@@ -21,7 +21,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="text-center mt-8"
           >
             <h2 className="text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20">
               {words.map((word, i) => (
