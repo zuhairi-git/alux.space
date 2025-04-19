@@ -63,8 +63,8 @@ const Navigation = () => {
 
           {/* Hamburger for mobile */}
           <button
-            className="md:hidden flex items-center text-gray-300 focus:outline-none"
-            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden text-gray-300 hover:text-white focus:outline-none ml-auto"
+            onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
           >
             <span className="material-symbols text-3xl">menu</span>
@@ -104,53 +104,43 @@ const Navigation = () => {
                 </Link>
               </motion.li>
               <motion.li 
+                className="relative group"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                whileHover={{ y: -2 }}
-                className="relative"
-                onMouseEnter={() => setPortfolioOpen(true)}
-                onMouseLeave={() => setPortfolioOpen(false)}
+                onHoverStart={() => setPortfolioOpen(true)}
+                onHoverEnd={() => setPortfolioOpen(false)}
               >
-                <div className="flex items-center gap-1">
-                  <Link
-                    href="/portfolio"
-                    className="relative group flex items-center gap-1 text-gray-300 hover:text-white transition-colors focus:outline-none"
-                    onClick={() => setPortfolioOpen(false)}
-                  >
-                    Portfolio
-                  </Link>
-                  <button
-                    className="relative group flex items-center text-gray-300 hover:text-white transition-colors focus:outline-none"
-                    onClick={e => { e.stopPropagation(); setPortfolioOpen(v => !v); }}
-                    aria-haspopup="true"
-                    aria-expanded={portfolioOpen}
-                    type="button"
-                    tabIndex={-1}
-                  >
-                    <span className="material-symbols text-base transition-transform duration-200" style={{ transform: portfolioOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>expand_more</span>
-                  </button>
-                </div>
-                {/* Dropdown */}
-                <div
-                  className={`absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-gray-900/95 ring-1 ring-black/10 transition-all duration-200 z-50 ${portfolioOpen ? 'block' : 'hidden'}`}
-                  onMouseEnter={() => setPortfolioOpen(true)}
-                  onMouseLeave={() => setPortfolioOpen(false)}
+                <Link 
+                  href="/portfolio" 
+                  className="flex items-center space-x-1 text-gray-300 group-hover:text-white transition-colors"
                 >
-                  <ul className="py-2">
+                  <span>Portfolio</span>
+                  <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
+                    expand_more
+                  </span>
+                </Link>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ 
+                    opacity: portfolioOpen ? 1 : 0,
+                    y: portfolioOpen ? 0 : 10
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 mt-2 w-64 rounded-lg bg-black/90 backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden"
+                >
+                  <div className="py-2">
                     {portfolioDropdownItems.map((item) => (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          className="block px-4 py-2 text-gray-300 hover:bg-blue-500/10 hover:text-blue-400 rounded transition-colors"
-                          onClick={() => setPortfolioOpen(false)}
-                        >
-                          {item.text}
-                        </Link>
-                      </li>
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+                      >
+                        {item.text}
+                      </Link>
                     ))}
-                  </ul>
-                </div>
+                  </div>
+                </motion.div>
               </motion.li>
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
@@ -181,48 +171,82 @@ const Navigation = () => {
           </nav>
 
           {/* Mobile nav */}
-          <nav className={`md:hidden fixed top-0 left-0 w-full h-full bg-black/80 z-40 transition-opacity duration-300 ${menuOpen ? 'block' : 'hidden'}`}
+          <motion.nav 
+            className={`md:hidden fixed top-0 left-0 w-full h-full bg-black/90 backdrop-blur-lg z-40 transition-all duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
             onClick={() => setMenuOpen(false)}
           >
-            <div className="container mx-auto px-4 pt-24">
+            <div className="container mx-auto px-4 pt-24 pb-8 bg-black/90 backdrop-blur-lg z-40">
+              <div className="absolute top-4 right-4">
+                <button
+                  className="text-gray-300 hover:text-white focus:outline-none"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setMenuOpen(false);
+                  }}
+                  aria-label="Close menu"
+                >
+                  <span className="material-symbols text-3xl">close</span>
+                </button>
+              </div>
               <ul className="space-y-6 text-xl">
                 <li>
-                  <Link href="/" className="block text-gray-200 hover:text-blue-400 transition-colors" onClick={() => setMenuOpen(false)}>Home</Link>
-                </li>
-                <li>
-                  <button
-                    className="flex items-center gap-1 text-gray-200 hover:text-blue-400 w-full text-left focus:outline-none"
-                    onClick={(e) => { e.stopPropagation(); setPortfolioOpen((v) => !v); }}
-                    aria-haspopup="true"
-                    aria-expanded={portfolioOpen}
-                    type="button"
+                  <Link 
+                    href="/" 
+                    className="block text-xl text-gray-300 hover:text-white transition-colors"
+                    onClick={() => setMenuOpen(false)}
                   >
-                    Portfolio
-                    <span className="material-symbols text-base transition-transform duration-200" style={{ transform: portfolioOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>expand_more</span>
-                  </button>
-                  {/* Dropdown for mobile */}
-                  <div className={`mt-2 ml-4 border-l border-blue-500/20 pl-4 ${portfolioOpen ? 'block' : 'hidden'}`}> 
-                    <ul className="space-y-2">
+                    Home
+                  </Link>
+                </li>
+                <li className="relative">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href="/portfolio"
+                      className="text-xl text-gray-300 hover:text-white transition-colors"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Portfolio
+                    </Link>
+                    <button
+                      className="ml-2 text-gray-300 hover:text-white"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPortfolioOpen(!portfolioOpen);
+                      }}
+                    >
+                      <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
+                        expand_more
+                      </span>
+                    </button>
+                  </div>
+                  {portfolioOpen && (
+                    <ul className="mt-4 ml-4 space-y-4">
                       {portfolioDropdownItems.map((item) => (
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="block text-gray-300 hover:text-blue-400 transition-colors"
-                            onClick={() => { setMenuOpen(false); setPortfolioOpen(false); }}
+                            className="block text-lg text-gray-400 hover:text-white transition-colors"
+                            onClick={() => setMenuOpen(false)}
                           >
                             {item.text}
                           </Link>
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  )}
                 </li>
                 <li>
-                  <Link href="/blog" className="block text-gray-200 hover:text-blue-400 transition-colors" onClick={() => setMenuOpen(false)}>Blog</Link>
+                  <Link 
+                    href="/blog" 
+                    className="block text-xl text-gray-300 hover:text-white transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Blog
+                  </Link>
                 </li>
               </ul>
             </div>
-          </nav>
+          </motion.nav>
         </div>
       </motion.div>
 
