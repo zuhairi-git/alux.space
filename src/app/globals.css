@@ -7,6 +7,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --gradient-start: #3b82f6;
+  --gradient-mid: #a855f7;
+  --gradient-end: #3b82f6;
+  --primary-glow: rgba(59, 130, 246, 0.2);
 
   /* Material Symbols configuration */
   --material-symbols: 'Material Symbols Rounded';
@@ -14,6 +20,42 @@
   --material-symbols-fill: 0;
   --material-symbols-grade: 0;
   --material-symbols-optical-size: 24;
+}
+
+/* Light theme */
+.theme-light {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --gradient-start: #3b82f6;
+  --gradient-mid: #a855f7;
+  --gradient-end: #3b82f6;
+  --primary-glow: rgba(59, 130, 246, 0.2);
+}
+
+/* Dark theme */
+.theme-dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --gradient-start: #3b82f6;
+  --gradient-mid: #a855f7;
+  --gradient-end: #3b82f6;
+  --primary-glow: rgba(59, 130, 246, 0.2);
+}
+
+/* Colorful theme (default) */
+.theme-colorful {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #a855f7;
+  --primary-hover: #9333ea;
+  --gradient-start: #ec4899;
+  --gradient-mid: #a855f7;
+  --gradient-end: #3b82f6;
+  --primary-glow: rgba(168, 85, 247, 0.2);
 }
 
 @theme inline {

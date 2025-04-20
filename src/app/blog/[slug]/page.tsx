@@ -1,45 +1,16 @@
 import React from 'react';
-import Image from 'next/image';
 import Navigation from '@/components/Navigation';
+import BlogPostHeader from '@/components/blog/BlogPostHeader';
 import BlogPostClient from '@/components/blog/BlogPostClient';
+import BlogContent from '@/components/blog/BlogContent';
 import { posts } from '../posts/data';
+import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 
 // Add generateStaticParams export
 export function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
   }));
-}
-
-// Helper function to convert markdown-style content to JSX
-function formatContent(content: string) {
-  return content.split('\n\n').map((block, index) => {
-    const trimmedBlock = block.trim();
-    if (trimmedBlock.startsWith('##')) {
-      return <h2 key={index} className="text-2xl font-bold mt-8 mb-4 text-blue-400">{trimmedBlock.replace('## ', '')}</h2>;
-    }
-    if (trimmedBlock.startsWith('###')) {
-      return <h3 key={index} className="text-xl font-semibold mt-6 mb-3 text-blue-300">{trimmedBlock.replace('### ', '')}</h3>;
-    }
-    if (trimmedBlock.startsWith('*')) {
-      return (
-        <ul key={index} className="list-disc pl-6 mb-4 space-y-2">
-          {trimmedBlock.split('\n').map((item, i) => (
-            <li key={i} className="text-gray-300">{item.replace('* ', '')}</li>
-          ))}
-        </ul>
-      );
-    }
-    if (trimmedBlock.match(/^\d\./)) {
-      return (
-        <div key={index} className="mb-4">
-          <strong className="text-blue-300">{trimmedBlock.split('\n')[0]}</strong>
-          <p className="text-gray-300 mt-1">{trimmedBlock.split('\n')[1]}</p>
-        </div>
-      );
-    }
-    return <p key={index} className="mb-4 text-lg text-gray-300 leading-relaxed">{trimmedBlock}</p>;
-  });
 }
 
 type Props = {
@@ -57,63 +28,41 @@ export default async function BlogPost({ params }: Props) {
   const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${post.slug}`;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white">
+    <main className="min-h-screen bg-theme overflow-hidden">
       <Navigation />
       
-      <article className="pt-24 pb-16">
-        <div className="container mx-auto px-4 max-w-4xl">
+      <article className="pt-24 pb-16 relative">
+        <BackgroundEffect type="gradient" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/20 pointer-events-none z-0" />
+        
+        <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <BlogPostClient shareUrl={shareUrl} title={post.title}>
-            {/* Article Header */}
-            <div className="mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd"/>
-                  </svg>
-                  {post.author}
-                </span>
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/>
-                  </svg>
-                  {post.publishedDate}
-                </span>
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/>
-                  </svg>
-                  {post.readTime}
-                </span>
+            <BlogPostHeader 
+              title={post.title}
+              description={post.description}
+              publishedDate={post.publishedDate}
+              readTime={post.readTime}
+              author={post.author}
+              tags={post.tags}
+              image={post.image}
+            />
+            
+            <BlogContent content={post.content} />
+            
+            {/* Related posts or author bio could go here */}
+            <div className="mt-16 pt-8 border-t border-white/10">
+              <h3 className="text-2xl font-bold mb-4 text-primary">About the Author</h3>
+              <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-start to-end p-1">
+                  <div className="w-full h-full rounded-full bg-black/50 overflow-hidden" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold mb-2">{post.author}</h4>
+                  <p className="text-gray-300">
+                    Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {post.tags.map((tag, index) => (
-                  <span 
-                    key={index}
-                    className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Featured Image */}
-            <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              />
-            </div>
-
-            {/* Article Content */}
-            <div className="prose prose-invert max-w-none">
-              {formatContent(post.content)}
             </div>
           </BlogPostClient>
         </div>

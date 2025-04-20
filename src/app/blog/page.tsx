@@ -1,91 +1,108 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import { posts } from './posts/data';
-import {
-  TwitterShareButton,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-} from 'next-share';
+import BlogCard from '@/components/blog/BlogCard';
+import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 
 const BlogPage = () => {
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white">
-      <Navigation />
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  
+  // Extract all unique tags from posts
+  const allTags = Array.from(new Set(posts.flatMap(post => post.tags)));
+  
+  // Filter posts by selected tag
+  const filteredPosts = selectedTag 
+    ? posts.filter(post => post.tags.includes(selectedTag))
+    : posts;
 
-      <section className="min-h-screen pt-24">
+  return (
+    <main className="min-h-screen bg-theme">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <BackgroundEffect type="gradient" />
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" />
+        
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="container mx-auto px-4"
+          className="container mx-auto px-4 relative z-10 text-center"
         >
-          <h2 className="text-4xl font-bold mb-8">Latest Posts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {posts.map((post, index) => (
-              <motion.article
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent">
+            Blog & Insights
+          </h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+            Thoughts, learnings, and perspectives on design leadership, 
+            product management, and the intersection of creativity and technology.
+          </p>
+          
+          {/* Tag filter */}
+          <div className="flex flex-wrap gap-3 justify-center mt-8">
+            <motion.button
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedTag(null)}
+              className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                selectedTag === null 
+                  ? 'bg-primary text-white' 
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              All
+            </motion.button>
+            
+            {allTags.map(tag => (
+              <motion.button
+                key={tag}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setSelectedTag(tag)}
+                className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                  selectedTag === tag 
+                    ? 'bg-primary text-white' 
+                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                }`}
               >
-                <Link href={`/blog/${post.slug}`} className="block">
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {post.tags.slice(0, 2).map((tag, idx) => (
-                        <span 
-                          key={idx}
-                          className="px-2 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2 text-blue-400 hover:text-blue-300 transition-colors">{post.title}</h3>
-                    <p className="text-gray-400 text-sm mb-3 flex items-center gap-4">
-                      <span>{post.publishedDate}</span>
-                      <span>•</span>
-                      <span>{post.readTime}</span>
-                    </p>
-                    <p className="text-gray-300 line-clamp-2">{post.description}</p>
-                    <div className="flex gap-2 mt-4">
-                      <TwitterShareButton 
-                        url={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`}
-                        title={post.title}
-                      >
-                        <TwitterIcon size={24} round />
-                      </TwitterShareButton>
-                      <LinkedinShareButton 
-                        url={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`}
-                        title={post.title}
-                      >
-                        <LinkedinIcon size={24} round />
-                      </LinkedinShareButton>
-                    </div>
-                  </div>
-                </Link>
-              </motion.article>
+                {tag}
+              </motion.button>
             ))}
           </div>
         </motion.div>
       </section>
 
-      <footer className="bg-black/40 text-gray-400 py-8 mt-20">
+      {/* Blog Posts Grid */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPosts.map((post, index) => (
+              <BlogCard key={post.slug} post={post} index={index} />
+            ))}
+          </div>
+          
+          {filteredPosts.length === 0 && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16"
+            >
+              <p className="text-xl text-gray-400">No posts found for this tag.</p>
+              <button 
+                onClick={() => setSelectedTag(null)}
+                className="mt-4 px-6 py-2 bg-primary/20 text-primary rounded-full hover:bg-primary/30 transition-colors"
+              >
+                Show all posts
+              </button>
+            </motion.div>
+          )}
+        </div>
+      </section>
+
+      <footer className="bg-black/40 text-gray-400 py-8">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
         </div>

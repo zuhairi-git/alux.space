@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import ThemeSwitch from './ThemeSwitch';
 
 const portfolioDropdownItems = [
   { href: '/portfolio/collaboration', text: 'Collaboration & Leadership' },
@@ -41,14 +42,14 @@ const Navigation = () => {
           >
             <Link href="/" className="block">
               <motion.span 
-                className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent relative z-10"
+                className="bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent relative z-10"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 Ali Al-Zuhairi
               </motion.span>
               <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute -inset-2 bg-gradient-to-r from-start/20 to-end/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 animate={{
                   scale: [1, 1.1, 1],
                 }}
@@ -71,7 +72,7 @@ const Navigation = () => {
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden md:block">
+          <nav className="hidden md:flex items-center space-x-8">
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -87,11 +88,11 @@ const Navigation = () => {
                 <Link href="/" className="relative group">
                   <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors">Home</span>
                   <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full transition-all duration-300"
+                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
                     layoutId="underline"
                   />
                   <motion.div
-                    className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     animate={{
                       scale: [1, 1.1, 1],
                     }}
@@ -151,11 +152,11 @@ const Navigation = () => {
                 <Link href="/blog" className="relative group">
                   <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors">Blog</span>
                   <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full transition-all duration-300"
+                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
                     layoutId="underline"
                   />
                   <motion.div
-                    className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     animate={{
                       scale: [1, 1.1, 1],
                     }}
@@ -168,6 +169,16 @@ const Navigation = () => {
                 </Link>
               </motion.li>
             </motion.ul>
+            
+            {/* Theme Switcher - Desktop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="ml-6"
+            >
+              <ThemeSwitch />
+            </motion.div>
           </nav>
 
           {/* Mobile nav */}
@@ -244,6 +255,13 @@ const Navigation = () => {
                     Blog
                   </Link>
                 </li>
+                
+                {/* Theme Switcher - Mobile */}
+                <li className="pt-4 border-t border-white/10 mt-6">
+                  <div className="flex justify-center">
+                    <ThemeSwitch />
+                  </div>
+                </li>
               </ul>
             </div>
           </motion.nav>
@@ -252,7 +270,7 @@ const Navigation = () => {
 
       {/* Fancy bottom border effect */}
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"
         animate={{
           opacity: [0.3, 0.6, 0.3],
         }}
