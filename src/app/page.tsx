@@ -26,96 +26,6 @@ const HomePage = () => {
       <Navigation />
       <Hero config={heroConfig} />
 
-      {/* About Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="py-20 bg-black/30 relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4">
-          <div className="relative">
-            <div className="max-w-4xl mx-auto text-center">
-              <h3 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Crafting Digital Dreams into Reality
-              </h3>
-              
-              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  Hey there! I&apos;m Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents &ndash; from Damascus to Helsinki &ndash; I&apos;ve learned that great design is about more than just aesthetics; it&apos;s about touching hearts and solving real problems.
-                </motion.p>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-blue-400 italic"
-                >
-                  &ldquo;Every pixel has a purpose, every interaction tells a story.&rdquo;
-                </motion.p>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  Over the past decade, I&apos;ve had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical. ✨
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="pt-4"
-                >
-                  <span className="text-gray-400">When I&apos;m not designing, you&apos;ll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone&apos;s digital life a little bit better.</span>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Skills Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="py-20"
-      >
-        <div className="container mx-auto px-4">
-          <h3 className="text-3xl font-bold mb-12 text-center">Strengths & Skills</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
-              { title: 'Research', desc: 'Skilled in qualitative and quantitative research' },
-              { title: 'Design Systems', desc: 'Creating consistent, scalable frameworks' },
-              { title: 'Project Management', desc: 'Agile methodology (Jira, Scrum, Kanban)' },
-              { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
-              { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' },
-            ].map((skill, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
-              >
-                <h4 className="text-xl font-semibold mb-2 text-blue-400">{skill.title}</h4>
-                <p className="text-gray-400">{skill.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
       {/* Work Experience Section */}
       <motion.section 
         initial={{ opacity: 0 }}
@@ -275,6 +185,97 @@ const HomePage = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+
+      {/* About Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 bg-black/30 relative overflow-hidden"
+      >
+        <div className="container mx-auto px-4">
+          <div className="relative">
+            <div className="max-w-4xl mx-auto text-center">
+              <h3 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Crafting Digital Dreams into Reality
+              </h3>
+              
+              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  Hey there! I&apos;m Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents &ndash; from Damascus to Helsinki &ndash; I&apos;ve learned that great design is about more than just aesthetics; it&apos;s about touching hearts and solving real problems.
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="text-blue-400 italic"
+                >
+                  &ldquo;Every pixel has a purpose, every interaction tells a story.&rdquo;
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  Over the past decade, I&apos;ve had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical. ✨
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="pt-4"
+                >
+                  <span className="text-gray-400">When I&apos;m not designing, you&apos;ll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone&apos;s digital life a little bit better.</span>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Skills Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20"
+      >
+        <div className="container mx-auto px-4">
+          <h3 className="text-3xl font-bold mb-12 text-center">Strengths & Skills</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
+              { title: 'Research', desc: 'Skilled in qualitative and quantitative research' },
+              { title: 'Design Systems', desc: 'Creating consistent, scalable frameworks' },
+              { title: 'Project Management', desc: 'Agile methodology (Jira, Scrum, Kanban)' },
+              { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
+              { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' },
+            ].map((skill, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+              >
+                <h4 className="text-xl font-semibold mb-2 text-blue-400">{skill.title}</h4>
+                <p className="text-gray-400">{skill.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
