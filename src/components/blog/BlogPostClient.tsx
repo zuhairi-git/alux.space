@@ -23,12 +23,14 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        setScrollPosition(window.scrollY);
+      };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
   if (!mounted) return <>{children}</>;
