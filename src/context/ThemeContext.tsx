@@ -29,7 +29,7 @@ function ThemeScript({ defaultTheme = 'colorful' }: { defaultTheme?: Theme }) {
     document.documentElement.classList.add(`theme-${theme}`);
     
     // Make theme available globally
-    (window as any).__theme = theme;
+    (window as Window & { __theme?: Theme }).__theme = theme;
   }, []);
   
   // Return nothing from the component to avoid hydration mismatches
@@ -71,7 +71,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
     
     // Update window.__theme for any code that needs to know the current theme
-    (window as any).__theme = theme;
+    (window as Window & { __theme?: Theme }).__theme = theme;
   }, [theme, mounted]);
 
   // Apply the default theme class for SSR
