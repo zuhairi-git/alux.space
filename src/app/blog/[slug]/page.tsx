@@ -6,7 +6,6 @@ import BlogContent from '@/components/blog/BlogContent';
 import { posts } from '../posts/data';
 import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 
-// Add generateStaticParams export
 export function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
@@ -14,30 +13,27 @@ export function generateStaticParams() {
 }
 
 type Props = {
-  params: Promise<{ slug: string }>;
-}
+  params: { slug: string };
+};
 
-export default async function BlogPost({ params }: Props) {
-  const resolvedParams = await params;
-  const post = posts.find(p => p.slug === resolvedParams.slug);
+export default function BlogPost({ params }: Props) {
+  const post = posts.find((p) => p.slug === params.slug);
 
-  if (!post) {
-    return null;
-  }
+  if (!post) return null;
 
   const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${post.slug}`;
 
   return (
     <main className="min-h-screen bg-theme overflow-hidden">
       <Navigation />
-      
+
       <article className="pt-24 pb-16 relative">
         <BackgroundEffect type="gradient" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/20 pointer-events-none z-0" />
-        
+
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <BlogPostClient shareUrl={shareUrl} title={post.title}>
-            <BlogPostHeader 
+            <BlogPostHeader
               title={post.title}
               description={post.description}
               publishedDate={post.publishedDate}
@@ -46,10 +42,9 @@ export default async function BlogPost({ params }: Props) {
               tags={post.tags}
               image={post.image}
             />
-            
+
             <BlogContent content={post.content} />
-            
-            {/* Related posts or author bio could go here */}
+
             <div className="mt-16 pt-8 border-t border-white/10">
               <h3 className="text-2xl font-bold mb-4 text-primary">About the Author</h3>
               <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
