@@ -7,6 +7,7 @@ import Card from '@/components/Card';
 import { posts } from '../posts/data';
 import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 import { ThemeProvider } from '@/context/ThemeContext';
+import Image from 'next/image';
 
 export function generateStaticParams() {
   return posts.map((post) => ({
@@ -59,11 +60,13 @@ function BlogPostContent({ post, shareUrl }: { post: typeof posts[0], shareUrl: 
               <h3 className="text-2xl font-bold mb-6 text-primary">About the Author</h3>
               <Card variant="primary">
                 <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                  <div className="w-24 h-24 rounded-full overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-                    <img
+                  <div className="w-24 h-24 relative rounded-full overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                    <Image
                       src="/images/me/ali.png"
                       alt={post.author}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="96px"
                     />
                   </div>
                   <div>

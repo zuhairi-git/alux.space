@@ -21,7 +21,6 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
 
   const getGlowClassName = () => {
     switch (variant) {
