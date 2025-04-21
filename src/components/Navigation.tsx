@@ -211,6 +211,31 @@ const Navigation = () => {
                   />
                 </Link>
               </motion.li>
+              <motion.li 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link href="/prompt" className="relative group">
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Prompts</span>
+                  <motion.span
+                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
+                    layoutId="underline"
+                  />
+                  <motion.div
+                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                </Link>
+              </motion.li>
             </motion.ul>
             
             {/* Theme Switcher - Desktop */}
@@ -311,6 +336,15 @@ const Navigation = () => {
                     onClick={() => setMenuOpen(false)}
                   >
                     Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    href="/prompt" 
+                    className="block text-xl text-gray-300 hover:text-white transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Prompts
                   </Link>
                 </li>
                 

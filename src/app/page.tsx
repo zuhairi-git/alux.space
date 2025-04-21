@@ -43,7 +43,7 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <motion.span 
-              className="material-symbols text-4xl text-blue-400 mb-4 inline-block"
+              className="material-symbols text-3xl p-3 mb-5 rounded-lg text-purple-400 bg-purple-400/10"
               initial={{ rotateY: 0 }}
               animate={{ rotateY: 360 }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
