@@ -25,7 +25,6 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
   
   // Keep colorful theme dark, only light theme is treated differently
   const isLight = theme === 'light';
-  const isDarkMode = theme === 'dark' || theme === 'colorful';
 
   useEffect(() => {
     setMounted(true);

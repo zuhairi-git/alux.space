@@ -8,6 +8,7 @@ import { posts } from '../posts/data';
 import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 import { ThemeProvider } from '@/context/ThemeContext';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
 export function generateStaticParams() {
   return posts.map((post) => ({
@@ -15,17 +16,34 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = params;
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = posts.find((p) => p.slug === slug);
+  
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+  
+  return {
+    title: post.title,
+    description: post.description,
+  };
+}
+
+export default async function BlogPost(props: Props) {
+  const { slug } = await props.params;
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) return null;
 
-  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${post.slug}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${slug}`;
 
   return (
     <ThemeProvider>
