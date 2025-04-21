@@ -65,7 +65,7 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="relative max-w-3xl mx-auto mb-12 px-8 z-20"
+            className="relative max-w-3xl mx-auto mb-12"
           >
             <div className={`relative ${isLight ? 'bg-gray-100/70' : 'bg-black/20'} backdrop-blur-sm rounded-xl p-8`}>
               <motion.p

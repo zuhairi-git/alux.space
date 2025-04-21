@@ -40,7 +40,7 @@ const BlogPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="container mx-auto px-4 relative z-10 text-center"
+          className="container mx-auto px-4 relative z-10 text-center mt-20"
         >
           <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
             Blog & Insights
