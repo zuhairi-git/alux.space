@@ -21,6 +21,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
 
   const getGlowClassName = () => {
     switch (variant) {
@@ -38,19 +39,43 @@ const Card: React.FC<CardProps> = ({
   };
 
   const getShadowClassName = () => {
-    if (!isLight) return '';
-    
-    switch (variant) {
-      case 'primary':
-        return 'shadow-md shadow-primary/5 hover:shadow-lg hover:shadow-primary/10';
-      case 'secondary':
-        return 'shadow-md shadow-blue-500/5 hover:shadow-lg hover:shadow-blue-500/10';
-      case 'tertiary':
-        return 'shadow-md shadow-purple-500/5 hover:shadow-lg hover:shadow-purple-500/10';
-      case 'muted':
-        return 'shadow-md shadow-gray-400/10 hover:shadow-lg hover:shadow-gray-400/15';
-      default:
-        return 'shadow-md shadow-primary/5 hover:shadow-lg hover:shadow-primary/10';
+    const baseShadow = 'shadow-md';
+    const hoverShadow = 'hover:shadow-lg';
+
+    let colorShadow = '';
+    let hoverColorShadow = '';
+
+    if (isLight) {
+      // Light theme shadows (Subtle)
+      switch (variant) {
+        case 'primary': colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
+        case 'secondary': colorShadow = 'shadow-blue-500/5'; hoverColorShadow = 'hover:shadow-blue-500/10'; break;
+        case 'tertiary': colorShadow = 'shadow-purple-500/5'; hoverColorShadow = 'hover:shadow-purple-500/10'; break;
+        case 'muted': colorShadow = 'shadow-gray-400/10'; hoverColorShadow = 'hover:shadow-gray-400/15'; break;
+        default: colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
+      }
+      return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
+    } else if (isColorful) {
+      // Colorful theme: Apply shadows with same opacity as dark theme, but vibrant colors
+      switch (variant) {
+        case 'primary': colorShadow = 'shadow-fuchsia-500/10'; hoverColorShadow = 'hover:shadow-fuchsia-500/20'; break;
+        case 'secondary': colorShadow = 'shadow-cyan-500/10'; hoverColorShadow = 'hover:shadow-cyan-500/20'; break;
+        case 'tertiary': colorShadow = 'shadow-violet-500/10'; hoverColorShadow = 'hover:shadow-violet-500/20'; break;
+        case 'muted': colorShadow = 'shadow-sky-400/10'; hoverColorShadow = 'hover:shadow-sky-400/20'; break;
+        default: colorShadow = 'shadow-fuchsia-500/10'; hoverColorShadow = 'hover:shadow-fuchsia-500/20'; break;
+      }
+      // Colorful theme: Apply base shadow and hover shadow
+      return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
+    } else {
+      // Dark theme shadows (Standard)
+      switch (variant) {
+        case 'primary': colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
+        case 'secondary': colorShadow = 'shadow-blue-500/10'; hoverColorShadow = 'hover:shadow-blue-500/20'; break;
+        case 'tertiary': colorShadow = 'shadow-purple-500/10'; hoverColorShadow = 'hover:shadow-purple-500/20'; break;
+        case 'muted': colorShadow = 'shadow-gray-500/10'; hoverColorShadow = 'hover:shadow-gray-500/20'; break;
+        default: colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
+      }
+      return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
     }
   };
 
@@ -60,13 +85,13 @@ const Card: React.FC<CardProps> = ({
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className={`theme-card group ${getShadowClassName()} transform-gpu transition-all overflow-hidden ${className}`}
+      className={`theme-card group ${getShadowClassName()} transform-gpu transition-shadow duration-300 ease-in-out overflow-hidden ${className}`}
       whileHover={hoverEffect ? { scale: 1.01 } : {}}
     >
-      {/* Glow effect that changes with theme */}
+      {/* Glow effect layer - styles controlled by globals.css */}
       <div className={getGlowClassName()} />
       
-      {/* Main content container with background that adapts to theme */}
+      {/* Main content container */}
       <div className="theme-card-content p-8 overflow-hidden h-full">
         {children}
       </div>

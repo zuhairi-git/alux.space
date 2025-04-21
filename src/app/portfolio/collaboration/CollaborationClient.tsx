@@ -170,7 +170,7 @@ export default function CollaborationClient() {
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">Research Insights</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
+                <div className="p-6 rounded-lg5">
                   <h3 className="text-xl font-semibold text-primary mb-6">Participant Feedback</h3>
                   <div className="space-y-6">
                     {[
@@ -202,7 +202,7 @@ export default function CollaborationClient() {
                     ))}
                   </div>
                 </div>
-                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
+                <div className="p-6 rounded-lg">
                   <h3 className="text-xl font-semibold text-primary mb-6">Key Recommendations</h3>
                   <div className="space-y-4">
                     {[
@@ -363,7 +363,7 @@ export default function CollaborationClient() {
             {/* Requirements & Testing */}
             <motion.section variants={fadeInUp} className="mb-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
+                <div className="p-6 rounded-lg">
                   <h2 className="text-3xl font-bold mb-6 text-primary">Product Requirements</h2>
                   <div className="space-y-4">
                     {[
@@ -424,7 +424,7 @@ export default function CollaborationClient() {
                   </div>
                 </div>
 
-                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
+                <div className="p-6 rounded-lg">
                   <h2 className="text-3xl font-bold mb-6 text-primary">User Testing</h2>
                   <div className="mb-8">
                     <h3 className="text-xl font-semibold text-primary mb-4">Test Scenario</h3>
