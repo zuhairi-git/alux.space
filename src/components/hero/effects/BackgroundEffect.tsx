@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Theme } from '@/context/ThemeContext';
 
 interface Props {
@@ -32,12 +32,7 @@ const SCATTERED_POSITIONS = [
 ];
 
 const DesignCodeEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
-  const [mounted, setMounted] = useState(false);
   const isLight = theme === 'light';
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
