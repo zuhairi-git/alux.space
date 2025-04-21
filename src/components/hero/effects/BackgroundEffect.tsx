@@ -9,28 +9,6 @@ interface Props {
   theme?: Theme;
 }
 
-// Updated positions to better scatter icons across the hero section
-// Using a grid-like approach to ensure even distribution
-const SCATTERED_POSITIONS = [
-  // Top row
-  { x: 10, y: 15, size: 0.9, rotation: 15 },
-  { x: 30, y: 10, size: 1.1, rotation: -10 },
-  { x: 50, y: 12, size: 0.8, rotation: 5 },
-  { x: 70, y: 18, size: 1.2, rotation: -5 },
-  { x: 90, y: 15, size: 0.7, rotation: 12 },
-  
-  // Middle row
-  { x: 15, y: 40, size: 1.0, rotation: -8 },
-  { x: 35, y: 45, size: 0.75, rotation: 20 },
-  { x: 60, y: 38, size: 1.15, rotation: -15 },
-  { x: 85, y: 42, size: 0.95, rotation: 8 },
-  
-  // Bottom row
-  { x: 20, y: 75, size: 1.05, rotation: -12 },
-  { x: 45, y: 70, size: 0.85, rotation: 7 },
-  { x: 75, y: 80, size: 1.1, rotation: -20 },
-];
-
 const DesignCodeEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const isLight = theme === 'light';
 
