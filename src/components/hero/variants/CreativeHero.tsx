@@ -4,9 +4,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import { Theme } from '@/context/ThemeContext';
 
-const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
+interface CreativeHeroProps extends HeroConfig {
+  theme?: Theme;
+}
+
+const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta, theme = 'dark' }) => {
   const words = title.split(' ');
+  const isLight = theme === 'light';
   
   return (
     <motion.div 
@@ -48,7 +54,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-2xl md:text-3xl text-center text-white mb-12 relative z-20"
+            className={`text-2xl md:text-3xl text-center ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
           >
             {subtitle}
           </motion.p>
@@ -61,12 +67,12 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
             transition={{ delay: 1, duration: 0.8 }}
             className="relative max-w-3xl mx-auto mb-12 px-8 z-20"
           >
-            <div className="relative bg-black/20 backdrop-blur-sm rounded-xl p-8">
+            <div className={`relative ${isLight ? 'bg-gray-100/70' : 'bg-black/20'} backdrop-blur-sm rounded-xl p-8`}>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
-                className="text-xl italic text-white relative z-20"
+                className={`text-xl italic ${isLight ? 'text-gray-700' : 'text-white'} relative z-20`}
               >
                 {quote.text}
               </motion.p>
@@ -86,28 +92,48 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6, duration: 0.6 }}
-            className="relative text-center z-20"
+            transition={{ delay: 1.4, duration: 0.8 }}
+            className="text-center"
           >
-            <Link 
+            <Link
               href={cta.href}
-              className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 group"
+              className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
+                theme === 'colorful' 
+                  ? 'text-white border border-transparent shadow-lg' 
+                  : isLight 
+                    ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+              style={{
+                ...(theme === 'colorful' ? {
+                  backgroundImage: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradientShift 3s ease infinite',
+                } : {})
+              }}
             >
-              <span className="relative z-10 flex items-center gap-2 font-medium">
+              <motion.span
+                className="relative z-10"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
                 {cta.text}
-                <motion.span
-                  className="material-symbols"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                >
-                  arrow_forward
-                </motion.span>
-              </span>
+              </motion.span>
+              {theme === 'colorful' && (
+                <motion.div 
+                  className="absolute inset-0 bg-black/10"
+                  whileHover={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
             </Link>
+            <style jsx global>{`
+              @keyframes gradientShift {
+                0% { background-position: 0% 50% }
+                50% { background-position: 100% 50% }
+                100% { background-position: 0% 50% }
+              }
+            `}</style>
           </motion.div>
         )}
       </div>

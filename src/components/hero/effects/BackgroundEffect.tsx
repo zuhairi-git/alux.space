@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Theme } from '@/context/ThemeContext';
 
 interface Props {
   type: 'particles' | 'design-code' | 'gradient' | 'none';
+  theme?: Theme;
 }
 
 // Fixed initial positions to avoid hydration mismatches
@@ -23,11 +25,13 @@ const FIXED_POSITIONS = [
   { x: 35, y: 40 },
 ];
 
-const DesignCodeEffect = () => {
+const DesignCodeEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const designIcons = ['design_services', 'developer_board_chip', 'gesture', 'lens_blur', 'motion_photos_on', 'spatial_tracking'];
   const codeIcons = ['code', 'terminal', 'deployed_code', 'data_object', 'memory', 'integration_instructions'];
   const [showDesign, setShowDesign] = useState(true);
   const [mounted, setMounted] = useState(false);
+
+  const isLight = theme === 'light';
 
   useEffect(() => {
     setMounted(true);
@@ -39,8 +43,8 @@ const DesignCodeEffect = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Very light base overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/20 to-transparent z-0" />
+      {/* Very light base overlay - lighter for light theme */}
+      <div className={`absolute inset-0 ${isLight ? 'bg-white/20' : 'bg-gradient-to-br from-black/40 via-black/20 to-transparent'} z-0`} />
       
       {mounted && (
         <AnimatePresence mode="wait">
@@ -79,7 +83,7 @@ const DesignCodeEffect = () => {
                       delay: index * 0.2
                     }}
                   >
-                    <span className="material-symbols text-6xl text-blue-400/20">
+                    <span className={`material-symbols text-6xl ${isLight ? 'text-blue-500/30' : 'text-blue-400/20'}`}>
                       {icon}
                     </span>
                   </motion.div>
@@ -121,7 +125,7 @@ const DesignCodeEffect = () => {
                       delay: index * 0.2
                     }}
                   >
-                    <span className="material-symbols text-6xl text-purple-400/20">
+                    <span className={`material-symbols text-6xl ${isLight ? 'text-purple-500/30' : 'text-purple-400/20'}`}>
                       {icon}
                     </span>
                   </motion.div>
@@ -136,10 +140,15 @@ const DesignCodeEffect = () => {
       <motion.div
         className="absolute inset-0 z-10"
         animate={{
-          background: [
-            'radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 70%)',
-            'radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.03) 0%, transparent 70%)'
-          ]
+          background: isLight
+            ? [
+              'radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 70%)',
+              'radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 70%)'
+            ]
+            : [
+              'radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 70%)',
+              'radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.03) 0%, transparent 70%)'
+            ]
         }}
         transition={{
           duration: 8,
@@ -151,9 +160,10 @@ const DesignCodeEffect = () => {
   );
 };
 
-const ParticlesEffect = () => {
+const ParticlesEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<Array<{x: number, y: number, duration: number}>>([]);
+  const isLight = theme === 'light';
   
   useEffect(() => {
     setMounted(true);
@@ -173,7 +183,7 @@ const ParticlesEffect = () => {
       {particles.map((particle, i) => (
         <motion.div
           key={i}
-          className="absolute h-1 w-1 bg-blue-400/30 rounded-full"
+          className={`absolute h-1 w-1 ${isLight ? 'bg-blue-500/30' : 'bg-blue-400/30'} rounded-full`}
           initial={{
             x: `${particle.x}%`,
             y: `${particle.y}%`,
@@ -195,31 +205,133 @@ const ParticlesEffect = () => {
   );
 };
 
-const GradientEffect = () => (
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-700/20 via-purple-500/20 to-transparent" />
-);
-
-const BackgroundEffect = ({ type }: Props) => {
-  const [mounted, setMounted] = useState(false);
+const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
+  const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
   
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  
-  // Return a simple div for SSR to avoid hydration mismatches
-  if (!mounted) {
-    return type === 'none' ? null : <div className="absolute inset-0" />;
+  if (isColorful) {
+    return (
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Cosmic background base */}
+        <div className="absolute inset-0 bg-[#050023]" />
+        
+        {/* Animated cosmic nebula effect */}
+        <motion.div
+          className="absolute inset-0 opacity-40"
+          style={{
+            background: 'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)'
+          }}
+          animate={{
+            background: [
+              'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)',
+              'radial-gradient(circle at 60% 30%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 30% 40%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)',
+              'radial-gradient(circle at 40% 70%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 60% 50%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)'
+            ]
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Cosmic stars */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 50 }).map((_, i) => {
+            const size = Math.random() * 2 + 1;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const duration = Math.random() * 3 + 2;
+            
+            return (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: size,
+                  height: size,
+                  left: `${posX}%`,
+                  top: `${posY}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.3, 1],
+                }}
+                transition={{
+                  duration: duration,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: Math.random() * 2,
+                }}
+              />
+            );
+          })}
+        </div>
+        
+        {/* Floating cosmic objects */}
+        <motion.div 
+          className="absolute w-40 h-40 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%)',
+            left: '10%',
+            top: '20%'
+          }}
+          animate={{
+            x: [0, 20, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        <motion.div 
+          className="absolute w-60 h-60 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 0, 204, 0.1) 0%, transparent 70%)',
+            right: '15%',
+            bottom: '20%'
+          }}
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 20, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Subtle overlay to enhance text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050023] via-transparent to-transparent" />
+      </div>
+    );
   }
   
-  if (type === 'none') return null;
+  return (
+    <div className={`absolute inset-0 ${
+      isLight 
+        ? 'bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/10 via-purple-400/10 to-transparent'
+        : 'bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-700/20 via-purple-500/20 to-transparent'
+    }`} />
+  );
+};
 
-  const effects = {
-    'particles': <ParticlesEffect />,
-    'design-code': <DesignCodeEffect />,
-    'gradient': <GradientEffect />,
-  };
-
-  return effects[type] || null;
+const BackgroundEffect = ({ type, theme = 'dark' }: Props) => {
+  switch (type) {
+    case 'particles':
+      return <ParticlesEffect theme={theme} />;
+    case 'design-code':
+      return <DesignCodeEffect theme={theme} />;
+    case 'gradient':
+      return <GradientEffect theme={theme} />;
+    case 'none':
+    default:
+      return null;
+  }
 };
 
 export default BackgroundEffect;

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useInsertionEffect } from 'react';
 
-type Theme = 'light' | 'dark' | 'colorful';
+export type Theme = 'light' | 'dark' | 'colorful';
 
 interface ThemeContextType {
   theme: Theme;
@@ -72,6 +72,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     // Update window.__theme for any code that needs to know the current theme
     (window as Window & { __theme?: Theme }).__theme = theme;
+    
+    // Refresh the cache when theme changes
+    if ('caches' in window) {
+      // This forces all caches to be revalidated by adding a cache-busting timestamp query parameter
+      const timestamp = new Date().getTime();
+      // Only perform on client-side navigation (don't reload the whole page)
+      window.history.replaceState(
+        window.history.state,
+        document.title,
+        window.location.pathname + 
+        window.location.search.replace(/(\?|&)_ts=\d+/, '') + 
+        (window.location.search ? '&' : '?') + 
+        `_ts=${timestamp}`
+      );
+    }
   }, [theme, mounted]);
 
   // Apply the default theme class for SSR

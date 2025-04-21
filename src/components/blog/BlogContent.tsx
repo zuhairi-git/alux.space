@@ -55,7 +55,7 @@ function formatContent(content: string) {
           className="list-disc pl-6 mb-6 space-y-2"
         >
           {trimmedBlock.split('\n').map((item, i) => (
-            <li key={i} className="text-gray-200">
+            <li key={i} className="text-theme">
               {item.replace('* ', '')}
             </li>
           ))}
@@ -75,7 +75,7 @@ function formatContent(content: string) {
           className="mb-6"
         >
           <strong className="text-primary">{trimmedBlock.split('\n')[0]}</strong>
-          <p className="text-gray-200 mt-2">{trimmedBlock.split('\n')[1]}</p>
+          <p className="text-theme mt-2">{trimmedBlock.split('\n')[1]}</p>
         </motion.div>
       );
     }
@@ -92,7 +92,7 @@ function formatContent(content: string) {
           transition={{ delay: 0.1 }}
           className="mb-6"
         >
-          <pre className="bg-black/30 backdrop-blur-sm p-4 rounded-lg overflow-x-auto text-sm text-gray-200 border border-white/5">
+          <pre className="bg-theme/30 backdrop-blur-sm p-4 rounded-lg overflow-x-auto text-sm text-theme border border-primary/10">
             <code>{code}</code>
           </pre>
         </motion.div>
@@ -108,7 +108,7 @@ function formatContent(content: string) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="pl-4 border-l-4 border-primary italic my-6 text-lg text-gray-200"
+          className="pl-4 border-l-4 border-primary italic my-6 text-lg text-theme"
         >
           {trimmedBlock.replace('> ', '')}
         </motion.blockquote>
@@ -123,7 +123,7 @@ function formatContent(content: string) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="mb-6 text-lg text-gray-200 leading-relaxed"
+        className="mb-6 text-lg text-theme leading-relaxed"
       >
         {trimmedBlock}
       </motion.p>

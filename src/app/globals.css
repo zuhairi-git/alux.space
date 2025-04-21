@@ -14,6 +14,13 @@
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
 
+  /* Card Colors */
+  --card-from-bg: rgba(249, 250, 251, 0.9);
+  --card-to-bg: rgba(243, 244, 246, 0.9);
+  --card-border: rgba(229, 231, 235, 0.5);
+  --card-border-hover: rgba(96, 165, 250, 0.5);
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
+  
   /* Material Symbols configuration */
   --material-symbols: 'Material Symbols Rounded';
   --material-symbols-weight: 200;
@@ -25,13 +32,20 @@
 /* Light theme */
 .theme-light {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2937;
   --primary: #3b82f6;
   --primary-hover: #2563eb;
   --gradient-start: #3b82f6;
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
+  
+  /* Card Colors - Light Theme */
+  --card-from-bg: rgba(253, 253, 253, 0.9);
+  --card-to-bg: rgba(243, 244, 246, 0.9);
+  --card-border: rgba(229, 231, 235, 0.5);
+  --card-border-hover: rgba(96, 165, 250, 0.5);
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
 }
 
 /* Dark theme */
@@ -44,18 +58,32 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
+  
+  /* Card Colors - Dark Theme */
+  --card-from-bg: rgba(31, 41, 55, 0.9);
+  --card-to-bg: rgba(17, 24, 39, 0.9);
+  --card-border: rgba(75, 85, 99, 0.5);
+  --card-border-hover: rgba(96, 165, 250, 0.5);
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
 }
 
 /* Colorful theme (default) */
 .theme-colorful {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --primary: #a855f7;
-  --primary-hover: #9333ea;
-  --gradient-start: #ec4899;
-  --gradient-mid: #a855f7;
+  --background: #050023;
+  --foreground: #f0f8ff;
+  --primary: #ff00cc;
+  --primary-hover: #d100ff;
+  --gradient-start: #00ffff;
+  --gradient-mid: #ff00cc;
   --gradient-end: #3b82f6;
-  --primary-glow: rgba(168, 85, 247, 0.2);
+  --primary-glow: rgba(255, 0, 204, 0.3);
+  
+  /* Card Colors - Colorful Theme */
+  --card-from-bg: rgba(20, 10, 50, 0.8);
+  --card-to-bg: rgba(10, 5, 30, 0.8);
+  --card-border: rgba(128, 0, 255, 0.3);
+  --card-border-hover: rgba(0, 255, 255, 0.6);
+  --card-shadow-color: rgba(255, 0, 204, 0.3);
 }
 
 @theme inline {
@@ -105,4 +133,222 @@ body {
     'wght' var(--material-symbols-weight),
     'GRAD' var(--material-symbols-grade),
     'opsz' var(--material-symbols-optical-size);
+}
+
+/* Card component styling */
+.theme-card {
+  @apply relative rounded-xl p-[2px];
+  transform-style: preserve-3d;
+}
+
+.theme-card-glow {
+  @apply absolute -inset-1 rounded-xl blur-xl transition-all duration-300 opacity-70 group-hover:blur-2xl group-hover:opacity-100;
+  background: linear-gradient(to right, var(--card-shadow-color), var(--card-shadow-color));
+}
+
+.theme-card-glow-primary {
+  --card-shadow-color: rgba(168, 85, 247, 0.2);
+}
+
+.theme-card-glow-secondary {
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
+}
+
+.theme-card-glow-tertiary {
+  --card-shadow-color: rgba(124, 58, 237, 0.2);
+}
+
+.theme-card-glow-muted {
+  --card-shadow-color: rgba(156, 163, 175, 0.2);
+}
+
+.theme-card-content {
+  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
+  border: 1px solid var(--card-border);
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-card-flex {
+  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
+  border: 1px solid var(--card-border);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-card-content:hover,
+.theme-card-flex:hover {
+  border-color: var(--card-border-hover);
+}
+
+/* Light theme specific card styling */
+.theme-light .theme-card-content {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.theme-light .theme-card-content:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+}
+
+.theme-light .theme-card-glow {
+  opacity: 0.4;
+}
+
+.theme-light .theme-card-glow:hover {
+  opacity: 0.6;
+}
+
+.theme-light .theme-card-glow-primary {
+  --card-shadow-color: rgba(168, 85, 247, 0.1);
+}
+
+.theme-light .theme-card-glow-secondary {
+  --card-shadow-color: rgba(59, 130, 246, 0.1);
+}
+
+.theme-light .theme-card-glow-tertiary {
+  --card-shadow-color: rgba(124, 58, 237, 0.1);
+}
+
+/* Ensure images stay contained within cards */
+.theme-card img {
+  @apply transition-transform duration-300;
+  transform-origin: center center;
+}
+
+.theme-card .overflow-hidden {
+  @apply z-10;
+}
+
+/* Blog cards equal height fix */
+.grid > .flex > .theme-card {
+  height: 100%;
+  width: 100%;
+}
+
+/* Theme support for blog post section */
+.bg-theme-light {
+  background-color: #f9fafb;
+}
+
+.bg-theme-dark {
+  background-color: #0a0a0a;
+}
+
+.theme-light .bg-theme-dark {
+  display: none;
+}
+
+.theme-dark .bg-theme-light,
+.theme-colorful .bg-theme-light {
+  display: none;
+}
+
+/* Ensure theme-colorful uses dark background like theme-dark */
+.theme-colorful .bg-theme-dark {
+  display: block;
+}
+
+/* Blog post content in light theme */
+.theme-light .prose {
+  color: #374151;
+}
+
+.theme-light .prose h2, 
+.theme-light .prose h3, 
+.theme-light .prose h4 {
+  color: #1f2937;
+}
+
+.theme-light .prose a {
+  color: var(--primary);
+}
+
+.theme-light .prose img {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Colorful theme specific card styling */
+.theme-colorful .theme-card-content {
+  background: linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg));
+  border: 1px solid var(--card-border);
+  box-shadow: 0 0 20px rgba(128, 0, 255, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.theme-colorful .theme-card-content:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  border-color: var(--card-border-hover);
+  transform: translateY(-3px);
+}
+
+.theme-colorful .theme-card-glow {
+  opacity: 0.7;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 204, 0.3), rgba(59, 130, 246, 0.3));
+  filter: blur(15px);
+}
+
+.theme-colorful .theme-card-glow-primary {
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 204, 0.4));
+}
+
+.theme-colorful .theme-card-glow-secondary {
+  background: linear-gradient(45deg, rgba(255, 0, 204, 0.4), rgba(59, 130, 246, 0.4));
+}
+
+.theme-colorful .theme-card-glow-tertiary {
+  background: linear-gradient(45deg, rgba(59, 130, 246, 0.4), rgba(0, 255, 255, 0.4));
+}
+
+/* Enhance headings in colorful theme */
+.theme-colorful h1, 
+.theme-colorful h2, 
+.theme-colorful h3 {
+  text-shadow: 0 0 10px rgba(255, 0, 204, 0.3);
+}
+
+.theme-colorful .bg-gradient-to-r {
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Enhance color theme text visibility */
+.theme-colorful .text-transparent.bg-clip-text {
+  filter: drop-shadow(0 0 2px rgba(255, 0, 204, 0.3));
+}
+
+.theme-colorful .nav-item {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Improve blog card visibility in colorful theme */
+.theme-colorful .theme-card {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.theme-colorful .theme-card-content:hover {
+  transform: translateY(-5px);
+}
+
+/* Ensure navigation name visibility */
+.theme-colorful .text-transparent {
+  -webkit-text-stroke: 0.2px rgba(255, 255, 255, 0.1);
 }
