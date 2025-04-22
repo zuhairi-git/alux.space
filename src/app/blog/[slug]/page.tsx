@@ -114,8 +114,8 @@ function BlogPostBackground() {
   return (
     <>
       {/* Light theme background - only visible in light theme */}
-      <div className="absolute inset-0 bg-theme-light z-0">
-        <div className="absolute inset-0 bg-gray-50/80"></div>
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0"></div>
       </div>
 
       {/* Dark/Colorful theme background - visible in dark and colorful themes */}
