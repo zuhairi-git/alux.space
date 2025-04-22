@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import { posts } from './posts/data';
 import BlogCard from '@/components/blog/BlogCard';
+import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 import { useTheme } from '@/context/ThemeContext';
 
 const BlogPage = () => {
@@ -28,6 +29,7 @@ const BlogPage = () => {
       <section className={`relative min-h-[40vh] flex items-center justify-center overflow-hidden ${
         isLight ? 'bg-gray-50' : ''
       }`}>
+        <BackgroundEffect type="gradient" theme={theme} />
         <div className={`absolute inset-0 ${
           isLight 
             ? 'bg-white/40 backdrop-blur-sm' 

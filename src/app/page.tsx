@@ -38,7 +38,7 @@ const HomePage = () => {
       >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
-        <div className="absolute h-full w-1 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-transparent left-1/2 transform -translate-x-1/2 md:left-[20%]  md:top-[25%] " />
+        <div className="absolute h-full w-1 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-transparent left-1/2 transform -translate-x-1/2 md:left-[20%] md:top-[25%]" />
         
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">

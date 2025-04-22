@@ -27,6 +27,10 @@ export const metadata: Metadata = {
     template: '%s | Ali Al-Zuhairi'
   },
   description: 'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.',
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     title: 'Ali Al-Zuhairi - Product Owner & Design Leader',
     description: 'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.',

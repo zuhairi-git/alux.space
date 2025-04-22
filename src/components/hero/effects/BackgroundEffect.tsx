@@ -108,6 +108,22 @@ const ParticlesEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
 const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
+  const [mounted, setMounted] = useState(false);
+  const [stars, setStars] = useState<Array<{size: number, posX: number, posY: number, duration: number}>>([]);
+  
+  useEffect(() => {
+    setMounted(true);
+    // Generate star data after mounting to avoid hydration mismatch
+    if (isColorful) {
+      const newStars = Array.from({ length: 50 }).map(() => ({
+        size: Math.random() * 2 + 1,
+        posX: Math.random() * 100,
+        posY: Math.random() * 100,
+        duration: Math.random() * 3 + 2
+      }));
+      setStars(newStars);
+    }
+  }, [isColorful]);
   
   if (isColorful) {
     return (
@@ -135,38 +151,33 @@ const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
           }}
         />
         
-        {/* Cosmic stars */}
-        <div className="absolute inset-0">
-          {Array.from({ length: 50 }).map((_, i) => {
-            const size = Math.random() * 2 + 1;
-            const posX = Math.random() * 100;
-            const posY = Math.random() * 100;
-            const duration = Math.random() * 3 + 2;
-            
-            return (
+        {/* Cosmic stars - only render on client side */}
+        {mounted && (
+          <div className="absolute inset-0">
+            {stars.map((star, i) => (
               <motion.div
                 key={i}
                 className="absolute rounded-full bg-white"
                 style={{
-                  width: size,
-                  height: size,
-                  left: `${posX}%`,
-                  top: `${posY}%`,
+                  width: star.size,
+                  height: star.size,
+                  left: `${star.posX}%`,
+                  top: `${star.posY}%`,
                 }}
                 animate={{
                   opacity: [0.2, 0.8, 0.2],
                   scale: [1, 1.3, 1],
                 }}
                 transition={{
-                  duration: duration,
+                  duration: star.duration,
                   repeat: Infinity,
                   repeatType: "reverse",
                   delay: Math.random() * 2,
                 }}
               />
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
         
         {/* Floating cosmic objects */}
         <motion.div 

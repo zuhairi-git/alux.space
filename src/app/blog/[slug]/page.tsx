@@ -5,13 +5,14 @@ import BlogPostClient from '@/components/blog/BlogPostClient';
 import BlogContent from '@/components/blog/BlogContent';
 import Card from '@/components/Card';
 import { posts } from '../posts/data';
+import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 import { ThemeProvider } from '@/context/ThemeContext';
 import Image from 'next/image';
 import { Metadata } from 'next';
 
 export function generateStaticParams() {
   return posts.map((post) => ({
-    slug: post.slug.split('&')[0].split('?')[0],
+    slug: post.slug,
   }));
 }
 
@@ -22,8 +23,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const cleanSlug = slug.split('&')[0].split('?')[0];
-  const post = posts.find((p) => p.slug === cleanSlug);
+  const post = posts.find((p) => p.slug === slug);
   
   if (!post) {
     return {
@@ -39,12 +39,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPost(props: Props) {
   const { slug } = await props.params;
-  const cleanSlug = slug.split('&')[0].split('?')[0];
-  const post = posts.find((p) => p.slug === cleanSlug);
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) return null;
 
-  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${cleanSlug}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${slug}`;
 
   return (
     <ThemeProvider>
@@ -115,12 +114,13 @@ function BlogPostBackground() {
   return (
     <>
       {/* Light theme background - only visible in light theme */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0"></div>
+      <div className="absolute inset-0 bg-theme-light z-0">
+        <div className="absolute inset-0 bg-gray-50/80"></div>
       </div>
 
       {/* Dark/Colorful theme background - visible in dark and colorful themes */}
       <div className="absolute inset-0 z-0">
+        <BackgroundEffect type="gradient" />
         <div className="absolute inset-0 pointer-events-none"></div>
       </div>
     </>
