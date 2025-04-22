@@ -11,6 +11,7 @@ import {
   FacebookIcon,
 } from 'next-share';
 import { useTheme } from '@/context/ThemeContext';
+import { ReadingProgress } from './ReadingProgress';
 
 interface BlogPostClientProps {
   children: React.ReactNode;
@@ -42,6 +43,8 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
 
   return (
     <div className="relative">
+      <ReadingProgress />
+      
       {/* Social share sidebar - visible once scrolled */}
       {scrollPosition > 300 && (
         <motion.div
