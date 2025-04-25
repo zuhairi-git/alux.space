@@ -72,7 +72,7 @@ function BlogPostContent({ post, shareUrl }: { post: typeof posts[0], shareUrl: 
               image={post.image}
             />
 
-            <BlogContent content={post.content} />
+            <BlogContent content={post.content} slug={post.slug} />
 
             <div className="mt-16">
               <h3 className="text-2xl font-bold mb-6 text-primary">About the Author</h3>

@@ -174,76 +174,82 @@ The future of work isn't about pushing harder—it's about working smarter. By u
    },
    {
       slug: 'primitive-human',
-      title: 'The Primitive Human: Understanding Our Ancestral Roots',
+      title: 'Embracing the Era of AI: Humanity\'s Journey to Unparalleled Sophistication',
       description: 'Explore the fascinating journey of human evolution and how our primitive instincts still influence modern behavior and decision-making.',
-      publishedDate: 'April 20, 2024',
+      publishedDate: '2023-06-20',
       content: `
-The story of human evolution is a remarkable journey that has shaped who we are today. Understanding our primitive roots helps us better comprehend our modern behaviors, instincts, and social structures.
+Embracing the Era of AI: Humanity's Journey to Unparalleled Sophistication
 
-## The Evolutionary Journey
+I have a feeling that with the progress of AI and the advancements in machine learning, our world will reach such a level of sophistication that most humans may appear primitive once more.
+Ali
 
-Our species, Homo sapiens, has evolved through several key stages:
+Chapter Zero - It is me, AI
+Introduction:
+In an era where technological advancements are reshaping our world at an unprecedented pace, it is not uncommon for individuals to ponder the future implications of such progress. Among these advancements, the rise of Artificial Intelligence (AI) and Machine Learning (ML) has been particularly transformative. This article explores the belief that our world is headed towards an extraordinary level of sophistication, potentially rendering humans primitive in comparison.
 
-### 1. Early Hominids
+AI
+The Accelerating Power of AI and ML:
+Artificial Intelligence and Machine Learning have exhibited remarkable progress in recent years. AI systems are becoming increasingly capable of performing complex tasks, learning from vast amounts of data, and even mimicking human cognitive abilities. As technology continues to evolve, AI is anticipated to surpass human intelligence, leading to a future where machines may outperform us in various domains.
 
-* Emergence of bipedalism
-* Development of basic tool use
-* Formation of early social structures
-* Adaptation to changing environments
+The Impact on Human Life:
+The widespread integration of AI and ML is already leaving a significant impact on our daily lives. From autonomous vehicles to personalized recommendations, these technologies have enhanced convenience, efficiency, and productivity. However, the full potential of AI is yet to be realized. As AI algorithms continue to improve, they are likely to revolutionize industries such as healthcare, finance, transportation, and more, surpassing human capabilities in these fields.
 
-### 2. Cognitive Revolution
+ Continue Reading Chapter Zero
+Conclusion:
+The belief that AI and ML advancements will lead our world to unparalleled sophistication, potentially rendering humans primitive in comparison, is a thought-provoking concept. As AI continues to evolve, it holds immense potential to transform society, industries, and our very notion of what it means to be human. It is crucial to approach this journey with a balanced perspective, embracing the opportunities that arise while ensuring that human values and ethics guide our path forward. By doing so, we can shape a future where humans and AI coexist symbiotically, harnessing the vast potential of both to create a world that transcends our current limitations.
 
-* Development of language
-* Emergence of complex social structures
-* Creation of art and symbolic thinking
-* Development of shared myths and beliefs
+After Conclusion
+In case you are still uncertain or sceptical, it is important to note that the article thus far has been created by an AI, utilizing my statement: "I have a feeling that with the progress of AI and the advancements in machine learning, our world will reach such a level of sophistication that most humans may appear primitive once more." I must admit, it is quite remarkable.
 
-## Primitive Instincts in Modern Life
+Chapter Tow - Focus on Human
+Pivotal Moment
+The inception of this idea behind this article was not driven by me being against AI, but rather by a profound belief in the significance of expanding our understanding of the ever-changing world and redefining educational principles. We stand at a pivotal moment in history, where the path we tread holds the potential for irreversible consequences. This demands a profound change in our approach to education and the work environment. As I often emphasize, the focus should not solely be on enhancing the intelligence of our surroundings. Instead, we ought to explore ways to enhance human capabilities and embrace the enhancement of our creativity.
 
-Many of our primitive instincts still influence our behavior today:
+Human
+To accomplish this, in my opinion, there are three key points to consider:
 
-* Fight or Flight Response: Our immediate reaction to perceived threats
-* Social Bonding: The need for community and belonging
-* Resource Gathering: Our drive to accumulate and protect resources
-* Territorial Behavior: The instinct to protect our personal space
+Know-what: It is crucial to understand what AI is and how developers interact with it at a code level. This ensure gaining knowledge about the inner workings of AI systems.
+Know-why: We must strive to reach a collective understanding and, ideally, an agreement on why we need AI. This involves recognizing the benefits and potential risks associated with its implementation.
+Know-how: By mastering the first two points, we can begin to establish regulations or boundaries that are universally understood and accepted.
+It is important to understand the ever-changing world and redefining educational principles to cope with new sophisticated challenges we are currently facing.
 
-## The Impact on Modern Society
+Chapter Three - Rewrite the rules
+Robotics Ruls for Human
+The core element revolves around control, and those who possess it can govern and shape the course of events. While humans in positions of control may occasionally make mistakes, the situation may differ when it comes to AI and its sophisticated problem-solving abilities. The one with the most reliable decision-making pattern can eventually determine the outcome of matters that hold utmost importance to humans, such as the value of things and the establishment of rules.
 
-Understanding our primitive roots helps explain:
+Now, let's envision a world without traditional rules, and for that, I would like to propose three rules of robotics and convert them into three rules for humans:
+First attempt:
 
-### 1. Social Structures
+Individuals must comply with and respect the autonomy and well-being of others.
+Individuals must avoid actions or situations that may physically or psychologically harm other humans.
+Within their domain, individuals are free to act as they wish as long as their actions align with the principles outlined in the first and second laws.
+My first attempt to build on the idea of exploiting the concept of control and decision making in a world where AI plays a significant role sounds good enough for me. Now, bear in mind that you should shift your mindset to understand this vision. It may not appear practical, but think about a world without any authoritarian force, where humans simply live side by side in a world that caters to all human needs.
 
-- Formation of communities
-- Development of hierarchies
-- Creation of social norms
+Chapter Four - UtopiAI
+What if..?
+When we are deeply committed to creating a society that can fulfill the requirements of decent living for everyone, people will shift their mindset from working to live or working to get rich to instead enjoying living. The focus of creativity will also shift towards exploring how to prolong life and determining the best practices for enhancing human well-being. In this transformed society, relationships will also undergo change, consequently significantly altering the need for having multiple children. By taking this vision further and imagine a utopian society where the focus shifts from working form material gain to enjoying life and exploring ways to enhance human well-being.
 
-### 2. Decision Making
+Chapter Five - The Impact
+Eruption of changes
+AI's influence on our lives is of supreme importance in the present day. It has caused an eruption of changes and rendered many job positions redundant by automating tasks, all thanks to its ability to fulfill numerous requests, provide solutions, and generate ideas with very little human interaction.
 
-- Emotional responses
-- Risk assessment
-- Group dynamics
+AI's rapid advancement as a powerful tool to produce results effortlessly makes it a great replacement for many positions and assistance jobs previously managed by humans. As humans, we are impatient and want answers instantly, so what could be better than having something that won't get tired or complain when asked too many questions?
 
-### 3. Cultural Development
+It is inevitable that AI will replace, disrupt, and change many things. However, there might be hidden treasure for those who can cope with this change and adapt to the new era where AI is involved in everything.
 
-- Creation of traditions
-- Development of rituals
-- Formation of belief systems
+Final Conclusion
+In conclusion, for engaging in this game, it is imperative to establish clear and simplified rules that can be easily understood by all participants. Instead of complex and often ignored rules akin to a book of law, we should adopt straightforward guidelines. Achieving a common understanding of what AI is, its significance, and the purpose of implementing ground rules for its use is essential. These rules should be designed to enhance our lives, considering the impact of AI on both technical and non-technical individuals. By doing so, we can foster a conducive environment for AI's responsible and beneficial integration into our society.
 
-## Looking Forward
+What is coming next?
+Having discussed the significance of AI, it is worth noting that there is already an ideation of Artificial General Intelligence (AGI). AGI refers to a machine that can learn and comprehend any intellectual task that a human being can, and can even develop capabilities beyond the scope of traditional AI systems.
 
-As we continue to evolve, both biologically and culturally, it's important to recognize how our primitive roots influence our modern lives. By understanding these connections, we can:
-
-* Make more informed decisions
-* Build stronger communities
-* Create more effective social structures
-* Develop better coping mechanisms
-
-> While we've come a long way from our primitive ancestors, their legacy continues to shape who we are and how we interact with the world around us.
+AGI
+Finally, I want to express my gratitude for your patience and for taking the time to read this article in its entirety. If you have any questions, please don't hesitate to contact me anytime. I'll be more than happy to hear your feedback.
     `,
       author: 'Ali Al-Zuhairi',
       image: '/images/blog/aivshuman.jpg',
-      tags: ['Evolution', 'Anthropology', 'Human Behavior', 'History'],
-      readTime: '5 min read'
+      tags: ['Artificial Intelligence', 'Future', 'Technology', 'Ethics', 'Education'],
+      readTime: '10 min read'
    },
    {
       slug: 'claude-ai',
