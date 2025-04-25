@@ -30,8 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return notFound();
   }
 
-  const ogImage = post.image.startsWith('http') ? post.image : `${process.env.NEXT_PUBLIC_BASE_URL}${post.image}`;
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${resolvedParams.slug}`;
+  // Ensure absolute URL for images
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
+  const ogImage = post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`;
+  const url = `${baseUrl}/blog/${resolvedParams.slug}`;
 
   return {
     title: post.title,
@@ -53,7 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: post.title
+          alt: post.title,
+          type: 'image/jpeg',
+          secureUrl: ogImage.replace('http://', 'https://')
         }
       ]
     },
@@ -66,17 +70,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [ogImage],
     },
     other: {
+      // Standard Open Graph
       'og:url': url,
       'og:title': post.title,
       'og:description': post.description,
       'og:image': ogImage,
+      'og:image:secure_url': ogImage.replace('http://', 'https://'),
+      'og:image:type': 'image/jpeg',
+      'og:image:width': '1200',
+      'og:image:height': '630',
       'og:image:alt': post.title,
       'og:site_name': 'Ali Al-Zuhairi',
       'og:type': 'article',
       'og:locale': 'en_US',
+      
+      // WhatsApp specific tags
+      'og:image:url': ogImage,
+      
+      // Article specific
       'article:published_time': post.publishedTime,
       'article:author': post.author,
       'article:tag': post.tags.join(','),
+      
+      // Twitter
       'twitter:url': url,
       'twitter:card': 'summary_large_image',
       'twitter:site': '@alialzuhairi',
@@ -85,7 +101,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'twitter:description': post.description,
       'twitter:image': ogImage,
       'twitter:image:alt': post.title
-    }
+    },
+    metadataBase: new URL(baseUrl),
   };
 }
 
