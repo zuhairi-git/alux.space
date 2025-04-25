@@ -240,30 +240,12 @@ export default function JobSeekingClient() {
                 <div>
                   <h3 className="text-xl font-semibold text-primary mb-2">Product Requirements</h3>
                   <ul className="list-disc list-inside opacity-80 space-y-2">
-                    <li>
-                      <span className="material-symbols text-sm text-purple-400 mr-2">person</span>
-                      User Profiles: Sign-up, skills, experience, availability
-                    </li>
-                    <li>
-                      <span className="material-symbols text-sm text-purple-400 mr-2">search</span>
-                      Job Search & Filters: Location, pay, industry, saved filters
-                    </li>
-                    <li>
-                      <span className="material-symbols text-sm text-purple-400 mr-2">notifications</span>
-                      Notifications: New listings, deadlines, interviews
-                    </li>
-                    <li>
-                      <span className="material-symbols text-sm text-purple-400 mr-2">chat</span>
-                      Messaging: In-app chat for employer/job seeker interaction
-                    </li>
-                    <li>
-                      <span className="material-symbols text-sm text-purple-400 mr-2">recommend</span>
-                      Recommendations: Tailored job suggestions
-                    </li>
-                    <li>
-                      <span className="material-symbols text-sm text-purple-400 mr-2">analytics</span>
-                      Analytics: Application stats and job search insights
-                    </li>
+                    <li>User Profiles: Sign-up, skills, experience, availability</li>
+                    <li>Job Search & Filters: Location, pay, industry, saved filters</li>
+                    <li>Notifications: New listings, deadlines, interviews</li>
+                    <li>Messaging: In-app chat for employer/job seeker interaction</li>
+                    <li>Recommendations: Tailored job suggestions</li>
+                    <li>Analytics: Application stats and job search insights</li>
                   </ul>
                 </div>
               </div>
@@ -300,22 +282,10 @@ export default function JobSeekingClient() {
               <div className="theme-card-content p-8">
                 <h2 className="text-2xl font-bold mb-6 text-primary">Deliver Phase</h2>
                 <ul className="list-disc list-inside opacity-80 space-y-3">
-                  <li>
-                    <span className="material-symbols text-sm text-purple-400 mr-2">devices</span>
-                    <span className="font-semibold text-primary">High-Fidelity Prototype:</span> Visual walkthrough of the final UI, tested against user goals.
-                  </li>
-                  <li>
-                    <span className="material-symbols text-sm text-purple-400 mr-2">reviews</span>
-                    <span className="font-semibold text-primary">Design Reviews:</span> Structured feedback sessions to evaluate UI quality and usability. All feedback is documented.
-                  </li>
-                  <li>
-                    <span className="material-symbols text-sm text-purple-400 mr-2">verified</span>
-                    <span className="font-semibold text-primary">Quality Assurance:</span> Covers usability, cross-device compatibility, and visual consistency
-                  </li>
-                  <li>
-                    <span className="material-symbols text-sm text-purple-400 mr-2">folder</span>
-                    <span className="font-semibold text-primary">Design Documentation:</span> Finalized assets, design decisions, and handoff materials—ready for development collaboration.
-                  </li>
+                  <li><span className="font-semibold text-primary">High-Fidelity Prototype:</span> Visual walkthrough of the final UI, tested against user goals.</li>
+                  <li><span className="font-semibold text-primary">Design Reviews:</span> Structured feedback sessions to evaluate UI quality and usability. All feedback is documented.</li>
+                  <li><span className="font-semibold text-primary">Quality Assurance:</span> Covers usability, cross-device compatibility, and visual consistency</li>
+                  <li><span className="font-semibold text-primary">Design Documentation:</span> Finalized assets, design decisions, and handoff materials—ready for development collaboration.</li>
                 </ul>
               </div>
             </div>
