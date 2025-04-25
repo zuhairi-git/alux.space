@@ -96,36 +96,28 @@ export default function JobSeekingClient() {
                   phase: "Discover",
                   desc: "Research and interviews to understand user pain points",
                   icon: (
-                    <svg className="w-8 h-8 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+                    <span className="material-symbols text-3xl text-purple-400">search</span>
                   )
                 },
                 { 
                   phase: "Define",
                   desc: "Analyze insights to frame clear design problems",
                   icon: (
-                    <svg className="w-8 h-8 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
+                    <span className="material-symbols text-3xl text-purple-400">notes</span>
                   )
                 },
                 { 
                   phase: "Develop",
                   desc: "Ideate solutions and test prototypes",
                   icon: (
-                    <svg className="w-8 h-8 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                    </svg>
+                    <span className="material-symbols text-3xl text-purple-400">edit</span>
                   )
                 },
                 { 
                   phase: "Deliver",
                   desc: "Finalize solution through iterative testing and feedback",
                   icon: (
-                    <svg className="w-8 h-8 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                    </svg>
+                    <span className="material-symbols text-3xl text-purple-400">rocket_launch</span>
                   )
                 }
               ].map((item, index) => (
@@ -133,7 +125,9 @@ export default function JobSeekingClient() {
                   key={index}
                   className="theme-card-content p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                 >
-                  {item.icon}
+                  <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
+                    {item.icon}
+                  </div>
                   <h3 className="text-xl font-semibold text-primary mb-2">{item.phase}</h3>
                   <p className="opacity-80">{item.desc}</p>
                 </div>
@@ -165,20 +159,44 @@ export default function JobSeekingClient() {
                 <div>
                   <h3 className="text-xl font-semibold text-primary mb-2">Primary Research</h3>
                   <div className="mb-2 font-medium">Objectives:</div>
-                  <ul className="list-disc list-inside mb-4 opacity-80">
-                    <li>Gauge app awareness and usage</li>
-                    <li>Identify user pain points</li>
-                    <li>Gather UX improvement suggestions</li>
+                  <ul className="list-inside mb-4 opacity-80 space-y-1">
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">target</span>
+                      Gauge app awareness and usage
+                    </li>
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">psychology</span>
+                      Identify user pain points
+                    </li>
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">lightbulb</span>
+                      Gather UX improvement suggestions
+                    </li>
                   </ul>
                   <div className="mb-2 font-medium">Methods:</div>
-                  <ul className="list-disc list-inside mb-4 opacity-80">
-                    <li>Interviews (semi-structured)</li>
-                    <li>Surveys (mixed questions)</li>
-                    <li>App usage tracking</li>
-                    <li>Thematic and quantitative data analysis</li>
+                  <ul className="list-inside mb-4 opacity-80 space-y-1">
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">group</span>
+                      Interviews (semi-structured)
+                    </li>
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">list_alt</span>
+                      Surveys (mixed questions)
+                    </li>
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">trending_up</span>
+                      App usage tracking
+                    </li>
+                    <li className="flex items-center">
+                      <span className="material-symbols text-sm text-purple-400 mr-2">data_object</span>
+                      Thematic and quantitative data analysis
+                    </li>
                   </ul>
                   <div className="mb-2 font-medium">Ethics:</div>
-                  <p className="opacity-80">Informed consent, anonymity, voluntary participation</p>
+                  <p className="opacity-80 flex items-center">
+                    <span className="material-symbols text-sm text-purple-400 mr-2">verified_user</span>
+                    Informed consent, anonymity, voluntary participation
+                  </p>
                 </div>
               </div>
             </div>
@@ -193,14 +211,23 @@ export default function JobSeekingClient() {
                   <h3 className="text-xl font-semibold text-primary mb-4">Personas</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="bg-theme/20 p-4 rounded-lg">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
+                        <span className="material-symbols text-3xl text-purple-400">person</span>
+                      </div>
                       <div className="font-bold text-primary mb-2">Allen (20, Student)</div>
                       <p className="opacity-80 text-sm">Uses app infrequently for quick cash. Flexible with night/weekend shifts. Reliable when he works.</p>
                     </div>
                     <div className="bg-theme/20 p-4 rounded-lg">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
+                        <span className="material-symbols text-3xl text-purple-400">school</span>
+                      </div>
                       <div className="font-bold text-primary mb-2">James (23, Uni Student)</div>
                       <p className="opacity-80 text-sm">Works 2–3 shifts/week in hospitality. Prefers consistent roles at favorite venues.</p>
                     </div>
                     <div className="bg-theme/20 p-4 rounded-lg">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
+                        <span className="material-symbols text-3xl text-purple-400">work</span>
+                      </div>
                       <div className="font-bold text-primary mb-2">Eeva (40, Regular User)</div>
                       <p className="opacity-80 text-sm">Relies on app for 20–40% of income. Plans work in advance, highly dependable, no sector preference.</p>
                     </div>
@@ -213,12 +240,30 @@ export default function JobSeekingClient() {
                 <div>
                   <h3 className="text-xl font-semibold text-primary mb-2">Product Requirements</h3>
                   <ul className="list-disc list-inside opacity-80 space-y-2">
-                    <li>User Profiles: Sign-up, skills, experience, availability</li>
-                    <li>Job Search & Filters: Location, pay, industry, saved filters</li>
-                    <li>Notifications: New listings, deadlines, interviews</li>
-                    <li>Messaging: In-app chat for employer/job seeker interaction</li>
-                    <li>Recommendations: Tailored job suggestions</li>
-                    <li>Analytics: Application stats and job search insights</li>
+                    <li>
+                      <span className="material-symbols text-sm text-purple-400 mr-2">person</span>
+                      User Profiles: Sign-up, skills, experience, availability
+                    </li>
+                    <li>
+                      <span className="material-symbols text-sm text-purple-400 mr-2">search</span>
+                      Job Search & Filters: Location, pay, industry, saved filters
+                    </li>
+                    <li>
+                      <span className="material-symbols text-sm text-purple-400 mr-2">notifications</span>
+                      Notifications: New listings, deadlines, interviews
+                    </li>
+                    <li>
+                      <span className="material-symbols text-sm text-purple-400 mr-2">chat</span>
+                      Messaging: In-app chat for employer/job seeker interaction
+                    </li>
+                    <li>
+                      <span className="material-symbols text-sm text-purple-400 mr-2">recommend</span>
+                      Recommendations: Tailored job suggestions
+                    </li>
+                    <li>
+                      <span className="material-symbols text-sm text-purple-400 mr-2">analytics</span>
+                      Analytics: Application stats and job search insights
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -233,11 +278,21 @@ export default function JobSeekingClient() {
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">Epic Goal</h3>
-                    <p className="opacity-80">Enable fast income opportunities via local gigs</p>
+                    <div className="flex items-center">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-3">
+                        <span className="material-symbols text-3xl text-purple-400">flight_takeoff</span>
+                      </div>
+                      <p className="opacity-80">Enable fast income opportunities via local gigs</p>
+                    </div>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">User Testing</h3>
-                    <p className="opacity-80">In progress</p>
+                    <div className="flex items-center">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-3">
+                        <span className="material-symbols text-3xl text-purple-400">checklist</span>
+                      </div>
+                      <p className="opacity-80">In progress</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -245,10 +300,22 @@ export default function JobSeekingClient() {
               <div className="theme-card-content p-8">
                 <h2 className="text-2xl font-bold mb-6 text-primary">Deliver Phase</h2>
                 <ul className="list-disc list-inside opacity-80 space-y-3">
-                  <li><span className="font-semibold text-primary">High-Fidelity Prototype:</span> Visual walkthrough of the final UI, tested against user goals.</li>
-                  <li><span className="font-semibold text-primary">Design Reviews:</span> Structured feedback sessions to evaluate UI quality and usability. All feedback is documented.</li>
-                  <li><span className="font-semibold text-primary">Quality Assurance:</span> Covers usability, cross-device compatibility, and visual consistency</li>
-                  <li><span className="font-semibold text-primary">Design Documentation:</span> Finalized assets, design decisions, and handoff materials—ready for development collaboration.</li>
+                  <li>
+                    <span className="material-symbols text-sm text-purple-400 mr-2">devices</span>
+                    <span className="font-semibold text-primary">High-Fidelity Prototype:</span> Visual walkthrough of the final UI, tested against user goals.
+                  </li>
+                  <li>
+                    <span className="material-symbols text-sm text-purple-400 mr-2">reviews</span>
+                    <span className="font-semibold text-primary">Design Reviews:</span> Structured feedback sessions to evaluate UI quality and usability. All feedback is documented.
+                  </li>
+                  <li>
+                    <span className="material-symbols text-sm text-purple-400 mr-2">verified</span>
+                    <span className="font-semibold text-primary">Quality Assurance:</span> Covers usability, cross-device compatibility, and visual consistency
+                  </li>
+                  <li>
+                    <span className="material-symbols text-sm text-purple-400 mr-2">folder</span>
+                    <span className="font-semibold text-primary">Design Documentation:</span> Finalized assets, design decisions, and handoff materials—ready for development collaboration.
+                  </li>
                 </ul>
               </div>
             </div>
