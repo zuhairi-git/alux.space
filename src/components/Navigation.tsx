@@ -28,6 +28,8 @@ const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const portfolioTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const portfolioMenuRef = useRef<HTMLDivElement>(null);
+  const portfolioButtonRef = useRef<HTMLLIElement>(null);
 
   // Handle portfolio dropdown timeout
   const handleMenuOpen = () => {
@@ -46,14 +48,28 @@ const Navigation = () => {
     }, 3000);
   };
 
-  // Clean up timeout on unmount
+  // Handle clicks outside the portfolio dropdown
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        portfolioOpen && 
+        portfolioMenuRef.current && 
+        portfolioButtonRef.current && 
+        !portfolioMenuRef.current.contains(event.target as Node) &&
+        !portfolioButtonRef.current.contains(event.target as Node)
+      ) {
+        setPortfolioOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
       if (portfolioTimeoutRef.current) {
         clearTimeout(portfolioTimeoutRef.current);
       }
     };
-  }, []);
+  }, [portfolioOpen]);
 
   // Determine text color based on theme
   const getTextColorClass = (isActive = false) => {
@@ -146,6 +162,7 @@ const Navigation = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
+                ref={portfolioButtonRef}
               >
                 <Link 
                   href="/portfolio" 
@@ -161,6 +178,7 @@ const Navigation = () => {
                 
                 {portfolioOpen && (
                   <motion.div
+                    ref={portfolioMenuRef}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
