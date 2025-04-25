@@ -17,57 +17,124 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
   
   // Generate ID from title if not provided
   const chapterId = id || title.toLowerCase().replace(/\s+/g, '-');
+  
+  // Color variables for light/dark themes
+  const primaryColor = isLight ? 'from-purple-500 to-pink-500' : 'from-purple-400 to-pink-400';
+  const secondaryColor = isLight ? 'from-blue-400 to-indigo-500' : 'from-blue-300 to-indigo-400';
+  const bgBase = isLight ? 'bg-white' : 'bg-gray-900';
+  const textColor = isLight ? 'text-gray-900' : 'text-white';
+  const subtleTextColor = isLight ? 'text-gray-600' : 'text-gray-300';
 
   return (
     <motion.div
       id={chapterId}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6 }}
-      className="my-16 relative"
+      transition={{ duration: 0.8 }}
+      className="my-20 relative"
     >
-      <div className="flex items-center">
-        {/* Decorative line left */}
-        <div className={`flex-grow h-px ${isLight ? 'bg-gradient-to-r from-transparent via-primary/20 to-primary/30' : 'bg-gradient-to-r from-transparent via-primary/30 to-primary/40'}`}></div>
-        
-        {/* Chapter number badge */}
-        <div className="mx-4 relative">
-          <div 
-            className={`w-20 h-20 rounded-full flex items-center justify-center ${
-              isLight 
-                ? 'bg-white shadow-[0_4px_15px_rgba(0,0,0,0.05),_inset_0_-2px_5px_rgba(0,0,0,0.03)]' 
-                : 'bg-gray-800 shadow-[0_4px_15px_rgba(0,0,0,0.2),_inset_0_-2px_5px_rgba(255,255,255,0.02)]'
-            } border-2 ${isLight ? 'border-primary/10' : 'border-primary/30'}`}
-          >
-            <span className="text-3xl font-bold bg-gradient-to-br from-primary to-violet-400 text-transparent bg-clip-text">{number}</span>
-          </div>
-          
-          {/* Small decorative elements */}
-          <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-primary/20"></div>
-          <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full bg-primary/30"></div>
-        </div>
-        
-        {/* Decorative line right */}
-        <div className={`flex-grow h-px ${isLight ? 'bg-gradient-to-l from-transparent via-primary/20 to-primary/30' : 'bg-gradient-to-l from-transparent via-primary/30 to-primary/40'}`}></div>
+      {/* Abstract background shapes */}
+      <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 blur-3xl"></div>
+        <div className="absolute top-10 -right-10 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 blur-3xl"></div>
       </div>
       
-      {/* Chapter title */}
-      <h2 className={`text-3xl md:text-4xl font-bold text-center mt-6 mb-10 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-        {title}
-      </h2>
-      
-      {/* Back to top link */}
-      <div className="text-center">
-        <Link 
-          href="#top" 
-          className={`inline-flex items-center text-sm ${isLight ? 'text-gray-500 hover:text-primary' : 'text-gray-400 hover:text-primary'} transition duration-300`}
+      <div className="flex flex-col items-center relative z-10">
+        {/* Top design element - gradient line with dots */}
+        <div className="flex items-center w-full max-w-xl mx-auto mb-8">
+          <div className={`h-px flex-1 bg-gradient-to-r ${primaryColor} opacity-30`}></div>
+          <div className="px-3 flex items-center">
+            {[...Array(3)].map((_, i) => (
+              <motion.div 
+                key={i} 
+                className={`w-1 h-1 rounded-full bg-gradient-to-r ${primaryColor} mx-1`}
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  repeatType: "reverse",
+                  delay: i * 0.3
+                }}
+              ></motion.div>
+            ))}
+          </div>
+          <div className={`h-px flex-1 bg-gradient-to-l ${primaryColor} opacity-30`}></div>
+        </div>
+        
+        {/* Chapter number with unique styling */}
+        <div className="relative mb-4">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative"
+          >
+            {/* Subtle glow behind number */}
+            <div className={`absolute inset-0 bg-gradient-to-r ${primaryColor} opacity-10 blur-xl rounded-full`}></div>
+            
+            {/* Chapter number */}
+            <div className="relative z-10 flex items-center justify-center">
+              <span className={`text-7xl font-bold bg-gradient-to-br ${primaryColor} bg-clip-text text-transparent opacity-30`}>
+                {number}
+              </span>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Chapter title with animated underline */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mb-6 relative"
         >
-          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-          </svg>
-          Back to top
-        </Link>
+          <h2 className={`text-2xl md:text-3xl font-bold ${textColor} mb-2`}>
+            {title}
+          </h2>
+          
+          {/* Animated underline */}
+          <motion.div 
+            className={`h-px w-0 bg-gradient-to-r ${secondaryColor} mx-auto`}
+            initial={{ width: "0%" }}
+            whileInView={{ width: "50%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          ></motion.div>
+        </motion.div>
+        
+        {/* Back to top link with subtle styling */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center"
+        >
+          <Link 
+            href="#top" 
+            className={`inline-flex items-center text-xs ${subtleTextColor} hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:${primaryColor} transition duration-300`}
+          >
+            <motion.svg 
+              className="w-3 h-3 mr-1" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg"
+              animate={{ y: [0, -2, 0] }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                repeatType: "loop" 
+              }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </motion.svg>
+            return to top
+          </Link>
+        </motion.div>
       </div>
     </motion.div>
   );

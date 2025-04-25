@@ -200,55 +200,61 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`relative w-full ${isLight ? 'bg-white' : 'bg-gray-900'} rounded-2xl p-6 mb-8 overflow-hidden ${
+      className={`relative w-full backdrop-blur-md rounded-2xl p-6 mb-8 overflow-hidden ${
         isLight 
-          ? 'shadow-[0_10px_25px_-15px_rgba(0,0,0,0.1),_inset_0_-2px_6px_0_rgba(0,0,0,0.06)]' 
-          : 'shadow-[0_10px_25px_-15px_rgba(0,0,0,0.5),_inset_0_-2px_6px_0_rgba(255,255,255,0.02)]'
-      }`}
+          ? 'bg-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.05)]' 
+          : 'bg-gray-900/80 shadow-[0_8px_30px_rgba(0,0,0,0.15)]'
+      } border border-opacity-10 ${isLight ? 'border-purple-200' : 'border-purple-800'}`}
       aria-label="Audio player"
     >
-      {/* Background wave */}
-      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
-        <motion.div 
-          className="w-[200%] h-full transform-gpu will-change-transform"
-          animate={{ 
-            x: isPlaying ? "-50%" : "0%"
-          }}
-          transition={{ 
-            duration: isPlaying ? 20 : 0, 
-            ease: "linear", 
-            repeat: Infinity, 
-            repeatType: "loop" 
-          }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" 
-            className="h-full w-full text-primary">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-            fill="currentColor" />
-          </svg>
-        </motion.div>
+      {/* Abstract background shapes */}
+      <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 blur-3xl"></div>
+        <div className="absolute bottom-10 -right-20 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 blur-3xl"></div>
       </div>
       
-      {title && (
-        <div className="mb-3 text-base font-medium text-theme flex items-center">
-          <motion.svg 
-            className="w-5 h-5 mr-2 text-primary" 
-            fill="currentColor" 
-            viewBox="0 0 20 20"
-            animate={{ 
-              scale: isPlaying ? [1, 1.2, 1] : 1
-            }}
-            transition={{ 
-              duration: 1.5, 
-              repeat: isPlaying ? Infinity : 0,
-              repeatType: "loop" 
-            }}
-          >
-            <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
-          </motion.svg>
-          {title}
+      {/* ERROR MESSAGE */}
+      {loadError && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-3 flex items-center space-x-2">
+          <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+          </svg>
+          <p className="text-sm text-red-700 dark:text-red-300">Unable to load audio. Please try again later.</p>
         </div>
       )}
+
+      {/* Title and abstract shapes */}
+      <div className="mb-4 relative">
+        {/* Abstract decorative shapes */}
+        <div className="absolute top-0 right-0 -mt-4 mr-2 opacity-20 dark:opacity-30">
+          <svg width="50" height="50" viewBox="0 0 100 100" className="text-purple-500">
+            <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="10 5" />
+            <circle cx="60" cy="40" r="10" fill="currentColor" opacity="0.5" />
+          </svg>
+        </div>
+        <div className="absolute bottom-0 left-4 -mb-2 opacity-20 dark:opacity-30">
+          <svg width="30" height="30" viewBox="0 0 100 100" className="text-pink-500">
+            <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" strokeWidth="3" />
+            <circle cx="20" cy="20" r="5" fill="currentColor" />
+            <circle cx="80" cy="20" r="5" fill="currentColor" />
+            <circle cx="80" cy="80" r="5" fill="currentColor" />
+            <circle cx="20" cy="80" r="5" fill="currentColor" />
+          </svg>
+        </div>
+        
+        <h3 className="font-medium text-purple-500">
+          <span className="block text-sm uppercase tracking-wider mb-1 opacity-70 text-gray-700 dark:text-gray-300">Now Playing</span>
+          <span className="block relative">
+            <span className="relative z-10">{title || 'Untitled Audio'}</span>
+            <motion.span 
+              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          </span>
+        </h3>
+      </div>
       
       <div className="flex flex-col space-y-4 relative z-10">
         {/* Hidden audio element */}
@@ -270,7 +276,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
               <span className="text-xs opacity-80">Check file path: {src}</span>
               <button 
                 onClick={retryLoading}
-                className="px-3 py-1 bg-primary/20 text-primary rounded-full text-xs hover:bg-primary/30 transition-colors"
+                className="px-3 py-1 bg-purple-500/20 text-purple-500 rounded-full text-xs hover:bg-purple-500/30 transition-colors"
               >
                 Retry
               </button>
@@ -284,7 +290,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
             {Array.from({ length: 10 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="w-1 bg-primary rounded-full"
+                className="w-1 bg-purple-500 rounded-full"
                 animate={{ 
                   height: [8, Math.random() * 16 + 4, 8],
                   opacity: [0.5, 1, 0.5] 
@@ -301,9 +307,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
         
         {/* Progress bar */}
         <div className="w-full flex items-center">
-          <div className="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden relative">
+          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative">
             <div 
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-violet-400 rounded-full transform-gpu"
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transform-gpu"
               style={{ width: `${progressPercentage}%` }}
             />
             <input
@@ -331,9 +337,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className={`w-14 h-14 flex items-center justify-center rounded-full ${
                 isLight 
-                  ? 'bg-white shadow-[0_4px_10px_rgba(0,0,0,0.05),_inset_0_-2px_5px_rgba(0,0,0,0.03)]' 
-                  : 'bg-gray-800 shadow-[0_4px_10px_rgba(0,0,0,0.3),_inset_0_-2px_5px_rgba(255,255,255,0.02)]'
-              } border ${isLight ? 'border-gray-100' : 'border-gray-700'} relative overflow-hidden ${loadError ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  ? 'bg-white/90 shadow-md hover:shadow-lg' 
+                  : 'bg-gray-800/90 shadow-md hover:shadow-lg'
+              } border ${isLight ? 'border-purple-100' : 'border-purple-900/30'} relative overflow-hidden backdrop-blur-sm ${loadError ? 'opacity-50 cursor-not-allowed' : ''}`}
               aria-label={isPlaying ? "Pause" : "Play"}
               disabled={loadError}
             >
@@ -344,7 +350,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.8, opacity: 0 }}
-                    className="w-7 h-7 text-primary" 
+                    className="w-7 h-7 text-purple-500" 
                     fill="currentColor" 
                     viewBox="0 0 20 20"
                   >
@@ -356,7 +362,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.8, opacity: 0 }}
-                    className="w-7 h-7 text-primary" 
+                    className="w-7 h-7 text-purple-500" 
                     fill="currentColor" 
                     viewBox="0 0 20 20"
                   >
@@ -374,14 +380,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className={`w-12 h-12 flex items-center justify-center rounded-full ${
                 isLight 
-                  ? 'bg-white shadow-[0_4px_10px_rgba(0,0,0,0.05),_inset_0_-2px_5px_rgba(0,0,0,0.03)]' 
-                  : 'bg-gray-800 shadow-[0_4px_10px_rgba(0,0,0,0.3),_inset_0_-2px_5px_rgba(255,255,255,0.02)]'
-              } border ${isLight ? 'border-gray-100' : 'border-gray-700'} ${loadError ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  ? 'bg-white/90 shadow-md hover:shadow-lg' 
+                  : 'bg-gray-800/90 shadow-md hover:shadow-lg'
+              } border ${isLight ? 'border-purple-100' : 'border-purple-900/30'} backdrop-blur-sm ${loadError ? 'opacity-50 cursor-not-allowed' : ''}`}
               aria-label="Stop"
               disabled={loadError}
             >
               <motion.svg 
-                className="w-6 h-6 text-primary" 
+                className="w-6 h-6 text-purple-500" 
                 fill="currentColor" 
                 viewBox="0 0 20 20"
                 whileHover={{ rotate: 90 }}
@@ -399,9 +405,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className={`flex items-center justify-center px-4 h-10 rounded-full ${
                 isLight 
-                  ? 'bg-white shadow-[0_4px_10px_rgba(0,0,0,0.05),_inset_0_-2px_5px_rgba(0,0,0,0.03)]' 
-                  : 'bg-gray-800 shadow-[0_4px_10px_rgba(0,0,0,0.3),_inset_0_-2px_5px_rgba(255,255,255,0.02)]'
-              } border ${isLight ? 'border-gray-100' : 'border-gray-700'} text-primary text-sm font-medium ${loadError ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  ? 'bg-white/90 shadow-md hover:shadow-lg' 
+                  : 'bg-gray-800/90 shadow-md hover:shadow-lg'
+              } border ${isLight ? 'border-purple-100' : 'border-purple-900/30'} backdrop-blur-sm text-sm font-medium ${loadError ? 'opacity-50 cursor-not-allowed' : ''}`}
               aria-label={`Change playback speed, currently ${playbackRate}x`}
               disabled={loadError}
             >
@@ -410,6 +416,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
                 initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 10, opacity: 0 }}
+                className="text-purple-500"
               >
                 {playbackRate}x
               </motion.span>
@@ -417,10 +424,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
           </div>
           
           {/* Time display */}
-          <div className="text-sm text-theme flex items-center bg-primary/5 px-3 py-1 rounded-full">
-            <span className="tabular-nums">{formatTime(currentTime)}</span>
+          <div className="text-sm flex items-center bg-gradient-to-r from-purple-500/10 to-pink-500/10 backdrop-blur-sm px-3 py-1 rounded-full">
+            <span className="tabular-nums text-purple-500">{formatTime(currentTime)}</span>
             <span className="mx-1 opacity-50">/</span>
-            <span className="tabular-nums">{formatTime(duration)}</span>
+            <span className="tabular-nums text-gray-700 dark:text-gray-300 opacity-70">{formatTime(duration)}</span>
           </div>
         </div>
       </div>
