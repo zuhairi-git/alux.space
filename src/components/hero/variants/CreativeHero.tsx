@@ -13,6 +13,7 @@ interface CreativeHeroProps extends HeroConfig {
 const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta, theme = 'dark' }) => {
   const words = title.split(' ');
   const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
   
   return (
     <motion.div 
@@ -67,7 +68,7 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             transition={{ delay: 1, duration: 0.8 }}
             className="relative max-w-3xl mx-auto mb-12"
           >
-            <div className={`relative ${isLight ? 'bg-gray-100/70' : 'bg-black/20'} backdrop-blur-sm rounded-xl p-8`}>
+            <div className={`relative ${isLight ? 'bg-gray-100/70' : 'bg-black/20'} backdrop-blur-sm ${isColorful ? 'rounded-2xl' : 'rounded-xl'} p-8`}>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

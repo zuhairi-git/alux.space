@@ -215,10 +215,12 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="theme-card-content p-6 rounded-xl hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
+                className="theme-card"
               >
-                <h4 className="text-xl font-semibold mb-2 text-primary">{skill.title}</h4>
-                <p className="opacity-70">{skill.desc}</p>
+                <div className="theme-card-content p-6 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+                  <h4 className="text-xl font-semibold mb-2 text-primary">{skill.title}</h4>
+                  <p className="opacity-70">{skill.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -238,24 +240,28 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className="theme-card-content p-6 rounded-xl"
+              className="theme-card"
             >
-              <h4 className="text-xl font-semibold mb-4 text-primary">Experience & Achievements</h4>
-              <ul className="space-y-2 opacity-80">
-                <li>• Professional journey and roles</li>
-                <li>• Key milestones and successes</li>
-              </ul>
+              <div className="theme-card-content p-6">
+                <h4 className="text-xl font-semibold mb-4 text-primary">Experience & Achievements</h4>
+                <ul className="space-y-2 opacity-80">
+                  <li>• Professional journey and roles</li>
+                  <li>• Key milestones and successes</li>
+                </ul>
+              </div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className="theme-card-content p-6 rounded-xl"
+              className="theme-card"
             >
-              <h4 className="text-xl font-semibold mb-4 text-primary">Connect & Learn More</h4>
-              <ul className="space-y-2 opacity-80">
-                <li>• Social Media connections</li>
-                <li>• Recommendations and testimonials</li>
-                <li>• Blog insights and updates</li>
-              </ul>
+              <div className="theme-card-content p-6">
+                <h4 className="text-xl font-semibold mb-4 text-primary">Connect & Learn More</h4>
+                <ul className="space-y-2 opacity-80">
+                  <li>• Social Media connections</li>
+                  <li>• Recommendations and testimonials</li>
+                  <li>• Blog insights and updates</li>
+                </ul>
+              </div>
             </motion.div>
           </div>
         </div>
