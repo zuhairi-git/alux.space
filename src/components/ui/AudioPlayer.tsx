@@ -30,6 +30,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
       return;
     }
 
+    // Check if src is empty or undefined
+    if (!src) {
+      console.error("AudioPlayer: Failed to load audio file", { src: "Source is empty or undefined" });
+      setLoadError(true);
+      return;
+    }
+
     // Reset state on mount
     setIsPlaying(false);
     setCurrentTime(0);

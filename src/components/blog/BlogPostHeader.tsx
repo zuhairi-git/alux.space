@@ -111,7 +111,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
       </motion.div>
       
       {/* Audio Player (if available) */}
-      {hasAudio && (
+      {hasAudio && audioSrc && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

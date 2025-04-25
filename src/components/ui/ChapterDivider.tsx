@@ -21,7 +21,6 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
   // Color variables for light/dark themes
   const primaryColor = isLight ? 'from-purple-500 to-pink-500' : 'from-purple-400 to-pink-400';
   const secondaryColor = isLight ? 'from-blue-400 to-indigo-500' : 'from-blue-300 to-indigo-400';
-  const bgBase = isLight ? 'bg-white' : 'bg-gray-900';
   const textColor = isLight ? 'text-gray-900' : 'text-white';
   const subtleTextColor = isLight ? 'text-gray-600' : 'text-gray-300';
 
