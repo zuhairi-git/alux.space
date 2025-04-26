@@ -7,12 +7,69 @@ import { useTheme } from '@/context/ThemeContext';
 interface QuoteBlockProps {
   quote: string;
   author?: string;
+  variant?: 'default' | 'simple' | 'minimal';
 }
 
-const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author }) => {
+const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  
+  // Determine the appropriate variant based on content if not explicitly provided
+  const determinedVariant = variant || determineVariant(quote);
 
+  // For minimal style, just render the text with minimal formatting
+  if (determinedVariant === 'minimal') {
+    return (
+      <motion.div
+        initial={{ opacity: 0.5, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+        className="my-8 max-w-4xl mx-auto relative"
+      >
+        <blockquote className="text-xl md:text-2xl leading-relaxed italic text-theme">
+          {quote}
+        </blockquote>
+        
+        {author && (
+          <footer className="text-right mt-2">
+            <cite className="font-medium text-primary">— {author}</cite>
+          </footer>
+        )}
+      </motion.div>
+    );
+  }
+  
+  // For simple style, use a cleaner blockquote without decorative elements
+  if (determinedVariant === 'simple') {
+    return (
+      <motion.div
+        initial={{ opacity: 0.5, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+        className="my-10 max-w-4xl mx-auto relative"
+      >
+        <div className={`py-6 px-6 border-l-4 ${
+          isLight 
+            ? 'border-primary/30 bg-gray-50' 
+            : 'border-primary/50 bg-gray-900/30'
+        } rounded-r-md`}>
+          <blockquote className="text-xl md:text-2xl leading-relaxed mb-3 text-theme">
+            {quote}
+          </blockquote>
+          
+          {author && (
+            <footer className="text-right">
+              <cite className="font-medium text-primary">— {author}</cite>
+            </footer>
+          )}
+        </div>
+      </motion.div>
+    );
+  }
+  
+  // Default variant (rich styling with decorative elements)
   return (
     <motion.div
       initial={{ opacity: 0.5, y: 20 }}
@@ -73,5 +130,27 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author }) => {
     </motion.div>
   );
 };
+
+// Helper function to intelligently determine the appropriate variant based on content
+function determineVariant(quote: string): 'default' | 'simple' | 'minimal' {
+  // If the quote already has quotation marks, use minimal styling
+  if ((quote.startsWith('"') && quote.endsWith('"')) || 
+      (quote.startsWith('\'') && quote.endsWith('\''))) {
+    return 'minimal';
+  }
+  
+  // If it starts with '>' (markdown blockquote syntax), use simple styling
+  if (quote.startsWith('>')) {
+    return 'simple';
+  }
+  
+  // If the quote is very long (more than 150 chars), use simple styling
+  if (quote.length > 150) {
+    return 'simple';
+  }
+  
+  // Default to rich styling for short, impactful quotes
+  return 'default';
+}
 
 export default QuoteBlock; 

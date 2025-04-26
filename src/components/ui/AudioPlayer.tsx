@@ -233,24 +233,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
       {/* Title and abstract shapes */}
       <div className="mb-4 relative">
         {/* Abstract decorative shapes */}
-        <div className="absolute top-0 right-0 -mt-4 mr-2 opacity-20 dark:opacity-30">
+        <div className="absolute top-0 right-0 -mt-4 mr-2 opacity-60 dark:opacity-60">
           <svg width="50" height="50" viewBox="0 0 100 100" className="text-purple-500">
             <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="10 5" />
             <circle cx="60" cy="40" r="10" fill="currentColor" opacity="0.5" />
           </svg>
         </div>
-        <div className="absolute bottom-0 left-4 -mb-2 opacity-20 dark:opacity-30">
-          <svg width="30" height="30" viewBox="0 0 100 100" className="text-pink-500">
-            <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" strokeWidth="3" />
-            <circle cx="20" cy="20" r="5" fill="currentColor" />
-            <circle cx="80" cy="20" r="5" fill="currentColor" />
-            <circle cx="80" cy="80" r="5" fill="currentColor" />
-            <circle cx="20" cy="80" r="5" fill="currentColor" />
-          </svg>
-        </div>
         
         <h3 className="font-medium text-purple-500">
-          <span className="block text-sm uppercase tracking-wider mb-1 opacity-70 text-gray-700 dark:text-gray-300">Now Playing</span>
+          <span className="block text-sm uppercase tracking-wider mb-1 opacity-70 text-gray500 dark:text-gray-300">Now Playing</span>
           <span className="block relative">
             <span className="relative z-10">{title || 'Untitled Audio'}</span>
             <motion.span 
@@ -434,7 +425,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
           <div className="text-sm flex items-center bg-gradient-to-r from-purple-500/10 to-pink-500/10 backdrop-blur-sm px-3 py-1 rounded-full">
             <span className="tabular-nums text-purple-500">{formatTime(currentTime)}</span>
             <span className="mx-1 opacity-50">/</span>
-            <span className="tabular-nums text-gray-700 dark:text-gray-300 opacity-70">{formatTime(duration)}</span>
+            <span className="tabular-nums text-gray-500 dark:text-gray-300 opacity-70">{formatTime(duration)}</span>
           </div>
         </div>
       </div>

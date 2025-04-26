@@ -484,7 +484,7 @@ export default function CollaborationClient() {
                   },
                   {
                     title: "Documentation",
-                    description: "Comprehensive documentation for future development and cross-functional collaboration",
+                    description: "Clear documentation for future development and cross-functional collaboration.",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">folder</span>

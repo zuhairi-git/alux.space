@@ -272,7 +272,7 @@ const Navigation = () => {
             className={`md:hidden fixed top-0 left-0 w-full h-full bg-black/90 backdrop-blur-lg z-40 transition-all duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
             onClick={() => setMenuOpen(false)}
           >
-            <div className="container mx-auto px-4 pt-24 pb-8 bg-black/90 backdrop-blur-lg z-40">
+            <div className="container mx-auto px-4 pt-24 pb-8 h-full overflow-y-auto">
               <div className="absolute top-4 right-4">
                 <button
                   className="text-gray-300 hover:text-white focus:outline-none"
@@ -305,20 +305,12 @@ const Navigation = () => {
                       Portfolio
                     </Link>
                     <button
-                      className="ml-2 text-gray-300 hover:text-white"
+                      className="ml-2 p-2 text-gray-300 hover:text-white focus:outline-none"
                       onClick={(e) => {
                         e.stopPropagation();
-                        // Toggle menu and clear any existing timeout
-                        if (portfolioOpen) {
-                          setPortfolioOpen(false);
-                        } else {
-                          if (portfolioTimeoutRef.current) {
-                            clearTimeout(portfolioTimeoutRef.current);
-                            portfolioTimeoutRef.current = null;
-                          }
-                          setPortfolioOpen(true);
-                        }
+                        setPortfolioOpen(!portfolioOpen);
                       }}
+                      aria-label={portfolioOpen ? "Collapse portfolio menu" : "Expand portfolio menu"}
                     >
                       <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
                         expand_more
@@ -330,14 +322,14 @@ const Navigation = () => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.1 }}
+                      transition={{ duration: 0.3 }}
                       className="mt-4 ml-4 space-y-4 overflow-hidden"
                     >
                       {portfolioDropdownItems.map((item) => (
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="block text-lg text-gray-400 hover:text-white transition-colors"
+                            className="block text-lg text-gray-400 hover:text-white transition-colors py-2"
                             onClick={() => setMenuOpen(false)}
                           >
                             {item.text}

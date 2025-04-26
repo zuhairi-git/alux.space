@@ -2,25 +2,65 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '../ui/QuoteBlock';
 import ChapterDivider from '../ui/ChapterDivider';
-import ImageSection from '../ui/ImageSection';
 
 interface BlogContentProps {
   content: string;
-  slug: string;
 }
 
 // Helper function to convert markdown-style content to JSX
-function formatContent(content: string, slug: string, theme: string) {
-  // Special processing for the AI blog post
-  if (slug === 'primitive-human') {
-    return formatPrimitiveHumanContent(content, theme);
-  }
+function formatContent(content: string) {
+  // Apply the same styling to all blog posts
+  return formatStylizedContent(content);
+}
+
+// Renamed the primitive human formatter to a generic stylized formatter for all posts
+function formatStylizedContent(content: string) {
+  // Split by sections - either chapters or major headings
+  const splitPattern = /Chapter\s+|^##\s+/im;
+  const hasSections = content.match(splitPattern);
   
-  // For other blog posts, use the regular content formatter
-  return formatRegularContent(content);
+  if (hasSections) {
+    // For content with explicit chapter-like sections
+    const parts = content.split(splitPattern);
+    const intro = parts[0];
+    
+    // Process introduction which includes the quote if present
+    const introContent = processIntroduction(intro);
+    
+    // Process remaining chapters/sections
+    const sections = parts.slice(1).map((section, index) => {
+      // Extract section title and content
+      const titleMatch = section.match(/^(.*?)\n/);
+      const title = titleMatch ? titleMatch[1].trim() : `Section ${index + 1}`;
+      const sectionContent = section.replace(/^.*?\n/, '').trim();
+      
+      // Process the section content
+      const formattedContent = processChapterContent(sectionContent);
+      
+      return (
+        <React.Fragment key={`section-${index}`}>
+          <ChapterDivider title={title} number={index} id={`section-${index}`} />
+          {formattedContent}
+        </React.Fragment>
+      );
+    });
+    
+    return (
+      <>
+        {introContent}
+        {sections}
+      </>
+    );
+  } else {
+    // For content without explicit sections, process as a whole
+    return (
+      <>
+        {processIntroduction(content)}
+      </>
+    );
+  }
 }
 
 // Create separate formatter functions to avoid Hook rules issues
@@ -28,65 +68,121 @@ function formatRegularContent(content: string) {
   return content.split('\n\n').map((block, index) => {
     const trimmedBlock = block.trim();
     
-    // Headings
-    if (trimmedBlock.startsWith('##') && !trimmedBlock.startsWith('###')) {
-      return (
-        <motion.h2 
-          key={index} 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-2xl font-bold mt-10 mb-5 text-primary"
-        >
-          {trimmedBlock.replace('## ', '')}
-        </motion.h2>
-      );
+    // Skip empty blocks
+    if (!trimmedBlock) return null;
+    
+    // Headings (h1, h2, h3)
+    if (trimmedBlock.startsWith('#')) {
+      // H1 heading
+      if (trimmedBlock.startsWith('# ')) {
+        return (
+          <motion.h1 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl font-bold mt-12 mb-6 text-primary"
+          >
+            {trimmedBlock.replace(/^# /, '')}
+          </motion.h1>
+        );
+      }
+      
+      // H2 heading
+      if (trimmedBlock.startsWith('## ')) {
+        return (
+          <motion.h2 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl font-bold mt-10 mb-5 text-primary"
+          >
+            {trimmedBlock.replace(/^## /, '')}
+          </motion.h2>
+        );
+      }
+      
+      // H3 heading
+      if (trimmedBlock.startsWith('### ')) {
+        return (
+          <motion.h3 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-xl font-semibold mt-8 mb-4 text-primary"
+          >
+            {trimmedBlock.replace(/^### /, '')}
+          </motion.h3>
+        );
+      }
+      
+      // H4 heading
+      if (trimmedBlock.startsWith('#### ')) {
+        return (
+          <motion.h4 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg font-semibold mt-6 mb-3 text-primary"
+          >
+            {trimmedBlock.replace(/^#### /, '')}
+          </motion.h4>
+        );
+      }
     }
     
-    if (trimmedBlock.startsWith('###')) {
-      return (
-        <motion.h3 
-          key={index} 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-xl font-semibold mt-8 mb-4 text-primary"
-        >
-          {trimmedBlock.replace('### ', '')}
-        </motion.h3>
-      );
-    }
-    
-    // Lists
-    if (trimmedBlock.startsWith('*')) {
+    // Unordered Lists
+    if (trimmedBlock.match(/^[*\-] /m)) {
+      const items = trimmedBlock.split('\n').filter(line => line.trim().match(/^[*\-] /));
+      
       return (
         <motion.ul 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="list-disc pl-6 mb-6 space-y-2"
         >
-          {trimmedBlock.split('\n').map((item, i) => (
+          {items.map((item, i) => (
             <li key={i} className="text-theme">
-              {item.replace('* ', '')}
+              {item.replace(/^[*\-] /, '')}
             </li>
           ))}
         </motion.ul>
       );
     }
     
-    // Numbered points
+    // Ordered Lists
+    if (trimmedBlock.match(/^\d+\. /m)) {
+      const items = trimmedBlock.split('\n').filter(line => line.trim().match(/^\d+\. /));
+      
+      return (
+        <motion.ol 
+          key={index} 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="list-decimal pl-6 mb-6 space-y-2"
+        >
+          {items.map((item, i) => (
+            <li key={i} className="text-theme">
+              {item.replace(/^\d+\. /, '')}
+            </li>
+          ))}
+        </motion.ol>
+      );
+    }
+    
+    // Simple numbered points (e.g., "1. Title\nDescription")
     if (trimmedBlock.match(/^\d\./)) {
       return (
         <motion.div 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6"
         >
@@ -103,8 +199,7 @@ function formatRegularContent(content: string) {
         <motion.div 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6"
         >
@@ -115,19 +210,79 @@ function formatRegularContent(content: string) {
       );
     }
     
-    // Blockquotes
+    // Blockquotes with QuoteBlock component
     if (trimmedBlock.startsWith('>')) {
+      const quoteContent = trimmedBlock.replace(/^>\s?/, '').replace(/\n>\s?/g, '\n');
+      
+      // Detect if there's an author attribution in the format "> Quote text\n> — Author"
+      const authorMatch = quoteContent.match(/\n—\s*(.+)$/);
+      
+      if (authorMatch) {
+        const quote = quoteContent.replace(/\n—\s*.+$/, '');
+        const author = authorMatch[1];
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <QuoteBlock quote={quote} author={author} variant="default" />
+          </motion.div>
+        );
+      } else {
+        return (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <QuoteBlock quote={quoteContent} variant="default" />
+          </motion.div>
+        );
+      }
+    }
+    
+    // Emphasis (italic)
+    if (trimmedBlock.includes('*') && !trimmedBlock.startsWith('*')) {
+      const parts = trimmedBlock.split(/(\*[^*]+\*)/g);
       return (
-        <motion.blockquote 
+        <motion.p 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="pl-4 border-l-4 border-primary italic my-6 text-lg text-theme"
+          className="mb-6 text-lg text-theme leading-relaxed"
         >
-          {trimmedBlock.replace('> ', '')}
-        </motion.blockquote>
+          {parts.map((part, i) => {
+            if (part.startsWith('*') && part.endsWith('*')) {
+              return <em key={i}>{part.slice(1, -1)}</em>;
+            }
+            return part;
+          })}
+        </motion.p>
+      );
+    }
+    
+    // Strong emphasis (bold)
+    if (trimmedBlock.includes('**')) {
+      const parts = trimmedBlock.split(/(\*\*[^*]+\*\*)/g);
+      return (
+        <motion.p 
+          key={index} 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-6 text-lg text-theme leading-relaxed"
+        >
+          {parts.map((part, i) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+              return <strong key={i}>{part.slice(2, -2)}</strong>;
+            }
+            return part;
+          })}
+        </motion.p>
       );
     }
     
@@ -136,8 +291,7 @@ function formatRegularContent(content: string) {
       <motion.p 
         key={index} 
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         className="mb-6 text-lg text-theme leading-relaxed"
       >
@@ -147,106 +301,6 @@ function formatRegularContent(content: string) {
   });
 }
 
-// Separate function to format the primitive-human blog content
-function formatPrimitiveHumanContent(content: string, theme: string) {
-  const isLight = theme === 'light';
-  
-  // Split by chapters or major sections
-  const parts = content.split(/Chapter\s+/i);
-  const intro = parts[0];
-  
-  // Process introduction which includes the quote
-  const introContent = processIntroduction(intro);
-  
-  // Process remaining chapters
-  const chapters = parts.slice(1).map((chapter, index) => {
-    // Extract chapter title and content
-    const titleMatch = chapter.match(/^(.*?)\n/);
-    const title = titleMatch ? titleMatch[1].trim() : `Chapter ${index + 1}`;
-    const chapterContent = chapter.replace(/^.*?\n/, '').trim();
-    
-    // Add appropriate images for each chapter
-    let chapterImage;
-    if (index === 0) { // Chapter Zero
-      chapterImage = <ImageSection 
-        src="/images/blog/ai-brain.jpg" 
-        alt="AI Brain Concept"
-        caption="Visualization of artificial neural networks - the foundation of modern AI"
-      />;
-    } else if (index === 1) { // 
-      chapterImage = <ImageSection 
-        src="/images/blog/human-ai.jpg" 
-        alt="Human and AI Interaction"
-        caption="The human element remains essential in the age of AI"
-        aspectRatio="tall"
-      />;
-    } else if (index === 2) { // Chapter Two
-      chapterImage = <ImageSection 
-        src="/images/blog/future-rules.jpg" 
-        alt="AI Ethics and Rules"
-        caption="Redefining societal rules for a future with advanced artificial intelligence"
-      />;
-    } else if (index === 3) { // Chapter Three
-      chapterImage = <ImageSection 
-        src="/images/blog/utopia.jpg" 
-        alt="Utopian Future Society"
-        caption="Envisioning a society where AI enhances human well-being"
-        aspectRatio="square"
-      />;
-    } else if (index === 4) { // Chapter Four
-      chapterImage = <ImageSection 
-        src="/images/blog/ai-impact.jpg" 
-        alt="AI Impact on Society"
-        caption="The widespread impact of AI on work and daily life"
-      />;
-    }
-    
-    // Process the chapter content
-    const formattedContent = processChapterContent(chapterContent);
-    
-    return (
-      <React.Fragment key={`chapter-${index}`}>
-        <ChapterDivider title={title} number={index} id={`chapter-${index}`} />
-        {chapterImage}
-        {formattedContent}
-      </React.Fragment>
-    );
-  });
-  
-  return (
-    <>
-      {introContent}
-      {chapters}
-      
-      {/* Final section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        className="mt-16 mb-8 text-center"
-      >
-        <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-          What is coming next?
-        </h2>
-        <p className="text-lg text-theme leading-relaxed max-w-3xl mx-auto mb-8">
-          Having discussed the significance of AI, it is worth noting that there is already an ideation of Artificial General Intelligence (AGI). AGI refers to a machine that can learn and comprehend any intellectual task that a human being can, and can even develop capabilities beyond the scope of traditional AI systems.
-        </p>
-        
-        <ImageSection 
-          src="/images/blog/agi-future.jpg" 
-          alt="Artificial General Intelligence"
-          caption="A glimpse into the potential future of Artificial General Intelligence"
-        />
-        
-        <p className="text-lg text-theme leading-relaxed max-w-3xl mx-auto mt-12 italic">
-          Finally, I want to express my gratitude for your patience and for taking the time to read this article in its entirety. If you have any questions, please don&apos;t hesitate to contact me anytime. I&apos;ll be more than happy to hear your feedback.
-        </p>
-      </motion.div>
-    </>
-  );
-}
-
 // Process the introduction section of the AI blog
 function processIntroduction(intro: string) {
   const lines = intro.split('\n\n');
@@ -254,82 +308,70 @@ function processIntroduction(intro: string) {
   const quoteLine = lines[1]?.trim() || '';
   const remainingContent = lines.slice(2).join('\n\n').trim();
   
+  // Check if the second line is a proper quote or just a regular paragraph
+  const isQuote = quoteLine.startsWith('>') || 
+                 (quoteLine.startsWith('"') && quoteLine.endsWith('"')) ||
+                 (quoteLine.startsWith('"') && quoteLine.endsWith('"'));
+  
   return (
     <>
       <motion.h1
         id="top"
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         className="text-3xl font-bold mb-10 text-center text-primary"
       >
         {title}
       </motion.h1>
       
-      <QuoteBlock quote={quoteLine} author="Ali" />
+      {quoteLine && (
+        isQuote ? (
+          <QuoteBlock 
+            quote={quoteLine.startsWith('>') ? quoteLine.substring(1).trim() : quoteLine} 
+            author="Ali" 
+            variant="default"
+          />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="max-w-3xl mx-auto mb-8 text-center"
+          >
+            <p className="text-xl text-theme leading-relaxed italic">
+              {quoteLine}
+            </p>
+          </motion.div>
+        )
+      )}
       
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-        className="max-w-3xl mx-auto mb-16"
-      >
-        <p className="text-lg text-theme leading-relaxed">
-          {remainingContent}
-        </p>
-      </motion.div>
+      {remainingContent && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="max-w-3xl mx-auto mb-16"
+        >
+          {formatRegularContent(remainingContent)}
+        </motion.div>
+      )}
     </>
   );
 }
 
 // Process chapter content to enhance formatting
 function processChapterContent(content: string) {
-  const paragraphs = content.split('\n\n');
-  
-  return paragraphs.map((paragraph, index) => {
-    if (!paragraph.trim()) return null;
-    
-    // Check if this is a subheading within a chapter
-    if (paragraph.match(/^[A-Z][\w\s]+$/)) {
-      return (
-        <motion.h3
-          key={`subhead-${index}`}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-2xl font-bold mt-10 mb-6 text-primary"
-        >
-          {paragraph}
-        </motion.h3>
-      );
-    }
-    
-    return (
-      <motion.p
-        key={`para-${index}`}
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="mb-6 text-lg text-theme leading-relaxed max-w-3xl mx-auto"
-      >
-        {paragraph}
-      </motion.p>
-    );
-  });
+  return formatRegularContent(content);
 }
 
 // Main component
-const BlogContent: React.FC<BlogContentProps> = ({ content, slug }) => {
-  const { theme } = useTheme();
+const BlogContent: React.FC<BlogContentProps> = ({ content }) => {
   const [fullContent, setFullContent] = useState<React.ReactNode>([]);
 
   useEffect(() => {
-    setFullContent(formatContent(content, slug, theme));
-  }, [content, slug, theme]);
+    setFullContent(formatContent(content));
+  }, [content]);
 
   return (
     <div className="max-w-4xl mx-auto px-4 pt-8 pb-16">

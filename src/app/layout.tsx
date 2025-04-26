@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import BackToTop from "@/components/ui/BackToTop";
 
 // Add Material Symbols stylesheet
 const materialSymbolsUrl = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,200,0..1,-50..200';
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${roboto.variable}`}>
         <ThemeProvider>
           {children}
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>
