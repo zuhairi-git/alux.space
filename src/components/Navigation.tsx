@@ -30,6 +30,8 @@ const Navigation = () => {
   const portfolioTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const portfolioMenuRef = useRef<HTMLDivElement>(null);
   const portfolioButtonRef = useRef<HTMLLIElement>(null);
+  // State for mobile portfolio dropdown
+  const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
 
   // Handle portfolio dropdown timeout
   const handleMenuOpen = () => {
@@ -146,14 +148,6 @@ const Navigation = () => {
                   />
                   <motion.div
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
                   />
                 </Link>
               </motion.li>
@@ -218,14 +212,6 @@ const Navigation = () => {
                   />
                   <motion.div
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
                   />
                 </Link>
               </motion.li>
@@ -243,14 +229,6 @@ const Navigation = () => {
                   />
                   <motion.div
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
                   />
                 </Link>
               </motion.li>
@@ -267,70 +245,56 @@ const Navigation = () => {
             </motion.div>
           </nav>
 
-          {/* Mobile nav */}
-          <motion.nav 
-            className={`md:hidden fixed top-0 left-0 w-full h-full bg-black/90 backdrop-blur-lg z-40 transition-all duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-            onClick={() => setMenuOpen(false)}
-          >
-            <div className="container mx-auto px-4 pt-24 pb-8 h-full overflow-y-auto">
-              <div className="absolute top-4 right-4">
-                <button
-                  className="text-gray-300 hover:text-white focus:outline-none"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setMenuOpen(false);
-                  }}
-                  aria-label="Close menu"
-                >
-                  <span className="material-symbols text-3xl">close</span>
-                </button>
-              </div>
-              <ul className="space-y-6 text-xl">
+          {/* Mobile Menu - Conditionally rendered */}
+          {menuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className={`md:hidden absolute top-full left-0 w-full mt-1 ${theme === 'light' ? 'bg-white/95' : 'bg-black/95'} shadow-lg backdrop-blur-md rounded-b-lg overflow-hidden`}
+            >
+              <ul className="flex flex-col items-center space-y-4 py-4">
                 <li>
-                  <Link 
-                    href="/" 
-                    className="block text-xl text-gray-300 hover:text-white transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
+                  <Link href="/" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
                     Home
                   </Link>
                 </li>
-                <li className="relative">
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href="/portfolio"
-                      className="text-xl text-gray-300 hover:text-white transition-colors"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Portfolio
-                    </Link>
-                    <button
-                      className="ml-2 p-2 text-gray-300 hover:text-white focus:outline-none"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setPortfolioOpen(!portfolioOpen);
-                      }}
-                      aria-label={portfolioOpen ? "Collapse portfolio menu" : "Expand portfolio menu"}
-                    >
-                      <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
-                        expand_more
-                      </span>
-                    </button>
-                  </div>
-                  {portfolioOpen && (
-                    <motion.ul 
+                {/* Mobile Portfolio Item with Dropdown */}
+                <li className="w-full text-center">
+                  <button 
+                    className={`flex items-center justify-center w-full py-2 ${getTextColorClass()} focus:outline-none`}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent closing the main menu
+                      setMobilePortfolioOpen(!mobilePortfolioOpen);
+                    }}
+                    aria-expanded={mobilePortfolioOpen}
+                    aria-controls="mobile-portfolio-menu"
+                  >
+                    <span>Portfolio</span>
+                    <span className={`material-symbols transform transition-transform ml-1 ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
+                      expand_more
+                    </span>
+                  </button>
+                  {/* Mobile Portfolio Submenu */}
+                  {mobilePortfolioOpen && (
+                    <motion.ul
+                      id="mobile-portfolio-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="mt-4 ml-4 space-y-4 overflow-hidden"
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="mt-2 space-y-2 overflow-hidden"
                     >
                       {portfolioDropdownItems.map((item) => (
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="block text-lg text-gray-400 hover:text-white transition-colors py-2"
-                            onClick={() => setMenuOpen(false)}
+                            className={`block py-2 text-sm ${getTextColorClass()} hover:bg-primary/10 transition-colors`}
+                            onClick={() => {
+                              setMobilePortfolioOpen(false);
+                              setMenuOpen(false); // Close main menu on navigation
+                            }}
                           >
                             {item.text}
                           </Link>
@@ -340,33 +304,22 @@ const Navigation = () => {
                   )}
                 </li>
                 <li>
-                  <Link 
-                    href="/blog" 
-                    className="block text-xl text-gray-300 hover:text-white transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
+                  <Link href="/blog" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
                     Blog
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    href="/prompt" 
-                    className="block text-xl text-gray-300 hover:text-white transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
+                  <Link href="/prompt" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
                     Prompts
                   </Link>
                 </li>
-                
-                {/* Theme Switcher - Mobile */}
-                <li className="pt-4 border-t border-white/10 mt-6">
-                  <div className="flex justify-center">
-                    <ThemeSwitch />
-                  </div>
-                </li>
+                 {/* Theme Switcher - Mobile */}
+                 <li className="pt-4 border-t border-gray-500/30 mt-4 w-full flex justify-center">
+                   <ThemeSwitch />
+                 </li>
               </ul>
-            </div>
-          </motion.nav>
+            </motion.div>
+          )}
         </div>
       </motion.div>
 

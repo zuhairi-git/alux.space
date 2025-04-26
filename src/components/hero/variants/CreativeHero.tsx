@@ -13,23 +13,53 @@ interface CreativeHeroProps extends HeroConfig {
 
 // Interactive particles component
 const ParticleField = ({ count = 20 }) => {
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    initialOpacity: number;
+    animateY: number[];
+    animateX: number[];
+    animateOpacity: number[];
+    duration: number;
+  }>>([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Generate particle data only on the client after mount
+    const generatedParticles = [...Array(count)].map((_, i) => ({
+      id: i,
+      animateX: [Math.random() * 100],
+      animateY: [Math.random() * 100, Math.random() * 100],
+      initialOpacity: 0.1 + Math.random() * 0.3,
+      animateOpacity: [0.1 + Math.random() * 0.3, 0.5, 0.1 + Math.random() * 0.3],
+      duration: 5 + Math.random() * 15,
+    }));
+    setParticles(generatedParticles);
+    setIsMounted(true);
+  }, [count]);
+
+  // Render nothing on the server or during initial client hydration
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(count)].map((_, i) => (
+      {particles.map((particle) => (
         <motion.div
-          key={i}
+          key={particle.id}
           className="absolute w-1 h-1 rounded-full bg-primary/30"
-          initial={{ 
-            x: `${Math.random() * 100}%`, 
-            y: `${Math.random() * 100}%`,
-            opacity: 0.1 + Math.random() * 0.3
+          initial={{
+            x: '50%',
+            y: '50%',
+            opacity: 0
           }}
-          animate={{ 
-            y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-            opacity: [0.1 + Math.random() * 0.3, 0.5, 0.1 + Math.random() * 0.3]
+          animate={{
+            x: particle.animateX.map(x => `${x}%`),
+            y: particle.animateY.map(y => `${y}%`),
+            opacity: particle.animateOpacity
           }}
-          transition={{ 
-            duration: 5 + Math.random() * 15,
+          transition={{
+            duration: particle.duration,
             repeat: Infinity,
             repeatType: "reverse"
           }}

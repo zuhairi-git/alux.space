@@ -39,7 +39,7 @@ export default function PortfolioClient({ items }: Props) {
           transition={{ duration: 0.8 }}
           className="container mx-auto px-4"
         >
-          <div className="max-w-4xl mx-auto mb-16">
+          <div className="max-w-4xl mb-16">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
