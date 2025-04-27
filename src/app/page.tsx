@@ -545,7 +545,7 @@ const HomePage = () => {
             }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
           >
-            Client Testimonials
+            Testimonials
           </motion.h3>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
