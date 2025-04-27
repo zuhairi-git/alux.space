@@ -154,17 +154,28 @@ const heroConfig: HeroConfig = {
 const CursorFollower = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
+    const checkScreen = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+    checkScreen();
+    window.addEventListener('resize', checkScreen);
+    return () => window.removeEventListener('resize', checkScreen);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
     };
-
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isVisible]);
+  }, [isVisible, isDesktop]);
 
+  if (!isDesktop) return null;
   return (
     <motion.div
       className="hidden lg:block fixed w-64 h-64 pointer-events-none z-50"
@@ -229,11 +240,17 @@ const HomePage = () => {
   // Ref for the Work Experience section
   const workExperienceRef = useRef<HTMLElement>(null);
   
+  const [isDesktop, setIsDesktop] = useState(true);
+  
   useEffect(() => {
     // Only run on client-side
     if (typeof window === 'undefined') return;
+    const checkScreen = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+    checkScreen();
+    window.addEventListener('resize', checkScreen);
     
-    // Smooth mouse tracking
     const handleMouseMove = (e: MouseEvent) => {
       // Using lerp (linear interpolation) for smoother movement
       const newX = e.clientX / window.innerWidth - 0.5;
@@ -260,6 +277,7 @@ const HomePage = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener('resize', checkScreen);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -275,25 +293,25 @@ const HomePage = () => {
     <main className="min-h-screen bg-theme text-theme overflow-hidden">
       {/* Cursor follower effect */}
       <CursorFollower />
-      
       {/* Interactive background elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-[-1]">
-        <div 
-          className="absolute top-[20%] right-[10%] opacity-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
-          style={{ 
-            transform: `translateY(${scrollY * 0.2}px) translateX(${mousePos.x * 40}px)`,
-            transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
-          }}
-        />
-        <div 
-          className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
-          style={{ 
-            transform: `translateY(${scrollY * -0.15}px) translateX(${mousePos.x * -40}px)`,
-            transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
-          }}
-        />
-      </div>
-      
+      {isDesktop && (
+        <div className="fixed inset-0 pointer-events-none overflow-hidden z-[-1]">
+          <div 
+            className="absolute top-[20%] right-[10%] opacity-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
+            style={{ 
+              transform: `translateY(${scrollY * 0.2}px) translateX(${mousePos.x * 40}px)`,
+              transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
+            }}
+          />
+          <div 
+            className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
+            style={{ 
+              transform: `translateY(${scrollY * -0.15}px) translateX(${mousePos.x * -40}px)`,
+              transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
+            }}
+          />
+        </div>
+      )}
       <Navigation />
       <Hero config={heroConfig} />
       
