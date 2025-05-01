@@ -122,6 +122,14 @@
   [dir="rtl"] button {
     font-family: var(--font-tajawal) !important;
   }
+
+  /* Exclude icon elements from the RTL font override */
+  [dir="rtl"] span.material-symbols,
+  [dir="rtl"] span.material-symbols-rounded,
+  [dir="rtl"] i.material-symbols,
+  [dir="rtl"] i.material-icons {
+    font-family: var(--material-symbols) !important;
+  }
   
   /* Arabic font class for special styling of Arabic quotes */
   .font-arabic {
@@ -611,6 +619,18 @@ body {
   --tw-translate-x: -0.25rem;
 }
 
-[dir="rtl"] .material-symbols {
-  direction: rtl;
+/* Fix for material symbols in RTL mode */
+[dir="rtl"] .material-symbols,
+[dir="rtl"] .material-symbols-rounded,
+[dir="rtl"] .material-icons {
+  /* Override the direction for icon elements */
+  direction: ltr !important;
+  /* Ensure the font family isn't overridden */
+  font-family: var(--material-symbols) !important;
+  /* Preserve the icon's natural orientation */
+  text-orientation: mixed;
+  /* Ensure icons don't flip in RTL context */
+  unicode-bidi: isolate;
+  /* Fix icon position in RTL context */
+  display: inline-block;
 }
