@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import ClientBlogPage from '@/components/blog/ClientBlogPage';
 import { posts } from './posts/data';
 import type { BlogPost } from '@/components/blog/ClientBlogPage';
+import Navigation from '@/components/Navigation';
 
 // Ensure absolute URL for images
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
@@ -82,5 +83,10 @@ export default function BlogPage() {
     categories: post.tags || []
   }));
 
-  return <ClientBlogPage posts={blogPosts} />;
+  return (
+    <>
+      <Navigation />
+      <ClientBlogPage posts={blogPosts} />
+    </>
+  );
 }

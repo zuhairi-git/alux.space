@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         poppins: ['var(--font-poppins)'],
         roboto: ['var(--font-roboto)'],
+        tajawal: ['var(--font-tajawal)'],
       },
       textDirection: {
         rtl: 'rtl',

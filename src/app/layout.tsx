@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Roboto } from "next/font/google";
+import { Poppins, Roboto, Tajawal } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -19,6 +19,14 @@ const roboto = Roboto({
   variable: "--font-roboto",
   weight: ['400', '500', '700'],
   subsets: ["latin"],
+  display: 'swap',
+});
+
+// Add Tajawal font for Arabic text
+const tajawal = Tajawal({
+  variable: "--font-tajawal",
+  weight: ['400', '500', '700'],
+  subsets: ["arabic"],
   display: 'swap',
 });
 
@@ -58,7 +66,7 @@ export default function RootLayout({
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
       </head>
-      <body className={`${poppins.variable} ${roboto.variable}`}>
+      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
             {children}
