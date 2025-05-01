@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Theme } from '@/context/ThemeContext';
 
 interface Props {
-  type: 'particles' | 'design-code' | 'gradient' | 'none';
+  type: 'particles' | 'design-code' | 'gradient' | 'none' | 'abstract-modern';
   theme?: Theme;
 }
 
@@ -231,6 +231,177 @@ const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   );
 };
 
+const AbstractModernEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
+  const isLight = theme === 'light';
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  if (!mounted) return <div className="absolute inset-0" />;
+  
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Base gradient background */}
+      <div className={`absolute inset-0 ${
+        isLight 
+          ? 'bg-gradient-to-br from-white via-blue-50/30 to-white'
+          : 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
+      }`} />
+      
+      {/* Abstract geometric shapes */}
+      <div className="absolute inset-0">
+        {/* Large circle - top right */}
+        <motion.div
+          className={`absolute rounded-full ${
+            isLight 
+              ? 'bg-gradient-to-br from-blue-100/20 to-purple-100/20'
+              : 'bg-gradient-to-br from-blue-500/10 to-purple-500/10'
+          }`}
+          style={{
+            width: '40vw',
+            height: '40vw',
+            right: '-10vw',
+            top: '-10vw',
+          }}
+          animate={{
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Medium square - bottom left, rotated */}
+        <motion.div
+          className={`absolute ${
+            isLight 
+              ? 'bg-gradient-to-br from-blue-50/20 to-purple-50/20'
+              : 'bg-gradient-to-br from-blue-800/10 to-purple-600/10'
+          }`}
+          style={{
+            width: '30vw',
+            height: '30vw',
+            left: '-10vw',
+            bottom: '-5vw',
+            borderRadius: '4rem',
+            transform: 'rotate(15deg)',
+          }}
+          animate={{
+            rotate: [15, 20, 15],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Subtle grid pattern overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(${isLight ? 'rgba(0, 0, 0, 0.02)' : 'rgba(255, 255, 255, 0.03)'} 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+          }}
+        />
+        
+        {/* Floating abstract elements */}
+        <motion.div
+          className={`absolute w-32 h-32 ${
+            isLight 
+              ? 'bg-gradient-to-br from-cyan-100/30 to-blue-100/20' 
+              : 'bg-gradient-to-br from-cyan-800/10 to-blue-700/10'
+          }`}
+          style={{
+            borderRadius: '38% 62% 63% 37% / 41% 44% 56% 59%',
+            left: '20%',
+            top: '15%',
+          }}
+          animate={{
+            borderRadius: ['38% 62% 63% 37% / 41% 44% 56% 59%', '45% 55% 57% 43% / 45% 48% 52% 55%', '38% 62% 63% 37% / 41% 44% 56% 59%'],
+            x: [0, -10, 0],
+            y: [0, 15, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Another floating element - right side */}
+        <motion.div
+          className={`absolute w-48 h-48 ${
+            isLight 
+              ? 'bg-gradient-to-br from-indigo-100/20 to-purple-100/20' 
+              : 'bg-gradient-to-br from-indigo-700/10 to-purple-800/10'
+          }`}
+          style={{
+            borderRadius: '58% 42% 38% 62% / 42% 55% 45% 58%',
+            right: '15%',
+            bottom: '20%',
+          }}
+          animate={{
+            borderRadius: ['58% 42% 38% 62% / 42% 55% 45% 58%', '52% 48% 44% 56% / 47% 50% 50% 53%', '58% 42% 38% 62% / 42% 55% 45% 58%'],
+            x: [0, 20, 0],
+            y: [0, -15, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Thin line across page */}
+        <motion.div
+          className={`absolute h-px w-full ${isLight ? 'bg-gradient-to-r from-transparent via-blue-200/40 to-transparent' : 'bg-gradient-to-r from-transparent via-blue-500/20 to-transparent'}`}
+          style={{
+            top: '70%',
+          }}
+          animate={{
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 opacity-20">
+          {mounted && Array.from({ length: 30 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute rounded-full ${isLight ? 'bg-blue-300/30' : 'bg-blue-400/30'}`}
+              style={{
+                width: Math.random() * 4 + 2 + 'px',
+                height: Math.random() * 4 + 2 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+              }}
+              animate={{
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: Math.random() * 5 + 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const BackgroundEffect = ({ type, theme = 'dark' }: Props) => {
   switch (type) {
     case 'particles':
@@ -239,6 +410,8 @@ const BackgroundEffect = ({ type, theme = 'dark' }: Props) => {
       return <DesignCodeEffect theme={theme} />;
     case 'gradient':
       return <GradientEffect theme={theme} />;
+    case 'abstract-modern':
+      return <AbstractModernEffect theme={theme} />;
     case 'none':
     default:
       return null;

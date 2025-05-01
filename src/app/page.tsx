@@ -84,7 +84,7 @@ export default function Home() {
     variant: theme === 'colorful' ? 'creative' : 'default',
     title: t('home.hero.title'),
     subtitle: t('home.hero.subtitle'),
-    backgroundEffect: theme === 'colorful' ? 'particles' : 'gradient',
+    backgroundEffect: theme === 'colorful' ? 'particles' : 'abstract-modern',
     cta: {
       text: t('home.hero.cta'),
       href: "/portfolio"

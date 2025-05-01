@@ -7,6 +7,7 @@ import DesignHero from './variants/DesignHero';
 import CreativeHero from './variants/CreativeHero';
 import BackgroundEffect from './effects/BackgroundEffect';
 import { useLanguage } from '@/context/LanguageContext';
+import { useTheme } from '@/context/ThemeContext';
 
 interface HeroProps {
   config: HeroConfig;
@@ -14,6 +15,7 @@ interface HeroProps {
 
 export default function Hero({ config }: HeroProps) {
   const { isRTL } = useLanguage();
+  const { theme } = useTheme();
   const { variant = 'default', backgroundEffect = 'none' } = config;
   
   const renderHeroVariant = () => {
@@ -32,7 +34,7 @@ export default function Hero({ config }: HeroProps) {
     <section className={`relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center ${isRTL ? 'text-right' : 'text-left'}`}>
       {/* Background Effect */}
       <div className="absolute inset-0 z-0">
-        <BackgroundEffect type={backgroundEffect} />
+        <BackgroundEffect type={backgroundEffect} theme={theme} />
       </div>
       
       {/* Hero Content */}
