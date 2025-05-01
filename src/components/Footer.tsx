@@ -3,12 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
 
 const Footer = () => {
-  const { theme } = useTheme();
   const { locale, isRTL } = useLanguage();
   const { t } = useTranslations(locale);
   
