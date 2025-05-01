@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface QuoteBlockProps {
   quote: string;
@@ -12,10 +13,15 @@ interface QuoteBlockProps {
 
 const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
   const { theme } = useTheme();
+  const { locale } = useLanguage();
   const isLight = theme === 'light';
+  const isArabic = locale === 'ar';
   
   // Determine the appropriate variant based on content if not explicitly provided
   const determinedVariant = variant || determineVariant(quote);
+
+  // Arabic font class for quotes
+  const arabicFontClass = isArabic ? 'font-arabic' : 'font-serif';
 
   // For minimal style, just render the text with minimal formatting
   if (determinedVariant === 'minimal') {
@@ -27,13 +33,13 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
         transition={{ duration: 0.5 }}
         className="my-8 max-w-4xl mx-auto relative"
       >
-        <blockquote className="text-xl md:text-2xl leading-relaxed italic text-theme">
+        <blockquote className={`text-xl md:text-2xl leading-relaxed italic text-theme ${arabicFontClass}`}>
           {quote}
         </blockquote>
         
         {author && (
           <footer className="text-right mt-2">
-            <cite className="font-medium text-primary">— {author}</cite>
+            <cite className={`font-medium text-primary ${isArabic ? 'font-arabic' : ''}`}>— {author}</cite>
           </footer>
         )}
       </motion.div>
@@ -55,13 +61,13 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
             ? 'border-primary/30 bg-gray-50' 
             : 'border-primary/50 bg-gray-900/30'
         } rounded-r-md`}>
-          <blockquote className="text-xl md:text-2xl leading-relaxed mb-3 text-theme">
+          <blockquote className={`text-xl md:text-2xl leading-relaxed mb-3 text-theme ${arabicFontClass}`}>
             {quote}
           </blockquote>
           
           {author && (
             <footer className="text-right">
-              <cite className="font-medium text-primary">— {author}</cite>
+              <cite className={`font-medium text-primary ${isArabic ? 'font-arabic' : ''}`}>— {author}</cite>
             </footer>
           )}
         </div>
@@ -103,13 +109,13 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
           }`}
         />
         
-        <blockquote className="font-serif text-xl md:text-2xl leading-relaxed mb-4 relative z-10">
+        <blockquote className={`text-xl md:text-2xl leading-relaxed mb-4 relative z-10 ${arabicFontClass}`}>
           {quote}
         </blockquote>
         
         {author && (
           <footer className="text-right">
-            <cite className="flex items-center justify-end font-medium text-primary">
+            <cite className={`flex items-center justify-end font-medium text-primary ${isArabic ? 'font-arabic' : ''}`}>
               <span className="mr-2 inline-block w-8 h-px bg-primary/50" />
               {author}
             </cite>
@@ -153,4 +159,4 @@ function determineVariant(quote: string): 'default' | 'simple' | 'minimal' {
   return 'default';
 }
 
-export default QuoteBlock; 
+export default QuoteBlock;

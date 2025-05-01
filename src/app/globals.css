@@ -122,6 +122,23 @@
   [dir="rtl"] button {
     font-family: var(--font-tajawal) !important;
   }
+  
+  /* Arabic font class for special styling of Arabic quotes */
+  .font-arabic {
+    font-family: var(--font-tajawal);
+    font-weight: 500; /* Medium weight for better readability of quotes */
+    line-height: 1.8; /* Increased line height for Arabic text */
+    letter-spacing: -0.01em; /* Slightly tighter letter spacing */
+  }
+  
+  /* Enhanced Arabic quotes styling */
+  [dir="rtl"] blockquote.font-arabic {
+    font-family: var(--font-tajawal);
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: -0.01em;
+    text-align: right;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
