@@ -475,7 +475,7 @@ export default function Home() {
                 </div>
                 <div className="flex-grow">
                   <div className="mb-4 text-primary/40">
-                    <Icon name="quote" className="text-3xl" />
+                    <Icon name="format_quote" className="text-3xl" />
                   </div>
                   <p className="text-theme-text/80 mb-4 leading-relaxed">
                     Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I&apos;ve worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
@@ -511,7 +511,7 @@ export default function Home() {
                 </div>
                 <div className="flex-grow">
                   <div className="mb-4 text-primary/40">
-                    <Icon name="quote" className="text-3xl" />
+                    <Icon name="format_quote" className="text-3xl" />
                   </div>
                   <p className="text-theme-text/80 mb-4 leading-relaxed">
                     Ali is an exceptional and experienced UI/UX designer with more than ten years of professional experience specialising in product design for technology companies. Ali believes that design is not about deliverables and beautiful pixels but about solving problems and achieving business and user goals. As a product designer, Ali focuses on usability, user experience, and user research in his designs. He has worked with small and large teams as well as a freelancer and enjoys the challenge of solving user problems. He always delivers on time and on budget.
