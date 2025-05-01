@@ -63,12 +63,12 @@ export default function LanguageSwitcher() {
       <Tooltip text={t('languageSwitcher.title')}>
         <button
           onClick={toggleDropdown}
-          className={`flex items-center space-x-1 p-2 rounded-full ${getDropdownButtonClass()}`}
+          className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} p-2 rounded-full ${getDropdownButtonClass()}`}
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
           <span className="text-xl">{languageFlags[locale]}</span>
-          <span className="material-symbols transform transition-transform">
+          <span className={`material-symbols material-symbols-rounded transform transition-transform ${isRTL ? 'mr-1' : 'ml-1'}`}>
             {isOpen ? 'expand_less' : 'expand_more'}
           </span>
         </button>
@@ -90,7 +90,7 @@ export default function LanguageSwitcher() {
               <button
                 key={langCode}
                 onClick={() => handleLanguageChange(langCode)}
-                className={`flex items-center w-full px-4 py-2 text-sm ${
+                className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
                   theme === 'light'
                     ? locale === langCode
                       ? 'bg-blue-50 text-blue-600'
@@ -98,9 +98,9 @@ export default function LanguageSwitcher() {
                     : locale === langCode
                     ? 'bg-gray-800 text-blue-400'
                     : 'text-gray-300 hover:bg-gray-800'
-                } transition-colors ${isRTL ? 'text-right' : 'text-left'} rtl:space-x-reverse`}
+                } transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
               >
-                <span className="text-xl mr-2">{languageFlags[langCode]}</span>
+                <span className={`text-xl ${isRTL ? 'ml-2' : 'mr-2'}`}>{languageFlags[langCode]}</span>
                 <span>{languageNames[langCode]}</span>
               </button>
             ))}

@@ -8,10 +8,12 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
+import Tooltip from './ui/Tooltip';
 
 const portfolioDropdownItems = [
-  { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration' },
-  { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking' },
+  { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, // Added overview page
+  { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration', type: 'case' },
+  { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking', type: 'case' },
 ];
 
 const Navigation = () => {
@@ -44,17 +46,14 @@ const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
-  const portfolioButtonRef = useRef<HTMLLIElement>(null);
-  const portfolioMenuRef = useRef<HTMLDivElement>(null);
+  const portfolioDropdownRef = useRef<HTMLDivElement>(null);
   
   // Close the portfolio dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        portfolioButtonRef.current && 
-        portfolioMenuRef.current && 
-        !portfolioButtonRef.current.contains(event.target as Node) && 
-        !portfolioMenuRef.current.contains(event.target as Node)
+        portfolioDropdownRef.current && 
+        !portfolioDropdownRef.current.contains(event.target as Node)
       ) {
         setPortfolioOpen(false);
       }
@@ -66,22 +65,22 @@ const Navigation = () => {
     };
   }, []);
   
-  // Handle menu opening and closing
-  const handleMenuOpen = () => {
-    setPortfolioOpen(true);
-  };
-  
-  const handleMenuClose = () => {
-    // Use a slight delay to allow for selecting items
-    setTimeout(() => {
-      setPortfolioOpen(false);
-    }, 100);
+  // Toggle portfolio dropdown
+  const togglePortfolioDropdown = () => {
+    setPortfolioOpen(!portfolioOpen);
   };
   
   // Get text color class based on theme
   const getTextColorClass = () => {
     return theme === 'light' 
       ? 'text-gray-700 hover:text-primary' 
+      : 'text-gray-300 hover:text-white';
+  };
+
+  // Get dropdown button styles based on theme
+  const getDropdownButtonClass = () => {
+    return theme === 'light'
+      ? 'text-gray-800 hover:text-primary'
       : 'text-gray-300 hover:text-white';
   };
 
@@ -127,7 +126,7 @@ const Navigation = () => {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
           >
-            <span className="material-symbols text-3xl">menu</span>
+            <span className="material-symbols material-symbols-rounded text-3xl">menu</span>
           </button>
 
           {/* Desktop nav */}
@@ -155,53 +154,82 @@ const Navigation = () => {
                   />
                 </Link>
               </motion.li>
+              
+              {/* Portfolio dropdown using language switcher pattern */}
               <motion.li 
-                className="relative"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                ref={portfolioButtonRef}
+                whileHover={{ y: -2 }}
+                className="relative"
               >
-                <Link 
-                  href="/portfolio" 
-                  className={`flex items-center ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-1 transition-colors ${getTextColorClass()}`}
-                  onMouseEnter={handleMenuOpen}
-                  onMouseLeave={handleMenuClose}
-                >
-                  <span>{t('nav.portfolio')}</span>
-                  <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
-                    expand_more
-                  </span>
-                </Link>
-                
-                {portfolioOpen && (
-                  <motion.div
-                    ref={portfolioMenuRef}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ 
-                      duration: portfolioOpen ? 0.2 : 0.5, // Longer fade out
-                      ease: "easeInOut" 
-                    }}
-                    className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
-                    onMouseEnter={handleMenuOpen}
-                    onMouseLeave={handleMenuClose}
-                  >
-                    <div className="py-2">
-                      {portfolioDropdownItems.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={`block px-4 py-3 ${getTextColorClass()} hover:bg-primary/10 transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
-                        >
-                          {t(item.textKey)}
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
+                <div className="relative" ref={portfolioDropdownRef}>
+                  <Tooltip text={t('nav.portfolio')}>
+                    <button
+                      onClick={togglePortfolioDropdown}
+                      className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} p-2 rounded-full ${getDropdownButtonClass()}`}
+                      aria-expanded={portfolioOpen}
+                      aria-haspopup="true"
+                    >
+                      <span className="relative z-10 transition-colors">{t('nav.portfolio')}</span>
+                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${portfolioOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'}`}>
+                        {portfolioOpen ? 'expand_less' : 'expand_more'}
+                      </span>
+                    </button>
+                  </Tooltip>
+
+                  {portfolioOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: "easeInOut"
+                      }}
+                      className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden z-50`}
+                    >
+                      <div className="py-2">
+                        {portfolioDropdownItems.map((item, index) => (
+                          <React.Fragment key={item.href}>
+                            {/* Add a divider after the overview item */}
+                            {index === 1 && (
+                              <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
+                            )}
+                            
+                            <Link
+                              href={item.href}
+                              className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
+                                item.type === 'overview' 
+                                ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
+                                : theme === 'light'
+                                  ? 'text-gray-700 hover:bg-gray-50'
+                                  : 'text-gray-300 hover:bg-gray-800'
+                              } transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                              onClick={() => setPortfolioOpen(false)}
+                            >
+                              {/* Add icon for overview item */}
+                              {item.type === 'overview' && (
+                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  grid_view
+                                </span>
+                              )}
+                              {/* Add icon for case items */}
+                              {item.type === 'case' && (
+                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  article
+                                </span>
+                              )}
+                              {t(item.textKey)}
+                            </Link>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </motion.li>
+
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -277,7 +305,7 @@ const Navigation = () => {
                 {/* Mobile Portfolio Item with Dropdown */}
                 <li className="w-full text-center">
                   <button 
-                    className={`flex items-center justify-center w-full py-2 ${getTextColorClass()} focus:outline-none`}
+                    className={`flex items-center justify-center ${isRTL ? 'flex-row-reverse' : ''} w-full py-2 ${getTextColorClass()} focus:outline-none`}
                     onClick={(e) => {
                       e.stopPropagation(); // Prevent closing the main menu
                       setMobilePortfolioOpen(!mobilePortfolioOpen);
@@ -286,35 +314,57 @@ const Navigation = () => {
                     aria-controls="mobile-portfolio-menu"
                   >
                     <span>{t('nav.portfolio')}</span>
-                    <span className={`material-symbols transform transition-transform ml-1 ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
-                      expand_more
+                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobilePortfolioOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'}`}>
+                      {mobilePortfolioOpen ? 'expand_less' : 'expand_more'}
                     </span>
                   </button>
                   {/* Mobile Portfolio Submenu */}
                   {mobilePortfolioOpen && (
-                    <motion.ul
+                    <motion.div
                       id="mobile-portfolio-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="mt-2 space-y-2 overflow-hidden"
+                      className={`mt-2 w-full rounded-lg ${theme === 'light' ? 'bg-white/50' : 'bg-black/50'} backdrop-blur-lg overflow-hidden`}
                     >
-                      {portfolioDropdownItems.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            className={`block py-2 text-sm ${getTextColorClass()} hover:bg-primary/10 transition-colors`}
-                            onClick={() => {
-                              setMobilePortfolioOpen(false);
-                              setMenuOpen(false); // Close main menu on navigation
-                            }}
-                          >
-                            {t(item.textKey)}
-                          </Link>
-                        </li>
-                      ))}
-                    </motion.ul>
+                      <div className="py-2">
+                        {portfolioDropdownItems.map((item, index) => (
+                          <React.Fragment key={item.href}>
+                            {/* Add a divider after the overview item */}
+                            {index === 1 && (
+                              <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
+                            )}
+                            <Link
+                              href={item.href}
+                              className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
+                                item.type === 'overview' 
+                                ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
+                                : getTextColorClass()
+                              } hover:bg-primary/10 transition-colors ${isRTL ? 'justify-end' : 'justify-start'}`}
+                              onClick={() => {
+                                setMobilePortfolioOpen(false);
+                                setMenuOpen(false); // Close main menu on navigation
+                              }}
+                            >
+                              {/* Add icon for overview item */}
+                              {item.type === 'overview' && (
+                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  grid_view
+                                </span>
+                              )}
+                              {/* Add icon for case items */}
+                              {item.type === 'case' && (
+                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  article
+                                </span>
+                              )}
+                              {t(item.textKey)}
+                            </Link>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </motion.div>
                   )}
                 </li>
                 <li>

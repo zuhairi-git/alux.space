@@ -6,6 +6,7 @@
     "prompts": "Kehotteet"
   },
   "portfolio": {
+    "overview": "Kaikki Projektit",
     "cases": {
       "collaboration": "Yhteistyö & Johtajuus",
       "jobseeking": "Urakehitys"
