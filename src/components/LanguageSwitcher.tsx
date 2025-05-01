@@ -68,7 +68,7 @@ export default function LanguageSwitcher() {
           aria-haspopup="true"
         >
           <span className="text-xl">{languageFlags[locale]}</span>
-          <span className={`material-symbols material-symbols-rounded transform transition-transform ${isRTL ? 'mr-1' : 'ml-1'}`}>
+          <span className={`material-symbols material-symbols-rounded text-base transform transition-transform ${isRTL ? 'mr-1' : 'ml-1'}`}>
             {isOpen ? 'expand_less' : 'expand_more'}
           </span>
         </button>

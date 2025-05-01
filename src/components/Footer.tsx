@@ -49,7 +49,7 @@ const Footer = () => {
                 whileHover={{ scale: 1.1 }}
                 aria-label="Twitter"
               >
-                <span className="material-symbols">flutter_dash</span>
+                <span className="material-symbols material-symbols-rounded text-xl">flutter_dash</span>
               </motion.a>
               <motion.a 
                 href="https://www.linkedin.com/in/alialzuhairi/" 
@@ -59,7 +59,7 @@ const Footer = () => {
                 whileHover={{ scale: 1.1 }}
                 aria-label="LinkedIn"
               >
-                <span className="material-symbols">group</span>
+                <span className="material-symbols material-symbols-rounded text-xl">group</span>
               </motion.a>
               <motion.a 
                 href="https://github.com/alialzuhairi" 
@@ -69,7 +69,7 @@ const Footer = () => {
                 whileHover={{ scale: 1.1 }}
                 aria-label="GitHub"
               >
-                <span className="material-symbols">code</span>
+                <span className="material-symbols material-symbols-rounded text-xl">code</span>
               </motion.a>
             </div>
           </div>
@@ -122,7 +122,7 @@ const Footer = () => {
                 href="mailto:info@cvlanes.com" 
                 className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors flex items-center gap-1"
               >
-                <span className="material-symbols text-base">mail</span>
+                <span className="material-symbols material-symbols-rounded text-base">mail</span>
                 info@cvlanes.com
               </a>
             </div>

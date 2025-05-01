@@ -6,8 +6,8 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";
 import Footer from "@/components/Footer";
 
-// Add Material Symbols stylesheet with better support for RTL languages
-const materialSymbolsUrl = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=block';
+// Add Material Symbols stylesheet with better support for all languages including RTL
+const materialSymbolsUrl = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap';
 
 const poppins = Poppins({
   variable: "--font-poppins",

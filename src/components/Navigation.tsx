@@ -130,12 +130,12 @@ const Navigation = () => {
           </button>
 
           {/* Desktop nav */}
-          <nav className={`hidden md:flex items-center ${isRTL ? 'flex-row-reverse' : ''} space-x-8`}>
+          <nav className={`hidden md:flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={`flex ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-8`}
+              className={`flex items-center ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-8`}
             >
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}

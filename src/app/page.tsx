@@ -155,26 +155,32 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-4 text-theme-text/70 max-w-2xl mx-auto"
+            >
+              A journey through my professional career, showcasing my growth and expertise in design and technology.
+            </motion.p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Current Position */}
             <Card>
               <CardContent 
-                icon="work" 
+                icon="rocket_launch" 
                 iconClassName="text-purple-400 bg-purple-400/10"
-                title={t('home.workExperience.current')}
+                title="Product Designer | Product Owner"
                 date="2023 - Present"
               >
                 <div className="space-y-4">
                   <div>
-                    <h5 className="text-2xl font-bold mb-2 text-primary">Senior Product Owner</h5>
-                    <p className="opacity-70 mb-1">TietoEvry, Helsinki, Finland</p>
-                    <ul className="list-disc list-inside opacity-50 space-y-1 text-sm">
-                      <li>Leading the design and development of innovative financial products</li>
-                      <li>Managing stakeholder relationships and aligning business requirements</li>
-                      <li>Driving agile development processes and ensuring quality delivery</li>
-                    </ul>
+                    <div className="flex items-center gap-2 opacity-80 mb-2">
+                      <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                      <p>Webropol, Helsinki, Finland</p>
+                    </div>
+                    <p className="opacity-70">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
                   </div>
                 </div>
               </CardContent>
@@ -183,19 +189,37 @@ export default function Home() {
             {/* Previous Positions */}
             <Card>
               <CardContent 
-                icon="history" 
+                icon="insights" 
                 iconClassName="text-blue-400 bg-blue-400/10"
-                title={t('home.workExperience.previous')}
+                title="Professional Product Designer"
+                date="2017 - 2023"
+              >
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center gap-2 opacity-80 mb-2">
+                      <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                      <p>Reslink, Espoo, Finland</p>
+                    </div>
+                    <p className="opacity-70">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent 
+                icon="grid_view" 
+                iconClassName="text-cyan-400 bg-cyan-400/10"
+                title="Senior UI/UX Designer & IT Expert"
                 date="2016 - 2023"
               >
                 <div className="space-y-4">
                   <div>
-                    <h5 className="text-lg opacity-70 mb-1">UI & UX Team Leader</h5>
-                    <p className="opacity-50">Tietoevry, Helsinki, Finland (2020 - 2023)</p>
-                  </div>
-                  <div>
-                    <h5 className="text-lg opacity-70 mb-1">UI/UX Lead Designer</h5>
-                    <p className="opacity-50">Tietoevry, Helsinki, Finland (2016 - 2020)</p>
+                    <div className="flex items-center gap-2 opacity-80 mb-2">
+                      <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                      <p>Reslink, Helsinki, Finland</p>
+                    </div>
+                    <p className="opacity-70">Web Application, Android UI Development, and VPN Management.</p>
                   </div>
                 </div>
               </CardContent>
@@ -204,23 +228,23 @@ export default function Home() {
             {/* Earlier Positions */}
             <Card>
               <CardContent 
-                icon="schedule" 
+                icon="history" 
                 iconClassName="text-gray-400 bg-gray-400/10"
-                title={t('home.workExperience.earlier')}
+                title="Earlier Positions"
                 date="2000 - 2016"
               >
                 <div className="space-y-4">
                   <div>
-                    <h5 className="text-lg opacity-70 mb-1">Graphic Designer UI/UX & IT Expert</h5>
-                    <p className="opacity-50">Reslink, Helsinki, Finland (2014 - 2016)</p>
+                    <h5 className="text-lg opacity-80 mb-1">Graphic Designer UI/UX & IT Expert</h5>
+                    <p className="opacity-60">Reslink, Helsinki, Finland (2014 - 2016)</p>
                   </div>
                   <div>
-                    <h5 className="text-lg opacity-70 mb-1">Freelance IT Expert & UI Developer</h5>
-                    <p className="opacity-50">From Damascus to Espoo (2000 - 2014)</p>
+                    <h5 className="text-lg opacity-80 mb-1">Freelance IT Expert & UI Developer</h5>
+                    <p className="opacity-60">From Damascus to Espoo (2000 - 2014)</p>
                   </div>
                   <div>
-                    <h5 className="text-lg opacity-70 mb-1">Graphic Designer & IT Expert</h5>
-                    <p className="opacity-50">Various Magazines and Newspapers — Tehran, Iran</p>
+                    <h5 className="text-lg opacity-80 mb-1">Graphic Designer & IT Expert</h5>
+                    <p className="opacity-60">Various Magazines and Newspapers — Tehran, Iran</p>
                   </div>
                 </div>
               </CardContent>
