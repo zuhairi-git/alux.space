@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";
 
 // Add Material Symbols stylesheet
@@ -53,14 +54,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="theme-colorful">
+    <html suppressHydrationWarning>
       <head>
-        <link rel="stylesheet" href={materialSymbolsUrl} />
+        <link href={materialSymbolsUrl} rel="stylesheet" />
       </head>
       <body className={`${poppins.variable} ${roboto.variable}`}>
         <ThemeProvider>
-          {children}
-          <BackToTop />
+          <LanguageProvider>
+            {children}
+            <BackToTop />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

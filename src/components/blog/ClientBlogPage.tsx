@@ -2,140 +2,147 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Navigation from '@/components/Navigation';
-import { posts } from '@/app/blog/posts/data';
-import BlogCard from '@/components/blog/BlogCard';
-import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
-import { useTheme } from '@/context/ThemeContext';
+import BlogCard from './BlogCard';
+import { useLanguage } from '@/context/LanguageContext';
+import { useTranslations } from '@/utils/translations';
 
-const ClientBlogPage = () => {
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
+// Blog post type
+export type BlogPost = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  image: string;
+  readTime: string;
+  categories: string[];
+};
+
+interface ClientBlogPageProps {
+  posts: BlogPost[];
+}
+
+export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
+  const { locale, isRTL } = useLanguage();
+  const { t } = useTranslations(locale);
+  const [filter, setFilter] = useState<string | null>(null);
   
-  // Extract all unique tags from posts
-  const allTags = Array.from(new Set(posts.flatMap(post => post.tags)));
+  // Extract unique categories
+  const categories = Array.from(
+    new Set(posts.flatMap(post => post.categories))
+  );
   
-  // Filter posts by selected tag
-  const filteredPosts = selectedTag 
-    ? posts.filter(post => post.tags.includes(selectedTag))
+  // Filter posts by category
+  const filteredPosts = filter
+    ? posts.filter(post => post.categories.includes(filter))
     : posts;
-
+  
   return (
-    <main className="min-h-screen bg-theme text-theme">
-      <Navigation />
-      
-      {/* Hero Section */}
-      <section className={`relative min-h-[40vh] flex items-center justify-center overflow-hidden ${
-        isLight ? 'bg-gray-50' : ''
-      }`}>
-        <BackgroundEffect type="gradient" theme={theme} />
-        <div className={`absolute inset-0 ${
-          isLight 
-            ? 'bg-white/40 backdrop-blur-sm' 
-            : 'bg-black/40 backdrop-blur-sm'
-        } z-0`} />
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto px-4 relative z-10 text-center mt-20"
-        >
-          <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-            Blog & Insights
-          </h1>
-          <p className={`text-xl ${isLight ? 'text-gray-700' : 'opacity-80'} max-w-2xl mx-auto mb-10`}>
-            Thoughts, learnings, and perspectives on design leadership, 
-            product management, and the intersection of creativity and technology.
-          </p>
+    <div className="min-h-screen pt-32 pb-16">
+      <div className="container mx-auto px-4">
+        <div className={`max-w-4xl ${isRTL ? 'mr-auto' : 'mx-auto'} ${isRTL ? 'text-right' : 'text-center'}`}>
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold mb-4"
+          >
+            {t('blogPage.title')}
+          </motion.h1>
           
-          {/* Tag filter */}
-          <div className="flex flex-wrap gap-3 justify-center mt-8">
-            <motion.button
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedTag(null)}
-              className={`px-4 py-2 rounded-full text-sm transition-colors relative ${
-                selectedTag === null 
-                  ? `${isLight ? 'bg-gray-800 text-white' : 'bg-primary text-white'}`
-                  : `${isLight ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-white/10 text-theme hover:bg-white/20'}`
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl opacity-60 mb-12"
+          >
+            {t('blogPage.description')}
+          </motion.p>
+          
+          {/* Category Filters */}
+          <motion.div 
+            className={`flex ${isRTL ? 'justify-end' : 'justify-center'} flex-wrap gap-2 mb-12`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <button
+              onClick={() => setFilter(null)}
+              className={`px-4 py-2 rounded-full text-sm transition-all ${
+                filter === null
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                  : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
               }`}
             >
               All
-              {selectedTag === null && (
-                <motion.span 
-                  layoutId="activeFilterUnderline"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
-                />
-              )}
-            </motion.button>
-            
-            {allTags.map(tag => (
-              <motion.button
-                key={tag}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setSelectedTag(tag)}
-                className={`px-4 py-2 rounded-full text-sm transition-colors relative ${
-                  selectedTag === tag 
-                    ? `${isLight ? 'bg-gray-800 text-white' : 'bg-primary text-white'}`
-                    : `${isLight ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-white/10 text-theme hover:bg-white/20'}`
+            </button>
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setFilter(category)}
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  filter === category
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                    : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
                 }`}
               >
-                {tag}
-                {selectedTag === tag && (
-                  <motion.span 
-                    layoutId="activeFilterUnderline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
-                  />
-                )}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Blog Posts Grid */}
-      <section className={`py-16 ${isLight ? 'bg-white' : ''}`}>
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
-              <div key={post.slug} className="flex h-full">
-                <BlogCard post={post} index={index} />
-              </div>
-            ))}
-          </div>
-          
-          {filteredPosts.length === 0 && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-16"
-            >
-              <p className="text-xl opacity-70">No posts found for this tag.</p>
-              <button 
-                onClick={() => setSelectedTag(null)}
-                className={`mt-4 px-6 py-2 ${
-                  isLight 
-                    ? 'bg-primary/10 text-primary hover:bg-primary/20' 
-                    : 'bg-primary/20 text-primary hover:bg-primary/30'
-                } rounded-full transition-colors`}
-              >
-                Show all posts
+                {category}
               </button>
+            ))}
+          </motion.div>
+        </div>
+        
+        {/* Blog Posts Grid */}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          initial="hidden"
+          animate="show"
+        >
+          {filteredPosts.map((post, index) => (
+            <motion.div
+              key={post.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              <BlogCard 
+                post={{
+                  slug: post.slug,
+                  title: post.title,
+                  description: post.excerpt,
+                  image: post.image,
+                  publishedDate: post.date,
+                  readTime: post.readTime,
+                  tags: post.categories
+                }}
+                index={index}
+              />
             </motion.div>
-          )}
-        </div>
-      </section>
-
-      <footer className="bg-theme text-theme opacity-70 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
-        </div>
-      </footer>
-    </main>
+          ))}
+        </motion.div>
+        
+        {/* Empty state when no posts match filter */}
+        {filteredPosts.length === 0 && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-12"
+          >
+            <p className="text-xl opacity-60">No posts found in this category.</p>
+          </motion.div>
+        )}
+      </div>
+    </div>
   );
-};
-
-export default ClientBlogPage; 
+}

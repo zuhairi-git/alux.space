@@ -1,6 +1,8 @@
 import React from 'react';
 import { Metadata } from 'next';
 import ClientBlogPage from '@/components/blog/ClientBlogPage';
+import { posts } from './posts/data';
+import type { BlogPost } from '@/components/blog/ClientBlogPage';
 
 // Ensure absolute URL for images
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
@@ -68,5 +70,17 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  return <ClientBlogPage />;
+  // Map Post objects to BlogPost structure
+  const blogPosts: BlogPost[] = posts.map(post => ({
+    id: post.slug,
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.description,
+    date: post.publishedDate,
+    image: post.image,
+    readTime: post.readTime,
+    categories: post.tags || []
+  }));
+
+  return <ClientBlogPage posts={blogPosts} />;
 }

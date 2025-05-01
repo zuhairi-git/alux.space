@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const withNextIntl = require('next-intl/plugin')('./src/i18n.js');
+
 const nextConfig = {
   images: {
     unoptimized: true, // <- disables image optimization for export mode
@@ -19,4 +21,4 @@ const nextConfig = {
   output: 'export', // Static export mode
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

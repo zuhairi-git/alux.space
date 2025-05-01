@@ -1,160 +1,85 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
-import { Theme } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
+import { useLanguage } from '@/context/LanguageContext';
 
-interface CreativeHeroProps extends HeroConfig {
-  theme?: Theme;
-}
-
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  return isMobile;
-};
-
-// Interactive particles component
-const ParticleField = ({ count = 20 }) => {
-  const [particles, setParticles] = useState<Array<{
-    id: number;
-    initialOpacity: number;
-    animateY: number[];
-    animateX: number[];
-    animateOpacity: number[];
-    duration: number;
-  }>>([]);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    // Generate particle data only on the client after mount
-    const generatedParticles = [...Array(count)].map((_, i) => ({
-      id: i,
-      animateX: [Math.random() * 100],
-      animateY: [Math.random() * 100, Math.random() * 100],
-      initialOpacity: 0.1 + Math.random() * 0.3,
-      animateOpacity: [0.1 + Math.random() * 0.3, 0.5, 0.1 + Math.random() * 0.3],
-      duration: 5 + Math.random() * 15,
-    }));
-    setParticles(generatedParticles);
-    setIsMounted(true);
-  }, [count]);
-
-  // Render nothing on the server or during initial client hydration
-  if (!isMounted) {
-    return null;
-  }
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
-          initial={{
-            x: '50%',
-            y: '50%',
-            opacity: 0
-          }}
-          animate={{
-            x: particle.animateX.map(x => `${x}%`),
-            y: particle.animateY.map(y => `${y}%`),
-            opacity: particle.animateOpacity
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta, theme = 'dark' }) => {
-  const words = title.split(' ');
+const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
+  const { theme } = useTheme();
+  const { isRTL } = useLanguage();
   const isLight = theme === 'light';
-  const isMobile = useIsMobile();
-
-  // Mouse-follow effect for 3D perspective
+  
+  // Split title into words for staggered animation
+  const words = title ? title.split(' ') : [];
+  
+  // For the mouse-based 3D effect
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
+      // Calculate mouse position relative to the center of the screen
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+      
       setMousePosition({ x, y });
     };
-
+    
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
-
-  if (isMobile) {
-    return (
-      <div className="container mx-auto px-4 relative z-30">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-12 overflow-hidden relative">
-            <h2 className={`text-4xl font-bold leading-tight tracking-tight text-center mt-8 ${isLight ? 'text-gray-900' : 'text-white'}`}
-                style={theme === 'colorful' ? { background: 'linear-gradient(90deg,#06b6d4,#a855f7)', WebkitBackgroundClip: 'text', color: 'transparent' } : {}}>
-              {title}
-            </h2>
-          </div>
-          {subtitle && (
-            <p className={`text-xl text-center mb-8 ${isLight ? 'text-primary' : 'text-fuchsia-300'}`}>{subtitle}</p>
-          )}
-          {cta && (
-            <div className="text-center">
-              <Link
-                href={cta.href}
-                className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 ${theme === 'colorful' ? 'bg-gradient-to-r from-cyan-500 to-fuchsia-600 text-white shadow-lg' : isLight ? 'bg-blue-500 text-white' : 'bg-blue-500 text-white'}`}
-                style={theme === 'colorful' ? { boxShadow: '0 2px 16px 0 rgba(168,85,247,0.25)' } : {}}
-              >
-                {cta.text}
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
+  
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="container mx-auto px-4 relative z-30"
-      ref={containerRef}
+      className="container mx-auto px-4 relative z-10"
     >
-      <ParticleField />
-      
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-12 overflow-hidden relative">
+      {/* Title Section */}
+      <div className="flex flex-col items-center justify-center my-8">
+        {/* Geometric decorations */}
+        <div className="relative w-full max-w-4xl mx-auto">
+          {/* Floating circle decoration */}
           <motion.div
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mt-8"
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+            className="absolute -top-20 -left-10 md:-left-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 blur-sm"
+          />
+          
+          {/* Rotating square decoration */}
+          <motion.div
+            animate={{
+              rotate: 360,
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-10 -right-10 md:-right-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 blur-sm"
+          />
+          
+          {/* Main Title with 3D Effect */}
+          <motion.div 
+            className={`relative z-10 mx-auto ${isRTL ? 'text-right' : 'text-center'} mb-12`}
             style={{
               transform: `perspective(1000px) rotateX(${mousePosition.y * -5}deg) rotateY(${mousePosition.x * 5}deg)`
             }}
           >
-            <h2 className="text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20">
+            <h2 className={`text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20 ${isRTL ? 'text-right' : 'text-center'}`}>
               {words.map((word, i) => (
                 <motion.span
                   key={i}
@@ -174,10 +99,10 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             
             {/* Decorative elements */}
             <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.7 }}
+              transition={{ delay: 0.5, duration: 1 }}
               className="absolute -z-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500/10 to-fuchsia-600/10 blur-3xl"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.5, duration: 1.5 }}
               style={{
                 left: '50%',
                 top: '50%',
@@ -192,7 +117,7 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className={`text-2xl md:text-3xl text-center ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
+            className={`text-2xl md:text-3xl ${isRTL ? 'text-right' : 'text-center'} ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
           >
             {subtitle}
           </motion.p>
@@ -218,7 +143,7 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
-            className="text-center"
+            className={isRTL ? 'text-right' : 'text-center'}
           >
             <Link
               href={cta.href}
@@ -254,18 +179,20 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
               
               {/* Animated glow effect */}
               <motion.div 
-                className="absolute -inset-2 blur-md bg-gradient-to-r from-cyan-500/30 to-fuchsia-600/30 rounded-full opacity-0"
-                whileHover={{ opacity: 0.7 }}
-                transition={{ duration: 0.3 }}
+                className="absolute -z-10 inset-0 bg-gradient-to-r from-cyan-500/30 via-fuchsia-500/30 to-blue-500/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  repeatType: 'loop'
+                }}
+                style={{
+                  backgroundSize: '200% 200%'
+                }}
               />
             </Link>
-            <style jsx global>{`
-              @keyframes gradientShift {
-                0% { background-position: 0% 50% }
-                50% { background-position: 100% 50% }
-                100% { background-position: 0% 50% }
-              }
-            `}</style>
           </motion.div>
         )}
       </div>

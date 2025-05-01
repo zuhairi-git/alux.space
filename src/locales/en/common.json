@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "prompts": "Prompts"
+  },
+  "portfolio": {
+    "cases": {
+      "collaboration": "Collaboration & Leadership",
+      "jobseeking": "Career Development"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Hi, I'm Ali Al-Zuhairi",
+      "subtitle": "I'm a designer and developer who loves creating beautiful digital experiences.",
+      "cta": "View Portfolio"
+    },
+    "about": {
+      "title": "Crafting Digital Dreams into Reality",
+      "intro": "Hey there! I'm Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about more than just aesthetics; it's about touching hearts and solving real problems.",
+      "quote": "Every pixel has a purpose, every interaction tells a story.",
+      "second": "Over the past decade, I've had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.",
+      "third": "When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better."
+    },
+    "workExperience": {
+      "title": "Work Experience",
+      "current": "Current Position",
+      "previous": "Previous Positions",
+      "earlier": "Earlier Positions"
+    },
+    "skills": {
+      "title": "Strengths & Skills"
+    },
+    "testimonials": {
+      "title": "Testimonials"
+    }
+  },
+  "collaboration": {
+    "title": "Collaboration Workflow Platform",
+    "intro": "At the heart of the Collaboration Workflow Platform is a commitment to creativity, interconnectivity, and real-time teamwork. This platform is designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
+    "projectType": "Project Type",
+    "timeline": "Timeline",
+    "tools": "Tools",
+    "roles": "Roles",
+    "objectives": "Objectives",
+    "designProcess": {
+      "title": "Design Process",
+      "discover": "Discover",
+      "discoverDesc": "Research user needs and pain points",
+      "define": "Define",
+      "defineDesc": "Analyze insights to scope the challenge",
+      "develop": "Develop",
+      "developDesc": "Create solution concepts",
+      "deliver": "Deliver",
+      "deliverDesc": "Test with users and iterate"
+    }
+  },
+  "jobseeking": {
+    "title": "Job Seeking Application",
+    "intro": "A mobile app designed to streamline job searches—especially for local, part-time, and weekend work. Created to make job hunting faster, easier, and more efficient for people seeking additional income opportunities."
+  },
+  "blogPage": {
+    "title": "Blog & Insights",
+    "description": "Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology."
+  },
+  "promptsPage": {
+    "title": "Prompts Gallery",
+    "subtitle": "A collection of prompts I've crafted for various creative AI tools"
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+  "languageSwitcher": {
+    "title": "Language",
+    "en": "English",
+    "fi": "Finnish",
+    "ar": "Arabic"
+  },
+  "theme": {
+    "light": "Light Theme",
+    "dark": "Dark Theme",
+    "colorful": "Colorful Theme"
+  }
+}

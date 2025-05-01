@@ -4,16 +4,21 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThemeSwitch from './ThemeSwitch';
+import LanguageSwitcher from './LanguageSwitcher';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { useTranslations } from '@/utils/translations';
 
 const portfolioDropdownItems = [
-  { href: '/portfolio/collaboration', text: 'Collaboration & Leadership' },
-  { href: '/portfolio/jobseeking', text: 'Career Development' },
+  { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration' },
+  { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking' },
 ];
 
 const Navigation = () => {
   const { scrollY } = useScroll();
   const { theme } = useTheme();
+  const { locale, isRTL } = useLanguage();
+  const { t } = useTranslations(locale);
   
   // Use different background colors based on theme
   const backgroundColor = useTransform(
@@ -23,62 +28,61 @@ const Navigation = () => {
       ? ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.8)"] 
       : ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)"]
   );
-  const backdropBlur = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(12px)"]);
-  const scale = useTransform(scrollY, [0, 100], [1, 0.95]);
+  
+  const backdropBlur = useTransform(
+    scrollY,
+    [0, 100],
+    ["blur(0px)", "blur(10px)"]
+  );
+  
+  const scale = useTransform(
+    scrollY,
+    [0, 100],
+    [1, 0.9]
+  );
+  
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
-  const portfolioTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const portfolioMenuRef = useRef<HTMLDivElement>(null);
-  const portfolioButtonRef = useRef<HTMLLIElement>(null);
-  // State for mobile portfolio dropdown
   const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
-
-  // Handle portfolio dropdown timeout
-  const handleMenuOpen = () => {
-    // Clear any existing timeout
-    if (portfolioTimeoutRef.current) {
-      clearTimeout(portfolioTimeoutRef.current);
-      portfolioTimeoutRef.current = null;
-    }
-    setPortfolioOpen(true);
-  };
-
-  const handleMenuClose = () => {
-    // Set a timeout to close the menu after 3 seconds
-    portfolioTimeoutRef.current = setTimeout(() => {
-      setPortfolioOpen(false);
-    }, 3000);
-  };
-
-  // Handle clicks outside the portfolio dropdown
+  const portfolioButtonRef = useRef<HTMLLIElement>(null);
+  const portfolioMenuRef = useRef<HTMLDivElement>(null);
+  
+  // Close the portfolio dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        portfolioOpen && 
-        portfolioMenuRef.current && 
         portfolioButtonRef.current && 
-        !portfolioMenuRef.current.contains(event.target as Node) &&
-        !portfolioButtonRef.current.contains(event.target as Node)
+        portfolioMenuRef.current && 
+        !portfolioButtonRef.current.contains(event.target as Node) && 
+        !portfolioMenuRef.current.contains(event.target as Node)
       ) {
         setPortfolioOpen(false);
       }
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
+    
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (portfolioTimeoutRef.current) {
-        clearTimeout(portfolioTimeoutRef.current);
-      }
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [portfolioOpen]);
-
-  // Determine text color based on theme
-  const getTextColorClass = (isActive = false) => {
-    if (theme === 'light') {
-      return isActive ? 'text-primary' : 'text-gray-800 hover:text-primary';
-    }
-    return isActive ? 'text-white' : 'text-gray-300 hover:text-white';
+  }, []);
+  
+  // Handle menu opening and closing
+  const handleMenuOpen = () => {
+    setPortfolioOpen(true);
+  };
+  
+  const handleMenuClose = () => {
+    // Use a slight delay to allow for selecting items
+    setTimeout(() => {
+      setPortfolioOpen(false);
+    }, 100);
+  };
+  
+  // Get text color class based on theme
+  const getTextColorClass = () => {
+    return theme === 'light' 
+      ? 'text-gray-700 hover:text-primary' 
+      : 'text-gray-300 hover:text-white';
   };
 
   // Get mobile menu button color based on theme
@@ -100,7 +104,7 @@ const Navigation = () => {
         className="container mx-auto px-4 py-4"
         style={{ scale }}
       >
-        <div className="flex justify-between items-center">
+        <div className={`flex justify-between items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
           <motion.h1 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -127,12 +131,12 @@ const Navigation = () => {
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className={`hidden md:flex items-center ${isRTL ? 'flex-row-reverse' : ''} space-x-8`}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex space-x-8"
+              className={`flex ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-8`}
             >
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
@@ -141,9 +145,9 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
               >
                 <Link href="/" className="relative group">
-                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Home</span>
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.home')}</span>
                   <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
+                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
                     layoutId="underline"
                   />
                   <motion.div
@@ -160,11 +164,11 @@ const Navigation = () => {
               >
                 <Link 
                   href="/portfolio" 
-                  className={`flex items-center space-x-1 transition-colors ${getTextColorClass()}`}
+                  className={`flex items-center ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-1 transition-colors ${getTextColorClass()}`}
                   onMouseEnter={handleMenuOpen}
                   onMouseLeave={handleMenuClose}
                 >
-                  <span>Portfolio</span>
+                  <span>{t('nav.portfolio')}</span>
                   <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
                     expand_more
                   </span>
@@ -180,7 +184,7 @@ const Navigation = () => {
                       duration: portfolioOpen ? 0.2 : 0.5, // Longer fade out
                       ease: "easeInOut" 
                     }}
-                    className={`absolute left-0 mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
+                    className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
                     onMouseEnter={handleMenuOpen}
                     onMouseLeave={handleMenuClose}
                   >
@@ -189,9 +193,9 @@ const Navigation = () => {
                         <Link
                           key={item.href}
                           href={item.href}
-                          className={`block px-4 py-3 ${getTextColorClass()} hover:bg-primary/10 transition-colors`}
+                          className={`block px-4 py-3 ${getTextColorClass()} hover:bg-primary/10 transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
                         >
-                          {item.text}
+                          {t(item.textKey)}
                         </Link>
                       ))}
                     </div>
@@ -205,9 +209,9 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
               >
                 <Link href="/blog" className="relative group">
-                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Blog</span>
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.blog')}</span>
                   <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
+                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
                     layoutId="underline"
                   />
                   <motion.div
@@ -222,9 +226,9 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
               >
                 <Link href="/prompt" className="relative group">
-                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Prompts</span>
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.prompts')}</span>
                   <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
+                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
                     layoutId="underline"
                   />
                   <motion.div
@@ -234,12 +238,22 @@ const Navigation = () => {
               </motion.li>
             </motion.ul>
             
+            {/* Language Switcher - Desktop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mr-4"
+            >
+              <LanguageSwitcher />
+            </motion.div>
+            
             {/* Theme Switcher - Desktop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="ml-6"
+              className="ml-2"
             >
               <ThemeSwitch />
             </motion.div>
@@ -252,12 +266,12 @@ const Navigation = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className={`md:hidden absolute top-full left-0 w-full mt-1 ${theme === 'light' ? 'bg-white/95' : 'bg-black/95'} shadow-lg backdrop-blur-md rounded-b-lg overflow-hidden`}
+              className={`md:hidden absolute top-full ${isRTL ? 'right-0' : 'left-0'} w-full mt-1 ${theme === 'light' ? 'bg-white/95' : 'bg-black/95'} shadow-lg backdrop-blur-md rounded-b-lg overflow-hidden`}
             >
               <ul className="flex flex-col items-center space-y-4 py-4">
                 <li>
                   <Link href="/" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
-                    Home
+                    {t('nav.home')}
                   </Link>
                 </li>
                 {/* Mobile Portfolio Item with Dropdown */}
@@ -271,7 +285,7 @@ const Navigation = () => {
                     aria-expanded={mobilePortfolioOpen}
                     aria-controls="mobile-portfolio-menu"
                   >
-                    <span>Portfolio</span>
+                    <span>{t('nav.portfolio')}</span>
                     <span className={`material-symbols transform transition-transform ml-1 ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
                       expand_more
                     </span>
@@ -296,7 +310,7 @@ const Navigation = () => {
                               setMenuOpen(false); // Close main menu on navigation
                             }}
                           >
-                            {item.text}
+                            {t(item.textKey)}
                           </Link>
                         </li>
                       ))}
@@ -305,18 +319,24 @@ const Navigation = () => {
                 </li>
                 <li>
                   <Link href="/blog" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
-                    Blog
+                    {t('nav.blog')}
                   </Link>
                 </li>
                 <li>
                   <Link href="/prompt" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
-                    Prompts
+                    {t('nav.prompts')}
                   </Link>
                 </li>
-                 {/* Theme Switcher - Mobile */}
-                 <li className="pt-4 border-t border-gray-500/30 mt-4 w-full flex justify-center">
-                   <ThemeSwitch />
-                 </li>
+                
+                {/* Language Switcher - Mobile */}
+                <li className="pt-4 border-t border-gray-500/30 mt-4 w-full flex justify-center">
+                  <LanguageSwitcher />
+                </li>
+                
+                {/* Theme Switcher - Mobile */}
+                <li className="pt-4 w-full flex justify-center">
+                  <ThemeSwitch />
+                </li>
               </ul>
             </motion.div>
           )}

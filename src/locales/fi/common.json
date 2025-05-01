@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Etusivu",
+    "portfolio": "Portfolio",
+    "blog": "Blogi",
+    "prompts": "Kehotteet"
+  },
+  "portfolio": {
+    "cases": {
+      "collaboration": "Yhteistyö & Johtajuus",
+      "jobseeking": "Urakehitys"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Hei, olen Ali Al-Zuhairi",
+      "subtitle": "Olen suunnittelija ja kehittäjä, joka rakastaa kauniiden digitaalisten kokemusten luomista.",
+      "cta": "Näytä Portfolio"
+    },
+    "about": {
+      "title": "Digitaalisten unelmien muuttaminen todellisuudeksi",
+      "intro": "Hei siellä! Olen Ali, intohimoinen unelmoija ja luova sielu, joka uskoo suunnittelun voimaan muuttaa ideat merkityksellisiksi kokemuksiksi. Matkani useilla mantereilla – Damaskoksesta Helsinkiin – on opettanut minulle, että hyvä suunnittelu on muutakin kuin estetiikkaa; se koskettaa sydämiä ja ratkaisee todellisia ongelmia.",
+      "quote": "Jokaisella pikselillä on tarkoitus, jokainen vuorovaikutus kertoo tarinan.",
+      "second": "Viimeisen vuosikymmenen aikana olen saanut iloa lukuisten digitaalisten tuotteiden elävöittämisestä, aina Double Diamond -lähestymistavan ohjaamana mutta omalla luovalla tyylilläni värittämänä. Uskon, että teknologiasta voi tehdä inhimillisempää, saavutettavampaa ja ehkä jopa hieman taianomaista.",
+      "third": "Kun en suunnittele, löydät minut tutkimasta uusia teknologioita, jakamasta tietoa kollegoiden kanssa, tai yksinkertaisesti unelmoimasta seuraavasta suuresta ideasta, joka voisi tehdä jonkun digitaalisesta elämästä hieman parempaa."
+    },
+    "workExperience": {
+      "title": "Työkokemus",
+      "current": "Nykyinen tehtävä",
+      "previous": "Aikaisemmat tehtävät",
+      "earlier": "Varhaisemmat tehtävät"
+    },
+    "skills": {
+      "title": "Vahvuudet & Taidot"
+    },
+    "testimonials": {
+      "title": "Suositukset"
+    }
+  },
+  "collaboration": {
+    "title": "Yhteistyön työnkulkualusta",
+    "intro": "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteenliitettävyyteen ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan elävää yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+    "projectType": "Projektityyppi",
+    "timeline": "Aikataulu",
+    "tools": "Työkalut",
+    "roles": "Roolit",
+    "objectives": "Tavoitteet",
+    "designProcess": {
+      "title": "Suunnitteluprosessi",
+      "discover": "Löydä",
+      "discoverDesc": "Tutkimus käyttäjien tarpeista ja kipupisteistä",
+      "define": "Määrittele",
+      "defineDesc": "Analysoi oivallukset haasteen määrittelemiseksi",
+      "develop": "Kehitä",
+      "developDesc": "Luo ratkaisukonsepteja",
+      "deliver": "Toimita",
+      "deliverDesc": "Testaa käyttäjillä ja iteroi"
+    }
+  },
+  "jobseeking": {
+    "title": "Työnhakusovellus",
+    "intro": "Mobiilisovellus, joka on suunniteltu virtaviivaistamaan työnhakua – erityisesti paikallisiin, osa-aikaisiin ja viikonlopputöihin. Luotu tekemään työnhausta nopeampaa, helpompaa ja tehokkaampaa ihmisille, jotka etsivät lisätuloja."
+  },
+  "blogPage": {
+    "title": "Blogi & Näkemykset",
+    "description": "Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan."
+  },
+  "promptsPage": {
+    "title": "Kehotekokoelma",
+    "subtitle": "Kokoelma kehotteitani erilaisille luoville tekoälytyökaluille"
+  },
+  "footer": {
+    "copyright": "Kaikki oikeudet pidätetään."
+  },
+  "languageSwitcher": {
+    "title": "Kieli",
+    "en": "Englanti",
+    "fi": "Suomi",
+    "ar": "Arabia"
+  },
+  "theme": {
+    "light": "Vaalea teema",
+    "dark": "Tumma teema",
+    "colorful": "Värikäs teema"
+  }
+}

@@ -8,6 +8,10 @@ module.exports = {
         poppins: ['var(--font-poppins)'],
         roboto: ['var(--font-roboto)'],
       },
+      textDirection: {
+        rtl: 'rtl',
+        ltr: 'ltr',
+      },
     },
   },
   plugins: [
