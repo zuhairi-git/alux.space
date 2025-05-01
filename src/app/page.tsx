@@ -126,7 +126,6 @@ export default function Home() {
       >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
-        <div className="absolute h-full w-1 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-transparent left-1/2 transform -translate-x-1/2 md:left-[20%] md:top-[25%]" />
         
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -165,90 +164,171 @@ export default function Home() {
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Timeline container with vertical line */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Central timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent"></div>
+            
             {/* Current Position */}
-            <Card>
-              <CardContent 
-                icon="rocket_launch" 
-                iconClassName="text-purple-400 bg-purple-400/10"
-                title="Product Designer | Product Owner"
-                date="2023 - Present"
-              >
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center gap-2 opacity-80 mb-2">
-                      <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                      <p>Webropol, Helsinki, Finland</p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
+              className="relative mb-16"
+            >
+              {/* Timeline dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg shadow-purple-500/20 z-10"></div>
+              
+              {/* Date badge */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-primary px-4 py-1 rounded-full text-sm font-medium">
+                2023 - Present
+              </div>
+              
+              {/* Card positioned to right of timeline */}
+              <div className="ml-auto mr-0 md:ml-[52%] md:w-[48%]">
+                <Card>
+                  <CardContent 
+                    icon="rocket_launch" 
+                    iconClassName="text-purple-400 bg-purple-400/10"
+                    title="Product Designer | Product Owner"
+                    date="2023 - Present"
+                  >
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center gap-2 opacity-80 mb-2">
+                          <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                          <p>Webropol, Helsinki, Finland</p>
+                        </div>
+                        <p className="opacity-70">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
+                      </div>
                     </div>
-                    <p className="opacity-70">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              </div>
+            </motion.div>
             
-            {/* Previous Positions */}
-            <Card>
-              <CardContent 
-                icon="insights" 
-                iconClassName="text-blue-400 bg-blue-400/10"
-                title="Professional Product Designer"
-                date="2017 - 2023"
-              >
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center gap-2 opacity-80 mb-2">
-                      <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                      <p>Reslink, Espoo, Finland</p>
+            {/* Previous Position 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative mb-16"
+            >
+              {/* Timeline dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20 z-10"></div>
+              
+              {/* Date badge */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-primary px-4 py-1 rounded-full text-sm font-medium">
+                2017 - 2023
+              </div>
+              
+              {/* Card positioned to left of timeline */}
+              <div className="mr-auto ml-0 md:mr-[52%] md:w-[48%]">
+                <Card>
+                  <CardContent 
+                    icon="insights" 
+                    iconClassName="text-blue-400 bg-blue-400/10"
+                    title="Professional Product Designer"
+                    date="2017 - 2023"
+                  >
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center gap-2 opacity-80 mb-2">
+                          <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                          <p>Reslink, Espoo, Finland</p>
+                        </div>
+                        <p className="opacity-70">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
+                      </div>
                     </div>
-                    <p className="opacity-70">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              </div>
+            </motion.div>
             
-            <Card>
-              <CardContent 
-                icon="grid_view" 
-                iconClassName="text-cyan-400 bg-cyan-400/10"
-                title="Senior UI/UX Designer & IT Expert"
-                date="2016 - 2023"
-              >
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center gap-2 opacity-80 mb-2">
-                      <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                      <p>Reslink, Helsinki, Finland</p>
+            {/* Previous Position 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="relative mb-16"
+            >
+              {/* Timeline dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg shadow-cyan-500/20 z-10"></div>
+              
+              {/* Date badge */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-primary px-4 py-1 rounded-full text-sm font-medium">
+                2016 - 2023
+              </div>
+              
+              {/* Card positioned to right of timeline */}
+              <div className="ml-auto mr-0 md:ml-[52%] md:w-[48%]">
+                <Card>
+                  <CardContent 
+                    icon="grid_view" 
+                    iconClassName="text-cyan-400 bg-cyan-400/10"
+                    title="Senior UI/UX Designer & IT Expert"
+                    date="2016 - 2023"
+                  >
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center gap-2 opacity-80 mb-2">
+                          <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                          <p>Reslink, Helsinki, Finland</p>
+                        </div>
+                        <p className="opacity-70">Web Application, Android UI Development, and VPN Management.</p>
+                      </div>
                     </div>
-                    <p className="opacity-70">Web Application, Android UI Development, and VPN Management.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              </div>
+            </motion.div>
             
             {/* Earlier Positions */}
-            <Card>
-              <CardContent 
-                icon="history" 
-                iconClassName="text-gray-400 bg-gray-400/10"
-                title="Earlier Positions"
-                date="2000 - 2016"
-              >
-                <div className="space-y-4">
-                  <div>
-                    <h5 className="text-lg opacity-80 mb-1">Graphic Designer UI/UX & IT Expert</h5>
-                    <p className="opacity-60">Reslink, Helsinki, Finland (2014 - 2016)</p>
-                  </div>
-                  <div>
-                    <h5 className="text-lg opacity-80 mb-1">Freelance IT Expert & UI Developer</h5>
-                    <p className="opacity-60">From Damascus to Espoo (2000 - 2014)</p>
-                  </div>
-                  <div>
-                    <h5 className="text-lg opacity-80 mb-1">Graphic Designer & IT Expert</h5>
-                    <p className="opacity-60">Various Magazines and Newspapers — Tehran, Iran</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="relative"
+            >
+              {/* Timeline dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-gray-500 to-blue-500/50 shadow-lg shadow-gray-500/20 z-10"></div>
+              
+              {/* Date badge */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-gray-500/20 to-blue-500/10 text-primary px-4 py-1 rounded-full text-sm font-medium">
+                2000 - 2016
+              </div>
+              
+              {/* Card positioned to left of timeline */}
+              <div className="mr-auto ml-0 md:mr-[52%] md:w-[48%]">
+                <Card>
+                  <CardContent 
+                    icon="history" 
+                    iconClassName="text-gray-400 bg-gray-400/10"
+                    title="Earlier Positions"
+                    date="2000 - 2016"
+                  >
+                    <div className="space-y-4">
+                      <div>
+                        <h5 className="text-lg opacity-80 mb-1">Graphic Designer UI/UX & IT Expert</h5>
+                        <p className="opacity-60">Reslink, Helsinki, Finland (2014 - 2016)</p>
+                      </div>
+                      <div>
+                        <h5 className="text-lg opacity-80 mb-1">Freelance IT Expert & UI Developer</h5>
+                        <p className="opacity-60">From Damascus to Espoo (2000 - 2014)</p>
+                      </div>
+                      <div>
+                        <h5 className="text-lg opacity-80 mb-1">Graphic Designer & IT Expert</h5>
+                        <p className="opacity-60">Various Magazines and Newspapers — Tehran, Iran</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </motion.div>
           </div>
         </div>
       </motion.section>
