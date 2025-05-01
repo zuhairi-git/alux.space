@@ -226,23 +226,24 @@ const Navigation = () => {
               >
                 <div className="relative" ref={homeDropdownRef}>
                   <Tooltip text={t('nav.home')}>
-                    <Link 
-                      href="/#home" 
-                      className={`relative group flex items-center p-2 rounded-lg ${getDropdownButtonClass()}`}
-                      onMouseEnter={() => setHomeOpen(true)}
-                    >
-                      <span className="relative z-10 transition-colors">{t('nav.home')}</span>
-                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'}`}>
-                        {homeOpen ? 'expand_less' : 'expand_more'}
-                      </span>
-                      <motion.span
-                        className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
-                        layoutId="underline-home"
-                      />
-                      <motion.div
-                        className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      />
-                    </Link>
+                    <div className="relative inline-flex items-center">
+                      <Link 
+                        href="/" 
+                        className={`p-2 rounded-lg ${getDropdownButtonClass()}`}
+                      >
+                        <span className="relative z-10 transition-colors">{t('nav.home')}</span>
+                      </Link>
+                      <button
+                        onClick={toggleHomeDropdown}
+                        className={`ml-1 p-1 rounded-lg ${getDropdownButtonClass()}`}
+                        aria-expanded={homeOpen}
+                        aria-haspopup="true"
+                      >
+                        <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''}`}>
+                          {homeOpen ? 'expand_less' : 'expand_more'}
+                        </span>
+                      </button>
+                    </div>
                   </Tooltip>
 
                   <AnimatePresence>
@@ -256,7 +257,6 @@ const Navigation = () => {
                           ease: "easeInOut"
                         }}
                         className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 ${getDropdownMenuClass()}`}
-                        onMouseLeave={() => setHomeOpen(false)}
                       >
                         <div className="py-2">
                           {homeDropdownItems.map((item) => (
@@ -447,20 +447,26 @@ const Navigation = () => {
               {/* Home with dropdown - Mobile */}
               <li className="relative">
                 <div ref={mobileHomeRef}>
-                  <button
-                    onClick={toggleMobileHomeDropdown}
-                    className={`w-full flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                    aria-expanded={mobileHomeOpen}
-                    aria-haspopup="true"
-                  >
-                    <div className="flex items-center">
+                  <div className="flex items-center">
+                    <Link
+                      href="/"
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex-grow flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                    >
                       <span className={`material-symbols ${isRTL ? 'ml-2' : 'mr-2'}`}>home</span>
                       <span className="font-medium">{t('nav.home')}</span>
-                    </div>
-                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobileHomeOpen ? 'rotate-180' : ''}`}>
-                      {mobileHomeOpen ? 'expand_less' : 'expand_more'}
-                    </span>
-                  </button>
+                    </Link>
+                    <button
+                      onClick={toggleMobileHomeDropdown}
+                      className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                      aria-expanded={mobileHomeOpen}
+                      aria-haspopup="true"
+                    >
+                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobileHomeOpen ? 'rotate-180' : ''}`}>
+                        {mobileHomeOpen ? 'expand_less' : 'expand_more'}
+                      </span>
+                    </button>
+                  </div>
 
                   <AnimatePresence>
                     {mobileHomeOpen && (
@@ -471,22 +477,6 @@ const Navigation = () => {
                         transition={{ duration: 0.2 }}
                         className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}
                       >
-                        <Link 
-                          href="/#home" 
-                          className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-6 py-2 text-sm ${getDropdownItemClass(false)} ${isRTL ? 'text-right' : 'text-left'}`}
-                          onClick={() => {
-                            setMobileHomeOpen(false);
-                            setMenuOpen(false);
-                          }}
-                        >
-                          <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
-                            home
-                          </span>
-                          {t('nav.home')}
-                        </Link>
-
-                        <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-
                         {homeDropdownItems.map((item) => (
                           <Link
                             key={item.href}
@@ -512,20 +502,26 @@ const Navigation = () => {
               {/* Portfolio with dropdown - Mobile */}
               <li className="relative">
                 <div ref={mobilePortfolioRef}>
-                  <button
-                    onClick={toggleMobilePortfolioDropdown}
-                    className={`w-full flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                    aria-expanded={mobilePortfolioOpen}
-                    aria-haspopup="true"
-                  >
-                    <div className="flex items-center">
+                  <div className="flex items-center">
+                    <Link
+                      href="/portfolio"
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex-grow flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                    >
                       <span className={`material-symbols ${isRTL ? 'ml-2' : 'mr-2'}`}>work</span>
                       <span className="font-medium">{t('nav.portfolio')}</span>
-                    </div>
-                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
-                      {mobilePortfolioOpen ? 'expand_less' : 'expand_more'}
-                    </span>
-                  </button>
+                    </Link>
+                    <button
+                      onClick={toggleMobilePortfolioDropdown}
+                      className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                      aria-expanded={mobilePortfolioOpen}
+                      aria-haspopup="true"
+                    >
+                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
+                        {mobilePortfolioOpen ? 'expand_less' : 'expand_more'}
+                      </span>
+                    </button>
+                  </div>
 
                   <AnimatePresence>
                     {mobilePortfolioOpen && (
