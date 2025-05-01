@@ -16,6 +16,14 @@ const portfolioDropdownItems = [
   { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking', type: 'case' },
 ];
 
+// New home dropdown items
+const homeDropdownItems = [
+  { href: '/#work-experience', text: 'Work Experience', icon: 'work' },
+  { href: '/#digital-dreams', text: 'Digital Dreams', icon: 'auto_awesome' },
+  { href: '/#strengths-skills', text: 'Strengths & Skills', icon: 'psychology' },
+  { href: '/#testimonials', text: 'Testimonials', icon: 'format_quote' },
+];
+
 const Navigation = () => {
   const { scrollY } = useScroll();
   const { theme } = useTheme();
@@ -46,7 +54,13 @@ const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
+  // New states for home dropdown
+  const [homeOpen, setHomeOpen] = useState(false);
+  const [mobileHomeOpen, setMobileHomeOpen] = useState(false);
+  
   const portfolioDropdownRef = useRef<HTMLDivElement>(null);
+  // New ref for home dropdown
+  const homeDropdownRef = useRef<HTMLDivElement>(null);
   
   // Close the portfolio dropdown when clicking outside
   useEffect(() => {
@@ -56,6 +70,14 @@ const Navigation = () => {
         !portfolioDropdownRef.current.contains(event.target as Node)
       ) {
         setPortfolioOpen(false);
+      }
+      
+      // Also close home dropdown when clicking outside
+      if (
+        homeDropdownRef.current && 
+        !homeDropdownRef.current.contains(event.target as Node)
+      ) {
+        setHomeOpen(false);
       }
     };
     
@@ -68,6 +90,11 @@ const Navigation = () => {
   // Toggle portfolio dropdown
   const togglePortfolioDropdown = () => {
     setPortfolioOpen(!portfolioOpen);
+  };
+  
+  // Toggle home dropdown
+  const toggleHomeDropdown = () => {
+    setHomeOpen(!homeOpen);
   };
   
   // Get text color class based on theme
@@ -137,22 +164,69 @@ const Navigation = () => {
               transition={{ delay: 0.2 }}
               className={`flex items-center ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}space-x-8 px-8`}
             >
+              {/* Home item with dropdown */}
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
                 whileHover={{ y: -2 }}
+                className="relative"
               >
-                <Link href="/" className="relative group">
-                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.home')}</span>
-                  <motion.span
-                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
-                    layoutId="underline"
-                  />
-                  <motion.div
-                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                </Link>
+                <div className="relative" ref={homeDropdownRef}>
+                  <Tooltip text={t('nav.home')}>
+                    <Link 
+                      href="/#home" 
+                      className="relative group flex items-center"
+                      onMouseEnter={() => setHomeOpen(true)}
+                    >
+                      <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.home')}</span>
+                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'}`}>
+                        {homeOpen ? 'expand_less' : 'expand_more'}
+                      </span>
+                      <motion.span
+                        className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
+                        layoutId="underline-home"
+                      />
+                      <motion.div
+                        className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                    </Link>
+                  </Tooltip>
+
+                  {homeOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: "easeInOut"
+                      }}
+                      className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden z-50`}
+                      onMouseLeave={() => setHomeOpen(false)}
+                    >
+                      <div className="py-2">
+                        {homeDropdownItems.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
+                              theme === 'light'
+                                ? 'text-gray-700 hover:bg-gray-50'
+                                : 'text-gray-300 hover:bg-gray-800'
+                            } transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                            onClick={() => setHomeOpen(false)}
+                          >
+                            <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                              {item.icon}
+                            </span>
+                            {item.text}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </motion.li>
               
               {/* Portfolio dropdown using language switcher pattern */}
@@ -297,10 +371,52 @@ const Navigation = () => {
               className={`md:hidden absolute top-full ${isRTL ? 'right-0' : 'left-0'} w-full mt-1 ${theme === 'light' ? 'bg-white/95' : 'bg-black/95'} shadow-lg backdrop-blur-md rounded-b-lg overflow-hidden`}
             >
               <ul className="flex flex-col items-center space-y-4 py-4">
-                <li>
-                  <Link href="/" className={`block py-2 ${getTextColorClass()}`} onClick={() => setMenuOpen(false)}>
-                    {t('nav.home')}
-                  </Link>
+                {/* Mobile Home Item with Dropdown */}
+                <li className="w-full text-center">
+                  <button 
+                    className={`flex items-center justify-center ${isRTL ? 'flex-row-reverse' : ''} w-full py-2 ${getTextColorClass()} focus:outline-none`}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent closing the main menu
+                      setMobileHomeOpen(!mobileHomeOpen);
+                    }}
+                    aria-expanded={mobileHomeOpen}
+                    aria-controls="mobile-home-menu"
+                  >
+                    <span>{t('nav.home')}</span>
+                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobileHomeOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'}`}>
+                      {mobileHomeOpen ? 'expand_less' : 'expand_more'}
+                    </span>
+                  </button>
+                  {/* Mobile Home Submenu */}
+                  {mobileHomeOpen && (
+                    <motion.div
+                      id="mobile-home-menu"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className={`mt-2 w-full rounded-lg ${theme === 'light' ? 'bg-white/50' : 'bg-black/50'} backdrop-blur-lg overflow-hidden`}
+                    >
+                      <div className="py-2">
+                        {homeDropdownItems.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${getTextColorClass()} hover:bg-primary/10 transition-colors ${isRTL ? 'justify-end' : 'justify-start'}`}
+                            onClick={() => {
+                              setMobileHomeOpen(false);
+                              setMenuOpen(false); // Close main menu on navigation
+                            }}
+                          >
+                            <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                              {item.icon}
+                            </span>
+                            {item.text}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
                 </li>
                 {/* Mobile Portfolio Item with Dropdown */}
                 <li className="w-full text-center">
