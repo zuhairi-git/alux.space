@@ -11,6 +11,17 @@ interface CreativeHeroProps extends HeroConfig {
   theme?: Theme;
 }
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  return isMobile;
+};
+
 // Interactive particles component
 const ParticleField = ({ count = 20 }) => {
   const [particles, setParticles] = useState<Array<{
@@ -72,26 +83,56 @@ const ParticleField = ({ count = 20 }) => {
 const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta, theme = 'dark' }) => {
   const words = title.split(' ');
   const isLight = theme === 'light';
-  
+  const isMobile = useIsMobile();
+
   // Mouse-follow effect for 3D perspective
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-      
+
       const rect = containerRef.current.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      
+
       setMousePosition({ x, y });
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-  
+
+  if (isMobile) {
+    return (
+      <div className="container mx-auto px-4 relative z-30">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-12 overflow-hidden relative">
+            <h2 className={`text-4xl font-bold leading-tight tracking-tight text-center mt-8 ${isLight ? 'text-gray-900' : 'text-white'}`}
+                style={theme === 'colorful' ? { background: 'linear-gradient(90deg,#06b6d4,#a855f7)', WebkitBackgroundClip: 'text', color: 'transparent' } : {}}>
+              {title}
+            </h2>
+          </div>
+          {subtitle && (
+            <p className={`text-xl text-center mb-8 ${isLight ? 'text-primary' : 'text-fuchsia-300'}`}>{subtitle}</p>
+          )}
+          {cta && (
+            <div className="text-center">
+              <Link
+                href={cta.href}
+                className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 ${theme === 'colorful' ? 'bg-gradient-to-r from-cyan-500 to-fuchsia-600 text-white shadow-lg' : isLight ? 'bg-blue-500 text-white' : 'bg-blue-500 text-white'}`}
+                style={theme === 'colorful' ? { boxShadow: '0 2px 16px 0 rgba(168,85,247,0.25)' } : {}}
+              >
+                {cta.text}
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
