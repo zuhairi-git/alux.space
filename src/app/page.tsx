@@ -7,7 +7,6 @@ import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
 import Hero from '@/components/hero/Hero';
 import QuoteBlock from '@/components/ui/QuoteBlock';
-import ChapterDivider from '@/components/ui/ChapterDivider';
 import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -239,22 +238,16 @@ export default function Home() {
         className="py-20 relative overflow-hidden"
         id="about"
       >
-        <ChapterDivider 
-          number={1} 
-          title={t('home.about.title')}
-        />
-        
-        <div className="container mx-auto px-4 mt-12">
+        <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <motion.h3 
-              className="text-4xl md:text-5xl font-bold mb-8 leading-tight"
-              animate={{ 
-                textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
-              }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
+            <motion.h2
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-5xl font-bold mb-10 text-center"
             >
               {t('home.about.title')}
-            </motion.h3>
+            </motion.h2>
             
             <div className="space-y-6 text-lg text-theme opacity-80 leading-relaxed">
               <motion.p
@@ -438,11 +431,6 @@ export default function Home() {
       </motion.section>
       
       {/* Footer */}
-      <footer className="py-8 text-center text-sm opacity-60">
-        <div className="container mx-auto px-4">
-          <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. {t('footer.copyright')}</p>
-        </div>
-      </footer>
     </main>
   );
 }

@@ -303,11 +303,6 @@ export default function JobSeekingClient() {
         </motion.div>
       </div>
       
-      <footer className="mt-16 py-8 opacity-70">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
-        </div>
-      </footer>
     </article>
   );
 } 

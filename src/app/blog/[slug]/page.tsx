@@ -100,11 +100,6 @@ function BlogPostContent({ post, shareUrl }: { post: typeof posts[0], shareUrl: 
         </div>
       </article>
 
-      <footer className="bg-theme text-theme opacity-70 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
-        </div>
-      </footer>
     </main>
   );
 }

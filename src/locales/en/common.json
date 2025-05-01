@@ -20,7 +20,7 @@
     "about": {
       "title": "Crafting Digital Dreams into Reality",
       "intro": "Hey there! I'm Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about more than just aesthetics; it's about touching hearts and solving real problems.",
-      "quote": "Every pixel has a purpose, every interaction tells a story.",
+      "quote": "Designing at the intersection of strategy and imagination — where vision becomes reality.",
       "second": "Over the past decade, I've had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.",
       "third": "When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better."
     },
@@ -70,7 +70,14 @@
     "subtitle": "A collection of prompts I've crafted for various creative AI tools"
   },
   "footer": {
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "additionalInfo": {
+      "title": "Additional Information",
+      "content": "Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in creating intuitive, accessible interfaces and leading cross-functional teams."
+    },
+    "quickLinks": "Quick Links",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
   },
   "languageSwitcher": {
     "title": "Language",
