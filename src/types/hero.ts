@@ -8,7 +8,7 @@ export interface HeroConfig {
     text: string;
     author: string;
   };
-  backgroundEffect?: 'particles' | 'design-code' | 'gradient' | 'none';
+  backgroundEffect?: 'particles' | 'design-code' | 'gradient' | 'none' | 'abstract-modern';
   cta?: {
     text: string;
     href: string;
