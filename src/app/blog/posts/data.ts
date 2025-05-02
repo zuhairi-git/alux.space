@@ -1,22 +1,35 @@
-export interface Post {
-   slug: string;
+export interface LocalizedContent {
    title: string;
    description: string;
-   publishedDate: string;
    content: string;
+   publishedDate: string; // Keeping dates as strings to allow localized date formats
+   readTime: string;
+}
+
+export interface Post {
+   slug: string;
    author: string;
    image: string;
    tags: string[];
-   readTime: string;
+   content: {
+      en: LocalizedContent;
+      fi?: LocalizedContent; // Optional to allow gradual translation
+      ar?: LocalizedContent; // Optional to allow gradual translation
+   };
 }
 
 export const posts: Post[] = [
    {
       slug: 'ios-notifications',
-      title: 'How to Get Notifications on iOS with Personal Focus On',
-      description: 'Learn how to effectively manage and customize notifications on iOS devices while maintaining focus on what matters most to you.',
-      publishedDate: 'April 20, 2024',
-      content: `
+      author: 'Ali Al-Zuhairi',
+      image: '/images/blog/ios-notifications.jpg',
+      tags: ['iOS', 'Productivity', 'Mobile', 'Focus'],
+      content: {
+         en: {
+            title: 'How to Get Notifications on iOS with Personal Focus On',
+            description: 'Learn how to effectively manage and customize notifications on iOS devices while maintaining focus on what matters most to you.',
+            publishedDate: 'April 20, 2024',
+            content: `
 In today's digital age, managing notifications effectively is crucial for maintaining productivity and mental well-being. iOS provides powerful tools to help you stay focused while ensuring you don't miss important updates. Let's explore how to optimize your notification settings on iOS devices.
 
 ## Understanding iOS Notification Settings
@@ -92,18 +105,188 @@ To maintain optimal focus:
 iOS continues to evolve its notification system, offering more ways to maintain focus while staying connected. By taking advantage of these features, you can create a notification environment that supports your productivity and well-being.
 
 > Remember: The key to effective notification management is finding the right balance between staying informed and maintaining focus. Regularly review and adjust your settings to match your changing needs.
-    `,
-      author: 'Ali Al-Zuhairi',
-      image: '/images/blog/ios-notifications.jpg',
-      tags: ['iOS', 'Productivity', 'Mobile', 'Focus'],
-      readTime: '4 min read'
+            `,
+            readTime: '4 min read'
+         },
+         fi: {
+            title: 'iOS-ilmoitusten hallinta Henkilökohtaisella Fokus-tilalla',
+            description: 'Opi hallitsemaan ja mukauttamaan ilmoituksia iOS-laitteilla säilyttäen samalla keskittymisen sinulle tärkeisiin asioihin.',
+            publishedDate: '20. huhtikuuta 2024',
+            content: `
+Nykyajan digitaalisessa maailmassa ilmoitusten tehokas hallinta on ratkaisevan tärkeää tuottavuuden ja henkisen hyvinvoinnin ylläpitämiseksi. iOS tarjoaa tehokkaat työkalut, jotka auttavat sinua pysymään keskittyneenä varmistaen samalla, ettet menetä tärkeitä päivityksiä. Tutkitaan, kuinka optimoida ilmoitusasetukset iOS-laitteissa.
+
+## iOS-ilmoitusasetusten ymmärtäminen
+
+iOS tarjoaa kattavan ilmoitusjärjestelmän, jota voidaan mukauttaa erityistarpeisiisi:
+
+### 1. Ilmoituskeskus
+
+* Pääsy pyyhkäisemällä näytön yläosasta alaspäin
+* Tarkastele kaikkia viimeaikaisia ilmoituksia yhdessä paikassa
+* Ryhmittele ilmoitukset sovelluksen tai ajan mukaan
+* Tyhjennä ilmoitukset yksitellen tai kaikki kerralla
+
+### 2. Fokus-tilat
+
+* Henkilökohtainen Fokus: Mukauta ilmoituksia henkilökohtaista aikaa varten
+* Työ-Fokus: Suodata työhön liittyvät ilmoitukset
+* Uni-Fokus: Minimoi häiriöt unen aikana
+* Mukautettu Fokus: Luo omat fokus-tilasi
+
+## Henkilökohtaisen Fokus-tilan asettaminen
+
+Luodaksesi personoidun ilmoituskokemuksen:
+
+### 1. Fokus-asetusten käyttö
+
+- Avaa Asetukset
+- Napauta Fokus
+- Valitse "Henkilökohtainen Fokus"
+
+### 2. Sallittujen ilmoitusten mukauttaminen
+
+- Valitse, mitkä sovellukset voivat lähettää ilmoituksia
+- Valitse tietyt yhteystiedot, jotka voivat tavoittaa sinut
+- Aseta aikaan tai sijaintiin perustuva aktivointi
+
+### 3. Fokus-suodattimien määrittäminen
+
+- Suodata Kotinäytön sivuja
+- Mukauta Lukitusnäytön ulkoasua
+- Määritä sovelluskohtaisia käyttäytymistapoja
+
+## Edistynyt ilmoitusten hallinta
+
+Tarkempaa hallintaa varten:
+
+* Ilmoitusten ryhmittely: Valitse, miten ilmoitukset ryhmitellään
+* Toimitusajat: Ajoita ilmoitusten toimittaminen
+* Ilmoitusten esikatselut: Hallitse, milloin esikatselut näkyvät
+* Ääni- ja haptisen palautteen asetukset: Mukauta hälytystyylejä
+
+## Parhaat käytännöt ilmoitusten hallintaan
+
+Optimaalisen keskittymisen ylläpitämiseksi:
+
+### 1. Priorisoi tärkeät sovellukset
+
+- Salli vain välttämättömien sovellusten lähettää ilmoituksia
+- Käytä kriittisiä hälytyksiä elintärkeälle tiedolle
+
+### 2. Aikatauluta fokusaika
+
+- Aseta säännölliset keskittymisjaksot
+- Käytä automaatiota johdonmukaisiin aikatauluihin
+
+### 3. Tarkista ja säädä
+
+- Arvioi säännöllisesti ilmoitusmalleja
+- Säädä asetuksia tarpeidesi mukaan
+
+## Katse tulevaisuuteen
+
+iOS kehittää jatkuvasti ilmoitusjärjestelmäänsä tarjoten enemmän tapoja ylläpitää keskittymistä pysyen samalla yhteydessä. Hyödyntämällä näitä ominaisuuksia voit luoda ilmoitusympäristön, joka tukee tuottavuuttasi ja hyvinvointiasi.
+
+> Muista: Avain tehokkaaseen ilmoitusten hallintaan on löytää oikea tasapaino tiedonsaannin ja keskittymisen ylläpitämisen välillä. Tarkista ja säädä asetuksiasi säännöllisesti vastaamaan muuttuvia tarpeitasi.
+            `,
+            readTime: '4 min lukuaika'
+         },
+         ar: {
+            title: 'كيفية الحصول على إشعارات iOS مع تشغيل وضع التركيز الشخصي',
+            description: 'تعلم كيفية إدارة وتخصيص الإشعارات على أجهزة iOS بشكل فعال مع الحفاظ على التركيز على ما يهمك أكثر.',
+            publishedDate: '20 أبريل 2024',
+            content: `
+في العصر الرقمي اليوم، تعتبر إدارة الإشعارات بفعالية أمرًا ضروريًا للحفاظ على الإنتاجية والصحة النفسية. يوفر نظام iOS أدوات قوية تساعدك على البقاء متركزًا مع ضمان عدم تفويت التحديثات المهمة. دعنا نستكشف كيفية تحسين إعدادات الإشعارات على أجهزة iOS.
+
+## فهم إعدادات الإشعارات في iOS
+
+يوفر iOS نظامًا شاملاً للإشعارات يمكن تخصيصه وفقًا لاحتياجاتك الخاصة:
+
+### 1. مركز الإشعارات
+
+* الوصول عن طريق السحب لأسفل من أعلى الشاشة
+* عرض جميع الإشعارات الأخيرة في مكان واحد
+* تجميع الإشعارات حسب التطبيق أو الوقت
+* مسح الإشعارات بشكل فردي أو جميعها دفعة واحدة
+
+### 2. أوضاع التركيز
+
+* التركيز الشخصي: تخصيص الإشعارات للوقت الشخصي
+* تركيز العمل: تصفية الإشعارات المتعلقة بالعمل
+* تركيز النوم: تقليل الاضطرابات أثناء النوم
+* تركيز مخصص: إنشاء أوضاع التركيز الخاصة بك
+
+## إعداد التركيز الشخصي
+
+لإنشاء تجربة إشعارات مخصصة:
+
+### 1. الوصول إلى إعدادات التركيز
+
+- افتح الإعدادات
+- اضغط على التركيز
+- اختر "التركيز الشخصي"
+
+### 2. تخصيص الإشعارات المسموح بها
+
+- اختر التطبيقات التي يمكنها إرسال إشعارات
+- حدد جهات اتصال معينة يمكنها الوصول إليك
+- ضبط التنشيط المستند إلى الوقت أو الموقع
+
+### 3. تكوين مرشحات التركيز
+
+- تصفية صفحات الشاشة الرئيسية
+- تخصيص مظهر شاشة القفل
+- إعداد سلوكيات خاصة بالتطبيق
+
+## الإدارة المتقدمة للإشعارات
+
+للحصول على تحكم أكثر تفصيلاً:
+
+* تجميع الإشعارات: اختر كيفية تجميع الإشعارات
+* أوقات التسليم: جدولة تسليم الإشعارات
+* معاينات الإشعارات: التحكم في وقت ظهور المعاينات
+* إعدادات الصوت والاهتزاز: تخصيص أنماط التنبيه
+
+## أفضل الممارسات لإدارة الإشعارات
+
+للحفاظ على التركيز الأمثل:
+
+### 1. إعطاء الأولوية للتطبيقات المهمة
+
+- السماح فقط للتطبيقات الأساسية بإرسال إشعارات
+- استخدام التنبيهات الحرجة للمعلومات الحيوية
+
+### 2. جدولة وقت التركيز
+
+- تعيين فترات تركيز منتظمة
+- استخدام الأتمتة للجداول المتسقة
+
+### 3. المراجعة والتعديل
+
+- تقييم أنماط الإشعارات بانتظام
+- تعديل الإعدادات بناءً على احتياجاتك
+
+## التطلع إلى المستقبل
+
+يواصل iOS تطوير نظام الإشعارات الخاص به، مما يوفر المزيد من الطرق للحفاظ على التركيز مع البقاء على اتصال. من خلال الاستفادة من هذه الميزات، يمكنك إنشاء بيئة إشعارات تدعم إنتاجيتك ورفاهيتك.
+
+> تذكر: مفتاح الإدارة الفعالة للإشعارات هو إيجاد التوازن الصحيح بين البقاء على اطلاع والحفاظ على التركيز. راجع وعدّل إعداداتك بانتظام لتتناسب مع احتياجاتك المتغيرة.
+            `,
+            readTime: '4 دقائق قراءة'
+         }
+      }
    },
    {
       slug: 'circle-of-rhythm',
-      title: 'The Circle of Daily Rhythm: Mastering Your Productive Flow',
-      description: 'Discover how to harness your natural daily rhythms to maximize productivity and creativity in both professional and personal pursuits.',
-      publishedDate: 'April 16, 2025',
-      content: `
+      author: 'Ali Al-Zuhairi',
+      image: '/images/blog/circle-daily-rhythm.jpg',
+      tags: ['Productivity', 'Design Process', 'Work-Life Balance', 'Creativity'],
+      content: {
+         en: {
+            title: 'The Circle of Daily Rhythm: Mastering Your Productive Flow',
+            description: 'Discover how to harness your natural daily rhythms to maximize productivity and creativity in both professional and personal pursuits.',
+            publishedDate: 'April 16, 2025',
+            content: `
 In the fast-paced world of product design and development, understanding and leveraging our natural rhythms isn't just helpful—it's essential. As a Product Owner and Design Leader, I've discovered that aligning our work patterns with our body's natural cycles can dramatically improve both productivity and creative output.
 
 ## The Natural Flow of Productivity
@@ -166,18 +349,22 @@ As designers and product owners, our work requires both analytical thinking and 
 The future of work isn't about pushing harder—it's about working smarter. By understanding and respecting our natural rhythms, we can achieve more while maintaining our well-being and creative edge.
 
 > Your rhythm might differ slightly from others'. The key is to observe your patterns and adapt this framework to your personal cycle of productivity.
-    `,
-      author: 'Ali Al-Zuhairi',
-      image: '/images/blog/circle-daily-rhythm.jpg',
-      tags: ['Productivity', 'Design Process', 'Work-Life Balance', 'Creativity'],
-      readTime: '5 min read'
+            `,
+            readTime: '5 min read'
+         }
+      }
    },
    {
       slug: 'primitive-human',
-      title: 'Embracing the Era of AI: Humanity\'s Journey to Unparalleled Sophistication',
-      description: 'Explore the fascinating journey of human evolution and how our primitive instincts still influence modern behavior and decision-making.',
-      publishedDate: '2023-06-20',
-      content: `
+      author: 'Ali Al-Zuhairi',
+      image: '/images/blog/aivshuman.jpg',
+      tags: ['Artificial Intelligence', 'Future', 'Technology', 'Ethics', 'Education'],
+      content: {
+         en: {
+            title: 'Embracing the Era of AI: Humanity\'s Journey to Unparalleled Sophistication',
+            description: 'Explore the fascinating journey of human evolution and how our primitive instincts still influence modern behavior and decision-making.',
+            publishedDate: '2023-06-20',
+            content: `
 Embracing the Era of AI: Humanity's Journey to Unparalleled Sophistication
 
 > I have a feeling that with the progress of AI and the advancements in machine learning, our world will reach such a level of sophistication that most humans may appear primitive once more.
@@ -257,18 +444,22 @@ Having discussed the significance of AI, it is worth noting that there is alread
 
 AGI
 Finally, I want to express my gratitude for your patience and for taking the time to read this article in its entirety. If you have any questions, please don't hesitate to contact me anytime. I'll be more than happy to hear your feedback.
-    `,
-      author: 'Ali Al-Zuhairi',
-      image: '/images/blog/aivshuman.jpg',
-      tags: ['Artificial Intelligence', 'Future', 'Technology', 'Ethics', 'Education'],
-      readTime: '10 min read'
+            `,
+            readTime: '10 min read'
+         }
+      }
    },
    {
       slug: 'claude-ai',
-      title: 'Claude AI: The Next Generation of Artificial Intelligence',
-      description: 'Discover how Claude AI is revolutionizing the field of artificial intelligence with its advanced capabilities and human-like understanding.',
-      publishedDate: 'April 20, 2024',
-      content: `
+      author: 'Ali Al-Zuhairi',
+      image: '/images/blog/claudevschatgpt.jpg',
+      tags: ['Artificial Intelligence', 'Technology', 'Innovation', 'Future'],
+      content: {
+         en: {
+            title: 'Claude AI: The Next Generation of Artificial Intelligence',
+            description: 'Discover how Claude AI is revolutionizing the field of artificial intelligence with its advanced capabilities and human-like understanding.',
+            publishedDate: 'April 20, 2024',
+            content: `
 Artificial Intelligence has reached new heights with the development of Claude AI, a cutting-edge language model that's changing how we interact with technology.
 
 ## Understanding Claude AI
@@ -346,11 +537,9 @@ The future of Claude AI and similar technologies holds immense potential:
 * Better integration with daily life
 
 > While AI continues to advance, it's crucial to maintain a balance between technological progress and human values, ensuring that these tools serve to enhance rather than replace human capabilities.
-
-    `,
-      author: 'Ali Al-Zuhairi',
-      image: '/images/blog/claudevschatgpt.jpg',
-      tags: ['Artificial Intelligence', 'Technology', 'Innovation', 'Future'],
-      readTime: '6 min read'
+            `,
+            readTime: '6 min read'
+         }
+      }
    }
 ];

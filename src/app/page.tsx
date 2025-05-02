@@ -90,6 +90,232 @@ export default function Home() {
       href: "/portfolio"
     }
   };
+
+  // Skills data with translations
+  const getSkills = () => {
+    const skills = {
+      en: [
+        { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
+        { title: 'Research', desc: 'Skilled in qualitative and quantitative research' },
+        { title: 'Product Management', desc: 'Agile methodologies and roadmapping' },
+        { title: 'Design Leadership', desc: 'Team mentoring and process development' },
+        { title: 'Design Systems', desc: 'Creating consistent, scalable frameworks' },
+        { title: 'Project Management', desc: 'Agile methodology (Jira, Scrum, Kanban)' },
+        { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
+        { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' }
+      ],
+      fi: [
+        { title: 'UI/UX Suunnittelu', desc: 'Asiantuntemus Figma & Adobe CC:ssä' },
+        { title: 'Tutkimus', desc: 'Taitava kvalitatiivisessa ja kvantitatiivisessa tutkimuksessa' },
+        { title: 'Tuotehallinta', desc: 'Ketterät menetelmät ja tiekartat' },
+        { title: 'Designjohtajuus', desc: 'Tiimin mentorointi ja prosessien kehittäminen' },
+        { title: 'Designjärjestelmät', desc: 'Johdonmukaisten, skaalautuvien kehysten luominen' },
+        { title: 'Projektinhallinta', desc: 'Ketterä metodologia (Jira, Scrum, Kanban)' },
+        { title: 'Testinhallinta', desc: 'Taitava Maze ja Zephyr Scale -työkaluissa' },
+        { title: 'Teknologiat', desc: 'Web/mobiili UI, WordPress, HubSpot, React JS' }
+      ],
+      ar: [
+        { title: 'تصميم واجهة المستخدم/تجربة المستخدم', desc: 'خبرة في فيجما وأدوبي' },
+        { title: 'البحث', desc: 'ماهر في البحث النوعي والكمي' },
+        { title: 'إدارة المنتج', desc: 'منهجيات أجايل ورسم خرائط الطريق' },
+        { title: 'قيادة التصميم', desc: 'إرشاد الفريق وتطوير العمليات' },
+        { title: 'أنظمة التصميم', desc: 'إنشاء أطر عمل متسقة وقابلة للتوسع' },
+        { title: 'إدارة المشاريع', desc: 'منهجية أجايل (جيرا، سكرم، كانبان)' },
+        { title: 'إدارة الاختبار', desc: 'متمكن من ميز وزفير سكيل' },
+        { title: 'المجموعة التقنية', desc: 'واجهات الويب/الموبايل، وردبريس، هابسبوت، رياكت' }
+      ]
+    };
+    
+    return skills[locale as keyof typeof skills] || skills.en;
+  };
+
+  // Get work experience content by locale
+  const getWorkExperience = () => {
+    const workExperience = {
+      en: {
+        intro: "A journey through my professional career, showcasing my growth and expertise in design and technology.",
+        positions: [
+          {
+            title: "Product Designer | Product Owner",
+            company: "Webropol, Helsinki, Finland",
+            description: "Product vision, specifying features, prototyping, and handing off design system to developers.",
+            period: "2023 - Present"
+          },
+          {
+            title: "Professional Product Designer",
+            company: "Reslink, Espoo, Finland",
+            description: "Workflow and Cloud Management, WebApp (SaaS), and Mobile.",
+            period: "2017 - 2023"
+          },
+          {
+            title: "Senior UI/UX Designer & IT Expert",
+            company: "Reslink, Helsinki, Finland",
+            description: "Web Application, Android UI Development, and VPN Management.",
+            period: "2016 - 2023"
+          },
+          {
+            title: "Earlier Positions",
+            positions: [
+              {
+                title: "Graphic Designer UI/UX & IT Expert",
+                company: "Reslink, Helsinki, Finland",
+                period: "2014 - 2016"
+              },
+              {
+                title: "Freelance IT Expert & UI Developer",
+                company: "From Damascus to Espoo",
+                period: "2000 - 2014"
+              },
+              {
+                title: "Graphic Designer & IT Expert",
+                company: "Various Magazines and Newspapers — Tehran, Iran",
+                period: ""
+              }
+            ],
+            period: "2000 - 2016"
+          }
+        ]
+      },
+      fi: {
+        intro: "Matka ammattiurallani, joka osoittaa kasvuni ja asiantuntemukseni suunnittelussa ja teknologiassa.",
+        positions: [
+          {
+            title: "Tuotesuunnittelija | Tuoteomistaja",
+            company: "Webropol, Helsinki, Suomi",
+            description: "Tuotevisio, ominaisuuksien määrittely, prototyyppien luonti ja suunnittelujärjestelmän luovuttaminen kehittäjille.",
+            period: "2023 - Nykyhetki"
+          },
+          {
+            title: "Ammattimainen tuotesuunnittelija",
+            company: "Reslink, Espoo, Suomi",
+            description: "Työnkulun ja pilvipalvelun hallinta, verkkosovellus (SaaS) ja mobiili.",
+            period: "2017 - 2023"
+          },
+          {
+            title: "Senior UI/UX-suunnittelija & IT-asiantuntija",
+            company: "Reslink, Helsinki, Suomi",
+            description: "Verkkosovellus, Android-käyttöliittymäkehitys ja VPN-hallinta.",
+            period: "2016 - 2023"
+          },
+          {
+            title: "Aikaisemmat tehtävät",
+            positions: [
+              {
+                title: "Graafinen suunnittelija UI/UX & IT-asiantuntija",
+                company: "Reslink, Helsinki, Suomi",
+                period: "2014 - 2016"
+              },
+              {
+                title: "Freelance IT-asiantuntija & UI-kehittäjä",
+                company: "Damaskoksesta Espooseen",
+                period: "2000 - 2014"
+              },
+              {
+                title: "Graafinen suunnittelija & IT-asiantuntija",
+                company: "Eri lehdet ja sanomalehdet — Teheran, Iran",
+                period: ""
+              }
+            ],
+            period: "2000 - 2016"
+          }
+        ]
+      },
+      ar: {
+        intro: "رحلة عبر مسيرتي المهنية، تعرض نموي وخبرتي في التصميم والتكنولوجيا.",
+        positions: [
+          {
+            title: "مصمم منتجات | مالك المنتج",
+            company: "ويبروبول، هلسنكي، فنلندا",
+            description: "رؤية المنتج، وتحديد الميزات، وإنشاء النماذج الأولية، وتسليم نظام التصميم للمطورين.",
+            period: "2023 - الحاضر"
+          },
+          {
+            title: "مصمم منتجات محترف",
+            company: "ريسلينك، إسبو، فنلندا",
+            description: "إدارة سير العمل والسحابة، تطبيق ويب (SaaS)، وتطبيق موبايل.",
+            period: "2017 - 2023"
+          },
+          {
+            title: "مصمم واجهة مستخدم/تجربة مستخدم كبير وخبير تكنولوجيا المعلومات",
+            company: "ريسلينك، هلسنكي، فنلندا",
+            description: "تطبيق ويب، وتطوير واجهة مستخدم أندرويد، وإدارة VPN.",
+            period: "2016 - 2023"
+          },
+          {
+            title: "المناصب السابقة",
+            positions: [
+              {
+                title: "مصمم جرافيك واجهة مستخدم/تجربة مستخدم وخبير تكنولوجيا المعلومات",
+                company: "ريسلينك، هلسنكي، فنلندا",
+                period: "2014 - 2016"
+              },
+              {
+                title: "خبير تكنولوجيا معلومات مستقل ومطور واجهة مستخدم",
+                company: "من دمشق إلى إسبو",
+                period: "2000 - 2014"
+              },
+              {
+                title: "مصمم جرافيك وخبير تكنولوجيا معلومات",
+                company: "مجلات وصحف مختلفة — طهران، إيران",
+                period: ""
+              }
+            ],
+            period: "2000 - 2016"
+          }
+        ]
+      }
+    };
+    
+    return workExperience[locale as keyof typeof workExperience] || workExperience.en;
+  };
+
+  // Get translated testimonials
+  const getTestimonials = () => {
+    const testimonials = {
+      en: [
+        {
+          text: "Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I've worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.",
+          name: "Fahad M",
+          position: "IT Contractor | Travelodge Hotels Limited"
+        },
+        {
+          text: "Ali is an exceptional and experienced UI/UX designer with more than ten years of professional experience specialising in product design for technology companies. Ali believes that design is not about deliverables and beautiful pixels but about solving problems and achieving business and user goals. As a product designer, Ali focuses on usability, user experience, and user research in his designs. He has worked with small and large teams as well as a freelancer and enjoys the challenge of solving user problems. He always delivers on time and on budget.",
+          name: "Constantin Buda",
+          position: "CMO at Vidalico Digital | Hubspot Agency Partner | SicTic Member"
+        }
+      ],
+      fi: [
+        {
+          text: "Ali on luova tuotesuunnittelija. Löydät paljon taiteilijoita, joilla on liian kiireisiä taiteen muotoja. Mutta Ali on edelläkävijä vaikuttavissa mutta yksinkertaisissa ja merkityksellisissä tuotesuunnitteluissa. Hänellä on tämä ovela kyky ratkaista monimutkaisia ongelmia yksinkertaisilla ratkaisuilla käyttäen suunnittelutaitojaan. Hänen taiteensa puhuu visuaalisesti, tekee työn täydellisesti ja jättää pitkäaikaisen vaikutelman. Olen työskennellyt Alin kanssa aiemmin ja se oli todella hauska kokemus. Haluaisin tehdä sen uudestaan ja suosittelen myös Alia.",
+          name: "Fahad M",
+          position: "IT-urakoitsija | Travelodge Hotels Limited"
+        },
+        {
+          text: "Ali on poikkeuksellinen ja kokenut UI/UX-suunnittelija, jolla on yli kymmenen vuoden ammattikokemus erikoistuen tuotesuunnitteluun teknologiayrityksissä. Ali uskoo, että suunnittelu ei ole kyse toimitettavista ja kauniista pikseleistä, vaan ongelmien ratkaisemisesta ja liiketoiminnan ja käyttäjien tavoitteiden saavuttamisesta. Tuotesuunnittelijana Ali keskittyy käytettävyyteen, käyttäjäkokemukseen ja käyttäjätutkimukseen suunnittelussaan. Hän on työskennellyt pienissä ja suurissa tiimeissä sekä freelancerina ja nauttii käyttäjäongelmien ratkaisun haasteesta. Hän toimittaa aina ajallaan ja budjetissa.",
+          name: "Constantin Buda",
+          position: "CMO Vidalico Digitalissa | Hubspot Agency Partner | SicTic-jäsen"
+        }
+      ],
+      ar: [
+        {
+          text: "علي مصمم منتجات مبدع. ستجد الكثير من الفنانين ذوي التصميمات المزدحمة والأشكال الفنية المعقدة. لكن علي يأخذ الريادة في تصاميم المنتجات المؤثرة والبسيطة والمناسبة. لديه هذه القدرة الذكية على حل المشاكل المعقدة بحلول بسيطة باستخدام مهاراته التصميمية. فنه يتحدث بصريًا، يؤدي المهمة بشكل مثالي ويترك انطباعًا دائمًا. لقد عملت مع علي في الماضي وكانت تجربة ممتعة حقًا. أود أن أفعل ذلك مرة أخرى وأوصي بعلي أيضًا.",
+          name: "فهد م",
+          position: "متعاقد تكنولوجيا المعلومات | ترافيلودج للفنادق المحدودة"
+        },
+        {
+          text: "علي مصمم واجهة مستخدم/تجربة مستخدم استثنائي وذو خبرة مع أكثر من عشر سنوات من الخبرة المهنية متخصص في تصميم المنتجات لشركات التكنولوجيا. يعتقد علي أن التصميم لا يتعلق بالمنتجات النهائية والبكسلات الجميلة، بل بحل المشكلات وتحقيق أهداف العمل والمستخدم. كمصمم منتجات، يركز علي على قابلية الاستخدام وتجربة المستخدم وأبحاث المستخدم في تصاميمه. لقد عمل مع فرق صغيرة وكبيرة وكذلك كمستقل ويستمتع بتحدي حل مشاكل المستخدمين. يقدم دائمًا في الوقت المحدد وضمن الميزانية.",
+          name: "قسطنطين بودا",
+          position: "رئيس التسويق في فيداليكو الرقمية | شريك وكالة هابسبوت | عضو سيكتيك"
+        }
+      ]
+    };
+    
+    return testimonials[locale as keyof typeof testimonials] || testimonials.en;
+  };
+  
+  const workContent = getWorkExperience();
+  const skills = getSkills();
+  const testimonials = getTestimonials();
   
   return (
     <main className="min-h-screen bg-theme">
@@ -160,7 +386,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-4 text-theme-text/70 max-w-2xl mx-auto"
             >
-              A journey through my professional career, showcasing my growth and expertise in design and technology.
+              {workContent.intro}
             </motion.p>
           </div>
           
@@ -169,166 +395,85 @@ export default function Home() {
             {/* Central timeline line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent"></div>
             
-            {/* Current Position */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5 }}
-              className="relative mb-16"
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg shadow-purple-500/20 z-10"></div>
-              
-              {/* Date badge */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-primary px-4 py-1 rounded-full text-sm font-medium">
-                2023 - Present
-              </div>
-              
-              {/* Card positioned to right of timeline */}
-              <div className="ml-auto mr-0 md:ml-[52%] md:w-[48%]">
-                <Card>
-                  <CardContent 
-                    icon="rocket_launch" 
-                    iconClassName="text-purple-400 bg-purple-400/10"
-                    title="Product Designer | Product Owner"
-                    date="2023 - Present"
-                  >
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex items-center gap-2 opacity-80 mb-2">
-                          <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                          <p>Webropol, Helsinki, Finland</p>
-                        </div>
-                        <p className="opacity-70">Product vision, specifying features, prototyping, and handing off design system to developers.</p>
+            {workContent.positions.map((position, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className={`relative ${index < workContent.positions.length - 1 ? 'mb-16' : ''}`}
+              >
+                {/* Timeline dot */}
+                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full ${
+                  index === 0 
+                    ? 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg shadow-purple-500/20' 
+                    : index === workContent.positions.length - 1
+                      ? 'bg-gradient-to-r from-gray-500 to-blue-500/50 shadow-lg shadow-gray-500/20'
+                      : 'bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20'
+                } z-10`}></div>
+                
+                {/* Date badge */}
+                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-12 ${
+                  index === 0 
+                    ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20' 
+                    : index === workContent.positions.length - 1
+                      ? 'bg-gradient-to-r from-gray-500/20 to-blue-500/10'
+                      : 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20'
+                } text-primary px-4 py-1 rounded-full text-sm font-medium`}>
+                  {position.period}
+                </div>
+                
+                {/* Card positioned alternating */}
+                <div className={`${
+                  index % 2 === 0 
+                    ? 'ml-auto mr-0 md:ml-[52%] md:w-[48%]' 
+                    : 'mr-auto ml-0 md:mr-[52%] md:w-[48%]'
+                }`}>
+                  <Card>
+                    <CardContent 
+                      icon={
+                        index === 0 
+                          ? "rocket_launch" 
+                          : index === workContent.positions.length - 1
+                            ? "history"
+                            : index % 2 === 0 ? "grid_view" : "insights"
+                      } 
+                      iconClassName={`${
+                        index === 0 
+                          ? 'text-purple-400 bg-purple-400/10' 
+                          : index === workContent.positions.length - 1
+                            ? 'text-gray-400 bg-gray-400/10'
+                            : index % 2 === 0 ? 'text-cyan-400 bg-cyan-400/10' : 'text-blue-400 bg-blue-400/10'
+                      }`}
+                      title={position.title}
+                      date={position.period}
+                    >
+                      <div className="space-y-4">
+                        {position.positions ? (
+                          // For the "Earlier Positions" with nested positions
+                          position.positions.map((subPosition, subIndex) => (
+                            <div key={subIndex}>
+                              <h5 className="text-lg opacity-80 mb-1">{subPosition.title}</h5>
+                              <p className="opacity-60">{subPosition.company} {subPosition.period ? `(${subPosition.period})` : ''}</p>
+                            </div>
+                          ))
+                        ) : (
+                          // For regular positions
+                          <div>
+                            <div className="flex items-center gap-2 opacity-80 mb-2">
+                              <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                              <p>{position.company}</p>
+                            </div>
+                            <p className="opacity-70">{position.description}</p>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </motion.div>
-            
-            {/* Previous Position 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative mb-16"
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20 z-10"></div>
-              
-              {/* Date badge */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-primary px-4 py-1 rounded-full text-sm font-medium">
-                2017 - 2023
-              </div>
-              
-              {/* Card positioned to left of timeline */}
-              <div className="mr-auto ml-0 md:mr-[52%] md:w-[48%]">
-                <Card>
-                  <CardContent 
-                    icon="insights" 
-                    iconClassName="text-blue-400 bg-blue-400/10"
-                    title="Professional Product Designer"
-                    date="2017 - 2023"
-                  >
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex items-center gap-2 opacity-80 mb-2">
-                          <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                          <p>Reslink, Espoo, Finland</p>
-                        </div>
-                        <p className="opacity-70">Workflow and Cloud Management, WebApp (SaaS), and Mobile.</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </motion.div>
-            
-            {/* Previous Position 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="relative mb-16"
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg shadow-cyan-500/20 z-10"></div>
-              
-              {/* Date badge */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-primary px-4 py-1 rounded-full text-sm font-medium">
-                2016 - 2023
-              </div>
-              
-              {/* Card positioned to right of timeline */}
-              <div className="ml-auto mr-0 md:ml-[52%] md:w-[48%]">
-                <Card>
-                  <CardContent 
-                    icon="grid_view" 
-                    iconClassName="text-cyan-400 bg-cyan-400/10"
-                    title="Senior UI/UX Designer & IT Expert"
-                    date="2016 - 2023"
-                  >
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex items-center gap-2 opacity-80 mb-2">
-                          <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                          <p>Reslink, Helsinki, Finland</p>
-                        </div>
-                        <p className="opacity-70">Web Application, Android UI Development, and VPN Management.</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </motion.div>
-            
-            {/* Earlier Positions */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative"
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full bg-gradient-to-r from-gray-500 to-blue-500/50 shadow-lg shadow-gray-500/20 z-10"></div>
-              
-              {/* Date badge */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-12 bg-gradient-to-r from-gray-500/20 to-blue-500/10 text-primary px-4 py-1 rounded-full text-sm font-medium">
-                2000 - 2016
-              </div>
-              
-              {/* Card positioned to left of timeline */}
-              <div className="mr-auto ml-0 md:mr-[52%] md:w-[48%]">
-                <Card>
-                  <CardContent 
-                    icon="history" 
-                    iconClassName="text-gray-400 bg-gray-400/10"
-                    title="Earlier Positions"
-                    date="2000 - 2016"
-                  >
-                    <div className="space-y-4">
-                      <div>
-                        <h5 className="text-lg opacity-80 mb-1">Graphic Designer UI/UX & IT Expert</h5>
-                        <p className="opacity-60">Reslink, Helsinki, Finland (2014 - 2016)</p>
-                      </div>
-                      <div>
-                        <h5 className="text-lg opacity-80 mb-1">Freelance IT Expert & UI Developer</h5>
-                        <p className="opacity-60">From Damascus to Espoo (2000 - 2014)</p>
-                      </div>
-                      <div>
-                        <h5 className="text-lg opacity-80 mb-1">Graphic Designer & IT Expert</h5>
-                        <p className="opacity-60">Various Magazines and Newspapers — Tehran, Iran</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </motion.div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
@@ -424,16 +569,7 @@ export default function Home() {
             {t('home.skills.title')}
           </motion.h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
-              { title: 'Research', desc: 'Skilled in qualitative and quantitative research' },
-              { title: 'Product Management', desc: 'Agile methodologies and roadmapping' },
-              { title: 'Design Leadership', desc: 'Team mentoring and process development' },
-              { title: 'Design Systems', desc: 'Creating consistent, scalable frameworks' },
-              { title: 'Project Management', desc: 'Agile methodology (Jira, Scrum, Kanban)' },
-              { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
-              { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' },
-            ].map((skill, index) => (
+            {skills.map((skill, index) => (
               <InteractiveSkillCard key={index} skill={skill} index={index} />
             ))}
           </div>
@@ -483,123 +619,68 @@ export default function Home() {
           </div>
           
           <div className="space-y-16 max-w-5xl mx-auto">
-            {/* Testimonial 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.02 }}
-              className="theme-card relative overflow-hidden"
-            >
-              <div className="theme-card-content p-8 md:p-10">
-                <div className="absolute -top-16 -left-16 text-8xl opacity-20 text-primary">
-                  <Icon name="format_quote" className="" />
-                </div>
-                
-                <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
-                  <div className="flex-shrink-0">
-                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
-                      <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
-                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">FM</span>
+            {testimonials.map((testimonial, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ scale: 1.02 }}
+                className="theme-card relative overflow-hidden"
+              >
+                <div className="theme-card-content p-8 md:p-10">
+                  <div className={`absolute -top-16 ${locale === 'ar' ? '-right-16' : '-left-16'} text-8xl opacity-20 text-primary`}>
+                    <Icon name="format_quote" className="" />
+                  </div>
+                  
+                  <div className={`flex flex-col md:flex-row gap-8 items-start relative z-10 ${locale === 'ar' ? 'md:flex-row-reverse text-right' : ''}`}>
+                    <div className="flex-shrink-0">
+                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
+                        <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
+                          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">
+                            {index === 0 ? 'FM' : 'CB'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-grow">
+                      <div className="mb-6">
+                        <p className="text-theme-text/80 text-lg leading-relaxed">
+                          {testimonial.text}
+                        </p>
+                      </div>
+                      <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse justify-start' : 'justify-between'}`}>
+                        <div>
+                          <div className="font-medium text-primary text-xl">{testimonial.name}</div>
+                          <div className="text-sm text-theme-text/60 mt-1">{testimonial.position}</div>
+                        </div>
+                        <div className={`hidden md:flex gap-1 ${locale === 'ar' ? 'ml-auto mr-8' : ''}`}>
+                          {[...Array(5)].map((_, i) => (
+                            <motion.span 
+                              key={i}
+                              className="material-symbols text-amber-400"
+                              initial={{ opacity: 0.2, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.1 }}
+                            >
+                              star
+                            </motion.span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex-grow">
-                    <div className="mb-6">
-                      <p className="text-theme-text/80 text-lg leading-relaxed">
-                        Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I&apos;ve worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium text-primary text-xl">Fahad M</div>
-                        <div className="text-sm text-theme-text/60 mt-1">IT Contractor | Travelodge Hotels Limited</div>
-                      </div>
-                      <div className="hidden md:flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <motion.span 
-                            key={i}
-                            className="material-symbols text-amber-400"
-                            initial={{ opacity: 0.2, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.1 }}
-                          >
-                            star
-                          </motion.span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <motion.div 
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
+                    initial={{ scaleX: 0, transformOrigin: locale === 'ar' ? "right" : "left" }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                  />
                 </div>
-                <motion.div 
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                />
-              </div>
-            </motion.div>
-            
-            {/* Testimonial 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ scale: 1.02 }}
-              className="theme-card relative overflow-hidden"
-            >
-              <div className="theme-card-content p-8 md:p-10">
-                <div className="absolute -top-16 -left-16 text-8xl opacity-20 text-primary">
-                  <Icon name="format_quote" className="" />
-                </div>
-                
-                <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
-                  <div className="flex-shrink-0">
-                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-cyan-500/20 to-fuchsia-600/20 flex items-center justify-center p-1">
-                      <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
-                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-fuchsia-500">CB</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-grow">
-                    <div className="mb-6">
-                      <p className="text-theme-text/80 text-lg leading-relaxed">
-                        Ali is an exceptional and experienced UI/UX designer with more than ten years of professional experience specialising in product design for technology companies. Ali believes that design is not about deliverables and beautiful pixels but about solving problems and achieving business and user goals. As a product designer, Ali focuses on usability, user experience, and user research in his designs. He has worked with small and large teams as well as a freelancer and enjoys the challenge of solving user problems. He always delivers on time and on budget.
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium text-primary text-xl">Constantin Buda</div>
-                        <div className="text-sm text-theme-text/60 mt-1">CMO at Vidalico Digital | Hubspot Agency Partner | SicTic Member</div>
-                      </div>
-                      <div className="hidden md:flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <motion.span 
-                            key={i}
-                            className="material-symbols text-amber-400"
-                            initial={{ opacity: 0.2, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.1 }}
-                          >
-                            star
-                          </motion.span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <motion.div 
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600"
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                />
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>

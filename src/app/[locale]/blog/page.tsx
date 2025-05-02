@@ -1,17 +1,22 @@
 import React from 'react';
 import { Metadata } from 'next';
 import ClientBlogPage from '@/components/blog/ClientBlogPage';
-import { posts } from './posts/data';
+import { posts } from '../../blog/posts/data';
 import Navigation from '@/components/Navigation';
 import { i18n } from '@/i18n';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 
+// Add the required generateStaticParams function for static site generation
+export function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ locale }));
+}
+
 // Ensure absolute URL for images
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
 const ogImage = `${baseUrl}/images/blog/blog-cover.jpg`;
 
-export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const url = `${baseUrl}/${locale}/blog`;
   
@@ -72,8 +77,8 @@ export async function generateMetadata({ params }: { params: { locale?: string }
   };
 }
 
-export default function BlogPage({ params }: { params: { locale?: string } }) {
-  const locale = params.locale || i18n.defaultLocale;
+export default function BlogPage({ params }: { params: { locale: string } }) {
+  const locale = params.locale;
 
   return (
     <ThemeProvider>

@@ -4,7 +4,7 @@ import BlogPostHeader from '@/components/blog/BlogPostHeader';
 import BlogPostClient from '@/components/blog/BlogPostClient';
 import BlogContent from '@/components/blog/BlogContent';
 import Card from '@/components/Card';
-import { posts } from '../posts/data';
+import { posts } from '../../../blog/posts/data';
 import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
@@ -13,20 +13,23 @@ import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
 export function generateStaticParams() {
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const staticParams = [];
+  
+  // Generate all combinations of locales and slugs
+  for (const locale of i18n.locales) {
+    for (const post of posts) {
+      staticParams.push({
+        locale,
+        slug: post.slug,
+      });
+    }
+  }
+  
+  return staticParams;
 }
 
-// Updated Props type to match Next.js expectations
-type Props = {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
-  const locale = i18n.defaultLocale;
+export async function generateMetadata({ params }: { params: { slug: string; locale: string } }): Promise<Metadata> {
+  const { slug, locale } = params;
   const post = posts.find((p) => p.slug === slug);
   
   if (!post) {
@@ -43,9 +46,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function BlogPost({ params }: Props) {
-  const { slug } = params;
-  const locale = i18n.defaultLocale;
+// Using the exact function signature expected by Next.js for pages
+export default function BlogPost({ 
+  params,
+}: {
+  params: { slug: string; locale: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  const { slug, locale } = params;
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) return null;

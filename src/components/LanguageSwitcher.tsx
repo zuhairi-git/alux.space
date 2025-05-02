@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
 import { useTheme } from '@/context/ThemeContext';
 import Tooltip from './ui/Tooltip';
+import { i18n } from '@/i18n';
 
 export default function LanguageSwitcher() {
   const { locale, setLocale, isRTL } = useLanguage();
@@ -21,11 +22,10 @@ export default function LanguageSwitcher() {
     ar: '🇸🇦',
   };
 
-  // Language names
-  const languageNames: Record<string, string> = {
-    en: t('languageSwitcher.en'),
-    fi: t('languageSwitcher.fi'),
-    ar: t('languageSwitcher.ar'),
+  // Get language names dynamically from translations
+  const getLanguageName = (langCode: string) => {
+    const key = `languageSwitcher.${langCode}`;
+    return t(key);
   };
 
   const toggleDropdown = () => {
@@ -96,7 +96,7 @@ export default function LanguageSwitcher() {
           aria-label="Select language"
         >
           <span className="text-xl">{languageFlags[locale]}</span>
-          <span className={`mx-2 truncate ${isMobile ? 'hidden' : 'inline-block'}`}>{languageNames[locale]}</span>
+          <span className={`mx-2 truncate ${isMobile ? 'hidden' : 'inline-block'}`}>{getLanguageName(locale)}</span>
           <span className={`material-symbols material-symbols-rounded text-base transform transition-transform ${isRTL ? 'mr-1' : 'ml-1'} ${isOpen ? 'rotate-180' : ''}`}>
             {isOpen ? 'expand_less' : 'expand_more'}
           </span>
@@ -116,7 +116,7 @@ export default function LanguageSwitcher() {
             className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-auto min-w-[180px] rounded-lg ${theme === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-900 border border-gray-700'} backdrop-blur-lg shadow-lg overflow-hidden z-50`}
           >
             <div className="py-2">
-              {Object.keys(languageFlags).map((langCode) => (
+              {i18n.locales.map((langCode) => (
                 <button
                   key={langCode}
                   onClick={() => handleLanguageChange(langCode)}
@@ -138,7 +138,7 @@ export default function LanguageSwitcher() {
                   } ${isRTL ? 'ml-2' : 'mr-2'}`}>
                     {languageFlags[langCode]}
                   </div>
-                  <span className="font-medium whitespace-nowrap">{languageNames[langCode]}</span>
+                  <span className="font-medium whitespace-nowrap">{getLanguageName(langCode)}</span>
                   
                   {/* Show indicator for current language */}
                   {locale === langCode && (

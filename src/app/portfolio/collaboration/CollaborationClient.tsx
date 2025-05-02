@@ -5,8 +5,14 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { useTranslations } from '@/utils/translations';
 
-export default function CollaborationClient() {
+interface Props {
+  locale: string;
+}
+
+export default function CollaborationClient({ locale: initialLocale }: Props) {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -14,10 +20,185 @@ export default function CollaborationClient() {
   };
 
   const { theme } = useTheme();
+  const { locale, isRTL } = useLanguage();
+  const { t } = useTranslations(locale);
   const isLight = theme === 'light';
 
+  // Get localized text content
+  const getLocalizedContent = () => {
+    const content = {
+      en: {
+        title: "Collaboration Workflow Platform",
+        intro: "At the heart of the Collaboration Workflow Platform is a commitment to creativity, interconnectivity, and real-time teamwork. This platform is designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
+        projectType: "Project Type",
+        projectTypeValues: "Landing Page, Web & Mobile Platform, Mobile Application",
+        timeline: "Timeline",
+        timelineValue: "18 Weeks",
+        tools: "Tools",
+        toolsValue: "Figma, FigJam, Maze",
+        roles: "Roles",
+        objectives: "Objectives",
+        designProcess: "Design Process",
+        researchInsights: "Research Insights",
+        participantFeedback: "Participant Feedback",
+        keyRecommendations: "Key Recommendations",
+        userPersonas: "User Personas",
+        productRequirements: "Product Requirements",
+        userTesting: "User Testing",
+        testScenario: "Test Scenario",
+        testScenarioValue: "Configure a new device using the prototype",
+        focusAreas: "Focus Areas",
+        deliveryPhase: "Delivery Phase",
+        completed: "Completed",
+        learnMore: "Learn more",
+      },
+      fi: {
+        title: "Yhteistyön työnkulkualusta",
+        intro: "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteyskykyyn ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan reaaliaikaista yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin eri laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+        projectType: "Projektityyppi",
+        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, mobiilisovellus",
+        timeline: "Aikataulu",
+        timelineValue: "18 viikkoa",
+        tools: "Työkalut",
+        toolsValue: "Figma, FigJam, Maze",
+        roles: "Roolit",
+        objectives: "Tavoitteet",
+        designProcess: "Suunnitteluprosessi",
+        researchInsights: "Tutkimustulokset",
+        participantFeedback: "Osallistujien palaute",
+        keyRecommendations: "Tärkeimmät suositukset",
+        userPersonas: "Käyttäjäpersoonat",
+        productRequirements: "Tuotevaatimukset",
+        userTesting: "Käyttäjätestaus",
+        testScenario: "Testiskenaario",
+        testScenarioValue: "Määritä uusi laite käyttäen prototyyppiä",
+        focusAreas: "Keskittymisalueet",
+        deliveryPhase: "Toimitusvaihe",
+        completed: "Valmis",
+        learnMore: "Lue lisää",
+      },
+      ar: {
+        title: "منصة سير عمل التعاون",
+        intro: "في قلب منصة سير عمل التعاون التزام بالإبداع والترابط والعمل الجماعي في الوقت الحقيقي. تم تصميم هذه المنصة لتبسيط التعاون المباشر، وتحسين التواصل، ومساعدة الفرق على توصيل المحتوى بشكل أكثر كفاءة عبر الأجهزة والمناطق الزمنية والمواقع.",
+        projectType: "نوع المشروع",
+        projectTypeValues: "صفحة هبوط، منصة ويب وجوال، تطبيق جوال",
+        timeline: "الجدول الزمني",
+        timelineValue: "18 أسبوعا",
+        tools: "أدوات",
+        toolsValue: "فيجما، فيججام، ميز",
+        roles: "الأدوار",
+        objectives: "الأهداف",
+        designProcess: "عملية التصميم",
+        researchInsights: "نتائج البحث",
+        participantFeedback: "تعليقات المشاركين",
+        keyRecommendations: "التوصيات الرئيسية",
+        userPersonas: "شخصيات المستخدمين",
+        productRequirements: "متطلبات المنتج",
+        userTesting: "اختبار المستخدم",
+        testScenario: "سيناريو الاختبار",
+        testScenarioValue: "تكوين جهاز جديد باستخدام النموذج الأولي",
+        focusAreas: "مجالات التركيز",
+        deliveryPhase: "مرحلة التسليم",
+        completed: "مكتمل",
+        learnMore: "اقرأ المزيد",
+      }
+    };
+    
+    return content[locale as keyof typeof content] || content.en;
+  };
+
+  // Get localized objectives
+  const getObjectives = () => {
+    const objectives = {
+      en: [
+        "Clarify each step's purpose for better user understanding",
+        "Communicate using business logic",
+        "Offer UI customization",
+        "Maintain consistent UI patterns",
+        "Ensure mobile-first responsive design"
+      ],
+      fi: [
+        "Selkeytä jokaisen vaiheen tarkoitus parempaa käyttäjäymmärrystä varten",
+        "Kommunikoi käyttäen liiketoimintalogiikkaa",
+        "Tarjoa käyttöliittymän mukauttamista",
+        "Ylläpidä johdonmukaisia käyttöliittymäkuvioita",
+        "Varmista mobiilipainotteinen responsiivinen suunnittelu"
+      ],
+      ar: [
+        "توضيح الغرض من كل خطوة لفهم أفضل للمستخدم",
+        "التواصل باستخدام منطق الأعمال",
+        "تقديم تخصيص واجهة المستخدم",
+        "الحفاظ على أنماط متسقة لواجهة المستخدم",
+        "ضمان تصميم متجاوب يعطي الأولوية للجوال"
+      ]
+    };
+    
+    return objectives[locale as keyof typeof objectives] || objectives.en;
+  };
+
+  const content = getLocalizedContent();
+  const objectives = getObjectives();
+
+  const designProcessSteps = [
+    { 
+      phase: locale === 'fi' ? "Tutki" : locale === 'ar' ? "اكتشف" : "Discover",
+      desc: locale === 'fi' ? "Tutki käyttäjien tarpeita ja kipupisteitä" : locale === 'ar' ? "بحث احتياجات ومشاكل المستخدم" : "Research user needs and pain points",
+      icon: (
+        <span className="material-symbols text-4xl">search</span>
+      )
+    },
+    { 
+      phase: locale === 'fi' ? "Määrittele" : locale === 'ar' ? "حدّد" : "Define",
+      desc: locale === 'fi' ? "Analysoi oivalluksia haasteen rajaamiseksi" : locale === 'ar' ? "تحليل الرؤى لتحديد نطاق التحدي" : "Analyze insights to scope the challenge",
+      icon: (
+        <span className="material-symbols text-4xl">notes</span>
+      )
+    },
+    { 
+      phase: locale === 'fi' ? "Kehitä" : locale === 'ar' ? "طوّر" : "Develop",
+      desc: locale === 'fi' ? "Luo ratkaisukonsepteja" : locale === 'ar' ? "إنشاء مفاهيم الحلول" : "Create solution concepts",
+      icon: (
+        <span className="material-symbols text-4xl">edit</span>
+      )
+    },
+    { 
+      phase: locale === 'fi' ? "Toimita" : locale === 'ar' ? "قدّم" : "Deliver",
+      desc: locale === 'fi' ? "Testaa käyttäjillä ja iteroidu" : locale === 'ar' ? "اختبار مع المستخدمين والتكرار" : "Test with users and iterate",
+      icon: (
+        <span className="material-symbols text-4xl">rocket_launch</span>
+      )
+    }
+  ];
+  
+  // Translation for roles
+  const roles = locale === 'fi' ? 
+    ["Tuotesuunnittelija", "Tuotepäällikkö", "Käyttäjätutkimus", "Testaus", "Analytiikka"] :
+    locale === 'ar' ?
+    ["مصمم منتجات", "مدير منتج", "بحث المستخدم", "اختبار", "تحليلات"] :
+    ["Product Designer", "Product Manager", "User Research", "Testing", "Analytics"];
+
+  // Localized metrics
+  const metrics = [
+    { 
+      label: locale === 'fi' ? "Luovuuden arvo" : locale === 'ar' ? "قيمة الإبداع" : "Creativity Value", 
+      value: 90 
+    },
+    { 
+      label: locale === 'fi' ? "Käyttäjäystävällisyys" : locale === 'ar' ? "سهولة الاستخدام" : "User-Friendliness", 
+      value: 95 
+    },
+    { 
+      label: locale === 'fi' ? "Värien hyväksyntä" : locale === 'ar' ? "اعتماد الألوان" : "Color Approval", 
+      value: 80 
+    },
+    { 
+      label: locale === 'fi' ? "Esteettömyys" : locale === 'ar' ? "إمكانية الوصول" : "Accessibility", 
+      value: 85 
+    }
+  ];
+
   return (
-    <main className="min-h-screen bg-theme text-theme">
+    <main className={`min-h-screen bg-theme text-theme ${isRTL ? 'text-right' : 'text-left'}`}>
       <Navigation />
 
       <article className="pt-24 pb-16">
@@ -29,7 +210,7 @@ export default function CollaborationClient() {
               initial: { opacity: 0 },
               animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
             }}
-            className="max-w-4xl mx-auto"
+            className={`max-w-4xl ${isRTL ? 'mr-auto' : 'mx-auto'}`}
           >
             {/* Hero Image */}
             <motion.div 
@@ -38,56 +219,50 @@ export default function CollaborationClient() {
             >
               <Image
                 src="/images/portfolio/collaboration/cover.jpg"
-                alt="Collaboration Workflow Platform"
+                alt={content.title}
                 fill
                 className="object-cover"
                 priority
               />
             </motion.div>
 
-            {/* Rest of the content */}
             {/* Header Section */}
             <motion.h1 
               variants={fadeInUp}
               className={`text-5xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}
             >
-              Collaboration Workflow Platform
+              {content.title}
             </motion.h1>
 
             <motion.div variants={fadeInUp} className="mb-12">
               <p className="text-xl opacity-80 leading-relaxed">
-                At the heart of the Collaboration Workflow Platform is a commitment to creativity, 
-                interconnectivity, and real-time teamwork. This platform is designed to simplify 
-                live collaboration, improve communication, and help teams deliver content more 
-                efficiently across devices, time zones, and locations.
+                {content.intro}
               </p>
             </motion.div>
 
             {/* Project Overview */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${isRTL ? 'text-right' : 'text-left'}`}>
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-semibold text-primary">Project Type</h3>
-                    <p className="opacity-80">Landing Page, Web & Mobile Platform, Mobile Application</p>
+                    <h3 className="text-lg font-semibold text-primary">{content.projectType}</h3>
+                    <p className="opacity-80">{content.projectTypeValues}</p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-primary">Timeline</h3>
-                    <p className="opacity-80">18 Weeks</p>
+                    <h3 className="text-lg font-semibold text-primary">{content.timeline}</h3>
+                    <p className="opacity-80">{content.timelineValue}</p>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-primary">Tools</h3>
-                    <p className="opacity-80">Figma, FigJam, Maze</p>
+                    <h3 className="text-lg font-semibold text-primary">{content.tools}</h3>
+                    <p className="opacity-80">{content.toolsValue}</p>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-primary mb-4">Roles</h3>
-                  <ul className="list-disc list-inside opacity-80 space-y-2">
-                    <li>Product Designer</li>
-                    <li>Product Manager</li>
-                    <li>User Research</li>
-                    <li>Testing</li>
-                    <li>Analytics</li>
+                  <h3 className="text-lg font-semibold text-primary mb-4">{content.roles}</h3>
+                  <ul className={`list-disc ${isRTL ? 'list-inside mr-4' : 'list-inside'} opacity-80 space-y-2`}>
+                    {roles.map((role, index) => (
+                      <li key={index}>{role}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -95,17 +270,11 @@ export default function CollaborationClient() {
 
             {/* Objectives */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 text-primary">Objectives</h2>
+              <h2 className="text-3xl font-bold mb-6 text-primary">{content.objectives}</h2>
               <ul className="list-none space-y-4">
-                {[
-                  "Clarify each step's purpose for better user understanding",
-                  "Communicate using business logic",
-                  "Offer UI customization",
-                  "Maintain consistent UI patterns",
-                  "Ensure mobile-first responsive design"
-                ].map((objective: string, index: number) => (
-                  <li key={index} className="flex items-start">
-                    <span className="inline-block w-2 h-2 mt-2 mr-3 bg-primary rounded-full"></span>
+                {objectives.map((objective: string, index: number) => (
+                  <li key={index} className={`flex items-start ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <span className={`inline-block w-2 h-2 mt-2 ${isRTL ? 'ml-3' : 'mr-3'} bg-primary rounded-full`}></span>
                     <span className="opacity-80">{objective}</span>
                   </li>
                 ))}
@@ -114,38 +283,9 @@ export default function CollaborationClient() {
 
             {/* Design Process */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 text-primary">Design Process</h2>
+              <h2 className="text-3xl font-bold mb-6 text-primary">{content.designProcess}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { 
-                    phase: "Discover",
-                    desc: "Research user needs and pain points",
-                    icon: (
-                      <span className="material-symbols text-4xl">search</span>
-                    )
-                  },
-                  { 
-                    phase: "Define",
-                    desc: "Analyze insights to scope the challenge",
-                    icon: (
-                      <span className="material-symbols text-4xl">notes</span>
-                    )
-                  },
-                  { 
-                    phase: "Develop",
-                    desc: "Create solution concepts",
-                    icon: (
-                      <span className="material-symbols text-4xl">edit</span>
-                    )
-                  },
-                  { 
-                    phase: "Deliver",
-                    desc: "Test with users and iterate",
-                    icon: (
-                      <span className="material-symbols text-4xl">rocket_launch</span>
-                    )
-                  }
-                ].map((item, index) => (
+                {designProcessSteps.map((item, index) => (
                   <div
                     key={index}
                     className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
@@ -162,17 +302,12 @@ export default function CollaborationClient() {
 
             {/* Research Findings */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 text-primary">Research Insights</h2>
+              <h2 className="text-3xl font-bold mb-6 text-primary">{content.researchInsights}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="p-6 rounded-lg5">
-                  <h3 className="text-xl font-semibold text-primary mb-6">Participant Feedback</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-6">{content.participantFeedback}</h3>
                   <div className="space-y-6">
-                    {[
-                      { label: "Creativity Value", value: 90 },
-                      { label: "User-Friendliness", value: 95 },
-                      { label: "Color Approval", value: 80 },
-                      { label: "Accessibility", value: 85 }
-                    ].map((metric, index) => (
+                    {metrics.map((metric, index) => (
                       <motion.div
                         key={index}
                         className="relative pt-1"
@@ -180,7 +315,7 @@ export default function CollaborationClient() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <div className="flex items-center justify-between mb-2">
+                        <div className={`flex items-center justify-between mb-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                           <span className="text-opacity-80">{metric.label}</span>
                           <span className="text-primary font-semibold">{metric.value}%</span>
                         </div>
@@ -189,7 +324,11 @@ export default function CollaborationClient() {
                             initial={{ width: 0 }}
                             animate={{ width: `${metric.value}%` }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400"
+                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400 ${isRTL ? 'mr-auto' : 'ml-0'}`}
+                            style={{ 
+                              width: `${metric.value}%`,
+                              ...(isRTL ? { marginRight: '0', marginLeft: 'auto' } : {})
+                            }}
                           />
                         </div>
                       </motion.div>
@@ -197,26 +336,26 @@ export default function CollaborationClient() {
                   </div>
                 </div>
                 <div className="p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-primary mb-6">Key Recommendations</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-6">{content.keyRecommendations}</h3>
                   <div className="space-y-4">
                     {[
                       {
-                        title: "Enhanced Accessibility",
-                        description: "Add clear labels to all icons and images",
+                        title: locale === 'fi' ? "Parannettu saavutettavuus" : locale === 'ar' ? "إمكانية وصول محسّنة" : "Enhanced Accessibility",
+                        description: locale === 'fi' ? "Lisää selkeät etiketit kaikkiin kuvakkeisiin ja kuviin" : locale === 'ar' ? "إضافة تسميات واضحة لجميع الرموز والصور" : "Add clear labels to all icons and images",
                         icon: (
                           <span className="material-symbols text-4xl">person</span>
                         )
                       },
                       {
-                        title: "Keyboard Navigation",
-                        description: "Improve focus states and keyboard shortcuts",
+                        title: locale === 'fi' ? "Näppäimistön navigointi" : locale === 'ar' ? "التنقل عبر لوحة المفاتيح" : "Keyboard Navigation",
+                        description: locale === 'fi' ? "Paranna kohdistustiloja ja näppäimistön pikavalintoja" : locale === 'ar' ? "تحسين حالات التركيز واختصارات لوحة المفاتيح" : "Improve focus states and keyboard shortcuts",
                         icon: (
                           <span className="material-symbols text-4xl">keyboard</span>
                         )
                       },
                       {
-                        title: "Color Contrast",
-                        description: "Enhance contrast ratios for better readability",
+                        title: locale === 'fi' ? "Värikontrasti" : locale === 'ar' ? "تباين الألوان" : "Color Contrast",
+                        description: locale === 'fi' ? "Paranna kontrastisuhteita paremman luettavuuden vuoksi" : locale === 'ar' ? "تعزيز نسب التباين لتحسين قابلية القراءة" : "Enhance contrast ratios for better readability",
                         icon: (
                           <span className="material-symbols text-4xl">palette</span>
                         )
@@ -247,27 +386,27 @@ export default function CollaborationClient() {
 
             {/* Personas */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 text-primary">User Personas</h2>
+              <h2 className="text-3xl font-bold mb-6 text-primary">{content.userPersonas}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 { [
                   {
-                    name: "John J.",
-                    role: "Marketing Manager",
-                    traits: ["Tech-savvy", "Innovation-focused"],
-                    needs: ["Collaboration tools", "Strategy alignment"],
-                    goals: ["Streamline team communication", "Implement new marketing strategies"],
-                    painPoints: ["Complex approval processes", "Scattered feedback channels"],
+                    name: locale === 'fi' ? "John J." : locale === 'ar' ? "جون ج." : "John J.",
+                    role: locale === 'fi' ? "Markkinointipäällikkö" : locale === 'ar' ? "مدير التسويق" : "Marketing Manager",
+                    traits: locale === 'fi' ? ["Teknologiaosaava", "Innovaatioihin keskittyvä"] : locale === 'ar' ? ["متمرس بالتكنولوجيا", "يركز على الابتكار"] : ["Tech-savvy", "Innovation-focused"],
+                    needs: locale === 'fi' ? ["Yhteistyötyökalut", "Strategian yhdenmukaistaminen"] : locale === 'ar' ? ["أدوات التعاون", "مواءمة الاستراتيجية"] : ["Collaboration tools", "Strategy alignment"],
+                    goals: locale === 'fi' ? ["Tehosta tiimiviestintää", "Ota käyttöön uusia markkinointistrategioita"] : locale === 'ar' ? ["تبسيط التواصل بين الفريق", "تنفيذ استراتيجيات تسويقية جديدة"] : ["Streamline team communication", "Implement new marketing strategies"],
+                    painPoints: locale === 'fi' ? ["Monimutkaiset hyväksymisprosessit", "Hajautetut palautekanavat"] : locale === 'ar' ? ["عمليات الموافقة المعقدة", "قنوات التغذية الراجعة المتفرقة"] : ["Complex approval processes", "Scattered feedback channels"],
                     icon: (
                       <span className="material-symbols text-4xl">groups</span>
                     )
                   },
                   {
-                    name: "Julia Romes",
-                    role: "Sales Director",
-                    traits: ["Results-driven", "Mobile-first"],
-                    needs: ["Quick collaboration", "On-the-go access"],
-                    goals: ["Close deals faster", "Improve team coordination"],
-                    painPoints: ["Limited mobile functionality", "Delayed responses"],
+                    name: locale === 'fi' ? "Julia Romes" : locale === 'ar' ? "جوليا رومز" : "Julia Romes",
+                    role: locale === 'fi' ? "Myyntijohtaja" : locale === 'ar' ? "مدير المبيعات" : "Sales Director",
+                    traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Mobiilipainotteinen"] : locale === 'ar' ? ["يركز على النتائج", "يعطي الأولوية للجوال"] : ["Results-driven", "Mobile-first"],
+                    needs: locale === 'fi' ? ["Nopea yhteistyö", "Liikkuva pääsy"] : locale === 'ar' ? ["تعاون سريع", "الوصول أثناء التنقل"] : ["Quick collaboration", "On-the-go access"],
+                    goals: locale === 'fi' ? ["Sulje kaupat nopeammin", "Paranna tiimikoordinointia"] : locale === 'ar' ? ["إتمام الصفقات بشكل أسرع", "تحسين تنسيق الفريق"] : ["Close deals faster", "Improve team coordination"],
+                    painPoints: locale === 'fi' ? ["Rajoitettu mobiilitoiminnallisuus", "Viivästyneet vastaukset"] : locale === 'ar' ? ["وظائف محدودة للجوال", "ردود متأخرة"] : ["Limited mobile functionality", "Delayed responses"],
                     icon: (
                       <span className="material-symbols text-4xl">groups</span>
                     )
@@ -290,7 +429,7 @@ export default function CollaborationClient() {
                     
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">Traits</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Ominaisuudet" : locale === 'ar' ? "السمات" : "Traits"}</h4>
                         <div className="flex flex-wrap gap-2">
                           {persona.traits.map((trait, i) => (
                             <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
@@ -301,7 +440,7 @@ export default function CollaborationClient() {
                       </div>
                       
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">Needs</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tarpeet" : locale === 'ar' ? "الاحتياجات" : "Needs"}</h4>
                         <ul className="space-y-2">
                           {persona.needs.map((need, i) => (
                             <li key={i} className="flex items-center text-opacity-80">
@@ -313,7 +452,7 @@ export default function CollaborationClient() {
                       </div>
                       
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">Goals</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tavoitteet" : locale === 'ar' ? "الأهداف" : "Goals"}</h4>
                         <ul className="space-y-2">
                           {persona.goals.map((goal, i) => (
                             <li key={i} className="flex items-center text-opacity-80">
@@ -325,7 +464,7 @@ export default function CollaborationClient() {
                       </div>
                       
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">Pain Points</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Kipupisteet" : locale === 'ar' ? "نقاط الألم" : "Pain Points"}</h4>
                         <ul className="space-y-2">
                           {persona.painPoints.map((point, i) => (
                             <li key={i} className="flex items-center text-opacity-80">
@@ -345,33 +484,33 @@ export default function CollaborationClient() {
             <motion.section variants={fadeInUp} className="mb-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="p-6 rounded-lg">
-                  <h2 className="text-3xl font-bold mb-6 text-primary">Product Requirements</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-primary">{content.productRequirements}</h2>
                   <div className="space-y-4">
                     {[
                       {
-                        title: "Team Communication",
-                        description: "Enable seamless real-time collaboration",
+                        title: locale === 'fi' ? "Tiimiviestintä" : locale === 'ar' ? "تواصل الفريق" : "Team Communication",
+                        description: locale === 'fi' ? "Mahdollista saumaton reaaliaikainen yhteistyö" : locale === 'ar' ? "تمكين التعاون في الوقت الحقيقي بسلاسة" : "Enable seamless real-time collaboration",
                         icon: (
                           <span className="material-symbols text-4xl">group</span>
                         )
                       },
                       {
-                        title: "User Feedback Loop",
-                        description: "Continuous collection of user insights",
+                        title: locale === 'fi' ? "Käyttäjäpalautesilmukka" : locale === 'ar' ? "حلقة تغذية راجعة المستخدم" : "User Feedback Loop",
+                        description: locale === 'fi' ? "Jatkuva käyttäjäoivallusten kerääminen" : locale === 'ar' ? "جمع مستمر لرؤى المستخدم" : "Continuous collection of user insights",
                         icon: (
                           <span className="material-symbols text-4xl">feedback</span>
                         )
                       },
                       {
-                        title: "Training Resources",
-                        description: "Multi-level learning materials",
+                        title: locale === 'fi' ? "Koulutusresurssit" : locale === 'ar' ? "موارد التدريب" : "Training Resources",
+                        description: locale === 'fi' ? "Monitasoiset oppimateriaalit" : locale === 'ar' ? "مواد تعليمية متعددة المستويات" : "Multi-level learning materials",
                         icon: (
                           <span className="material-symbols text-4xl">school</span>
                         )
                       },
                       {
-                        title: "Documentation",
-                        description: "Comprehensive support resources",
+                        title: locale === 'fi' ? "Dokumentaatio" : locale === 'ar' ? "التوثيق" : "Documentation",
+                        description: locale === 'fi' ? "Kattavat tukiresurssit" : locale === 'ar' ? "موارد دعم شاملة" : "Comprehensive support resources",
                         icon: (
                           <span className="material-symbols text-4xl">description</span>
                         )
@@ -398,38 +537,38 @@ export default function CollaborationClient() {
                 </div>
 
                 <div className="p-6 rounded-lg">
-                  <h2 className="text-3xl font-bold mb-6 text-primary">User Testing</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-primary">{content.userTesting}</h2>
                   <div className="mb-8">
-                    <h3 className="text-xl font-semibold text-primary mb-4">Test Scenario</h3>
+                    <h3 className="text-xl font-semibold text-primary mb-4">{content.testScenario}</h3>
                     <div className="theme-card-flex p-4 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 self-start">
-                      <p className="text-opacity-80">Configure a new device using the prototype</p>
+                      <p className="text-opacity-80">{content.testScenarioValue}</p>
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-semibold text-primary mb-4">Focus Areas</h3>
+                    <h3 className="text-xl font-semibold text-primary mb-4">{content.focusAreas}</h3>
                     <div className="grid grid-cols-2 gap-4 grid-flow-row auto-rows-auto">
                       { [
                         {
-                          area: "Usability",
+                          area: locale === 'fi' ? "Käytettävyys" : locale === 'ar' ? "سهولة الاستخدام" : "Usability",
                           icon: (
                             <span className="material-symbols text-4xl">touch_app</span>
                           )
                         },
                         {
-                          area: "Creativity",
+                          area: locale === 'fi' ? "Luovuus" : locale === 'ar' ? "الإبداع" : "Creativity",
                           icon: (
                             <span className="material-symbols text-4xl">brush</span>
                           )
                         },
                         {
-                          area: "Accessibility",
+                          area: locale === 'fi' ? "Esteettömyys" : locale === 'ar' ? "إمكانية الوصول" : "Accessibility",
                           icon: (
                             <span className="material-symbols text-4xl">accessibility</span>
                           )
                         },
                         {
-                          area: "Visual Design",
+                          area: locale === 'fi' ? "Visuaalinen suunnittelu" : locale === 'ar' ? "التصميم البصري" : "Visual Design",
                           icon: (
                             <span className="material-symbols text-4xl">image</span>
                           )
@@ -455,36 +594,36 @@ export default function CollaborationClient() {
 
             {/* Delivery Phase */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 text-primary">Delivery Phase</h2>
+              <h2 className="text-3xl font-bold mb-6 text-primary">{content.deliveryPhase}</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 { [
                   {
-                    title: "High Fidelity Prototype",
-                    description: "Interactive designs showcasing key features aligned with user goals and usability principles",
+                    title: locale === 'fi' ? "Korkean tarkkuuden prototyyppi" : locale === 'ar' ? "نموذج أولي عالي الدقة" : "High Fidelity Prototype",
+                    description: locale === 'fi' ? "Vuorovaikutteiset suunnitelmat, jotka esittelevät keskeisiä ominaisuuksia käyttäjien tavoitteiden ja käytettävyyden periaatteiden mukaisesti" : locale === 'ar' ? "تصاميم تفاعلية تعرض الميزات الرئيسية المتوافقة مع أهداف المستخدم ومبادئ سهولة الاستخدام" : "Interactive designs showcasing key features aligned with user goals and usability principles",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">devices</span>
                     )
                   },
                   {
-                    title: "Design Reviews",
-                    description: "Structured feedback sessions with stakeholders to document key decisions and improvements",
+                    title: locale === 'fi' ? "Suunnittelukatsaukset" : locale === 'ar' ? "مراجعات التصميم" : "Design Reviews",
+                    description: locale === 'fi' ? "Rakenteelliset palautesessiot sidosryhmien kanssa dokumentoimaan keskeisiä päätöksiä ja parannuksia" : locale === 'ar' ? "جلسات ملاحظات منظمة مع أصحاب المصلحة لتوثيق القرارات الرئيسية والتحسينات" : "Structured feedback sessions with stakeholders to document key decisions and improvements",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">reviews</span>
                     )
                   },
                   {
-                    title: "Quality Assurance",
-                    description: "Comprehensive testing across devices to ensure consistent experience and performance",
+                    title: locale === 'fi' ? "Laadunvarmistus" : locale === 'ar' ? "ضمان الجودة" : "Quality Assurance",
+                    description: locale === 'fi' ? "Kattava testaus eri laitteilla varmistamaan johdonmukainen kokemus ja suorituskyky" : locale === 'ar' ? "اختبار شامل عبر الأجهزة لضمان تجربة وأداء متسقين" : "Comprehensive testing across devices to ensure consistent experience and performance",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">verified</span>
                     )
                   },
                   {
-                    title: "Documentation",
-                    description: "Clear documentation for future development and cross-functional collaboration.",
+                    title: locale === 'fi' ? "Dokumentaatio" : locale === 'ar' ? "التوثيق" : "Documentation",
+                    description: locale === 'fi' ? "Selkeä dokumentaatio tulevaa kehitystä ja monitoimista yhteistyötä varten." : locale === 'ar' ? "توثيق واضح للتطوير المستقبلي والتعاون متعدد الوظائف." : "Clear documentation for future development and cross-functional collaboration.",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">folder</span>
@@ -510,7 +649,7 @@ export default function CollaborationClient() {
                           <div className="flex mb-2 items-center justify-between">
                             <div>
                               <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary bg-primary/10">
-                                Completed
+                                {content.completed}
                               </span>
                             </div>
                             <div className="text-right">

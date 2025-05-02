@@ -5,37 +5,70 @@ import { motion } from 'framer-motion';
 import BlogCard from './BlogCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
-
-// Blog post type
-export type BlogPost = {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  image: string;
-  readTime: string;
-  categories: string[];
-};
+import { Post } from '@/app/blog/posts/data';
 
 interface ClientBlogPageProps {
-  posts: BlogPost[];
+  posts: Post[];
+  locale: string;
 }
 
-export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
+export default function ClientBlogPage({ posts, locale: initialLocale }: ClientBlogPageProps) {
   const { locale, isRTL } = useLanguage();
   const { t } = useTranslations(locale);
   const [filter, setFilter] = useState<string | null>(null);
   
-  // Extract unique categories
+  // Extract unique categories from all posts
   const categories = Array.from(
-    new Set(posts.flatMap(post => post.categories))
+    new Set(posts.flatMap(post => post.tags))
   );
   
   // Filter posts by category
   const filteredPosts = filter
-    ? posts.filter(post => post.categories.includes(filter))
+    ? posts.filter(post => post.tags.includes(filter))
     : posts;
+  
+  // Translate category names
+  const translateCategory = (category: string): string => {
+    // You can add translations for categories here if needed
+    const categoryTranslations: Record<string, Record<string, string>> = {
+      'Artificial Intelligence': {
+        en: 'Artificial Intelligence',
+        fi: 'Tekoäly',
+        ar: 'الذكاء الاصطناعي'
+      },
+      'Technology': {
+        en: 'Technology',
+        fi: 'Teknologia',
+        ar: 'التكنولوجيا'
+      },
+      'Productivity': {
+        en: 'Productivity',
+        fi: 'Tuottavuus',
+        ar: 'الإنتاجية'
+      },
+      // Add more category translations as needed
+    };
+    
+    return categoryTranslations[category]?.[locale] || category;
+  };
+  
+  // Translate "All" button text
+  const getAllText = (): string => {
+    switch(locale) {
+      case 'fi': return 'Kaikki';
+      case 'ar': return 'الكل';
+      default: return 'All';
+    }
+  };
+  
+  // Translate "No posts found" text
+  const getNoPostsText = (): string => {
+    switch(locale) {
+      case 'fi': return 'Ei artikkeleita tässä kategoriassa.';
+      case 'ar': return 'لا توجد مقالات في هذه الفئة.';
+      default: return 'No posts found in this category.';
+    }
+  };
   
   return (
     <div className="min-h-screen pt-32 pb-16">
@@ -74,7 +107,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
                   : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
               }`}
             >
-              All
+              {getAllText()}
             </button>
             {categories.map((category) => (
               <button
@@ -86,7 +119,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
                     : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
                 }`}
               >
-                {category}
+                {translateCategory(category)}
               </button>
             ))}
           </motion.div>
@@ -107,29 +140,34 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           initial="hidden"
           animate="show"
         >
-          {filteredPosts.map((post, index) => (
-            <motion.div
-              key={post.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0 }
-              }}
-              transition={{ duration: 0.5 }}
-            >
-              <BlogCard 
-                post={{
-                  slug: post.slug,
-                  title: post.title,
-                  description: post.excerpt,
-                  image: post.image,
-                  publishedDate: post.date,
-                  readTime: post.readTime,
-                  tags: post.categories
+          {filteredPosts.map((post, index) => {
+            // Get the content for the current locale or fall back to English
+            const localeContent = post.content[locale as keyof typeof post.content] || post.content.en;
+            
+            return (
+              <motion.div
+                key={post.slug}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 }
                 }}
-                index={index}
-              />
-            </motion.div>
-          ))}
+                transition={{ duration: 0.5 }}
+              >
+                <BlogCard 
+                  post={{
+                    slug: post.slug,
+                    title: localeContent.title,
+                    description: localeContent.description,
+                    image: post.image,
+                    publishedDate: localeContent.publishedDate,
+                    readTime: localeContent.readTime,
+                    tags: post.tags
+                  }}
+                  index={index}
+                />
+              </motion.div>
+            );
+          })}
         </motion.div>
         
         {/* Empty state when no posts match filter */}
@@ -139,7 +177,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
             animate={{ opacity: 1 }}
             className="text-center py-12"
           >
-            <p className="text-xl opacity-60">No posts found in this category.</p>
+            <p className="text-xl opacity-60">{getNoPostsText()}</p>
           </motion.div>
         )}
       </div>
