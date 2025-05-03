@@ -499,65 +499,6 @@ export default function Home() {
                 
                 <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
                   <div className="flex-shrink-0">
-                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
-                      <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
-                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">FM</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-grow">
-                    <div className="mb-6">
-                      <p className="text-theme-text/80 text-lg leading-relaxed">
-                        Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I&apos;ve worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium text-primary text-xl">Fahad M</div>
-                        <div className="text-sm text-theme-text/60 mt-1">IT Contractor | Travelodge Hotels Limited</div>
-                      </div>
-                      <div className="hidden md:flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <motion.span 
-                            key={i}
-                            className="material-symbols text-amber-400"
-                            initial={{ opacity: 0.2, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.1 }}
-                          >
-                            star
-                          </motion.span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <motion.div 
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                />
-              </div>
-            </motion.div>
-            
-            {/* Testimonial 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ scale: 1.02 }}
-              className="theme-card relative overflow-hidden"
-            >
-              <div className="theme-card-content p-8 md:p-10">
-                <div className="absolute -top-16 -left-16 text-8xl opacity-20 text-primary">
-                  <Icon name="format_quote" className="" />
-                </div>
-                
-                <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
-                  <div className="flex-shrink-0">
                     <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-cyan-500/20 to-fuchsia-600/20 flex items-center justify-center p-1">
                       <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
                         <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-fuchsia-500">CB</span>
@@ -593,6 +534,65 @@ export default function Home() {
                 </div>
                 <motion.div 
                   className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600"
+                  initial={{ scaleX: 0, transformOrigin: "left" }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                />
+              </div>
+            </motion.div>
+            
+            {/* Testimonial 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02 }}
+              className="theme-card relative overflow-hidden"
+            >
+              <div className="theme-card-content p-8 md:p-10">
+                <div className="absolute -top-16 -left-16 text-8xl opacity-20 text-primary">
+                  <Icon name="format_quote" className="" />
+                </div>
+                
+                <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
+                  <div className="flex-shrink-0">
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
+                      <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
+                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">FM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex-grow">
+                    <div className="mb-6">
+                      <p className="text-theme-text/80 text-lg leading-relaxed">
+                        Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I&apos;ve worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-primary text-xl">Fahad M</div>
+                        <div className="text-sm text-theme-text/60 mt-1">IT Contractor | Travelodge Hotels Limited</div>
+                      </div>
+                      <div className="hidden md:flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <motion.span 
+                            key={i}
+                            className="material-symbols text-amber-400"
+                            initial={{ opacity: 0.2, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: i * 0.1 }}
+                          >
+                            star
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <motion.div 
+                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
                   initial={{ scaleX: 0, transformOrigin: "left" }}
                   whileInView={{ scaleX: 1 }}
                   transition={{ duration: 0.8 }}

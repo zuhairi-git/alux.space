@@ -1,0 +1,88 @@
+# Design System Theme Colors
+
+## Light Theme
+background: #ffffff
+foreground: #1f2937
+primary: #3b82f6
+primary-hover: #2563eb
+gradient-start: #3b82f6
+gradient-mid: #a855f7
+gradient-end: #3b82f6
+primary-glow: rgba(59, 130, 246, 0.2)
+
+# Card
+card-from-bg: rgba(253, 253, 253, 0.9)
+card-to-bg: rgba(243, 244, 246, 0.9)
+card-border: rgba(229, 231, 235, 0.5)
+card-border-hover: rgba(96, 165, 250, 0.5)
+card-shadow-color: rgba(168, 85, 247, 0.1)
+
+# Text
+text-primary: #1f2937
+text-secondary: #374151
+
+# Other
+bg-theme-light: #f9fafb
+
+---
+
+## Dark Theme
+background: #0a0a0a
+foreground: #ededed
+primary: #3b82f6
+primary-hover: #2563eb
+gradient-start: #3b82f6
+gradient-mid: #a855f7
+gradient-end: #3b82f6
+primary-glow: rgba(59, 130, 246, 0.2)
+
+# Card
+card-from-bg: rgba(31, 41, 55, 0.9)
+card-to-bg: rgba(17, 24, 39, 0.9)
+card-border: rgba(75, 85, 99, 0.5)
+card-border-hover: rgba(96, 165, 250, 0.5)
+card-shadow-color: rgba(59, 130, 246, 0.2)
+
+# Text
+text-primary: #ededed
+text-secondary: #d1d5db
+
+# Other
+bg-theme-dark: #0a0a0a
+
+---
+
+## Colorful Theme
+background: #050023
+foreground: #f0f8ff
+primary: #ff00cc
+primary-hover: #d100ff
+gradient-start: #00ffff
+gradient-mid: #ff00cc
+gradient-end: #3b82f6
+primary-glow: rgba(255, 0, 204, 0.3)
+
+# Card
+card-from-bg: rgba(20, 10, 50, 0.8)
+card-to-bg: rgba(10, 5, 30, 0.8)
+card-border: rgba(128, 0, 255, 0.3)
+card-border-hover: rgba(0, 255, 255, 0.6)
+card-shadow-color: rgba(255, 0, 204, 0.3)
+
+# Text
+text-primary: #f0f8ff
+text-accent: #ff00cc
+
+# Gradients & Effects
+cosmic-gradient: linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)
+heading-glow: text-shadow: 0 0 10px rgba(255, 0, 204, 0.3)
+
+# Other
+bg-theme-dark: #050023
+
+---
+
+# Notes
+- Gradients and glows are used extensively in the colorful theme for backgrounds and buttons.
+- Card, border, and shadow colors are theme-specific for visual consistency.
+- Use CSS variables for implementation as in globals.css.
