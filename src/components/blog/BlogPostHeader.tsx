@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
-import { useParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import AudioPlayer from '../ui/AudioPlayer';
+import { useTranslations } from '@/utils/translations';
 
 interface BlogPostHeaderProps {
   title: string;
@@ -31,12 +31,17 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   slug,
 }) => {
   const { theme } = useTheme();
-  const { locale } = useLanguage();
+  const { locale, isRTL } = useLanguage();
+  const { t } = useTranslations(locale);
   const isLight = theme === 'light';
 
-  // Helper function to add locale to paths
-  const localizedHref = (path: string) => {
-    return `/${locale}${path}`;
+  // Get localized strings for UI elements
+  const getBackToBlogText = (): string => {
+    switch(locale) {
+      case 'fi': return 'Takaisin blogiin';
+      case 'ar': return 'العودة إلى المدونة';
+      default: return 'Back to all articles';
+    }
   };
 
   // Map of blog posts with audio content
@@ -59,11 +64,11 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         animate={{ opacity: 1, x: 0 }}
         className="mb-8"
       >
-        <Link href={localizedHref("/blog")} className="inline-flex items-center text-primary hover:text-primary-hover transition-colors">
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <Link href={`/${locale}/blog`} className={`inline-flex items-center text-primary hover:text-primary-hover transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
+          <svg className={`w-5 h-5 ${isRTL ? 'ml-2 transform rotate-180' : 'mr-2'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to all articles
+          {getBackToBlogText()}
         </Link>
       </motion.div>
       

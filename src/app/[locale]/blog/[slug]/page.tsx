@@ -72,6 +72,7 @@ export default function BlogPost({
 function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], shareUrl: string, locale: string }) {
   // Get the content for the current locale or fall back to English
   const localeContent = post.content[locale as keyof typeof post.content] || post.content.en;
+  const isUsingFallback = !post.content[locale as keyof typeof post.content];
   
   // Get author biography description based on locale
   const getAuthorDescription = (locale: string) => {
@@ -96,6 +97,18 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
         return 'About the Author';
     }
   };
+  
+  // Get translation notice text if using fallback content
+  const getTranslationNoticeText = () => {
+    switch(locale) {
+      case 'fi':
+        return 'Tätä artikkelia ei ole vielä saatavilla suomeksi. Näytetään englanninkielinen versio.';
+      case 'ar':
+        return 'هذه المقالة غير متوفرة باللغة العربية بعد. يتم عرض النسخة الإنجليزية.';
+      default:
+        return '';
+    }
+  };
 
   return (
     <main className="min-h-screen bg-theme text-theme overflow-hidden">
@@ -106,6 +119,13 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
       <article className="pt-24 pb-16 relative">
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <BlogPostClient shareUrl={shareUrl} title={localeContent.title}>
+            {/* Translation notice - only show if using fallback */}
+            {isUsingFallback && locale !== 'en' && (
+              <div className="mb-8 p-4 rounded-lg bg-yellow-50 border border-yellow-100 text-yellow-800">
+                <p>{getTranslationNoticeText()}</p>
+              </div>
+            )}
+            
             <BlogPostHeader
               title={localeContent.title}
               description={localeContent.description}
@@ -114,6 +134,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
               author={post.author}
               tags={post.tags}
               image={post.image}
+              slug={post.slug}
             />
 
             <BlogContent content={localeContent.content} />
@@ -143,7 +164,6 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
           </BlogPostClient>
         </div>
       </article>
-
     </main>
   );
 }

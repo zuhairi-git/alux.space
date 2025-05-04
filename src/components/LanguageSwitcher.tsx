@@ -21,9 +21,30 @@ export default function LanguageSwitcher() {
     fi: '🇫🇮',
     ar: '🇸🇦',
   };
+  
+  // Default language names to avoid hydration mismatch
+  const defaultLanguageNames: Record<string, string> = {
+    en: 'English',
+    fi: 'Suomi',
+    ar: 'العربية',
+  };
+  
+  // State to track if we're on the client side
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    // Mark that we're on the client side
+    setIsClient(true);
+  }, []);
 
   // Get language names dynamically from translations
   const getLanguageName = (langCode: string) => {
+    // During SSR or initial render, use default language names to avoid hydration mismatch
+    if (!isClient) {
+      return defaultLanguageNames[langCode];
+    }
+    
+    // After hydration on client, we can safely use translations
     const key = `languageSwitcher.${langCode}`;
     return t(key);
   };
@@ -83,7 +104,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <Tooltip text={t('languageSwitcher.title')}>
+      <Tooltip text={isClient ? t('languageSwitcher.title') : "Language"}>
         <button
           onClick={toggleDropdown}
           className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} px-3 py-2 rounded-lg ${

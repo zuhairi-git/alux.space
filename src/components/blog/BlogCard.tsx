@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'next-share';
 import Card from '@/components/Card';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface BlogCardProps {
   post: {
@@ -24,8 +25,12 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
   const variant = index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary';
   const { theme } = useTheme();
+  const { locale } = useLanguage();
   const isLight = theme === 'light';
   const slideDirection = index % 2 === 0 ? 'left' : 'right';
+  
+  // Create localized blog post URL
+  const localizedPostUrl = `/${locale}/blog/${post.slug}`;
   
   return (
     <Card 
@@ -33,7 +38,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
       slideDirection={slideDirection}
       className="h-full w-full transform-gpu"
     >
-      <Link href={`/blog/${post.slug}`} className="block -m-8 rounded-xl overflow-hidden">
+      <Link href={localizedPostUrl} className="block -m-8 rounded-xl overflow-hidden">
         <div className="flex flex-col h-full">
           <div className="relative w-full h-64 overflow-hidden">
             <Image
@@ -47,7 +52,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             
             <div className="absolute top-4 right-4 z-10 flex gap-2">
               <TwitterShareButton 
-                url={`${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/blog/${post.slug}`}
+                url={`${process.env.NEXT_PUBLIC_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : '')}${localizedPostUrl}`}
                 title={post.title}
               >
                 <motion.div 
@@ -59,7 +64,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
                 </motion.div>
               </TwitterShareButton>
               <LinkedinShareButton 
-                url={`${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/blog/${post.slug}`}
+                url={`${process.env.NEXT_PUBLIC_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : '')}${localizedPostUrl}`}
                 title={post.title}
               >
                 <motion.div 
@@ -120,4 +125,4 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
   );
 };
 
-export default BlogCard; 
+export default BlogCard;
