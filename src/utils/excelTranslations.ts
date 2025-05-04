@@ -23,6 +23,23 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
 }
 
 /**
+ * Get a translation value by traversing the nested keys
+ */
+function getNestedTranslation(obj: any, keys: string[]): string | null {
+  let current = obj;
+  
+  for (const k of keys) {
+    if (current && typeof current === 'object' && k in current) {
+      current = current[k];
+    } else {
+      return null; // Key not found at some level
+    }
+  }
+  
+  return typeof current === 'string' ? current : null;
+}
+
+/**
  * Get a translation for a specific key and locale
  */
 export function getExcelTranslation(
@@ -33,37 +50,27 @@ export function getExcelTranslation(
 ): string {
   // Default to English if locale doesn't exist
   const safeLocale = translations[locale] ? locale : 'en';
-  
   const keys = key.split('.');
-  let currentObj: any = translations[safeLocale];
   
-  // Try to get translation from specified locale
-  for (const k of keys) {
-    if (currentObj && typeof currentObj === 'object' && k in currentObj) {
-      currentObj = currentObj[k];
-    } else {
-      // If translation is missing, try to get it from English
-      let enObj: any = translations.en;
-      for (const enK of keys) {
-        if (enObj && typeof enObj === 'object' && enK in enObj) {
-          enObj = enObj[enK];
-        } else {
-          console.warn(`Translation missing for key: ${key} in locale: ${locale}`);
-          return key; // Return key as last resort
-        }
-      }
-      currentObj = enObj;
-      break;
-    }
-  }
+  // First try in the specified locale
+  const translation = getNestedTranslation(translations[safeLocale], keys);
   
-  if (typeof currentObj !== 'string') {
-    return key;
+  // If not found and locale isn't English, try English as fallback
+  const fallback = 
+    !translation && safeLocale !== 'en' 
+      ? getNestedTranslation(translations.en, keys) 
+      : null;
+  
+  // Use translation, fallback, or key as last resort
+  let result = translation || fallback || key;
+  
+  // Only log warning when in development and only if neither translation nor fallback was found
+  if (!translation && !fallback && typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    console.warn(`Translation missing for key: ${key} in locale: ${locale}`);
   }
   
   // Handle placeholder replacements if provided
-  let result = currentObj;
-  if (placeholders) {
+  if (placeholders && typeof result === 'string') {
     Object.entries(placeholders).forEach(([placeholder, value]) => {
       result = result.replace(new RegExp(`{{${placeholder}}}`, 'g'), String(value));
     });

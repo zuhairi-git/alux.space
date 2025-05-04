@@ -1,37 +1,23 @@
 import { loadExcelTranslations, getExcelTranslation } from './excelTranslations';
+import generatedTranslations from '../translations/generatedTranslations.json';
 
 // Define a recursive interface for translations without circular references
 interface TranslationValue {
   [key: string]: string | TranslationValue;
 }
 
-// Translations will be loaded from Excel
-let translations: Record<string, TranslationValue> = {
-  en: {},
-  fi: {},
-  ar: {},
-};
-
-// Flag to track if translations are being loaded
-let isLoadingTranslations = false;
-
-// Flag to track if translations have been loaded
-let translationsLoaded = false;
+// Load translations directly from the JSON file for immediate availability
+let translations: Record<string, TranslationValue> = generatedTranslations as Record<string, TranslationValue>;
 
 /**
- * Initialize translations from Excel file
+ * Initialize translations by loading them from Excel
+ * This ensures the translations are up-to-date with the latest data
  */
 export async function initTranslations(): Promise<void> {
-  if (isLoadingTranslations || translationsLoaded) return;
-  
-  isLoadingTranslations = true;
   try {
     translations = await loadExcelTranslations();
-    translationsLoaded = true;
   } catch (error) {
-    console.error('Failed to load translations from Excel:', error);
-  } finally {
-    isLoadingTranslations = false;
+    console.error('Failed to initialize translations from Excel:', error);
   }
 }
 
@@ -39,17 +25,6 @@ export async function initTranslations(): Promise<void> {
  * Get a translation for a specific key and locale
  */
 export function getTranslation(locale: string, key: string, placeholders?: Record<string, string | number>): string {
-  // If translations haven't been loaded yet, try to load them synchronously
-  if (!translationsLoaded && typeof window !== 'undefined') {
-    // In browser context, trigger async loading if not already loading
-    if (!isLoadingTranslations) {
-      initTranslations(); // Don't await, just trigger the loading
-    }
-    
-    // Use fallback key while translations are loading
-    return key;
-  }
-  
   return getExcelTranslation(translations, locale, key, placeholders);
 }
 

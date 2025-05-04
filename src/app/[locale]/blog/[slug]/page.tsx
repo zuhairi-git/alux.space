@@ -11,6 +11,7 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
+import { notFound } from 'next/navigation';
 
 export function generateStaticParams() {
   const staticParams = [];
@@ -38,11 +39,28 @@ export async function generateMetadata({ params }: { params: { slug: string; loc
     };
   }
   
-  const localeContent = post.content[locale as keyof typeof post.content] || post.content.en;
+  // Safer content access
+  if (!post.content) {
+    return {
+      title: 'Post Content Not Available',
+      description: 'Content structure is missing',
+    };
+  }
+  
+  // Get content for current locale or fall back to English
+  const localeContent = post.content[locale as keyof typeof post.content] || post.content.en || {
+    title: 'Content Not Available',
+    description: 'This content is not available in your language.',
+  };
   
   return {
-    title: localeContent.title,
-    description: localeContent.description,
+    title: localeContent.title || 'Blog Post',
+    description: localeContent.description || '',
+    openGraph: {
+      title: localeContent.title,
+      description: localeContent.description,
+      images: [{ url: post.image }]
+    }
   };
 }
 
@@ -56,9 +74,35 @@ export default function BlogPost({
   const { slug, locale } = params;
   const post = posts.find((p) => p.slug === slug);
 
-  if (!post) return null;
+  if (!post) {
+    // Use Next.js notFound() for proper 404 handling
+    notFound();
+    // Fallback return in case notFound isn't called immediately
+    return null;
+  }
 
-  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/${locale}/blog/${slug}`;
+  // Validate content existence
+  if (!post.content) {
+    console.error(`Post ${slug} is missing content property`);
+    // Fallback to prevent rendering errors
+    return (
+      <ThemeProvider>
+        <LanguageProvider initialLocale={locale}>
+          <main className="min-h-screen bg-theme text-theme">
+            <Navigation />
+            <div className="pt-32 pb-16 container mx-auto px-4">
+              <h1 className="text-3xl font-bold mb-4">Content Not Available</h1>
+              <p>The content for this post is not properly structured.</p>
+            </div>
+          </main>
+        </LanguageProvider>
+      </ThemeProvider>
+    );
+  }
+
+  // Use a safer approach to get base URL
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const shareUrl = `${baseUrl}/${locale}/blog/${slug}`;
 
   return (
     <ThemeProvider>
@@ -70,9 +114,24 @@ export default function BlogPost({
 }
 
 function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], shareUrl: string, locale: string }) {
-  // Get the content for the current locale or fall back to English
-  const localeContent = post.content[locale as keyof typeof post.content] || post.content.en;
-  const isUsingFallback = !post.content[locale as keyof typeof post.content];
+  // Safely get the content for the current locale or fall back to English
+  const localeContent = post.content 
+    ? (post.content[locale as keyof typeof post.content] || post.content.en || {
+        title: 'Content Not Available',
+        description: 'This content is not available in your language.',
+        publishedDate: '',
+        content: 'Content not available.',
+        readTime: ''
+      })
+    : {
+        title: 'Content Not Available',
+        description: 'This content is not available.',
+        publishedDate: '',
+        content: 'Content not available.',
+        readTime: ''
+      };
+  
+  const isUsingFallback = post.content && !post.content[locale as keyof typeof post.content];
   
   // Get author biography description based on locale
   const getAuthorDescription = (locale: string) => {
@@ -110,6 +169,13 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
     }
   };
 
+  // Safely access properties with fallbacks
+  const title = localeContent.title || 'Blog Post';
+  const description = localeContent.description || '';
+  const publishedDate = localeContent.publishedDate || '';
+  const readTime = localeContent.readTime || '';
+  const content = localeContent.content || '';
+
   return (
     <main className="min-h-screen bg-theme text-theme overflow-hidden">
       <Navigation />
@@ -118,7 +184,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
 
       <article className="pt-24 pb-16 relative">
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
-          <BlogPostClient shareUrl={shareUrl} title={localeContent.title}>
+          <BlogPostClient shareUrl={shareUrl} title={title}>
             {/* Translation notice - only show if using fallback */}
             {isUsingFallback && locale !== 'en' && (
               <div className="mb-8 p-4 rounded-lg bg-yellow-50 border border-yellow-100 text-yellow-800">
@@ -127,17 +193,16 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
             )}
             
             <BlogPostHeader
-              title={localeContent.title}
-              description={localeContent.description}
-              publishedDate={localeContent.publishedDate}
-              readTime={localeContent.readTime}
+              title={title}
+              description={description}
+              publishedDate={publishedDate}
+              readTime={readTime}
               author={post.author}
               tags={post.tags}
               image={post.image}
-              slug={post.slug}
             />
 
-            <BlogContent content={localeContent.content} />
+            <BlogContent content={content} />
 
             <div className="mt-16">
               <h3 className="text-2xl font-bold mb-6 text-primary">{getAboutAuthorText(locale)}</h3>

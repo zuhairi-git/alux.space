@@ -17,7 +17,7 @@ interface BlogPostHeaderProps {
   author: string;
   tags: string[];
   image: string;
-  slug: string;
+  slug?: string; // Make slug optional
 }
 
 const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
@@ -53,7 +53,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   };
 
   // Check if this post has audio narration and if the audio file actually exists
-  const hasAudio = slug in audioMap;
+  const hasAudio = slug && slug in audioMap;
   const audioSrc = hasAudio ? audioMap[slug] : '';
 
   return (
