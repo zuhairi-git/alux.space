@@ -12,6 +12,11 @@ const Footer = () => {
   
   const currentYear = new Date().getFullYear();
   
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    return `/${locale}${path}`;
+  };
+  
   // Quick links for footer navigation
   const quickLinks = [
     { href: '/', textKey: 'nav.home' },
@@ -79,7 +84,7 @@ const Footer = () => {
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link 
-                    href={link.href} 
+                    href={localizedHref(link.href)} 
                     className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors"
                   >
                     {t(link.textKey)}
@@ -104,7 +109,7 @@ const Footer = () => {
               {portfolioLinks.map((link) => (
                 <li key={link.href}>
                   <Link 
-                    href={link.href} 
+                    href={localizedHref(link.href)} 
                     className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors"
                   >
                     {t(link.textKey)}

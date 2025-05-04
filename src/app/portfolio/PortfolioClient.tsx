@@ -46,6 +46,11 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const { locale, isRTL } = useLanguage();
   const { t } = useTranslations(locale);
   
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    return `/${locale}${path}`;
+  };
+  
   // Get localized text content
   const getTitle = (item: PortfolioItem): string => {
     return item.title[locale as keyof typeof item.title] || item.title.en;
@@ -144,7 +149,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
                 variant={index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary'}
                 slideDirection={index % 2 === 0 ? 'left' : 'right'}
               >
-                <Link href={`/${locale}${item.link}`} className="block -m-8">
+                <Link href={localizedHref(item.link)} className="block -m-8">
                   <div className={`flex flex-col ${isRTL ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
                     <div className="relative w-full md:w-1/2 h-64 md:h-96 overflow-hidden">
                       {item.photo ? (

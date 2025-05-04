@@ -11,7 +11,7 @@ import { useTranslations } from '@/utils/translations';
 import Tooltip from './ui/Tooltip';
 
 const portfolioDropdownItems = [
-  { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, // Added overview page
+  { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, 
   { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration', type: 'case' },
   { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking', type: 'case' },
 ];
@@ -30,6 +30,15 @@ const Navigation = () => {
   const { locale, isRTL } = useLanguage();
   const { t } = useTranslations(locale);
   
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    if (path.startsWith('#') || path.startsWith('/#')) {
+      // For hash links, add locale to the base path
+      return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
+    }
+    return `/${locale}${path}`;
+  };
+
   // Use different background colors based on theme
   const backgroundColor = useTransform(
     scrollY,
@@ -228,7 +237,7 @@ const Navigation = () => {
                   <Tooltip text={t('nav.home')}>
                     <div className="relative inline-flex items-center">
                       <Link 
-                        href="/" 
+                        href={localizedHref('/')} 
                         className={`p-2 rounded-lg ${getDropdownButtonClass()}`}
                       >
                         <span className="relative z-10 transition-colors">{t('nav.home')}</span>
@@ -262,7 +271,7 @@ const Navigation = () => {
                           {homeDropdownItems.map((item) => (
                             <Link
                               key={item.href}
-                              href={item.href}
+                              href={localizedHref(item.href)}
                               className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${getDropdownItemClass(false)} ${isRTL ? 'text-right' : 'text-left'}`}
                               onClick={() => setHomeOpen(false)}
                             >
@@ -322,7 +331,7 @@ const Navigation = () => {
                               )}
                               
                               <Link
-                                href={item.href}
+                                href={localizedHref(item.href)}
                                 className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
@@ -357,7 +366,7 @@ const Navigation = () => {
                 transition={{ delay: 0.5 }}
                 whileHover={{ y: -2 }}
               >
-                <Link href="/blog" className="relative group p-2 rounded-lg block">
+                <Link href={localizedHref('/blog')} className="relative group p-2 rounded-lg block">
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.blog')}</span>
                   <motion.span
                     className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
@@ -374,7 +383,7 @@ const Navigation = () => {
                 transition={{ delay: 0.6 }}
                 whileHover={{ y: -2 }}
               >
-                <Link href="/prompt" className="relative group p-2 rounded-lg block">
+                <Link href={localizedHref('/prompt')} className="relative group p-2 rounded-lg block">
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.prompts')}</span>
                   <motion.span
                     className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
@@ -449,7 +458,7 @@ const Navigation = () => {
                 <div ref={mobileHomeRef}>
                   <div className="flex items-center">
                     <Link
-                      href="/"
+                      href={localizedHref('/')}
                       onClick={() => setMenuOpen(false)}
                       className={`flex-grow flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                     >
@@ -480,7 +489,7 @@ const Navigation = () => {
                         {homeDropdownItems.map((item) => (
                           <Link
                             key={item.href}
-                            href={item.href}
+                            href={localizedHref(item.href)}
                             className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-6 py-2 text-sm ${getDropdownItemClass(false)} ${isRTL ? 'text-right' : 'text-left'}`}
                             onClick={() => {
                               setMobileHomeOpen(false);
@@ -504,7 +513,7 @@ const Navigation = () => {
                 <div ref={mobilePortfolioRef}>
                   <div className="flex items-center">
                     <Link
-                      href="/portfolio"
+                      href={localizedHref('/portfolio')}
                       onClick={() => setMenuOpen(false)}
                       className={`flex-grow flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                     >
@@ -539,7 +548,7 @@ const Navigation = () => {
                             )}
                             
                             <Link
-                              href={item.href}
+                              href={localizedHref(item.href)}
                               className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
@@ -573,7 +582,7 @@ const Navigation = () => {
               {/* Blog link - Mobile */}
               <li>
                 <Link
-                  href="/blog"
+                  href={localizedHref('/blog')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >
@@ -585,7 +594,7 @@ const Navigation = () => {
               {/* Prompts link - Mobile */}
               <li>
                 <Link
-                  href="/prompt"
+                  href={localizedHref('/prompt')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >

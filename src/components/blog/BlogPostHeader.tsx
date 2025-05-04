@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import { useParams } from 'next/navigation';
+import { useLanguage } from '@/context/LanguageContext';
 import AudioPlayer from '../ui/AudioPlayer';
 
 interface BlogPostHeaderProps {
@@ -16,6 +17,7 @@ interface BlogPostHeaderProps {
   author: string;
   tags: string[];
   image: string;
+  slug: string;
 }
 
 const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
@@ -26,14 +28,17 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   author,
   tags,
   image,
+  slug,
 }) => {
   const { theme } = useTheme();
-  const params = useParams();
-  const slug = params.slug as string;
-  
-  // Only light theme should be treated differently, colorful theme remains dark
+  const { locale } = useLanguage();
   const isLight = theme === 'light';
-  
+
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    return `/${locale}${path}`;
+  };
+
   // Map of blog posts with audio content
   const audioMap: Record<string, string> = {
     // Make sure the path matches exactly where the file is located
@@ -41,7 +46,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
     // Add more audio files here as they become available
     // 'other-post-slug': '/audio/blog/other-file.mp3',
   };
-  
+
   // Check if this post has audio narration and if the audio file actually exists
   const hasAudio = slug in audioMap;
   const audioSrc = hasAudio ? audioMap[slug] : '';
@@ -54,7 +59,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         animate={{ opacity: 1, x: 0 }}
         className="mb-8"
       >
-        <Link href="/blog" className="inline-flex items-center text-primary hover:text-primary-hover transition-colors">
+        <Link href={localizedHref("/blog")} className="inline-flex items-center text-primary hover:text-primary-hover transition-colors">
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -145,4 +150,4 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   );
 };
 
-export default BlogPostHeader; 
+export default BlogPostHeader;
