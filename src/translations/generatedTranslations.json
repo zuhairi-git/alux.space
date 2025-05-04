@@ -1,0 +1,284 @@
+{
+  "en": {
+    "blogPage": {
+      "description": "Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology.",
+      "title": "Blog & Insights"
+    },
+    "collaboration": {
+      "designProcess": {
+        "define": "Define",
+        "defineDesc": "Analyze insights to scope the challenge",
+        "deliver": "Deliver",
+        "deliverDesc": "Test with users and iterate",
+        "develop": "Develop",
+        "developDesc": "Create solution concepts",
+        "discover": "Discover",
+        "discoverDesc": "Research user needs and pain points",
+        "title": "Design Process"
+      },
+      "intro": "At the heart of the Collaboration Workflow Platform is a commitment to creativity, interconnectivity, and real-time teamwork. This platform is designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
+      "objectives": "Objectives",
+      "projectType": "Project Type",
+      "roles": "Roles",
+      "timeline": "Timeline",
+      "title": "Collaboration Workflow Platform",
+      "tools": "Tools"
+    },
+    "footer": {
+      "additionalInfo": {
+        "content": "Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in creating intuitive, accessible interfaces and leading cross-functional teams.",
+        "title": "Additional Information"
+      },
+      "contact": "Contact",
+      "copyright": "All rights reserved.",
+      "portfolio": "Portfolio",
+      "quickLinks": "Quick Links"
+    },
+    "home": {
+      "about": {
+        "intro": "Hey there! I'm Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about more than just aesthetics; it's about touching hearts and solving real problems.",
+        "quote": "Designing at the intersection of strategy and imagination — where vision becomes reality.",
+        "second": "Over the past decade, I've had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.",
+        "third": "When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better.",
+        "title": "Crafting Digital Dreams into Reality"
+      },
+      "hero": {
+        "cta": "View Portfolio",
+        "subtitle": "I'm a designer and developer who loves creating beautiful digital experiences.",
+        "title": "Hi, I'm Ali Al-Zuhairi"
+      },
+      "skills": {
+        "title": "Strengths & Skills"
+      },
+      "testimonials": {
+        "title": "Testimonials"
+      },
+      "workExperience": {
+        "current": "Current Position",
+        "earlier": "Earlier Positions",
+        "previous": "Previous Positions",
+        "title": "Work Experience"
+      }
+    },
+    "jobseeking": {
+      "intro": "A mobile app designed to streamline job searches—especially for local, part-time, and weekend work. Created to make job hunting faster, easier, and more efficient for people seeking additional income opportunities.",
+      "title": "Job Seeking Application"
+    },
+    "languageSwitcher": {
+      "ar": "Arabic",
+      "en": "English",
+      "fi": "Finnish",
+      "title": "Language"
+    },
+    "nav": {
+      "blog": "Blog",
+      "home": "Home",
+      "portfolio": "Portfolio",
+      "prompts": "Prompts"
+    },
+    "portfolio": {
+      "cases": {
+        "collaboration": "Collaboration & Leadership",
+        "jobseeking": "Career Development"
+      },
+      "overview": "All Projects"
+    },
+    "promptsPage": {
+      "subtitle": "A collection of prompts I've crafted for various creative AI tools",
+      "title": "Prompts Gallery"
+    },
+    "theme": {
+      "colorful": "Colorful Theme",
+      "dark": "Dark Theme",
+      "light": "Light Theme"
+    }
+  },
+  "fi": {
+    "blogPage": {
+      "description": "Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan.",
+      "title": "Blogi & Näkemykset"
+    },
+    "collaboration": {
+      "designProcess": {
+        "define": "Määrittele",
+        "defineDesc": "Analysoi oivallukset haasteen määrittelemiseksi",
+        "deliver": "Toimita",
+        "deliverDesc": "Testaa käyttäjillä ja iteroi",
+        "develop": "Kehitä",
+        "developDesc": "Luo ratkaisukonsepteja",
+        "discover": "Löydä",
+        "discoverDesc": "Tutkimus käyttäjien tarpeista ja kipupisteistä",
+        "title": "Suunnitteluprosessi"
+      },
+      "intro": "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteenliitettävyyteen ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan elävää yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+      "objectives": "Tavoitteet",
+      "projectType": "Projektityyppi",
+      "roles": "Roolit",
+      "timeline": "Aikataulu",
+      "title": "Yhteistyön työnkulkualusta",
+      "tools": "Työkalut"
+    },
+    "footer": {
+      "additionalInfo": {
+        "content": "",
+        "title": ""
+      },
+      "contact": "",
+      "copyright": "Kaikki oikeudet pidätetään.",
+      "portfolio": "",
+      "quickLinks": ""
+    },
+    "home": {
+      "about": {
+        "intro": "Hei siellä! Olen Ali, intohimoinen unelmoija ja luova sielu, joka uskoo suunnittelun voimaan muuttaa ideat merkityksellisiksi kokemuksiksi. Matkani useilla mantereilla – Damaskoksesta Helsinkiin – on opettanut minulle, että hyvä suunnittelu on muutakin kuin estetiikkaa; se koskettaa sydämiä ja ratkaisee todellisia ongelmia.",
+        "quote": "Jokaisella pikselillä on tarkoitus, jokainen vuorovaikutus kertoo tarinan.",
+        "second": "Viimeisen vuosikymmenen aikana olen saanut iloa lukuisten digitaalisten tuotteiden elävöittämisestä, aina Double Diamond -lähestymistavan ohjaamana mutta omalla luovalla tyylilläni värittämänä. Uskon, että teknologiasta voi tehdä inhimillisempää, saavutettavampaa ja ehkä jopa hieman taianomaista.",
+        "third": "Kun en suunnittele, löydät minut tutkimasta uusia teknologioita, jakamasta tietoa kollegoiden kanssa, tai yksinkertaisesti unelmoimasta seuraavasta suuresta ideasta, joka voisi tehdä jonkun digitaalisesta elämästä hieman parempaa.",
+        "title": "Digitaalisten unelmien muuttaminen todellisuudeksi"
+      },
+      "hero": {
+        "cta": "Näytä Portfolio",
+        "subtitle": "Olen suunnittelija ja kehittäjä, joka rakastaa kauniiden digitaalisten kokemusten luomista.",
+        "title": "Hei, olen Ali Al-Zuhairi"
+      },
+      "skills": {
+        "title": "Vahvuudet & Taidot"
+      },
+      "testimonials": {
+        "title": "Suositukset"
+      },
+      "workExperience": {
+        "current": "Nykyinen tehtävä",
+        "earlier": "Varhaisemmat tehtävät",
+        "previous": "Aikaisemmat tehtävät",
+        "title": "Työkokemus"
+      }
+    },
+    "jobseeking": {
+      "intro": "Mobiilisovellus, joka on suunniteltu virtaviivaistamaan työnhakua – erityisesti paikallisiin, osa-aikaisiin ja viikonlopputöihin. Luotu tekemään työnhausta nopeampaa, helpompaa ja tehokkaampaa ihmisille, jotka etsivät lisätuloja.",
+      "title": "Työnhakusovellus"
+    },
+    "languageSwitcher": {
+      "ar": "Arabia",
+      "en": "Englanti",
+      "fi": "Suomi",
+      "title": "Kieli"
+    },
+    "nav": {
+      "blog": "Blogi",
+      "home": "Etusivu",
+      "portfolio": "Portfolio",
+      "prompts": "Kehotteet"
+    },
+    "portfolio": {
+      "cases": {
+        "collaboration": "Yhteistyö & Johtajuus",
+        "jobseeking": "Urakehitys"
+      },
+      "overview": "Kaikki Projektit"
+    },
+    "promptsPage": {
+      "subtitle": "Kokoelma kehotteitani erilaisille luoville tekoälytyökaluille",
+      "title": "Kehotekokoelma"
+    },
+    "theme": {
+      "colorful": "Värikäs teema",
+      "dark": "Tumma teema",
+      "light": "Vaalea teema"
+    }
+  },
+  "ar": {
+    "blogPage": {
+      "description": "أفكار وتعلم ووجهات نظر حول قيادة التصميم، وإدارة المنتجات، وتقاطع الإبداع والتكنولوجيا.",
+      "title": "المدونة والرؤى"
+    },
+    "collaboration": {
+      "designProcess": {
+        "define": "حدد",
+        "defineDesc": "تحليل الرؤى لتحديد نطاق التحدي",
+        "deliver": "سلّم",
+        "deliverDesc": "اختبار مع المستخدمين والتكرار",
+        "develop": "طور",
+        "developDesc": "إنشاء مفاهيم الحلول",
+        "discover": "اكتشف",
+        "discoverDesc": "بحث احتياجات المستخدمين ونقاط الألم",
+        "title": "عملية التصميم"
+      },
+      "intro": "في قلب منصة سير عمل التعاون يوجد التزام بالإبداع والترابط والعمل الجماعي في الوقت الفعلي. تم تصميم هذه المنصة لتبسيط التعاون المباشر، وتحسين التواصل، ومساعدة الفرق على تسليم المحتوى بكفاءة أكبر عبر الأجهزة والمناطق الزمنية والمواقع.",
+      "objectives": "الأهداف",
+      "projectType": "نوع المشروع",
+      "roles": "الأدوار",
+      "timeline": "الجدول الزمني",
+      "title": "منصة سير عمل التعاون",
+      "tools": "الأدوات"
+    },
+    "footer": {
+      "additionalInfo": {
+        "content": "",
+        "title": ""
+      },
+      "contact": "",
+      "copyright": "جميع الحقوق محفوظة.",
+      "portfolio": "",
+      "quickLinks": ""
+    },
+    "home": {
+      "about": {
+        "intro": "مرحباً! أنا علي، حالم شغوف وروح مبدعة يؤمن بقوة التصميم في تحويل الأفكار إلى تجارب هادفة. مع رحلتي عبر القارات - من دمشق إلى هلسنكي - تعلمت أن التصميم الرائع يتجاوز الجماليات؛ إنه يتعلق بلمس القلوب وحل المشكلات الحقيقية.",
+        "quote": "لكل بكسل غرض، ولكل تفاعل قصة.",
+        "second": "على مدار العقد الماضي، استمتعت ببث الحياة في عدد لا يحصى من المنتجات الرقمية، دائمًا بتوجيه من نهج Double Diamond ولكن بلمسة إبداعية خاصة بي. أؤمن بجعل التكنولوجيا أكثر إنسانية وسهولة في الوصول، وربما حتى سحرية قليلاً.",
+        "third": "عندما لا أقوم بالتصميم، ستجدني أستكشف تقنيات جديدة، أشارك المعرفة مع زملائي المصممين، أو ببساطة أحلم بالفكرة التالية الكبيرة التي يمكن أن تجعل حياة شخص ما الرقمية أفضل قليلاً.",
+        "title": "تحويل الأحلام الرقمية إلى حقيقة"
+      },
+      "hero": {
+        "cta": "عرض المشاريع",
+        "subtitle": "أنا مصمم ومطور أحب إنشاء تجارب رقمية جميلة.",
+        "title": "مرحباً، أنا علي الزهيري"
+      },
+      "skills": {
+        "title": "المهارات والقدرات"
+      },
+      "testimonials": {
+        "title": "الشهادات"
+      },
+      "workExperience": {
+        "current": "المنصب الحالي",
+        "earlier": "المناصب المبكرة",
+        "previous": "المناصب السابقة",
+        "title": "الخبرة المهنية"
+      }
+    },
+    "jobseeking": {
+      "intro": "تطبيق للهاتف المحمول مصمم لتبسيط عمليات البحث عن الوظائف - خاصة للعمل المحلي، بدوام جزئي، وفي عطلة نهاية الأسبوع. تم إنشاؤه لجعل البحث عن وظيفة أسرع وأسهل وأكثر كفاءة للأشخاص الذين يبحثون عن فرص دخل إضافية.",
+      "title": "تطبيق البحث عن وظائف"
+    },
+    "languageSwitcher": {
+      "ar": "العربية",
+      "en": "الإنجليزية",
+      "fi": "الفنلندية",
+      "title": "اللغة"
+    },
+    "nav": {
+      "blog": "المدونة",
+      "home": "الرئيسية",
+      "portfolio": "المشاريع",
+      "prompts": "الأوامر"
+    },
+    "portfolio": {
+      "cases": {
+        "collaboration": "التعاون والقيادة",
+        "jobseeking": "التطور المهني"
+      },
+      "overview": "جميع المشاريع"
+    },
+    "promptsPage": {
+      "subtitle": "مجموعة من الأوامر التي صممتها لمختلف أدوات الذكاء الاصطناعي الإبداعية",
+      "title": "معرض الأوامر"
+    },
+    "theme": {
+      "colorful": "نمط ملون",
+      "dark": "نمط داكن",
+      "light": "نمط فاتح"
+    }
+  }
+}

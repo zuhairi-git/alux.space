@@ -1,58 +1,56 @@
-import enTranslations from '../locales/en/common.json';
-import fiTranslations from '../locales/fi/common.json';
-import arTranslations from '../locales/ar/common.json';
+import { loadExcelTranslations, getExcelTranslation } from './excelTranslations';
 
 // Define a recursive interface for translations without circular references
 interface TranslationValue {
   [key: string]: string | TranslationValue;
 }
 
-const translations: Record<string, TranslationValue> = {
-  en: enTranslations as unknown as TranslationValue,
-  fi: fiTranslations as unknown as TranslationValue,
-  ar: arTranslations as unknown as TranslationValue,
+// Translations will be loaded from Excel
+let translations: Record<string, TranslationValue> = {
+  en: {},
+  fi: {},
+  ar: {},
 };
 
-export function getTranslation(locale: string, key: string, placeholders?: Record<string, string | number>): string {
-  // Default to English if locale doesn't exist
-  const safeLocale = translations[locale] ? locale : 'en';
+// Flag to track if translations are being loaded
+let isLoadingTranslations = false;
+
+// Flag to track if translations have been loaded
+let translationsLoaded = false;
+
+/**
+ * Initialize translations from Excel file
+ */
+export async function initTranslations(): Promise<void> {
+  if (isLoadingTranslations || translationsLoaded) return;
   
-  const keys = key.split('.');
-  let currentObj: unknown = translations[safeLocale];
-  
-  // Try to get translation from specified locale
-  for (const k of keys) {
-    if (currentObj && typeof currentObj === 'object' && k in currentObj) {
-      currentObj = (currentObj as Record<string, unknown>)[k];
-    } else {
-      // If translation is missing, try to get it from English
-      let enObj: unknown = translations.en;
-      for (const enK of keys) {
-        if (enObj && typeof enObj === 'object' && enK in enObj) {
-          enObj = (enObj as Record<string, unknown>)[enK];
-        } else {
-          console.warn(`Translation missing for key: ${key} in locale: ${locale}`);
-          return key; // Return key as last resort
-        }
-      }
-      currentObj = enObj;
-      break;
-    }
+  isLoadingTranslations = true;
+  try {
+    translations = await loadExcelTranslations();
+    translationsLoaded = true;
+  } catch (error) {
+    console.error('Failed to load translations from Excel:', error);
+  } finally {
+    isLoadingTranslations = false;
   }
-  
-  if (typeof currentObj !== 'string') {
+}
+
+/**
+ * Get a translation for a specific key and locale
+ */
+export function getTranslation(locale: string, key: string, placeholders?: Record<string, string | number>): string {
+  // If translations haven't been loaded yet, try to load them synchronously
+  if (!translationsLoaded && typeof window !== 'undefined') {
+    // In browser context, trigger async loading if not already loading
+    if (!isLoadingTranslations) {
+      initTranslations(); // Don't await, just trigger the loading
+    }
+    
+    // Use fallback key while translations are loading
     return key;
   }
   
-  // Handle placeholder replacements if provided
-  let result = currentObj;
-  if (placeholders) {
-    Object.entries(placeholders).forEach(([placeholder, value]) => {
-      result = result.replace(new RegExp(`{{${placeholder}}}`, 'g'), String(value));
-    });
-  }
-  
-  return result;
+  return getExcelTranslation(translations, locale, key, placeholders);
 }
 
 type DateFormatOptions = Intl.DateTimeFormatOptions;
