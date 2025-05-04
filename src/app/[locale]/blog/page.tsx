@@ -13,7 +13,7 @@ export function generateStaticParams() {
 }
 
 // Ensure absolute URL for images
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 const ogImage = `${baseUrl}/images/blog/blog-cover.jpg`;
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   // Ensure absolute URL for images
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
   const ogImage = post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`;
   const url = `${baseUrl}/blog/${resolvedParams.slug}`;
 

@@ -13,7 +13,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cvlanes.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
   
   const localizedMetadata = {
     en: {
