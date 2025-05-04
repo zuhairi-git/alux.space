@@ -28,7 +28,7 @@ const nextConfig = {
   },
   // Using standard server-side rendering for now to get internationalization working
   // We can switch to 'export' mode once we resolve the static generation issues
-  // output: 'export',
+  output: 'export',
   typescript: {
     ignoreBuildErrors: true,
   },

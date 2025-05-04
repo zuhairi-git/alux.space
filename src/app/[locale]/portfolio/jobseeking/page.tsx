@@ -4,6 +4,11 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
+// Required for static site generation with internationalized routes
+export function generateStaticParams() {
+  return i18n.locales.map(locale => ({ locale }));
+}
+
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';

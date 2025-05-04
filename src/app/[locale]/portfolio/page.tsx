@@ -5,6 +5,11 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
+// Required for static site generation with internationalized routes
+export function generateStaticParams() {
+  return i18n.locales.map(locale => ({ locale }));
+}
+
 interface PortfolioItem {
   title: {
     en: string;
