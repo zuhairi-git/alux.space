@@ -401,7 +401,7 @@ const Navigation = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mr-4"
+              className="mr-4 ml-4"
             >
               <LanguageSwitcher />
             </motion.div>
