@@ -28,7 +28,7 @@ export const posts: Post[] = [
          en: {
             title: 'How to Get Notifications on iOS with Personal Focus On',
             description: 'Learn how to effectively manage and customize notifications on iOS devices while maintaining focus on what matters most to you.',
-            publishedDate: 'April 20, 2024',
+            publishedDate: 'March 23, 2023',
             content: `
 In today's digital age, managing notifications effectively is crucial for maintaining productivity and mental well-being. iOS provides powerful tools to help you stay focused while ensuring you don't miss important updates. Let's explore how to optimize your notification settings on iOS devices.
 
@@ -111,7 +111,7 @@ iOS continues to evolve its notification system, offering more ways to maintain 
          fi: {
             title: 'iOS-ilmoitusten hallinta Henkilökohtaisella Fokus-tilalla',
             description: 'Opi hallitsemaan ja mukauttamaan ilmoituksia iOS-laitteilla säilyttäen samalla keskittymisen sinulle tärkeisiin asioihin.',
-            publishedDate: '20. huhtikuuta 2024',
+            publishedDate: '23. maaliskuuta 2023',
             content: `
 Nykyajan digitaalisessa maailmassa ilmoitusten tehokas hallinta on ratkaisevan tärkeää tuottavuuden ja henkisen hyvinvoinnin ylläpitämiseksi. iOS tarjoaa tehokkaat työkalut, jotka auttavat sinua pysymään keskittyneenä varmistaen samalla, ettet menetä tärkeitä päivityksiä. Tutkitaan, kuinka optimoida ilmoitusasetukset iOS-laitteissa.
 
@@ -194,7 +194,7 @@ iOS kehittää jatkuvasti ilmoitusjärjestelmäänsä tarjoten enemmän tapoja y
          ar: {
             title: 'كيفية الحصول على إشعارات iOS مع تشغيل وضع التركيز الشخصي',
             description: 'تعلم كيفية إدارة وتخصيص الإشعارات على أجهزة iOS بشكل فعال مع الحفاظ على التركيز على ما يهمك أكثر.',
-            publishedDate: '20 أبريل 2024',
+            publishedDate: '23 مارس 2023',
             content: `
 في العصر الرقمي اليوم، تعتبر إدارة الإشعارات بفعالية أمرًا ضروريًا للحفاظ على الإنتاجية والصحة النفسية. يوفر نظام iOS أدوات قوية تساعدك على البقاء متركزًا مع ضمان عدم تفويت التحديثات المهمة. دعنا نستكشف كيفية تحسين إعدادات الإشعارات على أجهزة iOS.
 
@@ -285,7 +285,7 @@ iOS kehittää jatkuvasti ilmoitusjärjestelmäänsä tarjoten enemmän tapoja y
          en: {
             title: 'The Circle of Daily Rhythm: Mastering Your Productive Flow',
             description: 'Discover how to harness your natural daily rhythms to maximize productivity and creativity in both professional and personal pursuits.',
-            publishedDate: 'April 16, 2025',
+            publishedDate: 'March 20, 2023',
             content: `
 In the fast-paced world of product design and development, understanding and leveraging our natural rhythms isn't just helpful—it's essential. As a Product Owner and Design Leader, I've discovered that aligning our work patterns with our body's natural cycles can dramatically improve both productivity and creative output.
 
@@ -355,7 +355,7 @@ The future of work isn't about pushing harder—it's about working smarter. By u
          fi: {
             title: 'Päivittäisen rytmin kehä: Tuottavuuden virran hallinta',
             description: 'Opi hyödyntämään luonnollisia päivittäisiä rytmejäsi maksimoidaksesi tuottavuuden ja luovuuden sekä ammatillisissa että henkilökohtaisissa pyrkimyksissäsi.',
-            publishedDate: '16. huhtikuuta 2025',
+            publishedDate: '20. maaliskuuta 2023',
             content: `
 Tuotesuunnittelun ja -kehityksen nopeatempoisessa maailmassa luonnollisten rytmiemme ymmärtäminen ja hyödyntäminen ei ole vain hyödyllistä - se on välttämätöntä. Tuoteomistajana ja suunnittelujohtajana olen havainnut, että työskentely kehon luonnollisten syklien mukaisesti voi parantaa merkittävästi sekä tuottavuutta että luovaa tuotantoa.
 
@@ -425,7 +425,7 @@ Työn tulevaisuus ei ole kovemmassa yrittämisessä - se on älykkäämmin työs
          ar: {
             title: 'دائرة الإيقاع اليومي: إتقان تدفق إنتاجيتك',
             description: 'اكتشف كيفية تسخير إيقاعاتك اليومية الطبيعية لزيادة الإنتاجية والإبداع في كل من المساعي المهنية والشخصية.',
-            publishedDate: '16 أبريل 2025',
+            publishedDate: '20 مارس 2023',
             content: `
 في عالم تصميم المنتجات والتطوير سريع الوتيرة، فإن فهم إيقاعاتنا الطبيعية والاستفادة منها ليس مفيدًا فحسب، بل هو ضروري. كمالك للمنتج وقائد في التصميم، اكتشفت أن مواءمة أنماط عملنا مع دورات الجسم الطبيعية يمكن أن يحسن بشكل كبير كلاً من الإنتاجية والإنتاج الإبداعي.
 
@@ -503,7 +503,7 @@ Työn tulevaisuus ei ole kovemmassa yrittämisessä - se on älykkäämmin työs
          en: {
             title: 'Embracing the Era of AI: Humanity\'s Journey to Unparalleled Sophistication',
             description: 'Explore the fascinating journey of human evolution and how our primitive instincts still influence modern behavior and decision-making.',
-            publishedDate: '2023-06-20',
+            publishedDate: 'June 20, 2023',
             content: `
 Embracing the Era of AI: Humanity's Journey to Unparalleled Sophistication
 
@@ -598,7 +598,7 @@ Finally, I want to express my gratitude for your patience and for taking the tim
          en: {
             title: 'Claude AI: The Next Generation of Artificial Intelligence',
             description: 'Discover how Claude AI is revolutionizing the field of artificial intelligence with its advanced capabilities and human-like understanding.',
-            publishedDate: 'April 20, 2024',
+            publishedDate: 'June 28, 2023',
             content: `
 Artificial Intelligence has reached new heights with the development of Claude AI, a cutting-edge language model that's changing how we interact with technology.
 
@@ -683,7 +683,7 @@ The future of Claude AI and similar technologies holds immense potential:
          fi: {
             title: 'Claude AI: Tekoälyn seuraava sukupolvi',
             description: 'Tutustu siihen, miten Claude AI mullistaa tekoälyn kentän edistyneillä kyvyillään ja ihmismäisellä ymmärryksellään.',
-            publishedDate: '20. huhtikuuta 2024',
+            publishedDate: '28. kesäkuuta 2023',
             content: `
 Tekoäly on saavuttanut uusia korkeuksia Claude AI:n kehityksen myötä. Claude AI on huipputason kielimalli, joka muuttaa tapaamme olla vuorovaikutuksessa teknologian kanssa.
 
@@ -768,7 +768,7 @@ Claude AI:n ja vastaavien teknologioiden tulevaisuudessa on valtava potentiaali:
          ar: {
             title: 'كلود للذكاء الاصطناعي: الجيل القادم من الذكاء الاصطناعي',
             description: 'اكتشف كيف يحدث كلود للذكاء الاصطناعي ثورة في مجال الذكاء الاصطناعي بقدراته المتقدمة وفهمه البشري.',
-            publishedDate: '20 أبريل 2024',
+            publishedDate: '28 يونيو 2023',
             content: `
 وصل الذكاء الاصطناعي إلى آفاق جديدة مع تطوير كلود للذكاء الاصطناعي. يعد Claude AI نموذجًا لغويًا متقدمًا يغير طريقة تفاعلنا مع التكنولوجيا.
 
