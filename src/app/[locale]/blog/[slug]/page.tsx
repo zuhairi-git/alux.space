@@ -200,6 +200,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
               author={post.author}
               tags={post.tags}
               image={post.image}
+              slug={post.slug}  // Add slug for audio mapping
             />
 
             <BlogContent content={content} />
