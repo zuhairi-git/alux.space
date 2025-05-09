@@ -109,7 +109,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
           }`}
         />
         
-        <blockquote className={`text-xl md:text-2xl leading-relaxed mb-4 relative z-10 ${arabicFontClass}`}>
+        <blockquote className={`text-left text-xl md:text-2xl leading-relaxed mb-4 relative z-10 ${arabicFontClass}`}>
           {quote}
         </blockquote>
         

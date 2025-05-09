@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
+import QuoteBlock from '@/components/ui/QuoteBlock';
 
 export default function PromptPage() {
   return (
@@ -12,12 +13,11 @@ export default function PromptPage() {
             A collection of development tasks and their implementation status.
           </p>
           <div className="max-w-3xl mx-auto mb-8">
-            <blockquote className="border-l-4 border-yellow-400 bg-yellow-50 p-4 italic text-gray-700 rounded-lg">
-              <h3 className="font-semibold text-gray-900 mb-2">Note to Readers</h3>
-              <p className="m-0">
-                Creating powerful prompts might seem simple on the surface—but it’s not. Behind every effective result are countless iterations, experiments, and a lot of patience. This process is as much about refining your thinking as it is about refining the words themselves.
-              </p>
-            </blockquote>
+            <QuoteBlock
+              quote="Creating powerful prompts might seem simple on the surface—but it’s not. Behind every effective result are countless iterations, experiments, and a lot of patience. This process is as much about refining your thinking as it is about refining the words themselves."
+              author="Ali Al-Zuhairi"
+              variant="default"
+            />
           </div>
         </header>
         
