@@ -207,17 +207,17 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`relative w-full backdrop-blur-md rounded-2xl p-6 mb-8 overflow-hidden ${
+      className={`relative w-full  rounded-2xl p-6 mb-8 overflow-hidden ${
         isLight 
-          ? 'bg-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.05)]' 
-          : 'bg-gray-900/80 shadow-[0_8px_30px_rgba(0,0,0,0.15)]'
-      } border border-opacity-10 ${isLight ? 'border-purple-200' : 'border-purple-800'}`}
+          ? 'bg-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.06)]' 
+          : 'bg-gray-900/80 shadow-[0_8px_30px_rgba(0,0,0,0.3)]'
+      } border ${isLight ? 'border-gray-600' : 'border-gray-800'}`}
       aria-label="Audio player"
     >
       {/* Abstract background shapes */}
-      <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 blur-3xl"></div>
-        <div className="absolute bottom-10 -right-20 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 blur-3xl"></div>
+      <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 blur-3xl"></div>
+        <div className="absolute bottom-10 -right-20 w-48 h-48 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 blur-3xl"></div>
       </div>
       
       {/* ERROR MESSAGE */}
@@ -232,24 +232,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
 
       {/* Title and abstract shapes */}
       <div className="mb-4 relative">
-        {/* Abstract decorative shapes */}
-        <div className="absolute top-0 right-0 -mt-4 mr-2 opacity-60 dark:opacity-60">
-          <svg width="50" height="50" viewBox="0 0 100 100" className="text-purple-500">
-            <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="10 5" />
-            <circle cx="60" cy="40" r="10" fill="currentColor" opacity="0.5" />
-          </svg>
-        </div>
         
         <h3 className="font-medium text-purple-500">
-          <span className="block text-sm uppercase tracking-wider mb-1 opacity-70 text-gray500 dark:text-gray-300">Now Playing</span>
+          <span className="block text-sm uppercase tracking-wider mb-1 opacity-100 text-gray500 dark:text-gray-300">Now Playing</span>
           <span className="block relative">
             <span className="relative z-10">{title || 'Untitled Audio'}</span>
-            <motion.span 
-              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: '100%' }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            />
           </span>
         </h3>
       </div>
@@ -425,7 +412,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
           <div className="text-sm flex items-center bg-gradient-to-r from-purple-500/10 to-pink-500/10 backdrop-blur-sm px-3 py-1 rounded-full">
             <span className="tabular-nums text-purple-500">{formatTime(currentTime)}</span>
             <span className="mx-1 opacity-50">/</span>
-            <span className="tabular-nums text-gray-500 dark:text-gray-300 opacity-70">{formatTime(duration)}</span>
+            <span className="tabular-nums text-purple-400">{formatTime(duration)}</span>
           </div>
         </div>
       </div>
