@@ -11,13 +11,46 @@ export default function PromptPage() {
           <p className="text-xl max-w-3xl mx-auto">
             A collection of development tasks and their implementation status.
           </p>
+          <p className="text-sm max-w-3xl mx-auto">
+            This may seems easy, but it's not.
+          </p>
         </header>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <PromptCard 
             status="Done" 
             bugsFixed={3}
-            content={`Create a comprehensive modernization plan for my React website using the latest Tailwind CSS practices and modern web design principles. The website consists of: 1. Introduction/Home Page: Implement a visually striking hero section with smooth animations, dynamic typography, gradient effects, and modern UI components. Include interactive elements, micro-interactions, and a responsive navbar with glass-morphism effects. 2. Blog Page: Design a modern blog layout with card-based content presentation, skeleton loading states, infinite scroll functionality, category filtering, and reading time estimates. Implement dark mode toggle and responsive grid layouts using Tailwind CSS Grid and Flexbox. 3. Portfolio Case Studies (2 entries): Create an immersive case study layout with parallax scrolling effects, interactive image galleries, progress indicators, and animated transitions between sections. Include hover effects, modern typography hierarchies, and clear call-to-action elements. Global Improvements: - Implement latest Tailwind CSS features including JIT compiler - Add smooth page transitions and loading states - Ensure responsive design across all device sizes - Include modern accessibility features - Optimize performance with lazy loading - Use modern color schemes and gradients - Implement container queries and fluid typography - Add subtle micro-animations and hover effects - Ensure consistent spacing using Tailwind's spacing system - Include modern scrolling experiences and animations Please. Follow this documentation of the tailwind: https://tailwindcss.com/plus/ui-blocks/documentation`}
+            content={`
+Create a comprehensive modernization plan for my React website using the latest Tailwind CSS practices and modern web design principles.
+
+The website consists of:
+1. Introduction/Home Page:
+   - Visually striking hero section with smooth animations, dynamic typography, gradient effects, and modern UI components.
+   - Interactive elements, micro-interactions, and a responsive navbar with glass-morphism effects.
+
+2. Blog Page:
+   - Modern blog layout with card-based content presentation, skeleton loading states, infinite scroll functionality, category filtering, and reading time estimates.
+   - Dark mode toggle and responsive grid layouts using Tailwind CSS Grid and Flexbox.
+
+3. Portfolio Case Studies (2 entries):
+   - Immersive case study layout with parallax scrolling effects, interactive image galleries, progress indicators, and animated transitions between sections.
+   - Hover effects, modern typography hierarchies, and clear call-to-action elements.
+
+Global Improvements:
+- Implement latest Tailwind CSS features including JIT compiler
+- Add smooth page transitions and loading states
+- Ensure responsive design across all device sizes
+- Include modern accessibility features
+- Optimize performance with lazy loading
+- Use modern color schemes and gradients
+- Implement container queries and fluid typography
+- Add subtle micro-animations and hover effects
+- Ensure consistent spacing using Tailwind's spacing system
+- Include modern scrolling experiences and animations
+
+Please follow the Tailwind UI Blocks documentation:
+https://tailwindcss.com/plus/ui-blocks/documentation
+            `}
           />
 
           <PromptCard 
