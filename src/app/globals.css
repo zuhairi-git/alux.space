@@ -209,7 +209,7 @@ body {
 }
 
 .theme-card-content {
-  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  @apply relative backdrop-blur-sm transition-all duration-300 overflow-hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
   z-index: 1;

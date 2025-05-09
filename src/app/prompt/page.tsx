@@ -263,7 +263,7 @@ type PromptCardProps = {
 
 function PromptCard({ status, content, bugsFixed = 'None' }: PromptCardProps) {
   return (
-    <div className="theme-card-content p-6 relative z-10 transition-all duration-300 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 h-full">
+    <div className="theme-card-content relative z-10 transition-all duration-300 p-6 overflow-hidden shadow-md hover:shadow-lg h-full !rounded-lg">
       <div className="flex flex-col mb-4">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">
@@ -291,4 +291,4 @@ function PromptCard({ status, content, bugsFixed = 'None' }: PromptCardProps) {
       </div>
     </div>
   );
-} 
+}
