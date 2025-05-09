@@ -22,7 +22,7 @@ export default function PromptPage() {
 
           <PromptCard 
             status="Done" 
-            bugsFixed={5}
+            bugsFixed={12}
             content={`Task Breakdown:
 • Use tailwind best practices #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
 • Navigation Bar
@@ -68,15 +68,15 @@ Replace my portfolio content with the following from the below sources:
           />
 
           <PromptCard 
-            status="Done" 
-            bugsFixed={2}
+            status="Failed" 
+            bugsFixed={20}
             content={`Unsplash.com integration
 Integrate with unsplash and use proper images for my portfolio
 Use best integration practices from #fetch https://unsplash.com/documentation`}
           />
 
           <PromptCard 
-            status="Done" 
+            status="Failed" 
             bugsFixed={1}
             content={`Hero Section (Based on Adham Dannaway's Site):
 • Fetch the hero effect from  #fetch https://www.adhamdannaway.com.
@@ -85,7 +85,7 @@ Use best integration practices from #fetch https://unsplash.com/documentation`}
 
           <PromptCard 
             status="Done" 
-            bugsFixed={4}
+            bugsFixed={14}
             content={`Create a stunning and futuristic hero section that feels both unique and exceptional. Use animated Google Material Icons in the background to visually express the transformation of design into code. Take inspiration from Apple Vision Pro—craft something that feels ahead of its time.`}
           />
 
@@ -132,7 +132,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
 
           <PromptCard 
             status="Done" 
-            bugsFixed={5}
+            bugsFixed={59}
             content={`Website global Theme Switcher (Light/Dark/Colorful):
 // Use tailwind best practices @https://tailwindcss.com/plus/ui-blocks/documentation
 // consider compatibility with the current version of next.js 
@@ -145,7 +145,8 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
           />
 
           <PromptCard 
-            status="Done" 
+            status="Done"
+            bugsFixed={5}
             content={`Mobile-Friendly:
 // Ensure that the website is responsive and works smoothly on all devices (desktops, tablets, and mobile).
 // Ensure the mobile navigation bar has a proper background color for better visibility.
@@ -157,6 +158,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
 
           <PromptCard 
             status="Done" 
+            bugsFixed={17}
             content={`Light Theme Styling Instructions:
 • Background Gradient:
 Apply a soft, light gradient background that transitions from near-white to soft gray:
@@ -180,7 +182,8 @@ color: #1f2937;
           />
 
           <PromptCard 
-            status="Done" 
+            status="Done"
+            bugsFixed={9}
             content={`UI Prompt Instructions:
 1. Tooltips Behavior:
 Tooltips must be aware of screen boundaries. They should dynamically reposition to remain fully visible within the viewport.
@@ -191,7 +194,8 @@ In the light version, the navigation/header bar should use darker text and icons
           />
 
           <PromptCard 
-            status="Done" 
+            status="Done"
+            bugsFixed={39}
             content={`Blog Section Prompt Instructions:
 1. Blog Cards Layout & Shadow:
   ○ Blog cards are misaligned vertically; ensure they are evenly aligned across the row.
@@ -207,7 +211,8 @@ In the light version, the navigation/header bar should use darker text and icons
           />
 
           <PromptCard 
-            status="Done" 
+            status="Done"
+            bugsFixed={9}
             content={`Header & Blog Post Prompt Instructions:
 1. Header Interaction – Portfolio Menu:
   ○ The hover effect that triggers the portfolio menu should only activate when hovering directly over the portfolio area in the header — not when hovering elsewhere.
@@ -220,7 +225,8 @@ images/me/ali.png
           />
 
           <PromptCard 
-            status="Done" 
+            status="Done"
+            bugsFixed={11}
             content={`Colorful Theme Prompt Instructions:
 • Apply a vibrant and modern color palette that feels fresh, bold, and visually engaging.
 • Get inspired by futuristic, dream-like, or cosmic aesthetics — think gradients, glow, and unexpected color blends.
@@ -239,7 +245,8 @@ Blog Page & Header UI – Prompt Instructions:
           />
 
           <PromptCard 
-            status="Done" 
+            status="Done"
+            bugsFixed={15}
             content={`Process Sections – Card Style Prompt Instructions:
 • Update the sections: Research Insights, User Personas, Product Requirements, User Testing, and Delivery Phase to use a new flexible card style, consistent with the design used in the Design Process section.
 • Maintain the existing animations—they should remain unchanged.
