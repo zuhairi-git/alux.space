@@ -11,9 +11,14 @@ export default function PromptPage() {
           <p className="text-xl max-w-3xl mx-auto">
             A collection of development tasks and their implementation status.
           </p>
-          <p className="text-sm max-w-3xl mx-auto">
-            This may seems easy, but it's not.
-          </p>
+          <div className="max-w-3xl mx-auto mb-8">
+            <blockquote className="border-l-4 border-yellow-400 bg-yellow-50 p-4 italic text-gray-700 rounded-lg">
+              <h3 className="font-semibold text-gray-900 mb-2">Note to Readers</h3>
+              <p className="m-0">
+                Creating powerful prompts might seem simple on the surface—but it’s not. Behind every effective result are countless iterations, experiments, and a lot of patience. This process is as much about refining your thinking as it is about refining the words themselves.
+              </p>
+            </blockquote>
+          </div>
         </header>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
