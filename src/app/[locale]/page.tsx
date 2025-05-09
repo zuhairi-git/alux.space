@@ -44,7 +44,7 @@ export default function LocalizedHomePage({ params }: { params: { locale: string
   return (
     <>
       {/* Test language navigation links */}
-      <div className="fixed top-24 right-4 z-50 bg-black bg-opacity-50 p-2 rounded">
+      <div className="hidden fixed top-24 right-4 z-50 bg-black bg-opacity-50 p-2 rounded">
         <div className="flex flex-col gap-2">
           {i18n.locales.map((lang) => (
             <Link 
