@@ -22,6 +22,8 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
 
   // Arabic font class for quotes
   const arabicFontClass = isArabic ? 'font-arabic' : 'font-serif';
+  // Highlight 'thinking' with underline decoration
+  const quoteHtml = quote.replace(/\bthinking\b/gi, '<span class="underline decoration-4 decoration-yellow-400/100">$&</span>');
 
   // For minimal style, just render the text with minimal formatting
   if (determinedVariant === 'minimal') {
@@ -33,9 +35,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
         transition={{ duration: 0.5 }}
         className="my-8 max-w-4xl mx-auto relative"
       >
-        <blockquote className={`text-xl md:text-2xl leading-relaxed italic text-theme ${arabicFontClass}`}>
-          {quote}
-        </blockquote>
+        <blockquote className={`text-xl md:text-2xl leading-relaxed italic text-theme ${arabicFontClass}`} dangerouslySetInnerHTML={{ __html: quoteHtml }} />
         
         {author && (
           <footer className="text-right mt-2">
@@ -61,9 +61,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
             ? 'border-primary/30 bg-gray-50' 
             : 'border-primary/50 bg-gray-900/30'
         } rounded-r-md`}>
-          <blockquote className={`text-xl md:text-2xl leading-relaxed mb-3 text-theme ${arabicFontClass}`}>
-            {quote}
-          </blockquote>
+          <blockquote className={`text-xl md:text-2xl leading-relaxed mb-3 text-theme ${arabicFontClass}`} dangerouslySetInnerHTML={{ __html: quoteHtml }} />
           
           {author && (
             <footer className="text-right">
@@ -109,9 +107,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
           }`}
         />
         
-        <blockquote className={`text-left text-xl md:text-2xl leading-relaxed mb-4 relative z-10 ${arabicFontClass}`}>
-          {quote}
-        </blockquote>
+        <blockquote className={`text-left text-xl md:text-2xl leading-relaxed mb-4 relative z-10 ${arabicFontClass}`} dangerouslySetInnerHTML={{ __html: quoteHtml }} />
         
         {author && (
           <footer className="text-right">
