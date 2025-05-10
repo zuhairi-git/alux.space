@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
+import { i18n } from '@/i18n';
 
 const Footer = () => {
   const { locale, isRTL } = useLanguage();
@@ -14,6 +15,10 @@ const Footer = () => {
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
     return `/${locale}${path}`;
   };
   

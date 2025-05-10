@@ -9,6 +9,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
 import Tooltip from './ui/Tooltip';
+import { i18n } from '@/i18n';
 
 const portfolioDropdownItems = [
   { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, 
@@ -32,10 +33,16 @@ const Navigation = () => {
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
+    
     if (path.startsWith('#') || path.startsWith('/#')) {
       // For hash links, add locale to the base path
       return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
     }
+    
     return `/${locale}${path}`;
   };
 

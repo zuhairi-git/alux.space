@@ -8,6 +8,7 @@ import Navigation from '@/components/Navigation';
 import Card from '@/components/Card';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
+import { i18n } from '@/i18n';
 
 interface PortfolioItem {
   title: {
@@ -48,6 +49,10 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
     return `/${locale}${path}`;
   };
   
