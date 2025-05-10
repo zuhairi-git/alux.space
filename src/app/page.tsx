@@ -475,18 +475,17 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </motion.section>
-      
-      {/* About Section */}
+        </div>      </motion.section>
+        {/* About Section with Digital Dreams anchor */}
       <motion.section
         ref={aboutRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         className="py-20 relative overflow-hidden"
-        id="about"
+        id="digital-dreams"
       >
+        <div id="about"></div>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <motion.h2
@@ -539,14 +538,13 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
-      
-      {/* Skills Section */}
+        {/* Skills Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="relative overflow-hidden pb-20"
-        id="skills"
+        id="strengths-skills"
       >
         <div 
           className="absolute inset-0 pointer-events-none opacity-20"
@@ -574,14 +572,13 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </motion.section>
-
-      {/* Testimonials Section */}
+      </motion.section>      {/* Testimonials Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="py-24 bg-black/5 relative overflow-hidden"
+        id="testimonials"
       >
         {/* Background decorative elements */}
         <div className="absolute inset-0 pointer-events-none">
