@@ -331,7 +331,7 @@ function PromptCard({ status, content, bugsFixed = 'None' }: PromptCardProps) {
         </div>
       </div>
       
-      <div className="whitespace-pre-wrap text-gray-600 text-sm">
+      <div className="whitespace-pre-wrap text-sm">
         {content}
       </div>
     </div>
