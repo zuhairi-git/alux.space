@@ -416,6 +416,7 @@ const Navigation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
                 whileHover={{ y: -2 }}
+                className='hidden'
               >
                 <Link href={localizedHref('/text-direction-demo')} className="relative group p-2 rounded-lg block">
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>
