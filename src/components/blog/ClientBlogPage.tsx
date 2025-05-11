@@ -46,6 +46,56 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
         fi: 'Tuottavuus',
         ar: 'الإنتاجية'
       },
+      'Future': {
+        'en': 'Future',
+        'fi': 'Tulevaisuus',
+        'ar': 'المستقبل'
+      },
+      'Ethics': {
+        'en': 'Ethics',
+        'fi': 'Etiikka',
+        'ar': 'الأخلاقيات'
+      },
+      'Education': {
+        'en': 'Education',
+        'fi': 'Koulutus',
+        'ar': 'التعليم'
+      },
+      'Innovation': {
+        'en': 'Innovation',
+        'fi': 'Innovaatio',
+        'ar': 'الابتكار'
+      },
+      'iOS': {
+        'en': 'iOS',
+        'fi': 'iOS',
+        'ar': 'iOS'
+      },
+      'Mobile': {
+        'en': 'Mobile',
+        'fi': 'Mobiili',
+        'ar': 'الجوال'
+      },
+      'Focus': {
+        'en': 'Focus',
+        'fi': 'Keskittyminen',
+        'ar': 'التركيز'
+      },
+      'Design Process': {
+        'en': 'Design Process',
+        'fi': 'Suunnitteluprosessi',
+        'ar': 'عملية التصميم'
+      },
+      'Work-Life Balance': {
+        'en': 'Work-Life Balance',
+        'fi': 'Työelämän ja vapaa-ajan tasapaino',
+        'ar': 'التوازن بين العمل والحياة'
+      },
+      'Creativity': {
+        'en': 'Creativity',
+        'fi': 'Luovuus',
+        'ar': 'الإبداع'
+      }
       // Add more category translations as needed
     };
     
