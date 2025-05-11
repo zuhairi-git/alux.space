@@ -1,0 +1,93 @@
+/* 
+ * RTL.css - Additional styles for RTL support
+ * Include this file in your application for comprehensive RTL language support
+ * Especially for Arabic language
+ */
+
+/* Basic RTL overrides */
+[dir="rtl"] body {
+  text-align: right;
+}
+
+/* Fix for scroll behavior in RTL mode */
+[dir="rtl"] * {
+  scrollbar-width: thin;
+}
+
+/* Override common classes that might not be caught by the global RTL rules */
+[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+/* Ensure space-x works in RTL mode */
+[dir="rtl"] .space-x-1 > * + * {
+  margin-right: 0.25rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-2 > * + * {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-3 > * + * {
+  margin-right: 0.75rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-4 > * + * {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-6 > * + * {
+  margin-right: 1.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-8 > * + * {
+  margin-right: 2rem;
+  margin-left: 0;
+}
+
+/* Ensure flex direction is correctly applied in RTL */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* For bidirectional text with numbers in RTL languages */
+.bidi-numbers {
+  unicode-bidi: isolate;
+}
+
+/* Helper classes for RTL-specific fixes */
+.rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Fix for RTL buttons with icons */
+[dir="rtl"] button > .material-symbols:first-child {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+/* Proper handling of blockquotes in RTL */
+[dir="rtl"] blockquote {
+  border-left: none;
+  border-right: 4px solid;
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+/* Fix for input fields in RTL */
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="search"],
+[dir="rtl"] textarea {
+  text-align: right;
+  direction: rtl;
+}

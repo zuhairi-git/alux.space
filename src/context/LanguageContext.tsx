@@ -72,15 +72,22 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
       console.error('Failed to initialize translations:', err);
     });
   }, [pathname]);
-
   useEffect(() => {
     // Update RTL state when locale changes
     setIsRTL(locale === 'ar');
     
     // Apply RTL attribute to document for proper text direction
     if (typeof document !== 'undefined') {
+      // Set the dir attribute for RTL/LTR text direction
       document.documentElement.setAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
       document.documentElement.setAttribute('lang', locale);
+      
+      // Add or remove a CSS class to help with specific RTL styling
+      if (locale === 'ar') {
+        document.documentElement.classList.add('rtl-mode');
+      } else {
+        document.documentElement.classList.remove('rtl-mode');
+      }
     }
 
     // Save language preference to localStorage

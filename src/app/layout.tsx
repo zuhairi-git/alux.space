@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Roboto, Tajawal } from "next/font/google";
 import "./globals.css";
+import "./rtl.css"; // Import additional RTL styles
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";
@@ -96,6 +97,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // We don't know the locale yet at this level, but the LanguageProvider will handle setting the dir attribute
   return (
     <html suppressHydrationWarning>
       <head>

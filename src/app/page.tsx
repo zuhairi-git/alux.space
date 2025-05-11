@@ -7,6 +7,7 @@ import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
 import Hero from '@/components/hero/Hero';
 import QuoteBlock from '@/components/ui/QuoteBlock';
+import RTLText from '@/components/ui/RTLText';
 import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -630,8 +631,7 @@ export default function Home() {
                   <div className={`absolute -top-16 ${locale === 'ar' ? '-right-16' : '-left-16'} text-8xl opacity-20 text-primary`}>
                     <Icon name="format_quote" className="" />
                   </div>
-                  
-                  <div className={`flex flex-col md:flex-row gap-8 items-start relative z-10 ${locale === 'ar' ? 'md:flex-row-reverse text-right' : ''}`}>
+                    <div className={`flex flex-col md:flex-row gap-8 items-start relative z-10 ${locale === 'ar' ? 'md:flex-row-reverse text-right rtl' : ''}`}>
                     <div className="flex-shrink-0">
                       <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
                         <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
@@ -644,15 +644,15 @@ export default function Home() {
                     <div className="flex-grow">
                       <div className="mb-6">
                         <p className="text-theme-text/80 text-lg leading-relaxed">
-                          {testimonial.text}
+                          <RTLText>{testimonial.text}</RTLText>
                         </p>
                       </div>
-                      <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse justify-start' : 'justify-between'}`}>
+                      <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse justify-end' : 'justify-between'}`}>
                         <div>
-                          <div className="font-medium text-primary text-xl">{testimonial.name}</div>
-                          <div className="text-sm text-theme-text/60 mt-1">{testimonial.position}</div>
+                          <div className="font-medium text-primary text-xl"><RTLText>{testimonial.name}</RTLText></div>
+                          <div className="text-sm text-theme-text/60 mt-1"><RTLText>{testimonial.position}</RTLText></div>
                         </div>
-                        <div className={`hidden md:flex gap-1 ${locale === 'ar' ? 'ml-auto mr-8' : ''}`}>
+                        <div className={`hidden md:flex gap-1 ${locale === 'ar' ? 'mr-auto ml-8' : ''}`}>
                           {[...Array(5)].map((_, i) => (
                             <motion.span 
                               key={i}

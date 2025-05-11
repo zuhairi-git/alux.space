@@ -10,6 +10,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
 import Tooltip from './ui/Tooltip';
 import { i18n } from '@/i18n';
+import RTLText from './ui/RTLText';
+import { getFlexDirectionClass, getSpacingClass } from '@/utils/rtl';
 
 const portfolioDropdownItems = [
   { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, 
@@ -225,13 +227,12 @@ const Navigation = () => {
             </span>
           </button>
 
-          {/* Desktop nav */}
-          <nav className={`hidden md:flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+          {/* Desktop nav */}          <nav className={`hidden md:flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={`flex items-center ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-8 px-4`}
+              className={`flex items-center ${getFlexDirectionClass(locale)} ${getSpacingClass(locale, 8)} px-4`}
             >
               {/* Home item with dropdown */}              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
@@ -240,13 +241,14 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
                 className="relative"
               >                <div className="relative" ref={homeDropdownRef}>
-                  <Tooltip text={t('nav.home')}>
-                    <button
+                  <Tooltip text={t('nav.home')}>                    <button
                       onClick={toggleHomeDropdown}
-                      className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} p-2 rounded-lg ${getDropdownButtonClass()}`}
+                      className={`flex items-center ${getFlexDirectionClass(locale)} p-2 rounded-lg ${getDropdownButtonClass()}`}
                       aria-expanded={homeOpen}
                       aria-haspopup="true"
-                    >                      <span className="relative z-10 transition-colors">{t('nav.home')}</span>
+                    >                      <span className="relative z-10 transition-colors">
+                        <RTLText>{t('nav.home')}</RTLText>
+                      </span>
                       <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'} order-${isRTL ? 'first' : 'last'}`}>
                         {homeOpen ? 'expand_less' : 'expand_more'}
                       </span>
@@ -401,6 +403,27 @@ const Navigation = () => {
                   <motion.span
                     className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
                     layoutId="underline-prompts"
+                  />
+                  <motion.div
+                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                </Link>
+              </motion.li>
+              
+              {/* Text Direction Demo - Only visible during development */}
+              <motion.li 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link href={localizedHref('/text-direction-demo')} className="relative group p-2 rounded-lg block">
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>
+                    <RTLText>RTL Demo</RTLText>
+                  </span>
+                  <motion.span
+                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
+                    layoutId="underline-rtl-demo"
                   />
                   <motion.div
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
