@@ -13,7 +13,7 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 rtl:space-x-0 rtl:space-x-reverse">
       <Tooltip text="Light Theme">
         <motion.button
           whileHover={{ scale: 1.1 }}
@@ -26,7 +26,7 @@ export default function ThemeSwitch() {
           }`}
           aria-label="Switch to light theme"
         >
-          <span className="material-symbols text-xl">light_mode</span>
+          <span className="material-symbols material-symbols-rounded text-xl rtl:inline-block">light_mode</span>
           {theme === 'light' && (
             <motion.span
               layoutId="theme-indicator"
@@ -51,7 +51,7 @@ export default function ThemeSwitch() {
           }`}
           aria-label="Switch to dark theme"
         >
-          <span className="material-symbols text-xl">dark_mode</span>
+          <span className="material-symbols material-symbols-rounded text-xl rtl:inline-block">dark_mode</span>
           {theme === 'dark' && (
             <motion.span
               layoutId="theme-indicator"
@@ -76,7 +76,7 @@ export default function ThemeSwitch() {
           }`}
           aria-label="Switch to colorful theme"
         >
-          <span className="material-symbols text-xl">palette</span>
+          <span className="material-symbols material-symbols-rounded text-xl rtl:inline-block">palette</span>
           {theme === 'colorful' && (
             <motion.span
               layoutId="theme-indicator"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Roboto, Tajawal } from "next/font/google";
 import "./globals.css";
 import "./rtl.css"; // Import additional RTL styles
+import "./rtl-fixes.css"; // Import RTL-specific fixes
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";

@@ -365,7 +365,7 @@ export default function Home() {
               work_history
             </motion.span>
             <motion.h3 
-              className="text-3xl font-bold"
+              className="text-center text-3xl font-bold"
               animate={{ 
                 textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(168, 85, 247, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
               }}
@@ -385,7 +385,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-4 text-theme-text/70 max-w-2xl mx-auto"
+              className="text-center mb-4mt-4 text-theme-text/70 max-w-2xl mx-auto"
             >
               {workContent.intro}
             </motion.p>
@@ -602,7 +602,7 @@ export default function Home() {
               format_quote
             </motion.span>
             <motion.h3 
-              className="text-3xl md:text-4xl font-bold"
+              className="text-3xl text-center md:text-4xl font-bold"
               animate={{ 
                 textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
               }}
