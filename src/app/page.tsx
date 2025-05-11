@@ -626,13 +626,16 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 whileHover={{ scale: 1.02 }}
                 className="theme-card relative overflow-hidden"
-              >
-                <div className="theme-card-content p-8 md:p-10">
+              >                <div className="theme-card-content p-8 md:p-10">
+                  {/* Quote icon positioned on the correct side based on language direction */}
                   <div className={`absolute -top-16 ${locale === 'ar' ? '-right-16' : '-left-16'} text-8xl opacity-20 text-primary`}>
                     <Icon name="format_quote" className="" />
                   </div>
-                    <div className={`flex flex-col md:flex-row gap-8 items-start relative z-10 ${locale === 'ar' ? 'md:flex-row-reverse text-right rtl' : ''}`}>
-                    <div className="flex-shrink-0">
+                  
+                  {/* Main testimonial content with proper RTL support */}
+                  <div className={`flex flex-col ${locale === 'ar' ? 'md:flex-row-reverse rtl' : 'md:flex-row'} gap-8 items-start relative z-10`}>
+                    {/* Avatar - positioned on the right for Arabic, left for other languages */}
+                    <div className={`flex-shrink-0 ${locale === 'ar' ? 'md:mr-0 md:ml-8' : 'md:ml-0 md:mr-8'}`}>
                       <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
                         <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
                           <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">
@@ -641,14 +644,19 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
+                    
+                    {/* Testimonial text content */}
                     <div className="flex-grow">
+                      {/* Testimonial text with proper text alignment */}
                       <div className="mb-6">
-                        <p className="text-theme-text/80 text-lg leading-relaxed">
+                        <p className={`text-theme-text/80 text-lg leading-relaxed ${locale === 'ar' ? 'text-right' : ''}`}>
                           <RTLText>{testimonial.text}</RTLText>
                         </p>
                       </div>
+                      
+                      {/* Author information with proper alignment */}
                       <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse justify-end' : 'justify-between'}`}>
-                        <div>
+                        <div className={locale === 'ar' ? 'text-right' : ''}>
                           <div className="font-medium text-primary text-xl"><RTLText>{testimonial.name}</RTLText></div>
                           <div className="text-sm text-theme-text/60 mt-1"><RTLText>{testimonial.position}</RTLText></div>
                         </div>
