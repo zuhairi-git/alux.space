@@ -652,19 +652,6 @@ export default function Home() {
                           <div className="font-medium text-primary text-xl"><RTLText>{testimonial.name}</RTLText></div>
                           <div className="text-sm text-theme-text/60 mt-1"><RTLText>{testimonial.position}</RTLText></div>
                         </div>
-                        <div className={`hidden md:flex gap-1 ${locale === 'ar' ? 'mr-auto ml-8' : ''}`}>
-                          {[...Array(5)].map((_, i) => (
-                            <motion.span 
-                              key={i}
-                              className="material-symbols text-amber-400"
-                              initial={{ opacity: 0.2, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: i * 0.1 }}
-                            >
-                              star
-                            </motion.span>
-                          ))}
-                        </div>
                       </div>
                     </div>
                   </div>
