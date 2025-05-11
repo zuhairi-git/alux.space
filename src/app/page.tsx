@@ -390,9 +390,8 @@ export default function Home() {
               {workContent.intro}
             </motion.p>
           </div>
-          
-          {/* Timeline container with vertical line */}
-          <div className="relative max-w-4xl mx-auto">
+            {/* Timeline container with vertical line */}
+          <div className="relative max-w-5xl mx-auto">
             {/* Central timeline line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent"></div>
             
@@ -403,7 +402,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`relative ${index < workContent.positions.length - 1 ? 'mb-16' : ''}`}
+                className={`relative ${index < workContent.positions.length - 1 ? 'mb-20' : ''}`}
               >
                 {/* Timeline dot */}
                 <div className={`absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full ${
@@ -413,23 +412,21 @@ export default function Home() {
                       ? 'bg-gradient-to-r from-gray-500 to-blue-500/50 shadow-lg shadow-gray-500/20'
                       : 'bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20'
                 } z-10`}></div>
-                
-                {/* Date badge */}
-                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-12 ${
+                  {/* Date badge */}
+                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-14 ${
                   index === 0 
-                    ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20' 
+                    ? 'bg-gradient-to-r from-purple-500/30 to-blue-500/30 shadow-md shadow-purple-500/10' 
                     : index === workContent.positions.length - 1
-                      ? 'bg-gradient-to-r from-gray-500/20 to-blue-500/10'
-                      : 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20'
-                } text-primary px-4 py-1 rounded-full text-sm font-medium`}>
+                      ? 'bg-gradient-to-r from-gray-500/30 to-blue-500/20 shadow-md shadow-gray-500/10'
+                      : 'bg-gradient-to-r from-blue-500/30 to-cyan-500/30 shadow-md shadow-blue-500/10'
+                } backdrop-blur-sm text-primary px-5 py-2 rounded-full text-sm font-semibold border border-primary/10`}>
                   {position.period}
                 </div>
                 
-                {/* Card positioned alternating */}
-                <div className={`${
+                {/* Card positioned alternating */}                <div className={`${
                   index % 2 === 0 
-                    ? 'ml-auto mr-0 md:ml-[52%] md:w-[48%]' 
-                    : 'mr-auto ml-0 md:mr-[52%] md:w-[48%]'
+                    ? 'ml-auto mr-0 md:ml-[50%] md:w-[50%]' 
+                    : 'mr-auto ml-0 md:mr-[50%] md:w-[50%]'
                 }`}>
                   <Card>
                     <CardContent 
@@ -456,7 +453,14 @@ export default function Home() {
                           position.positions.map((subPosition, subIndex) => (
                             <div key={subIndex}>
                               <h5 className="text-lg opacity-80 mb-1">{subPosition.title}</h5>
-                              <p className="opacity-60">{subPosition.company} {subPosition.period ? `(${subPosition.period})` : ''}</p>
+                              <div className="flex flex-wrap items-center gap-2">
+                                <p className="opacity-70">{subPosition.company}</p>
+                                {subPosition.period && (
+                                  <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
+                                    {subPosition.period}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           ))
                         ) : (

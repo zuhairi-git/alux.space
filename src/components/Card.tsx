@@ -91,8 +91,7 @@ const Card: React.FC<CardProps> = ({
       {/* Glow effect layer - only render for non-colorful themes */}
       {!isColorful && <div className={getGlowClassName()} />}
       
-      {/* Main content container */}
-      <div className="theme-card-content p-8 overflow-hidden h-full">
+      {/* Main content container */}      <div className="theme-card-content p-10 overflow-hidden h-full">
         {children}
       </div>
     </motion.div>

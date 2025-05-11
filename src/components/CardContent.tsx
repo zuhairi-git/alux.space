@@ -33,11 +33,10 @@ const CardContent: React.FC<CardContentProps> = ({
         </span>
       )}
       
-      <div className="flex-1">
-        <div className="flex flex-col md:flex-row justify-between mb-4">
+      <div className="flex-1">        <div className="flex flex-col md:flex-row justify-between mb-4">
           <h4 className={titleClassName}>{title}</h4>
           {date && (
-            <span className="text-theme opacity-70 flex items-center gap-2">
+            <span className="text-theme opacity-80 flex items-center gap-1 bg-primary/10 px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">
               <span className="material-symbols text-sm">schedule</span>
               {date}
             </span>
