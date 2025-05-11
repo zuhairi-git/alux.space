@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '../i18n';
 import { initTranslations } from '@/utils/translations';
+import { initRTLDebug } from '@/utils/rtlDebug';
 
 type LanguageContextType = {
   locale: string;
@@ -61,33 +62,48 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
   };
   
   const [locale, setLocaleState] = useState(defaultLanguage);
-  const [isRTL, setIsRTL] = useState(locale === 'ar');
-
-  useEffect(() => {
+  const [isRTL, setIsRTL] = useState(locale === 'ar');  useEffect(() => {
     const detectedLocale = detectLocale();
     setLocaleState(detectedLocale);
     
     // Initialize translations from Excel when component mounts
+    // or when the pathname changes (which might indicate a language change)
     initTranslations().catch(err => {
       console.error('Failed to initialize translations:', err);
     });
   }, [pathname]);
+  
   useEffect(() => {
     // Update RTL state when locale changes
-    setIsRTL(locale === 'ar');
+    const rtlLocale = locale === 'ar';
+    setIsRTL(rtlLocale);
     
     // Apply RTL attribute to document for proper text direction
     if (typeof document !== 'undefined') {
       // Set the dir attribute for RTL/LTR text direction
-      document.documentElement.setAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
+      document.documentElement.setAttribute('dir', rtlLocale ? 'rtl' : 'ltr');
       document.documentElement.setAttribute('lang', locale);
       
-      // Add or remove a CSS class to help with specific RTL styling
-      if (locale === 'ar') {
+      // Add or remove CSS classes to help with specific RTL styling
+      if (rtlLocale) {
         document.documentElement.classList.add('rtl-mode');
+        document.documentElement.classList.remove('ltr-mode');
+        // Set the font for Arabic
+        document.documentElement.classList.add('font-tajawal');
+        document.documentElement.classList.remove('font-poppins');
       } else {
         document.documentElement.classList.remove('rtl-mode');
-      }
+        document.documentElement.classList.add('ltr-mode');
+        // Set the font for non-Arabic
+        document.documentElement.classList.remove('font-tajawal');
+        document.documentElement.classList.add('font-poppins');
+      }      // Force update on layout to fix any RTL rendering issues
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 0);
+      
+      // Initialize RTL debugging if URL parameter is present
+      initRTLDebug();
     }
 
     // Save language preference to localStorage

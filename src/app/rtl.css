@@ -23,10 +23,85 @@
   text-align: left !important;
 }
 
+/* Improve RTL text alignment specificity */
+[dir="rtl"] .rtl\:text-right {
+  text-align: right !important;
+}
+
+[dir="rtl"] .rtl\:text-left {
+  text-align: left !important;
+}
+
 /* Ensure space-x works in RTL mode */
-[dir="rtl"] .space-x-1 > * + * {
-  margin-right: 0.25rem;
-  margin-left: 0;
+[dir="rtl"] .space-x-1 > * + *,
+[dir="rtl"] .space-x-2 > * + *,
+[dir="rtl"] .space-x-3 > * + *,
+[dir="rtl"] .space-x-4 > * + * {
+  margin-right: var(--tw-space-x-reverse) !important;
+  margin-left: 0 !important;
+}
+
+[dir="rtl"] .rtl\:space-x-reverse > * + * {
+  --tw-space-x-reverse: 1 !important;
+}
+
+/* Handle RTL padding in lists */
+[dir="rtl"] ul.rtl\:pr-0 {
+  padding-right: 0 !important;
+}
+
+[dir="rtl"] .rtl\:pl-4 {
+  padding-left: 1rem !important;
+}
+
+/* Fix flex alignment in RTL mode */
+[dir="rtl"] .rtl-text {
+  text-align: right;
+}
+
+/* Footer grid alignment in RTL */
+[dir="rtl"] footer .grid {
+  text-align: right;
+}
+
+/* Alignment for specific RTL components */
+[dir="rtl"] h1, 
+[dir="rtl"] h2, 
+[dir="rtl"] h3, 
+[dir="rtl"] h4, 
+[dir="rtl"] h5, 
+[dir="rtl"] h6,
+[dir="rtl"] p {
+  text-align: right;
+}
+
+/* Fix menu and navigation in RTL mode */
+[dir="rtl"] .menu-item {
+  text-align: right;
+}
+
+/* Make sure borders are on the correct side in RTL */
+[dir="rtl"] .border-l {
+  border-left: none;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+[dir="rtl"] .border-r {
+  border-right: none;
+  border-left-width: 1px;
+  border-left-style: solid;
+}
+
+/* Ensure flex wrap works correctly in RTL */
+[dir="rtl"] .flex-wrap {
+  flex-wrap: wrap-reverse;
+}
+
+/* Fix Arabic text alignment issues */
+[dir="rtl"] .font-arabic {
+  text-align: right;
+  font-family: var(--font-tajawal);
 }
 
 [dir="rtl"] .space-x-2 > * + * {
@@ -54,9 +129,40 @@
   margin-left: 0;
 }
 
+/* Comprehensive RTL spacing for all common Tailwind sizes */
+[dir="rtl"] .space-x-0 > * + * {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-5 > * + * {
+  margin-right: 1.25rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-7 > * + * {
+  margin-right: 1.75rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-10 > * + * {
+  margin-right: 2.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-12 > * + * {
+  margin-right: 3rem;
+  margin-left: 0;
+}
+
 /* Ensure flex direction is correctly applied in RTL */
 [dir="rtl"] .flex-row {
   flex-direction: row-reverse;
+}
+
+/* RTL Grid support */
+[dir="rtl"] .grid-flow-col {
+  grid-auto-flow: row;
 }
 
 /* For bidirectional text with numbers in RTL languages */
@@ -70,9 +176,16 @@
 }
 
 /* Fix for RTL buttons with icons */
-[dir="rtl"] button > .material-symbols:first-child {
+[dir="rtl"] button > .material-symbols:first-child,
+[dir="rtl"] a > .material-symbols:first-child {
   margin-right: 0;
   margin-left: 0.5rem;
+}
+
+[dir="rtl"] button > .material-symbols:last-child,
+[dir="rtl"] a > .material-symbols:last-child {
+  margin-left: 0;
+  margin-right: 0.5rem;
 }
 
 /* Proper handling of blockquotes in RTL */
@@ -86,8 +199,62 @@
 /* Fix for input fields in RTL */
 [dir="rtl"] input[type="text"],
 [dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="password"],
 [dir="rtl"] input[type="search"],
+[dir="rtl"] input[type="tel"],
+[dir="rtl"] input[type="url"],
+[dir="rtl"] input[type="number"],
 [dir="rtl"] textarea {
   text-align: right;
   direction: rtl;
 }
+
+/* RTL list styles */
+[dir="rtl"] ul, 
+[dir="rtl"] ol {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+/* RTL transform origins for animations and transitions */
+[dir="rtl"] .origin-left {
+  transform-origin: right;
+}
+
+[dir="rtl"] .origin-right {
+  transform-origin: left;
+}
+
+/* RTL grid columns */
+[dir="rtl"] .col-start-1 { grid-column-start: -1; }
+[dir="rtl"] .col-start-2 { grid-column-start: -2; }
+[dir="rtl"] .col-start-3 { grid-column-start: -3; }
+[dir="rtl"] .col-start-4 { grid-column-start: -4; }
+
+/* RTL positioning */
+[dir="rtl"] .left-0 { right: 0; left: auto; }
+[dir="rtl"] .right-0 { left: 0; right: auto; }
+[dir="rtl"] .left-1 { right: 0.25rem; left: auto; }
+[dir="rtl"] .right-1 { left: 0.25rem; right: auto; }
+[dir="rtl"] .left-2 { right: 0.5rem; left: auto; }
+[dir="rtl"] .right-2 { left: 0.5rem; right: auto; }
+[dir="rtl"] .left-4 { right: 1rem; left: auto; }
+[dir="rtl"] .right-4 { left: 1rem; right: auto; }
+
+/* RTL margins - automatic conversion for all common Tailwind margins */
+[dir="rtl"] .ml-1 { margin-left: 0; margin-right: 0.25rem; }
+[dir="rtl"] .mr-1 { margin-right: 0; margin-left: 0.25rem; }
+[dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+[dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+[dir="rtl"] .ml-6 { margin-left: 0; margin-right: 1.5rem; }
+[dir="rtl"] .mr-6 { margin-right: 0; margin-left: 1.5rem; }
+[dir="rtl"] .ml-8 { margin-left: 0; margin-right: 2rem; }
+[dir="rtl"] .mr-8 { margin-right: 0; margin-left: 2rem; }
+
+/* RTL text decoration and border styles */
+[dir="rtl"] .border-l { border-left: 0; border-right: 1px solid; }
+[dir="rtl"] .border-r { border-right: 0; border-left: 1px solid; }

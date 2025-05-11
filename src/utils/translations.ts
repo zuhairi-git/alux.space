@@ -1,13 +1,18 @@
 import { loadExcelTranslations, getExcelTranslation } from './excelTranslations';
 import generatedTranslations from '../translations/generatedTranslations.json';
+import { useEffect } from 'react';
 
-// Define a recursive interface for translations without circular references
+// Define a more flexible interface for translations to accommodate various formats
 interface TranslationValue {
-  [key: string]: string | TranslationValue;
+  [key: string]: string | number | null | undefined | TranslationValue;
 }
 
 // Load translations directly from the JSON file for immediate availability
-let translations: Record<string, TranslationValue> = generatedTranslations as Record<string, TranslationValue>;
+// Use type assertion to avoid TypeScript errors with JSON format
+let translations: Record<string, any> = generatedTranslations;
+
+// Flag to track if in development mode for more detailed logging
+const isDev = process.env.NODE_ENV === 'development';
 
 /**
  * Initialize translations by loading them from Excel
@@ -15,9 +20,32 @@ let translations: Record<string, TranslationValue> = generatedTranslations as Re
  */
 export async function initTranslations(): Promise<void> {
   try {
-    translations = await loadExcelTranslations();
+    // Force reload the generated translations in development mode
+    if (typeof window !== 'undefined' && isDev) {
+      try {
+        // Add cache-busting parameter for development
+        const cacheBuster = Date.now();
+        const response = await fetch(`/api/translations?t=${cacheBuster}`);
+        if (response.ok) {
+          const freshTranslations = await response.json();
+          translations = freshTranslations;
+          console.log('Loaded fresh translations from API');
+          return;
+        }
+      } catch (fetchErr) {
+        console.warn('Could not fetch fresh translations, using cached ones');
+      }
+    }
+    
+    try {
+      // Use type assertion to ensure compatibility
+      const excelTranslations = await loadExcelTranslations();
+      translations = excelTranslations as typeof translations;
+    } catch (loadError) {
+      console.error('Error loading Excel translations, using generated translations instead:', loadError);
+    }
   } catch (error) {
-    console.error('Failed to initialize translations from Excel:', error);
+    console.error('Failed to initialize translations:', error);
   }
 }
 
@@ -63,9 +91,25 @@ export function formatDate(
 }
 
 export function useTranslations(locale: string) {
+  // Trigger a re-initialization of translations on first client-side render
+  // but only in development to ensure freshest translations
+  useEffect(() => {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+      initTranslations().catch(err => {
+        console.warn('Failed to refresh translations on component mount', err);
+      });
+    }
+  }, []);
+
   return {
-    t: (key: string, placeholders?: Record<string, string | number>) => 
-      getTranslation(locale, key, placeholders),
+    t: (key: string, placeholders?: Record<string, string | number>) => {
+      try {
+        return getTranslation(locale, key, placeholders);
+      } catch (error) {
+        console.error(`Translation error for key "${key}":`, error);
+        return key; // Fallback to the key itself
+      }
+    },
     formatDate: (date: Date | string | number, format?: keyof typeof dateFormats | DateFormatOptions) => 
       formatDate(locale, date, format)
   };

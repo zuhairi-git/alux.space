@@ -649,14 +649,14 @@ export default function Home() {
                     <div className="flex-grow">
                       {/* Testimonial text with proper text alignment */}
                       <div className="mb-6">
-                        <p className={`text-theme-text/80 text-lg leading-relaxed ${locale === 'ar' ? 'text-right' : ''}`}>
+                        <p className={`text-theme-text/80 text-lg leading-relaxed ${locale === 'ar' ? '' : ''}`}>
                           <RTLText>{testimonial.text}</RTLText>
                         </p>
                       </div>
                       
                       {/* Author information with proper alignment */}
                       <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse justify-end' : 'justify-between'}`}>
-                        <div className={locale === 'ar' ? 'text-right' : ''}>
+                        <div className={locale === 'ar' ? '' : ''}>
                           <div className="font-medium text-primary text-xl"><RTLText>{testimonial.name}</RTLText></div>
                           <div className="text-sm text-theme-text/60 mt-1"><RTLText>{testimonial.position}</RTLText></div>
                         </div>

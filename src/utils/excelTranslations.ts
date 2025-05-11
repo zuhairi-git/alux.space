@@ -6,13 +6,52 @@ type TranslationObject = { [key: string]: TranslationValue };
 
 /**
  * Load translations from pre-generated JSON (converted from Excel)
+ * or from local JSON files if the Excel-generated file is not available
  */
 export async function loadExcelTranslations(): Promise<Record<string, TranslationObject>> {
   try {
-    // Return the imported translations
-    return generatedTranslations as Record<string, TranslationObject>;
+    // First try to load from imported JSON
+    const translations = generatedTranslations as Record<string, TranslationObject>;
+    
+    // Check if we're running in the browser where dynamic imports aren't available
+    if (typeof window !== 'undefined') {
+      return translations;
+    }
+    
+    // In Node.js environment, we can try to load from actual JSON files for fresher content
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const localesDir = path.join(process.cwd(), 'src', 'locales');
+      
+      // Load each language
+      const languages = ['en', 'fi', 'ar'];
+      const updatedTranslations: Record<string, TranslationObject> = {};
+      
+      languages.forEach(lang => {
+        const filePath = path.join(localesDir, lang, 'common.json');
+        if (fs.existsSync(filePath)) {
+          const content = fs.readFileSync(filePath, 'utf8');
+          updatedTranslations[lang] = JSON.parse(content);
+        } else {
+          updatedTranslations[lang] = translations[lang] || {};
+        }
+      });
+      
+      // Merge with imported translations to ensure we have all keys
+      const result = { ...translations };
+      languages.forEach(lang => {
+        result[lang] = { ...result[lang], ...updatedTranslations[lang] };
+      });
+      
+      return result;
+    } catch (fsError) {
+      // If we can't load from filesystem, use the imported translations
+      console.warn('Could not load translations from filesystem, using pre-generated translations');
+      return translations;
+    }
   } catch (error) {
-    console.error('Error loading Excel translations:', error);
+    console.error('Error loading translations:', error);
     // Fallback to empty translations
     return {
       en: {},

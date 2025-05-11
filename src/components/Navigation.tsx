@@ -273,14 +273,13 @@ const Navigation = () => {
                               {index === 1 && (
                                 <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
                               )}
-                              
-                              <Link
+                                <Link
                                 href={localizedHref(item.href)}
-                                className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
+                                className={`flex items-center ${isRTL ? 'flex-row-reverse rtl:justify-start' : ''} w-full px-4 py-2 text-sm ${
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                                } ${isRTL ? 'text-right' : 'text-left'}`}
+                                } ${isRTL ? 'rtl:text-right' : 'text-left'}`}
                                 onClick={() => setHomeOpen(false)}
                               >
                                 {item.type === 'overview' && (

@@ -8,6 +8,7 @@ module.exports = {
         poppins: ['var(--font-poppins)'],
         roboto: ['var(--font-roboto)'],
         tajawal: ['var(--font-tajawal)'],
+        arabic: ['var(--font-tajawal)'],
       },
       textDirection: {
         rtl: 'rtl',
@@ -17,5 +18,11 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    // Add RTL plugin to better handle directional utilities
+    function({ addVariant }) {
+      // Add rtl variant for all utilities
+      addVariant('rtl', '[dir="rtl"] &');
+      addVariant('ltr', '[dir="ltr"] &');
+    },
   ],
 };

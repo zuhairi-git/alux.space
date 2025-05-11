@@ -1,12 +1,14 @@
 import React from 'react';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
-import Navigation from '@/components/Navigation';
 import { i18n } from '@/i18n';
+import TextDirectionDemo from '@/components/ui/TextDirectionDemo';
 
 // Required for static site generation with internationalized routes
 export function generateStaticParams() {
   return i18n.locales.map(locale => ({ locale }));
+}
+
+export default function TextDirectionDemoPage() {
+  return <TextDirectionDemo />;
 }
 
 // TextDirectionDemo component to test RTL functionality

@@ -119,19 +119,19 @@
       "tools": "Työkalut"
     },
     "footer": {
-      "copyright": "Kaikki oikeudet pidätetään.",
       "additionalInfo": {
-        "title": "Lisätietoa",
-        "content": "Tuoteomistaja ja UX-suunnittelun vetäjä, jolla on yli 20 vuoden kokemus digitaalisesta tuotekehityksestä ja käyttäjäkeskeisestä suunnittelusta. Erikoistunut intuitiivisten ja saavutettavien käyttöliittymien luomiseen sekä monialaisten tiimien johtamiseen."
+        "content": "",
+        "title": ""
       },
-      "quickLinks": "Pikalinkit",
-      "portfolio": "Portfolio",
-      "contact": "Yhteystiedot"
+      "contact": "",
+      "copyright": "Kaikki oikeudet pidätetään.",
+      "portfolio": "",
+      "quickLinks": ""
     },
     "home": {
       "about": {
         "intro": "Hei siellä! Olen Ali, intohimoinen unelmoija ja luova sielu, joka uskoo suunnittelun voimaan muuttaa ideat merkityksellisiksi kokemuksiksi. Matkani useilla mantereilla – Damaskoksesta Helsinkiin – on opettanut minulle, että hyvä suunnittelu on muutakin kuin estetiikkaa; se koskettaa sydämiä ja ratkaisee todellisia ongelmia.",
-        "quote": "Suunnittelua strategian ja mielikuvituksen risteyksessä — siellä missä visio muuttuu todellisuudeksi.",
+        "quote": "Jokaisella pikselillä on tarkoitus, jokainen vuorovaikutus kertoo tarinan.",
         "second": "Viimeisen vuosikymmenen aikana olen saanut iloa lukuisten digitaalisten tuotteiden elävöittämisestä, aina Double Diamond -lähestymistavan ohjaamana mutta omalla luovalla tyylilläni värittämänä. Uskon, että teknologiasta voi tehdä inhimillisempää, saavutettavampaa ja ehkä jopa hieman taianomaista.",
         "third": "Kun en suunnittele, löydät minut tutkimasta uusia teknologioita, jakamasta tietoa kollegoiden kanssa, tai yksinkertaisesti unelmoimasta seuraavasta suuresta ideasta, joka voisi tehdä jonkun digitaalisesta elämästä hieman parempaa.",
         "title": "Digitaalisten unelmien muuttaminen todellisuudeksi"
@@ -213,19 +213,19 @@
       "tools": "الأدوات"
     },
     "footer": {
-      "copyright": "جميع الحقوق محفوظة.",
       "additionalInfo": {
-        "title": "معلومات إضافية",
-        "content": "مالك المنتج وقائد تصميم تجربة المستخدم مع أكثر من 20 عامًا من الخبرة في تطوير المنتجات الرقمية والتصميم المرتكز على المستخدم. متخصص في إنشاء واجهات بديهية وسهلة الوصول وقيادة الفرق متعددة التخصصات."
+        "content": "",
+        "title": ""
       },
-      "quickLinks": "روابط سريعة",
-      "portfolio": "أعمالي",
-      "contact": "تواصل"
+      "contact": "",
+      "copyright": "جميع الحقوق محفوظة.",
+      "portfolio": "",
+      "quickLinks": ""
     },
     "home": {
       "about": {
         "intro": "مرحباً! أنا علي، حالم شغوف وروح مبدعة يؤمن بقوة التصميم في تحويل الأفكار إلى تجارب هادفة. مع رحلتي عبر القارات - من دمشق إلى هلسنكي - تعلمت أن التصميم الرائع يتجاوز الجماليات؛ إنه يتعلق بلمس القلوب وحل المشكلات الحقيقية.",
-        "quote": "التصميم عند تقاطع الإستراتيجية والخيال — حيث تتحول الرؤية إلى واقع.",
+        "quote": "لكل بكسل غرض، ولكل تفاعل قصة.",
         "second": "على مدار العقد الماضي، استمتعت ببث الحياة في عدد لا يحصى من المنتجات الرقمية، دائمًا بتوجيه من نهج Double Diamond ولكن بلمسة إبداعية خاصة بي. أؤمن بجعل التكنولوجيا أكثر إنسانية وسهولة في الوصول، وربما حتى سحرية قليلاً.",
         "third": "عندما لا أقوم بالتصميم، ستجدني أستكشف تقنيات جديدة، أشارك المعرفة مع زملائي المصممين، أو ببساطة أحلم بالفكرة التالية الكبيرة التي يمكن أن تجعل حياة شخص ما الرقمية أفضل قليلاً.",
         "title": "تحويل الأحلام الرقمية إلى حقيقة"
