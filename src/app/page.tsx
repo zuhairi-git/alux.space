@@ -319,95 +319,166 @@ export default function Home() {
             >
               {workContent.intro}
             </motion.p>
-          </div>            {/* Timeline container with vertical line */}
-          <div className="relative max-w-5xl mx-auto mt-16 px-4">
-            {/* Central timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent"></div>
+          </div>            
+          {/* Enhanced Timeline container with improved visual design */}
+          <div className="relative max-w-6xl mx-auto mt-16 px-4">
+            {/* Central timeline line with animated gradient */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1.5 bg-gradient-to-b from-purple-500/80 via-blue-500/80 to-transparent rounded-full animate-pulse"></div>
             
-            {workContent.positions.map((position, index) => (              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`relative ${index < workContent.positions.length - 1 ? 'mb-24' : ''} flex items-center`}
-              >{/* Timeline dot perfectly centered on the line */}
-                <div className={`absolute left-1/2 top-0 transform -translate-x-1/2 w-6 h-6 rounded-full ${
-                  index === 0 
-                    ? 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg shadow-purple-500/20' 
-                    : index === workContent.positions.length - 1
-                      ? 'bg-gradient-to-r from-gray-500 to-blue-500/50 shadow-lg shadow-gray-500/20'
-                      : 'bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20'
-                } z-10`}></div>
-                  {/* Date badge perfectly centered above timeline dot */}
-                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-12 ${
-                  index === 0 
-                    ? 'bg-gradient-to-r from-purple-500/30 to-blue-500/30 shadow-md shadow-purple-500/10' 
-                    : index === workContent.positions.length - 1
-                      ? 'bg-gradient-to-r from-gray-500/30 to-blue-500/20 shadow-md shadow-gray-500/10'
-                      : 'bg-gradient-to-r from-blue-500/30 to-cyan-500/30 shadow-md shadow-blue-500/10'
-                } backdrop-blur-sm text-primary px-5 py-2 rounded-full text-sm font-semibold border border-primary/10 text-center`}>
-                  {position.period}
-                </div>
-                  {/* Card positioned alternating with equal spacing from timeline */}
-                <div className={`${
-                  index % 2 === 0 
-                    ? 'ml-auto md:ml-[52%] md:w-[45%] md:pl-8' 
-                    : 'mr-auto md:mr-[52%] md:w-[45%] md:pr-8'
-                } mt-6`}>
-                  <Card>
-                    <CardContent 
-                      icon={
-                        index === 0 
-                          ? "rocket_launch" 
-                          : index === workContent.positions.length - 1
-                            ? "history"
-                            : index % 2 === 0 ? "grid_view" : "insights"
+            {workContent.positions.map((position, index) => {
+              const isEven = index % 2 === 0;
+              const isFirst = index === 0;
+              const isLast = index === workContent.positions.length - 1;
+              
+              // Calculate progress percentage for animation offset
+              const progressPercentage = (index / (workContent.positions.length - 1)) * 100;
+              
+              return (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: isEven ? -50 : 50, y: 20 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ 
+                    duration: 0.7, 
+                    delay: index * 0.15,
+                    type: "spring", 
+                    stiffness: 100,
+                    damping: 20 
+                  }}
+                  className={`relative ${index < workContent.positions.length - 1 ? 'mb-28' : ''}`}
+                >
+                  {/* Connector line from timeline to card (horizontal line) */}
+                  <div className={`absolute left-1/2 top-3 ${isEven ? '-translate-x-full' : ''} h-0.5 ${isEven ? 'w-[calc(50%-5rem)]' : 'w-[calc(50%-5rem)]'} 
+                    ${isFirst 
+                      ? 'bg-gradient-to-r from-purple-400/70 to-blue-400/70'
+                      : isLast 
+                        ? 'bg-gradient-to-r from-gray-400/70 to-blue-400/50'
+                        : 'bg-gradient-to-r from-blue-500/70 to-cyan-400/70'
+                    }`}>
+                  </div>
+                  
+                  {/* Enhanced timeline dot with pulse effect */}
+                  <motion.div 
+                    className={`absolute left-1/2 top-0 transform -translate-x-1/2 w-6 h-6 rounded-full z-10
+                      ${isFirst 
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-500' 
+                        : isLast
+                          ? 'bg-gradient-to-r from-gray-500 to-blue-500/50'
+                          : 'bg-gradient-to-r from-blue-500 to-cyan-500'
+                      }
+                      flex items-center justify-center
+                    `}
+                    whileHover={{ scale: 1.2 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Inner dot for depth effect */}
+                    <div className="w-2 h-2 rounded-full bg-white/90"></div>
+                  </motion.div>
+                  
+                  {/* Animated date badge with hover effect */}
+                  <motion.div 
+                    className={`absolute left-1/2 transform -translate-x-1/2 -top-12 backdrop-blur-sm 
+                      ${isFirst 
+                        ? 'bg-gradient-to-r from-purple-500/40 to-blue-500/40 text-purple-50' 
+                        : isLast
+                          ? 'bg-gradient-to-r from-gray-500/40 to-blue-500/30 text-gray-100'
+                          : 'bg-gradient-to-r from-blue-500/40 to-cyan-500/40 text-blue-50'
                       } 
-                      iconClassName={`${
-                        index === 0 
-                          ? 'text-purple-400 bg-purple-400/10' 
-                          : index === workContent.positions.length - 1
-                            ? 'text-gray-400 bg-gray-400/10'
-                            : index % 2 === 0 ? 'text-cyan-400 bg-cyan-400/10' : 'text-blue-400 bg-blue-400/10'
-                      }`}
-                      title={position.title}
-                      date={position.period}
+                      px-5 py-2 rounded-full text-sm font-semibold border border-primary/20 text-center
+                      shadow-lg shadow-primary/10
+                    `}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -3,
+                      boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.25)"
+                    }}
+                  >
+                    {position.period}
+                  </motion.div>
+                  
+                  {/* Work experience cards with alternating positions */}
+                  <div className={`flex ${isEven ? 'justify-end' : 'justify-start'}`}>
+                    <motion.div 
+                      className={`mt-6 w-full md:w-[45%] ${isEven ? 'md:mr-[5%]' : 'md:ml-[5%]'}`}
+                      whileHover={{ 
+                        y: -5,
+                        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.1)"
+                      }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <div className="space-y-4">
-                        {position.positions ? (
-                          // For the "Earlier Positions" with nested positions
-                          position.positions.map((subPosition, subIndex) => (
-                            <div key={subIndex}>
-                              <h5 className="text-lg opacity-80 mb-1">{subPosition.title}</h5>
-                              <div className="flex flex-wrap items-center gap-2">
-                                <p className="opacity-70">{subPosition.company}</p>
-                                {subPosition.period && (
-                                  <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
-                                    {subPosition.period}
-                                  </span>
-                                )}
+                      <Card>
+                        <CardContent 
+                          icon={
+                            isFirst 
+                              ? "rocket_launch" 
+                              : isLast
+                                ? "history"
+                                : isEven ? "grid_view" : "insights"
+                          } 
+                          iconClassName={`${
+                            isFirst 
+                              ? 'text-purple-400 bg-purple-400/15' 
+                              : isLast
+                                ? 'text-gray-400 bg-gray-400/15'
+                                : isEven ? 'text-cyan-400 bg-cyan-400/15' : 'text-blue-400 bg-blue-400/15'
+                          }`}
+                          title={position.title}
+                          date={position.period}
+                        >
+                          <div className="space-y-4">
+                            {position.positions ? (
+                              // For the "Earlier Positions" with nested positions
+                              position.positions.map((subPosition, subIndex) => (
+                                <motion.div 
+                                  key={subIndex} 
+                                  initial={{ opacity: 0 }}
+                                  whileInView={{ opacity: 1 }}
+                                  transition={{ delay: 0.3 + (subIndex * 0.1) }}
+                                  viewport={{ once: true }}
+                                >
+                                  <h5 className="text-lg opacity-80 mb-1">{subPosition.title}</h5>
+                                  <div className="flex flex-wrap items-center gap-2">
+                                    <p className="opacity-70">{subPosition.company}</p>
+                                    {subPosition.period && (
+                                      <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
+                                        {subPosition.period}
+                                      </span>
+                                    )}
+                                  </div>
+                                </motion.div>
+                              ))
+                            ) : (
+                              // For regular positions
+                              <div>
+                                <div className="flex items-center gap-2 opacity-80 mb-2">
+                                  <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
+                                  <p>{position.company}</p>
+                                </div>
+                                <p className="opacity-70">{position.description}</p>
                               </div>
-                            </div>
-                          ))
-                        ) : (
-                          // For regular positions
-                          <div>
-                            <div className="flex items-center gap-2 opacity-80 mb-2">
-                              <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                              <p>{position.company}</p>
-                            </div>
-                            <p className="opacity-70">{position.description}</p>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </motion.div>
-            ))}
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              );
+            })}
+            
+            {/* Visual indicator for timeline progress */}
+            <motion.div 
+              className="absolute left-1/2 transform -translate-x-1/2 w-1.5 bg-gradient-to-t from-transparent to-primary/70 rounded-full"
+              style={{ height: '0%', top: 0 }}
+              initial={{ height: '0%' }}
+              whileInView={{ height: '100%' }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            />
           </div>
-        </div>      </motion.section>
+        </div>
+      </motion.section>
         {/* About Section with Digital Dreams anchor */}
       <motion.section
         ref={aboutRef}
