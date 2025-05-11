@@ -20,7 +20,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
   };
 
   const { theme } = useTheme();
-  const { locale, isRTL } = useLanguage();
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isLight = theme === 'light';
 
@@ -184,7 +184,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
               initial: { opacity: 0 },
               animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
             }}
-            className={`max-w-4xl ${isRTL ? 'mr-auto' : 'mx-auto'}`}
+            className={`max-w-4xl `}
           >
             {/* Hero Image */}
             <motion.div 
@@ -216,7 +216,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
 
             {/* Project Overview */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 `}>
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold text-primary">{content.projectType}</h3>
@@ -233,7 +233,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-primary mb-4">{content.roles}</h3>
-                  <ul className={`list-disc ${isRTL ? 'list-inside mr-4' : 'list-inside'} opacity-80 space-y-2`}>
+                  <ul className={`list-disc  opacity-80 space-y-2`}>
                     <li>{locale === 'fi' ? 'Tuotesuunnittelija' : locale === 'ar' ? 'مصمم المنتج' : 'Product Designer'}</li>
                     <li>{locale === 'fi' ? 'Tuotejohtaja' : locale === 'ar' ? 'مدير المنتج' : 'Product Manager'}</li>
                     <li>{locale === 'fi' ? 'Käyttäjätutkimus' : locale === 'ar' ? 'بحث المستخدم' : 'User Research'}</li>
@@ -414,7 +414,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-primary mb-2">{content.productRequirements}</h3>
-                      <ul className={`list-disc ${isRTL ? 'list-inside mr-4' : 'list-inside'} opacity-80 space-y-2`}>
+                      <ul className={`list-disc  opacity-80 space-y-2`}>
                         <li>{locale === 'fi' ? 'Käyttäjäprofiilit: Rekisteröityminen, taidot, kokemus, saatavuus' : locale === 'ar' ? 'ملفات المستخدم: التسجيل، المهارات، الخبرة، التوفر' : 'User Profiles: Sign-up, skills, experience, availability'}</li>
                         <li>{locale === 'fi' ? 'Työnhaku ja suodattimet: Sijainti, palkka, toimiala, tallennetut suodattimet' : locale === 'ar' ? 'البحث عن وظائف والتصفية: الموقع، الأجر، الصناعة، عوامل التصفية المحفوظة' : 'Job Search & Filters: Location, pay, industry, saved filters'}</li>
                         <li>{locale === 'fi' ? 'Ilmoitukset: Uudet ilmoitukset, määräajat, haastattelut' : locale === 'ar' ? 'الإشعارات: القوائم الجديدة، المواعيد النهائية، المقابلات' : 'Notifications: New listings, deadlines, interviews'}</li>
@@ -460,7 +460,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                 <div className="theme-card">
                   <div className="theme-card-content p-8">
                     <h2 className="text-2xl font-bold mb-6 text-primary">{content.deliverPhase}</h2>
-                    <ul className={`list-disc ${isRTL ? 'list-inside mr-4' : 'list-inside'} opacity-80 space-y-3`}>
+                    <ul className={`list-disc  opacity-80 space-y-3`}>
                       <li><span className="font-semibold text-primary">{content.hifiProto}</span> {content.hifiProtoDesc}</li>
                       <li><span className="font-semibold text-primary">{content.designReviews}</span> {content.designReviewsDesc}</li>
                       <li><span className="font-semibold text-primary">{content.qa}</span> {content.qaDesc}</li>

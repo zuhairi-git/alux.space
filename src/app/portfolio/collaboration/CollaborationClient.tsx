@@ -20,7 +20,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
   };
 
   const { theme } = useTheme();
-  const { locale, isRTL } = useLanguage();
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isLight = theme === 'light';
 
@@ -198,7 +198,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
   ];
 
   return (
-    <main className={`min-h-screen bg-theme text-theme ${isRTL ? 'text-right' : 'text-left'}`}>
+    <main className={`min-h-screen bg-theme text-theme `}>
       <Navigation />
 
       <article className="pt-24 pb-16">
@@ -210,7 +210,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
               initial: { opacity: 0 },
               animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
             }}
-            className={`max-w-4xl ${isRTL ? 'mr-auto' : 'mx-auto'}`}
+            className={`max-w-4xl `}
           >
             {/* Hero Image */}
             <motion.div 
@@ -242,7 +242,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
 
             {/* Project Overview */}
             <motion.section variants={fadeInUp} className="mb-16">
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 `}>
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold text-primary">{content.projectType}</h3>
@@ -259,7 +259,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-primary mb-4">{content.roles}</h3>
-                  <ul className={`list-disc ${isRTL ? 'list-inside mr-4' : 'list-inside'} opacity-80 space-y-2`}>
+                  <ul className={`list-disc  opacity-80 space-y-2`}>
                     {roles.map((role, index) => (
                       <li key={index}>{role}</li>
                     ))}
@@ -273,8 +273,8 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.objectives}</h2>
               <ul className="list-none space-y-4">
                 {objectives.map((objective: string, index: number) => (
-                  <li key={index} className={`flex items-start ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <span className={`inline-block w-2 h-2 mt-2 ${isRTL ? 'ml-3' : 'mr-3'} bg-primary rounded-full`}></span>
+                  <li key={index} className={`flex items-start `}>
+                    <span className={`inline-block w-2 h-2 mt-2  bg-primary rounded-full`}></span>
                     <span className="opacity-80">{objective}</span>
                   </li>
                 ))}
@@ -315,7 +315,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <div className={`flex items-center justify-between mb-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                        <div className={`flex items-center justify-between mb-2 `}>
                           <span className="text-opacity-80">{metric.label}</span>
                           <span className="text-primary font-semibold">{metric.value}%</span>
                         </div>
@@ -324,10 +324,9 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                             initial={{ width: 0 }}
                             animate={{ width: `${metric.value}%` }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400 ${isRTL ? 'mr-auto' : 'ml-0'}`}
+                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400 `}
                             style={{ 
-                              width: `${metric.value}%`,
-                              ...(isRTL ? { marginRight: '0', marginLeft: 'auto' } : {})
+                              width: `${metric.value}%`
                             }}
                           />
                         </div>

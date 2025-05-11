@@ -1,3 +1,6 @@
+export const dynamic = "force-static";
+export const revalidate = 0;
+
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
@@ -11,7 +14,7 @@ export async function GET() {
     // Define paths and default translations object
     const localesDir = path.join(process.cwd(), 'src', 'locales');
     const generatedPath = path.join(process.cwd(), 'src', 'translations', 'generatedTranslations.json');
-    let translations: Record<string, any> = { en: {}, fi: {}, ar: {} };
+    let translations: Record<string, any> = { en: {}, fi: {} };
     
     // In production, return the static translations if possible
     if (process.env.NODE_ENV !== 'development') {
@@ -36,7 +39,7 @@ export async function GET() {
     // Then try to load from actual JSON files for fresher content
     try {
       // Load each language
-      const languages = ['en', 'fi', 'ar'];
+      const languages = ['en', 'fi'];
       const freshTranslations: Record<string, any> = {};
       
       languages.forEach(lang => {

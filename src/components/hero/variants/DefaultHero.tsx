@@ -4,19 +4,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
-import { useLanguage } from '@/context/LanguageContext';
 
 const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
-  const { isRTL } = useLanguage();
-  
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className={`container mx-auto px-4 ${isRTL ? 'text-right' : 'text-center'} relative z-10`}
+      className={`container mx-auto px-4  relative z-10`}
     >
-      <div className={`${isRTL ? 'text-right' : 'text-center'} max-w-4xl ${isRTL ? 'mr-auto' : 'mx-auto'}`}>
+      <div className={` max-w-4xl `}>
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
           {title}
         </h1>
@@ -28,7 +25,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className={isRTL ? 'text-right' : 'text-center'}
+        className="text-center"
       >
         {cta && (
           <Link 

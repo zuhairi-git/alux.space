@@ -4,12 +4,9 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '../i18n';
 import { initTranslations } from '@/utils/translations';
-import { initRTLDebug } from '@/utils/rtlDebug';
-
 type LanguageContextType = {
   locale: string;
   setLocale: (locale: string) => void;
-  isRTL: boolean;
 };
 
 const defaultLanguage = i18n.defaultLocale;
@@ -17,7 +14,6 @@ const defaultLanguage = i18n.defaultLocale;
 const LanguageContext = createContext<LanguageContextType>({
   locale: defaultLanguage,
   setLocale: () => {},
-  isRTL: false,
 });
 
 export const useLanguage = () => {
@@ -60,9 +56,9 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
     
     return defaultLanguage;
   };
-  
   const [locale, setLocaleState] = useState(defaultLanguage);
-  const [isRTL, setIsRTL] = useState(locale === 'ar');  useEffect(() => {
+  
+  useEffect(() => {
     const detectedLocale = detectLocale();
     setLocaleState(detectedLocale);
     
@@ -74,36 +70,14 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
   }, [pathname]);
   
   useEffect(() => {
-    // Update RTL state when locale changes
-    const rtlLocale = locale === 'ar';
-    setIsRTL(rtlLocale);
-    
-    // Apply RTL attribute to document for proper text direction
+    // Set document language
     if (typeof document !== 'undefined') {
-      // Set the dir attribute for RTL/LTR text direction
-      document.documentElement.setAttribute('dir', rtlLocale ? 'rtl' : 'ltr');
+      document.documentElement.setAttribute('dir', 'ltr');
       document.documentElement.setAttribute('lang', locale);
       
-      // Add or remove CSS classes to help with specific RTL styling
-      if (rtlLocale) {
-        document.documentElement.classList.add('rtl-mode');
-        document.documentElement.classList.remove('ltr-mode');
-        // Set the font for Arabic
-        document.documentElement.classList.add('font-tajawal');
-        document.documentElement.classList.remove('font-poppins');
-      } else {
-        document.documentElement.classList.remove('rtl-mode');
-        document.documentElement.classList.add('ltr-mode');
-        // Set the font for non-Arabic
-        document.documentElement.classList.remove('font-tajawal');
-        document.documentElement.classList.add('font-poppins');
-      }      // Force update on layout to fix any RTL rendering issues
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 0);
-      
-      // Initialize RTL debugging if URL parameter is present
-      initRTLDebug();
+      // Set the font
+      document.documentElement.classList.add('ltr-mode');
+      document.documentElement.classList.add('font-poppins');
     }
 
     // Save language preference to localStorage
@@ -138,9 +112,8 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
       router.push(newPath);
     }
   };
-
   return (
-    <LanguageContext.Provider value={{ locale, setLocale, isRTL }}>
+    <LanguageContext.Provider value={{ locale, setLocale }}>
       {children}
     </LanguageContext.Provider>
   );

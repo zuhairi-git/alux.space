@@ -10,8 +10,6 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
 import Tooltip from './ui/Tooltip';
 import { i18n } from '@/i18n';
-import RTLText from './ui/RTLText';
-import { getFlexDirectionClass, getSpacingClass } from '@/utils/rtl';
 
 const portfolioDropdownItems = [
   { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, 
@@ -31,7 +29,7 @@ const homeDropdownItems = [
 const Navigation = () => {
   const { scrollY } = useScroll();
   const { theme } = useTheme();
-  const { locale, isRTL } = useLanguage();
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   
   // Helper function to add locale to paths
@@ -199,7 +197,7 @@ const Navigation = () => {
         className="container mx-auto px-4 py-3"
         style={{ scale }}
       >
-        <div className={`flex justify-between items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <div className={`flex justify-between items-center `}>
           <motion.h1 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -225,14 +223,12 @@ const Navigation = () => {
             <span className="material-symbols material-symbols-rounded text-2xl">
               {menuOpen ? 'close' : 'menu'}
             </span>
-          </button>
-
-          {/* Desktop nav */}          <nav className={`hidden md:flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+          </button>          {/* Desktop nav */}          <nav className={`hidden md:flex items-center `}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={`flex items-center ${getFlexDirectionClass(locale)} ${getSpacingClass(locale, 8)} px-4`}
+              className={`flex items-center px-4`}
             >
               {/* Home item with dropdown */}              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
@@ -243,13 +239,12 @@ const Navigation = () => {
               >                <div className="relative" ref={homeDropdownRef}>
                   <Tooltip text={t('nav.home')}>                    <button
                       onClick={toggleHomeDropdown}
-                      className={`flex items-center ${getFlexDirectionClass(locale)} p-2 rounded-lg ${getDropdownButtonClass()}`}
-                      aria-expanded={homeOpen}
+                      className={`flex items-center p-2 rounded-lg ${getDropdownButtonClass()}`}aria-expanded={homeOpen}
                       aria-haspopup="true"
                     >                      <span className="relative z-10 transition-colors">
-                        <RTLText>{t('nav.home')}</RTLText>
+                        {t('nav.home')}
                       </span>
-                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'} order-${isRTL ? 'first' : 'last'}`}>
+                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''} ml-1`}>
                         {homeOpen ? 'expand_less' : 'expand_more'}
                       </span>
                     </button>
@@ -265,7 +260,7 @@ const Navigation = () => {
                           duration: 0.2,
                           ease: "easeInOut"
                         }}
-                        className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 ${getDropdownMenuClass()}`}
+                        className={`absolute  mt-2 w-64 ${getDropdownMenuClass()}`}
                       >
                         <div className="py-2">
                           {homeDropdownItems.map((item, index) => (
@@ -275,20 +270,20 @@ const Navigation = () => {
                               )}
                                 <Link
                                 href={localizedHref(item.href)}
-                                className={`flex items-center ${isRTL ? 'flex-row-reverse rtl:justify-start' : ''} w-full px-4 py-2 text-sm ${
+                                className={`flex items-center  w-full px-4 py-2 text-sm ${
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                                } ${isRTL ? 'rtl:text-right' : 'text-left'}`}
+                                } `}
                                 onClick={() => setHomeOpen(false)}
                               >
                                 {item.type === 'overview' && (
-                                  <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  <span className={`material-symbols text-sm `}>
                                     grid_view
                                   </span>
                                 )}
                                 {item.type === 'section' && (
-                                  <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  <span className={`material-symbols text-sm `}>
                                     {item.icon || ''}
                                   </span>
                                 )}
@@ -315,11 +310,10 @@ const Navigation = () => {
                   <Tooltip text={t('nav.portfolio')}>
                     <button
                       onClick={togglePortfolioDropdown}
-                      className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} p-2 rounded-lg ${getDropdownButtonClass()}`}
+                      className={`flex items-center  p-2 rounded-lg ${getDropdownButtonClass()}`}
                       aria-expanded={portfolioOpen}
                       aria-haspopup="true"
-                    >                      <span className="relative z-10 transition-colors">{t('nav.portfolio')}</span>
-                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${portfolioOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'} order-${isRTL ? 'first' : 'last'}`}>
+                    >                      <span className="relative z-10 transition-colors">{t('nav.portfolio')}</span>                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${portfolioOpen ? 'rotate-180' : ''} ml-1`}>
                         {portfolioOpen ? 'expand_less' : 'expand_more'}
                       </span>
                     </button>
@@ -335,7 +329,7 @@ const Navigation = () => {
                           duration: 0.2,
                           ease: "easeInOut"
                         }}
-                        className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-64 ${getDropdownMenuClass()}`}
+                        className={`absolute  mt-2 w-64 ${getDropdownMenuClass()}`}
                       >
                         <div className="py-2">
                           {portfolioDropdownItems.map((item, index) => (
@@ -346,20 +340,20 @@ const Navigation = () => {
                               
                               <Link
                                 href={localizedHref(item.href)}
-                                className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-2 text-sm ${
+                                className={`flex items-center  w-full px-4 py-2 text-sm ${
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                                } ${isRTL ? 'text-right' : 'text-left'}`}
+                                } `}
                                 onClick={() => setPortfolioOpen(false)}
                               >
                                 {item.type === 'overview' && (
-                                  <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  <span className={`material-symbols text-sm `}>
                                     grid_view
                                   </span>
                                 )}
                                 {item.type === 'case' && (
-                                  <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                  <span className={`material-symbols text-sm `}>
                                     article
                                   </span>
                                 )}
@@ -383,8 +377,7 @@ const Navigation = () => {
                 <Link href={localizedHref('/blog')} className="relative group p-2 rounded-lg block">
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.blog')}</span>
                   <motion.span
-                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
-                    layoutId="underline-blog"
+                    className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
                   />
                   <motion.div
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -400,30 +393,7 @@ const Navigation = () => {
                 <Link href={localizedHref('/prompt')} className="relative group p-2 rounded-lg block">
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.prompts')}</span>
                   <motion.span
-                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
-                    layoutId="underline-prompts"
-                  />
-                  <motion.div
-                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                </Link>
-              </motion.li>
-              
-              {/* Text Direction Demo - Only visible during development */}
-              <motion.li 
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                whileHover={{ y: -2 }}
-                className='hidden'
-              >
-                <Link href={localizedHref('/text-direction-demo')} className="relative group p-2 rounded-lg block">
-                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>
-                    <RTLText>RTL Demo</RTLText>
-                  </span>
-                  <motion.span
-                    className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
-                    layoutId="underline-rtl-demo"
+                    className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
                   />
                   <motion.div
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -470,7 +440,7 @@ const Navigation = () => {
             }}
           >
             {/* Mobile header - removed duplicate name */}
-            <div className={`p-4 flex ${isRTL ? 'justify-end' : 'justify-start'} border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
+            <div className={`p-4 flex  border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
               {/* Empty div to maintain spacing */}
             </div>
 
@@ -495,17 +465,16 @@ const Navigation = () => {
                     <Link
                       href={localizedHref('/')}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex-grow flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                      className={`flex-grow flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                     >
-                      <span className={`material-symbols ${isRTL ? 'ml-2' : 'mr-2'}`}>home</span>
+                      <span className={`material-symbols `}>home</span>
                       <span className="font-medium">{t('nav.home')}</span>
-                    </Link>
-                    <button
+                    </Link>                    <button
                       onClick={toggleMobileHomeDropdown}
                       className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                       aria-expanded={mobileHomeOpen}
                       aria-haspopup="true"
-                    >                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobileHomeOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'} order-${isRTL ? 'first' : 'last'}`}>
+                    >                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobileHomeOpen ? 'rotate-180' : ''}`}>
                         {mobileHomeOpen ? 'expand_less' : 'expand_more'}
                       </span>
                     </button>
@@ -528,23 +497,23 @@ const Navigation = () => {
                             
                             <Link
                               href={localizedHref(item.href)}
-                              className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-6 py-2 text-sm ${
+                              className={`flex items-center  w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                              } ${isRTL ? 'text-right' : 'text-left'}`}
+                              } `}
                               onClick={() => {
                                 setMobileHomeOpen(false);
                                 setMenuOpen(false);
                               }}
                             >
                               {item.type === 'overview' && (
-                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                <span className={`material-symbols text-sm `}>
                                   grid_view
                                 </span>
                               )}
                               {item.type === 'section' && (
-                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                <span className={`material-symbols text-sm `}>
                                   {item.icon || ''}
                                 </span>
                               )}
@@ -565,17 +534,16 @@ const Navigation = () => {
                     <Link
                       href={localizedHref('/portfolio')}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex-grow flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                      className={`flex-grow flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                     >
-                      <span className={`material-symbols ${isRTL ? 'ml-2' : 'mr-2'}`}>work</span>
+                      <span className={`material-symbols `}>work</span>
                       <span className="font-medium">{t('nav.portfolio')}</span>
-                    </Link>
-                    <button
+                    </Link>                    <button
                       onClick={toggleMobilePortfolioDropdown}
                       className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                       aria-expanded={mobilePortfolioOpen}
                       aria-haspopup="true"
-                    >                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobilePortfolioOpen ? 'rotate-180' : ''} ${isRTL ? 'mr-1' : 'ml-1'} order-${isRTL ? 'first' : 'last'}`}>
+                    >                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
                         {mobilePortfolioOpen ? 'expand_less' : 'expand_more'}
                       </span>
                     </button>
@@ -598,23 +566,23 @@ const Navigation = () => {
                             
                             <Link
                               href={localizedHref(item.href)}
-                              className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-6 py-2 text-sm ${
+                              className={`flex items-center  w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                              } ${isRTL ? 'text-right' : 'text-left'}`}
+                              } `}
                               onClick={() => {
                                 setMobilePortfolioOpen(false);
                                 setMenuOpen(false);
                               }}
                             >
                               {item.type === 'overview' && (
-                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                <span className={`material-symbols text-sm `}>
                                   grid_view
                                 </span>
                               )}
                               {item.type === 'case' && (
-                                <span className={`material-symbols text-sm ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                                <span className={`material-symbols text-sm `}>
                                   article
                                 </span>
                               )}
@@ -633,9 +601,9 @@ const Navigation = () => {
                 <Link
                   href={localizedHref('/blog')}
                   onClick={() => setMenuOpen(false)}
-                  className={`w-full flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  className={`w-full flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >
-                  <span className={`material-symbols ${isRTL ? 'ml-2' : 'mr-2'}`}>article</span>
+                  <span className={`material-symbols `}>article</span>
                   <span className="font-medium">{t('nav.blog')}</span>
                 </Link>
               </li>
@@ -645,9 +613,9 @@ const Navigation = () => {
                 <Link
                   href={localizedHref('/prompt')}
                   onClick={() => setMenuOpen(false)}
-                  className={`w-full flex items-center ${isRTL ? 'flex-row-reverse' : ''} py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  className={`w-full flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >
-                  <span className={`material-symbols ${isRTL ? 'ml-2' : 'mr-2'}`}>smart_toy</span>
+                  <span className={`material-symbols `}>smart_toy</span>
                   <span className="font-medium">{t('nav.prompts')}</span>
                 </Link>
               </li>

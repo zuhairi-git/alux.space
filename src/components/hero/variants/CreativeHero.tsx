@@ -10,7 +10,6 @@ import { useLanguage } from '@/context/LanguageContext';
 
 const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
   const { theme } = useTheme();
-  const { isRTL } = useLanguage();
   const isLight = theme === 'light';
   
   // Split title into words for staggered animation
@@ -74,12 +73,12 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
           
           {/* Main Title with 3D Effect */}
           <motion.div 
-            className={`relative z-10 mx-auto ${isRTL ? 'text-right' : 'text-center'} mb-12`}
+            className={`relative z-10 mx-auto  mb-12`}
             style={{
               transform: `perspective(1000px) rotateX(${mousePosition.y * -5}deg) rotateY(${mousePosition.x * 5}deg)`
             }}
           >
-            <h2 className={`text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20 ${isRTL ? 'text-right' : 'text-center'}`}>
+            <h2 className={`text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20 `}>
               {words.map((word, i) => (
                 <motion.span
                   key={i}
@@ -117,7 +116,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className={`text-2xl md:text-3xl ${isRTL ? 'text-right' : 'text-center'} ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
+            className={`text-2xl md:text-3xl  ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
           >
             {subtitle}
           </motion.p>
@@ -143,7 +142,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
-            className={isRTL ? 'text-right' : 'text-center'}
+            className="text-center"
           >
             <Link
               href={cta.href}

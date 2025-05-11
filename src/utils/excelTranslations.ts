@@ -25,7 +25,7 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
       const localesDir = path.join(process.cwd(), 'src', 'locales');
       
       // Load each language
-      const languages = ['en', 'fi', 'ar'];
+      const languages = ['en', 'fi'];
       const updatedTranslations: Record<string, TranslationObject> = {};
       
       languages.forEach(lang => {
@@ -56,7 +56,6 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
     return {
       en: {},
       fi: {},
-      ar: {},
     };
   }
 }

@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -13,15 +9,11 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
-
-  /* Card Colors */
   --card-from-bg: rgba(249, 250, 251, 0.9);
   --card-to-bg: rgba(243, 244, 246, 0.9);
   --card-border: rgba(229, 231, 235, 0.5);
   --card-border-hover: rgba(96, 165, 250, 0.5);
   --card-shadow-color: rgba(59, 130, 246, 0.2);
-  
-  /* Material Symbols configuration */
   --material-symbols: 'Material Symbols Rounded';
   --material-symbols-weight: 200;
   --material-symbols-fill: 0;
@@ -29,7 +21,6 @@
   --material-symbols-optical-size: 24;
 }
 
-/* Light theme */
 .theme-light {
   --background: #ffffff;
   --foreground: #1f2937;
@@ -39,8 +30,6 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
-  
-  /* Card Colors - Light Theme */
   --card-from-bg: rgba(253, 253, 253, 0.9);
   --card-to-bg: rgba(243, 244, 246, 0.9);
   --card-border: rgba(229, 231, 235, 0.5);
@@ -48,7 +37,6 @@
   --card-shadow-color: rgba(59, 130, 246, 0.2);
 }
 
-/* Dark theme */
 .theme-dark {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -58,8 +46,6 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
-  
-  /* Card Colors - Dark Theme */
   --card-from-bg: rgba(31, 41, 55, 0.9);
   --card-to-bg: rgba(17, 24, 39, 0.9);
   --card-border: rgba(75, 85, 99, 0.5);
@@ -67,7 +53,6 @@
   --card-shadow-color: rgba(59, 130, 246, 0.2);
 }
 
-/* Colorful theme (default) */
 .theme-colorful {
   --background: #050023;
   --foreground: #f0f8ff;
@@ -77,8 +62,6 @@
   --gradient-mid: #ff00cc;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(255, 0, 204, 0.3);
-  
-  /* Card Colors - Colorful Theme */
   --card-from-bg: rgba(20, 10, 50, 0.8);
   --card-to-bg: rgba(10, 5, 30, 0.8);
   --card-border: rgba(128, 0, 255, 0.3);
@@ -86,82 +69,12 @@
   --card-shadow-color: rgba(255, 0, 204, 0.3);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-poppins);
-  }
-
-  body {
-    font-family: var(--font-roboto);
-  }
-  
-  /* Apply Tajawal font for Arabic text */
-  [dir="rtl"] {
-    font-family: var(--font-tajawal);
-  }
-
-  /* Apply Tajawal font for all elements in RTL mode */
-  [dir="rtl"] body,
-  [dir="rtl"] h1,
-  [dir="rtl"] h2,
-  [dir="rtl"] h3,
-  [dir="rtl"] h4,
-  [dir="rtl"] h5,
-  [dir="rtl"] h6,
-  [dir="rtl"] p,
-  [dir="rtl"] div,
-  [dir="rtl"] span,
-  [dir="rtl"] a,
-  [dir="rtl"] button {
-    font-family: var(--font-tajawal) !important;
-  }
-
-  /* Exclude icon elements from the RTL font override */
-  [dir="rtl"] span.material-symbols,
-  [dir="rtl"] span.material-symbols-rounded,
-  [dir="rtl"] i.material-symbols,
-  [dir="rtl"] i.material-icons {
-    font-family: var(--material-symbols) !important;
-  }
-  
-  /* Arabic font class for special styling of Arabic quotes */
-  .font-arabic {
-    font-family: var(--font-tajawal);
-    font-weight: 500; /* Medium weight for better readability of quotes */
-    line-height: 1.8; /* Increased line height for Arabic text */
-    letter-spacing: -0.01em; /* Slightly tighter letter spacing */
-  }
-  
-  /* Enhanced Arabic quotes styling */
-  [dir="rtl"] blockquote.font-arabic {
-    font-family: var(--font-tajawal);
-    font-weight: 500;
-    line-height: 2;
-    letter-spacing: -0.01em;
-    text-align: right;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-roboto);
 }
 
-/* Material Symbols default styles */
 .material-symbols {
   font-family: var(--material-symbols);
   font-weight: var(--material-symbols-weight);
@@ -181,14 +94,23 @@ body {
     'opsz' var(--material-symbols-optical-size);
 }
 
+/* Remove all .rtl-flex-row-reverse, .font-arabic, and RTL/Arabic-specific classes */
+
 /* Card component styling */
 .theme-card {
-  @apply relative rounded-xl p-[2px];
+  position: relative;
+  border-radius: 1rem;
+  padding: 2px;
   transform-style: preserve-3d;
 }
 
 .theme-card-glow {
-  @apply absolute -inset-1 rounded-xl blur-xl transition-all duration-300 opacity-70 group-hover:blur-2xl group-hover:opacity-100;
+  position: absolute;
+  inset: -1px;
+  border-radius: 1rem;
+  filter: blur(1rem);
+  transition: all 0.3s;
+  opacity: 0.7;
   background: linear-gradient(to right, var(--card-shadow-color), var(--card-shadow-color));
 }
 
@@ -209,7 +131,10 @@ body {
 }
 
 .theme-card-content {
-  @apply relative backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  position: relative;
+  backdrop-filter: blur(0.25rem);
+  transition: all 0.3s;
+  overflow: hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
   z-index: 1;
@@ -219,7 +144,11 @@ body {
 }
 
 .theme-card-flex {
-  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  position: relative;
+  border-radius: 1rem;
+  backdrop-filter: blur(0.25rem);
+  transition: all 0.3s;
+  overflow: hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
   z-index: 1;
@@ -263,12 +192,12 @@ body {
 
 /* Ensure images stay contained within cards */
 .theme-card img {
-  @apply transition-transform duration-300;
+  transition: transform 0.3s;
   transform-origin: center center;
 }
 
 .theme-card .overflow-hidden {
-  @apply z-10;
+  z-index: 10;
 }
 
 /* Blog cards equal height fix */
@@ -321,23 +250,29 @@ body {
 
 /* Colorful theme specific card styling */
 .theme-colorful .theme-card {
-  @apply relative rounded-2xl p-[2px];
+  position: relative;
+  border-radius: 2rem;
+  padding: 2px;
   transform-style: preserve-3d;
 }
 
 .theme-colorful .theme-card-content {
-  @apply relative rounded-2xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  position: relative;
+  border-radius: 2rem;
+  backdrop-filter: blur(0.75rem);
+  transition: all 0.3s;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(12px);
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-  border-radius: inherit;
-  position: relative;
   z-index: 1;
 }
 
 .theme-colorful .theme-card-flex {
-  @apply relative rounded-2xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  position: relative;
+  border-radius: 2rem;
+  backdrop-filter: blur(0.75rem);
+  transition: all 0.3s;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
   z-index: 1;
@@ -403,10 +338,6 @@ body {
 .theme-colorful .theme-card {
   transform: translateZ(0);
   will-change: transform;
-}
-
-.theme-colorful .theme-card-content:hover {
-  /* Remove the transform that causes the padding shift */
 }
 
 /* Ensure navigation name visibility */
@@ -524,204 +455,4 @@ body {
   100% {
     transform: translateX(100%);
   }
-}
-
-/* RTL Support for Arabic language */
-[dir="rtl"] {
-  /* Text alignment */
-  .text-left {
-    text-align: right;
-  }
-  
-  .text-right {
-    text-align: left;
-  }
-  
-  /* Margins and paddings - comprehensive solution */
-  .mr-1, .me-1 {
-    margin-right: 0;
-    margin-left: 0.25rem;
-  }
-  
-  .ml-1, .ms-1 {
-    margin-left: 0;
-    margin-right: 0.25rem;
-  }
-  
-  .mr-2, .me-2 {
-    margin-right: 0;
-    margin-left: 0.5rem;
-  }
-  
-  .ml-2, .ms-2 {
-    margin-left: 0;
-    margin-right: 0.5rem;
-  }
-  
-  .mr-3, .me-3 {
-    margin-right: 0;
-    margin-left: 0.75rem;
-  }
-  
-  .ml-3, .ms-3 {
-    margin-left: 0;
-    margin-right: 0.75rem;
-  }
-  
-  .mr-4, .me-4 {
-    margin-right: 0;
-    margin-left: 1rem;
-  }
-  
-  .ml-4, .ms-4 {
-    margin-left: 0;
-    margin-right: 1rem;
-  }
-  
-  .mr-5, .me-5 {
-    margin-right: 0;
-    margin-left: 1.25rem;
-  }
-  
-  .ml-5, .ms-5 {
-    margin-left: 0;
-    margin-right: 1.25rem;
-  }
-  
-  .mr-6, .me-6 {
-    margin-right: 0;
-    margin-left: 1.5rem;
-  }
-  
-  .ml-6, .ms-6 {
-    margin-left: 0;
-    margin-right: 1.5rem;
-  }
-  
-  .mr-8, .me-8 {
-    margin-right: 0;
-    margin-left: 2rem;
-  }
-  
-  .ml-8, .ms-8 {
-    margin-left: 0;
-    margin-right: 2rem;
-  }
-  
-  /* Padding swaps */
-  .pr-1, .pe-1 {
-    padding-right: 0;
-    padding-left: 0.25rem;
-  }
-  
-  .pl-1, .ps-1 {
-    padding-left: 0;
-    padding-right: 0.25rem;
-  }
-  
-  .pr-2, .pe-2 {
-    padding-right: 0;
-    padding-left: 0.5rem;
-  }
-  
-  .pl-2, .ps-2 {
-    padding-left: 0;
-    padding-right: 0.5rem;
-  }
-  
-  .pr-3, .pe-3 {
-    padding-right: 0;
-    padding-left: 0.75rem;
-  }
-  
-  .pl-3, .ps-3 {
-    padding-left: 0;
-    padding-right: 0.75rem;
-  }
-  
-  .pr-4, .pe-4 {
-    padding-right: 0;
-    padding-left: 1rem;
-  }
-  
-  .pl-4, .ps-4 {
-    padding-left: 0;
-    padding-right: 1rem;
-  }
-  
-  .pr-6, .pe-6 {
-    padding-right: 0;
-    padding-left: 1.5rem;
-  }
-  
-  .pl-6, .ps-6 {
-    padding-left: 0;
-    padding-right: 1.5rem;
-  }
-  
-  /* Directions and flexbox order */
-  .space-x-1 > * + * {
-    margin-left: 0;
-    margin-right: 0.25rem;
-  }
-  
-  .space-x-2 > * + * {
-    margin-left: 0;
-    margin-right: 0.5rem;
-  }
-  
-  .space-x-4 > * + * {
-    margin-left: 0;
-    margin-right: 1rem;
-  }
-  
-  .space-x-8 > * + * {
-    margin-left: 0;
-    margin-right: 2rem;
-  }
-  
-  /* RTL specific flex direction */
-  .rtl-flex-row-reverse {
-    flex-direction: row-reverse;
-  }
-  
-  /* RTL specific border radius adjustments */
-  .rtl-rounded-r {
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  
-  .rtl-rounded-l {
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}
-
-/* For RTL languages, adjust transitions and transforms */
-[dir="rtl"] .group-hover\:translate-x-1 {
-  --tw-translate-x: -0.25rem;
-}
-
-[dir="rtl"] .translate-x-1 {
-  --tw-translate-x: -0.25rem;
-}
-
-/* Fix for material symbols in RTL mode */
-[dir="rtl"] .material-symbols,
-[dir="rtl"] .material-symbols-rounded,
-[dir="rtl"] .material-icons {
-  /* Override the direction for icon elements */
-  direction: ltr !important;
-  /* Ensure the font family isn't overridden */
-  font-family: var(--material-symbols) !important;
-  /* Preserve the icon's natural orientation */
-  text-orientation: mixed;
-  /* Ensure icons don't flip in RTL context */
-  unicode-bidi: isolate;
-  /* Fix icon position in RTL context */
-  display: inline-block;
 }

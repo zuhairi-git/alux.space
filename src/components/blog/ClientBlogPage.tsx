@@ -13,7 +13,7 @@ interface ClientBlogPageProps {
 }
 
 export default function ClientBlogPage({ posts, locale: initialLocale }: ClientBlogPageProps) {
-  const { locale, isRTL } = useLanguage();
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const [filter, setFilter] = useState<string | null>(null);
   
@@ -123,7 +123,7 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
   return (
     <div className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4">
-        <div className={`max-w-4xl ${isRTL ? 'mr-auto' : 'mx-auto'} ${isRTL ? 'text-right' : 'text-center'}`}>
+        <div className={`max-w-4xl  `}>
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
           
           {/* Category Filters */}
           <motion.div 
-            className={`flex ${isRTL ? 'justify-end' : 'justify-center'} flex-wrap gap-2 mb-12`}
+            className={`flex  flex-wrap gap-2 mb-12`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Poppins, Roboto, Tajawal } from "next/font/google";
+import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
-import "./rtl.css"; // Import additional RTL styles
-import "./rtl-fixes.css"; // Import RTL-specific fixes
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";
@@ -26,13 +24,6 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-const tajawal = Tajawal({
-  variable: "--font-tajawal",
-  weight: ['400', '500', '700'],
-  subsets: ["arabic"],
-  display: 'swap',
-});
-
 export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   
@@ -45,10 +36,6 @@ export async function generateMetadata({ params }: { params: { locale?: string }
     fi: {
       title: 'Ali Al-Zuhairi - Tuoteomistaja & Design-johtaja',
       description: 'Tuoteomistaja ja design-johtaja, jolla on asiantuntemusta UX-suunnittelussa, ketterissä menetelmissä ja luovassa innovaatiossa.',
-    },
-    ar: {
-      title: 'علي الزهيري - مالك المنتج وقائد التصميم',
-      description: 'مالك المنتج وقائد التصميم مع خبرة في تصميم UX والمنهجيات الرشيقة والابتكار الإبداعي.',
     }
   };
   
@@ -75,9 +62,9 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       description: metadata.description,
       type: 'website',
       siteName: 'Ali Al-Zuhairi',
-      locale: locale === 'en' ? 'en_US' : locale === 'fi' ? 'fi_FI' : 'ar_SA',
+      locale: locale === 'en' ? 'en_US' : 'fi_FI',
       alternateLocale: i18n.locales.filter(l => l !== locale).map(l => 
-        l === 'en' ? 'en_US' : l === 'fi' ? 'fi_FI' : 'ar_SA'
+        l === 'en' ? 'en_US' : 'fi_FI'
       ),
     },
     twitter: {
@@ -104,7 +91,7 @@ export default function RootLayout({
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
       </head>
-      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
+      <body className={`${poppins.variable} ${roboto.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
             {children}

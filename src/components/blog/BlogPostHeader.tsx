@@ -31,7 +31,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   slug,
 }) => {
   const { theme } = useTheme();
-  const { locale, isRTL } = useLanguage();
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isLight = theme === 'light';
 
@@ -64,8 +64,8 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         animate={{ opacity: 1, x: 0 }}
         className="mb-8"
       >
-        <Link href={`/${locale}/blog`} className={`inline-flex items-center text-primary hover:text-primary-hover transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <svg className={`w-5 h-5 ${isRTL ? 'ml-2 transform rotate-180' : 'mr-2'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <Link href={`/${locale}/blog`} className={`inline-flex items-center text-primary hover:text-primary-hover transition-colors `}>
+          <svg className={`w-5 h-5 `} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           {getBackToBlogText()}

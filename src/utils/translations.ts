@@ -76,7 +76,6 @@ export function formatDate(
   const localeMap: Record<string, string> = {
     en: 'en-US',
     fi: 'fi-FI',
-    ar: 'ar-SA',
   };
   
   const dateObj = date instanceof Date ? date : new Date(date);

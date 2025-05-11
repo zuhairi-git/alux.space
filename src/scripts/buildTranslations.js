@@ -34,7 +34,6 @@ async function buildTranslationsFromExcel() {
     const translations = {
       en: {},
       fi: {},
-      ar: {},
     };
     
     // Process each row in the Excel file

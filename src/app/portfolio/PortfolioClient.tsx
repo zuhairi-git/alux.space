@@ -44,7 +44,7 @@ interface Props {
 }
 
 export default function PortfolioClient({ items, locale: initialLocale }: Props) {
-  const { locale, isRTL } = useLanguage();
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   
   // Helper function to add locale to paths
@@ -128,7 +128,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
           transition={{ duration: 0.8 }}
           className="container mx-auto px-4"
         >
-          <div className={`max-w-4xl mb-16 ${isRTL ? 'text-right' : ''}`}>
+          <div className={`max-w-4xl mb-16 `}>
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -155,7 +155,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
                 slideDirection={index % 2 === 0 ? 'left' : 'right'}
               >
                 <Link href={localizedHref(item.link)} className="block -m-8">
-                  <div className={`flex flex-col ${isRTL ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+                  <div className={`flex flex-col `}>
                     <div className="relative w-full md:w-1/2 h-64 md:h-96 overflow-hidden">
                       {item.photo ? (
                         <>
@@ -168,7 +168,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                           {item.photo.author && (
-                            <div className={`absolute bottom-2 ${isRTL ? 'left-2 text-right' : 'right-2 text-left'} text-xs text-white/70`}>
+                            <div className={`absolute bottom-2  text-xs text-white/70`}>
                               {getPhotoByText()}{' '}
                               <a
                                 href={item.photo.author.link}
@@ -196,7 +196,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
                         </div>
                       )}
                     </div>
-                    <div className={`w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center ${isRTL ? 'text-right' : ''}`}>
+                    <div className={`w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center `}>
                       <span className={`text-sm font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent mb-4`}>
                         {getType(item)}
                       </span>
@@ -206,9 +206,9 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
                       <p className="opacity-80 mb-6">
                         {getDesc(item)}
                       </p>
-                      <span className={`inline-flex items-center text-primary group-hover:opacity-80 transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
+                      <span className={`inline-flex items-center text-primary group-hover:opacity-80 transition-colors `}>
                         {getLearnMoreText()}
-                        <svg className={`w-5 h-5 ${isRTL ? 'mr-2 transform group-hover:-translate-x-1 rotate-180' : 'ml-2 transform group-hover:translate-x-1'} transition-transform`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5  transition-transform`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </span>

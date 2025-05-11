@@ -1,3 +1,6 @@
+export const dynamic = "force-static";
+export const revalidate = 0;
+
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
@@ -20,8 +23,8 @@ export async function GET() {
     const outputPath = path.join(process.cwd(), 'src', 'translations', 'generatedTranslations.json');
     
     // Load all JSON files
-    const languages = ['en', 'fi', 'ar'];
-    const translations = {};
+    const languages = ['en', 'fi'];
+    const translations: Record<string, any> = {};
     
     // Load each language's translations
     languages.forEach(lang => {

@@ -7,7 +7,6 @@ import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
 import Hero from '@/components/hero/Hero';
 import QuoteBlock from '@/components/ui/QuoteBlock';
-import RTLText from '@/components/ui/RTLText';
 import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -91,7 +90,6 @@ export default function Home() {
       href: "/portfolio"
     }
   };
-
   // Skills data with translations
   const getSkills = () => {
     const skills = {
@@ -114,22 +112,11 @@ export default function Home() {
         { title: 'Projektinhallinta', desc: 'Ketterä metodologia (Jira, Scrum, Kanban)' },
         { title: 'Testinhallinta', desc: 'Taitava Maze ja Zephyr Scale -työkaluissa' },
         { title: 'Teknologiat', desc: 'Web/mobiili UI, WordPress, HubSpot, React JS' }
-      ],
-      ar: [
-        { title: 'تصميم واجهة المستخدم/تجربة المستخدم', desc: 'خبرة في فيجما وأدوبي' },
-        { title: 'البحث', desc: 'ماهر في البحث النوعي والكمي' },
-        { title: 'إدارة المنتج', desc: 'منهجيات أجايل ورسم خرائط الطريق' },
-        { title: 'قيادة التصميم', desc: 'إرشاد الفريق وتطوير العمليات' },
-        { title: 'أنظمة التصميم', desc: 'إنشاء أطر عمل متسقة وقابلة للتوسع' },
-        { title: 'إدارة المشاريع', desc: 'منهجية أجايل (جيرا، سكرم، كانبان)' },
-        { title: 'إدارة الاختبار', desc: 'متمكن من ميز وزفير سكيل' },
-        { title: 'المجموعة التقنية', desc: 'واجهات الويب/الموبايل، وردبريس، هابسبوت، رياكت' }
       ]
     };
     
     return skills[locale as keyof typeof skills] || skills.en;
   };
-
   // Get work experience content by locale
   const getWorkExperience = () => {
     const workExperience = {
@@ -220,56 +207,11 @@ export default function Home() {
             period: "2000 - 2016"
           }
         ]
-      },
-      ar: {
-        intro: "رحلة عبر مسيرتي المهنية، تعرض نموي وخبرتي في التصميم والتكنولوجيا.",
-        positions: [
-          {
-            title: "مصمم منتجات | مالك المنتج",
-            company: "ويبروبول، هلسنكي، فنلندا",
-            description: "رؤية المنتج، وتحديد الميزات، وإنشاء النماذج الأولية، وتسليم نظام التصميم للمطورين.",
-            period: "2023 - الحاضر"
-          },
-          {
-            title: "مصمم منتجات محترف",
-            company: "ريسلينك، إسبو، فنلندا",
-            description: "إدارة سير العمل والسحابة، تطبيق ويب (SaaS)، وتطبيق موبايل.",
-            period: "2017 - 2023"
-          },
-          {
-            title: "مصمم واجهة مستخدم/تجربة مستخدم كبير وخبير تكنولوجيا المعلومات",
-            company: "ريسلينك، هلسنكي، فنلندا",
-            description: "تطبيق ويب، وتطوير واجهة مستخدم أندرويد، وإدارة VPN.",
-            period: "2016 - 2023"
-          },
-          {
-            title: "المناصب السابقة",
-            positions: [
-              {
-                title: "مصمم جرافيك واجهة مستخدم/تجربة مستخدم وخبير تكنولوجيا المعلومات",
-                company: "ريسلينك، هلسنكي، فنلندا",
-                period: "2014 - 2016"
-              },
-              {
-                title: "خبير تكنولوجيا معلومات مستقل ومطور واجهة مستخدم",
-                company: "من دمشق إلى إسبو",
-                period: "2000 - 2014"
-              },
-              {
-                title: "مصمم جرافيك وخبير تكنولوجيا معلومات",
-                company: "مجلات وصحف مختلفة — طهران، إيران",
-                period: ""
-              }
-            ],
-            period: "2000 - 2016"
-          }
-        ]
       }
     };
     
     return workExperience[locale as keyof typeof workExperience] || workExperience.en;
   };
-
   // Get translated testimonials
   const getTestimonials = () => {
     const testimonials = {
@@ -295,18 +237,6 @@ export default function Home() {
           text: "Ali on poikkeuksellinen ja kokenut UI/UX-suunnittelija, jolla on yli kymmenen vuoden ammattikokemus erikoistuen tuotesuunnitteluun teknologiayrityksissä. Ali uskoo, että suunnittelu ei ole kyse toimitettavista ja kauniista pikseleistä, vaan ongelmien ratkaisemisesta ja liiketoiminnan ja käyttäjien tavoitteiden saavuttamisesta. Tuotesuunnittelijana Ali keskittyy käytettävyyteen, käyttäjäkokemukseen ja käyttäjätutkimukseen suunnittelussaan. Hän on työskennellyt pienissä ja suurissa tiimeissä sekä freelancerina ja nauttii käyttäjäongelmien ratkaisun haasteesta. Hän toimittaa aina ajallaan ja budjetissa.",
           name: "Constantin Buda",
           position: "CMO Vidalico Digitalissa | Hubspot Agency Partner | SicTic-jäsen"
-        }
-      ],
-      ar: [
-        {
-          text: "علي مصمم منتجات مبدع. ستجد الكثير من الفنانين ذوي التصميمات المزدحمة والأشكال الفنية المعقدة. لكن علي يأخذ الريادة في تصاميم المنتجات المؤثرة والبسيطة والمناسبة. لديه هذه القدرة الذكية على حل المشاكل المعقدة بحلول بسيطة باستخدام مهاراته التصميمية. فنه يتحدث بصريًا، يؤدي المهمة بشكل مثالي ويترك انطباعًا دائمًا. لقد عملت مع علي في الماضي وكانت تجربة ممتعة حقًا. أود أن أفعل ذلك مرة أخرى وأوصي بعلي أيضًا.",
-          name: "فهد م",
-          position: "متعاقد تكنولوجيا المعلومات | ترافيلودج للفنادق المحدودة"
-        },
-        {
-          text: "علي مصمم واجهة مستخدم/تجربة مستخدم استثنائي وذو خبرة مع أكثر من عشر سنوات من الخبرة المهنية متخصص في تصميم المنتجات لشركات التكنولوجيا. يعتقد علي أن التصميم لا يتعلق بالمنتجات النهائية والبكسلات الجميلة، بل بحل المشكلات وتحقيق أهداف العمل والمستخدم. كمصمم منتجات، يركز علي على قابلية الاستخدام وتجربة المستخدم وأبحاث المستخدم في تصاميمه. لقد عمل مع فرق صغيرة وكبيرة وكذلك كمستقل ويستمتع بتحدي حل مشاكل المستخدمين. يقدم دائمًا في الوقت المحدد وضمن الميزانية.",
-          name: "قسطنطين بودا",
-          position: "رئيس التسويق في فيداليكو الرقمية | شريك وكالة هابسبوت | عضو سيكتيك"
         }
       ]
     };
@@ -389,45 +319,42 @@ export default function Home() {
             >
               {workContent.intro}
             </motion.p>
-          </div>
-            {/* Timeline container with vertical line */}
-          <div className="relative max-w-5xl mx-auto">
+          </div>            {/* Timeline container with vertical line */}
+          <div className="relative max-w-5xl mx-auto mt-16 px-4">
             {/* Central timeline line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent"></div>
             
-            {workContent.positions.map((position, index) => (
-              <motion.div 
+            {workContent.positions.map((position, index) => (              <motion.div 
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`relative ${index < workContent.positions.length - 1 ? 'mb-20' : ''}`}
-              >
-                {/* Timeline dot */}
-                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-2 w-6 h-6 rounded-full ${
+                className={`relative ${index < workContent.positions.length - 1 ? 'mb-24' : ''} flex items-center`}
+              >{/* Timeline dot perfectly centered on the line */}
+                <div className={`absolute left-1/2 top-0 transform -translate-x-1/2 w-6 h-6 rounded-full ${
                   index === 0 
                     ? 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg shadow-purple-500/20' 
                     : index === workContent.positions.length - 1
                       ? 'bg-gradient-to-r from-gray-500 to-blue-500/50 shadow-lg shadow-gray-500/20'
                       : 'bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20'
                 } z-10`}></div>
-                  {/* Date badge */}
-                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-14 ${
+                  {/* Date badge perfectly centered above timeline dot */}
+                <div className={`absolute left-1/2 transform -translate-x-1/2 -top-12 ${
                   index === 0 
                     ? 'bg-gradient-to-r from-purple-500/30 to-blue-500/30 shadow-md shadow-purple-500/10' 
                     : index === workContent.positions.length - 1
                       ? 'bg-gradient-to-r from-gray-500/30 to-blue-500/20 shadow-md shadow-gray-500/10'
                       : 'bg-gradient-to-r from-blue-500/30 to-cyan-500/30 shadow-md shadow-blue-500/10'
-                } backdrop-blur-sm text-primary px-5 py-2 rounded-full text-sm font-semibold border border-primary/10`}>
+                } backdrop-blur-sm text-primary px-5 py-2 rounded-full text-sm font-semibold border border-primary/10 text-center`}>
                   {position.period}
                 </div>
-                
-                {/* Card positioned alternating */}                <div className={`${
+                  {/* Card positioned alternating with equal spacing from timeline */}
+                <div className={`${
                   index % 2 === 0 
-                    ? 'ml-auto mr-0 md:ml-[50%] md:w-[50%]' 
-                    : 'mr-auto ml-0 md:mr-[50%] md:w-[50%]'
-                }`}>
+                    ? 'ml-auto md:ml-[52%] md:w-[45%] md:pl-8' 
+                    : 'mr-auto md:mr-[52%] md:w-[45%] md:pr-8'
+                } mt-6`}>
                   <Card>
                     <CardContent 
                       icon={
@@ -630,16 +557,14 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 whileHover={{ scale: 1.02 }}
                 className="theme-card relative overflow-hidden"
-              >                <div className="theme-card-content p-8 md:p-10">
-                  {/* Quote icon positioned on the correct side based on language direction */}
-                  <div className={`absolute -top-16 ${locale === 'ar' ? '-right-16' : '-left-16'} text-8xl opacity-20 text-primary`}>
+              >                <div className="theme-card-content p-8 md:p-10">                  {/* Quote icon */}
+                  <div className="absolute -top-16 -left-16 text-8xl opacity-20 text-primary">
                     <Icon name="format_quote" className="" />
                   </div>
-                  
-                  {/* Main testimonial content with proper RTL support */}
-                  <div className={`flex flex-col ${locale === 'ar' ? 'md:flex-row-reverse rtl' : 'md:flex-row'} gap-8 items-start relative z-10`}>
-                    {/* Avatar - positioned on the right for Arabic, left for other languages */}
-                    <div className={`flex-shrink-0 ${locale === 'ar' ? 'md:mr-0 md:ml-8' : 'md:ml-0 md:mr-8'}`}>
+                    {/* Main testimonial content */}
+                  <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
+                    {/* Avatar */}
+                    <div className="flex-shrink-0 md:ml-0 md:mr-8">
                       <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
                         <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
                           <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">
@@ -651,25 +576,24 @@ export default function Home() {
                     
                     {/* Testimonial text content */}
                     <div className="flex-grow">
-                      {/* Testimonial text with proper text alignment */}
+                      {/* Testimonial text */}
                       <div className="mb-6">
-                        <p className={`text-theme-text/80 text-lg leading-relaxed ${locale === 'ar' ? '' : ''}`}>
-                          <RTLText>{testimonial.text}</RTLText>
+                        <p className="text-theme-text/80 text-lg leading-relaxed">
+                          {testimonial.text}
                         </p>
                       </div>
                       
-                      {/* Author information with proper alignment */}
-                      <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse justify-end' : 'justify-between'}`}>
-                        <div className={locale === 'ar' ? '' : ''}>
-                          <div className="font-medium text-primary text-xl"><RTLText>{testimonial.name}</RTLText></div>
-                          <div className="text-sm text-theme-text/60 mt-1"><RTLText>{testimonial.position}</RTLText></div>
+                      {/* Author information */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-medium text-primary text-xl">{testimonial.name}</div>
+                          <div className="text-sm text-theme-text/60 mt-1">{testimonial.position}</div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <motion.div 
+                  </div>                  <motion.div 
                     className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
-                    initial={{ scaleX: 0, transformOrigin: locale === 'ar' ? "right" : "left" }}
+                    initial={{ scaleX: 0, transformOrigin: "left" }}
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}

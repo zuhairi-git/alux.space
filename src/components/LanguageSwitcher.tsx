@@ -8,25 +8,21 @@ import { useTheme } from '@/context/ThemeContext';
 import Tooltip from './ui/Tooltip';
 import { i18n } from '@/i18n';
 
-export default function LanguageSwitcher() {
-  const { locale, setLocale, isRTL } = useLanguage();
+export default function LanguageSwitcher() {  const { locale, setLocale } = useLanguage();
   const { theme } = useTheme();
   const { t } = useTranslations(locale);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
   // Flag icons for language selection
   const languageFlags: Record<string, string> = {
     en: '🇬🇧',
     fi: '🇫🇮',
-    ar: '🇸🇦',
   };
   
   // Default language names to avoid hydration mismatch
   const defaultLanguageNames: Record<string, string> = {
     en: 'English',
     fi: 'Suomi',
-    ar: 'العربية',
   };
   
   // State to track if we're on the client side
@@ -104,10 +100,9 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <Tooltip text={isClient ? t('languageSwitcher.title') : "Language"}>
-        <button
+      <Tooltip text={isClient ? t('languageSwitcher.title') : "Language"}>        <button
           onClick={toggleDropdown}
-          className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} px-3 py-2 rounded-lg ${
+          className={`flex items-center px-3 py-2 rounded-lg ${
             theme === 'light' 
               ? 'bg-white/80 hover:bg-white border border-gray-200 shadow-sm' 
               : 'bg-gray-800/80 hover:bg-gray-800 border border-gray-700 shadow-sm'
@@ -118,13 +113,11 @@ export default function LanguageSwitcher() {
         >
           <span className="text-xl">{languageFlags[locale]}</span>
           <span className={`mx-2 truncate ${isMobile ? 'hidden' : 'inline-block'}`}>{getLanguageName(locale)}</span>
-          <span className={`material-symbols material-symbols-rounded text-base transform transition-transform ${isRTL ? 'mr-1' : 'ml-1'} ${isOpen ? 'rotate-180' : ''}`}>
+          <span className={`material-symbols material-symbols-rounded text-base transform transition-transform ml-1 ${isOpen ? 'rotate-180' : ''}`}>
             {isOpen ? 'expand_less' : 'expand_more'}
           </span>
         </button>
-      </Tooltip>
-
-      <AnimatePresence>
+      </Tooltip>      <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -134,14 +127,14 @@ export default function LanguageSwitcher() {
               duration: 0.2,
               ease: "easeInOut"
             }}
-            className={`absolute ${isRTL ? 'right-0' : 'left-0'} mt-2 w-auto min-w-[180px] rounded-lg ${theme === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-900 border border-gray-700'} backdrop-blur-lg shadow-lg overflow-hidden z-50`}
+            className={`absolute left-0 mt-2 w-auto min-w-[180px] rounded-lg ${theme === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-900 border border-gray-700'} backdrop-blur-lg shadow-lg overflow-hidden z-50`}
           >
             <div className="py-2">
               {i18n.locales.map((langCode) => (
                 <button
                   key={langCode}
                   onClick={() => handleLanguageChange(langCode)}
-                  className={`flex items-center ${isRTL ? 'flex-row-reverse' : ''} w-full px-4 py-3 text-sm ${
+                  className={`flex items-center w-full px-4 py-3 text-sm ${
                     theme === 'light'
                       ? locale === langCode
                         ? 'bg-blue-50 text-blue-600'
@@ -149,14 +142,14 @@ export default function LanguageSwitcher() {
                       : locale === langCode
                       ? 'bg-blue-900/20 text-blue-400'
                       : 'text-gray-300 hover:bg-gray-800'
-                  } transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                  } transition-colors text-left`}
                   aria-current={locale === langCode ? "true" : "false"}
                 >
                   <div className={`flex items-center justify-center text-xl w-8 h-8 rounded-full ${
                     locale === langCode
                       ? theme === 'light' ? 'bg-blue-100' : 'bg-blue-800/30' 
                       : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-                  } ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                  } mr-2`}>
                     {languageFlags[langCode]}
                   </div>
                   <span className="font-medium whitespace-nowrap">{getLanguageName(langCode)}</span>
