@@ -239,7 +239,7 @@ const Navigation = () => {
               >                <div className="relative" ref={homeDropdownRef}>
                   <Tooltip text={t('nav.home')}>                    <button
                       onClick={toggleHomeDropdown}
-                      className={`flex items-center p-2 rounded-lg ${getDropdownButtonClass()}`}aria-expanded={homeOpen}
+                      className={`flex items-center gap-1 p-2 rounded-lg ${getDropdownButtonClass()}`}aria-expanded={homeOpen}
                       aria-haspopup="true"
                     >                      <span className="relative z-10 transition-colors">
                         {t('nav.home')}
@@ -267,10 +267,9 @@ const Navigation = () => {
                             <React.Fragment key={item.href}>
                               {index === 1 && (
                                 <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                              )}
-                                <Link
+                              )}                                <Link
                                 href={localizedHref(item.href)}
-                                className={`flex items-center  w-full px-4 py-2 text-sm ${
+                                className={`flex items-center gap-2 w-full px-4 py-2 text-sm ${
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
@@ -307,10 +306,9 @@ const Navigation = () => {
                 className="relative"
               >
                 <div className="relative" ref={portfolioDropdownRef}>
-                  <Tooltip text={t('nav.portfolio')}>
-                    <button
+                  <Tooltip text={t('nav.portfolio')}>                    <button
                       onClick={togglePortfolioDropdown}
-                      className={`flex items-center  p-2 rounded-lg ${getDropdownButtonClass()}`}
+                      className={`flex items-center gap-1 p-2 rounded-lg ${getDropdownButtonClass()}`}
                       aria-expanded={portfolioOpen}
                       aria-haspopup="true"
                     >                      <span className="relative z-10 transition-colors">{t('nav.portfolio')}</span>                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${portfolioOpen ? 'rotate-180' : ''} ml-1`}>
@@ -337,10 +335,9 @@ const Navigation = () => {
                               {index === 1 && (
                                 <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
                               )}
-                              
-                              <Link
+                                <Link
                                 href={localizedHref(item.href)}
-                                className={`flex items-center  w-full px-4 py-2 text-sm ${
+                                className={`flex items-center gap-2 w-full px-4 py-2 text-sm ${
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
@@ -461,15 +458,14 @@ const Navigation = () => {
             <ul className={`p-4 space-y-2`}>
               {/* Home with dropdown - Mobile */}              <li className="relative">
                 <div ref={mobileHomeRef}>
-                  <div className="flex items-center">
-                    <Link
+                  <div className="flex items-center">                    <Link
                       href={localizedHref('/')}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex-grow flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                     >
                       <span className={`material-symbols `}>home</span>
                       <span className="font-medium">{t('nav.home')}</span>
-                    </Link>                    <button
+                    </Link><button
                       onClick={toggleMobileHomeDropdown}
                       className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                       aria-expanded={mobileHomeOpen}
@@ -493,11 +489,9 @@ const Navigation = () => {
                           <React.Fragment key={item.href}>
                             {index === 1 && (
                               <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                            )}
-                            
-                            <Link
+                            )}                              <Link
                               href={localizedHref(item.href)}
-                              className={`flex items-center  w-full px-6 py-2 text-sm ${
+                              className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
@@ -530,15 +524,14 @@ const Navigation = () => {
               {/* Portfolio with dropdown - Mobile */}
               <li className="relative">
                 <div ref={mobilePortfolioRef}>
-                  <div className="flex items-center">
-                    <Link
+                  <div className="flex items-center">                    <Link
                       href={localizedHref('/portfolio')}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex-grow flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                     >
                       <span className={`material-symbols `}>work</span>
                       <span className="font-medium">{t('nav.portfolio')}</span>
-                    </Link>                    <button
+                    </Link><button
                       onClick={toggleMobilePortfolioDropdown}
                       className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                       aria-expanded={mobilePortfolioOpen}
@@ -562,11 +555,9 @@ const Navigation = () => {
                           <React.Fragment key={item.href}>
                             {index === 1 && (
                               <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                            )}
-                            
-                            <Link
+                            )}                              <Link
                               href={localizedHref(item.href)}
-                              className={`flex items-center  w-full px-6 py-2 text-sm ${
+                              className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
@@ -597,11 +588,10 @@ const Navigation = () => {
               </li>
 
               {/* Blog link - Mobile */}
-              <li>
-                <Link
+              <li>                  <Link
                   href={localizedHref('/blog')}
                   onClick={() => setMenuOpen(false)}
-                  className={`w-full flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >
                   <span className={`material-symbols `}>article</span>
                   <span className="font-medium">{t('nav.blog')}</span>
@@ -609,11 +599,10 @@ const Navigation = () => {
               </li>
 
               {/* Prompts link - Mobile */}
-              <li>
-                <Link
+              <li>                <Link
                   href={localizedHref('/prompt')}
                   onClick={() => setMenuOpen(false)}
-                  className={`w-full flex items-center  py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >
                   <span className={`material-symbols `}>smart_toy</span>
                   <span className="font-medium">{t('nav.prompts')}</span>
