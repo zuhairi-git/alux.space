@@ -14,17 +14,14 @@ interface PortfolioCardProps {
     title: {
       en: string;
       fi?: string;
-      ar?: string;
     };
     type: {
       en: string;
       fi?: string;
-      ar?: string;
     };
     desc: {
       en: string;
       fi?: string;
-      ar?: string;
     };
     link: string;
     gradient: string;
@@ -74,7 +71,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
   const getPhotoByText = (): string => {
     switch(locale) {
       case 'fi': return 'Kuva:';
-      case 'ar': return 'صورة بواسطة:';
       default: return 'Photo by';
     }
   };
@@ -82,7 +78,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
   const getOnText = (): string => {
     switch(locale) {
       case 'fi': return 'palvelussa';
-      case 'ar': return 'على';
       default: return 'on';
     }
   };
@@ -90,7 +85,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
   const getLearnMoreText = (): string => {
     switch(locale) {
       case 'fi': return 'Lue lisää';
-      case 'ar': return 'اقرأ المزيد';
       default: return 'Learn more';
     }
   };

@@ -34,12 +34,10 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isLight = theme === 'light';
-
   // Get localized strings for UI elements
   const getBackToBlogText = (): string => {
     switch(locale) {
       case 'fi': return 'Takaisin blogiin';
-      case 'ar': return 'العودة إلى المدونة';
       default: return 'Back to all articles';
     }
   };

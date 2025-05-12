@@ -14,17 +14,14 @@ interface PortfolioItem {
   title: {
     en: string;
     fi?: string;
-    ar?: string;
   };
   type: {
     en: string;
     fi?: string;
-    ar?: string;
   };
   desc: {
     en: string;
     fi?: string;
-    ar?: string;
   };
   link: string;
   gradient: string;
@@ -79,18 +76,15 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
     {
       title: {
         en: 'Collaboration & Leadership',
-        fi: 'Yhteistyö & Johtajuus',
-        ar: 'التعاون والقيادة'
+        fi: 'Yhteistyö & Johtajuus'
       },
       type: {
         en: 'Team Management',
-        fi: 'Tiimin hallinta',
-        ar: 'إدارة الفريق'
+        fi: 'Tiimin hallinta'
       },
       desc: {
         en: 'Building bridges between design, development, and business through effective collaboration.',
-        fi: 'Rakentaa siltoja suunnittelun, kehityksen ja liiketoiminnan välille tehokkaan yhteistyön avulla.',
-        ar: 'بناء الجسور بين التصميم والتطوير والأعمال من خلال التعاون الفعال.'
+        fi: 'Rakentaa siltoja suunnittelun, kehityksen ja liiketoiminnan välille tehokkaan yhteistyön avulla.'
       },
       link: `/${locale}/portfolio/collaboration`,
       gradient: 'from-blue-400 to-purple-500',
@@ -101,18 +95,15 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
     {
       title: {
         en: 'Career Development',
-        fi: 'Urakehitys',
-        ar: 'التطور المهني'
+        fi: 'Urakehitys'
       },
       type: {
         en: 'Professional Growth',
-        fi: 'Ammatillinen kasvu',
-        ar: 'النمو المهني'
+        fi: 'Ammatillinen kasvu'
       },
       desc: {
         en: 'Continuous learning and evolution in product design and leadership roles.',
-        fi: 'Jatkuva oppiminen ja kehitys tuotesuunnittelun ja johtamisen rooleissa.',
-        ar: 'التعلم المستمر والتطور في أدوار تصميم المنتجات والقيادة.'
+        fi: 'Jatkuva oppiminen ja kehitys tuotesuunnittelun ja johtamisen rooleissa.'
       },
       link: `/${locale}/portfolio/jobseeking`,
       gradient: 'from-purple-400 to-pink-500',

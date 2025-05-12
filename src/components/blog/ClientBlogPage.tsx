@@ -101,21 +101,17 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
     
     return categoryTranslations[category]?.[locale] || category;
   };
-  
-  // Translate "All" button text
+    // Translate "All" button text
   const getAllText = (): string => {
     switch(locale) {
       case 'fi': return 'Kaikki';
-      case 'ar': return 'الكل';
       default: return 'All';
     }
   };
-  
-  // Translate "No posts found" text
+    // Translate "No posts found" text
   const getNoPostsText = (): string => {
     switch(locale) {
       case 'fi': return 'Ei artikkeleita tässä kategoriassa.';
-      case 'ar': return 'لا توجد مقالات في هذه الفئة.';
       default: return 'No posts found in this category.';
     }
   };

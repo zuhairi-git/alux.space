@@ -132,38 +132,29 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
       };
   
   const isUsingFallback = post.content && !post.content[locale as keyof typeof post.content];
-  
-  // Get author biography description based on locale
+    // Get author biography description based on locale
   const getAuthorDescription = (locale: string) => {
     switch(locale) {
       case 'fi':
         return 'Tuoteomistaja ja design-johtaja, jolla on asiantuntemusta UX-suunnittelussa, ketterissä menetelmissä ja luovassa innovaatiossa.';
-      case 'ar':
-        return 'مالك المنتج وقائد التصميم مع خبرة في تصميم UX والمنهجيات الرشيقة والابتكار الإبداعي.';
       default:
         return 'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.';
     }
   };
-
   // Translate "About the Author" text based on locale
   const getAboutAuthorText = (locale: string) => {
     switch(locale) {
       case 'fi':
         return 'Tietoa kirjoittajasta';
-      case 'ar':
-        return 'عن الكاتب';
       default:
         return 'About the Author';
     }
   };
-  
-  // Get translation notice text if using fallback content
+    // Get translation notice text if using fallback content
   const getTranslationNoticeText = () => {
     switch(locale) {
       case 'fi':
         return 'Tätä artikkelia ei ole vielä saatavilla suomeksi. Näytetään englanninkielinen versio.';
-      case 'ar':
-        return 'هذه المقالة غير متوفرة باللغة العربية بعد. يتم عرض النسخة الإنجليزية.';
       default:
         return '';
     }

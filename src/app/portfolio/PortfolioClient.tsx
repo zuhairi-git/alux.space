@@ -15,17 +15,14 @@ interface PortfolioItem {
   title: {
     en: string;
     fi?: string;
-    ar?: string;
   };
   type: {
     en: string;
     fi?: string;
-    ar?: string;
   };
   desc: {
     en: string;
     fi?: string;
-    ar?: string;
   };
   link: string;
   gradient: string;
@@ -88,7 +85,6 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const getLearnMoreText = (): string => {
     switch(locale) {
       case 'fi': return 'Lue lisää';
-      case 'ar': return 'اقرأ المزيد';
       default: return 'Learn more';
     }
   };
@@ -101,8 +97,6 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
     switch(locale) {
       case 'fi': 
         return 'Jokainen projekti on luku suunnittelutarinaani—todellisten ongelmien ratkaisemista, tiimityötä ja kasvua käytännön johtajuuden sekä luovan tutkimisen kautta.';
-      case 'ar':
-        return 'استكشاف رحلتي من خلال قيادة التصميم والتعاون الجماعي والنمو المهني.';
       default:
         return 'Each project is a chapter in my design story—solving real problems, collaborating with teams, and evolving through hands-on leadership and creative exploration.';
     }
@@ -111,7 +105,6 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const getPhotoByText = (): string => {
     switch(locale) {
       case 'fi': return 'Kuva:';
-      case 'ar': return 'صورة بواسطة:';
       default: return 'Photo by';
     }
   };
@@ -119,14 +112,12 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const getOnText = (): string => {
     switch(locale) {
       case 'fi': return 'palvelussa';
-      case 'ar': return 'على';
       default: return 'on';
     }
   };
     const getImageUnavailableText = (): string => {
     switch(locale) {
       case 'fi': return 'Kuva ei saatavilla';
-      case 'ar': return 'الصورة غير متوفرة';
       default: return 'Image unavailable';
     }
   };
@@ -135,7 +126,6 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const getAllText = (): string => {
     switch(locale) {
       case 'fi': return 'Kaikki';
-      case 'ar': return 'الكل';
       default: return 'All';
     }
   };
@@ -144,7 +134,6 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const getNoItemsText = (): string => {
     switch(locale) {
       case 'fi': return 'Ei projekteja tässä kategoriassa.';
-      case 'ar': return 'لا توجد مشاريع في هذه الفئة.';
       default: return 'No projects found in this category.';
     }
   };
