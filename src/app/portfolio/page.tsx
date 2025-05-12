@@ -23,6 +23,8 @@ interface PortfolioItem {
   };
   link: string;
   gradient: string;
+  tags?: string[];
+  date?: string;
   photo?: {
     url: string;
     author?: {
@@ -69,8 +71,7 @@ export async function generateMetadata({ params }: { params: { locale?: string }
 
 export default async function PortfolioPage({ params }: { params: { locale?: string } }) {
   const locale = params.locale || i18n.defaultLocale;
-  
-  const portfolioItems: PortfolioItem[] = [
+    const portfolioItems: PortfolioItem[] = [
     {
       title: {
         en: 'Collaboration & Leadership',
@@ -87,13 +88,14 @@ export default async function PortfolioPage({ params }: { params: { locale?: str
         fi: 'Rakentaa siltoja suunnittelun, kehityksen ja liiketoiminnan välille tehokkaan yhteistyön avulla.',
         ar: 'بناء الجسور بين التصميم والتطوير والأعمال من خلال التعاون الفعال.'
       },
+      tags: ['Leadership', 'UX Design', 'Teamwork'],
+      date: 'Jan 2023 - Present',
       link: '/portfolio/collaboration',
       gradient: 'from-blue-400 to-purple-500',
       photo: {
         url: '/images/portfolio/collaboration/cover.jpg'
       }
-    },
-    {
+    },    {
       title: {
         en: 'Career Development',
         fi: 'Urakehitys',
@@ -109,11 +111,33 @@ export default async function PortfolioPage({ params }: { params: { locale?: str
         fi: 'Jatkuva oppiminen ja kehitys tuotesuunnittelun ja johtamisen rooleissa.',
         ar: 'التعلم المستمر والتطور في أدوار تصميم المنتجات والقيادة.'
       },
+      tags: ['Personal Growth', 'Career Path', 'Design Leadership'],
+      date: 'May 2022 - Dec 2022',
       link: '/portfolio/jobseeking',
       gradient: 'from-purple-400 to-pink-500',
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpeg'
-      }
+      }    },
+    {
+      title: {
+        en: 'UX Design Portfolio',
+        fi: 'UX-suunnitteluportfolio',
+        ar: 'محفظة تصميم تجربة المستخدم'
+      },
+      type: {
+        en: 'UX Design',
+        fi: 'UX-suunnittelu',
+        ar: 'تصميم تجربة المستخدم'
+      },
+      desc: {
+        en: 'A collection of my user experience design projects focusing on usability and accessibility.',
+        fi: 'Kokoelma käyttäjäkokemussuunnitteluprojektejani, jotka keskittyvät käytettävyyteen ja saavutettavuuteen.',
+        ar: 'مجموعة من مشاريع تصميم تجربة المستخدم التي تركز على قابلية الاستخدام وإمكانية الوصول.'
+      },
+      tags: ['UI/UX', 'Accessibility', 'User Research'],
+      date: 'Aug 2021 - Apr 2022',
+      link: '/portfolio/ux-design',
+      gradient: 'from-green-400 to-blue-500'
     }
   ];
 
