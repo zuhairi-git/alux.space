@@ -140,36 +140,56 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index, viewMode = 'standard' 
                   </svg>
                   {post.readTime}
                 </span>
-              </div>
-            </div>
+              </div>            </div>
           </Link>
         </div>
       </motion.div>
-    );  }
-  
-  // Standard view (default)
+    );
+  }
+    // Standard view (default)
   return (
     <motion.div
-      initial={{ opacity: 0, x: slideDirection === 'left' ? -50 : 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
-      className={`rounded-xl overflow-hidden shadow-md h-full transition-all duration-300 ${styles.card}`}
+      className="h-full w-full"
     >
-      <Link href={localizedPostUrl} className="block h-full">
-        <div className="group flex flex-col h-full">
-          <div className="relative w-full h-64 overflow-hidden">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover transform transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-            <div className="absolute top-4 right-4 z-10 flex gap-2">
+      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
+        <Link href={localizedPostUrl} className="h-full flex flex-col">
+          {/* Image Section */}
+          <div className="relative w-full h-48 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden bg-black">
+              <motion.div
+                className="absolute inset-0 w-full h-full scale-[1.01]"
+                whileHover={{ scale: 1.05 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 15, 
+                  duration: 0.2
+                }}
+              >
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </motion.div>
+            </div>
+            
+            {/* Display post main category as a badge */}
+            <div className="absolute top-3 right-3 z-10">
+              <span className="px-3 py-1 rounded-full text-xs bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md">
+                {post.tags[0] || 'Blog'}
+              </span>
+            </div>
+            
+            {/* Social sharing buttons */}
+            <div className="absolute top-3 left-3 z-10 flex gap-2">
               <TwitterShareButton
                 url={`${process.env.NEXT_PUBLIC_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : '')}${localizedPostUrl}`}
                 title={post.title}
@@ -196,46 +216,40 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index, viewMode = 'standard' 
               </LinkedinShareButton>
             </div>
           </div>
-
-          <div className="p-6 flex flex-col flex-grow">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {post.tags.slice(0, 2).map((tag, idx) => (
-                <span
-                  key={idx}
-                  className={`px-3 py-1 rounded-full text-xs ${styles.tag}`}
-                >
-                  {tag}
+          
+          {/* Content Section */}
+          <div className="p-6 flex-1 flex flex-col">            <div className="flex items-start mb-4 gap-4">              <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-primary bg-primary/10 rounded-lg">
+                <span className="material-symbols-rounded text-4xl">
+                  article
                 </span>
-              ))}
-            </div>
-
-            <h3 className={`text-xl font-bold mb-2 group-hover:${styles.primaryText} transition-colors ${styles.text}`}>
-              {post.title}
-            </h3>
-
-            <p className={`${styles.text} opacity-80 text-sm mb-4 flex-grow`}>
-              {post.description}
-            </p>
-
-            <div className="flex justify-between items-center text-sm mt-auto pt-4 border-t border-current/10">
-              <span className={styles.date}>{post.publishedDate}</span>
-              <span className={`flex items-center ${styles.date}`}>
-                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-                {post.readTime}
-              </span>
-            </div>
-
-            <div className={`mt-4 inline-flex items-center ${styles.primaryText} group-hover:opacity-80 transition-colors`}>
-              Read more
-              <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              </div>
+              <div className="flex-1">
+                <h3 className={`text-xl font-semibold text-primary mb-1`}>{post.title}</h3>
+                <div className="opacity-80 text-sm line-clamp-2">{post.description}</div>
+              </div>
+            </div>            {/* Tags Section */}
+            {post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2 mb-4">
+                {post.tags.slice(0, 2).map((tag, idx) => (
+                  <span key={idx} className="px-3 py-1.5 rounded-full text-xs bg-primary/10 text-primary font-medium">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+              {/* Date and read time section */}
+            <div className="text-xs mt-auto pt-4 flex items-center justify-between border-t border-current/10">              <div className="flex items-center gap-1">
+                <span className="material-symbols-rounded text-sm text-primary">calendar_today</span>
+                <span className="opacity-80">{post.publishedDate}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="material-symbols-rounded text-sm text-primary">schedule</span>
+                <span className="opacity-80">{post.readTime}</span>
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </motion.div>
   );
 };

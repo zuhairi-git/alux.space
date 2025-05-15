@@ -184,44 +184,48 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
                   {translateCategory(category)}
                 </button>
               ))}
-            </motion.div>
-            
-            {/* View Mode Toggle */}
+            </motion.div>              {/* View Mode Toggle */}
             <motion.div 
               className="flex items-center bg-theme-card rounded-full p-1"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <button
+              <motion.button
                 onClick={() => setViewMode('standard')}
                 className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
                   viewMode === 'standard'
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
                     : 'text-gray-400 hover:text-gray-100'
                 }`}
+                whileHover={{ scale: viewMode === 'standard' ? 1 : 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <span className="material-symbols text-sm">grid_view</span>
+                <span className="material-symbols-rounded text-sm">grid_view</span>
                 <span>{getViewModeText('standard')}</span>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => setViewMode('overlay')}
                 className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
                   viewMode === 'overlay'
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
                     : 'text-gray-400 hover:text-gray-100'
                 }`}
-              >
-                <span className="material-symbols text-sm">layers</span>
+                whileHover={{ scale: viewMode === 'overlay' ? 1 : 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >                <span className="material-symbols-rounded text-sm">layers</span>
                 <span>{getViewModeText('overlay')}</span>
-              </button>
+              </motion.button>
             </motion.div>
           </div>
         </div>
-        
-        {/* Blog Posts Grid */}
+          {/* Blog Posts Grid */}
         <motion.div 
-          className={`grid grid-cols-1 ${viewMode === 'standard' ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} gap-8`}
+          className={`grid grid-cols-1 ${
+            viewMode === 'standard' 
+              ? 'md:grid-cols-2 lg:grid-cols-3' 
+              : 'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'
+          } gap-8`}
           variants={{
             hidden: { opacity: 0 },
             show: {
@@ -239,14 +243,15 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
             // Get the content for the current locale or fall back to English
             const localeContent = post.content[locale as keyof typeof post.content] || post.content.en;
             
-            return (
-              <motion.div
+            return (              <motion.div
                 key={post.slug}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   show: { opacity: 1, y: 0 }
                 }}
                 className={`h-full ${viewMode === 'overlay' ? 'aspect-[3/4]' : ''}`}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
               >
                 <BlogCard 
                   post={{
