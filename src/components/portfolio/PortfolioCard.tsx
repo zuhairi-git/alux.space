@@ -1,11 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import Card from '@/components/Card';
-import { useTheme } from '@/context/ThemeContext';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
 
@@ -40,12 +38,8 @@ interface PortfolioCardProps {
 }
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
-  const variant = index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary';
-  const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
-  const isLight = theme === 'light';
-  const slideDirection = index % 2 === 0 ? 'left' : 'right';
   
   // Helper functions to get localized content
   const getTitle = (): string => {
@@ -67,127 +61,108 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
     }
     return `/${locale}${path}`;
   };
+
+  // Create tags array that includes the type as first tag
+  const cardTags = item.tags?.length ? item.tags.slice(0, 2) : [];
+
+  // Format link for navigation with proper localization
+  const cardLink = localizedHref(item.link);
   
-  const getPhotoByText = (): string => {
-    switch(locale) {
-      case 'fi': return 'Kuva:';
-      default: return 'Photo by';
+  // Get icon based on project type
+  const getTypeIcon = () => {
+    const type = getType().toLowerCase();
+    
+    if (type.includes('team') || type.includes('management')) {
+      return 'groups';
+    } else if (type.includes('growth') || type.includes('professional')) {
+      return 'trending_up';
+    } else if (type.includes('ux') || type.includes('design')) {
+      return 'brush';
+    } else if (type.includes('development') || type.includes('programming')) {
+      return 'code';
+    } else {
+      return 'folder'; // Default icon
     }
   };
+
+  // Get gradient from item
+  const gradientClasses = item.gradient || 'from-blue-400 to-purple-500';
   
-  const getOnText = (): string => {
-    switch(locale) {
-      case 'fi': return 'palvelussa';
-      default: return 'on';
-    }
-  };
+  // Create background style for the icon
+  const iconBgStyle = `bg-gradient-to-br ${gradientClasses} bg-opacity-10`;
   
-  const getLearnMoreText = (): string => {
-    switch(locale) {
-      case 'fi': return 'Lue lisää';
-      default: return 'Learn more';
-    }
-  };
-  
-  return (
-    <Card 
-      variant={variant} 
-      slideDirection={slideDirection}
-      className="h-full transform-gpu"
-    >
-      <Link href={localizedHref(item.link)} className="block -m-8 rounded-xl overflow-hidden h-full">
-        <div className="flex flex-col h-full">
-          <div className="relative w-full h-64 overflow-hidden">
-            {item.photo ? (
-              <>
+  return (    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      className="h-full w-full"
+    >      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
+        <Link href={cardLink} className="h-full flex flex-col">
+          {/* Image Section */}
+          <div className="relative w-full h-48 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden bg-black">
+              <motion.div
+                className="absolute inset-0 w-full h-full scale-[1.01]"
+                whileHover={{ scale: 1.05 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 15, 
+                  duration: 0.2
+                }}
+              >
                 <Image
-                  src={item.photo.url}
+                  src={item.photo?.url || '/images/placeholder.jpg'}
                   alt={getTitle()}
                   fill
-                  className="object-cover transform transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                
-                {/* Add type tag on image */}
-                <div className="absolute top-4 left-4 px-3 py-1 backdrop-blur-sm bg-black/30 text-white rounded-full text-xs">
-                  {getType()}
-                </div>
-                
-                {/* Photo attribution if available */}
-                {item.photo.author && (
-                  <div className="absolute bottom-2 left-4 text-xs text-white/70">
-                    {getPhotoByText()}{' '}
-                    <a
-                      href={item.photo.author.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-white"
-                    >
-                      {item.photo.author.name}
-                    </a>
-                    {' '}{getOnText()}{' '}
-                    <a
-                      href="https://unsplash.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-white"
-                    >
-                      Unsplash
-                    </a>
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="w-full h-full bg-theme flex items-center justify-center">
-                <span className="opacity-50">Image unavailable</span>
+              </motion.div>
+            </div>
+            
+            {/* Display project type as a badge */}
+            <div className="absolute top-3 right-3 z-10">
+              <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${gradientClasses} text-white shadow-md`}>
+                {getType()}
+              </span>
+            </div>
+          </div>          {/* Content Section */}
+          <div className="p-6 flex-1 flex flex-col">
+            <div className="flex items-start mb-4 gap-4">
+              <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-primary bg-primary/10 rounded-lg">
+                <span className="material-symbols text-4xl">
+                  {getTypeIcon()}
+                </span>
               </div>
-            )}
-          </div>
-          
-          <div className="p-8 flex flex-col flex-grow">
-            {/* Tags if available */}
-            {item.tags && item.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
-                {item.tags.slice(0, 3).map((tag, idx) => (
-                  <span 
-                    key={idx}
-                    className={`px-3 py-1 ${
-                      isLight 
-                        ? 'bg-primary/10 text-primary' 
-                        : 'bg-primary/20 text-primary'
-                    } rounded-full text-xs`}
-                  >
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-primary mb-1">{getTitle()}</h3>
+                <div className="opacity-80 text-sm line-clamp-2">{getDesc()}</div>
+              </div>
+            </div>
+              {/* Tags Section */}
+            {cardTags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2 mb-4">
+                {cardTags.map((tag, idx) => (
+                  <span key={idx} className="px-3 py-1 rounded-full text-xs bg-primary/10 text-primary font-medium">
                     {tag}
                   </span>
                 ))}
               </div>
             )}
-            
-            <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-              {getTitle()}
-            </h3>
-            
-            <p className="opacity-80 mb-4 flex-grow">
-              {getDesc()}
-            </p>
-            
+              {/* Date if available */}
             {item.date && (
-              <div className="flex justify-start items-center text-sm opacity-70 mt-auto pt-4 border-t border-primary/10">
-                <span>{item.date}</span>
+              <div className="text-xs mt-auto pt-4 flex items-center gap-1 border-t border-current/10">
+                <span className="material-symbols text-sm text-primary">schedule</span>
+                <span className="opacity-80">{item.date}</span>
               </div>
             )}
-            
-            <div className="mt-4 inline-flex items-center text-primary group-hover:opacity-80 transition-colors">
-              {getLearnMoreText()}
-              <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
           </div>
-        </div>
-      </Link>
-    </Card>
+        </Link>
+      </div>
+    </motion.div>
   );
 };
 

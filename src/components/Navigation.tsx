@@ -341,8 +341,7 @@ const Navigation = () => {
                                   item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                                } `}
-                                onClick={() => setPortfolioOpen(false)}
+                                } `}                                onClick={() => setPortfolioOpen(false)}
                               >
                                 {item.type === 'overview' && (
                                   <span className={`material-symbols text-sm `}>
@@ -566,8 +565,7 @@ const Navigation = () => {
                                 setMobilePortfolioOpen(false);
                                 setMenuOpen(false);
                               }}
-                            >
-                              {item.type === 'overview' && (
+                            >                              {item.type === 'overview' && (
                                 <span className={`material-symbols text-sm `}>
                                   grid_view
                                 </span>

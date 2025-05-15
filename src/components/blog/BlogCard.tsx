@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'next-share';
-import Card from '@/components/Card';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -23,23 +22,66 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
-  const variant = index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary';
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
   const slideDirection = index % 2 === 0 ? 'left' : 'right';
   
   // Create localized blog post URL
   const localizedPostUrl = `/${locale}/blog/${post.slug}`;
   
+  // Get theme-specific styles
+  const getThemeStyles = () => {
+    switch (theme) {
+      case 'light':
+        return {
+          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-purple-500/10 hover:shadow-blue-300/30',
+          text: 'text-neutral-800',
+          primaryText: 'text-blue-500',
+          tag: 'bg-blue-500/10 text-blue-600',
+          date: 'text-neutral-500',
+        };
+      case 'dark':
+        return {
+          card: 'bg-neutral-800/90 border border-neutral-700/50 hover:border-blue-300/50 shadow-blue-500/20 hover:shadow-blue-500/30',
+          text: 'text-neutral-100',
+          primaryText: 'text-blue-400',
+          tag: 'bg-blue-500/20 text-blue-400',
+          date: 'text-neutral-400',
+        };
+      case 'colorful':
+        return {
+          card: 'bg-indigo-950/80 border border-purple-500/30 hover:border-cyan-400/60 shadow-fuchsia-500/30 hover:shadow-cyan-500/30',
+          text: 'text-blue-50',
+          primaryText: 'text-fuchsia-400',
+          tag: 'bg-fuchsia-500/20 text-fuchsia-300',
+          date: 'text-blue-200',
+        };
+      default:
+        return {
+          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-purple-500/10 hover:shadow-blue-300/30',
+          text: 'text-neutral-800',
+          primaryText: 'text-blue-500',
+          tag: 'bg-blue-500/10 text-blue-600',
+          date: 'text-neutral-500',
+        };
+    }
+  };
+  
+  const styles = getThemeStyles();
+  
   return (
-    <Card 
-      variant={variant} 
-      slideDirection={slideDirection}
-      className="h-full w-full transform-gpu"
+    <motion.div
+      initial={{ opacity: 0, x: slideDirection === 'left' ? -50 : 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      className={`rounded-xl overflow-hidden shadow-md h-full transition-all duration-300 ${styles.card}`}
     >
-      <Link href={localizedPostUrl} className="block -m-8 rounded-xl overflow-hidden">
-        <div className="flex flex-col h-full">
+      <Link href={localizedPostUrl} className="block h-full">
+        <div className="group flex flex-col h-full">
           <div className="relative w-full h-64 overflow-hidden">
             <Image
               src={post.image}
@@ -78,33 +120,29 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             </div>
           </div>
           
-          <div className="p-8 flex flex-col flex-grow">
+          <div className="p-6 flex flex-col flex-grow">
             <div className="flex flex-wrap gap-2 mb-4">
               {post.tags.slice(0, 2).map((tag, idx) => (
                 <span 
                   key={idx}
-                  className={`px-3 py-1 ${
-                    isLight 
-                      ? 'bg-primary/10 text-primary' 
-                      : 'bg-primary/20 text-primary'
-                  } rounded-full text-xs`}
+                  className={`px-3 py-1 rounded-full text-xs ${styles.tag}`}
                 >
                   {tag}
                 </span>
               ))}
             </div>
             
-            <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+            <h3 className={`text-xl font-bold mb-2 group-hover:${styles.primaryText} transition-colors ${styles.text}`}>
               {post.title}
             </h3>
             
-            <p className="opacity-80 mb-4 flex-grow">
+            <p className={`${styles.text} opacity-80 text-sm mb-4 flex-grow`}>
               {post.description}
             </p>
             
-            <div className="flex justify-between items-center text-sm opacity-70 mt-auto pt-4 border-t border-primary/10">
-              <span>{post.publishedDate}</span>
-              <span className="flex items-center">
+            <div className="flex justify-between items-center text-sm mt-auto pt-4 border-t border-current/10">
+              <span className={styles.date}>{post.publishedDate}</span>
+              <span className={`flex items-center ${styles.date}`}>
                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/>
                 </svg>
@@ -112,7 +150,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
               </span>
             </div>
             
-            <div className="mt-4 inline-flex items-center text-primary group-hover:opacity-80 transition-colors">
+            <div className={`mt-4 inline-flex items-center ${styles.primaryText} group-hover:opacity-80 transition-colors`}>
               Read more
               <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -121,7 +159,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
           </div>
         </div>
       </Link>
-    </Card>
+    </motion.div>
   );
 };
 

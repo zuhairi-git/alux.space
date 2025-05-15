@@ -83,7 +83,8 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const getType = (item: PortfolioItem): string => {
     return item.type[locale as keyof typeof item.type] || item.type.en;
   };
-    // Translate "No items found" text
+  
+  // Translate "No items found" text
   const getNoItemsText = (): string => {
     switch(locale) {
       case 'fi': return 'Ei projekteja tässä kategoriassa.';
@@ -98,7 +99,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
       <section className="min-h-screen pt-32 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mb-16">
-            <motion.h1
+            <motion.h1 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
