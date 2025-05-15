@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import BlogCard from './BlogCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
+import { useTheme } from '@/context/ThemeContext';
 import { Post } from '@/app/blog/posts/data';
 
 interface ClientBlogPageProps {
@@ -15,7 +16,9 @@ interface ClientBlogPageProps {
 export default function ClientBlogPage({ posts, locale: initialLocale }: ClientBlogPageProps) {
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
+  const { theme } = useTheme();
   const [filter, setFilter] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'standard' | 'overlay'>('standard');
   
   // Extract unique categories from all posts
   const categories = Array.from(
@@ -101,14 +104,16 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
     
     return categoryTranslations[category]?.[locale] || category;
   };
-    // Translate "All" button text
+  
+  // Translate "All" button text
   const getAllText = (): string => {
     switch(locale) {
       case 'fi': return 'Kaikki';
       default: return 'All';
     }
   };
-    // Translate "No posts found" text
+  
+  // Translate "No posts found" text
   const getNoPostsText = (): string => {
     switch(locale) {
       case 'fi': return 'Ei artikkeleita tässä kategoriassa.';
@@ -116,10 +121,19 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
     }
   };
   
+  // Translate view mode labels
+  const getViewModeText = (mode: 'standard' | 'overlay'): string => {
+    if (mode === 'standard') {
+      return locale === 'fi' ? 'Tavallinen' : 'Standard';
+    } else {
+      return locale === 'fi' ? 'Peite' : 'Overlay';
+    }
+  };
+  
   return (
     <div className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4">
-        <div className={`max-w-4xl  `}>
+        <div className="max-w-4xl mb-16">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -138,42 +152,76 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
             {t('blogPage.description')}
           </motion.p>
           
-          {/* Category Filters */}
-          <motion.div 
-            className={`flex  flex-wrap gap-2 mb-12`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <button
-              onClick={() => setFilter(null)}
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                filter === null
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                  : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
-              }`}
+          {/* Filters and View Mode Toggle */}
+          <div className="flex flex-col md:flex-row md:items-center gap-4 mb-12">
+            {/* Category Filters */}
+            <motion.div 
+              className="flex flex-wrap gap-2 flex-1"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              {getAllText()}
-            </button>
-            {categories.map((category) => (
               <button
-                key={category}
-                onClick={() => setFilter(category)}
+                onClick={() => setFilter(null)}
                 className={`px-4 py-2 rounded-full text-sm transition-all ${
-                  filter === category
+                  filter === null
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
                     : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
                 }`}
               >
-                {translateCategory(category)}
+                {getAllText()}
               </button>
-            ))}
-          </motion.div>
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setFilter(category)}
+                  className={`px-4 py-2 rounded-full text-sm transition-all ${
+                    filter === category
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                      : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                  }`}
+                >
+                  {translateCategory(category)}
+                </button>
+              ))}
+            </motion.div>
+            
+            {/* View Mode Toggle */}
+            <motion.div 
+              className="flex items-center bg-theme-card rounded-full p-1"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <button
+                onClick={() => setViewMode('standard')}
+                className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
+                  viewMode === 'standard'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                    : 'text-gray-400 hover:text-gray-100'
+                }`}
+              >
+                <span className="material-symbols text-sm">grid_view</span>
+                <span>{getViewModeText('standard')}</span>
+              </button>
+              <button
+                onClick={() => setViewMode('overlay')}
+                className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
+                  viewMode === 'overlay'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                    : 'text-gray-400 hover:text-gray-100'
+                }`}
+              >
+                <span className="material-symbols text-sm">layers</span>
+                <span>{getViewModeText('overlay')}</span>
+              </button>
+            </motion.div>
+          </div>
         </div>
         
         {/* Blog Posts Grid */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className={`grid grid-cols-1 ${viewMode === 'standard' ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} gap-8`}
           variants={{
             hidden: { opacity: 0 },
             show: {
@@ -185,6 +233,7 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
           }}
           initial="hidden"
           animate="show"
+          key={viewMode} // This forces re-render animation when view mode changes
         >
           {filteredPosts.map((post, index) => {
             // Get the content for the current locale or fall back to English
@@ -197,7 +246,7 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
                   hidden: { opacity: 0, y: 20 },
                   show: { opacity: 1, y: 0 }
                 }}
-                transition={{ duration: 0.5 }}
+                className={`h-full ${viewMode === 'overlay' ? 'aspect-[3/4]' : ''}`}
               >
                 <BlogCard 
                   post={{
@@ -210,6 +259,7 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
                     tags: post.tags
                   }}
                   index={index}
+                  viewMode={viewMode}
                 />
               </motion.div>
             );
