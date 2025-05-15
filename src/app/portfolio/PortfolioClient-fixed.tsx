@@ -46,6 +46,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
   const { t } = useTranslations(locale);
   const { theme } = useTheme();
   const [filter, setFilter] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'standard' | 'overlay'>('standard');
   
   // Extract all item types for filtering
   const itemTypes = Array.from(
@@ -91,6 +92,15 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
       default: return 'No projects found in this category.';
     }
   };
+  
+  // Translate view mode labels
+  const getViewModeText = (mode: 'standard' | 'overlay'): string => {
+    if (mode === 'standard') {
+      return locale === 'fi' ? 'Tavallinen' : 'Standard';
+    } else {
+      return locale === 'fi' ? 'Peite' : 'Overlay';
+    }
+  };
 
   return (
     <main className="min-h-screen bg-theme text-theme">      
@@ -116,43 +126,77 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
               {getPortfolioDescription()}
             </motion.p>
             
-            {/* Type Filters */}
-            <motion.div 
-              className="flex flex-wrap gap-2 mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <button
-                onClick={() => setFilter(null)}
-                className={`px-4 py-2 rounded-full text-sm transition-all ${
-                  filter === null
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                    : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
-                }`}
+            {/* Filters and View Mode Toggle */}
+            <div className="flex flex-col md:flex-row md:items-center gap-4 mb-12">
+              {/* Type Filters */}
+              <motion.div 
+                className="flex flex-wrap gap-2 flex-1"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
               >
-                {getAllText()}
-              </button>
-              {itemTypes.map((type) => (
                 <button
-                  key={type}
-                  onClick={() => setFilter(type)}
+                  onClick={() => setFilter(null)}
                   className={`px-4 py-2 rounded-full text-sm transition-all ${
-                    filter === type
+                    filter === null
                       ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
                       : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
                   }`}
                 >
-                  {getType({ type: { en: type } } as PortfolioItem)}
+                  {getAllText()}
                 </button>
-              ))}
-            </motion.div>
+                {itemTypes.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setFilter(type)}
+                    className={`px-4 py-2 rounded-full text-sm transition-all ${
+                      filter === type
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                        : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                    }`}
+                  >
+                    {getType({ type: { en: type } } as PortfolioItem)}
+                  </button>
+                ))}
+              </motion.div>
+              
+              {/* View Mode Toggle */}
+              <motion.div 
+                className="flex items-center bg-theme-card rounded-full p-1"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <button
+                  onClick={() => setViewMode('standard')}
+                  className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
+                    viewMode === 'standard'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                      : 'text-gray-400 hover:text-gray-100'
+                  }`}
+                >
+                  <span className="material-symbols text-sm">grid_view</span>
+                  <span>{getViewModeText('standard')}</span>
+                </button>
+                <button
+                  onClick={() => setViewMode('overlay')}
+                  className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
+                    viewMode === 'overlay'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                      : 'text-gray-400 hover:text-gray-100'
+                  }`}
+                >
+                  <span className="material-symbols text-sm">layers</span>
+                  <span>{getViewModeText('overlay')}</span>
+                </button>
+              </motion.div>
+            </div>
           </div>
           
           {/* Portfolio Items Grid */}
           {filteredItems.length > 0 ? (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className={`grid grid-cols-1 ${viewMode === 'standard' ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} gap-8`}
               variants={{
                 hidden: { opacity: 0 },
                 show: {
@@ -164,6 +208,7 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
               }}
               initial="hidden"
               animate="show"
+              key={viewMode} // This forces re-render animation when view mode changes
             >
               {filteredItems.map((item, index) => (
                 <motion.div
@@ -172,9 +217,9 @@ export default function PortfolioClient({ items, locale: initialLocale }: Props)
                     hidden: { opacity: 0, y: 20 },
                     show: { opacity: 1, y: 0 }
                   }}
-                  className="h-full"
+                  className={`h-full ${viewMode === 'overlay' ? 'aspect-[3/4]' : ''}`}
                 >
-                  <PortfolioCard item={item} index={index} />
+                  <PortfolioCard item={item} index={index} viewMode={viewMode} />
                 </motion.div>
               ))}
             </motion.div>

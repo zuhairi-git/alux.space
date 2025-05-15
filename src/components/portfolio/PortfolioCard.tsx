@@ -35,9 +35,10 @@ interface PortfolioCardProps {
     };
   };
   index: number;
+  viewMode?: 'standard' | 'overlay';
 }
 
-const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
+const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   
@@ -88,17 +89,101 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
   // Get gradient from item
   const gradientClasses = item.gradient || 'from-blue-400 to-purple-500';
   
-  // Create background style for the icon
-  const iconBgStyle = `bg-gradient-to-br ${gradientClasses} bg-opacity-10`;
+  // Render card based on view mode
+  if (viewMode === 'overlay') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -5 }}
+        className="h-full w-full"
+      >
+        <div className="relative h-full w-full overflow-hidden rounded-xl border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <motion.div
+              className="absolute inset-0 w-full h-full"
+              whileHover={{ scale: 1.05 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 15, 
+                duration: 0.2
+              }}
+            >
+              <Image
+                src={item.photo?.url || '/images/placeholder.jpg'}
+                alt={getTitle()}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </motion.div>
+            
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
+          </div>
+          
+          <Link href={cardLink} className="block h-full">
+            <div className="relative h-full flex flex-col justify-end p-6 z-10">
+              {/* Badge */}
+              <div className="absolute top-3 right-3">
+                <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${gradientClasses} text-white shadow-md`}>
+                  {getType()}
+                </span>
+              </div>
+              
+              {/* Icon and Title Section */}
+              <div className="flex items-start gap-4 mb-4">
+                <div className="flex-shrink-0 h-16 w-16 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                  <span className="material-symbols text-3xl text-white">
+                    {getTypeIcon()}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">{getTitle()}</h3>
+                  <p className="text-white/80 text-sm line-clamp-3">{getDesc()}</p>
+                </div>
+              </div>
+              
+              {/* Tags */}
+              {cardTags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {cardTags.map((tag, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/20 text-white font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
+              {/* Date */}
+              {item.date && (
+                <div className="text-xs mt-4 flex items-center gap-1 text-white/60">
+                  <span className="material-symbols text-sm">schedule</span>
+                  <span>{item.date}</span>
+                </div>
+              )}
+            </div>
+          </Link>
+        </div>
+      </motion.div>
+    );
+  }
   
-  return (    <motion.div
+  // Standard view (default)
+  return (
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
       className="h-full w-full"
-    >      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
+    >
+      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
         <Link href={cardLink} className="h-full flex flex-col">
           {/* Image Section */}
           <div className="relative w-full h-48 overflow-hidden">
@@ -129,7 +214,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
                 {getType()}
               </span>
             </div>
-          </div>          {/* Content Section */}
+          </div>
+          
+          {/* Content Section */}
           <div className="p-6 flex-1 flex flex-col">
             <div className="flex items-start mb-4 gap-4">
               <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-primary bg-primary/10 rounded-lg">
@@ -142,7 +229,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
                 <div className="opacity-80 text-sm line-clamp-2">{getDesc()}</div>
               </div>
             </div>
-              {/* Tags Section */}
+            
+            {/* Tags Section */}
             {cardTags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-2 mb-4">
                 {cardTags.map((tag, idx) => (
@@ -152,7 +240,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index }) => {
                 ))}
               </div>
             )}
-              {/* Date if available */}
+            
+            {/* Date if available */}
             {item.date && (
               <div className="text-xs mt-auto pt-4 flex items-center gap-1 border-t border-current/10">
                 <span className="material-symbols text-sm text-primary">schedule</span>
