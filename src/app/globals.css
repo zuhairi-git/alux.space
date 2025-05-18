@@ -301,11 +301,11 @@ body {
   display: none;
 }
 
-/* Enhance headings in colorful theme */
+/* Headings in colorful theme - no glow */
 .theme-colorful h1, 
 .theme-colorful h2, 
 .theme-colorful h3 {
-  text-shadow: 0 0 10px rgba(255, 0, 204, 0.3);
+  /* Removed text shadow for cleaner appearance */
 }
 
 .theme-colorful .bg-gradient-to-r {
@@ -325,13 +325,13 @@ body {
   }
 }
 
-/* Enhance color theme text visibility */
+/* Color theme text visibility - no glow */
 .theme-colorful .text-transparent.bg-clip-text {
-  filter: drop-shadow(0 0 2px rgba(255, 0, 204, 0.3));
+  filter: none;
 }
 
 .theme-colorful .nav-item {
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
 }
 
 /* Improve blog card visibility in colorful theme */
@@ -345,9 +345,9 @@ body {
   -webkit-text-stroke: 0.2px rgba(255, 255, 255, 0.1);
 }
 
-/* Enhanced interactive effects */
+/* Enhanced interactive effects - no glow */
 .glow-text {
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  text-shadow: none;
 }
 
 .magic-hover {
@@ -455,4 +455,92 @@ body {
   100% {
     transform: translateX(100%);
   }
+}
+
+/* Timeline Card specific styles */
+.perspective-1000 h3 {
+  text-shadow: none !important;
+}
+
+/* Timeline card animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg) scale(1.5);
+  }
+  to {
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50px) rotate(180deg) scale(1.2);
+  }
+  85% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes dimension-shift {
+  0%, 100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg);
+  }
+  75% {
+    transform: perspective(1000px) rotateX(-2deg) rotateY(2deg);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-dimension {
+  animation: dimension-shift 8s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
 }

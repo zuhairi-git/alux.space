@@ -362,12 +362,27 @@ const Navigation = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </motion.li>
-
-              <motion.li 
+              </motion.li>              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link href={localizedHref('/design/timeline-cards')} className="relative group p-2 rounded-lg block">
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Design</span>
+                  <motion.span
+                    className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
+                  />
+                  <motion.div
+                    className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                </Link>
+              </motion.li>
+              
+              <motion.li 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
                 whileHover={{ y: -2 }}
               >
                 <Link href={localizedHref('/blog')} className="relative group p-2 rounded-lg block">
@@ -379,11 +394,10 @@ const Navigation = () => {
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 </Link>
-              </motion.li>
-              <motion.li 
+              </motion.li>              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.7 }}
                 whileHover={{ y: -2 }}
               >
                 <Link href={localizedHref('/prompt')} className="relative group p-2 rounded-lg block">
@@ -583,6 +597,15 @@ const Navigation = () => {
                     )}
                   </AnimatePresence>
                 </div>
+              </li>              {/* Design link - Mobile */}
+              <li>                  <Link
+                  href={localizedHref('/design/timeline-cards')}
+                  onClick={() => setMenuOpen(false)}
+                  className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                >
+                  <span className={`material-symbols `}>design_services</span>
+                  <span className="font-medium">Design</span>
+                </Link>
               </li>
 
               {/* Blog link - Mobile */}

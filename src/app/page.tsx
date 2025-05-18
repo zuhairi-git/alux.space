@@ -11,6 +11,13 @@ import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
+import AnimatedSection from '@/components/AnimatedSection';
+import TimelineCard from '@/components/TimelineCard';
+// Material UI Icons
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import GridViewIcon from '@mui/icons-material/GridView';
+import InsightsIcon from '@mui/icons-material/Insights';
+import HistoryIcon from '@mui/icons-material/History';
 
 // A helper component for skill cards
 const InteractiveSkillCard = ({ 
@@ -271,15 +278,13 @@ export default function Home() {
       )}
       <Navigation />
       <Hero config={heroConfig} />
-      
-      {/* Work Experience Section */}
-      <motion.section 
+        {/* Work Experience Section - New Timeline Cards */}
+      <AnimatedSection 
         ref={workExperienceRef}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="py-20 bg-black/5 relative overflow-hidden"
         id="work-experience"
+        className="py-20 bg-black/5 relative overflow-hidden"
+        animation="fade-in"
+        duration={0.8}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
@@ -287,22 +292,16 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <motion.span 
-              className="material-symbols text-3xl p-3 mb-5 rounded-lg text-purple-400 bg-purple-400/10"
+              className="material-symbols text-3xl p-3 mb-5 rounded-lg text-purple-400 bg-purple-400/10 inline-block"
               initial={{ rotateY: 0 }}
               animate={{ rotateY: 360 }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
             >
               work_history
             </motion.span>
-            <motion.h3 
-              className="text-center text-3xl font-bold"
-              animate={{ 
-                textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(168, 85, 247, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
-              }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-            >
+            <h3 className="text-center text-3xl font-bold">
               {t('home.workExperience.title')}
-            </motion.h3>
+            </h3>
             
             <motion.div
               className="mx-auto h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 mt-4"
@@ -311,163 +310,15 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             />
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-center mb-4mt-4 text-theme-text/70 max-w-2xl mx-auto"
-            >
+            <p className="text-center mt-4 text-theme-text/70 max-w-2xl mx-auto">
               {workContent.intro}
-            </motion.p>
-          </div>            
-          {/* Enhanced Timeline container with improved visual design */}
-          <div className="relative max-w-6xl mx-auto mt-16 px-4">
-            {/* Central timeline line with animated gradient */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1.5 bg-gradient-to-b from-purple-500/80 via-blue-500/80 to-transparent rounded-full animate-pulse"></div>
+            </p>
+          </div>
+            {/* Vertical Timeline Cards */}
+          <div className="relative max-w-5xl mx-auto">            {/* Central timeline line with animated gradient - thicker on mobile for visibility */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-2 md:w-1.5 bg-gradient-to-b from-purple-500/80 via-blue-500/80 to-transparent rounded-full animate-pulse shadow-sm shadow-blue-500/30"></div>
             
-            {workContent.positions.map((position, index) => {
-              const isEven = index % 2 === 0;
-              const isFirst = index === 0;
-              const isLast = index === workContent.positions.length - 1;
-              
-              // Calculate progress percentage for animation offset
-              const progressPercentage = (index / (workContent.positions.length - 1)) * 100;
-              
-              return (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: isEven ? -50 : 50, y: 20 }}
-                  whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ 
-                    duration: 0.7, 
-                    delay: index * 0.15,
-                    type: "spring", 
-                    stiffness: 100,
-                    damping: 20 
-                  }}
-                  className={`relative ${index < workContent.positions.length - 1 ? 'mb-28' : ''}`}
-                >
-                  {/* Connector line from timeline to card (horizontal line) */}
-                  <div className={`absolute left-1/2 top-3 ${isEven ? '-translate-x-full' : ''} h-0.5 ${isEven ? 'w-[calc(50%-5rem)]' : 'w-[calc(50%-5rem)]'} 
-                    ${isFirst 
-                      ? 'bg-gradient-to-r from-purple-400/70 to-blue-400/70'
-                      : isLast 
-                        ? 'bg-gradient-to-r from-gray-400/70 to-blue-400/50'
-                        : 'bg-gradient-to-r from-blue-500/70 to-cyan-400/70'
-                    }`}>
-                  </div>
-                  
-                  {/* Enhanced timeline dot with pulse effect */}
-                  <motion.div 
-                    className={`absolute left-1/2 top-0 transform -translate-x-1/2 w-6 h-6 rounded-full z-10
-                      ${isFirst 
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-500' 
-                        : isLast
-                          ? 'bg-gradient-to-r from-gray-500 to-blue-500/50'
-                          : 'bg-gradient-to-r from-blue-500 to-cyan-500'
-                      }
-                      flex items-center justify-center
-                    `}
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Inner dot for depth effect */}
-                    <div className="w-2 h-2 rounded-full bg-white/90"></div>
-                  </motion.div>
-                  
-                  {/* Animated date badge with hover effect */}
-                  <motion.div 
-                    className={`absolute left-1/2 transform -translate-x-1/2 -top-12 backdrop-blur-sm 
-                      ${isFirst 
-                        ? 'bg-gradient-to-r from-purple-500/40 to-blue-500/40 text-purple-50' 
-                        : isLast
-                          ? 'bg-gradient-to-r from-gray-500/40 to-blue-500/30 text-gray-100'
-                          : 'bg-gradient-to-r from-blue-500/40 to-cyan-500/40 text-blue-50'
-                      } 
-                      px-5 py-2 rounded-full text-sm font-semibold border border-primary/20 text-center
-                      shadow-lg shadow-primary/10
-                    `}
-                    whileHover={{ 
-                      scale: 1.05, 
-                      y: -3,
-                      boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.25)"
-                    }}
-                  >
-                    {position.period}
-                  </motion.div>
-                  
-                  {/* Work experience cards with alternating positions */}
-                  <div className={`flex ${isEven ? 'justify-end' : 'justify-start'}`}>
-                    <motion.div 
-                      className={`mt-6 w-full md:w-[45%] ${isEven ? 'md:mr-[5%]' : 'md:ml-[5%]'}`}
-                      whileHover={{ 
-                        y: -5,
-                        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.1)"
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Card>
-                        <CardContent 
-                          icon={
-                            isFirst 
-                              ? "rocket_launch" 
-                              : isLast
-                                ? "history"
-                                : isEven ? "grid_view" : "insights"
-                          } 
-                          iconClassName={`${
-                            isFirst 
-                              ? 'text-purple-400 bg-purple-400/15' 
-                              : isLast
-                                ? 'text-gray-400 bg-gray-400/15'
-                                : isEven ? 'text-cyan-400 bg-cyan-400/15' : 'text-blue-400 bg-blue-400/15'
-                          }`}
-                          title={position.title}
-                          date={position.period}
-                        >
-                          <div className="space-y-4">
-                            {position.positions ? (
-                              // For the "Earlier Positions" with nested positions
-                              position.positions.map((subPosition, subIndex) => (
-                                <motion.div 
-                                  key={subIndex} 
-                                  initial={{ opacity: 0 }}
-                                  whileInView={{ opacity: 1 }}
-                                  transition={{ delay: 0.3 + (subIndex * 0.1) }}
-                                  viewport={{ once: true }}
-                                >
-                                  <h5 className="text-lg opacity-80 mb-1">{subPosition.title}</h5>
-                                  <div className="flex flex-wrap items-center gap-2">
-                                    <p className="opacity-70">{subPosition.company}</p>
-                                    {subPosition.period && (
-                                      <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
-                                        {subPosition.period}
-                                      </span>
-                                    )}
-                                  </div>
-                                </motion.div>
-                              ))
-                            ) : (
-                              // For regular positions
-                              <div>
-                                <div className="flex items-center gap-2 opacity-80 mb-2">
-                                  <span className="material-symbols material-symbols-rounded text-sm">location_on</span>
-                                  <p>{position.company}</p>
-                                </div>
-                                <p className="opacity-70">{position.description}</p>
-                              </div>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              );
-            })}
-            
-            {/* Visual indicator for timeline progress */}
+            {/* Visual indicator for timeline progress - animate on scroll */}
             <motion.div 
               className="absolute left-1/2 transform -translate-x-1/2 w-1.5 bg-gradient-to-t from-transparent to-primary/70 rounded-full"
               style={{ height: '0%', top: 0 }}
@@ -476,9 +327,165 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 1.5, ease: "easeOut" }}
             />
+            
+            {/* Decorative floating elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <motion.div 
+                className="absolute w-32 h-32 rounded-full bg-gradient-to-br from-purple-500/10 to-blue-500/10 blur-xl"
+                initial={{ x: -100, y: 100, opacity: 0 }}
+                animate={{ x: 0, y: 150, opacity: 0.5 }}
+                transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+                style={{ left: '5%', top: '10%' }}
+              />
+              <motion.div 
+                className="absolute w-40 h-40 rounded-full bg-gradient-to-br from-blue-500/10 to-cyan-500/10 blur-xl"
+                initial={{ x: 100, y: -100, opacity: 0 }}
+                animate={{ x: 0, y: -150, opacity: 0.5 }}
+                transition={{ duration: 12, repeat: Infinity, repeatType: "reverse" }}
+                style={{ right: '5%', top: '40%' }}
+              />
+            </div>
+
+            {workContent.positions.map((position, index) => {
+              const isFirst = index === 0;
+              const isLast = index === workContent.positions.length - 1;
+              const isEven = index % 2 === 0;
+              
+              // For regular positions
+              if (!position.positions) {
+                // Determine which icon to use based on position
+                let IconComponent = isFirst ? RocketLaunchIcon : (index % 2 === 0 ? GridViewIcon : InsightsIcon);
+                
+                return (
+                  <div className="relative mb-24" key={index}>                    {/* Timeline dot with pulsing effect */}
+                    <motion.div 
+                      className={`absolute left-1/2 top-12 transform -translate-x-1/2 w-8 h-8 rounded-full z-10
+                        ${isFirst 
+                          ? 'bg-gradient-to-r from-purple-600 to-blue-500' 
+                          : isLast
+                            ? 'bg-gradient-to-r from-gray-500 to-blue-500/50'
+                            : 'bg-gradient-to-r from-blue-500 to-cyan-500'
+                        }
+                        flex items-center justify-center shadow-lg
+                        ${isFirst ? 'shadow-purple-500/30' : isLast ? 'shadow-gray-500/30' : 'shadow-blue-500/30'}
+                      `}
+                      whileHover={{ scale: 1.3, boxShadow: `0 0 20px 0 rgba(56, 189, 248, 0.5)` }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Pulsing ring effect */}
+                      <div className={`absolute inset-0 rounded-full 
+                        ${isFirst 
+                          ? 'bg-purple-500/30' 
+                          : isLast
+                            ? 'bg-gray-500/30'
+                            : 'bg-blue-500/30'
+                        } animate-ping opacity-75`}></div>
+                        
+                      {/* Inner dot for depth effect */}
+                      <div className="w-3 h-3 rounded-full bg-white/90"></div>
+                    </motion.div>
+                      {/* Connector line from timeline to card (horizontal line) - hidden on smaller screens */}
+                    <div className={`absolute top-14 hidden md:block ${isEven ? 'right-1/2' : 'left-1/2'} h-0.5 w-[calc(25%-1rem)]
+                      ${isFirst 
+                        ? 'bg-gradient-to-r from-purple-400/70 to-blue-400/70'
+                        : isLast 
+                          ? 'bg-gradient-to-r from-gray-400/70 to-blue-400/50'
+                          : 'bg-gradient-to-r from-blue-500/70 to-cyan-400/70'
+                      }`}>
+                    </div>
+                    
+                    {/* Mobile connector line (always to the right) */}
+                    <div className={`absolute top-14 md:hidden left-1/2 h-0.5 w-[15%]
+                      ${isFirst 
+                        ? 'bg-gradient-to-r from-purple-400/70 to-blue-400/70'
+                        : isLast 
+                          ? 'bg-gradient-to-r from-gray-400/70 to-blue-400/50'
+                          : 'bg-gradient-to-r from-blue-500/70 to-cyan-400/70'
+                      }`}>
+                    </div>
+                      {/* Card positioning with alternating sides on desktop, stacked on mobile */}
+                    <div className={`flex ${isEven ? 'justify-start' : 'justify-end'}`}>
+                      <div className={`w-full sm:w-[85%] md:w-[48%] ${isEven ? 'md:ml-[4%]' : 'md:mr-[4%]'} sm:ml-[15%] md:ml-0`}>
+                        <AnimatedSection 
+                          animation={isEven ? "slide-right" : "slide-left"}
+                          delay={0.1 + (index * 0.1)}
+                        >
+                          <TimelineCard
+                            theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
+                            materialIcon={IconComponent}
+                            title={position.title}
+                            date={position.period}
+                            location={position.company}
+                            description={position.description}
+                          />
+                        </AnimatedSection>
+                      </div>
+                    </div>
+                  </div>
+                );
+              } 
+              // For "Earlier Positions" with nested positions
+              else {
+                return (
+                  <div className="relative mb-24" key={index}>                    {/* Timeline dot for earlier positions section with matching pulsing effect */}
+                    <motion.div 
+                      className="absolute left-1/2 top-12 transform -translate-x-1/2 w-10 h-10 rounded-full z-10
+                        bg-gradient-to-r from-gray-500 to-blue-500/50 flex items-center justify-center shadow-lg shadow-gray-500/30"
+                      whileHover={{ scale: 1.3, boxShadow: `0 0 20px 0 rgba(56, 189, 248, 0.5)` }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Pulsing ring effect */}
+                      <div className="absolute inset-0 rounded-full bg-gray-500/30 animate-ping opacity-75"></div>
+                      
+                      {/* Icon */}
+                      <HistoryIcon className="w-5 h-5 text-white z-10" />
+                    </motion.div>                    {/* Horizontal connector for center card - responsive version */}
+                    <div className="absolute top-14 hidden md:block left-1/2 h-0.5 w-[calc(25%-1rem)]
+                      bg-gradient-to-r from-gray-400/70 to-blue-400/50">
+                    </div>
+                    
+                    {/* Mobile horizontal connector */}
+                    <div className="absolute top-14 md:hidden left-1/2 h-0.5 w-[15%]
+                      bg-gradient-to-r from-gray-400/70 to-blue-400/50">
+                    </div>
+                  
+                    <AnimatedSection 
+                      animation="fade-in" 
+                      delay={0.1 + (index * 0.1)}
+                      className="md:mx-auto md:w-[75%]"
+                    >
+                      <div className="bg-black/10 backdrop-blur-md rounded-xl p-6 border border-primary/10">
+                        <h4 className="text-xl font-semibold mb-6 text-center">
+                          {position.title} <span className="text-base font-medium text-theme-text/70 ml-2">{position.period}</span>
+                        </h4>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {position.positions.map((subPosition, subIndex) => (
+                            <AnimatedSection 
+                              key={subIndex} 
+                              animation="fade-in"
+                              delay={0.3 + (subIndex * 0.1)}
+                            >
+                              <TimelineCard
+                                theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
+                                materialIcon={HistoryIcon}
+                                title={subPosition.title}
+                                date={subPosition.period || "Unspecified"}
+                                location={subPosition.company}
+                                description="Early career position developing design and technical skills."
+                              />
+                            </AnimatedSection>
+                          ))}
+                        </div>
+                      </div>
+                    </AnimatedSection>
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
-      </motion.section>
+      </AnimatedSection>
         {/* About Section with Digital Dreams anchor */}
       <motion.section
         ref={aboutRef}

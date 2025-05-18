@@ -1,0 +1,64 @@
+/* Remove text shadow from all headings */
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  text-shadow: none !important;
+}
+
+/* Remove text-shadow from theme-colorful headings */
+.theme-colorful h1, 
+.theme-colorful h2, 
+.theme-colorful h3,
+.theme-colorful h4, 
+.theme-colorful h5, 
+.theme-colorful h6 {
+  text-shadow: none !important;
+}
+
+/* Remove glow from glow-text class */
+.glow-text {
+  text-shadow: none !important;
+}
+
+/* Remove drop-shadow from text */
+.text-transparent.bg-clip-text {
+  filter: none !important;
+}
+
+/* Remove nav-item text shadow */
+.nav-item {
+  text-shadow: none !important;
+}
+
+/* Remove glow from all titles with gradients */
+.bg-gradient-to-r,
+.bg-gradient-to-l,
+.bg-gradient-to-b,
+.bg-gradient-to-t,
+.bg-gradient-to-tr,
+.bg-gradient-to-tl,
+.bg-gradient-to-br,
+.bg-gradient-to-bl {
+  text-shadow: none !important;
+}
+
+/* Remove any remaining drop shadows */
+.drop-shadow,
+[class*="drop-shadow-"] {
+  filter: none !important;
+}
+
+/* Ensure no text shadow appears in hover or animation states */
+*:hover,
+*:focus,
+*:active,
+*.animated {
+  text-shadow: none !important;
+}
+
+/* Target timeline card titles specifically */
+.perspective-1000 h3,
+.TimelineCard h3,
+[class*="timeline"] h3 {
+  text-shadow: none !important;
+  filter: none !important;
+}
