@@ -14,25 +14,8 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
   
   // Split title into words for staggered animation
   const words = title ? title.split(' ') : [];
-  
-  // For the mouse-based 3D effect
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Calculate mouse position relative to the center of the screen
-      const x = (e.clientX / window.innerWidth) - 0.5;
-      const y = (e.clientY / window.innerHeight) - 0.5;
-      
-      setMousePosition({ x, y });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+    // Mouse-based 3D effect removed
+  const mousePosition = { x: 0, y: 0 }; // Set to fixed values to prevent any mouse-over effects
   
   return (
     <motion.div 
@@ -73,9 +56,8 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
           
           {/* Main Title with 3D Effect */}
           <motion.div 
-            className={`relative z-10 mx-auto  mb-12`}
-            style={{
-              transform: `perspective(1000px) rotateX(${mousePosition.y * -5}deg) rotateY(${mousePosition.x * 5}deg)`
+            className={`relative z-10 mx-auto  mb-12`}            style={{
+              transform: `perspective(1000px) rotateX(0deg) rotateY(0deg)` // Fixed position instead of mouse-based rotation
             }}
           >
             <h2 className={`text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20 `}>
@@ -149,9 +131,8 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
               className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
                 theme === 'colorful' 
                   ? 'text-white border border-transparent shadow-lg' 
-                  : isLight 
-                    ? 'bg-blue-500 hover:bg-blue-600 text-white' 
-                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                  : isLight                    ? 'bg-blue-500 text-white' 
+                    : 'bg-blue-500 text-white'
               } cosmic-shimmer`}
               style={{
                 ...(theme === 'colorful' ? {
@@ -160,25 +141,20 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
                   animation: 'gradientShift 3s ease infinite',
                 } : {})
               }}
-            >
-              <motion.span
+            >              <motion.span
                 className="relative z-10"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
               >
                 {cta.text}
               </motion.span>
               {theme === 'colorful' && (
                 <motion.div 
                   className="absolute inset-0 bg-black/10"
-                  whileHover={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 />
               )}
               
-              {/* Animated glow effect */}
-              <motion.div 
-                className="absolute -z-10 inset-0 bg-gradient-to-r from-cyan-500/30 via-fuchsia-500/30 to-blue-500/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity"
+              {/* Animated glow effect */}              <motion.div 
+                className="absolute -z-10 inset-0 bg-gradient-to-r from-cyan-500/30 via-fuchsia-500/30 to-blue-500/30 blur-lg opacity-30"
                 animate={{
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
                 }}

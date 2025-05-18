@@ -31,7 +31,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
           {cta && (
             <Link 
               href={cta.href}
-              className="inline-block px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300"
+              className="inline-block px-8 py-3 bg-blue-500 text-white rounded-lg"
             >
               {cta.text}
             </Link>

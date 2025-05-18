@@ -42,7 +42,7 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
           >
             <Link 
               href={cta.href}
-              className="inline-block px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300"
+              className="inline-block px-6 py-3 bg-gray-800 text-white rounded-lg"
             >
               {cta.text}
             </Link>

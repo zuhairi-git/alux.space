@@ -14,7 +14,9 @@ interface HeroProps {
 
 export default function Hero({ config }: HeroProps) {
   const { theme } = useTheme();
-  const { variant = 'default', backgroundEffect = 'none' } = config;
+  const { variant = 'default' } = config;
+  // Use modern-flow for light/dark themes regardless of the configured background effect
+  const backgroundEffect = (theme === 'light' || theme === 'dark') ? 'modern-flow' : config.backgroundEffect || 'none';
   
   const renderHeroVariant = () => {
     switch (variant) {

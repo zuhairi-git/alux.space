@@ -62,26 +62,18 @@ export default function Home() {
   // Refs for section tracking
   const workExperienceRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-  
-  // Track mouse position for parallax effects
+    // Track scroll position for animations
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Normalize mouse position between -0.5 and 0.5 for subtle movement
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 0.1,
-        y: (e.clientY / window.innerHeight - 0.5) * 0.1
-      });
-    };
+    // Mouse tracking removed to eliminate hover effects
     
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     
-    window.addEventListener('mousemove', handleMouseMove);
+    // No longer tracking mouse movement
     window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      return () => {
+      // Mouse listener removed
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Theme } from '@/context/ThemeContext';
 
 interface Props {
-  type: 'particles' | 'design-code' | 'gradient' | 'none' | 'abstract-modern';
+  type: 'particles' | 'design-code' | 'gradient' | 'none' | 'abstract-modern' | 'modern-flow';
   theme?: Theme;
 }
 
@@ -402,6 +402,284 @@ const AbstractModernEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   );
 };
 
+const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
+  const isLight = theme === 'light';
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  if (!mounted) return <div className="absolute inset-0" />;
+  
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Base background with subtle gradient */}
+      <div className={`absolute inset-0 ${
+        isLight
+          ? 'bg-gradient-to-b from-white via-blue-50/20 to-white'
+          : 'bg-gradient-to-b from-gray-900 via-gray-800/90 to-gray-900'
+      }`} style={{ zIndex: 0 }} />
+      
+      {/* Dynamic flowing background */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background: isLight
+            ? 'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.08) 0%, transparent 40%)'
+            : 'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)'
+        }}
+        animate={{
+          background: isLight
+            ? [
+                'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.08) 0%, transparent 40%)',
+                'radial-gradient(circle at 40% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), radial-gradient(circle at 60% 40%, rgba(139, 92, 246, 0.08) 0%, transparent 40%)',
+                'radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), radial-gradient(circle at 50% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 40%)',
+                'radial-gradient(circle at 40% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), radial-gradient(circle at 60% 60%, rgba(139, 92, 246, 0.08) 0%, transparent 40%)',
+                'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.08) 0%, transparent 40%)'
+              ]
+            : [
+                'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)',
+                'radial-gradient(circle at 40% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 60% 40%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)',
+                'radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 50% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)',
+                'radial-gradient(circle at 40% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 60% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)',
+                'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)'
+              ]
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut"
+        }}
+      />
+      
+      {/* Animated flowing blobs */}
+      <div className="absolute inset-0">
+        {/* Larger flowing shape - top right */}
+        <motion.div
+          className={`absolute ${
+            isLight
+              ? 'bg-gradient-to-br from-blue-100/60 to-indigo-200/50'
+              : 'bg-gradient-to-br from-blue-500/30 to-indigo-600/30'
+          }`}
+          style={{
+            width: '50vw',
+            height: '50vw',
+            right: '-15vw',
+            top: '-15vw',
+            borderRadius: '63% 37% 54% 46% / 55% 48% 52% 45%',
+            filter: 'blur(40px)'
+          }}
+          animate={{
+            borderRadius: [
+              '63% 37% 54% 46% / 55% 48% 52% 45%',
+              '42% 58% 60% 40% / 45% 58% 42% 55%',
+              '56% 44% 67% 33% / 48% 46% 54% 52%',
+              '63% 37% 54% 46% / 55% 48% 52% 45%'
+            ]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut"
+          }}
+        />
+        
+        {/* Medium flowing shape - bottom left */}
+        <motion.div
+          className={`absolute ${
+            isLight
+              ? 'bg-gradient-to-tl from-purple-100/60 to-cyan-200/50'
+              : 'bg-gradient-to-tl from-purple-500/30 to-cyan-600/30'
+          }`}
+          style={{
+            width: '40vw',
+            height: '40vw',
+            left: '-10vw',
+            bottom: '-10vw',
+            borderRadius: '53% 47% 47% 53% / 45% 45% 55% 55%',
+            filter: 'blur(40px)'
+          }}
+          animate={{
+            borderRadius: [
+              '53% 47% 47% 53% / 45% 45% 55% 55%',
+              '61% 39% 33% 67% / 60% 30% 70% 40%',
+              '36% 64% 64% 36% / 40% 53% 47% 60%',
+              '53% 47% 47% 53% / 45% 45% 55% 55%'
+            ]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut"
+          }}
+        />
+          {/* Small flowing shape - center removed */}
+
+        {/* Additional decorative elements - geometric shapes */}
+        {/* Circle pattern top left */}
+        <div className="absolute left-[10%] top-[15%] z-1">
+          {mounted && Array.from({ length: 3 }).map((_, i) => (
+            <motion.div 
+              key={`circle-${i}`}
+              className={`absolute rounded-full border ${
+                isLight
+                  ? 'border-blue-300/40'
+                  : 'border-blue-400/30'
+              }`}
+              style={{
+                width: `${(i + 1) * 40}px`,
+                height: `${(i + 1) * 40}px`,
+                left: `-${(i + 1) * 20}px`,
+                top: `-${(i + 1) * 20}px`,
+              }}
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 4 + i,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Square pattern bottom right */}
+        <div className="absolute right-[15%] bottom-[20%] z-1">
+          {mounted && Array.from({ length: 3 }).map((_, i) => (
+            <motion.div 
+              key={`square-${i}`}
+              className={`absolute border ${
+                isLight
+                  ? 'border-purple-300/40'
+                  : 'border-purple-400/30'
+              }`}
+              style={{
+                width: `${(i + 1) * 30}px`,
+                height: `${(i + 1) * 30}px`,
+                right: `-${(i + 1) * 15}px`,
+                bottom: `-${(i + 1) * 15}px`,
+                borderRadius: '4px',
+              }}
+              animate={{
+                rotate: [0, 45, 0],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 6 + i,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: i * 0.7,
+              }}
+            />
+          ))}
+        </div>
+          {/* Animated rings - removed */}
+        
+        {/* Abstract Line Decoration */}
+        <div className="absolute bottom-[25%] left-[20%]">
+          <motion.div
+            className={`h-px ${
+              isLight
+                ? 'bg-gradient-to-r from-transparent via-blue-400/40 to-transparent'
+                : 'bg-gradient-to-r from-transparent via-blue-500/30 to-transparent'
+            }`}
+            style={{ width: '150px' }}
+            animate={{
+              scaleX: [1, 1.5, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+        </div>
+        
+        <div className="absolute top-[40%] right-[15%]">
+          <motion.div
+            className={`h-px ${
+              isLight
+                ? 'bg-gradient-to-r from-transparent via-purple-400/40 to-transparent'
+                : 'bg-gradient-to-r from-transparent via-purple-500/30 to-transparent'
+            }`}
+            style={{ width: '120px' }}
+            animate={{
+              scaleX: [1, 1.5, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 1
+            }}
+          />
+        </div>
+
+        {/* Subtle grid overlay */}
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `linear-gradient(${isLight ? 'rgba(0,0,0,0.01)' : 'rgba(255,255,255,0.02)'} 1px, transparent 1px), 
+                             linear-gradient(to right, ${isLight ? 'rgba(0,0,0,0.01)' : 'rgba(255,255,255,0.02)'} 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+            zIndex: 1
+          }}
+        />
+        
+        {/* Moving particle dots */}
+        {mounted && Array.from({ length: 30 }).map((_, i) => {
+          const size = Math.random() * 4 + 2;
+          return (
+            <motion.div
+              key={`particle-${i}`}
+              className={`absolute rounded-full ${
+                isLight 
+                  ? i % 3 === 0 ? 'bg-blue-400/50' : i % 3 === 1 ? 'bg-purple-400/50' : 'bg-cyan-400/50'
+                  : i % 3 === 0 ? 'bg-blue-400/50' : i % 3 === 1 ? 'bg-purple-400/50' : 'bg-cyan-400/50'
+              }`}
+              style={{
+                width: size + 'px',
+                height: size + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                boxShadow: `0 0 ${size * 2}px ${size/2}px ${isLight ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`,
+              }}
+              animate={{
+                x: [0, Math.random() * 150 - 75, 0],
+                y: [0, Math.random() * 150 - 75, 0],
+                opacity: [0.3, 0.7, 0.3],
+                scale: [1, Math.random() * 1 + 1, 1]
+              }}
+              transition={{
+                duration: Math.random() * 8 + 6,
+                repeat: Infinity,
+                repeatType: "mirror",
+                ease: "easeInOut"
+              }}
+            />
+          );
+        })}
+
+        {/* Floating icons/symbols for visual interest */}
+        {mounted && (
+          <>            {/* Clock icon removed */}            {/* Triangle icon removed */}
+              {/* Globe icon removed */}
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const BackgroundEffect = ({ type, theme = 'dark' }: Props) => {
   switch (type) {
     case 'particles':
@@ -412,6 +690,8 @@ const BackgroundEffect = ({ type, theme = 'dark' }: Props) => {
       return <GradientEffect theme={theme} />;
     case 'abstract-modern':
       return <AbstractModernEffect theme={theme} />;
+    case 'modern-flow':
+      return <ModernFlowEffect theme={theme} />;
     case 'none':
     default:
       return null;
