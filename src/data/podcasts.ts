@@ -3,7 +3,7 @@ export interface PodcastEpisode {
   id: string;
   title: string;
   description: string;
-  audioFile: string;
+  audioFile: string | Record<string, string>; // Either a single file path or localized paths
   publishDate: string;
   duration: string;
   tags?: string[];
@@ -11,12 +11,14 @@ export interface PodcastEpisode {
 }
 
 // Podcast collection data
-export const podcastEpisodes: PodcastEpisode[] = [
-  {
+export const podcastEpisodes: PodcastEpisode[] = [  {
     id: 'episode-1',
     title: 'Ali Al-Zuhairi: Blog & Insights',
     description: 'In this episode, we delve into the core principles of thought, learning, and perspective in design leadership, product management, and the dynamic intersection of creativity and technology.',
-    audioFile: '/audio/podcasts/Blog-Insights.wav',
+    audioFile: {
+      en: '/audio/podcasts/Blog-Insights.wav',
+      fi: '/audio/podcasts/Blog-Insights-fi.wav'
+    },
     publishDate: '2025-05-21',
     duration: '04:49', // Using the same audio file, so duration is the same
     tags: ['Blog', 'Insights', 'AI', 'Technology', 'Development'],

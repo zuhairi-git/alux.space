@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { podcastEpisodes, PodcastEpisode } from '@/data/podcasts';
 
 interface PodcastPlayerProps {
@@ -11,6 +12,7 @@ interface PodcastPlayerProps {
 
 const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   const { theme } = useTheme();
+  const { locale } = useLanguage();
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
   
@@ -56,7 +58,21 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
       return 'from-blue-500 to-purple-500';
     }
   };
-  
+    // Get the appropriate audio file based on current language
+  const getAudioFile = () => {
+    if (typeof currentEpisode.audioFile === 'string') {
+      return currentEpisode.audioFile;
+    }
+    
+    // If we have a localized version for the current language, use it
+    if (currentEpisode.audioFile[locale]) {
+      return currentEpisode.audioFile[locale];
+    }
+    
+    // Otherwise fall back to English or first available language
+    return currentEpisode.audioFile.en || Object.values(currentEpisode.audioFile)[0];
+  };
+    
   // Audio functions
   useEffect(() => {
     const audio = audioRef.current;
@@ -66,7 +82,10 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
     setIsPlaying(false);
     setCurrentTime(0);
     setLoadError(false);
-    audio.src = currentEpisode.audioFile;
+    
+    // Get the appropriate audio file for the current language
+    const audioSrc = getAudioFile();
+    audio.src = audioSrc;
     audio.load();
     
     const handleLoadedData = () => {
@@ -91,14 +110,13 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('error', handleError);
     audio.addEventListener('ended', handleEnded);
-    
-    return () => {
+      return () => {
       audio.removeEventListener('loadeddata', handleLoadedData);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('error', handleError);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [currentEpisode]);
+  }, [currentEpisode, locale]);
   
   const formatTime = (time: number) => {
     if (isNaN(time)) return '00:00';
@@ -187,9 +205,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
               </svg>
               Podcast Player
-            </h3>
-            <p className={`text-sm mt-1 truncate ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
-              Now Playing: {currentEpisode.title}
+            </h3>            <p className={`text-sm mt-1 truncate ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
+              {locale === 'fi' ? 'Nyt toistetaan: ' : 'Now Playing: '}{currentEpisode.title}
             </p>
           </div>
           
@@ -429,11 +446,12 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      
-      {/* Load error message */}
+        {/* Load error message */}
       {loadError && (
         <div className={`p-4 ${isLight ? 'bg-red-50 text-red-600' : 'bg-red-900/20 text-red-400'} text-sm`}>
-          Could not load audio file. The file may be missing or in an unsupported format.
+          {locale === 'fi' 
+            ? 'Äänitiedostoa ei voitu ladata. Tiedosto voi puuttua tai olla väärässä muodossa.'
+            : 'Could not load audio file. The file may be missing or in an unsupported format.'}
         </div>
       )}
     </motion.div>
