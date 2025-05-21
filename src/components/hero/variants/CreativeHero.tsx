@@ -7,8 +7,9 @@ import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import { useLanguage } from '@/context/LanguageContext';
+import PodcastPlayer from '@/components/PodcastPlayer';
 
-const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
+const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
   
@@ -168,6 +169,17 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => 
                 }}
               />
             </Link>
+          </motion.div>        )}
+        
+        {/* Podcast Player */}
+        {showPodcastPlayer && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
+            className="mt-16 max-w-3xl mx-auto"
+          >
+            <PodcastPlayer />
           </motion.div>
         )}
       </div>

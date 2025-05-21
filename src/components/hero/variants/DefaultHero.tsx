@@ -4,8 +4,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import PodcastPlayer from '@/components/PodcastPlayer';
 
-const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
+const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -200,8 +201,19 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
               duration: 10,
               repeat: Infinity,
               repeatType: "reverse"
-            }}
-          />
+            }}          />
+        </motion.div>
+      )}
+      
+      {/* Podcast Player */}
+      {showPodcastPlayer && (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="mt-16"
+        >
+          <PodcastPlayer />
         </motion.div>
       )}
     </motion.div>

@@ -4,8 +4,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import PodcastPlayer from '@/components/PodcastPlayer';
 
-const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
+const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -53,9 +54,20 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
               </p>
               <p className="text-blue-400 mt-6 text-right">— {quote.author}</p>
             </div>
-          )}
-        </motion.div>
+          )}        </motion.div>
       </div>
+      
+      {/* Podcast Player */}
+      {showPodcastPlayer && (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-16 max-w-3xl mx-auto"
+        >
+          <PodcastPlayer />
+        </motion.div>
+      )}
     </motion.div>
   );
 };

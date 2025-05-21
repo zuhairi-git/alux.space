@@ -87,7 +87,8 @@ export default function Home() {
     cta: {
       text: t('home.hero.cta'),
       href: "/portfolio"
-    }
+    },
+    showPodcastPlayer: true
   };
   // Skills data with translations
   const getSkills = () => {

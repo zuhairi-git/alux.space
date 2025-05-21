@@ -4,8 +4,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import PodcastPlayer from '@/components/PodcastPlayer';
 
-const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
+const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPlayer }) => {
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -43,9 +44,20 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
             <Link 
               href={cta.href}
               className="inline-block px-6 py-3 bg-gray-800 text-white rounded-lg"
-            >
-              {cta.text}
+            >              {cta.text}
             </Link>
+          </motion.div>
+        )}
+        
+        {/* Podcast Player */}
+        {showPodcastPlayer && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-16 max-w-3xl"
+          >
+            <PodcastPlayer />
           </motion.div>
         )}
       </div>

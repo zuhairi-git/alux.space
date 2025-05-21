@@ -13,4 +13,5 @@ export interface HeroConfig {
     text: string;
     href: string;
   };
+  showPodcastPlayer?: boolean;
 }
