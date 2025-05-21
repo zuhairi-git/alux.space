@@ -120,23 +120,38 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
       if (item.photo) {
         return item;
       }
-      
-      // Otherwise try to get an Unsplash photo
-      const photo = await getUnsplashPhoto(item.title.en.toLowerCase());
-      if (photo) {
-        return {
-          ...item,
-          photo: {
-            url: photo.urls.regular,
-            author: {
-              name: photo.user.name,
-              username: photo.user.username,
-              link: photo.user.links.html,
+        // Otherwise try to get an Unsplash photo
+      try {
+        const photo = await getUnsplashPhoto(item.title.en.toLowerCase());
+        if (photo) {
+          return {
+            ...item,
+            photo: {
+              url: photo.urls.regular,
+              author: {
+                name: photo.user.name,
+                username: photo.user.username,
+                link: photo.user.links.html,
+              }
             }
-          }
-        };
+          };
+        }
+      } catch (error) {
+        console.warn(`Failed to fetch Unsplash image for ${item.title.en}:`, error);
       }
-      return item;
+      
+      // Fallback to a placeholder or default image
+      return {
+        ...item,
+        photo: {
+          url: '/images/portfolio/placeholder.jpg', // Make sure this file exists
+          author: {
+            name: 'Default',
+            username: 'default',
+            link: '',
+          }
+        }
+      };
     })
   );
 
