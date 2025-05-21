@@ -11,8 +11,8 @@ export default function DesignLayout({
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname.includes(path);
-
   const designComponents = [
+    { name: 'Coming Soon', path: '/design/coming-soon' },
     { name: 'Timeline Cards', path: '/design/timeline-cards' },
     { name: 'Media Cards', path: '/design/media-cards' },
   ];

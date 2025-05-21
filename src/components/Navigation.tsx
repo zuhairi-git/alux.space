@@ -24,6 +24,7 @@ const homeDropdownItems = [
   { href: '/#digital-dreams', text: 'Digital Dreams', type: 'section', icon: 'auto_awesome' },
   { href: '/#strengths-skills', text: 'Strengths & Skills', type: 'section', icon: 'psychology' },
   { href: '/#testimonials', text: 'Testimonials', type: 'section', icon: 'format_quote' },
+  { href: '/coming-soon', text: 'Coming Soon', type: 'overview', icon: 'rocket_launch' },
 ];
 
 const Navigation = () => {
@@ -367,8 +368,7 @@ const Navigation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 whileHover={{ y: -2 }}
-              >
-                <Link href={localizedHref('/design/timeline-cards')} className="relative group p-2 rounded-lg block">
+              >                <Link href={localizedHref('/coming-soon')} className="relative group p-2 rounded-lg block">
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Design</span>
                   <motion.span
                     className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
@@ -597,9 +597,8 @@ const Navigation = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </li>              {/* Design link - Mobile */}
-              <li>                  <Link
-                  href={localizedHref('/design/timeline-cards')}
+              </li>              {/* Design link - Mobile */}              <li>                  <Link
+                  href={localizedHref('/coming-soon')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
                 >
