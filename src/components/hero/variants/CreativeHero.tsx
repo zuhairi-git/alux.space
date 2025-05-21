@@ -61,7 +61,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               transform: `perspective(1000px) rotateX(0deg) rotateY(0deg)` // Fixed position instead of mouse-based rotation
             }}
           >
-            <h2 className={`text-6xl md:text-8xl font-bold leading-tight tracking-tight relative z-20 `}>
+            <h2 className={`text-6xl text-center md:text-7xl font-bold leading-tight tracking-tight relative z-20 `}>
               {words.map((word, i) => (
                 <motion.span
                   key={i}
