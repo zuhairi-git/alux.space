@@ -14,6 +14,8 @@
   --card-border: rgba(229, 231, 235, 0.5);
   --card-border-hover: rgba(96, 165, 250, 0.5);
   --card-shadow-color: rgba(59, 130, 246, 0.2);
+  --scrollbar-thumb: #3b82f6;
+  --scrollbar-thumb-hover: #2563eb;
   --material-symbols: 'Material Symbols Rounded';
   --material-symbols-weight: 200;
   --material-symbols-fill: 0;
@@ -35,6 +37,8 @@
   --card-border: rgba(229, 231, 235, 0.5);
   --card-border-hover: rgba(96, 165, 250, 0.5);
   --card-shadow-color: rgba(59, 130, 246, 0.2);
+  --scrollbar-thumb: #3b82f6;
+  --scrollbar-thumb-hover: #1e40af;
 }
 
 .theme-dark {
@@ -51,6 +55,8 @@
   --card-border: rgba(75, 85, 99, 0.5);
   --card-border-hover: rgba(96, 165, 250, 0.5);
   --card-shadow-color: rgba(59, 130, 246, 0.2);
+  --scrollbar-thumb: #2563eb;
+  --scrollbar-thumb-hover: #60a5fa;
 }
 
 .theme-colorful {
@@ -67,6 +73,8 @@
   --card-border: rgba(128, 0, 255, 0.3);
   --card-border-hover: rgba(0, 255, 255, 0.6);
   --card-shadow-color: rgba(255, 0, 204, 0.3);
+  --scrollbar-thumb: #d100ff;
+  --scrollbar-thumb-hover: #9900cc;
 }
 
 body {
@@ -305,7 +313,7 @@ body {
 .theme-colorful h1, 
 .theme-colorful h2, 
 .theme-colorful h3 {
-  /* Removed text shadow for cleaner appearance */
+  text-shadow: none;
 }
 
 .theme-colorful .bg-gradient-to-r {
@@ -543,4 +551,136 @@ body {
 
 .perspective-1000 {
   perspective: 1000px;
+}
+
+/* Custom Thin Scrollbar Styles for Podcast Player */
+.podcast-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+}
+
+.podcast-scrollbar::-webkit-scrollbar {
+  width: 1px; /* Ultra thin scrollbar */
+}
+
+.podcast-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Theme-specific scrollbar styling */
+.scrollbar-light::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 10px;
+}
+
+.scrollbar-light::-webkit-scrollbar-thumb:hover {
+  background-color: #1e40af;
+}
+
+.scrollbar-dark::-webkit-scrollbar-thumb {
+  background-color: #2563eb;
+  border-radius: 10px;
+}
+
+.scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background-color: #60a5fa;
+}
+
+.scrollbar-colorful::-webkit-scrollbar-thumb {
+  background: #d100ff;
+  border-radius: 10px;
+}
+
+.scrollbar-colorful::-webkit-scrollbar-thumb:hover {
+  background: #9900cc;
+}
+
+/* Global Thin Scrollbar Styling */
+* {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Theme-specific scrollbar colors */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox specific customization - using color-scheme */
+@supports (scrollbar-color: var(--scrollbar-thumb) transparent) {
+  * {
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+  
+  /* Firefox theme-specific scrollbar colors */
+  .theme-light * {
+    scrollbar-color: #3b82f6 transparent;
+  }
+  
+  .theme-light *:hover {
+    scrollbar-color: #1e40af transparent;
+  }
+  
+  .theme-dark * {
+    scrollbar-color: #2563eb transparent;
+  }
+  
+  .theme-dark *:hover {
+    scrollbar-color: #60a5fa transparent;
+  }
+    /* Firefox-specific styling for colorful theme */
+  .theme-colorful * {
+    scrollbar-color: #d100ff transparent;
+  }
+  
+  .theme-colorful *:hover {
+    scrollbar-color: #9900cc transparent;
+  }
+}
+
+/* Edge and IE specific scrollbar styling (uses -ms- prefix) */
+@supports (-ms-overflow-style: none) {
+  * {
+    -ms-overflow-style: auto;
+  }
+  
+  *::-ms-scrollbar {
+    width: 1px;
+    height: 1px;
+  }
+  
+  *::-ms-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+  
+  *::-ms-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* Additional Safari specific customization */
+@supports (-webkit-overflow-scrolling: touch) {
+  ::-webkit-scrollbar {
+    width: 1px !important;
+    height: 1px !important;
+  }
+  
+  .safari-scrollbar-fix {
+    -webkit-overflow-scrolling: touch;
+  }
 }

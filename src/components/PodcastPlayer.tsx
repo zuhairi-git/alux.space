@@ -331,9 +331,14 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
-          >
-            <div className={`border-t ${isLight ? 'border-gray-200' : 'border-gray-700'}`}>
-              <div className="max-h-72 overflow-y-auto">
+          >            <div className={`border-t ${isLight ? 'border-gray-200' : 'border-gray-700'}`}>
+              <div className={`max-h-72 overflow-y-auto podcast-scrollbar ${
+                isLight 
+                  ? 'scrollbar-light' 
+                  : isColorful
+                    ? 'scrollbar-colorful'
+                    : 'scrollbar-dark'
+              }`}>
                 {podcastEpisodes.map(episode => (
                   <div 
                     key={episode.id}
