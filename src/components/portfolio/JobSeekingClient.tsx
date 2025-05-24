@@ -145,7 +145,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
               className="relative w-full h-[400px] mb-12 rounded-2xl overflow-hidden"
             >
               <Image
-                src="/images/portfolio/jobseeking/cover.jpeg"
+                src="/images/portfolio/jobseeking/cover.jpg"
                 alt={content.title}
                 fill
                 className="object-cover"

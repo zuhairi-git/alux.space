@@ -1,20 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
+import Navigation from '@/components/Navigation';
 
 interface Props {
-  locale: string;
+  locale?: string;
 }
 
 export default function AccessibilityClient({ locale: initialLocale }: Props) {
-  const [activeTab, setActiveTab] = useState('overview');
-  
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -30,615 +28,388 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
   const getLocalizedContent = () => {
     const content = {
       en: {
-        title: "Accessibility Portfolio",
-        subtitle: "WCAG 2.2 & Inclusive Design Excellence",
-        intro: "A comprehensive showcase of accessibility standards, best practices in accessible UX design including color contrast optimization, keyboard navigation, screen reader compatibility, semantic HTML, and inclusive design patterns with real-world before-and-after improvements.",
+        title: "Inclusive Design System",
+        intro: "A comprehensive case study on creating an inclusive design system for a fintech startup—demonstrating how accessibility principles can be embedded into every design decision from research to implementation.",
         projectType: "Project Type",
-        projectTypeValues: "Accessibility Audit, Design System, Guidelines & Training",
+        projectTypeValues: "Design System & Accessibility Framework",
         timeline: "Timeline",
-        timelineValue: "Ongoing Initiative",
+        timelineValue: "12 Weeks",
         tools: "Tools",
-        toolsValue: "axe DevTools, WAVE, Lighthouse, Color Oracle, NVDA",
+        toolsValue: "Figma, axe DevTools, WAVE, Color Oracle, NVDA",
         standards: "Standards",
-        standardsValue: "WCAG 2.2 AA/AAA, Section 508, ADA Compliance",
-        overview: "Overview",
-        wcagCompliance: "WCAG 2.2 Compliance",
-        colorContrast: "Color Contrast",
-        keyboardNav: "Keyboard Navigation",
-        screenReaders: "Screen Readers",
-        beforeAfter: "Before & After",
-        guidelines: "Guidelines",
-        testing: "Testing Results",
-        learnMore: "Learn more",
+        standardsValue: "WCAG 2.2 AA, Section 508, ARIA Guidelines",
+        roles: "Roles",
+        rolesValue: "Lead UX Designer, Accessibility Consultant",
+        designProcess: "Design Process",
+        designModel: "Framework:",
+        doubleD: "Inclusive Design Methodology",
+        discoverPhase: "Research & Audit",
+        definePhase: "Standards & Patterns",
+        developPhase: "Implementation",
+        deliverPhase: "Testing & Training",
+        challenge: "Challenge",
+        challengeDesc: "How might we create a design system that ensures all users, regardless of ability, can successfully complete financial transactions?",
+        discoveryInsights: "Discovery Insights",
+        discoveryDesc: "15% of users have some form of disability, yet most fintech apps fail basic accessibility tests. Users with visual impairments often abandon transactions due to poor contrast and screen reader support.",
+        initialResearch: "Accessibility Audit",
+        initialResearchDesc: "Conducted comprehensive audit of existing interface using automated tools and manual testing with assistive technologies. Identified 47 critical accessibility violations.",
+        hypothesis: "Hypothesis",
+        hypothesisDesc: "By integrating accessibility principles into our design system foundation, we can create inclusive financial products that improve usability for all users while meeting compliance standards.",
+        primaryResearch: "User Research with Disabilities",
+        objectives: "Objectives:",
+        methods: "Methods:",
+        ethics: "Ethics:",
+        personas: "Inclusive Personas",
+        userFlow: "Accessible User Flows",
+        userFlowDesc: "Redesigned critical user journeys with accessibility considerations, ensuring keyboard navigation, screen reader compatibility, and clear visual hierarchy.",
+        productRequirements: "Design System Requirements",
+        epicGoal: "Epic Goal",
+        epicGoalDesc: "Create an inclusive design system that enables equal access to financial services",
+        userTesting: "Accessibility Testing",
+        inProgress: "Continuous Improvement",
+        hifiProto: "Accessible Components:",
+        hifiProtoDesc: "Complete component library with built-in accessibility features, proper ARIA labels, and semantic markup.",
+        designReviews: "Accessibility Reviews:",
+        designReviewsDesc: "Regular audits using assistive technologies and compliance testing. All components tested with screen readers and keyboard navigation.",
+        qa: "Quality Assurance:",
+        qaDesc: "Automated accessibility testing integrated into CI/CD pipeline, manual testing with real users with disabilities",
+        designDocs: "Implementation Guide:",
+        designDocsDesc: "Comprehensive documentation including code examples, ARIA patterns, and accessibility best practices for development teams.",
+        impact: "Impact & Results",
+        impactDesc: "Achieved 100% WCAG 2.2 AA compliance, reduced user support tickets by 40%, and increased task completion rates among users with disabilities by 65%."
       },
       fi: {
-        title: "Saavutettavuusportfolio",
-        subtitle: "WCAG 2.2 & Inklusiivinen suunnittelun huippuosaaminen",
-        intro: "Kattava esittely saavutettavuusstandardeista, parhaista käytännöistä saavutettavassa UX-suunnittelussa mukaan lukien värikontrastin optimointi, näppäimistönavigaatio, ruudunlukijan yhteensopivuus, semanttinen HTML ja inklusiiviset suunnittelumallit todellisilla ennen-ja-jälkeen parannuksilla.",
+        title: "Inklusiivinen suunnittelujärjestelmä",
+        intro: "Kattava tapaustutkimus inklusiivisen suunnittelujärjestelmän luomisesta fintech-startupille—osoittaa miten saavutettavuusperiaatteet voidaan upottaa jokaiseen suunnittelupäätökseen tutkimuksesta toteutukseen.",
         projectType: "Projektityyppi",
-        projectTypeValues: "Saavutettavuusauditointi, Suunnittelujärjestelmä, Ohjeet & Koulutus",
+        projectTypeValues: "Suunnittelujärjestelmä & Saavutettavuuskehys",
         timeline: "Aikataulu",
-        timelineValue: "Jatkuva aloite",
+        timelineValue: "12 viikkoa",
         tools: "Työkalut",
-        toolsValue: "axe DevTools, WAVE, Lighthouse, Color Oracle, NVDA",
+        toolsValue: "Figma, axe DevTools, WAVE, Color Oracle, NVDA",
         standards: "Standardit",
-        standardsValue: "WCAG 2.2 AA/AAA, Section 508, ADA-vaatimustenmukaisuus",
-        overview: "Yleiskatsaus",
-        wcagCompliance: "WCAG 2.2 Vaatimustenmukaisuus",
-        colorContrast: "Värikontrasti",
-        keyboardNav: "Näppäimistönavigaatio",
-        screenReaders: "Ruudunlukijat",
-        beforeAfter: "Ennen & Jälkeen",
-        guidelines: "Ohjeet",
-        testing: "Testitulokset",
-        learnMore: "Lue lisää",
+        standardsValue: "WCAG 2.2 AA, Section 508, ARIA-ohjeet",
+        roles: "Roolit",
+        rolesValue: "Johtava UX-suunnittelija, Saavutettavuuskonsultti",
+        designProcess: "Suunnitteluprosessi",
+        designModel: "Kehys:",
+        doubleD: "Inklusiivinen suunnittelumetodologia",
+        discoverPhase: "Tutkimus & Auditointi",
+        definePhase: "Standardit & Mallit",
+        developPhase: "Toteutus",
+        deliverPhase: "Testaus & Koulutus",
+        challenge: "Haaste",
+        challengeDesc: "Miten voimme luoda suunnittelujärjestelmän, joka varmistaa että kaikki käyttäjät kyvyistä riippumatta voivat onnistuneesti suorittaa rahoitustransaktioita?",
+        discoveryInsights: "Löydökset",
+        discoveryDesc: "15% käyttäjistä on jonkinlainen vamma, mutta useimmat fintech-sovellukset epäonnistuvat perus saavutettavuustesteissä. Näkövammaiset käyttäjät hylkäävät usein transaktioita huonon kontrastin ja näytönlukijan tuen vuoksi.",
+        initialResearch: "Saavutettavuusauditointi",
+        initialResearchDesc: "Suoritettiin kattava auditointi olemassa olevasta käyttöliittymästä käyttäen automaattisia työkaluja ja manuaalista testausta avustavien teknologioiden kanssa. Tunnistettiin 47 kriittistä saavutettavuusrikkomusta.",
+        hypothesis: "Hypoteesi",
+        hypothesisDesc: "Integroimalla saavutettavuusperiaatteet suunnittelujärjestelmämme perustaan, voimme luoda inklusiivisia rahoitustuotteita, jotka parantavat käytettävyyttä kaikille käyttäjille samalla täyttäen vaatimustenmukaisuusstandardit.",
+        primaryResearch: "Käyttäjätutkimus vammaisten kanssa",
+        objectives: "Tavoitteet:",
+        methods: "Menetelmät:",
+        ethics: "Etiikka:",
+        personas: "Inklusiiviset henkilöt",
+        userFlow: "Saavutettavat käyttäjävirrat",
+        userFlowDesc: "Uudelleensuunniteltu kriittiset käyttäjämatkat saavutettavuusnäkökohdat huomioiden, varmistamalla näppäimistönavigaation, näytönlukijan yhteensopivuuden ja selkeän visuaalisen hierarkian.",
+        productRequirements: "Suunnittelujärjestelmän vaatimukset",
+        epicGoal: "Pääasiallinen tavoite",
+        epicGoalDesc: "Luoda inklusiivinen suunnittelujärjestelmä, joka mahdollistaa tasavertaisen pääsyn rahoituspalveluihin",
+        userTesting: "Saavutettavuustestaus",
+        inProgress: "Jatkuva parantaminen",
+        hifiProto: "Saavutettavat komponentit:",
+        hifiProtoDesc: "Täydellinen komponenttikirjasto sisäänrakennetuilla saavutettavuusominaisuuksilla, asianmukaisilla ARIA-merkinnöillä ja semanttisella merkinnällä.",
+        designReviews: "Saavutettavuuskatselmukset:",
+        designReviewsDesc: "Säännölliset auditoinnit avustavien teknologioiden ja vaatimustenmukaisuustestauksen avulla. Kaikki komponentit testattu näytönlukijoiden ja näppäimistönavigaation kanssa.",
+        qa: "Laadunvarmistus:",
+        qaDesc: "Automaattinen saavutettavuustestaus integroitu CI/CD-putkeen, manuaalinen testaus todellisten vammaisten käyttäjien kanssa",
+        designDocs: "Toteutusopas:",
+        designDocsDesc: "Kattava dokumentaatio sisältäen koodiesimerkit, ARIA-mallit ja saavutettavuuden parhaat käytännöt kehitystiimeille.",
+        impact: "Vaikutus & Tulokset",
+        impactDesc: "Saavutettiin 100% WCAG 2.2 AA -vaatimustenmukaisuus, vähennettiin käyttäjätukipyyntöjä 40%, ja lisättiin tehtävien suorittamisastetta vammaisten käyttäjien keskuudessa 65%."
       }
     };
-    
     return content[locale as keyof typeof content] || content.en;
   };
 
   const content = getLocalizedContent();
 
-  // WCAG 2.2 Guidelines
-  const wcagGuidelines = [
-    {
-      principle: locale === 'fi' ? "Havaittavuus" : "Perceivable",
-      guidelines: [
-        locale === 'fi' ? "Tekstivaihtoehdot kaikelle ei-tekstuaaliselle sisällölle" : "Text alternatives for non-text content",
-        locale === 'fi' ? "Kuvatekstit ja muut vaihtoehdot multimedialle" : "Captions and alternatives for multimedia",
-        locale === 'fi' ? "Sisältö voidaan esittää eri tavoin menettämättä merkitystä" : "Content can be presented in different ways without losing meaning",
-        locale === 'fi' ? "Helpottaa käyttäjien näkemistä ja kuulemista sisältöä" : "Make it easier for users to see and hear content"
-      ]
-    },
-    {
-      principle: locale === 'fi' ? "Toimivuus" : "Operable",
-      guidelines: [
-        locale === 'fi' ? "Kaikki toiminnot ovat käytettävissä näppäimistöltä" : "All functionality available from keyboard",
-        locale === 'fi' ? "Käyttäjille annetaan riittävästi aikaa lukea sisältöä" : "Users have enough time to read and use content",
-        locale === 'fi' ? "Sisältö ei aiheuta kouristuksia tai muita fyysisiä reaktioita" : "Content doesn't cause seizures or physical reactions",
-        locale === 'fi' ? "Käyttäjiä autetaan navigoimaan ja löytämään sisältöä" : "Users can navigate and find content"
-      ]
-    },
-    {
-      principle: locale === 'fi' ? "Ymmärrettävyys" : "Understandable",
-      guidelines: [
-        locale === 'fi' ? "Teksti on luettavaa ja ymmärrettävää" : "Text is readable and understandable",
-        locale === 'fi' ? "Verkkosivut näkyvät ja toimivat ennustettavasti" : "Web pages appear and operate predictably",
-        locale === 'fi' ? "Käyttäjiä autetaan välttämään ja korjaamaan virheitä" : "Users are helped to avoid and correct mistakes"
-      ]
-    },
-    {
-      principle: locale === 'fi' ? "Kestävyys" : "Robust",
-      guidelines: [
-        locale === 'fi' ? "Sisältö voidaan tulkita luotettavasti monenlaisilla käyttäjäagenteilla" : "Content can be interpreted reliably by a wide variety of user agents",
-        locale === 'fi' ? "Yhteensopivuus avustavien teknologioiden kanssa" : "Compatible with assistive technologies"
-      ]
-    }
-  ];
-
-  // Color contrast examples
-  const contrastExamples = [
-    {
-      type: locale === 'fi' ? "Huono kontrasti" : "Poor Contrast",
-      ratio: "2.1:1",
-      status: locale === 'fi' ? "Epäonnistuu" : "Fails",
-      bgColor: "#767676",
-      textColor: "#ffffff",
-      compliance: "❌"
-    },
-    {
-      type: locale === 'fi' ? "Hyvä kontrasti (AA)" : "Good Contrast (AA)",
-      ratio: "4.5:1",
-      status: locale === 'fi' ? "Hyväksytty" : "Passes",
-      bgColor: "#666666",
-      textColor: "#ffffff",
-      compliance: "✅"
-    },
-    {
-      type: locale === 'fi' ? "Erinomainen kontrasti (AAA)" : "Excellent Contrast (AAA)",
-      ratio: "7.1:1",
-      status: locale === 'fi' ? "Erinomainen" : "Excellent",
-      bgColor: "#333333",
-      textColor: "#ffffff",
-      compliance: "🏆"
-    }
-  ];
-
-  // Common accessibility pitfalls
-  const accessibilityPitfalls = [
-    {
-      pitfall: locale === 'fi' ? "Puuttuvat alt-tekstit kuvissa" : "Missing alt text for images",
-      impact: locale === 'fi' ? "Ruudunlukijat eivät voi kuvata sisältöä" : "Screen readers can't describe content",
-      solution: locale === 'fi' ? "Lisää kuvaavat alt-attribuutit" : "Add descriptive alt attributes"
-    },
-    {
-      pitfall: locale === 'fi' ? "Riittämätön värikontrasti" : "Insufficient color contrast",
-      impact: locale === 'fi' ? "Teksti on vaikea lukea heikkonäköisille" : "Text is hard to read for visually impaired",
-      solution: locale === 'fi' ? "Käytä WCAG 2.2 kontrastisuhteita" : "Use WCAG 2.2 contrast ratios"
-    },
-    {
-      pitfall: locale === 'fi' ? "Ei näppäimistötukea" : "No keyboard support",
-      impact: locale === 'fi' ? "Liikuntarajoitteiset eivät voi navigoida" : "Motor impaired users can't navigate",
-      solution: locale === 'fi' ? "Varmista kaikki toiminnot toimivat näppäimistöltä" : "Ensure all functions work with keyboard"
-    },
-    {
-      pitfall: locale === 'fi' ? "Ei semanttista HTML:ää" : "Non-semantic HTML",
-      impact: locale === 'fi' ? "Avustavat teknologiat eivät ymmärrä rakennetta" : "Assistive tech can't understand structure",
-      solution: locale === 'fi' ? "Käytä semanttisia HTML-elementtejä" : "Use semantic HTML elements"
-    }
-  ];
-
-  const tabs = [
-    { id: 'overview', label: content.overview, icon: '🎯' },
-    { id: 'wcag', label: content.wcagCompliance, icon: '📋' },
-    { id: 'contrast', label: content.colorContrast, icon: '🎨' },
-    { id: 'keyboard', label: content.keyboardNav, icon: '⌨️' },
-    { id: 'screen-readers', label: content.screenReaders, icon: '🔊' },
-    { id: 'before-after', label: content.beforeAfter, icon: '🔄' }
-  ];
-
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       isLight 
-        ? 'bg-gradient-to-br from-gray-50 via-white to-blue-50' 
-        : 'bg-gradient-to-br from-gray-900 via-black to-blue-900'
+        ? 'bg-gradient-to-br from-slate-50 to-gray-100' 
+        : 'bg-gradient-to-br from-gray-900 to-black'
     }`}>
       <Navigation />
       
-      <div className="container mx-auto px-4 pt-24 pb-16">
-        {/* Hero Section */}
-        <motion.div 
-          className="text-center mb-16"
-          {...fadeInUp}
-        >
-          <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${
-            isLight ? 'text-gray-900' : 'text-white'
-          }`}>
-            {content.title}
-          </h1>
-          <p className={`text-xl md:text-2xl mb-8 ${
-            isLight ? 'text-emerald-600' : 'text-emerald-400'
-          } font-medium`}>
-            {content.subtitle}
-          </p>
-          <p className={`text-lg max-w-4xl mx-auto leading-relaxed ${
-            isLight ? 'text-gray-700' : 'text-gray-300'
-          }`}>
-            {content.intro}
-          </p>
-        </motion.div>
-
-        {/* Project Details Grid */}
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {[
-            { label: content.projectType, value: content.projectTypeValues },
-            { label: content.timeline, value: content.timelineValue },
-            { label: content.tools, value: content.toolsValue },
-            { label: content.standards, value: content.standardsValue }
-          ].map((item, index) => (
-            <div key={index} className={`p-6 rounded-2xl border-2 ${
-              isLight 
-                ? 'bg-white border-gray-200 shadow-lg' 
-                : 'bg-gray-800 border-gray-700 shadow-xl'
-            }`}>
-              <h3 className={`font-semibold mb-2 ${
-                isLight ? 'text-gray-900' : 'text-white'
-              }`}>
-                {item.label}
-              </h3>
-              <p className={`text-sm ${
-                isLight ? 'text-gray-600' : 'text-gray-400'
-              }`}>
-                {item.value}
-              </p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Tab Navigation */}
-        <motion.div 
-          className="mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="flex flex-wrap gap-2 justify-center">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? isLight
-                      ? 'bg-emerald-500 text-white shadow-lg'
-                      : 'bg-emerald-600 text-white shadow-lg'
-                    : isLight
-                      ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                }`}
-              >
-                <span className="mr-2">{tab.icon}</span>
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Tab Content */}
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className={`rounded-3xl border-2 p-8 ${
-            isLight 
-              ? 'bg-white border-gray-200 shadow-xl' 
-              : 'bg-gray-800 border-gray-700 shadow-2xl'
-          }`}
-        >
-          {activeTab === 'overview' && (
-            <div>
-              <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                {content.overview}
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className={`text-xl font-semibold mb-4 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                    {locale === 'fi' ? 'Keskeiset osa-alueet' : 'Key Focus Areas'}
-                  </h3>
-                  <ul className="space-y-3">
-                    {[
-                      locale === 'fi' ? 'WCAG 2.2 AA/AAA vaatimustenmukaisuus' : 'WCAG 2.2 AA/AAA compliance',
-                      locale === 'fi' ? 'Värikontrastin optimointi' : 'Color contrast optimization',
-                      locale === 'fi' ? 'Näppäimistönavigaation toteutus' : 'Keyboard navigation implementation',
-                      locale === 'fi' ? 'Ruudunlukijan yhteensopivuus' : 'Screen reader compatibility',
-                      locale === 'fi' ? 'Semanttinen HTML-rakenne' : 'Semantic HTML structure',
-                      locale === 'fi' ? 'Inklusiiviset suunnittelumallit' : 'Inclusive design patterns'
-                    ].map((item, index) => (
-                      <li key={index} className={`flex items-center ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                        <span className="text-emerald-500 mr-3">✓</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className={`text-xl font-semibold mb-4 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                    {locale === 'fi' ? 'Liiketoimintavaikutus' : 'Business Impact'}
-                  </h3>
-                  <div className="space-y-4">
-                    {[
-                      { 
-                        metric: locale === 'fi' ? '+45% käyttäjäkunta' : '+45% user base', 
-                        desc: locale === 'fi' ? 'Saavutettavuuden parantaminen avasi uudet käyttäjäryhmät' : 'Accessibility improvements opened new user demographics'
-                      },
-                      { 
-                        metric: locale === 'fi' ? '-60% tukipyynnöt' : '-60% support tickets', 
-                        desc: locale === 'fi' ? 'Selkeämmät käyttöliittymät vähensivät avuntarvetta' : 'Clearer interfaces reduced need for assistance'
-                      },
-                      { 
-                        metric: locale === 'fi' ? '+30% käytettävyys' : '+30% usability score', 
-                        desc: locale === 'fi' ? 'Parempi kokonaiskokemus kaikille käyttäjille' : 'Better overall experience for all users'
-                      }
-                    ].map((item, index) => (
-                      <div key={index} className={`p-4 rounded-lg ${isLight ? 'bg-gray-50' : 'bg-gray-700'}`}>
-                        <div className="text-emerald-500 font-bold text-lg">{item.metric}</div>
-                        <div className={`text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{item.desc}</div>
-                      </div>
-                    ))}
-                  </div>
+      <main className="pt-24 pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Hero Section */}
+          <motion.div 
+            className="text-center mb-16"
+            {...fadeInUp}
+          >
+            <div className="mb-8">              <div className="relative w-full h-96 mb-8 rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/portfolio/accessibility/accessiblity-showcase.jpg"
+                  alt={content.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-8 left-8 text-white">
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4">{content.title}</h1>
+                  <p className="text-xl opacity-90 max-w-2xl">{content.intro}</p>
                 </div>
               </div>
             </div>
-          )}
+          </motion.div>
 
-          {activeTab === 'wcag' && (
-            <div>
-              <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                WCAG 2.2 {locale === 'fi' ? 'Vaatimustenmukaisuus' : 'Compliance'}
-              </h2>
-              <div className="space-y-8">
-                {wcagGuidelines.map((section, index) => (
-                  <div key={index} className={`p-6 rounded-xl ${isLight ? 'bg-gray-50' : 'bg-gray-700'}`}>
-                    <h3 className={`text-xl font-semibold mb-4 text-emerald-500`}>
-                      {index + 1}. {section.principle}
-                    </h3>
-                    <ul className="space-y-2">
-                      {section.guidelines.map((guideline, gIndex) => (
-                        <li key={gIndex} className={`flex items-start ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                          <span className="text-emerald-500 mr-3 mt-1">•</span>
-                          {guideline}
-                        </li>
-                      ))}
-                    </ul>
+          {/* Project Details Grid */}
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className={`p-6 rounded-xl ${
+              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.projectType}</h3>
+              <p className={`text-sm ${
+                isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.projectTypeValues}</p>
+            </div>
+            
+            <div className={`p-6 rounded-xl ${
+              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.timeline}</h3>
+              <p className={`text-sm ${
+                isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.timelineValue}</p>
+            </div>
+            
+            <div className={`p-6 rounded-xl ${
+              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.tools}</h3>
+              <p className={`text-sm ${
+                isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.toolsValue}</p>
+            </div>
+            
+            <div className={`p-6 rounded-xl ${
+              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.roles}</h3>
+              <p className={`text-sm ${
+                isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.rolesValue}</p>
+            </div>
+          </motion.div>
+
+          {/* Design Process */}
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <h2 className={`text-3xl font-bold mb-8 ${
+              isLight ? 'text-gray-900' : 'text-white'
+            }`}>{content.designProcess}</h2>
+            
+            <div className={`p-8 rounded-2xl mb-8 ${
+              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <div className="flex items-center mb-6">
+                <span className={`text-lg font-medium mr-4 ${
+                  isLight ? 'text-gray-700' : 'text-gray-300'
+                }`}>{content.designModel}</span>
+                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+                  {content.doubleD}
+                </span>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-6">
+                {[
+                  { phase: content.discoverPhase, color: 'from-indigo-400 to-indigo-500' },
+                  { phase: content.definePhase, color: 'from-purple-400 to-purple-500' },
+                  { phase: content.developPhase, color: 'from-pink-400 to-pink-500' },
+                  { phase: content.deliverPhase, color: 'from-rose-400 to-rose-500' },
+                ].map((item, index) => (
+                  <div key={index} className="text-center">
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-white font-bold text-lg`}>
+                      {index + 1}
+                    </div>
+                    <h3 className={`font-semibold ${
+                      isLight ? 'text-gray-900' : 'text-white'
+                    }`}>{item.phase}</h3>
                   </div>
                 ))}
               </div>
             </div>
-          )}
+          </motion.section>
 
-          {activeTab === 'contrast' && (
-            <div>
-              <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                {content.colorContrast} {locale === 'fi' ? 'Optimointi' : 'Optimization'}
-              </h2>
-              <div className="space-y-6">
-                <p className={`text-lg ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                  {locale === 'fi' 
-                    ? 'Värikontrastin merkitys saavutettavuudessa ja WCAG 2.2 standardien mukaiset kontrastisuhteet:'
-                    : 'The importance of color contrast in accessibility and WCAG 2.2 compliant contrast ratios:'
-                  }
-                </p>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {contrastExamples.map((example, index) => (
-                    <div key={index} className={`p-6 rounded-xl border-2 ${
-                      isLight ? 'border-gray-200' : 'border-gray-600'
-                    }`}>
-                      <div 
-                        className="p-4 rounded-lg mb-4 text-center font-semibold"
-                        style={{ backgroundColor: example.bgColor, color: example.textColor }}
-                      >
-                        {locale === 'fi' ? 'Esimerkkiteksti' : 'Sample Text'}
-                      </div>
-                      <div className="space-y-2">
-                        <div className={`font-semibold ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                          {example.type}
-                        </div>
-                        <div className={`text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-                          {locale === 'fi' ? 'Suhde' : 'Ratio'}: {example.ratio}
-                        </div>
-                        <div className="flex items-center">
-                          <span className="mr-2">{example.compliance}</span>
-                          <span className={`text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-                            {example.status}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          {/* Challenge Section */}
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className={`p-8 rounded-2xl ${
+              isLight ? 'bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100' : 'bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-800'
+            }`}>
+              <h2 className={`text-2xl font-bold mb-4 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.challenge}</h2>
+              <p className={`text-lg ${
+                isLight ? 'text-gray-700' : 'text-gray-300'
+              }`}>{content.challengeDesc}</p>
+            </div>
+          </motion.section>
+
+          {/* Discovery Insights */}
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className={`p-8 rounded-2xl ${
+                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isLight ? 'text-gray-900' : 'text-white'
+                }`}>{content.discoveryInsights}</h3>
+                <p className={`${
+                  isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>{content.discoveryDesc}</p>
+              </div>
+              
+              <div className={`p-8 rounded-2xl ${
+                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isLight ? 'text-gray-900' : 'text-white'
+                }`}>{content.initialResearch}</h3>
+                <p className={`${
+                  isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>{content.initialResearchDesc}</p>
               </div>
             </div>
-          )}
+          </motion.section>
 
-          {activeTab === 'keyboard' && (
-            <div>
-              <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                {content.keyboardNav}
-              </h2>
-              <div className="space-y-6">
-                <p className={`text-lg ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                  {locale === 'fi'
-                    ? 'Kaikki toiminnot on suunniteltu toimimaan täysin näppäimistöltä, mahdollistaen navigoinnin ilman hiirtä.'
-                    : 'All functionality is designed to work completely with keyboard, enabling navigation without a mouse.'
-                  }
-                </p>
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-4 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                      {locale === 'fi' ? 'Näppäinkomennot' : 'Keyboard Shortcuts'}
-                    </h3>
-                    <div className="space-y-3">
-                      {[
-                        { key: 'Tab', desc: locale === 'fi' ? 'Siirry seuraavaan elementtiin' : 'Move to next element' },
-                        { key: 'Shift + Tab', desc: locale === 'fi' ? 'Siirry edelliseen elementtiin' : 'Move to previous element' },
-                        { key: 'Enter/Space', desc: locale === 'fi' ? 'Aktivoi elementti' : 'Activate element' },
-                        { key: 'Esc', desc: locale === 'fi' ? 'Sulje modaalit/valikot' : 'Close modals/menus' },
-                        { key: 'Arrow Keys', desc: locale === 'fi' ? 'Navigoi valikoissa' : 'Navigate within menus' }
-                      ].map((shortcut, index) => (
-                        <div key={index} className={`flex items-center p-3 rounded-lg ${
-                          isLight ? 'bg-gray-50' : 'bg-gray-700'
-                        }`}>
-                          <kbd className={`px-2 py-1 rounded text-xs font-mono mr-4 ${
-                            isLight ? 'bg-gray-200 text-gray-800' : 'bg-gray-600 text-gray-200'
-                          }`}>
-                            {shortcut.key}
-                          </kbd>
-                          <span className={isLight ? 'text-gray-700' : 'text-gray-300'}>
-                            {shortcut.desc}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-4 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                      {locale === 'fi' ? 'Fokuksen hallinta' : 'Focus Management'}
-                    </h3>
-                    <ul className="space-y-3">
-                      {[
-                        locale === 'fi' ? 'Näkyvä fokusindikaattori kaikissa interaktiivisissa elementeissä' : 'Visible focus indicator on all interactive elements',
-                        locale === 'fi' ? 'Looginen tab-järjestys sisällön mukaan' : 'Logical tab order following content flow',
-                        locale === 'fi' ? 'Fokuksen säilyttäminen modaalien ja pudotusvalikoiden aikana' : 'Focus trapping in modals and dropdowns',
-                        locale === 'fi' ? 'Skip-linkit pitkien navigointien ohittamiseen' : 'Skip links to bypass long navigation',
-                        locale === 'fi' ? 'Fokuksen palautus alkuperäiseen elementtiin' : 'Focus restoration to triggering element'
-                      ].map((item, index) => (
-                        <li key={index} className={`flex items-start ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                          <span className="text-emerald-500 mr-3 mt-1">✓</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+          {/* Hypothesis */}
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <div className={`p-8 rounded-2xl ${
+              isLight ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100' : 'bg-gradient-to-r from-emerald-900/20 to-teal-900/20 border border-emerald-800'
+            }`}>
+              <h2 className={`text-2xl font-bold mb-4 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.hypothesis}</h2>
+              <p className={`text-lg ${
+                isLight ? 'text-gray-700' : 'text-gray-300'
+              }`}>{content.hypothesisDesc}</p>
+            </div>
+          </motion.section>
+
+          {/* Implementation & Testing */}
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <h2 className={`text-3xl font-bold mb-8 ${
+              isLight ? 'text-gray-900' : 'text-white'
+            }`}>{content.userTesting}</h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className={`p-8 rounded-2xl ${
+                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isLight ? 'text-gray-900' : 'text-white'
+                }`}>{content.hifiProto}</h3>
+                <p className={`mb-4 ${
+                  isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>{content.hifiProtoDesc}</p>
+              </div>
+              
+              <div className={`p-8 rounded-2xl ${
+                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isLight ? 'text-gray-900' : 'text-white'
+                }`}>{content.designReviews}</h3>
+                <p className={`mb-4 ${
+                  isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>{content.designReviewsDesc}</p>
+              </div>
+              
+              <div className={`p-8 rounded-2xl ${
+                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isLight ? 'text-gray-900' : 'text-white'
+                }`}>{content.qa}</h3>
+                <p className={`${
+                  isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>{content.qaDesc}</p>
+              </div>
+              
+              <div className={`p-8 rounded-2xl ${
+                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isLight ? 'text-gray-900' : 'text-white'
+                }`}>{content.designDocs}</h3>
+                <p className={`${
+                  isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>{content.designDocsDesc}</p>
               </div>
             </div>
-          )}
+          </motion.section>
 
-          {activeTab === 'screen-readers' && (
-            <div>
-              <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                {content.screenReaders} {locale === 'fi' ? 'Yhteensopivuus' : 'Compatibility'}
-              </h2>
-              <div className="space-y-8">
-                <p className={`text-lg ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                  {locale === 'fi'
-                    ? 'Optimoitu ruudunlukijoille kuten NVDA, JAWS ja VoiceOver semanttisen HTML:n ja ARIA-merkintöjen avulla.'
-                    : 'Optimized for screen readers like NVDA, JAWS, and VoiceOver using semantic HTML and ARIA markup.'
-                  }
-                </p>
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-4 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                      {locale === 'fi' ? 'Semanttinen HTML' : 'Semantic HTML'}
-                    </h3>
-                    <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-50' : 'bg-gray-700'}`}>
-                      <div className={isLight ? 'text-gray-800' : 'text-gray-200'}>
-                        {`<header>`}<br/>
-                        &nbsp;&nbsp;{`<nav aria-label="Main navigation">`}<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{`<h1>Site Title</h1>`}<br/>
-                        &nbsp;&nbsp;{`</nav>`}<br/>
-                        {`</header>`}<br/>
-                        {`<main>`}<br/>
-                        &nbsp;&nbsp;{`<section aria-labelledby="content-heading">`}<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{`<h2 id="content-heading">Content</h2>`}<br/>
-                        &nbsp;&nbsp;{`</section>`}<br/>
-                        {`</main>`}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-4 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                      ARIA {locale === 'fi' ? 'Merkinnät' : 'Attributes'}
-                    </h3>
-                    <ul className="space-y-2">
-                      {[
-                        { attr: 'aria-label', desc: locale === 'fi' ? 'Tarjoaa saavutettavan nimen' : 'Provides accessible name' },
-                        { attr: 'aria-describedby', desc: locale === 'fi' ? 'Linkittää lisäkuvauksen' : 'Links additional description' },
-                        { attr: 'aria-expanded', desc: locale === 'fi' ? 'Kertoo onko elementti laajennettu' : 'Indicates if element is expanded' },
-                        { attr: 'aria-hidden', desc: locale === 'fi' ? 'Piilottaa koristelun ruudunlukijalta' : 'Hides decorative content from screen readers' },
-                        { attr: 'role', desc: locale === 'fi' ? 'Määrittää elementin tarkoituksen' : 'Defines element purpose' }
-                      ].map((item, index) => (
-                        <li key={index} className={`flex items-start ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                          <code className={`px-2 py-1 rounded text-xs mr-3 ${
-                            isLight ? 'bg-emerald-100 text-emerald-800' : 'bg-emerald-900 text-emerald-200'
-                          }`}>
-                            {item.attr}
-                          </code>
-                          <span className="text-sm">{item.desc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
+          {/* Impact & Results */}
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <div className={`p-8 rounded-2xl ${
+              isLight ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100' : 'bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-800'
+            }`}>
+              <h2 className={`text-2xl font-bold mb-4 ${
+                isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.impact}</h2>
+              <p className={`text-lg ${
+                isLight ? 'text-gray-700' : 'text-gray-300'
+              }`}>{content.impactDesc}</p>
             </div>
-          )}
-
-          {activeTab === 'before-after' && (
-            <div>
-              <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                {content.beforeAfter} {locale === 'fi' ? 'Vertailu' : 'Comparison'}
-              </h2>
-              <div className="space-y-8">
-                <p className={`text-lg ${isLight ? 'text-gray-700' : 'text-gray-300'} mb-8`}>
-                  {locale === 'fi'
-                    ? 'Tosielämän esimerkkejä saavutettavuusparannuksista ja niiden vaikutuksista käyttäjäkokemukseen.'
-                    : 'Real-world examples of accessibility improvements and their impact on user experience.'
-                  }
-                </p>
-
-                {/* Common Pitfalls Section */}
-                <div>
-                  <h3 className={`text-2xl font-semibold mb-6 ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                    {locale === 'fi' ? 'Yleisiä saavutettavuusongelmia' : 'Common Accessibility Pitfalls'}
-                  </h3>
-                  <div className="space-y-4">
-                    {accessibilityPitfalls.map((pitfall, index) => (
-                      <div key={index} className={`p-6 rounded-xl border-l-4 border-red-500 ${
-                        isLight ? 'bg-red-50' : 'bg-red-900/20'
-                      }`}>
-                        <h4 className={`font-semibold mb-2 ${isLight ? 'text-red-800' : 'text-red-200'}`}>
-                          ❌ {pitfall.pitfall}
-                        </h4>
-                        <p className={`text-sm mb-2 ${isLight ? 'text-red-700' : 'text-red-300'}`}>
-                          <strong>{locale === 'fi' ? 'Vaikutus' : 'Impact'}:</strong> {pitfall.impact}
-                        </p>
-                        <p className={`text-sm ${isLight ? 'text-green-700' : 'text-green-300'}`}>
-                          <strong>{locale === 'fi' ? 'Ratkaisu' : 'Solution'}:</strong> {pitfall.solution}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Before/After Visual Example */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className={`p-6 rounded-xl border-2 ${
-                    isLight ? 'border-red-200 bg-red-50' : 'border-red-700 bg-red-900/20'
-                  }`}>
-                    <h4 className={`font-semibold mb-4 text-red-600`}>
-                      ❌ {locale === 'fi' ? 'Ennen' : 'Before'}
-                    </h4>
-                    <div className="space-y-3">
-                      <div className="p-3 bg-gray-300 text-gray-500 rounded text-sm">
-                        {locale === 'fi' ? 'Heikko kontrasti (2.1:1)' : 'Poor contrast (2.1:1)'}
-                      </div>
-                      <button className="w-full p-2 bg-blue-400 text-blue-200 rounded text-sm">
-                        {locale === 'fi' ? 'Ei fokusindikaattoria' : 'No focus indicator'}
-                      </button>
-                      <div className="text-sm text-gray-400">
-                        {locale === 'fi' ? 'Ei alt-tekstiä kuville' : 'No alt text for images'}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={`p-6 rounded-xl border-2 ${
-                    isLight ? 'border-green-200 bg-green-50' : 'border-green-700 bg-green-900/20'
-                  }`}>
-                    <h4 className={`font-semibold mb-4 text-green-600`}>
-                      ✅ {locale === 'fi' ? 'Jälkeen' : 'After'}
-                    </h4>
-                    <div className="space-y-3">
-                      <div className="p-3 bg-gray-800 text-white rounded text-sm">
-                        {locale === 'fi' ? 'Hyvä kontrasti (7.1:1)' : 'Good contrast (7.1:1)'}
-                      </div>
-                      <button className="w-full p-2 bg-blue-600 text-white rounded text-sm ring-2 ring-blue-400 ring-offset-2">
-                        {locale === 'fi' ? 'Selkeä fokusindikaattori' : 'Clear focus indicator'}
-                      </button>
-                      <div className="text-sm text-gray-800">
-                        {locale === 'fi' ? 'Kuvaavat alt-tekstit kaikissa kuvissa' : 'Descriptive alt text for all images'}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <p className={`text-lg mb-6 ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-            {locale === 'fi' 
-              ? 'Kiinnostunut saavutettavuusauditoinnista tai koulutuksesta?'
-              : 'Interested in accessibility auditing or training?'
-            }
-          </p>
-          <button className={`px-8 py-3 rounded-full font-semibold transition-all duration-200 ${
-            isLight 
-              ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg hover:shadow-xl' 
-              : 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-xl hover:shadow-2xl'
-          }`}>
-            {locale === 'fi' ? 'Ota yhteyttä' : 'Get in Touch'}
-          </button>
-        </motion.div>
-      </div>
+          </motion.section>
+        </div>
+      </main>
     </div>
   );
 }

@@ -13,15 +13,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const { locale } = params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  const localizedMetadata = {
+    const localizedMetadata = {
     en: {
-      title: 'Accessibility Portfolio - WCAG 2.2 & Inclusive Design | Portfolio',
-      description: 'Comprehensive showcase of accessibility standards, WCAG 2.2 compliance, color contrast optimization, keyboard navigation, screen reader compatibility, and inclusive design patterns with real-world examples.',
+      title: 'Inclusive Design System Case Study | Portfolio',
+      description: 'A comprehensive case study on building accessible design systems from the ground up—research-driven approach to creating inclusive digital products that work for everyone.',
     },
     fi: {
-      title: 'Saavutettavuusportfolio - WCAG 2.2 & Inklusiivinen suunnittelu | Portfolio',
-      description: 'Kattava esittely saavutettavuusstandardeista, WCAG 2.2 vaatimustenmukaisuudesta, värikontrastin optimoinnista, näppäimistönavigaatiosta, ruudunlukijan yhteensopivuudesta ja inklusiivisista suunnittelumalleista tosielämän esimerkeillä.',
+      title: 'Inklusiivinen suunnittelujärjestelmä tapaustutkimus | Portfolio',
+      description: 'Kattava tapaustutkimus saavutettavien suunnittelujärjestelmien rakentamisesta alusta alkaen—tutkimuspohjainen lähestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.',
     }
   };
 

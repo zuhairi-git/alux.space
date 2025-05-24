@@ -66,24 +66,22 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 
 export default async function PortfolioPage({ params }: { params: { locale: string } }) {
   const { locale } = params;
-    const portfolioItems: PortfolioItem[] = [
-    {
+    const portfolioItems: PortfolioItem[] = [    {
       title: {
-        en: 'Accessibility & Inclusive Design',
-        fi: 'Saavutettavuus & Inklusiivinen suunnittelu'
+        en: 'Inclusive Design System',
+        fi: 'Inklusiivinen suunnittelujärjestelmä'
       },
       type: {
-        en: 'WCAG 2.2 Compliance',
-        fi: 'WCAG 2.2 Vaatimustenmukaisuus'
+        en: 'Design System Case Study',
+        fi: 'Suunnittelujärjestelmä tapaustutkimus'
       },
       desc: {
-        en: 'Comprehensive approach to accessibility standards, color contrast optimization, keyboard navigation, and inclusive design patterns.',
-        fi: 'Kattava lähestymistapa saavutettavuusstandardeihin, värikontrastin optimointiin, näppäimistönavigaatioon ja inklusiivisiin suunnittelumalleihin.'
-      },
-      link: `/${locale}/portfolio/accessibility`,
-      gradient: 'from-green-400 to-blue-500',
+        en: 'Building accessible design systems from the ground up—research-driven approach to creating inclusive digital products that work for everyone.',
+        fi: 'Saavutettavien suunnittelujärjestelmien rakentaminen alusta alkaen—tutkimuspohjainen lähestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
+      },      link: `/${locale}/portfolio/accessibility`,
+      gradient: 'from-indigo-400 to-purple-500',
       photo: {
-        url: '/images/portfolio/accessibility/cover.jpg'
+        url: '/images/portfolio/accessibility/accessiblity-showcase.jpg'
       }
     },
     {
@@ -121,7 +119,7 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
       link: `/${locale}/portfolio/jobseeking`,
       gradient: 'from-purple-400 to-pink-500',
       photo: {
-        url: '/images/portfolio/jobseeking/cover.jpeg'
+        url: '/images/portfolio/jobseeking/cover.jpg'
       }
     }
   ];
@@ -132,10 +130,20 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
       // If we already have a local image, use it
       if (item.photo) {
         return item;
-      }
-        // Otherwise try to get an Unsplash photo
+      }      // Otherwise try to get an Unsplash photo
       try {
-        const photo = await getUnsplashPhoto(item.title.en.toLowerCase());
+        // Use more specific search terms for better image results
+        let searchQuery = item.title.en.toLowerCase();
+          // Special search terms for specific portfolio items
+        if (item.title.en.includes('Inclusive') || item.title.en.includes('Accessibility')) {
+          searchQuery = 'inclusive design accessibility diversity design system';
+        } else if (item.title.en.includes('Collaboration')) {
+          searchQuery = 'team collaboration workplace';
+        } else if (item.title.en.includes('Career') || item.title.en.includes('Job')) {
+          searchQuery = 'career growth professional development';
+        }
+        
+        const photo = await getUnsplashPhoto(searchQuery);
         if (photo) {
           return {
             ...item,
@@ -152,12 +160,11 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
       } catch (error) {
         console.warn(`Failed to fetch Unsplash image for ${item.title.en}:`, error);
       }
-      
-      // Fallback to a placeholder or default image
+        // Fallback to a default gradient background
       return {
         ...item,
         photo: {
-          url: '/images/portfolio/placeholder.jpg', // Make sure this file exists
+          url: '/images/portfolio/collaboration/cover.jpg', // Use existing image as fallback
           author: {
             name: 'Default',
             username: 'default',
