@@ -5,8 +5,26 @@ import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import PodcastPlayer from '@/components/PodcastPlayer';
+import { useLanguage } from '@/context/LanguageContext';
+import { i18n } from '@/i18n';
 
 const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
+  const { locale } = useLanguage();
+  
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
+    
+    if (path.startsWith('#') || path.startsWith('/#')) {
+      // For hash links, add locale to the base path
+      return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
+    }
+    
+    return `/${locale}${path}`;
+  };
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -29,9 +47,8 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           {subtitle && (
             <p className="text-xl text-gray-300 mb-8">{subtitle}</p>
           )}
-          {cta && (
-            <Link 
-              href={cta.href}
+          {cta && (            <Link 
+              href={localizedHref(cta.href)}
               className="inline-block px-8 py-3 bg-blue-500 text-white rounded-lg"
             >
               {cta.text}

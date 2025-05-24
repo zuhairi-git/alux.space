@@ -1,4 +1,4 @@
-import JobSeekingClient from '../../../portfolio/jobseeking/JobSeekingClient';
+import JobSeekingClient from '@/components/portfolio/JobSeekingClient';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';

@@ -1,4 +1,4 @@
-import AccessibilityClient from '@/app/portfolio/accessibility/AccessibilityClient';
+import AccessibilityClient from '@/components/portfolio/AccessibilityClient';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';

@@ -1,5 +1,5 @@
 import { getUnsplashPhoto } from '@/utils/unsplash';
-import PortfolioClient from '../../portfolio/PortfolioClient';
+import PortfolioClient from '@/components/portfolio/PortfolioClient';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';
@@ -66,8 +66,26 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 
 export default async function PortfolioPage({ params }: { params: { locale: string } }) {
   const { locale } = params;
-  
-  const portfolioItems: PortfolioItem[] = [
+    const portfolioItems: PortfolioItem[] = [
+    {
+      title: {
+        en: 'Accessibility & Inclusive Design',
+        fi: 'Saavutettavuus & Inklusiivinen suunnittelu'
+      },
+      type: {
+        en: 'WCAG 2.2 Compliance',
+        fi: 'WCAG 2.2 Vaatimustenmukaisuus'
+      },
+      desc: {
+        en: 'Comprehensive approach to accessibility standards, color contrast optimization, keyboard navigation, and inclusive design patterns.',
+        fi: 'Kattava lähestymistapa saavutettavuusstandardeihin, värikontrastin optimointiin, näppäimistönavigaatioon ja inklusiivisiin suunnittelumalleihin.'
+      },
+      link: `/${locale}/portfolio/accessibility`,
+      gradient: 'from-green-400 to-blue-500',
+      photo: {
+        url: '/images/portfolio/accessibility/cover.jpg'
+      }
+    },
     {
       title: {
         en: 'Collaboration & Leadership',

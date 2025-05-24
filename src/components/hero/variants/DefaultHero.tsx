@@ -5,8 +5,27 @@ import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import PodcastPlayer from '@/components/PodcastPlayer';
+import { useLanguage } from '@/context/LanguageContext';
+import { i18n } from '@/i18n';
 
 const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
+  const { locale } = useLanguage();
+  
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
+    
+    if (path.startsWith('#') || path.startsWith('/#')) {
+      // For hash links, add locale to the base path
+      return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
+    }
+    
+    return `/${locale}${path}`;
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -123,7 +142,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               }}
             ></motion.div>
             <Link 
-              href={cta.href} 
+              href={localizedHref(cta.href)} 
               className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg z-10"
             >
               <div className="flex items-center justify-center gap-2">

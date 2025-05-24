@@ -1,4 +1,4 @@
-import CollaborationClient from '../../../portfolio/collaboration/CollaborationClient';
+import CollaborationClient from '@/components/portfolio/CollaborationClient';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';

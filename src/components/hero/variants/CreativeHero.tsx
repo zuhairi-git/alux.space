@@ -8,10 +8,27 @@ import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
+import { i18n } from '@/i18n';
 
 const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { theme } = useTheme();
+  const { locale } = useLanguage();
   const isLight = theme === 'light';
+  
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
+    
+    if (path.startsWith('#') || path.startsWith('/#')) {
+      // For hash links, add locale to the base path
+      return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
+    }
+    
+    return `/${locale}${path}`;
+  };
   
   // Split title into words for staggered animation
   const words = title ? title.split(' ') : [];
@@ -126,9 +143,8 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
             className="text-center"
-          >
-            <Link
-              href={cta.href}
+          >            <Link
+              href={localizedHref(cta.href)}
               className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
                 theme === 'colorful' 
                   ? 'text-white border border-transparent shadow-lg' 

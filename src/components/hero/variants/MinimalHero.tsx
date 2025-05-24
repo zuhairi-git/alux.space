@@ -5,8 +5,26 @@ import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import PodcastPlayer from '@/components/PodcastPlayer';
+import { useLanguage } from '@/context/LanguageContext';
+import { i18n } from '@/i18n';
 
 const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPlayer }) => {
+  const { locale } = useLanguage();
+  
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
+    
+    if (path.startsWith('#') || path.startsWith('/#')) {
+      // For hash links, add locale to the base path
+      return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
+    }
+    
+    return `/${locale}${path}`;
+  };
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -40,11 +58,10 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Link 
-              href={cta.href}
+          >            <Link 
+              href={localizedHref(cta.href)}
               className="inline-block px-6 py-3 bg-gray-800 text-white rounded-lg"
-            >              {cta.text}
+            >{cta.text}
             </Link>
           </motion.div>
         )}
