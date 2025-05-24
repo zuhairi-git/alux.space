@@ -4,29 +4,41 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { podcastEpisodes, PodcastEpisode } from '@/data/podcasts';
+import { podcastEpisodes } from '@/data/podcasts';
+import { PodcastEpisode, SupportedLanguage } from '@/podcast/types/podcast';
+import { getAudioFileForLanguage, setMediaSessionMetadata, filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge } from '@/podcast/utils/languageUtils';
+import EpisodeList from '@/podcast/components/EpisodeList';
+import LanguageBadge from '@/podcast/components/LanguageBadge';
 
 interface PodcastPlayerProps {
   initialEpisodeId?: string;
 }
 
-const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
-  const { theme } = useTheme();
+const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {  const { theme } = useTheme();
   const { locale } = useLanguage();
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
   
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentEpisodeId, setCurrentEpisodeId] = useState<string>(initialEpisodeId || podcastEpisodes[0]?.id || '');
+  const currentLanguage = locale as SupportedLanguage;
+  
+  // Filter episodes based on current language
+  const availableEpisodes = filterEpisodesByLanguage(podcastEpisodes, currentLanguage);
+  
+  const [currentEpisodeId, setCurrentEpisodeId] = useState<string>(
+    initialEpisodeId || availableEpisodes[0]?.id || ''
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [loadError, setLoadError] = useState(false);
-  
-  // Find the current episode data
-  const currentEpisode = podcastEpisodes.find(ep => ep.id === currentEpisodeId) || podcastEpisodes[0];
+    // Find the current episode data
+  const currentEpisode = podcastEpisodes.find(ep => ep.id === currentEpisodeId) || availableEpisodes[0];
+  const currentAudioFile = currentEpisode ? getAudioFileForLanguage(currentEpisode, currentLanguage) : '';
+  const episodeDisplayLanguage = currentEpisode ? getEpisodeDisplayLanguage(currentEpisode, currentLanguage) : 'en';
+  const showLanguageBadge = currentEpisode ? shouldShowLanguageBadge(currentEpisode, currentLanguage) : false;
   
   // Get theme-specific styles
   const getBgStyle = () => {
@@ -57,36 +69,22 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
     } else {
       return 'from-blue-500 to-purple-500';
     }
-  };
-    // Get the appropriate audio file based on current language
-  const getAudioFile = () => {
-    if (typeof currentEpisode.audioFile === 'string') {
-      return currentEpisode.audioFile;
-    }
-    
-    // If we have a localized version for the current language, use it
-    if (currentEpisode.audioFile[locale]) {
-      return currentEpisode.audioFile[locale];
-    }
-    
-    // Otherwise fall back to English or first available language
-    return currentEpisode.audioFile.en || Object.values(currentEpisode.audioFile)[0];
-  };
-    
-  // Audio functions
+  };  // Audio functions
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !currentEpisode) return;
     
     // Reset player state when episode changes
     setIsPlaying(false);
     setCurrentTime(0);
     setLoadError(false);
     
-    // Get the appropriate audio file for the current language
-    const audioSrc = getAudioFile();
-    audio.src = audioSrc;
+    // Set audio source using language-aware utility
+    audio.src = currentAudioFile;
     audio.load();
+    
+    // Set media session metadata for mobile players
+    setMediaSessionMetadata(currentEpisode, currentLanguage);
     
     const handleLoadedData = () => {
       setDuration(audio.duration || 0);
@@ -109,14 +107,42 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
     audio.addEventListener('loadeddata', handleLoadedData);
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('error', handleError);
-    audio.addEventListener('ended', handleEnded);
-      return () => {
+    audio.addEventListener('ended', handleEnded);    return () => {
       audio.removeEventListener('loadeddata', handleLoadedData);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('error', handleError);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [currentEpisode, locale]);
+  }, [currentEpisodeId, currentLanguage, currentAudioFile]);
+
+  // Set up media session action handlers for mobile
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => {
+        if (!isPlaying) togglePlay();
+      });
+      
+      navigator.mediaSession.setActionHandler('pause', () => {
+        if (isPlaying) togglePlay();
+      });
+      
+      navigator.mediaSession.setActionHandler('stop', () => {
+        stopAudio();
+      });
+      
+      navigator.mediaSession.setActionHandler('seekbackward', () => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 10);
+        }
+      });
+      
+      navigator.mediaSession.setActionHandler('seekforward', () => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = Math.min(duration, audioRef.current.currentTime + 10);
+        }
+      });
+    }
+  }, [isPlaying, duration]);
   
   const formatTime = (time: number) => {
     if (isNaN(time)) return '00:00';
@@ -198,17 +224,21 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
       
       {/* Player header with current episode info */}
       <div className={`p-4 ${getTextStyle()}`}>
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between">        <div>          <div className="flex items-center gap-2">
             <h3 className="text-lg font-medium flex items-center">
               <svg className="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
               </svg>
               Podcast Player
-            </h3>            <p className={`text-sm mt-1 truncate ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
-              {locale === 'fi' ? 'Nyt toistetaan: ' : 'Now Playing: '}{currentEpisode.title}
-            </p>
+            </h3>
+            {showLanguageBadge && (
+              <LanguageBadge language={episodeDisplayLanguage} size="sm" />
+            )}
           </div>
+          <p className={`text-sm mt-1 truncate ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
+            {locale === 'fi' ? 'Nyt toistetaan: ' : 'Now Playing: '}{currentEpisode?.title || 'No episode selected'}
+          </p>
+        </div>
           
           <motion.button
             onClick={() => setIsExpanded(!isExpanded)}
@@ -339,8 +369,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           <span>{formatTime(duration)}</span>
         </div>
       </div>
-      
-      {/* Episode list (expandable) */}
+        {/* Episode list (expandable) */}
       <AnimatePresence>
         {isExpanded && (
           <motion.div
@@ -348,100 +377,14 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
-          >            <div className={`border-t ${isLight ? 'border-gray-200' : 'border-gray-700'}`}>
-              <div className={`max-h-72 overflow-y-auto podcast-scrollbar ${
-                isLight 
-                  ? 'scrollbar-light' 
-                  : isColorful
-                    ? 'scrollbar-colorful'
-                    : 'scrollbar-dark'
-              }`}>
-                {podcastEpisodes.map(episode => (
-                  <div 
-                    key={episode.id}
-                    onClick={() => handleEpisodeSelect(episode.id)}
-                    className={`p-4 border-b ${isLight ? 'border-gray-100' : 'border-gray-800'} cursor-pointer transition-colors ${
-                      currentEpisodeId === episode.id 
-                        ? isLight 
-                          ? 'bg-purple-50' 
-                          : 'bg-purple-900/20' 
-                        : ''
-                    } ${
-                      isLight 
-                        ? 'hover:bg-gray-50' 
-                        : 'hover:bg-gray-800/50'
-                    }`}
-                  >
-                    <div className="flex justify-between">
-                      <div className="flex-1 pr-4">
-                        <h4 className={`font-medium text-sm ${getTextStyle()}`}>{episode.title}</h4>
-                        <p className={`text-xs mt-1 line-clamp-2 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                          {episode.description}
-                        </p>
-                        
-                        <div className="flex items-center mt-2 space-x-2">
-                          <span className={`text-xs ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                            {new Date(episode.publishDate).toLocaleDateString()}
-                          </span>
-                          <span className={`text-xs ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>•</span>
-                          <span className={`text-xs ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                            {episode.duration}
-                          </span>
-                        </div>
-                        
-                        {episode.tags && episode.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {episode.tags.map(tag => (
-                              <span 
-                                key={tag} 
-                                className={`text-xs px-2 py-0.5 rounded-full ${
-                                  isLight 
-                                    ? 'bg-gray-100 text-gray-600' 
-                                    : isColorful
-                                      ? 'bg-purple-500/20 text-purple-300'
-                                      : 'bg-gray-800 text-gray-300'
-                                }`}
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center">
-                        {currentEpisodeId === episode.id && isPlaying ? (
-                          <div className="flex items-center space-x-1">
-                            {Array.from({ length: 3 }).map((_, i) => (
-                              <motion.div
-                                key={i}
-                                className={`w-0.5 h-3 rounded-full ${
-                                  isLight ? 'bg-purple-500' : 'bg-purple-400'
-                                }`}
-                                animate={{ 
-                                  height: [3, 12, 3],
-                                  opacity: [0.7, 1, 0.7]
-                                }}
-                                transition={{ 
-                                  duration: 1.2,
-                                  delay: i * 0.2,
-                                  repeat: Infinity
-                                }}
-                              />
-                            ))}
-                          </div>
-                        ) : (
-                          <svg className={`w-5 h-5 ${
-                            isLight ? 'text-gray-400' : 'text-gray-500'
-                          }`} fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                          </svg>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          >
+            <div className={`border-t ${isLight ? 'border-gray-200' : 'border-gray-700'} p-4`}>
+              <EpisodeList
+                episodes={podcastEpisodes}
+                currentEpisodeId={currentEpisodeId}
+                onEpisodeSelect={handleEpisodeSelect}
+                className="max-h-64 overflow-y-auto"
+              />
             </div>
           </motion.div>
         )}
