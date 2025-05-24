@@ -18,11 +18,11 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
   };
-
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
 
   // Get localized text content
   const getLocalizedContent = () => {
@@ -135,11 +135,12 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
 
   const content = getLocalizedContent();
 
-  return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      isLight 
-        ? 'bg-gradient-to-br from-slate-50 to-gray-100' 
-        : 'bg-gradient-to-br from-gray-900 to-black'
+  return (    <div className={`min-h-screen transition-colors duration-300 ${
+      isColorful 
+        ? 'bg-[#050023]' 
+        : isLight 
+          ? 'bg-gradient-to-br from-slate-50 to-gray-100' 
+          : 'bg-gradient-to-br from-gray-900 to-black'
     }`}>
       <Navigation />
       
@@ -172,49 +173,71 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+            transition={{ duration: 0.6, delay: 0.2 }}          >
             <div className={`p-6 rounded-xl ${
-              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              isColorful 
+                ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
             }`}>
               <h3 className={`font-semibold mb-2 ${
-                isLight ? 'text-gray-900' : 'text-white'
+                isColorful 
+                  ? 'text-cyan-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
               }`}>{content.projectType}</h3>
               <p className={`text-sm ${
-                isLight ? 'text-gray-600' : 'text-gray-300'
+                isColorful 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>{content.projectTypeValues}</p>
             </div>
             
             <div className={`p-6 rounded-xl ${
-              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              isColorful 
+                ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
             }`}>
               <h3 className={`font-semibold mb-2 ${
-                isLight ? 'text-gray-900' : 'text-white'
+                isColorful 
+                  ? 'text-purple-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
               }`}>{content.timeline}</h3>
               <p className={`text-sm ${
-                isLight ? 'text-gray-600' : 'text-gray-300'
+                isColorful 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>{content.timelineValue}</p>
             </div>
             
             <div className={`p-6 rounded-xl ${
-              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-            }`}>
+              isColorful 
+                ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'            }`}>
               <h3 className={`font-semibold mb-2 ${
-                isLight ? 'text-gray-900' : 'text-white'
+                isColorful 
+                  ? 'text-blue-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
               }`}>{content.tools}</h3>
               <p className={`text-sm ${
-                isLight ? 'text-gray-600' : 'text-gray-300'
+                isColorful 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>{content.toolsValue}</p>
             </div>
             
             <div className={`p-6 rounded-xl ${
-              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              isColorful 
+                ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
             }`}>
               <h3 className={`font-semibold mb-2 ${
-                isLight ? 'text-gray-900' : 'text-white'
+                isColorful 
+                  ? 'text-fuchsia-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
               }`}>{content.roles}</h3>
               <p className={`text-sm ${
-                isLight ? 'text-gray-600' : 'text-gray-300'
+                isColorful 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>{content.rolesValue}</p>
             </div>
           </motion.div>
@@ -225,36 +248,46 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h2 className={`text-3xl font-bold mb-8 ${
-              isLight ? 'text-gray-900' : 'text-white'
+          >            <h2 className={`text-3xl font-bold mb-8 ${
+              isColorful 
+                ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400' 
+                : isLight ? 'text-gray-900' : 'text-white'
             }`}>{content.designProcess}</h2>
             
             <div className={`p-8 rounded-2xl mb-8 ${
-              isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+              isColorful 
+                ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
             }`}>
               <div className="flex items-center mb-6">
                 <span className={`text-lg font-medium mr-4 ${
-                  isLight ? 'text-gray-700' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-cyan-300' 
+                    : isLight ? 'text-gray-700' : 'text-gray-300'
                 }`}>{content.designModel}</span>
-                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+                <span className={`text-2xl font-bold ${
+                  isColorful 
+                    ? 'bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent' 
+                    : 'bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent'
+                }`}>
                   {content.doubleD}
                 </span>
               </div>
-              
-              <div className="grid md:grid-cols-4 gap-6">
+                <div className="grid md:grid-cols-4 gap-6">
                 {[
-                  { phase: content.discoverPhase, color: 'from-indigo-400 to-indigo-500' },
-                  { phase: content.definePhase, color: 'from-purple-400 to-purple-500' },
-                  { phase: content.developPhase, color: 'from-pink-400 to-pink-500' },
-                  { phase: content.deliverPhase, color: 'from-rose-400 to-rose-500' },
+                  { phase: content.discoverPhase, color: isColorful ? 'from-cyan-400 to-cyan-500' : 'from-indigo-400 to-indigo-500' },
+                  { phase: content.definePhase, color: isColorful ? 'from-fuchsia-400 to-purple-500' : 'from-purple-400 to-purple-500' },
+                  { phase: content.developPhase, color: isColorful ? 'from-purple-400 to-indigo-500' : 'from-pink-400 to-pink-500' },
+                  { phase: content.deliverPhase, color: isColorful ? 'from-blue-400 to-cyan-500' : 'from-rose-400 to-rose-500' },
                 ].map((item, index) => (
                   <div key={index} className="text-center">
                     <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-white font-bold text-lg`}>
                       {index + 1}
                     </div>
                     <h3 className={`font-semibold ${
-                      isLight ? 'text-gray-900' : 'text-white'
+                      isColorful 
+                        ? 'text-gray-200' 
+                        : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{item.phase}</h3>
                   </div>
                 ))}
@@ -268,15 +301,20 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <div className={`p-8 rounded-2xl ${
-              isLight ? 'bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100' : 'bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-800'
+          >            <div className={`p-8 rounded-2xl ${
+              isColorful 
+                ? 'bg-gradient-to-r from-cyan-900/30 to-fuchsia-900/30 border border-cyan-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100' : 'bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-800'
             }`}>
               <h2 className={`text-2xl font-bold mb-4 ${
-                isLight ? 'text-gray-900' : 'text-white'
+                isColorful 
+                  ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400' 
+                  : isLight ? 'text-gray-900' : 'text-white'
               }`}>{content.challenge}</h2>
               <p className={`text-lg ${
-                isLight ? 'text-gray-700' : 'text-gray-300'
+                isColorful 
+                  ? 'text-gray-200' 
+                  : isLight ? 'text-gray-700' : 'text-gray-300'
               }`}>{content.challengeDesc}</p>
             </div>
           </motion.section>
@@ -287,27 +325,38 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <div className="grid md:grid-cols-2 gap-8">
+          >            <div className="grid md:grid-cols-2 gap-8">
               <div className={`p-8 rounded-2xl ${
-                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                isColorful 
+                  ? 'bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-400/30 backdrop-blur-lg' 
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
               }`}>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isLight ? 'text-gray-900' : 'text-white'
+                  isColorful 
+                    ? 'text-purple-300' 
+                    : isLight ? 'text-gray-900' : 'text-white'
                 }`}>{content.discoveryInsights}</h3>
                 <p className={`${
-                  isLight ? 'text-gray-600' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-gray-200' 
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>{content.discoveryDesc}</p>
               </div>
               
               <div className={`p-8 rounded-2xl ${
-                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                isColorful 
+                  ? 'bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-400/30 backdrop-blur-lg' 
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
               }`}>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isLight ? 'text-gray-900' : 'text-white'
+                  isColorful 
+                    ? 'text-blue-300' 
+                    : isLight ? 'text-gray-900' : 'text-white'
                 }`}>{content.initialResearch}</h3>
                 <p className={`${
-                  isLight ? 'text-gray-600' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-gray-200' 
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>{content.initialResearchDesc}</p>
               </div>
             </div>
@@ -319,15 +368,20 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <div className={`p-8 rounded-2xl ${
-              isLight ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100' : 'bg-gradient-to-r from-emerald-900/20 to-teal-900/20 border border-emerald-800'
+          >            <div className={`p-8 rounded-2xl ${
+              isColorful 
+                ? 'bg-gradient-to-r from-emerald-900/30 to-teal-900/30 border border-emerald-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100' : 'bg-gradient-to-r from-emerald-900/20 to-teal-900/20 border border-emerald-800'
             }`}>
               <h2 className={`text-2xl font-bold mb-4 ${
-                isLight ? 'text-gray-900' : 'text-white'
+                isColorful 
+                  ? 'text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400' 
+                  : isLight ? 'text-gray-900' : 'text-white'
               }`}>{content.hypothesis}</h2>
               <p className={`text-lg ${
-                isLight ? 'text-gray-700' : 'text-gray-300'
+                isColorful 
+                  ? 'text-gray-200' 
+                  : isLight ? 'text-gray-700' : 'text-gray-300'
               }`}>{content.hypothesisDesc}</p>
             </div>
           </motion.section>
@@ -338,53 +392,78 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <h2 className={`text-3xl font-bold mb-8 ${
-              isLight ? 'text-gray-900' : 'text-white'
+          >            <h2 className={`text-3xl font-bold mb-8 ${
+              isColorful 
+                ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400' 
+                : isLight ? 'text-gray-900' : 'text-white'
             }`}>{content.userTesting}</h2>
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className={`p-8 rounded-2xl ${
-                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                isColorful 
+                  ? 'bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border border-cyan-400/30 backdrop-blur-lg' 
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
               }`}>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isLight ? 'text-gray-900' : 'text-white'
+                  isColorful 
+                    ? 'text-cyan-300' 
+                    : isLight ? 'text-gray-900' : 'text-white'
                 }`}>{content.hifiProto}</h3>
                 <p className={`mb-4 ${
-                  isLight ? 'text-gray-600' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-gray-200' 
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>{content.hifiProtoDesc}</p>
               </div>
               
               <div className={`p-8 rounded-2xl ${
-                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                isColorful 
+                  ? 'bg-gradient-to-br from-fuchsia-900/30 to-purple-900/30 border border-fuchsia-400/30 backdrop-blur-lg' 
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
               }`}>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isLight ? 'text-gray-900' : 'text-white'
+                  isColorful 
+                    ? 'text-fuchsia-300' 
+                    : isLight ? 'text-gray-900' : 'text-white'
                 }`}>{content.designReviews}</h3>
                 <p className={`mb-4 ${
-                  isLight ? 'text-gray-600' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-gray-200' 
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>{content.designReviewsDesc}</p>
               </div>
               
               <div className={`p-8 rounded-2xl ${
-                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                isColorful 
+                  ? 'bg-gradient-to-br from-indigo-900/30 to-violet-900/30 border border-indigo-400/30 backdrop-blur-lg' 
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
               }`}>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isLight ? 'text-gray-900' : 'text-white'
+                  isColorful 
+                    ? 'text-indigo-300' 
+                    : isLight ? 'text-gray-900' : 'text-white'
                 }`}>{content.qa}</h3>
                 <p className={`${
-                  isLight ? 'text-gray-600' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-gray-200' 
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>{content.qaDesc}</p>
               </div>
               
               <div className={`p-8 rounded-2xl ${
-                isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                isColorful 
+                  ? 'bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-400/30 backdrop-blur-lg' 
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
               }`}>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isLight ? 'text-gray-900' : 'text-white'
+                  isColorful 
+                    ? 'text-purple-300' 
+                    : isLight ? 'text-gray-900' : 'text-white'
                 }`}>{content.designDocs}</h3>
                 <p className={`${
-                  isLight ? 'text-gray-600' : 'text-gray-300'
+                  isColorful 
+                    ? 'text-gray-200' 
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>{content.designDocsDesc}</p>
               </div>
             </div>
