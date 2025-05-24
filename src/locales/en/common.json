@@ -79,12 +79,10 @@
     "quickLinks": "Quick Links",
     "portfolio": "Portfolio",
     "contact": "Contact"
-  },
-  "languageSwitcher": {
+  },  "languageSwitcher": {
     "title": "Language",
     "en": "English",
-    "fi": "Finnish",
-    "ar": "Arabic"
+    "fi": "Finnish"
   },
   "theme": {
     "light": "Light Theme",

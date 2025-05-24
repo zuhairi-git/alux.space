@@ -38,8 +38,7 @@ interface PortfolioItem {
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  const localizedMetadata = {
+    const localizedMetadata = {
     en: {
       title: 'Portfolio | Ali Al-Zuhairi',
       description: 'Explore my portfolio of UX design and product management projects, showcasing creative solutions to real-world challenges.',
@@ -47,10 +46,6 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     fi: {
       title: 'Portfolio | Ali Al-Zuhairi',
       description: 'Tutustu UX-suunnittelu- ja tuotehallintaprojektieni portfolioon, joka esittelee luovia ratkaisuja todellisiin haasteisiin.',
-    },
-    ar: {
-      title: 'المشاريع | علي الزهيري',
-      description: 'استكشف محفظتي من مشاريع تصميم تجربة المستخدم وإدارة المنتجات، التي تعرض حلولاً إبداعية للتحديات الواقعية.',
     }
   };
   

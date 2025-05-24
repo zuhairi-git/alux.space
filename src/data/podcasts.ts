@@ -32,10 +32,9 @@ export const podcastEpisodes: PodcastEpisode[] = [
     }
   },  // English-only episodes
   {
-    id: 'episode-2',
-    title: 'Embracing the Era of AI',
+    id: 'episode-2',    title: 'Embracing the Era of AI',
     description: 'Exploring how artificial intelligence is reshaping our world and how we can embrace this transformative era with purpose and intentionality.',
-    audioFile: '/podcasts/en/embracing-the-era-of-ai-en.wav',
+    audioFile: '/podcasts/en/embracing-the-era-of-ai-en.mp3',
     publishDate: '2025-05-20',
     duration: '08:45',
     tags: ['AI', 'Future', 'Technology', 'Innovation', 'Transformation'],

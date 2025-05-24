@@ -33,71 +33,57 @@ export default function ClientBlogPage({ posts, locale: initialLocale }: ClientB
   // Translate category names
   const translateCategory = (category: string): string => {
     // You can add translations for categories here if needed
-    const categoryTranslations: Record<string, Record<string, string>> = {
+  const categoryTranslations: Record<string, Record<string, string>> = {
       'Artificial Intelligence': {
         en: 'Artificial Intelligence',
-        fi: 'Tekoäly',
-        ar: 'الذكاء الاصطناعي'
+        fi: 'Tekoäly'
       },
       'Technology': {
         en: 'Technology',
-        fi: 'Teknologia',
-        ar: 'التكنولوجيا'
+        fi: 'Teknologia'
       },
       'Productivity': {
         en: 'Productivity',
-        fi: 'Tuottavuus',
-        ar: 'الإنتاجية'
+        fi: 'Tuottavuus'
       },
       'Future': {
         'en': 'Future',
-        'fi': 'Tulevaisuus',
-        'ar': 'المستقبل'
+        'fi': 'Tulevaisuus'
       },
       'Ethics': {
         'en': 'Ethics',
-        'fi': 'Etiikka',
-        'ar': 'الأخلاقيات'
+        'fi': 'Etiikka'
       },
       'Education': {
         'en': 'Education',
-        'fi': 'Koulutus',
-        'ar': 'التعليم'
+        'fi': 'Koulutus'
       },
       'Innovation': {
         'en': 'Innovation',
-        'fi': 'Innovaatio',
-        'ar': 'الابتكار'
+        'fi': 'Innovaatio'
       },
       'iOS': {
         'en': 'iOS',
-        'fi': 'iOS',
-        'ar': 'iOS'
+        'fi': 'iOS'
       },
       'Mobile': {
         'en': 'Mobile',
-        'fi': 'Mobiili',
-        'ar': 'الجوال'
-      },
-      'Focus': {
+        'fi': 'Mobiili'
+      },      'Focus': {
         'en': 'Focus',
-        'fi': 'Keskittyminen',
-        'ar': 'التركيز'
+        'fi': 'Keskittyminen'
       },
       'Design Process': {
         'en': 'Design Process',
-        'fi': 'Suunnitteluprosessi',
-        'ar': 'عملية التصميم'
+        'fi': 'Suunnitteluprosessi'
       },
       'Work-Life Balance': {
         'en': 'Work-Life Balance',
-        'fi': 'Työelämän ja vapaa-ajan tasapaino',
-        'ar': 'التوازن بين العمل والحياة'
+        'fi': 'Työelämän ja vapaa-ajan tasapaino'
       },
       'Creativity': {
         'en': 'Creativity',
-        'fi': 'Luovuus',
-        'ar': 'الإبداع'
+        'fi': 'Luovuus'
       }
       // Add more category translations as needed
     };

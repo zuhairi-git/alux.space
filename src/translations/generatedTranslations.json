@@ -1,190 +1,181 @@
 {
   "en": {
-    "blogPage": {
-      "description": "Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology.",
-      "title": "Blog & Insights"
-    },
-    "collaboration": {
-      "designProcess": {
-        "define": "Define",
-        "defineDesc": "Analyze insights to scope the challenge",
-        "deliver": "Deliver",
-        "deliverDesc": "Test with users and iterate",
-        "develop": "Develop",
-        "developDesc": "Create solution concepts",
-        "discover": "Discover",
-        "discoverDesc": "Research user needs and pain points",
-        "title": "Design Process"
-      },
-      "intro": "At the heart of the Collaboration Workflow Platform is a commitment to creativity, interconnectivity, and real-time teamwork. This platform is designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
-      "objectives": "Objectives",
-      "projectType": "Project Type",
-      "roles": "Roles",
-      "timeline": "Timeline",
-      "title": "Collaboration Workflow Platform",
-      "tools": "Tools"
-    },
-    "footer": {
-      "additionalInfo": {
-        "content": "Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in creating intuitive, accessible interfaces and leading cross-functional teams.",
-        "title": "Additional Information"
-      },
-      "contact": "Contact",
-      "copyright": "All rights reserved.",
+    "nav": {
+      "home": "Home",
       "portfolio": "Portfolio",
-      "quickLinks": "Quick Links"
+      "blog": "Blog",
+      "prompts": "Prompts"
+    },
+    "portfolio": {
+      "overview": "All Projects",
+      "cases": {
+        "collaboration": "Collaboration & Leadership",
+        "jobseeking": "Job Seeking"
+      }
     },
     "home": {
+      "hero": {
+        "title": "Hi, I'm Ali Al-Zuhairi",
+        "subtitle": "I'm a designer and developer who loves creating beautiful digital experiences.",
+        "cta": "View Portfolio"
+      },
       "about": {
+        "title": "Crafting Digital Dreams into Reality",
         "intro": "Hey there! I'm Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about more than just aesthetics; it's about touching hearts and solving real problems.",
         "quote": "Designing at the intersection of strategy and imagination — where vision becomes reality.",
         "second": "Over the past decade, I've had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.",
-        "third": "When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better.",
-        "title": "Crafting Digital Dreams into Reality"
+        "third": "When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better."
       },
-      "hero": {
-        "cta": "View Portfolio",
-        "subtitle": "I'm a designer and developer who loves creating beautiful digital experiences.",
-        "title": "Hi, I'm Ali Al-Zuhairi"
+      "workExperience": {
+        "title": "Work Experience",
+        "current": "Current Position",
+        "previous": "Previous Positions",
+        "earlier": "Earlier Positions"
       },
       "skills": {
         "title": "Strengths & Skills"
       },
       "testimonials": {
         "title": "Testimonials"
-      },
-      "workExperience": {
-        "current": "Current Position",
-        "earlier": "Earlier Positions",
-        "previous": "Previous Positions",
-        "title": "Work Experience"
+      }
+    },
+    "collaboration": {
+      "title": "Collaboration Workflow Platform",
+      "intro": "At the heart of the Collaboration Workflow Platform is a commitment to creativity, interconnectivity, and real-time teamwork. This platform is designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
+      "projectType": "Project Type",
+      "timeline": "Timeline",
+      "tools": "Tools",
+      "roles": "Roles",
+      "objectives": "Objectives",
+      "designProcess": {
+        "title": "Design Process",
+        "discover": "Discover",
+        "discoverDesc": "Research user needs and pain points",
+        "define": "Define",
+        "defineDesc": "Analyze insights to scope the challenge",
+        "develop": "Develop",
+        "developDesc": "Create solution concepts",
+        "deliver": "Deliver",
+        "deliverDesc": "Test with users and iterate"
       }
     },
     "jobseeking": {
-      "intro": "A mobile app designed to streamline job searches—especially for local, part-time, and weekend work. Created to make job hunting faster, easier, and more efficient for people seeking additional income opportunities.",
-      "title": "Job Seeking Application"
+      "title": "Job Seeking Application",
+      "intro": "A mobile app designed to streamline job searches—especially for local, part-time, and weekend work. Created to make job hunting faster, easier, and more efficient for people seeking additional income opportunities."
     },
-    "languageSwitcher": {
-      "ar": "Arabic",
-      "en": "English",
-      "fi": "Finnish",
-      "title": "Language"
-    },
-    "nav": {
-      "blog": "Blog",
-      "home": "Home",
-      "portfolio": "Portfolio",
-      "prompts": "Prompts"
-    },
-    "portfolio": {
-      "cases": {
-        "collaboration": "Collaboration & Leadership",
-        "jobseeking": "Career Development"
-      },
-      "overview": "All Projects"
+    "blogPage": {
+      "title": "Blog & Insights",
+      "description": "Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology."
     },
     "promptsPage": {
-      "subtitle": "A collection of prompts I've crafted for various creative AI tools",
-      "title": "Prompts Gallery"
+      "title": "Prompts Gallery",
+      "subtitle": "A collection of prompts I've crafted for various creative AI tools"
+    },
+    "footer": {
+      "copyright": "All rights reserved.",
+      "additionalInfo": {
+        "title": "Additional Information",
+        "content": "Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in creating intuitive, accessible interfaces and leading cross-functional teams."
+      },
+      "quickLinks": "Quick Links",
+      "portfolio": "Portfolio",
+      "contact": "Contact"
+    },
+    "languageSwitcher": {
+      "title": "Language",
+      "en": "English",
+      "fi": "Finnish"
     },
     "theme": {
-      "colorful": "Colorful Theme",
+      "light": "Light Theme",
       "dark": "Dark Theme",
-      "light": "Light Theme"
+      "colorful": "Colorful Theme"
     }
   },
   "fi": {
-    "blogPage": {
-      "description": "Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan.",
-      "title": "Blogi & Näkemykset"
+    "nav": {
+      "home": "Etusivu",
+      "portfolio": "Portfolio",
+      "blog": "Blogi",
+      "prompts": "Kehotteet"
     },
-    "collaboration": {
-      "designProcess": {
-        "define": "Määrittele",
-        "defineDesc": "Analysoi oivallukset haasteen määrittelemiseksi",
-        "deliver": "Toimita",
-        "deliverDesc": "Testaa käyttäjillä ja iteroi",
-        "develop": "Kehitä",
-        "developDesc": "Luo ratkaisukonsepteja",
-        "discover": "Löydä",
-        "discoverDesc": "Tutkimus käyttäjien tarpeista ja kipupisteistä",
-        "title": "Suunnitteluprosessi"
-      },
-      "intro": "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteenliitettävyyteen ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan elävää yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
-      "objectives": "Tavoitteet",
-      "projectType": "Projektityyppi",
-      "roles": "Roolit",
-      "timeline": "Aikataulu",
-      "title": "Yhteistyön työnkulkualusta",
-      "tools": "Työkalut"
-    },
-    "footer": {
-      "additionalInfo": {
-        "content": "",
-        "title": ""
-      },
-      "contact": "",
-      "copyright": "Kaikki oikeudet pidätetään.",
-      "portfolio": "",
-      "quickLinks": ""
+    "portfolio": {
+      "overview": "Kaikki Projektit",
+      "cases": {
+        "collaboration": "Yhteistyö & Johtajuus",
+        "jobseeking": "Työnhaku"
+      }
     },
     "home": {
+      "hero": {
+        "title": "Hei, olen Ali Al-Zuhairi",
+        "subtitle": "Olen suunnittelija ja kehittäjä, joka rakastaa kauniiden digitaalisten kokemusten luomista.",
+        "cta": "Näytä Portfolio"
+      },
       "about": {
+        "title": "Digitaalisten unelmien muuttaminen todellisuudeksi",
         "intro": "Hei siellä! Olen Ali, intohimoinen unelmoija ja luova sielu, joka uskoo suunnittelun voimaan muuttaa ideat merkityksellisiksi kokemuksiksi. Matkani useilla mantereilla – Damaskoksesta Helsinkiin – on opettanut minulle, että hyvä suunnittelu on muutakin kuin estetiikkaa; se koskettaa sydämiä ja ratkaisee todellisia ongelmia.",
         "quote": "Jokaisella pikselillä on tarkoitus, jokainen vuorovaikutus kertoo tarinan.",
         "second": "Viimeisen vuosikymmenen aikana olen saanut iloa lukuisten digitaalisten tuotteiden elävöittämisestä, aina Double Diamond -lähestymistavan ohjaamana mutta omalla luovalla tyylilläni värittämänä. Uskon, että teknologiasta voi tehdä inhimillisempää, saavutettavampaa ja ehkä jopa hieman taianomaista.",
-        "third": "Kun en suunnittele, löydät minut tutkimasta uusia teknologioita, jakamasta tietoa kollegoiden kanssa, tai yksinkertaisesti unelmoimasta seuraavasta suuresta ideasta, joka voisi tehdä jonkun digitaalisesta elämästä hieman parempaa.",
-        "title": "Digitaalisten unelmien muuttaminen todellisuudeksi"
+        "third": "Kun en suunnittele, löydät minut tutkimasta uusia teknologioita, jakamasta tietoa kollegoiden kanssa, tai yksinkertaisesti unelmoimasta seuraavasta suuresta ideasta, joka voisi tehdä jonkun digitaalisesta elämästä hieman parempaa."
       },
-      "hero": {
-        "cta": "Näytä Portfolio",
-        "subtitle": "Olen suunnittelija ja kehittäjä, joka rakastaa kauniiden digitaalisten kokemusten luomista.",
-        "title": "Hei, olen Ali Al-Zuhairi"
+      "workExperience": {
+        "title": "Työkokemus",
+        "current": "Nykyinen tehtävä",
+        "previous": "Aikaisemmat tehtävät",
+        "earlier": "Varhaisemmat tehtävät"
       },
       "skills": {
         "title": "Vahvuudet & Taidot"
       },
       "testimonials": {
         "title": "Suositukset"
-      },
-      "workExperience": {
-        "current": "Nykyinen tehtävä",
-        "earlier": "Varhaisemmat tehtävät",
-        "previous": "Aikaisemmat tehtävät",
-        "title": "Työkokemus"
+      }
+    },
+    "collaboration": {
+      "title": "Yhteistyön työnkulkualusta",
+      "intro": "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteenliitettävyyteen ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan elävää yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+      "projectType": "Projektityyppi",
+      "timeline": "Aikataulu",
+      "tools": "Työkalut",
+      "roles": "Roolit",
+      "objectives": "Tavoitteet",
+      "designProcess": {
+        "title": "Suunnitteluprosessi",
+        "discover": "Löydä",
+        "discoverDesc": "Tutkimus käyttäjien tarpeista ja kipupisteistä",
+        "define": "Määrittele",
+        "defineDesc": "Analysoi oivallukset haasteen määrittelemiseksi",
+        "develop": "Kehitä",
+        "developDesc": "Luo ratkaisukonsepteja",
+        "deliver": "Toimita",
+        "deliverDesc": "Testaa käyttäjillä ja iteroi"
       }
     },
     "jobseeking": {
-      "intro": "Mobiilisovellus, joka on suunniteltu virtaviivaistamaan työnhakua – erityisesti paikallisiin, osa-aikaisiin ja viikonlopputöihin. Luotu tekemään työnhausta nopeampaa, helpompaa ja tehokkaampaa ihmisille, jotka etsivät lisätuloja.",
-      "title": "Työnhakusovellus"
+      "title": "Työnhakusovellus",
+      "intro": "Mobiilisovellus, joka on suunniteltu virtaviivaistamaan työnhakua – erityisesti paikallisiin, osa-aikaisiin ja viikonlopputöihin. Luotu tekemään työnhausta nopeampaa, helpompaa ja tehokkaampaa ihmisille, jotka etsivät lisätuloja."
     },
-    "languageSwitcher": {
-      "ar": "Arabia",
-      "en": "Englanti",
-      "fi": "Suomi",
-      "title": "Kieli"
-    },
-    "nav": {
-      "blog": "Blogi",
-      "home": "Etusivu",
-      "portfolio": "Portfolio",
-      "prompts": "Kehotteet"
-    },
-    "portfolio": {
-      "cases": {
-        "collaboration": "Yhteistyö & Johtajuus",
-        "jobseeking": "Urakehitys"
-      },
-      "overview": "Kaikki Projektit"
+    "blogPage": {
+      "title": "Blogi & Näkemykset",
+      "description": "Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan."
     },
     "promptsPage": {
-      "subtitle": "Kokoelma kehotteitani erilaisille luoville tekoälytyökaluille",
-      "title": "Kehotekokoelma"
+      "title": "Kehotekokoelma",
+      "subtitle": "Kokoelma kehotteitani erilaisille luoville tekoälytyökaluille"
+    },
+    "footer": {
+      "copyright": "Kaikki oikeudet pidätetään."
+    },
+    "languageSwitcher": {
+      "title": "Kieli",
+      "en": "Englanti",
+      "fi": "Suomi"
     },
     "theme": {
-      "colorful": "Värikäs teema",
+      "light": "Vaalea teema",
       "dark": "Tumma teema",
-      "light": "Vaalea teema"
+      "colorful": "Värikäs teema"
     }
   }
 }

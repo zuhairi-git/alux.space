@@ -74,33 +74,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
         testScenarioValue: "Määritä uusi laite käyttäen prototyyppiä",
         focusAreas: "Keskittymisalueet",
         deliveryPhase: "Toimitusvaihe",
-        completed: "Valmis",
-        learnMore: "Lue lisää",
-      },
-      ar: {
-        title: "منصة سير عمل التعاون",
-        intro: "في قلب منصة سير عمل التعاون التزام بالإبداع والترابط والعمل الجماعي في الوقت الحقيقي. تم تصميم هذه المنصة لتبسيط التعاون المباشر، وتحسين التواصل، ومساعدة الفرق على توصيل المحتوى بشكل أكثر كفاءة عبر الأجهزة والمناطق الزمنية والمواقع.",
-        projectType: "نوع المشروع",
-        projectTypeValues: "صفحة هبوط، منصة ويب وجوال، تطبيق جوال",
-        timeline: "الجدول الزمني",
-        timelineValue: "18 أسبوعا",
-        tools: "أدوات",
-        toolsValue: "فيجما، فيججام، ميز",
-        roles: "الأدوار",
-        objectives: "الأهداف",
-        designProcess: "عملية التصميم",
-        researchInsights: "نتائج البحث",
-        participantFeedback: "تعليقات المشاركين",
-        keyRecommendations: "التوصيات الرئيسية",
-        userPersonas: "شخصيات المستخدمين",
-        productRequirements: "متطلبات المنتج",
-        userTesting: "اختبار المستخدم",
-        testScenario: "سيناريو الاختبار",
-        testScenarioValue: "تكوين جهاز جديد باستخدام النموذج الأولي",
-        focusAreas: "مجالات التركيز",
-        deliveryPhase: "مرحلة التسليم",
-        completed: "مكتمل",
-        learnMore: "اقرأ المزيد",
+        completed: "Valmis",        learnMore: "Lue lisää",
       }
     };
     
@@ -121,15 +95,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
         "Selkeytä jokaisen vaiheen tarkoitus parempaa käyttäjäymmärrystä varten",
         "Kommunikoi käyttäen liiketoimintalogiikkaa",
         "Tarjoa käyttöliittymän mukauttamista",
-        "Ylläpidä johdonmukaisia käyttöliittymäkuvioita",
-        "Varmista mobiilipainotteinen responsiivinen suunnittelu"
-      ],
-      ar: [
-        "توضيح الغرض من كل خطوة لفهم أفضل للمستخدم",
-        "التواصل باستخدام منطق الأعمال",
-        "تقديم تخصيص واجهة المستخدم",
-        "الحفاظ على أنماط متسقة لواجهة المستخدم",
-        "ضمان تصميم متجاوب يعطي الأولوية للجوال"
+        "Ylläpidä johdonmukaisia käyttöliittymäkuvioita",        "Varmista mobiilipainotteinen responsiivinen suunnittelu"
       ]
     };
     
@@ -138,61 +104,56 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
 
   const content = getLocalizedContent();
   const objectives = getObjectives();
-
   const designProcessSteps = [
     { 
-      phase: locale === 'fi' ? "Tutki" : locale === 'ar' ? "اكتشف" : "Discover",
-      desc: locale === 'fi' ? "Tutki käyttäjien tarpeita ja kipupisteitä" : locale === 'ar' ? "بحث احتياجات ومشاكل المستخدم" : "Research user needs and pain points",
+      phase: locale === 'fi' ? "Tutki" : "Discover",
+      desc: locale === 'fi' ? "Tutki käyttäjien tarpeita ja kipupisteitä" : "Research user needs and pain points",
       icon: (
         <span className="material-symbols text-4xl">search</span>
       )
     },
     { 
-      phase: locale === 'fi' ? "Määrittele" : locale === 'ar' ? "حدّد" : "Define",
-      desc: locale === 'fi' ? "Analysoi oivalluksia haasteen rajaamiseksi" : locale === 'ar' ? "تحليل الرؤى لتحديد نطاق التحدي" : "Analyze insights to scope the challenge",
+      phase: locale === 'fi' ? "Määrittele" : "Define",
+      desc: locale === 'fi' ? "Analysoi oivalluksia haasteen rajaamiseksi" : "Analyze insights to scope the challenge",
       icon: (
         <span className="material-symbols text-4xl">notes</span>
       )
     },
     { 
-      phase: locale === 'fi' ? "Kehitä" : locale === 'ar' ? "طوّر" : "Develop",
-      desc: locale === 'fi' ? "Luo ratkaisukonsepteja" : locale === 'ar' ? "إنشاء مفاهيم الحلول" : "Create solution concepts",
+      phase: locale === 'fi' ? "Kehitä" : "Develop",
+      desc: locale === 'fi' ? "Luo ratkaisukonsepteja" : "Create solution concepts",
       icon: (
         <span className="material-symbols text-4xl">edit</span>
       )
     },
     { 
-      phase: locale === 'fi' ? "Toimita" : locale === 'ar' ? "قدّم" : "Deliver",
-      desc: locale === 'fi' ? "Testaa käyttäjillä ja iteroidu" : locale === 'ar' ? "اختبار مع المستخدمين والتكرار" : "Test with users and iterate",
+      phase: locale === 'fi' ? "Toimita" : "Deliver",
+      desc: locale === 'fi' ? "Testaa käyttäjillä ja iteroidu" : "Test with users and iterate",
       icon: (
         <span className="material-symbols text-4xl">rocket_launch</span>
       )
     }
   ];
-  
-  // Translation for roles
+    // Translation for roles
   const roles = locale === 'fi' ? 
     ["Tuotesuunnittelija", "Tuotepäällikkö", "Käyttäjätutkimus", "Testaus", "Analytiikka"] :
-    locale === 'ar' ?
-    ["مصمم منتجات", "مدير منتج", "بحث المستخدم", "اختبار", "تحليلات"] :
     ["Product Designer", "Product Manager", "User Research", "Testing", "Analytics"];
-
   // Localized metrics
   const metrics = [
     { 
-      label: locale === 'fi' ? "Luovuuden arvo" : locale === 'ar' ? "قيمة الإبداع" : "Creativity Value", 
+      label: locale === 'fi' ? "Luovuuden arvo" : "Creativity Value", 
       value: 90 
     },
     { 
-      label: locale === 'fi' ? "Käyttäjäystävällisyys" : locale === 'ar' ? "سهولة الاستخدام" : "User-Friendliness", 
+      label: locale === 'fi' ? "Käyttäjäystävällisyys" : "User-Friendliness", 
       value: 95 
     },
     { 
-      label: locale === 'fi' ? "Värien hyväksyntä" : locale === 'ar' ? "اعتماد الألوان" : "Color Approval", 
+      label: locale === 'fi' ? "Värien hyväksyntä" : "Color Approval", 
       value: 80 
     },
     { 
-      label: locale === 'fi' ? "Esteettömyys" : locale === 'ar' ? "إمكانية الوصول" : "Accessibility", 
+      label: locale === 'fi' ? "Esteettömyys" : "Accessibility", 
       value: 85 
     }
   ];
@@ -337,24 +298,21 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                 <div className="p-6 rounded-lg">
                   <h3 className="text-xl font-semibold text-primary mb-6">{content.keyRecommendations}</h3>
                   <div className="space-y-4">
-                    {[
-                      {
-                        title: locale === 'fi' ? "Parannettu saavutettavuus" : locale === 'ar' ? "إمكانية وصول محسّنة" : "Enhanced Accessibility",
-                        description: locale === 'fi' ? "Lisää selkeät etiketit kaikkiin kuvakkeisiin ja kuviin" : locale === 'ar' ? "إضافة تسميات واضحة لجميع الرموز والصور" : "Add clear labels to all icons and images",
+                    {[                      {
+                        title: locale === 'fi' ? "Parannettu saavutettavuus" : "Enhanced Accessibility",
+                        description: locale === 'fi' ? "Lisää selkeät etiketit kaikkiin kuvakkeisiin ja kuviin" : "Add clear labels to all icons and images",
                         icon: (
                           <span className="material-symbols text-4xl">person</span>
                         )
-                      },
-                      {
-                        title: locale === 'fi' ? "Näppäimistön navigointi" : locale === 'ar' ? "التنقل عبر لوحة المفاتيح" : "Keyboard Navigation",
-                        description: locale === 'fi' ? "Paranna kohdistustiloja ja näppäimistön pikavalintoja" : locale === 'ar' ? "تحسين حالات التركيز واختصارات لوحة المفاتيح" : "Improve focus states and keyboard shortcuts",
+                      },                      {
+                        title: locale === 'fi' ? "Näppäimistön navigointi" : "Keyboard Navigation",
+                        description: locale === 'fi' ? "Paranna kohdistustiloja ja näppäimistön pikavalintoja" : "Improve focus states and keyboard shortcuts",
                         icon: (
                           <span className="material-symbols text-4xl">keyboard</span>
                         )
-                      },
-                      {
-                        title: locale === 'fi' ? "Värikontrasti" : locale === 'ar' ? "تباين الألوان" : "Color Contrast",
-                        description: locale === 'fi' ? "Paranna kontrastisuhteita paremman luettavuuden vuoksi" : locale === 'ar' ? "تعزيز نسب التباين لتحسين قابلية القراءة" : "Enhance contrast ratios for better readability",
+                      },                      {
+                        title: locale === 'fi' ? "Värikontrasti" : "Color Contrast",
+                        description: locale === 'fi' ? "Paranna kontrastisuhteita paremman luettavuuden vuoksi" : "Enhance contrast ratios for better readability",
                         icon: (
                           <span className="material-symbols text-4xl">palette</span>
                         )
@@ -387,25 +345,23 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.userPersonas}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                { [
-                  {
-                    name: locale === 'fi' ? "John J." : locale === 'ar' ? "جون ج." : "John J.",
-                    role: locale === 'fi' ? "Markkinointipäällikkö" : locale === 'ar' ? "مدير التسويق" : "Marketing Manager",
-                    traits: locale === 'fi' ? ["Teknologiaosaava", "Innovaatioihin keskittyvä"] : locale === 'ar' ? ["متمرس بالتكنولوجيا", "يركز على الابتكار"] : ["Tech-savvy", "Innovation-focused"],
-                    needs: locale === 'fi' ? ["Yhteistyötyökalut", "Strategian yhdenmukaistaminen"] : locale === 'ar' ? ["أدوات التعاون", "مواءمة الاستراتيجية"] : ["Collaboration tools", "Strategy alignment"],
-                    goals: locale === 'fi' ? ["Tehosta tiimiviestintää", "Ota käyttöön uusia markkinointistrategioita"] : locale === 'ar' ? ["تبسيط التواصل بين الفريق", "تنفيذ استراتيجيات تسويقية جديدة"] : ["Streamline team communication", "Implement new marketing strategies"],
-                    painPoints: locale === 'fi' ? ["Monimutkaiset hyväksymisprosessit", "Hajautetut palautekanavat"] : locale === 'ar' ? ["عمليات الموافقة المعقدة", "قنوات التغذية الراجعة المتفرقة"] : ["Complex approval processes", "Scattered feedback channels"],
+                { [                  {
+                    name: locale === 'fi' ? "John J." : "John J.",
+                    role: locale === 'fi' ? "Markkinointipäällikkö" : "Marketing Manager",
+                    traits: locale === 'fi' ? ["Teknologiaosaava", "Innovaatioihin keskittyvä"] : ["Tech-savvy", "Innovation-focused"],
+                    needs: locale === 'fi' ? ["Yhteistyötyökalut", "Strategian yhdenmukaistaminen"] : ["Collaboration tools", "Strategy alignment"],
+                    goals: locale === 'fi' ? ["Tehosta tiimiviestintää", "Ota käyttöön uusia markkinointistrategioita"] : ["Streamline team communication", "Implement new marketing strategies"],
+                    painPoints: locale === 'fi' ? ["Monimutkaiset hyväksymisprosessit", "Hajautetut palautekanavat"] : ["Complex approval processes", "Scattered feedback channels"],
                     icon: (
                       <span className="material-symbols text-4xl">groups</span>
                     )
-                  },
-                  {
-                    name: locale === 'fi' ? "Julia Romes" : locale === 'ar' ? "جوليا رومز" : "Julia Romes",
-                    role: locale === 'fi' ? "Myyntijohtaja" : locale === 'ar' ? "مدير المبيعات" : "Sales Director",
-                    traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Mobiilipainotteinen"] : locale === 'ar' ? ["يركز على النتائج", "يعطي الأولوية للجوال"] : ["Results-driven", "Mobile-first"],
-                    needs: locale === 'fi' ? ["Nopea yhteistyö", "Liikkuva pääsy"] : locale === 'ar' ? ["تعاون سريع", "الوصول أثناء التنقل"] : ["Quick collaboration", "On-the-go access"],
-                    goals: locale === 'fi' ? ["Sulje kaupat nopeammin", "Paranna tiimikoordinointia"] : locale === 'ar' ? ["إتمام الصفقات بشكل أسرع", "تحسين تنسيق الفريق"] : ["Close deals faster", "Improve team coordination"],
-                    painPoints: locale === 'fi' ? ["Rajoitettu mobiilitoiminnallisuus", "Viivästyneet vastaukset"] : locale === 'ar' ? ["وظائف محدودة للجوال", "ردود متأخرة"] : ["Limited mobile functionality", "Delayed responses"],
+                  },                  {
+                    name: locale === 'fi' ? "Julia Romes" : "Julia Romes",
+                    role: locale === 'fi' ? "Myyntijohtaja" : "Sales Director",
+                    traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Mobiilipainotteinen"] : ["Results-driven", "Mobile-first"],
+                    needs: locale === 'fi' ? ["Nopea yhteistyö", "Liikkuva pääsy"] : ["Quick collaboration", "On-the-go access"],
+                    goals: locale === 'fi' ? ["Sulje kaupat nopeammin", "Paranna tiimikoordinointia"] : ["Close deals faster", "Improve team coordination"],
+                    painPoints: locale === 'fi' ? ["Rajoitettu mobiilitoiminnallisuus", "Viivästyneet vastaukset"] : ["Limited mobile functionality", "Delayed responses"],
                     icon: (
                       <span className="material-symbols text-4xl">groups</span>
                     )
@@ -428,7 +384,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                     
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Ominaisuudet" : locale === 'ar' ? "السمات" : "Traits"}</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Ominaisuudet" : "Traits"}</h4>
                         <div className="flex flex-wrap gap-2">
                           {persona.traits.map((trait, i) => (
                             <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
@@ -439,7 +395,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                       </div>
                       
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tarpeet" : locale === 'ar' ? "الاحتياجات" : "Needs"}</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                         <ul className="space-y-2">
                           {persona.needs.map((need, i) => (
                             <li key={i} className="flex items-center text-opacity-80">
@@ -451,7 +407,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                       </div>
                       
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tavoitteet" : locale === 'ar' ? "الأهداف" : "Goals"}</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
                         <ul className="space-y-2">
                           {persona.goals.map((goal, i) => (
                             <li key={i} className="flex items-center text-opacity-80">
@@ -463,7 +419,7 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                       </div>
                       
                       <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Kipupisteet" : locale === 'ar' ? "نقاط الألم" : "Pain Points"}</h4>
+                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                         <ul className="space-y-2">
                           {persona.painPoints.map((point, i) => (
                             <li key={i} className="flex items-center text-opacity-80">
@@ -485,31 +441,29 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                 <div className="p-6 rounded-lg">
                   <h2 className="text-3xl font-bold mb-6 text-primary">{content.productRequirements}</h2>
                   <div className="space-y-4">
-                    {[
-                      {
-                        title: locale === 'fi' ? "Tiimiviestintä" : locale === 'ar' ? "تواصل الفريق" : "Team Communication",
-                        description: locale === 'fi' ? "Mahdollista saumaton reaaliaikainen yhteistyö" : locale === 'ar' ? "تمكين التعاون في الوقت الحقيقي بسلاسة" : "Enable seamless real-time collaboration",
+                    {[                      {
+                        title: locale === 'fi' ? "Tiimiviestintä" : "Team Communication",
+                        description: locale === 'fi' ? "Mahdollista saumaton reaaliaikainen yhteistyö" : "Enable seamless real-time collaboration",
                         icon: (
                           <span className="material-symbols text-4xl">group</span>
-                        )
-                      },
+                        )                      },
                       {
-                        title: locale === 'fi' ? "Käyttäjäpalautesilmukka" : locale === 'ar' ? "حلقة تغذية راجعة المستخدم" : "User Feedback Loop",
-                        description: locale === 'fi' ? "Jatkuva käyttäjäoivallusten kerääminen" : locale === 'ar' ? "جمع مستمر لرؤى المستخدم" : "Continuous collection of user insights",
+                        title: locale === 'fi' ? "Käyttäjäpalautesilmukka" : "User Feedback Loop",
+                        description: locale === 'fi' ? "Jatkuva käyttäjäoivallusten kerääminen" : "Continuous collection of user insights",
                         icon: (
                           <span className="material-symbols text-4xl">feedback</span>
                         )
                       },
                       {
-                        title: locale === 'fi' ? "Koulutusresurssit" : locale === 'ar' ? "موارد التدريب" : "Training Resources",
-                        description: locale === 'fi' ? "Monitasoiset oppimateriaalit" : locale === 'ar' ? "مواد تعليمية متعددة المستويات" : "Multi-level learning materials",
+                        title: locale === 'fi' ? "Koulutusresurssit" : "Training Resources",
+                        description: locale === 'fi' ? "Monitasoiset oppimateriaalit" : "Multi-level learning materials",
                         icon: (
                           <span className="material-symbols text-4xl">school</span>
                         )
                       },
                       {
-                        title: locale === 'fi' ? "Dokumentaatio" : locale === 'ar' ? "التوثيق" : "Documentation",
-                        description: locale === 'fi' ? "Kattavat tukiresurssit" : locale === 'ar' ? "موارد دعم شاملة" : "Comprehensive support resources",
+                        title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
+                        description: locale === 'fi' ? "Kattavat tukiresurssit" : "Comprehensive support resources",
                         icon: (
                           <span className="material-symbols text-4xl">description</span>
                         )
@@ -547,27 +501,26 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-4">{content.focusAreas}</h3>
                     <div className="grid grid-cols-2 gap-4 grid-flow-row auto-rows-auto">
-                      { [
-                        {
-                          area: locale === 'fi' ? "Käytettävyys" : locale === 'ar' ? "سهولة الاستخدام" : "Usability",
+                      { [                        {
+                          area: locale === 'fi' ? "Käytettävyys" : "Usability",
                           icon: (
                             <span className="material-symbols text-4xl">touch_app</span>
                           )
                         },
                         {
-                          area: locale === 'fi' ? "Luovuus" : locale === 'ar' ? "الإبداع" : "Creativity",
+                          area: locale === 'fi' ? "Luovuus" : "Creativity",
                           icon: (
                             <span className="material-symbols text-4xl">brush</span>
                           )
                         },
                         {
-                          area: locale === 'fi' ? "Esteettömyys" : locale === 'ar' ? "إمكانية الوصول" : "Accessibility",
+                          area: locale === 'fi' ? "Esteettömyys" : "Accessibility",
                           icon: (
                             <span className="material-symbols text-4xl">accessibility</span>
                           )
                         },
                         {
-                          area: locale === 'fi' ? "Visuaalinen suunnittelu" : locale === 'ar' ? "التصميم البصري" : "Visual Design",
+                          area: locale === 'fi' ? "Visuaalinen suunnittelu" : "Visual Design",
                           icon: (
                             <span className="material-symbols text-4xl">image</span>
                           )
@@ -595,34 +548,33 @@ export default function CollaborationClient({ locale: initialLocale }: Props) {
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.deliveryPhase}</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                { [
-                  {
-                    title: locale === 'fi' ? "Korkean tarkkuuden prototyyppi" : locale === 'ar' ? "نموذج أولي عالي الدقة" : "High Fidelity Prototype",
-                    description: locale === 'fi' ? "Vuorovaikutteiset suunnitelmat, jotka esittelevät keskeisiä ominaisuuksia käyttäjien tavoitteiden ja käytettävyyden periaatteiden mukaisesti" : locale === 'ar' ? "تصاميم تفاعلية تعرض الميزات الرئيسية المتوافقة مع أهداف المستخدم ومبادئ سهولة الاستخدام" : "Interactive designs showcasing key features aligned with user goals and usability principles",
+                { [                  {
+                    title: locale === 'fi' ? "Korkean tarkkuuden prototyyppi" : "High Fidelity Prototype",
+                    description: locale === 'fi' ? "Vuorovaikutteiset suunnitelmat, jotka esittelevät keskeisiä ominaisuuksia käyttäjien tavoitteiden ja käytettävyyden periaatteiden mukaisesti" : "Interactive designs showcasing key features aligned with user goals and usability principles",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">devices</span>
                     )
                   },
                   {
-                    title: locale === 'fi' ? "Suunnittelukatsaukset" : locale === 'ar' ? "مراجعات التصميم" : "Design Reviews",
-                    description: locale === 'fi' ? "Rakenteelliset palautesessiot sidosryhmien kanssa dokumentoimaan keskeisiä päätöksiä ja parannuksia" : locale === 'ar' ? "جلسات ملاحظات منظمة مع أصحاب المصلحة لتوثيق القرارات الرئيسية والتحسينات" : "Structured feedback sessions with stakeholders to document key decisions and improvements",
+                    title: locale === 'fi' ? "Suunnittelukatsaukset" : "Design Reviews",
+                    description: locale === 'fi' ? "Rakenteelliset palautesessiot sidosryhmien kanssa dokumentoimaan keskeisiä päätöksiä ja parannuksia" : "Structured feedback sessions with stakeholders to document key decisions and improvements",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">reviews</span>
                     )
                   },
                   {
-                    title: locale === 'fi' ? "Laadunvarmistus" : locale === 'ar' ? "ضمان الجودة" : "Quality Assurance",
-                    description: locale === 'fi' ? "Kattava testaus eri laitteilla varmistamaan johdonmukainen kokemus ja suorituskyky" : locale === 'ar' ? "اختبار شامل عبر الأجهزة لضمان تجربة وأداء متسقين" : "Comprehensive testing across devices to ensure consistent experience and performance",
+                    title: locale === 'fi' ? "Laadunvarmistus" : "Quality Assurance",
+                    description: locale === 'fi' ? "Kattava testaus eri laitteilla varmistamaan johdonmukainen kokemus ja suorituskyky" : "Comprehensive testing across devices to ensure consistent experience and performance",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">verified</span>
                     )
                   },
                   {
-                    title: locale === 'fi' ? "Dokumentaatio" : locale === 'ar' ? "التوثيق" : "Documentation",
-                    description: locale === 'fi' ? "Selkeä dokumentaatio tulevaa kehitystä ja monitoimista yhteistyötä varten." : locale === 'ar' ? "توثيق واضح للتطوير المستقبلي والتعاون متعدد الوظائف." : "Clear documentation for future development and cross-functional collaboration.",
+                    title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
+                    description: locale === 'fi' ? "Selkeä dokumentaatio tulevaa kehitystä ja monitoimista yhteistyötä varten." : "Clear documentation for future development and cross-functional collaboration.",
                     progress: 100,
                     icon: (
                       <span className="material-symbols text-4xl">folder</span>

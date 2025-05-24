@@ -18,14 +18,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     en: {
       title: 'Prompts Gallery | Ali Al-Zuhairi',
       description: 'A collection of prompts I\'ve crafted for various creative AI tools and development tasks.',
-    },
-    fi: {
+    },    fi: {
       title: 'Kehotteet | Ali Al-Zuhairi',
       description: 'Kokoelma kehotteitä, jotka olen luonut erilaisille luoville tekoälytyökaluille ja kehitystehtäville.',
-    },
-    ar: {
-      title: 'معرض الأوامر | علي الزهيري',
-      description: 'مجموعة من الأوامر التي صممتها لمختلف أدوات الذكاء الاصطناعي الإبداعية ومهام التطوير.',
     }
   };
   

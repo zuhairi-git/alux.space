@@ -24,14 +24,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     en: {
       title: 'Blog & Insights | Ali Al-Zuhairi',
       description: 'Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology.',
-    },
-    fi: {
+    },    fi: {
       title: 'Blogi & Näkemykset | Ali Al-Zuhairi',
       description: 'Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan.',
-    },
-    ar: {
-      title: 'المدونة والرؤى | علي الزهيري',
-      description: 'أفكار وتعلم ووجهات نظر حول قيادة التصميم، وإدارة المنتجات، وتقاطع الإبداع والتكنولوجيا.',
     }
   };
   
@@ -47,7 +42,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       type: 'website',
       url: url,
       siteName: 'Ali Al-Zuhairi',
-      locale: locale === 'en' ? 'en_US' : locale === 'fi' ? 'fi_FI' : 'ar_SA',
+      locale: locale === 'en' ? 'en_US' : 'fi_FI',
       images: [
         {
           url: ogImage,

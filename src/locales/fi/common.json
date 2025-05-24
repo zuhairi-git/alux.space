@@ -72,12 +72,10 @@
   },
   "footer": {
     "copyright": "Kaikki oikeudet pidätetään."
-  },
-  "languageSwitcher": {
+  },  "languageSwitcher": {
     "title": "Kieli",
     "en": "Englanti",
-    "fi": "Suomi",
-    "ar": "Arabia"
+    "fi": "Suomi"
   },
   "theme": {
     "light": "Vaalea teema",

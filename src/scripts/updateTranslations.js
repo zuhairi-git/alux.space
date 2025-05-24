@@ -9,9 +9,8 @@ async function updateTranslations() {
     const outputPath = path.join(process.cwd(), 'src', 'translations', 'generatedTranslations.json');
     
     console.log('Updating translations from locale JSON files');
-    
-    // Load all JSON files
-    const languages = ['en', 'fi', 'ar']; 
+      // Load all JSON files
+    const languages = ['en', 'fi'];
     const translations = {};
     
     // Load each language's translations

@@ -19,14 +19,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     en: {
       title: 'Ali Al-Zuhairi | Product Designer & UX Leader',
       description: 'Personal portfolio showcasing product design, UX leadership, and creative project work.',
-    },
-    fi: {
+    },    fi: {
       title: 'Ali Al-Zuhairi | Tuotesuunnittelija & UX-johtaja',
       description: 'Henkilökohtainen portfolio, joka esittelee tuotesuunnittelua, UX-johtajuutta ja luovia projektitöitä.',
-    },
-    ar: {
-      title: 'علي الزهيري | مصمم منتجات وقائد تجربة المستخدم',
-      description: 'معرض أعمال شخصي يعرض تصميم المنتجات، وقيادة تجربة المستخدم، والعمل في المشاريع الإبداعية.',
     }
   };
   

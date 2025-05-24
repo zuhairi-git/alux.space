@@ -13,6 +13,7 @@ import { i18n } from '@/i18n';
 
 const portfolioDropdownItems = [
   { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, 
+  { href: '/portfolio/accessibility', textKey: 'portfolio.cases.accessibility', type: 'case' },
   { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration', type: 'case' },
   { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking', type: 'case' },
 ];

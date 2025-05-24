@@ -35,8 +35,7 @@ interface PortfolioItem {
 export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  const localizedMetadata = {
+    const localizedMetadata = {
     en: {
       title: 'Portfolio | Ali Al-Zuhairi',
       description: 'Explore my portfolio of UX design and product management projects, showcasing creative solutions to real-world challenges.',
@@ -44,10 +43,6 @@ export async function generateMetadata({ params }: { params: { locale?: string }
     fi: {
       title: 'Portfolio | Ali Al-Zuhairi',
       description: 'Tutustu UX-suunnittelu- ja tuotehallintaprojektieni portfolioon, joka esittelee luovia ratkaisuja todellisiin haasteisiin.',
-    },
-    ar: {
-      title: 'المشاريع | علي الزهيري',
-      description: 'استكشف محفظتي من مشاريع تصميم تجربة المستخدم وإدارة المنتجات، التي تعرض حلولاً إبداعية للتحديات الواقعية.',
     }
   };
   
@@ -66,9 +61,26 @@ export async function generateMetadata({ params }: { params: { locale?: string }
   };
 }
 
-export default async function PortfolioPage({ params }: { params: { locale?: string } }) {
-  const locale = params.locale || i18n.defaultLocale;
+export default async function PortfolioPage({ params }: { params: { locale?: string } }) {  const locale = params.locale || i18n.defaultLocale;
     const portfolioItems: PortfolioItem[] = [
+    {
+      title: {
+        en: 'Accessibility Portfolio',
+        fi: 'Saavutettavuusportfolio',
+      },
+      type: {
+        en: 'WCAG 2.2 & Inclusive Design',
+        fi: 'WCAG 2.2 & Inklusiivinen suunnittelu',
+      },
+      desc: {
+        en: 'Comprehensive showcase of accessibility standards, best practices in accessible UX design including color contrast, keyboard navigation, screen reader compatibility, and inclusive design patterns with before-and-after improvements.',
+        fi: 'Kattava esittely saavutettavuusstandardeista, parhaista käytännöistä saavutettavassa UX-suunnittelussa mukaan lukien värikontrasti, näppäimistönavigaatio, ruudunlukijan yhteensopivuus ja inklusiiviset suunnittelumallit ennen-ja-jälkeen parannuksilla.',
+      },
+      tags: ['WCAG 2.2', 'Accessibility', 'Inclusive Design', 'Screen Readers', 'Keyboard Navigation'],
+      date: 'Feb 2024 - Present',
+      link: '/portfolio/accessibility',
+      gradient: 'from-emerald-400 to-teal-500'
+    },
     {
       title: {
         en: 'Collaboration & Leadership',
@@ -89,7 +101,7 @@ export default async function PortfolioPage({ params }: { params: { locale?: str
       photo: {
         url: '/images/portfolio/collaboration/cover.jpg'
       }
-    },    {
+    },{
       title: {
         en: 'Career Development',
         fi: 'Urakehitys',
@@ -108,27 +120,8 @@ export default async function PortfolioPage({ params }: { params: { locale?: str
       gradient: 'from-purple-400 to-pink-500',
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpeg'
-      }    },
-    {
-      title: {
-        en: 'UX Design Portfolio',
-        fi: 'UX-suunnitteluportfolio',
-      },
-      type: {
-        en: 'UX Design',
-        fi: 'UX-suunnittelu',
-      },
-      desc: {
-        en: 'A collection of my user experience design projects focusing on usability and accessibility.',
-        fi: 'Kokoelma käyttäjäkokemussuunnitteluprojektejani, jotka keskittyvät käytettävyyteen ja saavutettavuuteen.',
-      },
-      tags: ['UI/UX', 'Accessibility', 'User Research'],
-      date: 'Aug 2021 - Apr 2022',
-      link: '/portfolio/ux-design',
-      gradient: 'from-green-400 to-blue-500'
-    }
+      }    }
   ];
-
   // Fetch Unsplash photos as fallback if local images fail to load
   const itemsWithPhotos = await Promise.all(
     portfolioItems.map(async (item) => {
@@ -138,7 +131,13 @@ export default async function PortfolioPage({ params }: { params: { locale?: str
       }
         // Otherwise try to get an Unsplash photo
       try {
-        const photo = await getUnsplashPhoto(item.title.en.toLowerCase());
+        // Use specific search terms for accessibility portfolio
+        let searchQuery = item.title.en.toLowerCase();
+        if (item.title.en === 'Accessibility Portfolio') {
+          searchQuery = 'accessibility inclusive design assistive technology';
+        }
+        
+        const photo = await getUnsplashPhoto(searchQuery);
         if (photo) {
           return {
             ...item,

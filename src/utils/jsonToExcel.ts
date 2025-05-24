@@ -29,7 +29,7 @@ export async function convertJsonToExcel(): Promise<string> {
     }
     
     // Load all JSON files
-    const languages = ['en', 'fi', 'ar']; // Add more languages as needed
+    const languages = ['en', 'fi']; // Add more languages as needed
     const translations: Record<string, any> = {};
     
     // Load each language's translations

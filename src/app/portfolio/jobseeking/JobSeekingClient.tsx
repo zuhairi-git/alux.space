@@ -117,54 +117,7 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
         qa: "Laadunvarmistus:",
         qaDesc: "Kattaa käytettävyyden, laiteyhteensopivuuden ja visuaalisen johdonmukaisuuden",
         designDocs: "Suunnitteludokumentaatio:",
-        designDocsDesc: "Viimeistellyt resurssit, suunnittelupäätökset ja luovutusmateriaalit – valmiina kehitysyhteistyöhön.",
-      },
-      ar: {
-        title: "تطبيق البحث عن وظائف",
-        intro: "تطبيق للهاتف المحمول مصمم لتبسيط عمليات البحث عن الوظائف - خاصة للعمل المحلي، بدوام جزئي، وفي عطلة نهاية الأسبوع. تم إنشاؤه لجعل البحث عن وظيفة أسرع وأسهل وأكثر كفاءة للأشخاص الذين يبحثون عن فرص دخل إضافية.",
-        projectType: "نوع المشروع",
-        projectTypeValues: "تطبيق واجهة أمامية للمستخدمين النهائيين",
-        timeline: "الجدول الزمني",
-        timelineValue: "8 أسابيع",
-        tools: "أدوات",
-        toolsValue: "فيجما، فيج جام، ميز",
-        roles: "الأدوار",
-        designProcess: "عملية التصميم",
-        designModel: "النموذج:",
-        doubleD: "الماسة المزدوجة",
-        discoverPhase: "مرحلة الاكتشاف",
-        definePhase: "مرحلة التحديد",
-        developPhase: "مرحلة التطوير",
-        deliverPhase: "مرحلة التسليم",
-        challenge: "التحدي",
-        challengeDesc: "كيف يمكن للمستخدمين العثور بسرعة على وظائف محلية موثوقة، سواء مؤقتة أو دائمة؟",
-        discoveryInsights: "رؤى الاكتشاف",
-        discoveryDesc: "تدفع تكاليف المعيشة المتزايدة الناس إلى البحث عن دخل إضافي - وظائف نهاية الأسبوع هي الخيار الأكثر مرونة. يساعد تطبيق وظائف موثوق المستخدمين على عرض توفرهم ومهاراتهم بكفاءة.",
-        initialResearch: "البحث الأولي",
-        initialResearchDesc: "تختلف منصات العمل في سهولة الاستخدام والثقة. أحد الحلول هو تقديم عقود عمل بعد التطابق لمزيد من الموثوقية وثقة المستخدم.",
-        hypothesis: "الفرضية",
-        hypothesisDesc: "يمكن لتطبيق وظائف سهل الاستخدام يركز محليًا مع ملفات شخصية مخصصة أن يخدم الباحثين عن عمل بشكل أفضل مقارنة بالمنصات العالمية.",
-        primaryResearch: "البحث الأساسي",
-        objectives: "الأهداف:",
-        methods: "الأساليب:",
-        ethics: "الأخلاقيات:",
-        personas: "الشخصيات",
-        userFlow: "مسار المستخدم",
-        userFlowDesc: "يدعم الحد الأدنى من المنتج القابل للتطبيق التفكير السريع والتطوير لنضج المنتج المبكر - مثالي للمصممين المستقلين والشركات الناشئة.",
-        productRequirements: "متطلبات المنتج",
-        epicGoal: "الهدف الملحمي",
-        epicGoalDesc: "تمكين فرص الدخل السريع عبر الوظائف المحلية",
-        userTesting: "اختبار المستخدم",
-        inProgress: "قيد التقدم",
-        hifiProto: "نموذج أولي عالي الدقة:",
-        hifiProtoDesc: "عرض مرئي لواجهة المستخدم النهائية، تم اختباره مقابل أهداف المستخدم.",
-        designReviews: "مراجعات التصميم:",
-        designReviewsDesc: "جلسات ملاحظات منظمة لتقييم جودة واجهة المستخدم وسهولة الاستخدام. يتم توثيق جميع الملاحظات.",
-        qa: "ضمان الجودة:",
-        qaDesc: "يغطي قابلية الاستخدام والتوافق عبر الأجهزة والاتساق المرئي",
-        designDocs: "وثائق التصميم:",
-        designDocsDesc: "الأصول النهائية، وقرارات التصميم، ومواد التسليم - جاهزة للتعاون التطويري.",
-      }
+        designDocsDesc: "Viimeistellyt resurssit, suunnittelupäätökset ja luovutusmateriaalit – valmiina kehitysyhteistyöhön.",      }
     };
     
     return content[locale as keyof typeof content] || content.en;
@@ -232,13 +185,12 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-primary mb-4">{content.roles}</h3>
-                  <ul className={`list-disc  opacity-80 space-y-2`}>
-                    <li>{locale === 'fi' ? 'Tuotesuunnittelija' : locale === 'ar' ? 'مصمم المنتج' : 'Product Designer'}</li>
-                    <li>{locale === 'fi' ? 'Tuotejohtaja' : locale === 'ar' ? 'مدير المنتج' : 'Product Manager'}</li>
-                    <li>{locale === 'fi' ? 'Käyttäjätutkimus' : locale === 'ar' ? 'بحث المستخدم' : 'User Research'}</li>
-                    <li>{locale === 'fi' ? 'Testaus' : locale === 'ar' ? 'اختبار' : 'Testing'}</li>
-                    <li>{locale === 'fi' ? 'Käyttäytymisanalytiikka' : locale === 'ar' ? 'تحليلات السلوك' : 'Behavior Analytics'}</li>
+                  <h3 className="text-lg font-semibold text-primary mb-4">{content.roles}</h3>                  <ul className={`list-disc  opacity-80 space-y-2`}>
+                    <li>{locale === 'fi' ? 'Tuotesuunnittelija' : 'Product Designer'}</li>
+                    <li>{locale === 'fi' ? 'Tuotejohtaja' : 'Product Manager'}</li>
+                    <li>{locale === 'fi' ? 'Käyttäjätutkimus' : 'User Research'}</li>
+                    <li>{locale === 'fi' ? 'Testaus' : 'Testing'}</li>
+                    <li>{locale === 'fi' ? 'Käyttäytymisanalytiikka' : 'Behavior Analytics'}</li>
                   </ul>
                 </div>
               </div>
@@ -253,12 +205,11 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
                     <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
                       <span className="material-symbols text-3xl text-purple-400">search</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Löydä" : locale === 'ar' ? "اكتشف" : "Discover"}
+                    </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                      {locale === 'fi' ? "Löydä" : "Discover"}
                     </h3>
                     <p className="opacity-80">
-                      {locale === 'fi' ? "Tutkimukset ja haastattelut käyttäjien kipupisteiden ymmärtämiseksi" : locale === 'ar' ? "البحث والمقابلات لفهم نقاط ألم المستخدم" : "Research and interviews to understand user pain points"}
+                      {locale === 'fi' ? "Tutkimukset ja haastattelut käyttäjien kipupisteiden ymmärtämiseksi" : "Research and interviews to understand user pain points"}
                     </p>
                   </div>
                 </div>
@@ -267,12 +218,11 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
                     <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
                       <span className="material-symbols text-3xl text-purple-400">notes</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Määrittele" : locale === 'ar' ? "حدّد" : "Define"}
+                    </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                      {locale === 'fi' ? "Määrittele" : "Define"}
                     </h3>
                     <p className="opacity-80">
-                      {locale === 'fi' ? "Analysoi oivalluksia selkeiden suunnitteluongelmien määrittämiseksi" : locale === 'ar' ? "تحليل الرؤى لتحديد مشاكل التصميم بوضوح" : "Analyze insights to frame clear design problems"}
+                      {locale === 'fi' ? "Analysoi oivalluksia selkeiden suunnitteluongelmien määrittämiseksi" : "Analyze insights to frame clear design problems"}
                     </p>
                   </div>
                 </div>
@@ -281,12 +231,11 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
                     <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
                       <span className="material-symbols text-3xl text-purple-400">edit</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Kehitä" : locale === 'ar' ? "طوّر" : "Develop"}
+                    </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                      {locale === 'fi' ? "Kehitä" : "Develop"}
                     </h3>
                     <p className="opacity-80">
-                      {locale === 'fi' ? "Ideoi ratkaisuja ja testaa prototyyppejä" : locale === 'ar' ? "ابتكار الحلول واختبار النماذج الأولية" : "Ideate solutions and test prototypes"}
+                      {locale === 'fi' ? "Ideoi ratkaisuja ja testaa prototyyppejä" : "Ideate solutions and test prototypes"}
                     </p>
                   </div>
                 </div>
@@ -295,12 +244,11 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
                     <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
                       <span className="material-symbols text-3xl text-purple-400">rocket_launch</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Toimita" : locale === 'ar' ? "سلّم" : "Deliver"}
+                    </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                      {locale === 'fi' ? "Toimita" : "Deliver"}
                     </h3>
                     <p className="opacity-80">
-                      {locale === 'fi' ? "Viimeistele ratkaisu iteratiivisen testauksen ja palautteen avulla" : locale === 'ar' ? "وضع اللمسات الأخيرة على الحل من خلال الاختبار والتغذية الراجعة المتكررة" : "Finalize solution through iterative testing and feedback"}
+                      {locale === 'fi' ? "Viimeistele ratkaisu iteratiivisen testauksen ja palautteen avulla" : "Finalize solution through iterative testing and feedback"}
                     </p>
                   </div>
                 </div>
@@ -332,43 +280,40 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                     <div>
                       <h3 className="text-xl font-semibold text-primary mb-2">{content.primaryResearch}</h3>
                       <div className="mb-2 font-medium">{content.objectives}</div>
-                      <ul className="list-inside mb-4 opacity-80 space-y-1">
-                        <li className="flex items-center">
+                      <ul className="list-inside mb-4 opacity-80 space-y-1">                        <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">target</span>
-                          {locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : locale === 'ar' ? 'تقييم الوعي باستخدام التطبيق' : 'Gauge app awareness and usage'}
+                          {locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : 'Gauge app awareness and usage'}
                         </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">psychology</span>
-                          {locale === 'fi' ? 'Tunnista käyttäjien kipupisteet' : locale === 'ar' ? 'تحديد نقاط ألم المستخدم' : 'Identify user pain points'}
+                          {locale === 'fi' ? 'Tunnista käyttäjien kipupisteet' : 'Identify user pain points'}
                         </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">lightbulb</span>
-                          {locale === 'fi' ? 'Kerää käyttökokemuksen parannusehdotuksia' : locale === 'ar' ? 'جمع اقتراحات لتحسين تجربة المستخدم' : 'Gather UX improvement suggestions'}
+                          {locale === 'fi' ? 'Kerää käyttökokemuksen parannusehdotuksia' : 'Gather UX improvement suggestions'}
                         </li>
                       </ul>
                       <div className="mb-2 font-medium">{content.methods}</div>
-                      <ul className="list-inside mb-4 opacity-80 space-y-1">
-                        <li className="flex items-center">
+                      <ul className="list-inside mb-4 opacity-80 space-y-1">                        <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">group</span>
-                          {locale === 'fi' ? 'Haastattelut (puolistrukturoidut)' : locale === 'ar' ? 'المقابلات (شبه منظمة)' : 'Interviews (semi-structured)'}
+                          {locale === 'fi' ? 'Haastattelut (puolistrukturoidut)' : 'Interviews (semi-structured)'}
                         </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">list_alt</span>
-                          {locale === 'fi' ? 'Kyselyt (sekalaiset kysymykset)' : locale === 'ar' ? 'استطلاعات الرأي (أسئلة مختلطة)' : 'Surveys (mixed questions)'}
+                          {locale === 'fi' ? 'Kyselyt (sekalaiset kysymykset)' : 'Surveys (mixed questions)'}
                         </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">trending_up</span>
-                          {locale === 'fi' ? 'Sovelluksen käytön seuranta' : locale === 'ar' ? 'تتبع استخدام التطبيق' : 'App usage tracking'}
+                          {locale === 'fi' ? 'Sovelluksen käytön seuranta' : 'App usage tracking'}
                         </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">data_object</span>
-                          {locale === 'fi' ? 'Temaattinen ja kvantitatiivinen data-analyysi' : locale === 'ar' ? 'التحليل الموضوعي والكمي للبيانات' : 'Thematic and quantitative data analysis'}
+                          {locale === 'fi' ? 'Temaattinen ja kvantitatiivinen data-analyysi' : 'Thematic and quantitative data analysis'}
                         </li>
                       </ul>
-                      <div className="mb-2 font-medium">{content.ethics}</div>
-                      <p className="opacity-80 flex items-center">
+                      <div className="mb-2 font-medium">{content.ethics}</div>                      <p className="opacity-80 flex items-center">
                         <span className="material-symbols text-sm text-purple-400 mr-2">verified_user</span>
-                        {locale === 'fi' ? 'Tietoinen suostumus, anonymiteetti, vapaaehtoinen osallistuminen' : locale === 'ar' ? 'الموافقة المستنيرة والسرية والمشاركة الطوعية' : 'Informed consent, anonymity, voluntary participation'}
+                        {locale === 'fi' ? 'Tietoinen suostumus, anonymiteetti, vapaaehtoinen osallistuminen' : 'Informed consent, anonymity, voluntary participation'}
                       </p>
                     </div>
                   </div>
@@ -388,23 +333,20 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                         <div className="bg-theme/20 p-4 rounded-lg">
                           <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
                             <span className="material-symbols text-3xl text-purple-400">person</span>
-                          </div>
-                          <div className="font-bold text-primary mb-2">{locale === 'fi' ? 'Allen (20, Opiskelija)' : locale === 'ar' ? 'ألن (20, طالب)' : 'Allen (20, Student)'}</div>
-                          <p className="opacity-80 text-sm">{locale === 'fi' ? 'Käyttää sovellusta satunnaisesti saadakseen nopeasti rahaa. Joustava yö-/viikonloppuvuorojen suhteen. Luotettava työskennellessään.' : locale === 'ar' ? 'يستخدم التطبيق بشكل متقطع للحصول على المال السريع. مرن مع المناوبات الليلية / في عطلة نهاية الأسبوع. موثوق به عندما يعمل.' : 'Uses app infrequently for quick cash. Flexible with night/weekend shifts. Reliable when he works.'}</p>
+                          </div>                          <div className="font-bold text-primary mb-2">{locale === 'fi' ? 'Allen (20, Opiskelija)' : 'Allen (20, Student)'}</div>
+                          <p className="opacity-80 text-sm">{locale === 'fi' ? 'Käyttää sovellusta satunnaisesti saadakseen nopeasti rahaa. Joustava yö-/viikonloppuvuorojen suhteen. Luotettava työskennellessään.' : 'Uses app infrequently for quick cash. Flexible with night/weekend shifts. Reliable when he works.'}</p>
                         </div>
                         <div className="bg-theme/20 p-4 rounded-lg">
                           <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
                             <span className="material-symbols text-3xl text-purple-400">school</span>
-                          </div>
-                          <div className="font-bold text-primary mb-2">{locale === 'fi' ? 'James (23, Yliopisto-opiskelija)' : locale === 'ar' ? 'جيمس (23, طالب جامعي)' : 'James (23, Uni Student)'}</div>
-                          <p className="opacity-80 text-sm">{locale === 'fi' ? 'Työskentelee 2-3 vuoroa/viikko ravintola-alalla. Suosii säännöllisiä tehtäviä suosikkipaikoissaan.' : locale === 'ar' ? 'يعمل 2-3 مناوبات/أسبوع في مجال الضيافة. يفضل الأدوار المستمرة في الأماكن المفضلة لديه.' : 'Works 2–3 shifts/week in hospitality. Prefers consistent roles at favorite venues.'}</p>
+                          </div>                          <div className="font-bold text-primary mb-2">{locale === 'fi' ? 'James (23, Yliopisto-opiskelija)' : 'James (23, Uni Student)'}</div>
+                          <p className="opacity-80 text-sm">{locale === 'fi' ? 'Työskentelee 2-3 vuoroa/viikko ravintola-alalla. Suosii säännöllisiä tehtäviä suosikkipaikoissaan.' : 'Works 2–3 shifts/week in hospitality. Prefers consistent roles at favorite venues.'}</p>
                         </div>
                         <div className="bg-theme/20 p-4 rounded-lg">
                           <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
                             <span className="material-symbols text-3xl text-purple-400">work</span>
-                          </div>
-                          <div className="font-bold text-primary mb-2">{locale === 'fi' ? 'Eeva (40, Säännöllinen käyttäjä)' : locale === 'ar' ? 'إيفا (40، مستخدم منتظم)' : 'Eeva (40, Regular User)'}</div>
-                          <p className="opacity-80 text-sm">{locale === 'fi' ? 'Sovellus tuottaa 20-40% tuloista. Suunnittelee työt etukäteen, erittäin luotettava, ei toimialapreferenssiä.' : locale === 'ar' ? 'يعتمد على التطبيق لتوفير 20-40٪ من الدخل. يخطط للعمل مسبقًا، يمكن الاعتماد عليه بشكل كبير، بدون تفضيل قطاع معين.' : 'Relies on app for 20–40% of income. Plans work in advance, highly dependable, no sector preference.'}</p>
+                          </div>                          <div className="font-bold text-primary mb-2">{locale === 'fi' ? 'Eeva (40, Säännöllinen käyttäjä)' : 'Eeva (40, Regular User)'}</div>
+                          <p className="opacity-80 text-sm">{locale === 'fi' ? 'Sovellus tuottaa 20-40% tuloista. Suunnittelee työt etukäteen, erittäin luotettava, ei toimialapreferenssiä.' : 'Relies on app for 20–40% of income. Plans work in advance, highly dependable, no sector preference.'}</p>
                         </div>
                       </div>
                     </div>
@@ -414,13 +356,12 @@ export default function JobSeekingClient({ locale: initialLocale }: Props) {
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-primary mb-2">{content.productRequirements}</h3>
-                      <ul className={`list-disc  opacity-80 space-y-2`}>
-                        <li>{locale === 'fi' ? 'Käyttäjäprofiilit: Rekisteröityminen, taidot, kokemus, saatavuus' : locale === 'ar' ? 'ملفات المستخدم: التسجيل، المهارات، الخبرة، التوفر' : 'User Profiles: Sign-up, skills, experience, availability'}</li>
-                        <li>{locale === 'fi' ? 'Työnhaku ja suodattimet: Sijainti, palkka, toimiala, tallennetut suodattimet' : locale === 'ar' ? 'البحث عن وظائف والتصفية: الموقع، الأجر، الصناعة، عوامل التصفية المحفوظة' : 'Job Search & Filters: Location, pay, industry, saved filters'}</li>
-                        <li>{locale === 'fi' ? 'Ilmoitukset: Uudet ilmoitukset, määräajat, haastattelut' : locale === 'ar' ? 'الإشعارات: القوائم الجديدة، المواعيد النهائية، المقابلات' : 'Notifications: New listings, deadlines, interviews'}</li>
-                        <li>{locale === 'fi' ? 'Viestintä: Sovelluksen sisäinen keskustelu työnantajan/työnhakijan välillä' : locale === 'ar' ? 'المراسلة: دردشة داخل التطبيق للتفاعل بين صاحب العمل والباحث عن عمل' : 'Messaging: In-app chat for employer/job seeker interaction'}</li>
-                        <li>{locale === 'fi' ? 'Suositukset: Räätälöidyt työehdotukset' : locale === 'ar' ? 'التوصيات: اقتراحات وظيفية مخصصة' : 'Recommendations: Tailored job suggestions'}</li>
-                        <li>{locale === 'fi' ? 'Analytiikka: Hakemustilastot ja työnhakutiedot' : locale === 'ar' ? 'التحليلات: إحصائيات التقديم ورؤى البحث عن وظائف' : 'Analytics: Application stats and job search insights'}</li>
+                      <ul className={`list-disc  opacity-80 space-y-2`}>                        <li>{locale === 'fi' ? 'Käyttäjäprofiilit: Rekisteröityminen, taidot, kokemus, saatavuus' : 'User Profiles: Sign-up, skills, experience, availability'}</li>
+                        <li>{locale === 'fi' ? 'Työnhaku ja suodattimet: Sijainti, palkka, toimiala, tallennetut suodattimet' : 'Job Search & Filters: Location, pay, industry, saved filters'}</li>
+                        <li>{locale === 'fi' ? 'Ilmoitukset: Uudet ilmoitukset, määräajat, haastattelut' : 'Notifications: New listings, deadlines, interviews'}</li>
+                        <li>{locale === 'fi' ? 'Viestintä: Sovelluksen sisäinen keskustelu työnantajan/työnhakijan välillä' : 'Messaging: In-app chat for employer/job seeker interaction'}</li>
+                        <li>{locale === 'fi' ? 'Suositukset: Räätälöidyt työehdotukset' : 'Recommendations: Tailored job suggestions'}</li>
+                        <li>{locale === 'fi' ? 'Analytiikka: Hakemustilastot ja työnhakutiedot' : 'Analytics: Application stats and job search insights'}</li>
                       </ul>
                     </div>
                   </div>

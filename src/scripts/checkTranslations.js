@@ -24,9 +24,8 @@ function compareFolderWithGenerated() {
     console.error('Could not read generated translations file');
     return;
   }
-  
-  // Check each language
-  const languages = ['en', 'fi', 'ar'];
+    // Check each language
+  const languages = ['en', 'fi'];
   languages.forEach(lang => {
     const localePath = path.join(localesDir, lang, 'common.json');
     const localeData = readJsonFile(localePath);
@@ -67,9 +66,8 @@ function compareFolderWithGenerated() {
 function updateGeneratedTranslations() {
   const localesDir = path.join(process.cwd(), 'src', 'locales');
   const outputPath = path.join(process.cwd(), 'src', 'translations', 'generatedTranslations.json');
-  
-  // Load all JSON files
-  const languages = ['en', 'fi', 'ar'];
+    // Load all JSON files
+  const languages = ['en', 'fi'];
   const translations = {};
   
   // Load each language's translations

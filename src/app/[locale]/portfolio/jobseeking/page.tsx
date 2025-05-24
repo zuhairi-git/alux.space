@@ -12,8 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  const localizedMetadata = {
+    const localizedMetadata = {
     en: {
       title: 'Job Seeking Application Case Study | Portfolio',
       description: 'A mobile app designed to streamline job searches—especially for local, part-time, and weekend work.',
@@ -21,10 +20,6 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     fi: {
       title: 'Työnhakusovelluksen tapaustutkimus | Portfolio',
       description: 'Mobiilisovellus, joka on suunniteltu helpottamaan työnhakua—erityisesti paikallisia, osa-aikaisia ja viikonlopputöitä.',
-    },
-    ar: {
-      title: 'دراسة حالة تطبيق البحث عن وظائف | المشاريع',
-      description: 'تطبيق محمول مصمم لتبسيط البحث عن الوظائف - خاصة للعمل المحلي وبدوام جزئي وعطلة نهاية الأسبوع.',
     }
   };
   

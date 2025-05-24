@@ -14,8 +14,7 @@ const ogImage = `${baseUrl}/images/blog/blog-cover.jpg`;
 export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const url = `${baseUrl}/${locale}/blog`;
-  
-  const localizedMetadata = {
+    const localizedMetadata = {
     en: {
       title: 'Blog & Insights | Ali Al-Zuhairi',
       description: 'Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology.',
@@ -23,10 +22,6 @@ export async function generateMetadata({ params }: { params: { locale?: string }
     fi: {
       title: 'Blogi & Näkemykset | Ali Al-Zuhairi',
       description: 'Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan.',
-    },
-    ar: {
-      title: 'المدونة والرؤى | علي الزهيري',
-      description: 'أفكار وتعلم ووجهات نظر حول قيادة التصميم، وإدارة المنتجات، وتقاطع الإبداع والتكنولوجيا.',
     }
   };
   

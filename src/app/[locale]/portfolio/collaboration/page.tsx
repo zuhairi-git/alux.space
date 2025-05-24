@@ -12,8 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  const localizedMetadata = {
+    const localizedMetadata = {
     en: {
       title: 'Collaboration Workflow Platform Case Study | Portfolio',
       description: 'A case study on building a platform for seamless team collaboration, improving communication, and content delivery across devices and time zones.',
@@ -21,10 +20,6 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     fi: {
       title: 'Yhteistyön työnkulkualustan tapaustutkimus | Portfolio',
       description: 'Tapaustutkimus alustasta saumattomaan tiimityöskentelyyn, viestinnän parantamiseen ja sisällön toimittamiseen eri laitteilla ja aikavyöhykkeillä.',
-    },
-    ar: {
-      title: 'دراسة حالة منصة سير عمل التعاون | المشاريع',
-      description: 'دراسة حالة حول بناء منصة للتعاون السلس بين الفرق، وتحسين التواصل، وتسليم المحتوى عبر الأجهزة والمناطق الزمنية.',
     }
   };
   
