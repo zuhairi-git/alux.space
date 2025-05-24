@@ -25,7 +25,6 @@ const homeDropdownItems = [
   { href: '/#digital-dreams', text: 'Digital Dreams', type: 'section', icon: 'auto_awesome' },
   { href: '/#strengths-skills', text: 'Strengths & Skills', type: 'section', icon: 'psychology' },
   { href: '/#testimonials', text: 'Testimonials', type: 'section', icon: 'format_quote' },
-  { href: '/coming-soon', text: 'Coming Soon', type: 'overview', icon: 'rocket_launch' },
 ];
 
 const Navigation = () => {

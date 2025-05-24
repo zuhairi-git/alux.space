@@ -4,10 +4,10 @@
     "portfolio": "Portfolio",
     "blog": "Blog",
     "prompts": "Prompts"
-  },
-  "portfolio": {
+  },  "portfolio": {
     "overview": "All Projects",
     "cases": {
+      "accessibility": "Accessibility Portfolio",
       "collaboration": "Collaboration & Leadership",
       "jobseeking": "Job Seeking"
     }
