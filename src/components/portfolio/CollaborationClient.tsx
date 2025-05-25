@@ -151,13 +151,39 @@ export default function CollaborationClient() {
       value: 85 
     }
   ];
-
   return (
-    <main className={`min-h-screen bg-theme text-theme `}>
-      <Navigation />
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'colorful' 
+        ? 'bg-[#050023]' 
+        : isLight 
+          ? 'bg-gradient-to-br from-slate-50 to-gray-100' 
+          : 'bg-gradient-to-br from-gray-900 to-black'
+    }`}>
+      <Navigation /><article className="pt-24 pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Hero Section */}
+          <motion.div 
+            className="text-center mb-16"
+            {...fadeInUp}
+          >
+            <div className="mb-8">
+              <div className="relative w-full h-96 mb-8 rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/portfolio/collaboration/cover.jpg"
+                  alt={content.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-8 left-8 text-white">
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4">{content.title}</h1>
+                  <p className="text-xl opacity-90 max-w-2xl">{content.intro}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
-      <article className="pt-24 pb-16">
-        <div className="container mx-auto px-4">
           <motion.div 
             initial="initial"
             animate="animate"
@@ -165,63 +191,85 @@ export default function CollaborationClient() {
               initial: { opacity: 0 },
               animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
             }}
-            className={`max-w-4xl `}
+          >          {/* Project Details Grid */}
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Hero Image */}
-            <motion.div 
-              variants={fadeInUp}
-              className="relative w-full h-[400px] mb-12 rounded-2xl overflow-hidden"
-            >
-              <Image
-                src="/images/portfolio/collaboration/cover.jpg"
-                alt={content.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </motion.div>
-
-            {/* Header Section */}
-            <motion.h1 
-              variants={fadeInUp}
-              className={`text-5xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}
-            >
-              {content.title}
-            </motion.h1>
-
-            <motion.div variants={fadeInUp} className="mb-12">
-              <p className="text-xl opacity-80 leading-relaxed">
-                {content.intro}
-              </p>
-            </motion.div>
-
-            {/* Project Overview */}
-            <motion.section variants={fadeInUp} className="mb-16">
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 `}>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary">{content.projectType}</h3>
-                    <p className="opacity-80">{content.projectTypeValues}</p>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary">{content.timeline}</h3>
-                    <p className="opacity-80">{content.timelineValue}</p>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary">{content.tools}</h3>
-                    <p className="opacity-80">{content.toolsValue}</p>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-primary mb-4">{content.roles}</h3>
-                  <ul className={`list-disc  opacity-80 space-y-2`}>
-                    {roles.map((role, index) => (
-                      <li key={index}>{role}</li>
-                    ))}
-                  </ul>
-                </div>
+            <div className={`p-6 rounded-xl ${
+              theme === 'colorful' 
+                ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                theme === 'colorful' 
+                  ? 'text-cyan-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.projectType}</h3>
+              <p className={`text-sm ${
+                theme === 'colorful' 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.projectTypeValues}</p>
+            </div>
+            
+            <div className={`p-6 rounded-xl ${
+              theme === 'colorful' 
+                ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                theme === 'colorful' 
+                  ? 'text-purple-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.timeline}</h3>
+              <p className={`text-sm ${
+                theme === 'colorful' 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.timelineValue}</p>
+            </div>
+            
+            <div className={`p-6 rounded-xl ${
+              theme === 'colorful' 
+                ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                theme === 'colorful' 
+                  ? 'text-blue-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.tools}</h3>
+              <p className={`text-sm ${
+                theme === 'colorful' 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>{content.toolsValue}</p>
+            </div>
+            
+            <div className={`p-6 rounded-xl ${
+              theme === 'colorful' 
+                ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg' 
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+            }`}>
+              <h3 className={`font-semibold mb-2 ${
+                theme === 'colorful' 
+                  ? 'text-fuchsia-300' 
+                  : isLight ? 'text-gray-900' : 'text-white'
+              }`}>{content.roles}</h3>
+              <div className={`text-sm ${
+                theme === 'colorful' 
+                  ? 'text-gray-300' 
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>
+                {roles.map((role, index) => (
+                  <div key={index}>{role}</div>
+                ))}
               </div>
-            </motion.section>
+            </div>
+          </motion.div>
 
             {/* Objectives */}
             <motion.section variants={fadeInUp} className="mb-16">
@@ -621,6 +669,6 @@ export default function CollaborationClient() {
           </motion.div>
         </div>
       </article>
-    </main>
+    </div>
   );
 }
