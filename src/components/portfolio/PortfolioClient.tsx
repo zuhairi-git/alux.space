@@ -22,6 +22,11 @@ interface PortfolioItem {
   };
   link: string;
   gradient: string;
+  status: {
+    en: string;
+    fi?: string;
+    type: 'in-progress' | 'accomplished';
+  };
   tags?: string[];
   date?: string;
   photo?: {

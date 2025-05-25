@@ -22,6 +22,11 @@ interface PortfolioCardProps {
     };
     link: string;
     gradient: string;
+    status: {
+      en: string;
+      fi?: string;
+      type: 'in-progress' | 'accomplished';
+    };
     tags?: string[];
     date?: string;
     photo?: {
@@ -48,9 +53,22 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   const getType = (): string => {
     return item.type[locale as keyof typeof item.type] || item.type.en;
   };
-  
-  const getDesc = (): string => {
+    const getDesc = (): string => {
     return item.desc[locale as keyof typeof item.desc] || item.desc.en;
+  };
+  
+  const getStatus = (): string => {
+    return item.status[locale as keyof typeof item.status] || item.status.en;
+  };
+    const getStatusClasses = (): string => {
+    switch (item.status.type) {
+      case 'in-progress':
+        return 'px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 whitespace-nowrap';
+      case 'accomplished':
+        return 'px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-300 whitespace-nowrap';
+      default:
+        return 'px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/20 text-gray-300 whitespace-nowrap';
+    }
   };
   
   // Create localized URL
@@ -122,11 +140,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
-          </div>
-          
-          <Link href={cardLink} className="block h-full">
+          </div>          <Link href={cardLink} className="block h-full">
             <div className="relative h-full flex flex-col justify-end p-6 z-10">
-              {/* Badge */}
+              {/* Project Type Badge - Top Right */}
               <div className="absolute top-3 right-3">
                 <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${gradientClasses} text-white shadow-md`}>
                   {getType()}
@@ -145,17 +161,26 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   <p className="text-white/80 text-sm line-clamp-3">{getDesc()}</p>
                 </div>
               </div>
-              
-              {/* Tags */}
-              {cardTags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {cardTags.map((tag, idx) => (
-                    <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/20 text-white font-medium">
-                      {tag}
-                    </span>
-                  ))}
+                {/* Footer with Tags and Status */}
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                {/* Tags */}
+                {cardTags.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {cardTags.map((tag, idx) => (
+                      <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/20 text-white font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Status Badge - Aligned Right */}
+                <div className="flex-shrink-0 ml-auto">
+                  <span className={getStatusClasses()}>
+                    {getStatus()}
+                  </span>
                 </div>
-              )}
+              </div>
               
               {/* Date */}
               {item.date && (
@@ -204,9 +229,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </motion.div>
-            </div>
-            
-            {/* Display project type as a badge */}
+            </div>            {/* Display project type as badge */}
             <div className="absolute top-3 right-3 z-10">
               <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${gradientClasses} text-white shadow-md`}>
                 {getType()}
@@ -227,21 +250,30 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 <div className="opacity-80 text-sm line-clamp-2">{getDesc()}</div>
               </div>
             </div>
-            
-            {/* Tags Section */}
-            {cardTags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2 mb-4">
-                {cardTags.map((tag, idx) => (
-                  <span key={idx} className="px-3 py-1 rounded-full text-xs bg-primary/10 text-primary font-medium">
-                    {tag}
-                  </span>
-                ))}
+              {/* Footer with Tags and Status */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-auto">
+              {/* Tags */}
+              {cardTags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {cardTags.map((tag, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-full text-xs bg-primary/10 text-primary font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
+              {/* Status Badge - Aligned Right */}
+              <div className="flex-shrink-0 ml-auto">
+                <span className={getStatusClasses()}>
+                  {getStatus()}
+                </span>
               </div>
-            )}
+            </div>
             
             {/* Date if available */}
             {item.date && (
-              <div className="text-xs mt-auto pt-4 flex items-center gap-1 border-t border-current/10">
+              <div className="text-xs mt-4 pt-4 flex items-center gap-1 border-t border-current/10">
                 <span className="material-symbols text-sm text-primary">schedule</span>
                 <span className="opacity-80">{item.date}</span>
               </div>

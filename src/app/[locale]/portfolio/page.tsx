@@ -25,6 +25,11 @@ interface PortfolioItem {
   };
   link: string;
   gradient: string;
+  status: {
+    en: string;
+    fi?: string;
+    type: 'in-progress' | 'accomplished';
+  };
   photo?: {
     url: string;
     author?: {
@@ -65,8 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-    const portfolioItems: PortfolioItem[] = [    {
+  const { locale } = await params;    const portfolioItems: PortfolioItem[] = [    {
       title: {
         en: 'Inclusive Design System',
         fi: 'Inklusiivinen suunnittelujärjestelmä'
@@ -80,6 +84,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Saavutettavien suunnittelujärjestelmien rakentaminen alusta alkaen—tutkimuspohjainen lähestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
       },      link: `/${locale}/portfolio/accessibility`,
       gradient: 'from-indigo-400 to-purple-500',
+      status: {
+        en: 'In Progress',
+        fi: 'Kehitteillä',
+        type: 'in-progress'
+      },
       photo: {
         url: '/images/portfolio/accessibility/accessiblity-showcase.jpg'
       }
@@ -99,6 +108,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       link: `/${locale}/portfolio/collaboration`,
       gradient: 'from-blue-400 to-purple-500',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
       photo: {
         url: '/images/portfolio/collaboration/cover.jpg'
       }
@@ -118,6 +132,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       link: `/${locale}/portfolio/jobseeking`,
       gradient: 'from-purple-400 to-pink-500',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpg'
       }
