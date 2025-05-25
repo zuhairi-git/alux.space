@@ -25,9 +25,10 @@ const nextConfig = {
   },  env: {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
     NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
-  },
-  // Using standard server-side rendering for now to get internationalization working
-  // We can switch to 'export' mode once we resolve the static generation issues  output: 'export',
+  },  // Using static export mode for deployment
+  output: 'export',
+  trailingSlash: true,
+  distDir: 'out',
   // Enable TypeScript type checking during build
   typescript: {
     ignoreBuildErrors: false,
