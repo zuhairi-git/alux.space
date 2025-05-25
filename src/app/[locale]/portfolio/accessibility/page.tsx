@@ -10,8 +10,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     const localizedMetadata = {
     en: {
@@ -61,13 +61,12 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default function AccessibilityPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
-  
-  return (
+export default async function AccessibilityPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+    return (
     <ThemeProvider>
       <LanguageProvider initialLocale={locale}>
-        <AccessibilityClient locale={locale} />
+        <AccessibilityClient />
       </LanguageProvider>
     </ThemeProvider>
   );

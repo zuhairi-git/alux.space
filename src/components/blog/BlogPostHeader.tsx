@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import AudioPlayer from '../ui/AudioPlayer';
-import { useTranslations } from '@/utils/translations';
 
 interface BlogPostHeaderProps {
   title: string;
@@ -29,10 +28,8 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   tags,
   image,
   slug,
-}) => {
-  const { theme } = useTheme();
+}) => {  const { theme } = useTheme();
   const { locale } = useLanguage();
-  const { t } = useTranslations(locale);
   const isLight = theme === 'light';
   // Get localized strings for UI elements
   const getBackToBlogText = (): string => {

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { PodcastEpisode, SupportedLanguage } from '../types/podcast';
-import { filterEpisodesByLanguage, getAvailableLanguages, getEpisodeDisplayLanguage, shouldShowLanguageBadge } from '../utils/languageUtils';
+import { filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge } from '../utils/languageUtils';
 import LanguageBadge from './LanguageBadge';
 
 interface EpisodeListProps {
@@ -82,13 +82,11 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
   };
 
   return (
-    <div className={`space-y-3 ${className}`}>
-      <h3 className={`text-lg font-semibold mb-4 ${getTextStyle()}`}>
+    <div className={`space-y-3 ${className}`}>      <h3 className={`text-lg font-semibold mb-4 ${getTextStyle()}`}>
         Episodes
       </h3>
         {filteredEpisodes.map((episode, index) => {
         const isSelected = episode.id === currentEpisodeId;
-        const availableLanguages = getAvailableLanguages(episode);
         const displayLanguage = getEpisodeDisplayLanguage(episode, currentLanguage);
         const showLanguageBadge = shouldShowLanguageBadge(episode, currentLanguage);
 

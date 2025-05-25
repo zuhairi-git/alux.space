@@ -11,9 +11,8 @@ export function generateStaticParams() {
   return i18n.locales.map(locale => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const locale = params.locale || i18n.defaultLocale;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   
   const localizedMetadata = {
     en: {
@@ -33,8 +32,8 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default function LocalizedHomePage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default async function LocalizedHomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   
   return (
     <>

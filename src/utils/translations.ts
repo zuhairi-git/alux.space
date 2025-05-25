@@ -2,14 +2,12 @@ import { loadExcelTranslations, getExcelTranslation } from './excelTranslations'
 import generatedTranslations from '../translations/generatedTranslations.json';
 import { useEffect } from 'react';
 
-// Define a more flexible interface for translations to accommodate various formats
-interface TranslationValue {
-  [key: string]: string | number | null | undefined | TranslationValue;
-}
+// Define types (matching those in excelTranslations.ts)
+type TranslationValue = string | number | boolean | null | TranslationObject;
+type TranslationObject = { [key: string]: TranslationValue };
 
 // Load translations directly from the JSON file for immediate availability
-// Use type assertion to avoid TypeScript errors with JSON format
-let translations: Record<string, any> = generatedTranslations;
+let translations: Record<string, TranslationObject> = generatedTranslations as Record<string, TranslationObject>;
 
 // Flag to track if in development mode for more detailed logging
 const isDev = process.env.NODE_ENV === 'development';
@@ -31,8 +29,7 @@ export async function initTranslations(): Promise<void> {
           translations = freshTranslations;
           console.log('Loaded fresh translations from API');
           return;
-        }
-      } catch (fetchErr) {
+        }      } catch {
         console.warn('Could not fetch fresh translations, using cached ones');
       }
     }

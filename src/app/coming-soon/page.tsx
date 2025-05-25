@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
+import { motion } from 'framer-motion';
 import ThemeSwitch from '@/components/ThemeSwitch';
 
 export default function ComingSoonPage() {
-  const { theme } = useTheme();
   const [typedText, setTypedText] = useState('');
   const fullText = 'Something amazing is coming soon';
   const [typingComplete, setTypingComplete] = useState(false);
@@ -71,7 +69,7 @@ export default function ComingSoonPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          We're working hard to bring you something extraordinary. Stay tuned!
+          We&apos;re working hard to bring you something extraordinary. Stay tuned!
         </motion.p>
       </motion.div>
         <div className="background-elements">

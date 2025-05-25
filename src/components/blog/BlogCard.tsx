@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'next-share';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 
 interface BlogCardProps {
@@ -22,53 +21,8 @@ interface BlogCardProps {
   viewMode?: 'standard' | 'overlay';
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post, index, viewMode = 'standard' }) => {
-  const { theme } = useTheme();
+const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
-  const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
-  const slideDirection = index % 2 === 0 ? 'left' : 'right';
-
-  // Get theme-specific styles
-  const getThemeStyles = () => {
-    switch (theme) {
-      case 'light':
-        return {
-          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-purple-500/10 hover:shadow-blue-300/30',
-          text: 'text-neutral-800',
-          primaryText: 'text-blue-500',
-          tag: 'bg-blue-500/10 text-blue-600',
-          date: 'text-neutral-500',
-        };
-      case 'dark':
-        return {
-          card: 'bg-neutral-800/90 border border-neutral-700/50 hover:border-blue-300/50 shadow-blue-500/20 hover:shadow-blue-500/30',
-          text: 'text-neutral-100',
-          primaryText: 'text-blue-400',
-          tag: 'bg-blue-500/20 text-blue-400',
-          date: 'text-neutral-400',
-        };
-      case 'colorful':
-        return {
-          card: 'bg-indigo-950/80 border border-purple-500/30 hover:border-cyan-400/60 shadow-fuchsia-500/30 hover:shadow-cyan-500/30',
-          text: 'text-blue-50',
-          primaryText: 'text-fuchsia-400',
-          tag: 'bg-fuchsia-500/20 text-fuchsia-300',
-          date: 'text-blue-200',
-        };
-      default:
-        return {
-          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-purple-500/10 hover:shadow-blue-300/30',
-          text: 'text-neutral-800',
-          primaryText: 'text-blue-500',
-          tag: 'bg-blue-500/10 text-blue-600',
-          date: 'text-neutral-500',
-        };
-    }
-  };
-
-  const styles = getThemeStyles();
-
   // Create localized blog post URL
   const localizedPostUrl = `/${locale}/blog/${post.slug}`;
 

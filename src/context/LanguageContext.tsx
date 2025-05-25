@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '../i18n';
 import { initTranslations } from '@/utils/translations';
@@ -32,9 +32,8 @@ interface LanguageProviderProps {
 export const LanguageProvider = ({ children, initialLocale }: LanguageProviderProps) => {
   const pathname = usePathname();
   const router = useRouter();
-  
-  // Detect locale from URL or use initialLocale or localStorage
-  const detectLocale = (): string => {
+    // Detect locale from URL or use initialLocale or localStorage
+  const detectLocale = useCallback((): string => {
     if (initialLocale && i18n.locales.includes(initialLocale)) {
       return initialLocale;
     }
@@ -55,10 +54,9 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
     }
     
     return defaultLanguage;
-  };
+  }, [initialLocale, pathname]);
   const [locale, setLocaleState] = useState(defaultLanguage);
-  
-  useEffect(() => {
+    useEffect(() => {
     const detectedLocale = detectLocale();
     setLocaleState(detectedLocale);
     
@@ -67,7 +65,7 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
     initTranslations().catch(err => {
       console.error('Failed to initialize translations:', err);
     });
-  }, [pathname]);
+  }, [pathname, detectLocale]);
   
   useEffect(() => {
     // Set document language

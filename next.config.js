@@ -27,13 +27,14 @@ const nextConfig = {
     NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
   },
   // Using standard server-side rendering for now to get internationalization working
-  // We can switch to 'export' mode once we resolve the static generation issues
-  output: 'export',
+  // We can switch to 'export' mode once we resolve the static generation issues  output: 'export',
+  // Enable TypeScript type checking during build
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
+  // Enable ESLint checking during build
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
 };
 

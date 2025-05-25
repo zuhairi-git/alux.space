@@ -2,10 +2,8 @@
 
 import React from 'react';
 import MediaCard from '@/components/ui/MediaCard';
-import { useTheme } from '@/context/ThemeContext';
 
 const MediaCardsShowcase = () => {
-  const { theme } = useTheme();
   
   // Sample data for the cards
   const cardData = [

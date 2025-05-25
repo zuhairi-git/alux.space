@@ -29,8 +29,8 @@ export function generateStaticParams() {
   return staticParams;
 }
 
-export async function generateMetadata({ params }: { params: { slug: string; locale: string } }): Promise<Metadata> {
-  const { slug, locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
+  const { slug, locale } = await params;
   const post = posts.find((p) => p.slug === slug);
   
   if (!post) {
@@ -65,13 +65,13 @@ export async function generateMetadata({ params }: { params: { slug: string; loc
 }
 
 // Using the exact function signature expected by Next.js for pages
-export default function BlogPost({ 
+export default async function BlogPost({ 
   params,
 }: {
-  params: { slug: string; locale: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string; locale: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { slug, locale } = params;
+  const { slug, locale } = await params;
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) {

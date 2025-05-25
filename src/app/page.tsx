@@ -3,8 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
-import Card from '@/components/Card';
-import CardContent from '@/components/CardContent';
+// Card components removed as they're not used in this file
 import Hero from '@/components/hero/Hero';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import { HeroConfig } from '@/types/hero';
@@ -54,18 +53,14 @@ export default function Home() {
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
-  
-  // State to track scroll position and mouse position for parallax effects
+    // State to track scroll position for parallax effects
   const [scrollY, setScrollY] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
-  // Refs for section tracking
+  // Mouse position state removed as it's not used
+    // Refs for section tracking
   const workExperienceRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
     // Track scroll position for animations
   useEffect(() => {
-    // Mouse tracking removed to eliminate hover effects
-    
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -252,33 +247,30 @@ export default function Home() {
     <main className="min-h-screen bg-theme">
       {/* Background effect for colorful theme */}
       {theme === 'colorful' && (
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div 
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">          <div 
             className="absolute top-[30%] right-[10%] opacity-20 w-96 h-96 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
             style={{ 
-              transform: `translateY(${scrollY * 0.2}px) translateX(${mousePos.x * 40}px)`,
+              transform: `translateY(${scrollY * 0.2}px)`,
               transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
             }}
           />
           <div 
             className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
             style={{ 
-              transform: `translateY(${scrollY * -0.15}px) translateX(${mousePos.x * -40}px)`,
+              transform: `translateY(${scrollY * -0.15}px)`,
               transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
             }}
           />
         </div>
       )}
       <Navigation />
-      <Hero config={heroConfig} />
-        {/* Work Experience Section - New Timeline Cards */}
-      <AnimatedSection 
-        ref={workExperienceRef}
-        id="work-experience"
-        className="py-20 bg-black/5 relative overflow-hidden"
-        animation="fade-in"
-        duration={0.8}
-      >
+      <Hero config={heroConfig} />      {/* Work Experience Section - New Timeline Cards */}
+      <div ref={workExperienceRef} id="work-experience">
+        <AnimatedSection 
+          className="py-20 bg-black/5 relative overflow-hidden"
+          animation="fade-in"
+          duration={0.8}
+        >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
         
@@ -345,9 +337,8 @@ export default function Home() {
               const isEven = index % 2 === 0;
               
               // For regular positions
-              if (!position.positions) {
-                // Determine which icon to use based on position
-                let IconComponent = isFirst ? RocketLaunchIcon : (index % 2 === 0 ? GridViewIcon : InsightsIcon);
+              if (!position.positions) {                // Determine which icon to use based on position
+                const IconComponent = isFirst ? RocketLaunchIcon : (index % 2 === 0 ? GridViewIcon : InsightsIcon);
                 
                 return (
                   <div className="relative mb-24" key={index}>                    {/* Timeline dot with pulsing effect */}
@@ -446,10 +437,8 @@ export default function Home() {
                       </AnimatedSection>
                     </div>
                       {/* Map each early position as a vertical timeline item */}
-                    {position.positions.map((subPosition, subIndex) => {
-                      // First card appears on the right side (odd), the rest follow alternating pattern
+                    {position.positions.map((subPosition, subIndex) => {                      // First card appears on the right side (odd), the rest follow alternating pattern
                       const isEvenSub = (subIndex + 1) % 2 === 0;
-                      const isLastSub = subIndex === position.positions.length - 1;
                       
                       return (
                         <div className="relative mb-24" key={`early-${subIndex}`}>
@@ -497,11 +486,12 @@ export default function Home() {
                   </React.Fragment>
                 );
               }
-            })}
-          </div>
+            })}          </div>
         </div>
       </AnimatedSection>
-        {/* About Section with Digital Dreams anchor */}
+      </div>
+
+      {/* About Section with Digital Dreams anchor */}
       <motion.section
         ref={aboutRef}
         initial={{ opacity: 0 }}

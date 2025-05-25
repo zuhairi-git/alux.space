@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
@@ -32,8 +32,6 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
   
   // Split title into words for staggered animation
   const words = title ? title.split(' ') : [];
-    // Mouse-based 3D effect removed
-  const mousePosition = { x: 0, y: 0 }; // Set to fixed values to prevent any mouse-over effects
   
   return (
     <motion.div 

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import ComingSoonPage from '@/app/coming-soon/page';
 
 export default function ComingSoonDesignPage() {
   return (
@@ -9,7 +8,7 @@ export default function ComingSoonDesignPage() {
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-2">Coming Soon Page</h2>
         <p className="text-neutral-600 dark:text-neutral-400">
-          A responsive and animated "Coming Soon" page with theme support (light, dark, colorful).
+          A responsive and animated &ldquo;Coming Soon&rdquo; page with theme support (light, dark, colorful).
         </p>
       </div>
       

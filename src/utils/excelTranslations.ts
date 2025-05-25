@@ -17,21 +17,19 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
     if (typeof window !== 'undefined') {
       return translations;
     }
-    
-    // In Node.js environment, we can try to load from actual JSON files for fresher content
+      // In Node.js environment, we can try to load from actual JSON files for fresher content
     try {
-      const fs = require('fs');
-      const path = require('path');
-      const localesDir = path.join(process.cwd(), 'src', 'locales');
+      const fs = await import('fs');
+      const path = await import('path');      const localesDir = path.default.join(process.cwd(), 'src', 'locales');
       
       // Load each language
       const languages = ['en', 'fi'];
       const updatedTranslations: Record<string, TranslationObject> = {};
       
       languages.forEach(lang => {
-        const filePath = path.join(localesDir, lang, 'common.json');
-        if (fs.existsSync(filePath)) {
-          const content = fs.readFileSync(filePath, 'utf8');
+        const filePath = path.default.join(localesDir, lang, 'common.json');
+        if (fs.default.existsSync(filePath)) {
+          const content = fs.default.readFileSync(filePath, 'utf8');
           updatedTranslations[lang] = JSON.parse(content);
         } else {
           updatedTranslations[lang] = translations[lang] || {};
@@ -44,8 +42,7 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
         result[lang] = { ...result[lang], ...updatedTranslations[lang] };
       });
       
-      return result;
-    } catch (fsError) {
+      return result;    } catch {
       // If we can't load from filesystem, use the imported translations
       console.warn('Could not load translations from filesystem, using pre-generated translations');
       return translations;
@@ -63,12 +60,12 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
 /**
  * Get a translation value by traversing the nested keys
  */
-function getNestedTranslation(obj: any, keys: string[]): string | null {
-  let current = obj;
+function getNestedTranslation(obj: Record<string, unknown>, keys: string[]): string | null {
+  let current: unknown = obj;
   
   for (const k of keys) {
-    if (current && typeof current === 'object' && k in current) {
-      current = current[k];
+    if (current && typeof current === 'object' && current !== null && k in current) {
+      current = (current as Record<string, unknown>)[k];
     } else {
       return null; // Key not found at some level
     }

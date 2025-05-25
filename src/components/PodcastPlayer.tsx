@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { podcastEpisodes } from '@/data/podcasts';
-import { PodcastEpisode, SupportedLanguage } from '@/podcast/types/podcast';
+import { SupportedLanguage } from '@/podcast/types/podcast';
 import { getAudioFileForLanguage, setMediaSessionMetadata, filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge } from '@/podcast/utils/languageUtils';
 import EpisodeList from '@/podcast/components/EpisodeList';
 import LanguageBadge from '@/podcast/components/LanguageBadge';
@@ -69,7 +69,34 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     } else {
       return 'from-blue-500 to-purple-500';
     }
-  };  // Audio functions
+  };  // Audio control functions
+  const togglePlay = useCallback(() => {
+    if (!audioRef.current) return;
+    
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(error => {
+          console.error('Error playing audio:', error);
+        });
+    }
+  }, [isPlaying]);
+  
+  const stopAudio = useCallback(() => {
+    if (!audioRef.current) return;
+    
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    setIsPlaying(false);
+    setCurrentTime(0);
+  }, []);
+
+  // Audio functions
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !currentEpisode) return;
@@ -84,7 +111,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     audio.load();
     
     // Set media session metadata for mobile players
-    setMediaSessionMetadata(currentEpisode, currentLanguage);
+    setMediaSessionMetadata(currentEpisode);
     
     const handleLoadedData = () => {
       setDuration(audio.duration || 0);
@@ -107,13 +134,15 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     audio.addEventListener('loadeddata', handleLoadedData);
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('error', handleError);
-    audio.addEventListener('ended', handleEnded);    return () => {
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
       audio.removeEventListener('loadeddata', handleLoadedData);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('error', handleError);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [currentEpisodeId, currentLanguage, currentAudioFile]);
+  }, [currentEpisodeId, currentLanguage, currentAudioFile, currentEpisode]);
 
   // Set up media session action handlers for mobile
   useEffect(() => {
@@ -142,9 +171,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
         }
       });
     }
-  }, [isPlaying, duration]);
-  
-  const formatTime = (time: number) => {
+  }, [isPlaying, duration, togglePlay, stopAudio]);
+    const formatTime = (time: number) => {
     if (isNaN(time)) return '00:00';
     
     const minutes = Math.floor(time / 60);
@@ -153,33 +181,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
   
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-    
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(error => {
-          console.error('Error playing audio:', error);
-        });
-    }
-  };
-  
-  const stopAudio = () => {
-    if (!audioRef.current) return;
-    
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-    setIsPlaying(false);
-    setCurrentTime(0);
-  };
-  
-  const changePlaybackRate = () => {
+  const changePlaybackRate = useCallback(() => {
     if (!audioRef.current) return;
     
     const rates = [1, 1.5, 2, 3];
@@ -188,17 +190,17 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     
     audioRef.current.playbackRate = newRate;
     setPlaybackRate(newRate);
-  };
+  }, [playbackRate]);
   
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSeek = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!audioRef.current) return;
     
     const newTime = parseFloat(e.target.value);
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
-  };
+  }, []);
   
-  const handleEpisodeSelect = (episodeId: string) => {
+  const handleEpisodeSelect = useCallback((episodeId: string) => {
     if (currentEpisodeId === episodeId && isPlaying) {
       // If clicking the current playing episode, pause it
       togglePlay();
@@ -207,7 +209,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       stopAudio();
       setCurrentEpisodeId(episodeId);
     }
-  };
+  }, [currentEpisodeId, isPlaying, togglePlay, stopAudio]);
   
   // Calculate progress percentage for the progress bar
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0;

@@ -32,10 +32,8 @@ const MediaCard: React.FC<MediaCardProps> = ({
   description,
   imagePath,
   imageAlt,
-  link,
-  tags,
+  link,  tags,
   date,
-  icon,
   className = '',
   imageAttribution
 }) => {

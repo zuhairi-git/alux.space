@@ -5,14 +5,9 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
 import Navigation from '@/components/Navigation';
 
-interface Props {
-  locale?: string;
-}
-
-export default function AccessibilityClient({ locale: initialLocale }: Props) {
+export default function AccessibilityClient() {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -20,7 +15,6 @@ export default function AccessibilityClient({ locale: initialLocale }: Props) {
   };
   const { theme } = useTheme();
   const { locale } = useLanguage();
-  const { t } = useTranslations(locale);
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
 

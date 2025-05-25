@@ -6,8 +6,6 @@ import Navigation from '@/components/Navigation';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
-import { useTheme } from '@/context/ThemeContext';
-import { i18n } from '@/i18n';
 
 interface PortfolioItem {
   title: {
@@ -38,13 +36,11 @@ interface PortfolioItem {
 
 interface Props {
   items: PortfolioItem[];
-  locale: string;
 }
 
-export default function PortfolioClient({ items, locale: initialLocale }: Props) {
+export default function PortfolioClient({ items }: Props) {
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
-  const { theme } = useTheme();
   const [filter, setFilter] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'standard' | 'overlay'>('standard');
   

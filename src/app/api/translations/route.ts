@@ -10,11 +10,10 @@ import path from 'path';
  * This helps ensure we're using the latest translations, especially in development mode
  */
 export async function GET() {
-  try {
-    // Define paths and default translations object
+  try {    // Define paths and default translations object
     const localesDir = path.join(process.cwd(), 'src', 'locales');
     const generatedPath = path.join(process.cwd(), 'src', 'translations', 'generatedTranslations.json');
-    let translations: Record<string, any> = { en: {}, fi: {} };
+    let translations: Record<string, Record<string, unknown>> = { en: {}, fi: {} };
     
     // In production, return the static translations if possible
     if (process.env.NODE_ENV !== 'development') {
@@ -37,10 +36,9 @@ export async function GET() {
     }
     
     // Then try to load from actual JSON files for fresher content
-    try {
-      // Load each language
+    try {      // Load each language
       const languages = ['en', 'fi'];
-      const freshTranslations: Record<string, any> = {};
+      const freshTranslations: Record<string, Record<string, unknown>> = {};
       
       languages.forEach(lang => {
         const filePath = path.join(localesDir, lang, 'common.json');
@@ -54,10 +52,9 @@ export async function GET() {
       
       // Use the fresh translations
       translations = freshTranslations;
-      
-      // Also update the generatedTranslations.json file for future use
+        // Also update the generatedTranslations.json file for future use
       fs.writeFileSync(generatedPath, JSON.stringify(translations, null, 2), 'utf8');
-    } catch (fsError) {
+    } catch {
       console.warn('Could not load translations from filesystem, using pre-generated translations');
     }
     

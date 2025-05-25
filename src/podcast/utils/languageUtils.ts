@@ -122,7 +122,7 @@ export const shouldShowLanguageBadge = (
 /**
  * Set media session metadata for native mobile players
  */
-export const setMediaSessionMetadata = (episode: PodcastEpisode, language: SupportedLanguage) => {
+export const setMediaSessionMetadata = (episode: PodcastEpisode) => {
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: episode.title,

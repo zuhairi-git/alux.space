@@ -11,8 +11,9 @@ import { LanguageProvider } from '@/context/LanguageContext';
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 const ogImage = `${baseUrl}/images/blog/blog-cover.jpg`;
 
-export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
-  const locale = params.locale || i18n.defaultLocale;
+export async function generateMetadata({ params }: { params: Promise<{ locale?: string }> }): Promise<Metadata> {
+  const { locale: paramLocale } = await params;
+  const locale = paramLocale || i18n.defaultLocale;
   const url = `${baseUrl}/${locale}/blog`;
     const localizedMetadata = {
     en: {
@@ -67,14 +68,14 @@ export async function generateMetadata({ params }: { params: { locale?: string }
   };
 }
 
-export default function BlogPage({ params }: { params: { locale?: string } }) {
-  const locale = params.locale || i18n.defaultLocale;
+export default async function BlogPage({ params }: { params: Promise<{ locale?: string }> }) {
+  const { locale: paramLocale } = await params;
+  const locale = paramLocale || i18n.defaultLocale;
 
   return (
-    <ThemeProvider>
-      <LanguageProvider initialLocale={locale}>
+    <ThemeProvider>      <LanguageProvider initialLocale={locale}>
         <Navigation />
-        <ClientBlogPage posts={posts} locale={locale} />
+        <ClientBlogPage posts={posts} />
       </LanguageProvider>
     </ThemeProvider>
   );

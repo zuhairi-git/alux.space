@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
-import { useLanguage } from '@/context/LanguageContext';
 
 interface QuoteBlockProps {
   quote: string;
@@ -12,9 +11,7 @@ interface QuoteBlockProps {
 }
 
 const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
-  const { theme } = useTheme();
-  const { locale } = useLanguage();
-  const isLight = theme === 'light';
+  const { theme } = useTheme();  const isLight = theme === 'light';
   
   // Determine the appropriate variant based on content if not explicitly provided
   const determinedVariant = variant || determineVariant(quote);

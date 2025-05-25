@@ -35,8 +35,8 @@ interface PortfolioItem {
   };
 }
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const locale = params.locale || i18n.defaultLocale;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     const localizedMetadata = {
     en: {
@@ -64,8 +64,8 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default async function PortfolioPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
     const portfolioItems: PortfolioItem[] = [    {
       title: {
         en: 'Inclusive Design System',
@@ -176,9 +176,8 @@ export default async function PortfolioPage({ params }: { params: { locale: stri
   );
 
   return (
-    <ThemeProvider>
-      <LanguageProvider initialLocale={locale}>
-        <PortfolioClient items={itemsWithPhotos} locale={locale} />
+    <ThemeProvider>      <LanguageProvider initialLocale={locale}>
+        <PortfolioClient items={itemsWithPhotos} />
       </LanguageProvider>
     </ThemeProvider>
   );

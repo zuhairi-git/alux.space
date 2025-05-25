@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
 
 interface PortfolioCardProps {
   item: {
@@ -38,9 +37,8 @@ interface PortfolioCardProps {
   viewMode?: 'standard' | 'overlay';
 }
 
-const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, index, viewMode = 'standard' }) => {
+const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
-  const { t } = useTranslations(locale);
   
   // Helper functions to get localized content
   const getTitle = (): string => {

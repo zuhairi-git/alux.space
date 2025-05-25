@@ -3,13 +3,14 @@ import path from 'path';
 import fs from 'fs';
 
 // Helper function to flatten nested JSON objects into dot notation
-function flattenObject(obj: any, prefix = ''): Record<string, any> {
-  return Object.keys(obj).reduce((acc: Record<string, any>, k: string) => {
+function flattenObject(obj: Record<string, unknown>, prefix = ''): Record<string, string> {
+  return Object.keys(obj).reduce((acc: Record<string, string>, k: string) => {
     const pre = prefix.length ? `${prefix}.` : '';
-    if (typeof obj[k] === 'object' && obj[k] !== null && !Array.isArray(obj[k])) {
-      Object.assign(acc, flattenObject(obj[k], `${pre}${k}`));
+    const value = obj[k];
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      Object.assign(acc, flattenObject(value as Record<string, unknown>, `${pre}${k}`));
     } else {
-      acc[`${pre}${k}`] = obj[k];
+      acc[`${pre}${k}`] = String(value);
     }
     return acc;
   }, {});
@@ -27,24 +28,22 @@ export async function convertJsonToExcel(): Promise<string> {
     if (!fs.existsSync(excelDir)) {
       fs.mkdirSync(excelDir, { recursive: true });
     }
-    
-    // Load all JSON files
+      // Load all JSON files
     const languages = ['en', 'fi']; // Add more languages as needed
-    const translations: Record<string, any> = {};
+    const translations: Record<string, Record<string, unknown>> = {};
     
     // Load each language's translations
     languages.forEach(lang => {
       const filePath = path.join(localesDir, lang, 'common.json');
       if (fs.existsSync(filePath)) {
         const content = fs.readFileSync(filePath, 'utf8');
-        translations[lang] = JSON.parse(content);
+        translations[lang] = JSON.parse(content) as Record<string, unknown>;
       } else {
         translations[lang] = {};
       }
     });
-    
-    // Flatten all translations
-    const flattened: Record<string, Record<string, any>> = {};
+      // Flatten all translations
+    const flattened: Record<string, Record<string, string>> = {};
     languages.forEach(lang => {
       flattened[lang] = flattenObject(translations[lang]);
     });
@@ -52,13 +51,12 @@ export async function convertJsonToExcel(): Promise<string> {
     // Get all unique keys across all languages
     const allKeys = new Set<string>();
     languages.forEach(lang => {
-      Object.keys(flattened[lang]).forEach(key => allKeys.add(key));
-    });
+      Object.keys(flattened[lang]).forEach(key => allKeys.add(key));    });
     
     // Create Excel worksheet data
-    const worksheetData: Array<Record<string, any>> = [];
+    const worksheetData: Array<Record<string, string>> = [];
     Array.from(allKeys).sort().forEach(key => {
-      const row: Record<string, any> = { key };
+      const row: Record<string, string> = { key };
       languages.forEach(lang => {
         row[lang] = flattened[lang][key] || '';
       });

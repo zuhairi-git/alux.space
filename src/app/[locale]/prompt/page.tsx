@@ -10,8 +10,8 @@ export function generateStaticParams() {
   return i18n.locales.map(locale => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const locale = params.locale || i18n.defaultLocale;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   
   const localizedMetadata = {
@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default function PromptPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default async function PromptPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   
   return (
     <ThemeProvider>

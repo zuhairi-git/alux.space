@@ -5,18 +5,15 @@ import { motion } from 'framer-motion';
 import BlogCard from './BlogCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
-import { useTheme } from '@/context/ThemeContext';
 import { Post } from '@/app/blog/posts/data';
 
 interface ClientBlogPageProps {
   posts: Post[];
-  locale: string;
 }
 
-export default function ClientBlogPage({ posts, locale: initialLocale }: ClientBlogPageProps) {
+export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
-  const { theme } = useTheme();
   const [filter, setFilter] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'standard' | 'overlay'>('standard');
   

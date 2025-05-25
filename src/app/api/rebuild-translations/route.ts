@@ -21,10 +21,9 @@ export async function GET() {
     // Define paths
     const localesDir = path.join(process.cwd(), 'src', 'locales');
     const outputPath = path.join(process.cwd(), 'src', 'translations', 'generatedTranslations.json');
-    
-    // Load all JSON files
+      // Load all JSON files
     const languages = ['en', 'fi'];
-    const translations: Record<string, any> = {};
+    const translations: Record<string, Record<string, unknown>> = {};
     
     // Load each language's translations
     languages.forEach(lang => {

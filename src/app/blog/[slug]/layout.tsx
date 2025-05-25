@@ -6,12 +6,15 @@ async function getPostMetadata(slug: string) {
   const post = posts.find(p => p.slug === slug);
   if (!post) return null;
   
+  // Use English content as default for metadata
+  const content = post.content.en;
+  
   return {
-    title: post.title,
-    description: post.description,
+    title: content.title,
+    description: content.description,
     image: post.image,
     type: 'article' as const,
-    publishedTime: new Date(post.publishedDate).toISOString(),
+    publishedTime: new Date(content.publishedDate).toISOString(),
     author: post.author,
     tags: post.tags
   };
