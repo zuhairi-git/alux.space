@@ -307,24 +307,29 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       
       // Auto-play the next episode if something was playing before
       if (wasPlaying) {
-        setTimeout(() => {
-          if (audioRef.current) {
-            // Wait for the audio to be ready
-            const tryPlay = () => {
-              if (audioRef.current && audioRef.current.readyState >= 2) {
-                togglePlay();
-              } else {
-                // Audio not ready yet, try again in a bit
-                setTimeout(tryPlay, 100);
-              }
-            };
-            tryPlay();
+        // Set a flag to auto-play when the new episode is ready
+        const autoPlayWhenReady = () => {
+          if (audioRef.current && audioRef.current.readyState >= 2) {
+            console.log('Auto-playing next episode');
+            audioRef.current.play()
+              .then(() => {
+                setIsPlaying(true);
+                setLoadError(false);
+              })
+              .catch(error => {
+                console.error('Auto-play failed:', error);
+              });
+          } else {
+            // Audio not ready yet, try again in a bit
+            setTimeout(autoPlayWhenReady, 100);
           }
-        }, 200);
+        };
+        
+        // Give the audio element time to load the new source
+        setTimeout(autoPlayWhenReady, 300);
       }
     }
-  }, [availableEpisodes, currentEpisodeId, isPlaying, togglePlay]);
-
+  }, [availableEpisodes, currentEpisodeId, isPlaying]);
   const goToPreviousEpisode = useCallback(() => {
     const currentIndex = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId);
     if (currentIndex > 0) {
@@ -342,23 +347,28 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       
       // Auto-play the previous episode if something was playing before
       if (wasPlaying) {
-        setTimeout(() => {
-          if (audioRef.current) {
-            // Wait for the audio to be ready
-            const tryPlay = () => {
-              if (audioRef.current && audioRef.current.readyState >= 2) {
-                togglePlay();
-              } else {
-                // Audio not ready yet, try again in a bit
-                setTimeout(tryPlay, 100);
-              }
-            };
-            tryPlay();
+        // Set a flag to auto-play when the new episode is ready
+        const autoPlayWhenReady = () => {
+          if (audioRef.current && audioRef.current.readyState >= 2) {
+            console.log('Auto-playing previous episode');
+            audioRef.current.play()
+              .then(() => {
+                setIsPlaying(true);
+                setLoadError(false);
+              })
+              .catch(error => {
+                console.error('Auto-play failed:', error);
+              });
+          } else {
+            // Audio not ready yet, try again in a bit
+            setTimeout(autoPlayWhenReady, 100);
           }
-        }, 200);
+        };
+          // Give the audio element time to load the new source
+        setTimeout(autoPlayWhenReady, 300);
       }
     }
-  }, [availableEpisodes, currentEpisodeId, isPlaying, togglePlay]);
+  }, [availableEpisodes, currentEpisodeId, isPlaying]);
   // Check if next/previous buttons should be enabled
   const canGoNext = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) < availableEpisodes.length - 1;
   const canGoPrevious = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) > 0;
