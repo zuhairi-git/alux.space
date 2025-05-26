@@ -5,7 +5,7 @@ const defaultMetadata: PodcastMetadata = {
   title: 'Ali Al-Zuhairi Podcast',
   author: 'Ali Al-Zuhairi',
   description: 'Insights on design leadership, product management, and the intersection of creativity and technology.',
-  coverImage: '/images/me/ali.png',
+  coverImage: '/podcasts/podcast.png',
   website: 'https://alux.space',
   copyright: '© 2025 Ali Al-Zuhairi'
 };

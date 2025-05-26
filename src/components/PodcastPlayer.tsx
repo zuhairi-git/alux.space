@@ -6,7 +6,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { podcastEpisodes } from '@/data/podcasts';
 import { SupportedLanguage } from '@/podcast/types/podcast';
-import { getAudioFileForLanguage, filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge } from '@/podcast/utils/languageUtils';
+import { getAudioFileForLanguage, filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge, setMediaSessionMetadata } from '@/podcast/utils/languageUtils';
 import EpisodeList from '@/podcast/components/EpisodeList';
 import LanguageBadge from '@/podcast/components/LanguageBadge';
 
@@ -372,10 +372,12 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
   // Check if next/previous buttons should be enabled
   const canGoNext = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) < availableEpisodes.length - 1;
   const canGoPrevious = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) > 0;
-
   // Set up media session action handlers for mobile
   useEffect(() => {
     if ('mediaSession' in navigator) {
+      // Set media session metadata
+      setMediaSessionMetadata(currentEpisode);
+      
       navigator.mediaSession.setActionHandler('play', () => {
         if (!isPlaying) togglePlay();
       });
@@ -407,7 +409,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       navigator.mediaSession.setActionHandler('nexttrack', () => {
         if (canGoNext) goToNextEpisode();
       });
-    }  }, [isPlaying, duration, togglePlay, stopAudio, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode]);
+    }
+  }, [currentEpisode, isPlaying, duration, togglePlay, stopAudio, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode]);
     return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
