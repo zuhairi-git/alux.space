@@ -29,9 +29,8 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
   // Filter episodes based on current language
   const currentLanguage = locale as SupportedLanguage;
   const filteredEpisodes = filterEpisodesByLanguage(episodes, currentLanguage);
-
   const getCardStyle = (isSelected: boolean) => {
-    const baseStyle = 'p-4 rounded-lg cursor-pointer transition-all duration-200 border';
+    const baseStyle = 'p-3 sm:p-4 rounded-lg cursor-pointer transition-all duration-200 border';
     
     if (isSelected) {
       if (isLight) {
@@ -81,8 +80,8 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
     });
   };
 
-  return (
-    <div className={`space-y-3 ${className}`}>      <h3 className={`text-lg font-semibold mb-4 ${getTextStyle()}`}>
+  return (    <div className={`space-y-2 sm:space-y-3 ${className}`}>
+      <h3 className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${getTextStyle()}`}>
         Episodes
       </h3>
         {filteredEpisodes.map((episode, index) => {
@@ -98,13 +97,13 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
             transition={{ delay: index * 0.1 }}
             className={getCardStyle(isSelected)}
             onClick={() => onEpisodeSelect(episode.id)}
-          >
-            <div className="flex items-start justify-between">
+          >            <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-2">
-                  <h4 className={`font-medium text-sm truncate ${getTextStyle()}`}>
+                  <h4 className={`font-medium text-sm sm:text-base truncate ${getTextStyle()}`}>
                     {episode.title}
-                  </h4>                  {showLanguageBadge && (
+                  </h4>
+                  {showLanguageBadge && (
                     <LanguageBadge 
                       language={displayLanguage} 
                       size="sm"
@@ -112,15 +111,15 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
                   )}
                 </div>
                 
-                <p className={`text-xs mb-2 line-clamp-2 ${getSecondaryTextStyle()}`}>
+                <p className={`text-xs sm:text-sm mb-2 line-clamp-2 ${getSecondaryTextStyle()}`}>
                   {episode.description}
                 </p>
                 
-                <div className={`flex items-center gap-4 text-xs ${getSecondaryTextStyle()}`}>
+                <div className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs ${getSecondaryTextStyle()}`}>
                   <span>{formatDate(episode.publishDate)}</span>
                   <span>{episode.duration}</span>
                   {episode.featured && (
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${
                       isLight ? 'bg-yellow-100 text-yellow-800' :
                       isColorful ? 'bg-yellow-500/20 text-yellow-300' :
                       'bg-yellow-900/30 text-yellow-400'

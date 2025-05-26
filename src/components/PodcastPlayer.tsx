@@ -398,8 +398,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
         if (canGoNext) goToNextEpisode();
       });
     }  }, [isPlaying, duration, togglePlay, stopAudio, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode]);
-  
-  return (
+    return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -446,26 +445,27 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
         }}        onStalled={() => {
           console.log('Audio stalled');
         }}
-      />      {/* Main player content with generous padding */}
-      <div className="p-6">
+      />      {/* Main player content with responsive padding */}
+      <div className="p-4 sm:p-6">
         {/* Header section with episode info and expand button */}
-        <div className="flex items-start justify-between mb-8">
-          <div className="flex-1 min-w-0 pr-6">
-            <div className="flex items-center gap-3 mb-4">
-              <h3 className={`font-bold text-2xl ${getTextStyle()} truncate`}>
+        <div className="flex items-start justify-between mb-6 sm:mb-8">
+          <div className="flex-1 min-w-0 pr-4 sm:pr-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <h3 className={`font-bold text-xl sm:text-2xl ${getTextStyle()} truncate`}>
                 {currentEpisode?.title || 'Loading...'}
-              </h3>              {showLanguageBadge && (
+              </h3>
+              {showLanguageBadge && (
                 <LanguageBadge 
                   language={episodeDisplayLanguage} 
                 />
               )}
             </div>
-            <p className={`text-base leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'} line-clamp-3 mb-4`}>
+            <p className={`text-sm sm:text-base leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'} line-clamp-3 mb-3 sm:mb-4`}>
               {currentEpisode?.description || ''}
             </p>
             
             {/* Episode counter */}
-            <div className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+            <div className={`text-xs sm:text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
               {locale === 'fi' ? 'Jakso' : 'Episode'} {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1} / {availableEpisodes.length}
             </div>
           </div>
@@ -475,7 +475,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             onClick={() => setIsExpanded(!isExpanded)}
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
-            className={`p-4 rounded-xl ${
+            className={`p-3 sm:p-4 rounded-xl ${
               isLight 
                 ? 'bg-gray-100 hover:bg-gray-200' 
                 : 'bg-gray-800 hover:bg-gray-700'
@@ -483,7 +483,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             title={isExpanded ? (locale === 'fi' ? 'Piilota jaksot' : 'Hide episodes') : (locale === 'fi' ? 'Näytä jaksot' : 'Show episodes')}
           >
             <motion.span 
-              className="material-symbols-rounded text-xl text-purple-500"
+              className="material-symbols-rounded text-lg sm:text-xl text-purple-500"
               animate={{ rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
@@ -491,9 +491,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             </motion.span>
           </motion.button>
         </div>        {/* Modern Progress Bar with Time Ruler */}
-        <div className="mb-8">
-          {/* Time markers above progress bar */}
-          <div className="relative w-full h-6 mb-2">
+        <div className="mb-6 sm:mb-8">
+          {/* Time markers above progress bar - hidden on mobile */}
+          <div className="relative w-full h-6 mb-2 hidden sm:block">
             {/* Generate time ruler marks */}
             <div className="absolute inset-x-0 bottom-0 h-4 flex justify-between items-end">
               {duration > 0 && Array.from({ length: 11 }).map((_, i) => {
@@ -526,9 +526,10 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
           </div>
 
           {/* Main progress bar container */}
-          <div className="relative w-full">            {/* Background track with subtle gradient */}
+          <div className="relative w-full">
+            {/* Background track with subtle gradient */}
             <div 
-              className={`w-full h-4 rounded-lg relative overflow-hidden cursor-pointer group ${
+              className={`w-full h-6 sm:h-4 rounded-lg relative overflow-hidden cursor-pointer group ${
                 isLight 
                   ? 'bg-gradient-to-r from-gray-100 via-gray-150 to-gray-100 border border-gray-200' 
                   : 'bg-gradient-to-r from-gray-800 via-gray-750 to-gray-800 border border-gray-600'
@@ -537,7 +538,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               onMouseMove={handleProgressMouseMove}
               onMouseEnter={handleProgressMouseEnter}
               onMouseLeave={handleProgressMouseLeave}
-            >              {/* Subtle inner shadow for depth */}
+            >{/* Subtle inner shadow for depth */}
               <div className={`absolute inset-0 rounded-lg ${
                 isLight ? 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]' : 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]'
               }`} />
@@ -566,9 +567,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                   {/* Subtle shine effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-lg" />
                 </div>
-              </motion.div>
-
-              {/* Interactive playhead */}
+              </motion.div>              {/* Interactive playhead */}
               <motion.div
                 className="absolute top-1/2 transform -translate-y-1/2 transition-all duration-200"
                 style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
@@ -578,15 +577,15 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 }}
                 whileHover={{ scale: 1.2 }}
               >
-                <div className={`w-6 h-6 rounded-full shadow-lg border-3 border-white transition-all duration-200 group-hover:shadow-xl ${
+                <div className={`w-8 h-8 sm:w-6 sm:h-6 rounded-full shadow-lg border-3 border-white transition-all duration-200 group-hover:shadow-xl ${
                   isLight 
                     ? 'bg-gradient-to-b from-purple-400 to-purple-600' 
                     : 'bg-gradient-to-b from-purple-500 to-purple-700'
-                } opacity-0 group-hover:opacity-100`}>
+                } opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100`}>
                   {/* Inner highlight */}
                   <div className="absolute inset-1 rounded-full bg-gradient-to-b from-white/30 to-transparent" />
                 </div>
-              </motion.div>              {/* Hover preview line */}
+              </motion.div>{/* Hover preview line */}
               <motion.div 
                 className="absolute top-0 h-full w-0.5 bg-purple-400/70 transition-opacity pointer-events-none rounded-full shadow-sm" 
                 style={{ left: `${mousePosition}%` }}
@@ -613,250 +612,263 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 )}
               </motion.div>
             </div>
-          </div>
-            {/* Enhanced time display */}
-          <div className="flex justify-between items-center mt-4">
+          </div>          {/* Enhanced time display */}
+          <div className="flex justify-between items-center mt-3 sm:mt-4">
             <div className={`flex items-center gap-2`}>
-              <div className={`text-lg font-bold font-mono ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
+              <div className={`text-base sm:text-lg font-bold font-mono ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
                 {formatTime(currentTime)}
               </div>
               <div className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                 /
               </div>
             </div>
-            <div className={`text-lg font-bold font-mono ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+            <div className={`text-base sm:text-lg font-bold font-mono ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
               {formatTime(duration)}
             </div>
           </div>
-        </div>{/* All controls in one row */}
-        <div className="flex items-center justify-center gap-6 mb-6">
-          {/* Previous button */}
-          <motion.button
-            onClick={goToPreviousEpisode}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            className={`w-16 h-16 flex items-center justify-center rounded-full ${
-              isLight 
-                ? 'bg-gray-100 hover:bg-gray-200' 
-                : 'bg-gray-800 hover:bg-gray-700'
-            } ${!canGoPrevious ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
-            disabled={loadError || !canGoPrevious}
-            title={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
-          >
-            <svg 
-              className="w-7 h-7 text-purple-500" 
-              fill="currentColor" 
-              viewBox="0 0 20 20"
-            >
-              <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
-            </svg>
-          </motion.button>
-
-          {/* Play/Pause button - Large and prominent */}
-          <motion.button
-            onClick={togglePlay}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            className={`w-24 h-24 flex items-center justify-center rounded-full ${
-              isLight 
-                ? 'bg-purple-100 hover:bg-purple-200' 
-                : 'bg-purple-900/50 hover:bg-purple-800/50'
-            } border-4 border-purple-500 shadow-2xl transition-all duration-200`}
-            disabled={loadError}
-          >
-            <AnimatePresence mode="wait">
-              {isPlaying ? (
-                <motion.svg 
-                  key="pause"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-10 h-10 text-purple-500" 
-                  fill="currentColor" 
-                  viewBox="0 0 20 20"
-                >
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                </motion.svg>
-              ) : (
-                <motion.svg 
-                  key="play"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-10 h-10 text-purple-500" 
-                  fill="currentColor" 
-                  viewBox="0 0 20 20"
-                >
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                </motion.svg>
-              )}
-            </AnimatePresence>
-          </motion.button>
-
-          {/* Next button */}
-          <motion.button
-            onClick={goToNextEpisode}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            className={`w-16 h-16 flex items-center justify-center rounded-full ${
-              isLight 
-                ? 'bg-gray-100 hover:bg-gray-200' 
-                : 'bg-gray-800 hover:bg-gray-700'
-            } ${!canGoNext ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
-            disabled={loadError || !canGoNext}
-            title={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
-          >
-            <svg 
-              className="w-7 h-7 text-purple-500" 
-              fill="currentColor" 
-              viewBox="0 0 20 20"
-            >
-              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
-            </svg>
-          </motion.button>
-
-          {/* Stop button */}
-          <motion.button
-            onClick={stopAudio}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            className={`w-14 h-14 flex items-center justify-center rounded-full ${
-              isLight 
-                ? 'bg-gray-100 hover:bg-gray-200' 
-                : 'bg-gray-800 hover:bg-gray-700'
-            } transition-all duration-200 shadow-md`}
-            disabled={loadError}
-            title={locale === 'fi' ? 'Pysäytä' : 'Stop'}
-          >
-            <svg 
-              className="w-6 h-6 text-purple-500" 
-              fill="currentColor" 
-              viewBox="0 0 20 20"
-            >
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
-            </svg>
-          </motion.button>
-          
-          {/* Playback rate button */}
-          <motion.button
-            onClick={changePlaybackRate}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            className={`px-4 h-14 rounded-full flex items-center gap-2 ${
-              isLight 
-                ? 'bg-gray-100 hover:bg-gray-200' 
-                : 'bg-gray-800 hover:bg-gray-700'
-            } transition-all duration-200 shadow-md`}
-            disabled={loadError}
-            title={locale === 'fi' ? 'Toistonopeus' : 'Playback speed'}
-          >
-            <span className="material-symbols-rounded text-purple-500 text-xl">speed</span>
-            <motion.span 
-              key={playbackRate}
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="text-purple-500 font-semibold text-lg"
-            >
-              {playbackRate}x
-            </motion.span>
-          </motion.button>          {/* Volume controls - vintage radio dial style */}
-          <div className="flex items-center gap-3">
+        </div>        {/* Responsive controls layout */}
+        <div className="mb-4 sm:mb-6">
+          {/* Primary controls - play/pause, previous, next */}
+          <div className="flex items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-0">
+            {/* Previous button */}
             <motion.button
-              onClick={() => {
-                if (audioRef.current) {
-                  audioRef.current.muted = !audioRef.current.muted;
-                  console.log('Muted:', audioRef.current.muted);
-                }
-              }}
+              onClick={goToPreviousEpisode}
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
-              className={`w-12 h-12 flex items-center justify-center rounded-full ${
+              className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full ${
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
-              } transition-all duration-200 shadow-md`}
-              title={locale === 'fi' ? 'Mykistä/poista mykistys' : 'Mute/unmute'}
+              } ${!canGoPrevious ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
+              disabled={loadError || !canGoPrevious}
+              title={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
             >
-              <span className="text-xl">
-                {audioRef.current?.muted ? '🔇' : '🔊'}
-              </span>
-            </motion.button>              {/* Vintage Radio Frequency Display - Reduced Height */}
-            <div className="relative w-40 h-10 ml-1">
-              {/* Radio frequency display body */}
-              <div className={`absolute inset-0 rounded-lg ${
-                isLight ? 'border-gray-400 bg-gradient-to-b from-gray-50 to-gray-100 transition-all duration-200 shadow-md' : 'bg-gradient-to-b from-gray-800 to-gray-900'
-              } shadow-inner overflow-hidden`}>
-                
-                {/* Main frequency scale */}
-                <div className="absolute inset-0 p-0.5">
-                  {/* Frequency lines */}
-                  <div className="relative w-full h-full">
-                    {/* Horizontal frequency measurement lines */}
-                    <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between">
-                      {/* Upper frequency band */}
-                      <div className={`h-1/2 w-full border-b ${isLight ? 'border-gray-300' : 'border-gray-600'} flex items-end`}>
-                        <div className="w-full flex justify-between px-1 text-[5px] font-mono">
-                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>88</span>
-                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>92</span>
-                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>96</span>
-                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>100</span>
-                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>104</span>
-                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>108</span>
+              <svg 
+                className="w-5 h-5 sm:w-7 sm:h-7 text-purple-500" 
+                fill="currentColor" 
+                viewBox="0 0 20 20"
+              >
+                <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
+              </svg>
+            </motion.button>
+
+            {/* Play/Pause button - Large and prominent */}
+            <motion.button
+              onClick={togglePlay}
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              className={`w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full ${
+                isLight 
+                  ? 'bg-purple-100 hover:bg-purple-200' 
+                  : 'bg-purple-900/50 hover:bg-purple-800/50'
+              } border-4 border-purple-500 shadow-2xl transition-all duration-200`}
+              disabled={loadError}
+            >
+              <AnimatePresence mode="wait">
+                {isPlaying ? (
+                  <motion.svg 
+                    key="pause"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    className="w-8 h-8 sm:w-10 sm:h-10 text-purple-500" 
+                    fill="currentColor" 
+                    viewBox="0 0 20 20"
+                  >
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </motion.svg>
+                ) : (
+                  <motion.svg 
+                    key="play"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    className="w-8 h-8 sm:w-10 sm:h-10 text-purple-500" 
+                    fill="currentColor" 
+                    viewBox="0 0 20 20"
+                  >
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </motion.svg>
+                )}
+              </AnimatePresence>
+            </motion.button>
+
+            {/* Next button */}
+            <motion.button
+              onClick={goToNextEpisode}
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full ${
+                isLight 
+                  ? 'bg-gray-100 hover:bg-gray-200' 
+                  : 'bg-gray-800 hover:bg-gray-700'
+              } ${!canGoNext ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
+              disabled={loadError || !canGoNext}
+              title={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
+            >
+              <svg 
+                className="w-5 h-5 sm:w-7 sm:h-7 text-purple-500" 
+                fill="currentColor" 
+                viewBox="0 0 20 20"
+              >
+                <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
+              </svg>
+            </motion.button>
+          </div>
+
+          {/* Secondary controls - mobile stacked layout */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            {/* Top row on mobile: Stop and Playback rate */}
+            <div className="flex items-center gap-3 sm:gap-4">
+              {/* Stop button */}
+              <motion.button
+                onClick={stopAudio}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                className={`w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-full ${
+                  isLight 
+                    ? 'bg-gray-100 hover:bg-gray-200' 
+                    : 'bg-gray-800 hover:bg-gray-700'
+                } transition-all duration-200 shadow-md`}
+                disabled={loadError}
+                title={locale === 'fi' ? 'Pysäytä' : 'Stop'}
+              >
+                <svg 
+                  className="w-4 h-4 sm:w-6 sm:h-6 text-purple-500" 
+                  fill="currentColor" 
+                  viewBox="0 0 20 20"
+                >
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
+                </svg>
+              </motion.button>
+              
+              {/* Playback rate button */}
+              <motion.button
+                onClick={changePlaybackRate}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                className={`px-3 h-10 sm:px-4 sm:h-14 rounded-full flex items-center gap-1 sm:gap-2 ${
+                  isLight 
+                    ? 'bg-gray-100 hover:bg-gray-200' 
+                    : 'bg-gray-800 hover:bg-gray-700'
+                } transition-all duration-200 shadow-md`}
+                disabled={loadError}
+                title={locale === 'fi' ? 'Toistonopeus' : 'Playback speed'}
+              >
+                <span className="material-symbols-rounded text-purple-500 text-lg sm:text-xl">speed</span>
+                <motion.span 
+                  key={playbackRate}
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  className="text-purple-500 font-semibold text-sm sm:text-lg"
+                >
+                  {playbackRate}x
+                </motion.span>
+              </motion.button>
+            </div>
+
+            {/* Bottom row on mobile: Volume controls */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <motion.button
+                onClick={() => {
+                  if (audioRef.current) {
+                    audioRef.current.muted = !audioRef.current.muted;
+                    console.log('Muted:', audioRef.current.muted);
+                  }
+                }}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full ${
+                  isLight 
+                    ? 'bg-gray-100 hover:bg-gray-200' 
+                    : 'bg-gray-800 hover:bg-gray-700'
+                } transition-all duration-200 shadow-md`}
+                title={locale === 'fi' ? 'Mykistä/poista mykistys' : 'Mute/unmute'}
+              >
+                <span className="text-lg sm:text-xl">
+                  {audioRef.current?.muted ? '🔇' : '🔊'}
+                </span>
+              </motion.button>
+
+              {/* Vintage Radio Frequency Display - Responsive size */}
+              <div className="relative w-32 h-8 sm:w-40 sm:h-10 ml-1">
+                {/* Radio frequency display body */}
+                <div className={`absolute inset-0 rounded-lg ${
+                  isLight ? 'border-gray-400 bg-gradient-to-b from-gray-50 to-gray-100 transition-all duration-200 shadow-md' : 'bg-gradient-to-b from-gray-800 to-gray-900'
+                } shadow-inner overflow-hidden`}>
+                  
+                  {/* Main frequency scale */}
+                  <div className="absolute inset-0 p-0.5">
+                    {/* Frequency lines */}
+                    <div className="relative w-full h-full">
+                      {/* Horizontal frequency measurement lines */}
+                      <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between">
+                        {/* Upper frequency band */}
+                        <div className={`h-1/2 w-full border-b ${isLight ? 'border-gray-300' : 'border-gray-600'} flex items-end`}>
+                          <div className="w-full flex justify-between px-1 text-[4px] sm:text-[5px] font-mono">
+                            <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>88</span>
+                            <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>92</span>
+                            <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>96</span>
+                            <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>100</span>
+                            <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>104</span>
+                            <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>108</span>
+                          </div>
+                        </div>
+                        
+                        {/* Lower frequency band - ticker marks */}
+                        <div className="h-1/2 w-full flex items-center">
+                          <div className="w-full flex justify-between px-1">
+                            {Array.from({ length: 15 }).map((_, i) => (
+                              <div 
+                                key={i} 
+                                className={`${
+                                  isLight ? 'bg-gray-400' : 'bg-gray-500'
+                                } ${i % 5 === 0 ? 'h-[2px] sm:h-[3px]' : 'h-[1.5px] sm:h-[2px]'}`}
+                                style={{ width: '1px' }}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
                       
-                      {/* Lower frequency band - ticker marks */}
-                      <div className="h-1/2 w-full flex items-center">
-                        <div className="w-full flex justify-between px-1">
-                          {Array.from({ length: 15 }).map((_, i) => (
-                            <div 
-                              key={i} 
-                              className={`${
-                                isLight ? 'bg-gray-400' : 'bg-gray-500'
-                              } ${i % 5 === 0 ? 'h-[3px]' : 'h-[2px]'}`}
-                              style={{ width: '1px' }}
-                            />
-                          ))}
-                        </div>
-                      </div>
+                      {/* Red frequency indicator */}
+                      <div 
+                        className="absolute h-full w-0.5 bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.7)] z-10 transition-all duration-150"
+                        style={{ 
+                          left: `${(audioRef.current?.volume || 1) * 100}%`, 
+                          transform: 'translateX(-50%)' 
+                        }}
+                      />
                     </div>
-                    
-                    {/* Red frequency indicator */}
-                    <div 
-                      className="absolute h-full w-0.5 bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.7)] z-10 transition-all duration-150"
-                      style={{ 
-                        left: `${(audioRef.current?.volume || 1) * 100}%`, 
-                        transform: 'translateX(-50%)' 
-                      }}
-                    />
                   </div>
                 </div>
-              </div>
-              
-              {/* Volume slider - hidden but functional */}
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={audioRef.current?.volume || 1}
-                onChange={(e) => {
-                  if (audioRef.current) {
-                    audioRef.current.volume = parseFloat(e.target.value);
-                  }
-                }}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
-              />
-              
-              {/* Volume labels */}
-              <div className={`absolute -bottom-3 left-0 text-[9px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                MIN
-              </div>
-              <div className={`absolute -bottom-3 right-0 text-[9px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                MAX
+                
+                {/* Volume slider - hidden but functional */}
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={audioRef.current?.volume || 1}
+                  onChange={(e) => {
+                    if (audioRef.current) {
+                      audioRef.current.volume = parseFloat(e.target.value);
+                    }
+                  }}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
+                />
+                
+                {/* Volume labels */}
+                <div className={`absolute -bottom-2 sm:-bottom-3 left-0 text-[7px] sm:text-[9px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                  MIN
+                </div>
+                <div className={`absolute -bottom-2 sm:-bottom-3 right-0 text-[7px] sm:text-[9px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                  MAX
+                </div>
               </div>
             </div>
-          </div></div>
+          </div>
+        </div>
       </div>
         {/* Episode list (expandable) */}
       <AnimatePresence>
