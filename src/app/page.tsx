@@ -72,10 +72,9 @@ export default function Home() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
-  // Hero configuration
+    // Hero configuration - no longer switches variants, smooth transitions handled internally
   const heroConfig: HeroConfig = {
-    variant: theme === 'colorful' ? 'creative' : 'default',
+    variant: 'default', // Using unified component, this doesn't matter anymore
     title: t('home.hero.title'),
     subtitle: t('home.hero.subtitle'),
     backgroundEffect: theme === 'colorful' ? 'particles' : 'abstract-modern',
