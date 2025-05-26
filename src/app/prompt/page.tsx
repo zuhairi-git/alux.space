@@ -116,8 +116,8 @@ Use best integration practices from #fetch https://unsplash.com/documentation`}
           <PromptCard 
             status="Failed" 
             bugsFixed={1}
-            content={`Hero Section (Based on Adham Dannaway's Site):
-• Fetch the hero effect from  #fetch https://www.adhamdannaway.com.
+            content={`Hero Section (Based on XXX Site):
+• Fetch the hero effect from  #fetch https://www.xxxx.com.
 • Use the image located at images/hero for the hero background.`}
           />
 

@@ -34,7 +34,6 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
   const [isExpanded, setIsExpanded] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);  const [loadError, setLoadError] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
-  const [debugInfo, setDebugInfo] = useState<string>('');
     // Find the current episode data
   const currentEpisode = podcastEpisodes.find(ep => ep.id === currentEpisodeId) || availableEpisodes[0];
   const currentAudioFile = currentEpisode ? getAudioFileForLanguage(currentEpisode, currentLanguage) : '';
@@ -268,20 +267,39 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       stopAudio();
       setCurrentEpisodeId(episodeId);
     }
-  }, [currentEpisodeId, isPlaying, togglePlay, stopAudio]);
-  // Navigation functions for next/previous episodes
+  }, [currentEpisodeId, isPlaying, togglePlay, stopAudio]);  // Navigation functions for next/previous episodes
   const goToNextEpisode = useCallback(() => {
     const currentIndex = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId);
     if (currentIndex < availableEpisodes.length - 1) {
       const nextEpisode = availableEpisodes[currentIndex + 1];
+      const wasPlaying = isPlaying;
+      
+      // Stop current audio first
+      if (audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+      
+      // Change to next episode
       setCurrentEpisodeId(nextEpisode.id);
       
-      // Auto-play the next episode after a short delay to ensure audio is loaded
-      setTimeout(() => {
-        if (audioRef.current && !isPlaying) {
-          togglePlay();
-        }
-      }, 100);
+      // Auto-play the next episode if something was playing before
+      if (wasPlaying) {
+        setTimeout(() => {
+          if (audioRef.current) {
+            // Wait for the audio to be ready
+            const tryPlay = () => {
+              if (audioRef.current && audioRef.current.readyState >= 2) {
+                togglePlay();
+              } else {
+                // Audio not ready yet, try again in a bit
+                setTimeout(tryPlay, 100);
+              }
+            };
+            tryPlay();
+          }
+        }, 200);
+      }
     }
   }, [availableEpisodes, currentEpisodeId, isPlaying, togglePlay]);
 
@@ -289,14 +307,34 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     const currentIndex = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId);
     if (currentIndex > 0) {
       const previousEpisode = availableEpisodes[currentIndex - 1];
+      const wasPlaying = isPlaying;
+      
+      // Stop current audio first
+      if (audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+      
+      // Change to previous episode
       setCurrentEpisodeId(previousEpisode.id);
       
-      // Auto-play the previous episode after a short delay to ensure audio is loaded
-      setTimeout(() => {
-        if (audioRef.current && !isPlaying) {
-          togglePlay();
-        }
-      }, 100);
+      // Auto-play the previous episode if something was playing before
+      if (wasPlaying) {
+        setTimeout(() => {
+          if (audioRef.current) {
+            // Wait for the audio to be ready
+            const tryPlay = () => {
+              if (audioRef.current && audioRef.current.readyState >= 2) {
+                togglePlay();
+              } else {
+                // Audio not ready yet, try again in a bit
+                setTimeout(tryPlay, 100);
+              }
+            };
+            tryPlay();
+          }
+        }, 200);
+      }
     }
   }, [availableEpisodes, currentEpisodeId, isPlaying, togglePlay]);
   // Check if next/previous buttons should be enabled
@@ -351,40 +389,26 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
         src={currentAudioFile}
         preload="metadata"
         onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
-        onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
-        onCanPlay={() => {
+        onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}        onCanPlay={() => {
           console.log('Audio can play');
           setLoadError(false);
-          setDebugInfo('Audio ready to play');
-        }}
-        onCanPlayThrough={() => {
+        }}        onCanPlayThrough={() => {
           console.log('Audio can play through');
-          setDebugInfo('Audio can play through');
-        }}
-        onLoadStart={() => {
+        }}        onLoadStart={() => {
           console.log('Audio load started');
-          setDebugInfo('Loading...');
-        }}
-        onProgress={(e) => {
+        }}        onProgress={(e) => {
           const buffered = e.currentTarget.buffered;
           if (buffered.length > 0) {
             const bufferedEnd = buffered.end(buffered.length - 1);
             console.log(`Audio buffered: ${bufferedEnd}s`);
-            setDebugInfo(`Buffered: ${Math.round(bufferedEnd)}s`);
           }
-        }}
-        onError={(e) => {
+        }}        onError={(e) => {
           console.error('Audio error:', e);
           setLoadError(true);
-          setDebugInfo('Load error');
-        }}
-        onPlay={() => {
+        }}        onPlay={() => {
           console.log('Audio started playing');
-          setDebugInfo('Playing');
-        }}
-        onPause={() => {
+        }}        onPause={() => {
           console.log('Audio paused');
-          setDebugInfo('Paused');
         }}
         onEnded={() => {
           setIsPlaying(false);
@@ -393,18 +417,12 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             audioRef.current.currentTime = 0;
           }
           console.log('Episode ended');
-        }}
-        onLoadedData={() => {
+        }}        onLoadedData={() => {
           console.log('Audio data loaded');
-          setDebugInfo('Data loaded');
-        }}
-        onWaiting={() => {
+        }}        onWaiting={() => {
           console.log('Audio waiting for data');
-          setDebugInfo('Buffering...');
-        }}
-        onStalled={() => {
+        }}        onStalled={() => {
           console.log('Audio stalled');
-          setDebugInfo('Stalled');
         }}
       />      {/* Main player content with generous padding */}
       <div className="p-6">
@@ -477,100 +495,93 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               {formatTime(duration)}
             </div>
           </div>
-        </div>
-
-        {/* Main controls section - centered and prominent */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="flex items-center gap-6">
-            {/* Previous button */}
-            <motion.button
-              onClick={goToPreviousEpisode}
-              whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.05 }}
-              className={`w-16 h-16 flex items-center justify-center rounded-full ${
-                isLight 
-                  ? 'bg-gray-100 hover:bg-gray-200' 
-                  : 'bg-gray-800 hover:bg-gray-700'
-              } ${!canGoPrevious ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
-              disabled={loadError || !canGoPrevious}
-              title={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
+        </div>        {/* All controls in one row */}
+        <div className="flex items-center justify-center gap-6 mb-6">
+          {/* Previous button */}
+          <motion.button
+            onClick={goToPreviousEpisode}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            className={`w-16 h-16 flex items-center justify-center rounded-full ${
+              isLight 
+                ? 'bg-gray-100 hover:bg-gray-200' 
+                : 'bg-gray-800 hover:bg-gray-700'
+            } ${!canGoPrevious ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
+            disabled={loadError || !canGoPrevious}
+            title={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
+          >
+            <svg 
+              className="w-7 h-7 text-purple-500" 
+              fill="currentColor" 
+              viewBox="0 0 20 20"
             >
-              <svg 
-                className="w-7 h-7 text-purple-500" 
-                fill="currentColor" 
-                viewBox="0 0 20 20"
-              >
-                <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
-              </svg>
-            </motion.button>
+              <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
+            </svg>
+          </motion.button>
 
-            {/* Play/Pause button - Large and prominent */}
-            <motion.button
-              onClick={togglePlay}
-              whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.05 }}
-              className={`w-24 h-24 flex items-center justify-center rounded-full ${
-                isLight 
-                  ? 'bg-purple-100 hover:bg-purple-200' 
-                  : 'bg-purple-900/50 hover:bg-purple-800/50'
-              } border-4 border-purple-500 shadow-2xl transition-all duration-200`}
-              disabled={loadError}
+          {/* Play/Pause button - Large and prominent */}
+          <motion.button
+            onClick={togglePlay}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            className={`w-24 h-24 flex items-center justify-center rounded-full ${
+              isLight 
+                ? 'bg-purple-100 hover:bg-purple-200' 
+                : 'bg-purple-900/50 hover:bg-purple-800/50'
+            } border-4 border-purple-500 shadow-2xl transition-all duration-200`}
+            disabled={loadError}
+          >
+            <AnimatePresence mode="wait">
+              {isPlaying ? (
+                <motion.svg 
+                  key="pause"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  className="w-10 h-10 text-purple-500" 
+                  fill="currentColor" 
+                  viewBox="0 0 20 20"
+                >
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                </motion.svg>
+              ) : (
+                <motion.svg 
+                  key="play"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  className="w-10 h-10 text-purple-500" 
+                  fill="currentColor" 
+                  viewBox="0 0 20 20"
+                >
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                </motion.svg>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
+          {/* Next button */}
+          <motion.button
+            onClick={goToNextEpisode}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            className={`w-16 h-16 flex items-center justify-center rounded-full ${
+              isLight 
+                ? 'bg-gray-100 hover:bg-gray-200' 
+                : 'bg-gray-800 hover:bg-gray-700'
+            } ${!canGoNext ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
+            disabled={loadError || !canGoNext}
+            title={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
+          >
+            <svg 
+              className="w-7 h-7 text-purple-500" 
+              fill="currentColor" 
+              viewBox="0 0 20 20"
             >
-              <AnimatePresence mode="wait">
-                {isPlaying ? (
-                  <motion.svg 
-                    key="pause"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.8, opacity: 0 }}
-                    className="w-10 h-10 text-purple-500" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                  >
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </motion.svg>
-                ) : (
-                  <motion.svg 
-                    key="play"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.8, opacity: 0 }}
-                    className="w-10 h-10 text-purple-500" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                  </motion.svg>
-                )}
-              </AnimatePresence>
-            </motion.button>
+              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
+            </svg>
+          </motion.button>
 
-            {/* Next button */}
-            <motion.button
-              onClick={goToNextEpisode}
-              whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.05 }}
-              className={`w-16 h-16 flex items-center justify-center rounded-full ${
-                isLight 
-                  ? 'bg-gray-100 hover:bg-gray-200' 
-                  : 'bg-gray-800 hover:bg-gray-700'
-              } ${!canGoNext ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
-              disabled={loadError || !canGoNext}
-              title={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
-            >
-              <svg 
-                className="w-7 h-7 text-purple-500" 
-                fill="currentColor" 
-                viewBox="0 0 20 20"
-              >
-                <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
-              </svg>
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Secondary controls row */}
-        <div className="flex items-center justify-center gap-8 mb-6">
           {/* Stop button */}
           <motion.button
             onClick={stopAudio}
@@ -598,7 +609,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             onClick={changePlaybackRate}
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
-            className={`px-6 h-14 rounded-full flex items-center gap-2 ${
+            className={`px-4 h-14 rounded-full flex items-center gap-2 ${
               isLight 
                 ? 'bg-gray-100 hover:bg-gray-200' 
                 : 'bg-gray-800 hover:bg-gray-700'
@@ -615,10 +626,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             >
               {playbackRate}x
             </motion.span>
-          </motion.button>
-
-          {/* Volume controls */}
-          <div className="flex items-center gap-4">
+          </motion.button>          {/* Volume controls - vintage radio dial style */}
+          <div className="flex items-center gap-3">
             <motion.button
               onClick={() => {
                 if (audioRef.current) {
@@ -628,57 +637,93 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               }}
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
-              className={`w-14 h-14 flex items-center justify-center rounded-full ${
+              className={`w-12 h-12 flex items-center justify-center rounded-full ${
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
               } transition-all duration-200 shadow-md`}
               title={locale === 'fi' ? 'Mykistä/poista mykistys' : 'Mute/unmute'}
             >
-              <span className="text-2xl">
+              <span className="text-xl">
                 {audioRef.current?.muted ? '🔇' : '🔊'}
               </span>
-            </motion.button>
-            
-            <div className="flex items-center gap-3">
-              <span className={`text-sm font-medium ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>Vol</span>
-              <div className="relative">
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={audioRef.current?.volume || 1}
-                  onChange={(e) => {
-                    if (audioRef.current) {
-                      audioRef.current.volume = parseFloat(e.target.value);
-                      console.log('Volume set to:', audioRef.current.volume);
-                    }
-                  }}
-                  className={`w-24 h-3 rounded-full appearance-none cursor-pointer ${
-                    isLight ? 'bg-gray-200' : 'bg-gray-700'
-                  } focus:outline-none focus:ring-2 focus:ring-purple-500`}
-                  style={{
-                    background: `linear-gradient(to right, #8b5cf6 0%, #8b5cf6 ${(audioRef.current?.volume || 1) * 100}%, ${isLight ? '#e5e7eb' : '#374151'} ${(audioRef.current?.volume || 1) * 100}%, ${isLight ? '#e5e7eb' : '#374151'} 100%)`
-                  }}
-                />
+            </motion.button>              {/* Vintage Radio Frequency Display - Reduced Height */}
+            <div className="relative w-40 h-10 ml-1">
+              {/* Radio frequency display body */}
+              <div className={`absolute inset-0 rounded-lg border ${
+                isLight ? 'border-gray-400 bg-gradient-to-b from-gray-50 to-gray-100' : 'border-gray-600 bg-gradient-to-b from-gray-800 to-gray-900'
+              } shadow-inner overflow-hidden`}>
+                
+                {/* Main frequency scale */}
+                <div className="absolute inset-0 p-0.5">
+                  {/* Frequency lines */}
+                  <div className="relative w-full h-full">
+                    {/* Horizontal frequency measurement lines */}
+                    <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between">
+                      {/* Upper frequency band */}
+                      <div className={`h-1/2 w-full border-b ${isLight ? 'border-gray-300' : 'border-gray-600'} flex items-end`}>
+                        <div className="w-full flex justify-between px-1 text-[5px] font-mono">
+                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>88</span>
+                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>92</span>
+                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>96</span>
+                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>100</span>
+                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>104</span>
+                          <span className={isLight ? 'text-gray-500' : 'text-gray-400'}>108</span>
+                        </div>
+                      </div>
+                      
+                      {/* Lower frequency band - ticker marks */}
+                      <div className="h-1/2 w-full flex items-center">
+                        <div className="w-full flex justify-between px-1">
+                          {Array.from({ length: 15 }).map((_, i) => (
+                            <div 
+                              key={i} 
+                              className={`${
+                                isLight ? 'bg-gray-400' : 'bg-gray-500'
+                              } ${i % 5 === 0 ? 'h-[3px]' : 'h-[2px]'}`}
+                              style={{ width: '1px' }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Red frequency indicator */}
+                    <div 
+                      className="absolute h-full w-0.5 bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.7)] z-10 transition-all duration-150"
+                      style={{ 
+                        left: `${(audioRef.current?.volume || 1) * 100}%`, 
+                        transform: 'translateX(-50%)' 
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Volume slider - hidden but functional */}
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={audioRef.current?.volume || 1}
+                onChange={(e) => {
+                  if (audioRef.current) {
+                    audioRef.current.volume = parseFloat(e.target.value);
+                  }
+                }}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
+              />
+              
+              {/* Volume labels */}
+              <div className={`absolute -bottom-3 left-0 text-[9px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                MIN
+              </div>
+              <div className={`absolute -bottom-3 right-0 text-[9px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                MAX
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Debug info display */}
-        {debugInfo && (
-          <div className="text-center">
-            <div className={`text-sm font-medium px-4 py-2 rounded-lg inline-block ${
-              isLight 
-                ? 'bg-purple-100 text-purple-700' 
-                : 'bg-purple-900/30 text-purple-300'
-            }`}>
-              {debugInfo}
-            </div>
-          </div>
-        )}
+          </div></div>
       </div>
         {/* Episode list (expandable) */}
       <AnimatePresence>
