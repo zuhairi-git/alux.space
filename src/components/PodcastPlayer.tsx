@@ -783,8 +783,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             </motion.button>              {/* Vintage Radio Frequency Display - Reduced Height */}
             <div className="relative w-40 h-10 ml-1">
               {/* Radio frequency display body */}
-              <div className={`absolute inset-0 rounded-lg border ${
-                isLight ? 'border-gray-400 bg-gradient-to-b from-gray-50 to-gray-100' : 'border-gray-600 bg-gradient-to-b from-gray-800 to-gray-900'
+              <div className={`absolute inset-0 rounded-lg ${
+                isLight ? 'border-gray-400 bg-gradient-to-b from-gray-50 to-gray-100 transition-all duration-200 shadow-md' : 'bg-gradient-to-b from-gray-800 to-gray-900'
               } shadow-inner overflow-hidden`}>
                 
                 {/* Main frequency scale */}
