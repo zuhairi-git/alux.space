@@ -245,7 +245,6 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     
     audioRef.current.playbackRate = newRate;
     setPlaybackRate(newRate);  }, [playbackRate]);
-
   const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!audioRef.current || !duration) return;
     
@@ -258,6 +257,29 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   }, [duration]);
+
+  // Mouse tracking for progress bar hover preview
+  const [mousePosition, setMousePosition] = useState<number>(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleProgressMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!duration) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const progressBarWidth = rect.width;
+    const mousePercentage = Math.max(0, Math.min(100, (mouseX / progressBarWidth) * 100));
+    
+    setMousePosition(mousePercentage);
+  }, [duration]);
+
+  const handleProgressMouseEnter = useCallback(() => {
+    setIsHovering(true);
+  }, []);
+
+  const handleProgressMouseLeave = useCallback(() => {
+    setIsHovering(false);
+  }, []);
     const handleEpisodeSelect = useCallback((episodeId: string) => {
     if (currentEpisodeId === episodeId && isPlaying) {
       // If clicking the current playing episode, pause it
@@ -468,34 +490,145 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               expand_more
             </motion.span>
           </motion.button>
-        </div>
-
-        {/* Progress bar section with time display */}
+        </div>        {/* Modern Progress Bar with Time Ruler */}
         <div className="mb-8">
-          <div className={`w-full h-3 rounded-full ${
-            isLight ? 'bg-gray-200' : 'bg-gray-700'
-          } overflow-hidden cursor-pointer group relative`} onClick={handleProgressClick}>
-            <motion.div 
-              className={`h-full bg-gradient-to-r ${getAccentColor()} rounded-full relative transition-all duration-200`}
-              style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-              initial={{ width: 0 }}
-              animate={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="absolute right-0 top-1/2 w-5 h-5 bg-white rounded-full shadow-lg transform -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity border-2 border-purple-500" />
-            </motion.div>
-          </div>
-          
-          {/* Time display below progress bar */}
-          <div className="flex justify-between items-center mt-3">
-            <div className={`text-base font-medium ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-              {formatTime(currentTime)}
+          {/* Time markers above progress bar */}
+          <div className="relative w-full h-6 mb-2">
+            {/* Generate time ruler marks */}
+            <div className="absolute inset-x-0 bottom-0 h-4 flex justify-between items-end">
+              {duration > 0 && Array.from({ length: 11 }).map((_, i) => {
+                const timeAtMark = (duration * i) / 10;
+                const isQuarterMark = i % 2.5 === 0; // Marks at 0%, 25%, 50%, 75%, 100%
+                const isMajorMark = i === 0 || i === 5 || i === 10; // Start, middle, end
+                
+                return (
+                  <div key={i} className="flex flex-col items-center">
+                    {/* Tick mark */}
+                    <div 
+                      className={`${
+                        isMajorMark 
+                          ? `w-0.5 h-3 ${isLight ? 'bg-gray-400' : 'bg-gray-500'}` 
+                          : isQuarterMark 
+                            ? `w-0.5 h-2 ${isLight ? 'bg-gray-300' : 'bg-gray-600'}` 
+                            : `w-px h-1.5 ${isLight ? 'bg-gray-200' : 'bg-gray-700'}`
+                      } transition-colors duration-200`}
+                    />
+                    {/* Time label for major marks */}
+                    {isMajorMark && (
+                      <span className={`text-xs mt-1 ${isLight ? 'text-gray-500' : 'text-gray-400'} font-mono`}>
+                        {formatTime(timeAtMark)}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-            <div className={`text-base font-medium ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
+          </div>
+
+          {/* Main progress bar container */}
+          <div className="relative w-full">            {/* Background track with subtle gradient */}
+            <div 
+              className={`w-full h-4 rounded-lg relative overflow-hidden cursor-pointer group ${
+                isLight 
+                  ? 'bg-gradient-to-r from-gray-100 via-gray-150 to-gray-100 border border-gray-200' 
+                  : 'bg-gradient-to-r from-gray-800 via-gray-750 to-gray-800 border border-gray-600'
+              } shadow-inner transition-all duration-200 hover:shadow-md`}
+              onClick={handleProgressClick}
+              onMouseMove={handleProgressMouseMove}
+              onMouseEnter={handleProgressMouseEnter}
+              onMouseLeave={handleProgressMouseLeave}
+            >              {/* Subtle inner shadow for depth */}
+              <div className={`absolute inset-0 rounded-lg ${
+                isLight ? 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]' : 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]'
+              }`} />
+              
+              {/* Buffering indicator (behind progress) */}
+              <div className={`absolute left-0 top-0 h-full w-full ${
+                isLight ? 'bg-gray-300/30' : 'bg-gray-600/30'
+              } rounded-lg opacity-0 animate-pulse`} 
+              style={{ 
+                opacity: audioRef.current?.readyState && audioRef.current.readyState < 4 ? 0.5 : 0,
+                transition: 'opacity 0.3s ease'
+              }} />
+              
+              {/* Progress fill with glass effect */}
+              <motion.div 
+                className={`absolute left-0 top-0 h-full rounded-lg overflow-hidden`}
+                style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+                initial={{ width: 0 }}
+                animate={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                {/* Main gradient fill */}
+                <div className={`w-full h-full bg-gradient-to-r ${getAccentColor()} relative`}>
+                  {/* Glass overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 rounded-lg" />
+                  {/* Subtle shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-lg" />
+                </div>
+              </motion.div>
+
+              {/* Interactive playhead */}
+              <motion.div
+                className="absolute top-1/2 transform -translate-y-1/2 transition-all duration-200"
+                style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+                animate={{ 
+                  x: "-50%",
+                  scale: 1
+                }}
+                whileHover={{ scale: 1.2 }}
+              >
+                <div className={`w-6 h-6 rounded-full shadow-lg border-3 border-white transition-all duration-200 group-hover:shadow-xl ${
+                  isLight 
+                    ? 'bg-gradient-to-b from-purple-400 to-purple-600' 
+                    : 'bg-gradient-to-b from-purple-500 to-purple-700'
+                } opacity-0 group-hover:opacity-100`}>
+                  {/* Inner highlight */}
+                  <div className="absolute inset-1 rounded-full bg-gradient-to-b from-white/30 to-transparent" />
+                </div>
+              </motion.div>              {/* Hover preview line */}
+              <motion.div 
+                className="absolute top-0 h-full w-0.5 bg-purple-400/70 transition-opacity pointer-events-none rounded-full shadow-sm" 
+                style={{ left: `${mousePosition}%` }}
+                animate={{ 
+                  opacity: isHovering ? 1 : 0,
+                  scale: isHovering ? 1 : 0.8
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                {/* Preview time tooltip */}
+                {isHovering && duration > 0 && (
+                  <motion.div
+                    className={`absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs font-mono ${
+                      isLight 
+                        ? 'bg-gray-800 text-white' 
+                        : 'bg-white text-gray-800'
+                    } shadow-lg whitespace-nowrap z-10`}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {formatTime((mousePosition / 100) * duration)}
+                  </motion.div>
+                )}
+              </motion.div>
+            </div>
+          </div>
+            {/* Enhanced time display */}
+          <div className="flex justify-between items-center mt-4">
+            <div className={`flex items-center gap-2`}>
+              <div className={`text-lg font-bold font-mono ${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
+                {formatTime(currentTime)}
+              </div>
+              <div className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                /
+              </div>
+            </div>
+            <div className={`text-lg font-bold font-mono ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
               {formatTime(duration)}
             </div>
           </div>
-        </div>        {/* All controls in one row */}
+        </div>{/* All controls in one row */}
         <div className="flex items-center justify-center gap-6 mb-6">
           {/* Previous button */}
           <motion.button
