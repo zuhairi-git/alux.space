@@ -842,11 +842,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                             ))}
                           </div>
                         </div>
-                      </div>
-                      
-                      {/* Red frequency indicator */}
+                      </div>                      {/* Red frequency indicator */}
                       <div 
-                        className="absolute h-full w-0.5 bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.7)] z-10 transition-all duration-150"
+                        className="absolute h-full w-3 bg-red-500/60 shadow-[0_0_10px_rgba(239,68,68,0.5)] z-10 transition-all duration-200 rounded-sm hover:w-4 hover:bg-red-500/80 hover:shadow-[0_0_15px_rgba(239,68,68,0.7)] cursor-pointer"
                         style={{ 
                           left: `${(audioRef.current?.volume || 1) * 100}%`, 
                           transform: 'translateX(-50%)' 
