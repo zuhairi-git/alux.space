@@ -29,9 +29,9 @@ const Footer = () => {
     { href: '/blog', textKey: 'nav.blog' },
     { href: '/prompt', textKey: 'nav.prompts' }
   ];
-  
-  // Portfolio section links
+    // Portfolio section links
   const portfolioLinks = [
+    { href: '/portfolio/accessibility', textKey: 'portfolio.cases.accessibility' },
     { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration' },
     { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking' }
   ];
