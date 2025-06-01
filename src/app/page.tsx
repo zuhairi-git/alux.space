@@ -241,9 +241,8 @@ export default function Home() {
   const workContent = getWorkExperience();
   const skills = getSkills();
   const testimonials = getTestimonials();
-  
-  return (
-    <main className="min-h-screen bg-theme">
+    return (
+    <main id="main-content" className="min-h-screen bg-theme">
       {/* Background effect for colorful theme */}
       {theme === 'colorful' && (
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">          <div 

@@ -50,10 +50,13 @@ const Footer = () => {
       console.log(`Additional Info Content: "${t('footer.additionalInfo.content')}"`);
       console.groupEnd();
     }
-  }, [locale, t, debugTranslations]);
-
-  return (
-    <footer className="bg-theme border-t border-gray-200/10 pt-12 pb-4">
+  }, [locale, t, debugTranslations]);  return (
+    <footer 
+      id="footer" 
+      className="bg-theme border-t border-gray-200/10 pt-12 pb-4"
+      role="contentinfo"
+      aria-label={t('footer.aria.siteFooter')}
+    >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-8">
           {/* Brand & About Section */}
@@ -63,88 +66,99 @@ const Footer = () => {
               {t('home.about.quote')}
             </p>
             {/* Social Links */}
-            <div className="flex space-x-4 mt-4">
-              <motion.a 
-                href="https://twitter.com/alialzuhairi" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-primary-hover transition-colors"
-                whileHover={{ scale: 1.1 }}
-                aria-label="Twitter"
-              >
-                <span className="material-symbols material-symbols-rounded text-xl">flutter_dash</span>
-              </motion.a>
-              <motion.a 
-                href="https://www.linkedin.com/in/alialzuhairi/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-primary-hover transition-colors"
-                whileHover={{ scale: 1.1 }}
-                aria-label="LinkedIn"
-              >
-                <span className="material-symbols material-symbols-rounded text-xl">group</span>
-              </motion.a>
-              <motion.a 
-                href="https://github.com/alialzuhairi" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-primary-hover transition-colors"
-                whileHover={{ scale: 1.1 }}
-                aria-label="GitHub"
-              >
-                <span className="material-symbols material-symbols-rounded text-xl">code</span>
-              </motion.a>
-            </div>
+            <nav 
+              role="navigation" 
+              aria-label={t('footer.aria.socialMedia')}
+              className="mt-4"
+            >
+              <div className="flex space-x-4">
+                <motion.a 
+                  href="https://twitter.com/alialzuhairi" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
+                  whileHover={{ scale: 1.1 }}
+                  aria-label={`${t('footer.aria.socialPlatform')} Twitter`}
+                >
+                  <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">flutter_dash</span>
+                </motion.a>
+                <motion.a 
+                  href="https://www.linkedin.com/in/alialzuhairi/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
+                  whileHover={{ scale: 1.1 }}
+                  aria-label={`${t('footer.aria.socialPlatform')} LinkedIn`}
+                >
+                  <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">group</span>
+                </motion.a>
+                <motion.a 
+                  href="https://github.com/alialzuhairi" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
+                  whileHover={{ scale: 1.1 }}
+                  aria-label={`${t('footer.aria.socialPlatform')} GitHub`}
+                >
+                  <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">code</span>
+                </motion.a>
+              </div>
+            </nav>
           </div>
           {/* Navigation Links */}
           <div>
             <h4 className="font-semibold mb-4">{t('footer.quickLinks')}</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link 
-                    href={localizedHref(link.href)} 
-                    className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block"
-                  >
-                    {t(link.textKey)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <nav role="navigation" aria-label={t('footer.aria.quickLinks')}>
+              <ul className="space-y-2" role="list">
+                {quickLinks.map((link) => (
+                  <li key={link.href} role="listitem">
+                    <Link 
+                      href={localizedHref(link.href)} 
+                      className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                    >
+                      {t(link.textKey)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
             {/* Additional Information Section */}
-            <div className="mt-8">
-              <h4 className="font-semibold mb-4">{t('footer.additionalInfo.title')}</h4>
+            <section className="mt-8" aria-labelledby="additional-info-heading">
+              <h4 id="additional-info-heading" className="font-semibold mb-4">{t('footer.additionalInfo.title')}</h4>
               <div className="text-sm opacity-80">
                 {t('footer.additionalInfo.content')}
               </div>
-            </div>
+            </section>
           </div>
           {/* Portfolio section */}
           <div>
             <h4 className="font-semibold mb-4">{t('footer.portfolio')}</h4>
-            <ul className="space-y-2">
-              {portfolioLinks.map((link) => (
-                <li key={link.href}>
-                  <Link 
-                    href={localizedHref(link.href)} 
-                    className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block"
-                  >
-                    {t(link.textKey)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <nav role="navigation" aria-label={t('footer.aria.portfolioLinks')}>
+              <ul className="space-y-2" role="list">
+                {portfolioLinks.map((link) => (
+                  <li key={link.href} role="listitem">
+                    <Link 
+                      href={localizedHref(link.href)} 
+                      className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                    >
+                      {t(link.textKey)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
             {/* Contact info */}
-            <div className="mt-6">
-              <h4 className="font-semibold mb-4">{t('footer.contact')}</h4>
+            <section className="mt-6" aria-labelledby="contact-heading">
+              <h4 id="contact-heading" className="font-semibold mb-4">{t('footer.contact')}</h4>
               <a 
                 href="mailto:info@cvlanes.com" 
-                className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors flex items-center gap-1"
+                className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                aria-label={`${t('footer.aria.emailContact')} info@cvlanes.com`}
               >
-                <span className="material-symbols material-symbols-rounded text-base">mail</span>
+                <span className="material-symbols material-symbols-rounded text-base" aria-hidden="true">mail</span>
                 info@cvlanes.com
               </a>
-            </div>
+            </section>
           </div>
         </div>
         {/* Bottom section with copyright */}
@@ -154,8 +168,8 @@ const Footer = () => {
           </div>
           {/* City and profession */}
           <div className="mt-3 text-xs opacity-50 flex flex-wrap gap-4">
-            <span>Helsinki, Finland</span>
-            <span>Product Owner & Design Leader</span>
+            <span>{t('footer.location')}</span>
+            <span>{t('footer.profession')}</span>
           </div>
         </div>
       </div>

@@ -139,14 +139,27 @@ export default function TimelineCard({
     ) : '',
     transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)'
   };
-
   return (
-    <div className="group perspective-1000">
-      <div 
-        className={`relative rounded-2xl overflow-hidden ${getCardStyles()} transition-all duration-500`}
+    <div className="group perspective-1000">      <article 
+        className={`relative rounded-2xl overflow-hidden ${getCardStyles()} transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+          theme === 'colorful' ? 'focus:ring-fuchsia-500' :
+          theme === 'dark' ? 'focus:ring-blue-400' :
+          'focus:ring-blue-500'
+        }`}
         style={cardCustomStyles}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        tabIndex={0}
+        role="article"
+        aria-label={`${title} - ${date} - ${location}`}
+        onFocus={() => setIsHovered(true)}
+        onBlur={() => setIsHovered(false)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsHovered(!isHovered);
+          }
+        }}
       >
         {/* Floating particles (visible on hover) with enhanced visibility */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -205,10 +218,9 @@ export default function TimelineCard({
           } transition-all duration-300`}>
             <p className={getDescriptionStyles()}>
               {description}
-            </p>
-          </div>
+            </p>          </div>
         </div>
-      </div>
+      </article>
     </div>
   );
 }

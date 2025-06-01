@@ -140,7 +140,11 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
-          </div>          <Link href={cardLink} className="block h-full">
+          </div>          <Link 
+            href={cardLink} 
+            className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
+            aria-label={`${getTitle()} - ${getType()} - ${getStatus()}`}
+          >
             <div className="relative h-full flex flex-col justify-end p-6 z-10">
               {/* Project Type Badge - Top Right */}
               <div className="absolute top-3 right-3">

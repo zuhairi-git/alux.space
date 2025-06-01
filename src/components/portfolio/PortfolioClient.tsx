@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { RadioGroup } from '@headlessui/react';
 import Navigation from '@/components/Navigation';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { useLanguage } from '@/context/LanguageContext';
@@ -126,8 +127,7 @@ export default function PortfolioClient({ items }: Props) {
             >
               {getPortfolioDescription()}
             </motion.p>
-            
-            {/* Filters and View Mode Toggle */}
+              {/* Filters and View Mode Toggle */}
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-12">
               {/* Type Filters */}
               <motion.div 
@@ -136,29 +136,39 @@ export default function PortfolioClient({ items }: Props) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <button
-                  onClick={() => setFilter(null)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all ${
-                    filter === null
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                      : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
-                  }`}
-                >
-                  {getAllText()}
-                </button>
-                {itemTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setFilter(type)}
-                    className={`px-4 py-2 rounded-full text-sm transition-all ${
-                      filter === type
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                        : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
-                    }`}
-                  >
-                    {getType({ type: { en: type } } as PortfolioItem)}
-                  </button>
-                ))}
+                <RadioGroup value={filter} onChange={setFilter} className="flex flex-wrap gap-2">
+                  <RadioGroup.Label className="sr-only">Filter projects by type</RadioGroup.Label>
+                  
+                  <RadioGroup.Option value={null}>
+                    {({ checked }) => (
+                      <button
+                        className={`px-4 py-2 rounded-full text-sm transition-all ${
+                          checked
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                            : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                        }`}
+                      >
+                        {getAllText()}
+                      </button>
+                    )}
+                  </RadioGroup.Option>
+                  
+                  {itemTypes.map((type) => (
+                    <RadioGroup.Option key={type} value={type}>
+                      {({ checked }) => (
+                        <button
+                          className={`px-4 py-2 rounded-full text-sm transition-all ${
+                            checked
+                              ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                              : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                          }`}
+                        >
+                          {getType({ type: { en: type } } as PortfolioItem)}
+                        </button>
+                      )}
+                    </RadioGroup.Option>
+                  ))}
+                </RadioGroup>
               </motion.div>
               
               {/* View Mode Toggle */}
@@ -168,28 +178,39 @@ export default function PortfolioClient({ items }: Props) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <button
-                  onClick={() => setViewMode('standard')}
-                  className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
-                    viewMode === 'standard'
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                      : 'text-gray-400 hover:text-gray-100'
-                  }`}
-                >
-                  <span className="material-symbols text-sm">grid_view</span>
-                  <span>{getViewModeText('standard')}</span>
-                </button>
-                <button
-                  onClick={() => setViewMode('overlay')}
-                  className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
-                    viewMode === 'overlay'
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                      : 'text-gray-400 hover:text-gray-100'
-                  }`}
-                >
-                  <span className="material-symbols text-sm">layers</span>
-                  <span>{getViewModeText('overlay')}</span>
-                </button>
+                <RadioGroup value={viewMode} onChange={setViewMode} className="flex items-center">
+                  <RadioGroup.Label className="sr-only">Select view mode</RadioGroup.Label>
+                  
+                  <RadioGroup.Option value="standard">
+                    {({ checked }) => (
+                      <button
+                        className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
+                          checked
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                            : 'text-gray-400 hover:text-gray-100'
+                        }`}
+                      >
+                        <span className="material-symbols text-sm">grid_view</span>
+                        <span>{getViewModeText('standard')}</span>
+                      </button>
+                    )}
+                  </RadioGroup.Option>
+                  
+                  <RadioGroup.Option value="overlay">
+                    {({ checked }) => (
+                      <button
+                        className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
+                          checked
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                            : 'text-gray-400 hover:text-gray-100'
+                        }`}
+                      >
+                        <span className="material-symbols text-sm">layers</span>
+                        <span>{getViewModeText('overlay')}</span>
+                      </button>
+                    )}
+                  </RadioGroup.Option>
+                </RadioGroup>
               </motion.div>
             </div>
           </div>

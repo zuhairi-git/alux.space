@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";
 import Footer from "@/components/Footer";
+import SkipLinks from "@/components/ui/SkipLinks";
 import { i18n } from '../i18n';
 
 // Add Material Symbols stylesheet with better support for all languages including RTL
@@ -91,10 +92,10 @@ export default function RootLayout({
     <html suppressHydrationWarning>
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
-      </head>
-      <body className={`${poppins.variable} ${roboto.variable}`}>
+      </head>      <body className={`${poppins.variable} ${roboto.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
+            <SkipLinks />
             {children}
             <BackToTop />
             <Footer />

@@ -9,17 +9,21 @@ import { SupportedLanguage } from '@/podcast/types/podcast';
 import { getAudioFileForLanguage, filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge, setMediaSessionMetadata } from '@/podcast/utils/languageUtils';
 import EpisodeList from '@/podcast/components/EpisodeList';
 import LanguageBadge from '@/podcast/components/LanguageBadge';
+import { LiveRegion } from './ui/LiveRegion';
 
 interface PodcastPlayerProps {
   initialEpisodeId?: string;
 }
 
-const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {  const { theme } = useTheme();
+const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
+  const { theme } = useTheme();
   const { locale } = useLanguage();
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
   
   const audioRef = useRef<HTMLAudioElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const playButtonRef = useRef<HTMLButtonElement>(null);
   const currentLanguage = locale as SupportedLanguage;
   
   // Filter episodes based on current language
@@ -32,9 +36,12 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [playbackRate, setPlaybackRate] = useState(1);  const [loadError, setLoadError] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [loadError, setLoadError] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
-    // Find the current episode data
+  const [announcement, setAnnouncement] = useState('');
+
+  // Find the current episode data
   const currentEpisode = podcastEpisodes.find(ep => ep.id === currentEpisodeId) || availableEpisodes[0];
   const currentAudioFile = currentEpisode ? getAudioFileForLanguage(currentEpisode, currentLanguage) : '';
   const episodeDisplayLanguage = currentEpisode ? getEpisodeDisplayLanguage(currentEpisode, currentLanguage) : 'en';
@@ -89,10 +96,10 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       readyState: audioRef.current.readyState,
       networkState: audioRef.current.networkState
     });
-    
-    if (isPlaying) {
+      if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
+      setAnnouncement(locale === 'fi' ? 'Podcast pysäytetty' : 'Podcast paused');
     } else {
       // Ensure audio is loaded before trying to play
       if (audioRef.current.readyState < 2) {
@@ -111,8 +118,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
           console.log('Audio paused:', audioRef.current?.paused);
           setIsPlaying(true);
           setLoadError(false);
-        })
-        .catch(error => {
+          setAnnouncement(locale === 'fi' ? 'Podcast toistetaan' : 'Podcast playing');
+        })        .catch(error => {
           console.error('Error playing audio:', error);
           console.error('Audio source:', audioRef.current?.src);
           console.error('Current audio file:', currentAudioFile);
@@ -120,9 +127,10 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
           console.error('Network state:', audioRef.current?.networkState);
           setLoadError(true);
           setIsPlaying(false);
+          setAnnouncement(locale === 'fi' ? 'Virhe äänen toistossa' : 'Error playing audio');
         });
     }
-  }, [isPlaying, currentAudioFile, currentEpisode, hasUserInteracted]);
+  }, [isPlaying, currentAudioFile, currentEpisode, hasUserInteracted, locale]);
     const stopAudio = useCallback(() => {
     if (!audioRef.current) return;
     
@@ -235,8 +243,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
-  
-  const changePlaybackRate = useCallback(() => {
+    const changePlaybackRate = useCallback(() => {
     if (!audioRef.current) return;
     
     const rates = [1, 1.5, 2, 3];
@@ -244,7 +251,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
     const newRate = rates[nextRateIndex];
     
     audioRef.current.playbackRate = newRate;
-    setPlaybackRate(newRate);  }, [playbackRate]);
+    setPlaybackRate(newRate);
+    setAnnouncement(`${locale === 'fi' ? 'Toistonopeus muutettu' : 'Playback speed changed to'} ${newRate}x`);
+  }, [playbackRate, locale]);
   const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!audioRef.current || !duration) return;
     
@@ -280,7 +289,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
   const handleProgressMouseLeave = useCallback(() => {
     setIsHovering(false);
   }, []);
-    const handleEpisodeSelect = useCallback((episodeId: string) => {
+  const handleEpisodeSelect = useCallback((episodeId: string) => {
+    const selectedEpisode = podcastEpisodes.find(ep => ep.id === episodeId);
+    
     if (currentEpisodeId === episodeId && isPlaying) {
       // If clicking the current playing episode, pause it
       togglePlay();
@@ -288,8 +299,15 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       // Otherwise, switch to the new episode
       stopAudio();
       setCurrentEpisodeId(episodeId);
+      
+      // Announce episode change
+      if (selectedEpisode) {
+        setAnnouncement(`${locale === 'fi' ? 'Valittu jakso:' : 'Selected episode:'} ${selectedEpisode.title}`);
+      }
     }
-  }, [currentEpisodeId, isPlaying, togglePlay, stopAudio]);  // Navigation functions for next/previous episodes
+  }, [currentEpisodeId, isPlaying, togglePlay, stopAudio, locale]);
+
+  // Navigation functions for next/previous episodes
   const goToNextEpisode = useCallback(() => {
     const currentIndex = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId);
     if (currentIndex < availableEpisodes.length - 1) {
@@ -304,6 +322,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       
       // Change to next episode
       setCurrentEpisodeId(nextEpisode.id);
+      setAnnouncement(`${locale === 'fi' ? 'Seuraava jakso:' : 'Next episode:'} ${nextEpisode.title}`);
       
       // Auto-play the next episode if something was playing before
       if (wasPlaying) {
@@ -329,8 +348,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
         setTimeout(autoPlayWhenReady, 300);
       }
     }
-  }, [availableEpisodes, currentEpisodeId, isPlaying]);
-  const goToPreviousEpisode = useCallback(() => {
+  }, [availableEpisodes, currentEpisodeId, isPlaying, locale]);  const goToPreviousEpisode = useCallback(() => {
     const currentIndex = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId);
     if (currentIndex > 0) {
       const previousEpisode = availableEpisodes[currentIndex - 1];
@@ -344,6 +362,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       
       // Change to previous episode
       setCurrentEpisodeId(previousEpisode.id);
+      setAnnouncement(`${locale === 'fi' ? 'Edellinen jakso:' : 'Previous episode:'} ${previousEpisode.title}`);
       
       // Auto-play the previous episode if something was playing before
       if (wasPlaying) {
@@ -368,7 +387,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
         setTimeout(autoPlayWhenReady, 300);
       }
     }
-  }, [availableEpisodes, currentEpisodeId, isPlaying]);
+  }, [availableEpisodes, currentEpisodeId, isPlaying, locale]);
   // Check if next/previous buttons should be enabled
   const canGoNext = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) < availableEpisodes.length - 1;
   const canGoPrevious = availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) > 0;
@@ -407,11 +426,75 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
       });
 
       navigator.mediaSession.setActionHandler('nexttrack', () => {
-        if (canGoNext) goToNextEpisode();
-      });
+        if (canGoNext) goToNextEpisode();      });
     }
   }, [currentEpisode, isPlaying, duration, togglePlay, stopAudio, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode]);
-    return (
+
+  // Keyboard shortcuts for accessibility
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Only handle shortcuts when not typing in an input
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (event.key) {
+        case ' ':
+          event.preventDefault();
+          togglePlay();
+          break;
+        case 'ArrowRight':
+          if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            if (canGoNext) goToNextEpisode();
+          } else if (audioRef.current && duration) {
+            event.preventDefault();
+            const newTime = Math.min(duration, audioRef.current.currentTime + 10);
+            audioRef.current.currentTime = newTime;
+            setAnnouncement(`${locale === 'fi' ? 'Siirtyi kohtaan' : 'Seeked to'} ${formatTime(newTime)}`);
+          }
+          break;
+        case 'ArrowLeft':
+          if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            if (canGoPrevious) goToPreviousEpisode();
+          } else if (audioRef.current) {
+            event.preventDefault();
+            const newTime = Math.max(0, audioRef.current.currentTime - 10);
+            audioRef.current.currentTime = newTime;
+            setAnnouncement(`${locale === 'fi' ? 'Siirtyi kohtaan' : 'Seeked to'} ${formatTime(newTime)}`);
+          }
+          break;
+        case 'm':
+        case 'M':
+          event.preventDefault();
+          if (audioRef.current) {
+            audioRef.current.muted = !audioRef.current.muted;
+            setAnnouncement(audioRef.current.muted 
+              ? (locale === 'fi' ? 'Ääni mykistetty' : 'Audio muted')
+              : (locale === 'fi' ? 'Ääni palautettu' : 'Audio unmuted')
+            );
+          }
+          break;
+        case 's':
+        case 'S':
+          event.preventDefault();
+          stopAudio();
+          setAnnouncement(locale === 'fi' ? 'Podcast pysäytetty' : 'Podcast stopped');
+          break;
+        case 'r':
+        case 'R':
+          event.preventDefault();
+          changePlaybackRate();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [togglePlay, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode, stopAudio, changePlaybackRate, duration, locale]);
+    
+  return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -482,17 +565,24 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               {locale === 'fi' ? 'Jakso' : 'Episode'} {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1} / {availableEpisodes.length}
             </div>
           </div>
-          
-          {/* Expand/collapse button */}
+            {/* Expand/collapse button */}
           <motion.button
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+              setAnnouncement(isExpanded 
+                ? (locale === 'fi' ? 'Jaksolista piilotettu' : 'Episode list hidden')
+                : (locale === 'fi' ? 'Jaksolista näytetään' : 'Episode list shown')
+              );
+            }}
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
             className={`p-3 sm:p-4 rounded-xl ${
               isLight 
                 ? 'bg-gray-100 hover:bg-gray-200' 
                 : 'bg-gray-800 hover:bg-gray-700'
-            } transition-all duration-200 shadow-lg`}
+            } transition-all duration-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            aria-expanded={isExpanded}
+            aria-label={isExpanded ? (locale === 'fi' ? 'Piilota jaksot' : 'Hide episodes') : (locale === 'fi' ? 'Näytä jaksot' : 'Show episodes')}
             title={isExpanded ? (locale === 'fi' ? 'Piilota jaksot' : 'Hide episodes') : (locale === 'fi' ? 'Näytä jaksot' : 'Show episodes')}
           >
             <motion.span 
@@ -542,15 +632,54 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
           <div className="relative w-full">
             {/* Background track with subtle gradient */}
             <div 
+              ref={progressRef}
+              role="slider"
+              aria-label={locale === 'fi' ? 'Äänen edistyminen' : 'Audio progress'}
+              aria-valuemin={0}
+              aria-valuemax={duration}
+              aria-valuenow={currentTime}
+              aria-valuetext={`${formatTime(currentTime)} / ${formatTime(duration)}`}
+              tabIndex={0}
               className={`w-full h-6 sm:h-4 rounded-lg relative overflow-hidden cursor-pointer group ${
                 isLight 
                   ? 'bg-gradient-to-r from-gray-100 via-gray-150 to-gray-100 border border-gray-200' 
                   : 'bg-gradient-to-r from-gray-800 via-gray-750 to-gray-800 border border-gray-600'
-              } shadow-inner transition-all duration-200 hover:shadow-md`}
+              } shadow-inner transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
               onClick={handleProgressClick}
               onMouseMove={handleProgressMouseMove}
               onMouseEnter={handleProgressMouseEnter}
               onMouseLeave={handleProgressMouseLeave}
+              onKeyDown={(e) => {
+                if (!audioRef.current || !duration) return;
+                
+                let newTime = currentTime;
+                const step = duration / 100; // 1% steps
+                
+                switch (e.key) {
+                  case 'ArrowLeft':
+                    e.preventDefault();
+                    newTime = Math.max(0, currentTime - step);
+                    break;
+                  case 'ArrowRight':
+                    e.preventDefault();
+                    newTime = Math.min(duration, currentTime + step);
+                    break;
+                  case 'Home':
+                    e.preventDefault();
+                    newTime = 0;
+                    break;
+                  case 'End':
+                    e.preventDefault();
+                    newTime = duration;
+                    break;
+                  default:
+                    return;
+                }
+                
+                audioRef.current.currentTime = newTime;
+                setCurrentTime(newTime);
+                setAnnouncement(`${locale === 'fi' ? 'Siirtyi kohtaan' : 'Seeked to'} ${formatTime(newTime)}`);
+              }}
             >{/* Subtle inner shadow for depth */}
               <div className={`absolute inset-0 rounded-lg ${
                 isLight ? 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]' : 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]'
@@ -641,8 +770,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
           </div>
         </div>        {/* All controls in one horizontal row */}
         <div className="mb-4 sm:mb-6">
-          <div className="flex items-center justify-center gap-1 sm:gap-2">
-            {/* Previous button */}
+          <div className="flex items-center justify-center gap-1 sm:gap-2">            {/* Previous button */}
             <motion.button
               onClick={goToPreviousEpisode}
               whileTap={{ scale: 0.95 }}
@@ -651,8 +779,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
-              } ${!canGoPrevious ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
+              } ${!canGoPrevious ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
               disabled={loadError || !canGoPrevious}
+              aria-label={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
               title={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
             >
               <svg 
@@ -662,10 +791,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               >
                 <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
               </svg>
-            </motion.button>
-
-            {/* Play/Pause button */}
+            </motion.button>            {/* Play/Pause button */}
             <motion.button
+              ref={playButtonRef}
               onClick={togglePlay}
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
@@ -673,8 +801,10 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 isLight 
                   ? 'bg-purple-100 hover:bg-purple-200' 
                   : 'bg-purple-900/50 hover:bg-purple-800/50'
-              } border-3 border-purple-500 shadow-2xl transition-all duration-200`}
+              } border-3 border-purple-500 shadow-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
               disabled={loadError}
+              aria-label={isPlaying ? (locale === 'fi' ? 'Pysäytä podcast' : 'Pause podcast') : (locale === 'fi' ? 'Toista podcast' : 'Play podcast')}
+              title={isPlaying ? (locale === 'fi' ? 'Pysäytä' : 'Pause') : (locale === 'fi' ? 'Toista' : 'Play')}
             >
               <AnimatePresence mode="wait">
                 {isPlaying ? (
@@ -703,9 +833,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                   </motion.svg>
                 )}
               </AnimatePresence>
-            </motion.button>
-
-            {/* Next button */}
+            </motion.button>            {/* Next button */}
             <motion.button
               onClick={goToNextEpisode}
               whileTap={{ scale: 0.95 }}
@@ -714,8 +842,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
-              } ${!canGoNext ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg`}
+              } ${!canGoNext ? 'opacity-50 cursor-not-allowed' : ''} transition-all duration-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
               disabled={loadError || !canGoNext}
+              aria-label={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
               title={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
             >
               <svg 
@@ -725,9 +854,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               >
                 <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
               </svg>
-            </motion.button>
-
-            {/* Stop button */}
+            </motion.button>            {/* Stop button */}
             <motion.button
               onClick={stopAudio}
               whileTap={{ scale: 0.95 }}
@@ -736,8 +863,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
-              } transition-all duration-200 shadow-md`}
+              } transition-all duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
               disabled={loadError}
+              aria-label={locale === 'fi' ? 'Pysäytä podcast' : 'Stop podcast'}
               title={locale === 'fi' ? 'Pysäytä' : 'Stop'}
             >
               <svg 
@@ -748,8 +876,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
               </svg>
             </motion.button>
-            
-            {/* Playback rate button */}
+              {/* Playback rate button */}
             <motion.button
               onClick={changePlaybackRate}
               whileTap={{ scale: 0.95 }}
@@ -758,8 +885,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
-              } transition-all duration-200 shadow-md`}
+              } transition-all duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
               disabled={loadError}
+              aria-label={`${locale === 'fi' ? 'Toistonopeus' : 'Playback speed'} ${playbackRate}x`}
               title={locale === 'fi' ? 'Toistonopeus' : 'Playback speed'}
             >
               <span className="material-symbols-rounded text-purple-500 text-xs sm:text-sm">speed</span>
@@ -771,13 +899,14 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
               >
                 {playbackRate}x
               </motion.span>
-            </motion.button>
-
-            {/* Mute button */}
-            <motion.button
-              onClick={() => {
+            </motion.button>            {/* Mute button */}
+            <motion.button              onClick={() => {
                 if (audioRef.current) {
                   audioRef.current.muted = !audioRef.current.muted;
+                  setAnnouncement(audioRef.current.muted 
+                    ? (locale === 'fi' ? 'Ääni mykistetty' : 'Audio muted')
+                    : (locale === 'fi' ? 'Ääni palautettu' : 'Audio unmuted')
+                  );
                   console.log('Muted:', audioRef.current.muted);
                 }
               }}
@@ -787,7 +916,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 isLight 
                   ? 'bg-gray-100 hover:bg-gray-200' 
                   : 'bg-gray-800 hover:bg-gray-700'
-              } transition-all duration-200 shadow-md`}
+              } transition-all duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+              aria-label={audioRef.current?.muted 
+                ? (locale === 'fi' ? 'Poista mykistys' : 'Unmute audio')
+                : (locale === 'fi' ? 'Mykistä ääni' : 'Mute audio')
+              }
               title={locale === 'fi' ? 'Mykistä/poista mykistys' : 'Mute/unmute'}
             >
               <span className="text-xs sm:text-sm">
@@ -844,8 +977,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                   </div>
                 </div>
               </div>
-              
-              {/* Volume slider - hidden but functional */}
+                {/* Volume slider - hidden but functional */}
               <input
                 type="range"
                 min="0"
@@ -854,11 +986,18 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
                 value={audioRef.current?.volume || 1}
                 onChange={(e) => {
                   if (audioRef.current) {
-                    audioRef.current.volume = parseFloat(e.target.value);
+                    const newVolume = parseFloat(e.target.value);
+                    audioRef.current.volume = newVolume;
+                    setAnnouncement(`${locale === 'fi' ? 'Äänenvoimakkuus' : 'Volume'} ${Math.round(newVolume * 100)}%`);
                   }
                 }}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
-              />            </div>
+                aria-label={locale === 'fi' ? 'Äänenvoimakkuus' : 'Volume control'}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round((audioRef.current?.volume || 1) * 100)}
+                aria-valuetext={`${Math.round((audioRef.current?.volume || 1) * 100)}%`}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20 focus:opacity-100"
+              /></div>
           </div>
         </div>
       </div>
@@ -908,9 +1047,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             </motion.button>
           </div>
         </div>
-      )}
-
-      {/* No audio file available message */}
+      )}      {/* No audio file available message */}
       {!currentAudioFile && !loadError && (
         <div className={`p-4 ${isLight ? 'bg-yellow-50 text-yellow-600' : 'bg-yellow-900/20 text-yellow-400'} text-sm`}>
           {locale === 'fi' 
@@ -918,6 +1055,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => { 
             : 'No audio file available for this episode in the selected language.'}
         </div>
       )}
+
+      {/* LiveRegion for screen reader announcements */}
+      <LiveRegion message={announcement} />
     </motion.div>
   );
 };

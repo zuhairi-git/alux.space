@@ -70,65 +70,80 @@ function formatRegularContent(content: string) {
     
     // Skip empty blocks
     if (!trimmedBlock) return null;
-    
-    // Headings (h1, h2, h3)
+      // Headings (h1, h2, h3)
     if (trimmedBlock.startsWith('#')) {
       // H1 heading
       if (trimmedBlock.startsWith('# ')) {
+        const headingText = trimmedBlock.replace(/^# /, '');
+        const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         return (
           <motion.h1 
             key={index} 
+            id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl font-bold mt-12 mb-6 text-primary"
+            className="text-3xl font-bold mt-12 mb-6 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            tabIndex={-1}
           >
-            {trimmedBlock.replace(/^# /, '')}
+            {headingText}
           </motion.h1>
         );
       }
       
       // H2 heading
       if (trimmedBlock.startsWith('## ')) {
+        const headingText = trimmedBlock.replace(/^## /, '');
+        const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         return (
           <motion.h2 
             key={index} 
+            id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-2xl font-bold mt-10 mb-5 text-primary"
+            className="text-2xl font-bold mt-10 mb-5 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            tabIndex={-1}
           >
-            {trimmedBlock.replace(/^## /, '')}
+            {headingText}
           </motion.h2>
         );
       }
       
       // H3 heading
       if (trimmedBlock.startsWith('### ')) {
+        const headingText = trimmedBlock.replace(/^### /, '');
+        const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         return (
           <motion.h3 
             key={index} 
+            id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl font-semibold mt-8 mb-4 text-primary"
+            className="text-xl font-semibold mt-8 mb-4 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            tabIndex={-1}
           >
-            {trimmedBlock.replace(/^### /, '')}
+            {headingText}
           </motion.h3>
         );
       }
       
       // H4 heading
       if (trimmedBlock.startsWith('#### ')) {
+        const headingText = trimmedBlock.replace(/^#### /, '');
+        const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         return (
           <motion.h4 
             key={index} 
+            id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg font-semibold mt-6 mb-3 text-primary"
+            className="text-lg font-semibold mt-6 mb-3 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            tabIndex={-1}
           >
-            {trimmedBlock.replace(/^#### /, '')}
+            {headingText}
           </motion.h4>
         );
       }
@@ -191,20 +206,27 @@ function formatRegularContent(content: string) {
         </motion.div>
       );
     }
-    
-    // Code blocks
+      // Code blocks
     if (trimmedBlock.startsWith('```')) {
+      const langMatch = trimmedBlock.match(/```(\w+)/);
+      const language = langMatch ? langMatch[1] : 'text';
       const code = trimmedBlock.replace(/```(.*)\n/, '').replace(/```$/, '');
       return (
         <motion.div 
-          key={index} 
+          key={index}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6"
+          role="region"
+          aria-label={`Code block in ${language}`}
         >
-          <pre className="bg-theme/30 backdrop-blur-sm p-4 rounded-lg overflow-x-auto text-sm text-theme border border-primary/10">
-            <code>{code}</code>
+          <pre 
+            className="bg-theme/30 backdrop-blur-sm p-4 rounded-lg overflow-x-auto text-sm text-theme border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900"
+            tabIndex={0}
+            aria-label={`Code snippet in ${language}`}
+          >
+            <code lang={language}>{code}</code>
           </pre>
         </motion.div>
       );
@@ -374,9 +396,13 @@ const BlogContent: React.FC<BlogContentProps> = ({ content }) => {
   }, [content]);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 pt-8 pb-16">
+    <article 
+      className="max-w-4xl mx-auto px-4 pt-8 pb-16"
+      role="main"
+      aria-label="Blog post content"
+    >
       {fullContent}
-    </div>
+    </article>
   );
 }
 

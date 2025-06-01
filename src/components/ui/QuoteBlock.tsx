@@ -8,9 +8,11 @@ interface QuoteBlockProps {
   quote: string;
   author?: string;
   variant?: 'default' | 'simple' | 'minimal';
+  cite?: string; // URL or source for the quote
+  lang?: string; // Language of the quote if different from page language
 }
 
-const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
+const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, lang }) => {
   const { theme } = useTheme();  const isLight = theme === 'light';
   
   // Determine the appropriate variant based on content if not explicitly provided
@@ -18,7 +20,6 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
 
   // Highlight 'thinking' with underline decoration
   const quoteHtml = quote.replace(/\bthinking\b/gi, '<span class="underline decoration-4 decoration-yellow-400/100">$&</span>');
-
   // For minimal style, just render the text with minimal formatting
   if (determinedVariant === 'minimal') {
     return (
@@ -28,8 +29,15 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5 }}
         className="my-8 max-w-4xl mx-auto relative"
+        role="region"
+        aria-label="Quote"
       >
-        <blockquote className="text-xl md:text-2xl leading-relaxed italic text-theme" dangerouslySetInnerHTML={{ __html: quoteHtml }} />
+        <blockquote 
+          className="text-xl md:text-2xl leading-relaxed italic text-theme" 
+          dangerouslySetInnerHTML={{ __html: quoteHtml }}
+          lang={lang}
+          cite={cite}
+        />
         
         {author && (
           <footer className="text-right mt-2">
@@ -39,8 +47,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
       </motion.div>
     );
   }
-  
-  // For simple style, use a cleaner blockquote without decorative elements
+    // For simple style, use a cleaner blockquote without decorative elements
   if (determinedVariant === 'simple') {
     return (
       <motion.div
@@ -49,13 +56,20 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5 }}
         className="my-10 max-w-4xl mx-auto relative"
+        role="region"
+        aria-label="Quote"
       >
         <div className={`py-6 px-6 border-l-4 ${
           isLight 
             ? 'border-primary/30 bg-gray-50' 
             : 'border-primary/50 bg-gray-900/30'
         } rounded-r-md`}>
-          <blockquote className="text-xl md:text-2xl leading-relaxed mb-3 text-theme" dangerouslySetInnerHTML={{ __html: quoteHtml }} />
+          <blockquote 
+            className="text-xl md:text-2xl leading-relaxed mb-3 text-theme" 
+            dangerouslySetInnerHTML={{ __html: quoteHtml }}
+            lang={lang}
+            cite={cite}
+          />
           
           {author && (
             <footer className="text-right">
@@ -66,8 +80,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
       </motion.div>
     );
   }
-  
-  // Default variant (rich styling with decorative elements)
+    // Default variant (rich styling with decorative elements)
   return (
     <motion.div
       initial={{ opacity: 0.5, y: 20 }}
@@ -75,13 +88,16 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5 }}
       className={`my-12 max-w-4xl mx-auto relative ${isLight ? 'text-gray-800' : 'text-gray-100'}`}
+      role="region"
+      aria-label="Quote"
     >
       {/* Decorative elements */}
-      <div className="absolute -top-6 -left-2 md:-left-8">
+      <div className="absolute -top-6 -left-2 md:-left-8" aria-hidden="true">
         <svg 
           className="w-12 h-12 md:w-16 md:h-16 text-primary opacity-20" 
           fill="currentColor" 
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
         </svg>
@@ -99,9 +115,15 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant }) => {
           className={`absolute h-px w-full top-1/2 -right-4 ${
             isLight ? 'bg-gradient-to-l from-transparent via-primary/10 to-transparent' : 'bg-gradient-to-l from-transparent via-primary/20 to-transparent'
           }`}
+          aria-hidden="true"
         />
         
-        <blockquote className="text-left text-xl md:text-2xl leading-relaxed mb-4 relative z-10" dangerouslySetInnerHTML={{ __html: quoteHtml }} />
+        <blockquote 
+          className="text-left text-xl md:text-2xl leading-relaxed mb-4 relative z-10" 
+          dangerouslySetInnerHTML={{ __html: quoteHtml }}
+          lang={lang}
+          cite={cite}
+        />
         
         {author && (
           <footer className="text-right">

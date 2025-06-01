@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { RadioGroup } from '@headlessui/react';
 import BlogCard from './BlogCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
@@ -112,16 +113,17 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
       return locale === 'fi' ? 'Peite' : 'Overlay';
     }
   };
-  
-  return (
-    <div className="min-h-screen pt-32 pb-16">
+    return (
+    <main className="min-h-screen pt-32 pb-16" role="main">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mb-16">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-4xl md:text-5xl font-bold mb-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            tabIndex={-1}
+            id="blog-page-title"
           >
             {t('blogPage.title')}
           </motion.h1>
@@ -131,12 +133,15 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl opacity-60 mb-12"
+            role="doc-subtitle"
           >
             {t('blogPage.description')}
           </motion.p>
           
           {/* Filters and View Mode Toggle */}
-          <div className="flex flex-col md:flex-row md:items-center gap-4 mb-12">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 mb-12" role="region" aria-labelledby="blog-controls">
+            <h2 id="blog-controls" className="sr-only">{t('blog.aria.filterControls')}</h2>
+            
             {/* Category Filters */}
             <motion.div 
               className="flex flex-wrap gap-2 flex-1"
@@ -144,66 +149,107 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <button
-                onClick={() => setFilter(null)}
-                className={`px-4 py-2 rounded-full text-sm transition-all ${
-                  filter === null
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                    : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
-                }`}
+              <RadioGroup 
+                value={filter} 
+                onChange={setFilter} 
+                className="flex flex-wrap gap-2"
+                aria-label={t('blog.aria.categoryFilter')}
               >
-                {getAllText()}
-              </button>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setFilter(category)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all ${
-                    filter === category
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                      : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
-                  }`}
-                >
-                  {translateCategory(category)}
-                </button>
-              ))}
-            </motion.div>              {/* View Mode Toggle */}
+                <RadioGroup.Label className="sr-only">{t('blog.aria.categoryFilterDescription')}</RadioGroup.Label>
+                
+                <RadioGroup.Option value={null}>
+                  {({ checked }) => (
+                    <button
+                      className={`px-4 py-2 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                        checked
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                          : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                      }`}
+                      aria-pressed={checked}
+                      aria-label={`${t('blog.aria.showAllPosts')} ${getAllText()}`}
+                    >
+                      {getAllText()}
+                    </button>
+                  )}
+                </RadioGroup.Option>
+                
+                {categories.map((category) => (
+                  <RadioGroup.Option key={category} value={category}>
+                    {({ checked }) => (
+                      <button
+                        className={`px-4 py-2 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                          checked
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                            : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                        }`}
+                        aria-pressed={checked}
+                        aria-label={`${t('blog.aria.filterByCategory')} ${translateCategory(category)}`}
+                      >
+                        {translateCategory(category)}
+                      </button>
+                    )}
+                  </RadioGroup.Option>
+                ))}
+              </RadioGroup>
+            </motion.div>
+            
+            {/* View Mode Toggle */}
             <motion.div 
               className="flex items-center bg-theme-card rounded-full p-1"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <motion.button
-                onClick={() => setViewMode('standard')}
-                className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
-                  viewMode === 'standard'
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                    : 'text-gray-400 hover:text-gray-100'
-                }`}
-                whileHover={{ scale: viewMode === 'standard' ? 1 : 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              <RadioGroup 
+                value={viewMode} 
+                onChange={setViewMode} 
+                className="flex items-center"
+                aria-label={t('blog.aria.viewMode')}
               >
-                <span className="material-symbols-rounded text-sm">grid_view</span>
-                <span>{getViewModeText('standard')}</span>
-              </motion.button>
-              <motion.button
-                onClick={() => setViewMode('overlay')}
-                className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all ${
-                  viewMode === 'overlay'
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
-                    : 'text-gray-400 hover:text-gray-100'
-                }`}
-                whileHover={{ scale: viewMode === 'overlay' ? 1 : 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >                <span className="material-symbols-rounded text-sm">layers</span>
-                <span>{getViewModeText('overlay')}</span>
-              </motion.button>
+                <RadioGroup.Label className="sr-only">{t('blog.aria.viewModeDescription')}</RadioGroup.Label>
+                
+                <RadioGroup.Option value="standard">
+                  {({ checked }) => (
+                    <motion.button
+                      className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                        checked
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                          : 'text-gray-400 hover:text-gray-100'
+                      }`}
+                      whileHover={{ scale: checked ? 1 : 1.05 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      aria-pressed={checked}
+                      aria-label={`${t('blog.aria.switchToViewMode')} ${getViewModeText('standard')}`}
+                    >
+                      <span className="material-symbols-rounded text-sm" aria-hidden="true">grid_view</span>
+                      <span>{getViewModeText('standard')}</span>
+                    </motion.button>
+                  )}
+                </RadioGroup.Option>
+                
+                <RadioGroup.Option value="overlay">
+                  {({ checked }) => (
+                    <motion.button
+                      className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                        checked
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                          : 'text-gray-400 hover:text-gray-100'
+                      }`}
+                      whileHover={{ scale: checked ? 1 : 1.05 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      aria-pressed={checked}
+                      aria-label={`${t('blog.aria.switchToViewMode')} ${getViewModeText('overlay')}`}
+                    >
+                      <span className="material-symbols-rounded text-sm" aria-hidden="true">layers</span>
+                      <span>{getViewModeText('overlay')}</span>
+                    </motion.button>
+                  )}
+                </RadioGroup.Option>
+              </RadioGroup>
             </motion.div>
           </div>
-        </div>
-          {/* Blog Posts Grid */}
-        <motion.div 
+        </div>          {/* Blog Posts Grid */}
+        <motion.section 
           className={`grid grid-cols-1 ${
             viewMode === 'standard' 
               ? 'md:grid-cols-2 lg:grid-cols-3' 
@@ -221,12 +267,17 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           initial="hidden"
           animate="show"
           key={viewMode} // This forces re-render animation when view mode changes
+          role="region"
+          aria-label={t('blog.aria.blogPosts')}
+          aria-live="polite"
+          aria-atomic="false"
         >
           {filteredPosts.map((post, index) => {
             // Get the content for the current locale or fall back to English
             const localeContent = post.content[locale as keyof typeof post.content] || post.content.en;
             
-            return (              <motion.div
+            return (
+              <motion.article
                 key={post.slug}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
@@ -235,6 +286,8 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
                 className={`h-full ${viewMode === 'overlay' ? 'aspect-[3/4]' : ''}`}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.3 }}
+                role="article"
+                aria-labelledby={`post-title-${post.slug}`}
               >
                 <BlogCard 
                   post={{
@@ -249,10 +302,10 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
                   index={index}
                   viewMode={viewMode}
                 />
-              </motion.div>
+              </motion.article>
             );
           })}
-        </motion.div>
+        </motion.section>
         
         {/* Empty state when no posts match filter */}
         {filteredPosts.length === 0 && (
@@ -260,11 +313,13 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-center py-12"
+            role="status"
+            aria-live="polite"
           >
             <p className="text-xl opacity-60">{getNoPostsText()}</p>
           </motion.div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

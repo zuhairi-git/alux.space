@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Menu, Disclosure } from '@headlessui/react';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageSwitcher from './LanguageSwitcher';
+import FocusTrap from './ui/FocusTrap';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
@@ -29,8 +31,7 @@ const homeDropdownItems = [
 
 const Navigation = () => {
   const { scrollY } = useScroll();
-  const { theme } = useTheme();
-  const { locale } = useLanguage();
+  const { theme } = useTheme();  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   
   // Helper function to add locale to paths
@@ -67,85 +68,45 @@ const Navigation = () => {
     scrollY,
     [0, 100],
     [1, 0.95]
-  );
+  );    const [menuOpen, setMenuOpen] = useState(false);
+    const mobileMenuRef = useRef<HTMLDivElement>(null);
+    // Announce menu state changes to screen readers
+  const handleMenuToggle = useCallback((isOpen: boolean) => {
+    setMenuOpen(isOpen);
+    // Note: Screen reader announcements could be implemented here with LiveRegion
+  }, []);
   
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [portfolioOpen, setPortfolioOpen] = useState(false);
-  const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
-  const [homeOpen, setHomeOpen] = useState(false);
-  const [mobileHomeOpen, setMobileHomeOpen] = useState(false);
-  
-  const portfolioDropdownRef = useRef<HTMLDivElement>(null);
-  const homeDropdownRef = useRef<HTMLDivElement>(null);
-  const mobilePortfolioRef = useRef<HTMLDivElement>(null);
-  const mobileHomeRef = useRef<HTMLDivElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  
-  // Close the dropdowns when clicking outside
+  // Close the menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        portfolioDropdownRef.current && 
-        !portfolioDropdownRef.current.contains(event.target as Node)
+        mobileMenuRef.current && 
+        !mobileMenuRef.current.contains(event.target as Node)
       ) {
-        setPortfolioOpen(false);
-      }
-      
-      if (
-        homeDropdownRef.current && 
-        !homeDropdownRef.current.contains(event.target as Node)
-      ) {
-        setHomeOpen(false);
-      }
-      
-      if (
-        mobilePortfolioRef.current && 
-        !mobilePortfolioRef.current.contains(event.target as Node)
-      ) {
-        setMobilePortfolioOpen(false);
-      }
-      
-      if (
-        mobileHomeRef.current && 
-        !mobileHomeRef.current.contains(event.target as Node)
-      ) {
-        setMobileHomeOpen(false);
+        if (menuOpen) {
+          handleMenuToggle(false);
+        }
       }
     };
     
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };  }, [menuOpen, handleMenuToggle]);
+  
+  // Handle escape key to close mobile menu
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && menuOpen) {
+        handleMenuToggle(false);
+      }
     };
-  }, []);
-  
-  // Toggle portfolio dropdown
-  const togglePortfolioDropdown = () => {
-    setPortfolioOpen(!portfolioOpen);
-  };
-  
-  // Toggle home dropdown
-  const toggleHomeDropdown = () => {
-    setHomeOpen(!homeOpen);
-  };
-  
-  // Toggle mobile portfolio dropdown
-  const toggleMobilePortfolioDropdown = () => {
-    setMobilePortfolioOpen(!mobilePortfolioOpen);
-    // Close other mobile dropdowns when opening this one
-    if (!mobilePortfolioOpen) {
-      setMobileHomeOpen(false);
-    }
-  };
-  
-  // Toggle mobile home dropdown
-  const toggleMobileHomeDropdown = () => {
-    setMobileHomeOpen(!mobileHomeOpen);
-    // Close other mobile dropdowns when opening this one
-    if (!mobileHomeOpen) {
-      setMobilePortfolioOpen(false);
-    }
-  };
+    
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [menuOpen, handleMenuToggle]);
   
   // Get text color class based on theme
   const getTextColorClass = () => {
@@ -184,15 +145,15 @@ const Navigation = () => {
           ? 'bg-blue-900/20 text-blue-400' 
           : 'text-gray-300 hover:bg-gray-800'
     } transition-colors`;
-  };
-
-  return (
+  };  return (
     <motion.header 
+      id="navigation"
       className="fixed w-full z-50"
       style={{
         backgroundColor,
         backdropFilter: backdropBlur,
       }}
+      role="banner"
     >
       <motion.div 
         className="container mx-auto px-4 py-3"
@@ -204,7 +165,11 @@ const Navigation = () => {
             animate={{ opacity: 1, x: 0 }}
             className={`text-2xl md:text-3xl font-bold relative`}
           >
-            <Link href="/" className="block">
+            <Link 
+              href="/" 
+              className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+              aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
+            >
               <motion.span 
                 className={`relative ${theme === 'light' ? 'text-gray-900' : 'text-white'} font-extrabold`}
                 whileHover={{ scale: 1.02 }}
@@ -213,92 +178,138 @@ const Navigation = () => {
                 Ali Al-Zuhairi
               </motion.span>
             </Link>
-          </motion.h1>
+          </motion.h1>          {/* Hamburger for mobile */}
+          <Disclosure>
+            {({ open }) => (
+              <>
+                <Disclosure.Button 
+                  className={`md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg p-2 ${getMobileMenuButtonClass()} flex items-center`}
+                  aria-expanded={open}
+                  aria-controls="mobile-navigation-menu"
+                  aria-label={open 
+                    ? (locale === 'fi' ? 'Sulje päävalikko' : 'Close main menu')
+                    : (locale === 'fi' ? 'Avaa päävalikko' : 'Open main menu')
+                  }
+                >
+                  <span className="material-symbols material-symbols-rounded text-2xl">
+                    {open ? 'close' : 'menu'}
+                  </span>
+                </Disclosure.Button>                <Disclosure.Panel 
+                  as={motion.div}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  // @ts-expect-error - Framer Motion transition prop
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className={`md:hidden fixed inset-0 top-[60px] z-50 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} shadow-xl overflow-y-auto`}
+                  style={{
+                    height: 'calc(100vh - 60px)'
+                  }}
+                  id="mobile-navigation-menu"
+                  role="navigation"
+                  aria-label={locale === 'fi' ? 'Mobiilinavigaatio' : 'Mobile navigation'}
+                >
+                  {/* Mobile navigation content will go here */}
+                  <div className={`p-4 flex border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
+                    {/* Empty div to maintain spacing */}
+                  </div>
 
-          {/* Hamburger for mobile */}
-          <button
-            className={`md:hidden focus:outline-none ${getMobileMenuButtonClass()} flex items-center`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            <span className="material-symbols material-symbols-rounded text-2xl">
-              {menuOpen ? 'close' : 'menu'}
-            </span>
-          </button>          {/* Desktop nav */}          <nav className={`hidden md:flex items-center `}>
+                  {/* Top controls - Language and Theme */}
+                  <div className={`py-4 px-4 flex items-center justify-between border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
+                    <div>
+                      <LanguageSwitcher />
+                    </div>
+                    <div>
+                      <ThemeSwitch />
+                    </div>
+                  </div>
+
+                  {/* Navigation links */}
+                  <ul className="p-4 space-y-2">
+                    {/* Mobile menu items will be added here */}
+                  </ul>
+                </Disclosure.Panel>
+              </>
+            )}
+          </Disclosure>          {/* Desktop nav */}          
+          <nav className={`hidden md:flex items-center `} role="navigation" aria-label={locale === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className={`flex items-center px-4`}
-            >
-              {/* Home item with dropdown */}              <motion.li 
+            >              {/* Home item with dropdown */}
+              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
                 whileHover={{ y: -2 }}
                 className="relative"
-              >                <div className="relative" ref={homeDropdownRef}>
-                  <Tooltip text={t('nav.home')}>                    <button
-                      onClick={toggleHomeDropdown}
-                      className={`flex items-center gap-1 p-2 rounded-lg ${getDropdownButtonClass()}`}aria-expanded={homeOpen}
-                      aria-haspopup="true"
-                    >                      <span className="relative z-10 transition-colors">
-                        {t('nav.home')}
-                      </span>
-                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${homeOpen ? 'rotate-180' : ''} ml-1`}>
-                        {homeOpen ? 'expand_less' : 'expand_more'}
-                      </span>
-                    </button>
-                  </Tooltip>
-
-                  <AnimatePresence>
-                    {homeOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{
-                          duration: 0.2,
-                          ease: "easeInOut"
-                        }}
-                        className={`absolute  mt-2 w-64 ${getDropdownMenuClass()}`}
+              >
+                <Menu as="div" className="relative">
+                  {({ open }) => (
+                    <>
+                      <Tooltip text={t('nav.home')}>
+                        <Menu.Button 
+                          className={`flex items-center gap-1 p-2 rounded-lg ${getDropdownButtonClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                          aria-expanded={open}
+                          aria-haspopup="true"
+                          aria-label={`${t('nav.home')} ${locale === 'fi' ? 'alavalikko' : 'submenu'}`}
+                        >
+                          <span className="relative z-10 transition-colors">
+                            {t('nav.home')}
+                          </span>
+                          <span className="material-symbols material-symbols-rounded transform transition-transform ui-open:rotate-180 ml-1">
+                            expand_more
+                          </span>
+                        </Menu.Button>
+                      </Tooltip>                      <Menu.Items 
+                        className={`absolute mt-2 w-64 ${getDropdownMenuClass()} focus:outline-none`}
+                        aria-orientation="vertical"
+                        aria-labelledby="home-menu-button"
                       >
                         <div className="py-2">
                           {homeDropdownItems.map((item, index) => (
                             <React.Fragment key={item.href}>
                               {index === 1 && (
                                 <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                              )}                                <Link
-                                href={localizedHref(item.href)}
-                                className={`flex items-center gap-2 w-full px-4 py-2 text-sm ${
-                                  item.type === 'overview' 
-                                  ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
-                                  : getDropdownItemClass(false)
-                                } `}
-                                onClick={() => setHomeOpen(false)}
-                              >
-                                {item.type === 'overview' && (
-                                  <span className={`material-symbols text-sm `}>
-                                    grid_view
-                                  </span>
+                              )}
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    href={localizedHref(item.href)}
+                                    className={`flex items-center gap-2 w-full px-4 py-2 text-sm ${
+                                      item.type === 'overview' 
+                                        ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
+                                        : active 
+                                          ? `${theme === 'light' ? 'bg-gray-50 text-gray-900' : 'bg-gray-800 text-gray-100'}`
+                                          : getDropdownItemClass(false)
+                                    }`}
+                                    role="menuitem"
+                                    tabIndex={-1}
+                                  >
+                                    {item.type === 'overview' && (
+                                      <span className="material-symbols text-sm">
+                                        grid_view
+                                      </span>
+                                    )}
+                                    {item.type === 'section' && (
+                                      <span className="material-symbols text-sm">
+                                        {item.icon || ''}
+                                      </span>
+                                    )}
+                                    {item.type === 'overview' ? (item.textKey ? t(item.textKey) : '') : item.text}
+                                  </Link>
                                 )}
-                                {item.type === 'section' && (
-                                  <span className={`material-symbols text-sm `}>
-                                    {item.icon || ''}
-                                  </span>
-                                )}
-                                {item.type === 'overview' ? (item.textKey ? t(item.textKey) : '') : item.text}
-                              </Link>
+                              </Menu.Item>
                             </React.Fragment>
                           ))}
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.li>
-              
-              {/* Portfolio dropdown */}
+                      </Menu.Items>
+                    </>
+                  )}
+                </Menu>
+              </motion.li>                {/* Portfolio dropdown */}
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -306,29 +317,25 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
                 className="relative"
               >
-                <div className="relative" ref={portfolioDropdownRef}>
-                  <Tooltip text={t('nav.portfolio')}>                    <button
-                      onClick={togglePortfolioDropdown}
-                      className={`flex items-center gap-1 p-2 rounded-lg ${getDropdownButtonClass()}`}
-                      aria-expanded={portfolioOpen}
-                      aria-haspopup="true"
-                    >                      <span className="relative z-10 transition-colors">{t('nav.portfolio')}</span>                    <span className={`material-symbols material-symbols-rounded transform transition-transform ${portfolioOpen ? 'rotate-180' : ''} ml-1`}>
-                        {portfolioOpen ? 'expand_less' : 'expand_more'}
-                      </span>
-                    </button>
-                  </Tooltip>
-
-                  <AnimatePresence>
-                    {portfolioOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{
-                          duration: 0.2,
-                          ease: "easeInOut"
-                        }}
-                        className={`absolute  mt-2 w-64 ${getDropdownMenuClass()}`}
+                <Menu as="div" className="relative">
+                  {({ open }) => (
+                    <>
+                      <Tooltip text={t('nav.portfolio')}>
+                        <Menu.Button 
+                          className={`flex items-center gap-1 p-2 rounded-lg ${getDropdownButtonClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                          aria-expanded={open}
+                          aria-haspopup="true"
+                          aria-label={`${t('nav.portfolio')} ${locale === 'fi' ? 'alavalikko' : 'submenu'}`}
+                        >
+                          <span className="relative z-10 transition-colors">{t('nav.portfolio')}</span>
+                          <span className="material-symbols material-symbols-rounded transform transition-transform ui-open:rotate-180 ml-1">
+                            expand_more
+                          </span>
+                        </Menu.Button>
+                      </Tooltip>                      <Menu.Items 
+                        className={`absolute mt-2 w-64 ${getDropdownMenuClass()} focus:outline-none`}
+                        aria-orientation="vertical"
+                        aria-labelledby="portfolio-menu-button"
                       >
                         <div className="py-2">
                           {portfolioDropdownItems.map((item, index) => (
@@ -336,39 +343,52 @@ const Navigation = () => {
                               {index === 1 && (
                                 <div className={`mx-4 my-2 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
                               )}
-                                <Link
-                                href={localizedHref(item.href)}
-                                className={`flex items-center gap-2 w-full px-4 py-2 text-sm ${
-                                  item.type === 'overview' 
-                                  ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
-                                  : getDropdownItemClass(false)
-                                } `}                                onClick={() => setPortfolioOpen(false)}
-                              >
-                                {item.type === 'overview' && (
-                                  <span className={`material-symbols text-sm `}>
-                                    grid_view
-                                  </span>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    href={localizedHref(item.href)}
+                                    className={`flex items-center gap-2 w-full px-4 py-2 text-sm ${
+                                      item.type === 'overview' 
+                                        ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
+                                        : active 
+                                          ? `${theme === 'light' ? 'bg-gray-50 text-gray-900' : 'bg-gray-800 text-gray-100'}`
+                                          : getDropdownItemClass(false)
+                                    }`}
+                                    role="menuitem"
+                                    tabIndex={-1}
+                                  >
+                                    {item.type === 'overview' && (
+                                      <span className="material-symbols text-sm">
+                                        grid_view
+                                      </span>
+                                    )}
+                                    {item.type === 'case' && (
+                                      <span className="material-symbols text-sm">
+                                        article
+                                      </span>
+                                    )}
+                                    {t(item.textKey)}
+                                  </Link>
                                 )}
-                                {item.type === 'case' && (
-                                  <span className={`material-symbols text-sm `}>
-                                    article
-                                  </span>
-                                )}
-                                {t(item.textKey)}
-                              </Link>
+                              </Menu.Item>
                             </React.Fragment>
                           ))}
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                      </Menu.Items>
+                    </>
+                  )}
+                </Menu>
               </motion.li>              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 whileHover={{ y: -2 }}
-              >                <Link href={localizedHref('/coming-soon')} className="relative group p-2 rounded-lg block">
+              >                
+                <Link 
+                  href={localizedHref('/coming-soon')} 
+                  className="relative group p-2 rounded-lg block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={locale === 'fi' ? 'Siirry suunnittelusivulle' : 'Go to design page'}
+                >
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Design</span>
                   <motion.span
                     className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
@@ -385,7 +405,11 @@ const Navigation = () => {
                 transition={{ delay: 0.6 }}
                 whileHover={{ y: -2 }}
               >
-                <Link href={localizedHref('/blog')} className="relative group p-2 rounded-lg block">
+                <Link 
+                  href={localizedHref('/blog')} 
+                  className="relative group p-2 rounded-lg block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={locale === 'fi' ? 'Siirry blogisivulle' : 'Go to blog page'}
+                >
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.blog')}</span>
                   <motion.span
                     className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
@@ -394,13 +418,19 @@ const Navigation = () => {
                     className="absolute -inset-2 bg-gradient-to-r from-start/10 to-end/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 </Link>
-              </motion.li>              <motion.li 
+              </motion.li>              
+
+              <motion.li 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
                 whileHover={{ y: -2 }}
               >
-                <Link href={localizedHref('/prompt')} className="relative group p-2 rounded-lg block">
+                <Link 
+                  href={localizedHref('/prompt')} 
+                  className="relative group p-2 rounded-lg block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={locale === 'fi' ? 'Siirry promptisivulle' : 'Go to prompts page'}
+                >
                   <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>{t('nav.prompts')}</span>
                   <motion.span
                     className={`absolute bottom-0  w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300`}
@@ -433,22 +463,24 @@ const Navigation = () => {
             </motion.div>
           </nav>
         </div>
-      </motion.div>
-
-      {/* Mobile Menu Overlay - Fixed position */}
+      </motion.div>      {/* Mobile Menu Overlay - Fixed position */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div 
-            ref={mobileMenuRef}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`md:hidden fixed inset-0 top-[60px] z-50 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} shadow-xl overflow-y-auto`}
-            style={{
-              height: 'calc(100vh - 60px)'
-            }}
-          >
+          <FocusTrap active={menuOpen} restoreFocus={true}>
+            <motion.div 
+              ref={mobileMenuRef}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className={`md:hidden fixed inset-0 top-[60px] z-50 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} shadow-xl overflow-y-auto`}
+              style={{
+                height: 'calc(100vh - 60px)'
+              }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation menu"
+            >
             {/* Mobile header - removed duplicate name */}
             <div className={`p-4 flex  border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
               {/* Empty div to maintain spacing */}
@@ -468,59 +500,67 @@ const Navigation = () => {
             </div>
 
             {/* Navigation links */}
-            <ul className={`p-4 space-y-2`}>
-              {/* Home with dropdown - Mobile */}              <li className="relative">
-                <div ref={mobileHomeRef}>
-                  <div className="flex items-center">                    <Link
-                      href={localizedHref('/')}
-                      onClick={() => setMenuOpen(false)}
-                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                    >
-                      <span className={`material-symbols `}>home</span>
-                      <span className="font-medium">{t('nav.home')}</span>
-                    </Link><button
-                      onClick={toggleMobileHomeDropdown}
-                      className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                      aria-expanded={mobileHomeOpen}
-                      aria-haspopup="true"
-                    >                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobileHomeOpen ? 'rotate-180' : ''}`}>
-                        {mobileHomeOpen ? 'expand_less' : 'expand_more'}
-                      </span>
-                    </button>
-                  </div>
-
-                  <AnimatePresence>
-                    {mobileHomeOpen && (
-                      <motion.div
+            <ul className={`p-4 space-y-2`}>              {/* Home with dropdown - Mobile */}              
+              <li className="relative">
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <div className="flex items-center">                        
+                        <Link
+                          href={localizedHref('/')}
+                          onClick={() => handleMenuToggle(false)}
+                          className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                          aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
+                        >
+                          <span className={`material-symbols `} aria-hidden="true">home</span>
+                          <span className="font-medium">{t('nav.home')}</span>
+                        </Link>
+                        
+                        <Disclosure.Button
+                          className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                          aria-expanded={open}
+                          aria-label={open 
+                            ? (locale === 'fi' ? 'Sulje kotisivun alavalikko' : 'Close home submenu')
+                            : (locale === 'fi' ? 'Avaa kotisivun alavalikko' : 'Open home submenu')
+                          }
+                        >                      
+                          <span className={`material-symbols material-symbols-rounded transform transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true">
+                            {open ? 'expand_less' : 'expand_more'}
+                          </span>
+                        </Disclosure.Button>
+                      </div>                      <Disclosure.Panel 
+                        as={motion.div}
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
+                        // @ts-expect-error - Framer Motion transition prop
                         transition={{ duration: 0.2 }}
                         className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}
-                      >
-                        {homeDropdownItems.map((item, index) => (
+                        role="menu"
+                        aria-label={locale === 'fi' ? 'Kotisivun alavalikko' : 'Home submenu'}
+                      >{homeDropdownItems.map((item, index) => (
                           <React.Fragment key={item.href}>
                             {index === 1 && (
                               <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                            )}                              <Link
+                            )}                              
+                            <Link
                               href={localizedHref(item.href)}
                               className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
-                              } `}
-                              onClick={() => {
-                                setMobileHomeOpen(false);
-                                setMenuOpen(false);
-                              }}
+                              } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded`}
+                              onClick={() => handleMenuToggle(false)}
+                              role="menuitem"
+                              tabIndex={-1}
                             >
                               {item.type === 'overview' && (
-                                <span className={`material-symbols text-sm `}>
+                                <span className={`material-symbols text-sm `} aria-hidden="true">
                                   grid_view
                                 </span>
                               )}
                               {item.type === 'section' && (
-                                <span className={`material-symbols text-sm `}>
+                                <span className={`material-symbols text-sm `} aria-hidden="true">
                                   {item.icon || ''}
                                 </span>
                               )}
@@ -528,58 +568,64 @@ const Navigation = () => {
                             </Link>
                           </React.Fragment>
                         ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </li>
-
-              {/* Portfolio with dropdown - Mobile */}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              </li>              {/* Portfolio with dropdown - Mobile */}
               <li className="relative">
-                <div ref={mobilePortfolioRef}>
-                  <div className="flex items-center">                    <Link
-                      href={localizedHref('/portfolio')}
-                      onClick={() => setMenuOpen(false)}
-                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                    >
-                      <span className={`material-symbols `}>work</span>
-                      <span className="font-medium">{t('nav.portfolio')}</span>
-                    </Link><button
-                      onClick={toggleMobilePortfolioDropdown}
-                      className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                      aria-expanded={mobilePortfolioOpen}
-                      aria-haspopup="true"
-                    >                      <span className={`material-symbols material-symbols-rounded transform transition-transform ${mobilePortfolioOpen ? 'rotate-180' : ''}`}>
-                        {mobilePortfolioOpen ? 'expand_less' : 'expand_more'}
-                      </span>
-                    </button>
-                  </div>
-
-                  <AnimatePresence>
-                    {mobilePortfolioOpen && (
-                      <motion.div
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <div className="flex items-center">                        
+                        <Link
+                          href={localizedHref('/portfolio')}
+                          onClick={() => handleMenuToggle(false)}
+                          className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                          aria-label={locale === 'fi' ? 'Siirry portfoliosivulle' : 'Go to portfolio page'}
+                        >
+                          <span className={`material-symbols `} aria-hidden="true">work</span>
+                          <span className="font-medium">{t('nav.portfolio')}</span>
+                        </Link>
+                        
+                        <Disclosure.Button
+                          className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                          aria-expanded={open}
+                          aria-label={open 
+                            ? (locale === 'fi' ? 'Sulje portfolion alavalikko' : 'Close portfolio submenu')
+                            : (locale === 'fi' ? 'Avaa portfolion alavalikko' : 'Open portfolio submenu')
+                          }
+                        >                      
+                          <span className={`material-symbols material-symbols-rounded transform transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true">
+                            {open ? 'expand_less' : 'expand_more'}
+                          </span>
+                        </Disclosure.Button>
+                      </div>                      <Disclosure.Panel 
+                        as={motion.div}
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
+                        // @ts-expect-error - Framer Motion transition prop
                         transition={{ duration: 0.2 }}
                         className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}
+                        role="menu"
+                        aria-label={locale === 'fi' ? 'Portfolion alavalikko' : 'Portfolio submenu'}
                       >
                         {portfolioDropdownItems.map((item, index) => (
                           <React.Fragment key={item.href}>
                             {index === 1 && (
                               <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                            )}                              <Link
+                            )}                              
+                            <Link
                               href={localizedHref(item.href)}
                               className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${
                                 item.type === 'overview' 
                                   ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
                                   : getDropdownItemClass(false)
                               } `}
-                              onClick={() => {
-                                setMobilePortfolioOpen(false);
-                                setMenuOpen(false);
-                              }}
-                            >                              {item.type === 'overview' && (
+                              onClick={() => setMenuOpen(false)}
+                            >                              
+                              {item.type === 'overview' && (
                                 <span className={`material-symbols text-sm `}>
                                   grid_view
                                 </span>
@@ -593,11 +639,11 @@ const Navigation = () => {
                             </Link>
                           </React.Fragment>
                         ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </li>              {/* Design link - Mobile */}              <li>                  <Link
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              </li>{/* Design link - Mobile */}              <li>                  <Link
                   href={localizedHref('/coming-soon')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
@@ -630,8 +676,7 @@ const Navigation = () => {
               </li>
             </ul>
 
-            {/* Close button */}
-            <div className="sticky bottom-4 left-0 right-0 mt-8 px-4 flex justify-center">
+            {/* Close button */}            <div className="sticky bottom-4 left-0 right-0 mt-8 px-4 flex justify-center">
               <button
                 onClick={() => setMenuOpen(false)}
                 className={`px-6 py-2 rounded-full ${theme === 'light' 
@@ -645,6 +690,7 @@ const Navigation = () => {
               </button>
             </div>
           </motion.div>
+          </FocusTrap>
         )}
       </AnimatePresence>
 
