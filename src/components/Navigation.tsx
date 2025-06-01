@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Menu, Disclosure } from '@headlessui/react';
+import { Menu } from '@headlessui/react';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageSwitcher from './LanguageSwitcher';
 import FocusTrap from './ui/FocusTrap';
@@ -179,59 +179,20 @@ const Navigation = () => {
               </motion.span>
             </Link>
           </motion.h1>          {/* Hamburger for mobile */}
-          <Disclosure>
-            {({ open }) => (
-              <>
-                <Disclosure.Button 
-                  className={`md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg p-2 ${getMobileMenuButtonClass()} flex items-center`}
-                  aria-expanded={open}
-                  aria-controls="mobile-navigation-menu"
-                  aria-label={open 
-                    ? (locale === 'fi' ? 'Sulje päävalikko' : 'Close main menu')
-                    : (locale === 'fi' ? 'Avaa päävalikko' : 'Open main menu')
-                  }
-                >
-                  <span className="material-symbols material-symbols-rounded text-2xl">
-                    {open ? 'close' : 'menu'}
-                  </span>
-                </Disclosure.Button>                <Disclosure.Panel 
-                  as={motion.div}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  // @ts-expect-error - Framer Motion transition prop
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className={`md:hidden fixed inset-0 top-[60px] z-50 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} shadow-xl overflow-y-auto`}
-                  style={{
-                    height: 'calc(100vh - 60px)'
-                  }}
-                  id="mobile-navigation-menu"
-                  role="navigation"
-                  aria-label={locale === 'fi' ? 'Mobiilinavigaatio' : 'Mobile navigation'}
-                >
-                  {/* Mobile navigation content will go here */}
-                  <div className={`p-4 flex border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-                    {/* Empty div to maintain spacing */}
-                  </div>
-
-                  {/* Top controls - Language and Theme */}
-                  <div className={`py-4 px-4 flex items-center justify-between border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-                    <div>
-                      <LanguageSwitcher />
-                    </div>
-                    <div>
-                      <ThemeSwitch />
-                    </div>
-                  </div>
-
-                  {/* Navigation links */}
-                  <ul className="p-4 space-y-2">
-                    {/* Mobile menu items will be added here */}
-                  </ul>
-                </Disclosure.Panel>
-              </>
-            )}
-          </Disclosure>          {/* Desktop nav */}          
+          <button
+            onClick={() => handleMenuToggle(!menuOpen)}
+            className={`md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg p-2 ${getMobileMenuButtonClass()} flex items-center`}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation-menu"
+            aria-label={menuOpen 
+              ? (locale === 'fi' ? 'Sulje päävalikko' : 'Close main menu')
+              : (locale === 'fi' ? 'Avaa päävalikko' : 'Open main menu')
+            }
+          >
+            <span className="material-symbols material-symbols-rounded text-2xl">
+              {menuOpen ? 'close' : 'menu'}
+            </span>
+          </button>{/* Desktop nav */}          
           <nav className={`hidden md:flex items-center `} role="navigation" aria-label={locale === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
@@ -497,153 +458,73 @@ const Navigation = () => {
               <div>
                 <ThemeSwitch />
               </div>
-            </div>
+            </div>            {/* Navigation links */}
+            <ul className={`p-4 space-y-2`}>              
+              {/* Home with dropdown - Mobile */}              
+              <li className="relative">
+                <div className="flex items-center">                        
+                  <Link
+                    href={localizedHref('/')}
+                    onClick={() => handleMenuToggle(false)}
+                    className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                    aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
+                  >
+                    <span className={`material-symbols `} aria-hidden="true">home</span>
+                    <span className="font-medium">{t('nav.home')}</span>
+                  </Link>
+                </div>
+                  {/* Home submenu items */}
+                <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
+                  {homeDropdownItems.slice(1).map((item) => (
+                    <Link
+                      key={item.href}
+                      href={localizedHref(item.href)}
+                      className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded`}
+                      onClick={() => handleMenuToggle(false)}
+                    >
+                      <span className={`material-symbols text-sm `} aria-hidden="true">
+                        {item.icon || ''}
+                      </span>
+                      {item.text}
+                    </Link>
+                  ))}
+                </div>
+              </li>              
 
-            {/* Navigation links */}
-            <ul className={`p-4 space-y-2`}>              {/* Home with dropdown - Mobile */}              
+              {/* Portfolio with dropdown - Mobile */}
               <li className="relative">
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <div className="flex items-center">                        
-                        <Link
-                          href={localizedHref('/')}
-                          onClick={() => handleMenuToggle(false)}
-                          className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                          aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
-                        >
-                          <span className={`material-symbols `} aria-hidden="true">home</span>
-                          <span className="font-medium">{t('nav.home')}</span>
-                        </Link>
-                        
-                        <Disclosure.Button
-                          className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                          aria-expanded={open}
-                          aria-label={open 
-                            ? (locale === 'fi' ? 'Sulje kotisivun alavalikko' : 'Close home submenu')
-                            : (locale === 'fi' ? 'Avaa kotisivun alavalikko' : 'Open home submenu')
-                          }
-                        >                      
-                          <span className={`material-symbols material-symbols-rounded transform transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true">
-                            {open ? 'expand_less' : 'expand_more'}
-                          </span>
-                        </Disclosure.Button>
-                      </div>                      <Disclosure.Panel 
-                        as={motion.div}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        // @ts-expect-error - Framer Motion transition prop
-                        transition={{ duration: 0.2 }}
-                        className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}
-                        role="menu"
-                        aria-label={locale === 'fi' ? 'Kotisivun alavalikko' : 'Home submenu'}
-                      >{homeDropdownItems.map((item, index) => (
-                          <React.Fragment key={item.href}>
-                            {index === 1 && (
-                              <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                            )}                              
-                            <Link
-                              href={localizedHref(item.href)}
-                              className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${
-                                item.type === 'overview' 
-                                  ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
-                                  : getDropdownItemClass(false)
-                              } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded`}
-                              onClick={() => handleMenuToggle(false)}
-                              role="menuitem"
-                              tabIndex={-1}
-                            >
-                              {item.type === 'overview' && (
-                                <span className={`material-symbols text-sm `} aria-hidden="true">
-                                  grid_view
-                                </span>
-                              )}
-                              {item.type === 'section' && (
-                                <span className={`material-symbols text-sm `} aria-hidden="true">
-                                  {item.icon || ''}
-                                </span>
-                              )}
-                              {item.type === 'overview' ? (item.textKey ? t(item.textKey) : '') : item.text}
-                            </Link>
-                          </React.Fragment>
-                        ))}
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-              </li>              {/* Portfolio with dropdown - Mobile */}
-              <li className="relative">
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <div className="flex items-center">                        
-                        <Link
-                          href={localizedHref('/portfolio')}
-                          onClick={() => handleMenuToggle(false)}
-                          className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                          aria-label={locale === 'fi' ? 'Siirry portfoliosivulle' : 'Go to portfolio page'}
-                        >
-                          <span className={`material-symbols `} aria-hidden="true">work</span>
-                          <span className="font-medium">{t('nav.portfolio')}</span>
-                        </Link>
-                        
-                        <Disclosure.Button
-                          className={`py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                          aria-expanded={open}
-                          aria-label={open 
-                            ? (locale === 'fi' ? 'Sulje portfolion alavalikko' : 'Close portfolio submenu')
-                            : (locale === 'fi' ? 'Avaa portfolion alavalikko' : 'Open portfolio submenu')
-                          }
-                        >                      
-                          <span className={`material-symbols material-symbols-rounded transform transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true">
-                            {open ? 'expand_less' : 'expand_more'}
-                          </span>
-                        </Disclosure.Button>
-                      </div>                      <Disclosure.Panel 
-                        as={motion.div}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        // @ts-expect-error - Framer Motion transition prop
-                        transition={{ duration: 0.2 }}
-                        className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}
-                        role="menu"
-                        aria-label={locale === 'fi' ? 'Portfolion alavalikko' : 'Portfolio submenu'}
-                      >
-                        {portfolioDropdownItems.map((item, index) => (
-                          <React.Fragment key={item.href}>
-                            {index === 1 && (
-                              <div className={`mx-4 my-1 h-px ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'}`} />
-                            )}                              
-                            <Link
-                              href={localizedHref(item.href)}
-                              className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${
-                                item.type === 'overview' 
-                                  ? `font-medium ${theme === 'light' ? 'text-primary' : 'text-primary-light'}` 
-                                  : getDropdownItemClass(false)
-                              } `}
-                              onClick={() => setMenuOpen(false)}
-                            >                              
-                              {item.type === 'overview' && (
-                                <span className={`material-symbols text-sm `}>
-                                  grid_view
-                                </span>
-                              )}
-                              {item.type === 'case' && (
-                                <span className={`material-symbols text-sm `}>
-                                  article
-                                </span>
-                              )}
-                              {t(item.textKey)}
-                            </Link>
-                          </React.Fragment>
-                        ))}
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-              </li>{/* Design link - Mobile */}              <li>                  <Link
+                <div className="flex items-center">                        
+                  <Link
+                    href={localizedHref('/portfolio')}
+                    onClick={() => handleMenuToggle(false)}
+                    className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                    aria-label={locale === 'fi' ? 'Siirry portfoliosivulle' : 'Go to portfolio page'}
+                  >
+                    <span className={`material-symbols `} aria-hidden="true">work</span>
+                    <span className="font-medium">{t('nav.portfolio')}</span>
+                  </Link>
+                </div>
+                  {/* Portfolio submenu items */}
+                <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
+                  {portfolioDropdownItems.slice(1).map((item) => (
+                    <Link
+                      key={item.href}
+                      href={localizedHref(item.href)}
+                      className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <span className={`material-symbols text-sm `}>
+                        article
+                      </span>
+                      {t(item.textKey)}
+                    </Link>
+                  ))}
+                </div>
+              </li>
+
+              {/* Design link - Mobile */}              
+              <li>                  
+                <Link
                   href={localizedHref('/coming-soon')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
@@ -654,7 +535,8 @@ const Navigation = () => {
               </li>
 
               {/* Blog link - Mobile */}
-              <li>                  <Link
+              <li>                  
+                <Link
                   href={localizedHref('/blog')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
@@ -665,7 +547,8 @@ const Navigation = () => {
               </li>
 
               {/* Prompts link - Mobile */}
-              <li>                <Link
+              <li>                
+                <Link
                   href={localizedHref('/prompt')}
                   onClick={() => setMenuOpen(false)}
                   className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
