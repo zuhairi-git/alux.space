@@ -405,83 +405,87 @@ export default function Home() {
                     </div>
                   </div>
                 );
-              }              // For "Earlier Positions" with nested positions - Now vertically integrated
+              }              // For "Earlier Positions" with nested positions - Consolidated into single card
               else {
+                // Create consolidated description from all earlier positions
+                const consolidatedDescription = position.positions
+                  .map(subPosition => `${subPosition.title} at ${subPosition.company} (${subPosition.period || "2000-2016"})`)
+                  .join(" • ");
+                
                 return (
-                  <React.Fragment key={index}>
-                    {/* Section divider with year range */}
-                    <div className="relative mb-12 mt-12" key={`divider-${index}`}>
-                      <motion.div 
-                        className="absolute left-1/2 top-0 transform -translate-x-1/2 w-10 h-10 rounded-full z-10
-                          bg-gradient-to-r from-gray-500 to-blue-500/50 flex items-center justify-center shadow-lg shadow-gray-500/30"
-                        whileHover={{ scale: 1.3, boxShadow: `0 0 20px 0 rgba(56, 189, 248, 0.5)` }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {/* Pulsing ring effect */}
-                        <div className="absolute inset-0 rounded-full bg-gray-500/30 animate-ping opacity-75"></div>
-                        
-                        {/* Icon */}
-                        <HistoryIcon className="w-5 h-5 text-white z-10" />
-                      </motion.div>
+                  <div className="relative mb-24" key={index}>
+                    {/* Timeline dot */}
+                    <motion.div 
+                      className={`absolute left-1/2 top-2 transform -translate-x-1/2 w-8 h-8 rounded-full z-10 
+                        flex items-center justify-center shadow-lg
+                        ${isFirst 
+                          ? 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-purple-500/30'
+                          : isLast 
+                            ? 'bg-gradient-to-r from-gray-500 to-blue-500 shadow-gray-500/30'
+                            : 'bg-gradient-to-r from-blue-500 to-cyan-500 shadow-blue-500/30'
+                        }`}
+                      whileHover={{ 
+                        scale: 1.3, 
+                        boxShadow: isFirst 
+                          ? `0 0 20px 0 rgba(147, 51, 234, 0.6)`
+                          : isLast 
+                            ? `0 0 20px 0 rgba(156, 163, 175, 0.6)`
+                            : `0 0 20px 0 rgba(56, 189, 248, 0.6)`
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Pulsing ring effect */}
+                      <div className={`absolute inset-0 rounded-full animate-ping opacity-75
+                        ${isFirst 
+                          ? 'bg-purple-400/30'
+                          : isLast 
+                            ? 'bg-gray-400/30'
+                            : 'bg-blue-400/30'
+                        }`}>
+                      </div>
                       
-                      <AnimatedSection 
-                        animation="fade-in" 
-                        delay={0.1}
-                        className="pt-16 text-center mb-4"
-                      >
-                        <h4 className="text-xl font-semibold">
-                          {position.title} <span className="text-base font-medium text-theme-text/70 ml-2">{position.period}</span>
-                        </h4>
-                      </AnimatedSection>
+                      {/* Icon */}
+                      <HistoryIcon className="w-4 h-4 text-white z-10" />
+                    </motion.div>
+                    
+                    {/* Connector line from timeline to card (horizontal line) - hidden on smaller screens */}
+                    <div className={`absolute top-14 hidden md:block ${isEven ? 'right-1/2' : 'left-1/2'} h-0.5 w-[calc(25%-1rem)]
+                      ${isFirst 
+                        ? 'bg-gradient-to-r from-purple-400/70 to-blue-400/70'
+                        : isLast 
+                          ? 'bg-gradient-to-r from-gray-400/70 to-blue-400/50'
+                          : 'bg-gradient-to-r from-blue-500/70 to-cyan-400/70'
+                      }`}>
                     </div>
-                      {/* Map each early position as a vertical timeline item */}
-                    {position.positions.map((subPosition, subIndex) => {                      // First card appears on the right side (odd), the rest follow alternating pattern
-                      const isEvenSub = (subIndex + 1) % 2 === 0;
-                      
-                      return (
-                        <div className="relative mb-24" key={`early-${subIndex}`}>
-                          {/* Timeline dot for earlier sub-position */}
-                          <motion.div 
-                            className="absolute left-1/2 top-2 transform -translate-x-1/2 w-7 h-7 rounded-full z-10
-                              bg-gradient-to-r from-gray-600 to-blue-500/40 flex items-center justify-center shadow-md shadow-gray-500/20"
-                            whileHover={{ scale: 1.2, boxShadow: `0 0 15px 0 rgba(56, 189, 248, 0.4)` }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            <div className="w-2.5 h-2.5 rounded-full bg-white/90"></div>
-                          </motion.div>
-                          
-                          {/* Connector line from timeline to card (horizontal line) - hidden on smaller screens */}
-                          <div className={`absolute top-14 hidden md:block ${isEvenSub ? 'right-1/2' : 'left-1/2'} h-0.5 w-[calc(25%-1rem)]
-                            bg-gradient-to-r from-gray-400/50 to-blue-400/30`}>
-                          </div>
-                          
-                          {/* Mobile connector line (always to the right) */}
-                          <div className={`absolute top-14 md:hidden left-1/2 h-0.5 w-[15%]
-                            bg-gradient-to-r from-gray-400/50 to-blue-400/30`}>
-                          </div>
-                          
-                          {/* Card positioning with alternating sides on desktop, stacked on mobile */}
-                          <div className={`flex ${isEvenSub ? 'justify-start' : 'justify-end'}`}>
-                            <div className={`w-full sm:w-[85%] md:w-[48%] ${isEvenSub ? 'md:ml-[4%]' : 'md:mr-[4%]'} sm:ml-[15%] md:ml-0`}>
-                              <AnimatedSection 
-                                animation={isEvenSub ? "slide-right" : "slide-left"}
-                                delay={0.1 + (subIndex * 0.1)}
-                              >
-                                <TimelineCard
-                                  theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
-                                  materialIcon={HistoryIcon}
-                                  title={subPosition.title}
-                                  date={subPosition.period || "2000 - 2016"}
-                                  location={subPosition.company}
-                                  description="Early career position developing design and technical skills."
-                                />
-                              </AnimatedSection>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </React.Fragment>
+                    
+                    {/* Mobile connector line (always to the right) */}
+                    <div className={`absolute top-14 md:hidden left-1/2 h-0.5 w-[15%]
+                      ${isFirst 
+                        ? 'bg-gradient-to-r from-purple-400/70 to-blue-400/70'
+                        : isLast 
+                          ? 'bg-gradient-to-r from-gray-400/70 to-blue-400/50'
+                          : 'bg-gradient-to-r from-blue-500/70 to-cyan-400/70'
+                      }`}>
+                    </div>
+                      {/* Card positioning with alternating sides on desktop, stacked on mobile */}
+                    <div className={`flex ${isEven ? 'justify-start' : 'justify-end'}`}>
+                      <div className={`w-full sm:w-[85%] md:w-[48%] ${isEven ? 'md:ml-[4%]' : 'md:mr-[4%]'} sm:ml-[15%] md:ml-0`}>
+                        <AnimatedSection 
+                          animation={isEven ? "slide-right" : "slide-left"}
+                          delay={0.1 + (index * 0.1)}
+                        >
+                          <TimelineCard
+                            theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
+                            materialIcon={HistoryIcon}
+                            title={position.title}
+                            date={position.period}
+                            location="Various Companies"
+                            description={consolidatedDescription}
+                          />
+                        </AnimatedSection>
+                      </div>
+                    </div>
+                  </div>
                 );
               }
             })}          </div>
