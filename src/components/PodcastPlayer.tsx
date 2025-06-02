@@ -612,29 +612,81 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 }}
                 transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
               />
-            </div>            {/* Podcast icon/logo in center */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            </div>            {/* Podcast metadata display in center */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+              {/* Episode number badge */}
               <motion.div 
-                className={`w-16 h-16 rounded-xl ${
+                className={`mb-3 px-3 py-1 rounded-full text-xs font-bold ${
                   isLight 
-                    ? 'bg-gradient-to-br from-purple-400 to-purple-600' 
-                    : 'bg-gradient-to-br from-purple-500 to-purple-700'
-                } shadow-xl flex items-center justify-center`}
-                animate={{ 
-                  rotate: isPlaying ? 360 : 0 
-                }}
-                transition={{ 
-                  duration: 20, 
-                  repeat: isPlaying ? Infinity : 0, 
-                  ease: "linear" 
-                }}
+                    ? 'bg-white/90 text-purple-700 shadow-sm' 
+                    : 'bg-black/40 text-white backdrop-blur-sm'
+                } border ${
+                  isLight 
+                    ? 'border-purple-200' 
+                    : 'border-white/20'
+                }`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
               >
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1z"/>
-                  <path d="M11 11h3l-4-4-4 4h3v3h2v-3z"/>
-                </svg>
+                EP {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}
               </motion.div>
-            </div>            {/* Vinyl record effect when playing */}
+
+              {/* Duration display */}
+              <motion.div 
+                className={`text-lg md:text-xl font-bold mb-2 ${
+                  isLight ? 'text-purple-700' : 'text-white'
+                } drop-shadow-sm`}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                {currentEpisode?.duration || '00:00'}
+              </motion.div>
+
+              {/* Publication year */}
+              <motion.div 
+                className={`text-xs font-medium ${
+                  isLight ? 'text-purple-600/80' : 'text-white/70'
+                } mb-2`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                {currentEpisode?.publishDate ? new Date(currentEpisode.publishDate).getFullYear() : '2025'}
+              </motion.div>
+
+              {/* Playing indicator animation */}
+              <AnimatePresence>
+                {isPlaying && (
+                  <motion.div 
+                    className="flex items-center gap-1"
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                  >
+                    {[0, 1, 2].map((i) => (
+                      <motion.div
+                        key={i}
+                        className={`w-1 h-3 rounded-full ${
+                          isLight ? 'bg-purple-500' : 'bg-white'
+                        }`}
+                        animate={{
+                          scaleY: [1, 2, 1],
+                          opacity: [0.6, 1, 0.6],
+                        }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          delay: i * 0.1,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>{/* Vinyl record effect when playing */}
             {isPlaying && (
               <motion.div 
                 className="absolute inset-0 border-4 border-white/20 rounded-xl"
