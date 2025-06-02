@@ -13,40 +13,50 @@ export async function loadExcelTranslations(): Promise<Record<string, Translatio
     // First try to load from imported JSON
     const translations = generatedTranslations as Record<string, TranslationObject>;
     
-    // Check if we're running in the browser where dynamic imports aren't available
+    // Check if we're running in the browser - just return the pre-generated translations
     if (typeof window !== 'undefined') {
       return translations;
     }
+    
+    // Check if we're in a server environment (Node.js) where we can access file system
+    if (typeof process !== 'undefined' && process.versions && process.versions.node) {
       // In Node.js environment, we can try to load from actual JSON files for fresher content
-    try {
-      const fs = await import('fs');
-      const path = await import('path');      const localesDir = path.default.join(process.cwd(), 'src', 'locales');
-      
-      // Load each language
-      const languages = ['en', 'fi'];
-      const updatedTranslations: Record<string, TranslationObject> = {};
-      
-      languages.forEach(lang => {
-        const filePath = path.default.join(localesDir, lang, 'common.json');
-        if (fs.default.existsSync(filePath)) {
-          const content = fs.default.readFileSync(filePath, 'utf8');
-          updatedTranslations[lang] = JSON.parse(content);
-        } else {
-          updatedTranslations[lang] = translations[lang] || {};
-        }
-      });
-      
-      // Merge with imported translations to ensure we have all keys
-      const result = { ...translations };
-      languages.forEach(lang => {
-        result[lang] = { ...result[lang], ...updatedTranslations[lang] };
-      });
-      
-      return result;    } catch {
-      // If we can't load from filesystem, use the imported translations
-      console.warn('Could not load translations from filesystem, using pre-generated translations');
-      return translations;
+      try {
+        const fs = await import('fs');
+        const path = await import('path');
+        
+        const localesDir = path.default.join(process.cwd(), 'src', 'locales');
+        
+        // Load each language
+        const languages = ['en', 'fi'];
+        const updatedTranslations: Record<string, TranslationObject> = {};
+        
+        languages.forEach(lang => {
+          const filePath = path.default.join(localesDir, lang, 'common.json');
+          if (fs.default.existsSync(filePath)) {
+            const content = fs.default.readFileSync(filePath, 'utf8');
+            updatedTranslations[lang] = JSON.parse(content);
+          } else {
+            updatedTranslations[lang] = translations[lang] || {};
+          }
+        });
+        
+        // Merge with imported translations to ensure we have all keys
+        const result = { ...translations };
+        languages.forEach(lang => {
+          result[lang] = { ...result[lang], ...updatedTranslations[lang] };
+        });
+        
+        return result;
+      } catch {
+        // If we can't load from filesystem, use the imported translations
+        console.warn('Could not load translations from filesystem, using pre-generated translations');
+        return translations;
+      }
     }
+    
+    // Default fallback - just return the imported translations
+    return translations;
   } catch (error) {
     console.error('Error loading translations:', error);
     // Fallback to empty translations

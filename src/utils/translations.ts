@@ -1,4 +1,4 @@
-import { loadExcelTranslations, getExcelTranslation } from './excelTranslations';
+import { loadExcelTranslations, getExcelTranslation } from './excelTranslations.client';
 import generatedTranslations from '../translations/generatedTranslations.json';
 import { useEffect } from 'react';
 

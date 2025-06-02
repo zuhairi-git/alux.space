@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { podcastEpisodes } from '@/data/podcasts';
@@ -620,14 +621,17 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <img
+                <Image
                   src="/images/me/ali.png"
                   alt="Ali Al-Zuhairi"
+                  width={80}
+                  height={80}
                   className={`w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-3 ${
                     isLight 
                       ? 'border-white/90 shadow-lg' 
                       : 'border-white/30 shadow-xl'
                   } backdrop-blur-sm`}
+                  priority
                 />
               </motion.div>
 
