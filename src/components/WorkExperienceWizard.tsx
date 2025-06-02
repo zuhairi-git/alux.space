@@ -4,17 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TimelineCard from './TimelineCard';
 import AnimatedSection from './AnimatedSection';
-const ChevronLeftIcon = ({ className }: { className?: string }) => (
-  <svg className={className || "w-5 h-5"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-  </svg>
-);
-
-const ChevronRightIcon = ({ className }: { className?: string }) => (
-  <svg className={className || "w-5 h-5"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-  </svg>
-);
 
 const PlayIcon = ({ className }: { className?: string }) => (
   <svg className={className || "w-4 h-4"} fill="currentColor" viewBox="0 0 24 24">
@@ -67,13 +56,8 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
     const progress = ((currentStep + 1) / totalSteps) * 100;
     setScrollProgress(progress);
   }, [currentStep, totalSteps]);
-
   const nextStep = () => {
     setCurrentStep((prev) => (prev + 1) % totalSteps);
-  };
-
-  const prevStep = () => {
-    setCurrentStep((prev) => (prev - 1 + totalSteps) % totalSteps);
   };
 
   const goToStep = (step: number) => {
@@ -99,28 +83,27 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
     
     return isFirst ? 'rocket_launch' : (index % 2 === 0 ? 'grid_view' : 'insights');
   };
-
-  const getStepColors = (index: number) => {
-    const isFirst = index === 0;
-    const isLast = index === totalSteps - 1;
-    
-    if (isFirst) {
+  const getStepColors = (theme: string) => {
+    if (theme === 'colorful') {
       return {
         gradient: 'from-purple-500 to-blue-500',
         shadow: 'shadow-purple-500/30',
-        ring: 'bg-purple-400/30'
+        ring: 'bg-purple-400/30',
+        text: 'text-white'
       };
-    } else if (isLast) {
+    } else if (theme === 'dark') {
       return {
-        gradient: 'from-gray-500 to-blue-500',
-        shadow: 'shadow-gray-500/30',
-        ring: 'bg-gray-400/30'
+        gradient: 'from-blue-400 to-cyan-400',
+        shadow: 'shadow-blue-400/30',
+        ring: 'bg-blue-400/30',
+        text: 'text-white'
       };
     } else {
       return {
-        gradient: 'from-blue-500 to-cyan-500',
+        gradient: 'from-blue-500 to-indigo-500',
         shadow: 'shadow-blue-500/30',
-        ring: 'bg-blue-400/30'
+        ring: 'bg-blue-400/30',
+        text: 'text-white'
       };
     }
   };
@@ -167,13 +150,11 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </div>
-          
-          {/* Step indicators */}
+            {/* Step indicators */}
           <div className="flex justify-between items-center mt-4">
             {workContent.positions.map((_: any, index: number) => {
-              const colors = getStepColors(index);
+              const colors = getStepColors(theme);
               const isActive = index === currentStep;
-              const isCompleted = index < currentStep;
               
               return (
                 <motion.button
@@ -182,9 +163,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                   className={`relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
                     isActive
                       ? `bg-gradient-to-r ${colors.gradient} ${colors.shadow} shadow-lg scale-110`
-                      : isCompleted
-                      ? `bg-gradient-to-r ${colors.gradient} opacity-70`
-                      : 'bg-theme-text/20 hover:bg-theme-text/30'
+                      : 'bg-theme-text/10 hover:bg-theme-text/20 text-theme-text/50'
                   }`}
                   whileHover={{ scale: isActive ? 1.1 : 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -192,50 +171,33 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                   {isActive && (
                     <div className={`absolute inset-0 rounded-full animate-ping opacity-75 ${colors.ring}`} />
                   )}
-                  <span className="material-symbols text-white text-sm z-10">
+                  <span className={`material-symbols text-sm z-10 ${isActive ? 'text-white' : 'text-theme-text/50'}`}>
                     {getStepIcon(index)}
                   </span>
                 </motion.button>
               );
             })}
           </div>
-        </div>
-
-        {/* Main Content Area */}
+        </div>        {/* Main Content Area */}
         <div className="max-w-4xl mx-auto">
-          {/* Navigation Controls */}
-          <div className="flex justify-between items-center mb-8">
+          {/* Auto-play Control */}
+          <div className="flex justify-center items-center mb-8">
             <button
-              onClick={prevStep}
-              className="group flex items-center gap-2 px-4 py-2 rounded-lg bg-theme-text/10 hover:bg-theme-text/20 transition-all duration-300"
+              onClick={toggleAutoPlay}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+                isAutoPlaying
+                  ? `bg-gradient-to-r ${getStepColors(theme).gradient} text-white shadow-lg ${getStepColors(theme).shadow}`
+                  : 'bg-theme-text/10 hover:bg-theme-text/20 text-theme-text'
+              }`}
             >
-              <ChevronLeftIcon className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="hidden sm:inline">Previous</span>
-            </button>
-
-            {/* Step counter and auto-play */}
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-theme-text/70">
-                {currentStep + 1} of {totalSteps}
+              {isAutoPlaying ? (
+                <PauseIcon className="w-4 h-4" />
+              ) : (
+                <PlayIcon className="w-4 h-4" />
+              )}
+              <span className="text-sm">
+                {isAutoPlaying ? 'Pause' : 'Auto Play'}
               </span>
-              <button
-                onClick={toggleAutoPlay}
-                className={`p-2 rounded-lg transition-all duration-300 ${
-                  isAutoPlaying
-                    ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
-                    : 'bg-theme-text/10 hover:bg-theme-text/20'
-                }`}
-              >
-                <PlayIcon className={`w-4 h-4 ${isAutoPlaying ? 'animate-pulse' : ''}`} />
-              </button>
-            </div>
-
-            <button
-              onClick={nextStep}
-              className="group flex items-center gap-2 px-4 py-2 rounded-lg bg-theme-text/10 hover:bg-theme-text/20 transition-all duration-300"
-            >
-              <span className="hidden sm:inline">Next</span>
-              <ChevronRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
@@ -249,21 +211,28 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                 exit={{ opacity: 0, x: -100, scale: 0.9 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="w-full"
-              >
-                {(() => {
+              >                {(() => {
                   const position = getCurrentPosition();
-                  const colors = getStepColors(currentStep);
+                  const colors = getStepColors(theme);
                     if (!position.positions) {
                     // Regular position
                     return (
-                      <TimelineCard
-                        theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
-                        icon={<span className="material-symbols text-3xl">{getStepIcon(currentStep)}</span>}
-                        title={position.title}
-                        date={position.period}
-                        location={position.company}
-                        description={position.description}
-                      />
+                      <div className="space-y-4">
+                        <TimelineCard
+                          theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
+                          icon={<span className="material-symbols text-3xl">{getStepIcon(currentStep)}</span>}
+                          title={position.title}
+                          date={position.period}
+                          location={position.company}
+                          description={position.description}
+                        />
+                        {/* Step counter at bottom */}
+                        <div className="flex justify-center">
+                          <span className="text-sm text-theme-text/50 bg-theme-text/5 px-3 py-1 rounded-full">
+                            {currentStep + 1} of {totalSteps}
+                          </span>
+                        </div>
+                      </div>
                     );
                   } else {
                     // Consolidated earlier positions
@@ -272,34 +241,49 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                       .join(" • ");
                     
                     return (
-                      <TimelineCard
-                        theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
-                        icon={<span className="material-symbols text-3xl">history</span>}
-                        title={position.title}
-                        date={position.period}
-                        location="Various Companies"
-                        description={consolidatedDescription}
-                      />
+                      <div className="space-y-4">
+                        <TimelineCard
+                          theme={theme === 'colorful' ? 'colorful' : theme === 'dark' ? 'dark' : 'light'}
+                          icon={<span className="material-symbols text-3xl">history</span>}
+                          title={position.title}
+                          date={position.period}
+                          location="Various Companies"
+                          description={consolidatedDescription}
+                        />
+                        {/* Step counter at bottom */}
+                        <div className="flex justify-center">
+                          <span className="text-sm text-theme-text/50 bg-theme-text/5 px-3 py-1 rounded-full">
+                            {currentStep + 1} of {totalSteps}
+                          </span>
+                        </div>
+                      </div>
                     );
                   }
                 })()}
               </motion.div>
             </AnimatePresence>
-          </div>
-
-          {/* Quick Navigation Dots */}
-          <div className="flex justify-center items-center gap-2 mt-8">
-            {workContent.positions.map((_: any, index: number) => (
-              <button
-                key={index}
-                onClick={() => goToStep(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentStep
-                    ? 'bg-purple-500 scale-125'
-                    : 'bg-theme-text/30 hover:bg-theme-text/50'
-                }`}
-              />
-            ))}
+          </div>          {/* Quick Navigation Dots */}
+          <div className="flex justify-center items-center gap-3 mt-8">
+            {workContent.positions.map((_: any, index: number) => {
+              const colors = getStepColors(theme);
+              const isActive = index === currentStep;
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => goToStep(index)}
+                  className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
+                    isActive
+                      ? `bg-gradient-to-r ${colors.gradient} scale-150 shadow-lg ${colors.shadow}`
+                      : 'bg-transparent border border-theme-text/20 hover:border-theme-text/40'
+                  }`}
+                >
+                  {isActive && (
+                    <div className={`absolute inset-0 rounded-full animate-ping opacity-75 ${colors.ring}`} />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
