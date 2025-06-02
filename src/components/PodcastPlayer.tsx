@@ -613,10 +613,27 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
               />
             </div>            {/* Podcast metadata display in center */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">              {/* Profile image - circular */}
+              <motion.div 
+                className="mb-3"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                <img
+                  src="/images/me/ali.png"
+                  alt="Ali Al-Zuhairi"
+                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-3 ${
+                    isLight 
+                      ? 'border-white/90 shadow-lg' 
+                      : 'border-white/30 shadow-xl'
+                  } backdrop-blur-sm`}
+                />
+              </motion.div>
+
               {/* Episode number badge */}
               <motion.div 
-                className={`mb-3 px-3 py-1 rounded-full text-xs font-bold ${
+                className={`mb-2 px-3 py-1 rounded-full text-xs font-bold ${
                   isLight 
                     ? 'bg-white/90 text-purple-700 shadow-sm' 
                     : 'bg-black/40 text-white backdrop-blur-sm'
