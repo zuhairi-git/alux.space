@@ -3,79 +3,47 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TimelineCard from './TimelineCard';
-import AnimatedSection from './AnimatedSection';
 
-const PlayIcon = ({ className }: { className?: string }) => (
-  <svg className={className || "w-4 h-4"} fill="currentColor" viewBox="0 0 24 24">
-    <path d="M8 5v14l11-7z" />
-  </svg>
-);
+interface WorkPosition {
+  title: string;
+  period: string;
+  company?: string;
+  description?: string;
+  positions?: WorkPosition[];
+}
 
-const PauseIcon = ({ className }: { className?: string }) => (
-  <svg className={className || "w-4 h-4"} fill="currentColor" viewBox="0 0 24 24">
-    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-  </svg>
-);
+interface WorkContent {
+  intro: string;
+  positions: WorkPosition[];
+}
 
 interface WorkExperienceWizardProps {
-  workContent: any;
+  workContent: WorkContent;
   theme: string;
   t: (key: string) => string;
 }
 
 export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWizardProps) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const totalSteps = workContent.positions.length;
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (isAutoPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCurrentStep((prev) => (prev + 1) % totalSteps);
-      }, 4000);
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isAutoPlaying, totalSteps]);
 
   // Handle scroll progress
   useEffect(() => {
     const progress = ((currentStep + 1) / totalSteps) * 100;
     setScrollProgress(progress);
-  }, [currentStep, totalSteps]);
-  const nextStep = () => {
-    setCurrentStep((prev) => (prev + 1) % totalSteps);
-  };
-
-  const goToStep = (step: number) => {
+  }, [currentStep, totalSteps]);  const goToStep = (step: number) => {
     setCurrentStep(step);
-  };
-
-  const toggleAutoPlay = () => {
-    setIsAutoPlaying(!isAutoPlaying);
   };
 
   const getCurrentPosition = () => {
     return workContent.positions[currentStep];
   };
-
   const getStepIcon = (index: number) => {
     const position = workContent.positions[index];
     const isFirst = index === 0;
-    const isLast = index === totalSteps - 1;
     
     if (position.positions) {
       return 'history';
@@ -149,10 +117,9 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
               animate={{ width: `${scrollProgress}%` }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
-          </div>
-            {/* Step indicators */}
+          </div>          {/* Step indicators */}
           <div className="flex justify-between items-center mt-4">
-            {workContent.positions.map((_: any, index: number) => {
+            {workContent.positions.map((_: WorkPosition, index: number) => {
               const colors = getStepColors(theme);
               const isActive = index === currentStep;
               
@@ -177,30 +144,9 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                 </motion.button>
               );
             })}
-          </div>
-        </div>        {/* Main Content Area */}
+          </div></div>
+        {/* Main Content Area */}
         <div className="max-w-4xl mx-auto">
-          {/* Auto-play Control */}
-          <div className="flex justify-center items-center mb-8">
-            <button
-              onClick={toggleAutoPlay}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                isAutoPlaying
-                  ? `bg-gradient-to-r ${getStepColors(theme).gradient} text-white shadow-lg ${getStepColors(theme).shadow}`
-                  : 'bg-theme-text/10 hover:bg-theme-text/20 text-theme-text'
-              }`}
-            >
-              {isAutoPlaying ? (
-                <PauseIcon className="w-4 h-4" />
-              ) : (
-                <PlayIcon className="w-4 h-4" />
-              )}
-              <span className="text-sm">
-                {isAutoPlaying ? 'Pause' : 'Auto Play'}
-              </span>
-            </button>
-          </div>
-
           {/* Card Display Area */}
           <div className="relative min-h-[400px] flex items-center justify-center">
             <AnimatePresence mode="wait">
@@ -213,7 +159,6 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                 className="w-full"
               >                {(() => {
                   const position = getCurrentPosition();
-                  const colors = getStepColors(theme);
                     if (!position.positions) {
                     // Regular position
                     return (
@@ -223,8 +168,8 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                           icon={<span className="material-symbols text-3xl">{getStepIcon(currentStep)}</span>}
                           title={position.title}
                           date={position.period}
-                          location={position.company}
-                          description={position.description}
+                          location={position.company || ''}
+                          description={position.description || ''}
                         />
                         {/* Step counter at bottom */}
                         <div className="flex justify-center">
@@ -237,7 +182,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                   } else {
                     // Consolidated earlier positions
                     const consolidatedDescription = position.positions
-                      .map((subPosition: any) => `${subPosition.title} at ${subPosition.company} (${subPosition.period || "2000-2016"})`)
+                      .map((subPosition: WorkPosition) => `${subPosition.title} at ${subPosition.company || 'Unknown Company'} (${subPosition.period || "2000-2016"})`)
                       .join(" • ");
                     
                     return (
@@ -264,7 +209,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
             </AnimatePresence>
           </div>          {/* Quick Navigation Dots */}
           <div className="flex justify-center items-center gap-3 mt-8">
-            {workContent.positions.map((_: any, index: number) => {
+            {workContent.positions.map((_: WorkPosition, index: number) => {
               const colors = getStepColors(theme);
               const isActive = index === currentStep;
               

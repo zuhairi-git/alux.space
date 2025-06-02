@@ -10,14 +10,7 @@ import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
-import AnimatedSection from '@/components/AnimatedSection';
-import TimelineCard from '@/components/TimelineCard';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
-// Material UI Icons
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import GridViewIcon from '@mui/icons-material/GridView';
-import InsightsIcon from '@mui/icons-material/Insights';
-import HistoryIcon from '@mui/icons-material/History';
 
 // A helper component for skill cards
 const InteractiveSkillCard = ({ 
