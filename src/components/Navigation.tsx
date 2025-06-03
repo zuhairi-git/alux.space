@@ -12,7 +12,7 @@ import { useTranslations } from '@/utils/translations';
 import { i18n } from '@/i18n';
 
 const portfolioDropdownItems = [
-  { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' }, 
+  { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' },
   { href: '/portfolio/accessibility', textKey: 'portfolio.cases.accessibility', type: 'case' },
   { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration', type: 'case' },
   { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking', type: 'case' },
@@ -29,21 +29,21 @@ const homeDropdownItems = [
 
 const Navigation = () => {
   const { scrollY } = useScroll();
-  const { theme } = useTheme();  const { locale } = useLanguage();
+  const { theme } = useTheme(); const { locale } = useLanguage();
   const { t } = useTranslations(locale);
-  
+
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
     // Check if the path already contains the locale
     if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
       return path; // Path already has locale, don't add it again
     }
-    
+
     if (path.startsWith('#') || path.startsWith('/#')) {
       // For hash links, add locale to the base path
       return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
     }
-    
+
     return `/${locale}${path}`;
   };
 
@@ -51,25 +51,25 @@ const Navigation = () => {
   const backgroundColor = useTransform(
     scrollY,
     [0, 100],
-    theme === 'light' 
-      ? ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.9)"] 
+    theme === 'light'
+      ? ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.9)"]
       : ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.9)"]
   );
-  
+
   const backdropBlur = useTransform(
     scrollY,
     [0, 100],
     ["blur(0px)", "blur(10px)"]
   );
-  
+
   const scale = useTransform(
     scrollY,
     [0, 100],
     [1, 0.95]
-  );  const [menuOpen, setMenuOpen] = useState(false);
+  ); const [menuOpen, setMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
-  
+
   // Announce menu state changes to screen readers
   const handleMenuToggle = useCallback((isOpen: boolean) => {
     setMenuOpen(isOpen);
@@ -78,10 +78,10 @@ const Navigation = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      
+
       // Don't close if clicking the hamburger button or if clicking inside the menu
       if (
-        mobileMenuRef.current && 
+        mobileMenuRef.current &&
         !mobileMenuRef.current.contains(target) &&
         hamburgerButtonRef.current &&
         !hamburgerButtonRef.current.contains(target)
@@ -91,13 +91,13 @@ const Navigation = () => {
         }
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuOpen, handleMenuToggle]);
-  
+
   // Handle escape key to close mobile menu
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -105,23 +105,23 @@ const Navigation = () => {
         handleMenuToggle(false);
       }
     };
-    
+
     document.addEventListener('keydown', handleEscape);
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
   }, [menuOpen, handleMenuToggle]);
-    // Get text color class based on theme
+  // Get text color class based on theme
   const getTextColorClass = () => {
-    return theme === 'light' 
-      ? 'text-gray-700 hover:text-primary' 
+    return theme === 'light'
+      ? 'text-gray-700 hover:text-primary'
       : 'text-gray-300 hover:text-white';
   };
 
   // Get mobile menu button color based on theme
   const getMobileMenuButtonClass = () => {
-    return theme === 'light' 
-      ? 'text-gray-800 hover:text-primary' 
+    return theme === 'light'
+      ? 'text-gray-800 hover:text-primary'
       : 'text-gray-300 hover:text-white';
   };
 
@@ -129,20 +129,19 @@ const Navigation = () => {
   const getDropdownMenuClass = () => {
     return `rounded-lg ${theme === 'light' ? 'bg-white/95 border border-gray-200' : 'bg-gray-900/95 border border-gray-700'} backdrop-blur-sm shadow-lg overflow-hidden z-50`;
   };
-  
+
   // Get common dropdown item styles
   const getDropdownItemClass = (isActive = false) => {
-    return `${
-      theme === 'light'
-        ? isActive 
-          ? 'bg-blue-50 text-blue-600' 
+    return `${theme === 'light'
+        ? isActive
+          ? 'bg-blue-50 text-blue-600'
           : 'text-gray-700 hover:bg-gray-50'
-        : isActive 
-          ? 'bg-blue-900/20 text-blue-400' 
+        : isActive
+          ? 'bg-blue-900/20 text-blue-400'
           : 'text-gray-300 hover:bg-gray-800'
-    } transition-colors`;
-  };  return (
-    <motion.header 
+      } transition-colors`;
+  }; return (
+    <motion.header
       id="navigation"
       className="fixed w-full z-[60]"
       style={{
@@ -151,22 +150,22 @@ const Navigation = () => {
       }}
       role="banner"
     >
-      <motion.div 
+      <motion.div
         className="container mx-auto px-4 py-3"
         style={{ scale }}
       >
         <div className={`flex justify-between items-center `}>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className={`text-2xl md:text-3xl font-bold relative`}
           >
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
               aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
             >
-              <motion.span 
+              <motion.span
                 className={`relative ${theme === 'light' ? 'text-gray-900' : 'text-white'} font-extrabold`}
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -174,14 +173,99 @@ const Navigation = () => {
                 Ali Al-Zuhairi
               </motion.span>
             </Link>
-          </motion.h1>          {/* Hamburger for mobile */}
+          </motion.h1>          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
+            {/* Home with dropdown */}
+            <div className="relative group">
+              <Link
+                href={localizedHref('/')}
+                className={`flex items-center gap-1 py-2 px-3 rounded-lg ${getTextColorClass()} transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+              >
+                <span className="font-medium">{t('nav.home')}</span>
+                <span className="material-symbols text-sm">expand_more</span>
+              </Link>
+
+              {/* Home dropdown */}
+              <div className={`absolute top-full left-0 mt-1 w-56 ${getDropdownMenuClass()} opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200`}>
+                {homeDropdownItems.slice(1).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={localizedHref(item.href)}
+                    className={`flex items-center gap-2 w-full px-4 py-3 text-sm ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                  >
+                    <span className="material-symbols text-sm" aria-hidden="true">
+                      {item.icon || ''}
+                    </span>
+                    {item.text}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Portfolio with dropdown */}
+            <div className="relative group">
+              <Link
+                href={localizedHref('/portfolio')}
+                className={`flex items-center gap-1 py-2 px-3 rounded-lg ${getTextColorClass()} transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+              >
+                <span className="font-medium">{t('nav.portfolio')}</span>
+                <span className="material-symbols text-sm">expand_more</span>
+              </Link>
+
+              {/* Portfolio dropdown */}
+              <div className={`absolute top-full left-0 mt-1 w-56 ${getDropdownMenuClass()} opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200`}>
+                {portfolioDropdownItems.slice(1).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={localizedHref(item.href)}
+                    className={`flex items-center gap-2 w-full px-4 py-3 text-sm ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                  >
+                    <span className="material-symbols text-sm">article</span>
+                    {t(item.textKey)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Design link */}
+            <Link
+              href={localizedHref('/coming-soon')}
+              className={`py-2 px-3 rounded-lg ${getTextColorClass()} transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+            >
+              <span className="font-medium">Design</span>
+            </Link>
+
+            {/* Blog link */}
+            <Link
+              href={localizedHref('/blog')}
+              className={`py-2 px-3 rounded-lg ${getTextColorClass()} transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+            >
+              <span className="font-medium">{t('nav.blog')}</span>
+            </Link>
+
+            {/* Prompts link */}
+            <Link
+              href={localizedHref('/prompt')}
+              className={`py-2 px-3 rounded-lg ${getTextColorClass()} transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+            >
+              <span className="font-medium">{t('nav.prompts')}</span>
+            </Link>
+
+            {/* Theme and Language Switchers */}
+            <div className="flex items-center space-x-4 ml-6 border-l border-gray-300 dark:border-gray-600 pl-6">
+              <LanguageSwitcher />
+              <ThemeSwitch />
+            </div>
+          </nav>
+
+          {/* Hamburger for mobile */}
           <button
             ref={hamburgerButtonRef}
             onClick={() => handleMenuToggle(!menuOpen)}
             className={`md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg p-2 ${getMobileMenuButtonClass()} flex items-center relative z-[60]`}
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation-menu"
-            aria-label={menuOpen 
+            aria-label={menuOpen
               ? (locale === 'fi' ? 'Sulje päävalikko' : 'Close main menu')
               : (locale === 'fi' ? 'Avaa päävalikko' : 'Open main menu')
             }
@@ -195,7 +279,7 @@ const Navigation = () => {
       <AnimatePresence>
         {menuOpen && (
           <FocusTrap active={menuOpen} restoreFocus={true}>
-            <motion.div 
+            <motion.div
               ref={mobileMenuRef}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -209,87 +293,87 @@ const Navigation = () => {
               aria-modal="true"
               aria-label="Mobile navigation menu"
             >
-            {/* Mobile header - removed duplicate name */}
-            <div className={`p-4 flex  border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-              {/* Empty div to maintain spacing */}
-            </div>
-
-            {/* Top controls - Language and Theme */}
-            <div className={`py-4 px-4 flex items-center justify-between border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-              {/* Mobile Language Switcher */}
-              <div>
-                <LanguageSwitcher />
+              {/* Mobile header - removed duplicate name */}
+              <div className={`p-4 flex  border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
+                {/* Empty div to maintain spacing */}
               </div>
 
-              {/* Mobile Theme Switcher */}
-              <div>
-                <ThemeSwitch />
-              </div>
-            </div>            {/* Navigation links */}
-            <ul className={`p-4 space-y-2`}>              
-              {/* Home with dropdown - Mobile */}              
-              <li className="relative">
-                <div className="flex items-center">                        
-                  <Link
-                    href={localizedHref('/')}
-                    onClick={() => handleMenuToggle(false)}
-                    className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                    aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
-                  >
-                    <span className={`material-symbols `} aria-hidden="true">home</span>
-                    <span className="font-medium">{t('nav.home')}</span>
-                  </Link>
+              {/* Top controls - Language and Theme */}
+              <div className={`py-4 px-4 flex items-center justify-between border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
+                {/* Mobile Language Switcher */}
+                <div>
+                  <LanguageSwitcher />
                 </div>
-                  {/* Home submenu items */}
-                <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
-                  {homeDropdownItems.slice(1).map((item) => (
+
+                {/* Mobile Theme Switcher */}
+                <div>
+                  <ThemeSwitch />
+                </div>
+              </div>            {/* Navigation links */}
+              <ul className={`p-4 space-y-2`}>
+                {/* Home with dropdown - Mobile */}
+                <li className="relative">
+                  <div className="flex items-center">
                     <Link
-                      key={item.href}
-                      href={localizedHref(item.href)}
-                      className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded`}
+                      href={localizedHref('/')}
                       onClick={() => handleMenuToggle(false)}
+                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                      aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
                     >
-                      <span className={`material-symbols text-sm `} aria-hidden="true">
-                        {item.icon || ''}
-                      </span>
-                      {item.text}
+                      <span className={`material-symbols `} aria-hidden="true">home</span>
+                      <span className="font-medium">{t('nav.home')}</span>
                     </Link>
-                  ))}
-                </div>
-              </li>              
+                  </div>
+                  {/* Home submenu items */}
+                  <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
+                    {homeDropdownItems.slice(1).map((item) => (
+                      <Link
+                        key={item.href}
+                        href={localizedHref(item.href)}
+                        className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded`}
+                        onClick={() => handleMenuToggle(false)}
+                      >
+                        <span className={`material-symbols text-sm `} aria-hidden="true">
+                          {item.icon || ''}
+                        </span>
+                        {item.text}
+                      </Link>
+                    ))}
+                  </div>
+                </li>
 
-              {/* Portfolio with dropdown - Mobile */}
-              <li className="relative">
-                <div className="flex items-center">                        
-                  <Link
-                    href={localizedHref('/portfolio')}
-                    onClick={() => handleMenuToggle(false)}
-                    className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                    aria-label={locale === 'fi' ? 'Siirry portfoliosivulle' : 'Go to portfolio page'}
-                  >
-                    <span className={`material-symbols `} aria-hidden="true">work</span>
-                    <span className="font-medium">{t('nav.portfolio')}</span>
-                  </Link>
-                </div>
-                  {/* Portfolio submenu items */}
-                <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
-                  {portfolioDropdownItems.slice(1).map((item) => (
+                {/* Portfolio with dropdown - Mobile */}
+                <li className="relative">
+                  <div className="flex items-center">
                     <Link
-                      key={item.href}
-                      href={localizedHref(item.href)}
-                      className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)}`}                      onClick={() => handleMenuToggle(false)}
+                      href={localizedHref('/portfolio')}
+                      onClick={() => handleMenuToggle(false)}
+                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                      aria-label={locale === 'fi' ? 'Siirry portfoliosivulle' : 'Go to portfolio page'}
                     >
-                      <span className={`material-symbols text-sm `}>
-                        article
-                      </span>
-                      {t(item.textKey)}
+                      <span className={`material-symbols `} aria-hidden="true">work</span>
+                      <span className="font-medium">{t('nav.portfolio')}</span>
                     </Link>
-                  ))}
-                </div>
-              </li>
+                  </div>
+                  {/* Portfolio submenu items */}
+                  <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
+                    {portfolioDropdownItems.slice(1).map((item) => (
+                      <Link
+                        key={item.href}
+                        href={localizedHref(item.href)}
+                        className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)}`} onClick={() => handleMenuToggle(false)}
+                      >
+                        <span className={`material-symbols text-sm `}>
+                          article
+                        </span>
+                        {t(item.textKey)}
+                      </Link>
+                    ))}
+                  </div>
+                </li>
 
-              {/* Design link - Mobile */}              
-              <li>                    <Link
+                {/* Design link - Mobile */}
+                <li>                    <Link
                   href={localizedHref('/coming-soon')}
                   onClick={() => handleMenuToggle(false)}
                   className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
@@ -297,48 +381,48 @@ const Navigation = () => {
                   <span className={`material-symbols `}>design_services</span>
                   <span className="font-medium">Design</span>
                 </Link>
-              </li>
+                </li>
 
-              {/* Blog link - Mobile */}
-              <li>                  
-                <Link
-                  href={localizedHref('/blog')}
+                {/* Blog link - Mobile */}
+                <li>
+                  <Link
+                    href={localizedHref('/blog')}
+                    onClick={() => handleMenuToggle(false)}
+                    className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  >
+                    <span className={`material-symbols `}>article</span>
+                    <span className="font-medium">{t('nav.blog')}</span>
+                  </Link>
+                </li>
+
+                {/* Prompts link - Mobile */}
+                <li>
+                  <Link
+                    href={localizedHref('/prompt')}
+                    onClick={() => handleMenuToggle(false)}
+                    className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  >
+                    <span className={`material-symbols `}>smart_toy</span>
+                    <span className="font-medium">{t('nav.prompts')}</span>
+                  </Link>
+                </li>
+              </ul>
+
+              {/* Close button */}
+              <div className="sticky bottom-4 left-0 right-0 mt-8 px-4 flex justify-center">
+                <button
                   onClick={() => handleMenuToggle(false)}
-                  className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
+                  className={`px-6 py-2 rounded-full ${theme === 'light'
+                    ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    } transition-colors flex items-center gap-2`}
+                  aria-label="Close menu"
                 >
-                  <span className={`material-symbols `}>article</span>
-                  <span className="font-medium">{t('nav.blog')}</span>
-                </Link>
-              </li>
-
-              {/* Prompts link - Mobile */}
-              <li>                
-                <Link
-                  href={localizedHref('/prompt')}
-                  onClick={() => handleMenuToggle(false)}
-                  className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                >
-                  <span className={`material-symbols `}>smart_toy</span>
-                  <span className="font-medium">{t('nav.prompts')}</span>
-                </Link>
-              </li>
-            </ul>
-
-            {/* Close button */}            
-            <div className="sticky bottom-4 left-0 right-0 mt-8 px-4 flex justify-center">
-              <button
-                onClick={() => handleMenuToggle(false)}
-                className={`px-6 py-2 rounded-full ${theme === 'light' 
-                  ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' 
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                } transition-colors flex items-center gap-2`}
-                aria-label="Close menu"
-              >
-                <span className="material-symbols text-sm">close</span>
-                {t('close')}
-              </button>
-            </div>
-          </motion.div>
+                  <span className="material-symbols text-sm">close</span>
+                  {t('close')}
+                </button>
+              </div>
+            </motion.div>
           </FocusTrap>
         )}
       </AnimatePresence>
