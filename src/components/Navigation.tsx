@@ -178,7 +178,8 @@ const Navigation = () => {
                 Ali Al-Zuhairi
               </motion.span>
             </Link>
-          </motion.h1>          {/* Hamburger for mobile */}
+          </motion.h1>          
+          {/* Hamburger for mobile */}
           <button
             onClick={() => handleMenuToggle(!menuOpen)}
             className={`md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg p-2 ${getMobileMenuButtonClass()} flex items-center`}
@@ -192,7 +193,8 @@ const Navigation = () => {
             <span className="material-symbols material-symbols-rounded text-2xl">
               {menuOpen ? 'close' : 'menu'}
             </span>
-          </button>{/* Desktop nav */}          
+          </button>
+          {/* Desktop nav */}          
           <nav className={`hidden md:flex items-center `} role="navigation" aria-label={locale === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
             <motion.ul 
               initial={{ opacity: 0, y: -10 }}
