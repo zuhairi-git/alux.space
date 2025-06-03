@@ -3,14 +3,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Menu } from '@headlessui/react';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageSwitcher from './LanguageSwitcher';
 import FocusTrap from './ui/FocusTrap';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/utils/translations';
-import Tooltip from './ui/Tooltip';
 import { i18n } from '@/i18n';
 
 const portfolioDropdownItems = [
@@ -113,18 +111,10 @@ const Navigation = () => {
       document.removeEventListener('keydown', handleEscape);
     };
   }, [menuOpen, handleMenuToggle]);
-  
-  // Get text color class based on theme
+    // Get text color class based on theme
   const getTextColorClass = () => {
     return theme === 'light' 
       ? 'text-gray-700 hover:text-primary' 
-      : 'text-gray-300 hover:text-white';
-  };
-
-  // Get dropdown button styles based on theme
-  const getDropdownButtonClass = () => {
-    return theme === 'light'
-      ? 'text-gray-800 hover:text-primary'
       : 'text-gray-300 hover:text-white';
   };
 
