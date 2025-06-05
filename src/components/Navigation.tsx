@@ -27,6 +27,208 @@ const homeDropdownItems = [
   { href: '/#testimonials', text: 'Testimonials', type: 'section', icon: 'format_quote' },
 ];
 
+// Mobile Menu Section Component
+interface MobileMenuSectionProps {
+  title: string;
+  icon: string;
+  href: string;
+  items: any[];
+  theme: string;
+  onLinkClick: () => void;
+  getDropdownItemClass: (isActive: boolean) => string;
+  getTextColorClass: () => string;
+  localizedHref: (path: string) => string;
+  locale: string;
+  isPortfolio?: boolean;
+  t?: (key: string) => string;
+}
+
+const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
+  title,
+  icon,
+  href,
+  items,
+  theme,
+  onLinkClick,
+  getDropdownItemClass,
+  getTextColorClass,
+  localizedHref,
+  locale,
+  isPortfolio = false,
+  t
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const getBgClass = () => {
+    return theme === 'light' 
+      ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50' 
+      : theme === 'dark'
+      ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50'
+      : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/20';
+  };
+
+  const getExpandedBgClass = () => {
+    return theme === 'light' 
+      ? 'bg-blue-50/50 border-blue-200/50' 
+      : theme === 'dark'
+      ? 'bg-blue-900/20 border-blue-700/50'
+      : 'bg-purple-500/10 border-purple-400/30';
+  };
+
+  const getSubmenuBgClass = () => {
+    return theme === 'light' 
+      ? 'bg-gray-50/80' 
+      : theme === 'dark'
+      ? 'bg-gray-800/80'
+      : 'bg-purple-900/30';
+  };
+
+  return (
+    <motion.div
+      className={`rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 ${
+        isExpanded ? getExpandedBgClass() : getBgClass()
+      }`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Main section header */}
+      <div className="flex items-center">
+        <Link
+          href={href}
+          onClick={onLinkClick}
+          className={`flex-grow flex items-center gap-3 py-4 px-4 ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors`}
+          aria-label={locale === 'fi' 
+            ? (isPortfolio ? 'Siirry portfoliosivulle' : 'Siirry etusivulle') 
+            : (isPortfolio ? 'Go to portfolio page' : 'Go to homepage')
+          }
+        >
+          <motion.div
+            className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="material-symbols text-xl" aria-hidden="true">{icon}</span>
+          </motion.div>
+          <span className="font-semibold text-lg">{title}</span>
+        </Link>
+        
+        {/* Expand/Collapse button */}
+        <motion.button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className={`p-3 mr-2 rounded-lg ${getTextColorClass()} hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors`}
+          aria-expanded={isExpanded}
+          aria-label={isExpanded ? 'Collapse menu' : 'Expand menu'}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.span
+            className="material-symbols text-xl"
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            expand_more
+          </motion.span>
+        </motion.button>
+      </div>
+
+      {/* Submenu items */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={`overflow-hidden ${getSubmenuBgClass()}`}
+          >
+            <div className="px-2 pb-3 space-y-1">
+              {items.map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: index * 0.05 }}
+                >
+                  <Link
+                    href={localizedHref(item.href)}
+                    className={`flex items-center gap-3 w-full px-4 py-3 text-sm rounded-lg ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 hover:translate-x-1`}
+                    onClick={onLinkClick}
+                  >
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
+                      <span className="material-symbols text-sm" aria-hidden="true">
+                        {item.icon || 'article'}
+                      </span>
+                    </div>
+                    <span className="font-medium">
+                      {isPortfolio && t ? t(item.textKey) : item.text}
+                    </span>                    <span className="material-symbols text-xs ml-auto opacity-50">
+                      chevron_right
+                    </span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// Mobile Menu Item Component (for simple items without dropdown)
+interface MobileMenuItemProps {
+  href: string;
+  icon: string;
+  title: string;
+  theme: string;
+  onLinkClick: () => void;
+  getTextColorClass: () => string;
+}
+
+const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
+  href,
+  icon,
+  title,
+  theme,
+  onLinkClick,
+  getTextColorClass
+}) => {
+  const getBgClass = () => {
+    return theme === 'light' 
+      ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50' 
+      : theme === 'dark'
+      ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50'
+      : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/20';
+  };
+
+  return (
+    <motion.div
+      className={`rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 ${getBgClass()}`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
+    >
+      <Link
+        href={href}
+        onClick={onLinkClick}
+        className={`flex items-center gap-3 w-full py-4 px-4 ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors group`}
+      >
+        <motion.div
+          className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-200"
+          whileHover={{ scale: 1.05 }}
+        >
+          <span className="material-symbols text-xl" aria-hidden="true">{icon}</span>
+        </motion.div>
+        <span className="font-semibold text-lg group-hover:translate-x-1 transition-transform duration-200">{title}</span>        <span className="material-symbols text-sm ml-auto opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
+          chevron_right
+        </span>
+      </Link>
+    </motion.div>
+  );
+};
+
 const Navigation = () => {
   const { scrollY } = useScroll();
   const { theme } = useTheme(); const { locale } = useLanguage();
@@ -310,102 +512,74 @@ const Navigation = () => {
                   <ThemeSwitch />
                 </div>
               </div>            {/* Navigation links */}
-              <ul className={`p-4 space-y-2`}>
-                {/* Home with dropdown - Mobile */}
-                <li className="relative">
-                  <div className="flex items-center">
-                    <Link
-                      href={localizedHref('/')}
-                      onClick={() => handleMenuToggle(false)}
-                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                      aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
-                    >
-                      <span className={`material-symbols `} aria-hidden="true">home</span>
-                      <span className="font-medium">{t('nav.home')}</span>
-                    </Link>
-                  </div>
-                  {/* Home submenu items */}
-                  <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
-                    {homeDropdownItems.slice(1).map((item) => (
-                      <Link
-                        key={item.href}
-                        href={localizedHref(item.href)}
-                        className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded`}
-                        onClick={() => handleMenuToggle(false)}
-                      >
-                        <span className={`material-symbols text-sm `} aria-hidden="true">
-                          {item.icon || ''}
-                        </span>
-                        {item.text}
-                      </Link>
-                    ))}
-                  </div>
-                </li>
+            <ul className={`p-4 space-y-3`}>
+              {/* Home with collapsible dropdown - Mobile */}
+              <li className="relative">
+                <MobileMenuSection
+                  title={t('nav.home')}
+                  icon="home"
+                  href={localizedHref('/')}
+                  items={homeDropdownItems.slice(1)}
+                  theme={theme}
+                  onLinkClick={() => handleMenuToggle(false)}
+                  getDropdownItemClass={getDropdownItemClass}
+                  getTextColorClass={getTextColorClass}
+                  localizedHref={localizedHref}
+                  locale={locale}
+                />
+              </li>
 
-                {/* Portfolio with dropdown - Mobile */}
-                <li className="relative">
-                  <div className="flex items-center">
-                    <Link
-                      href={localizedHref('/portfolio')}
-                      onClick={() => handleMenuToggle(false)}
-                      className={`flex-grow flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                      aria-label={locale === 'fi' ? 'Siirry portfoliosivulle' : 'Go to portfolio page'}
-                    >
-                      <span className={`material-symbols `} aria-hidden="true">work</span>
-                      <span className="font-medium">{t('nav.portfolio')}</span>
-                    </Link>
-                  </div>
-                  {/* Portfolio submenu items */}
-                  <div className={`${getDropdownMenuClass()} mx-2 mb-2 border-t-0 rounded-t-none`}>
-                    {portfolioDropdownItems.slice(1).map((item) => (
-                      <Link
-                        key={item.href}
-                        href={localizedHref(item.href)}
-                        className={`flex items-center gap-2 w-full px-6 py-2 text-sm ${getDropdownItemClass(false)}`} onClick={() => handleMenuToggle(false)}
-                      >
-                        <span className={`material-symbols text-sm `}>
-                          article
-                        </span>
-                        {t(item.textKey)}
-                      </Link>
-                    ))}
-                  </div>
-                </li>
-
-                {/* Design link - Mobile */}
-                <li>                    <Link
+              {/* Portfolio with collapsible dropdown - Mobile */}
+              <li className="relative">
+                <MobileMenuSection
+                  title={t('nav.portfolio')}
+                  icon="work"
+                  href={localizedHref('/portfolio')}
+                  items={portfolioDropdownItems.slice(1)}
+                  theme={theme}
+                  onLinkClick={() => handleMenuToggle(false)}
+                  getDropdownItemClass={getDropdownItemClass}
+                  getTextColorClass={getTextColorClass}
+                  localizedHref={localizedHref}
+                  locale={locale}
+                  isPortfolio={true}
+                  t={t}
+                />
+              </li>              {/* Design link - Mobile */}
+              <li>
+                <MobileMenuItem
                   href={localizedHref('/coming-soon')}
-                  onClick={() => handleMenuToggle(false)}
-                  className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                >
-                  <span className={`material-symbols `}>design_services</span>
-                  <span className="font-medium">Design</span>
-                </Link>
-                </li>
+                  icon="design_services"
+                  title="Design"
+                  theme={theme}
+                  onLinkClick={() => handleMenuToggle(false)}
+                  getTextColorClass={getTextColorClass}
+                />
+              </li>
 
-                {/* Blog link - Mobile */}
-                <li>
-                  <Link
-                    href={localizedHref('/blog')}
-                    onClick={() => handleMenuToggle(false)}
-                    className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                  >
-                    <span className={`material-symbols `}>article</span>
-                    <span className="font-medium">{t('nav.blog')}</span>
-                  </Link>
-                </li>
+              {/* Blog link - Mobile */}
+              <li>
+                <MobileMenuItem
+                  href={localizedHref('/blog')}
+                  icon="article"
+                  title={t('nav.blog')}
+                  theme={theme}
+                  onLinkClick={() => handleMenuToggle(false)}
+                  getTextColorClass={getTextColorClass}
+                />
+              </li>
 
-                {/* Prompts link - Mobile */}
-                <li>
-                  <Link
-                    href={localizedHref('/prompt')}
-                    onClick={() => handleMenuToggle(false)}
-                    className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg ${theme === 'light' ? 'hover:bg-gray-50' : 'hover:bg-gray-800'} ${getTextColorClass()}`}
-                  >
-                    <span className={`material-symbols `}>smart_toy</span>
-                    <span className="font-medium">{t('nav.prompts')}</span>
-                  </Link>
-                </li>
+              {/* Prompts link - Mobile */}
+              <li>
+                <MobileMenuItem
+                  href={localizedHref('/prompt')}
+                  icon="smart_toy"
+                  title={t('nav.prompts')}
+                  theme={theme}
+                  onLinkClick={() => handleMenuToggle(false)}
+                  getTextColorClass={getTextColorClass}
+                />
+              </li>
               </ul>
 
               {/* Close button */}
