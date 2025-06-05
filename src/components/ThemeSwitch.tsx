@@ -65,7 +65,7 @@ export default function ThemeSwitch() {
               <Tooltip text={themeOption.label}>                <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`relative w-12 h-12 flex items-center justify-center rounded-lg cursor-pointer overflow-hidden ${
+                  className={`relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-lg cursor-pointer overflow-hidden ${
                     checked 
                       ? getSelectedStyles(themeOption.value as Theme)
                       : getUnselectedStyles(theme)
@@ -93,10 +93,9 @@ export default function ThemeSwitch() {
                       }}
                     />
                   )}
-                  
-                  {/* Icon with enhanced animations */}
+                    {/* Icon with enhanced animations */}
                   <motion.span 
-                    className="material-symbols material-symbols-rounded text-xl relative z-10"
+                    className="material-symbols material-symbols-rounded text-xl md:text-lg relative z-10"
                     animate={checked ? {
                       rotate: [0, 10, -10, 0],
                       scale: [1, 1.1, 1]
