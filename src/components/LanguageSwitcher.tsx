@@ -4,16 +4,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu } from '@headlessui/react';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
 import { useTheme } from '@/context/ThemeContext';
 import Tooltip from './ui/Tooltip';
 import { LiveRegion } from './ui/LiveRegion';
-import { i18n } from '@/i18n';
 
 export default function LanguageSwitcher() {
   const { locale, setLocale } = useLanguage();
   const { theme } = useTheme();
-  const { t } = useTranslations(locale);
   const [announcement, setAnnouncement] = useState('');
 
   // Language configurations with flags and labels
@@ -119,10 +116,9 @@ export default function LanguageSwitcher() {
                     transition: 'all 0.2s ease-out'
                   }}
                 >
-                  <div className="p-1">
-                    {languages.map((language, index) => (
+                  <div className="p-1">                    {languages.map((language, index) => (
                       <Menu.Item key={language.code}>
-                        {({ active }) => (
+                        {() => (
                           <motion.button
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
