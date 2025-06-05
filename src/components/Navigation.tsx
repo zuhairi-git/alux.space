@@ -112,18 +112,22 @@ const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
           </motion.div>
           <span className="font-semibold text-lg">{title}</span>
         </Link>
-        
-        {/* Expand/Collapse button */}
+          {/* Expand/Collapse button */}
         <motion.button
           onClick={() => setIsExpanded(!isExpanded)}
-          className={`p-3 mr-2 rounded-lg ${getTextColorClass()} hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors`}
+          className={`p-2 mr-2 rounded-full bg-black/5 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 ${
+            theme === 'light' 
+              ? 'text-gray-600 hover:text-gray-800 bg-gray-100/50 hover:bg-gray-200/70' 
+              : theme === 'dark'
+              ? 'text-gray-400 hover:text-gray-200 bg-gray-700/50 hover:bg-gray-600/70'
+              : 'text-gray-300 hover:text-white bg-purple-900/30 hover:bg-purple-800/50'
+          }`}
           aria-expanded={isExpanded}
           aria-label={isExpanded ? 'Collapse menu' : 'Expand menu'}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <motion.span
-            className="material-symbols text-xl"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >          <motion.span
+            className="material-symbols text-lg"
             animate={{ rotate: isExpanded ? 180 : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
@@ -220,9 +224,8 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
           whileHover={{ scale: 1.05 }}
         >
           <span className="material-symbols text-xl" aria-hidden="true">{icon}</span>
-        </motion.div>
-        <span className="font-semibold text-lg group-hover:translate-x-1 transition-transform duration-200">{title}</span>        <span className="material-symbols text-sm ml-auto opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
-          chevron_right
+        </motion.div>        <span className="font-semibold text-lg group-hover:translate-x-1 transition-transform duration-200">{title}</span>        <span className="material-symbols text-xs ml-auto opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
+          arrow_forward
         </span>
       </Link>
     </motion.div>

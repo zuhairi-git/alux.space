@@ -62,11 +62,10 @@ export default function ThemeSwitch() {
             className="focus:outline-none"
           >
             {({ checked }) => (
-              <Tooltip text={themeOption.label}>
-                <motion.div
+              <Tooltip text={themeOption.label}>                <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`relative w-11 h-11 flex items-center justify-center rounded-xl cursor-pointer overflow-hidden ${
+                  className={`relative w-12 h-12 flex items-center justify-center rounded-lg cursor-pointer overflow-hidden ${
                     checked 
                       ? getSelectedStyles(themeOption.value as Theme)
                       : getUnselectedStyles(theme)
@@ -125,7 +124,7 @@ export default function ThemeSwitch() {
                   {/* Pulse effect for active theme */}
                   {checked && (
                     <motion.div
-                      className="absolute inset-0 rounded-xl"
+                      className="absolute inset-0 rounded-lg"
                       style={{
                         background: themeOption.value === 'light' 
                           ? 'rgba(251, 191, 36, 0.3)' 
