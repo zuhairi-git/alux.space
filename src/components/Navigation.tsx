@@ -415,7 +415,7 @@ const Navigation = () => {
                       ? 'bg-blue-900/50' 
                       : 'bg-gradient-to-br from-blue-500/20 to-purple-500/20'
                   }`}>
-                    <span className="material-symbols text-xs text-blue-500">home</span>
+                    <span className="material-symbols text-xs text-blue-500 scale-65">home</span>
                   </div>
                   <span className="font-medium text-sm">{t('nav.home')}</span>
                 </Link>
@@ -514,7 +514,7 @@ const Navigation = () => {
                       ? 'bg-purple-900/50' 
                       : 'bg-gradient-to-br from-purple-500/20 to-pink-500/20'
                   }`}>
-                    <span className="material-symbols text-xs text-purple-500">work</span>
+                    <span className="material-symbols text-xs text-purple-500 scale-65">work</span>
                   </div>
                   <span className="font-medium text-sm">{t('nav.portfolio')}</span>
                 </Link>
@@ -591,14 +591,14 @@ const Navigation = () => {
                   ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
                   : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
               } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+            >              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                 theme === 'light' 
                   ? 'bg-green-100' 
                   : theme === 'dark' 
                   ? 'bg-green-900/50' 
                   : 'bg-gradient-to-br from-green-500/20 to-teal-500/20'
               }`}>
-                <span className="material-symbols text-xs text-green-500">design_services</span>
+                <span className="material-symbols text-xs text-green-500 scale-65">design_services</span>
               </div>
               <span className="font-medium text-sm">Design</span>
               <span className="material-symbols text-xs ml-auto opacity-50">
@@ -614,14 +614,14 @@ const Navigation = () => {
                   ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
                   : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
               } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+            >              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                 theme === 'light' 
                   ? 'bg-orange-100' 
                   : theme === 'dark' 
                   ? 'bg-orange-900/50' 
                   : 'bg-gradient-to-br from-orange-500/20 to-red-500/20'
               }`}>
-                <span className="material-symbols text-xs text-orange-500">article</span>
+                <span className="material-symbols text-xs text-orange-500 scale-65">article</span>
               </div>
               <span className="font-medium text-sm">{t('nav.blog')}</span>
               <span className="material-symbols text-xs ml-auto opacity-50">
@@ -637,14 +637,14 @@ const Navigation = () => {
                   ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
                   : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
               } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+            >              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                 theme === 'light' 
                   ? 'bg-pink-100' 
                   : theme === 'dark' 
                   ? 'bg-pink-900/50' 
                   : 'bg-gradient-to-br from-pink-500/20 to-rose-500/20'
               }`}>
-                <span className="material-symbols text-xs text-pink-500">smart_toy</span>
+                <span className="material-symbols text-xs text-pink-500 scale-65">smart_toy</span>
               </div>
               <span className="font-medium text-sm">{t('nav.prompts')}</span>
               <span className="material-symbols text-xs ml-auto opacity-50">
