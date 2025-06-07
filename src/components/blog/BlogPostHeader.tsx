@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 import AudioPlayer from '../ui/AudioPlayer';
 
 interface BlogPostHeaderProps {

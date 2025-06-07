@@ -74,7 +74,17 @@
     },
     "quickLinks": "Quick Links",
     "portfolio": "Portfolio",
-    "contact": "Contact"
+    "contact": "Contact",
+    "location": "Helsinki, Finland",
+    "profession": "AI-powered Design Architect",
+    "aria": {
+      "siteFooter": "Site footer with additional information and links",
+      "socialMedia": "Social media links",
+      "socialPlatform": "Social media platform",
+      "quickLinks": "Quick navigation links",
+      "portfolioLinks": "Portfolio and work links",
+      "emailContact": "Email contact information"
+    }
   },"languageSwitcher": {
     "title": "Language",
     "en": "English",

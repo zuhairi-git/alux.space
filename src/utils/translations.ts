@@ -1,59 +1,81 @@
-import { loadExcelTranslations, getExcelTranslation } from './excelTranslations.client';
-import generatedTranslations from '../translations/generatedTranslations.json';
-import { useEffect } from 'react';
+import type { TranslationObject } from '../types/translations';
 
-// Define types (matching those in excelTranslations.ts)
-type TranslationValue = string | number | boolean | null | TranslationObject;
-type TranslationObject = { [key: string]: TranslationValue };
+// Import translation data
+import enTranslations from '../locales/en/common.json';
+import fiTranslations from '../locales/fi/common.json';
 
-// Load translations directly from the JSON file for immediate availability
-let translations: Record<string, TranslationObject> = generatedTranslations as Record<string, TranslationObject>;
-
-// Flag to track if in development mode for more detailed logging
-const isDev = process.env.NODE_ENV === 'development';
+// Static translations object
+const staticTranslations: Record<string, TranslationObject> = {
+  en: enTranslations as TranslationObject,
+  fi: fiTranslations as TranslationObject,
+};
 
 /**
- * Initialize translations by loading them from Excel
- * This ensures the translations are up-to-date with the latest data
+ * Load translations from static imports
  */
-export async function initTranslations(): Promise<void> {
-  try {
-    // Force reload the generated translations in development mode
-    if (typeof window !== 'undefined' && isDev) {
-      try {
-        // Add cache-busting parameter for development
-        const cacheBuster = Date.now();
-        const response = await fetch(`/api/translations?t=${cacheBuster}`);
-        if (response.ok) {
-          const freshTranslations = await response.json();
-          translations = freshTranslations;
-          console.log('Loaded fresh translations from API');
-          return;
-        }      } catch {
-        console.warn('Could not fetch fresh translations, using cached ones');
-      }
+export function loadTranslations(): Record<string, TranslationObject> {
+  return staticTranslations;
+}
+
+/**
+ * Get a nested translation value using dot notation
+ */
+function getNestedTranslation(obj: Record<string, unknown>, keys: string[]): string | null {
+  let current: unknown = obj;
+  
+  for (const key of keys) {
+    if (current && typeof current === 'object' && current !== null && key in current) {
+      current = (current as Record<string, unknown>)[key];
+    } else {
+      return null; // Key not found
     }
-    
-    try {
-      // Use type assertion to ensure compatibility
-      const excelTranslations = await loadExcelTranslations();
-      translations = excelTranslations as typeof translations;
-    } catch (loadError) {
-      console.error('Error loading Excel translations, using generated translations instead:', loadError);
-    }
-  } catch (error) {
-    console.error('Failed to initialize translations:', error);
   }
+  
+  return typeof current === 'string' ? current : null;
 }
 
 /**
  * Get a translation for a specific key and locale
  */
-export function getTranslation(locale: string, key: string, placeholders?: Record<string, string | number>): string {
-  return getExcelTranslation(translations, locale, key, placeholders);
+export function getTranslation(
+  locale: string, 
+  key: string, 
+  placeholders?: Record<string, string | number>
+): string {
+  const translations = loadTranslations();
+  
+  // Default to English if locale doesn't exist
+  const safeLocale = translations[locale] ? locale : 'en';
+  const keys = key.split('.');
+  
+  // First try in the specified locale
+  const translation = getNestedTranslation(translations[safeLocale], keys);
+  
+  // If not found and locale isn't English, try English as fallback
+  const fallback = 
+    !translation && safeLocale !== 'en' 
+      ? getNestedTranslation(translations.en, keys) 
+      : null;
+  
+  // Use translation, fallback, or key as last resort
+  let result = translation || fallback || key;
+  
+  // Handle placeholder replacements if provided
+  if (placeholders && typeof result === 'string') {
+    Object.entries(placeholders).forEach(([placeholder, value]) => {
+      result = result.replace(new RegExp(`{{${placeholder}}}`, 'g'), String(value));
+    });
+  }
+  
+  // Log warning in development if no translation found
+  if (!translation && !fallback && process.env.NODE_ENV === 'development') {
+    console.warn(`Translation missing for key: ${key} in locale: ${locale}`);
+  }
+  
+  return result;
 }
 
-type DateFormatOptions = Intl.DateTimeFormatOptions;
+export type DateFormatOptions = Intl.DateTimeFormatOptions;
 
 // Common date format presets
 const dateFormats: Record<string, DateFormatOptions> = {
@@ -84,29 +106,4 @@ export function formatDate(
     console.error('Error formatting date:', error);
     return new Intl.DateTimeFormat('en-US', options).format(dateObj);
   }
-}
-
-export function useTranslations(locale: string) {
-  // Trigger a re-initialization of translations on first client-side render
-  // but only in development to ensure freshest translations
-  useEffect(() => {
-    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-      initTranslations().catch(err => {
-        console.warn('Failed to refresh translations on component mount', err);
-      });
-    }
-  }, []);
-
-  return {
-    t: (key: string, placeholders?: Record<string, string | number>) => {
-      try {
-        return getTranslation(locale, key, placeholders);
-      } catch (error) {
-        console.error(`Translation error for key "${key}":`, error);
-        return key; // Fallback to the key itself
-      }
-    },
-    formatDate: (date: Date | string | number, format?: keyof typeof dateFormats | DateFormatOptions) => 
-      formatDate(locale, date, format)
-  };
 }

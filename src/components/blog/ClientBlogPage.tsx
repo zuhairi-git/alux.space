@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { RadioGroup } from '@headlessui/react';
 import BlogCard from './BlogCard';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 import { Post } from '@/app/blog/posts/data';
 
 interface ClientBlogPageProps {

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
 
 const Footer = () => {

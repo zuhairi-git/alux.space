@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '../i18n';
-import { initTranslations } from '@/utils/translations';
 type LanguageContextType = {
   locale: string;
   setLocale: (locale: string) => void;
@@ -56,15 +55,9 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
     return defaultLanguage;
   }, [initialLocale, pathname]);
   const [locale, setLocaleState] = useState(defaultLanguage);
-    useEffect(() => {
+  useEffect(() => {
     const detectedLocale = detectLocale();
     setLocaleState(detectedLocale);
-    
-    // Initialize translations from Excel when component mounts
-    // or when the pathname changes (which might indicate a language change)
-    initTranslations().catch(err => {
-      console.error('Failed to initialize translations:', err);
-    });
   }, [pathname, detectLocale]);
   
   useEffect(() => {

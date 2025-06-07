@@ -6,7 +6,7 @@ import { RadioGroup } from '@headlessui/react';
 import Navigation from '@/components/Navigation';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface PortfolioItem {
   title: {

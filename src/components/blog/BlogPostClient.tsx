@@ -12,7 +12,7 @@ import {
 } from 'next-share';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface BlogPostClientProps {
   children: React.ReactNode;

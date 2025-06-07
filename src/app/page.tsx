@@ -9,7 +9,7 @@ import QuoteBlock from '@/components/ui/QuoteBlock';
 import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 
 // A helper component for skill cards

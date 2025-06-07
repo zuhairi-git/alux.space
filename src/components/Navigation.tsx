@@ -8,7 +8,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import FocusTrap from './ui/FocusTrap';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
 
 // Define types for dropdown items

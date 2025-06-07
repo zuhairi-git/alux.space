@@ -1,13 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { buildTranslationsFromExcel } = require('./src/scripts/buildTranslations');
-
-// Build translations from Excel before Next.js starts building
-if (!process.env.SKIP_EXCEL_TRANSLATIONS) {
-  console.log('Building translations from Excel...');
-  buildTranslationsFromExcel().catch(err => {
-    console.error('Error building translations:', err);
-  });
-}
 
 const nextConfig = {
   images: {
