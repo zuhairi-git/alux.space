@@ -3,10 +3,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
+    extend: {      fontFamily: {
         poppins: ['var(--font-poppins)'],
         roboto: ['var(--font-roboto)'],
+        tajawal: ['var(--font-tajawal)'],
       },
     },
   },

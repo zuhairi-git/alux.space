@@ -1,13 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 
-export default function AccessibilityClient() {  const [activeTab, setActiveTab] = useState(0);
+export default function AccessibilityClient() {
+  const [activeTab, setActiveTab] = useState(0);
+  
+  useEffect(() => {
+    // Ensure Tajawal font is loaded
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap';
+    link.rel = 'stylesheet';
+    if (!document.querySelector(`link[href="${link.href}"]`)) {
+      document.head.appendChild(link);
+    }
+  }, []);
   
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -627,8 +638,7 @@ export default function AccessibilityClient() {  const [activeTab, setActiveTab]
                   }`}>{content.objectivesTitle}</h2>
                   
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[
-                      { icon: "foundation", text: content.objective1 },
+                    {[                      { icon: "home_repair_service", text: content.objective1 },
                       { icon: "accessibility", text: content.objective2 },
                       { icon: "verified", text: content.objective3 },
                       { icon: "integration_instructions", text: content.objective4 },
@@ -727,10 +737,9 @@ export default function AccessibilityClient() {  const [activeTab, setActiveTab]
                     }`}>{content.participantFeedback}</h3>
                     
                     <div className="grid md:grid-cols-4 gap-6 mb-8">
-                      {[
-                        { label: content.accessibilityValue, value: "92%", icon: "accessibility" },
+                      {[                        { label: content.accessibilityValue, value: "92%", icon: "accessibility" },
                         { label: content.usabilityScore, value: "88%", icon: "thumb_up" },
-                        { label: content.inclusionApproval, value: "95%", icon: "diversity_3" },
+                        { label: content.inclusionApproval, value: "95%", icon: "groups" },
                         { label: content.complianceRating, value: "100%", icon: "verified" }
                       ].map((metric, index) => (
                         <div key={index} className="text-center">
@@ -1087,10 +1096,9 @@ export default function AccessibilityClient() {  const [activeTab, setActiveTab]
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400' 
                       : isLight ? 'text-gray-900' : 'text-white'
                   }`}>{content.principlesTitle}</h2>
-                  
-                  <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-3 gap-8">
                     {[
-                      { title: content.principle1, desc: content.principle1Desc, icon: 'universal_access' },
+                      { title: content.principle1, desc: content.principle1Desc, icon: 'accessibility' },
                       { title: content.principle2, desc: content.principle2Desc, icon: 'integration_instructions' },
                       { title: content.principle3, desc: content.principle3Desc, icon: 'developer_mode' }
                     ].map((principle, index) => (
@@ -1223,8 +1231,7 @@ export default function AccessibilityClient() {  const [activeTab, setActiveTab]
                         </div>
                       </div>
                     </div>
-                    
-                    <div className={`p-8 rounded-2xl ${
+                      <div className={`p-8 rounded-2xl ${
                       isColorful 
                         ? 'bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-400/30 backdrop-blur-lg' 
                         : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
@@ -1232,24 +1239,24 @@ export default function AccessibilityClient() {  const [activeTab, setActiveTab]
                       <h3 className={`text-xl font-bold mb-4 ${
                         isColorful ? 'text-orange-300' : isLight ? 'text-gray-900' : 'text-white'
                       }`}>{content.arabicType}</h3>
-                      <div className="space-y-4" dir="rtl">
+                      <div className="space-y-4" dir="rtl" style={{fontFamily: "'Tajawal', sans-serif"}}>
                         <div>
                           <h4 className={`text-3xl font-bold ${
                             isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
                           }`}>عنوان كبير</h4>
-                          <p className="text-sm text-gray-400" dir="ltr">Font Size: 48px, Line Height: 1.4</p>
+                          <p className="text-sm text-gray-400" dir="ltr">Font: Tajawal, Size: 48px, Line Height: 1.4</p>
                         </div>
                         <div>
                           <h5 className={`text-xl font-semibold ${
                             isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
                           }`}>عنوان متوسط</h5>
-                          <p className="text-sm text-gray-400" dir="ltr">Font Size: 24px, Line Height: 1.5</p>
+                          <p className="text-sm text-gray-400" dir="ltr">Font: Tajawal, Size: 24px, Line Height: 1.5</p>
                         </div>
                         <div>
                           <p className={`text-base ${
                             isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
                           }`}>نص محسن للقراءة والوضوح</p>
-                          <p className="text-sm text-gray-400" dir="ltr">Font Size: 16px, Line Height: 1.7</p>
+                          <p className="text-sm text-gray-400" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
                         </div>
                       </div>
                       <div className={`mt-6 p-4 rounded-lg ${

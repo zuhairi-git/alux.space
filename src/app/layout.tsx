@@ -88,11 +88,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // We don't know the locale yet at this level, but the LanguageProvider will handle setting the dir attribute
-  return (
-    <html suppressHydrationWarning>
+  return (    <html suppressHydrationWarning>
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
-      </head>      <body className={`${poppins.variable} ${roboto.variable}`}>
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+      </head>
+      <body className={`${poppins.variable} ${roboto.variable}`} style={{"--font-tajawal": "Tajawal, sans-serif"} as React.CSSProperties}>
         <ThemeProvider>
           <LanguageProvider>
             <SkipLinks />
