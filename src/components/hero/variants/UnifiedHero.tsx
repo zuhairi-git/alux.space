@@ -232,25 +232,137 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               </motion.h1>
             )}
           </AnimatePresence>
-        </motion.div>
-
-        {/* Subtitle */}
+        </motion.div>        {/* Enhanced Subtitle */}
         {subtitle && (
-          <motion.p
+          <motion.div
             layout
             key={`subtitle-${theme}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`${
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className={`relative z-20 ${
               isColorful 
-                ? 'text-2xl md:text-3xl mb-12' 
-                : 'text-xl md:text-2xl mb-8'
-            } ${isLight ? 'text-gray-700' : 'text-gray-300'} text-center relative z-20`}
+                ? 'mb-16 max-w-5xl mx-auto' 
+                : 'mb-12 max-w-4xl mx-auto'
+            }`}
           >
-            {subtitle}
-          </motion.p>
+            {/* Decorative accent line above subtitle */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className={`w-24 h-0.5 mx-auto mb-6 ${
+                isColorful
+                  ? 'bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-blue-500'
+                  : isLight
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500'
+                  : 'bg-gradient-to-r from-blue-400 to-purple-400'
+              } rounded-full`}
+            />
+              {/* Main subtitle text with enhanced typography */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className={`${
+                isColorful 
+                  ? 'text-2xl md:text-3xl lg:text-4xl leading-relaxed' 
+                  : 'text-xl md:text-2xl lg:text-3xl leading-relaxed'
+              } font-medium text-center relative subtitle-gradient-animated`}
+              style={{
+                background: isColorful
+                  ? 'linear-gradient(135deg, #06b6d4 0%, #ec4899 50%, #3b82f6 100%)'
+                  : isLight
+                  ? 'linear-gradient(135deg, #1e40af 0%, #7c3aed 100%)'
+                  : 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                backgroundSize: '200% 200%',
+                filter: 'drop-shadow(0 2px 8px rgba(59, 130, 246, 0.15))'
+              }}
+            >
+              {/* Split subtitle into parts for better visual hierarchy */}
+              <span className="block">
+                {subtitle.split('—')[0]?.trim()}
+              </span>
+              {subtitle.includes('—') && (
+                <motion.span 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.9 }}
+                  className={`block mt-4 ${
+                    isColorful ? 'text-lg md:text-xl lg:text-2xl' : 'text-lg md:text-xl'
+                  }`}
+                  style={{
+                    background: isLight
+                      ? 'linear-gradient(135deg, #374151 0%, #6b7280 100%)'
+                      : 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    opacity: 0.85
+                  }}
+                >
+                  — {subtitle.split('—')[1]?.trim()}
+                </motion.span>
+              )}
+            </motion.p>
+            
+            {/* Subtle glow effect behind text */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.8 }}
+              className="absolute inset-0 -z-10 blur-2xl"
+              style={{
+                background: isColorful
+                  ? 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.08) 0%, rgba(236, 72, 153, 0.08) 50%, rgba(59, 130, 246, 0.08) 100%)'
+                  : isLight
+                  ? 'radial-gradient(ellipse at center, rgba(30, 64, 175, 0.06) 0%, rgba(124, 58, 237, 0.06) 100%)'
+                  : 'radial-gradient(ellipse at center, rgba(96, 165, 250, 0.08) 0%, rgba(167, 139, 250, 0.08) 100%)',
+              }}
+            />
+            
+            {/* Floating accent elements */}
+            <motion.div
+              animate={{
+                y: [0, -8, 0],
+                rotate: [0, 2, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              className={`absolute -top-4 -left-4 w-2 h-2 rounded-full ${
+                isColorful
+                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500'
+                  : 'bg-gradient-to-r from-blue-400 to-purple-400'
+              } shadow-lg`}
+            />
+            
+            <motion.div
+              animate={{
+                y: [0, -6, 0],
+                rotate: [0, -2, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+                delay: 1
+              }}
+              className={`absolute -bottom-4 -right-4 w-2 h-2 rounded-full ${
+                isColorful
+                  ? 'bg-gradient-to-r from-fuchsia-400 to-pink-500'
+                  : 'bg-gradient-to-r from-purple-400 to-pink-400'
+              } shadow-lg`}
+            />
+          </motion.div>
         )}
 
         {/* Quote Section */}

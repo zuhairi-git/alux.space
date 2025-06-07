@@ -11,19 +11,16 @@
       "collaboration": "Collaboration & Leadership",
       "jobseeking": "Job Seeking"
     }
-  },
-  "home": {
-    "hero": {
+  },  "home": {    "hero": {
       "title": "Hi, I'm Ali Al-Zuhairi",
-      "subtitle": "I'm a designer and developer who loves creating beautiful digital experiences.",
+      "subtitle": "AI-powered design architect specializing in prompt engineering — transforming complex challenges into intelligent, inclusive digital solutions that bridge human creativity and artificial intelligence.",
       "cta": "View Portfolio"
-    },
-    "about": {
+    },    "about": {
       "title": "Crafting Digital Dreams into Reality",
-      "intro": "Hey there! I'm Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about more than just aesthetics; it's about touching hearts and solving real problems.",
-      "quote": "Designing at the intersection of strategy and imagination — where vision becomes reality.",
-      "second": "Over the past decade, I've had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.",
-      "third": "When I'm not designing, you'll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone's digital life a little bit better."
+      "intro": "Hey there! I'm Ali, a passionate AI-driven designer who believes in the transformative power of intelligent design to solve complex problems. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about bridging human intuition with artificial intelligence to create meaningful, accessible experiences.",
+      "quote": "At the intersection of human creativity and AI innovation — where precision prompt engineering meets visionary design.",
+      "second": "Over the past decade, I've specialized in harnessing AI technologies and prompt engineering to breathe life into countless digital products. I believe in making AI more human, more accessible, and infinitely more powerful through thoughtful design and strategic prompt crafting.",
+      "third": "When I'm not designing with AI, you'll find me experimenting with new AI tools, crafting precise prompts that unlock creative possibilities, or mentoring others on how to leverage artificial intelligence for better design outcomes."
     },
     "workExperience": {
       "title": "Work Experience",
@@ -69,17 +66,16 @@
   "promptsPage": {
     "title": "Prompts Gallery",
     "subtitle": "A collection of prompts I've crafted for various creative AI tools"
-  },
-  "footer": {
+  },  "footer": {
     "copyright": "All rights reserved.",
     "additionalInfo": {
       "title": "Additional Information",
-      "content": "Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in creating intuitive, accessible interfaces and leading cross-functional teams."
+      "content": "AI-powered Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in prompt engineering, AI-assisted design workflows, and creating intelligent, accessible interfaces that bridge human creativity with artificial intelligence."
     },
     "quickLinks": "Quick Links",
     "portfolio": "Portfolio",
     "contact": "Contact"
-  },  "languageSwitcher": {
+  },"languageSwitcher": {
     "title": "Language",
     "en": "English",
     "fi": "Finnish"

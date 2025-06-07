@@ -11,19 +11,16 @@
       "collaboration": "Yhteistyö & Johtajuus",
       "jobseeking": "Työnhaku"
     }
-  },
-  "home": {
-    "hero": {
+  },  "home": {    "hero": {
       "title": "Hei, olen Ali Al-Zuhairi",
-      "subtitle": "Olen suunnittelija ja kehittäjä, joka rakastaa kauniiden digitaalisten kokemusten luomista.",
+      "subtitle": "Tekoälyn voimalla toimiva suunnitteluarkkitehti, erikoistunut prompt-tekniikkaan — muutan monimutkaisia haasteita älykkäiksi, inklusiivisiksi digitaalisiksi ratkaisuiksi, jotka yhdistävät inhimillisen luovuuden ja tekoälyn.",
       "cta": "Näytä Portfolio"
-    },
-    "about": {
+    },    "about": {
       "title": "Digitaalisten unelmien muuttaminen todellisuudeksi",
-      "intro": "Hei siellä! Olen Ali, intohimoinen unelmoija ja luova sielu, joka uskoo suunnittelun voimaan muuttaa ideat merkityksellisiksi kokemuksiksi. Matkani useilla mantereilla – Damaskoksesta Helsinkiin – on opettanut minulle, että hyvä suunnittelu on muutakin kuin estetiikkaa; se koskettaa sydämiä ja ratkaisee todellisia ongelmia.",
-      "quote": "Jokaisella pikselillä on tarkoitus, jokainen vuorovaikutus kertoo tarinan.",
-      "second": "Viimeisen vuosikymmenen aikana olen saanut iloa lukuisten digitaalisten tuotteiden elävöittämisestä, aina Double Diamond -lähestymistavan ohjaamana mutta omalla luovalla tyylilläni värittämänä. Uskon, että teknologiasta voi tehdä inhimillisempää, saavutettavampaa ja ehkä jopa hieman taianomaista.",
-      "third": "Kun en suunnittele, löydät minut tutkimasta uusia teknologioita, jakamasta tietoa kollegoiden kanssa, tai yksinkertaisesti unelmoimasta seuraavasta suuresta ideasta, joka voisi tehdä jonkun digitaalisesta elämästä hieman parempaa."
+      "intro": "Hei siellä! Olen Ali, intohimoinen tekoälyvetoinen suunnittelija, joka uskoo älykkään suunnittelun muutosvoimaan monimutkaisten ongelmien ratkaisemisessa. Matkani useilla mantereilla – Damaskoksesta Helsinkiin – on opettanut minulle, että hyvä suunnittelu yhdistää inhimillisen intuition ja tekoälyn luodakseen merkityksellisiä, saavutettavia kokemuksia.",
+      "quote": "Inhimillisen luovuuden ja tekoälyinnovaation risteyskohdassa — missä täsmällinen prompt-tekniikka kohtaa visionäärisen suunnittelun.",
+      "second": "Viimeisen vuosikymmenen aikana olen erikoistunut tekoälyteknologioiden ja prompt-tekniikan hyödyntämiseen lukuisten digitaalisten tuotteiden elävöittämisessä. Uskon, että tekoälystä voi tehdä inhimillisempää, saavutettavampaa ja äärettömän tehokkaampaa harkitun suunnittelun ja strategisen prompt-luomisen avulla.",
+      "third": "Kun en suunnittele tekoälyn kanssa, löydät minut kokeilemasta uusia tekoälytyökaluja, luomasta tarkkoja prompteja jotka avaavat luovia mahdollisuuksia, tai mentoroimassa muita tekoälyn hyödyntämisessä parempien suunnittelutulosten saamiseksi."
     },
     "workExperience": {
       "title": "Työkokemus",
