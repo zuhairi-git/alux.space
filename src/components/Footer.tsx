@@ -70,27 +70,16 @@ const Footer = () => {
               role="navigation" 
               aria-label={t('footer.aria.socialMedia')}
               className="mt-4"
-            >
-              <div className="flex space-x-4">
+            >              <div className="flex space-x-4">
                 <motion.a 
-                  href="https://twitter.com/alialzuhairi" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
-                  whileHover={{ scale: 1.1 }}
-                  aria-label={`${t('footer.aria.socialPlatform')} Twitter`}
-                >
-                  <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">flutter_dash</span>
-                </motion.a>
-                <motion.a 
-                  href="https://www.linkedin.com/in/alialzuhairi/" 
+                  href="https://www.linkedin.com/in/ali-zuhairi/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
                   whileHover={{ scale: 1.1 }}
                   aria-label={`${t('footer.aria.socialPlatform')} LinkedIn`}
                 >
-                  <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">group</span>
+                  <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">work</span>
                 </motion.a>
                 <motion.a 
                   href="https://github.com/alialzuhairi" 
@@ -145,20 +134,7 @@ const Footer = () => {
                     </Link>
                   </li>
                 ))}
-              </ul>
-            </nav>
-            {/* Contact info */}
-            <section className="mt-6" aria-labelledby="contact-heading">
-              <h4 id="contact-heading" className="font-semibold mb-4">{t('footer.contact')}</h4>
-              <a 
-                href="mailto:info@cvlanes.com" 
-                className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
-                aria-label={`${t('footer.aria.emailContact')} info@cvlanes.com`}
-              >
-                <span className="material-symbols material-symbols-rounded text-base" aria-hidden="true">mail</span>
-                info@cvlanes.com
-              </a>
-            </section>
+              </ul>            </nav>
           </div>
         </div>
         {/* Bottom section with copyright */}
