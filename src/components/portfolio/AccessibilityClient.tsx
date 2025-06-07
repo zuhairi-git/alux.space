@@ -180,9 +180,8 @@ export default function AccessibilityClient() {
         semanticHtml: "Semantic HTML structure",
         ariaLabels: "Comprehensive ARIA labeling",
         keyboardSupport: "Complete keyboard interaction",
-        
-        // Design process
-        designProcess: "Our Design Process",
+          // Design process
+        designProcess: "My Design Process",
         designModel: "Design Model:",
         doubleD: "Double Diamond",
         discoverPhase: "Discover",
@@ -373,9 +372,8 @@ export default function AccessibilityClient() {
         semanticHtml: "Semanttinen HTML-rakenne",
         ariaLabels: "Kattava ARIA-merkintä",
         keyboardSupport: "Täydellinen näppäimistövuorovaikutus",
-        
-        // Design process
-        designProcess: "Suunnitteluprosessimme",
+          // Design process
+        designProcess: "Suunnitteluprosessini",
         designModel: "Suunnittelumalli:",
         doubleD: "Kaksinkertainen timantti",
         discoverPhase: "Löytää",
@@ -668,8 +666,7 @@ export default function AccessibilityClient() {
                     isColorful 
                       ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg' 
                       : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                  }`}>
-                    <div className="flex items-center mb-6">
+                  }`}>                    <div className="flex items-center mb-8">
                       <span className={`text-lg font-medium mr-4 ${
                         isColorful 
                           ? 'text-cyan-300' 
@@ -682,27 +679,187 @@ export default function AccessibilityClient() {
                       }`}>
                         {content.doubleD}
                       </span>
-                    </div>
-                    <div className="grid md:grid-cols-4 gap-6">
-                      {[
-                        { phase: content.discoverPhase, icon: "search", color: isColorful ? 'from-cyan-400 to-cyan-500' : 'from-indigo-400 to-indigo-500' },
-                        { phase: content.definePhase, icon: "notes", color: isColorful ? 'from-fuchsia-400 to-purple-500' : 'from-purple-400 to-purple-500' },
-                        { phase: content.developPhase, icon: "edit", color: isColorful ? 'from-purple-400 to-indigo-500' : 'from-pink-400 to-pink-500' },
-                        { phase: content.deliverPhase, icon: "rocket_launch", color: isColorful ? 'from-blue-400 to-cyan-500' : 'from-rose-400 to-rose-500' },
-                      ].map((item, index) => (
-                        <div key={index} className="text-center">
-                          <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-white font-bold`}>
-                            <span className="material-symbols text-lg">{item.icon}</span>
-                          </div>
-                          <h3 className={`font-semibold ${
+                    </div>                      {/* Revolutionary Interactive Double Diamond */}
+                    <div className="relative mb-16 overflow-hidden">
+                      {/* Ambient background */}
+                      <div className={`absolute inset-0 ${
+                        isColorful 
+                          ? 'bg-gradient-to-br from-indigo-900/20 via-purple-900/10 to-pink-900/20' 
+                          : isLight ? 'bg-gradient-to-br from-blue-50/50 to-purple-50/50' : 'bg-gradient-to-br from-gray-900/50 to-indigo-900/30'
+                      } blur-3xl`}></div>
+                      
+                      <div className="relative">
+                        {/* Floating header */}
+                        <div className="text-center mb-12">
+                          <div className={`inline-flex items-center gap-4 px-8 py-4 rounded-full backdrop-blur-xl border ${
                             isColorful 
-                              ? 'text-gray-200' 
-                              : isLight ? 'text-gray-900' : 'text-white'
-                          }`}>{item.phase}</h3>
+                              ? 'bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 border-white/20' 
+                              : isLight ? 'bg-white/80 border-gray-200/50 shadow-lg' : 'bg-gray-800/80 border-gray-700/50'
+                          }`}>
+                            <span className={`w-2 h-2 rounded-full ${
+                              isColorful ? 'bg-cyan-400' : isLight ? 'bg-blue-500' : 'bg-blue-400'
+                            } animate-pulse`}></span>
+                            <span className={`text-sm font-medium ${
+                              isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
+                            }`}>Problem Discovery</span>
+                            
+                            <div className={`w-px h-6 ${
+                              isColorful ? 'bg-gradient-to-b from-cyan-400 to-pink-400' : 'bg-gray-300'
+                            }`}></div>
+                            
+                            <span className={`w-2 h-2 rounded-full ${
+                              isColorful ? 'bg-pink-400' : isLight ? 'bg-pink-500' : 'bg-pink-400'
+                            } animate-pulse delay-1000`}></span>
+                            <span className={`text-sm font-medium ${
+                              isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
+                            }`}>Solution Creation</span>
+                          </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+
+                        {/* Interactive Phase Cards */}
+                        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 max-w-7xl mx-auto px-6">
+                          {[
+                            {
+                              phase: content.discoverPhase,
+                              icon: 'search',
+                              color: isColorful ? 'cyan' : 'blue',
+                              description: 'Research user needs, accessibility challenges, and current limitations in design systems.',
+                              gradient: isColorful ? 'from-cyan-400/20 to-blue-400/10' : isLight ? 'from-blue-100 to-blue-50' : 'from-blue-900/30 to-blue-800/20'
+                            },
+                            {
+                              phase: content.definePhase,
+                              icon: 'target',
+                              color: isColorful ? 'purple' : 'indigo',
+                              description: 'Synthesize insights into clear accessibility requirements and design principles.',
+                              gradient: isColorful ? 'from-purple-400/20 to-indigo-400/10' : isLight ? 'from-purple-100 to-indigo-50' : 'from-purple-900/30 to-indigo-800/20'
+                            },
+                            {
+                              phase: content.developPhase,
+                              icon: 'build',
+                              color: isColorful ? 'fuchsia' : 'pink',
+                              description: 'Create accessible components, test with users, and iterate based on feedback.',
+                              gradient: isColorful ? 'from-fuchsia-400/20 to-pink-400/10' : isLight ? 'from-pink-100 to-rose-50' : 'from-pink-900/30 to-rose-800/20'
+                            },
+                            {
+                              phase: content.deliverPhase,
+                              icon: 'rocket_launch',
+                              color: isColorful ? 'emerald' : 'green',
+                              description: 'Launch the design system with comprehensive documentation and training.',
+                              gradient: isColorful ? 'from-emerald-400/20 to-green-400/10' : isLight ? 'from-green-100 to-emerald-50' : 'from-green-900/30 to-emerald-800/20'
+                            }
+                          ].map((phase, index) => (
+                            <div 
+                              key={index}
+                              className={`group relative p-6 rounded-3xl backdrop-blur-xl border transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer ${
+                                isColorful 
+                                  ? `bg-gradient-to-br ${phase.gradient} border-white/10 hover:border-white/20` 
+                                  : isLight 
+                                    ? `bg-gradient-to-br ${phase.gradient} border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-xl` 
+                                    : `bg-gradient-to-br ${phase.gradient} border-gray-700/30 hover:border-gray-600/50`
+                              }`}
+                            >
+                              {/* Floating icon */}
+                              <div className={`relative mb-6 ${
+                                index % 2 === 0 ? 'text-left' : 'text-right'
+                              }`}>
+                                <div className={`inline-flex w-16 h-16 items-center justify-center rounded-2xl ${
+                                  isColorful 
+                                    ? `bg-gradient-to-br from-${phase.color}-400/30 to-${phase.color}-500/20 backdrop-blur-sm` 
+                                    : isLight 
+                                      ? `bg-gradient-to-br from-${phase.color}-100 to-${phase.color}-200` 
+                                      : `bg-gradient-to-br from-${phase.color}-900/50 to-${phase.color}-800/30`
+                                } group-hover:scale-110 transition-transform duration-300`}>
+                                  <span className={`material-symbols text-2xl font-bold ${
+                                    isColorful 
+                                      ? `text-${phase.color}-300` 
+                                      : isLight 
+                                        ? `text-${phase.color}-600` 
+                                        : `text-${phase.color}-400`
+                                  }`}>{phase.icon}</span>
+                                </div>
+                              </div>
+
+                              {/* Phase title */}
+                              <h3 className={`text-xl font-bold mb-3 ${
+                                isColorful 
+                                  ? `text-${phase.color}-200` 
+                                  : isLight 
+                                    ? `text-${phase.color}-800` 
+                                    : `text-${phase.color}-300`
+                              }`}>
+                                {phase.phase}
+                              </h3>
+
+                              {/* Description */}
+                              <p className={`text-sm leading-relaxed ${
+                                isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'
+                              }`}>
+                                {phase.description}
+                              </p>
+
+                              {/* Connection indicator */}
+                              {index < 3 && (
+                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-0.5 ${
+                                  isColorful 
+                                    ? 'bg-gradient-to-r from-white/30 to-transparent' 
+                                    : isLight 
+                                      ? 'bg-gradient-to-r from-gray-300 to-transparent' 
+                                      : 'bg-gradient-to-r from-gray-600 to-transparent'
+                                }`}>
+                                  <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full ${
+                                    isColorful ? 'bg-white/50' : isLight ? 'bg-gray-400' : 'bg-gray-500'
+                                  }`}></div>
+                                </div>
+                              )}
+
+                              {/* Hover glow effect */}
+                              <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                                isColorful 
+                                  ? `bg-gradient-to-br from-${phase.color}-400/5 to-transparent` 
+                                  : isLight 
+                                    ? `bg-gradient-to-br from-${phase.color}-200/20 to-transparent` 
+                                    : `bg-gradient-to-br from-${phase.color}-400/10 to-transparent`
+                              }`}></div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Methodology indicator */}
+                        <div className="text-center mt-12">
+                          <div className={`inline-flex items-center gap-6 px-8 py-4 rounded-full backdrop-blur-xl ${
+                            isColorful 
+                              ? 'bg-white/5 border border-white/10' 
+                              : isLight 
+                                ? 'bg-white/60 border border-gray-200/50 shadow-lg' 
+                                : 'bg-gray-800/60 border border-gray-700/50'
+                          }`}>
+                            <div className="flex items-center gap-2">
+                              <div className={`w-3 h-3 rounded-full ${
+                                isColorful ? 'bg-cyan-400' : 'bg-blue-500'
+                              } animate-pulse`}></div>
+                              <span className={`text-xs font-medium ${
+                                isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
+                              }`}>Divergent</span>
+                            </div>
+                            
+                            <div className={`w-8 h-px ${
+                              isColorful 
+                                ? 'bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400' 
+                                : 'bg-gradient-to-r from-blue-400 to-pink-400'
+                            }`}></div>
+                            
+                            <div className="flex items-center gap-2">
+                              <span className={`text-xs font-medium ${
+                                isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
+                              }`}>Convergent</span>
+                              <div className={`w-3 h-3 rounded-full ${
+                                isColorful ? 'bg-pink-400' : 'bg-pink-500'
+                              } animate-pulse delay-500`}></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>                  </div>
                 </motion.section>
 
                 {/* Research Insights */}
