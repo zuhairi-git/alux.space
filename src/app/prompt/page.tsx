@@ -1,6 +1,6 @@
 // filepath: c:\Users\zohai\Documents\GitHub\alux.space\src\app\prompt\page.tsx
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import QuoteBlock from '@/components/ui/QuoteBlock';
@@ -353,7 +353,24 @@ Blog Page & Header UI – Prompt Instructions:
 export default function PromptPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedStatus, setSelectedStatus] = useState<string>('All');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.dropdown-container')) {
+        setCategoryDropdownOpen(false);
+        setStatusDropdownOpen(false);
+      }
+    };
+
+    if (categoryDropdownOpen || statusDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [categoryDropdownOpen, statusDropdownOpen]);
 
   // Get unique categories and calculate stats
   const categories = ['All', ...Array.from(new Set(prompts.map(p => p.category)))];
@@ -455,9 +472,7 @@ export default function PromptPage() {
               <div className="text-3xl font-bold text-purple-500 mb-2">{stats.totalBugsFixed}</div>
               <div className="text-sm opacity-70">Bugs Fixed</div>
             </div>
-          </motion.div>
-
-          {/* Filter Controls */}
+          </motion.div>          {/* Filter Controls */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -465,45 +480,104 @@ export default function PromptPage() {
             className="mb-12"
           >
             <div className="theme-card-content p-6 rounded-2xl backdrop-blur-sm">
-              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-                {/* Category Filter */}
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-sm font-medium opacity-70 mr-2">Category:</span>
-                  {categories.map((category) => (
-                    <motion.button
-                      key={category}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                        selectedCategory === category
-                          ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg'
-                          : 'bg-white/10 hover:bg-white/20 backdrop-blur-sm'
-                      }`}
+              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">                {/* Category Dropdown */}
+                <div className="relative dropdown-container">
+                  <button
+                    onClick={() => {
+                      setCategoryDropdownOpen(!categoryDropdownOpen);
+                      setStatusDropdownOpen(false);
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 min-w-[140px] justify-between"
+                  >
+                    <span>Category: {selectedCategory}</span>
+                    <svg 
+                      className={`w-4 h-4 transition-transform duration-200 ${categoryDropdownOpen ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
                     >
-                      {category}
-                    </motion.button>
-                  ))}
-                </div>
-
-                {/* Status Filter */}
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-sm font-medium opacity-70 mr-2">Status:</span>
-                  {statuses.map((status) => (
-                    <motion.button
-                      key={status}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedStatus(status)}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                        selectedStatus === status
-                          ? 'bg-gradient-to-r from-green-500 to-teal-500 text-white shadow-lg'
-                          : 'bg-white/10 hover:bg-white/20 backdrop-blur-sm'
-                      }`}
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {categoryDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-50 min-w-[180px] overflow-hidden"
+                      >
+                        {categories.map((category) => (
+                          <motion.button
+                            key={category}
+                            whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                            onClick={() => {
+                              setSelectedCategory(category);
+                              setCategoryDropdownOpen(false);
+                            }}
+                            className={`w-full text-left px-4 py-3 text-sm transition-all duration-200 ${
+                              selectedCategory === category
+                                ? 'bg-gradient-to-r from-purple-500/30 to-blue-500/30 text-white font-medium'
+                                : 'hover:bg-white/10'
+                            }`}
+                          >
+                            {category}
+                          </motion.button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>                {/* Status Dropdown */}
+                <div className="relative dropdown-container">
+                  <button
+                    onClick={() => {
+                      setStatusDropdownOpen(!statusDropdownOpen);
+                      setCategoryDropdownOpen(false);
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 min-w-[120px] justify-between"
+                  >
+                    <span>Status: {selectedStatus}</span>
+                    <svg 
+                      className={`w-4 h-4 transition-transform duration-200 ${statusDropdownOpen ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
                     >
-                      {status}
-                    </motion.button>
-                  ))}
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {statusDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-50 min-w-[140px] overflow-hidden"
+                      >
+                        {statuses.map((status) => (
+                          <motion.button
+                            key={status}
+                            whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                            onClick={() => {
+                              setSelectedStatus(status);
+                              setStatusDropdownOpen(false);
+                            }}
+                            className={`w-full text-left px-4 py-3 text-sm transition-all duration-200 ${
+                              selectedStatus === status
+                                ? 'bg-gradient-to-r from-green-500/30 to-teal-500/30 text-white font-medium'
+                                : 'hover:bg-white/10'
+                            }`}
+                          >
+                            {status}
+                          </motion.button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* View Mode Toggle */}
