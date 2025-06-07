@@ -6,13 +6,17 @@ import Navigation from '@/components/Navigation';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 
 // Data structure for prompts with enhanced categorization
-const prompts = [  {
+const prompts = [
+  {
     id: 1,
     title: "React Website Modernization",
     category: "Frontend",
     status: "Done" as const,
     bugsFixed: 3,
+    priority: "High",
+    complexity: "Advanced",
     technologies: ["React", "Tailwind CSS", "JavaScript"],
+    timeline: "2 weeks",
     description: "Comprehensive modernization plan for React website using latest Tailwind CSS practices and modern web design principles.",
     content: `Create a comprehensive modernization plan for my React website using the latest Tailwind CSS practices and modern web design principles.
 
@@ -43,13 +47,17 @@ Global Improvements:
 
 Please follow the Tailwind UI Blocks documentation:
 https://tailwindcss.com/plus/ui-blocks/documentation`
-  },  {
+  },
+  {
     id: 2,
     title: "Navigation & Blog Enhancement",
     category: "Frontend",
     status: "Done" as const,
     bugsFixed: 12,
+    priority: "High",
+    complexity: "Intermediate",
     technologies: ["React", "Next.js", "Tailwind CSS"],
+    timeline: "1 week",
     description: "Refactor navigation system and enhance blog functionality with OG metadata and modern design patterns.",
     content: `Task Breakdown:
 • Use tailwind best practices #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
@@ -69,13 +77,17 @@ https://tailwindcss.com/plus/ui-blocks/documentation`
 
 Here is the post:
 #fetch: https://cvlanes.com/blogs/circle-of-rhythm`
-  },  {
+  },
+  {
     id: 3,
     title: "Typography Enhancement",
     category: "Design",
     status: "Done" as const,
     bugsFixed: 0,
+    priority: "Medium",
+    complexity: "Beginner",
     technologies: ["Google Fonts", "CSS"],
+    timeline: "2 days",
     description: "Implement Google Fonts for better typography hierarchy and readability.",
     content: `Add Fonts using google fonts web:
 Headings
@@ -84,13 +96,17 @@ It has geometric, rounded letters that give your site a bold, friendly, and mode
 Body Text
 • Roboto is better for body text.
 It was designed for readability on screens, with a clean, neutral, and highly legible look even at small sizes.`
-  },  {
+  },
+  {
     id: 4,
     title: "Modern Portfolio Section",
     category: "Portfolio",
     status: "Done" as const,
     bugsFixed: 7,
+    priority: "High",
+    complexity: "Advanced",
     technologies: ["React", "Animation", "CSS"],
+    timeline: "1.5 weeks",
     description: "Build a slick, modern portfolio section with smooth animations and transitions.",
     content: `Use Tailwind CSS best practices and follow the UI Blocks documentation:
 #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
@@ -98,14 +114,18 @@ It was designed for readability on screens, with a clean, neutral, and highly le
 Build a slick, modern portfolio section with smooth animations and transitions.
 Replace my portfolio content with the following from the below sources:
 #fetch: https://cvlanes.com/portfolio/collaboration
-#fetch: https://cvlanes.com/portfolio/jobseeking`  },
+#fetch: https://cvlanes.com/portfolio/jobseeking`
+  },
   {
     id: 5,
     title: "Unsplash Integration",
     category: "Integration",
     status: "Failed" as const,
     bugsFixed: 20,
+    priority: "Medium",
+    complexity: "Intermediate",
     technologies: ["API", "Unsplash", "JavaScript"],
+    timeline: "3 days",
     description: "Integrate with Unsplash API to use proper images for portfolio projects.",
     content: `Unsplash.com integration
 Integrate with unsplash and use proper images for my portfolio
@@ -117,7 +137,10 @@ Use best integration practices from #fetch https://unsplash.com/documentation`
     category: "Frontend",
     status: "Failed" as const,
     bugsFixed: 1,
+    priority: "Low",
+    complexity: "Intermediate",
     technologies: ["CSS", "JavaScript"],
+    timeline: "1 week",
     description: "Create hero section with custom effects and background imagery.",
     content: `Hero Section (Based on XXX Site):
 • Fetch the hero effect from  #fetch https://www.xxxx.com.
@@ -129,16 +152,23 @@ Use best integration practices from #fetch https://unsplash.com/documentation`
     category: "Design",
     status: "Done" as const,
     bugsFixed: 14,
+    priority: "High",
+    complexity: "Advanced",
     technologies: ["Animation", "Material Icons", "CSS"],
+    timeline: "1 week",
     description: "Create a stunning and futuristic hero section with animated Google Material Icons.",
-    content: `Create a stunning and futuristic hero section that feels both unique and exceptional. Use animated Google Material Icons in the background to visually express the transformation of design into code. Take inspiration from Apple Vision Pro—craft something that feels ahead of its time.`  },
+    content: `Create a stunning and futuristic hero section that feels both unique and exceptional. Use animated Google Material Icons in the background to visually express the transformation of design into code. Take inspiration from Apple Vision Pro—craft something that feels ahead of its time.`
+  },
   {
     id: 8,
     title: "Dynamic Hero System",
     category: "Architecture",
     status: "Done" as const,
     bugsFixed: 6,
+    priority: "Medium",
+    complexity: "Intermediate",
     technologies: ["React", "Component Architecture"],
+    timeline: "3 days",
     description: "Decouple hero section and make it dynamic with multiple variations.",
     content: `Decouple the hero section from the homepage and make it dynamic, allowing it to be easily swapped based on different occasions or contexts. Integrate this flexibility into the homepage by providing an option to choose between multiple hero section variations. This approach simplifies the design process and enhances adaptability.`
   },
@@ -148,19 +178,26 @@ Use best integration practices from #fetch https://unsplash.com/documentation`
     category: "Content",
     status: "Failed" as const,
     bugsFixed: 0,
+    priority: "High",
+    complexity: "Beginner",
     technologies: ["Content Management"],
+    timeline: "1 week",
     description: "Rebuild portfolio content with comprehensive case studies and design processes.",
     content: `Rebuild my portfolio content using all the material from the sources provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete design process, key decisions, and case studies. Incorporate the provided images as representations of the final website or product interface.
 urls:
 #fetch: https://cvlanes.com/portfolio/collaboration
-#fetch: https://cvlanes.com/portfolio/jobseeking`  },
+#fetch: https://cvlanes.com/portfolio/jobseeking`
+  },
   {
     id: 10,
     title: "Collaboration Case Study",
     category: "Portfolio",
     status: "Done" as const,
     bugsFixed: 9,
+    priority: "High",
+    complexity: "Intermediate",
     technologies: ["UX Design", "Case Study"],
+    timeline: "1 week",
     description: "Rebuild collaboration content with comprehensive user journey and product design insights.",
     content: `Rebuild my collaboration content using all the material from the content provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete process. 
 Remember this is case study or user journey of a future product design that offers an insight into a possible solution.
@@ -172,7 +209,10 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
     category: "Portfolio",
     status: "Done" as const,
     bugsFixed: 3,
+    priority: "High",
+    complexity: "Intermediate",
     technologies: ["UX Design", "Navigation"],
+    timeline: "1 week",
     description: "Create job seeking case study with portfolio navigation integration.",
     content: `// In the navigation bar when clicked on the "Portfolio" it should go to the list of portfolios
 
@@ -186,18 +226,25 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
     category: "Frontend",
     status: "Done" as const,
     bugsFixed: 8,
+    priority: "High",
+    complexity: "Intermediate",
     technologies: ["CSS", "JavaScript", "Responsive Design"],
+    timeline: "3 days",
     description: "Make navigation responsive with dropdown menu for portfolio items.",
     content: `// In the navigation bar when clicked on the "Portfolio" it should go to the list of portfolios
 // Make the navigation bar responsive using CSS/JavaScript. Use tailwind best practices #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
-// Add a dropdown menu to the "Portfolio" navigation item that displays a list of available portfolios when clicked.`  },
+// Add a dropdown menu to the "Portfolio" navigation item that displays a list of available portfolios when clicked.`
+  },
   {
     id: 13,
     title: "Global Theme Switcher",
     category: "Architecture",
     status: "Done" as const,
     bugsFixed: 59,
+    priority: "High",
+    complexity: "Advanced",
     technologies: ["Next.js", "Theme System", "Local Storage"],
+    timeline: "1 week",
     description: "Implement comprehensive theme switcher with Light, Dark, and Colorful themes.",
     content: `Website global Theme Switcher (Light/Dark/Colorful):
 // Use tailwind best practices @https://tailwindcss.com/plus/ui-blocks/documentation
@@ -215,7 +262,10 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
     category: "Responsive",
     status: "Done" as const,
     bugsFixed: 5,
+    priority: "High",
+    complexity: "Intermediate",
     technologies: ["Responsive Design", "Mobile UX"],
+    timeline: "4 days",
     description: "Ensure website is fully responsive and optimized for all devices.",
     content: `Mobile-Friendly:
 // Ensure that the website is responsive and works smoothly on all devices (desktops, tablets, and mobile).
@@ -223,14 +273,18 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
 // Style the dropdown menu under "Portfolio" to have a visible background when hovered over.
 
 // Tapping on the Portfolio should redirect you to the portfolio list.
-// On mobile, the menu background color should match the desktop version for better clarity and visibility.`  },
+// On mobile, the menu background color should match the desktop version for better clarity and visibility.`
+  },
   {
     id: 15,
     title: "Light Theme Styling",
     category: "Design",
     status: "Done" as const,
     bugsFixed: 17,
+    priority: "Medium",
+    complexity: "Intermediate",
     technologies: ["CSS", "Theme System"],
+    timeline: "3 days",
     description: "Implement comprehensive light theme with soft gradients and accessible colors.",
     content: `Light Theme Styling Instructions:
 • Background Gradient:
@@ -259,7 +313,10 @@ color: #1f2937;
     category: "UX",
     status: "Done" as const,
     bugsFixed: 9,
+    priority: "Medium",
+    complexity: "Intermediate",
     technologies: ["CSS", "JavaScript", "UX"],
+    timeline: "2 days",
     description: "Polish UI elements with smart tooltips and theme-aware styling.",
     content: `UI Prompt Instructions:
 1. Tooltips Behavior:
@@ -267,14 +324,18 @@ Tooltips must be aware of screen boundaries. They should dynamically reposition 
 2. Hero Section Styling:
 In light theme, the hero section should have a lighter visual appearance — softer background and minimal contrast to blend smoothly with the overall theme.
 3. Navigation Bar (Light Theme):
-In the light version, the navigation/header bar should use darker text and icons to ensure clarity and sufficient contrast against the light background.`  },
+In the light version, the navigation/header bar should use darker text and icons to ensure clarity and sufficient contrast against the light background.`
+  },
   {
     id: 17,
     title: "Blog Section Improvements",
     category: "Frontend",
     status: "Done" as const,
     bugsFixed: 39,
+    priority: "High",
+    complexity: "Intermediate",
     technologies: ["CSS", "Layout", "Styling"],
+    timeline: "1 week",
     description: "Fix blog card alignment, shadows, and filter controls for better UX.",
     content: `Blog Section Prompt Instructions:
 1. Blog Cards Layout & Shadow:
@@ -295,7 +356,10 @@ In the light version, the navigation/header bar should use darker text and icons
     category: "Frontend",
     status: "Done" as const,
     bugsFixed: 9,
+    priority: "Medium",
+    complexity: "Beginner",
     technologies: ["React", "Image Handling"],
+    timeline: "2 days",
     description: "Improve header interactions and add author avatars to blog posts.",
     content: `Header & Blog Post Prompt Instructions:
 1. Header Interaction – Portfolio Menu:
@@ -313,7 +377,10 @@ images/me/ali.png
     category: "Design",
     status: "Done" as const,
     bugsFixed: 11,
+    priority: "High",
+    complexity: "Advanced",
     technologies: ["CSS", "Design System", "Animation"],
+    timeline: "1 week",
     description: "Create vibrant colorful theme with cosmic aesthetics and engaging visuals.",
     content: `Colorful Theme Prompt Instructions:
 • Apply a vibrant and modern color palette that feels fresh, bold, and visually engaging.
@@ -337,7 +404,10 @@ Blog Page & Header UI – Prompt Instructions:
     category: "Design",
     status: "Done" as const,
     bugsFixed: 15,
+    priority: "Medium",
+    complexity: "Intermediate",
     technologies: ["CSS", "Layout", "Animation"],
+    timeline: "4 days",
     description: "Update process sections with flexible card layouts and natural content flow.",
     content: `Process Sections – Card Style Prompt Instructions:
 • Update the sections: Research Insights, User Personas, Product Requirements, User Testing, and Delivery Phase to use a new flexible card style, consistent with the design used in the Design Process section.
@@ -598,7 +668,10 @@ type Prompt = {
   category: string;
   status: 'Done' | 'Failed';
   bugsFixed: number;
+  priority: string;
+  complexity: string;
   technologies: string[];
+  timeline: string;
   description: string;
   content: string;
 };
@@ -606,10 +679,29 @@ type Prompt = {
 function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
   const getStatusColor = (status: string) => {
     return status === 'Done' 
       ? 'from-green-500 to-emerald-600' 
       : 'from-red-500 to-rose-600';
+  };
+
+  const getPriorityColor = (priority: string) => {
+    switch (priority) {
+      case 'High': return 'from-orange-500 to-red-500';
+      case 'Medium': return 'from-yellow-500 to-orange-500';
+      case 'Low': return 'from-blue-500 to-indigo-500';
+      default: return 'from-gray-500 to-slate-500';
+    }
+  };
+
+  const getComplexityIcon = (complexity: string) => {
+    switch (complexity) {
+      case 'Beginner': return '🟢';
+      case 'Intermediate': return '🟡';
+      case 'Advanced': return '🔴';
+      default: return '⚪';
+    }
   };
 
   return (
@@ -645,16 +737,19 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
                 {prompt.description}
               </p>
             </div>
-          </div>          {/* Metrics Row */}
+          </div>
+
+          {/* Metrics Row */}
           <div className="flex items-center gap-2 mb-4 flex-wrap">
+            <span className={`px-3 py-1 rounded-xl text-xs font-medium bg-gradient-to-r ${getPriorityColor(prompt.priority)} text-white shadow-sm`}>
+              {prompt.priority}
+            </span>
+            <span className="px-3 py-1 rounded-xl text-xs font-medium bg-white/10 backdrop-blur-sm">
+              {getComplexityIcon(prompt.complexity)} {prompt.complexity}
+            </span>
             <span className="px-3 py-1 rounded-xl text-xs font-medium bg-white/10 backdrop-blur-sm">
               📂 {prompt.category}
             </span>
-            {prompt.bugsFixed > 0 && (
-              <span className="px-3 py-1 rounded-xl text-xs font-medium bg-gradient-to-r from-red-500/20 to-orange-500/20 text-orange-300 backdrop-blur-sm">
-                🐛 {prompt.bugsFixed} bugs fixed
-              </span>
-            )}
           </div>
 
           {/* Technology Tags */}
@@ -670,14 +765,18 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
               </span>
             )}
           </div>
-        </div>        {/* Stats Section */}
-        <div className="grid grid-cols-1 gap-4 mb-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm">
-          {prompt.bugsFixed > 0 && (
-            <div className="text-center">
-              <div className="text-2xl font-bold text-red-400 mb-1">{prompt.bugsFixed}</div>
-              <div className="text-xs opacity-70">Bugs Fixed</div>
-            </div>
-          )}
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 gap-4 mb-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-400 mb-1">{prompt.bugsFixed}</div>
+            <div className="text-xs opacity-70">Bugs Fixed</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-400 mb-1">{prompt.timeline}</div>
+            <div className="text-xs opacity-70">Timeline</div>
+          </div>
         </div>
 
         {/* Content Preview */}
@@ -774,16 +873,25 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
               <div className={`px-4 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r ${getStatusColor(prompt.status)} shadow-lg shrink-0 ml-4`}>
                 {prompt.status}
               </div>
-            </div>            {/* Tags and Metrics */}
+            </div>
+
+            {/* Tags and Metrics */}
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 text-sm">
                 📂 {prompt.category}
               </span>
-              {prompt.bugsFixed > 0 && (
-                <span className="px-3 py-1 rounded-lg bg-red-500/20 text-red-300 text-sm">
-                  🐛 {prompt.bugsFixed} bugs fixed
-                </span>
-              )}
+              <span className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-300 text-sm">
+                🐛 {prompt.bugsFixed} bugs
+              </span>
+              <span className="px-3 py-1 rounded-lg bg-orange-500/20 text-orange-300 text-sm">
+                ⏱️ {prompt.timeline}
+              </span>
+              <span className="px-3 py-1 rounded-lg bg-teal-500/20 text-teal-300 text-sm">
+                🎯 {prompt.priority}
+              </span>
+              <span className="px-3 py-1 rounded-lg bg-pink-500/20 text-pink-300 text-sm">
+                📊 {prompt.complexity}
+              </span>
             </div>
 
             {/* Technologies */}
