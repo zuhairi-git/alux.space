@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useTheme } from '@/context/ThemeContext';
 
 interface PortfolioCardProps {
   item: {
@@ -44,6 +45,7 @@ interface PortfolioCardProps {
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
+  const { theme } = useTheme();
   
   // Helper functions to get localized content
   const getTitle = (): string => {
@@ -59,15 +61,56 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   
   const getStatus = (): string => {
     return item.status[locale as keyof typeof item.status] || item.status.en;
-  };
-    const getStatusClasses = (): string => {
+  };  const getStatusClasses = (): string => {
+    const baseClasses = 'px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap border transition-all duration-200';
+    
     switch (item.status.type) {
       case 'in-progress':
-        return 'px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 whitespace-nowrap';
+        if (theme === 'light') {
+          return `${baseClasses} bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100`;
+        } else if (theme === 'colorful') {
+          return `${baseClasses} bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500/30`;
+        } else {
+          return `${baseClasses} bg-amber-900/30 text-amber-300 border-amber-500/40 hover:bg-amber-900/50`;
+        }
       case 'accomplished':
-        return 'px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-300 whitespace-nowrap';
+        if (theme === 'light') {
+          return `${baseClasses} bg-green-50 text-green-700 border-green-200 hover:bg-green-100`;
+        } else if (theme === 'colorful') {
+          return `${baseClasses} bg-green-500/20 text-green-300 border-green-500/40 hover:bg-green-500/30`;
+        } else {
+          return `${baseClasses} bg-green-900/30 text-green-300 border-green-500/40 hover:bg-green-900/50`;
+        }
       default:
-        return 'px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/20 text-gray-300 whitespace-nowrap';
+        if (theme === 'light') {
+          return `${baseClasses} bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100`;
+        } else if (theme === 'colorful') {
+          return `${baseClasses} bg-gray-500/20 text-gray-300 border-gray-500/40 hover:bg-gray-500/30`;
+        } else {
+          return `${baseClasses} bg-gray-800/50 text-gray-300 border-gray-600/40 hover:bg-gray-800/70`;        }
+    }
+  };
+  
+  const getTagClasses = (): string => {
+    const baseClasses = 'px-3 py-1 rounded-full text-xs font-medium transition-all duration-200';
+    
+    if (theme === 'light') {
+      return `${baseClasses} bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100`;
+    } else if (theme === 'colorful') {
+      return `${baseClasses} bg-blue-500/20 text-blue-300 border border-blue-500/40 hover:bg-blue-500/30`;
+    } else {
+      return `${baseClasses} bg-blue-900/30 text-blue-300 border border-blue-500/40 hover:bg-blue-900/50`;
+    }  };
+  
+  const getTypeBadgeClasses = (): string => {
+    const baseClasses = 'px-3 py-1 rounded-full text-xs font-medium shadow-md transition-all duration-200';
+    
+    if (theme === 'light') {
+      return `${baseClasses} bg-gradient-to-r ${item.gradient || 'from-blue-600 to-purple-600'} text-white hover:shadow-lg`;
+    } else if (theme === 'colorful') {
+      return `${baseClasses} bg-gradient-to-r ${item.gradient || 'from-cyan-400 to-fuchsia-500'} text-white hover:shadow-lg hover:shadow-fuchsia-500/25`;
+    } else {
+      return `${baseClasses} bg-gradient-to-r ${item.gradient || 'from-blue-500 to-purple-500'} text-white hover:shadow-lg hover:shadow-blue-500/25`;
     }
   };
   
@@ -101,10 +144,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
       return 'folder'; // Default icon
     }
   };
-
-  // Get gradient from item
-  const gradientClasses = item.gradient || 'from-blue-400 to-purple-500';
-  
   // Render card based on view mode
   if (viewMode === 'overlay') {
     return (
@@ -145,10 +184,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
             aria-label={`${getTitle()} - ${getType()} - ${getStatus()}`}
           >
-            <div className="relative h-full flex flex-col justify-end p-6 z-10">
-              {/* Project Type Badge - Top Right */}
+            <div className="relative h-full flex flex-col justify-end p-6 z-10">              {/* Project Type Badge - Top Right */}
               <div className="absolute top-3 right-3">
-                <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${gradientClasses} text-white shadow-md`}>
+                <span className={getTypeBadgeClasses()}>
                   {getType()}
                 </span>
               </div>
@@ -166,12 +204,11 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 </div>
               </div>
                 {/* Footer with Tags and Status */}
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                {/* Tags */}
+              <div className="flex flex-wrap items-center justify-between gap-2">                {/* Tags */}
                 {cardTags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {cardTags.map((tag, idx) => (
-                      <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/20 text-white font-medium">
+                      <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/30 text-white font-medium border border-white/20 hover:bg-white/40 transition-all duration-200">
                         {tag}
                       </span>
                     ))}
@@ -235,7 +272,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
               </motion.div>
             </div>            {/* Display project type as badge */}
             <div className="absolute top-3 right-3 z-10">
-              <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${gradientClasses} text-white shadow-md`}>
+              <span className={getTypeBadgeClasses()}>
                 {getType()}
               </span>
             </div>
@@ -256,11 +293,10 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             </div>
               {/* Footer with Tags and Status */}
             <div className="flex flex-wrap items-center justify-between gap-2 mt-auto">
-              {/* Tags */}
-              {cardTags.length > 0 && (
+              {/* Tags */}              {cardTags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {cardTags.map((tag, idx) => (
-                    <span key={idx} className="px-3 py-1 rounded-full text-xs bg-primary/10 text-primary font-medium">
+                    <span key={idx} className={getTagClasses()}>
                       {tag}
                     </span>
                   ))}
