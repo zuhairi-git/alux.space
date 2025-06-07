@@ -1,10 +1,13 @@
-{
-  "nav": {
+{  "nav": {
     "home": "Etusivu",
     "portfolio": "Portfolio",
     "blog": "Blogi",
-    "prompts": "Kehotteet"
-  },  "portfolio": {
+    "prompts": "Kehotteet",
+    "workExperience": "Työkokemus",
+    "digitalDreams": "Digitaaliset Unelmat",
+    "strengthsSkills": "Vahvuudet & Taidot",
+    "testimonials": "Suositukset"
+  },"portfolio": {
     "overview": "Kaikki Projektit",
     "cases": {
       "accessibility": "Inklusiivinen suunnittelujärjestelmä",

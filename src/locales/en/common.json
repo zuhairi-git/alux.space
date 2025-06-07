@@ -1,10 +1,13 @@
-{
-  "nav": {
+{  "nav": {
     "home": "Home",
     "portfolio": "Portfolio",
     "blog": "Blog",
-    "prompts": "Prompts"
-  },  "portfolio": {
+    "prompts": "Prompts",
+    "workExperience": "Work Experience",
+    "digitalDreams": "Digital Dreams",
+    "strengthsSkills": "Strengths & Skills",
+    "testimonials": "Testimonials"
+  },"portfolio": {
     "overview": "All Projects",
     "cases": {
       "accessibility": "Inclusive Design System",

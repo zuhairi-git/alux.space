@@ -30,10 +30,10 @@ const portfolioDropdownItems: DropdownItem[] = [
 // Home dropdown items
 const homeDropdownItems: DropdownItem[] = [
   { href: '/', textKey: 'nav.home', type: 'overview', icon: 'home' },
-  { href: '/#work-experience', text: 'Work Experience', type: 'section', icon: 'work' },
-  { href: '/#digital-dreams', text: 'Digital Dreams', type: 'section', icon: 'auto_awesome' },
-  { href: '/#strengths-skills', text: 'Strengths & Skills', type: 'section', icon: 'psychology' },
-  { href: '/#testimonials', text: 'Testimonials', type: 'section', icon: 'format_quote' },
+  { href: '/#work-experience', textKey: 'nav.workExperience', type: 'section', icon: 'work' },
+  { href: '/#digital-dreams', textKey: 'nav.digitalDreams', type: 'section', icon: 'auto_awesome' },
+  { href: '/#strengths-skills', textKey: 'nav.strengthsSkills', type: 'section', icon: 'psychology' },
+  { href: '/#testimonials', textKey: 'nav.testimonials', type: 'section', icon: 'format_quote' },
 ];
 
 // Mobile Menu Section Component
@@ -475,7 +475,7 @@ const Navigation = () => {
                             {item.icon || 'article'}
                           </span>
                         </div>
-                        <span className="font-medium">{item.text}</span>
+                        <span className="font-medium">{t(item.textKey || 'nav.home')}</span>
                         <span className="material-symbols text-xs ml-auto opacity-50">
                           chevron_right
                         </span>
