@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Roboto } from "next/font/google";
+import { Poppins, Roboto, Tajawal } from "next/font/google";
 import "./globals.css";
 import "./no-glow.css";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -23,6 +23,13 @@ const roboto = Roboto({
   variable: "--font-roboto",
   weight: ['400', '500', '700'],
   subsets: ["latin"],
+  display: 'swap',
+});
+
+const tajawal = Tajawal({
+  variable: "--font-tajawal",
+  weight: ['400', '500', '700'],
+  subsets: ["arabic"],
   display: 'swap',
 });
 
@@ -86,14 +93,13 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  // We don't know the locale yet at this level, but the LanguageProvider will handle setting the dir attribute
-  return (    <html suppressHydrationWarning>
+}>) {  // We don't know the locale yet at this level, but the LanguageProvider will handle setting the dir attribute
+  return (
+    <html suppressHydrationWarning>
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${poppins.variable} ${roboto.variable}`} style={{"--font-tajawal": "Tajawal, sans-serif"} as React.CSSProperties}>
+      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
             <SkipLinks />

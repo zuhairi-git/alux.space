@@ -17,14 +17,7 @@ export default function AccessibilityClient() {
     link.rel = 'stylesheet';
     if (!document.querySelector(`link[href="${link.href}"]`)) {
       document.head.appendChild(link);
-    }
-  }, []);
-  
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
-  };
+    }  }, []);
   
   const { theme } = useTheme();
   const { locale } = useLanguage();
@@ -481,39 +474,39 @@ export default function AccessibilityClient() {
       <Navigation />
       
       <main className="pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Hero Section */}
+        <div className="max-w-7xl mx-auto px-6">          {/* Hero Section */}
+          <div className="relative h-96 overflow-hidden rounded-xl mb-16">
+            <Image
+              src="/images/portfolio/accessibility/accessiblity-showcase.jpg"
+              alt={content.title}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8">
+              <div className="text-white">
+                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                  {content.title}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
+                  {content.subtitle}
+                </p>
+              </div>
+            </div>          </div>
+
+          {/* Intro Section */}
           <motion.div 
             className="text-center mb-16"
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="relative w-full h-[500px] mb-8 rounded-3xl overflow-hidden">
-              <Image
-                src="/images/portfolio/accessibility/accessiblity-showcase.jpg"
-                alt={content.title}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white p-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                    {content.title}
-                  </h1>
-                  <p className="text-2xl mb-6 opacity-90 max-w-3xl">
-                    {content.subtitle}
-                  </p>
-                  <p className="text-lg opacity-80 max-w-4xl leading-relaxed">
-                    {content.intro}
-                  </p>
-                </motion.div>
-              </div>
-            </div>
+            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${
+              isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+            }`}>
+              {content.intro}
+            </p>
           </motion.div>
 
           {/* Project Overview Cards */}

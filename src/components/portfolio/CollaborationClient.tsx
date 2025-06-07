@@ -23,7 +23,7 @@ export default function CollaborationClient() {
     const content = {
       en: {
         title: "Collaboration Workflow Platform",
-        intro: "At the heart of the Collaboration Workflow Platform is a commitment to creativity, interconnectivity, and real-time teamwork. This platform is designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
+        intro: "A platform designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
         projectType: "Project Type",
         projectTypeValues: "Landing Page, Web & Mobile Platform, Mobile Application",
         timeline: "Timeline",
@@ -48,7 +48,7 @@ export default function CollaborationClient() {
       },
       fi: {
         title: "Yhteistyön työnkulkualusta",
-        intro: "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteyskykyyn ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan reaaliaikaista yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin eri laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+        intro: "Alusta, joka on suunniteltu yksinkertaistamaan reaaliaikaista yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin eri laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
         projectType: "Projektityyppi",
         projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, mobiilisovellus",
         timeline: "Aikataulu",
@@ -160,28 +160,40 @@ export default function CollaborationClient() {
           : 'bg-gradient-to-br from-gray-900 to-black'
     }`}>
       <Navigation /><article className="pt-24 pb-16">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Hero Section */}
-          <motion.div 
-            className="text-center mb-16"
-            {...fadeInUp}
-          >
-            <div className="mb-8">
-              <div className="relative w-full h-96 mb-8 rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/portfolio/collaboration/cover.jpg"
-                  alt={content.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-8 left-8 text-white">
-                  <h1 className="text-4xl md:text-6xl font-bold mb-4">{content.title}</h1>
-                  <p className="text-xl opacity-90 max-w-2xl">{content.intro}</p>
-                </div>
+        <div className="max-w-6xl mx-auto px-6">          {/* Hero Section */}
+          <div className="relative h-96 overflow-hidden rounded-xl mb-16">
+            <Image
+              src="/images/portfolio/collaboration/cover.jpg"
+              alt={content.title}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8">
+              <div className="text-white">
+                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                  {content.title}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
+                  {locale === 'fi' ? 'Tehokas yhteistyöalusta tiimeille' : 'Efficient collaboration platform for teams'}
+                </p>
               </div>
             </div>
+          </div>
+
+          {/* Intro Section */}
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${
+              theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+            }`}>
+              {content.intro}
+            </p>
           </motion.div>
 
           <motion.div 
