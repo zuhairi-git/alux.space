@@ -74,7 +74,7 @@ Here is the post:
     title: "Typography Enhancement",
     category: "Design",
     status: "Done" as const,
-    bugsFixed: 0,
+    bugsFixed: 29,
     technologies: ["Google Fonts", "CSS"],
     description: "Implement Google Fonts for better typography hierarchy and readability.",
     content: `Add Fonts using google fonts web:
@@ -147,7 +147,7 @@ Use best integration practices from #fetch https://unsplash.com/documentation`
     title: "Portfolio Content Rebuild",
     category: "Content",
     status: "Failed" as const,
-    bugsFixed: 0,
+    bugsFixed: 52,
     technologies: ["Content Management"],
     description: "Rebuild portfolio content with comprehensive case studies and design processes.",
     content: `Rebuild my portfolio content using all the material from the sources provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete design process, key decisions, and case studies. Incorporate the provided images as representations of the final website or product interface.
@@ -159,7 +159,7 @@ urls:
     title: "Collaboration Case Study",
     category: "Portfolio",
     status: "Done" as const,
-    bugsFixed: 9,
+    bugsFixed: 19,
     technologies: ["UX Design", "Case Study"],
     description: "Rebuild collaboration content with comprehensive user journey and product design insights.",
     content: `Rebuild my collaboration content using all the material from the content provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete process. 
@@ -171,7 +171,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
     title: "Job Seeking Portfolio",
     category: "Portfolio",
     status: "Done" as const,
-    bugsFixed: 3,
+    bugsFixed: 31,
     technologies: ["UX Design", "Navigation"],
     description: "Create job seeking case study with portfolio navigation integration.",
     content: `// In the navigation bar when clicked on the "Portfolio" it should go to the list of portfolios
@@ -185,7 +185,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
     title: "Responsive Navigation",
     category: "Frontend",
     status: "Done" as const,
-    bugsFixed: 8,
+    bugsFixed: 18,
     technologies: ["CSS", "JavaScript", "Responsive Design"],
     description: "Make navigation responsive with dropdown menu for portfolio items.",
     content: `// In the navigation bar when clicked on the "Portfolio" it should go to the list of portfolios
@@ -258,7 +258,7 @@ color: #1f2937;
     title: "UI Polish & Tooltips",
     category: "UX",
     status: "Done" as const,
-    bugsFixed: 9,
+    bugsFixed: 91,
     technologies: ["CSS", "JavaScript", "UX"],
     description: "Polish UI elements with smart tooltips and theme-aware styling.",
     content: `UI Prompt Instructions:
@@ -477,11 +477,11 @@ export default function PromptPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="mb-12"
+            className="mb-12 relative z-10"
           >
-            <div className="theme-card-content p-6 rounded-2xl backdrop-blur-sm">
-              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">                {/* Category Dropdown */}
-                <div className="relative dropdown-container">
+            <div className="theme-card-content p-6 rounded-2xl backdrop-blur-sm overflow-visible">
+              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between overflow-visible">{/* Category Dropdown */}
+                <div className="relative dropdown-container z-[100]">
                   <button
                     onClick={() => {
                       setCategoryDropdownOpen(!categoryDropdownOpen);
@@ -507,7 +507,7 @@ export default function PromptPage() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-50 min-w-[180px] overflow-hidden"
+                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-[9999] min-w-[180px] overflow-hidden"
                       >
                         {categories.map((category) => (
                           <motion.button
@@ -530,7 +530,7 @@ export default function PromptPage() {
                     )}
                   </AnimatePresence>
                 </div>                {/* Status Dropdown */}
-                <div className="relative dropdown-container">
+                <div className="relative dropdown-container z-[100]">
                   <button
                     onClick={() => {
                       setStatusDropdownOpen(!statusDropdownOpen);
@@ -556,7 +556,7 @@ export default function PromptPage() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-50 min-w-[140px] overflow-hidden"
+                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-[9999] min-w-[140px] overflow-hidden"
                       >
                         {statuses.map((status) => (
                           <motion.button
