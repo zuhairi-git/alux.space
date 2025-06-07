@@ -82,7 +82,7 @@ const Footer = () => {
                   <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">work</span>
                 </motion.a>
                 <motion.a 
-                  href="https://github.com/alialzuhairi" 
+                  href="https://github.com/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
