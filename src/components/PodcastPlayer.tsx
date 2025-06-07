@@ -914,12 +914,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             aria-label={isPlaying ? (locale === 'fi' ? 'Pysäytä podcast' : 'Pause podcast') : (locale === 'fi' ? 'Toista podcast' : 'Play podcast')}
           >
             <AnimatePresence mode="wait">
-              {isPlaying ? (
-                <motion.svg 
+              {isPlaying ? (                <motion.svg 
                   key="pause"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}                  className="w-6 h-6 md:w-7 md:h-7 text-white" 
+                  exit={{ scale: 0.8, opacity: 0 }}                  className="w-8 h-8 md:w-10 md:h-10 text-white" 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
@@ -931,7 +930,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-6 h-6 md:w-7 md:h-7 text-white ml-1" 
+                  className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
