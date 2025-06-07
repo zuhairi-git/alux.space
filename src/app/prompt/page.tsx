@@ -644,18 +644,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
               <p className="text-sm opacity-70 line-clamp-2 mb-3">
                 {prompt.description}
               </p>
-            </div>
-          </div>          {/* Metrics Row */}
-          <div className="flex items-center gap-2 mb-4 flex-wrap">
-            <span className="px-3 py-1 rounded-xl text-xs font-medium bg-white/10 backdrop-blur-sm">
-              📂 {prompt.category}
-            </span>
-            {prompt.bugsFixed > 0 && (
-              <span className="px-3 py-1 rounded-xl text-xs font-medium bg-gradient-to-r from-red-500/20 to-orange-500/20 text-orange-300 backdrop-blur-sm">
-                🐛 {prompt.bugsFixed} bugs fixed
-              </span>
-            )}
-          </div>
+            </div>          </div>
 
           {/* Technology Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
@@ -773,18 +762,7 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
               </div>
               <div className={`px-4 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r ${getStatusColor(prompt.status)} shadow-lg shrink-0 ml-4`}>
                 {prompt.status}
-              </div>
-            </div>            {/* Tags and Metrics */}
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 text-sm">
-                📂 {prompt.category}
-              </span>
-              {prompt.bugsFixed > 0 && (
-                <span className="px-3 py-1 rounded-lg bg-red-500/20 text-red-300 text-sm">
-                  🐛 {prompt.bugsFixed} bugs fixed
-                </span>
-              )}
-            </div>
+              </div>            </div>
 
             {/* Technologies */}
             <div className="flex flex-wrap gap-2 mb-4">
