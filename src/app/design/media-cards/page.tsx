@@ -21,9 +21,8 @@ export default function MediaCardsShowcasePage() {
         <Navigation />
         <div className="relative z-10 pt-32 pb-16">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Media Cards</h1>
-            <p className="text-lg text-center max-w-3xl mx-auto mb-12 opacity-80">
-              Showcase of different media card styles following the Alux Design System.
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Media Cards</h1>            <p className="text-lg text-center max-w-3xl mx-auto mb-12 opacity-80">
+              Showcase of different media card styles following our inclusive design system.
               These card components are designed for images, videos, and rich media content.
             </p>
             

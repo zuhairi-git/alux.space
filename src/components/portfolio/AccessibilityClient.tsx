@@ -33,9 +33,8 @@ export default function AccessibilityClient() {
 
   // Get localized text content
   const getLocalizedContent = () => {
-    const content = {
-      en: {
-        title: "The Alux Design System",
+    const content = {      en: {
+        title: "Inclusive Design System",
         subtitle: "Accessibility-First Design Philosophy",
         intro: "Building the future of inclusive digital products—from research to implementation. This system powers applications used by millions while ensuring no one is left behind.",
         projectType: "Project Type",
@@ -227,9 +226,8 @@ export default function AccessibilityClient() {
         
         learnMore: "Learn More",
         nextSection: "Next Section"
-      },
-      fi: {
-        title: "Alux-suunnittelujärjestelmä",
+      },      fi: {
+        title: "Inklusiivinen suunnittelujärjestelmä",
         subtitle: "Saavutettavuus-ensin filosofia",
         intro: "Rakennamme inklusiivisten digitaalisten tuotteiden tulevaisuutta—tutkimuksesta toteutukseen. Tämä järjestelmä voimistaa miljoonien käyttäjien sovelluksia varmistaen, että ketään ei jätetä jälkeen.",
         projectType: "Projektityyppi",

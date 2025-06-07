@@ -4,11 +4,10 @@
     "portfolio": "Portfolio",
     "blog": "Blogi",
     "prompts": "Kehotteet"
-  },
-  "portfolio": {
+  },  "portfolio": {
     "overview": "Kaikki Projektit",
     "cases": {
-      "accessibility": "Saavutettavuusportfolio",
+      "accessibility": "Inklusiivinen suunnittelujärjestelmä",
       "collaboration": "Yhteistyö & Johtajuus",
       "jobseeking": "Työnhaku"
     }
