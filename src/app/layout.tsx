@@ -61,10 +61,13 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       default: metadata.title,
       template: `%s | ${metadata.title.split(' - ')[0]}`
     },
-    description: metadata.description,
-    icons: {
-      icon: '/favicon.png',
+    description: metadata.description,    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/favicon.png', type: 'image/png' }
+      ],
       apple: '/favicon.png',
+      shortcut: '/favicon.ico',
     },
     openGraph: {
       title: metadata.title,
