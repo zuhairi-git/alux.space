@@ -16,13 +16,12 @@
     }
   },  "home": {    "hero": {
       "title": "Hi, I'm Ali Al-Zuhairi",
-      "subtitle": "AI-powered design architect specializing in prompt engineering — transforming complex challenges into intelligent, inclusive digital solutions that bridge human creativity and artificial intelligence.",
+      "subtitle": "AI-driven product designer and product owner specializing in prompt engineering — transforming complex challenges into intelligent, inclusive digital solutions that bridge human creativity and artificial intelligence.",
       "cta": "View Portfolio"
     },    "about": {
       "title": "Crafting Digital Dreams into Reality",
-      "intro": "Hey there! I'm Ali, a passionate AI-driven designer who believes in the transformative power of intelligent design to solve complex problems. With my journey spanning across continents – from Damascus to Helsinki – I've learned that great design is about bridging human intuition with artificial intelligence to create meaningful, accessible experiences.",
-      "quote": "At the intersection of human creativity and AI innovation — where precision prompt engineering meets visionary design.",
-      "second": "Over the past decade, I've specialized in harnessing AI technologies and prompt engineering to breathe life into countless digital products. I believe in making AI more human, more accessible, and infinitely more powerful through thoughtful design and strategic prompt crafting.",
+      "intro": "Hey there! I'm Ali, a designer who uses AI as a powerful tool to unlock new levels of creativity. From Damascus to Helsinki, my journey has taught me that great design happens at the intersection of human intuition and intelligent technology. By integrating AI into my process, I explore fresh ideas, solve complex problems, and craft experiences that are both meaningful and accessible.",      "quote": "At the intersection of human creativity and AI innovation — where precision prompt engineering meets visionary design.",
+      "second": "In the past couple of years, as AI technologies rapidly emerged, I was among the early adopters—eager to experiment and integrate them into real-world design workflows. I've specialized in using prompt engineering to bring digital products to life, making AI feel more human, more accessible, and vastly more powerful through intentional design and strategic interaction.",
       "third": "When I'm not designing with AI, you'll find me experimenting with new AI tools, crafting precise prompts that unlock creative possibilities, or mentoring others on how to leverage artificial intelligence for better design outcomes."
     },
     "workExperience": {
