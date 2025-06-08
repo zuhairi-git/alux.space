@@ -11,6 +11,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
+import { i18n } from '@/i18n';
 
 // A clean, readable skill card component
 const InteractiveSkillCard = ({ 
@@ -67,7 +68,7 @@ export default function Home() {
     // Refs for section tracking
   const workExperienceRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-    // Track scroll position for animations
+  // Track scroll position for animations
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -80,7 +81,23 @@ export default function Home() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-    // Hero configuration - no longer switches variants, smooth transitions handled internally
+
+  // Helper function to add locale to paths
+  const localizedHref = (path: string) => {
+    // Check if the path already contains the locale
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path; // Path already has locale, don't add it again
+    }
+
+    if (path.startsWith('#') || path.startsWith('/#')) {
+      // For hash links, add locale to the base path
+      return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
+    }
+
+    return `/${locale}${path}`;
+  };
+    
+  // Hero configuration - no longer switches variants, smooth transitions handled internally
   const heroConfig: HeroConfig = {
     variant: 'default', // Using unified component, this doesn't matter anymore
     title: t('home.hero.title'),
@@ -465,15 +482,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <p className="text-lg opacity-60 mb-6">
+          >            <p className="text-lg opacity-60 mb-6">
               {locale === 'fi' 
-                ? 'Kiinnostunut yhteistyöstä? Otetaan yhteyttä!'
-                : 'Interested in collaboration? Let\'s connect!'
+                ? 'Tutustu joihinkin töihini'
+                : 'Check out some of my work'
               }
-            </p>
-            <motion.a
-              href="/portfolio"
+            </p><motion.a
+              href={localizedHref('/portfolio')}
               className={`
                 inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-medium
                 transition-all duration-300 border backdrop-blur-sm
