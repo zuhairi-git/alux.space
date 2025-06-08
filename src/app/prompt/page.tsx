@@ -765,25 +765,17 @@ type Prompt = {
 
 function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const getStatusColor = (status: string) => {
     return status === 'Done' 
       ? 'from-green-500 to-emerald-600' 
       : 'from-red-500 to-rose-600';
   };
-
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ scale: 1.02 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="theme-card-content relative overflow-hidden rounded-3xl backdrop-blur-sm border border-white/10 transition-all duration-500 group"
+    <div
+      className="theme-card-content relative overflow-hidden rounded-3xl backdrop-blur-sm border border-white/10"
     >
       {/* Gradient Background Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${getStatusColor(prompt.status)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+      <div className={`absolute inset-0 bg-gradient-to-br ${getStatusColor(prompt.status)} opacity-5`}></div>
       
       {/* Floating Status Badge */}
       <div className="absolute top-4 right-4 z-20">
@@ -827,71 +819,37 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
               <div className="text-xs opacity-70">Bugs Fixed</div>
             </div>
           )}
-        </div>
-
-        {/* Content Preview */}
-        <AnimatePresence>
-          {!isExpanded && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mb-4"
-            >
-              <div className="text-sm opacity-60 line-clamp-3">
-                {prompt.content}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Expanded Content */}
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mb-4 overflow-hidden"
-            >
-              <div className="text-sm whitespace-pre-wrap p-4 rounded-2xl bg-white/5 backdrop-blur-sm max-h-60 overflow-y-auto">
-                {prompt.content}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Action Buttons */}
+        </div>        {/* Content Preview */}
+        {!isExpanded && (
+          <div className="mb-4">
+            <div className="text-sm opacity-60 line-clamp-3">
+              {prompt.content}
+            </div>
+          </div>
+        )}{/* Expanded Content */}
+        {isExpanded && (
+          <div className="mb-4 overflow-hidden">
+            <div className="text-sm whitespace-pre-wrap p-4 rounded-2xl bg-white/5 backdrop-blur-sm max-h-60 overflow-y-auto">
+              {prompt.content}
+            </div>
+          </div>
+        )}        {/* Action Buttons */}
         <div className="flex gap-2">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex-1 py-2 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="flex-1 py-2 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium shadow-lg hover:shadow-xl"
           >
             {isExpanded ? 'Show Less' : 'View Details'}
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300"
+          </button>
+          <button
+            className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
             </svg>
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Hover Effect Border */}
-      <motion.div
-        className="absolute inset-0 rounded-3xl border-2 border-transparent"
-        animate={{
-          borderColor: isHovered ? 'rgba(139, 92, 246, 0.3)' : 'transparent',
-        }}
-        transition={{ duration: 0.3 }}
-      />
-    </motion.div>
+          </button>
+        </div>      </div>
+    </div>
   );
 }
 
@@ -903,12 +861,8 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
       ? 'from-green-500 to-emerald-600' 
       : 'from-red-500 to-rose-600';
   };
-
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
+    <div
       className="theme-card-content rounded-2xl backdrop-blur-sm border border-white/10 overflow-hidden"
     >
       <div className="p-6">
@@ -931,34 +885,22 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
                   {tech}
                 </span>
               ))}
+            </div>            {/* Content Preview/Full */}
+            <div className="text-sm opacity-60">
+              <div className={isExpanded ? 'whitespace-pre-wrap' : 'line-clamp-2'}>
+                {prompt.content}
+              </div>
             </div>
-
-            {/* Content Preview/Full */}
-            <AnimatePresence>
-              <motion.div
-                layout
-                className="text-sm opacity-60"
-              >
-                <div className={isExpanded ? 'whitespace-pre-wrap' : 'line-clamp-2'}>
-                  {prompt.content}
-                </div>
-              </motion.div>
-            </AnimatePresence>
           </div>
-        </div>
-
-        {/* Expand Button */}
+        </div>        {/* Expand Button */}
         <div className="mt-4 pt-4 border-t border-white/10">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-sm text-purple-400 hover:text-purple-300 transition-colors duration-200"
+            className="text-sm text-purple-400 hover:text-purple-300"
           >
             {isExpanded ? '↑ Show Less' : '↓ Show More'}
-          </motion.button>
-        </div>
+          </button>        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
