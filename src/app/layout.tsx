@@ -63,11 +63,11 @@ export async function generateMetadata({ params }: { params: { locale?: string }
     },
     description: metadata.description,    icons: {
       icon: [
-        { url: '/favicon.ico', sizes: 'any' },
-        { url: '/favicon.png', type: 'image/png' }
+        { url: '/favicon.ico?v=2', sizes: 'any' },
+        { url: '/favicon.png?v=2', type: 'image/png' }
       ],
-      apple: '/favicon.png',
-      shortcut: '/favicon.ico',
+      apple: '/favicon.png?v=2',
+      shortcut: '/favicon.ico?v=2',
     },
     openGraph: {
       title: metadata.title,
@@ -97,10 +97,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {  // We don't know the locale yet at this level, but the LanguageProvider will handle setting the dir attribute
-  return (
-    <html suppressHydrationWarning>
+  return (    <html suppressHydrationWarning>
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
+        {/* Additional favicon meta tags for better browser support */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2" />
+        <link rel="apple-touch-icon" href="/favicon.png?v=2" />
+        <meta name="msapplication-TileImage" content="/favicon.png?v=2" />
       </head>
       <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
