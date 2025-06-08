@@ -35,18 +35,17 @@ export default function LanguageSwitcher() {
         return 'bg-white/50 hover:bg-white/70 border border-gray-200/50 text-gray-700 hover:text-primary';
     }
   };
-
   // Get theme-specific styling for dropdown menu
   const getMenuStyles = () => {
     switch (theme) {
       case 'light':
-        return 'bg-white/95 border border-gray-200';
+        return 'bg-white border border-gray-200';
       case 'dark':
-        return 'bg-gray-900/95 border border-gray-700';
+        return 'bg-gray-900 border border-gray-700';
       case 'colorful':
-        return 'bg-purple-900/95 border border-purple-700';
+        return 'bg-purple-900 border border-purple-700';
       default:
-        return 'bg-white/95 border border-gray-200';
+        return 'bg-white border border-gray-200';
     }
   };
 
@@ -111,7 +110,7 @@ export default function LanguageSwitcher() {
                   initial={{ opacity: 0, y: -10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  className={`absolute top-full right-0 mt-2 w-40 ${getMenuStyles()} backdrop-blur-lg shadow-lg rounded-lg overflow-hidden z-50 focus:outline-none`}
+                  className={`absolute top-full right-0 mt-2 w-40 ${getMenuStyles()} shadow-lg rounded-lg overflow-hidden z-[70] focus:outline-none`}
                   style={{
                     transition: 'all 0.2s ease-out'
                   }}

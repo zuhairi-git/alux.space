@@ -480,8 +480,8 @@ export default function PromptPage() {
             className="mb-12 relative z-10"
           >
             <div className="theme-card-content p-6 rounded-2xl backdrop-blur-sm overflow-visible">
-              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between overflow-visible">{/* Category Dropdown */}
-                <div className="relative dropdown-container z-[100]">
+              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between overflow-visible">                {/* Category Dropdown */}
+                <div className="relative dropdown-container z-[80]">
                   <button
                     onClick={() => {
                       setCategoryDropdownOpen(!categoryDropdownOpen);
@@ -501,13 +501,12 @@ export default function PromptPage() {
                   </button>
                   
                   <AnimatePresence>
-                    {categoryDropdownOpen && (
-                      <motion.div
+                    {categoryDropdownOpen && (                      <motion.div
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-[9999] min-w-[180px] overflow-hidden"
+                        className="absolute top-full mt-2 left-0 bg-gray-900 rounded-xl shadow-2xl border border-gray-700 z-[80] min-w-[180px] overflow-hidden"
                       >
                         {categories.map((category) => (
                           <motion.button
@@ -530,7 +529,7 @@ export default function PromptPage() {
                     )}
                   </AnimatePresence>
                 </div>                {/* Status Dropdown */}
-                <div className="relative dropdown-container z-[100]">
+                <div className="relative dropdown-container z-[80]">
                   <button
                     onClick={() => {
                       setStatusDropdownOpen(!statusDropdownOpen);
@@ -550,13 +549,12 @@ export default function PromptPage() {
                   </button>
                   
                   <AnimatePresence>
-                    {statusDropdownOpen && (
-                      <motion.div
+                    {statusDropdownOpen && (                      <motion.div
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full mt-2 left-0 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl border border-white/20 z-[9999] min-w-[140px] overflow-hidden"
+                        className="absolute top-full mt-2 left-0 bg-gray-900 rounded-xl shadow-2xl border border-gray-700 z-[80] min-w-[140px] overflow-hidden"
                       >
                         {statuses.map((status) => (
                           <motion.button
