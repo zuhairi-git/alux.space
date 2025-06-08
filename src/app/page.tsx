@@ -12,7 +12,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 
-// A helper component for skill cards
+// A modern, sophisticated skill card component
 const InteractiveSkillCard = ({ 
   skill,
   index
@@ -20,20 +20,129 @@ const InteractiveSkillCard = ({
   skill: { title: string, desc: string },
   index: number 
 }) => {
+  const { theme } = useTheme();
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Get card styles based on theme
+  const getCardStyles = () => {
+    if (theme === 'colorful') {
+      return isHovered 
+        ? 'bg-gradient-to-br from-purple-900/30 via-fuchsia-900/20 to-pink-900/30 border-fuchsia-500/40 shadow-[0_20px_40px_-12px_rgba(236,72,153,0.4)]'
+        : 'bg-gradient-to-br from-purple-900/20 via-fuchsia-900/10 to-pink-900/20 border-fuchsia-500/20 shadow-[0_8px_25px_-5px_rgba(236,72,153,0.2)]';
+    } else if (theme === 'dark') {
+      return isHovered
+        ? 'bg-gradient-to-br from-slate-800/80 via-slate-900/60 to-blue-900/40 border-blue-500/40 shadow-[0_20px_40px_-12px_rgba(59,130,246,0.3)]'
+        : 'bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-blue-900/30 border-blue-500/20 shadow-[0_8px_25px_-5px_rgba(59,130,246,0.15)]';
+    } else {
+      return isHovered
+        ? 'bg-gradient-to-br from-white via-blue-50/50 to-indigo-50/30 border-blue-300/60 shadow-[0_20px_40px_-12px_rgba(59,130,246,0.25)]'
+        : 'bg-gradient-to-br from-white/90 via-blue-50/30 to-indigo-50/20 border-blue-200/40 shadow-[0_8px_25px_-5px_rgba(59,130,246,0.1)]';
+    }
+  };
+
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, rotateX: 15 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ scale: 1.05 }}
-      className="theme-card"
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.1,
+        type: "spring",
+        stiffness: 100
+      }}
+      whileHover={{ 
+        y: -8,
+        rotateX: 5,
+        transition: { duration: 0.3 }
+      }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className={`
+        relative overflow-hidden rounded-2xl border backdrop-blur-xl
+        transition-all duration-500 ease-out cursor-pointer group
+        ${getCardStyles()}
+      `}
+      style={{
+        transformStyle: 'preserve-3d',
+        perspective: '1000px'
+      }}
     >
-      <div className="theme-card-glow theme-card-glow-secondary"></div>
-      <div className="theme-card-content p-6">
-        <h4 className="text-xl font-medium mb-2">{skill.title}</h4>
-        <p className="opacity-75 text-sm">{skill.desc}</p>
+      {/* Animated background gradient overlay */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: theme === 'colorful' 
+            ? 'radial-gradient(circle at 50% 50%, rgba(236,72,153,0.1) 0%, transparent 70%)'
+            : theme === 'dark'
+            ? 'radial-gradient(circle at 50% 50%, rgba(59,130,246,0.1) 0%, transparent 70%)'
+            : 'radial-gradient(circle at 50% 50%, rgba(59,130,246,0.08) 0%, transparent 70%)'
+        }}
+      />
+      
+      {/* Content */}
+      <div className="p-6">
+        <motion.h4 
+          className="text-xl font-semibold mb-3 leading-tight"
+          initial={{ opacity: 0.8 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {skill.title}
+        </motion.h4>
+        
+        <motion.p 
+          className="text-sm leading-relaxed opacity-70 group-hover:opacity-90 transition-opacity duration-300"
+          initial={{ opacity: 0.7 }}
+          whileHover={{ opacity: 0.9 }}
+        >
+          {skill.desc}
+        </motion.p>
       </div>
+      
+      {/* Bottom accent line */}
+      <motion.div
+        className={`
+          absolute bottom-0 left-0 h-1 w-0 group-hover:w-full
+          transition-all duration-500 ease-out
+          ${theme === 'colorful' 
+            ? 'bg-gradient-to-r from-fuchsia-500 to-purple-500' 
+            : theme === 'dark'
+            ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
+            : 'bg-gradient-to-r from-blue-500 to-indigo-500'
+          }
+        `}
+      />
+      
+      {/* Floating particles effect */}
+      {isHovered && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`
+                absolute w-1 h-1 rounded-full
+                ${theme === 'colorful' ? 'bg-fuchsia-400' : 'bg-blue-400'}
+              `}
+              initial={{
+                x: Math.random() * 100 + '%',
+                y: '100%',
+                opacity: 0
+              }}
+              animate={{
+                y: '-20%',
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2,
+                delay: i * 0.3,
+                repeat: Infinity,
+                ease: "easeOut"
+              }}
+            />
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };
@@ -326,42 +435,164 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </motion.section>
-        {/* Skills Section */}
+      </motion.section>        {/* Skills Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative overflow-hidden pb-20"
+        className="relative overflow-hidden py-24 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent"
         id="strengths-skills"
       >
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-20"
-          style={{
-            backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIiBmaWxsPSJub25lIj48cGF0aCBkPSJNNTYgNDRDNTYgNTQuNjM3IDQ3LjI5MjYgNjMgMzYgNjNDMjQuNzA3NCA2MyAxNiA1NC42MzcgMTYgNDQiIHN0cm9rZT0iIzY1NzZGRiIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cGF0aCBkPSJNMTYgNDRDMTYgMzMuMzYzIDI0LjcwNzQgMjUgMzYgMjVDNDcuMjkyNiAyNSA1NiAzMy4zNjMgNTYgNDQiIHN0cm9rZT0iIzY1NzZGRiIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48L3N2Zz4=')",
-            backgroundPosition: "center center",
-            backgroundSize: '80% 80%',
-            backgroundRepeat: 'no-repeat'
-          }}
-        />
-      
-        <div className="container mx-auto px-4">
-          <motion.h3 
-            className="text-3xl font-bold mb-12 text-center"
-            animate={{ 
-              textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
+        {/* Enhanced background decorative elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Animated gradient orbs */}
+          <motion.div
+            className="absolute top-20 left-1/4 w-96 h-96 rounded-full opacity-[0.03]"
+            style={{
+              background: theme === 'colorful' 
+                ? 'radial-gradient(circle, #ec4899 0%, #8b5cf6 50%, transparent 70%)'
+                : 'radial-gradient(circle, #3b82f6 0%, #6366f1 50%, transparent 70%)',
+              filter: 'blur(40px)'
             }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.03, 0.05, 0.03],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-1/4 w-80 h-80 rounded-full opacity-[0.04]"
+            style={{
+              background: theme === 'colorful' 
+                ? 'radial-gradient(circle, #f59e0b 0%, #ec4899 50%, transparent 70%)'
+                : 'radial-gradient(circle, #06b6d4 0%, #3b82f6 50%, transparent 70%)',
+              filter: 'blur(35px)'
+            }}
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.04, 0.06, 0.04],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          
+          {/* Subtle grid pattern */}
+          <div 
+            className="absolute inset-0 opacity-[0.02]"
+            style={{
+              backgroundImage: `linear-gradient(${theme === 'colorful' ? '#ec4899' : '#3b82f6'} 1px, transparent 1px), linear-gradient(90deg, ${theme === 'colorful' ? '#ec4899' : '#3b82f6'} 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }}
+          />
+        </div>
+      
+        <div className="container mx-auto px-4 max-w-7xl relative z-10">
+          {/* Section header with enhanced typography */}
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center justify-center mb-6"
+            >
+              <span className={`
+                material-symbols text-4xl p-4 rounded-2xl
+                ${theme === 'colorful' 
+                  ? 'text-fuchsia-500 bg-fuchsia-500/10 border border-fuchsia-500/20' 
+                  : theme === 'dark'
+                  ? 'text-blue-400 bg-blue-500/10 border border-blue-500/20'
+                  : 'text-blue-600 bg-blue-500/10 border border-blue-500/20'
+                }
+              `}>
+                psychology
+              </span>
+            </motion.div>
+            
+            <motion.h3 
+              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-current via-current to-current bg-clip-text"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              {t('home.skills.title')}
+            </motion.h3>
+            
+            <motion.p
+              className="text-lg opacity-70 max-w-2xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {locale === 'fi' 
+                ? 'Kattava valikoima taitoja ja osaamista, jotka mahdollistavat innovatiivisten ratkaisujen luomisen'
+                : 'A comprehensive set of skills and expertise that enable the creation of innovative solutions'
+              }
+            </motion.p>
+          </div>
+          
+          {/* Enhanced grid layout with staggered animations */}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {t('home.skills.title')}
-          </motion.h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill, index) => (
               <InteractiveSkillCard key={index} skill={skill} index={index} />
             ))}
-          </div>
+          </motion.div>
+          
+          {/* Call-to-action section */}
+          <motion.div
+            className="text-center mt-20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <p className="text-lg opacity-60 mb-6">
+              {locale === 'fi' 
+                ? 'Kiinnostunut yhteistyöstä? Otetaan yhteyttä!'
+                : 'Interested in collaboration? Let\'s connect!'
+              }
+            </p>
+            <motion.a
+              href="/portfolio"
+              className={`
+                inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-medium
+                transition-all duration-300 border backdrop-blur-sm
+                ${theme === 'colorful'
+                  ? 'bg-gradient-to-r from-fuchsia-500/10 to-purple-500/10 border-fuchsia-500/30 text-fuchsia-300 hover:from-fuchsia-500/20 hover:to-purple-500/20 hover:border-fuchsia-500/50'
+                  : theme === 'dark'
+                  ? 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/30 text-blue-300 hover:from-blue-500/20 hover:to-indigo-500/20 hover:border-blue-500/50'
+                  : 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/30 text-blue-600 hover:from-blue-500/20 hover:to-indigo-500/20 hover:border-blue-500/50'
+                }
+              `}
+              whileHover={{ 
+                scale: 1.05,
+                y: -2
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="material-symbols text-xl">work</span>
+              {locale === 'fi' ? 'Tutustu portfolioon' : 'View Portfolio'}
+              <span className="material-symbols text-xl">arrow_forward</span>
+            </motion.a>
+          </motion.div>
         </div>
-      </motion.section>      {/* Testimonials Section */}
+      </motion.section>{/* Testimonials Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
