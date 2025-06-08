@@ -155,17 +155,9 @@ const Footer = () => {
           </div>
         </div>        {/* Bottom section with copyright */}
         <div className="pt-6 border-t border-gray-200/10">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">            <div className="flex items-center gap-3">
-              <Image
-                src="/images/logo/AluxLogoLabel.svg"
-                alt="Alux Logo"
-                width={24}
-                height={24}
-                className="w-6 h-6 object-contain rounded-lg opacity-80"
-              />
-              <div className="text-sm opacity-60">
-                &copy; {currentYear} Ali Al-Zuhairi. {t('footer.copyright')}
-              </div>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="text-sm opacity-60">
+              &copy; {currentYear} Ali Al-Zuhairi. {t('footer.copyright')}
             </div>
             {/* City and profession */}
             <div className="text-xs opacity-50 flex flex-wrap gap-4">
