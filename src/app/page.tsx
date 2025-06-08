@@ -12,138 +12,43 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 
-// A modern, sophisticated skill card component
+// A clean, readable skill card component
 const InteractiveSkillCard = ({ 
-  skill,
-  index
+  skill
 }: { 
-  skill: { title: string, desc: string },
-  index: number 
+  skill: { title: string, desc: string }
 }) => {
   const { theme } = useTheme();
-  const [isHovered, setIsHovered] = useState(false);
 
   // Get card styles based on theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return isHovered 
-        ? 'bg-gradient-to-br from-purple-900/30 via-fuchsia-900/20 to-pink-900/30 border-fuchsia-500/40 shadow-[0_20px_40px_-12px_rgba(236,72,153,0.4)]'
-        : 'bg-gradient-to-br from-purple-900/20 via-fuchsia-900/10 to-pink-900/20 border-fuchsia-500/20 shadow-[0_8px_25px_-5px_rgba(236,72,153,0.2)]';
+      return 'bg-gradient-to-br from-purple-900/20 via-fuchsia-900/10 to-pink-900/20 border-fuchsia-500/20 shadow-lg';
     } else if (theme === 'dark') {
-      return isHovered
-        ? 'bg-gradient-to-br from-slate-800/80 via-slate-900/60 to-blue-900/40 border-blue-500/40 shadow-[0_20px_40px_-12px_rgba(59,130,246,0.3)]'
-        : 'bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-blue-900/30 border-blue-500/20 shadow-[0_8px_25px_-5px_rgba(59,130,246,0.15)]';
+      return 'bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-blue-900/30 border-blue-500/20 shadow-lg';
     } else {
-      return isHovered
-        ? 'bg-gradient-to-br from-white via-blue-50/50 to-indigo-50/30 border-blue-300/60 shadow-[0_20px_40px_-12px_rgba(59,130,246,0.25)]'
-        : 'bg-gradient-to-br from-white/90 via-blue-50/30 to-indigo-50/20 border-blue-200/40 shadow-[0_8px_25px_-5px_rgba(59,130,246,0.1)]';
+      return 'bg-gradient-to-br from-white/90 via-blue-50/30 to-indigo-50/20 border-blue-200/40 shadow-lg';
     }
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30, rotateX: 15 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ 
-        duration: 0.6, 
-        delay: index * 0.1,
-        type: "spring",
-        stiffness: 100
-      }}
-      whileHover={{ 
-        y: -8,
-        rotateX: 5,
-        transition: { duration: 0.3 }
-      }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+    <div 
       className={`
         relative overflow-hidden rounded-2xl border backdrop-blur-xl
-        transition-all duration-500 ease-out cursor-pointer group
         ${getCardStyles()}
       `}
-      style={{
-        transformStyle: 'preserve-3d',
-        perspective: '1000px'
-      }}
     >
-      {/* Animated background gradient overlay */}
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background: theme === 'colorful' 
-            ? 'radial-gradient(circle at 50% 50%, rgba(236,72,153,0.1) 0%, transparent 70%)'
-            : theme === 'dark'
-            ? 'radial-gradient(circle at 50% 50%, rgba(59,130,246,0.1) 0%, transparent 70%)'
-            : 'radial-gradient(circle at 50% 50%, rgba(59,130,246,0.08) 0%, transparent 70%)'
-        }}
-      />
-      
       {/* Content */}
       <div className="p-6">
-        <motion.h4 
-          className="text-xl font-semibold mb-3 leading-tight"
-          initial={{ opacity: 0.8 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
+        <h4 className="text-xl font-semibold mb-3 leading-tight">
           {skill.title}
-        </motion.h4>
+        </h4>
         
-        <motion.p 
-          className="text-sm leading-relaxed opacity-70 group-hover:opacity-90 transition-opacity duration-300"
-          initial={{ opacity: 0.7 }}
-          whileHover={{ opacity: 0.9 }}
-        >
+        <p className="text-sm leading-relaxed opacity-70">
           {skill.desc}
-        </motion.p>
+        </p>
       </div>
-      
-      {/* Bottom accent line */}
-      <motion.div
-        className={`
-          absolute bottom-0 left-0 h-1 w-0 group-hover:w-full
-          transition-all duration-500 ease-out
-          ${theme === 'colorful' 
-            ? 'bg-gradient-to-r from-fuchsia-500 to-purple-500' 
-            : theme === 'dark'
-            ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
-            : 'bg-gradient-to-r from-blue-500 to-indigo-500'
-          }
-        `}
-      />
-      
-      {/* Floating particles effect */}
-      {isHovered && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={i}
-              className={`
-                absolute w-1 h-1 rounded-full
-                ${theme === 'colorful' ? 'bg-fuchsia-400' : 'bg-blue-400'}
-              `}
-              initial={{
-                x: Math.random() * 100 + '%',
-                y: '100%',
-                opacity: 0
-              }}
-              animate={{
-                y: '-20%',
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: 2,
-                delay: i * 0.3,
-                repeat: Infinity,
-                ease: "easeOut"
-              }}
-            />
-          ))}
-        </div>
-      )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -548,9 +453,8 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {skills.map((skill, index) => (
-              <InteractiveSkillCard key={index} skill={skill} index={index} />
+          >            {skills.map((skill, index) => (
+              <InteractiveSkillCard key={index} skill={skill} />
             ))}
           </motion.div>
           
