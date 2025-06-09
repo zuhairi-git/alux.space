@@ -27,18 +27,16 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
     
     return `/${locale}${path}`;
   };
-  return (
-    <motion.div 
+  return (    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       className="container mx-auto px-4 text-center relative z-10"
     >
-      <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-        <motion.div
+      <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">        <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="text-left"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -48,7 +46,9 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           </h2>
           {subtitle && (
             <p className="text-xl text-gray-300 mb-8">{subtitle}</p>
-          )}          {cta && (
+          )}
+
+          {cta && (
             <Link 
               href={localizedHref(cta.href)}
               className="inline-block px-8 py-3 bg-blue-500 text-white rounded-lg"
@@ -62,7 +62,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
         <motion.div
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="relative"
         >
           {quote && (
@@ -78,11 +78,10 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
       </div>
       
       {/* Podcast Player */}
-      {showPodcastPlayer && (
-        <motion.div 
+      {showPodcastPlayer && (        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.3 }}
           className="mt-16 max-w-3xl mx-auto"
         >
           <PodcastPlayer />

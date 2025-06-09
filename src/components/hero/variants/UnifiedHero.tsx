@@ -51,12 +51,11 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Corner decorative accents */}
-            <motion.div
+            {/* Corner decorative accents */}            <motion.div
               className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
             >
               <div className="w-full h-full border-t-2 border-l-2 border-blue-400/30 rounded-tl-lg" />
             </motion.div>
@@ -65,7 +64,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
             >
               <div className="w-full h-full border-b-2 border-r-2 border-purple-400/30 rounded-br-lg" />
             </motion.div>

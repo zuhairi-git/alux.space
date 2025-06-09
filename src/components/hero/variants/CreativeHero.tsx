@@ -35,24 +35,22 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
   // Split title into words for staggered animation
   const words = title ? title.split(' ') : [];
   
-  return (
-    <motion.div 
+  return (    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       className="container mx-auto px-4 relative z-10"
     >
       {/* Title Section */}
       <div className="flex flex-col items-center justify-center my-8">
         {/* Geometric decorations */}
         <div className="relative w-full max-w-4xl mx-auto">
-          {/* Floating circle decoration */}
-          <motion.div
+          {/* Floating circle decoration */}          <motion.div
             animate={{
               y: [0, -15, 0],
             }}
             transition={{
-              duration: 4,
+              duration: 2,
               repeat: Infinity,
               repeatType: "reverse"
             }}
@@ -65,7 +63,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               rotate: 360,
             }}
             transition={{
-              duration: 20,
+              duration: 10,
               repeat: Infinity,
               ease: "linear"
             }}
@@ -79,14 +77,13 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
             }}
           >
             <h2 className={`text-6xl text-center md:text-7xl font-bold leading-tight tracking-tight relative z-20 `}>
-              {words.map((word, i) => (
-                <motion.span
+              {words.map((word, i) => (                <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
-                    delay: i * 0.2, 
-                    duration: 0.8,
+                    delay: i * 0.1, 
+                    duration: 0.4,
                     ease: [0.19, 1, 0.22, 1]
                   }}
                   className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
@@ -96,11 +93,10 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               ))}
             </h2>
             
-            {/* Decorative elements */}
-            <motion.div 
+            {/* Decorative elements */}            <motion.div 
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 0.7 }}
-              transition={{ delay: 0.5, duration: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
               className="absolute -z-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500/10 to-fuchsia-600/10 blur-3xl"
               style={{
                 left: '50%',
@@ -111,22 +107,20 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
           </motion.div>
         </div>
 
-        {subtitle && (
-          <motion.p
+        {subtitle && (          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
             className={`text-2xl md:text-3xl  ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
           >
             {subtitle}
           </motion.p>
         )}
 
-        {quote && (
-          <motion.div
+        {quote && (          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            transition={{ delay: 0.4, duration: 0.4 }}
             className="relative max-w-4xl mx-auto mb-12"
           >
             <QuoteBlock 
@@ -137,13 +131,12 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
           </motion.div>
         )}
 
-        {cta && (
-          <motion.div
+        {cta && (          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
             className="text-center"
-          >            <Link
+          ><Link
               href={localizedHref(cta.href)}
               className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
                 theme === 'colorful' 
@@ -178,7 +171,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
                 }}
                 transition={{
-                  duration: 5,
+                  duration: 2.5,
                   repeat: Infinity,
                   repeatType: 'loop'
                 }}
@@ -190,11 +183,10 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
           </motion.div>        )}
         
         {/* Podcast Player */}
-        {showPodcastPlayer && (
-          <motion.div 
+        {showPodcastPlayer && (          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6, duration: 0.8 }}
+            transition={{ delay: 0.6, duration: 0.4 }}
             className="mt-16 max-w-3xl mx-auto"
           >
             <PodcastPlayer />

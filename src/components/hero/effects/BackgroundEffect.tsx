@@ -17,8 +17,7 @@ const DesignCodeEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
       {/* Very light base overlay - lighter for light theme */}
       <div className={`absolute inset-0 ${isLight ? 'bg-white/20' : 'bg-gradient-to-br from-black/40 via-black/20 to-transparent'} z-0`} />
       
-      {/* Enhanced ambient light effect */}
-      <motion.div
+      {/* Enhanced ambient light effect */}      <motion.div
         className="absolute inset-0 z-10"
         animate={{
           background: isLight
@@ -32,20 +31,19 @@ const DesignCodeEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
             ]
         }}
         transition={{
-          duration: 12,
+          duration: 6,
           repeat: Infinity,
           repeatType: "reverse"
         }}
       />
       
-      {/* Subtle accent gradient */}
-      <motion.div
+      {/* Subtle accent gradient */}      <motion.div
         className="absolute inset-0 z-5"
         animate={{
           opacity: [0.2, 0.4, 0.2]
         }}
         transition={{
-          duration: 8,
+          duration: 4,
           repeat: Infinity,
           repeatType: "reverse"
         }}
@@ -63,36 +61,33 @@ const DesignCodeEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
 const ParticlesEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<Array<{x: number, y: number, duration: number}>>([]);
-  const isLight = theme === 'light';
-  
-  useEffect(() => {
+  const isLight = theme === 'light';  useEffect(() => {
     setMounted(true);
-    // Generate particle data after mounting to avoid hydration mismatch
-    const newParticles = Array(20).fill(0).map(() => ({
+    // Generate particle data after mounting to avoid hydration mismatch - REDUCED
+    const newParticles = Array(3).fill(0).map(() => ({ // Reduced from 10 to 3
       x: Math.random() * 100,
       y: Math.random() * 100,
-      duration: Math.random() * 10 + 10
+      duration: Math.random() * 8 + 8 // Slower animations
     }));
     setParticles(newParticles);
   }, []);
   
   if (!mounted) return <div className="absolute inset-0" />;
   
-  return (
-    <div className="absolute inset-0">
+  return (    <div className="absolute inset-0">
       {particles.map((particle, i) => (
         <motion.div
           key={i}
-          className={`absolute h-1 w-1 ${isLight ? 'bg-blue-500/30' : 'bg-blue-400/30'} rounded-full`}
+          className={`absolute h-1 w-1 ${isLight ? 'bg-blue-500/15' : 'bg-blue-400/15'} rounded-full`}
           initial={{
             x: `${particle.x}%`,
             y: `${particle.y}%`,
-            scale: 1
+            scale: 0.5
           }}
           animate={{
             x: `${Math.random() * 100}%`,
             y: `${Math.random() * 100}%`,
-            scale: [1, 2, 1],
+            scale: [0.5, 1, 0.5],
           }}
           transition={{
             duration: particle.duration,
@@ -110,16 +105,15 @@ const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const isColorful = theme === 'colorful';
   const [mounted, setMounted] = useState(false);
   const [stars, setStars] = useState<Array<{size: number, posX: number, posY: number, duration: number}>>([]);
-  
-  useEffect(() => {
+    useEffect(() => {
     setMounted(true);
-    // Generate star data after mounting to avoid hydration mismatch
+    // Generate star data after mounting to avoid hydration mismatch - SIGNIFICANTLY REDUCED
     if (isColorful) {
-      const newStars = Array.from({ length: 50 }).map(() => ({
-        size: Math.random() * 2 + 1,
+      const newStars = Array.from({ length: 8 }).map(() => ({
+        size: Math.random() * 1.5 + 0.5, // Smaller stars
         posX: Math.random() * 100,
         posY: Math.random() * 100,
-        duration: Math.random() * 3 + 2
+        duration: Math.random() * 4 + 3 // Slower animations
       }));
       setStars(newStars);
     }
@@ -130,22 +124,21 @@ const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
       <div className="absolute inset-0 overflow-hidden">
         {/* Cosmic background base */}
         <div className="absolute inset-0 bg-[#050023]" />
-        
-        {/* Animated cosmic nebula effect */}
+          {/* Animated cosmic nebula effect - MUCH MORE SUBTLE */}
         <motion.div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-20" 
           style={{
-            background: 'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)'
+            background: 'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 40%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.2) 0%, transparent 40%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)'
           }}
           animate={{
             background: [
-              'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)',
-              'radial-gradient(circle at 60% 30%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 30% 40%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)',
-              'radial-gradient(circle at 40% 70%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 60% 50%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)'
+              'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 40%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.2) 0%, transparent 40%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)',
+              'radial-gradient(circle at 60% 30%, rgba(0, 255, 255, 0.2) 0%, transparent 40%), radial-gradient(circle at 30% 40%, rgba(255, 0, 204, 0.2) 0%, transparent 40%), radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)',
+              'radial-gradient(circle at 40% 70%, rgba(0, 255, 255, 0.2) 0%, transparent 40%), radial-gradient(circle at 60% 50%, rgba(255, 0, 204, 0.2) 0%, transparent 40%), radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)'
             ]
           }}
           transition={{
-            duration: 15,
+            duration: 20,
             repeat: Infinity,
             repeatType: "reverse"
           }}
@@ -163,36 +156,33 @@ const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
                   height: star.size,
                   left: `${star.posX}%`,
                   top: `${star.posY}%`,
-                }}
-                animate={{
-                  opacity: [0.2, 0.8, 0.2],
-                  scale: [1, 1.3, 1],
+                }}                animate={{
+                  opacity: [0.1, 0.4, 0.1], // Much more subtle
+                  scale: [1, 1.1, 1], // Less scaling
                 }}
                 transition={{
                   duration: star.duration,
                   repeat: Infinity,
                   repeatType: "reverse",
-                  delay: Math.random() * 2,
+                  delay: Math.random() * 3,
                 }}
               />
             ))}
           </div>
         )}
-        
-        {/* Floating cosmic objects */}
+          {/* Floating cosmic objects - REDUCED */}
         <motion.div 
           className="absolute w-40 h-40 rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0, 255, 255, 0.08) 0%, transparent 70%)',
             left: '10%',
-            top: '20%'
-          }}
+            top: '20%'        }}
           animate={{
-            x: [0, 20, 0],
-            y: [0, -20, 0],
+            x: [0, 10, 0],
+            y: [0, -10, 0],
           }}
           transition={{
-            duration: 20,
+            duration: 15,
             repeat: Infinity,
             repeatType: "reverse"
           }}
@@ -201,16 +191,16 @@ const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
         <motion.div 
           className="absolute w-60 h-60 rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(255, 0, 204, 0.1) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 0, 204, 0.05) 0%, transparent 70%)',
             right: '15%',
             bottom: '20%'
           }}
           animate={{
-            x: [0, -30, 0],
-            y: [0, 20, 0],
+            x: [0, -15, 0],
+            y: [0, 10, 0],
           }}
           transition={{
-            duration: 18,
+            duration: 25,
             repeat: Infinity,
             repeatType: "reverse"
           }}
@@ -321,13 +311,12 @@ const AbstractModernEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
             left: '20%',
             top: '15%',
           }}
-          animate={{
-            borderRadius: ['38% 62% 63% 37% / 41% 44% 56% 59%', '45% 55% 57% 43% / 45% 48% 52% 55%', '38% 62% 63% 37% / 41% 44% 56% 59%'],
+          animate={{          borderRadius: ['38% 62% 63% 37% / 41% 44% 56% 59%', '45% 55% 57% 43% / 45% 48% 52% 55%', '38% 62% 63% 37% / 41% 44% 56% 59%'],
             x: [0, -10, 0],
             y: [0, 15, 0],
           }}
           transition={{
-            duration: 20,
+            duration: 10,
             repeat: Infinity,
             repeatType: "reverse"
           }}
@@ -370,29 +359,28 @@ const AbstractModernEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
             duration: 8,
             repeat: Infinity,
             repeatType: "reverse"
-          }}
-        />
+          }}        />
         
-        {/* Subtle dot pattern */}
-        <div className="absolute inset-0 opacity-20">
-          {mounted && Array.from({ length: 30 }).map((_, i) => (
+        {/* Subtle dot pattern - SIGNIFICANTLY REDUCED */}
+        <div className="absolute inset-0 opacity-10">
+          {mounted && Array.from({ length: 8 }).map((_, i) => (
             <motion.div
               key={i}
-              className={`absolute rounded-full ${isLight ? 'bg-blue-300/30' : 'bg-blue-400/30'}`}
+              className={`absolute rounded-full ${isLight ? 'bg-blue-300/20' : 'bg-blue-400/20'}`}
               style={{
-                width: Math.random() * 4 + 2 + 'px',
-                height: Math.random() * 4 + 2 + 'px',
+                width: Math.random() * 2 + 1 + 'px',
+                height: Math.random() * 2 + 1 + 'px',
                 left: Math.random() * 100 + '%',
                 top: Math.random() * 100 + '%',
               }}
               animate={{
-                opacity: [0.3, 0.8, 0.3],
+                opacity: [0.1, 0.3, 0.1],
               }}
               transition={{
-                duration: Math.random() * 5 + 5,
+                duration: Math.random() * 8 + 8,
                 repeat: Infinity,
                 repeatType: "reverse",
-                delay: Math.random() * 5,
+                delay: Math.random() * 8,
               }}
             />
           ))}
@@ -445,9 +433,8 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
                 'radial-gradient(circle at 40% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 60% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)',
                 'radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.15) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 40%)'
               ]
-        }}
-        transition={{
-          duration: 20,
+        }}        transition={{
+          duration: 10,
           repeat: Infinity,
           repeatType: "reverse",
           ease: "easeInOut"
@@ -471,8 +458,7 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
             borderRadius: '63% 37% 54% 46% / 55% 48% 52% 45%',
             filter: 'blur(40px)'
           }}
-          animate={{
-            borderRadius: [
+          animate={{            borderRadius: [
               '63% 37% 54% 46% / 55% 48% 52% 45%',
               '42% 58% 60% 40% / 45% 58% 42% 55%',
               '56% 44% 67% 33% / 48% 46% 54% 52%',
@@ -480,7 +466,7 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
             ]
           }}
           transition={{
-            duration: 20,
+            duration: 10,
             repeat: Infinity,
             repeatType: "mirror",
             ease: "easeInOut"
@@ -509,9 +495,8 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
               '36% 64% 64% 36% / 40% 53% 47% 60%',
               '53% 47% 47% 53% / 45% 45% 55% 55%'
             ]
-          }}
-          transition={{
-            duration: 20,
+          }}          transition={{
+            duration: 10,
             repeat: Infinity,
             repeatType: "mirror",
             ease: "easeInOut"
@@ -519,16 +504,15 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
         />
           {/* Small flowing shape - center removed */}
 
-        {/* Additional decorative elements - geometric shapes */}
-        {/* Circle pattern top left */}
+        {/* Additional decorative elements - geometric shapes */}        {/* Circle pattern top left - REDUCED */}
         <div className="absolute left-[10%] top-[15%] z-1">
-          {mounted && Array.from({ length: 3 }).map((_, i) => (
+          {mounted && Array.from({ length: 2 }).map((_, i) => (
             <motion.div 
               key={`circle-${i}`}
               className={`absolute rounded-full border ${
                 isLight
-                  ? 'border-blue-300/40'
-                  : 'border-blue-400/30'
+                  ? 'border-blue-300/20'
+                  : 'border-blue-400/15'
               }`}
               style={{
                 width: `${(i + 1) * 40}px`,
@@ -537,28 +521,27 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
                 top: `-${(i + 1) * 20}px`,
               }}
               animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.4, 0.7, 0.4],
+                scale: [1, 1.05, 1],
+                opacity: [0.2, 0.4, 0.2],
               }}
               transition={{
-                duration: 4 + i,
+                duration: 6 + i * 2,
                 repeat: Infinity,
                 repeatType: "reverse",
-                delay: i * 0.5,
+                delay: i * 1,
               }}
             />
           ))}
         </div>
-        
-        {/* Square pattern bottom right */}
+          {/* Square pattern bottom right - REDUCED */}
         <div className="absolute right-[15%] bottom-[20%] z-1">
-          {mounted && Array.from({ length: 3 }).map((_, i) => (
+          {mounted && Array.from({ length: 2 }).map((_, i) => (
             <motion.div 
               key={`square-${i}`}
               className={`absolute border ${
                 isLight
-                  ? 'border-purple-300/40'
-                  : 'border-purple-400/30'
+                  ? 'border-purple-300/20'
+                  : 'border-purple-400/15'
               }`}
               style={{
                 width: `${(i + 1) * 30}px`,
@@ -568,14 +551,14 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
                 borderRadius: '4px',
               }}
               animate={{
-                rotate: [0, 45, 0],
-                opacity: [0.4, 0.7, 0.4],
+                rotate: [0, 20, 0],
+                opacity: [0.2, 0.4, 0.2],
               }}
               transition={{
-                duration: 6 + i,
+                duration: 8 + i * 2,
                 repeat: Infinity,
                 repeatType: "reverse",
-                delay: i * 0.7,
+                delay: i * 1,
               }}
             />
           ))}
@@ -622,45 +605,41 @@ const ModernFlowEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
               delay: 1
             }}
           />
-        </div>
-
-        {/* Subtle grid overlay */}
+        </div>        {/* Subtle grid overlay - MUCH MORE SUBTLE */}
         <div 
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: `linear-gradient(${isLight ? 'rgba(0,0,0,0.01)' : 'rgba(255,255,255,0.02)'} 1px, transparent 1px), 
-                             linear-gradient(to right, ${isLight ? 'rgba(0,0,0,0.01)' : 'rgba(255,255,255,0.02)'} 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
+            backgroundImage: `linear-gradient(${isLight ? 'rgba(0,0,0,0.005)' : 'rgba(255,255,255,0.01)'} 1px, transparent 1px), 
+                             linear-gradient(to right, ${isLight ? 'rgba(0,0,0,0.005)' : 'rgba(255,255,255,0.01)'} 1px, transparent 1px)`,
+            backgroundSize: '60px 60px',
             zIndex: 1
           }}
         />
-        
-        {/* Moving particle dots */}
-        {mounted && Array.from({ length: 30 }).map((_, i) => {
-          const size = Math.random() * 4 + 2;
+          {/* Moving particle dots - SIGNIFICANTLY REDUCED */}
+        {mounted && Array.from({ length: 3 }).map((_, i) => {
+          const size = Math.random() * 2 + 1; // Smaller particles
           return (
             <motion.div
               key={`particle-${i}`}
               className={`absolute rounded-full ${
                 isLight 
-                  ? i % 3 === 0 ? 'bg-blue-400/50' : i % 3 === 1 ? 'bg-purple-400/50' : 'bg-cyan-400/50'
-                  : i % 3 === 0 ? 'bg-blue-400/50' : i % 3 === 1 ? 'bg-purple-400/50' : 'bg-cyan-400/50'
+                  ? i % 3 === 0 ? 'bg-blue-400/20' : i % 3 === 1 ? 'bg-purple-400/20' : 'bg-cyan-400/20'
+                  : i % 3 === 0 ? 'bg-blue-400/20' : i % 3 === 1 ? 'bg-purple-400/20' : 'bg-cyan-400/20'
               }`}
               style={{
                 width: size + 'px',
                 height: size + 'px',
                 left: Math.random() * 100 + '%',
                 top: Math.random() * 100 + '%',
-                boxShadow: `0 0 ${size * 2}px ${size/2}px ${isLight ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`,
+                boxShadow: `0 0 ${size}px ${size/4}px ${isLight ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)'}`, // Much subtler glow
               }}
               animate={{
-                x: [0, Math.random() * 150 - 75, 0],
-                y: [0, Math.random() * 150 - 75, 0],
-                opacity: [0.3, 0.7, 0.3],
-                scale: [1, Math.random() * 1 + 1, 1]
-              }}
-              transition={{
-                duration: Math.random() * 8 + 6,
+                x: [0, Math.random() * 50 - 25, 0], // Much smaller movement
+                y: [0, Math.random() * 50 - 25, 0], // Much smaller movement
+                opacity: [0.1, 0.3, 0.1], // Much more subtle
+                scale: [1, 1.1, 1] // Less scaling
+              }}              transition={{
+                duration: Math.random() * 6 + 5, // Slower
                 repeat: Infinity,
                 repeatType: "mirror",
                 ease: "easeInOut"

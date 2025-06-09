@@ -27,18 +27,16 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
     
     return `/${locale}${path}`;
   };
-  return (
-    <motion.div 
+  return (    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       className="container mx-auto px-4 relative z-10"
     >
-      <div className="max-w-3xl mx-auto">
-        <motion.h2
+      <div className="max-w-3xl mx-auto">        <motion.h2
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
         >
           {title}
@@ -48,16 +46,18 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="text-xl text-gray-300 mb-8"
           >
             {subtitle}
           </motion.p>
-        )}        {cta && (
+        )}
+
+        {cta && (
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
           >
             <Link 
               href={localizedHref(cta.href)}
@@ -70,11 +70,10 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
         )}
         
         {/* Podcast Player */}
-        {showPodcastPlayer && (
-          <motion.div 
+        {showPodcastPlayer && (          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
             className="mt-16 max-w-3xl"
           >
             <PodcastPlayer />

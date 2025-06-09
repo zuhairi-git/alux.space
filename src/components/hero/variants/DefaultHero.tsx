@@ -28,19 +28,17 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
     return `/${locale}${path}`;
   };
 
-  return (
-    <motion.div 
+  return (    <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       className={`container mx-auto px-4 relative z-10`}
     >
-      {/* Decorative accents */}
-      <motion.div
+      {/* Decorative accents */}      <motion.div
         className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
       >
         <div className="w-full h-full border-t-2 border-l-2 border-blue-400/30 rounded-tl-lg" />
       </motion.div>
@@ -49,16 +47,15 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
       >
         <div className="w-full h-full border-b-2 border-r-2 border-purple-400/30 rounded-br-lg" />
       </motion.div>
-      
-      <motion.div 
+        <motion.div 
         className="absolute -left-20 top-[40%] hidden md:block" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
@@ -70,7 +67,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         className="absolute -right-20 top-[40%] hidden md:block" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
@@ -85,50 +82,46 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                style={{ backgroundImage: 'radial-gradient(circle, rgba(96, 165, 250, 0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
           </div>
         </div>
-        
-        <motion.h1 
+          <motion.h1 
           className="text-5xl md:text-6xl font-bold mb-6 text-center relative"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
         >
           {/* Decorative line above title */}
           <motion.span 
             className="block mx-auto w-12 h-1 bg-gradient-to-r from-blue-400/50 to-purple-400/50 mb-6"
             initial={{ width: 0 }}
             animate={{ width: 48 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
           ></motion.span>
           
           {title}
-          
-          {/* Decorative underline highlight */}
+            {/* Decorative underline highlight */}
           <motion.div
             className="absolute -z-10 h-4 rounded-full bg-blue-400/10 bottom-1"
             initial={{ width: 0, x: '50%' }}
             animate={{ width: '70%', x: '15%' }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
           />
         </motion.h1>
-        
-        <motion.p 
+          <motion.p 
           className="text-xl md:text-2xl text-gray-300 mb-8 text-center relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
         >
           {subtitle}
         </motion.p>
       </div>      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.25 }}
         className="text-center relative"
-      >        {cta && (
+      >{cta && (
           <motion.div
             className="inline-block relative"
-          >
-            <motion.div 
+          >            <motion.div 
               className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-indigo-500/40 blur-md opacity-70"
               animate={{
                 background: [
@@ -138,11 +131,11 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 ]
               }}
               transition={{
-                duration: 8,
+                duration: 4,
                 repeat: Infinity,
                 repeatType: "reverse"
               }}
-            ></motion.div>            <Link 
+            ></motion.div><Link 
               href={localizedHref(cta.href)} 
               className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg z-10"
               onClick={() => trackEvent('hero_cta_click', 'hero', `default_variant_${cta.text}`)}
@@ -160,22 +153,20 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           {/* Decorative square icon removed */}
       </motion.div>
       
-      {quote && (
-        <motion.div
+      {quote && (        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 0.4 }}
           className="relative max-w-2xl mx-auto mt-16 p-8 rounded-lg bg-white/5 backdrop-blur-sm text-center border-t border-l border-white/10"
         >
-          {/* Decorative elements */}
-          <motion.div 
+          {/* Decorative elements */}          <motion.div 
             className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-400/20"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5]
             }}
             transition={{
-              duration: 4,
+              duration: 2,
               repeat: Infinity,
               repeatType: "reverse"
             }}
@@ -188,10 +179,10 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               opacity: [0.5, 0.8, 0.5]
             }}
             transition={{
-              duration: 4,
+              duration: 2,
               repeat: Infinity,
               repeatType: "reverse",
-              delay: 1
+              delay: 0.5
             }}
           />
           

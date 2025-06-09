@@ -320,7 +320,7 @@ body {
 
 .theme-colorful .bg-gradient-to-r {
   background-size: 200% 200%;
-  animation: gradientShift 10s ease infinite;
+  animation: gradientShift 5s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -382,10 +382,9 @@ body {
 }
 
 /* Animated background gradients */
-.animated-gradient-bg {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+.animated-gradient-bg {  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 7s ease infinite;
 }
 
 @keyframes gradient {
@@ -453,12 +452,11 @@ body {
 }
 
 .cosmic-shimmer::before {
-  content: '';
-  position: absolute;
+  content: '';  position: absolute;
   inset: 0;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transform: translateX(-100%);
-  animation: shimmer 3s infinite;
+  animation: shimmer 1.5s infinite;
 }
 
 @keyframes shimmer {
@@ -536,19 +534,19 @@ body {
 }
 
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: float 2s ease-in-out infinite;
 }
 
 .animate-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+  animation: pulse-glow 1.5s ease-in-out infinite;
 }
 
 .animate-shimmer {
-  animation: shimmer 2s infinite;
+  animation: shimmer 1s infinite;
 }
 
 .animate-dimension {
-  animation: dimension-shift 8s ease-in-out infinite;
+  animation: dimension-shift 4s ease-in-out infinite;
 }
 
 .perspective-1000 {
