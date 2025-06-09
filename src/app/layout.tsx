@@ -38,7 +38,7 @@ const tajawal = Tajawal({
 export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
   
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
   const localeSpecificMetadata = {
     en: {
       title: 'Ali Al-Zuhairi - Product Owner & Design Leader',

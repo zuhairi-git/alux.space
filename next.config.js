@@ -12,11 +12,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'plus.unsplash.com'
       }
-    ],
-  },  env: {
-    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+    ],  },  env: {
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space',
     NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
-  },  // Using static export mode for deployment
+  },// Using static export mode for deployment
   output: 'export',
   trailingSlash: true,
   distDir: 'out',

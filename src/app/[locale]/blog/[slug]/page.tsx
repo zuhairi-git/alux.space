@@ -131,7 +131,7 @@ export default async function BlogPost({
   }
 
   // Use a safer approach to get base URL
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
   const shareUrl = `${baseUrl}/${locale}/blog/${slug}`;
   return (
     <BlogPostContent post={post} shareUrl={shareUrl} locale={locale} />
