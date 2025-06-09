@@ -924,15 +924,15 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 >
                   <path fillRule="evenodd" d="M6 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1zm6 0a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z" clipRule="evenodd" />
                 </motion.svg>
-              ) : (
-                <motion.svg 
+              ) : (                <motion.svg 
                   key="play"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" 
+                  className="w-8 h-8 md:w-10 md:h-10 text-white" 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
+                  style={{ transform: 'translateX(0.5px)' }}
                 >
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                 </motion.svg>
