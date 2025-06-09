@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'next-share';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
 
 interface BlogCardProps {
   post: {
@@ -23,6 +24,7 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
+  const { trackEvent } = useAnalyticsTracking();
   // Create localized blog post URL
   const localizedPostUrl = `/${locale}/blog/${post.slug}`;
 
@@ -74,12 +76,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
 
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
-          </div>
-
-          <Link 
+          </div>          <Link 
             href={localizedPostUrl} 
             className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
             aria-label={getArticleAriaLabel()}
+            onClick={() => trackEvent('blog_card_click', 'blog', `overlay_${post.slug}_${post.tags[0] || 'uncategorized'}`)}
           >
             <div className="relative h-full flex flex-col justify-end p-6 z-10">
               {/* Badge */}
@@ -155,11 +156,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
       aria-labelledby={`blog-title-${post.slug}`}
       aria-describedby={`blog-desc-${post.slug}`}
     >
-      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
-        <Link 
+      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">        <Link 
           href={localizedPostUrl} 
           className="h-full flex flex-col focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
           aria-label={getArticleAriaLabel()}
+          onClick={() => trackEvent('blog_card_click', 'blog', `standard_${post.slug}_${post.tags[0] || 'uncategorized'}`)}
         >
           {/* Image Section */}
           <div className="relative w-full h-48 overflow-hidden">

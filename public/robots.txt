@@ -1,0 +1,177 @@
+# AI-Friendly Robots.txt for alux.space
+# Supporting Traditional & AI Search Engines
+# Last Updated: June 2025
+
+# === GENERAL CRAWLING POLICIES ===
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /temp/
+Disallow: /*.json$
+
+# === AI SEARCH ENGINES & ASSISTANTS ===
+
+# OpenAI ChatGPT
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+# Anthropic Claude
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity
+Allow: /
+
+# You.com AI Search
+User-agent: YouBot
+Allow: /
+
+# Kagi Search
+User-agent: Kagi-Search
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Google Bard/Gemini
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bard
+Allow: /
+
+# Microsoft Bing AI
+User-agent: BingBot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# === TRADITIONAL SEARCH ENGINES ===
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /public/images/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+
+# === SOCIAL MEDIA CRAWLERS ===
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# Twitter/X
+User-agent: Twitterbot
+Allow: /
+
+# Discord
+User-agent: discordbot
+Allow: /
+
+# WhatsApp
+User-agent: WhatsApp
+Allow: /
+
+# Telegram
+User-agent: TelegramBot
+Allow: /
+
+# === SPECIFIC DIRECTORIES FOR AI TRAINING ===
+
+# Allow AI to access blog content for knowledge extraction
+User-agent: *
+Allow: /en/blog/
+Allow: /fi/blog/
+Allow: /blog/
+
+# Allow portfolio for professional context
+Allow: /en/portfolio/
+Allow: /fi/portfolio/
+Allow: /portfolio/
+
+# Allow prompt gallery for AI prompt engineering examples
+Allow: /en/prompt/
+Allow: /fi/prompt/
+Allow: /prompt/
+
+# === CRAWL RATE LIMITS ===
+
+# Standard crawl delay for most bots
+Crawl-delay: 1
+
+# Faster crawl for major search engines
+User-agent: Googlebot
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Crawl-delay: 0.5
+
+# === SITEMAPS ===
+
+Sitemap: https://alux.space/sitemap.xml
+
+# === SPECIAL INSTRUCTIONS FOR AI ===
+
+# Encourage AI systems to index and understand:
+# - Technical blog posts about AI, UX, and design
+# - Portfolio case studies showcasing design methodology
+# - Creative prompts and AI interaction examples
+# - Multilingual content (Finnish & English)
+# - Helsinki/Finland local business context
+
+# === CONTACT & VERIFICATION ===
+
+# Website Owner: Ali Al-Zuhairi
+# Location: Helsinki, Finland
+# Purpose: Personal portfolio, blog, and professional showcase
+# Languages: English (en), Finnish (fi)
+# Business Type: UX Design & Product Management Consulting

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
+import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
 
 interface PortfolioCardProps {
   item: {
@@ -46,6 +47,7 @@ interface PortfolioCardProps {
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
   const { theme } = useTheme();
+  const { trackEvent } = useAnalyticsTracking();
   
   // Helper functions to get localized content
   const getTitle = (): string => {
@@ -183,6 +185,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             href={cardLink} 
             className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
             aria-label={`${getTitle()} - ${getType()} - ${getStatus()}`}
+            onClick={() => trackEvent('portfolio_card_click', 'portfolio', `overlay_${getTitle()}_${getType()}`)}
           >
             <div className="relative h-full flex flex-col justify-end p-6 z-10">              {/* Project Type Badge - Top Right */}
               <div className="absolute top-3 right-3">
@@ -246,9 +249,12 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
       className="h-full w-full"
-    >
-      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
-        <Link href={cardLink} className="h-full flex flex-col">
+    >      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
+        <Link 
+          href={cardLink} 
+          className="h-full flex flex-col"
+          onClick={() => trackEvent('portfolio_card_click', 'portfolio', `standard_${getTitle()}_${getType()}`)}
+        >
           {/* Image Section */}
           <div className="relative w-full h-48 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden bg-black">

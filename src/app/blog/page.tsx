@@ -4,8 +4,6 @@ import ClientBlogPage from '@/components/blog/ClientBlogPage';
 import { posts } from './posts/data';
 import Navigation from '@/components/Navigation';
 import { i18n } from '@/i18n';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 
 // Ensure absolute URL for images
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
@@ -69,14 +67,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale?: 
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale?: string }> }) {
-  const { locale: paramLocale } = await params;
-  const locale = paramLocale || i18n.defaultLocale;
+  await params; // locale is provided by root layout context
 
   return (
-    <ThemeProvider>      <LanguageProvider initialLocale={locale}>
-        <Navigation />
-        <ClientBlogPage posts={posts} />
-      </LanguageProvider>
-    </ThemeProvider>
+    <>
+      <Navigation />
+      <ClientBlogPage posts={posts} />
+    </>
   );
 }

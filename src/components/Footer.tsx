@@ -7,12 +7,25 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
+import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
 const Footer = () => {
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
+  const { trackEvent, trackNavigation, trackSocialShare } = useAnalyticsTracking();
   
   const currentYear = new Date().getFullYear();
+  
+  // Analytics tracking functions
+  const handleFooterLinkClick = (linkText: string, destination: string) => {
+    trackNavigation(destination, 'internal');
+    trackEvent('footer_link_click', 'footer', linkText);
+  };
+
+  const handleSocialClick = (platform: string, url: string) => {
+    trackSocialShare(platform, 'profile_visit', url);
+    trackEvent('social_click', 'footer', platform);
+  };
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
@@ -93,6 +106,7 @@ const Footer = () => {
                   className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
                   whileHover={{ scale: 1.1 }}
                   aria-label={`${t('footer.aria.socialPlatform')} LinkedIn`}
+                  onClick={() => handleSocialClick('LinkedIn', 'https://www.linkedin.com/in/ali-zuhairi/')}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -105,6 +119,7 @@ const Footer = () => {
                   className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
                   whileHover={{ scale: 1.1 }}
                   aria-label={`${t('footer.aria.socialPlatform')} GitHub`}
+                  onClick={() => handleSocialClick('GitHub', 'https://github.com/')}
                 >
                   <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">code</span>
                 </motion.a>
@@ -121,6 +136,7 @@ const Footer = () => {
                     <Link 
                       href={localizedHref(link.href)} 
                       className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                      onClick={() => handleFooterLinkClick(t(link.textKey), link.href)}
                     >
                       {t(link.textKey)}
                     </Link>
@@ -142,10 +158,10 @@ const Footer = () => {
             <nav role="navigation" aria-label={t('footer.aria.portfolioLinks')}>
               <ul className="space-y-2" role="list">
                 {portfolioLinks.map((link) => (
-                  <li key={link.href} role="listitem">
-                    <Link 
+                  <li key={link.href} role="listitem">                    <Link 
                       href={localizedHref(link.href)} 
                       className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                      onClick={() => handleFooterLinkClick(t(link.textKey), link.href)}
                     >
                       {t(link.textKey)}
                     </Link>

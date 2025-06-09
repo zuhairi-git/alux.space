@@ -1,7 +1,5 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 import HomePage from '../page';
 import { i18n } from '@/i18n';
 import Link from 'next/link';
@@ -47,16 +45,11 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
               className={`text-white px-3 py-1 rounded ${locale === lang ? 'bg-purple-600' : 'bg-gray-700'}`}
             >
               {lang.toUpperCase()} Blog
-            </Link>
-          ))}
+            </Link>        ))}
         </div>
       </div>
       
-      <ThemeProvider>
-        <LanguageProvider initialLocale={locale}>
-          <HomePage />
-        </LanguageProvider>
-      </ThemeProvider>
+      <HomePage />
     </>
   );
 }

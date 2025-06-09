@@ -12,6 +12,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 import { i18n } from '@/i18n';
+import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
 // A clean, readable skill card component
 const InteractiveSkillCard = ({ 
@@ -20,24 +21,43 @@ const InteractiveSkillCard = ({
   skill: { title: string, desc: string }
 }) => {
   const { theme } = useTheme();
+  const { trackEvent } = useAnalyticsTracking();
+
+  // Track skill card interaction
+  const handleSkillInteraction = () => {
+    trackEvent('skill_hover', 'homepage', skill.title);
+  };
 
   // Get card styles based on theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-purple-900/20 via-fuchsia-900/10 to-pink-900/20 border-fuchsia-500/20 shadow-lg';
+      return 'bg-gradient-to-br from-purple-900/30 to-fuchsia-900/30 border-fuchsia-500/30 hover:border-fuchsia-400/50 hover:shadow-lg hover:shadow-fuchsia-500/20';
     } else if (theme === 'dark') {
-      return 'bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-blue-900/30 border-blue-500/20 shadow-lg';
+      return 'bg-gradient-to-br from-gray-800/50 to-gray-700/50 border-gray-600/30 hover:border-gray-500/50 hover:shadow-lg hover:shadow-blue-500/10';
     } else {
-      return 'bg-gradient-to-br from-white/90 via-blue-50/30 to-indigo-50/20 border-blue-200/40 shadow-lg';
+      return 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/30 hover:border-gray-300/50 hover:shadow-lg hover:shadow-blue-500/5';
     }
   };
 
   return (
-    <div 
+    <motion.div
       className={`
-        relative overflow-hidden rounded-2xl border backdrop-blur-xl
+        p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 
         ${getCardStyles()}
       `}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ 
+        scale: 1.03,
+        y: -5,
+        transition: { duration: 0.2 }
+      }}
+      onHoverStart={handleSkillInteraction}
+      transition={{ 
+        duration: 0.5, 
+        delay: Math.random() * 0.2 
+      }}
     >
       {/* Content */}
       <div className="p-6">
@@ -49,7 +69,7 @@ const InteractiveSkillCard = ({
           {skill.desc}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -62,25 +82,36 @@ export default function Home() {
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
-    // State to track scroll position for parallax effects
+  const { trackEvent } = useAnalyticsTracking();
+
+  // State to track scroll position for parallax effects
   const [scrollY, setScrollY] = useState(0);
   // Mouse position state removed as it's not used
-    // Refs for section tracking
+
+  // Refs for section tracking
   const workExperienceRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-  // Track scroll position for animations
+
+  // Track scroll position for animations and analytics
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      
+      // Track scroll engagement
+      const scrollPercentage = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      if (scrollPercentage > 0 && scrollPercentage % 25 === 0) {
+        trackEvent('scroll_engagement', 'homepage', `${scrollPercentage}%`, scrollPercentage);
+      }
     };
     
     // No longer tracking mouse movement
     window.addEventListener('scroll', handleScroll);
-      return () => {
+    
+    return () => {
       // Mouse listener removed
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [trackEvent]);
 
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {

@@ -4,8 +4,6 @@ import ClientBlogPage from '@/components/blog/ClientBlogPage';
 import { posts } from '../../blog/posts/data';
 import Navigation from '@/components/Navigation';
 import { i18n } from '@/i18n';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 
 // Add the required generateStaticParams function for static site generation
 export function generateStaticParams() {
@@ -73,13 +71,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+  await params; // locale is provided by root layout context
 
   return (
-    <ThemeProvider>      <LanguageProvider initialLocale={locale}>
-        <Navigation />
-        <ClientBlogPage posts={posts} />
-      </LanguageProvider>
-    </ThemeProvider>
+    <>
+      <Navigation />
+      <ClientBlogPage posts={posts} />
+    </>
   );
 }

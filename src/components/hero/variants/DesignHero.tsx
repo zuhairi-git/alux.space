@@ -4,12 +4,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
-import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
+import PodcastPlayer from '@/components/PodcastPlayer';
+import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
 
 const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { locale } = useLanguage();
+  const { trackEvent } = useAnalyticsTracking();
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
@@ -46,10 +48,11 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           </h2>
           {subtitle && (
             <p className="text-xl text-gray-300 mb-8">{subtitle}</p>
-          )}
-          {cta && (            <Link 
+          )}          {cta && (
+            <Link 
               href={localizedHref(cta.href)}
               className="inline-block px-8 py-3 bg-blue-500 text-white rounded-lg"
+              onClick={() => trackEvent('hero_cta_click', 'hero', `design_variant_${cta.text}`)}
             >
               {cta.text}
             </Link>

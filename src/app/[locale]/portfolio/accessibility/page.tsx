@@ -1,6 +1,4 @@
 import AccessibilityClient from '@/components/portfolio/AccessibilityClient';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
@@ -62,12 +60,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function AccessibilityPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-    return (
-    <ThemeProvider>
-      <LanguageProvider initialLocale={locale}>
-        <AccessibilityClient />
-      </LanguageProvider>
-    </ThemeProvider>
-  );
+  await params; // locale is provided by root layout context
+  return <AccessibilityClient />;
 }

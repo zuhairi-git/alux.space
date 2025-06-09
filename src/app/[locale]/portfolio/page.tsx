@@ -1,7 +1,5 @@
 import { getUnsplashPhoto } from '@/utils/unsplash';
 import PortfolioClient from '@/components/portfolio/PortfolioClient';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
@@ -193,11 +191,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       };
     })
   );
-
   return (
-    <ThemeProvider>      <LanguageProvider initialLocale={locale}>
-        <PortfolioClient items={itemsWithPhotos} />
-      </LanguageProvider>
-    </ThemeProvider>
+    <PortfolioClient items={itemsWithPhotos} />
   );
 }

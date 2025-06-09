@@ -10,6 +10,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
+import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
 // Define types for dropdown items
 interface DropdownItem {
@@ -50,6 +51,7 @@ interface MobileMenuSectionProps {
   locale: string;
   isPortfolio?: boolean;
   t?: (key: string) => string;
+  trackEvent?: (action: string, category: string, label?: string) => void;
 }
 
 const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
@@ -64,7 +66,8 @@ const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
   localizedHref,
   locale,
   isPortfolio = false,
-  t
+  t,
+  trackEvent
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -101,11 +104,12 @@ const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >      {/* Main section header */}
-      <div className="flex items-center">
-        {/* Navigation link - takes up most of the space */}
+      <div className="flex items-center">        {/* Navigation link - takes up most of the space */}
         <Link
-          href={href}
-          onClick={onLinkClick}
+          href={href}          onClick={() => {
+            onLinkClick();
+            trackEvent?.('mobile_section_click', 'navigation', title.toLowerCase());
+          }}
           className={`flex-grow flex items-center gap-3 py-4 px-4 ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors rounded-l-xl`}
           aria-label={locale === 'fi' 
             ? (isPortfolio ? 'Siirry portfoliosivulle' : 'Siirry etusivulle') 
@@ -197,6 +201,7 @@ interface MobileMenuItemProps {
   theme: string;
   onLinkClick: () => void;
   getTextColorClass: () => string;
+  trackEvent?: (action: string, category: string, label?: string) => void;
 }
 
 const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
@@ -205,7 +210,8 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
   title,
   theme,
   onLinkClick,
-  getTextColorClass
+  getTextColorClass,
+  trackEvent
 }) => {
   const getBgClass = () => {
     return theme === 'light' 
@@ -223,10 +229,12 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.2 }}
-    >
-      <Link
+    >      <Link
         href={href}
-        onClick={onLinkClick}
+        onClick={() => {
+          onLinkClick();
+          trackEvent?.('mobile_item_click', 'navigation', title.toLowerCase());
+        }}
         className={`flex items-center gap-3 w-full py-4 px-4 ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors group`}
       >
         <motion.div
@@ -244,8 +252,10 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
 
 const Navigation = () => {
   const { scrollY } = useScroll();
-  const { theme } = useTheme(); const { locale } = useLanguage();
+  const { theme } = useTheme(); 
+  const { locale } = useLanguage();
   const { t } = useTranslations(locale);
+  const { trackEvent } = useAnalyticsTracking();
 
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
@@ -286,12 +296,14 @@ const Navigation = () => {
   const [portfolioDropdownOpen, setPortfolioDropdownOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
-
   // Announce menu state changes to screen readers
   const handleMenuToggle = useCallback((isOpen: boolean) => {
     setMenuOpen(isOpen);
+      // Track mobile menu interactions
+    trackEvent(isOpen ? 'mobile_menu_open' : 'mobile_menu_close', 'navigation', 'header');
+    
     // Note: Screen reader announcements could be implemented here with LiveRegion
-  }, []);  // Close the menu when clicking outside
+  }, [trackEvent]);// Close the menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -397,10 +409,10 @@ const Navigation = () => {
                 } backdrop-blur-sm transition-all duration-200`}
                 onMouseEnter={() => setHomeDropdownOpen(true)}
                 onMouseLeave={() => setHomeDropdownOpen(false)}
-              >
-                {/* Home navigation link */}
+              >                {/* Home navigation link */}
                 <Link
                   href={localizedHref('/')}
+                  onClick={() => trackEvent('desktop_nav_click', 'navigation', 'home')}
                   className={`flex items-center gap-2 ${
                     theme === 'light' 
                       ? 'text-gray-700 hover:text-primary' 
@@ -408,7 +420,7 @@ const Navigation = () => {
                       ? 'text-gray-300 hover:text-white'
                       : 'text-gray-300 hover:text-white'
                   } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded transition-colors`}
-                >                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                     theme === 'light' 
                       ? 'bg-blue-100'
                       : theme === 'dark' 
@@ -456,15 +468,17 @@ const Navigation = () => {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2, delay: index * 0.05 }}
-                    >
-                      <Link
+                    >                      <Link
                         href={localizedHref(item.href)}
                         className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
                           theme === 'light'
                             ? 'text-gray-700 hover:bg-gray-50'
                             : 'text-gray-300 hover:bg-gray-800'
                         } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                        onClick={() => setHomeDropdownOpen(false)}
+                        onClick={() => {
+                          setHomeDropdownOpen(false);
+                          trackEvent('dropdown_nav_click', 'navigation', `home_${item.textKey?.split('.').pop() || 'unknown'}`);
+                        }}
                       >
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                           theme === 'light' 
@@ -496,10 +510,10 @@ const Navigation = () => {
                 } backdrop-blur-sm transition-all duration-200`}
                 onMouseEnter={() => setPortfolioDropdownOpen(true)}
                 onMouseLeave={() => setPortfolioDropdownOpen(false)}
-              >
-                {/* Portfolio navigation link */}
+              >                {/* Portfolio navigation link */}
                 <Link
                   href={localizedHref('/portfolio')}
+                  onClick={() => trackEvent('desktop_nav_click', 'navigation', 'portfolio')}
                   className={`flex items-center gap-2 ${
                     theme === 'light' 
                       ? 'text-gray-700 hover:text-primary' 
@@ -507,7 +521,7 @@ const Navigation = () => {
                       ? 'text-gray-300 hover:text-white'
                       : 'text-gray-300 hover:text-white'
                   } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded transition-colors`}
-                >                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                     theme === 'light' 
                       ? 'bg-purple-100' 
                       : theme === 'dark' 
@@ -555,15 +569,17 @@ const Navigation = () => {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2, delay: index * 0.05 }}
-                    >
-                      <Link
+                    >                      <Link
                         href={localizedHref(item.href)}
                         className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
                           theme === 'light'
                             ? 'text-gray-700 hover:bg-gray-50'
                             : 'text-gray-300 hover:bg-gray-800'
                         } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                        onClick={() => setPortfolioDropdownOpen(false)}
+                        onClick={() => {
+                          setPortfolioDropdownOpen(false);
+                          trackEvent('dropdown_nav_click', 'navigation', `portfolio_${item.textKey?.split('.').pop() || 'unknown'}`);
+                        }}
                       >
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                           theme === 'light' 
@@ -581,9 +597,10 @@ const Navigation = () => {
                   ))}
                 </div>
               </div>
-            </div>{/* Blog link */}
+            </div>            {/* Blog link */}
             <Link
               href={localizedHref('/blog')}
+              onClick={() => trackEvent('desktop_nav_click', 'navigation', 'blog')}
               className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
                 theme === 'light' 
                   ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50 text-gray-700 hover:text-primary' 
@@ -591,7 +608,7 @@ const Navigation = () => {
                   ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
                   : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
               } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            >              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+            ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                 theme === 'light' 
                   ? 'bg-orange-100' 
                   : theme === 'dark' 
@@ -607,6 +624,7 @@ const Navigation = () => {
             </Link>            {/* Prompts link */}
             <Link
               href={localizedHref('/prompt')}
+              onClick={() => trackEvent('desktop_nav_click', 'navigation', 'prompts')}
               className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
                 theme === 'light' 
                   ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50 text-gray-700 hover:text-primary' 
@@ -614,7 +632,7 @@ const Navigation = () => {
                   ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
                   : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
               } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            >              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+            ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                 theme === 'light' 
                   ? 'bg-pink-100' 
                   : theme === 'dark' 
@@ -688,8 +706,7 @@ const Navigation = () => {
                   <ThemeSwitch />
                 </div>
               </div>            {/* Navigation links */}
-            <ul className={`p-4 space-y-3`}>
-              {/* Home with collapsible dropdown - Mobile */}
+            <ul className={`p-4 space-y-3`}>              {/* Home with collapsible dropdown - Mobile */}
               <li className="relative">
                 <MobileMenuSection
                   title={t('nav.home')}
@@ -702,6 +719,7 @@ const Navigation = () => {
                   getTextColorClass={getTextColorClass}
                   localizedHref={localizedHref}
                   locale={locale}
+                  trackEvent={trackEvent}
                 />
               </li>
 
@@ -720,10 +738,9 @@ const Navigation = () => {
                   locale={locale}
                   isPortfolio={true}
                   t={t}
+                  trackEvent={trackEvent}
                 />
-              </li>
-
-              {/* Blog link - Mobile */}
+              </li>              {/* Blog link - Mobile */}
               <li>
                 <MobileMenuItem
                   href={localizedHref('/blog')}
@@ -732,6 +749,7 @@ const Navigation = () => {
                   theme={theme}
                   onLinkClick={() => handleMenuToggle(false)}
                   getTextColorClass={getTextColorClass}
+                  trackEvent={trackEvent}
                 />
               </li>
 
@@ -744,6 +762,7 @@ const Navigation = () => {
                   theme={theme}
                   onLinkClick={() => handleMenuToggle(false)}
                   getTextColorClass={getTextColorClass}
+                  trackEvent={trackEvent}
                 />
               </li>
               </ul>

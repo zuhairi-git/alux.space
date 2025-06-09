@@ -4,12 +4,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
-import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
+import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
+import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
 
 const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPlayer }) => {
   const { locale } = useLanguage();
+  const { trackEvent } = useAnalyticsTracking();
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
@@ -51,17 +53,18 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
           >
             {subtitle}
           </motion.p>
-        )}
-
-        {cta && (
+        )}        {cta && (
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-          >            <Link 
+          >
+            <Link 
               href={localizedHref(cta.href)}
               className="inline-block px-6 py-3 bg-gray-800 text-white rounded-lg"
-            >{cta.text}
+              onClick={() => trackEvent('hero_cta_click', 'hero', `minimal_variant_${cta.text}`)}
+            >
+              {cta.text}
             </Link>
           </motion.div>
         )}

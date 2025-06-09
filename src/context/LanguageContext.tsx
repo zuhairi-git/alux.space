@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '../i18n';
+
 type LanguageContextType = {
   locale: string;
   setLocale: (locale: string) => void;
@@ -18,6 +19,10 @@ const LanguageContext = createContext<LanguageContextType>({
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
+    // During SSG, provide fallback values instead of throwing
+    if (typeof window === 'undefined') {
+      return { locale: i18n.defaultLocale, setLocale: () => {} };
+    }
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
@@ -29,36 +34,58 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider = ({ children, initialLocale }: LanguageProviderProps) => {
+  const [mounted, setMounted] = useState(false);
+  const [locale, setLocaleState] = useState(initialLocale || defaultLanguage);
+  
+  // Always call hooks, but safely handle SSG
   const pathname = usePathname();
   const router = useRouter();
-    // Detect locale from URL or use initialLocale or localStorage
+  
+  // Set mounted state
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Detect locale from URL or use initialLocale or localStorage
   const detectLocale = useCallback((): string => {
     if (initialLocale && i18n.locales.includes(initialLocale)) {
       return initialLocale;
     }
     
-    // Try to detect from URL path
-    const pathSegments = pathname?.split('/').filter(Boolean) || [];
-    const firstSegment = pathSegments[0];
-    if (firstSegment && i18n.locales.includes(firstSegment)) {
-      return firstSegment;
+    // Try to detect from URL path (only after mounting and if pathname exists)
+    if (mounted && pathname) {
+      try {
+        const pathSegments = pathname.split('/').filter(Boolean);
+        const firstSegment = pathSegments[0];
+        if (firstSegment && i18n.locales.includes(firstSegment)) {
+          return firstSegment;
+        }
+      } catch (error) {
+        console.warn('Error parsing pathname:', error);
+      }
     }
     
     // Check localStorage for saved language preference
-    if (typeof window !== 'undefined') {
-      const savedLocale = localStorage.getItem('locale');
-      if (savedLocale && i18n.locales.includes(savedLocale)) {
-        return savedLocale;
+    if (mounted && typeof window !== 'undefined') {
+      try {
+        const savedLocale = localStorage.getItem('locale');
+        if (savedLocale && i18n.locales.includes(savedLocale)) {
+          return savedLocale;
+        }
+      } catch (error) {
+        console.warn('Error accessing localStorage:', error);
       }
     }
     
     return defaultLanguage;
-  }, [initialLocale, pathname]);
-  const [locale, setLocaleState] = useState(defaultLanguage);
+  }, [initialLocale, pathname, mounted]);
+  
   useEffect(() => {
-    const detectedLocale = detectLocale();
-    setLocaleState(detectedLocale);
-  }, [pathname, detectLocale]);
+    if (mounted) {
+      const detectedLocale = detectLocale();
+      setLocaleState(detectedLocale);
+    }
+  }, [mounted, detectLocale]);
   
   useEffect(() => {
     // Set document language
@@ -75,9 +102,7 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('locale', locale);
     }
-  }, [locale]);
-
-  const setLocale = (newLocale: string) => {
+  }, [locale]);  const setLocale = (newLocale: string) => {
     if (!i18n.locales.includes(newLocale)) {
       console.error(`Invalid locale: ${newLocale}`);
       return;
@@ -85,8 +110,8 @@ export const LanguageProvider = ({ children, initialLocale }: LanguageProviderPr
     
     setLocaleState(newLocale);
     
-    // Update URL to include locale
-    if (pathname) {
+    // Update URL to include locale (only if mounted and router/pathname are available)
+    if (mounted && router && pathname) {
       const segments = pathname.split('/').filter(Boolean);
       const isLocaleInPath = i18n.locales.includes(segments[0]);
       

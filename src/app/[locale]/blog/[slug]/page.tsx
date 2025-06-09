@@ -6,8 +6,6 @@ import BlogContent from '@/components/blog/BlogContent';
 import Card from '@/components/Card';
 import { posts } from '../../../blog/posts/data';
 import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
@@ -51,16 +49,50 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const localeContent = post.content[locale as keyof typeof post.content] || post.content.en || {
     title: 'Content Not Available',
     description: 'This content is not available in your language.',
+    publishedDate: new Date().toISOString(),
+    readTime: '5 min read',
+    content: ''
   };
   
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
+  const postUrl = `${baseUrl}/${locale}/blog/${slug}`;
+  
   return {
-    title: localeContent.title || 'Blog Post',
+    title: `${localeContent.title} | Ali Al-Zuhairi`,
     description: localeContent.description || '',
+    keywords: ['UX Design', 'Product Design', 'AI', 'Innovation', 'Helsinki', 'Design Leadership'],
+    authors: [{ name: 'Ali Al-Zuhairi', url: baseUrl }],
     openGraph: {
       title: localeContent.title,
       description: localeContent.description,
-      images: [{ url: post.image }]
-    }
+      type: 'article',
+      url: postUrl,
+      siteName: 'Ali Al-Zuhairi',
+      locale: locale === 'en' ? 'en_US' : 'fi_FI',
+      publishedTime: localeContent.publishedDate,
+      authors: ['Ali Al-Zuhairi'],
+      tags: post.tags || [],
+      images: [{ 
+        url: `${baseUrl}${post.image}`,
+        width: 1200,
+        height: 630,
+        alt: localeContent.title 
+      }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: localeContent.title,
+      description: localeContent.description,
+      creator: '@alialzuhairi',
+      images: [`${baseUrl}${post.image}`],
+    },
+    alternates: {
+      canonical: postUrl,
+      languages: {
+        'en': `${baseUrl}/en/blog/${slug}`,
+        'fi': `${baseUrl}/fi/blog/${slug}`,
+      },
+    },
   };
 }
 
@@ -84,32 +116,23 @@ export default async function BlogPost({
   // Validate content existence
   if (!post.content) {
     console.error(`Post ${slug} is missing content property`);
-    // Fallback to prevent rendering errors
+  // Fallback to prevent rendering errors
     return (
-      <ThemeProvider>
-        <LanguageProvider initialLocale={locale}>
-          <main className="min-h-screen bg-theme text-theme">
-            <Navigation />
-            <div className="pt-32 pb-16 container mx-auto px-4">
-              <h1 className="text-3xl font-bold mb-4">Content Not Available</h1>
-              <p>The content for this post is not properly structured.</p>
-            </div>
-          </main>
-        </LanguageProvider>
-      </ThemeProvider>
+      <main className="min-h-screen bg-theme text-theme">
+        <Navigation />
+        <div className="pt-32 pb-16 container mx-auto px-4">
+          <h1 className="text-3xl font-bold mb-4">Content Not Available</h1>
+          <p>The content for this post is not properly structured.</p>
+        </div>
+      </main>
     );
   }
 
   // Use a safer approach to get base URL
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   const shareUrl = `${baseUrl}/${locale}/blog/${slug}`;
-
   return (
-    <ThemeProvider>
-      <LanguageProvider initialLocale={locale}>
-        <BlogPostContent post={post} shareUrl={shareUrl} locale={locale} />
-      </LanguageProvider>
-    </ThemeProvider>
+    <BlogPostContent post={post} shareUrl={shareUrl} locale={locale} />
   );
 }
 

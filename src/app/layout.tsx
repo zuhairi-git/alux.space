@@ -8,6 +8,8 @@ import BackToTop from "@/components/ui/BackToTop";
 import Footer from "@/components/Footer";
 import SkipLinks from "@/components/ui/SkipLinks";
 import { i18n } from '../i18n';
+import { AnalyticsProvider } from "../../seo/AnalyticsProvider";
+import { structuredDataGenerator } from "../../seo/structured-data";
 
 // Add Material Symbols stylesheet with better support for all languages including RTL
 const materialSymbolsUrl = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap';
@@ -40,11 +42,13 @@ export async function generateMetadata({ params }: { params: { locale?: string }
   const localeSpecificMetadata = {
     en: {
       title: 'Ali Al-Zuhairi - Product Owner & Design Leader',
-      description: 'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.',
+      description: 'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation. Based in Helsinki, Finland.',
+      keywords: 'Product Owner, Design Leader, UX Design, UI Design, Agile, Scrum, Helsinki, Finland, Digital Innovation, User Experience, Design Thinking',
     },
     fi: {
       title: 'Ali Al-Zuhairi - Tuoteomistaja & Design-johtaja',
-      description: 'Tuoteomistaja ja design-johtaja, jolla on asiantuntemusta UX-suunnittelussa, ketterissä menetelmissä ja luovassa innovaatiossa.',
+      description: 'Tuoteomistaja ja design-johtaja, jolla on asiantuntemusta UX-suunnittelussa, ketterissä menetelmissä ja luovassa innovaatiossa. Toimii Helsingissä, Suomessa.',
+      keywords: 'Tuoteomistaja, Design-johtaja, UX-suunnittelu, UI-suunnittelu, Agile, Scrum, Helsinki, Suomi, Digitaalinen innovaatio, Käyttäjäkokemus, Muotoilumenetelmät',
     }
   };
   
@@ -54,14 +58,28 @@ export async function generateMetadata({ params }: { params: { locale?: string }
     acc[lang] = `${baseUrl}/${lang}`;
     return acc;
   }, {} as Record<string, string>);
-  
-  return {
+    return {
     metadataBase: new URL(baseUrl),
     title: {
       default: metadata.title,
       template: `%s | ${metadata.title.split(' - ')[0]}`
     },
-    description: metadata.description,    icons: {
+    description: metadata.description,
+    keywords: metadata.keywords,
+    authors: [{ name: 'Ali Al-Zuhairi', url: baseUrl }],
+    creator: 'Ali Al-Zuhairi',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    icons: {
       icon: [
         { url: '/favicon.ico?v=2', sizes: 'any' },
         { url: '/favicon.png?v=2', type: 'image/png' }
@@ -73,21 +91,34 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       title: metadata.title,
       description: metadata.description,
       type: 'website',
+      url: `${baseUrl}/${locale}`,
       siteName: 'Ali Al-Zuhairi',
       locale: locale === 'en' ? 'en_US' : 'fi_FI',
       alternateLocale: i18n.locales.filter(l => l !== locale).map(l => 
         l === 'en' ? 'en_US' : 'fi_FI'
       ),
+      images: [
+        {
+          url: `${baseUrl}/images/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: metadata.title,
+        }
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: metadata.title,
       description: metadata.description,
       creator: '@alialzuhairi',
+      images: [`${baseUrl}/images/og-image.jpg`],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: alternateLanguages,
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
   };
 }
@@ -96,8 +127,14 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {  // We don't know the locale yet at this level, but the LanguageProvider will handle setting the dir attribute
-  return (    <html suppressHydrationWarning>
+}>) {
+  const structuredData = structuredDataGenerator.generatePageStructuredData({
+    url: 'https://alux.space',
+    pageType: 'homepage'
+  });
+  
+  return (
+    <html suppressHydrationWarning>
       <head>
         <link href={materialSymbolsUrl} rel="stylesheet" />
         {/* Additional favicon meta tags for better browser support */}
@@ -105,14 +142,22 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2" />
         <link rel="apple-touch-icon" href="/favicon.png?v=2" />
         <meta name="msapplication-TileImage" content="/favicon.png?v=2" />
-      </head>
-      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
+        {/* Structured Data */}
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </head>      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
-            <SkipLinks />
-            {children}
-            <BackToTop />
-            <Footer />
+            <AnalyticsProvider>
+              <SkipLinks />
+              {children}
+              <BackToTop />
+              <Footer />
+            </AnalyticsProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

@@ -4,14 +4,17 @@
   "private": true,
   "engines": {
     "node": ">=20.10.0"
-  },
-  "scripts": {
+  },  "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && node scripts/seo-build.js",
     "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
+    "lint": "next lint",
+    "seo:audit": "node scripts/seo-dev.js audit",
+    "seo:monitor": "node scripts/seo-dev.js monitor",
+    "seo:watch": "node scripts/seo-dev.js watch",
+    "sitemap": "node -e \"require('./seo/sitemap.ts').generateSitemap()\"",
+    "precommit": "npm run lint && npm run seo:audit"
+  },  "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@headlessui/react": "^2.2.4",
@@ -19,17 +22,19 @@
     "@mui/material": "^7.1.0",
     "@vercel/og": "^0.6.8",
     "framer-motion": "^12.7.3",
+    "gtag": "^1.0.1",
     "next": "15.3.0",
     "next-intl": "^4.1.0",
     "next-share": "^0.27.0",
     "node-fetch": "^3.3.2",
-    "react": "^19.0.0",    "react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "unsplash-js": "^7.0.19"
-  },
-  "devDependencies": {
+  },  "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/gtag": "^0.0.20",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -37,6 +42,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "postcss": "^8.5.3",
+    "puppeteer": "^23.0.0",
     "tailwindcss": "^4.1.4",
     "typescript": "^5"
   }

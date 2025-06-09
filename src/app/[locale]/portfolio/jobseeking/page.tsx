@@ -1,6 +1,4 @@
 import JobSeekingClient from '@/components/portfolio/JobSeekingClient';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { LanguageProvider } from '@/context/LanguageContext';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
@@ -39,13 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function JobSeekingPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+  await params; // locale is provided by root layout context
   
-  return (
-    <ThemeProvider>
-      <LanguageProvider initialLocale={locale}>
-        <JobSeekingClient />
-      </LanguageProvider>
-    </ThemeProvider>
-  );
+  return <JobSeekingClient />;
 }

@@ -9,10 +9,12 @@ import QuoteBlock from '@/components/ui/QuoteBlock';
 import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
+import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
 
 const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { theme } = useTheme();
   const { locale } = useLanguage();
+  const { trackEvent } = useAnalyticsTracking();
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
   
@@ -461,8 +463,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                >
-                  <Link
+                >                  <Link
                     href={localizedHref(cta.href)}
                     className="inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden text-white border border-transparent shadow-lg cosmic-shimmer"
                     style={{
@@ -470,6 +471,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                       backgroundSize: '200% 200%',
                       animation: 'gradientShift 3s ease infinite',
                     }}
+                    onClick={() => trackEvent('hero_cta_click', 'hero', `colorful_theme_${cta.text}`)}
                   >
                     <motion.span className="relative z-10">
                       {cta.text}
@@ -521,10 +523,10 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                       repeat: Infinity,
                       repeatType: "reverse"
                     }}
-                  />
-                  <Link 
+                  />                  <Link 
                     href={localizedHref(cta.href)} 
                     className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg z-10"
+                    onClick={() => trackEvent('hero_cta_click', 'hero', `default_theme_${cta.text}`)}
                   >
                     <div className="flex items-center justify-center gap-2">
                       <span>{cta.text}</span>

@@ -99,7 +99,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
+    // During SSG, provide fallback values instead of throwing
+    if (typeof window === 'undefined') {
+      return { theme: 'colorful' as Theme, setTheme: () => {} };
+    }
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-} 
+}

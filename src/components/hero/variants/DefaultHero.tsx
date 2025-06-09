@@ -7,9 +7,11 @@ import Link from 'next/link';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
+import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
 
 const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { locale } = useLanguage();
+  const { trackEvent } = useAnalyticsTracking();
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
@@ -140,10 +142,10 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 repeat: Infinity,
                 repeatType: "reverse"
               }}
-            ></motion.div>
-            <Link 
+            ></motion.div>            <Link 
               href={localizedHref(cta.href)} 
               className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg z-10"
+              onClick={() => trackEvent('hero_cta_click', 'hero', `default_variant_${cta.text}`)}
             >
               <div className="flex items-center justify-center gap-2">
                 <span>{cta.text}</span>

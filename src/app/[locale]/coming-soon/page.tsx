@@ -1,9 +1,9 @@
 import { i18n } from '@/i18n';
-import LocalizedComingSoonPageWithProviders from './client-page';
+import ComingSoonPageContent from '@/app/coming-soon/page';
 
-// This is a server component that uses the client component
+// This is a server component that wraps the client component
 export default function LocalizedComingSoonPage() {
-  return <LocalizedComingSoonPageWithProviders />;
+  return <ComingSoonPageContent />;
 }
 
 // This function is required for static export with dynamic routes
