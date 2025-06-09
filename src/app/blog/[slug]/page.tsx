@@ -45,6 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: 'Content Not Available',
     description: 'This content is not available in your language.',
   };
+    const imageUrl = post.image.startsWith('http') ? post.image : `https://alux.space${post.image}`;
   
   return {
     title: localeContent.title || 'Blog Post',
@@ -52,7 +53,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: localeContent.title,
       description: localeContent.description,
-      images: [{ url: post.image }]
+      type: 'article',
+      url: `https://alux.space/blog/${slug}`,
+      siteName: 'Ali Al-Zuhairi',
+      locale: 'en_US',
+      images: [{ 
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: localeContent.title,
+        type: 'image/jpeg'
+      }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: localeContent.title,
+      description: localeContent.description,
+      creator: '@alialzuhairi',
+      site: '@alialzuhairi',
+      images: [imageUrl],
     }
   };
 }

@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: 'Kattava tapaustutkimus saavutettavien suunnittelujärjestelmien rakentamisesta alusta alkaen—tutkimuspohjainen lähestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.',
     }
   };
-
   const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
+  const imageUrl = `${baseUrl}/images/portfolio/accessibility/accessiblity-showcase.jpg`;
 
   return {
     title: metadata.title,
@@ -36,10 +36,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       images: [
         {
-          url: `${baseUrl}/images/portfolio/accessibility-og.jpg`,
+          url: imageUrl,
           width: 1200,
           height: 630,
           alt: metadata.title,
+          type: 'image/jpeg'
         },
       ],
     },
@@ -47,7 +48,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: metadata.title,
       description: metadata.description,
-      images: [`${baseUrl}/images/portfolio/accessibility-og.jpg`],
+      creator: '@alialzuhairi',
+      site: '@alialzuhairi',
+      images: [imageUrl],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/portfolio/accessibility`,

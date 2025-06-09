@@ -85,8 +85,7 @@ export async function generateMetadata({ params }: { params: { locale?: string }
         { url: '/favicon.png?v=2', type: 'image/png' }
       ],
       apple: '/favicon.png?v=2',
-      shortcut: '/favicon.ico?v=2',
-    },
+      shortcut: '/favicon.ico?v=2',    },
     openGraph: {
       title: metadata.title,
       description: metadata.description,
@@ -96,13 +95,13 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       locale: locale === 'en' ? 'en_US' : 'fi_FI',
       alternateLocale: i18n.locales.filter(l => l !== locale).map(l => 
         l === 'en' ? 'en_US' : 'fi_FI'
-      ),
-      images: [
+      ),      images: [
         {
-          url: `${baseUrl}/images/og-image.jpg`,
+          url: `${baseUrl}/images/main.jpg`,
           width: 1200,
           height: 630,
           alt: metadata.title,
+          type: 'image/jpeg'
         }
       ],
     },
@@ -111,7 +110,8 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       title: metadata.title,
       description: metadata.description,
       creator: '@alialzuhairi',
-      images: [`${baseUrl}/images/og-image.jpg`],
+      site: '@alialzuhairi',
+      images: [`${baseUrl}/images/main.jpg`],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,

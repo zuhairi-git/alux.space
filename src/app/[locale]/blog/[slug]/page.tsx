@@ -53,9 +53,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     readTime: '5 min read',
     content: ''
   };
-  
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
   const postUrl = `${baseUrl}/${locale}/blog/${slug}`;
+  const imageUrl = post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`;
   
   return {
     title: `${localeContent.title} | Ali Al-Zuhairi`,
@@ -73,10 +73,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       authors: ['Ali Al-Zuhairi'],
       tags: post.tags || [],
       images: [{ 
-        url: `${baseUrl}${post.image}`,
+        url: imageUrl,
         width: 1200,
         height: 630,
-        alt: localeContent.title 
+        alt: localeContent.title,
+        type: 'image/jpeg'
       }]
     },
     twitter: {
@@ -84,7 +85,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: localeContent.title,
       description: localeContent.description,
       creator: '@alialzuhairi',
-      images: [`${baseUrl}${post.image}`],
+      site: '@alialzuhairi',
+      images: [imageUrl],
     },
     alternates: {
       canonical: postUrl,

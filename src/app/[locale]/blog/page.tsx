@@ -29,8 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
   
   const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
-  
-  return {
+    return {
     title: metadata.title,
     description: metadata.description,
     metadataBase: new URL(baseUrl),
@@ -47,8 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           width: 1200,
           height: 630,
           alt: metadata.title,
-          type: 'image/jpeg',
-          secureUrl: ogImage.replace('http://', 'https://')
+          type: 'image/jpeg'
         }
       ]
     },
