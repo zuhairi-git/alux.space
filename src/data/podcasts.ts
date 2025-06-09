@@ -13,26 +13,8 @@ const defaultMetadata: PodcastMetadata = {
 // Podcast collection data
 export const podcastEpisodes: PodcastEpisode[] = [
   {
-    id: 'episode-1',
-    title: 'Ali Al-Zuhairi: Blog & Insights',
-    description: 'In this episode, we delve into the core principles of thought, learning, and perspective in design leadership, product management, and the dynamic intersection of creativity and technology.',
-    audioFile: {
-      en: '/podcasts/en/blog-insights-en.wav',
-      fi: '/podcasts/fi/blog-insights-fi.wav'
-    },
-    publishDate: '2025-05-21',
-    duration: '04:49',
-    tags: ['Blog', 'Insights', 'AI', 'Technology', 'Development'],
-    featured: true,
-    language: ['en', 'fi'],
-    metadata: {
-      ...defaultMetadata,
-      title: 'Blog & Insights - Ali Al-Zuhairi Podcast',
-      description: 'Deep dive into design leadership, product management, and the creative intersection of technology and innovation.'
-    }
-  },  // English-only episodes
-  {
-    id: 'episode-2',    title: 'Embracing the Era of AI',
+    id: 'episode-2',
+    title: 'Embracing the Era of AI',
     description: 'Exploring how artificial intelligence is reshaping our world and how we can embrace this transformative era with purpose and intentionality.',
     audioFile: '/podcasts/en/embracing-the-era-of-ai-en.mp3',
     publishDate: '2025-05-20',
@@ -60,6 +42,25 @@ export const podcastEpisodes: PodcastEpisode[] = [
       ...defaultMetadata,
       title: 'The Circle of Daily Rhythm - Ali Al-Zuhairi Podcast',
       description: 'Build sustainable daily rhythms that support long-term success and well-being.'
+    }
+  },
+  {
+    id: 'episode-1',
+    title: 'Ali Al-Zuhairi: Blog & Insights',
+    description: 'In this episode, we delve into the core principles of thought, learning, and perspective in design leadership, product management, and the dynamic intersection of creativity and technology.',
+    audioFile: {
+      en: '/podcasts/en/blog-insights-en.wav',
+      fi: '/podcasts/fi/blog-insights-fi.wav'
+    },
+    publishDate: '2025-05-21',
+    duration: '04:49',
+    tags: ['Blog', 'Insights', 'AI', 'Technology', 'Development'],
+    featured: true,
+    language: ['en', 'fi'],
+    metadata: {
+      ...defaultMetadata,
+      title: 'Blog & Insights - Ali Al-Zuhairi Podcast',
+      description: 'Deep dive into design leadership, product management, and the creative intersection of technology and innovation.'
     }
   }
 ];
