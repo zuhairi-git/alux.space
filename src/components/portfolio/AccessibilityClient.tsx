@@ -757,24 +757,34 @@ export default function AccessibilityClient() {
                                     ? `bg-gradient-to-br ${phase.gradient} border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-xl` 
                                     : `bg-gradient-to-br ${phase.gradient} border-gray-700/30 hover:border-gray-600/50`
                               }`}
-                            >
-                              {/* Floating icon */}
+                            >                              {/* Floating icon */}
                               <div className={`relative mb-6 ${
                                 index % 2 === 0 ? 'text-left' : 'text-right'
-                              }`}>
-                                <div className={`inline-flex w-16 h-16 items-center justify-center rounded-2xl ${
+                              }`}>                                <div className={`inline-flex w-16 h-16 items-center justify-center rounded-2xl ${
                                   isColorful 
                                     ? `bg-gradient-to-br from-${phase.color}-400/30 to-${phase.color}-500/20 backdrop-blur-sm` 
                                     : isLight 
-                                      ? `bg-gradient-to-br from-${phase.color}-100 to-${phase.color}-200` 
-                                      : `bg-gradient-to-br from-${phase.color}-900/50 to-${phase.color}-800/30`
+                                      ? phase.color === 'blue' 
+                                        ? 'bg-gradient-to-br from-blue-300 to-blue-400 shadow-lg'
+                                        : phase.color === 'indigo'
+                                        ? 'bg-gradient-to-br from-indigo-300 to-indigo-400 shadow-lg'
+                                        : phase.color === 'pink'
+                                        ? 'bg-gradient-to-br from-pink-300 to-pink-400 shadow-lg'
+                                        : 'bg-gradient-to-br from-green-300 to-green-400 shadow-lg'
+                                      : phase.color === 'blue'
+                                      ? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg'
+                                      : phase.color === 'indigo'
+                                      ? 'bg-gradient-to-br from-indigo-400 to-indigo-500 shadow-lg'
+                                      : phase.color === 'pink'
+                                      ? 'bg-gradient-to-br from-pink-400 to-pink-500 shadow-lg'
+                                      : 'bg-gradient-to-br from-green-400 to-green-500 shadow-lg'
                                 } group-hover:scale-110 transition-transform duration-300`}>
                                   <span className={`material-symbols text-2xl font-bold ${
                                     isColorful 
                                       ? `text-${phase.color}-300` 
                                       : isLight 
-                                        ? `text-${phase.color}-600` 
-                                        : `text-${phase.color}-400`
+                                        ? 'text-white'
+                                        : 'text-white'
                                   }`}>{phase.icon}</span>
                                 </div>
                               </div>
