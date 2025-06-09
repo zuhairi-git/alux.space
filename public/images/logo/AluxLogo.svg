@@ -1,55 +1,7 @@
-<svg width="340" height="340" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg" class="cosmic-shimmer">
-<defs>
-<style>
-.cosmic-shimmer {
-position: relative;
-overflow: hidden;
-transition: transform 0.3s ease;
-}
-.cosmic-shimmer:hover {
-transform: scale(1.05) rotate(2deg);
-}
-.cosmic-background {
-fill: url(#cosmicGradient);
-}
-@keyframes gradientShift {
-0% { stop-color: #3b82f6; }
-33% { stop-color: #a855f7; }
-66% { stop-color: #6366f1; }
-100% { stop-color: #3b82f6; }
-}
-.gradient-stop-1 {
-animation: gradientShift 3s ease infinite;
-}
-.gradient-stop-2 {
-animation: gradientShift 3s ease infinite 1s;
-}
-.gradient-stop-3 {
-animation: gradientShift 3s ease infinite 2s;
-}
-@keyframes shimmer {
-0% { transform: translateX(-100%); }
-100% { transform: translateX(100%); }
-}
-.shimmer-overlay {
-animation: shimmer 3s infinite;
-}
-</style>
-<linearGradient id="cosmicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" class="gradient-stop-1" stop-color="#3b82f6"/>
-<stop offset="50%" class="gradient-stop-2" stop-color="#a855f7"/>
-<stop offset="100%" class="gradient-stop-3" stop-color="#6366f1"/>
-</linearGradient>
-<linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" stop-color="transparent"/>
-<stop offset="50%" stop-color="rgba(255, 255, 255, 0.1)"/>
-<stop offset="100%" stop-color="transparent"/>
-</linearGradient>
-</defs>
-<rect width="340" height="340" class="cosmic-background" opacity="0.7"/>
-<rect width="340" height="340" fill="url(#shimmerGradient)" class="shimmer-overlay"/>
-<path d="M113.153 108.01L169.466 55.1518L160.741 304.985L100.974 261.78L113.153 108.01Z" fill="white"/>
-<path d="M226.754 107.999L169.696 55.1663L178.421 305L239.026 261.765L226.754 107.999Z" fill="white"/>
-<path d="M106.136 108.394L40.7039 77.4956L99.2488 262.888L106.136 108.394Z" fill="white"/>
-<path d="M233.864 108.394L299.296 77.4956L240.751 262.888L233.864 108.394Z" fill="white"/>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="512" height="512" fill="#4765EB"/>
+<path d="M178.85 164.657L255.275 92.9206L243.434 431.98L162.322 373.344L178.85 164.657Z" fill="white"/>
+<path d="M333.024 164.641L255.588 92.9403L267.428 432L349.678 373.324L333.024 164.641Z" fill="white"/>
+<path d="M169.328 165.178L80.5269 123.244L159.981 372.848L169.328 165.178Z" fill="white"/>
+<path d="M342.672 165.178L431.473 123.244L352.019 372.848L342.672 165.178Z" fill="white"/>
 </svg>
