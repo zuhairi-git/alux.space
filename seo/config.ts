@@ -18,7 +18,7 @@ export const seoConfig = {
     email: 'hello@alux.space',
     linkedin: 'https://www.linkedin.com/in/ali-zuhairi/',
     twitter: '@alialzuhairi',
-    github: 'https://github.com/ali-zuhairi'
+    github: 'https://github.com/'
   },
 
   // === BUSINESS INFORMATION ===
@@ -47,6 +47,7 @@ export const seoConfig = {
   // === KEYWORDS & TOPICS ===
   keywords: {
     primary: [
+      'AI Driven Product Designer',
       'UX Designer Helsinki',
       'Product Designer Finland',
       'Design Leader',
@@ -55,6 +56,7 @@ export const seoConfig = {
       'Creative Innovation'
     ],
     secondary: [
+      'AI Product Design',
       'User Experience',
       'Product Design',
       'Design Systems',
@@ -67,12 +69,16 @@ export const seoConfig = {
       'Creative Direction',
       'Portfolio',
       'Case Studies'
-    ],
-    technical: [
+    ],    technical: [
       'React',
+      'Prompt Engineering',
       'Next.js',
       'Figma',
-      'Design Tokens',
+      'Figma Make',
+      'Design Systems', 
+      'Accessibility',  
+      'VS Code Copilot',
+      'AI Design Tools',
       'WCAG',
       'ARIA',
       'TypeScript',
@@ -97,7 +103,7 @@ export const seoConfig = {
       site: '@alialzuhairi'
     },
     linkedin: 'https://www.linkedin.com/in/ali-zuhairi/',
-    github: 'https://github.com/ali-zuhairi'
+    github: 'https://github.com/'
   },
 
   // === IMAGES ===
@@ -121,7 +127,7 @@ export const seoConfig = {
     organization: {
       '@type': 'Person',
       name: 'Ali Al-Zuhairi',
-      jobTitle: 'Product Designer & UX Leader',
+      jobTitle: 'AI Driven Product Designer & Product Owner',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Helsinki',
@@ -129,7 +135,7 @@ export const seoConfig = {
       },
       sameAs: [
         'https://www.linkedin.com/in/ali-zuhairi/',
-        'https://github.com/ali-zuhairi'
+        'https://github.com/'
       ]
     }
   },
