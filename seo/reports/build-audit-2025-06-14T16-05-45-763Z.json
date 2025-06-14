@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-06-14T16:05:45.731Z",
+  "score": 85,
+  "issues": [],
+  "recommendations": [],
+  "analytics": {
+    "trackingImplemented": true,
+    "componentsWithTracking": 7,
+    "componentsAudited": [
+      {
+        "file": "Hero.tsx",
+        "hasTracking": false,
+        "type": "Hero"
+      },
+      {
+        "file": "CreativeHero.tsx",
+        "hasTracking": true,
+        "type": "Hero"
+      },
+      {
+        "file": "DefaultHero.tsx",
+        "hasTracking": true,
+        "type": "Hero"
+      },
+      {
+        "file": "DesignHero.tsx",
+        "hasTracking": true,
+        "type": "Hero"
+      },
+      {
+        "file": "MinimalHero.tsx",
+        "hasTracking": true,
+        "type": "Hero"
+      },
+      {
+        "file": "UnifiedHero.tsx",
+        "hasTracking": true,
+        "type": "Hero"
+      },
+      {
+        "file": "PortfolioCard.tsx",
+        "hasTracking": true,
+        "type": "Portfolio"
+      },
+      {
+        "file": "PortfolioClient.tsx",
+        "hasTracking": false,
+        "type": "Portfolio"
+      },
+      {
+        "file": "BlogCard.tsx",
+        "hasTracking": true,
+        "type": "Blog"
+      },
+      {
+        "file": "BlogContent.tsx",
+        "hasTracking": false,
+        "type": "Blog"
+      },
+      {
+        "file": "BlogPostClient.tsx",
+        "hasTracking": false,
+        "type": "Blog"
+      },
+      {
+        "file": "BlogPostHeader.tsx",
+        "hasTracking": false,
+        "type": "Blog"
+      },
+      {
+        "file": "ClientBlogPage.tsx",
+        "hasTracking": false,
+        "type": "Blog"
+      }
+    ]
+  },
+  "performance": {
+    "imageCount": 28,
+    "largeImageCount": 28,
+    "bundleSize": 0,
+    "bundleSizeFormatted": "0 Bytes"
+  },
+  "accessibility": {
+    "altTextCheck": "pending",
+    "colorContrastCheck": "pending",
+    "keyboardNavigationCheck": "pending"
+  }
+}
