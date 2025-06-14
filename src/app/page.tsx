@@ -38,26 +38,13 @@ const InteractiveSkillCard = ({
       return 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/30 hover:border-gray-300/50 hover:shadow-lg hover:shadow-blue-500/5';
     }
   };
-
   return (
-    <motion.div
+    <div
       className={`
         p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 
         ${getCardStyles()}
       `}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ 
-        scale: 1.03,
-        y: -5,
-        transition: { duration: 0.2 }
-      }}
-      onHoverStart={handleSkillInteraction}
-      transition={{ 
-        duration: 0.5, 
-        delay: Math.random() * 0.2 
-      }}
+      onMouseEnter={handleSkillInteraction}
     >
       {/* Content */}
       <div className="p-6">
@@ -69,7 +56,7 @@ const InteractiveSkillCard = ({
           {skill.desc}
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
