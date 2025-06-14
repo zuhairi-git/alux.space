@@ -27,7 +27,6 @@ const InteractiveSkillCard = ({
   const handleSkillInteraction = () => {
     trackEvent('skill_hover', 'homepage', skill.title);
   };
-
   // Get card styles based on theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
@@ -35,10 +34,9 @@ const InteractiveSkillCard = ({
     } else if (theme === 'dark') {
       return 'bg-gradient-to-br from-gray-800/50 to-gray-700/50 border-gray-600/30 hover:border-gray-500/50 hover:shadow-lg hover:shadow-blue-500/10';
     } else {
-      return 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/30 hover:border-gray-300/50 hover:shadow-lg hover:shadow-blue-500/5';
+      return 'bg-white/95 border-gray-300/60 shadow-md shadow-gray-200/50 hover:border-blue-400/60 hover:shadow-lg hover:shadow-blue-200/40 hover:bg-white';
     }
-  };
-  return (
+  };  return (
     <div
       className={`
         p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 
@@ -48,11 +46,15 @@ const InteractiveSkillCard = ({
     >
       {/* Content */}
       <div className="p-6">
-        <h4 className="text-xl font-semibold mb-3 leading-tight">
+        <h4 className={`text-xl font-semibold mb-3 leading-tight ${
+          theme === 'light' ? 'text-gray-900' : ''
+        }`}>
           {skill.title}
         </h4>
         
-        <p className="text-sm leading-relaxed opacity-70">
+        <p className={`text-sm leading-relaxed ${
+          theme === 'light' ? 'text-gray-700 opacity-90' : 'opacity-70'
+        }`}>
           {skill.desc}
         </p>
       </div>
