@@ -7,7 +7,8 @@
     "digitalDreams": "Digital Dreams",
     "strengthsSkills": "Strengths & Skills",
     "testimonials": "Testimonials"
-  },"portfolio": {
+  },
+  "close": "Close","portfolio": {
     "overview": "All Projects",
     "cases": {
       "accessibility": "Inclusive Design System",

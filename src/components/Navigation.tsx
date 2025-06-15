@@ -179,7 +179,7 @@ const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
                         {item.icon || 'article'}
                       </span>
                     </div>                    <span className="font-medium">
-                      {isPortfolio && t && item.textKey ? t(item.textKey) : item.text || item.textKey}
+                      {t && item.textKey ? t(item.textKey) : item.text || item.textKey}
                     </span><span className="material-symbols text-xs ml-auto opacity-50">
                       chevron_right
                     </span>
@@ -719,6 +719,7 @@ const Navigation = () => {
                   getTextColorClass={getTextColorClass}
                   localizedHref={localizedHref}
                   locale={locale}
+                  t={t}
                   trackEvent={trackEvent}
                 />
               </li>
