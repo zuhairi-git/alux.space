@@ -9,6 +9,7 @@ import FocusTrap from './ui/FocusTrap';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useScreenAwareDropdown } from '@/hooks/useScreenAwareDropdown';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
@@ -291,11 +292,23 @@ const Navigation = () => {
     scrollY,
     [0, 100],
     [1, 0.95]
-  );  const [menuOpen, setMenuOpen] = useState(false);
-  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
+  );  const [menuOpen, setMenuOpen] = useState(false);  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   const [portfolioDropdownOpen, setPortfolioDropdownOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);  const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
+    // Screen-aware dropdown positioning for desktop dropdowns
+  const homeDropdown = useScreenAwareDropdown<HTMLAnchorElement>({
+    isOpen: homeDropdownOpen,
+    dropdownWidth: 256, // w-64 = 256px
+    dropdownHeight: 200, // Estimated height
+    offset: 8
+  });
+  
+  const portfolioDropdown = useScreenAwareDropdown<HTMLAnchorElement>({
+    isOpen: portfolioDropdownOpen,
+    dropdownWidth: 256, // w-64 = 256px
+    dropdownHeight: 180, // Estimated height
+    offset: 8
+  });  
   // Announce menu state changes to screen readers
   const handleMenuToggle = useCallback((isOpen: boolean) => {
     setMenuOpen(isOpen);
@@ -411,6 +424,7 @@ const Navigation = () => {
                 onMouseLeave={() => setHomeDropdownOpen(false)}
               >                {/* Home navigation link */}
                 <Link
+                  ref={homeDropdown.buttonRef}
                   href={localizedHref('/')}
                   onClick={() => trackEvent('desktop_nav_click', 'navigation', 'home')}
                   className={`flex items-center gap-2 ${
@@ -447,17 +461,16 @@ const Navigation = () => {
                 >
                   <span className="material-symbols text-sm">expand_more</span>
                 </button>
-              </div>
-
-              {/* Home dropdown */}
+              </div>              {/* Home dropdown */}
               <div 
-                className={`absolute top-full left-0 mt-2 w-64 ${
+                className={`${homeDropdown.getPositionClasses()} w-64 dropdown-screen-aware ${
                   theme === 'light' 
                     ? 'bg-white/95 border border-gray-200' 
                     : 'bg-gray-900/95 border border-gray-700'
                 } backdrop-blur-lg shadow-lg rounded-lg overflow-hidden z-50 transition-all duration-200 ${
                   homeDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}
+                style={homeDropdown.getPositionStyles()}
                 onMouseEnter={() => setHomeDropdownOpen(true)}
                 onMouseLeave={() => setHomeDropdownOpen(false)}
               >
@@ -512,6 +525,7 @@ const Navigation = () => {
                 onMouseLeave={() => setPortfolioDropdownOpen(false)}
               >                {/* Portfolio navigation link */}
                 <Link
+                  ref={portfolioDropdown.buttonRef}
                   href={localizedHref('/portfolio')}
                   onClick={() => trackEvent('desktop_nav_click', 'navigation', 'portfolio')}
                   className={`flex items-center gap-2 ${
@@ -548,17 +562,16 @@ const Navigation = () => {
                 >
                   <span className="material-symbols text-sm">expand_more</span>
                 </button>
-              </div>
-
-              {/* Portfolio dropdown */}
+              </div>              {/* Portfolio dropdown */}
               <div 
-                className={`absolute top-full left-0 mt-2 w-64 ${
+                className={`${portfolioDropdown.getPositionClasses()} w-64 dropdown-screen-aware ${
                   theme === 'light' 
                     ? 'bg-white/95 border border-gray-200' 
                     : 'bg-gray-900/95 border border-gray-700'
                 } backdrop-blur-lg shadow-lg rounded-lg overflow-hidden z-50 transition-all duration-200 ${
                   portfolioDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}
+                style={portfolioDropdown.getPositionStyles()}
                 onMouseEnter={() => setPortfolioDropdownOpen(true)}
                 onMouseLeave={() => setPortfolioDropdownOpen(false)}
               >

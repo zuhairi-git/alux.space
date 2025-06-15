@@ -1276,6 +1276,42 @@ body {
               0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
+/* Screen-aware dropdown utilities */
+.dropdown-screen-aware {
+  /* Ensure dropdown respects viewport boundaries */
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+}
+
+@media (max-width: 768px) {
+  .dropdown-mobile-responsive {
+    /* On mobile, ensure dropdown has proper spacing */
+    min-width: 160px;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .dropdown-mobile-centered {
+    /* Center dropdown on very small screens when needed */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+  }
+  
+  .dropdown-mobile-full-width {
+    /* Full width dropdown for very small screens */
+    left: 1rem !important;
+    right: 1rem !important;
+    width: auto !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown-mobile-responsive {
+    max-width: calc(100vw - 1rem);
+  }
+}
+
 /* Ensure backface visibility for proper rendering */
 .dropdown-menu {
   backface-visibility: hidden;

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu } from '@headlessui/react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
+import { useScreenAwareDropdown } from '@/hooks/useScreenAwareDropdown';
 import Tooltip from './ui/Tooltip';
 import { LiveRegion } from './ui/LiveRegion';
 
@@ -12,6 +13,14 @@ export default function LanguageSwitcher() {
   const { locale, setLocale } = useLanguage();
   const { theme } = useTheme();
   const [announcement, setAnnouncement] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  // Screen-aware dropdown positioning
+  const { buttonRef, getPositionClasses, getPositionStyles } = useScreenAwareDropdown<HTMLButtonElement>({
+    isOpen,
+    dropdownWidth: 160,
+    dropdownHeight: 100,
+    offset: 8
+  });
 
   // Language configurations with flags and labels
   const languages = [
@@ -73,12 +82,19 @@ export default function LanguageSwitcher() {
   };  return (
     <>
       <Menu as="div" className="relative">
-        {({ open }) => (
-          <>
-            <Tooltip text={`Current language: ${currentLanguage.label}`}>
-              <Menu.Button
-                className={`flex items-center gap-2 py-2 px-3 rounded-lg ${getButtonStyles()} backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-              >
+        {({ open }) => {
+          // Update open state for screen-aware positioning
+          if (open !== isOpen) {
+            setIsOpen(open);
+          }
+          
+          return (
+            <>
+              <Tooltip text={`Current language: ${currentLanguage.label}`}>
+                <Menu.Button
+                  ref={buttonRef}
+                  className={`flex items-center gap-2 py-2 px-3 rounded-lg ${getButtonStyles()} backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                >
                 <motion.div
                   className="flex items-center gap-2"
                   whileHover={{ scale: 1.02 }}
@@ -100,19 +116,19 @@ export default function LanguageSwitcher() {
                   </motion.span>
                 </motion.div>
               </Menu.Button>
-            </Tooltip>
-
-            {/* Dropdown menu */}
+            </Tooltip>            {/* Dropdown menu */}
             <AnimatePresence>
-              {open && (                <Menu.Items
+              {open && (
+                <Menu.Items
                   as={motion.div}
                   static
                   initial={{ opacity: 0, y: -10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  className={`absolute top-full right-0 mt-2 w-40 ${getMenuStyles()} shadow-lg rounded-lg overflow-hidden z-[70] focus:outline-none`}
+                  className={`${getPositionClasses()} w-40 dropdown-screen-aware dropdown-mobile-responsive ${getMenuStyles()} shadow-lg rounded-lg overflow-hidden z-[70] focus:outline-none`}
                   style={{
-                    transition: 'all 0.2s ease-out'
+                    transition: 'all 0.2s ease-out',
+                    ...getPositionStyles()
                   }}
                 >
                   <div className="p-1">                    {languages.map((language, index) => (
@@ -151,10 +167,10 @@ export default function LanguageSwitcher() {
                     ))}
                   </div>
                 </Menu.Items>
-              )}
-            </AnimatePresence>
+              )}            </AnimatePresence>
           </>
-        )}
+        );
+        }}
       </Menu>
       <LiveRegion message={announcement} priority="polite" />
     </>
