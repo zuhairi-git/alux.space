@@ -850,11 +850,10 @@ Claude AI:n ja vastaavien teknologioiden tulevaisuudessa on valtava potentiaali:
             `,
             readTime: '6 دقائق قراءة'
          }
-      }   },
-   {
+      }   },   {
       slug: 'sharpened-by-machine',
       author: 'Ali Al-Zuhairi',
-      image: '/images/blog/human-ai.jpg',
+      image: '/images/blog/AI/female-ai.jpg',
       tags: ['Artificial Intelligence', 'Human Development', 'Critical Thinking', 'Future', 'Education'],
       content: {
          en: {
