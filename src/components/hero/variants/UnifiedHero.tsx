@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
@@ -10,6 +10,13 @@ import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
+import { 
+  MotionDiv, 
+  MotionH1, 
+  MotionH2, 
+  MotionP, 
+  MotionSpan
+} from '@/components/ui/MotionWrapper';
 
 const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { theme } = useTheme();
@@ -35,42 +42,39 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
   
   // Split title into words for colorful theme staggered animation
   const words = title ? title.split(' ') : [];
-  
-  return (
-    <motion.div 
+    return (
+    <MotionDiv 
       layout
       className="container mx-auto px-4 relative z-10"
     >
       {/* Decorative elements - show/hide based on theme */}
       <AnimatePresence mode="wait">
         {!isColorful && (
-          <motion.div
+          <MotionDiv
             key="decorative-elements"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-          >
-            {/* Corner decorative accents */}            <motion.div
+          >            {/* Corner decorative accents */}            <MotionDiv
               className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
               <div className="w-full h-full border-t-2 border-l-2 border-blue-400/30 rounded-tl-lg" />
-            </motion.div>
+            </MotionDiv>
             
-            <motion.div
+            <MotionDiv
               className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
               <div className="w-full h-full border-b-2 border-r-2 border-purple-400/30 rounded-br-lg" />
-            </motion.div>
-            
-            {/* Side line decorations */}
-            <motion.div 
+            </MotionDiv>
+              {/* Side line decorations */}
+            <MotionDiv 
               className="absolute -left-20 top-[40%] hidden md:block" 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -80,9 +84,9 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
                 <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent"></div>
               </div>
-            </motion.div>
+            </MotionDiv>
             
-            <motion.div 
+            <MotionDiv 
               className="absolute -right-20 top-[40%] hidden md:block" 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -92,15 +96,15 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
                 <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent"></div>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
       </AnimatePresence>
 
       {/* Colorful theme geometric decorations */}
       <AnimatePresence mode="wait">
         {isColorful && (
-          <motion.div
+          <MotionDiv
             key="colorful-decorations"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -109,7 +113,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             className="relative w-full max-w-4xl mx-auto"
           >
             {/* Floating circle decoration */}
-            <motion.div
+            <MotionDiv
               animate={{
                 y: [0, -15, 0],
               }}
@@ -122,7 +126,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             />
             
             {/* Rotating square decoration */}
-            <motion.div
+            <MotionDiv
               animate={{
                 rotate: 360,
               }}
@@ -133,21 +137,21 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               }}
               className="absolute top-10 -right-10 md:-right-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 blur-sm"
             />
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
 
       {/* Main content container */}
       <div className="flex flex-col items-center justify-center my-8 relative">
         {/* Title Section with theme-aware rendering */}
-        <motion.div 
+        <MotionDiv 
           layout
           className={`relative z-10 mx-auto mb-12 ${isColorful ? 'text-center' : 'text-center max-w-4xl'}`}
         >
           {/* Subtle dot grid behind the title for non-colorful themes */}
           <AnimatePresence mode="wait">
             {!isColorful && (
-              <motion.div
+              <MotionDiv
                 key="dot-grid"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -158,14 +162,14 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 <div className="absolute top-0 left-[20%] w-3/5 h-full" 
                      style={{ backgroundImage: 'radial-gradient(circle, rgba(96, 165, 250, 0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
           </AnimatePresence>
           
           {/* Dynamic title rendering based on theme */}
           <AnimatePresence mode="wait">
             {isColorful ? (
-              <motion.h2 
+              <MotionH2 
                 key="colorful-title"
                 layout
                 className="text-6xl md:text-7xl font-bold leading-tight tracking-tight relative z-20"
@@ -175,7 +179,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 transition={{ duration: 0.5 }}
               >
                 {words.map((word, i) => (
-                  <motion.span
+                  <MotionSpan
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -187,11 +191,11 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
                   >
                     {word}
-                  </motion.span>
+                  </MotionSpan>
                 ))}
                 
                 {/* Decorative glow effect for colorful theme */}
-                <motion.div 
+                <MotionDiv 
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 0.7 }}
                   transition={{ delay: 0.5, duration: 1 }}
@@ -202,9 +206,9 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     transform: 'translate(-50%, -50%)'
                   }}
                 />
-              </motion.h2>
+              </MotionH2>
             ) : (
-              <motion.h1 
+              <MotionH1 
                 key="default-title"
                 layout
                 className="text-5xl md:text-6xl font-bold mb-6 text-center relative"
@@ -214,7 +218,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 transition={{ duration: 0.5 }}
               >
                 {/* Decorative line above title */}
-                <motion.span 
+                <MotionSpan 
                   className="block mx-auto w-12 h-1 bg-gradient-to-r from-blue-400/50 to-purple-400/50 mb-6"
                   initial={{ width: 0 }}
                   animate={{ width: 48 }}
@@ -224,18 +228,18 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 {title}
                 
                 {/* Decorative underline highlight */}
-                <motion.div
+                <MotionDiv
                   className="absolute -z-10 h-4 rounded-full bg-blue-400/10 bottom-1"
                   initial={{ width: 0, x: '50%' }}
                   animate={{ width: '70%', x: '15%' }}
                   transition={{ duration: 0.8, delay: 1.2 }}
                 />
-              </motion.h1>
+              </MotionH1>
             )}
           </AnimatePresence>
-        </motion.div>        {/* Enhanced Subtitle */}
+        </MotionDiv>        {/* Enhanced Subtitle */}
         {subtitle && (
-          <motion.div
+          <MotionDiv
             layout
             key={`subtitle-${theme}`}
             initial={{ opacity: 0, y: 20 }}
@@ -249,7 +253,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             }`}
           >
             {/* Decorative accent line above subtitle */}
-            <motion.div
+            <MotionDiv
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -262,7 +266,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               } rounded-full`}
             />
               {/* Main subtitle text with enhanced typography */}
-            <motion.p
+            <MotionP
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -289,7 +293,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 {subtitle.split('—')[0]?.trim()}
               </span>
               {subtitle.includes('—') && (
-                <motion.span 
+                <MotionSpan 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.9 }}
@@ -307,12 +311,12 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   }}
                 >
                   — {subtitle.split('—')[1]?.trim()}
-                </motion.span>
+                </MotionSpan>
               )}
-            </motion.p>
+            </MotionP>
             
             {/* Subtle glow effect behind text */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.8 }}
@@ -327,7 +331,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             />
             
             {/* Floating accent elements */}
-            <motion.div
+            <MotionDiv
               animate={{
                 y: [0, -8, 0],
                 rotate: [0, 2, 0],
@@ -345,7 +349,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               } shadow-lg`}
             />
             
-            <motion.div
+            <MotionDiv
               animate={{
                 y: [0, -6, 0],
                 rotate: [0, -2, 0],
@@ -363,12 +367,12 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   : 'bg-gradient-to-r from-purple-400 to-pink-400'
               } shadow-lg`}
             />
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* Quote Section */}
         {quote && (
-          <motion.div
+          <MotionDiv
             layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -384,7 +388,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             ) : (
               <>
                 {/* Decorative elements for default theme */}
-                <motion.div 
+                <MotionDiv 
                   className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-400/20"
                   animate={{
                     scale: [1, 1.2, 1],
@@ -397,7 +401,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   }}
                 />
                 
-                <motion.div 
+                <MotionDiv 
                   className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-purple-400/20 to-blue-400/20"
                   animate={{
                     scale: [1, 1.2, 1],
@@ -415,17 +419,17 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   <span className="absolute -left-4 top-0 text-blue-400 text-4xl opacity-80">&ldquo;</span>
                   {quote.text}
                   <span className="absolute -bottom-4 right-0 text-blue-400 text-4xl opacity-80">&rdquo;</span>
-                  <motion.span 
+                  <MotionSpan 
                     className="block text-blue-400 mt-6 text-center"
                     initial={{ x: -10, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 1 }}
                   >
                     — {quote.author}
-                  </motion.span>
+                  </MotionSpan>
                 </p>
                 
-                <motion.div 
+                <MotionDiv 
                   className="absolute inset-0 -z-10 opacity-20"
                   animate={{
                     background: [
@@ -442,12 +446,12 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 />
               </>
             )}
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* CTA Button */}
         {cta && (
-          <motion.div
+          <MotionDiv
             layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -456,7 +460,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           >
             <AnimatePresence mode="wait">
               {isColorful ? (
-                <motion.div
+                <MotionDiv
                   key="colorful-cta"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -472,17 +476,17 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     }}
                     onClick={() => trackEvent('hero_cta_click', 'hero', `colorful_theme_${cta.text}`)}
                   >
-                    <motion.span className="relative z-10">
+                    <MotionSpan className="relative z-10">
                       {cta.text}
-                    </motion.span>
+                    </MotionSpan>
                     
-                    <motion.div 
+                    <MotionDiv 
                       className="absolute inset-0 bg-black/10"
                       transition={{ duration: 0.3 }}
                     />
                     
                     {/* Animated glow effect */}
-                    <motion.div 
+                    <MotionDiv 
                       className="absolute -z-10 inset-0 bg-gradient-to-r from-cyan-500/30 via-fuchsia-500/30 to-blue-500/30 blur-lg opacity-30"
                       animate={{
                         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
@@ -497,9 +501,9 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                       }}
                     />
                   </Link>
-                </motion.div>
+                </MotionDiv>
               ) : (
-                <motion.div
+                <MotionDiv
                   key="default-cta"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -507,7 +511,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   transition={{ duration: 0.3 }}
                   className="inline-block relative"
                 >
-                  <motion.div 
+                  <MotionDiv 
                     className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-indigo-500/40 blur-md opacity-70"
                     animate={{
                       background: [
@@ -534,27 +538,26 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                       </svg>
                     </div>
                   </Link>
-                </motion.div>
+                </MotionDiv>
               )}
             </AnimatePresence>
-          </motion.div>
+          </MotionDiv>
         )}
-        
-        {/* Podcast Player */}
+          {/* Podcast Player */}
         {showPodcastPlayer && (
-          <motion.div 
+          <MotionDiv 
             layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: isColorful ? 1.6 : 0.8 }}
             className={`mt-16 ${isColorful ? 'max-w-3xl mx-auto' : ''}`}
-          >
-            <PodcastPlayer />
-          </motion.div>
+          ><PodcastPlayer />
+          </MotionDiv>
         )}
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 
 export default UnifiedHero;
+
