@@ -851,17 +851,17 @@ Claude AI:n ja vastaavien teknologioiden tulevaisuudessa on valtava potentiaali:
             readTime: '6 دقائق قراءة'
          }
       }   },   {
-      slug: 'sharpened-by-machine',
-      author: 'Ali Al-Zuhairi',
+      slug: 'sharpened-by-machine',      author: 'Ali Al-Zuhairi',
       image: '/images/blog/AI/female-ai.jpg',
-      tags: ['Artificial Intelligence', 'Human Development', 'Critical Thinking', 'Future', 'Education'],
+      tags: ['Artificial Intelligence', 'Human Development', 'Critical Thinking', 'Future', 'Education', 'AI Ethics', 'Machine Learning', 'Human Intelligence', 'Technology Philosophy', 'AI Strategy'],
       content: {
          en: {
             title: 'Sharpened by the Machine: How Challenging AI Makes Us More Human',
-            description: 'Discover how treating AI as an intellectual adversary rather than a tool can strengthen our critical thinking and preserve what makes us uniquely human.',
-            publishedDate: 'June 20, 2025',
-            content: `
+            description: 'Learn how to use AI as an intellectual adversary to strengthen critical thinking and preserve human intelligence. Discover strategies for challenging AI, avoiding cognitive dependency, and evolving human capabilities in the age of artificial intelligence.',
+            publishedDate: 'June 20, 2025',            content: `
 Sharpened by the Machine: How Challenging AI Makes Us More Human
+
+Image by freepik
 
 "Intelligence is not about having the answers. It's about knowing how to question everything—even the machine that seems to know it all."
 
@@ -978,13 +978,13 @@ Only you can do that.
 > The future belongs not to those who surrender their thinking to machines, but to those who use machines to think better. In the collision between human creativity and artificial intelligence, we don't just survive—we evolve.
             `,
             readTime: '8 min read'
-         },
-         fi: {
+         },         fi: {
             title: 'Koneen teroittama: Kuinka tekoälyn haastaminen tekee meistä inhimillisempiä',
-            description: 'Löydä kuinka tekoälyn käsitteleminen älyllisenä vastustajana työkalun sijaan voi vahvistaa kriittistä ajatteluamme ja säilyttää sen, mikä tekee meistä ainutlaatuisesti inhimillisiä.',
-            publishedDate: '20. kesäkuuta 2025',
-            content: `
+            description: 'Opi käyttämään tekoälyä älyllisenä vastustajana kriittisen ajattelun vahvistamiseksi. Tutustu strategioihin tekoälyn haastavuuteen, kognitiivisen riippuvuuden välttämiseen ja inhimillisten kykyjen kehittämiseen tekoälyn aikakaudella.',
+            publishedDate: '20. kesäkuuta 2025',            content: `
 Koneen teroittama: Kuinka tekoälyn haastaminen tekee meistä inhimillisempiä
+
+Image by freepik
 
 "Älykkyys ei ole vastausten omaamista. Se on kaiken kyseenalaistamisen taitoa—jopa koneen, joka näyttää tietävän kaiken."
 
