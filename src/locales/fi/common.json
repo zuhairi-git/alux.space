@@ -76,7 +76,11 @@
       "audioNarration": "Äänittävä kerronta",
       "featuredImage": "Esiintyvä kuva",
       "featuredImageFor": "Esiintyvä kuva artikkelille",
-      "audioLanguage": "Äänen kieli: englanti"
+      "audioLanguage": "Äänen kieli: englanti",
+      "shareAudio": "Jaa äänitiedosto",
+      "copyAudioLink": "Kopioi äänitiedoston linkki",
+      "audioLinkCopied": "Äänitiedoston linkki kopioitu leikepöydälle!",
+      "downloadAudio": "Lataa äänitiedosto"
     }
   },
   "promptsPage": {

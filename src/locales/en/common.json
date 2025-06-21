@@ -75,8 +75,11 @@
       "readTime": "Estimated reading time",
       "audioNarration": "Audio narration",
       "featuredImage": "Featured image",
-      "featuredImageFor": "Featured image for",
-      "audioLanguage": "Audio language: English"
+      "featuredImageFor": "Featured image for",      "audioLanguage": "Audio language: English",
+      "shareAudio": "Share Audio",
+      "copyAudioLink": "Copy audio link",
+      "audioLinkCopied": "Audio link copied to clipboard!",
+      "downloadAudio": "Download audio file"
     }
   },
   "promptsPage": {
