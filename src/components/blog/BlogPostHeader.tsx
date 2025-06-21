@@ -39,19 +39,24 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
       case 'fi': return 'Takaisin blogiin';
       default: return 'Back to all articles';
     }
-  };
-
-  // Map of blog posts with audio content
+  };  // Map of blog posts with audio content
   const audioMap: Record<string, string> = {
     // Make sure the path matches exactly where the file is located
     'primitive-human': '/audio/blog/blog03.mp3',
+    'sharpened-by-machine': '/audio/blog/Sharpened-by-the-Machine_ AI-and-Human-Development.wav',
     // Add more audio files here as they become available
     // 'other-post-slug': '/audio/blog/other-file.mp3',
   };
 
+  // Map of audio categories for specific posts
+  const audioCategoryMap: Record<string, string> = {
+    'sharpened-by-machine': 'Deep Dive Podcast',
+    // Add more categories here as needed
+  };
   // Check if this post has audio narration and if the audio file actually exists
   const hasAudio = slug && slug in audioMap;
   const audioSrc = hasAudio ? audioMap[slug] : '';
+  const audioCategory = slug && slug in audioCategoryMap ? audioCategoryMap[slug] : undefined;
   return (
     <header className="mb-12" role="banner">
       {/* Back to blog link */}
@@ -161,10 +166,10 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           transition={{ delay: 0.15 }}
           aria-labelledby="audio-section"
         >
-          <h2 id="audio-section" className="sr-only">{t('blog.aria.audioNarration')}</h2>
-          <AudioPlayer
+          <h2 id="audio-section" className="sr-only">{t('blog.aria.audioNarration')}</h2>          <AudioPlayer
             src={audioSrc}
             title={t('blog.aria.listenToArticle')}
+            category={audioCategory}
           />
         </motion.section>
       )}

@@ -2,14 +2,17 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { useTranslations } from '@/hooks/useTranslations';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface AudioPlayerProps {
   src: string;
   title?: string;
+  category?: string; // New prop for podcast category
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -17,6 +20,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
   const [playbackRate, setPlaybackRate] = useState(1);
   const [loadError, setLoadError] = useState(false);
   const { theme } = useTheme();
+  const { locale } = useLanguage();
+  const { t } = useTranslations(locale);
   
   // Only light theme should be treated differently
   const isLight = theme === 'light';
@@ -228,17 +233,29 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title }) => {
           </svg>
           <p className="text-sm text-red-700 dark:text-red-300">Unable to load audio. Please try again later.</p>
         </div>
-      )}
-
-      {/* Title and abstract shapes */}
+      )}      {/* Title and abstract shapes */}
       <div className="mb-4 relative">
-        
-        <h3 className="font-medium text-purple-500">
-          <span className="block text-sm uppercase tracking-wider mb-1 opacity-100 text-gray500 dark:text-gray-300">Now Playing</span>
-          <span className="block relative">
-            <span className="relative z-10">{title || 'Untitled Audio'}</span>
-          </span>
-        </h3>
+        <div className="flex items-start justify-between">
+          <h3 className="font-medium text-purple-500">
+            <span className="block text-sm uppercase tracking-wider mb-1 opacity-100 text-gray500 dark:text-gray-300">{category || 'Now Playing'}</span>
+            <span className="block relative">
+              <span className="relative z-10">{title || 'Untitled Audio'}</span>
+            </span>
+          </h3>          {/* Language Badge */}
+          <div className="flex-shrink-0 ml-3">
+            <span 
+              className={`px-2 py-1 text-xs font-medium rounded-full ${
+                isLight 
+                  ? 'bg-blue-100 text-blue-700 border border-blue-200' 
+                  : 'bg-blue-900/30 text-blue-300 border border-blue-800'
+              }`}
+              title={t('blog.aria.audioLanguage')}
+              aria-label={t('blog.aria.audioLanguage')}
+            >
+              EN
+            </span>
+          </div>
+        </div>
       </div>
       
       <div className="flex flex-col space-y-4 relative z-10">

@@ -61,10 +61,23 @@
   "jobseeking": {
     "title": "Työnhakusovellus",
     "intro": "Mobiilisovellus, joka on suunniteltu virtaviivaistamaan työnhakua – erityisesti paikallisiin, osa-aikaisiin ja viikonlopputöihin. Luotu tekemään työnhausta nopeampaa, helpompaa ja tehokkaampaa ihmisille, jotka etsivät lisätuloja."
-  },
-  "blogPage": {
+  },  "blogPage": {
     "title": "Blogi & Näkemykset",
     "description": "Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan."
+  },  "blog": {
+    "aria": {
+      "listenToArticle": "Kuuntele artikkeli",
+      "breadcrumb": "Blogin navigointi",
+      "backToBlog": "Takaisin kaikkiin artikkeleihin",
+      "tags": "Artikkelin tunnisteet",
+      "articleMeta": "Artikkelin metatiedot",
+      "authorPhoto": "Kirjoittajan kuva",
+      "readTime": "Arvioitu lukuaika",
+      "audioNarration": "Äänittävä kerronta",
+      "featuredImage": "Esiintyvä kuva",
+      "featuredImageFor": "Esiintyvä kuva artikkelille",
+      "audioLanguage": "Äänen kieli: englanti"
+    }
   },
   "promptsPage": {
     "title": "Kehotekokoelma",
