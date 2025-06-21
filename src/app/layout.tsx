@@ -5,6 +5,7 @@ import "./no-glow.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import BackToTop from "@/components/ui/BackToTop";
+import TranslationBadge from "@/components/ui/TranslationBadge";
 import Footer from "@/components/Footer";
 import SkipLinks from "@/components/ui/SkipLinks";
 import { i18n } from '../i18n';
@@ -152,10 +153,10 @@ export default function RootLayout({
       </head>      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
-            <AnalyticsProvider>
-              <SkipLinks />
+            <AnalyticsProvider>              <SkipLinks />
               {children}
               <BackToTop />
+              <TranslationBadge />
               <Footer />
             </AnalyticsProvider>
           </LanguageProvider>
