@@ -10,10 +10,9 @@ interface AudioPlayerProps {
   src: string;
   title?: string;
   category?: string;
-  slug?: string; // Add slug for generating shareable URLs
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category, slug }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -203,12 +202,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category, slug })
   const getFullAudioUrl = () => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
     return `${baseUrl}${src}`;
-  };
-
-  const getShareableUrl = () => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
-    // Use metadata-rich URL if slug is available, otherwise fallback to direct audio
-    return slug ? `${baseUrl}/api/audio/${slug}` : getFullAudioUrl();
+  };  const getShareableUrl = () => {
+    // For static export, use direct audio URLs instead of API routes
+    return getFullAudioUrl();
   };
 
   const copyAudioLink = async () => {

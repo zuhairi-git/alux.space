@@ -170,7 +170,6 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
             src={audioSrc}
             title={t('blog.aria.listenToArticle')}
             category={audioCategory}
-            slug={slug}
           />
         </motion.section>
       )}
@@ -192,8 +191,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
         />
         <div className={`absolute inset-0 ${isLight ? 'bg-gradient-to-t from-black/20 to-transparent' : 'bg-gradient-to-t from-black/30 to-transparent'}`} aria-hidden="true" />
-        
-        {/* Image Attribution Badge - only show for sharpened-by-machine post */}
+          {/* Image Attribution Badge - only show for sharpened-by-machine post */}
         {slug === 'sharpened-by-machine' && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -201,7 +199,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
             transition={{ delay: 0.4 }}
             className="absolute top-4 left-4 z-10"
           >
-            <div className="bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg border border-white/20">
+            <div className="bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs italic font-normal shadow-lg border border-white/20">
               Image by Freepik
             </div>
           </motion.div>
