@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -18,13 +19,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
-  const [loadError, setLoadError] = useState(false);
-  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const [loadError, setLoadError] = useState(false);  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [previewTime, setPreviewTime] = useState(0);
   const [bufferedRanges, setBufferedRanges] = useState<{start: number, end: number}[]>([]);
+  const [dropdownPosition, setDropdownPosition] = useState<{
+    position: 'top' | 'bottom' | 'left' | 'right';
+    alignment: 'start' | 'center' | 'end';
+  }>({ position: 'top', alignment: 'end' });
+  const shareButtonRef = useRef<HTMLButtonElement>(null);
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
@@ -345,6 +349,126 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
     document.body.removeChild(link);
   };
 
+  const calculateDropdownPosition = () => {
+    if (!shareButtonRef.current) return;
+
+    const button = shareButtonRef.current;
+    const buttonRect = button.getBoundingClientRect();
+    const viewport = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+
+    // Dropdown dimensions (estimated)
+    const dropdownWidth = 250;
+    const dropdownHeight = 320; // Approximate height based on number of menu items
+
+    // Calculate available space in each direction
+    const spaceAbove = buttonRect.top;
+    const spaceBelow = viewport.height - buttonRect.bottom;
+    const spaceLeft = buttonRect.left;
+    const spaceRight = viewport.width - buttonRect.right;
+
+    let position: 'top' | 'bottom' | 'left' | 'right' = 'top';
+    let alignment: 'start' | 'center' | 'end' = 'end';
+
+    // Prioritize vertical positioning (top/bottom) first
+    if (spaceAbove >= dropdownHeight) {
+      position = 'top';
+    } else if (spaceBelow >= dropdownHeight) {
+      position = 'bottom';
+    } else if (spaceRight >= dropdownWidth) {
+      position = 'right';
+      // For right positioning, check vertical alignment
+      if (buttonRect.top + dropdownHeight > viewport.height) {
+        alignment = 'end';
+      } else if (buttonRect.bottom - dropdownHeight < 0) {
+        alignment = 'start';
+      } else {
+        alignment = 'center';
+      }
+    } else if (spaceLeft >= dropdownWidth) {
+      position = 'left';
+      // For left positioning, check vertical alignment
+      if (buttonRect.top + dropdownHeight > viewport.height) {
+        alignment = 'end';
+      } else if (buttonRect.bottom - dropdownHeight < 0) {
+        alignment = 'start';
+      } else {
+        alignment = 'center';
+      }
+    } else {
+      // Fallback: use the direction with most space
+      const maxSpace = Math.max(spaceAbove, spaceBelow, spaceLeft, spaceRight);
+      if (maxSpace === spaceAbove) {
+        position = 'top';
+      } else if (maxSpace === spaceBelow) {
+        position = 'bottom';
+      } else if (maxSpace === spaceRight) {
+        position = 'right';
+        alignment = 'center';
+      } else {
+        position = 'left';
+        alignment = 'center';
+      }
+    }
+
+    // For top/bottom positioning, check horizontal alignment
+    if (position === 'top' || position === 'bottom') {
+      if (buttonRect.right - dropdownWidth < 0) {
+        alignment = 'start';
+      } else if (buttonRect.left + dropdownWidth > viewport.width) {
+        alignment = 'end';
+      } else {
+        alignment = 'end'; // Default to end alignment
+      }
+    }
+
+    setDropdownPosition({ position, alignment });
+  };  // Calculate dropdown position when opening
+  useEffect(() => {
+    if (showShareMenu) {
+      // Small delay to ensure DOM is ready
+      const timer = setTimeout(() => {
+        calculateDropdownPosition();
+      }, 10);
+      
+      // Recalculate on window resize and orientation change
+      const handleResize = () => {
+        setTimeout(() => {
+          calculateDropdownPosition();
+        }, 100); // Debounce resize events
+      };
+      
+      const handleOrientationChange = () => {
+        setTimeout(() => {
+          calculateDropdownPosition();
+        }, 300); // Wait for orientation change to complete
+      };
+
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('orientationchange', handleOrientationChange);
+      
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('orientationchange', handleOrientationChange);
+      };
+    }
+  }, [showShareMenu]);// Get animation direction based on dropdown position
+  const getDropdownAnimation = () => {
+    const { position } = dropdownPosition;
+    
+    const animations = {
+      top: { initial: { opacity: 0, y: 10, scale: 0.9 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: 10, scale: 0.9 } },
+      bottom: { initial: { opacity: 0, y: -10, scale: 0.9 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: -10, scale: 0.9 } },
+      left: { initial: { opacity: 0, x: 10, scale: 0.9 }, animate: { opacity: 1, x: 0, scale: 1 }, exit: { opacity: 0, x: 10, scale: 0.9 } },
+      right: { initial: { opacity: 0, x: -10, scale: 0.9 }, animate: { opacity: 1, x: 0, scale: 1 }, exit: { opacity: 0, x: -10, scale: 0.9 } }
+    };
+
+    return animations[position];
+  };
+
   const retryLoading = () => {
     if (!audioRef.current) return;
     
@@ -387,13 +511,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0;
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+    <motion.div      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`relative w-full rounded-2xl p-6 mb-6 backdrop-blur-2xl ${styles.container}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       aria-label="Enhanced Audio Player"
       style={{ overflow: 'visible' }}
     >      {/* Dynamic background effects */}
@@ -726,10 +847,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                 {playbackRate}×
               </motion.span>
             </motion.button>
-            
-            {/* Share button */}
+              {/* Share button */}
             <div className="relative">
               <motion.button
+                ref={shareButtonRef}
                 onClick={() => setShowShareMenu(!showShareMenu)}
                 whileTap={{ scale: 0.9 }}
                 whileHover={{ scale: 1.05 }}
@@ -747,23 +868,128 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                 </motion.svg>
-              </motion.button>
-              
-              {/* Enhanced share menu */}
+              </motion.button>              {/* Enhanced share menu with screen-aware positioning */}
               <AnimatePresence>
-                {showShareMenu && (
+                {showShareMenu && typeof window !== 'undefined' && createPortal(
                   <>
                     <div 
-                      className="fixed inset-0 z-40"
+                      className="fixed inset-0 z-[9998]"
                       onClick={() => setShowShareMenu(false)}
                     />
                     <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                      className={`absolute bottom-full right-0 mb-4 ${styles.container} rounded-2xl backdrop-blur-2xl p-4 min-w-[250px] z-50 shadow-2xl`}
+                      {...getDropdownAnimation()}
+                      className={`${styles.container} rounded-2xl backdrop-blur-2xl p-4 min-w-[250px] shadow-2xl`}
                       data-share-menu
+                      transition={{ 
+                        duration: 0.2, 
+                        ease: "easeOut",
+                        opacity: { duration: 0.15 },
+                        scale: { duration: 0.2 }
+                      }}
+                      style={{
+                        position: 'fixed',
+                        zIndex: 9999,
+                        ...(shareButtonRef.current && (() => {
+                          const buttonRect = shareButtonRef.current.getBoundingClientRect();
+                          const dropdownWidth = 250;
+                          const dropdownHeight = 320;
+                          const { position, alignment } = dropdownPosition;
+                          
+                          switch (position) {
+                            case 'top':
+                              const topY = buttonRect.top - dropdownHeight - 16;
+                              switch (alignment) {
+                                case 'start':
+                                  return { top: topY, left: buttonRect.left };
+                                case 'center':
+                                  return { top: topY, left: buttonRect.left + buttonRect.width/2 - dropdownWidth/2 };
+                                case 'end':
+                                  return { top: topY, left: buttonRect.right - dropdownWidth };
+                              }
+                              break;
+                              
+                            case 'bottom':
+                              const bottomY = buttonRect.bottom + 16;
+                              switch (alignment) {
+                                case 'start':
+                                  return { top: bottomY, left: buttonRect.left };
+                                case 'center':
+                                  return { top: bottomY, left: buttonRect.left + buttonRect.width/2 - dropdownWidth/2 };
+                                case 'end':
+                                  return { top: bottomY, left: buttonRect.right - dropdownWidth };
+                              }
+                              break;
+                              
+                            case 'left':
+                              const leftX = buttonRect.left - dropdownWidth - 16;
+                              switch (alignment) {
+                                case 'start':
+                                  return { top: buttonRect.top, left: leftX };
+                                case 'center':
+                                  return { top: buttonRect.top + buttonRect.height/2 - dropdownHeight/2, left: leftX };
+                                case 'end':
+                                  return { top: buttonRect.bottom - dropdownHeight, left: leftX };
+                              }
+                              break;
+                              
+                            case 'right':
+                              const rightX = buttonRect.right + 16;
+                              switch (alignment) {
+                                case 'start':
+                                  return { top: buttonRect.top, left: rightX };
+                                case 'center':
+                                  return { top: buttonRect.top + buttonRect.height/2 - dropdownHeight/2, left: rightX };
+                                case 'end':
+                                  return { top: buttonRect.bottom - dropdownHeight, left: rightX };
+                              }
+                              break;
+                          }
+                          return {};
+                        })())                      }}
                     >
+                      {/* Dynamic arrow indicator pointing to share button */}
+                      <div 
+                        className="absolute"
+                        style={{
+                          ...((() => {
+                            const { position } = dropdownPosition;
+                            switch (position) {
+                              case 'top':
+                                return {
+                                  bottom: '-8px',
+                                  left: '20px',
+                                  transform: 'translateX(-50%)'
+                                };
+                              case 'bottom':
+                                return {
+                                  top: '-8px',
+                                  left: '20px',
+                                  transform: 'translateX(-50%)'
+                                };
+                              case 'left':
+                                return {
+                                  right: '-8px',
+                                  top: '20px',
+                                  transform: 'translateY(-50%)'
+                                };
+                              case 'right':
+                                return {
+                                  left: '-8px',
+                                  top: '20px',
+                                  transform: 'translateY(-50%)'
+                                };
+                            }
+                          })())
+                        }}
+                      >
+                        <div className={`w-0 h-0 ${
+                          dropdownPosition.position === 'top' ? `border-l-2 border-r-2 border-t-4 border-transparent ${isLight ? 'border-t-white' : 'border-t-gray-800'}` :
+                          dropdownPosition.position === 'bottom' ? `border-l-2 border-r-2 border-b-4 border-transparent ${isLight ? 'border-b-white' : 'border-b-gray-800'}` :
+                          dropdownPosition.position === 'left' ? `border-t-2 border-b-2 border-l-4 border-transparent ${isLight ? 'border-l-white' : 'border-l-gray-800'}` :
+                          `border-t-2 border-b-2 border-r-4 border-transparent ${isLight ? 'border-r-white' : 'border-r-gray-800'}`
+                        }`} />
+                      </div>
+                      
                       <div className="space-y-2">
                         <button
                           onClick={copyAudioLink}
@@ -823,22 +1049,26 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
-                          {t('blog.aria.downloadAudio')}
-                        </button>
+                          {t('blog.aria.downloadAudio')}                        </button>
                       </div>
                     </motion.div>
-                  </>
+                  </>,
+                  document.body
                 )}
               </AnimatePresence>
             </div>
           </div>
-        </div>        {/* Enhanced time display - current time only */}
+        </div>        {/* Enhanced time display with duration counter */}
         <motion.div 
-          className={`flex items-center justify-center px-4 py-2 rounded-full backdrop-blur-md ${styles.controlButton}`}
+          className={`flex items-center space-x-3 px-4 py-2 rounded-full backdrop-blur-md ${styles.controlButton}`}
           whileHover={{ scale: 1.05 }}
         >
           <div className={`text-sm font-mono ${styles.textAccent}`}>
             {formatTime(currentTime)}
+          </div>
+          <div className={`w-1 h-1 rounded-full ${styles.textSecondary}`} />
+          <div className={`text-sm font-mono ${styles.textSecondary}`}>
+            {formatTime(duration)}
           </div>
         </motion.div>
       </div>
