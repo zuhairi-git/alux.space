@@ -28,11 +28,8 @@ export const posts: Post[] = [
          en: {
             title: 'Sharpened by the Machine: How Challenging AI Makes Us More Human',
             description: 'Learn how to use AI as an intellectual adversary to strengthen critical thinking and preserve human intelligence. Discover strategies for challenging AI, avoiding cognitive dependency, and evolving human capabilities in the age of artificial intelligence.',
-            publishedDate: 'June 20, 2025',
-            content: `
+            publishedDate: 'June 20, 2025',            content: `
 Sharpened by the Machine: How Challenging AI Makes Us More Human
-
-Image by freepik
 
 "Intelligence is not about having the answers. It's about knowing how to question everything—even the machine that seems to know it all."
 

@@ -174,8 +174,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           />
         </motion.section>
       )}
-      
-      {/* Featured Image */}
+        {/* Featured Image */}
       <motion.figure
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -193,6 +192,21 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
         />
         <div className={`absolute inset-0 ${isLight ? 'bg-gradient-to-t from-black/20 to-transparent' : 'bg-gradient-to-t from-black/30 to-transparent'}`} aria-hidden="true" />
+        
+        {/* Image Attribution Badge - only show for sharpened-by-machine post */}
+        {slug === 'sharpened-by-machine' && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="absolute top-4 left-4 z-10"
+          >
+            <div className="bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg border border-white/20">
+              Image by Freepik
+            </div>
+          </motion.div>
+        )}
+        
         <figcaption id="featured-image-caption" className="sr-only">
           {t('blog.aria.featuredImageFor')} {title}
         </figcaption>
