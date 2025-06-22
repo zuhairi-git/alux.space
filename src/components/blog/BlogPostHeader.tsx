@@ -42,7 +42,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   };  // Map of blog posts with audio content
   const audioMap: Record<string, string> = {
     // Make sure the path matches exactly where the file is located
-    'primitive-human': '/audio/blog/blog03.mp3',
+    'primitive-human': '/audio/blog/embracing-the-era-of-ai-en.mp3',
     'sharpened-by-machine': '/audio/blog/Sharpened-by-the-Machine_ AI-and-Human-Development.wav',
     // Add more audio files here as they become available
     // 'other-post-slug': '/audio/blog/other-file.mp3',
