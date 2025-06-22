@@ -47,6 +47,18 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   const [isTouching, setIsTouching] = useState(false);
   const [lastTap, setLastTap] = useState(0);
 
+  // Detect iOS/Safari for specific handling
+  const isIOS = React.useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }, []);
+
+  const isSafari = React.useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  }, []);
+
   // Find the current episode data
   const currentEpisode = podcastEpisodes.find(ep => ep.id === currentEpisodeId) || availableEpisodes[0];
   const currentAudioFile = currentEpisode ? getAudioFileForLanguage(currentEpisode, currentLanguage) : '';
@@ -94,14 +106,15 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
     } else {
       if (isLight) {
         return 'bg-white/60 hover:bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-sm hover:shadow-md text-gray-700';
-      } else if (isColorful) {
-        return 'bg-white/10 hover:bg-white/20 backdrop-blur-md border border-purple-300/30 shadow-sm hover:shadow-md text-white';
+      } else if (isColorful) {        return 'bg-white/10 hover:bg-white/20 backdrop-blur-md border border-purple-300/30 shadow-sm hover:shadow-md text-white';
       } else {
         return 'bg-white/5 hover:bg-white/10 backdrop-blur-md border border-gray-600/50 shadow-sm hover:shadow-md text-gray-300';
       }
     }
-  };// Audio control functions
-  const togglePlay = useCallback(() => {
+  };
+
+  // Audio control functions
+  const togglePlay = useCallback(async () => {
     if (!audioRef.current) {
       console.error('Audio ref is not available');
       return;
@@ -118,50 +131,88 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
       currentAudioFile,
       currentEpisode: currentEpisode?.title,
       readyState: audioRef.current.readyState,
-      networkState: audioRef.current.networkState
+      networkState: audioRef.current.networkState,
+      isIOS,
+      isSafari
     });
       if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
       setAnnouncement(locale === 'fi' ? 'Podcast pysäytetty' : 'Podcast paused');
     } else {
-      // Ensure audio is loaded before trying to play
-      if (audioRef.current.readyState < 2) {
-        console.log('Audio not ready, loading...');
-        audioRef.current.load();
-      }
+      try {
+        // iOS Safari specific handling
+        if (isIOS || isSafari) {
+          // Ensure audio is loaded before playing on iOS
+          if (audioRef.current.readyState === 0) {
+            console.log('PodcastPlayer: Loading audio for iOS/Safari');
+            audioRef.current.load();
+            
+            // Wait for audio to be ready
+            await new Promise<void>((resolve, reject) => {
+              const timeout = setTimeout(() => {
+                reject(new Error('Audio load timeout'));
+              }, 10000);
+              
+              const onCanPlay = () => {
+                clearTimeout(timeout);
+                audioRef.current?.removeEventListener('canplay', onCanPlay);
+                audioRef.current?.removeEventListener('error', onError);
+                resolve();
+              };
+              
+              const onError = () => {
+                clearTimeout(timeout);
+                audioRef.current?.removeEventListener('canplay', onCanPlay);
+                audioRef.current?.removeEventListener('error', onError);
+                reject(new Error('Audio load failed'));
+              };
+              
+              audioRef.current?.addEventListener('canplay', onCanPlay);
+              audioRef.current?.addEventListener('error', onError);
+            });
+          }
+        } else {
+          // Ensure audio is loaded before trying to play on other platforms
+          if (audioRef.current.readyState < 2) {
+            console.log('Audio not ready, loading...');
+            audioRef.current.load();
+          }
+        }
+        
         // Ensure audio volume is not muted
-      audioRef.current.volume = 1.0;
-      audioRef.current.muted = false;
-      
-      audioRef.current.play()
-        .then(() => {
-          console.log('Audio started playing successfully');
-          console.log('Audio volume:', audioRef.current?.volume);
-          console.log('Audio muted:', audioRef.current?.muted);
-          console.log('Audio paused:', audioRef.current?.paused);
-          setIsPlaying(true);
-          setLoadError(false);
-          setAnnouncement(locale === 'fi' ? 'Podcast toistetaan' : 'Podcast playing');
-        })        .catch(error => {
-          console.error('Error playing audio:', error);
-          console.error('Audio source:', audioRef.current?.src);
-          console.error('Current audio file:', currentAudioFile);
-          console.error('Ready state:', audioRef.current?.readyState);
-          console.error('Network state:', audioRef.current?.networkState);
-          setLoadError(true);
-          setIsPlaying(false);
-          setAnnouncement(locale === 'fi' ? 'Virhe äänen toistossa' : 'Error playing audio');
-        });
+        audioRef.current.volume = 1.0;
+        audioRef.current.muted = false;
+        
+        await audioRef.current.play();
+        console.log('Audio started playing successfully');
+        console.log('Audio volume:', audioRef.current?.volume);
+        console.log('Audio muted:', audioRef.current?.muted);
+        console.log('Audio paused:', audioRef.current?.paused);
+        setIsPlaying(true);
+        setLoadError(false);
+        setAnnouncement(locale === 'fi' ? 'Podcast toistetaan' : 'Podcast playing');
+        
+      } catch (error) {
+        console.error('Error playing audio:', error);
+        console.error('Audio source:', audioRef.current?.src);
+        console.error('Current audio file:', currentAudioFile);
+        console.error('Ready state:', audioRef.current?.readyState);
+        console.error('Network state:', audioRef.current?.networkState);        setLoadError(true);
+        setIsPlaying(false);
+        setAnnouncement(locale === 'fi' ? 'Virhe äänen toistossa' : 'Error playing audio');
+      }
     }
-  }, [isPlaying, currentAudioFile, currentEpisode, hasUserInteracted, locale]);
-    const stopAudio = useCallback(() => {
+  }, [isPlaying, currentAudioFile, currentEpisode, hasUserInteracted, locale, isIOS, isSafari]);
+  
+  const stopAudio = useCallback(() => {
     if (!audioRef.current) return;
     
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
     setIsPlaying(false);
-    setCurrentTime(0);  }, []);
+    setCurrentTime(0);
+  }, []);
 
 // Audio functions
   useEffect(() => {
@@ -522,16 +573,20 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className={`w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-2xl overflow-hidden ${getBgStyle()} shadow-xl`}
-    >
-      {/* Hidden audio element with comprehensive event handlers */}
+    >      {/* Hidden audio element with comprehensive event handlers and iOS optimizations */}
       <audio
         ref={audioRef}
         src={currentAudioFile}
-        preload="metadata"
+        preload={isIOS ? "none" : "metadata"}
+        playsInline={true}
+        controls={false}
+        muted={false}
+        autoPlay={false}
+        crossOrigin="anonymous"
         onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
         onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
         onCanPlay={() => {
-          console.log('Audio can play');
+          console.log('Audio can play', { isIOS, isSafari });
           setLoadError(false);
         }}
         onCanPlayThrough={() => {
@@ -548,7 +603,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           }
         }}
         onError={(e) => {
-          console.error('Audio error:', e);
+          console.error('Audio error:', e, { isIOS, isSafari });
           setLoadError(true);
         }}
         onPlay={() => {
@@ -574,7 +629,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
         onStalled={() => {
           console.log('Audio stalled');
         }}
-      />      {/* Album Art Section - Mobile First */}
+      />{/* Album Art Section - Mobile First */}
       <div className="relative p-4 pb-0">
         <div className="aspect-square w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto relative">          {/* Podcast "Album Art" Background */}
           <motion.div 
