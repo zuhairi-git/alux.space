@@ -1317,3 +1317,56 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+/* Mobile-Specific Podcast Player Icon Visibility */
+@media (max-width: 768px) {
+  /* Ensure all SVG icons in podcast player are visible on mobile */
+  .podcast-player svg,
+  [data-podcast-player] svg,
+  [aria-label*="podcast" i] svg,
+  [aria-label*="audio" i] svg {
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: contrast(1.2) brightness(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.3)) !important;
+  }
+  
+  /* Enhanced visibility for play/pause buttons on mobile */
+  .podcast-player button svg,
+  [data-podcast-player] button svg {
+    min-width: 20px !important;
+    min-height: 20px !important;
+    stroke-width: 0.5 !important;
+    stroke: rgba(255,255,255,0.8) !important;
+  }
+  
+  /* Ensure control buttons have proper z-index and are clickable */
+  .podcast-player button,
+  [data-podcast-player] button {
+    position: relative !important;
+    z-index: 10 !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(139, 92, 246, 0.3) !important;
+  }
+  
+  /* Force visibility of podcast player container */
+  .podcast-player,
+  [data-podcast-player] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 100 !important;
+  }
+}
+
+/* Podcast Player Icon Contrast Enhancement */
+.podcast-icon-enhance {
+  filter: contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important;
+}
+
+@media (max-width: 768px) {
+  .podcast-icon-enhance {
+    filter: contrast(1.4) brightness(1.2) drop-shadow(0 2px 6px rgba(0,0,0,0.5)) !important;
+    stroke: rgba(255,255,255,0.9) !important;
+    stroke-width: 0.5 !important;
+  }
+}

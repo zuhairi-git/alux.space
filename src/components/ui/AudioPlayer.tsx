@@ -519,12 +519,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
 
   // Calculate progress percentage for visual elements
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0;
-
   return (    <motion.div      initial={animationsDisabled ? {} : { opacity: 0, y: 20 }}
       animate={animationsDisabled ? {} : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}      className={`relative w-full rounded-2xl ${isMobile ? 'p-4' : 'p-6'} mb-6 backdrop-blur-2xl ${styles.container}`}
+      transition={{ duration: 0.6, ease: "easeOut" }}      className={`relative w-full rounded-2xl ${isMobile ? 'p-4' : 'p-6'} mb-6 backdrop-blur-2xl ${styles.container} podcast-player`}
       aria-label="Enhanced Audio Player"
-      style={{ overflow: 'visible', zIndex: 1 }}
+      style={{ overflow: 'visible', zIndex: 100, position: 'relative' }}
+      data-podcast-player="true"
     >      {/* Dynamic background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none rounded-2xl" style={{ zIndex: -1 }}>
         <motion.div 
@@ -786,8 +786,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
           />
         </motion.div>
       </div>      {/* Enhanced control panel */}
-      <div className="flex items-center justify-between relative z-10 mb-4" style={{ overflow: 'visible' }}>
-        <div className="flex items-center space-x-4 relative" style={{ overflow: 'visible' }}>          {/* Main play/pause button - Enhanced for mobile */}
+      <div className="flex items-center justify-between relative z-20 mb-4" style={{ overflow: 'visible' }}>
+        <div className="flex items-center space-x-4 relative z-10" style={{ overflow: 'visible' }}>{/* Main play/pause button - Enhanced for mobile */}
           <motion.button
             onClick={togglePlay}
             whileTap={animationsDisabled ? {} : { scale: 0.9 }}
@@ -819,26 +819,23 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
               transition={{ duration: 2, repeat: Infinity }}
             />
             
-            <AnimatePresence mode="wait">
-              {isPlaying ? (
-                <motion.svg 
+            <AnimatePresence mode="wait">              {isPlaying ? (                <motion.svg 
                   key="pause"
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
                   exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-8 h-8' : 'w-7 h-7'} text-white relative z-10`} 
+                  className={`${isMobile ? 'w-10 h-10' : 'w-7 h-7'} text-white relative z-20 drop-shadow-sm podcast-icon-enhance`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                 </motion.svg>
-              ) : (
-                <motion.svg 
+              ) : (                <motion.svg 
                   key="play"
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
                   exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-8 h-8' : 'w-7 h-7'} text-white relative z-10`} 
+                  className={`${isMobile ? 'w-10 h-10' : 'w-7 h-7'} text-white relative z-20 drop-shadow-sm podcast-icon-enhance`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
@@ -863,21 +860,20 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
           </motion.button>
             {/* Secondary controls - Enhanced for mobile */}
           <div className={`flex items-center ${isMobile ? 'space-x-4' : 'space-x-3'}`}>
-            {/* Stop button - Enhanced for mobile */}
-            <motion.button
+            {/* Stop button - Enhanced for mobile */}            <motion.button
               onClick={stopAudio}
               whileTap={animationsDisabled ? {} : { scale: 0.9 }}
               whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
               className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200 ${
                 isMobile ? 'active:bg-purple-500/20' : ''
-              }`}
+              } relative z-10`}
               disabled={loadError}
               aria-label="Stop"
               onTouchStart={() => setIsTouching(true)}
               onTouchEnd={() => setIsTouching(false)}
             >
               <motion.svg 
-                className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} 
+                className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5'} drop-shadow-sm`} 
                 fill="currentColor" 
                 viewBox="0 0 20 20"
                 whileHover={!isMobile && !animationsDisabled ? { rotate: 90 } : {}}
@@ -887,8 +883,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
               </motion.svg>
             </motion.button>
             
-            {/* Playback rate - Enhanced for mobile */}
-            <motion.button
+            {/* Playback rate - Enhanced for mobile */}            <motion.button
               onClick={changePlaybackRate}
               whileTap={animationsDisabled ? {} : { scale: 0.9 }}
               whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
@@ -896,12 +891,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                 isMobile ? 'text-sm' : 'text-sm'
               } font-semibold transition-all duration-200 ${
                 isMobile ? 'active:bg-purple-500/20' : ''
-              }`}
+              } relative z-10`}
               disabled={loadError}
               aria-label={`Change playback speed, currently ${playbackRate}x`}
               onTouchStart={() => setIsTouching(true)}
               onTouchEnd={() => setIsTouching(false)}
-            >              <motion.span 
+            ><motion.span 
                 key={playbackRate}
                 initial={animationsDisabled ? {} : { y: -10, opacity: 0 }}
                 animate={animationsDisabled ? {} : { y: 0, opacity: 1 }}
@@ -922,14 +917,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                 whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
                 className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200 ${
                   isMobile ? 'active:bg-purple-500/20' : ''
-                }`}
+                } relative z-10`}
                 disabled={loadError}
                 aria-label={t('blog.aria.shareAudio')}
                 data-share-menu
                 onTouchStart={() => setIsTouching(true)}
-                onTouchEnd={() => setIsTouching(false)}
-              >                <motion.svg 
-                  className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} 
+                onTouchEnd={() => setIsTouching(false)}              ><motion.svg 
+                  className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5'} drop-shadow-sm`} 
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -943,10 +937,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                   <>
                     {/* Invisible backdrop for better layering */}
                     <div className="fixed inset-0 z-[999998]" style={{ pointerEvents: 'none' }} />
-                    
-                    <motion.div
+                      <motion.div
                       {...getDropdownAnimation()}
-                      className={`absolute ${styles.container} rounded-2xl backdrop-blur-2xl p-4 min-w-[250px] shadow-2xl`}
+                      className={`absolute ${styles.container} rounded-2xl backdrop-blur-2xl p-4 min-w-[250px] shadow-2xl border border-white/10`}
                       data-share-menu
                       transition={{ 
                         duration: 0.2, 

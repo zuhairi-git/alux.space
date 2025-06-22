@@ -516,12 +516,13 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [togglePlay, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode, stopAudio, changePlaybackRate, duration, locale]);    return (
-    <motion.div 
+  }, [togglePlay, canGoNext, canGoPrevious, goToNextEpisode, goToPreviousEpisode, stopAudio, changePlaybackRate, duration, locale]);    return (    <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-2xl overflow-hidden ${getBgStyle()} shadow-xl`}
+      className={`w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-2xl overflow-hidden ${getBgStyle()} shadow-xl relative podcast-player`}
+      style={{ zIndex: 100, position: 'relative' }}
+      data-podcast-player="true"
     >
       {/* Hidden audio element with comprehensive event handlers */}
       <audio
@@ -575,8 +576,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           console.log('Audio stalled');
         }}
       />      {/* Album Art Section - Mobile First */}
-      <div className="relative p-4 pb-0">
-        <div className="aspect-square w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto relative">          {/* Podcast "Album Art" Background */}
+      <div className="relative p-4 pb-0 z-10">
+        <div className="aspect-square w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto relative z-10">{/* Podcast "Album Art" Background */}
           <motion.div 
             className={`w-full h-full rounded-xl md:rounded-2xl ${
               isLight 
@@ -783,7 +784,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           {currentEpisode?.description || ''}
         </p>
       </div>      {/* Progress Section - Modern Mobile Style */}
-      <div className="px-4 pb-3">        {/* Main progress bar - Enhanced for mobile touch */}
+      <div className="px-4 pb-3 relative z-15">{/* Main progress bar - Enhanced for mobile touch */}
         <div className="relative w-full mb-3">
           <div 
             ref={progressRef}
@@ -793,14 +794,13 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             aria-valuemax={duration}
             aria-valuenow={currentTime}
             aria-valuetext={`${formatTime(currentTime)} / ${formatTime(duration)}`}
-            tabIndex={0}
-            className={`w-full ${isMobile ? 'h-4 py-2' : 'h-2'} rounded-full relative overflow-hidden cursor-pointer group ${
+            tabIndex={0}            className={`w-full ${isMobile ? 'h-4 py-2' : 'h-2'} rounded-full relative overflow-hidden cursor-pointer group ${
               isLight 
                 ? 'bg-gray-200' 
                 : 'bg-gray-700'
             } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-              isMobile ? 'active:bg-gray-300 dark:active:bg-gray-600' : ''
-            }`}
+              isMobile ? 'active:bg-gray-300 dark:active:bg-gray-600 shadow-inner' : ''
+            } relative z-10`}
             onClick={handleProgressClick}
             onMouseMove={!isMobile ? handleProgressMouseMove : undefined}
             onMouseEnter={!isMobile ? handleProgressMouseEnter : undefined}
@@ -876,12 +876,12 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             />            {/* Interactive playhead - Enhanced for mobile */}
             <motion.div
               className={`absolute top-2/2 transform -translate-y-1/2 ${
-                isMobile ? 'w-4 h-4' : 'w-4 h-4'
+                isMobile ? 'w-5 h-5' : 'w-4 h-4'
               } rounded-full bg-white shadow-lg border-2 border-purple-500 ${
-                isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                isMobile ? 'opacity-100 shadow-xl' : 'opacity-0 group-hover:opacity-100'
               } transition-opacity ${
                 isTouching ? 'scale-125 shadow-xl' : ''
-              }`}
+              } relative z-20`}
               style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, transform: 'translate(-50%, -50%)' }}
               whileHover={!isMobile && !animationsDisabled ? { scale: 1.2 } : {}}
               animate={isTouching && !animationsDisabled ? { scale: 1.3 } : {}}
@@ -920,23 +920,25 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           </span>
         </div>
       </div>      {/* Controls Section - Compact Mobile Layout */}
-      <div className="px-4 pb-3">        {/* Main playback controls - Enhanced for mobile */}
+      <div className="px-4 pb-3 relative z-20">{/* Main playback controls - Enhanced for mobile */}
         <div className={`flex items-center justify-center ${isMobile ? 'gap-6' : 'gap-4 md:gap-6'} mb-3`}>
           {/* Previous - Larger touch target for mobile */}
           <motion.button
             onClick={goToPreviousEpisode}
             whileTap={animationsDisabled ? {} : { scale: 0.9 }}
-            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
-            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-10 h-10 md:w-12 md:h-12'} flex items-center justify-center rounded-full ${
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-10 h-10 md:w-12 md:h-12'} flex items-center justify-center rounded-full ${
               !canGoPrevious ? 'opacity-40' : 'opacity-100'
             } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-              isMobile ? 'active:bg-purple-500/20' : ''
-            }`}
+              isMobile ? 'active:bg-purple-500/20 shadow-lg' : ''
+            } relative z-10`}
             disabled={loadError || !canGoPrevious}
             aria-label={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
             onTouchStart={() => setIsTouching(true)}
-            onTouchEnd={() => setIsTouching(false)}
-          >            <svg className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5 md:w-6 md:h-6'} text-purple-500`} fill="currentColor" viewBox="0 0 20 20">
+            onTouchEnd={() => setIsTouching(false)}          >            <svg className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5 md:w-6 md:h-6'} text-purple-500 drop-shadow-sm podcast-icon-enhance`} fill="currentColor" viewBox="0 0 20 20" style={{ 
+              filter: 'contrast(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
+              stroke: isMobile ? 'rgba(147,51,234,0.8)' : 'none',
+              strokeWidth: isMobile ? '0.3' : '0'
+            }}>
               <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
             </svg>
           </motion.button>
@@ -946,8 +948,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             ref={playButtonRef}
             onClick={togglePlay}
             whileTap={animationsDisabled ? {} : { scale: 0.95 }}
-            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
-            className={`${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14 md:w-16 md:h-16'} flex items-center justify-center rounded-full ${
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}            className={`${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14 md:w-16 md:h-16'} flex items-center justify-center rounded-full ${
               isLight 
                 ? 'bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' 
                 : isColorful
@@ -955,7 +956,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   : 'bg-gradient-to-br from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800'
             } shadow-xl transition-all duration-200 focus:outline-none ${
               isMobile ? 'focus:ring-4 focus:ring-purple-500/50 active:shadow-2xl' : 'focus:ring-4 focus:ring-purple-500/50'
-            }`}
+            } relative z-20`}
             disabled={loadError}
             aria-label={isPlaying ? (locale === 'fi' ? 'Pysäytä podcast' : 'Pause podcast') : (locale === 'fi' ? 'Toista podcast' : 'Play podcast')}            onTouchStart={() => {
               setIsTouching(true);
@@ -974,10 +975,14 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   key="pause"
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
-                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-10 h-10' : 'w-8 h-8 md:w-10 md:h-10'} text-white`} 
+                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}                  className={`${isMobile ? 'w-12 h-12' : 'w-8 h-8 md:w-10 md:h-10'} text-white drop-shadow-md podcast-icon-enhance`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
+                  style={{ 
+                    filter: 'contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
+                    stroke: isMobile ? 'rgba(255,255,255,0.8)' : 'none',
+                    strokeWidth: isMobile ? '0.5' : '0'
+                  }}
                 >
                   <path fillRule="evenodd" d="M6 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1zm6 0a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z" clipRule="evenodd" />
                 </motion.svg>
@@ -986,11 +991,15 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   key="play"
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
-                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-10 h-10' : 'w-8 h-8 md:w-10 md:h-10'} text-white`} 
+                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}                  className={`${isMobile ? 'w-12 h-12' : 'w-8 h-8 md:w-10 md:h-10'} text-white drop-shadow-md podcast-icon-enhance`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
-                  style={{ transform: 'translateX(0.5px)' }}
+                  style={{ 
+                    transform: 'translateX(0.5px)', 
+                    filter: 'contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
+                    stroke: isMobile ? 'rgba(255,255,255,0.8)' : 'none',
+                    strokeWidth: isMobile ? '0.5' : '0'
+                  }}
                 >
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                 </motion.svg>
@@ -1000,18 +1009,20 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           <motion.button
             onClick={goToNextEpisode}
             whileTap={animationsDisabled ? {} : { scale: 0.9 }}
-            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
-            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-10 h-10 md:w-12 md:h-12'} flex items-center justify-center rounded-full ${
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-10 h-10 md:w-12 md:h-12'} flex items-center justify-center rounded-full ${
               !canGoNext ? 'opacity-40' : 'opacity-100'
             } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-              isMobile ? 'active:bg-purple-500/20' : ''
-            }`}
+              isMobile ? 'active:bg-purple-500/20 shadow-lg' : ''
+            } relative z-10`}
             disabled={loadError || !canGoNext}
             aria-label={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
-          >
-            <svg className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5 md:w-6 md:h-6'} text-purple-500`} fill="currentColor" viewBox="0 0 20 20">
+          >            <svg className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5 md:w-6 md:h-6'} text-purple-500 drop-shadow-sm podcast-icon-enhance`} fill="currentColor" viewBox="0 0 20 20" style={{ 
+              filter: 'contrast(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
+              stroke: isMobile ? 'rgba(147,51,234,0.8)' : 'none',
+              strokeWidth: isMobile ? '0.3' : '0'
+            }}>
               <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
             </svg>
           </motion.button>
@@ -1021,12 +1032,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           <motion.button
             onClick={changePlaybackRate}
             whileTap={animationsDisabled ? {} : { scale: 0.9 }}
-            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
-            className={`${isMobile ? 'px-3 py-2 min-w-[48px] min-h-[48px]' : 'px-2 py-1'} rounded-full ${getGlassButtonStyle('secondary')} ${
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}            className={`${isMobile ? 'px-3 py-2 min-w-[48px] min-h-[48px]' : 'px-2 py-1'} rounded-full ${getGlassButtonStyle('secondary')} ${
               isMobile ? 'text-sm' : 'text-xs'
             } font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-              isMobile ? 'active:bg-purple-500/20' : ''
-            }`}
+              isMobile ? 'active:bg-purple-500/20 shadow-lg' : ''
+            } relative z-10`}
             disabled={loadError}
             aria-label={`${locale === 'fi' ? 'Toistonopeus' : 'Playback speed'} ${playbackRate}x`}
             onTouchStart={() => setIsTouching(true)}
@@ -1059,11 +1069,16 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >            <motion.svg 
-              className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'}`}
+              className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} drop-shadow-sm`}
               fill="currentColor"
               viewBox="0 0 20 20"
               animate={animationsDisabled ? {} : { rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.2 }}
+              style={{ 
+                filter: 'contrast(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.2))',
+                stroke: isMobile ? 'rgba(0,0,0,0.1)' : 'none',
+                strokeWidth: isMobile ? '0.2' : '0'
+              }}
             >
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
             </motion.svg>
@@ -1081,8 +1096,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             aria-label={locale === 'fi' ? 'Pysäytä podcast' : 'Stop podcast'}
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
-          >
-            <svg className={`${isMobile ? 'w-4 h-4' : 'w-3 h-3'}`} fill="currentColor" viewBox="0 0 20 20">
+          >            <svg className={`${isMobile ? 'w-4 h-4' : 'w-3 h-3'} drop-shadow-sm`} fill="currentColor" viewBox="0 0 20 20" style={{ 
+              filter: 'contrast(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.2))',
+              stroke: isMobile ? 'rgba(0,0,0,0.1)' : 'none',
+              strokeWidth: isMobile ? '0.2' : '0'
+            }}>
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
             </svg>
           </motion.button>
@@ -1109,8 +1127,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             }
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
-          >
-            <span className={`${isMobile ? 'text-sm' : 'text-xs'}`}>
+          >            <span className={`${isMobile ? 'text-sm' : 'text-xs'} font-semibold drop-shadow-sm`} style={{ filter: 'contrast(1.1)' }}>
               {audioRef.current?.muted ? '🔇' : '🔊'}
             </span>
           </motion.button>
