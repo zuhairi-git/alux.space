@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { podcastEpisodes } from '@/data/podcasts';
 import { SupportedLanguage } from '@/podcast/types/podcast';
 import { getAudioFileForLanguage, filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge, setMediaSessionMetadata } from '@/podcast/utils/languageUtils';
@@ -18,6 +19,8 @@ interface PodcastPlayerProps {
 const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   const { theme } = useTheme();
   const { locale } = useLanguage();
+  const isMobile = useIsMobile();
+  const animationsDisabled = useAnimationsDisabled();
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
   
@@ -40,6 +43,9 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   const [loadError, setLoadError] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [announcement, setAnnouncement] = useState('');
+  // Enhanced mobile states
+  const [isTouching, setIsTouching] = useState(false);
+  const [lastTap, setLastTap] = useState(0);
 
   // Find the current episode data
   const currentEpisode = podcastEpisodes.find(ep => ep.id === currentEpisodeId) || availableEpisodes[0];
@@ -777,8 +783,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           {currentEpisode?.description || ''}
         </p>
       </div>      {/* Progress Section - Modern Mobile Style */}
-      <div className="px-4 pb-3">
-        {/* Main progress bar - mobile optimized */}
+      <div className="px-4 pb-3">        {/* Main progress bar - Enhanced for mobile touch */}
         <div className="relative w-full mb-3">
           <div 
             ref={progressRef}
@@ -789,15 +794,46 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             aria-valuenow={currentTime}
             aria-valuetext={`${formatTime(currentTime)} / ${formatTime(duration)}`}
             tabIndex={0}
-            className={`w-full h-2 rounded-full relative overflow-hidden cursor-pointer group ${
+            className={`w-full ${isMobile ? 'h-4 py-2' : 'h-2'} rounded-full relative overflow-hidden cursor-pointer group ${
               isLight 
                 ? 'bg-gray-200' 
                 : 'bg-gray-700'
-            } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-gray-300 dark:active:bg-gray-600' : ''
+            }`}
             onClick={handleProgressClick}
-            onMouseMove={handleProgressMouseMove}
-            onMouseEnter={handleProgressMouseEnter}
-            onMouseLeave={handleProgressMouseLeave}
+            onMouseMove={!isMobile ? handleProgressMouseMove : undefined}
+            onMouseEnter={!isMobile ? handleProgressMouseEnter : undefined}
+            onMouseLeave={!isMobile ? handleProgressMouseLeave : undefined}
+            onTouchStart={(e) => {
+              setIsTouching(true);
+              const touch = e.touches[0];
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = touch.clientX - rect.left;
+              const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+              if (audioRef.current && duration > 0) {
+                const newTime = (percentage / 100) * duration;
+                audioRef.current.currentTime = newTime;
+                setCurrentTime(newTime);
+                setAnnouncement(`${locale === 'fi' ? 'Siirtyi kohtaan' : 'Seeked to'} ${formatTime(newTime)}`);
+              }
+            }}
+            onTouchMove={(e) => {
+              if (!isTouching) return;
+              e.preventDefault(); // Prevent scrolling
+              const touch = e.touches[0];
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = touch.clientX - rect.left;
+              const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+              if (audioRef.current && duration > 0) {
+                const newTime = (percentage / 100) * duration;
+                audioRef.current.currentTime = newTime;
+                setCurrentTime(newTime);
+              }
+            }}
+            onTouchEnd={() => {
+              setIsTouching(false);
+            }}
             onKeyDown={(e) => {
               if (!audioRef.current || !duration) return;
               
@@ -837,13 +873,18 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               initial={{ width: 0 }}
               animate={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-            />
-
-            {/* Interactive playhead */}
+            />            {/* Interactive playhead - Enhanced for mobile */}
             <motion.div
-              className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg border-2 border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"
+              className={`absolute top-2/2 transform -translate-y-1/2 ${
+                isMobile ? 'w-4 h-4' : 'w-4 h-4'
+              } rounded-full bg-white shadow-lg border-2 border-purple-500 ${
+                isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+              } transition-opacity ${
+                isTouching ? 'scale-125 shadow-xl' : ''
+              }`}
               style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, transform: 'translate(-50%, -50%)' }}
-              whileHover={{ scale: 1.2 }}
+              whileHover={!isMobile && !animationsDisabled ? { scale: 1.2 } : {}}
+              animate={isTouching && !animationsDisabled ? { scale: 1.3 } : {}}
             />
 
             {/* Hover preview */}
@@ -879,57 +920,74 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           </span>
         </div>
       </div>      {/* Controls Section - Compact Mobile Layout */}
-      <div className="px-4 pb-3">
-        {/* Main playback controls */}
-        <div className="flex items-center justify-center gap-4 md:gap-6 mb-3">
-          {/* Previous */}
+      <div className="px-4 pb-3">        {/* Main playback controls - Enhanced for mobile */}
+        <div className={`flex items-center justify-center ${isMobile ? 'gap-6' : 'gap-4 md:gap-6'} mb-3`}>
+          {/* Previous - Larger touch target for mobile */}
           <motion.button
             onClick={goToPreviousEpisode}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full ${
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
+            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-10 h-10 md:w-12 md:h-12'} flex items-center justify-center rounded-full ${
               !canGoPrevious ? 'opacity-40' : 'opacity-100'
-            } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-purple-500/20' : ''
+            }`}
             disabled={loadError || !canGoPrevious}
             aria-label={locale === 'fi' ? 'Edellinen jakso' : 'Previous episode'}
-          >            <svg className="w-5 h-5 md:w-6 md:h-6 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+            onTouchStart={() => setIsTouching(true)}
+            onTouchEnd={() => setIsTouching(false)}
+          >            <svg className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5 md:w-6 md:h-6'} text-purple-500`} fill="currentColor" viewBox="0 0 20 20">
               <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
             </svg>
           </motion.button>
 
-          {/* Play/Pause - Central button */}
+          {/* Play/Pause - Central button - Enhanced for mobile */}
           <motion.button
             ref={playButtonRef}
             onClick={togglePlay}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full ${
+            whileTap={animationsDisabled ? {} : { scale: 0.95 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
+            className={`${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14 md:w-16 md:h-16'} flex items-center justify-center rounded-full ${
               isLight 
                 ? 'bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' 
                 : isColorful
                   ? 'bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600'
                   : 'bg-gradient-to-br from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800'
-            } shadow-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50`}
+            } shadow-xl transition-all duration-200 focus:outline-none ${
+              isMobile ? 'focus:ring-4 focus:ring-purple-500/50 active:shadow-2xl' : 'focus:ring-4 focus:ring-purple-500/50'
+            }`}
             disabled={loadError}
-            aria-label={isPlaying ? (locale === 'fi' ? 'Pysäytä podcast' : 'Pause podcast') : (locale === 'fi' ? 'Toista podcast' : 'Play podcast')}
+            aria-label={isPlaying ? (locale === 'fi' ? 'Pysäytä podcast' : 'Pause podcast') : (locale === 'fi' ? 'Toista podcast' : 'Play podcast')}            onTouchStart={() => {
+              setIsTouching(true);
+            }}
+            onTouchEnd={() => {
+              setIsTouching(false);
+              const now = Date.now();
+              if (now - lastTap < 300) {
+                // Double tap detected - could add special behavior
+              }
+              setLastTap(now);
+            }}
           >
             <AnimatePresence mode="wait">
               {isPlaying ? (                <motion.svg 
                   key="pause"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}                  className="w-8 h-8 md:w-10 md:h-10 text-white" 
+                  initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
+                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  className={`${isMobile ? 'w-10 h-10' : 'w-8 h-8 md:w-10 md:h-10'} text-white`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
                   <path fillRule="evenodd" d="M6 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1zm6 0a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z" clipRule="evenodd" />
                 </motion.svg>
-              ) : (                <motion.svg 
+              ) : (
+                <motion.svg 
                   key="play"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-8 h-8 md:w-10 md:h-10 text-white" 
+                  initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
+                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  className={`${isMobile ? 'w-10 h-10' : 'w-8 h-8 md:w-10 md:h-10'} text-white`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                   style={{ transform: 'translateX(0.5px)' }}
@@ -938,41 +996,51 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 </motion.svg>
               )}
             </AnimatePresence>
-          </motion.button>          {/* Next */}
+          </motion.button>          {/* Next - Enhanced for mobile */}
           <motion.button
             onClick={goToNextEpisode}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full ${
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
+            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-10 h-10 md:w-12 md:h-12'} flex items-center justify-center rounded-full ${
               !canGoNext ? 'opacity-40' : 'opacity-100'
-            } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            } transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-purple-500/20' : ''
+            }`}
             disabled={loadError || !canGoNext}
             aria-label={locale === 'fi' ? 'Seuraava jakso' : 'Next episode'}
+            onTouchStart={() => setIsTouching(true)}
+            onTouchEnd={() => setIsTouching(false)}
           >
-            <svg className="w-5 h-5 md:w-6 md:h-6 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+            <svg className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5 md:w-6 md:h-6'} text-purple-500`} fill="currentColor" viewBox="0 0 20 20">
               <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
             </svg>
           </motion.button>
-        </div>
-
-        {/* Secondary controls row */}
-        <div className="flex items-center justify-center gap-3">          {/* Playback speed */}
+        </div>        {/* Secondary controls row - Enhanced for mobile */}
+        <div className={`flex items-center justify-center ${isMobile ? 'gap-4' : 'gap-3'}`}>
+          {/* Playback speed - Enhanced for mobile */}
           <motion.button
             onClick={changePlaybackRate}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            className={`px-2 py-1 rounded-full ${getGlassButtonStyle('secondary')} text-xs font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
+            className={`${isMobile ? 'px-3 py-2 min-w-[48px] min-h-[48px]' : 'px-2 py-1'} rounded-full ${getGlassButtonStyle('secondary')} ${
+              isMobile ? 'text-sm' : 'text-xs'
+            } font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-purple-500/20' : ''
+            }`}
             disabled={loadError}
             aria-label={`${locale === 'fi' ? 'Toistonopeus' : 'Playback speed'} ${playbackRate}x`}
-          >
-            <motion.span 
+            onTouchStart={() => setIsTouching(true)}
+            onTouchEnd={() => setIsTouching(false)}
+          >            <motion.span 
               key={playbackRate}
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              initial={animationsDisabled ? {} : { y: -10, opacity: 0 }}
+              animate={animationsDisabled ? {} : { y: 0, opacity: 1 }}
             >
               {playbackRate}x
             </motion.span>
-          </motion.button>          {/* Episode list toggle */}
+          </motion.button>
+
+          {/* Episode list toggle - Enhanced for mobile */}
           <motion.button
             onClick={() => {
               setIsExpanded(!isExpanded);
@@ -981,34 +1049,45 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 : (locale === 'fi' ? 'Jaksolista näytetään' : 'Episode list shown')
               );
             }}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            className={`w-8 h-8 flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
+            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-8 h-8'} flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-purple-500/20' : ''
+            }`}
             aria-expanded={isExpanded}
             aria-label={isExpanded ? (locale === 'fi' ? 'Piilota jaksot' : 'Hide episodes') : (locale === 'fi' ? 'Näytä jaksot' : 'Show episodes')}
-          >
-            <motion.svg 
-              className="w-4 h-4"
+            onTouchStart={() => setIsTouching(true)}
+            onTouchEnd={() => setIsTouching(false)}
+          >            <motion.svg 
+              className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'}`}
               fill="currentColor"
               viewBox="0 0 20 20"
-              animate={{ rotate: isExpanded ? 180 : 0 }}
+              animate={animationsDisabled ? {} : { rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
             </motion.svg>
-          </motion.button>          {/* Stop */}
+          </motion.button>
+
+          {/* Stop - Enhanced for mobile */}
           <motion.button
             onClick={stopAudio}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            className={`w-8 h-8 flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
+            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-8 h-8'} flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-purple-500/20' : ''
+            }`}
             disabled={loadError}
             aria-label={locale === 'fi' ? 'Pysäytä podcast' : 'Stop podcast'}
+            onTouchStart={() => setIsTouching(true)}
+            onTouchEnd={() => setIsTouching(false)}
           >
-            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+            <svg className={`${isMobile ? 'w-4 h-4' : 'w-3 h-3'}`} fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
             </svg>
-          </motion.button>          {/* Mute */}
+          </motion.button>
+
+          {/* Mute - Enhanced for mobile */}
           <motion.button
             onClick={() => {
               if (audioRef.current) {
@@ -1019,15 +1098,19 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 );
               }
             }}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            className={`w-8 h-8 flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
+            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-8 h-8'} flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-purple-500/20' : ''
+            }`}
             aria-label={audioRef.current?.muted 
               ? (locale === 'fi' ? 'Poista mykistys' : 'Unmute audio')
               : (locale === 'fi' ? 'Mykistä ääni' : 'Mute audio')
             }
+            onTouchStart={() => setIsTouching(true)}
+            onTouchEnd={() => setIsTouching(false)}
           >
-            <span className="text-xs">
+            <span className={`${isMobile ? 'text-sm' : 'text-xs'}`}>
               {audioRef.current?.muted ? '🔇' : '🔊'}
             </span>
           </motion.button>

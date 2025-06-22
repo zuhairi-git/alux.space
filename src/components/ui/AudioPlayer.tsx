@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface AudioPlayerProps {
@@ -27,10 +28,17 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
     position: 'top' | 'bottom' | 'left' | 'right';
     alignment: 'start' | 'center' | 'end';
   }>({ position: 'top', alignment: 'end' });
+  
+  // Enhanced mobile states
+  const [isTouching, setIsTouching] = useState(false);
+  const [lastTap, setLastTap] = useState(0);
+  
   const shareButtonRef = useRef<HTMLButtonElement>(null);
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
+  const isMobile = useIsMobile();
+  const animationsDisabled = useAnimationsDisabled();
   
   // Theme-aware styling
   const isLight = theme === 'light';
@@ -512,17 +520,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
   // Calculate progress percentage for visual elements
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0;
 
-  return (
-    <motion.div      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}      className={`relative w-full rounded-2xl p-6 mb-6 backdrop-blur-2xl ${styles.container}`}
+  return (    <motion.div      initial={animationsDisabled ? {} : { opacity: 0, y: 20 }}
+      animate={animationsDisabled ? {} : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}      className={`relative w-full rounded-2xl ${isMobile ? 'p-4' : 'p-6'} mb-6 backdrop-blur-2xl ${styles.container}`}
       aria-label="Enhanced Audio Player"
       style={{ overflow: 'visible', zIndex: 1 }}
     >      {/* Dynamic background effects */}
-      <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none rounded-2xl">
+      <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none rounded-2xl" style={{ zIndex: -1 }}>
         <motion.div 
           className={`absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br ${styles.backgroundGlow} blur-3xl`}
-          animate={isPlaying ? {
+          animate={isPlaying && !animationsDisabled ? {
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
           } : {}}
@@ -534,7 +541,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
         />
         <motion.div 
           className={`absolute bottom-16 -right-32 w-80 h-80 rounded-full bg-gradient-to-br ${styles.backgroundGlow} blur-3xl`}
-          animate={isPlaying ? {
+          animate={isPlaying && !animationsDisabled ? {
             scale: [1, 1.1, 1],
             rotate: [360, 180, 0],
           } : {}}
@@ -670,14 +677,42 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
             }}
           />
         )}
-      </motion.div>      {/* Enhanced progress bar with buffering and preview */}
+      </motion.div>      {/* Enhanced progress bar with buffering and preview - Mobile optimized */}
       <div className="relative mb-4 z-10">
         <motion.div 
-          className="relative h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden cursor-pointer group"
-          onMouseMove={handleProgressBarHover}
-          onMouseLeave={handleProgressBarLeave}
+          className={`relative ${isMobile ? 'h-4 py-2' : 'h-3'} bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden cursor-pointer group`}
+          onMouseMove={!isMobile ? handleProgressBarHover : undefined}
+          onMouseLeave={!isMobile ? handleProgressBarLeave : undefined}
           onClick={handleProgressBarClick}
-          whileHover={{ height: 16 }}
+          onTouchStart={(e) => {
+            setIsTouching(true);
+            const touch = e.touches[0];
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            if (audioRef.current && duration > 0) {
+              const newTime = (percentage / 100) * duration;
+              audioRef.current.currentTime = newTime;
+              setCurrentTime(newTime);
+            }
+          }}
+          onTouchMove={(e) => {
+            if (!isTouching) return;
+            e.preventDefault(); // Prevent scrolling
+            const touch = e.touches[0];
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            if (audioRef.current && duration > 0) {
+              const newTime = (percentage / 100) * duration;
+              audioRef.current.currentTime = newTime;
+              setCurrentTime(newTime);
+            }
+          }}
+          onTouchEnd={() => {
+            setIsTouching(false);
+          }}
+          whileHover={!isMobile && !animationsDisabled ? { height: 16 } : {}}
           transition={{ duration: 0.2 }}
         >
           {/* Buffered ranges */}
@@ -691,12 +726,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
               }}
             />
           ))}
-          
-          {/* Progress gradient */}
+            {/* Progress gradient - Enhanced visual feedback */}
           <motion.div 
             className={`absolute top-0 left-0 h-full bg-gradient-to-r ${styles.progressGradient} rounded-full`}
             style={{ width: `${progressPercentage}%` }}
-            animate={isPlaying ? {
+            animate={isPlaying && !animationsDisabled ? {
               boxShadow: [
                 '0 0 10px rgba(var(--progress-color), 0.3)',
                 '0 0 20px rgba(var(--progress-color), 0.6)',
@@ -706,13 +740,23 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
             transition={{ duration: 1.5, repeat: Infinity }}
           />
           
-          {/* Preview timestamp */}
+          {/* Touch-friendly playhead indicator for mobile */}
+          {isMobile && (
+            <motion.div
+              className="absolute top-2/2 transform -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg border-2 border-purple-500 opacity-100"
+              style={{ left: `${progressPercentage}%`, transform: 'translate(-50%, -50%)' }}
+              animate={isTouching && !animationsDisabled ? { scale: 1.3 } : {}}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+          
+          {/* Preview timestamp - Desktop only */}
           <AnimatePresence>
-            {showPreview && (
+            {showPreview && !isMobile && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
+                initial={animationsDisabled ? {} : { opacity: 0, y: 10 }}
+                animate={animationsDisabled ? {} : { opacity: 1, y: 0 }}
+                exit={animationsDisabled ? {} : { opacity: 0, y: 10 }}
                 className={`absolute -top-10 px-2 py-1 rounded text-xs font-medium ${
                   isLight 
                     ? 'bg-gray-900 text-white' 
@@ -742,20 +786,30 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
           />
         </motion.div>
       </div>      {/* Enhanced control panel */}
-      <div className="flex items-center justify-between relative z-10" style={{ overflow: 'visible' }}>
-        <div className="flex items-center space-x-4 relative" style={{ overflow: 'visible' }}>          {/* Main play/pause button */}
+      <div className="flex items-center justify-between relative z-10 mb-4" style={{ overflow: 'visible' }}>
+        <div className="flex items-center space-x-4 relative" style={{ overflow: 'visible' }}>          {/* Main play/pause button - Enhanced for mobile */}
           <motion.button
             onClick={togglePlay}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.05 }}
-            className={`relative w-14 h-14 flex items-center justify-center rounded-full ${styles.playButton} backdrop-blur-md overflow-hidden group transition-all duration-300`}
+            whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+            whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
+            className={`relative ${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14'} flex items-center justify-center rounded-full ${styles.playButton} backdrop-blur-md overflow-hidden group transition-all duration-300 ${
+              isMobile ? 'active:shadow-2xl focus:ring-4 focus:ring-purple-500/50' : ''
+            }`}
             disabled={loadError}
             aria-label={isPlaying ? "Pause" : "Play"}
-          >
-            {/* Button glow effect */}
+            onTouchStart={() => {
+              setIsTouching(true);
+              const now = Date.now();
+              if (now - lastTap < 300) {
+                // Double tap detected - could add special behavior
+              }
+              setLastTap(now);
+            }}
+            onTouchEnd={() => setIsTouching(false)}
+          >            {/* Button glow effect */}
             <motion.div 
               className="absolute inset-0 rounded-full"
-              animate={isPlaying ? {
+              animate={isPlaying && !animationsDisabled ? {
                 boxShadow: [
                   '0 0 20px rgba(59, 130, 246, 0.3)',
                   '0 0 40px rgba(59, 130, 246, 0.6)',
@@ -766,12 +820,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
             />
             
             <AnimatePresence mode="wait">
-              {isPlaying ? (                <motion.svg 
+              {isPlaying ? (
+                <motion.svg 
                   key="pause"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-7 h-7 text-white relative z-10" 
+                  initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
+                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  className={`${isMobile ? 'w-8 h-8' : 'w-7 h-7'} text-white relative z-10`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
@@ -780,10 +835,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
               ) : (
                 <motion.svg 
                   key="play"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-7 h-7 text-white relative z-10" 
+                  initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
+                  exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
+                  className={`${isMobile ? 'w-8 h-8' : 'w-7 h-7'} text-white relative z-10`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
@@ -795,7 +850,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
             {/* Ripple effect */}
             <motion.div
               className="absolute inset-0 rounded-full border-2 border-white/30"
-              animate={isPlaying ? {
+              animate={isPlaying && !animationsDisabled ? {
                 scale: [1, 1.5],
                 opacity: [0.5, 0]
               } : {}}
@@ -806,68 +861,79 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
               }}
             />
           </motion.button>
-          
-          {/* Secondary controls */}
-          <div className="flex items-center space-x-3">
-            {/* Stop button */}
+            {/* Secondary controls - Enhanced for mobile */}
+          <div className={`flex items-center ${isMobile ? 'space-x-4' : 'space-x-3'}`}>
+            {/* Stop button - Enhanced for mobile */}
             <motion.button
               onClick={stopAudio}
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05 }}
-              className={`w-12 h-12 flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200`}
+              whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+              whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
+              className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200 ${
+                isMobile ? 'active:bg-purple-500/20' : ''
+              }`}
               disabled={loadError}
               aria-label="Stop"
+              onTouchStart={() => setIsTouching(true)}
+              onTouchEnd={() => setIsTouching(false)}
             >
               <motion.svg 
-                className="w-5 h-5" 
+                className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} 
                 fill="currentColor" 
                 viewBox="0 0 20 20"
-                whileHover={{ rotate: 90 }}
+                whileHover={!isMobile && !animationsDisabled ? { rotate: 90 } : {}}
                 transition={{ duration: 0.3 }}
               >
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
               </motion.svg>
             </motion.button>
             
-            {/* Playback rate */}
+            {/* Playback rate - Enhanced for mobile */}
             <motion.button
               onClick={changePlaybackRate}
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05 }}
-              className={`flex items-center justify-center px-4 h-10 rounded-full ${styles.controlButton} backdrop-blur-md text-sm font-semibold transition-all duration-200`}
+              whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+              whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
+              className={`flex items-center justify-center ${isMobile ? 'px-4 h-12 min-w-[64px] min-h-[48px]' : 'px-4 h-10'} rounded-full ${styles.controlButton} backdrop-blur-md ${
+                isMobile ? 'text-sm' : 'text-sm'
+              } font-semibold transition-all duration-200 ${
+                isMobile ? 'active:bg-purple-500/20' : ''
+              }`}
               disabled={loadError}
               aria-label={`Change playback speed, currently ${playbackRate}x`}
-            >
-              <motion.span 
+              onTouchStart={() => setIsTouching(true)}
+              onTouchEnd={() => setIsTouching(false)}
+            >              <motion.span 
                 key={playbackRate}
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 10, opacity: 0 }}
+                initial={animationsDisabled ? {} : { y: -10, opacity: 0 }}
+                animate={animationsDisabled ? {} : { y: 0, opacity: 1 }}
+                exit={animationsDisabled ? {} : { y: 10, opacity: 0 }}
                 className={styles.textAccent}
               >
                 {playbackRate}×
               </motion.span>
             </motion.button>
-              {/* Share button */}
+              {/* Share button - Enhanced for mobile */}
             <div className="relative">              <motion.button
                 ref={shareButtonRef}                onClick={(e) => {
                   e.stopPropagation();
                   console.log('AudioPlayer: Share button clicked, current state:', showShareMenu);
                   setShowShareMenu(!showShareMenu);
                 }}
-                whileTap={{ scale: 0.9 }}
-                whileHover={{ scale: 1.05 }}
-                className={`w-12 h-12 flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200`}
+                whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+                whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
+                className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200 ${
+                  isMobile ? 'active:bg-purple-500/20' : ''
+                }`}
                 disabled={loadError}
                 aria-label={t('blog.aria.shareAudio')}
                 data-share-menu
-              >
-                <motion.svg 
-                  className="w-5 h-5" 
+                onTouchStart={() => setIsTouching(true)}
+                onTouchEnd={() => setIsTouching(false)}
+              >                <motion.svg 
+                  className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} 
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  animate={{ rotate: showShareMenu ? 15 : 0 }}
+                  animate={animationsDisabled ? {} : { rotate: showShareMenu ? 15 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
@@ -1053,23 +1119,39 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
                     </motion.div>
                   </>
                 )}
-              </AnimatePresence>
+              </AnimatePresence>            </div>
+          </div>
+        </div>        {/* Enhanced time display with duration counter - Desktop only */}
+        {!isMobile && (
+          <motion.div 
+            className={`flex items-center space-x-3 px-4 py-2 rounded-full backdrop-blur-md ${styles.controlButton} text-sm`}
+            whileHover={!animationsDisabled ? { scale: 1.05 } : {}}
+          >
+            <div className={`font-mono ${styles.textAccent}`}>
+              {formatTime(currentTime)}
             </div>
+            <div className={`w-1 h-1 rounded-full ${styles.textSecondary}`} />
+            <div className={`font-mono ${styles.textSecondary}`}>
+              {formatTime(duration)}
+            </div>
+          </motion.div>        )}</div>
+
+      {/* Mobile timer display */}
+      {isMobile && (
+        <div className="flex justify-center mt-3">
+          <div className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg ${styles.controlButton} text-sm font-mono`}>
+            <span className={styles.textAccent}>
+              {formatTime(currentTime)}
+            </span>
+            <span className={styles.textSecondary}>
+              /
+            </span>
+            <span className={styles.textSecondary}>
+              {formatTime(duration)}
+            </span>
           </div>
-        </div>{/* Enhanced time display with duration counter */}
-        <motion.div 
-          className={`flex items-center space-x-3 px-4 py-2 rounded-full backdrop-blur-md ${styles.controlButton}`}
-          whileHover={{ scale: 1.05 }}
-        >
-          <div className={`text-sm font-mono ${styles.textAccent}`}>
-            {formatTime(currentTime)}
-          </div>
-          <div className={`w-1 h-1 rounded-full ${styles.textSecondary}`} />
-          <div className={`text-sm font-mono ${styles.textSecondary}`}>
-            {formatTime(duration)}
-          </div>
-        </motion.div>
-      </div>
+        </div>
+      )}
 
       {/* Success message for copied link */}
       <AnimatePresence>
