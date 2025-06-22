@@ -39,19 +39,24 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
       case 'fi': return 'Takaisin blogiin';
       default: return 'Back to all articles';
     }
-  };
-
-  // Map of blog posts with audio content
+  };  // Map of blog posts with audio content
   const audioMap: Record<string, string> = {
     // Make sure the path matches exactly where the file is located
-    'primitive-human': '/audio/blog/blog03.mp3',
+    'primitive-human': '/audio/blog/embracing-the-era-of-ai-en.mp3',
+    'sharpened-by-machine': '/audio/blog/Sharpened-by-the-Machine_ AI-and-Human-Development.wav',
     // Add more audio files here as they become available
     // 'other-post-slug': '/audio/blog/other-file.mp3',
   };
 
+  // Map of audio categories for specific posts
+  const audioCategoryMap: Record<string, string> = {
+    'sharpened-by-machine': 'Deep Dive Podcast',
+    // Add more categories here as needed
+  };
   // Check if this post has audio narration and if the audio file actually exists
   const hasAudio = slug && slug in audioMap;
   const audioSrc = hasAudio ? audioMap[slug] : '';
+  const audioCategory = slug && slug in audioCategoryMap ? audioCategoryMap[slug] : undefined;
   return (
     <header className="mb-12" role="banner">
       {/* Back to blog link */}
@@ -161,15 +166,14 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           transition={{ delay: 0.15 }}
           aria-labelledby="audio-section"
         >
-          <h2 id="audio-section" className="sr-only">{t('blog.aria.audioNarration')}</h2>
-          <AudioPlayer
+          <h2 id="audio-section" className="sr-only">{t('blog.aria.audioNarration')}</h2>          <AudioPlayer
             src={audioSrc}
             title={t('blog.aria.listenToArticle')}
+            category={audioCategory}
           />
         </motion.section>
       )}
-      
-      {/* Featured Image */}
+        {/* Featured Image */}
       <motion.figure
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -187,6 +191,20 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
         />
         <div className={`absolute inset-0 ${isLight ? 'bg-gradient-to-t from-black/20 to-transparent' : 'bg-gradient-to-t from-black/30 to-transparent'}`} aria-hidden="true" />
+          {/* Image Attribution Badge - only show for sharpened-by-machine post */}
+        {slug === 'sharpened-by-machine' && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="absolute top-4 left-4 z-10"
+          >
+            <div className="bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs italic font-normal shadow-lg border border-white/20">
+              Image by Freepik
+            </div>
+          </motion.div>
+        )}
+        
         <figcaption id="featured-image-caption" className="sr-only">
           {t('blog.aria.featuredImageFor')} {title}
         </figcaption>

@@ -68,8 +68,7 @@ export const seoConfig = {
       'AI Integration',
       'Creative Direction',
       'Portfolio',
-      'Case Studies'
-    ],    technical: [
+      'Case Studies'    ],    technical: [
       'React',
       'Prompt Engineering',
       'Next.js',
@@ -82,7 +81,15 @@ export const seoConfig = {
       'WCAG',
       'ARIA',
       'TypeScript',
-      'Tailwind CSS'
+      'Tailwind CSS',
+      'AI Ethics',
+      'Machine Learning',
+      'Critical Thinking',
+      'Human Intelligence',
+      'Technology Philosophy',
+      'AI Strategy',
+      'Cognitive Enhancement',
+      'AI Adversarial Training'
     ],
     local: [
       'Helsinki UX',

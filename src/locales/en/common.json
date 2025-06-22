@@ -61,10 +61,26 @@
   "jobseeking": {
     "title": "Job Seeking Application",
     "intro": "A mobile app designed to streamline job searches—especially for local, part-time, and weekend work. Created to make job hunting faster, easier, and more efficient for people seeking additional income opportunities."
-  },
-  "blogPage": {
+  },  "blogPage": {
     "title": "Blog & Insights",
     "description": "Thoughts, learnings, and perspectives on design leadership, product management, and the intersection of creativity and technology."
+  },  "blog": {
+    "aria": {
+      "listenToArticle": "Listen to Article",
+      "breadcrumb": "Blog navigation",
+      "backToBlog": "Back to all articles",
+      "tags": "Article tags",
+      "articleMeta": "Article metadata",
+      "authorPhoto": "Author photo",
+      "readTime": "Estimated reading time",
+      "audioNarration": "Audio narration",
+      "featuredImage": "Featured image",
+      "featuredImageFor": "Featured image for",      "audioLanguage": "Audio language: English",
+      "shareAudio": "Share Audio",
+      "copyAudioLink": "Copy audio link",
+      "audioLinkCopied": "Audio link copied to clipboard!",
+      "downloadAudio": "Download audio file"
+    }
   },
   "promptsPage": {
     "title": "Prompts Gallery",
