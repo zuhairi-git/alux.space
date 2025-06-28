@@ -148,12 +148,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData)
-          }}
-        />
-      </head>      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
-        <ThemeProvider>
+          }}        />
+      </head>
+      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>        <ThemeProvider>
           <LanguageProvider>
-            <AnalyticsProvider>              <SkipLinks />
+            <AnalyticsProvider>
+              <SkipLinks />
               {children}
               <BackToTop />
               <TranslationBadge />
