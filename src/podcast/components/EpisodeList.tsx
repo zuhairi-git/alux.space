@@ -117,7 +117,6 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
                 
                 <div className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs ${getSecondaryTextStyle()}`}>
                   <span>{formatDate(episode.publishDate)}</span>
-                  <span>{episode.duration}</span>
                   {episode.featured && (
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${
                       isLight ? 'bg-yellow-100 text-yellow-800' :

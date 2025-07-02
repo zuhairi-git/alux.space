@@ -660,17 +660,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 EP {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}
               </motion.div>
 
-              {/* Duration display */}
-              <motion.div 
-                className={`text-lg md:text-xl font-bold mb-2 ${
-                  isLight ? 'text-purple-700' : 'text-white'
-                } drop-shadow-sm`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                {currentEpisode?.duration || '00:00'}
-              </motion.div>
+              {/* Removed duration display to avoid showing timestamps */}
 
               {/* Publication year */}
               <motion.div 
@@ -746,10 +736,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           }) : ''}</span>
         </div>
         
-        {/* Episode Duration and Number */}
+        {/* Episode Number only - Duration removed */}
         <div className={`flex items-center justify-center gap-3 text-xs md:text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'} mb-2`}>
-          <span>{currentEpisode?.duration}</span>
-          <span className="w-1 h-1 rounded-full bg-current opacity-50"></span>
           <span>{locale === 'fi' ? 'Jakso' : 'Episode'} {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}/{availableEpisodes.length}</span>
         </div>
         
