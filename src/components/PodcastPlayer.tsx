@@ -772,30 +772,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>            {/* Enhanced vinyl record effect when playing */}
-            <AnimatePresence>
-              {isPlaying && (
-                <motion.div 
-                  className={`absolute inset-0 border-2 ${
-                    isLight 
-                      ? 'border-white/30 shadow-inner' 
-                      : 'border-white/20 shadow-inner'
-                  } rounded-xl md:rounded-2xl`}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1,
-                    rotate: 360 
-                  }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ 
-                    opacity: { duration: 0.3 },
-                    scale: { duration: 0.3 },
-                    rotate: { duration: 12, repeat: Infinity, ease: "linear" }
-                  }}
-                />
-              )}
-            </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </div>      {/* Episode Info Section - Compact with Metadata */}
