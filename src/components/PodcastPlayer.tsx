@@ -628,7 +628,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 transition={{ duration: 3.5, repeat: Infinity, delay: 1, ease: "easeInOut" }}
               />
             </div>{/* Enhanced modern podcast cover design */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center">
               
               {/* Elegant geometric background pattern */}
               <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-2xl">
@@ -724,61 +724,69 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 </span>
               </motion.div>
 
-              {/* Enhanced playing indicator */}
-              <AnimatePresence>
-                {isPlaying && (
-                  <motion.div 
-                    className="flex items-center gap-1.5 mb-2"
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                  >
-                    {[0, 1, 2, 3].map((i) => (
-                      <motion.div
-                        key={i}
-                        className={`w-1 rounded-full ${
-                          isLight ? 'bg-gradient-to-t from-purple-500 to-purple-400' : 'bg-gradient-to-t from-white to-gray-200'
-                        } shadow-sm`}
-                        style={{ height: '12px' }}
-                        animate={{
-                          scaleY: [1, 2.5, 1],
-                          opacity: [0.5, 1, 0.5],
-                        }}
-                        transition={{
-                          duration: 1.2,
-                          repeat: Infinity,
-                          delay: i * 0.1,
-                          ease: "easeInOut"
-                        }}
-                      />
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Minimalist status indicator when not playing */}
-              <AnimatePresence>
-                {!isPlaying && (
-                  <motion.div 
-                    className={`text-xs font-medium ${
-                      isLight ? 'text-purple-600/60' : 'text-white/50'
-                    } mb-2`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    READY TO PLAY
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Reserved space for playing indicator and status - Fixed height to prevent layout shifts - Enhanced for mobile */}
+              <div className={`flex items-center justify-center mb-2 ${isMobile ? 'h-10' : 'h-8'} overflow-hidden`}>
+                <AnimatePresence mode="wait">
+                  {isPlaying ? (
+                    <motion.div 
+                      key="playing"
+                      className="flex items-center gap-1.5 h-full"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                    >
+                      {[0, 1, 2, 3].map((i) => (
+                        <div
+                          key={i}
+                          className="flex items-center justify-center h-full"
+                          style={{ height: isMobile ? '40px' : '32px' }}
+                        >
+                          <motion.div
+                            className={`${isMobile ? 'w-1.5' : 'w-1'} rounded-full ${
+                              isLight ? 'bg-gradient-to-t from-purple-500 to-purple-400' : 'bg-gradient-to-t from-white to-gray-200'
+                            } shadow-sm origin-bottom`}
+                            style={{ 
+                              height: isMobile ? '8px' : '6px',
+                              transformOrigin: 'bottom center'
+                            }}
+                            animate={{
+                              scaleY: [1, 2, 1],
+                              opacity: [0.5, 1, 0.5],
+                            }}
+                            transition={{
+                              duration: 1.2,
+                              repeat: Infinity,
+                              delay: i * 0.1,
+                              ease: "easeInOut"
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </motion.div>
+                  ) : (
+                    <motion.div 
+                      key="ready"
+                      className={`${isMobile ? 'text-sm' : 'text-xs'} font-medium ${
+                        isLight ? 'text-purple-600/60' : 'text-white/50'
+                      } h-full flex items-center justify-center`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      READY TO PLAY
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </motion.div>
         </div>
-      </div>      {/* Episode Info Section - Compact with Metadata */}
+      </div>      {/* Episode Info Section - Compact with Metadata - Fixed layout to prevent shifts */}
       <div className="px-4 pt-4 pb-2 text-center">
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <h3 className={`font-bold text-base md:text-lg ${getTextStyle()} truncate max-w-[160px] md:max-w-[220px]`}>
+        {/* Title section with fixed height container - Enhanced for mobile */}
+        <div className={`flex items-center justify-center gap-2 mb-2 ${isMobile ? 'min-h-[2rem]' : 'min-h-[1.75rem]'}`}>
+          <h3 className={`font-bold text-base md:text-lg ${getTextStyle()} truncate ${isMobile ? 'max-w-[180px]' : 'max-w-[160px] md:max-w-[220px]'}`}>
             {currentEpisode?.title || 'Loading...'}
           </h3>
           {showLanguageBadge && (
@@ -786,8 +794,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           )}
         </div>
         
-        {/* Author and Publish Date */}
-        <div className={`flex items-center justify-center gap-3 text-xs md:text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'} mb-2`}>
+        {/* Author and Publish Date - Fixed height for mobile consistency */}
+        <div className={`flex items-center justify-center gap-3 text-xs md:text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'} mb-2 ${isMobile ? 'min-h-[1.25rem]' : ''}`}>
           <span className="font-medium">{currentEpisode?.metadata?.author || 'Ali Al-Zuhairi'}</span>
           <span className="w-1 h-1 rounded-full bg-current opacity-50"></span>
           <span>{currentEpisode?.publishDate ? new Date(currentEpisode.publishDate).toLocaleDateString(locale === 'fi' ? 'fi-FI' : 'en-US', { 
@@ -797,41 +805,49 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           }) : ''}</span>
         </div>
         
-        {/* Episode Number only - Duration removed */}
-        <div className={`flex items-center justify-center gap-3 text-xs md:text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'} mb-2`}>
+        {/* Episode Number only - Duration removed - Fixed height for mobile */}
+        <div className={`flex items-center justify-center gap-3 text-xs md:text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'} mb-2 ${isMobile ? 'min-h-[1.25rem]' : ''}`}>
           <span>{locale === 'fi' ? 'Jakso' : 'Episode'} {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}/{availableEpisodes.length}</span>
         </div>
         
-        {/* Tags */}
-        {currentEpisode?.tags && currentEpisode.tags.length > 0 && (
-          <div className="flex flex-wrap items-center justify-center gap-1 mb-3">
-            {currentEpisode.tags.slice(0, 3).map((tag, index) => (
-              <span 
-                key={index}
-                className={`px-2 py-1 text-xs rounded-full ${
-                  isLight 
-                    ? 'bg-purple-100 text-purple-700' 
-                    : 'bg-purple-900/30 text-purple-300'
-                } border ${
-                  isLight 
-                    ? 'border-purple-200' 
-                    : 'border-purple-700/50'
-                }`}
-              >
-                {tag}
-              </span>
-            ))}
-            {currentEpisode.tags.length > 3 && (
-              <span className={`text-xs ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                +{currentEpisode.tags.length - 3}
-              </span>
-            )}
-          </div>
-        )}
+        {/* Tags - Reserved space for mobile consistency */}
+        <div className={`mb-3 ${isMobile ? 'min-h-[2rem]' : ''}`}>
+          {currentEpisode?.tags && currentEpisode.tags.length > 0 ? (
+            <div className="flex flex-wrap items-center justify-center gap-1">
+              {currentEpisode.tags.slice(0, 3).map((tag, index) => (
+                <span 
+                  key={index}
+                  className={`px-2 py-1 text-xs rounded-full ${
+                    isLight 
+                      ? 'bg-purple-100 text-purple-700' 
+                      : 'bg-purple-900/30 text-purple-300'
+                  } border ${
+                    isLight 
+                      ? 'border-purple-200' 
+                      : 'border-purple-700/50'
+                  }`}
+                >
+                  {tag}
+                </span>
+              ))}
+              {currentEpisode.tags.length > 3 && (
+                <span className={`text-xs ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                  +{currentEpisode.tags.length - 3}
+                </span>
+              )}
+            </div>
+          ) : (
+            /* Empty space placeholder for consistent spacing */
+            <div className="w-full"></div>
+          )}
+        </div>
         
-        <p className={`text-xs md:text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'} line-clamp-2 mb-3 leading-relaxed max-w-prose mx-auto`}>
-          {currentEpisode?.description || ''}
-        </p>
+        {/* Description - Fixed height container for mobile */}
+        <div className={`mb-3 ${isMobile ? 'min-h-[2.5rem]' : ''}`}>
+          <p className={`text-xs md:text-sm ${isLight ? 'text-gray-600' : 'text-gray-400'} line-clamp-2 leading-relaxed max-w-prose mx-auto`}>
+            {currentEpisode?.description || ''}
+          </p>
+        </div>
       </div>      {/* Progress Section - Modern Mobile Style */}
       <div className="px-4 pb-3 relative z-15">{/* Main progress bar - Enhanced for mobile touch */}
         <div className="relative w-full mb-3">
