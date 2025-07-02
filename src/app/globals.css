@@ -1370,3 +1370,60 @@ body {
     stroke-width: 0.5 !important;
   }
 }
+
+/* Podcast Player Alignment Fixes */
+.podcast-player button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.podcast-player button svg {
+  display: block !important;
+  margin: auto !important;
+}
+
+/* Progress bar handle alignment fix */
+.podcast-player [role="slider"] {
+  position: relative !important;
+}
+
+/* Ensure progress bar handle is perfectly centered */
+.podcast-player [role="slider"] > div[style*="left:"] {
+  transform: translate(-50%, -50%) !important;
+  top: 50% !important;
+}
+
+/* Play/Pause button icon centering */
+.podcast-player button[aria-label*="Play" i] svg,
+.podcast-player button[aria-label*="Pause" i] svg,
+.podcast-player button[aria-label*="Toista" i] svg,
+.podcast-player button[aria-label*="Pysäytä" i] svg {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+/* Control button alignment for mobile */
+@media (max-width: 768px) {
+  .podcast-player button {
+    min-width: 48px !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .podcast-player button svg {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* Secondary control buttons alignment */
+.podcast-player button:not([aria-label*="Play" i]):not([aria-label*="Pause" i]):not([aria-label*="Toista" i]):not([aria-label*="Pysäytä" i]) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
