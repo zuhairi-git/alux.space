@@ -577,124 +577,175 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
         }}
       />      {/* Album Art Section - Mobile First */}
       <div className="relative p-4 pb-0 z-10">
-        <div className="aspect-square w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto relative z-10">{/* Podcast "Album Art" Background */}
+        <div className="aspect-square w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto relative z-10">          {/* Enhanced modern podcast cover background */}
           <motion.div 
             className={`w-full h-full rounded-xl md:rounded-2xl ${
               isLight 
-                ? 'bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100' 
+                ? 'bg-gradient-to-br from-white via-purple-50/50 to-blue-50/70' 
                 : isColorful
-                  ? 'bg-gradient-to-br from-purple-600/20 via-pink-500/20 to-blue-600/20'
-                  : 'bg-gradient-to-br from-gray-700 via-gray-600 to-gray-700'
-            } shadow-lg overflow-hidden relative`}
+                  ? 'bg-gradient-to-br from-slate-800/80 via-purple-900/40 to-blue-900/60'
+                  : 'bg-gradient-to-br from-gray-800/90 via-gray-700/80 to-gray-800/90'
+            } shadow-2xl overflow-hidden relative border ${
+              isLight 
+                ? 'border-white/60 shadow-purple-200/30' 
+                : 'border-white/10 shadow-black/20'
+            } backdrop-blur-sm`}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
-          >            {/* Animated background patterns */}
-            <div className="absolute inset-0">
+          >            {/* Refined animated background elements */}
+            <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-2xl">
               <motion.div 
-                className={`absolute top-3 left-3 w-6 h-6 rounded-full ${
-                  isLight ? 'bg-purple-200/60' : 'bg-purple-400/30'
-                }`}
-                animate={{ 
-                  scale: isPlaying ? [1, 1.2, 1] : 1,
-                  opacity: isPlaying ? [0.6, 1, 0.6] : 0.6 
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <motion.div 
-                className={`absolute bottom-4 right-4 w-4 h-4 rounded-full ${
-                  isLight ? 'bg-pink-200/60' : 'bg-pink-400/30'
-                }`}
+                className={`absolute top-4 left-4 w-8 h-8 rounded-full ${
+                  isLight ? 'bg-purple-300/40' : 'bg-purple-400/30'
+                } blur-sm`}
                 animate={{ 
                   scale: isPlaying ? [1, 1.3, 1] : 1,
-                  opacity: isPlaying ? [0.4, 0.8, 0.4] : 0.4 
+                  opacity: isPlaying ? [0.4, 0.7, 0.4] : 0.4,
+                  x: isPlaying ? [0, 5, 0] : 0
                 }}
-                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div 
-                className={`absolute top-1/2 right-6 w-3 h-3 rounded-full ${
-                  isLight ? 'bg-blue-200/60' : 'bg-blue-400/30'
-                }`}
+                className={`absolute bottom-6 right-5 w-6 h-6 rounded-full ${
+                  isLight ? 'bg-blue-300/40' : 'bg-blue-400/30'
+                } blur-sm`}
                 animate={{ 
-                  scale: isPlaying ? [1, 1.1, 1] : 1,
-                  opacity: isPlaying ? [0.5, 0.9, 0.5] : 0.5 
+                  scale: isPlaying ? [1, 1.4, 1] : 1,
+                  opacity: isPlaying ? [0.3, 0.6, 0.3] : 0.3,
+                  y: isPlaying ? [0, -3, 0] : 0
                 }}
-                transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+                transition={{ duration: 4, repeat: Infinity, delay: 0.5, ease: "easeInOut" }}
               />
-            </div>            {/* Podcast metadata display in center */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">              {/* Profile image - circular */}
               <motion.div 
-                className="mb-3"
+                className={`absolute top-1/3 right-3 w-4 h-4 rounded-full ${
+                  isLight ? 'bg-pink-300/40' : 'bg-pink-400/30'
+                } blur-sm`}
+                animate={{ 
+                  scale: isPlaying ? [1, 1.2, 1] : 1,
+                  opacity: isPlaying ? [0.4, 0.8, 0.4] : 0.4,
+                  rotate: isPlaying ? [0, 90, 0] : 0
+                }}
+                transition={{ duration: 3.5, repeat: Infinity, delay: 1, ease: "easeInOut" }}
+              />
+            </div>{/* Enhanced modern podcast cover design */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+              
+              {/* Elegant geometric background pattern */}
+              <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-2xl">
+                <div className={`absolute inset-0 ${
+                  isLight 
+                    ? 'bg-gradient-to-br from-purple-50/60 via-blue-50/40 to-pink-50/60' 
+                    : 'bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-pink-900/30'
+                } backdrop-blur-sm`} />
+                
+                {/* Subtle geometric shapes */}
+                <motion.div 
+                  className={`absolute -top-8 -right-8 w-24 h-24 rounded-full ${
+                    isLight ? 'bg-purple-200/30' : 'bg-purple-400/20'
+                  } blur-xl`}
+                  animate={{ 
+                    scale: isPlaying ? [1, 1.1, 1] : 1,
+                    opacity: isPlaying ? [0.3, 0.5, 0.3] : 0.3 
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                />
+                <motion.div 
+                  className={`absolute -bottom-6 -left-6 w-20 h-20 rounded-full ${
+                    isLight ? 'bg-blue-200/30' : 'bg-blue-400/20'
+                  } blur-lg`}
+                  animate={{ 
+                    scale: isPlaying ? [1, 1.2, 1] : 1,
+                    opacity: isPlaying ? [0.2, 0.4, 0.2] : 0.2 
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
+                />
+              </div>
+
+              {/* Premium profile image with enhanced styling */}
+              <motion.div 
+                className="relative mb-4 z-10"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
               >
+                <div className={`absolute inset-0 rounded-full ${
+                  isLight 
+                    ? 'bg-gradient-to-br from-purple-200 to-blue-200' 
+                    : 'bg-gradient-to-br from-purple-500/50 to-blue-500/50'
+                } blur-md scale-110`} />
+                
                 <Image
                   src="/images/me/ali.png"
                   alt="Ali Al-Zuhairi"
-                  width={80}
-                  height={80}
-                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-3 ${
+                  width={96}
+                  height={96}
+                  className={`relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 ${
                     isLight 
-                      ? 'border-white/90 shadow-lg' 
-                      : 'border-white/30 shadow-xl'
-                  } backdrop-blur-sm`}
+                      ? 'border-white/95 shadow-2xl shadow-purple-200/50' 
+                      : 'border-white/40 shadow-2xl shadow-purple-900/50'
+                  } backdrop-blur-sm ring-2 ${
+                    isLight 
+                      ? 'ring-purple-100/50' 
+                      : 'ring-purple-400/30'
+                  }`}
                   priority
                 />
+                
+                {/* Subtle glow effect */}
+                <div className={`absolute inset-0 rounded-full ${
+                  isLight 
+                    ? 'shadow-lg shadow-purple-300/30' 
+                    : 'shadow-lg shadow-purple-500/30'
+                } pointer-events-none`} />
               </motion.div>
 
-              {/* Episode number badge */}
+              {/* Modernized episode badge */}
               <motion.div 
-                className={`mb-2 px-3 py-1 rounded-full text-xs font-bold ${
+                className={`mb-3 px-4 py-2 rounded-full text-sm font-bold ${
                   isLight 
-                    ? 'bg-white/90 text-purple-700 shadow-sm' 
-                    : 'bg-black/40 text-white backdrop-blur-sm'
+                    ? 'bg-gradient-to-r from-white/95 to-gray-50/95 text-purple-700 shadow-lg shadow-purple-200/30' 
+                    : 'bg-gradient-to-r from-black/50 to-gray-900/50 text-white backdrop-blur-lg shadow-lg shadow-black/20'
                 } border ${
                   isLight 
-                    ? 'border-purple-200' 
+                    ? 'border-purple-200/50' 
                     : 'border-white/20'
-                }`}
+                } relative overflow-hidden`}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                EP {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}
+                <div className={`absolute inset-0 ${
+                  isLight 
+                    ? 'bg-gradient-to-r from-purple-50/50 to-blue-50/50' 
+                    : 'bg-gradient-to-r from-purple-900/20 to-blue-900/20'
+                } opacity-50`} />
+                <span className="relative z-10">
+                  EPISODE {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}
+                </span>
               </motion.div>
 
-              {/* Removed duration display to avoid showing timestamps */}
-
-              {/* Publication year */}
-              <motion.div 
-                className={`text-xs font-medium ${
-                  isLight ? 'text-purple-600/80' : 'text-white/70'
-                } mb-2`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                {currentEpisode?.publishDate ? new Date(currentEpisode.publishDate).getFullYear() : '2025'}
-              </motion.div>
-
-              {/* Playing indicator animation */}
+              {/* Enhanced playing indicator */}
               <AnimatePresence>
                 {isPlaying && (
                   <motion.div 
-                    className="flex items-center gap-1"
+                    className="flex items-center gap-1.5 mb-2"
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -5 }}
                   >
-                    {[0, 1, 2].map((i) => (
+                    {[0, 1, 2, 3].map((i) => (
                       <motion.div
                         key={i}
-                        className={`w-1 h-3 rounded-full ${
-                          isLight ? 'bg-purple-500' : 'bg-white'
-                        }`}
+                        className={`w-1 rounded-full ${
+                          isLight ? 'bg-gradient-to-t from-purple-500 to-purple-400' : 'bg-gradient-to-t from-white to-gray-200'
+                        } shadow-sm`}
+                        style={{ height: '12px' }}
                         animate={{
-                          scaleY: [1, 2, 1],
-                          opacity: [0.6, 1, 0.6],
+                          scaleY: [1, 2.5, 1],
+                          opacity: [0.5, 1, 0.5],
                         }}
                         transition={{
-                          duration: 1,
+                          duration: 1.2,
                           repeat: Infinity,
                           delay: i * 0.1,
                           ease: "easeInOut"
@@ -704,14 +755,47 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>{/* Vinyl record effect when playing */}
-            {isPlaying && (
-              <motion.div 
-                className="absolute inset-0 border-4 border-white/20 rounded-xl"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              />
-            )}
+
+              {/* Minimalist status indicator when not playing */}
+              <AnimatePresence>
+                {!isPlaying && (
+                  <motion.div 
+                    className={`text-xs font-medium ${
+                      isLight ? 'text-purple-600/60' : 'text-white/50'
+                    } mb-2`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    READY TO PLAY
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>            {/* Enhanced vinyl record effect when playing */}
+            <AnimatePresence>
+              {isPlaying && (
+                <motion.div 
+                  className={`absolute inset-0 border-2 ${
+                    isLight 
+                      ? 'border-white/30 shadow-inner' 
+                      : 'border-white/20 shadow-inner'
+                  } rounded-xl md:rounded-2xl`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    rotate: 360 
+                  }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ 
+                    opacity: { duration: 0.3 },
+                    scale: { duration: 0.3 },
+                    rotate: { duration: 12, repeat: Infinity, ease: "linear" }
+                  }}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>      {/* Episode Info Section - Compact with Metadata */}
