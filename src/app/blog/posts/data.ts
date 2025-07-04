@@ -28,7 +28,7 @@ export const posts: Post[] = [
          en: {
             title: 'Sharpened by the Machine: How Challenging AI Makes Us More Human',
             description: 'Learn how to use AI as an intellectual adversary to strengthen critical thinking and preserve human intelligence. Discover strategies for challenging AI, avoiding cognitive dependency, and evolving human capabilities in the age of artificial intelligence.',
-            publishedDate: 'June 20, 2025',            content: `
+            publishedDate: '2025-06-20T00:00:00.000Z',            content: `
 Sharpened by the Machine: How Challenging AI Makes Us More Human
 
 "Intelligence is not about having the answers. It's about knowing how to question everything—even the machine that seems to know it all."
@@ -150,7 +150,7 @@ Only you can do that.
          fi: {
             title: 'Koneen teroittama: Kuinka tekoälyn haastaminen tekee meistä inhimillisempiä',
             description: 'Opi käyttämään tekoälyä älyllisenä vastustajana kriittisen ajattelun vahvistamiseksi. Tutustu strategioihin tekoälyn haastavuuteen, kognitiivisen riippuvuuden välttämiseen ja inhimillisten kykyjen kehittämiseen tekoälyn aikakaudella.',
-            publishedDate: '20. kesäkuuta 2025',
+            publishedDate: '2025-06-20T00:00:00.000Z',
             content: `
 Koneen teroittama: Kuinka tekoälyn haastaminen tekee meistä inhimillisempiä
 

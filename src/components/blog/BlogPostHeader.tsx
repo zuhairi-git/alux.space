@@ -8,6 +8,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import AudioPlayer from '../ui/AudioPlayer';
+import { formatDate, toISOString } from '@/utils/dateUtils';
 
 interface BlogPostHeaderProps {
   title: string;
@@ -33,6 +34,10 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isLight = theme === 'light';
+  
+  // Format the date for display while keeping ISO format for dateTime attribute
+  const displayDate = formatDate(publishedDate, locale);
+  const isoDate = toISOString(publishedDate);
   // Get localized strings for UI elements
   const getBackToBlogText = (): string => {
     switch(locale) {
@@ -143,7 +148,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
             >
               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/>
             </svg>
-            <time dateTime={publishedDate}>{publishedDate}</time>
+            <time dateTime={isoDate}>{displayDate}</time>
           </span>
           <span className="flex items-center">
             <svg 

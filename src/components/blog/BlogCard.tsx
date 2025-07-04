@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'next-share';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
+import { formatDate, toISOString } from '@/utils/dateUtils';
 
 interface BlogCardProps {
   post: {
@@ -27,10 +28,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
   const { trackEvent } = useAnalyticsTracking();
   // Create localized blog post URL
   const localizedPostUrl = `/${locale}/blog/${post.slug}`;
+  
+  // Format the date for display while keeping ISO format for dateTime attribute
+  const displayDate = formatDate(post.publishedDate, locale);
+  const isoDate = toISOString(post.publishedDate);
 
   // Helper function to format aria-label for links
   const getArticleAriaLabel = () => {
-    return `Read article: ${post.title}. Published on ${post.publishedDate}. ${post.readTime} read. Tags: ${post.tags.join(', ')}.`;
+    return `Read article: ${post.title}. Published on ${displayDate}. ${post.readTime} read. Tags: ${post.tags.join(', ')}.`;
   };
 
   // Helper function for share button aria-labels
@@ -120,11 +125,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
 
               <div className="flex justify-between items-center text-sm mt-4 pt-4 border-t border-white/20">
                 <time 
-                  dateTime={post.publishedDate}
+                  dateTime={isoDate}
                   className="text-white/60"
-                  aria-label={`Published on ${post.publishedDate}`}
+                  aria-label={`Published on ${displayDate}`}
                 >
-                  {post.publishedDate}
+                  {displayDate}
                 </time>
                 <span 
                   className="flex items-center text-white/60"
@@ -275,11 +280,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
               <div className="flex items-center gap-1">
                 <span className="material-symbols-rounded text-sm text-primary" aria-hidden="true">calendar_today</span>
                 <time 
-                  dateTime={post.publishedDate}
+                  dateTime={isoDate}
                   className="opacity-80"
-                  aria-label={`Published on ${post.publishedDate}`}
+                  aria-label={`Published on ${displayDate}`}
                 >
-                  {post.publishedDate}
+                  {displayDate}
                 </time>
               </div>
               <div className="flex items-center gap-1">
