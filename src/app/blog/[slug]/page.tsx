@@ -57,6 +57,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://alux.space/blog/${slug}`,
       siteName: 'Ali Al-Zuhairi',
       locale: 'en_US',
+      publishedTime: localeContent.publishedDate,
+      authors: ['Ali Al-Zuhairi'],
+      tags: post.tags || [],
       images: [{ 
         url: imageUrl,
         width: 1200,

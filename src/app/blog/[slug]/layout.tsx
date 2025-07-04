@@ -14,7 +14,7 @@ async function getPostMetadata(slug: string) {
     description: content.description,
     image: post.image,
     type: 'article' as const,
-    publishedTime: new Date(content.publishedDate).toISOString(),
+    publishedTime: content.publishedDate,
     author: post.author,
     tags: post.tags
   };
