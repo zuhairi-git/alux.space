@@ -132,7 +132,7 @@ export default function Home() {
   // Skills data with translations
   const getSkills = () => {
     const skills = {      en: [
-        { title: 'AI Driven Product Designer', desc: 'Figma Make, VS Code Copilot, and Cursor' },
+        { title: 'AI Driven Product Designer', desc: 'Figma Make, VS Code GitHub Copilot, and Cursor' },
         { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
         { title: 'Research', desc: 'Skilled in qualitative and quantitative research' },
         { title: 'Product Management', desc: 'Agile methodologies and roadmapping' },
@@ -142,7 +142,7 @@ export default function Home() {
         { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
         { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' }
       ],      fi: [
-        { title: 'AI-Pohjainen Tuotesuunnittelija', desc: 'Figma Make, VS Code Copilot ja Cursor' },
+        { title: 'AI-Pohjainen Tuotesuunnittelija', desc: 'Figma Make, VS Code GitHub Copilot ja Cursor' },
         { title: 'UI/UX Suunnittelu', desc: 'Asiantuntemus Figma & Adobe CC:ssä' },
         { title: 'Tutkimus', desc: 'Taitava kvalitatiivisessa ja kvantitatiivisessa tutkimuksessa' },
         { title: 'Tuotehallinta', desc: 'Ketterät menetelmät ja tiekartat' },
