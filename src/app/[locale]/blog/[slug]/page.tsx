@@ -74,8 +74,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       tags: post.tags || [],
       images: [{ 
         url: imageUrl,
-        width: 1200,
-        height: 630,
+        width: 1500,
+        height: 1000,
         alt: localeContent.title,
         type: 'image/jpeg'
       }]
