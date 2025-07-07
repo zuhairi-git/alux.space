@@ -38,10 +38,11 @@ const Footer = () => {
   
   // Quick links for footer navigation
   const quickLinks = [
-    { href: '/', textKey: 'nav.home' },
-    { href: '/portfolio', textKey: 'nav.portfolio' },
-    { href: '/blog', textKey: 'nav.blog' },
-    { href: '/prompt', textKey: 'nav.prompts' }
+    { href: '/', textKey: 'nav.home', localized: true },
+    { href: '/portfolio', textKey: 'nav.portfolio', localized: true },
+    { href: '/blog', textKey: 'nav.blog', localized: true },
+    { href: '/prompt', textKey: 'nav.prompts', localized: true },
+    { href: '/audio-library', textKey: 'nav.audioLibrary', localized: false }
   ];
     // Portfolio section links
   const portfolioLinks = [
@@ -60,8 +61,6 @@ const Footer = () => {
       console.log(`Portfolio: "${t('footer.portfolio')}"`);
       console.log(`Contact: "${t('footer.contact')}"`);
       console.log(`Copyright: "${t('footer.copyright')}"`);
-      console.log(`Additional Info Title: "${t('footer.additionalInfo.title')}"`);
-      console.log(`Additional Info Content: "${t('footer.additionalInfo.content')}"`);
       console.groupEnd();
     }
   }, [locale, t, debugTranslations]);  return (
@@ -134,7 +133,7 @@ const Footer = () => {
                 {quickLinks.map((link) => (
                   <li key={link.href} role="listitem">
                     <Link 
-                      href={localizedHref(link.href)} 
+                      href={link.localized ? localizedHref(link.href) : link.href} 
                       className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
                       onClick={() => handleFooterLinkClick(t(link.textKey), link.href)}
                     >
@@ -144,13 +143,6 @@ const Footer = () => {
                 ))}
               </ul>
             </nav>
-            {/* Additional Information Section */}
-            <section className="mt-8" aria-labelledby="additional-info-heading">
-              <h4 id="additional-info-heading" className="font-semibold mb-4">{t('footer.additionalInfo.title')}</h4>
-              <div className="text-sm opacity-80">
-                {t('footer.additionalInfo.content')}
-              </div>
-            </section>
           </div>
           {/* Portfolio section */}
           <div>

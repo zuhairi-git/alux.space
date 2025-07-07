@@ -34,6 +34,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Features
+
+### Audio System
+This website includes a comprehensive audio system with:
+- **Audio Library**: Browse all audio content at `/audio-library` (unlisted page)
+- **Individual Audio Pages**: Each audio file has its own shareable URL
+- **Embedded Players**: Audio content can be embedded in blog posts
+- **Automatic Metadata**: Run `npm run audio:scan` to generate metadata for new audio files
+
+For detailed documentation, see `AUDIO_SYSTEM_README.md`.
+
 ## Environment Variables
 
 The following environment variables are required:
