@@ -13,8 +13,7 @@
     "seo:monitor": "node scripts/seo-dev.js monitor",
     "seo:watch": "node scripts/seo-dev.js watch",
     "sitemap": "node -e \"require('./seo/sitemap.ts').generateSitemap()\"",
-    "precommit": "npm run lint && npm run seo:audit",
-    "audio:scan": "node scripts/generate-audio-metadata.js"
+    "precommit": "npm run lint && npm run seo:audit"
   },  "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

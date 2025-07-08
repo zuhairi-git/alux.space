@@ -3,7 +3,6 @@
     "portfolio": "Portfolio",
     "blog": "Blog",
     "prompts": "Prompts",
-    "audioLibrary": "Audio Library",
     "workExperience": "Work Experience",
     "digitalDreams": "Digital Dreams",
     "strengthsSkills": "Strengths & Skills",
@@ -88,6 +87,10 @@
     "subtitle": "A collection of prompts I've crafted for various creative AI tools"
   },  "footer": {
     "copyright": "All rights reserved.",
+    "additionalInfo": {
+      "title": "Additional Information",
+      "content": "AI-powered Product Owner and UX Design Leader with over 20 years of experience in digital product development and user-centered design. Specialized in prompt engineering, AI-assisted design workflows, and creating intelligent, accessible interfaces that bridge human creativity with artificial intelligence."
+    },
     "quickLinks": "Quick Links",
     "portfolio": "Portfolio",
     "contact": "Contact",
