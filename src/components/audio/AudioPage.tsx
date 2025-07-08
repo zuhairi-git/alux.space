@@ -226,6 +226,10 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
                   <span className="material-symbols text-lg">language</span>
                   {audio.language.toUpperCase()}
                 </span>
+                <span className="flex items-center gap-2">
+                  <span className="material-symbols text-lg">calendar_today</span>
+                  {new Date(audio.publishedDate).toLocaleDateString()}
+                </span>
               </div>
 
               {/* Description */}
