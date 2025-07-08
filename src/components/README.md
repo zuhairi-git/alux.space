@@ -1,6 +1,7 @@
 # Themed Components
 
 This directory contains reusable themed components that maintain consistent styling across the entire application.
+Start your tasks with understanding the theme components.
 
 ## Available Components
 
