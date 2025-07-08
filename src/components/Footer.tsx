@@ -144,13 +144,6 @@ const Footer = () => {
                 ))}
               </ul>
             </nav>
-            {/* Additional Information Section */}
-            <section className="mt-8" aria-labelledby="additional-info-heading">
-              <h4 id="additional-info-heading" className="font-semibold mb-4">{t('footer.additionalInfo.title')}</h4>
-              <div className="text-sm opacity-80">
-                {t('footer.additionalInfo.content')}
-              </div>
-            </section>
           </div>
           {/* Portfolio section */}
           <div>
