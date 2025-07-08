@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -22,6 +22,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
   const { locale } = useLanguage();
   const params = useParams();
   const [imageError, setImageError] = useState(false);
+  const audioPlayerRef = useRef<{ play: () => void } | null>(null);
   
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
@@ -149,6 +150,32 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
     });
   };
 
+  const handlePlayButtonClick = () => {
+    // Scroll to the audio player section
+    const audioPlayerElement = document.querySelector('[data-audio-player]');
+    if (audioPlayerElement) {
+      audioPlayerElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Try to trigger play on the audio player
+      setTimeout(() => {
+        if (audioPlayerRef.current) {
+          audioPlayerRef.current.play();
+        } else {
+          // Fallback to button click if ref is not available
+          const playButton = audioPlayerElement.querySelector('button[aria-label*="Play"], button[aria-label*="play"]');
+          if (playButton && !playButton.getAttribute('aria-label')?.includes('Pause')) {
+            (playButton as HTMLButtonElement).click();
+          }
+        }
+      }, 500);
+    }
+    
+    // Also call the onPlayAudio callback if provided
+    if (onPlayAudio) {
+      onPlayAudio(audio);
+    }
+  };
+
   const downloadAudio = () => {
     const link = document.createElement('a');
     link.href = audio.filePath;
@@ -258,7 +285,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4">
                 <button
-                  onClick={() => onPlayAudio?.(audio)}
+                  onClick={handlePlayButtonClick}
                   className={`${buttonStyles.primary} px-6 py-3 rounded-lg flex items-center gap-2 font-semibold transition-colors`}
                 >
                   <span className="material-symbols text-lg">play_arrow</span>

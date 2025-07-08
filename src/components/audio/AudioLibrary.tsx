@@ -190,10 +190,10 @@ const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
             {/* View Controls */}
             <div className="flex items-center gap-3">
               {/* View Mode Toggle */}
-              <div className="flex items-center bg-gray-100 rounded-lg p-1">
+              <div className="flex items-center rounded-lg p-2">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-md transition-colors ${
+                  className={`m-2 p-2 rounded-md transition-colors ${
                     viewMode === 'grid' 
                       ? buttonStyles.active 
                       : buttonStyles.inactive

@@ -10,9 +10,20 @@ interface AudioPageClientProps {
 }
 
 const AudioPageClient: React.FC<AudioPageClientProps> = ({ audio }) => {
-  const handlePlayAudio = (audioToPlay: AudioMetadata) => {
-    // You could implement a global audio player state here
-    console.log('Playing audio:', audioToPlay.title);
+  const handlePlayAudio = () => {
+    // Scroll to the audio player and start playing
+    const audioPlayerElement = document.querySelector('[data-audio-player]');
+    if (audioPlayerElement) {
+      audioPlayerElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Try to trigger play on the audio player
+      setTimeout(() => {
+        const playButton = audioPlayerElement.querySelector('button[aria-label*="play"], button[aria-label*="Play"]');
+        if (playButton && !playButton.getAttribute('aria-label')?.includes('pause')) {
+          (playButton as HTMLButtonElement).click();
+        }
+      }, 500);
+    }
   };
 
   return (

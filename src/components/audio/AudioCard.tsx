@@ -90,11 +90,11 @@ const AudioCard: React.FC<AudioCardProps> = ({
 
   const getLinkStyles = () => {
     if (isLight) {
-      return 'no-underline hover:bg-blue-50 px-1 py-0.5 rounded transition-colors duration-150';
+      return 'no-underline hover:bg-blue-50 rounded transition-colors duration-150';
     } else if (isColorful) {
-      return 'no-underline hover:bg-purple-500/10 px-1 py-0.5 rounded transition-colors duration-150';
+      return 'no-underline hover:bg-purple-500/10 rounded transition-colors duration-150';
     } else {
-      return 'no-underline hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors duration-150';
+      return 'no-underline hover:bg-blue-900/20 rounded transition-colors duration-150';
     }
   };
 
@@ -113,10 +113,10 @@ const AudioCard: React.FC<AudioCardProps> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ y: -2 }}
-        className={`${getCardStyles()} rounded-xl p-4 transition-all duration-300 ${className}`}
+        className={`${getCardStyles()} rounded-xl overflow-hidden transition-all duration-300 ${className}`}
       >
         <Link href={`/${params.locale || locale}/audio/${audio.slug}`} className={`block ${getLinkStyles()}`}>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 p-4">
             {/* Cover Image */}
             <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
               <Image

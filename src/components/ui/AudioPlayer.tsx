@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useImperativeHandle, forwardRef } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -13,7 +13,15 @@ interface AudioPlayerProps {
   category?: string;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
+export interface AudioPlayerRef {
+  play: () => void;
+  pause: () => void;
+  stop: () => void;
+  togglePlay: () => void;
+  isPlaying: boolean;
+}
+
+const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, category }, ref) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -277,6 +285,25 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
     setPlaybackRate(newRate);
   };
 
+  // Expose audio control functions via ref
+  useImperativeHandle(ref, () => ({
+    play: () => {
+      if (!audioRef.current || loadError) return;
+      if (!isPlaying) {
+        togglePlay();
+      }
+    },
+    pause: () => {
+      if (!audioRef.current || loadError) return;
+      if (isPlaying) {
+        togglePlay();
+      }
+    },
+    stop: stopAudio,
+    togglePlay,
+    isPlaying
+  }));
+
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!audioRef.current || loadError) return;
     
@@ -525,6 +552,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
       aria-label="Enhanced Audio Player"
       style={{ overflow: 'visible', zIndex: 100, position: 'relative' }}
       data-podcast-player="true"
+      data-audio-player="true"
     >      {/* Dynamic background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none rounded-2xl" style={{ zIndex: -1 }}>
         <motion.div 
@@ -1165,6 +1193,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, category }) => {
       </AnimatePresence>
     </motion.div>
   );
-};
+});
+
+AudioPlayer.displayName = 'AudioPlayer';
 
 export default AudioPlayer;
