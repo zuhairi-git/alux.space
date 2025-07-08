@@ -3,11 +3,9 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
-import { useLanguage } from '@/context/LanguageContext';
 import { audioLibrary, audioLibraryConfig, getAudioCategories, getAudioTags, searchAudio } from '@/data/audioLibrary';
 import { AudioMetadata } from '@/types/audio';
 import AudioCard from './AudioCard';
-import { useIsMobile } from '@/utils/deviceUtils';
 
 interface AudioLibraryProps {
   onPlayAudio?: (audio: AudioMetadata) => void;
@@ -15,8 +13,6 @@ interface AudioLibraryProps {
 
 const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
   const { theme } = useTheme();
-  const { locale } = useLanguage();
-  const isMobile = useIsMobile();
   
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -300,7 +296,7 @@ const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
                     </label>
                     <select
                       value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value as any)}
+                      onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'title')}
                       className={`w-full px-4 py-2 rounded-lg border ${
                         isLight 
                           ? 'bg-white border-gray-300 text-gray-900' 

@@ -2,22 +2,32 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAudioBySlug, audioLibrary } from '@/data/audioLibrary';
-import AudioPageClient from './AudioPageClient';
+import AudioPageComponent from '@/components/audio/AudioPage';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 
 interface AudioPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return audioLibrary.map((audio) => ({
-    slug: audio.slug,
-  }));
+  const locales = ['en', 'fi'];
+  const params = [];
+  
+  for (const locale of locales) {
+    for (const audio of audioLibrary) {
+      params.push({
+        locale,
+        slug: audio.slug,
+      });
+    }
+  }
+  
+  return params;
 }
 
 export async function generateMetadata({ params }: AudioPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const audio = getAudioBySlug(slug);
 
   if (!audio) {
@@ -26,7 +36,7 @@ export async function generateMetadata({ params }: AudioPageProps): Promise<Meta
     };
   }
 
-  const pageUrl = `${baseUrl}/audio/${slug}`;
+  const pageUrl = `${baseUrl}/${locale}/audio/${slug}`;
   const imageUrl = audio.socialImage || audio.coverImage;
   const ogImage = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
@@ -48,7 +58,7 @@ export async function generateMetadata({ params }: AudioPageProps): Promise<Meta
       type: 'website',
       url: pageUrl,
       siteName: 'Ali Al-Zuhairi',
-      locale: audio.language === 'fi' ? 'fi_FI' : 'en_US',
+      locale: locale === 'fi' ? 'fi_FI' : 'en_US',
       images: [
         {
           url: ogImage,
@@ -85,7 +95,6 @@ export async function generateMetadata({ params }: AudioPageProps): Promise<Meta
       // Audio-specific metadata
       'audio:src': `${baseUrl}${audio.filePath}`,
       'audio:type': audio.format || 'audio/mpeg',
-      'audio:duration': audio.duration || '',
       
       // Structured data for audio
       'og:audio': `${baseUrl}${audio.filePath}`,
@@ -108,5 +117,5 @@ export default async function AudioPage({ params }: AudioPageProps) {
     notFound();
   }
 
-  return <AudioPageClient audio={audio} />;
+  return <AudioPageComponent audio={audio} />;
 }

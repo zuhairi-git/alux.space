@@ -1,11 +1,16 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import AudioLibraryClient from './AudioLibraryClient';
+import AudioLibrary from '@/components/audio/AudioLibrary';
 import { audioLibraryConfig } from '@/data/audioLibrary';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 
-export async function generateMetadata(): Promise<Metadata> {
+interface AudioLibraryPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: AudioLibraryPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const ogImage = `${baseUrl}/images/main.jpg`;
   
   return {
@@ -17,9 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: audioLibraryConfig.title,
       description: audioLibraryConfig.description,
       type: 'website',
-      url: `${baseUrl}/audio`,
+      url: `${baseUrl}/${locale}/audio`,
       siteName: 'Ali Al-Zuhairi',
-      locale: 'en_US',
+      locale: locale === 'fi' ? 'fi_FI' : 'en_US',
       images: [
         {
           url: ogImage,
@@ -39,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [ogImage],
     },
     alternates: {
-      canonical: `${baseUrl}/audio`,
+      canonical: `${baseUrl}/${locale}/audio`,
     },
     robots: {
       index: true,
@@ -56,5 +61,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function AudioLibraryPage() {
-  return <AudioLibraryClient />;
+  return <AudioLibrary />;
 }

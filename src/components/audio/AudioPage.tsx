@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useParams } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
 import { getRelatedAudio } from '@/data/audioLibrary';
 import AudioPlayer from '@/components/ui/AudioPlayer';
 import AudioCard from './AudioCard';
-import { formatTime } from '@/utils/formatTime';
 
 interface AudioPageProps {
   audio: AudioMetadata;
@@ -20,6 +20,7 @@ interface AudioPageProps {
 const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
   const { theme } = useTheme();
   const { locale } = useLanguage();
+  const params = useParams();
   const [imageError, setImageError] = useState(false);
   
   const isLight = theme === 'light';
@@ -106,6 +107,16 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
     }
   };
 
+  const getLinkStyles = () => {
+    if (isLight) {
+      return 'no-underline hover:bg-blue-50 px-1 py-0.5 rounded transition-colors duration-150';
+    } else if (isColorful) {
+      return 'no-underline hover:bg-cyan-500/10 px-1 py-0.5 rounded transition-colors duration-150';
+    } else {
+      return 'no-underline hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors duration-150';
+    }
+  };
+
   const textStyles = getTextStyles();
   const buttonStyles = getButtonStyles();
   const fallbackImage = '/images/main.jpg';
@@ -150,8 +161,8 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
       {/* Back Button */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <Link
-          href="/audio"
-          className={`inline-flex items-center gap-2 ${textStyles.accent} hover:underline transition-colors`}
+          href={`/${params.locale || locale}/audio`}
+          className={`inline-flex items-center gap-2 ${textStyles.accent} ${getLinkStyles()}`}
         >
           <span className="material-symbols text-lg">arrow_back</span>
           Back to Audio Library

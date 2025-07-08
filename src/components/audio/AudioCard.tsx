@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useParams } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
 
 interface AudioCardProps {
@@ -23,7 +25,8 @@ const AudioCard: React.FC<AudioCardProps> = ({
   className = ''
 }) => {
   const { theme } = useTheme();
-  const [isHovered, setIsHovered] = useState(false);
+  const { locale } = useLanguage();
+  const params = useParams();
   const [imageError, setImageError] = useState(false);
   
   const isLight = theme === 'light';
@@ -85,6 +88,16 @@ const AudioCard: React.FC<AudioCardProps> = ({
     }
   };
 
+  const getLinkStyles = () => {
+    if (isLight) {
+      return 'no-underline hover:bg-blue-50 px-1 py-0.5 rounded transition-colors duration-150';
+    } else if (isColorful) {
+      return 'no-underline hover:bg-purple-500/10 px-1 py-0.5 rounded transition-colors duration-150';
+    } else {
+      return 'no-underline hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors duration-150';
+    }
+  };
+
   const textStyles = getTextStyles();
   const fallbackImage = '/images/main.jpg';
 
@@ -101,10 +114,8 @@ const AudioCard: React.FC<AudioCardProps> = ({
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ y: -2 }}
         className={`${getCardStyles()} rounded-xl p-4 transition-all duration-300 ${className}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
-        <Link href={`/audio/${audio.slug}`} className="block">
+        <Link href={`/${params.locale || locale}/audio/${audio.slug}`} className={`block ${getLinkStyles()}`}>
           <div className="flex items-center gap-4">
             {/* Cover Image */}
             <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
@@ -164,10 +175,8 @@ const AudioCard: React.FC<AudioCardProps> = ({
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
       className={`${getCardStyles()} rounded-2xl overflow-hidden transition-all duration-300 group ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={`/audio/${audio.slug}`} className="block">
+      <Link href={`/${params.locale || locale}/audio/${audio.slug}`} className={`block ${getLinkStyles()}`}>
         {/* Cover Image */}
         <div className="relative aspect-square overflow-hidden">
           <Image
