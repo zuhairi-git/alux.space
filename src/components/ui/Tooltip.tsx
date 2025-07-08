@@ -12,9 +12,23 @@ interface TooltipProps {
 const Tooltip: React.FC<TooltipProps> = ({ text, children, className = '', id }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [position, setPosition] = useState<'top' | 'bottom' | 'left' | 'right'>('top');
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const tooltipId = id || `tooltip-${Math.random().toString(36).substr(2, 9)}`;  
+
+  useEffect(() => {
+    // Detect mobile devices (pointer: coarse covers most touch devices)
+    const checkMobile = () => {
+      if (typeof window !== 'undefined' && window.matchMedia) {
+        setIsMobile(window.matchMedia('(pointer: coarse)').matches);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   useEffect(() => {
     const updatePosition = () => {
       if (!containerRef.current || !tooltipRef.current) return;
@@ -61,7 +75,9 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, className = '', id })
       setIsVisible(false);
     }
   };
-  const showTooltip = () => setIsVisible(true);
+  const showTooltip = () => {
+    if (!isMobile) setIsVisible(true);
+  };
   const hideTooltip = () => setIsVisible(false);
   
   const getPositionClasses = () => {
@@ -87,38 +103,40 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, className = '', id })
       onFocus={showTooltip}
       onBlur={hideTooltip}
       onKeyDown={handleKeyDown}
-    >      {/* Enhanced children with proper ARIA attributes */}
+    >
+      {/* Enhanced children with proper ARIA attributes */}
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
-            'aria-describedby': isVisible ? tooltipId : undefined,
-            'aria-expanded': isVisible
+            'aria-describedby': isVisible && !isMobile ? tooltipId : undefined,
+            'aria-expanded': isVisible && !isMobile
           });
         }
         return child;
       })}
-      
       {/* Tooltip with enhanced accessibility */}
-      <div 
-        ref={tooltipRef}
-        id={tooltipId}
-        role="tooltip"
-        aria-hidden={!isVisible}
-        className={`absolute ${getPositionClasses()} px-3 py-2 bg-gray-900 text-white text-sm rounded-md pointer-events-none transition-all duration-200 z-50 max-w-xs ${
-          isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
-        style={{
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word'
-        }}
-      >
-        {text}
-        {/* Add arrow indicator */}
+      {!isMobile && (
         <div 
-          className={`absolute w-2 h-2 bg-gray-900 transform rotate-45 ${getArrowPositionClasses(position)}`}
-          aria-hidden="true"
-        />
-      </div>
+          ref={tooltipRef}
+          id={tooltipId}
+          role="tooltip"
+          aria-hidden={!isVisible}
+          className={`absolute ${getPositionClasses()} px-3 py-2 bg-gray-900 text-white text-sm rounded-md pointer-events-none transition-all duration-200 z-50 max-w-xs ${
+            isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
+          style={{
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word'
+          }}
+        >
+          {text}
+          {/* Add arrow indicator */}
+          <div 
+            className={`absolute w-2 h-2 bg-gray-900 transform rotate-45 ${getArrowPositionClasses(position)}`}
+            aria-hidden="true"
+          />
+        </div>
+      )}
     </div>
   );
 };
