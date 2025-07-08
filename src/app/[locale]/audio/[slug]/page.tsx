@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAudioBySlug, audioLibrary } from '@/data/audioLibrary';
-import AudioPageComponent from '@/components/audio/AudioPage';
+import AudioPageClient from './AudioPageClient';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 
@@ -117,5 +117,5 @@ export default async function AudioPage({ params }: AudioPageProps) {
     notFound();
   }
 
-  return <AudioPageComponent audio={audio} />;
+  return <AudioPageClient audio={audio} />;
 }

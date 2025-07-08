@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import AudioLibrary from '@/components/audio/AudioLibrary';
+import AudioLibraryClient from './AudioLibraryClient';
 import { audioLibraryConfig } from '@/data/audioLibrary';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
@@ -61,5 +61,5 @@ export async function generateMetadata({ params }: AudioLibraryPageProps): Promi
 }
 
 export default function AudioLibraryPage() {
-  return <AudioLibrary />;
+  return <AudioLibraryClient />;
 }
