@@ -134,9 +134,6 @@ const AudioCard: React.FC<AudioCardProps> = ({
                   </p>
                   <div className="flex items-center gap-4 text-sm">
                     <span className={textStyles.category}>{audio.category}</span>
-                    {audio.duration && (
-                      <span className={textStyles.meta}>{audio.duration}</span>
-                    )}
                     <span className={textStyles.meta}>{audio.language.toUpperCase()}</span>
                   </div>
                 </div>
@@ -202,15 +199,6 @@ const AudioCard: React.FC<AudioCardProps> = ({
               <div className="bg-yellow-400 text-yellow-900 px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
                 <span className="material-symbols text-sm">star</span>
                 Featured
-              </div>
-            </div>
-          )}
-
-          {/* Duration Badge */}
-          {audio.duration && (
-            <div className="absolute bottom-3 left-3">
-              <div className="bg-black/60 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
-                {audio.duration}
               </div>
             </div>
           )}

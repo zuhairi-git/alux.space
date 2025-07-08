@@ -211,12 +211,6 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
                   <span className="material-symbols text-lg">person</span>
                   {audio.author}
                 </span>
-                {audio.duration && (
-                  <span className="flex items-center gap-2">
-                    <span className="material-symbols text-lg">schedule</span>
-                    {audio.duration}
-                  </span>
-                )}
                 <span className="flex items-center gap-2">
                   <span className="material-symbols text-lg">language</span>
                   {audio.language.toUpperCase()}
@@ -293,46 +287,6 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
             title={audio.title}
             category={audio.category}
           />
-        </motion.div>
-      </div>
-
-      {/* Audio Details */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className={`${getCardStyles()} p-8`}
-        >
-          <h2 className={`text-2xl font-bold mb-6 ${textStyles.title}`}>
-            Audio Details
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <div>
-                <h3 className={`font-semibold mb-2 ${textStyles.text}`}>File Information</h3>
-                <div className={`space-y-2 ${textStyles.muted}`}>
-                  <p><span className="font-medium">Format:</span> {audio.format || 'MP3'}</p>
-                  <p><span className="font-medium">Bitrate:</span> {audio.bitrate || 'Standard'}</p>
-                  <p><span className="font-medium">Duration:</span> {audio.duration || 'Unknown'}</p>
-                  <p><span className="font-medium">File Size:</span> {audio.size ? `${(audio.size / 1024 / 1024).toFixed(1)} MB` : 'Unknown'}</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <h3 className={`font-semibold mb-2 ${textStyles.text}`}>Publication Details</h3>
-                <div className={`space-y-2 ${textStyles.muted}`}>
-                  <p><span className="font-medium">Published:</span> {new Date(audio.publishedDate).toLocaleDateString()}</p>
-                  <p><span className="font-medium">Author:</span> {audio.author}</p>
-                  <p><span className="font-medium">Language:</span> {audio.language.toUpperCase()}</p>
-                  <p><span className="font-medium">Category:</span> {audio.category}</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </motion.div>
       </div>
 

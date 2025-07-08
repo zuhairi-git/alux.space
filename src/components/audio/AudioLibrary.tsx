@@ -22,7 +22,7 @@ const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'title' | 'duration'>('newest');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'title'>('newest');
   const [showFilters, setShowFilters] = useState(false);
   
   const isLight = theme === 'light';
@@ -144,14 +144,6 @@ const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
           return new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
         case 'title':
           return a.title.localeCompare(b.title);
-        case 'duration':
-          // Sort by duration if available
-          if (a.duration && b.duration) {
-            const aDuration = a.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0);
-            const bDuration = b.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0);
-            return bDuration - aDuration;
-          }
-          return 0;
         default:
           return 0;
       }
@@ -318,7 +310,6 @@ const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
                       <option value="newest">Newest First</option>
                       <option value="oldest">Oldest First</option>
                       <option value="title">Title A-Z</option>
-                      <option value="duration">Duration</option>
                     </select>
                   </div>
                 </div>
