@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu } from '@headlessui/react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
@@ -95,55 +94,24 @@ export default function LanguageSwitcher() {
                   ref={buttonRef}
                   className={`flex items-center gap-2 py-2 px-3 rounded-lg ${getButtonStyles()} backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
                 >
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {/* Current language flag and code */}
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-lg leading-none">{currentLanguage.flag}</span>
-                    <span className="text-sm font-medium">{currentLanguage.shortLabel}</span>
-                  </div>
-                  
-                  {/* Dropdown arrow */}
-                  <motion.span
-                    className="material-symbols text-sm"
-                    animate={{ rotate: open ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    expand_more
-                  </motion.span>
-                </motion.div>
+                <div className="flex items-center">
+                  {/* Current language code only */}
+                  <span className="text-sm font-medium">{currentLanguage.shortLabel}</span>
+                </div>
               </Menu.Button>
             </Tooltip>            {/* Dropdown menu */}
-            <AnimatePresence>
               {open && (
                 <Menu.Items
-                  as={motion.div}
-                  static
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   className={`${getPositionClasses()} w-40 dropdown-screen-aware dropdown-mobile-responsive ${getMenuStyles()} shadow-lg rounded-lg overflow-hidden z-[70] focus:outline-none`}
-                  style={{
-                    transition: 'all 0.2s ease-out',
-                    ...getPositionStyles()
-                  }}
+                  style={getPositionStyles()}
                 >
-                  <div className="p-1">                    {languages.map((language, index) => (
+                  <div className="p-1">                    {languages.map((language) => (
                       <Menu.Item key={language.code}>
                         {() => (
-                          <motion.button
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          <button
                             onClick={() => handleLanguageChange(language.code)}
                             className={`flex items-center gap-3 w-full px-3 py-2 text-sm rounded-lg ${getItemStyles(locale === language.code)} focus:outline-none transition-all duration-200`}
                           >
-                            {/* Language flag */}
-                            <span className="text-base leading-none">{language.flag}</span>
-                            
                             {/* Language info */}
                             <div className="flex flex-col items-start">
                               <span className="font-medium">{language.label}</span>
@@ -152,22 +120,17 @@ export default function LanguageSwitcher() {
                             
                             {/* Selected indicator */}
                             {locale === language.code && (
-                              <motion.span
-                                className="material-symbols text-sm ml-auto text-primary"
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.2, ease: "easeOut" }}
-                              >
+                              <span className="material-symbols text-sm ml-auto text-primary">
                                 check
-                              </motion.span>
+                              </span>
                             )}
-                          </motion.button>
+                          </button>
                         )}
                       </Menu.Item>
                     ))}
                   </div>
                 </Menu.Items>
-              )}            </AnimatePresence>
+              )}
           </>
         );
         }}

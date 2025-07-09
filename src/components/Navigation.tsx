@@ -243,9 +243,7 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
           whileHover={{ scale: 1.05 }}
         >
           <span className="material-symbols text-xl" aria-hidden="true">{icon}</span>
-        </motion.div>        <span className="font-semibold text-lg group-hover:translate-x-1 transition-transform duration-200">{title}</span>        <span className="material-symbols text-xs ml-auto opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
-          arrow_forward
-        </span>
+        </motion.div>        <span className="font-semibold text-lg group-hover:translate-x-1 transition-transform duration-200">{title}</span>
       </Link>
     </motion.div>
   );
@@ -632,9 +630,6 @@ const Navigation = () => {
                 <span className="material-symbols text-xs text-orange-500 scale-65">article</span>
               </div>
               <span className="font-medium text-sm">{t('nav.blog')}</span>
-              <span className="material-symbols text-xs ml-auto opacity-50">
-                arrow_forward
-              </span>
             </Link>
 
             {/* Audio Library link */}
@@ -659,9 +654,6 @@ const Navigation = () => {
                 <span className="material-symbols text-xs text-blue-500 scale-65">audio_file</span>
               </div>
               <span className="font-medium text-sm">{t('nav.audio')}</span>
-              <span className="material-symbols text-xs ml-auto opacity-50">
-                arrow_forward
-              </span>
             </Link>            {/* Prompts link */}
             <Link
               href={localizedHref('/prompt')}
@@ -683,9 +675,6 @@ const Navigation = () => {
                 <span className="material-symbols text-xs text-pink-500 scale-65">smart_toy</span>
               </div>
               <span className="font-medium text-sm">{t('nav.prompts')}</span>
-              <span className="material-symbols text-xs ml-auto opacity-50">
-                arrow_forward
-              </span>
             </Link>
 
             {/* Theme and Language Switchers */}
