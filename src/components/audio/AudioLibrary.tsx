@@ -188,25 +188,25 @@ const AudioLibrary: React.FC = () => {
               <div className="flex items-center rounded-lg">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`m-1 p-1 rounded-md transition-colors ${
+                  className={`m-1 pe-2 ps-2 pt-1 pb-1 rounded-md transition-colors ${
                     viewMode === 'grid' 
                       ? buttonStyles.active 
                       : buttonStyles.inactive
                   }`}
                   aria-label="Grid view"
                 >
-                  <span className="material-symbols text-lg">grid_view</span>
+                  <span className="material-symbols text-lg pt-1">grid_view</span>
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`m-1 p-1 rounded-md transition-colors ${
+                  className={`m-1 pe-2 ps-2 pt-1 pb-1 rounded-md transition-colors ${
                     viewMode === 'list' 
                       ? buttonStyles.active 
                       : buttonStyles.inactive
                   }`}
                   aria-label="List view"
                 >
-                  <span className="material-symbols text-lg">list</span>
+                  <span className="material-symbols text-lg pt-1">list</span>
                 </button>
               </div>
 
