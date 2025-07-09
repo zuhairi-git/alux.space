@@ -175,6 +175,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
             src={audioSrc}
             title={t('blog.aria.listenToArticle')}
             category={audioCategory}
+            language={locale as 'en' | 'fi' | 'ar'}
           />
         </motion.section>
       )}

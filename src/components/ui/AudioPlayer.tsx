@@ -11,6 +11,8 @@ interface AudioPlayerProps {
   src: string;
   title?: string;
   category?: string;
+  language?: 'en' | 'fi' | 'ar';
+  availableLanguages?: string[];
 }
 
 export interface AudioPlayerRef {
@@ -21,7 +23,7 @@ export interface AudioPlayerRef {
   isPlaying: boolean;
 }
 
-const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, category }, ref) => {
+const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, category, language = 'en', availableLanguages = [] }, ref) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -636,19 +638,28 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           {/* Language indicator */}
           <motion.div 
             className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-              isLight 
-                ? 'bg-blue-100 text-blue-700 border border-blue-200' 
-                : isColorful
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                : 'bg-blue-900/30 text-blue-300 border border-blue-800'
+              availableLanguages.length > 1
+                ? isLight 
+                  ? 'bg-blue-50 text-blue-700 border border-blue-200' 
+                  : isColorful
+                  ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-400/30'
+                  : 'bg-blue-500/10 text-blue-300 border border-blue-400/30'
+                : isLight 
+                  ? 'bg-gray-100 text-gray-700 border border-gray-200' 
+                  : isColorful
+                  ? 'bg-white/10 text-white/80 border border-white/20'
+                  : 'bg-gray-700/50 text-gray-300 border border-gray-600/50'
             }`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}
             whileHover={{ scale: 1.05 }}
-            title={t('blog.aria.audioLanguage')}
+            title={availableLanguages.length > 1 ? `Available in ${availableLanguages.length} languages` : `Audio language: ${language.toUpperCase()}`}
           >
-            EN
+            {availableLanguages.length > 1 
+              ? availableLanguages.map(lang => lang.toUpperCase()).join('+')
+              : language.toUpperCase()
+            }
           </motion.div>
         </div>
       </div>      {/* Dynamic waveform visualization */}

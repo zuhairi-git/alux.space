@@ -377,6 +377,8 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
             src={audio.filePath}
             title={`${audio.title} (${selectedLanguage === 'en' ? 'English' : selectedLanguage === 'fi' ? 'Suomi' : 'العربية'})`}
             category={audio.category}
+            language={selectedLanguage}
+            availableLanguages={availableLanguages}
           />
         </motion.div>
       </div>
