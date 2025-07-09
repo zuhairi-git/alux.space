@@ -121,12 +121,12 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Urakehitys'
       },
       type: {
-        en: 'Professional Growth',
-        fi: 'Ammatillinen kasvu'
+        en: 'Job Seeking Application',
+        fi: 'Työnhakusovellus'
       },
       desc: {
-        en: 'Continuous learning and evolution in product design and leadership roles.',
-        fi: 'Jatkuva oppiminen ja kehitys tuotesuunnittelun ja johtamisen rooleissa.'
+        en: 'Job seeking app for efficient job searching',
+        fi: 'Työnhakusovellus tehokkaaseen työnhakuun'
       },
       link: `/${locale}/portfolio/jobseeking`,
       gradient: 'from-purple-400 to-pink-500',
