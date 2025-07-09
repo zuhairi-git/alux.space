@@ -13,7 +13,6 @@ interface AudioCardProps {
   audio: AudioMetadata;
   variant?: 'grid' | 'list';
   showPlayButton?: boolean;
-  onPlay?: (audio: AudioMetadata) => void;
   className?: string;
 }
 
@@ -21,7 +20,6 @@ const AudioCard: React.FC<AudioCardProps> = ({
   audio,
   variant = 'grid',
   showPlayButton = true,
-  onPlay,
   className = ''
 }) => {
   const { theme } = useTheme();
@@ -129,12 +127,6 @@ const AudioCard: React.FC<AudioCardProps> = ({
   const textStyles = getTextStyles();
   const fallbackImage = '/images/main.jpg';
 
-  const handlePlayClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onPlay?.(audio);
-  };
-
   const getLinkStyles = () => {
     if (isLight) {
       return 'no-underline hover:bg-blue-50 rounded transition-colors duration-150';
@@ -190,17 +182,11 @@ const AudioCard: React.FC<AudioCardProps> = ({
                   </div>
                 </div>
 
-                {/* Play Button */}
+                {/* Play Icon Visual Indicator */}
                 {showPlayButton && (
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handlePlayClick}
-                    className={`${getPlayButtonStyles()} w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200`}
-                    aria-label={`Play ${audio.title}`}
-                  >
+                  <div className={`${getPlayButtonStyles()} w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200`}>
                     <span className="material-symbols text-xl">play_arrow</span>
-                  </motion.button>
+                  </div>
                 )}
               </div>
             </div>
@@ -228,18 +214,12 @@ const AudioCard: React.FC<AudioCardProps> = ({
             onError={() => setImageError(true)}
           />
           
-          {/* Play Button Overlay */}
+          {/* Play Icon Overlay */}
           {showPlayButton && (
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handlePlayClick}
-                className={`${getPlayButtonStyles()} w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200`}
-                aria-label={`Play ${audio.title}`}
-              >
+              <div className={`${getPlayButtonStyles()} w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200`}>
                 <span className="material-symbols text-2xl">play_arrow</span>
-              </motion.button>
+              </div>
             </div>
           )}
 

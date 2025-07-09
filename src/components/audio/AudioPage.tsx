@@ -123,16 +123,6 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     }
   };
 
-  const getLanguageBadgeStyles = () => {
-    if (isLight) {
-      return 'bg-blue-100 text-blue-800 border border-blue-200';
-    } else if (isColorful) {
-      return 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30';
-    } else {
-      return 'bg-blue-500/20 text-blue-300 border border-blue-400/30';
-    }
-  };
-
   const getLanguageButtonStyles = (isActive: boolean) => {
     if (isLight) {
       return isActive 
@@ -406,7 +396,6 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                   <AudioCard
                     audio={relatedItem}
                     variant="grid"
-                    onPlay={onPlayAudio}
                   />
                 </motion.div>
               ))}

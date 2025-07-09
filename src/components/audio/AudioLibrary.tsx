@@ -4,14 +4,9 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { audioLibrary, audioLibraryConfig, getAudioCategories, getAudioTags, searchAudio } from '@/data/audioLibrary';
-import { AudioMetadata } from '@/types/audio';
 import AudioCard from './AudioCard';
 
-interface AudioLibraryProps {
-  onPlayAudio?: (audio: AudioMetadata) => void;
-}
-
-const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
+const AudioLibrary: React.FC = () => {
   const { theme } = useTheme();
   
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -408,7 +403,6 @@ const AudioLibrary: React.FC<AudioLibraryProps> = ({ onPlayAudio }) => {
                   <AudioCard
                     audio={audio}
                     variant={viewMode}
-                    onPlay={onPlayAudio}
                   />
                 </motion.div>
               ))}
