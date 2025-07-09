@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
-import { getRelatedAudio } from '@/data/audioLibrary';
+import { getRelatedAudio, getAudioLanguages, getAudioVersion } from '@/data/audioLibrary';
 import AudioPlayer from '@/components/ui/AudioPlayer';
 import AudioCard from './AudioCard';
 
@@ -17,15 +17,20 @@ interface AudioPageProps {
   onPlayAudio?: (audio: AudioMetadata) => void;
 }
 
-const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
+const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio }) => {
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const params = useParams();
   const [imageError, setImageError] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'fi' | 'ar'>(originalAudio.language);
   const audioPlayerRef = useRef<{ play: () => void } | null>(null);
   
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
+  
+  // Get the audio version for the selected language
+  const audio = getAudioVersion(originalAudio, selectedLanguage);
+  const availableLanguages = getAudioLanguages(originalAudio);
   
   // Get related audio
   const relatedAudio = getRelatedAudio(audio, 3);
@@ -115,6 +120,32 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
       return 'no-underline hover:bg-cyan-500/10 px-1 py-0.5 rounded transition-colors duration-150';
     } else {
       return 'no-underline hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors duration-150';
+    }
+  };
+
+  const getLanguageBadgeStyles = () => {
+    if (isLight) {
+      return 'bg-blue-100 text-blue-800 border border-blue-200';
+    } else if (isColorful) {
+      return 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30';
+    } else {
+      return 'bg-blue-500/20 text-blue-300 border border-blue-400/30';
+    }
+  };
+
+  const getLanguageButtonStyles = (isActive: boolean) => {
+    if (isLight) {
+      return isActive 
+        ? 'bg-blue-600 text-white border-blue-600' 
+        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50';
+    } else if (isColorful) {
+      return isActive 
+        ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white border-transparent' 
+        : 'bg-purple-500/20 text-purple-300 border-purple-500/30 hover:bg-purple-500/30';
+    } else {
+      return isActive 
+        ? 'bg-blue-600 text-white border-blue-600' 
+        : 'bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600';
     }
   };
 
@@ -250,14 +281,32 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
                   {audio.author}
                 </span>
                 <span className="flex items-center gap-2">
-                  <span className="material-symbols text-lg">language</span>
-                  {audio.language.toUpperCase()}
-                </span>
-                <span className="flex items-center gap-2">
                   <span className="material-symbols text-lg">calendar_today</span>
                   {new Date(audio.publishedDate).toLocaleDateString()}
                 </span>
               </div>
+
+              {/* Language Selection */}
+              {availableLanguages.length > 1 && (
+                <div className="mb-6">
+                  <label className={`block text-sm font-medium mb-3 ${textStyles.text}`}>
+                    Select Language
+                  </label>
+                  <div className="flex gap-2">
+                    {availableLanguages.map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => setSelectedLanguage(lang as 'en' | 'fi' | 'ar')}
+                        className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${getLanguageButtonStyles(selectedLanguage === lang)}`}
+                      >
+                        {lang === 'en' ? 'English' : lang === 'fi' ? 'Suomi' : 'العربية'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
 
               {/* Description */}
               <p className={`text-lg leading-relaxed mb-8 ${textStyles.text}`}>
@@ -326,7 +375,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio, onPlayAudio }) => {
           </h2>
           <AudioPlayer
             src={audio.filePath}
-            title={audio.title}
+            title={`${audio.title} (${selectedLanguage === 'en' ? 'English' : selectedLanguage === 'fi' ? 'Suomi' : 'العربية'})`}
             category={audio.category}
           />
         </motion.div>

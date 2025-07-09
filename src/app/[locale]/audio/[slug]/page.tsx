@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAudioBySlug, audioLibrary } from '@/data/audioLibrary';
+import { getAudioBySlug, audioLibrary, getAudioBySlugAndLanguage } from '@/data/audioLibrary';
 import AudioPageClient from './AudioPageClient';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
@@ -28,7 +28,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: AudioPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const audio = getAudioBySlug(slug);
+  const audio = getAudioBySlugAndLanguage(slug, locale as 'en' | 'fi' | 'ar') || getAudioBySlug(slug);
 
   if (!audio) {
     return {

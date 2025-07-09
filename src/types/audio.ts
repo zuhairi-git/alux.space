@@ -1,3 +1,12 @@
+export interface AudioVersion {
+  language: 'en' | 'fi' | 'ar';
+  fileName: string;
+  filePath: string;
+  duration?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
 export interface AudioMetadata {
   id: string;
   title: string;
@@ -19,6 +28,10 @@ export interface AudioMetadata {
   seoTitle?: string;
   seoDescription?: string;
   socialImage?: string;
+  // New field for multiple language versions
+  versions?: AudioVersion[];
+  // Indicates if this is a multi-language audio
+  isMultiLanguage?: boolean;
 }
 
 export interface AudioLibraryConfig {

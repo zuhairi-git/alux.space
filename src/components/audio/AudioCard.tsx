@@ -88,15 +88,43 @@ const AudioCard: React.FC<AudioCardProps> = ({
     }
   };
 
-  const getLinkStyles = () => {
+  const getLanguageBadgeStyles = () => {
     if (isLight) {
-      return 'no-underline hover:bg-blue-50 rounded transition-colors duration-150';
+      return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
     } else if (isColorful) {
-      return 'no-underline hover:bg-purple-500/10 rounded transition-colors duration-150';
+      return 'bg-white/10 text-white/80 hover:bg-white/20';
     } else {
-      return 'no-underline hover:bg-blue-900/20 rounded transition-colors duration-150';
+      return 'bg-gray-700/50 text-gray-300 hover:bg-gray-600/50';
     }
   };
+
+  const getMultiLanguageBadgeStyles = () => {
+    if (isLight) {
+      return 'bg-blue-50 text-blue-700 hover:bg-blue-100';
+    } else if (isColorful) {
+      return 'bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20';
+    } else {
+      return 'bg-blue-500/10 text-blue-300 hover:bg-blue-500/20';
+    }
+  };
+
+  const getLanguageBadgeContent = () => {
+    if (audio.isMultiLanguage && audio.versions) {
+      const languages = audio.versions.map(v => v.language.toUpperCase()).join('+');
+      return {
+        text: languages,
+        style: getMultiLanguageBadgeStyles(),
+        hasIcon: false
+      };
+    }
+    return {
+      text: audio.language.toUpperCase(),
+      style: getLanguageBadgeStyles(),
+      hasIcon: false
+    };
+  };
+
+  const languageBadge = getLanguageBadgeContent();
 
   const textStyles = getTextStyles();
   const fallbackImage = '/images/main.jpg';
@@ -105,6 +133,16 @@ const AudioCard: React.FC<AudioCardProps> = ({
     e.preventDefault();
     e.stopPropagation();
     onPlay?.(audio);
+  };
+
+  const getLinkStyles = () => {
+    if (isLight) {
+      return 'no-underline hover:bg-blue-50 rounded transition-colors duration-150';
+    } else if (isColorful) {
+      return 'no-underline hover:bg-purple-500/10 rounded transition-colors duration-150';
+    } else {
+      return 'no-underline hover:bg-blue-900/20 rounded transition-colors duration-150';
+    }
   };
 
   if (variant === 'list') {
@@ -143,9 +181,12 @@ const AudioCard: React.FC<AudioCardProps> = ({
                   <p className={`text-sm mb-2 line-clamp-2 ${textStyles.description}`}>
                     {audio.description}
                   </p>
-                  <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-4 text-sm flex-wrap">
                     <span className={textStyles.category}>{audio.category}</span>
-                    <span className={textStyles.meta}>{audio.language.toUpperCase()}</span>
+                    <span className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${languageBadge.style}`}>
+                      {languageBadge.text}
+                    </span>
+                    <span className={textStyles.meta}>{audio.duration}</span>
                   </div>
                 </div>
 
@@ -247,14 +288,19 @@ const AudioCard: React.FC<AudioCardProps> = ({
           </div>
 
           {/* Meta Info */}
-          <div className={`flex items-center gap-4 text-sm ${textStyles.meta}`}>
-            <span className="flex items-center gap-1">
-              <span className="material-symbols text-sm">language</span>
-              {audio.language.toUpperCase()}
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="material-symbols text-sm">calendar_today</span>
-              {new Date(audio.publishedDate).toLocaleDateString()}
+          <div className={`flex items-center justify-between text-sm ${textStyles.meta}`}>
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1">
+                <span className="material-symbols text-sm">calendar_today</span>
+                {new Date(audio.publishedDate).toLocaleDateString()}
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="material-symbols text-sm">schedule</span>
+                {audio.duration}
+              </span>
+            </div>
+            <span className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${languageBadge.style}`}>
+              {languageBadge.text}
             </span>
           </div>
         </div>

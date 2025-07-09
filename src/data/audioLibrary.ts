@@ -77,7 +77,7 @@ export const audioLibrary: AudioMetadata[] = [
   },
   {
     id: 'podcast-daily-rhythm',
-    title: 'The Circle of Daily Rhythm (Podcast)',
+    title: 'The Circle of Daily Rhythm',
     description: 'Understanding the importance of creating sustainable daily rhythms and how they form the foundation for personal and professional success.',
     fileName: 'the-circle-of-daily-rhythm-en.wav',
     filePath: '/podcasts/en/the-circle-of-daily-rhythm-en.wav',
@@ -97,8 +97,8 @@ export const audioLibrary: AudioMetadata[] = [
     bitrate: '128kbps'
   },
   {
-    id: 'podcast-blog-insights-en',
-    title: 'Blog & Insights (Podcast, EN)',
+    id: 'podcast-blog-insights',
+    title: 'Blog & Insights',
     description: 'In this episode, we delve into the core principles of thought, learning, and perspective in design leadership, product management, and the dynamic intersection of creativity and technology.',
     fileName: 'blog-insights-en.wav',
     filePath: '/podcasts/en/blog-insights-en.wav',
@@ -110,33 +110,31 @@ export const audioLibrary: AudioMetadata[] = [
     coverImage: '/podcasts/podcast.png',
     language: 'en',
     featured: true,
-    slug: 'podcast-blog-insights-en',
-    seoTitle: 'Blog & Insights (Podcast, EN) | Ali Al-Zuhairi',
-    seoDescription: 'Podcast episode: Blog & Insights (English).',
+    slug: 'podcast-blog-insights',
+    seoTitle: 'Blog & Insights | Ali Al-Zuhairi',
+    seoDescription: 'Podcast episode: Blog & Insights available in English and Finnish.',
     socialImage: '/podcasts/podcast.png',
     format: 'WAV',
-    bitrate: '128kbps'
-  },
-  {
-    id: 'podcast-blog-insights-fi',
-    title: 'Blog & Insights (Podcast, FI)',
-    description: 'In this episode, we delve into the core principles of thought, learning, and perspective in design leadership, product management, and the dynamic intersection of creativity and technology.',
-    fileName: 'blog-insights-fi.wav',
-    filePath: '/podcasts/fi/blog-insights-fi.wav',
-    duration: '04:49',
-    category: 'Podcast',
-    tags: ['Podcast', 'Blog', 'Insights', 'AI', 'Technology', 'Development'],
-    publishedDate: '2025-05-21',
-    author: 'Ali Al-Zuhairi',
-    coverImage: '/podcasts/podcast.png',
-    language: 'fi',
-    featured: true,
-    slug: 'podcast-blog-insights-fi',
-    seoTitle: 'Blog & Insights (Podcast, FI) | Ali Al-Zuhairi',
-    seoDescription: 'Podcast episode: Blog & Insights (Finnish).',
-    socialImage: '/podcasts/podcast.png',
-    format: 'WAV',
-    bitrate: '128kbps'
+    bitrate: '128kbps',
+    isMultiLanguage: true,
+    versions: [
+      {
+        language: 'en',
+        fileName: 'blog-insights-en.wav',
+        filePath: '/podcasts/en/blog-insights-en.wav',
+        duration: '04:49',
+        seoTitle: 'Blog & Insights (Podcast, EN) | Ali Al-Zuhairi',
+        seoDescription: 'Podcast episode: Blog & Insights (English).'
+      },
+      {
+        language: 'fi',
+        fileName: 'blog-insights-fi.wav',
+        filePath: '/podcasts/fi/blog-insights-fi.wav',
+        duration: '04:49',
+        seoTitle: 'Blog & Insights (Podcast, FI) | Ali Al-Zuhairi',
+        seoDescription: 'Podcast episode: Blog & Insights (Finnish).'
+      }
+    ]
   }
 ];
 
@@ -158,6 +156,56 @@ export const getAudioByTag = (tag: string): AudioMetadata[] => {
 // Get audio by slug
 export const getAudioBySlug = (slug: string): AudioMetadata | null => {
   return audioLibrary.find(audio => audio.slug === slug) || null;
+};
+
+// Get audio by slug and language
+export const getAudioBySlugAndLanguage = (slug: string, language: 'en' | 'fi' | 'ar'): AudioMetadata | null => {
+  const audio = audioLibrary.find(audio => audio.slug === slug);
+  if (!audio) return null;
+  
+  if (audio.isMultiLanguage && audio.versions) {
+    const version = audio.versions.find(v => v.language === language);
+    if (version) {
+      return {
+        ...audio,
+        language: version.language,
+        fileName: version.fileName,
+        filePath: version.filePath,
+        duration: version.duration || audio.duration,
+        seoTitle: version.seoTitle || audio.seoTitle,
+        seoDescription: version.seoDescription || audio.seoDescription
+      };
+    }
+  }
+  
+  return audio;
+};
+
+// Get available languages for an audio
+export const getAudioLanguages = (audio: AudioMetadata): string[] => {
+  if (audio.isMultiLanguage && audio.versions) {
+    return audio.versions.map(v => v.language);
+  }
+  return [audio.language];
+};
+
+// Get audio version by language
+export const getAudioVersion = (audio: AudioMetadata, language: 'en' | 'fi' | 'ar'): AudioMetadata => {
+  if (audio.isMultiLanguage && audio.versions) {
+    const version = audio.versions.find(v => v.language === language);
+    if (version) {
+      return {
+        ...audio,
+        language: version.language,
+        fileName: version.fileName,
+        filePath: version.filePath,
+        duration: version.duration || audio.duration,
+        seoTitle: version.seoTitle || audio.seoTitle,
+        seoDescription: version.seoDescription || audio.seoDescription
+      };
+    }
+  }
+  return audio;
 };
 
 // Get all categories
