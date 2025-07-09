@@ -178,7 +178,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
                     <span className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${languageBadge.style}`}>
                       {languageBadge.text}
                     </span>
-                    <span className={textStyles.meta}>{audio.duration}</span>
+                    {/* Removed duration from list card */}
                   </div>
                 </div>
 
@@ -274,10 +274,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
                 <span className="material-symbols text-sm">calendar_today</span>
                 {new Date(audio.publishedDate).toLocaleDateString()}
               </span>
-              <span className="flex items-center gap-1">
-                <span className="material-symbols text-sm">schedule</span>
-                {audio.duration}
-              </span>
+              {/* Removed duration from grid card */}
             </div>
             <span className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${languageBadge.style}`}>
               {languageBadge.text}
