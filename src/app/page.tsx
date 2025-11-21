@@ -93,38 +93,102 @@ const InteractiveSkillCard = ({
   const handleSkillInteraction = () => {
     trackEvent('skill_hover', 'homepage', skill.title);
   };
+
   // Get card styles based on theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-purple-900/30 to-fuchsia-900/30 border-fuchsia-500/30 hover:border-fuchsia-400/50 hover:shadow-lg hover:shadow-fuchsia-500/20';
+      return 'bg-gradient-to-br from-purple-500/5 via-fuchsia-500/5 to-pink-500/5 border-fuchsia-500/20 hover:border-fuchsia-400/40 hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-pink-500/10';
     } else if (theme === 'dark') {
-      return 'bg-gradient-to-br from-gray-800/50 to-gray-700/50 border-gray-600/30 hover:border-gray-500/50 hover:shadow-lg hover:shadow-blue-500/10';
+      return 'bg-gradient-to-br from-slate-800/40 via-slate-700/40 to-slate-800/40 border-slate-600/30 hover:border-blue-400/40 hover:from-slate-800/60 hover:via-slate-700/60 hover:to-slate-800/60';
     } else {
-      return 'bg-white/95 border-gray-300/60 shadow-md shadow-gray-200/50 hover:border-blue-400/60 hover:shadow-lg hover:shadow-blue-200/40 hover:bg-white';
+      return 'bg-white/80 border-slate-200/60 hover:border-blue-300/60 hover:bg-white hover:shadow-lg hover:shadow-blue-100/50';
     }
-  };  return (
-    <div
+  };
+
+  const getIconColor = () => {
+    if (theme === 'colorful') return 'text-fuchsia-400';
+    if (theme === 'dark') return 'text-blue-400';
+    return 'text-blue-600';
+  };
+
+  const getTitleColor = () => {
+    if (theme === 'light') return 'text-slate-900';
+    return 'text-white';
+  };
+
+  const getDescColor = () => {
+    if (theme === 'light') return 'text-slate-600';
+    return 'text-slate-300';
+  };
+
+  return (
+    <motion.div
       className={`
-        p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 
+        group relative overflow-hidden p-6 rounded-xl border backdrop-blur-sm 
+        transition-all duration-300 cursor-pointer
         ${getCardStyles()}
       `}
       onMouseEnter={handleSkillInteraction}
+      whileHover={{ y: -4 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
     >
+      {/* Decorative gradient overlay on hover */}
+      <div className={`
+        absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
+        ${theme === 'colorful' 
+          ? 'bg-gradient-to-br from-fuchsia-500/5 to-purple-500/5' 
+          : theme === 'dark'
+          ? 'bg-gradient-to-br from-blue-500/5 to-indigo-500/5'
+          : 'bg-gradient-to-br from-blue-500/3 to-indigo-500/3'
+        }
+      `} />
+
+      {/* Icon badge */}
+      <div className={`
+        inline-flex items-center justify-center w-12 h-12 mb-4 rounded-lg
+        transition-all duration-300 group-hover:scale-110
+        ${theme === 'colorful'
+          ? 'bg-fuchsia-500/10 group-hover:bg-fuchsia-500/20'
+          : theme === 'dark'
+          ? 'bg-blue-500/10 group-hover:bg-blue-500/20'
+          : 'bg-blue-500/10 group-hover:bg-blue-500/15'
+        }
+      `}>
+        <span className={`material-symbols text-2xl ${getIconColor()}`}>
+          {skill.title.toLowerCase().includes('leadership') ? 'groups' :
+           skill.title.toLowerCase().includes('strategy') ? 'lightbulb' :
+           skill.title.toLowerCase().includes('design') || skill.title.toLowerCase().includes('prototyp') ? 'palette' :
+           skill.title.toLowerCase().includes('research') || skill.title.toLowerCase().includes('tutkimus') ? 'science' :
+           skill.title.toLowerCase().includes('development') || skill.title.toLowerCase().includes('kehitys') ? 'code' :
+           'settings'}
+        </span>
+      </div>
+
       {/* Content */}
-      <div className="p-6">
-        <h4 className={`text-xl font-semibold mb-3 leading-tight ${
-          theme === 'light' ? 'text-gray-900' : ''
-        }`}>
+      <div className="relative z-10">
+        <h4 className={`text-lg font-semibold mb-2 leading-tight ${getTitleColor()}`}>
           {skill.title}
         </h4>
         
-        <p className={`text-sm leading-relaxed ${
-          theme === 'light' ? 'text-gray-700 opacity-90' : 'opacity-70'
-        }`}>
+        <p className={`text-sm leading-relaxed ${getDescColor()}`}>
           {skill.desc}
         </p>
       </div>
-    </div>
+
+      {/* Bottom accent line - appears on hover */}
+      <div className={`
+        absolute bottom-0 left-0 right-0 h-0.5 transform origin-left scale-x-0 
+        group-hover:scale-x-100 transition-transform duration-300
+        ${theme === 'colorful' 
+          ? 'bg-gradient-to-r from-fuchsia-500 to-purple-500' 
+          : theme === 'dark'
+          ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
+          : 'bg-gradient-to-r from-blue-500 to-indigo-600'
+        }
+      `} />
+    </motion.div>
   );
 };
 
@@ -198,10 +262,6 @@ export default function Home() {
   // Skills data with translations
   const getSkills = () => {
     const skills = {      en: [
-        { title: 'Product Design', desc: '10 years of experience', isExperience: true },
-        { title: 'Product Management', desc: '8 years of experience', isExperience: true },
-        { title: 'UX Research', desc: '8 years of experience', isExperience: true },
-        { title: 'Frontend Development', desc: '5 years of experience', isExperience: true },
         { title: 'Team Leadership', desc: 'Leading cross-functional teams', isExperience: false },
         { title: 'Product Strategy', desc: 'Strategic planning and roadmapping', isExperience: false },
         { title: 'Design & Prototyping', desc: 'Figma, Adobe CC, Design Systems', isExperience: false },
@@ -209,10 +269,6 @@ export default function Home() {
         { title: 'Development', desc: 'React, WordPress, HubSpot', isExperience: false },
         { title: 'Agile Management', desc: 'Scrum, Jira, Confluence, GitHub Copilot, GCP', isExperience: false }
       ],      fi: [
-        { title: 'Tuotesuunnittelu', desc: '10 vuoden kokemus', isExperience: true },
-        { title: 'Tuotehallinta', desc: '8 vuoden kokemus', isExperience: true },
-        { title: 'UX-tutkimus', desc: '8 vuoden kokemus', isExperience: true },
-        { title: 'Frontend-kehitys', desc: '5 vuoden kokemus', isExperience: true },
         { title: 'Tiimin johtaminen', desc: 'Poikkitoiminnallisten tiimien johtaminen', isExperience: false },
         { title: 'Tuotestrategia', desc: 'Strateginen suunnittelu ja tiekartat', isExperience: false },
         { title: 'Suunnittelu & Prototyypit', desc: 'Figma, Adobe CC, Designjärjestelmät', isExperience: false },
@@ -508,6 +564,60 @@ export default function Home() {
               }
             </motion.p>
           </div>
+
+          {/* Experience Overview Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-12"
+          >
+            <div className={`
+              flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12 p-6 md:p-8 rounded-2xl border backdrop-blur-sm
+              ${theme === 'colorful'
+                ? 'bg-gradient-to-r from-fuchsia-500/10 via-purple-500/10 to-fuchsia-500/10 border-fuchsia-500/30'
+                : theme === 'dark'
+                ? 'bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-blue-500/10 border-blue-500/30'
+                : 'bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-blue-500/5 border-blue-500/30'
+              }
+            `}>
+              {[
+                { years: '10', title: locale === 'fi' ? 'Tuotesuunnittelu' : 'Product Design' },
+                { years: '8', title: locale === 'fi' ? 'Tuotehallinta' : 'Product Management' },
+                { years: '8', title: locale === 'fi' ? 'UX-tutkimus' : 'UX Research' },
+                { years: '5', title: locale === 'fi' ? 'Frontend-kehitys' : 'Frontend Development' }
+              ].map((item, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className={`
+                    text-3xl md:text-4xl font-bold
+                    ${theme === 'colorful' ? 'text-fuchsia-400' :
+                      theme === 'dark' ? 'text-blue-400' :
+                      'text-blue-600'
+                    }
+                  `}>
+                    {item.years}
+                    <span className="text-base md:text-lg ml-1 opacity-70">
+                      {locale === 'fi' ? 'v' : 'yrs'}
+                    </span>
+                  </div>
+                  <div className={`
+                    text-sm md:text-base font-medium
+                    ${theme === 'light' ? 'text-gray-800' : 'text-white/90'}
+                  `}>
+                    {item.title}
+                  </div>
+                  {index < 3 && (
+                    <div className={`hidden md:block w-px h-8 ${
+                      theme === 'colorful' ? 'bg-fuchsia-500/30' :
+                      theme === 'dark' ? 'bg-blue-500/30' :
+                      'bg-blue-500/30'
+                    }`} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
           
           {/* Enhanced grid layout with staggered animations */}
           <motion.div 
@@ -517,11 +627,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >            {skills.map((skill, index) => (
-              skill.isExperience ? (
-                <ExperienceCard key={index} skill={skill} />
-              ) : (
-                <InteractiveSkillCard key={index} skill={skill} />
-              )
+              <InteractiveSkillCard key={index} skill={skill} />
             ))}
           </motion.div>
           
