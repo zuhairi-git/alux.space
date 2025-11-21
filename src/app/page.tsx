@@ -14,6 +14,72 @@ import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
+// Experience overview card with distinct design
+const ExperienceCard = ({ 
+  skill
+}: { 
+  skill: { title: string, desc: string }
+}) => {
+  const { theme } = useTheme();
+  const { trackEvent } = useAnalyticsTracking();
+
+  const handleExperienceInteraction = () => {
+    trackEvent('experience_hover', 'homepage', skill.title);
+  };
+
+  const getCardStyles = () => {
+    if (theme === 'colorful') {
+      return 'bg-gradient-to-br from-fuchsia-600/20 to-purple-600/20 border-fuchsia-400/40 hover:border-fuchsia-300/60 hover:shadow-xl hover:shadow-fuchsia-500/30';
+    } else if (theme === 'dark') {
+      return 'bg-gradient-to-br from-blue-600/20 to-indigo-600/20 border-blue-400/40 hover:border-blue-300/60 hover:shadow-xl hover:shadow-blue-500/20';
+    } else {
+      return 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-400/50 shadow-lg shadow-blue-200/60 hover:border-blue-500/70 hover:shadow-xl hover:shadow-blue-300/50 hover:from-blue-100 hover:to-indigo-100';
+    }
+  };
+
+  return (
+    <div
+      className={`
+        relative overflow-hidden p-8 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300
+        ${getCardStyles()}
+      `}
+      onMouseEnter={handleExperienceInteraction}
+    >
+      {/* Decorative corner accent */}
+      <div className={`absolute top-0 right-0 w-20 h-20 ${
+        theme === 'colorful' ? 'bg-fuchsia-500/10' :
+        theme === 'dark' ? 'bg-blue-500/10' :
+        'bg-blue-500/10'
+      } rounded-bl-full`} />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <div className={`text-3xl font-bold mb-2 ${
+          theme === 'light' ? 'text-blue-600' : 
+          theme === 'colorful' ? 'text-fuchsia-300' :
+          'text-blue-300'
+        }`}>
+          {skill.desc.match(/\d+/)?.[0] || ''}
+          <span className="text-lg ml-1 opacity-80">years</span>
+        </div>
+        
+        <h4 className={`text-xl font-semibold leading-tight ${
+          theme === 'light' ? 'text-gray-900' : 'text-white'
+        }`}>
+          {skill.title}
+        </h4>
+      </div>
+      
+      {/* Bottom accent line */}
+      <div className={`absolute bottom-0 left-0 right-0 h-1 ${
+        theme === 'colorful' ? 'bg-gradient-to-r from-fuchsia-500 to-purple-500' :
+        theme === 'dark' ? 'bg-gradient-to-r from-blue-500 to-indigo-500' :
+        'bg-gradient-to-r from-blue-500 to-indigo-600'
+      }`} />
+    </div>
+  );
+};
+
 // A clean, readable skill card component
 const InteractiveSkillCard = ({ 
   skill
@@ -132,25 +198,27 @@ export default function Home() {
   // Skills data with translations
   const getSkills = () => {
     const skills = {      en: [
-        { title: 'AI Driven Product Designer', desc: 'Figma Make, VS Code GitHub Copilot, and Cursor' },
-        { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
-        { title: 'Research', desc: 'Skilled in qualitative and quantitative research' },
-        { title: 'Product Management', desc: 'Agile methodologies and roadmapping' },
-        { title: 'Design Leadership', desc: 'Team mentoring and process development' },
-        { title: 'Design Systems', desc: 'Creating consistent, scalable frameworks' },
-        { title: 'Project Management', desc: 'Agile methodology (Jira, Scrum, Kanban)' },
-        { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
-        { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' }
+        { title: 'Product Design', desc: '10 years of experience', isExperience: true },
+        { title: 'Product Management', desc: '8 years of experience', isExperience: true },
+        { title: 'UX Research', desc: '8 years of experience', isExperience: true },
+        { title: 'Frontend Development', desc: '5 years of experience', isExperience: true },
+        { title: 'Team Leadership', desc: 'Leading cross-functional teams', isExperience: false },
+        { title: 'Product Strategy', desc: 'Strategic planning and roadmapping', isExperience: false },
+        { title: 'Design & Prototyping', desc: 'Figma, Adobe CC, Design Systems', isExperience: false },
+        { title: 'User Research', desc: 'Research and test management', isExperience: false },
+        { title: 'Development', desc: 'React, WordPress, HubSpot', isExperience: false },
+        { title: 'Agile Management', desc: 'Scrum, Jira, Confluence, GitHub Copilot, GCP', isExperience: false }
       ],      fi: [
-        { title: 'AI-Pohjainen Tuotesuunnittelija', desc: 'Figma Make, VS Code GitHub Copilot ja Cursor' },
-        { title: 'UI/UX Suunnittelu', desc: 'Asiantuntemus Figma & Adobe CC:ssä' },
-        { title: 'Tutkimus', desc: 'Taitava kvalitatiivisessa ja kvantitatiivisessa tutkimuksessa' },
-        { title: 'Tuotehallinta', desc: 'Ketterät menetelmät ja tiekartat' },
-        { title: 'Designjohtajuus', desc: 'Tiimin mentorointi ja prosessien kehittäminen' },
-        { title: 'Designjärjestelmät', desc: 'Johdonmukaisten, skaalautuvien kehysten luominen' },
-        { title: 'Projektinhallinta', desc: 'Ketterä metodologia (Jira, Scrum, Kanban)' },
-        { title: 'Testinhallinta', desc: 'Taitava Maze ja Zephyr Scale -työkaluissa' },
-        { title: 'Teknologiat', desc: 'Web/mobiili UI, WordPress, HubSpot, React JS' }
+        { title: 'Tuotesuunnittelu', desc: '10 vuoden kokemus', isExperience: true },
+        { title: 'Tuotehallinta', desc: '8 vuoden kokemus', isExperience: true },
+        { title: 'UX-tutkimus', desc: '8 vuoden kokemus', isExperience: true },
+        { title: 'Frontend-kehitys', desc: '5 vuoden kokemus', isExperience: true },
+        { title: 'Tiimin johtaminen', desc: 'Poikkitoiminnallisten tiimien johtaminen', isExperience: false },
+        { title: 'Tuotestrategia', desc: 'Strateginen suunnittelu ja tiekartat', isExperience: false },
+        { title: 'Suunnittelu & Prototyypit', desc: 'Figma, Adobe CC, Designjärjestelmät', isExperience: false },
+        { title: 'Käyttäjätutkimus', desc: 'Tutkimus- ja testinhallinta', isExperience: false },
+        { title: 'Kehitys', desc: 'React, WordPress, HubSpot', isExperience: false },
+        { title: 'Ketterä hallinta', desc: 'Scrum, Jira, Confluence, GitHub Copilot, GCP', isExperience: false }
       ]
     };
     
@@ -163,43 +231,22 @@ export default function Home() {
         intro: "A journey through my professional career, showcasing my growth and expertise in design and technology.",
         positions: [
           {
-            title: "Product Designer | Product Owner",
+            title: "Product Owner & Designer",
             company: "Webropol, Helsinki, Finland",
-            description: "Product vision, specifying features, prototyping, and handing off design system to developers.",
+            description: "Led international, multi-team coordination. Owned end-to-end platform design. Introduced scalable product and design processes. Drove a feedback-driven approach to usability.",
             period: "2023 - Present"
           },
           {
-            title: "Professional Product Designer",
-            company: "Reslink, Espoo, Finland",
-            description: "Workflow and Cloud Management, WebApp (SaaS), and Mobile.",
-            period: "2017 - 2023"
-          },
-          {
-            title: "Senior UI/UX Designer & IT Expert",
-            company: "Reslink, Helsinki, Finland",
-            description: "Web Application, Android UI Development, and VPN Management.",
+            title: "Product Designer",
+            company: "Reslink Solutions, Espoo, Finland",
+            description: "Managed full-cycle product design for web and Android. Conducted usability testing and journey mapping. Mentored junior designers.",
             period: "2016 - 2023"
           },
           {
-            title: "Earlier Positions",
-            positions: [
-              {
-                title: "Graphic Designer UI/UX & IT Expert",
-                company: "Reslink, Helsinki, Finland",
-                period: "2014 - 2016"
-              },
-              {
-                title: "Freelance IT Expert & UI Developer",
-                company: "From Damascus to Espoo",
-                period: "2000 - 2014"
-              },
-              {
-                title: "Graphic Designer & IT Expert",
-                company: "Various Magazines and Newspapers — Tehran, Iran",
-                period: ""
-              }
-            ],
-            period: "2000 - 2016"
+            title: "UI/UX Designer",
+            company: "Reslink Solutions, Helsinki, Finland",
+            description: "Created modern UI and design frameworks. Collaborated with developers.",
+            period: "2014 - 2016"
           }
         ]
       },
@@ -207,43 +254,22 @@ export default function Home() {
         intro: "Matka ammattiurallani, joka osoittaa kasvuni ja asiantuntemukseni suunnittelussa ja teknologiassa.",
         positions: [
           {
-            title: "Tuotesuunnittelija | Tuoteomistaja",
+            title: "Tuoteomistaja & Suunnittelija",
             company: "Webropol, Helsinki, Suomi",
-            description: "Tuotevisio, ominaisuuksien määrittely, prototyyppien luonti ja suunnittelujärjestelmän luovuttaminen kehittäjille.",
+            description: "Johdin kansainvälistä, monitiimistä koordinaatiota. Omistin alustan päästä päähän -suunnittelun. Esittelin skaalautuvia tuote- ja suunnitteluprosesseja. Edistin palautteeseen perustuvaa lähestymistapaa käytettävyyteen.",
             period: "2023 - Nykyhetki"
           },
           {
-            title: "Ammattimainen tuotesuunnittelija",
-            company: "Reslink, Espoo, Suomi",
-            description: "Työnkulun ja pilvipalvelun hallinta, verkkosovellus (SaaS) ja mobiili.",
-            period: "2017 - 2023"
-          },
-          {
-            title: "Senior UI/UX-suunnittelija & IT-asiantuntija",
-            company: "Reslink, Helsinki, Suomi",
-            description: "Verkkosovellus, Android-käyttöliittymäkehitys ja VPN-hallinta.",
+            title: "Tuotesuunnittelija",
+            company: "Reslink Solutions, Espoo, Suomi",
+            description: "Hallitsin kokonaisen syklin tuotesuunnittelua webille ja Androidille. Suoritin käytettävyystestauksen ja käyttäjäpolun kartoituksen. Mentoroin juniorsuunnittelijoita.",
             period: "2016 - 2023"
           },
           {
-            title: "Aikaisemmat tehtävät",
-            positions: [
-              {
-                title: "Graafinen suunnittelija UI/UX & IT-asiantuntija",
-                company: "Reslink, Helsinki, Suomi",
-                period: "2014 - 2016"
-              },
-              {
-                title: "Freelance IT-asiantuntija & UI-kehittäjä",
-                company: "Damaskoksesta Espooseen",
-                period: "2000 - 2014"
-              },
-              {
-                title: "Graafinen suunnittelija & IT-asiantuntija",
-                company: "Eri lehdet ja sanomalehdet — Teheran, Iran",
-                period: ""
-              }
-            ],
-            period: "2000 - 2016"
+            title: "UI/UX-suunnittelija",
+            company: "Reslink Solutions, Helsinki, Suomi",
+            description: "Loin moderneja UI- ja suunnittelukehyksiä. Tein yhteistyötä kehittäjien kanssa.",
+            period: "2014 - 2016"
           }
         ]
       }
@@ -491,7 +517,11 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >            {skills.map((skill, index) => (
-              <InteractiveSkillCard key={index} skill={skill} />
+              skill.isExperience ? (
+                <ExperienceCard key={index} skill={skill} />
+              ) : (
+                <InteractiveSkillCard key={index} skill={skill} />
+              )
             ))}
           </motion.div>
           
