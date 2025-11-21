@@ -573,49 +573,127 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-12"
           >
-            <div className={`
-              flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12 p-6 md:p-8 rounded-2xl border backdrop-blur-sm
-              ${theme === 'colorful'
-                ? 'bg-gradient-to-r from-fuchsia-500/10 via-purple-500/10 to-fuchsia-500/10 border-fuchsia-500/30'
-                : theme === 'dark'
-                ? 'bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-blue-500/10 border-blue-500/30'
-                : 'bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-blue-500/5 border-blue-500/30'
-              }
-            `}>
-              {[
-                { years: '10', title: locale === 'fi' ? 'Tuotesuunnittelu' : 'Product Design' },
-                { years: '8', title: locale === 'fi' ? 'Tuotehallinta' : 'Product Management' },
-                { years: '8', title: locale === 'fi' ? 'UX-tutkimus' : 'UX Research' },
-                { years: '5', title: locale === 'fi' ? 'Frontend-kehitys' : 'Frontend Development' }
-              ].map((item, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <div className={`
-                    text-3xl md:text-4xl font-bold
-                    ${theme === 'colorful' ? 'text-fuchsia-400' :
-                      theme === 'dark' ? 'text-blue-400' :
-                      'text-blue-600'
-                    }
-                  `}>
-                    {item.years}
-                    <span className="text-base md:text-lg ml-1 opacity-70">
-                      {locale === 'fi' ? 'v' : 'yrs'}
-                    </span>
-                  </div>
-                  <div className={`
-                    text-sm md:text-base font-medium
-                    ${theme === 'light' ? 'text-gray-800' : 'text-white/90'}
-                  `}>
-                    {item.title}
-                  </div>
-                  {index < 3 && (
-                    <div className={`hidden md:block w-px h-8 ${
-                      theme === 'colorful' ? 'bg-fuchsia-500/30' :
-                      theme === 'dark' ? 'bg-blue-500/30' :
-                      'bg-blue-500/30'
+            <div className="relative">
+              {/* Decorative background blur orbs */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+                <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl ${
+                  theme === 'colorful' ? 'bg-fuchsia-500/20' :
+                  theme === 'dark' ? 'bg-blue-500/20' :
+                  'bg-blue-400/15'
+                }`} />
+                <div className={`absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl ${
+                  theme === 'colorful' ? 'bg-purple-500/20' :
+                  theme === 'dark' ? 'bg-cyan-500/20' :
+                  'bg-indigo-400/15'
+                }`} />
+              </div>
+
+              <div className={`
+                relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 p-8 md:p-10 rounded-3xl border-2 backdrop-blur-xl
+                ${theme === 'colorful'
+                  ? 'bg-gradient-to-br from-fuchsia-900/30 via-purple-900/20 to-blue-900/30 border-fuchsia-500/30 shadow-2xl shadow-fuchsia-500/20'
+                  : theme === 'dark'
+                  ? 'bg-gradient-to-br from-gray-900/60 via-blue-900/40 to-gray-900/60 border-blue-500/30 shadow-2xl shadow-blue-500/10'
+                  : 'bg-white/80 border-blue-200/50 shadow-2xl shadow-blue-200/30'
+                }
+              `}>
+                {[
+                  { years: '10', title: locale === 'fi' ? 'Tuotesuunnittelu' : 'Product Design', icon: 'palette', color: 'fuchsia' },
+                  { years: '8', title: locale === 'fi' ? 'Tuotehallinta' : 'Product Management', icon: 'group', color: 'purple' },
+                  { years: '8', title: locale === 'fi' ? 'UX-tutkimus' : 'UX Research', icon: 'psychology', color: 'blue' },
+                  { years: '5', title: locale === 'fi' ? 'Frontend-kehitys' : 'Frontend Development', icon: 'code', color: 'cyan' }
+                ].map((item, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: 0.1 * index, duration: 0.5 }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -5,
+                      transition: { duration: 0.2 } 
+                    }}
+                    className={`
+                      group relative p-6 rounded-2xl backdrop-blur-sm transition-all duration-300
+                      ${theme === 'colorful'
+                        ? 'bg-gradient-to-br from-fuchsia-500/10 to-purple-500/10 hover:from-fuchsia-500/20 hover:to-purple-500/20 border border-fuchsia-500/20'
+                        : theme === 'dark'
+                        ? 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10 hover:from-blue-500/20 hover:to-cyan-500/20 border border-blue-500/20'
+                        : 'bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200/50'
+                      }
+                    `}
+                  >
+                    {/* Gradient overlay on hover */}
+                    <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                      theme === 'colorful'
+                        ? 'bg-gradient-to-br from-fuchsia-500/5 to-purple-500/5'
+                        : theme === 'dark'
+                        ? 'bg-gradient-to-br from-blue-500/5 to-cyan-500/5'
+                        : 'bg-gradient-to-br from-blue-100/50 to-indigo-100/50'
                     }`} />
-                  )}
-                </div>
-              ))}
+
+                    {/* Icon */}
+                    <motion.div 
+                      className={`
+                        inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl mb-4 transition-all duration-300
+                        ${theme === 'colorful'
+                          ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 group-hover:from-fuchsia-500/30 group-hover:to-purple-500/30'
+                          : theme === 'dark'
+                          ? 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 group-hover:from-blue-500/30 group-hover:to-cyan-500/30'
+                          : 'bg-gradient-to-br from-blue-100 to-indigo-100 group-hover:from-blue-200 group-hover:to-indigo-200'
+                        }
+                      `}
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <span className={`material-symbols text-2xl md:text-3xl ${
+                        theme === 'colorful' ? 'text-fuchsia-400' :
+                        theme === 'dark' ? 'text-blue-400' :
+                        'text-blue-600'
+                      }`}>
+                        {item.icon}
+                      </span>
+                    </motion.div>
+
+                    {/* Years */}
+                    <div className="relative mb-2">
+                      <div className={`
+                        text-4xl md:text-5xl font-bold leading-none bg-gradient-to-r bg-clip-text text-transparent
+                        ${theme === 'colorful'
+                          ? 'from-fuchsia-400 via-purple-400 to-blue-400'
+                          : theme === 'dark'
+                          ? 'from-blue-400 via-cyan-400 to-indigo-400'
+                          : 'from-blue-600 via-indigo-600 to-purple-600'
+                        }
+                      `}>
+                        {item.years}
+                        <span className={`text-lg md:text-xl ml-1 ${
+                          theme === 'light' ? 'text-gray-600' : 'text-white/70'
+                        }`}>
+                          {locale === 'fi' ? 'v' : 'yrs'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <div className={`
+                      text-base md:text-lg font-semibold leading-tight
+                      ${theme === 'light' ? 'text-gray-800' : 'text-white/90'}
+                    `}>
+                      {item.title}
+                    </div>
+
+                    {/* Decorative element */}
+                    <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl ${
+                      theme === 'colorful'
+                        ? 'bg-gradient-to-r from-fuchsia-500 via-purple-500 to-blue-500'
+                        : theme === 'dark'
+                        ? 'bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500'
+                        : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500'
+                    }`} />
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
           
