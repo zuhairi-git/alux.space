@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface WorkPosition {
@@ -33,16 +33,6 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
   const goToStep = (step: number) => {
     setDirection(step > currentStep ? 1 : -1);
     setCurrentStep(step);
-  };
-
-  const nextStep = () => {
-    setDirection(1);
-    setCurrentStep((prev) => (prev + 1) % totalSteps);
-  };
-
-  const prevStep = () => {
-    setDirection(-1);
-    setCurrentStep((prev) => (prev - 1 + totalSteps) % totalSteps);
   };
 
   const getCurrentPosition = () => {
