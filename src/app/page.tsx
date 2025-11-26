@@ -318,56 +318,126 @@ export default function Home() {
         id="digital-dreams"
       >
         <div id="about"></div>
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20"
+            >
+              <span className="material-symbols text-xl text-blue-500">auto_awesome</span>
+              <span className={`text-sm font-medium ${
+                theme === 'colorful' ? 'text-cyan-400' :
+                theme === 'dark' ? 'text-blue-400' :
+                'text-blue-600'
+              }`}>
+                {locale === 'fi' ? 'PERUSTUKSEN RAKENTAMINEN' : 'FOUNDATION BUILDING'}
+              </span>
+            </motion.div>
+            
             <motion.h2
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold mb-10 text-center"
+              className="text-4xl md:text-5xl font-bold mb-6"
             >
               {t('home.about.title')}
             </motion.h2>
             
-            <div className="space-y-6 text-lg text-theme opacity-80 leading-relaxed">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                {t('home.about.intro')}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <QuoteBlock 
-                  quote={t('home.about.quote')} 
-                  author="Ali"
-                  variant="default"
-                />
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                {t('home.about.second')}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="pt-4"
-              >
-                <span className="opacity-70">{t('home.about.third')}</span>
-              </motion.div>
-            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg opacity-70 max-w-3xl mx-auto"
+            >
+              {t('home.about.intro')}
+            </motion.p>
           </div>
+
+          {/* Main Content Cards */}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {/* Card 1: AI Integration */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className={`p-8 rounded-3xl border ${
+                theme === 'colorful' 
+                  ? 'bg-gradient-to-br from-purple-900/20 to-blue-900/20 border-purple-500/20' 
+                  : theme === 'dark'
+                  ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50'
+                  : 'bg-gradient-to-br from-gray-50 to-white border-gray-200'
+              }`}
+            >
+              <div className="flex items-start gap-4 mb-4">
+                <div className={`p-3 rounded-xl ${
+                  theme === 'colorful' ? 'bg-cyan-500/20 text-cyan-400' :
+                  theme === 'dark' ? 'bg-blue-500/20 text-blue-400' :
+                  'bg-blue-500/10 text-blue-600'
+                }`}>
+                  <span className="material-symbols text-2xl">psychology</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">
+                    {locale === 'fi' ? 'Tekoälyn integrointi' : 'AI Integration'}
+                  </h3>
+                  <p className="opacity-70 leading-relaxed">
+                    {t('home.about.second')}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 2: Creative Exploration */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className={`p-8 rounded-3xl border ${
+                theme === 'colorful' 
+                  ? 'bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20' 
+                  : theme === 'dark'
+                  ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50'
+                  : 'bg-gradient-to-br from-gray-50 to-white border-gray-200'
+              }`}
+            >
+              <div className="flex items-start gap-4 mb-4">
+                <div className={`p-3 rounded-xl ${
+                  theme === 'colorful' ? 'bg-purple-500/20 text-purple-400' :
+                  theme === 'dark' ? 'bg-indigo-500/20 text-indigo-400' :
+                  'bg-indigo-500/10 text-indigo-600'
+                }`}>
+                  <span className="material-symbols text-2xl">explore</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">
+                    {locale === 'fi' ? 'Luova tutkimus' : 'Creative Exploration'}
+                  </h3>
+                  <p className="opacity-70 leading-relaxed">
+                    {t('home.about.third')}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Quote Block */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <QuoteBlock 
+              quote={t('home.about.quote')} 
+              author="Ali"
+              variant="default"
+            />
+          </motion.div>
         </div>
       </motion.section>        {/* Skills Section */}
       <motion.section 
