@@ -67,7 +67,7 @@ const Footer = () => {
   }, [locale, t, debugTranslations]);  return (
     <footer 
       id="footer" 
-      className="bg-theme border-t border-gray-200/10 pt-12 pb-4"
+      className="bg-theme border-t border-gray-200/10 pt-12 pb-32 md:pb-4"
       role="contentinfo"
       aria-label={t('footer.aria.siteFooter')}
     >

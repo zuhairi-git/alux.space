@@ -1,849 +1,435 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageSwitcher from './LanguageSwitcher';
-import FocusTrap from './ui/FocusTrap';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
-import { useScreenAwareDropdown } from '@/hooks/useScreenAwareDropdown';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
-// Define types for dropdown items
-interface DropdownItem {
+// --- Types ---
+
+interface NavItem {
   href: string;
-  textKey?: string;
-  text?: string;
-  type: 'overview' | 'case' | 'section';
-  icon?: string;
+  labelKey: string;
+  icon: string;
+  type?: 'link' | 'dropdown';
+  children?: NavItem[];
 }
 
-const portfolioDropdownItems: DropdownItem[] = [
-  { href: '/portfolio', textKey: 'portfolio.overview', type: 'overview' },
-  { href: '/portfolio/accessibility', textKey: 'portfolio.cases.accessibility', type: 'case' },
-  { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration', type: 'case' },
-  { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking', type: 'case' },
+// --- Configuration ---
+
+const navItems: NavItem[] = [
+  {
+    href: '/',
+    labelKey: 'nav.home',
+    icon: 'home',
+    type: 'dropdown',
+    children: [
+      { href: '/', labelKey: 'nav.home', icon: 'home' },
+      { href: '/#work-experience', labelKey: 'nav.workExperience', icon: 'work' },
+      { href: '/#digital-dreams', labelKey: 'nav.digitalDreams', icon: 'auto_awesome' },
+      { href: '/#strengths-skills', labelKey: 'nav.strengthsSkills', icon: 'psychology' },
+      { href: '/#testimonials', labelKey: 'nav.testimonials', icon: 'format_quote' },
+    ]
+  },
+  {
+    href: '/portfolio',
+    labelKey: 'nav.portfolio',
+    icon: 'work',
+    type: 'dropdown',
+    children: [
+      { href: '/portfolio', labelKey: 'portfolio.overview', icon: 'dashboard' },
+      { href: '/portfolio/accessibility', labelKey: 'portfolio.cases.accessibility', icon: 'accessibility_new' },
+      { href: '/portfolio/collaboration', labelKey: 'portfolio.cases.collaboration', icon: 'groups' },
+      { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history' },
+    ]
+  },
+  { href: '/blog', labelKey: 'nav.blog', icon: 'article' },
+  { href: '/audio', labelKey: 'nav.audio', icon: 'audio_file' },
+  { href: '/prompt', labelKey: 'nav.prompts', icon: 'smart_toy' },
 ];
 
-// Home dropdown items
-const homeDropdownItems: DropdownItem[] = [
-  { href: '/', textKey: 'nav.home', type: 'overview', icon: 'home' },
-  { href: '/#work-experience', textKey: 'nav.workExperience', type: 'section', icon: 'work' },
-  { href: '/#digital-dreams', textKey: 'nav.digitalDreams', type: 'section', icon: 'auto_awesome' },
-  { href: '/#strengths-skills', textKey: 'nav.strengthsSkills', type: 'section', icon: 'psychology' },
-  { href: '/#testimonials', textKey: 'nav.testimonials', type: 'section', icon: 'format_quote' },
-];
-
-// Mobile Menu Section Component
-interface MobileMenuSectionProps {
-  title: string;
-  icon: string;
-  href: string;
-  items: DropdownItem[];
-  theme: string;
-  onLinkClick: () => void;
-  getDropdownItemClass: (isActive: boolean) => string;
-  getTextColorClass: () => string;
-  localizedHref: (path: string) => string;
-  locale: string;
-  isPortfolio?: boolean;
-  t?: (key: string) => string;
-  trackEvent?: (action: string, category: string, label?: string) => void;
-}
-
-const MobileMenuSection: React.FC<MobileMenuSectionProps> = ({
-  title,
-  icon,
-  href,
-  items,
-  theme,
-  onLinkClick,
-  getDropdownItemClass,
-  getTextColorClass,
-  localizedHref,
-  locale,
-  isPortfolio = false,
-  t,
-  trackEvent
-}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const getBgClass = () => {
-    return theme === 'light' 
-      ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50' 
-      : theme === 'dark'
-      ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50'
-      : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/20';
-  };
-
-  const getExpandedBgClass = () => {
-    return theme === 'light' 
-      ? 'bg-blue-50/50 border-blue-200/50' 
-      : theme === 'dark'
-      ? 'bg-blue-900/20 border-blue-700/50'
-      : 'bg-purple-500/10 border-purple-400/30';
-  };
-
-  const getSubmenuBgClass = () => {
-    return theme === 'light' 
-      ? 'bg-gray-50/80' 
-      : theme === 'dark'
-      ? 'bg-gray-800/80'
-      : 'bg-purple-900/30';
-  };
-
-  return (
-    <motion.div
-      className={`rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 ${
-        isExpanded ? getExpandedBgClass() : getBgClass()
-      }`}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >      {/* Main section header */}
-      <div className="flex items-center">        {/* Navigation link - takes up most of the space */}
-        <Link
-          href={href}          onClick={() => {
-            onLinkClick();
-            trackEvent?.('mobile_section_click', 'navigation', title.toLowerCase());
-          }}
-          className={`flex-grow flex items-center gap-3 py-4 px-4 ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors rounded-l-xl`}
-          aria-label={locale === 'fi' 
-            ? (isPortfolio ? 'Siirry portfoliosivulle' : 'Siirry etusivulle') 
-            : (isPortfolio ? 'Go to portfolio page' : 'Go to homepage')
-          }
-        >
-          <motion.div
-            className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="material-symbols text-xl" aria-hidden="true">{icon}</span>
-          </motion.div>
-          <span className="font-semibold text-lg">{title}</span>
-        </Link>
-        
-        {/* Expand/Collapse button - separate from navigation */}
-        <motion.button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={`p-3 rounded-r-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 border-l ${
-            theme === 'light' 
-              ? 'text-gray-600 hover:text-gray-800 bg-gray-100/50 hover:bg-gray-200/70 border-gray-200/30' 
-              : theme === 'dark'
-              ? 'text-gray-400 hover:text-gray-200 bg-gray-700/50 hover:bg-gray-600/70 border-gray-600/30'
-              : 'text-gray-300 hover:text-white bg-purple-900/30 hover:bg-purple-800/50 border-purple-700/30'
-          }`}
-          aria-expanded={isExpanded}
-          aria-label={isExpanded ? 'Collapse menu' : 'Expand menu'}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <motion.span
-            className="material-symbols text-lg"
-            animate={{ rotate: isExpanded ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            expand_more
-          </motion.span>
-        </motion.button>
-      </div>
-
-      {/* Submenu items */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`overflow-hidden ${getSubmenuBgClass()}`}
-          >
-            <div className="px-2 pb-3 space-y-1">
-              {items.map((item, index) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2, delay: index * 0.05 }}
-                >
-                  <Link
-                    href={localizedHref(item.href)}
-                    className={`flex items-center gap-3 w-full px-4 py-3 text-sm rounded-lg ${getDropdownItemClass(false)} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 hover:translate-x-1`}
-                    onClick={onLinkClick}
-                  >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
-                      <span className="material-symbols text-sm" aria-hidden="true">
-                        {item.icon || 'article'}
-                      </span>
-                    </div>                    <span className="font-medium">
-                      {t && item.textKey ? t(item.textKey) : item.text || item.textKey}
-                    </span><span className="material-symbols text-xs ml-auto opacity-50">
-                      chevron_right
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}      </AnimatePresence>
-    </motion.div>
-  );
-};
-
-// Mobile Menu Item Component (for simple items without dropdown)
-interface MobileMenuItemProps {
-  href: string;
-  icon: string;
-  title: string;
-  theme: string;
-  onLinkClick: () => void;
-  getTextColorClass: () => string;
-  trackEvent?: (action: string, category: string, label?: string) => void;
-}
-
-const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
-  href,
-  icon,
-  title,
-  theme,
-  onLinkClick,
-  getTextColorClass,
-  trackEvent
-}) => {
-  const getBgClass = () => {
-    return theme === 'light' 
-      ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50' 
-      : theme === 'dark'
-      ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50'
-      : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/20';
-  };
-
-  return (
-    <motion.div
-      className={`rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 ${getBgClass()}`}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.02, y: -2 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2 }}
-    >      <Link
-        href={href}
-        onClick={() => {
-          onLinkClick();
-          trackEvent?.('mobile_item_click', 'navigation', title.toLowerCase());
-        }}
-        className={`flex items-center gap-3 w-full py-4 px-4 ${getTextColorClass()} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors group`}
-      >
-        <motion.div
-          className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-200"
-          whileHover={{ scale: 1.05 }}
-        >
-          <span className="material-symbols text-xl" aria-hidden="true">{icon}</span>
-        </motion.div>        <span className="font-semibold text-lg group-hover:translate-x-1 transition-transform duration-200">{title}</span>
-      </Link>
-    </motion.div>
-  );
-};
+// --- Components ---
 
 const Navigation = () => {
   const { scrollY } = useScroll();
-  const { theme } = useTheme(); 
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const { trackEvent } = useAnalyticsTracking();
+  const pathname = usePathname();
 
-  // Helper function to add locale to paths
-  const localizedHref = (path: string) => {
-    // Check if the path already contains the locale
-    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
-      return path; // Path already has locale, don't add it again
+  // Handle scroll to hide/show nav
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = lastScrollY;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
     }
+    setLastScrollY(latest);
+  });
 
+  // Helper for localized paths
+  const localizedHref = (path: string) => {
+    if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
+      return path;
+    }
     if (path.startsWith('#') || path.startsWith('/#')) {
-      // For hash links, add locale to the base path
       return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
     }
-
     return `/${locale}${path}`;
   };
 
-  // Use different background colors based on theme
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    theme === 'light'
-      ? ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.9)"]
-      : ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.9)"]
+  return (
+    <>
+      {/* Desktop Navigation (Top Pill) */}
+      <DesktopNav 
+        hidden={hidden} 
+        theme={theme} 
+        t={t} 
+        localizedHref={localizedHref} 
+        trackEvent={trackEvent}
+        pathname={pathname}
+      />
+
+      {/* Mobile Navigation (Bottom Dock) */}
+      <MobileNav 
+        hidden={hidden} 
+        theme={theme} 
+        t={t} 
+        localizedHref={localizedHref} 
+        trackEvent={trackEvent}
+        pathname={pathname}
+      />
+    </>
   );
+};
 
-  const backdropBlur = useTransform(
-    scrollY,
-    [0, 100],
-    ["blur(0px)", "blur(10px)"]
-  );
+// --- Desktop Navigation Component ---
 
-  const scale = useTransform(
-    scrollY,
-    [0, 100],
-    [1, 0.95]
-  );  const [menuOpen, setMenuOpen] = useState(false);  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
-  const [portfolioDropdownOpen, setPortfolioDropdownOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);  const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
-    // Screen-aware dropdown positioning for desktop dropdowns
-  const homeDropdown = useScreenAwareDropdown<HTMLAnchorElement>({
-    isOpen: homeDropdownOpen,
-    dropdownWidth: 256, // w-64 = 256px
-    dropdownHeight: 200, // Estimated height
-    offset: 8
-  });
-  
-  const portfolioDropdown = useScreenAwareDropdown<HTMLAnchorElement>({
-    isOpen: portfolioDropdownOpen,
-    dropdownWidth: 256, // w-64 = 256px
-    dropdownHeight: 180, // Estimated height
-    offset: 8
-  });  
-  // Announce menu state changes to screen readers
-  const handleMenuToggle = useCallback((isOpen: boolean) => {
-    setMenuOpen(isOpen);
-      // Track mobile menu interactions
-    trackEvent(isOpen ? 'mobile_menu_open' : 'mobile_menu_close', 'navigation', 'header');
-    
-    // Note: Screen reader announcements could be implemented here with LiveRegion
-  }, [trackEvent]);// Close the menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
+const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: any) => {
+  const [hoveredTab, setHoveredTab] = useState<string | null>(null);
 
-      // Don't close if clicking the hamburger button or if clicking inside the menu
-      if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(target) &&
-        hamburgerButtonRef.current &&
-        !hamburgerButtonRef.current.contains(target)
-      ) {
-        if (menuOpen) {
-          handleMenuToggle(false);
-        }
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuOpen, handleMenuToggle]);
-
-  // Handle escape key to close mobile menu
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && menuOpen) {
-        handleMenuToggle(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [menuOpen, handleMenuToggle]);
-  // Get text color class based on theme
-  const getTextColorClass = () => {
-    return theme === 'light'
-      ? 'text-gray-700 hover:text-primary'
-      : 'text-gray-300 hover:text-white';
-  };
-  // Get mobile menu button color based on theme
-  const getMobileMenuButtonClass = () => {
-    return theme === 'light'
-      ? 'text-gray-800 hover:text-primary'
-      : 'text-gray-300 hover:text-white';
-  };
-
-  // Get common dropdown item styles
-  const getDropdownItemClass = (isActive = false) => {
-    return `${theme === 'light'
-        ? isActive
-          ? 'bg-blue-50 text-blue-600'
-          : 'text-gray-700 hover:bg-gray-50'
-        : isActive
-          ? 'bg-blue-900/20 text-blue-400'
-          : 'text-gray-300 hover:bg-gray-800'
-      } transition-colors`;
-  }; return (
-    <motion.header
-      id="navigation"
-      className="fixed w-full z-[60]"
-      style={{
-        backgroundColor,
-        backdropFilter: backdropBlur,
+  return (
+    <motion.nav
+      variants={{
+        visible: { y: 0, opacity: 1 },
+        hidden: { y: -100, opacity: 0 }
       }}
-      role="banner"
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-2 p-2 rounded-full border backdrop-blur-xl shadow-lg shadow-black/5"
+      style={{
+        backgroundColor: theme === 'colorful' ? 'rgba(5, 0, 35, 0.8)' : theme === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(17, 24, 39, 0.8)',
+        borderColor: theme === 'colorful' ? 'rgba(255, 0, 204, 0.3)' : theme === 'light' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)',
+      }}
     >
-      <motion.div
-        className="container mx-auto px-4 py-3"
-        style={{ scale }}
+      {/* Logo */}
+      <Link 
+        href={localizedHref('/')}
+        className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-lg ml-1 mr-2 shadow-md"
+        aria-label="Home"
       >
-        <div className={`flex justify-between items-center `}>
-          <motion.h1
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className={`text-2xl md:text-3xl font-bold relative`}
-          >
-            <Link
-              href="/"
-              className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
-              aria-label={locale === 'fi' ? 'Siirry etusivulle' : 'Go to homepage'}
-            >
-              <motion.span
-                className={`relative ${theme === 'light' ? 'text-gray-900' : 'text-white'} font-extrabold`}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                Ali Al-Zuhairi
-              </motion.span>
-            </Link>
-          </motion.h1>          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">            {/* Home with dropdown */}
-            <div className="relative group">
-              <div
-                className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
-                  theme === 'light' 
-                    ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50' 
-                    : theme === 'dark'
-                    ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50'
-                    : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30'
-                } backdrop-blur-sm transition-all duration-200`}
-                onMouseEnter={() => setHomeDropdownOpen(true)}
-                onMouseLeave={() => setHomeDropdownOpen(false)}
-              >                {/* Home navigation link */}
-                <Link
-                  ref={homeDropdown.buttonRef}
-                  href={localizedHref('/')}
-                  onClick={() => trackEvent('desktop_nav_click', 'navigation', 'home')}
-                  className={`flex items-center gap-2 ${
-                    theme === 'light' 
-                      ? 'text-gray-700 hover:text-primary' 
-                      : theme === 'dark'
-                      ? 'text-gray-300 hover:text-white'
-                      : 'text-gray-300 hover:text-white'
-                  } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded transition-colors`}
-                ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                    theme === 'light' 
-                      ? 'bg-blue-100'
-                      : theme === 'dark' 
-                      ? 'bg-blue-900/50' 
-                      : 'bg-gradient-to-br from-blue-500/20 to-purple-500/20'
-                  }`}>
-                    <span className="material-symbols text-xs text-blue-500 scale-65">home</span>
-                  </div>
-                  <span className="font-medium text-sm">{t('nav.home')}</span>
-                </Link>
-                
-                {/* Dropdown toggle button */}
-                <button
-                  onClick={() => setHomeDropdownOpen(!homeDropdownOpen)}
-                  className={`ml-1 p-1 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                    theme === 'light' 
-                      ? 'bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-600' 
-                      : theme === 'dark' 
-                      ? 'bg-gray-700 hover:bg-blue-900/50 text-gray-400 hover:text-blue-400' 
-                      : 'bg-purple-800/30 hover:bg-blue-600/30 text-gray-400 hover:text-blue-400'
-                  } ${homeDropdownOpen ? 'rotate-180' : ''}`}
-                  aria-expanded={homeDropdownOpen}
-                  aria-label="Toggle home menu"
-                >
-                  <span className="material-symbols text-sm">expand_more</span>
-                </button>
-              </div>              {/* Home dropdown */}
-              <div 
-                className={`${homeDropdown.getPositionClasses()} w-64 dropdown-screen-aware ${
-                  theme === 'light' 
-                    ? 'bg-white/95 border border-gray-200' 
-                    : 'bg-gray-900/95 border border-gray-700'
-                } backdrop-blur-lg shadow-lg rounded-lg overflow-hidden z-50 transition-all duration-200 ${
-                  homeDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}
-                style={homeDropdown.getPositionStyles()}
-                onMouseEnter={() => setHomeDropdownOpen(true)}
-                onMouseLeave={() => setHomeDropdownOpen(false)}
-              >
-                <div className="p-2 space-y-1">
-                  {homeDropdownItems.slice(1).map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.2, delay: index * 0.05 }}
-                    >                      <Link
-                        href={localizedHref(item.href)}
-                        className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
-                          theme === 'light'
-                            ? 'text-gray-700 hover:bg-gray-50'
-                            : 'text-gray-300 hover:bg-gray-800'
-                        } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                        onClick={() => {
-                          setHomeDropdownOpen(false);
-                          trackEvent('dropdown_nav_click', 'navigation', `home_${item.textKey?.split('.').pop() || 'unknown'}`);
-                        }}
-                      >
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                          theme === 'light' 
-                            ? 'bg-gray-100' 
-                            : 'bg-gray-700/50'
-                        }`}>
-                          <span className="material-symbols text-sm" aria-hidden="true">
-                            {item.icon || 'article'}
-                          </span>
-                        </div>
-                        <span className="font-medium">{t(item.textKey || 'nav.home')}</span>
-                        <span className="material-symbols text-xs ml-auto opacity-50">
-                          chevron_right
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>            {/* Portfolio with dropdown */}
-            <div className="relative group">
-              <div
-                className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
-                  theme === 'light' 
-                    ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50' 
-                    : theme === 'dark'
-                    ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50'
-                    : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30'
-                } backdrop-blur-sm transition-all duration-200`}
-                onMouseEnter={() => setPortfolioDropdownOpen(true)}
-                onMouseLeave={() => setPortfolioDropdownOpen(false)}
-              >                {/* Portfolio navigation link */}
-                <Link
-                  ref={portfolioDropdown.buttonRef}
-                  href={localizedHref('/portfolio')}
-                  onClick={() => trackEvent('desktop_nav_click', 'navigation', 'portfolio')}
-                  className={`flex items-center gap-2 ${
-                    theme === 'light' 
-                      ? 'text-gray-700 hover:text-primary' 
-                      : theme === 'dark'
-                      ? 'text-gray-300 hover:text-white'
-                      : 'text-gray-300 hover:text-white'
-                  } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded transition-colors`}
-                ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                    theme === 'light' 
-                      ? 'bg-purple-100' 
-                      : theme === 'dark' 
-                      ? 'bg-purple-900/50' 
-                      : 'bg-gradient-to-br from-purple-500/20 to-pink-500/20'
-                  }`}>
-                    <span className="material-symbols text-xs text-purple-500 scale-65">work</span>
-                  </div>
-                  <span className="font-medium text-sm">{t('nav.portfolio')}</span>
-                </Link>
-                
-                {/* Dropdown toggle button */}
-                <button
-                  onClick={() => setPortfolioDropdownOpen(!portfolioDropdownOpen)}
-                  className={`ml-1 p-1 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                    theme === 'light' 
-                      ? 'bg-gray-100 hover:bg-purple-100 text-gray-600 hover:text-purple-600' 
-                      : theme === 'dark' 
-                      ? 'bg-gray-700 hover:bg-purple-900/50 text-gray-400 hover:text-purple-400' 
-                      : 'bg-purple-800/30 hover:bg-purple-600/30 text-gray-400 hover:text-purple-400'
-                  } ${portfolioDropdownOpen ? 'rotate-180' : ''}`}
-                  aria-expanded={portfolioDropdownOpen}
-                  aria-label="Toggle portfolio menu"
-                >
-                  <span className="material-symbols text-sm">expand_more</span>
-                </button>
-              </div>              {/* Portfolio dropdown */}
-              <div 
-                className={`${portfolioDropdown.getPositionClasses()} w-64 dropdown-screen-aware ${
-                  theme === 'light' 
-                    ? 'bg-white/95 border border-gray-200' 
-                    : 'bg-gray-900/95 border border-gray-700'
-                } backdrop-blur-lg shadow-lg rounded-lg overflow-hidden z-50 transition-all duration-200 ${
-                  portfolioDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}
-                style={portfolioDropdown.getPositionStyles()}
-                onMouseEnter={() => setPortfolioDropdownOpen(true)}
-                onMouseLeave={() => setPortfolioDropdownOpen(false)}
-              >
-                <div className="p-2 space-y-1">
-                  {portfolioDropdownItems.slice(1).map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.2, delay: index * 0.05 }}
-                    >                      <Link
-                        href={localizedHref(item.href)}
-                        className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
-                          theme === 'light'
-                            ? 'text-gray-700 hover:bg-gray-50'
-                            : 'text-gray-300 hover:bg-gray-800'
-                        } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-                        onClick={() => {
-                          setPortfolioDropdownOpen(false);
-                          trackEvent('dropdown_nav_click', 'navigation', `portfolio_${item.textKey?.split('.').pop() || 'unknown'}`);
-                        }}
-                      >
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                          theme === 'light' 
-                            ? 'bg-gray-100' 
-                            : 'bg-gray-700/50'
-                        }`}>
-                          <span className="material-symbols text-sm">article</span>
-                        </div>
-                        <span className="font-medium">{item.textKey ? t(item.textKey) : item.text}</span>
-                        <span className="material-symbols text-xs ml-auto opacity-50">
-                          chevron_right
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>            {/* Blog link */}
-            <Link
-              href={localizedHref('/blog')}
-              onClick={() => trackEvent('desktop_nav_click', 'navigation', 'blog')}
-              className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
-                theme === 'light' 
-                  ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50 text-gray-700 hover:text-primary' 
-                  : theme === 'dark'
-                  ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
-                  : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
-              } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            >
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                theme === 'light' 
-                  ? 'bg-orange-100' 
-                  : theme === 'dark' 
-                  ? 'bg-orange-900/50' 
-                  : 'bg-gradient-to-br from-orange-500/20 to-red-500/20'
-              }`}>
-                <span className="material-symbols text-xs text-orange-500 scale-65">article</span>
-              </div>
-              <span className="font-medium text-sm">{t('nav.blog')}</span>
-            </Link>
+        A
+      </Link>
 
-            {/* Audio Library link */}
-            <Link
-              href={localizedHref('/audio')}
-              onClick={() => trackEvent('desktop_nav_click', 'navigation', 'audio')}
-              className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
-                theme === 'light' 
-                  ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50 text-gray-700 hover:text-primary' 
-                  : theme === 'dark'
-                  ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
-                  : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
-              } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            >
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                theme === 'light' 
-                  ? 'bg-blue-100' 
-                  : theme === 'dark' 
-                  ? 'bg-blue-900/50' 
-                  : 'bg-gradient-to-br from-blue-500/20 to-indigo-500/20'
-              }`}>
-                <span className="material-symbols text-xs text-blue-500 scale-65">audio_file</span>
-              </div>
-              <span className="font-medium text-sm">{t('nav.audio')}</span>
-            </Link>            {/* Prompts link */}
-            <Link
-              href={localizedHref('/prompt')}
-              onClick={() => trackEvent('desktop_nav_click', 'navigation', 'prompts')}
-              className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
-                theme === 'light' 
-                  ? 'bg-white/50 hover:bg-white/70 border border-gray-200/50 text-gray-700 hover:text-primary' 
-                  : theme === 'dark'
-                  ? 'bg-gray-800/50 hover:bg-gray-800/70 border border-gray-600/50 text-gray-300 hover:text-white'
-                  : 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-200/30 text-gray-300 hover:text-white'
-              } backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
-            ><div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                theme === 'light' 
-                  ? 'bg-pink-100' 
-                  : theme === 'dark' 
-                  ? 'bg-pink-900/50' 
-                  : 'bg-gradient-to-br from-pink-500/20 to-rose-500/20'
-              }`}>
-                <span className="material-symbols text-xs text-pink-500 scale-65">smart_toy</span>
-              </div>
-              <span className="font-medium text-sm">{t('nav.prompts')}</span>
-            </Link>
+      {/* Nav Items */}
+      <div className="flex items-center gap-1">
+        {navItems.map((item) => (
+          <DesktopNavItem 
+            key={item.href} 
+            item={item} 
+            theme={theme} 
+            t={t} 
+            localizedHref={localizedHref}
+            trackEvent={trackEvent}
+            isActive={pathname === localizedHref(item.href)}
+            hoveredTab={hoveredTab}
+            setHoveredTab={setHoveredTab}
+          />
+        ))}
+      </div>
 
-            {/* Theme and Language Switchers */}
-            <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-gray-300/50 dark:border-gray-600/50">
-              <LanguageSwitcher />
-              <ThemeSwitch />
-            </div>
-          </nav>
+      {/* Divider */}
+      <div className={`w-px h-6 mx-2 ${theme === 'colorful' ? 'bg-purple-500/30' : theme === 'light' ? 'bg-gray-300' : 'bg-gray-700'}`} />
 
-          {/* Hamburger for mobile */}
-          <button
-            ref={hamburgerButtonRef}
-            onClick={() => handleMenuToggle(!menuOpen)}
-            className={`md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg p-2 ${getMobileMenuButtonClass()} flex items-center relative z-[60]`}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation-menu"
-            aria-label={menuOpen
-              ? (locale === 'fi' ? 'Sulje päävalikko' : 'Close main menu')
-              : (locale === 'fi' ? 'Avaa päävalikko' : 'Open main menu')
-            }
-          >
-            <span className="material-symbols material-symbols-rounded text-2xl">
-              {menuOpen ? 'close' : 'menu'}
-            </span>
-          </button>
-        </div>
-      </motion.div>      {/* Mobile Menu Overlay - Fixed position */}
+      {/* Settings */}
+      <div className="flex items-center gap-1 pr-2">
+        <LanguageSwitcher />
+        <ThemeSwitch />
+      </div>
+    </motion.nav>
+  );
+};
+
+const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, hoveredTab, setHoveredTab }: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isHovered = hoveredTab === item.href;
+
+  return (
+    <div 
+      className="relative"
+      onMouseEnter={() => {
+        setHoveredTab(item.href);
+        setIsOpen(true);
+      }}
+      onMouseLeave={() => {
+        setHoveredTab(null);
+        setIsOpen(false);
+      }}
+    >
+      <Link
+        href={localizedHref(item.href)}
+        onClick={() => trackEvent('desktop_nav_click', 'navigation', item.labelKey)}
+        className={`
+          relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 whitespace-nowrap
+          ${isActive 
+            ? (theme === 'colorful' ? 'text-fuchsia-400 bg-fuchsia-500/20' : theme === 'light' ? 'text-blue-600 bg-blue-50' : 'text-blue-400 bg-blue-900/20') 
+            : (theme === 'colorful' ? 'text-purple-200 hover:text-white' : theme === 'light' ? 'text-gray-600 hover:text-gray-900' : 'text-gray-400 hover:text-gray-100')
+          }
+        `}
+      >
+        {isHovered && (
+          <motion.div
+            layoutId="nav-pill"
+            className={`absolute inset-0 rounded-full ${theme === 'colorful' ? 'bg-purple-900/40' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'}`}
+            initial={false}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+        )}
+        <span className="relative z-10 flex items-center gap-2">
+          {/* <span className="material-symbols text-[18px]">{item.icon}</span> */}
+          {t(item.labelKey)}
+          {item.children && <span className="material-symbols text-[14px]">expand_more</span>}
+        </span>
+      </Link>
+
+      {/* Dropdown */}
       <AnimatePresence>
-        {menuOpen && (
-          <FocusTrap active={menuOpen} restoreFocus={true}>
-            <motion.div
-              ref={mobileMenuRef}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className={`md:hidden fixed inset-0 top-[60px] z-50 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} shadow-xl overflow-y-auto`}
-              style={{
-                height: 'calc(100vh - 60px)'
-              }}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation menu"
-            >
-              {/* Mobile header - removed duplicate name */}
-              <div className={`p-4 flex  border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-                {/* Empty div to maintain spacing */}
-              </div>
-
-              {/* Top controls - Language and Theme */}
-              <div className={`py-4 px-4 flex items-center justify-between border-b ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-                {/* Mobile Language Switcher */}
-                <div>
-                  <LanguageSwitcher />
-                </div>
-
-                {/* Mobile Theme Switcher */}
-                <div>
-                  <ThemeSwitch />
-                </div>
-              </div>            {/* Navigation links */}
-            <ul className={`p-4 space-y-3`}>              {/* Home with collapsible dropdown - Mobile */}
-              <li className="relative">
-                <MobileMenuSection
-                  title={t('nav.home')}
-                  icon="home"
-                  href={localizedHref('/')}
-                  items={homeDropdownItems.slice(1)}
-                  theme={theme}
-                  onLinkClick={() => handleMenuToggle(false)}
-                  getDropdownItemClass={getDropdownItemClass}
-                  getTextColorClass={getTextColorClass}
-                  localizedHref={localizedHref}
-                  locale={locale}
-                  t={t}
-                  trackEvent={trackEvent}
-                />
-              </li>
-
-              {/* Portfolio with collapsible dropdown - Mobile */}
-              <li className="relative">
-                <MobileMenuSection
-                  title={t('nav.portfolio')}
-                  icon="work"
-                  href={localizedHref('/portfolio')}
-                  items={portfolioDropdownItems.slice(1)}
-                  theme={theme}
-                  onLinkClick={() => handleMenuToggle(false)}
-                  getDropdownItemClass={getDropdownItemClass}
-                  getTextColorClass={getTextColorClass}
-                  localizedHref={localizedHref}
-                  locale={locale}
-                  isPortfolio={true}
-                  t={t}
-                  trackEvent={trackEvent}
-                />
-              </li>              {/* Blog link - Mobile */}
-              <li>
-                <MobileMenuItem
-                  href={localizedHref('/blog')}
-                  icon="article"
-                  title={t('nav.blog')}
-                  theme={theme}
-                  onLinkClick={() => handleMenuToggle(false)}
-                  getTextColorClass={getTextColorClass}
-                  trackEvent={trackEvent}
-                />
-              </li>
-
-              {/* Audio Library link - Mobile */}
-              <li>
-                <MobileMenuItem
-                  href={localizedHref('/audio')}
-                  icon="audio_file"
-                  title={t('nav.audio')}
-                  theme={theme}
-                  onLinkClick={() => handleMenuToggle(false)}
-                  getTextColorClass={getTextColorClass}
-                  trackEvent={trackEvent}
-                />
-              </li>
-
-              {/* Prompts link - Mobile */}
-              <li>
-                <MobileMenuItem
-                  href={localizedHref('/prompt')}
-                  icon="smart_toy"
-                  title={t('nav.prompts')}
-                  theme={theme}
-                  onLinkClick={() => handleMenuToggle(false)}
-                  getTextColorClass={getTextColorClass}
-                  trackEvent={trackEvent}
-                />
-              </li>
-              </ul>
-
-              {/* Close button */}
-              <div className="sticky bottom-4 left-0 right-0 mt-8 px-4 flex justify-center">
-                <button
-                  onClick={() => handleMenuToggle(false)}
-                  className={`px-6 py-2 rounded-full ${theme === 'light'
-                    ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    } transition-colors flex items-center gap-2`}
-                  aria-label="Close menu"
-                >
-                  <span className="material-symbols text-sm">close</span>
-                  {t('close')}
-                </button>
-              </div>
-            </motion.div>
-          </FocusTrap>
+        {item.children && isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className={`
+              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
+              ${theme === 'colorful'
+                ? 'bg-[#050023]/90 border-purple-500/30'
+                : theme === 'light' 
+                  ? 'bg-white/90 border-gray-200' 
+                  : 'bg-gray-900/90 border-gray-700'
+              }
+            `}
+          >
+            {item.children.map((child: any, idx: number) => (
+              <Link
+                key={idx}
+                href={localizedHref(child.href)}
+                className={`
+                  flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap
+                  ${theme === 'colorful'
+                    ? 'text-purple-200 hover:bg-purple-900/40 hover:text-fuchsia-400'
+                    : theme === 'light' 
+                      ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' 
+                      : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400'
+                  }
+                `}
+                onClick={() => setIsOpen(false)}
+              >
+                <span className="material-symbols text-[18px] opacity-70">{child.icon}</span>
+                {t(child.labelKey)}
+              </Link>
+            ))}
+          </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+};
 
-      {/* Enhanced bottom border effect */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"
-        animate={{
-          opacity: [0.3, 0.7, 0.3],
-          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+// --- Mobile Navigation Component ---
+
+const MobileNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: any) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <>
+      {/* Bottom Dock */}
+      <motion.nav
+        variants={{
+          visible: { y: 0, opacity: 1 },
+          hidden: { y: 100, opacity: 0 }
         }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          repeatType: "loop"
-        }}
-      />
-    </motion.header>
+        animate={hidden && !isMenuOpen ? "hidden" : "visible"}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`
+          md:hidden fixed bottom-6 left-4 right-4 z-50 h-16 rounded-2xl border backdrop-blur-xl shadow-lg shadow-black/10 flex items-center justify-between px-2
+          ${theme === 'colorful'
+            ? 'bg-[#050023]/80 border-purple-500/30'
+            : theme === 'light' 
+              ? 'bg-white/80 border-white/50' 
+              : 'bg-gray-900/80 border-gray-800/50'
+          }
+        `}
+      >
+        {/* Main Links */}
+        <div className="flex items-center justify-around w-full">
+          <MobileDockItem 
+            href="/" 
+            icon="home" 
+            label={t('nav.home')} 
+            isActive={pathname === localizedHref('/')}
+            theme={theme}
+            localizedHref={localizedHref}
+          />
+          <MobileDockItem 
+            href="/portfolio" 
+            icon="work" 
+            label={t('nav.portfolio')} 
+            isActive={pathname.includes('/portfolio')}
+            theme={theme}
+            localizedHref={localizedHref}
+          />
+          
+          {/* Center Action Button (Menu) */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={`
+              relative -top-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-95
+              ${isMenuOpen 
+                ? 'bg-red-500 text-white rotate-90' 
+                : theme === 'colorful'
+                  ? 'bg-gradient-to-br from-fuchsia-600 to-purple-600 text-white'
+                  : 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
+              }
+            `}
+            aria-label="Menu"
+          >
+            <span className="material-symbols text-2xl">{isMenuOpen ? 'close' : 'grid_view'}</span>
+          </button>
+
+          <MobileDockItem 
+            href="/blog" 
+            icon="article" 
+            label={t('nav.blog')} 
+            isActive={pathname.includes('/blog')}
+            theme={theme}
+            localizedHref={localizedHref}
+          />
+          <MobileDockItem 
+            href="/audio" 
+            icon="audio_file" 
+            label={t('nav.audio')} 
+            isActive={pathname.includes('/audio')}
+            theme={theme}
+            localizedHref={localizedHref}
+          />
+        </div>
+      </motion.nav>
+
+      {/* Full Screen Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: '100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className={`
+              fixed inset-0 z-40 flex flex-col pt-20 pb-28 px-6 overflow-y-auto
+              ${theme === 'colorful' ? 'bg-[#050023]/95' : theme === 'light' ? 'bg-white/95' : 'bg-gray-900/95'}
+              backdrop-blur-xl
+            `}
+          >
+            <div className="flex flex-col gap-6">
+              {/* Menu Header */}
+              <div className="text-center mb-4">
+                <h2 className={`text-2xl font-bold ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>
+                  Menu
+                </h2>
+              </div>
+
+              {/* Menu Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={localizedHref(item.href)}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`
+                      flex flex-col items-center justify-center p-6 rounded-2xl border transition-all active:scale-95 whitespace-nowrap
+                      ${theme === 'colorful'
+                        ? 'bg-purple-900/20 border-purple-500/30 text-purple-100'
+                        : theme === 'light' 
+                          ? 'bg-gray-50 border-gray-200 text-gray-800' 
+                          : 'bg-gray-800/50 border-gray-700 text-gray-200'
+                      }
+                    `}
+                  >
+                    <div className={`
+                      w-12 h-12 rounded-full flex items-center justify-center mb-3 text-2xl
+                      ${theme === 'colorful'
+                        ? 'bg-purple-800/50 text-fuchsia-400'
+                        : theme === 'light' ? 'bg-white shadow-sm text-blue-600' : 'bg-gray-700 text-blue-400'}
+                    `}>
+                      <span className="material-symbols">{item.icon}</span>
+                    </div>
+                    <span className="font-medium">{t(item.labelKey)}</span>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Settings Section */}
+              <div className={`
+                mt-auto p-4 rounded-2xl border flex items-center justify-between
+                ${theme === 'colorful'
+                  ? 'bg-purple-900/20 border-purple-500/30'
+                  : theme === 'light' ? 'bg-gray-50 border-gray-200' : 'bg-gray-800/50 border-gray-700'}
+              `}>
+                <LanguageSwitcher />
+                <ThemeSwitch />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+const MobileDockItem = ({ href, icon, label, isActive, theme, localizedHref }: any) => {
+  return (
+    <Link
+      href={localizedHref(href)}
+      className={`
+        flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors
+        ${isActive 
+          ? (theme === 'colorful' ? 'text-fuchsia-400' : theme === 'light' ? 'text-blue-600' : 'text-blue-400') 
+          : (theme === 'colorful' ? 'text-purple-300' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
+        }
+      `}
+    >
+      <span className={`material-symbols text-2xl transition-transform ${isActive ? '-translate-y-1' : ''}`}>
+        {icon}
+      </span>
+      {/* <span className="text-[10px] font-medium">{label}</span> */}
+      {isActive && (
+        <motion.div 
+          layoutId="dock-dot"
+          className={`w-1 h-1 rounded-full ${theme === 'colorful' ? 'bg-fuchsia-400' : theme === 'light' ? 'bg-blue-600' : 'bg-blue-400'}`}
+        />
+      )}
+    </Link>
   );
 };
 
