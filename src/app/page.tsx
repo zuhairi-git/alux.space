@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 // Card components removed as they're not used in this file
@@ -137,10 +137,6 @@ export default function Home() {
   const { t } = useTranslations(locale);
   const { trackEvent } = useAnalyticsTracking();
 
-  // State to track scroll position for parallax effects
-  const [scrollY, setScrollY] = useState(0);
-  // Mouse position state removed as it's not used
-
   // Refs for section tracking
   const workExperienceRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -148,8 +144,6 @@ export default function Home() {
   // Track scroll position for animations and analytics
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-      
       // Track scroll engagement
       const scrollPercentage = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
       if (scrollPercentage > 0 && scrollPercentage % 25 === 0) {

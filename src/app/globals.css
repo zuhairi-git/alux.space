@@ -1324,6 +1324,21 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes gentle-drift {
+  0%, 100% { 
+    transform: rotate(0deg) scale(1); 
+  }
+  25% { 
+    transform: rotate(3deg) scale(1.02); 
+  }
+  50% { 
+    transform: rotate(0deg) scale(1); 
+  }
+  75% { 
+    transform: rotate(-3deg) scale(0.98); 
+  }
+}
+
 @keyframes slide-diagonal {
   0% { transform: translate(-100%, -100%); }
   100% { transform: translate(100%, 100%); }
@@ -1334,7 +1349,7 @@ body {
 }
 
 .animate-matrix {
-  animation: matrix-fall 8s linear infinite;
+  animation: matrix-fall 12s linear infinite;
   will-change: transform;
 }
 
@@ -1345,6 +1360,11 @@ body {
 
 .animate-rotate-slow {
   animation: rotate-slow 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-gentle-drift {
+  animation: gentle-drift 20s ease-in-out infinite;
   will-change: transform;
 }
 
