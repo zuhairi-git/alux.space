@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
@@ -107,7 +107,6 @@ const Navigation = () => {
         theme={theme} 
         t={t} 
         localizedHref={localizedHref} 
-        trackEvent={trackEvent}
         pathname={pathname}
       />
     </>
@@ -116,7 +115,16 @@ const Navigation = () => {
 
 // --- Desktop Navigation Component ---
 
-const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: any) => {
+interface DesktopNavProps {
+  hidden: boolean;
+  theme: string;
+  t: (key: string) => string;
+  localizedHref: (path: string) => string;
+  trackEvent: (action: string, category: string, label: string) => void;
+  pathname: string;
+}
+
+const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: DesktopNavProps) => {
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
 
   return (
@@ -133,10 +141,18 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: a
         borderColor: theme === 'colorful' ? 'rgba(255, 0, 204, 0.3)' : theme === 'light' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)',
       }}
     >
-      {/* Logo */}
+      {/* Logo/Avatar */}
       <Link 
         href={localizedHref('/')}
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-lg ml-1 mr-2 shadow-md"
+        className={`
+          flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg ml-1 mr-2 shadow-md transition-all duration-300
+          ${theme === 'colorful' 
+            ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-fuchsia-500/25' 
+            : theme === 'light' 
+              ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-blue-500/25' 
+              : 'bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-blue-400/25'
+          }
+        `}
         aria-label="Home"
       >
         A
@@ -171,7 +187,18 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: a
   );
 };
 
-const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, hoveredTab, setHoveredTab }: any) => {
+interface DesktopNavItemProps {
+  item: NavItem;
+  theme: string;
+  t: (key: string) => string;
+  localizedHref: (path: string) => string;
+  trackEvent: (action: string, category: string, label: string) => void;
+  isActive: boolean;
+  hoveredTab: string | null;
+  setHoveredTab: (href: string | null) => void;
+}
+
+const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, hoveredTab, setHoveredTab }: DesktopNavItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const isHovered = hoveredTab === item.href;
 
@@ -231,7 +258,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
               }
             `}
           >
-            {item.children.map((child: any, idx: number) => (
+            {item.children.map((child: NavItem, idx: number) => (
               <Link
                 key={idx}
                 href={localizedHref(child.href)}
@@ -259,7 +286,15 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
 
 // --- Mobile Navigation Component ---
 
-const MobileNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: any) => {
+interface MobileNavProps {
+  hidden: boolean;
+  theme: string;
+  t: (key: string) => string;
+  localizedHref: (path: string) => string;
+  pathname: string;
+}
+
+const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -407,7 +442,16 @@ const MobileNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: an
   );
 };
 
-const MobileDockItem = ({ href, icon, label, isActive, theme, localizedHref }: any) => {
+interface MobileDockItemProps {
+  href: string;
+  icon: string;
+  label: string;
+  isActive: boolean;
+  theme: string;
+  localizedHref: (path: string) => string;
+}
+
+const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDockItemProps) => {
   return (
     <Link
       href={localizedHref(href)}
