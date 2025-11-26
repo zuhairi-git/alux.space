@@ -25,40 +25,24 @@ interface WorkExperienceWizardProps {
 
 export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWizardProps) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [direction, setDirection] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const totalSteps = workContent.positions.length;
 
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlay) return;
-    
-    const interval = setInterval(() => {
-      setDirection(1);
-      setCurrentStep((prev) => (prev + 1) % totalSteps);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlay, totalSteps]);
-
   const goToStep = (step: number) => {
     setDirection(step > currentStep ? 1 : -1);
     setCurrentStep(step);
-    setIsAutoPlay(false);
   };
 
   const nextStep = () => {
     setDirection(1);
     setCurrentStep((prev) => (prev + 1) % totalSteps);
-    setIsAutoPlay(false);
   };
 
   const prevStep = () => {
     setDirection(-1);
     setCurrentStep((prev) => (prev - 1 + totalSteps) % totalSteps);
-    setIsAutoPlay(false);
   };
 
   const getCurrentPosition = () => {
@@ -333,79 +317,8 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
             </AnimatePresence>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-center gap-6 mt-12">
-            {/* Previous Button */}
-            <motion.button
-              onClick={prevStep}
-              className={`p-4 rounded-full ${colors.buttonBg} backdrop-blur-sm border ${colors.cardBorder} ${colors.iconColor} hover:scale-110 transition-all duration-300`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Previous"
-            >
-              <span className="material-symbols text-2xl">chevron_left</span>
-            </motion.button>
-
-            {/* Dot Navigation */}
-            <div className="flex items-center gap-3">
-              {workContent.positions.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => goToStep(index)}
-                  className={`relative transition-all duration-300 ${
-                    index === currentStep
-                      ? `w-12 h-3 rounded-full bg-gradient-to-r ${colors.accentGradient}`
-                      : `w-3 h-3 rounded-full ${colors.progressBg} hover:scale-125`
-                  }`}
-                  whileHover={{ scale: index === currentStep ? 1 : 1.25 }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label={`Go to position ${index + 1}`}
-                >
-                  {index === currentStep && (
-                    <motion.div
-                      className={`absolute inset-0 rounded-full bg-gradient-to-r ${colors.accentGradient}`}
-                      layoutId="activeIndicator"
-                    />
-                  )}
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Next Button */}
-            <motion.button
-              onClick={nextStep}
-              className={`p-4 rounded-full ${colors.buttonBg} backdrop-blur-sm border ${colors.cardBorder} ${colors.iconColor} hover:scale-110 transition-all duration-300`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Next"
-            >
-              <span className="material-symbols text-2xl">chevron_right</span>
-            </motion.button>
-          </div>
-
-          {/* Auto-play Toggle */}
-          <div className="flex justify-center mt-8">
-            <motion.button
-              onClick={() => setIsAutoPlay(!isAutoPlay)}
-              className={`px-6 py-3 rounded-full backdrop-blur-sm border ${colors.cardBorder} transition-all duration-300 flex items-center gap-2 ${
-                isAutoPlay 
-                  ? `${colors.buttonActive} text-white shadow-lg` 
-                  : `${colors.buttonBg} text-theme-text/70`
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="material-symbols text-xl">
-                {isAutoPlay ? 'pause' : 'play_arrow'}
-              </span>
-              <span className="font-medium">
-                {isAutoPlay ? 'Pause' : 'Auto Play'}
-              </span>
-            </motion.button>
-          </div>
-
           {/* Timeline visualization */}
-          <div className="mt-16">
+          <div className="mt-0">
             <div className="relative">
               {/* Progress line */}
               <div className={`h-2 rounded-full ${colors.progressBg} overflow-hidden`}>
