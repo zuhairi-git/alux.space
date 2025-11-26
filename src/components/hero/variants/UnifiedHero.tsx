@@ -49,20 +49,19 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
     >
       {/* Decorative elements - show/hide based on theme */}
       <AnimatePresence mode="wait">
-        {!isColorful && (
-          <MotionDiv
-            key="decorative-elements"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >            {/* Corner decorative accents */}            <MotionDiv
+        <MotionDiv
+          key="decorative-elements"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >            {/* Corner decorative accents */}            <MotionDiv
               className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <div className="w-full h-full border-t-2 border-l-2 border-blue-400/30 rounded-tl-lg" />
+              <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-cyan-400/30' : 'border-blue-400/30'} rounded-tl-lg`} />
             </MotionDiv>
             
             <MotionDiv
@@ -71,7 +70,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <div className="w-full h-full border-b-2 border-r-2 border-purple-400/30 rounded-br-lg" />
+              <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-fuchsia-400/30' : 'border-purple-400/30'} rounded-br-lg`} />
             </MotionDiv>
               {/* Side line decorations */}
             <MotionDiv 
@@ -81,8 +80,8 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               transition={{ duration: 1, delay: 0.5 }}
             >
               <div className="flex flex-col items-center gap-3">
-                <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
-                <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent"></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-blue-400/30 to-transparent'}`}></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-fuchsia-400/30 to-transparent' : 'from-transparent via-purple-400/30 to-transparent'}`}></div>
               </div>
             </MotionDiv>
             
@@ -93,53 +92,14 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               transition={{ duration: 1, delay: 0.5 }}
             >
               <div className="flex flex-col items-center gap-3">
-                <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
-                <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent"></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-blue-400/30 to-transparent'}`}></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-fuchsia-400/30 to-transparent' : 'from-transparent via-purple-400/30 to-transparent'}`}></div>
               </div>
             </MotionDiv>
           </MotionDiv>
-        )}
       </AnimatePresence>
 
-      {/* Colorful theme geometric decorations */}
-      <AnimatePresence mode="wait">
-        {isColorful && (
-          <MotionDiv
-            key="colorful-decorations"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative w-full max-w-4xl mx-auto"
-          >
-            {/* Floating circle decoration */}
-            <MotionDiv
-              animate={{
-                y: [0, -15, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-              className="absolute -top-20 -left-10 md:-left-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 blur-sm"
-            />
-            
-            {/* Rotating square decoration */}
-            <MotionDiv
-              animate={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="absolute top-10 -right-10 md:-right-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 blur-sm"
-            />
-          </MotionDiv>
-        )}
-      </AnimatePresence>
+      {/* Colorful theme geometric decorations - REMOVED */}
 
       {/* Main content container */}
       <div className="flex flex-col items-center justify-center my-8 relative">
@@ -148,22 +108,20 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           layout
           className={`relative z-10 mx-auto mb-12 ${isColorful ? 'text-center' : 'text-center max-w-4xl'}`}
         >
-          {/* Subtle dot grid behind the title for non-colorful themes */}
+          {/* Subtle dot grid behind the title */}
           <AnimatePresence mode="wait">
-            {!isColorful && (
-              <MotionDiv
-                key="dot-grid"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0 -z-10 opacity-20 overflow-hidden"
-              >
-                <div className="absolute top-0 left-[20%] w-3/5 h-full" 
-                     style={{ backgroundImage: 'radial-gradient(circle, rgba(96, 165, 250, 0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
-                </div>
-              </MotionDiv>
-            )}
+            <MotionDiv
+              key="dot-grid"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 -z-10 opacity-20 overflow-hidden"
+            >
+              <div className="absolute top-0 left-[20%] w-3/5 h-full" 
+                   style={{ backgroundImage: `radial-gradient(circle, ${isColorful ? 'rgba(236, 72, 153, 0.2)' : 'rgba(96, 165, 250, 0.2)'} 1px, transparent 1px)`, backgroundSize: '30px 30px' }}>
+              </div>
+            </MotionDiv>
           </AnimatePresence>
           
           {/* Dynamic title rendering based on theme */}
@@ -194,18 +152,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   </MotionSpan>
                 ))}
                 
-                {/* Decorative glow effect for colorful theme */}
-                <MotionDiv 
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 0.7 }}
-                  transition={{ delay: 0.5, duration: 1 }}
-                  className="absolute -z-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500/10 to-fuchsia-600/10 blur-3xl"
-                  style={{
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)'
-                  }}
-                />
+                {/* Decorative glow effect for colorful theme - REMOVED */}
               </MotionH2>
             ) : (
               <MotionH1 
@@ -455,92 +402,52 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: isColorful ? 1.4 : 0.8, duration: 0.8 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
             className="text-center relative"
           >
-            <AnimatePresence mode="wait">
-              {isColorful ? (
-                <MotionDiv
-                  key="colorful-cta"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >                  <Link
-                    href={localizedHref(cta.href)}
-                    className="inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden text-white border border-transparent shadow-lg cosmic-shimmer"
-                    style={{
-                      backgroundImage: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
-                      backgroundSize: '200% 200%',
-                      animation: 'gradientShift 3s ease infinite',
-                    }}
-                    onClick={() => trackEvent('hero_cta_click', 'hero', `colorful_theme_${cta.text}`)}
-                  >
-                    <MotionSpan className="relative z-10">
-                      {cta.text}
-                    </MotionSpan>
-                    
-                    <MotionDiv 
-                      className="absolute inset-0 bg-black/10"
-                      transition={{ duration: 0.3 }}
-                    />
-                    
-                    {/* Animated glow effect */}
-                    <MotionDiv 
-                      className="absolute -z-10 inset-0 bg-gradient-to-r from-cyan-500/30 via-fuchsia-500/30 to-blue-500/30 blur-lg opacity-30"
-                      animate={{
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                      }}
-                      transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        repeatType: 'loop'
-                      }}
-                      style={{
-                        backgroundSize: '200% 200%'
-                      }}
-                    />
-                  </Link>
-                </MotionDiv>
-              ) : (
-                <MotionDiv
-                  key="default-cta"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="inline-block relative"
-                >
-                  <MotionDiv 
-                    className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-indigo-500/40 blur-md opacity-70"
-                    animate={{
-                      background: [
-                        'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))',
-                        'linear-gradient(to right, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4))',
-                        'linear-gradient(to right, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4))',
-                        'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))'
-                      ]
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
-                  />                  <Link 
-                    href={localizedHref(cta.href)} 
-                    className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg z-10"
-                    onClick={() => trackEvent('hero_cta_click', 'hero', `default_theme_${cta.text}`)}
-                  >
-                    <div className="flex items-center justify-center gap-2">
-                      <span>{cta.text}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
-                  </Link>
-                </MotionDiv>
-              )}
-            </AnimatePresence>
+            <MotionDiv
+              key="default-cta"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="inline-block relative"
+            >
+              <MotionDiv 
+                className={`absolute -inset-1 rounded-lg bg-gradient-to-r ${isColorful ? 'from-cyan-500/40 via-fuchsia-500/40 to-blue-500/40' : 'from-blue-500/40 via-purple-500/40 to-indigo-500/40'} blur-md opacity-70`}
+                animate={{
+                  background: isColorful 
+                    ? [
+                      'linear-gradient(to right, rgba(6, 182, 212, 0.4), rgba(236, 72, 153, 0.4), rgba(59, 130, 246, 0.4))',
+                      'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4), rgba(236, 72, 153, 0.4))',
+                      'linear-gradient(to right, rgba(236, 72, 153, 0.4), rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4))',
+                      'linear-gradient(to right, rgba(6, 182, 212, 0.4), rgba(236, 72, 153, 0.4), rgba(59, 130, 246, 0.4))'
+                    ]
+                    : [
+                      'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))',
+                      'linear-gradient(to right, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4))',
+                      'linear-gradient(to right, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4))',
+                      'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))'
+                    ]
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />                  <Link 
+                href={localizedHref(cta.href)} 
+                className={`relative inline-block px-8 py-4 bg-gradient-to-r ${isColorful ? 'from-cyan-500 to-fuchsia-500' : 'from-blue-500 to-purple-500'} text-white rounded-lg shadow-lg z-10`}
+                onClick={() => trackEvent('hero_cta_click', 'hero', `${isColorful ? 'colorful' : 'default'}_theme_${cta.text}`)}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span>{cta.text}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </Link>
+            </MotionDiv>
           </MotionDiv>
         )}
           {/* Podcast Player */}

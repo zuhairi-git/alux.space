@@ -72,13 +72,13 @@ export default function ComingSoonPage() {
           We&apos;re working hard to bring you something extraordinary. Stay tuned!
         </motion.p>
       </motion.div>
-        <div className="background-elements">
+        {/* <div className="background-elements">
         <div className="animated-shape shape-1"></div>
         <div className="animated-shape shape-2"></div>
         <div className="animated-shape shape-3"></div>
         <div className="animated-shape shape-4"></div>
         <div className="animated-shape shape-5"></div>
-      </div>
+      </div> */}
     </div>
   );
 }

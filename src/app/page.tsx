@@ -304,24 +304,6 @@ export default function Home() {
   const testimonials = getTestimonials();
     return (
     <main id="main-content" className="min-h-screen bg-theme">
-      {/* Background effect for colorful theme */}
-      {theme === 'colorful' && (
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">          <div 
-            className="absolute top-[30%] right-[10%] opacity-20 w-96 h-96 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
-            style={{ 
-              transform: `translateY(${scrollY * 0.2}px)`,
-              transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
-            }}
-          />
-          <div 
-            className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
-            style={{ 
-              transform: `translateY(${scrollY * -0.15}px)`,
-              transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
-            }}
-          />
-        </div>
-      )}
       <Navigation />
       <Hero config={heroConfig} />      {/* Work Experience Section - Wizard Experience */}
       <div ref={workExperienceRef} id="work-experience">
@@ -401,56 +383,7 @@ export default function Home() {
         className="relative overflow-hidden py-24 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent"
         id="strengths-skills"
       >
-        {/* Enhanced background decorative elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Animated gradient orbs */}
-          <motion.div
-            className="absolute top-20 left-1/4 w-96 h-96 rounded-full opacity-[0.03]"
-            style={{
-              background: theme === 'colorful' 
-                ? 'radial-gradient(circle, #ec4899 0%, #8b5cf6 50%, transparent 70%)'
-                : 'radial-gradient(circle, #3b82f6 0%, #6366f1 50%, transparent 70%)',
-              filter: 'blur(40px)'
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.03, 0.05, 0.03],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-1/4 w-80 h-80 rounded-full opacity-[0.04]"
-            style={{
-              background: theme === 'colorful' 
-                ? 'radial-gradient(circle, #f59e0b 0%, #ec4899 50%, transparent 70%)'
-                : 'radial-gradient(circle, #06b6d4 0%, #3b82f6 50%, transparent 70%)',
-              filter: 'blur(35px)'
-            }}
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.04, 0.06, 0.04],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-          />
-          
-          {/* Subtle grid pattern */}
-          <div 
-            className="absolute inset-0 opacity-[0.02]"
-            style={{
-              backgroundImage: `linear-gradient(${theme === 'colorful' ? '#ec4899' : '#3b82f6'} 1px, transparent 1px), linear-gradient(90deg, ${theme === 'colorful' ? '#ec4899' : '#3b82f6'} 1px, transparent 1px)`,
-              backgroundSize: '50px 50px'
-            }}
-          />
-        </div>
+        {/* Enhanced background decorative elements - REMOVED */}
       
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           {/* Section header with enhanced typography */}
