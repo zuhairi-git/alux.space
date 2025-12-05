@@ -5,7 +5,7 @@ import BlogPostClient from '@/components/blog/BlogPostClient';
 import BlogContent from '@/components/blog/BlogContent';
 import Card from '@/components/Card';
 import { posts } from '../../../blog/posts/data';
-import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
+import BlogPostBackground from '@/components/blog/BlogPostBackground';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
@@ -247,23 +247,5 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
         </div>
       </article>
     </main>
-  );
-}
-
-// This component handles different background styling based on theme
-function BlogPostBackground() {
-  return (
-    <>
-      {/* Light theme background - only visible in light theme */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0"></div>
-      </div>
-
-      {/* Dark/Colorful theme background - visible in dark and colorful themes */}
-      <div className="absolute inset-0 z-0">
-        <BackgroundEffect type="gradient" />
-        <div className="absolute inset-0 pointer-events-none"></div>
-      </div>
-    </>
   );
 }
