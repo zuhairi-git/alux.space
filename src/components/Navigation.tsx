@@ -89,6 +89,24 @@ const Navigation = () => {
     return `/${locale}${path}`;
   };
 
+  // Helper to check if a nav item is active
+  const isNavItemActive = (item: NavItem): boolean => {
+    const itemPath = localizedHref(item.href);
+    
+    // Remove hash anchors for comparison (e.g., /#work-experience -> /)
+    const cleanPathname = pathname.split('#')[0];
+    const cleanItemPath = itemPath.split('#')[0];
+    
+    // Exact match for home page
+    if (cleanItemPath === `/${locale}` || cleanItemPath === `/${locale}/`) {
+      return cleanPathname === `/${locale}` || cleanPathname === `/${locale}/`;
+    }
+    
+    // For other pages, check if current path starts with item path
+    // This handles both exact matches and child pages
+    return cleanPathname.startsWith(cleanItemPath);
+  };
+
   return (
     <>
       {/* Desktop Navigation (Top Pill) */}
@@ -99,6 +117,7 @@ const Navigation = () => {
         localizedHref={localizedHref} 
         trackEvent={trackEvent}
         pathname={pathname}
+        isNavItemActive={isNavItemActive}
       />
 
       {/* Mobile Navigation (Bottom Dock) */}
@@ -108,6 +127,7 @@ const Navigation = () => {
         t={t} 
         localizedHref={localizedHref} 
         pathname={pathname}
+        isNavItemActive={isNavItemActive}
       />
     </>
   );
@@ -122,9 +142,10 @@ interface DesktopNavProps {
   localizedHref: (path: string) => string;
   trackEvent: (action: string, category: string, label: string) => void;
   pathname: string;
+  isNavItemActive: (item: NavItem) => boolean;
 }
 
-const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: DesktopNavProps) => {
+const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isNavItemActive }: DesktopNavProps) => {
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
 
   return (
@@ -168,9 +189,10 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname }: D
             t={t} 
             localizedHref={localizedHref}
             trackEvent={trackEvent}
-            isActive={pathname === localizedHref(item.href)}
+            isActive={isNavItemActive(item)}
             hoveredTab={hoveredTab}
             setHoveredTab={setHoveredTab}
+            pathname={pathname}
           />
         ))}
       </div>
@@ -196,11 +218,21 @@ interface DesktopNavItemProps {
   isActive: boolean;
   hoveredTab: string | null;
   setHoveredTab: (href: string | null) => void;
+  pathname: string;
 }
 
-const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, hoveredTab, setHoveredTab }: DesktopNavItemProps) => {
+const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, hoveredTab, setHoveredTab, pathname }: DesktopNavItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const isHovered = hoveredTab === item.href;
+
+  // Helper to check if a dropdown child item is active
+  const isChildActive = (childHref: string): boolean => {
+    const cleanPathname = pathname.split('#')[0];
+    const cleanChildPath = localizedHref(childHref).split('#')[0];
+    
+    // Exact match
+    return cleanPathname === cleanChildPath;
+  };
 
   return (
     <div 
@@ -264,11 +296,17 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 href={localizedHref(child.href)}
                 className={`
                   flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap
-                  ${theme === 'colorful'
-                    ? 'text-purple-200 hover:bg-purple-900/40 hover:text-fuchsia-400'
-                    : theme === 'light' 
-                      ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' 
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400'
+                  ${isChildActive(child.href)
+                    ? (theme === 'colorful'
+                      ? 'bg-fuchsia-500/20 text-fuchsia-400 font-medium'
+                      : theme === 'light'
+                        ? 'bg-blue-50 text-blue-600 font-medium'
+                        : 'bg-blue-900/30 text-blue-400 font-medium')
+                    : (theme === 'colorful'
+                      ? 'text-purple-200 hover:bg-purple-900/40 hover:text-fuchsia-400'
+                      : theme === 'light' 
+                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' 
+                        : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400')
                   }
                 `}
                 onClick={() => setIsOpen(false)}
@@ -292,9 +330,10 @@ interface MobileNavProps {
   t: (key: string) => string;
   localizedHref: (path: string) => string;
   pathname: string;
+  isNavItemActive: (item: NavItem) => boolean;
 }
 
-const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps) => {
+const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive }: MobileNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -323,7 +362,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps
             href="/" 
             icon="home" 
             label={t('nav.home')} 
-            isActive={pathname === localizedHref('/')}
+            isActive={pathname === localizedHref('/') || pathname === localizedHref('/')}
             theme={theme}
             localizedHref={localizedHref}
           />
@@ -331,7 +370,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps
             href="/portfolio" 
             icon="work" 
             label={t('nav.portfolio')} 
-            isActive={pathname.includes('/portfolio')}
+            isActive={isNavItemActive({ href: '/portfolio', labelKey: 'nav.portfolio', icon: 'work' })}
             theme={theme}
             localizedHref={localizedHref}
           />
@@ -357,7 +396,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps
             href="/blog" 
             icon="article" 
             label={t('nav.blog')} 
-            isActive={pathname.includes('/blog')}
+            isActive={isNavItemActive({ href: '/blog', labelKey: 'nav.blog', icon: 'article' })}
             theme={theme}
             localizedHref={localizedHref}
           />
@@ -365,7 +404,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps
             href="/audio" 
             icon="audio_file" 
             label={t('nav.audio')} 
-            isActive={pathname.includes('/audio')}
+            isActive={isNavItemActive({ href: '/audio', labelKey: 'nav.audio', icon: 'audio_file' })}
             theme={theme}
             localizedHref={localizedHref}
           />
@@ -396,32 +435,46 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname }: MobileNavProps
 
               {/* Menu Grid */}
               <div className="grid grid-cols-2 gap-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={localizedHref(item.href)}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`
-                      flex flex-col items-center justify-center p-6 rounded-2xl border transition-all active:scale-95 whitespace-nowrap
-                      ${theme === 'colorful'
-                        ? 'bg-purple-900/20 border-purple-500/30 text-purple-100'
-                        : theme === 'light' 
-                          ? 'bg-gray-50 border-gray-200 text-gray-800' 
-                          : 'bg-gray-800/50 border-gray-700 text-gray-200'
-                      }
-                    `}
-                  >
-                    <div className={`
-                      w-12 h-12 rounded-full flex items-center justify-center mb-3 text-2xl
-                      ${theme === 'colorful'
-                        ? 'bg-purple-800/50 text-fuchsia-400'
-                        : theme === 'light' ? 'bg-white shadow-sm text-blue-600' : 'bg-gray-700 text-blue-400'}
-                    `}>
-                      <span className="material-symbols">{item.icon}</span>
-                    </div>
-                    <span className="font-medium">{t(item.labelKey)}</span>
-                  </Link>
-                ))}
+                {navItems.map((item) => {
+                  const itemIsActive = isNavItemActive(item);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={localizedHref(item.href)}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`
+                        flex flex-col items-center justify-center p-6 rounded-2xl border transition-all active:scale-95 whitespace-nowrap
+                        ${itemIsActive
+                          ? (theme === 'colorful'
+                            ? 'bg-fuchsia-500/20 border-fuchsia-500/50 text-fuchsia-300 ring-2 ring-fuchsia-500/30'
+                            : theme === 'light'
+                              ? 'bg-blue-50 border-blue-300 text-blue-800 ring-2 ring-blue-200'
+                              : 'bg-blue-900/30 border-blue-600/50 text-blue-300 ring-2 ring-blue-600/30')
+                          : (theme === 'colorful'
+                            ? 'bg-purple-900/20 border-purple-500/30 text-purple-100'
+                            : theme === 'light' 
+                              ? 'bg-gray-50 border-gray-200 text-gray-800' 
+                              : 'bg-gray-800/50 border-gray-700 text-gray-200')
+                        }
+                      `}
+                    >
+                      <div className={`
+                        w-12 h-12 rounded-full flex items-center justify-center mb-3 text-2xl
+                        ${itemIsActive
+                          ? (theme === 'colorful'
+                            ? 'bg-fuchsia-500/30 text-fuchsia-400'
+                            : theme === 'light' ? 'bg-blue-100 shadow-sm text-blue-600' : 'bg-blue-800/50 text-blue-400')
+                          : (theme === 'colorful'
+                            ? 'bg-purple-800/50 text-fuchsia-400'
+                            : theme === 'light' ? 'bg-white shadow-sm text-blue-600' : 'bg-gray-700 text-blue-400')
+                        }
+                      `}>
+                        <span className="material-symbols">{item.icon}</span>
+                      </div>
+                      <span className={`font-medium ${itemIsActive ? 'font-semibold' : ''}`}>{t(item.labelKey)}</span>
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* Settings Section */}
