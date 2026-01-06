@@ -165,6 +165,7 @@ export default function HealthcarePrioritizationClient() {
         preventionDesc: "To permanently resolve the friction between speed and safety, we re-engineered our delivery process.",
         preventionStep1: "Shift-Left Compliance",
         preventionStep1Desc: "Integrated QA verification requirements into the user story 'Definition of Ready'. We moved compliance checks to the grooming phase, preventing documentation debt from accumulating.",
+        shiftLeftInfo: "Shift-Left Concept: Moving critical testing and compliance activities earlier in the development lifecycle (to the 'left') rather than waiting for the final validation phase.",
         preventionStep2: "Unified Release Protocol",
         preventionStep2Desc: "Established a formal 'Go/No-Go' council where Product, Engineering, and QA leads must unanimously review evidence 48h before release.",
 
@@ -241,6 +242,7 @@ export default function HealthcarePrioritizationClient() {
         preventionDesc: "Ratkaistaksemme pysyvästi nopeuden ja turvallisuuden välisen ristiriidan, suunnittelimme toimitusprosessimme uudelleen.",
         preventionStep1: "Laadunvarmistuksen aikaistaminen",
         preventionStep1Desc: "Integroimme QA-vaatimukset käyttäjätarinoiden 'Definition of Ready' -määritelmään. Siirsimme tarkistukset grooming-vaiheeseen, estäen dokumentaatiovelan kertymisen.",
+        shiftLeftInfo: "Shift-Left -käsite: Kriittisten testaus- ja vaatimustenmukaisuustoimien siirtäminen kehityskaaren aikaisempaan vaiheeseen ('vasemmalle') sen sijaan, että odotettaisiin lopputarkistuksia.",
         preventionStep2: "Yhtenäistetty julkaisukäytäntö",
         preventionStep2Desc: "Perustimme virallisen 'Go/No-Go' -neuvoston, jossa Tuote-, Tekniikka- ja QA-johdon on hyväksyttävä julkaisu 48h etukäteen.",
 
@@ -658,7 +660,29 @@ export default function HealthcarePrioritizationClient() {
                              }`}>
                                  <span className="material-symbols">fact_check</span>
                              </div>
-                             <h4 className={`text-xl font-bold mb-3 ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.preventionStep1}</h4>
+
+                             <div className="flex items-center gap-2 mb-3">
+                                <h4 className={`text-xl font-bold ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                                    {content.preventionStep1}
+                                </h4>
+                                <div className="relative group/info">
+                                    <span className={`material-symbols text-lg cursor-help transition-colors ${
+                                        isColorful ? 'text-indigo-400 hover:text-indigo-300' : isLight ? 'text-indigo-400 hover:text-indigo-600' : 'text-indigo-400 hover:text-indigo-300'
+                                    }`}>info</span>
+                                    
+                                    {/* Tooltip */}
+                                    <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 p-3 rounded-lg text-xs shadow-xl opacity-0 group-hover/info:opacity-100 transition-opacity pointer-events-none z-50 ${
+                                        isColorful ? 'bg-indigo-950 text-indigo-100 border border-indigo-500/30' : isLight ? 'bg-gray-900 text-white' : 'bg-gray-700 text-gray-100'
+                                    }`}>
+                                        {content.shiftLeftInfo}
+                                        {/* Arrow */}
+                                        <div className={`absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent ${
+                                            isColorful ? 'border-t-indigo-950' : isLight ? 'border-t-gray-900' : 'border-t-gray-700'
+                                        }`}></div>
+                                    </div>
+                                </div>
+                             </div>
+
                              <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{content.preventionStep1Desc}</p>
                          </div>
 
