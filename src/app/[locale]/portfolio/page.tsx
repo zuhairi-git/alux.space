@@ -68,7 +68,29 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;    const portfolioItems: PortfolioItem[] = [    {
+  const { locale } = await params;    const portfolioItems: PortfolioItem[] = [
+    {
+        title: {
+          en: 'Healthcare Product Prioritization',
+          fi: 'Terveydenhuollon tuotepriorisointi'
+        },
+        type: {
+          en: 'Product Management Case Study',
+          fi: 'Tuotehallinnan tapaustutkimus'
+        },
+        desc: {
+          en: 'Balancing technical debt, user needs, and strict compliance in a healthcare SaaS environment—a strategic approach to backlog prioritization and conflict resolution.',
+          fi: 'Teknisen velan, käyttäjätarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympäristössä—strateginen lähestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
+        },
+        link: `/${locale}/portfolio/healthcare-prioritization`,
+        gradient: 'from-blue-500 to-teal-400',
+        status: {
+          en: 'Accomplished',
+          fi: 'Saavutettu',
+          type: 'accomplished'
+        }
+      },
+      {
       title: {
         en: 'Inclusive Design System',
         fi: 'Inklusiivinen suunnittelujärjestelmä'
@@ -158,6 +180,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
           searchQuery = 'team collaboration workplace';
         } else if (item.title.en.includes('Career') || item.title.en.includes('Job')) {
           searchQuery = 'career growth professional development';
+        } else if (item.title.en.includes('Healthcare')) {
+          searchQuery = 'healthcare medical doctor hospital';
         }
         
         const photo = await getUnsplashPhoto(searchQuery);
