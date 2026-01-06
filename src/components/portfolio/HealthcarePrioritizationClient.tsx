@@ -87,6 +87,15 @@ export default function HealthcarePrioritizationClient() {
         takeawayBg: isColorful ? 'bg-gradient-to-br from-teal-900/30 to-teal-800/30 border border-teal-400/30' : '',
         takeawayIconBg: isColorful ? 'bg-teal-500/20 text-teal-300' : '',
         borderColor: isColorful ? 'border-teal-500/30' : ''
+      },
+      gray: {
+        cardBg: isColorful ? 'bg-gradient-to-br from-gray-500/20 to-gray-600/20 border border-gray-400/30' : '',
+        iconText: isColorful ? 'text-gray-400' : isLight ? 'text-gray-600' : 'text-gray-400',
+        titleText: isColorful ? 'text-gray-300' : '',
+        iconBg: isColorful ? 'bg-gray-500/20' : isLight ? 'bg-gray-100' : 'bg-gray-900/40',
+        takeawayBg: isColorful ? 'bg-gradient-to-br from-gray-900/30 to-gray-800/30 border border-gray-400/30' : '',
+        takeawayIconBg: isColorful ? 'bg-gray-500/20 text-gray-300' : '',
+        borderColor: isColorful ? 'border-gray-500/30' : ''
       }
     };
     return styles[color] || styles.blue;
@@ -125,12 +134,14 @@ export default function HealthcarePrioritizationClient() {
         prioritiesTitle: "Strategic Prioritization",
         priority1: "Patient Safety (Critical)",
         priority1Desc: "Fixing data-sync failures impacting 2% of appointments. Non-negotiable.",
-        priority2: "Nurse UX (High)",
+        priority2: "Nurse UX (Critical)",
         priority2Desc: "Improving alert visibility to ensure clinical awareness.",
         priority3: "Strategic Growth (Medium)",
         priority3Desc: "HL7/FHIR export features—valuable but scoped for dedicated capacity.",
         priority4: "Marketing Analytics (Low)",
         priority4Desc: "Push notification stats—valuable for growth, but safe to defer.",
+        priority5: "Automated Urgent Messages (Rejected)",
+        priority5Desc: "High clinical risk and lack of medical oversight.",
         
         // Decision Making
         decisionTitle: "Decision Framework",
@@ -151,11 +162,11 @@ export default function HealthcarePrioritizationClient() {
 
         // Prevention
         preventionTitle: "Prevention Strategy",
-        preventionDesc: "To avoid future conflicts, we established a proactive coordination approach.",
-        preventionStep1: "Mini-Team Meeting",
-        preventionStep1Desc: "QA, Dev, and Product meet early to identify risks, blockers, and documentation gaps.",
-        preventionStep2: "Leadership Alignment",
-        preventionStep2Desc: "Ensure all leaders have unified information before formal release decisions.",
+        preventionDesc: "To permanently resolve the friction between speed and safety, we re-engineered our delivery process.",
+        preventionStep1: "Shift-Left Compliance",
+        preventionStep1Desc: "Integrated QA verification requirements into the user story 'Definition of Ready'. We moved compliance checks to the grooming phase, preventing documentation debt from accumulating.",
+        preventionStep2: "Unified Release Protocol",
+        preventionStep2Desc: "Established a formal 'Go/No-Go' council where Product, Engineering, and QA leads must unanimously review evidence 48h before release.",
 
         // Outcomes
         takeawaysTitle: "Key Takeaways",
@@ -199,12 +210,14 @@ export default function HealthcarePrioritizationClient() {
         prioritiesTitle: "Strateginen priorisointi",
         priority1: "Potilasturvallisuus (Kriittinen)",
         priority1Desc: "Tietojen synkronointivirheiden korjaaminen, jotka vaikuttavat 2%:iin tapaamisista. Ei neuvoteltavissa.",
-        priority2: "Hoitaja-UX (Korkea)",
+        priority2: "Hoitaja-UX (Kriittinen)",
         priority2Desc: "Hälytysten näkyvyyden parantaminen kliinisen tietoisuuden varmistamiseksi.",
         priority3: "Strateginen kasvu (Keskitaso)",
         priority3Desc: "HL7/FHIR-vientitoiminnot – arvokkaita, mutta vaativat oman resursoinnin.",
         priority4: "Markkinointianalytiikka (Matala)",
         priority4Desc: "Push-ilmoitustilastot – arvokkaita kasvulle, mutta voidaan lykätä.",
+        priority5: "Automaattiset viestit (Hylätty)",
+        priority5Desc: "Korkea kliininen riski ja valvonnan puute.",
         
         // Decision Making
         decisionTitle: "Päätöksentekokehys",
@@ -225,11 +238,11 @@ export default function HealthcarePrioritizationClient() {
 
         // Prevention
         preventionTitle: "Ennaltaehkäisystrategia",
-        preventionDesc: "Tulevien konfliktien välttämiseksi loimme proaktiivisen koordinointimallin.",
-        preventionStep1: "Minitiimipalaveri",
-        preventionStep1Desc: "QA, Dev ja Tuote kohtaavat aikaisin tunnistaakseen riskit, esteet ja dokumentaatiopuutteet.",
-        preventionStep2: "Johdon linjaus",
-        preventionStep2Desc: "Varmistetaan, että kaikilla johtajilla on yhtenäinen tieto ennen virallisia julkaisupäätöksiä.",
+        preventionDesc: "Ratkaistaksemme pysyvästi nopeuden ja turvallisuuden välisen ristiriidan, suunnittelimme toimitusprosessimme uudelleen.",
+        preventionStep1: "Laadunvarmistuksen aikaistaminen",
+        preventionStep1Desc: "Integroimme QA-vaatimukset käyttäjätarinoiden 'Definition of Ready' -määritelmään. Siirsimme tarkistukset grooming-vaiheeseen, estäen dokumentaatiovelan kertymisen.",
+        preventionStep2: "Yhtenäistetty julkaisukäytäntö",
+        preventionStep2Desc: "Perustimme virallisen 'Go/No-Go' -neuvoston, jossa Tuote-, Tekniikka- ja QA-johdon on hyväksyttävä julkaisu 48h etukäteen.",
 
         // Outcomes
         takeawaysTitle: "Keskeiset oivallukset",
@@ -429,29 +442,96 @@ export default function HealthcarePrioritizationClient() {
                       : isLight ? 'text-gray-900' : 'text-white'
                   }`}>{content.prioritiesTitle}</h2>
                   
-                  <div className="grid gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                        { title: content.priority1, desc: content.priority1Desc, icon: "health_and_safety", color: "red" },
-                        { title: content.priority2, desc: content.priority2Desc, icon: "notifications_active", color: "orange" },
-                        { title: content.priority3, desc: content.priority3Desc, icon: "sync", color: "yellow" },
-                        { title: content.priority4, desc: content.priority4Desc, icon: "analytics", color: "blue" },
+                        { 
+                            id: "HC-134", 
+                            title: content.priority1, 
+                            desc: content.priority1Desc, 
+                            priorityIcon: "keyboard_double_arrow_up", 
+                            typeIcon: "bug_report",
+                            color: "red" 
+                        },
+                        { 
+                            id: "HC-142", 
+                            title: content.priority2, 
+                            desc: content.priority2Desc, 
+                            priorityIcon: "keyboard_double_arrow_up", 
+                            typeIcon: "check_box",
+                            color: "red" 
+                        },
+                        { 
+                            id: "HC-156", 
+                            title: content.priority3, 
+                            desc: content.priority3Desc, 
+                            priorityIcon: "drag_handle", 
+                            typeIcon: "bookmark",
+                            color: "yellow" 
+                        },
+                        { 
+                            id: "HC-161", 
+                            title: content.priority4, 
+                            desc: content.priority4Desc, 
+                            priorityIcon: "keyboard_arrow_down", 
+                            typeIcon: "bookmark",
+                            color: "blue" 
+                        },
+                        { 
+                            id: "HC-168", 
+                            title: content.priority5, 
+                            desc: content.priority5Desc, 
+                            priorityIcon: "block", 
+                            typeIcon: "dangerous",
+                            color: "gray" 
+                        },
                     ].map((item, index) => {
                         const styles = getColorStyles(item.color);
+                        // Extract just the color part for border-l (e.g., border-red-500)
+                        // A bit hacky but works given the consistent naming in getColorStyles if we look at iconText 'text-red-400' etc.
+                        // Better to hardcode the border-l class based on color prop since dynamic literals don't work well
+                        const borderLeftClass = {
+                            red: 'border-l-red-500',
+                            orange: 'border-l-orange-500',
+                            yellow: 'border-l-yellow-500',
+                            blue: 'border-l-blue-500',
+                            gray: 'border-l-gray-500',
+                            purple: 'border-l-purple-500',
+                            green: 'border-l-green-500',
+                            teal: 'border-l-teal-500'
+                        }[item.color] || 'border-l-gray-500';
+
                         return (
-                        <div key={index} className={`p-6 rounded-xl flex items-start gap-4 ${
+                        <div key={index} className={`p-4 rounded-lg flex flex-col gap-3 border-l-4 shadow-sm hover:shadow-md transition-shadow ${
+                             borderLeftClass
+                          } ${
                             isColorful 
-                              ? `bg-gray-800/50 border ${styles.borderColor}` 
-                              : isLight ? 'bg-white shadow-md border border-gray-100' : 'bg-gray-800 border border-gray-700'
+                              ? 'bg-gray-800/80 backdrop-blur-sm border-y border-r border-white/10' 
+                              : isLight ? 'bg-white border-y border-r border-gray-100' : 'bg-gray-800 border-y border-r border-gray-700'
                           }`}>
-                            <div className={`w-12 h-12 flex items-center justify-center rounded-full shrink-0 ${
-                                isColorful ? `${styles.iconBg} ${styles.iconText}` : isLight ? `${styles.iconBg} ${styles.iconText}` : `${styles.iconBg} ${styles.iconText}`
-                            }`}>
-                                <span className="material-symbols">{item.icon}</span>
+                            <div className="flex justify-between items-start">
+                                <div className="flex items-center gap-2">
+                                     <span className={`material-symbols text-lg ${styles.iconText}`}>{item.typeIcon}</span>
+                                     <span className={`text-xs font-mono font-medium ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{item.id}</span>
+                                </div>
+                                <div className={`flex items-center justify-center w-6 h-6 rounded ${isLight ? 'bg-gray-100' : 'bg-gray-700'}`}>
+                                    <span className={`material-symbols text-lg ${styles.iconText}`}>{item.priorityIcon}</span>
+                                </div>
                             </div>
+                            
                             <div>
-                                <h4 className={`text-lg font-bold mb-1 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h4>
-                                <p className={`${isColorful ? 'text-gray-400' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>{item.desc}</p>
+                                <h4 className={`text-sm font-bold mb-1 leading-tight ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h4>
+                                <p className={`text-xs ${isColorful ? 'text-gray-400' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{item.desc}</p>
                             </div>
+
+                             <div className="mt-auto pt-2 flex items-center justify-between border-t border-gray-500/10">
+                                <div className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${
+                                    item.color === 'gray' 
+                                        ? (isLight ? 'bg-gray-100 text-gray-600' : 'bg-gray-700 text-gray-300')
+                                        : (isLight ? 'bg-blue-50 text-blue-600' : 'bg-blue-900/20 text-blue-300')
+                                }`}>
+                                    {item.color === 'gray' ? 'Rejected' : 'Active'}
+                                </div>
+                             </div>
                         </div>
                         );
                     })}
@@ -550,32 +630,45 @@ export default function HealthcarePrioritizationClient() {
                         ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400' 
                         : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.preventionTitle}</h2>
-                    <p className={`text-lg mb-8 ${isLight?'text-gray-600':'text-gray-300'}`}>{content.preventionDesc}</p>
+                    <p className={`text-lg mb-12 ${isLight?'text-gray-600':'text-gray-300'}`}>{content.preventionDesc}</p>
 
-                    <div className="relative">
-                        <div className={`hidden md:block absolute left-1/2 top-0 bottom-0 w-1 ${isLight ? 'bg-gray-200' : 'bg-gray-700'} -translate-x-1/2`}></div>
-                        
-                        <div className="grid gap-8">
-                             {/* Step 1 */}
-                             <div className="relative md:grid md:grid-cols-2 md:gap-8 items-center">
-                                <div className="absolute left-0 md:left-1/2 top-0 md:top-1/2 w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold z-10 md:-translate-x-1/2 md:-translate-y-1/2 transform translate-y-2 md:translate-y-0 shadow-lg">1</div>
-                                <div className="ml-10 md:ml-0 md:text-right p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-md border border-gray-100 dark:border-gray-700">
-                                    <h4 className="text-xl font-bold mb-2 text-purple-500">{content.preventionStep1}</h4>
-                                    <p className="text-gray-600 dark:text-gray-300">{content.preventionStep1Desc}</p>
-                                </div>
-                                <div className="hidden md:block"></div>
-                             </div>
-
-                             {/* Step 2 */}
-                             <div className="relative md:grid md:grid-cols-2 md:gap-8 items-center">
-                                <div className="absolute left-0 md:left-1/2 top-0 md:top-1/2 w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center text-white font-bold z-10 md:-translate-x-1/2 md:-translate-y-1/2 transform translate-y-2 md:translate-y-0 shadow-lg">2</div>
-                                <div className="hidden md:block"></div>
-                                <div className="ml-10 md:ml-0 p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-md border border-gray-100 dark:border-gray-700">
-                                    <h4 className="text-xl font-bold mb-2 text-pink-500">{content.preventionStep2}</h4>
-                                    <p className="text-gray-600 dark:text-gray-300">{content.preventionStep2Desc}</p>
-                                </div>
-                             </div>
+                    <div className="grid md:grid-cols-2 gap-8 relative">
+                        {/* Connecting Arrow for Desktop */}
+                        <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full items-center justify-center z-10 ${
+                            isColorful ? 'bg-purple-500/20 text-purple-300' : isLight ? 'bg-white shadow text-gray-400' : 'bg-gray-700 text-gray-300'
+                        }`}>
+                            <span className="material-symbols">arrow_forward</span>
                         </div>
+
+                         {/* Step 1 */}
+                         <div className={`p-8 rounded-2xl relative border ${
+                             isColorful 
+                                ? 'bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border-indigo-400/30' 
+                                : isLight ? 'bg-white shadow-lg border-gray-100' : 'bg-gray-800 border-gray-700'
+                         }`}>
+                             <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-2xl ${
+                                 isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-50 text-indigo-600' : 'bg-indigo-900/40 text-indigo-300'
+                             }`}>
+                                 <span className="material-symbols">fact_check</span>
+                             </div>
+                             <h4 className={`text-xl font-bold mb-3 ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.preventionStep1}</h4>
+                             <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{content.preventionStep1Desc}</p>
+                         </div>
+
+                         {/* Step 2 */}
+                         <div className={`p-8 rounded-2xl relative border ${
+                             isColorful 
+                                ? 'bg-gradient-to-br from-pink-900/30 to-rose-900/30 border-pink-400/30' 
+                                : isLight ? 'bg-white shadow-lg border-gray-100' : 'bg-gray-800 border-gray-700'
+                         }`}>
+                             <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-2xl ${
+                                 isColorful ? 'bg-pink-500/20 text-pink-300' : isLight ? 'bg-pink-50 text-pink-600' : 'bg-pink-900/40 text-pink-300'
+                             }`}>
+                                 <span className="material-symbols">gavel</span>
+                             </div>
+                             <h4 className={`text-xl font-bold mb-3 ${isColorful ? 'text-pink-200' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.preventionStep2}</h4>
+                             <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{content.preventionStep2Desc}</p>
+                         </div>
                     </div>
                 </motion.section>
               </motion.div>
