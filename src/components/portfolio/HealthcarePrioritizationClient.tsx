@@ -283,13 +283,13 @@ export default function HealthcarePrioritizationClient() {
         <div className="max-w-7xl mx-auto px-6">
           {/* Hero Section */}
           <div className="relative h-96 overflow-hidden rounded-xl mb-16">
-             {/* Using a gradient placeholder until a real image is provided/available, or reusing a generic office/meeting image */}
-            <div className={`absolute inset-0 ${
-                isColorful ? 'bg-gradient-to-br from-blue-600 to-purple-600' : 'bg-gradient-to-br from-blue-500 to-teal-500'
-            }`}></div>
-             <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                <span className="material-symbols text-9xl text-white">health_and_safety</span>
-            </div>
+            <Image
+              src="/images/portfolio/healthcare/healthcare.jpg"
+              alt={content.title}
+              fill
+              className="object-cover"
+              priority
+            />
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 left-0 p-8">

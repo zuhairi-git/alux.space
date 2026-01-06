@@ -88,6 +88,9 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
           en: 'Accomplished',
           fi: 'Saavutettu',
           type: 'accomplished'
+        },
+        photo: {
+            url: '/images/portfolio/healthcare/healthcare.jpg'
         }
       },
       {

@@ -45,6 +45,7 @@ const navItems: NavItem[] = [
     type: 'dropdown',
     children: [
       { href: '/portfolio', labelKey: 'portfolio.overview', icon: 'dashboard' },
+      { href: '/portfolio/healthcare-prioritization', labelKey: 'portfolio.cases.healthcare', icon: 'health_and_safety' },
       { href: '/portfolio/accessibility', labelKey: 'portfolio.cases.accessibility', icon: 'accessibility_new' },
       { href: '/portfolio/collaboration', labelKey: 'portfolio.cases.collaboration', icon: 'groups' },
       { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history' },
