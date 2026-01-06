@@ -450,7 +450,8 @@ export default function HealthcarePrioritizationClient() {
                             desc: content.priority1Desc, 
                             priorityIcon: "keyboard_double_arrow_up", 
                             typeIcon: "bug_report",
-                            color: "red" 
+                            color: "red",
+                            status: "Active"
                         },
                         { 
                             id: "HC-142", 
@@ -458,7 +459,8 @@ export default function HealthcarePrioritizationClient() {
                             desc: content.priority2Desc, 
                             priorityIcon: "keyboard_double_arrow_up", 
                             typeIcon: "check_box",
-                            color: "red" 
+                            color: "red",
+                            status: "Active"
                         },
                         { 
                             id: "HC-156", 
@@ -466,7 +468,8 @@ export default function HealthcarePrioritizationClient() {
                             desc: content.priority3Desc, 
                             priorityIcon: "drag_handle", 
                             typeIcon: "bookmark",
-                            color: "yellow" 
+                            color: "yellow",
+                            status: "Backlog"
                         },
                         { 
                             id: "HC-161", 
@@ -474,7 +477,8 @@ export default function HealthcarePrioritizationClient() {
                             desc: content.priority4Desc, 
                             priorityIcon: "keyboard_arrow_down", 
                             typeIcon: "bookmark",
-                            color: "blue" 
+                            color: "blue",
+                            status: "Backlog"
                         },
                         { 
                             id: "HC-168", 
@@ -482,7 +486,8 @@ export default function HealthcarePrioritizationClient() {
                             desc: content.priority5Desc, 
                             priorityIcon: "block", 
                             typeIcon: "dangerous",
-                            color: "gray" 
+                            color: "gray",
+                            status: "Rejected"
                         },
                     ].map((item, index) => {
                         const styles = getColorStyles(item.color);
@@ -525,11 +530,13 @@ export default function HealthcarePrioritizationClient() {
 
                              <div className="mt-auto pt-2 flex items-center justify-between border-t border-gray-500/10">
                                 <div className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${
-                                    item.color === 'gray' 
+                                    item.status === 'Rejected' 
                                         ? (isLight ? 'bg-gray-100 text-gray-600' : 'bg-gray-700 text-gray-300')
-                                        : (isLight ? 'bg-blue-50 text-blue-600' : 'bg-blue-900/20 text-blue-300')
+                                        : item.status === 'Backlog'
+                                            ? (isLight ? 'bg-amber-50 text-amber-600' : 'bg-amber-900/20 text-amber-300')
+                                            : (isLight ? 'bg-blue-50 text-blue-600' : 'bg-blue-900/20 text-blue-300')
                                 }`}>
-                                    {item.color === 'gray' ? 'Rejected' : 'Active'}
+                                    {item.status}
                                 </div>
                              </div>
                         </div>
