@@ -1,4 +1,4 @@
-import { Document, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from 'docx';
+import { Document, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
 import pptxgen from 'pptxgenjs';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
@@ -1697,8 +1697,10 @@ export const exportToPDF = async () => {
           })
       )
     );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((document as any).fonts?.ready) {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await (document as any).fonts.ready;
       } catch {}
     }
@@ -1740,6 +1742,7 @@ export const exportToPDF = async () => {
         height: target.style.height,
         minWidth: target.style.minWidth,
         minHeight: target.style.minHeight,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         transform: (target.style as any).transform,
         opacity: target.style.opacity,
       };
@@ -1748,6 +1751,7 @@ export const exportToPDF = async () => {
       target.style.minWidth = `${viewportW}px`;
       target.style.minHeight = `${viewportH}px`;
       target.style.opacity = '1';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (target.style as any).transform = 'none';
 
       // Wait a tick for layout
@@ -1786,6 +1790,7 @@ export const exportToPDF = async () => {
       target.style.minWidth = targetPrev.minWidth;
       target.style.minHeight = targetPrev.minHeight;
       target.style.opacity = targetPrev.opacity;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (target.style as any).transform = targetPrev.transform;
 
       if (i > 0) pdf.addPage('a4', 'landscape');

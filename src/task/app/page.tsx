@@ -1,15 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { exportToWord, exportToPowerPoint, exportToPDF, exportToGoogleSlides } from "./presentation/exportUtils";
 
 export default function Home() {
-  const [openMenu, setOpenMenu] = useState(false);
-  const toggleMenu = () => setOpenMenu((v) => !v);
-  const closeMenu = () => setOpenMenu(false);
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 sm:p-6">
       <main className="w-full max-w-3xl">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Download, FileText, File } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { exportToWord, exportToPowerPoint, exportToPDF } from './exportUtils';
 
@@ -248,11 +248,11 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
   </div>
 );
 
-const BacklogPrioritySlide = () => (
-  <div data-slide="4" className="hidden"></div>
-);
 
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const priorityConfig: any = {
     red: { 
       label: 'Highest',
@@ -389,7 +389,7 @@ const ConflictScenarioSlide = () => (
           <div className="bg-gradient-to-br from-red-50 to-red-100/50 border-l-4 border-red-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
             <p className="text-base sm:text-lg lg:text-xl font-semibold text-slate-900 mb-2 sm:mb-3">Position:</p>
             <p className="text-slate-800 leading-relaxed text-sm sm:text-base lg:text-lg">
-              "Delay the release due to incomplete verification documentation"
+              &quot;Delay the release due to incomplete verification documentation&quot;
             </p>
           </div>
 
@@ -428,7 +428,7 @@ const ConflictScenarioSlide = () => (
           <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 border-l-4 border-blue-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
             <p className="text-base sm:text-lg lg:text-xl font-semibold text-slate-900 mb-2 sm:mb-3">Position:</p>
             <p className="text-slate-800 leading-relaxed text-sm sm:text-base lg:text-lg">
-              "Release on schedule to maintain momentum and commitments"
+              &quot;Release on schedule to maintain momentum and commitments&quot;
             </p>
           </div>
 
@@ -852,6 +852,7 @@ export default function Presentation() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide]);
 
   // Auto-export when opened with a query like ?export=pdf|ppt|doc
@@ -922,8 +923,12 @@ export default function Presentation() {
               })
           )
       );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((document as any).fonts?.ready) {
-        try { await (document as any).fonts.ready; } catch {}
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          await (document as any).fonts.ready;
+        } catch {}
       }
     };
     (async () => {
