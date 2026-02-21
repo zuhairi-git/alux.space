@@ -97,7 +97,7 @@ body {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  font-variation-settings: 
+  font-variation-settings:
     'FILL' var(--material-symbols-fill),
     'wght' var(--material-symbols-weight),
     'GRAD' var(--material-symbols-grade),
@@ -211,7 +211,7 @@ body {
 }
 
 /* Blog cards equal height fix */
-.grid > .flex > .theme-card {
+.grid>.flex>.theme-card {
   height: 100%;
   width: 100%;
 }
@@ -244,8 +244,8 @@ body {
   color: #374151;
 }
 
-.theme-light .prose h2, 
-.theme-light .prose h3, 
+.theme-light .prose h2,
+.theme-light .prose h3,
 .theme-light .prose h4 {
   color: #1f2937;
 }
@@ -296,7 +296,8 @@ body {
 }
 
 .theme-colorful .theme-card-glow {
-  display: none; /* Hide the glow effect completely */
+  display: none;
+  /* Hide the glow effect completely */
 }
 
 /* Remove the hover glow state for colorful theme */
@@ -312,8 +313,8 @@ body {
 }
 
 /* Headings in colorful theme - no glow */
-.theme-colorful h1, 
-.theme-colorful h2, 
+.theme-colorful h1,
+.theme-colorful h2,
 .theme-colorful h3 {
   text-shadow: none;
 }
@@ -411,33 +412,19 @@ body {
 
 /* Timeline card animations - REMOVED */
 
-.animate-float {
-  /* animation: float 2s ease-in-out infinite; */
-}
-
-.animate-glow {
-  /* animation: pulse-glow 1.5s ease-in-out infinite; */
-}
-
-.animate-shimmer {
-  /* animation: shimmer 1s infinite; */
-}
-
-.animate-dimension {
-  /* animation: dimension-shift 4s ease-in-out infinite; */
-}
-
 .perspective-1000 {
   perspective: 1000px;
 }
 
 /* Custom Thin Scrollbar Styles for Podcast Player */
 .podcast-scrollbar {
-  scrollbar-width: thin; /* For Firefox */
+  scrollbar-width: thin;
+  /* For Firefox */
 }
 
 .podcast-scrollbar::-webkit-scrollbar {
-  width: 1px; /* Ultra thin scrollbar */
+  width: 1px;
+  /* Ultra thin scrollbar */
 }
 
 .podcast-scrollbar::-webkit-scrollbar-track {
@@ -504,28 +491,29 @@ body {
   * {
     scrollbar-color: var(--scrollbar-thumb) transparent;
   }
-  
+
   /* Firefox theme-specific scrollbar colors */
   .theme-light * {
     scrollbar-color: #3b82f6 transparent;
   }
-  
+
   .theme-light *:hover {
     scrollbar-color: #1e40af transparent;
   }
-  
+
   .theme-dark * {
     scrollbar-color: #2563eb transparent;
   }
-  
+
   .theme-dark *:hover {
     scrollbar-color: #60a5fa transparent;
   }
-    /* Firefox-specific styling for colorful theme */
+
+  /* Firefox-specific styling for colorful theme */
   .theme-colorful * {
     scrollbar-color: #d100ff transparent;
   }
-  
+
   .theme-colorful *:hover {
     scrollbar-color: #9900cc transparent;
   }
@@ -536,16 +524,16 @@ body {
   * {
     -ms-overflow-style: auto;
   }
-  
+
   *::-ms-scrollbar {
     width: 1px;
     height: 1px;
   }
-  
+
   *::-ms-scrollbar-thumb {
     background: var(--scrollbar-thumb);
   }
-  
+
   *::-ms-scrollbar-track {
     background: transparent;
   }
@@ -557,7 +545,7 @@ body {
     width: 1px !important;
     height: 1px !important;
   }
-  
+
   .safari-scrollbar-fix {
     -webkit-overflow-scrolling: touch;
   }
@@ -621,31 +609,35 @@ body {
   height: 0.75rem;
   margin-left: 0.25rem;
   border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-mid),
-    var(--gradient-end)
-  );
+  background: linear-gradient(135deg,
+      var(--gradient-start),
+      var(--gradient-mid),
+      var(--gradient-end));
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.3);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .title {
   font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-mid),
-    var(--gradient-end)
-  );
+  background: linear-gradient(135deg,
+      var(--gradient-start),
+      var(--gradient-mid),
+      var(--gradient-end));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -659,11 +651,9 @@ body {
 .icon-rocket {
   font-size: 4rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-mid)
-  );
+  background: linear-gradient(135deg,
+      var(--gradient-start),
+      var(--gradient-mid));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -671,8 +661,15 @@ body {
 }
 
 @keyframes rocket-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(3deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(3deg);
+  }
 }
 
 .subtitle {
@@ -729,11 +726,9 @@ body {
 .countdown-value {
   font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-mid)
-  );
+  background: linear-gradient(135deg,
+      var(--gradient-start),
+      var(--gradient-mid));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -823,11 +818,9 @@ body {
   padding: 1rem 2rem;
   border-radius: 9999px;
   border: none;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-mid)
-  );
+  background: linear-gradient(135deg,
+      var(--gradient-start),
+      var(--gradient-mid));
   color: white;
   font-weight: 600;
   font-size: 1rem;
@@ -921,32 +914,51 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(50px, -30px) rotate(90deg); }
-  50% { transform: translate(20px, 50px) rotate(180deg); }
-  75% { transform: translate(-30px, 20px) rotate(270deg); }
-  100% { transform: translate(0, 0) rotate(360deg); }
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(50px, -30px) rotate(90deg);
+  }
+
+  50% {
+    transform: translate(20px, 50px) rotate(180deg);
+  }
+
+  75% {
+    transform: translate(-30px, 20px) rotate(270deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
 }
 
 /* Enhanced subtitle animations */
 @keyframes subtitleGlow {
-  0%, 100% { 
+
+  0%,
+  100% {
     filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.15));
   }
-  50% { 
+
+  50% {
     filter: drop-shadow(0 4px 16px rgba(59, 130, 246, 0.25));
   }
 }
 
 @keyframes gradientShift {
-  0% { 
-    background-position: 0% 50%; 
+  0% {
+    background-position: 0% 50%;
   }
-  50% { 
-    background-position: 100% 50%; 
+
+  50% {
+    background-position: 100% 50%;
   }
-  100% { 
-    background-position: 0% 50%; 
+
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -964,14 +976,14 @@ body {
   .title {
     font-size: 2.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.25rem;
     max-width: 90%;
     margin: 0 auto 2rem;
     padding: 0 1rem;
   }
-  
+
   .subtitle-hero {
     font-size: clamp(1.125rem, 5vw, 1.5rem);
     max-width: 95%;
@@ -979,33 +991,33 @@ body {
     padding: 0 1rem;
     line-height: 1.4;
   }
-  
+
   .countdown-container {
     gap: 1rem;
   }
-  
+
   .countdown-item {
     min-width: 60px;
   }
-  
+
   .countdown-value {
     font-size: 2rem;
   }
-  
+
   .notify-form {
     flex-direction: column;
   }
-  
-  .notify-input, 
+
+  .notify-input,
   .notify-button {
     width: 100%;
   }
-  
+
   .back-button {
     top: 1rem;
     left: 1rem;
   }
-  
+
   .theme-switcher-container {
     top: 1rem;
     right: 1rem;
@@ -1017,12 +1029,12 @@ body {
   .title {
     font-size: 2rem;
   }
-  
+
   .countdown-container {
     flex-wrap: wrap;
     gap: 1.5rem;
   }
-  
+
   .countdown-item {
     min-width: 70px;
     width: calc(50% - 1.5rem);
@@ -1054,11 +1066,9 @@ body {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-mid)
-  );
+  background: linear-gradient(135deg,
+      var(--gradient-start),
+      var(--gradient-mid));
   color: white;
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -1107,8 +1117,15 @@ body {
 }
 
 @keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
+
+  from,
+  to {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Z-index management and stacking context utilities */
@@ -1125,11 +1142,25 @@ body {
 }
 
 /* Z-index hierarchy */
-.z-navigation { z-index: 60; }
-.z-navigation-dropdown { z-index: 70; }
-.z-page-dropdown { z-index: 80; }
-.z-modal { z-index: 90; }
-.z-tooltip { z-index: 100; }
+.z-navigation {
+  z-index: 60;
+}
+
+.z-navigation-dropdown {
+  z-index: 70;
+}
+
+.z-page-dropdown {
+  z-index: 80;
+}
+
+.z-modal {
+  z-index: 90;
+}
+
+.z-tooltip {
+  z-index: 100;
+}
 
 /* Ensure proper stacking context for theme cards */
 .theme-card-content {
@@ -1149,9 +1180,9 @@ body {
 }
 
 .dropdown-shadow {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-              0 10px 10px -5px rgba(0, 0, 0, 0.04),
-              0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 /* Screen-aware dropdown utilities */
@@ -1167,14 +1198,14 @@ body {
     min-width: 160px;
     max-width: calc(100vw - 2rem);
   }
-  
+
   .dropdown-mobile-centered {
     /* Center dropdown on very small screens when needed */
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%);
   }
-  
+
   .dropdown-mobile-full-width {
     /* Full width dropdown for very small screens */
     left: 1rem !important;
@@ -1198,6 +1229,7 @@ body {
 
 /* Mobile-Specific Podcast Player Icon Visibility */
 @media (max-width: 768px) {
+
   /* Ensure all SVG icons in podcast player are visible on mobile */
   .podcast-player svg,
   [data-podcast-player] svg,
@@ -1205,18 +1237,18 @@ body {
   [aria-label*="audio" i] svg {
     opacity: 1 !important;
     visibility: visible !important;
-    filter: contrast(1.2) brightness(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.3)) !important;
+    filter: contrast(1.2) brightness(1.1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
   }
-  
+
   /* Enhanced visibility for play/pause buttons on mobile */
   .podcast-player button svg,
   [data-podcast-player] button svg {
     min-width: 20px !important;
     min-height: 20px !important;
     stroke-width: 0.5 !important;
-    stroke: rgba(255,255,255,0.8) !important;
+    stroke: rgba(255, 255, 255, 0.8) !important;
   }
-  
+
   /* Ensure control buttons have proper z-index and are clickable */
   .podcast-player button,
   [data-podcast-player] button {
@@ -1225,7 +1257,7 @@ body {
     touch-action: manipulation !important;
     -webkit-tap-highlight-color: rgba(139, 92, 246, 0.3) !important;
   }
-  
+
   /* Force visibility of podcast player container */
   .podcast-player,
   [data-podcast-player] {
@@ -1238,13 +1270,13 @@ body {
 
 /* Podcast Player Icon Contrast Enhancement */
 .podcast-icon-enhance {
-  filter: contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important;
+  filter: contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) !important;
 }
 
 @media (max-width: 768px) {
   .podcast-icon-enhance {
-    filter: contrast(1.4) brightness(1.2) drop-shadow(0 2px 6px rgba(0,0,0,0.5)) !important;
-    stroke: rgba(255,255,255,0.9) !important;
+    filter: contrast(1.4) brightness(1.2) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5)) !important;
+    stroke: rgba(255, 255, 255, 0.9) !important;
     stroke-width: 0.5 !important;
   }
 }
@@ -1267,7 +1299,7 @@ body {
 }
 
 /* Ensure progress bar handle is perfectly centered */
-.podcast-player [role="slider"] > div[style*="left:"] {
+.podcast-player [role="slider"]>div[style*="left:"] {
   transform: translate(-50%, -50%) !important;
   top: 50% !important;
 }
@@ -1290,7 +1322,7 @@ body {
     align-items: center !important;
     justify-content: center !important;
   }
-  
+
   .podcast-player button svg {
     position: relative !important;
     top: 0 !important;
@@ -1308,44 +1340,83 @@ body {
 
 /* High-Performance Background Animations */
 @keyframes matrix-fall {
-  0% { transform: translateY(-100%); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.3; transform: scale(0.95); }
-  50% { opacity: 0.6; transform: scale(1); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
 }
 
 @keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes gentle-drift {
-  0%, 100% { 
-    transform: rotate(0deg) scale(1); 
+
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
   }
-  25% { 
-    transform: rotate(3deg) scale(1.02); 
+
+  25% {
+    transform: rotate(3deg) scale(1.02);
   }
-  50% { 
-    transform: rotate(0deg) scale(1); 
+
+  50% {
+    transform: rotate(0deg) scale(1);
   }
-  75% { 
-    transform: rotate(-3deg) scale(0.98); 
+
+  75% {
+    transform: rotate(-3deg) scale(0.98);
   }
 }
 
 @keyframes slide-diagonal {
-  0% { transform: translate(-100%, -100%); }
-  100% { transform: translate(100%, 100%); }
+  0% {
+    transform: translate(-100%, -100%);
+  }
+
+  100% {
+    transform: translate(100%, 100%);
+  }
 }
 
 @keyframes dash {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .animate-matrix {
@@ -1366,6 +1437,30 @@ body {
 .animate-gentle-drift {
   animation: gentle-drift 20s ease-in-out infinite;
   will-change: transform;
+}
+
+/* Mobile Prototype Scrollbar Styling */
+.mobile-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af transparent;
+}
+
+.mobile-scrollbar::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+.mobile-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-scrollbar::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 10px;
+}
+
+.mobile-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
 
 .animate-slide-diagonal {

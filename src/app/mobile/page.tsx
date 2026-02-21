@@ -16,7 +16,7 @@ function MobilePrototypeContent() {
 
     const [os] = useState<'ios' | 'android'>(initialOs);
     const [theme, setTheme] = useState(initialTheme);
-    const [activeTab, setActiveTab] = useState<TabType>('assistant');
+    const [activeTab, setActiveTab] = useState<TabType>('home');
 
     // Sync theme param changes if the URL gets updated
     useEffect(() => {
@@ -69,18 +69,13 @@ function MobilePrototypeContent() {
                     {activeTab === 'home' && <HomeView key="home" os={os} theme={theme} onNavigate={(tab) => setActiveTab(tab)} />}
                     {activeTab === 'alerts' && <AlertsView key="alerts" os={os} theme={theme} />}
                     {activeTab === 'profile' && <ProfileView key="profile" os={os} theme={theme} />}
+                    {activeTab === 'assistant' && <AssistantView key="assistant" os={os} theme={theme} />}
                 </AnimatePresence>
             </main>
 
             {/* Bottom Navigation */}
             <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} os={os} theme={theme} />
 
-            {/* AI Assistant Overlay */}
-            <AnimatePresence>
-                {activeTab === 'assistant' && (
-                    <AssistantView key="assistant" os={os} theme={theme} onClose={() => setActiveTab('home')} />
-                )}
-            </AnimatePresence>
         </div>
     );
 }
@@ -185,7 +180,7 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
                                             />
                                         </div>
                                     </div>
-                                    <div className="overflow-y-auto scrollbar-none flex-1 p-2">
+                                    <div className="overflow-y-auto mobile-scrollbar flex-1 p-2">
                                         {filteredPrompts.length === 0 ? (
                                             <div className="p-4 text-center text-sm opacity-50">No prompts found.</div>
                                         ) : (
@@ -263,7 +258,7 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
     );
 }
 
-function AssistantView({ os, theme, onClose }: { os: string, theme: string, onClose: () => void }) {
+function AssistantView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
@@ -348,21 +343,18 @@ function AssistantView({ os, theme, onClose }: { os: string, theme: string, onCl
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 20 }}
-            transition={{ duration: 0.3, type: "spring", bounce: 0, stiffness: 300, damping: 30 }}
-            className={`absolute z-[100] inset-0 flex flex-col w-full h-full overflow-hidden ${bgOverlayClass}`}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+            className={`absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden pb-[84px] ${bgOverlayClass}`}
         >
             {/* Header */}
-            <div className={`p-4 pt-14 flex justify-between items-center z-10 ${headerClass}`}>
+            <div className={`p-4 flex justify-between items-center shrink-0 ${headerClass} ${isIOS ? 'pt-4' : 'pt-6'}`}>
                 <div className="flex gap-2 items-center">
                     <Icon name="smart_toy" className={`text-2xl ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`} />
                     <h2 className="text-xl font-bold tracking-tight">AI Assistant</h2>
                 </div>
-                <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/10 active:scale-95 transition-transform">
-                    <Icon name="close" className="text-xl" />
-                </button>
             </div>
 
             {/* Content Area */}
@@ -417,7 +409,7 @@ function AssistantView({ os, theme, onClose }: { os: string, theme: string, onCl
                                                 />
                                             </div>
                                         </div>
-                                        <div className="overflow-y-auto scrollbar-none flex-1 p-2">
+                                        <div className="overflow-y-auto mobile-scrollbar flex-1 p-2">
                                             {filteredPrompts.length === 0 ? (
                                                 <div className="p-4 text-center text-sm opacity-50">No prompts found.</div>
                                             ) : (
@@ -440,7 +432,7 @@ function AssistantView({ os, theme, onClose }: { os: string, theme: string, onCl
                 </div>
             ) : (
                 // Chat Feed
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none pb-24">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 mobile-scrollbar pb-24">
                     {messages.map(msg => (
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}

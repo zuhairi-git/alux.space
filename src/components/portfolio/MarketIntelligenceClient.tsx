@@ -35,13 +35,13 @@ export default function MarketIntelligenceClient() {
                 projectType: "Project Type",
                 projectTypeValues: "Mobile UX/UI Design",
                 timeline: "Timeline",
-                timelineValue: "18+ Weeks",
+                timelineValue: "In Progress",
                 tools: "Tools & Technologies",
                 toolsValue: "Figma, React, Tailwind CSS, iOS 26/Android 16 patterns",
                 standards: "Key Features",
                 standardsValue: "Conversational AI, Real-time Alerts, Streaming UX",
                 roles: "My Role",
-                rolesValue: "Lead UX/UI Designer",
+                rolesValue: "Product Manager & Designer",
 
                 // Navigation tabs
                 overviewTab: "Overview",
@@ -106,13 +106,13 @@ export default function MarketIntelligenceClient() {
                 projectType: "Projektityyppi",
                 projectTypeValues: "Mobiili UX/UI -suunnittelu",
                 timeline: "Aikataulu",
-                timelineValue: "Yli 18 viikkoa",
+                timelineValue: "Käynnissä",
                 tools: "Työkalut & Teknologiat",
                 toolsValue: "Figma, React, Tailwind CSS, iOS 26/Android 16 -mallit",
                 standards: "Tärkeimmät ominaisuudet",
                 standardsValue: "Keskusteleva tekoäly, reaaliaikaiset hälytykset, virtaava UX",
                 roles: "Roolini",
-                rolesValue: "Johtava UX/UI -suunnittelija",
+                rolesValue: "Tuotepäällikkö & Suunnittelija",
 
                 // Navigation tabs
                 overviewTab: "Yleiskatsaus",
@@ -237,7 +237,7 @@ export default function MarketIntelligenceClient() {
                         className="text-center mb-16"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                     >
                         <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
                             }`}>
@@ -250,7 +250,7 @@ export default function MarketIntelligenceClient() {
                         className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     >
                         <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
                             ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30'
@@ -302,7 +302,7 @@ export default function MarketIntelligenceClient() {
                         className="mb-12"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
                     >
                         <div className={`flex overflow-x-auto rounded-2xl p-2 scrollbar-none ${isColorful
                             ? 'bg-blue-900/30 backdrop-blur-lg border border-blue-400/30'
@@ -373,7 +373,7 @@ export default function MarketIntelligenceClient() {
                                     className="mb-16"
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 >
                                     <h2 className={`text-3xl font-bold mb-8 ${isColorful
                                         ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400'
@@ -407,7 +407,7 @@ export default function MarketIntelligenceClient() {
                                     className="pt-16 mt-16 border-t border-gray-200 dark:border-gray-800"
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                                 >
                                     <div className="text-center mb-12">
                                         <h2 className={`text-3xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400' : isLight ? 'text-gray-900' : 'text-white'}`}>Interactive Prototypes</h2>
@@ -505,7 +505,7 @@ export default function MarketIntelligenceClient() {
                                     className="mb-16"
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 >
                                     <h2 className={`text-3xl font-bold mb-8 ${isColorful
                                         ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400'
@@ -619,7 +619,7 @@ export default function MarketIntelligenceClient() {
                                     className="mb-16"
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 >
                                     <h2 className={`text-3xl font-bold mb-8 ${isColorful
                                         ? 'text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400'
