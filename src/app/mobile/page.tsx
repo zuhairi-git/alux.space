@@ -48,9 +48,9 @@ function MobilePrototypeContent() {
                             onClick={() => setActiveTab('profile')}
                             className="relative group transition-transform active:scale-95"
                         >
-                            <div className={`w-11 h-11 rounded-[16px] flex items-center justify-center overflow-hidden border-2 mb-0.5 ${isLight ? 'border-white shadow-sm' : 'border-[#2C2C2E] shadow-md'} bg-gradient-to-tr from-indigo-500 to-purple-500`}>
+                            <div className={`w-11 h-11 rounded-[16px] flex items-center justify-center overflow-hidden border-2 mb-0.5 ${isLight ? 'border-white shadow-sm' : 'border-[#2C2C2E] shadow-md'} bg-gradient-to-tr from-gray-50 to-gray-200 dark:from-white/10 dark:to-white/20`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="User" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=random" }} />
+                                <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=f3f4f6" }} />
                             </div>
                             <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${isLight ? 'border-white bg-[#34C759]' : 'border-[#1C1C1E] bg-[#32D74B]'}`}></div>
                         </button>
@@ -81,7 +81,7 @@ function MobilePrototypeContent() {
                                 >
                                     {activeTab === 'home' ? 'Ali Al-Zuhairi' :
                                         activeTab === 'alerts' ? 'Market Alerts' :
-                                            activeTab === 'profile' ? 'Your Space' : 'AI Assistant'}
+                                            activeTab === 'profile' ? 'My Space' : 'AI Assistant'}
                                 </motion.h1>
                             </AnimatePresence>
                         </div>
@@ -543,7 +543,7 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
             className={`absolute inset-0 overflow-y-auto p-4 pb-32 scrollbar-none pt-[110px]`}
         >
             <div className={`p-1 flex justify-between items-center shrink-0 mb-4`}>
-                <h2 className="text-xl font-bold tracking-tight ml-1">Profile</h2>
+                <h2 className="text-xl font-bold tracking-tight ml-1">My Space</h2>
                 <div className="flex gap-3">
                     <button className={`w-8 h-8 rounded-full flex items-center justify-center ${isIOS ? (isLight ? 'bg-black/5' : 'bg-white/10') : 'bg-[#EADDFF]/50 dark:bg-[#4A4458]/50'}`}>
                         <Icon name="settings" className="opacity-70 text-[18px]" />
@@ -553,10 +553,10 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
 
             <div className="flex flex-col items-center mt-4 mb-8">
                 <div className="relative mb-4">
-                    <div className={`w-28 h-28 rounded-full bg-gradient-to-tr overflow-hidden ${isIOS ? 'from-blue-500 to-indigo-500' : 'from-[#6750A4] to-[#D0BCFF]'} p-1 shadow-lg`}>
-                        <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                    <div className={`w-28 h-28 rounded-full bg-gradient-to-tr overflow-hidden from-gray-50 to-gray-200 dark:from-white/10 dark:to-white/20 p-[3px] shadow-lg`}>
+                        <div className="w-full h-full rounded-full bg-white dark:bg-black/80 overflow-hidden relative">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Ali Al-Zuhairi" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Ali+Al-Zuhairi&background=random" }} />
+                            <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="Ali Al-Zuhairi" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Ali+Al-Zuhairi&background=f3f4f6" }} />
                         </div>
                     </div>
                     <div className="absolute bottom-1 right-1 w-7 h-7 bg-green-500 border-[3px] border-white dark:border-[#1C1C1E] rounded-full shadow-sm"></div>
@@ -732,7 +732,7 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
             <NavBtn icon="home" label="Home" active={activeTab === 'home'} onClick={() => setActiveTab('home')} os={os} theme={theme} />
             <NavBtn icon="auto_awesome" label="Assistant" active={activeTab === 'assistant'} onClick={() => setActiveTab('assistant')} os={os} theme={theme} />
             <NavBtn icon="notifications" label="Alerts" active={activeTab === 'alerts'} onClick={() => setActiveTab('alerts')} os={os} theme={theme} />
-            <NavBtn icon="sentiment_satisfied" label="Profile" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} os={os} theme={theme} />
+            <NavBtn icon="sentiment_satisfied" label="My Space" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} os={os} theme={theme} />
         </nav>
     );
 }
