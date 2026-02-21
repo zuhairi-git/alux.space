@@ -324,7 +324,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
     // Styling
     const inputAreaClass = isIOS
         ? (isLight ? 'bg-white/90 backdrop-blur-xl border-t border-black/5' : 'bg-black/90 backdrop-blur-xl border-t border-white/10')
-        : (isLight ? 'bg-[#F3EDF7] rounded-t-[32px] pt-4 px-4 pb-0' : 'bg-[#2B2930] rounded-t-[32px] pt-4 px-4 pb-0');
+        : (isLight ? 'bg-[#F3EDF7] rounded-t-[32px]' : 'bg-[#2B2930] rounded-t-[32px]');
 
     const textInputClass = isIOS
         ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5 text-[15px]' : 'bg-white/10 rounded-full px-5 py-3 border border-white/10 text-[15px]')
@@ -350,7 +350,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
-            className={`absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden pb-[84px] ${bgOverlayClass}`}
+            className={`absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden ${bgOverlayClass}`}
         >
             {/* Header */}
             <div className={`p-4 flex justify-between items-center shrink-0 ${headerClass} ${isIOS ? 'pt-4' : 'pt-6'}`}>
@@ -474,7 +474,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
             )}
 
             {/* Always Input area for typing manually */}
-            <div className={`p-4 flex items-end space-x-2 shrink-0 z-30 w-full mb-[76px] sm:mb-[84px] ${inputAreaClass}`}>
+            <div className={`px-4 pt-4 pb-[96px] flex items-end space-x-2 shrink-0 z-30 w-full ${inputAreaClass}`}>
                 <input
                     type="text"
                     value={input}
