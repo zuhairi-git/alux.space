@@ -41,7 +41,7 @@ interface PortfolioItem {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
-    const localizedMetadata = {
+  const localizedMetadata = {
     en: {
       title: 'Portfolio | Ali Al-Zuhairi',
       description: 'Explore my portfolio of UX design and product management projects, showcasing creative solutions to real-world challenges.',
@@ -51,9 +51,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: 'Tutustu UX-suunnittelu- ja tuotehallintaprojektieni portfolioon, joka esittelee luovia ratkaisuja todellisiin haasteisiin.',
     }
   };
-  
+
   const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
-  
+
   return {
     title: metadata.title,
     description: metadata.description,
@@ -68,32 +68,56 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;    const portfolioItems: PortfolioItem[] = [
+  const { locale } = await params; const portfolioItems: PortfolioItem[] = [
     {
-        title: {
-          en: 'Healthcare Product Prioritization',
-          fi: 'Terveydenhuollon tuotepriorisointi'
-        },
-        type: {
-          en: 'Product Management Case Study',
-          fi: 'Tuotehallinnan tapaustutkimus'
-        },
-        desc: {
-          en: 'Balancing technical debt, user needs, and strict compliance in a healthcare SaaS environment—a strategic approach to backlog prioritization and conflict resolution.',
-          fi: 'Teknisen velan, käyttäjätarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympäristössä—strateginen lähestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
-        },
-        link: `/${locale}/portfolio/healthcare-prioritization`,
-        gradient: 'from-blue-500 to-teal-400',
-        status: {
-          en: 'Accomplished',
-          fi: 'Saavutettu',
-          type: 'accomplished'
-        },
-        photo: {
-            url: '/images/portfolio/healthcare/healthcare.jpg'
-        }
+      title: {
+        en: 'AI-Powered Market Intelligence',
+        fi: 'Tekoälypohjainen markkinatieto'
       },
-      {
+      type: {
+        en: 'Mobile UX/UI Design',
+        fi: 'Mobiili UX/UI -suunnittelu'
+      },
+      desc: {
+        en: 'Designing a mobile-first, AI-powered market intelligence application for enterprise users relying on trusted financial content.',
+        fi: 'Mobiililähtöisen, tekoälypohjaisen markkinatietosovelluksen suunnittelu yrityskäyttäjille, jotka luottavat luotettavaan taloudelliseen sisältöön.'
+      },
+      link: `/${locale}/portfolio/market-intelligence`,
+      gradient: 'from-blue-600 to-indigo-500',
+      status: {
+        en: 'In Progress',
+        fi: 'Kehitteillä',
+        type: 'in-progress'
+      },
+      photo: {
+        url: '/images/portfolio/market-intelligence/cover.jpg'
+      }
+    },
+    {
+      title: {
+        en: 'Healthcare Product Prioritization',
+        fi: 'Terveydenhuollon tuotepriorisointi'
+      },
+      type: {
+        en: 'Product Management Case Study',
+        fi: 'Tuotehallinnan tapaustutkimus'
+      },
+      desc: {
+        en: 'Balancing technical debt, user needs, and strict compliance in a healthcare SaaS environment—a strategic approach to backlog prioritization and conflict resolution.',
+        fi: 'Teknisen velan, käyttäjätarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympäristössä—strateginen lähestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
+      },
+      link: `/${locale}/portfolio/healthcare-prioritization`,
+      gradient: 'from-blue-500 to-teal-400',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
+      photo: {
+        url: '/images/portfolio/healthcare/healthcare.jpg'
+      }
+    },
+    {
       title: {
         en: 'Inclusive Design System',
         fi: 'Inklusiivinen suunnittelujärjestelmä'
@@ -105,7 +129,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       desc: {
         en: 'Building accessible design systems from the ground up—research-driven approach to creating inclusive digital products that work for everyone.',
         fi: 'Saavutettavien suunnittelujärjestelmien rakentaminen alusta alkaen—tutkimuspohjainen lähestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
-      },      link: `/${locale}/portfolio/accessibility`,
+      }, link: `/${locale}/portfolio/accessibility`,
       gradient: 'from-indigo-400 to-purple-500',
       status: {
         en: 'In Progress',
@@ -176,7 +200,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       try {
         // Use more specific search terms for better image results
         let searchQuery = item.title.en.toLowerCase();
-          // Special search terms for specific portfolio items
+        // Special search terms for specific portfolio items
         if (item.title.en.includes('Inclusive') || item.title.en.includes('Accessibility')) {
           searchQuery = 'inclusive design accessibility diversity design system';
         } else if (item.title.en.includes('Collaboration')) {
@@ -186,7 +210,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         } else if (item.title.en.includes('Healthcare')) {
           searchQuery = 'healthcare medical doctor hospital';
         }
-        
+
         const photo = await getUnsplashPhoto(searchQuery);
         if (photo) {
           return {
@@ -204,7 +228,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       } catch (error) {
         console.warn(`Failed to fetch Unsplash image for ${item.title.en}:`, error);
       }
-        // Fallback to a default gradient background
+      // Fallback to a default gradient background
       return {
         ...item,
         photo: {
