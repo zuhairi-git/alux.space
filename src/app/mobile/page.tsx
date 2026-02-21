@@ -35,31 +35,70 @@ function MobilePrototypeContent() {
             ? 'bg-[#050023] text-white'
             : (isIOS ? 'bg-black text-white' : 'bg-[#111114] text-[#E2E2E6]'); // True black iOS vs dark grey Android
 
-    // Header Styling
-    const headerClass = isIOS
-        ? (isLight ? 'bg-white/70 backdrop-blur-2xl border-b border-black/5' : 'bg-black/70 backdrop-blur-2xl border-b border-white/10')
-        : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]'); // Android surface variants
-
-    const brandColor = isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]';
-
     return (
         <div className={`flex flex-col min-h-[100dvh] w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
-            {/* Header */}
-            <header className={`pt-12 pb-4 px-6 flex justify-between items-end sticky top-0 z-40 transition-all duration-300 ${headerClass} ${isIOS ? '' : 'shadow-sm'}`}>
-                <div className="flex flex-col">
-                    <p className={`text-[10px] font-medium tracking-wider uppercase mb-1 ${isIOS ? 'text-gray-500' : 'text-[#6750A4]'}`}>Updated just now</p>
-                    <h1 className={`${isIOS ? 'text-2xl font-bold tracking-tight' : 'text-[28px] font-medium tracking-normal'}`}>
-                        Market<span className={isLight && !isIOS ? 'text-[#6750A4]' : brandColor}>Intelligence</span>
-                    </h1>
-                </div>
-                <div className="flex items-center space-x-3 pb-1">
-                    {/* Avatar/Profile */}
-                    <button className={`w-9 h-9 rounded-full overflow-hidden border-2 ${isIOS ? 'border-transparent' : 'border-[#6750A4] p-0.5'}`}>
-                        <div className="w-full h-full rounded-full bg-slate-300">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="https://ui-avatars.com/api/?name=AI&background=random" alt="Profile" className="w-full h-full object-cover rounded-full" />
+            {/* Elegant Header Redesign */}
+            <header className={`pt-12 pb-3 px-5 sticky top-0 z-40 transition-all duration-300 ${isIOS
+                ? (isLight ? 'bg-white/80 backdrop-blur-3xl border-b border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E]/80 backdrop-blur-3xl border-b border-white/5 shadow-[0_2px_10px_rgba(0,0,0,0.2)]')
+                : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-2xl border-b border-[#4A4458]/50 shadow-md')
+                }`}>
+                <div className="flex justify-between items-center w-full">
+                    <div className="flex items-center space-x-3.5">
+                        <button
+                            onClick={() => setActiveTab('profile')}
+                            className="relative group transition-transform active:scale-95"
+                        >
+                            <div className={`w-11 h-11 rounded-[16px] flex items-center justify-center overflow-hidden border-2 mb-0.5 ${isLight ? 'border-white shadow-sm' : 'border-[#2C2C2E] shadow-md'} bg-gradient-to-tr from-indigo-500 to-purple-500`}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="User" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=random" }} />
+                            </div>
+                            <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${isLight ? 'border-white bg-[#34C759]' : 'border-[#1C1C1E] bg-[#32D74B]'}`}></div>
+                        </button>
+
+                        <div className="flex flex-col justify-center">
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={activeTab + "-sub"}
+                                    initial={{ opacity: 0, y: -2 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 2 }}
+                                    transition={{ duration: 0.2 }}
+                                    className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? 'text-black/40' : 'text-white/40'}`}
+                                >
+                                    {activeTab === 'home' ? 'Welcome Back' :
+                                        activeTab === 'alerts' ? 'Live Updates' :
+                                            activeTab === 'profile' ? 'Settings' : 'Copilot'}
+                                </motion.span>
+                            </AnimatePresence>
+                            <AnimatePresence mode="wait">
+                                <motion.h1
+                                    key={activeTab + "-title"}
+                                    initial={{ opacity: 0, x: -5 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 5 }}
+                                    transition={{ duration: 0.2, delay: 0.05 }}
+                                    className={`text-[18px] font-extrabold tracking-tight leading-none ${isLight ? 'text-black' : 'text-white'}`}
+                                >
+                                    {activeTab === 'home' ? 'Ali Al-Zuhairi' :
+                                        activeTab === 'alerts' ? 'Market Alerts' :
+                                            activeTab === 'profile' ? 'Your Space' : 'AI Assistant'}
+                                </motion.h1>
+                            </AnimatePresence>
                         </div>
-                    </button>
+                    </div>
+
+                    <div className="flex items-center">
+                        <button
+                            onClick={() => setActiveTab('assistant')}
+                            className={`relative w-10 h-10 rounded-full flex justify-center items-center transition-transform active:scale-95 ${isIOS
+                                ? (isLight ? 'bg-black/5 text-black hover:bg-black/10' : 'bg-white/10 text-white hover:bg-white/20')
+                                : (isLight ? 'bg-[#EADDFF]/50 text-[#1D192B] hover:bg-[#EADDFF]' : 'bg-[#4A4458]/50 text-[#E8DEF8] hover:bg-[#4A4458]')
+                                }`}
+                        >
+                            <Icon name="auto_awesome" className="text-[20px]" />
+                            <span className="absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-[#FF9500] rounded-full animate-pulse shadow-[0_0_8px_rgba(255,149,0,0.8)]" />
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -97,24 +136,13 @@ type TabType = 'assistant' | 'home' | 'alerts' | 'profile';
 function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavigate: (t: TabType) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
-
-    // Prompts Dropdown
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [promptSearch, setPromptSearch] = useState("");
-    const allPrompts = ['AAPL Q3 Earnings Impact', 'Semiconductor Sector Sentiment', 'Macro Risk Factors Q4', 'Fed Interest Rates History', 'Global Supply Chain Risks'];
-    const filteredPrompts = allPrompts.filter(p => p.toLowerCase().includes(promptSearch.toLowerCase()));
-
     const cardClass = isIOS
-        ? (isLight ? 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[24px]' : 'bg-[#1C1C1E] rounded-[24px]')
-        : (isLight ? 'bg-[#FEF7FF] rounded-[28px] shadow-md border border-[#EADDFF]/50' : 'bg-[#2B2930] rounded-[28px] shadow-lg');
+        ? (isLight ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5 rounded-[24px]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/10 rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#4A4458]/50');
 
     const btnClass = isIOS
-        ? (isLight ? 'bg-[#F2F2F7] text-black rounded-xl font-semibold' : 'bg-[#2C2C2E] text-white rounded-xl font-semibold')
-        : (isLight ? 'bg-[#E8DEF8] text-[#1D192B] rounded-full font-medium' : 'bg-[#4A4458] text-[#E8DEF8] rounded-full font-medium');
-
-    const pillClass = isIOS
-        ? (isLight ? 'bg-white border border-black/10 shadow-sm' : 'bg-[#2C2C2E] border border-white/5')
-        : (isLight ? 'bg-[#F3EDF7] border border-[#79747E]' : 'bg-[#4A4458] border border-[#938F99]');
+        ? (isLight ? 'bg-black/5 hover:bg-black/10 text-black rounded-xl font-semibold backdrop-blur-md' : 'bg-white/10 hover:bg-white/20 text-white rounded-xl font-semibold backdrop-blur-md')
+        : (isLight ? 'bg-[#EADDFF]/50 hover:bg-[#EADDFF] text-[#1D192B] rounded-full font-medium' : 'bg-[#4A4458]/50 hover:bg-[#4A4458] text-[#E8DEF8] rounded-full font-medium');
 
     const handlePromptSelect = () => {
         // Here we could pass the prompt to the assistant view, but for now we just navigate
@@ -143,61 +171,37 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
                     onClick={() => onNavigate('assistant')}
                     className={`flex items-center justify-between p-3.5 mb-4 rounded-xl cursor-pointer transition-all active:scale-95 ${isIOS ? (isLight ? 'bg-[#F2F2F7]' : 'bg-[#2C2C2E]') : (isLight ? 'bg-[#EADDFF] rounded-full' : 'bg-[#4A4458] rounded-full')}`}
                 >
-                    <span className="truncate flex-1 text-[15px] opacity-70 pl-1">Ask market intelligence...</span>
+                    <span className="truncate flex-1 text-[15px] opacity-70 pl-1">Message AI...</span>
                     <div className={`w-8 h-8 rounded-full flex justify-center items-center ${isIOS ? 'bg-white shadow-sm' : 'bg-[#6750A4] text-white'}`}>
                         <Icon name="mic" className={`text-lg ${isIOS ? 'text-[#007AFF]' : ''}`} />
                     </div>
                 </div>
 
-                {/* Dropdown Search Wrapper */}
-                <div className="w-full relative z-20">
-                    <div className="relative">
-                        <button
-                            onClick={() => setDropdownOpen(!dropdownOpen)}
-                            className={`w-full p-3.5 flex justify-between items-center rounded-xl transition-all ${pillClass}`}
+                {/* Topics Grid */}
+                <div className="w-full relative z-20 mt-6">
+                    <div className="flex justify-between items-center mb-3">
+                        <label className="text-xs font-bold uppercase tracking-widest opacity-50 ml-1">Discover Topics</label>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        <motion.button
+                            whileTap={{ scale: 0.96 }}
+                            onClick={() => handlePromptSelect()}
+                            className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-gradient-to-br from-green-50 to-emerald-50 border border-emerald-100' : 'bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : 'bg-[#4A4458] text-[#E8DEF8]')}`}
                         >
-                            <span className="opacity-80 font-medium text-[15px]">Select predefined prompt...</span>
-                            <Icon name={dropdownOpen ? "expand_less" : "expand_more"} />
-                        </button>
+                            <Icon name="bolt" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-emerald-500' : 'text-emerald-400') : ''}`} />
+                            <span className={`font-semibold mb-1 text-[15px] ${isIOS ? (isLight ? 'text-emerald-900' : 'text-emerald-100') : ''}`}>Earnings</span>
+                            <span className="text-[12px] opacity-70 leading-snug line-clamp-2">&quot;Analyze AAPL Q3 Impact&quot;</span>
+                        </motion.button>
 
-                        <AnimatePresence>
-                            {dropdownOpen && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    className={`absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-60 z-50 ${isIOS ? (isLight ? 'bg-white border border-black/10' : 'bg-[#2C2C2E] border border-white/10') : (isLight ? 'bg-[#FEF7FF] border border-[#EADDFF]' : 'bg-[#2B2930] border border-[#4A4458]')}`}
-                                >
-                                    <div className={`p-2 border-b ${isIOS ? 'border-black/5 dark:border-white/5' : 'border-[#EADDFF] dark:border-[#4A4458]'}`}>
-                                        <div className={`flex items-center px-3 rounded-lg ${isIOS ? 'bg-black/5 dark:bg-white/5' : 'bg-[#E8DEF8] dark:bg-[#4A4458]'}`}>
-                                            <Icon name="search" className="text-sm opacity-50" />
-                                            <input
-                                                type="text"
-                                                value={promptSearch}
-                                                onChange={(e) => setPromptSearch(e.target.value)}
-                                                placeholder="Search prompts..."
-                                                className="w-full p-2 bg-transparent outline-none text-sm"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="overflow-y-auto mobile-scrollbar flex-1 p-2">
-                                        {filteredPrompts.length === 0 ? (
-                                            <div className="p-4 text-center text-sm opacity-50">No prompts found.</div>
-                                        ) : (
-                                            filteredPrompts.map((p, i) => (
-                                                <div
-                                                    key={i}
-                                                    onClick={() => handlePromptSelect()}
-                                                    className={`p-3 text-sm rounded-lg cursor-pointer transition-colors active:scale-95 ${isIOS ? 'active:bg-black/5 dark:active:bg-white/5' : 'active:bg-[#EADDFF]/50 dark:active:bg-[#4A4458]/50'}`}
-                                                >
-                                                    {p}
-                                                </div>
-                                            ))
-                                        )}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                        <motion.button
+                            whileTap={{ scale: 0.96 }}
+                            onClick={() => handlePromptSelect()}
+                            className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-white border border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E] border border-white/5') : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
+                        >
+                            <Icon name="track_changes" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-orange-500' : 'text-orange-400') : 'text-[#B3261E]'}`} />
+                            <span className="font-semibold mb-1 text-[15px]">Macro Risks</span>
+                            <span className="text-[12px] opacity-70 leading-snug line-clamp-2">&quot;Risk factors for Q4&quot;</span>
+                        </motion.button>
                     </div>
                 </div>
             </div>
@@ -274,16 +278,18 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
 
-    // Prompts Dropdown
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [promptSearch, setPromptSearch] = useState("");
-    const allPrompts = ['AAPL Q3 Earnings Impact', 'Semiconductor Sector Sentiment', 'Macro Risk Factors Q4', 'Fed Interest Rates History', 'Global Supply Chain Risks'];
-    const filteredPrompts = allPrompts.filter(p => p.toLowerCase().includes(promptSearch.toLowerCase()));
+    const allPrompts = [
+        'Analyze AAPL Q3 Earnings Impact',
+        'Summarize SEC filings on semiconductor constraints',
+        'Macro risk factors for Q4 according to the Fed',
+        'Global supply chain risks affecting TSLA',
+        'Provide insights on interest rate history'
+    ];
 
     const mockResponses = [
-        "Analyzing the latest SEC filings... The data indicates substantial QoQ growth in software services.",
-        "Based on recent macro trends, commodity prices are expected to stabilize over the next quarter.",
-        "I found 3 recent analyst upgrades for that ticker, predominantly citing strong margin expansion."
+        "Analyzing the latest SEC filings... The data indicates substantial QoQ growth in software services. Our sentiment models show a 94% confidence that this trend will sustain through Q4.",
+        "Based on recent macro trends, commodity prices are expected to stabilize over the next quarter. The Federal Reserve's recent minutes suggest members are willing to pause rate hikes if housing data continues to cool.",
+        "I found 3 recent analyst upgrades for that ticker, predominantly citing strong margin expansion and a surprisingly robust supply chain recovery against global headwinds."
     ];
 
     const scrollToBottom = () => {
@@ -302,7 +308,6 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
         const newMsg = { id: Date.now(), role: 'user' as const, text: txt };
         setMessages(prev => [...prev, newMsg]);
         setInput("");
-        setDropdownOpen(false);
         setIsTyping(true);
 
         setTimeout(() => {
@@ -322,24 +327,22 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
         : (isLight ? 'bg-[#F3EDF7] rounded-t-[32px] pt-4 px-4 pb-0' : 'bg-[#2B2930] rounded-t-[32px] pt-4 px-4 pb-0');
 
     const textInputClass = isIOS
-        ? (isLight ? 'bg-black/5 rounded-full px-4 py-2 border border-black/5' : 'bg-white/10 rounded-full px-4 py-2 border border-white/10')
-        : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[28px] px-5 py-3' : 'bg-[#4A4458] text-[#E8DEF8] rounded-[28px] px-5 py-3');
+        ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5 text-[15px]' : 'bg-white/10 rounded-full px-5 py-3 border border-white/10 text-[15px]')
+        : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[28px] px-6 py-3.5 text-[15px]' : 'bg-[#4A4458] text-[#E8DEF8] rounded-[28px] px-6 py-3.5 text-[15px]');
 
     const userBubbleClass = isIOS
-        ? 'bg-[#007AFF] text-white rounded-2xl rounded-tr-sm'
-        : 'bg-[#6750A4] text-white rounded-3xl rounded-tr-md';
+        ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6] text-white rounded-3xl rounded-tr-md shadow-[0_8px_16px_rgba(0,122,255,0.25)]'
+        : 'bg-gradient-to-br from-[#6750A4] to-[#B3261E] text-white rounded-3xl rounded-tr-md shadow-[0_4px_12px_rgba(103,80,164,0.3)]';
 
     const botBubbleClass = isIOS
-        ? (isLight ? 'bg-[#E5E5EA] text-black rounded-2xl rounded-tl-sm' : 'bg-[#2C2C2E] text-white rounded-2xl rounded-tl-sm')
-        : (isLight ? 'bg-[#E8DEF8] text-[#1D192B] rounded-3xl rounded-tl-md' : 'bg-[#4A4458] text-[#E8DEF8] rounded-3xl rounded-tl-md');
+        ? (isLight ? 'bg-white/60 backdrop-blur-xl border border-white/40 text-black rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.06)]' : 'bg-[#1C1C1E]/60 backdrop-blur-xl border border-white/10 text-white rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        : (isLight ? 'bg-[#FEF7FF]/80 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-3xl rounded-tl-sm shadow-sm' : 'bg-[#2B2930]/80 backdrop-blur-xl border border-[#4A4458]/50 text-[#E8DEF8] rounded-3xl rounded-tl-sm shadow-sm');
 
     const headerClass = isIOS
-        ? (isLight ? 'border-b border-black/10' : 'border-b border-white/10')
+        ? (isLight ? 'border-b border-black/5' : 'border-b border-white/5')
         : '';
 
-    const pillClass = isIOS
-        ? (isLight ? 'bg-white border border-black/10 shadow-sm' : 'bg-[#2C2C2E] border border-white/5')
-        : (isLight ? 'bg-[#F3EDF7] border border-[#79747E]' : 'bg-[#4A4458] border border-[#938F99]');
+
 
     return (
         <motion.div
@@ -360,73 +363,71 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
             {/* Content Area */}
             {messages.length === 0 ? (
                 // Empty State / Voice Prompt UI
-                <div className="flex-1 flex flex-col p-6 items-center justify-center -mt-16 relative">
+                <div className="flex-1 flex flex-col p-6 items-center overflow-y-auto mobile-scrollbar">
                     <motion.div
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.1, duration: 0.5 }}
-                        className="flex flex-col items-center mb-12 relative"
+                        className="flex flex-col items-center pt-[6vh] pb-10 shrink-0"
                     >
-                        {/* Voice Pulse Effect */}
-                        <div className={`absolute -inset-8 rounded-full opacity-20 animate-ping ${isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '3s' }} />
-                        <div className={`absolute -inset-4 rounded-full opacity-40 animate-ping ${isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '2s' }} />
+                        {/* Voice Pulse Effect Wrapper */}
+                        <div className="relative w-24 h-24 flex items-center justify-center">
+                            <div className={`absolute inset-0 rounded-full opacity-20 animate-ping ${isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '1.5s', animationIterationCount: 2, animationFillMode: 'forwards' }} />
+                            <div className={`absolute inset-0 rounded-full opacity-40 animate-ping ${isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '1s', animationIterationCount: 2, animationDelay: '0.2s', animationFillMode: 'forwards' }} />
 
-                        <button className={`relative w-24 h-24 rounded-full flex items-center justify-center shadow-2xl z-10 transition-transform active:scale-90 ${isIOS ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]' : 'bg-[#6750A4]'}`}>
-                            <Icon name="mic" className="text-5xl text-white drop-shadow-md" />
-                        </button>
-                        <h3 className="mt-8 font-medium text-lg opacity-80">Listening...</h3>
+                            <button className={`relative w-full h-full rounded-full flex items-center justify-center shadow-2xl z-10 transition-transform active:scale-90 ${isIOS ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]' : 'bg-[#6750A4]'}`}>
+                                <Icon name="mic" className="text-5xl text-white drop-shadow-md" />
+                            </button>
+                        </div>
+                        <h3 className={`mt-8 font-medium text-lg opacity-80 ${isIOS ? 'pt-8' : ''}`}>Listening...</h3>
                     </motion.div>
 
-                    {/* Prompts Dropdown Widget */}
-                    <div className="w-full max-w-sm relative z-20">
-                        <label className="text-xs font-semibold uppercase tracking-wider opacity-60 ml-2 mb-2 block">Quick Prompts</label>
-                        <div className="relative">
-                            <button
-                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                                className={`w-full p-4 flex justify-between items-center rounded-xl transition-all ${pillClass}`}
+                    {/* Prompts Layout Widget */}
+                    <div className="w-full relative z-20 px-2 mt-auto pb-4 shrink-0">
+                        <div className="flex justify-between items-center mb-4 px-2">
+                            <label className="text-xs font-bold uppercase tracking-widest opacity-50">Topics</label>
+                            <button className={`text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>See All</button>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                            <motion.button
+                                whileTap={{ scale: 0.96 }}
+                                onClick={() => handleSend(allPrompts[0])}
+                                className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-gradient-to-br from-green-50 to-emerald-50 border border-emerald-100' : 'bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : 'bg-[#4A4458] text-[#E8DEF8]')}`}
                             >
-                                <span className="opacity-80 font-medium">Select predefined prompt...</span>
-                                <Icon name={dropdownOpen ? "expand_less" : "expand_more"} />
-                            </button>
+                                <Icon name="bolt" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-emerald-500' : 'text-emerald-400') : ''}`} />
+                                <span className={`font-semibold mb-1 text-[15px] ${isIOS ? (isLight ? 'text-emerald-900' : 'text-emerald-100') : ''}`}>Earnings</span>
+                                <span className="text-[12px] opacity-70 leading-snug line-clamp-2">&quot;Analyze AAPL Q3 Impact&quot;</span>
+                            </motion.button>
 
-                            <AnimatePresence>
-                                {dropdownOpen && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className={`absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-60 z-50 ${isIOS ? (isLight ? 'bg-white border border-black/10' : 'bg-[#2C2C2E] border border-white/10') : (isLight ? 'bg-[#FEF7FF] border border-[#EADDFF]' : 'bg-[#2B2930] border border-[#4A4458]')}`}
-                                    >
-                                        <div className={`p-2 border-b ${isIOS ? 'border-black/5 dark:border-white/5' : 'border-[#EADDFF] dark:border-[#4A4458]'}`}>
-                                            <div className={`flex items-center px-3 rounded-lg ${isIOS ? 'bg-black/5 dark:bg-white/5' : 'bg-[#E8DEF8] dark:bg-[#4A4458]'}`}>
-                                                <Icon name="search" className="text-sm opacity-50" />
-                                                <input
-                                                    type="text"
-                                                    value={promptSearch}
-                                                    onChange={(e) => setPromptSearch(e.target.value)}
-                                                    placeholder="Search prompts..."
-                                                    className="w-full p-2 bg-transparent outline-none text-sm"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="overflow-y-auto mobile-scrollbar flex-1 p-2">
-                                            {filteredPrompts.length === 0 ? (
-                                                <div className="p-4 text-center text-sm opacity-50">No prompts found.</div>
-                                            ) : (
-                                                filteredPrompts.map((p, i) => (
-                                                    <div
-                                                        key={i}
-                                                        onClick={() => handleSend(p)}
-                                                        className={`p-3 text-sm rounded-lg cursor-pointer transition-colors active:scale-95 ${isIOS ? 'active:bg-black/5 dark:active:bg-white/5' : 'active:bg-[#EADDFF]/50 dark:active:bg-[#4A4458]/50'}`}
-                                                    >
-                                                        {p}
-                                                    </div>
-                                                ))
-                                            )}
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                            <motion.button
+                                whileTap={{ scale: 0.96 }}
+                                onClick={() => handleSend(allPrompts[2])}
+                                className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-white border border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E] border border-white/5') : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
+                            >
+                                <Icon name="track_changes" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-orange-500' : 'text-orange-400') : 'text-[#B3261E]'}`} />
+                                <span className="font-semibold mb-1 text-[15px]">Macro Risks</span>
+                                <span className="text-[12px] opacity-70 leading-snug line-clamp-2">&quot;Risk factors for Q4&quot;</span>
+                            </motion.button>
+
+                            <motion.button
+                                whileTap={{ scale: 0.96 }}
+                                onClick={() => handleSend(allPrompts[1])}
+                                className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-white border border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E] border border-white/5') : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
+                            >
+                                <Icon name="topic" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-purple-500' : 'text-purple-400') : 'text-[#6750A4]'}`} />
+                                <span className="font-semibold mb-1 text-[15px]">Filings</span>
+                                <span className="text-[12px] opacity-70 leading-snug line-clamp-2">&quot;Summarize SEC filings&quot;</span>
+                            </motion.button>
+
+                            <motion.button
+                                whileTap={{ scale: 0.96 }}
+                                onClick={() => handleSend(allPrompts[4])}
+                                className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-white border border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E] border border-white/5') : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
+                            >
+                                <Icon name="school" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-blue-500' : 'text-blue-400') : 'text-[#006A6A]'}`} />
+                                <span className="font-semibold mb-1 text-[15px]">Rates</span>
+                                <span className="text-[12px] opacity-70 leading-snug line-clamp-2">&quot;Interest rate history&quot;</span>
+                            </motion.button>
                         </div>
                     </div>
                 </div>
@@ -440,8 +441,22 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
                             key={msg.id}
                             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
-                            <div className={`max-w-[80%] px-4 py-2.5 text-[15px] leading-relaxed shadow-sm ${msg.role === 'user' ? userBubbleClass : botBubbleClass}`}>
-                                {msg.text}
+                            <div className="flex flex-col">
+                                <div className={`max-w-[85%] px-5 py-3.5 text-[15px] leading-relaxed shadow-sm ${msg.role === 'user' ? userBubbleClass + ' self-end' : botBubbleClass + ' self-start'}`}>
+                                    {msg.text}
+                                </div>
+                                {msg.role === 'assistant' && (
+                                    <div className="flex items-center space-x-2 mt-2 ml-1 text-xs opacity-70">
+                                        <button className={`flex items-center space-x-1 px-3 py-1.5 rounded-full backdrop-blur-md transition-colors ${isIOS ? (isLight ? 'bg-black/5 hover:bg-black/10' : 'bg-white/10 hover:bg-white/20') : (isLight ? 'bg-[#EADDFF]/50 hover:bg-[#EADDFF]' : 'bg-[#4A4458]/50 hover:bg-[#4A4458]')}`}>
+                                            <Icon name="ios_share" className="text-[14px]" />
+                                            <span>Share</span>
+                                        </button>
+                                        <button className={`flex items-center space-x-1 px-3 py-1.5 rounded-full backdrop-blur-md transition-colors ${isIOS ? (isLight ? 'bg-black/5 hover:bg-black/10' : 'bg-white/10 hover:bg-white/20') : (isLight ? 'bg-[#EADDFF]/50 hover:bg-[#EADDFF]' : 'bg-[#4A4458]/50 hover:bg-[#4A4458]')}`}>
+                                            <Icon name="groups" className="text-[14px]" />
+                                            <span>Connect</span>
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     ))}
@@ -459,7 +474,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
             )}
 
             {/* Always Input area for typing manually */}
-            <div className={`p-4 flex items-end space-x-2 shrink-0 z-30 w-full mb-5 ${inputAreaClass}`}>
+            <div className={`p-4 flex items-end space-x-2 shrink-0 z-30 w-full mb-[76px] sm:mb-[84px] ${inputAreaClass}`}>
                 <input
                     type="text"
                     value={input}
@@ -485,8 +500,8 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isLight = theme === 'light';
 
     const cardClass = isIOS
-        ? (isLight ? 'bg-white shadow-sm border border-black/5 rounded-[20px]' : 'bg-[#1C1C1E] rounded-[20px]')
-        : (isLight ? 'bg-[#FEF7FF] rounded-[24px] border border-[#EADDFF]' : 'bg-[#2B2930] rounded-[24px]');
+        ? (isLight ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5 rounded-[20px]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/10 rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] border border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] border border-[#4A4458]/50 shadow-lg');
 
     return (
         <motion.div
@@ -532,8 +547,8 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
     const isLight = theme === 'light';
 
     const cardClass = isIOS
-        ? (isLight ? 'bg-white shadow-sm border border-black/5 rounded-2xl' : 'bg-[#1C1C1E] rounded-2xl')
-        : (isLight ? 'bg-[#FEF7FF] rounded-[24px] border border-[#EADDFF]' : 'bg-[#2B2930] rounded-[24px]');
+        ? (isLight ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5 rounded-[20px]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/10 rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] border border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] border border-[#4A4458]/50 shadow-lg');
 
     return (
         <motion.div
@@ -542,20 +557,99 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
             exit={{ opacity: 0, x: -20 }}
             className={`absolute inset-0 overflow-y-auto p-4 pb-32 scrollbar-none ${isIOS ? 'pt-4' : 'pt-6'}`}
         >
-            <div className="flex flex-col items-center mt-6 mb-10">
-                <div className="relative mb-4">
-                    <div className={`w-24 h-24 rounded-full bg-gradient-to-tr overflow-hidden ${isIOS ? 'from-blue-500 to-indigo-500' : 'from-[#6750A4] to-[#D0BCFF]'} p-1`}>
-                        <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="https://ui-avatars.com/api/?name=AI&background=random" className="w-full h-full object-cover" alt="Profile" />
-                        </div>
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-500 border-2 border-white dark:border-[#1C1C1E] rounded-full"></div>
+            <div className={`p-4 flex justify-between items-center shrink-0 mb-2 ${isIOS ? (isLight ? 'border-b border-black/5' : 'border-b border-white/5') : ''}`}>
+                <h2 className="text-xl font-bold tracking-tight">Profile</h2>
+                <div className="flex gap-3">
+                    <Icon name="settings" className="opacity-70 text-xl" />
                 </div>
-                <h2 className={`font-bold ${isIOS ? 'text-2xl tracking-tight' : 'text-xl'}`}>Alice Investor</h2>
-                <p className={`text-sm font-medium mt-1 ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>Pro Enterprise Tier</p>
             </div>
 
+            <div className="flex flex-col items-center mt-4 mb-8">
+                <div className="relative mb-4">
+                    <div className={`w-28 h-28 rounded-full bg-gradient-to-tr overflow-hidden ${isIOS ? 'from-blue-500 to-indigo-500' : 'from-[#6750A4] to-[#D0BCFF]'} p-1 shadow-lg`}>
+                        <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Ali Al-Zuhairi" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Ali+Al-Zuhairi&background=random" }} />
+                        </div>
+                    </div>
+                    <div className="absolute bottom-1 right-1 w-7 h-7 bg-green-500 border-[3px] border-white dark:border-[#1C1C1E] rounded-full shadow-sm"></div>
+                </div>
+                <h2 className={`font-bold ${isIOS ? 'text-[26px] tracking-tight' : 'text-2xl'}`}>Ali Al-Zuhairi</h2>
+                <p className={`text-[15px] font-medium mt-1 drop-shadow-sm ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>Alux Space Founder</p>
+            </div>
+
+            {/* My Dashboards Section */}
+            <div className="mb-8">
+                <div className="flex justify-between items-center mb-4 px-1">
+                    <h3 className={`${isIOS ? 'text-lg font-bold tracking-tight' : 'text-base font-medium text-[#6750A4]'}`}>My Dashboards</h3>
+                    <button className={`text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>Edit</button>
+                </div>
+
+                <div className="space-y-4">
+                    {/* Graph Card 1 */}
+                    <div className={`p-5 relative overflow-hidden ${cardClass}`}>
+                        <div className="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 className="font-semibold text-[15px]">Portfolio Performance</h4>
+                                <p className="text-xs opacity-60 mt-0.5">Last 30 days</p>
+                            </div>
+                            <span className={`text-xs font-bold px-2 py-1 rounded-md ${isIOS ? 'bg-[#34C759]/10 text-[#34C759]' : 'bg-[#146C2E]/10 text-[#146C2E]'}`}>+12.4%</span>
+                        </div>
+
+                        {/* Mock Graph Bars */}
+                        <div className="h-24 flex items-end justify-between gap-1.5 px-1 mt-6">
+                            {[40, 65, 45, 80, 55, 90, 75].map((height, i) => (
+                                <div key={i} className="w-full h-full relative group flex items-end">
+                                    <motion.div
+                                        initial={{ height: 0 }}
+                                        animate={{ height: `${height}%` }}
+                                        transition={{ duration: 0.8, delay: i * 0.1 }}
+                                        className={`w-full rounded-t-md transition-all group-hover:opacity-80 shadow-sm ${i === 6 ? (isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]') : (isLight ? 'bg-black/20' : 'bg-white/20')}`}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Graph Card 2 */}
+                    <div className={`p-5 relative overflow-hidden ${cardClass}`}>
+                        <div className="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 className="font-semibold text-[15px]">Market Sentiment</h4>
+                                <p className="text-xs opacity-60 mt-0.5">Real-time aggregate</p>
+                            </div>
+                        </div>
+
+                        {/* Mock Donut Chart / Progress */}
+                        <div className="flex items-center space-x-6 mt-4">
+                            <div className="relative w-16 h-16 flex items-center justify-center shrink-0">
+                                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                    <path className={isLight ? "text-black/5" : "text-white/5"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <motion.path
+                                        initial={{ strokeDasharray: "0, 100" }}
+                                        animate={{ strokeDasharray: "75, 100" }}
+                                        transition={{ duration: 1.5, ease: "easeOut" }}
+                                        className={isIOS ? "text-[#AF52DE]" : "text-[#D0BCFF]"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    />
+                                </svg>
+                                <span className="absolute text-sm font-bold">75%</span>
+                            </div>
+                            <div className="flex-1 space-y-2">
+                                <div className="flex justify-between text-xs">
+                                    <span className="opacity-70 flex items-center"><span className={`w-2 h-2 rounded-full mr-1.5 ${isIOS ? 'bg-[#AF52DE]' : 'bg-[#D0BCFF]'}`}></span>Bullish</span>
+                                    <span className="font-semibold">75%</span>
+                                </div>
+                                <div className="flex justify-between text-xs">
+                                    <span className="opacity-70 flex items-center"><span className={`w-2 h-2 rounded-full mr-1.5 ${isLight ? 'bg-black/10' : 'bg-white/10'}`}></span>Bearish</span>
+                                    <span className="font-semibold">25%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Profile Options */}
             <div className="space-y-3">
                 <button className={`w-full p-4 flex justify-between items-center transition-transform active:scale-95 ${cardClass}`}>
                     <div className="flex items-center space-x-3">
