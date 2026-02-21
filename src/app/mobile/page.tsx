@@ -606,13 +606,13 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                             </div>
 
                             {[
-                                { height: 40, colors: isIOS ? 'from-blue-400 to-blue-600' : 'from-purple-400 to-purple-600' },
-                                { height: 65, colors: isIOS ? 'from-indigo-400 to-indigo-600' : 'from-fuchsia-400 to-fuchsia-600' },
-                                { height: 45, colors: isIOS ? 'from-cyan-400 to-cyan-600' : 'from-pink-400 to-pink-600' },
-                                { height: 80, colors: isIOS ? 'from-teal-400 to-teal-600' : 'from-rose-400 to-rose-600' },
-                                { height: 55, colors: isIOS ? 'from-emerald-400 to-emerald-600' : 'from-orange-400 to-orange-600' },
-                                { height: 90, colors: isIOS ? 'from-green-400 to-green-600' : 'from-amber-400 to-amber-600' },
-                                { height: 75, colors: isIOS ? 'from-[#007AFF] to-[#5856D6] shadow-[0_4px_10px_rgba(0,122,255,0.4)]' : 'from-[#6750A4] to-[#D0BCFF] shadow-[0_4px_10px_rgba(103,80,164,0.4)]' }
+                                { height: 40, colors: 'from-purple-400 to-purple-600' },
+                                { height: 65, colors: 'from-fuchsia-400 to-fuchsia-600' },
+                                { height: 45, colors: 'from-pink-400 to-pink-600' },
+                                { height: 80, colors: 'from-rose-400 to-rose-600' },
+                                { height: 55, colors: 'from-orange-400 to-orange-600' },
+                                { height: 90, colors: 'from-amber-400 to-amber-600' },
+                                { height: 75, colors: 'from-[#6750A4] to-[#D0BCFF] shadow-[0_4px_10px_rgba(103,80,164,0.4)]' }
                             ].map((item, i) => (
                                 <div key={i} className="w-full h-full relative group flex items-end justify-center z-10">
                                     <motion.div
@@ -653,7 +653,7 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                                         transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                                         strokeLinecap="round"
                                         strokeDashoffset={"-85"}
-                                        className={isIOS ? "text-orange-400" : "text-amber-500"} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        className="text-amber-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                     />
 
                                     {/* Bearish Segment */}
@@ -663,7 +663,7 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                                         transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                                         strokeLinecap="round"
                                         strokeDashoffset={"-65"}
-                                        className={isIOS ? "text-pink-500" : "text-rose-500"} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        className="text-rose-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                     />
 
                                     {/* Bullish Segment */}
@@ -672,27 +672,27 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                                         animate={{ strokeDasharray: "65, 100" }}
                                         transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                                         strokeLinecap="round"
-                                        className={isIOS ? "text-[#007AFF]" : "text-[#D0BCFF]"} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        className="text-[#D0BCFF]" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                     />
 
                                     {/* Inner subtle ring */}
                                     <circle cx="18" cy="18" r="13" fill="none" stroke="currentColor" className={isLight ? "text-gray-50" : "text-white/5"} strokeWidth="0.5" />
                                 </svg>
                                 <div className="absolute flex flex-col items-center justify-center">
-                                    <span className={`text-[17px] font-extrabold tracking-tight ${isIOS ? 'text-[#007AFF]' : 'text-[#D0BCFF]'}`}>65%</span>
+                                    <span className="text-[17px] font-extrabold tracking-tight text-[#D0BCFF]">65%</span>
                                 </div>
                             </div>
                             <div className="flex-1 space-y-2">
                                 <div className="flex justify-between text-xs items-center p-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                                    <span className="opacity-80 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 shadow-sm ${isIOS ? 'bg-[#007AFF]' : 'bg-[#D0BCFF]'}`}></span>Bullish</span>
+                                    <span className="opacity-80 flex items-center font-medium"><span className="w-2 h-2 rounded-full mr-2 shadow-sm bg-[#D0BCFF]"></span>Bullish</span>
                                     <span className="font-bold">65%</span>
                                 </div>
                                 <div className="flex justify-between text-xs items-center p-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                                    <span className="opacity-80 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 shadow-sm ${isIOS ? 'bg-pink-500' : 'bg-rose-500'}`}></span>Bearish</span>
+                                    <span className="opacity-80 flex items-center font-medium"><span className="w-2 h-2 rounded-full mr-2 shadow-sm bg-rose-500"></span>Bearish</span>
                                     <span className="font-bold">20%</span>
                                 </div>
                                 <div className="flex justify-between text-xs items-center p-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                                    <span className="opacity-80 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 shadow-sm ${isIOS ? 'bg-orange-400' : 'bg-amber-500'}`}></span>Neutral</span>
+                                    <span className="opacity-80 flex items-center font-medium"><span className="w-2 h-2 rounded-full mr-2 shadow-sm bg-amber-500"></span>Neutral</span>
                                     <span className="font-bold">15%</span>
                                 </div>
                             </div>
