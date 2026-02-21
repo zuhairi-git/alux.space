@@ -37,9 +37,9 @@ function MobilePrototypeContent() {
 
     return (
         <div className={`flex flex-col min-h-[100dvh] w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
-            {/* Elegant Header Redesign */}
+            {/* Elegant Header Redesign (Liquid Glass) */}
             <header className={`pt-12 pb-3 px-5 sticky top-0 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/80 backdrop-blur-3xl border-b border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E]/80 backdrop-blur-3xl border-b border-white/5 shadow-[0_2px_10px_rgba(0,0,0,0.2)]')
+                ? (isLight ? 'bg-white/40 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : 'bg-[#1C1C1E]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
                 : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-2xl border-b border-[#4A4458]/50 shadow-md')
                 }`}>
                 <div className="flex justify-between items-center w-full">
@@ -137,7 +137,7 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const cardClass = isIOS
-        ? (isLight ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5 rounded-[24px]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/10 rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 rounded-[28px]' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 rounded-[28px] shadow-[0_8px_32px_rgba(0,0,0,0.2)]')
         : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#4A4458]/50');
 
     const btnClass = isIOS
@@ -196,7 +196,7 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
                         <motion.button
                             whileTap={{ scale: 0.96 }}
                             onClick={() => handlePromptSelect()}
-                            className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-white border border-black/5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]' : 'bg-[#1C1C1E] border border-white/5') : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
+                            className={`flex flex-col text-left p-4 rounded-[20px] transition-all hover:shadow-md ${isIOS ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.05)]' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.2)]') : (isLight ? 'bg-[#F3EDF7] text-[#1D192B]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
                         >
                             <Icon name="track_changes" className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-orange-500' : 'text-orange-400') : 'text-[#B3261E]'}`} />
                             <span className="font-semibold mb-1 text-[15px]">Macro Risks</span>
@@ -323,7 +323,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
 
     // Styling
     const inputAreaClass = isIOS
-        ? (isLight ? 'bg-white/90 backdrop-blur-xl border-t border-black/5' : 'bg-black/90 backdrop-blur-xl border-t border-white/10')
+        ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-black/5' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-white/10')
         : (isLight ? 'bg-[#F3EDF7] rounded-t-[32px]' : 'bg-[#2B2930] rounded-t-[32px]');
 
     const textInputClass = isIOS
@@ -335,7 +335,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
         : 'bg-gradient-to-br from-[#6750A4] to-[#B3261E] text-white rounded-3xl rounded-tr-md shadow-[0_4px_12px_rgba(103,80,164,0.3)]';
 
     const botBubbleClass = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-xl border border-white/40 text-black rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.06)]' : 'bg-[#1C1C1E]/60 backdrop-blur-xl border border-white/10 text-white rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/40 text-black rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.05)]' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 text-white rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
         : (isLight ? 'bg-[#FEF7FF]/80 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-3xl rounded-tl-sm shadow-sm' : 'bg-[#2B2930]/80 backdrop-blur-xl border border-[#4A4458]/50 text-[#E8DEF8] rounded-3xl rounded-tl-sm shadow-sm');
 
     const headerClass = isIOS
@@ -500,7 +500,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isLight = theme === 'light';
 
     const cardClass = isIOS
-        ? (isLight ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5 rounded-[20px]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/10 rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 rounded-[20px]' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.2)]')
         : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] border border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] border border-[#4A4458]/50 shadow-lg');
 
     return (
@@ -547,7 +547,7 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
     const isLight = theme === 'light';
 
     const cardClass = isIOS
-        ? (isLight ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/5 rounded-[20px]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/10 rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
+        ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 rounded-[20px]' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.2)]')
         : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] border border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] border border-[#4A4458]/50 shadow-lg');
 
     return (
@@ -737,7 +737,7 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
     const isLight = theme === 'light';
 
     const navClass = isIOS
-        ? (isLight ? 'bg-white/80 backdrop-blur-2xl border-t border-black/5 pb-5 h-20' : 'bg-[#1C1C1E]/80 backdrop-blur-2xl border-t border-white/5 pb-5 h-20')
+        ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-black/5 pb-5 h-20' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-white/5 pb-5 h-20')
         : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : 'bg-[#2B2930] h-20 pb-2 border-t border-[#4A4458]/50');
 
     return (
