@@ -196,7 +196,7 @@ export default function MarketIntelligenceClient() {
                     {/* Hero Section */}
                     <div className="relative h-96 overflow-hidden rounded-xl mb-16">
                         <Image
-                            src="/images/portfolio/market-intelligence/cover.jpg"
+                            src="/images/portfolio/market/market-intellegence.jpg"
                             alt={content.title}
                             fill
                             className="object-cover"

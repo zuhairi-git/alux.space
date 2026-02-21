@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     }
   };
   const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
-  const imageUrl = `${baseUrl}/images/portfolio/market-intelligence/cover.jpg`;
+  const imageUrl = `${baseUrl}/images/portfolio/market/market-intellegence.jpg`;
 
   return {
     title: metadata.title,

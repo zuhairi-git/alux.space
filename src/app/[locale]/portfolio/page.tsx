@@ -90,7 +90,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         type: 'in-progress'
       },
       photo: {
-        url: '/images/portfolio/market-intelligence/cover.jpg'
+        url: '/images/portfolio/market/market-intellegence.jpg'
       }
     },
     {
