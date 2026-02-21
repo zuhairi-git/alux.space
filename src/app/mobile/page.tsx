@@ -38,8 +38,8 @@ function MobilePrototypeContent() {
     return (
         <div className={`flex flex-col min-h-[100dvh] w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
             {/* Elegant Header Redesign (Liquid Glass) */}
-            <header className={`pt-12 pb-3 px-5 sticky top-0 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/40 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : 'bg-[#1C1C1E]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
+            <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
+                ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
                 : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-2xl border-b border-[#4A4458]/50 shadow-md')
                 }`}>
                 <div className="flex justify-between items-center w-full">
@@ -155,7 +155,7 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
-            className={`absolute inset-0 overflow-y-auto p-4 space-y-6 scrollbar-none pb-32 ${isIOS ? 'pt-4' : 'pt-6'}`}
+            className={`absolute inset-0 overflow-y-auto p-4 space-y-6 scrollbar-none pb-32 pt-[110px]`}
         >
             {/* AI Assistant Entry point */}
             <div className={`p-5 shadow-sm ${isIOS ? (isLight ? 'bg-white border-black/5 rounded-3xl' : 'bg-[#1C1C1E] border-white/5 rounded-3xl') : (isLight ? 'bg-[#F3EDF7] rounded-[28px]' : 'bg-[#2B2930] rounded-[28px]')}`}>
@@ -265,14 +265,9 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
 function AssistantView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
-    const isColorful = theme === 'colorful';
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const bgOverlayClass = isLight
-        ? (isIOS ? 'bg-white/95 backdrop-blur-3xl' : 'bg-[#FAF8FC]/98 backdrop-blur-2xl')
-        : isColorful
-            ? 'bg-[#050023]/95 backdrop-blur-3xl'
-            : (isIOS ? 'bg-black/95 backdrop-blur-3xl' : 'bg-[#111114]/98 backdrop-blur-2xl');
+
 
     const [messages, setMessages] = useState<{ id: number, role: 'user' | 'assistant', text: string }[]>([]);
     const [input, setInput] = useState("");
@@ -338,10 +333,6 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
         ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/40 text-black rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.05)]' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 text-white rounded-3xl rounded-tl-md shadow-[0_8px_30px_rgb(0,0,0,0.2)]')
         : (isLight ? 'bg-[#FEF7FF]/80 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-3xl rounded-tl-sm shadow-sm' : 'bg-[#2B2930]/80 backdrop-blur-xl border border-[#4A4458]/50 text-[#E8DEF8] rounded-3xl rounded-tl-sm shadow-sm');
 
-    const headerClass = isIOS
-        ? (isLight ? 'border-b border-black/5' : 'border-b border-white/5')
-        : '';
-
 
 
     return (
@@ -350,15 +341,9 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
-            className={`absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden ${bgOverlayClass}`}
+            className={`absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden pt-[110px] bg-transparent`}
         >
-            {/* Header */}
-            <div className={`p-4 flex justify-between items-center shrink-0 ${headerClass} ${isIOS ? 'pt-4' : 'pt-6'}`}>
-                <div className="flex gap-2 items-center">
-                    <Icon name="auto_awesome" className={`text-2xl ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`} />
-                    <h2 className="text-xl font-bold tracking-tight">AI Assistant</h2>
-                </div>
-            </div>
+            {/* Main Assistant Area */}
 
             {/* Content Area */}
             {messages.length === 0 ? (
@@ -508,7 +493,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className={`absolute inset-0 overflow-y-auto p-4 space-y-4 pb-32 scrollbar-none ${isIOS ? 'pt-4' : 'pt-6'}`}
+            className={`absolute inset-0 overflow-y-auto p-4 space-y-4 pb-32 scrollbar-none pt-[110px]`}
         >
             <h2 className={`${isIOS ? 'text-2xl font-bold tracking-tight px-1' : 'text-xl font-medium px-2 text-[#6750A4]'}`}>
                 Market Alerts
@@ -555,12 +540,14 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className={`absolute inset-0 overflow-y-auto p-4 pb-32 scrollbar-none ${isIOS ? 'pt-4' : 'pt-6'}`}
+            className={`absolute inset-0 overflow-y-auto p-4 pb-32 scrollbar-none pt-[110px]`}
         >
-            <div className={`p-4 flex justify-between items-center shrink-0 mb-2 ${isIOS ? (isLight ? 'border-b border-black/5' : 'border-b border-white/5') : ''}`}>
-                <h2 className="text-xl font-bold tracking-tight">Profile</h2>
+            <div className={`p-1 flex justify-between items-center shrink-0 mb-4`}>
+                <h2 className="text-xl font-bold tracking-tight ml-1">Profile</h2>
                 <div className="flex gap-3">
-                    <Icon name="settings" className="opacity-70 text-xl" />
+                    <button className={`w-8 h-8 rounded-full flex items-center justify-center ${isIOS ? (isLight ? 'bg-black/5' : 'bg-white/10') : 'bg-[#EADDFF]/50 dark:bg-[#4A4458]/50'}`}>
+                        <Icon name="settings" className="opacity-70 text-[18px]" />
+                    </button>
                 </div>
             </div>
 
