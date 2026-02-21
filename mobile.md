@@ -22,19 +22,19 @@ The solution will deliver:
 
 ### Primary UI Framework
 
-> **Konsta UI will be used as the primary UI framework across iOS and Android.**
+> **Tailwind CSS will be used as the primary styling framework across iOS and Android prototypes.**
 
-Konsta UI enables:
-- Native-feeling iOS and Material-based Android styling
-- Platform-specific theming
-- Shared component architecture
-- Faster cross-platform consistency
+Tailwind CSS enables:
+- Rapid UI prototyping and iteration
+- Custom, highly specific styling without writing custom CSS files
+- Shared design tokens via tailwind.config
+- Complete control over the visual presentation
 - Efficient prototyping-to-production workflow
 
-Konsta UI will be customized to:
-- Align with iOS 26 Human Interface best practices
-- Align with Android 16 Material design evolution
-- Support enterprise-grade visual hierarchy
+Tailwind CSS will be customized to:
+- Implement custom design system tokens
+- Align with specific enterprise visual requirements
+- Ensure high accessibility and contrast standards
 - Support complex AI-driven interfaces
 
 ---
@@ -42,7 +42,7 @@ Konsta UI will be customized to:
 ## 2. Architecture Overview
 
 ### Frontend
-- Konsta UI (Primary UI Framework)
+- Tailwind CSS (Primary Styling Framework)
 - React-based mobile stack
 - Shared design tokens
 - Platform-aware styling
@@ -158,7 +158,7 @@ Konsta UI will be customized to:
 - Spacing system
 - Motion principles
 
-#### Components (Built on Konsta UI)
+#### Components (Built with Tailwind CSS)
 - AI Response Card
 - Source Citation Block
 - Confidence Indicator

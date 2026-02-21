@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -9,6 +9,7 @@ import Navigation from '@/components/Navigation';
 
 export default function MarketIntelligenceClient() {
     const [activeTab, setActiveTab] = useState(0);
+    const [isPrototypeModalOpen, setIsPrototypeModalOpen] = useState(false);
 
     useEffect(() => {
         // Ensure Tajawal font is loaded
@@ -37,7 +38,7 @@ export default function MarketIntelligenceClient() {
                 timeline: "Timeline",
                 timelineValue: "18+ Weeks",
                 tools: "Tools & Technologies",
-                toolsValue: "Figma, Reat, Konsta UI, iOS 26/Android 16 patterns",
+                toolsValue: "Figma, React, Tailwind CSS, iOS 26/Android 16 patterns",
                 standards: "Key Features",
                 standardsValue: "Conversational AI, Real-time Alerts, Streaming UX",
                 roles: "My Role",
@@ -64,8 +65,8 @@ export default function MarketIntelligenceClient() {
                 objective5: "Enforce enterprise-grade security and compliance",
 
                 // UI Framework
-                frameworkTitle: "Konsta UI & Architecture",
-                frameworkDesc: "Built on Konsta UI to ensure native-feeling iOS and Android styling while sharing a core component architecture.",
+                frameworkTitle: "Tailwind CSS & Architecture",
+                frameworkDesc: "Built on Tailwind CSS to ensure rapid, highly customizable iOS and Android styling while sharing a core component architecture and design tokens.",
 
                 // UX Section
                 iosPatternsTitle: "iOS 26 Best Practices",
@@ -108,7 +109,7 @@ export default function MarketIntelligenceClient() {
                 timeline: "Aikataulu",
                 timelineValue: "Yli 18 viikkoa",
                 tools: "Työkalut & Teknologiat",
-                toolsValue: "Figma, Reat, Konsta UI, iOS 26/Android 16 -mallit",
+                toolsValue: "Figma, React, Tailwind CSS, iOS 26/Android 16 -mallit",
                 standards: "Tärkeimmät ominaisuudet",
                 standardsValue: "Keskusteleva tekoäly, reaaliaikaiset hälytykset, virtaava UX",
                 roles: "Roolini",
@@ -135,8 +136,8 @@ export default function MarketIntelligenceClient() {
                 objective5: "Valvoa yritystason turvallisuutta ja vaatimustenmukaisuutta",
 
                 // UI Framework
-                frameworkTitle: "Konsta UI ja arkkitehtuuri",
-                frameworkDesc: "Rakennettu Konsta UI:n päälle varmistaakseen natiivin tuntuisen iOS- ja Android-tyylin samalla kun jaetaan ydinkomponenttiarkkitehtuuri.",
+                frameworkTitle: "Tailwind CSS ja arkkitehtuuri",
+                frameworkDesc: "Rakennettu Tailwind CSS:n päälle varmistaakseen nopean ja erittäin mukautettavan iOS- ja Android-tyylin samalla kun jaetaan ydinkomponenttiarkkitehtuuri ja suunnittelutokenit.",
 
                 // UX Section
                 iosPatternsTitle: "iOS 26 -parhaat käytännöt",
@@ -176,18 +177,18 @@ export default function MarketIntelligenceClient() {
     const content = getLocalizedContent();
 
     const tabs = [
-        { id: 0, label: content.overviewTab, icon: "overview" },
+        { id: 0, label: content.overviewTab, icon: "visibility" },
         { id: 1, label: content.uxTab, icon: "smartphone" },
-        { id: 2, label: content.systemTab, icon: "verified_user" },
-        { id: 3, label: content.impactTab, icon: "schema" }
+        { id: 2, label: content.systemTab, icon: "shield" },
+        { id: 3, label: content.impactTab, icon: "account_tree" }
     ];
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${isColorful
-                ? 'bg-[#050023]'
-                : isLight
-                    ? 'bg-gradient-to-br from-slate-50 to-gray-100'
-                    : 'bg-gradient-to-br from-gray-900 to-black'
+            ? 'bg-[#050023]'
+            : isLight
+                ? 'bg-gradient-to-br from-slate-50 to-gray-100'
+                : 'bg-gradient-to-br from-gray-900 to-black'
             }`}>
             <Navigation />
 
@@ -216,6 +217,13 @@ export default function MarketIntelligenceClient() {
                                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
                                     {content.subtitle}
                                 </p>
+                                <button
+                                    onClick={() => setIsPrototypeModalOpen(true)}
+                                    className="mt-6 flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-indigo-500/30"
+                                >
+                                    <span className="material-symbols text-2xl">play_circle</span>
+                                    <span>View Interactive Prototypes</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -241,8 +249,8 @@ export default function MarketIntelligenceClient() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
                         <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                                ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30'
-                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
+                            ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30'
+                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
                             }`}>
                             <span className="material-symbols text-3xl text-blue-400 mb-3 block">devices</span>
                             <h3 className={`font-bold mb-2 ${isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white'
@@ -252,8 +260,8 @@ export default function MarketIntelligenceClient() {
                         </div>
 
                         <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                                ? 'bg-gradient-to-br from-violet-500/20 to-purple-600/20 border border-violet-400/30'
-                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
+                            ? 'bg-gradient-to-br from-violet-500/20 to-purple-600/20 border border-violet-400/30'
+                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
                             }`}>
                             <span className="material-symbols text-3xl text-violet-400 mb-3 block">schedule</span>
                             <h3 className={`font-bold mb-2 ${isColorful ? 'text-violet-300' : isLight ? 'text-gray-900' : 'text-white'
@@ -263,8 +271,8 @@ export default function MarketIntelligenceClient() {
                         </div>
 
                         <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                                ? 'bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30'
-                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
+                            ? 'bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30'
+                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
                             }`}>
                             <span className="material-symbols text-3xl text-emerald-400 mb-3 block">memory</span>
                             <h3 className={`font-bold mb-2 ${isColorful ? 'text-emerald-300' : isLight ? 'text-gray-900' : 'text-white'
@@ -274,8 +282,8 @@ export default function MarketIntelligenceClient() {
                         </div>
 
                         <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                                ? 'bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-400/30'
-                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
+                            ? 'bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-400/30'
+                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
                             }`}>
                             <span className="material-symbols text-3xl text-amber-400 mb-3 block">person</span>
                             <h3 className={`font-bold mb-2 ${isColorful ? 'text-amber-300' : isLight ? 'text-gray-900' : 'text-white'
@@ -293,24 +301,24 @@ export default function MarketIntelligenceClient() {
                         transition={{ duration: 0.6, delay: 0.4 }}
                     >
                         <div className={`flex overflow-x-auto rounded-2xl p-2 scrollbar-none ${isColorful
-                                ? 'bg-blue-900/30 backdrop-blur-lg border border-blue-400/30'
-                                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                            ? 'bg-blue-900/30 backdrop-blur-lg border border-blue-400/30'
+                            : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                             }`}>
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center space-x-3 px-6 py-4 rounded-xl transition-all duration-300 whitespace-nowrap ${activeTab === tab.id
-                                            ? isColorful
-                                                ? 'bg-gradient-to-r from-blue-500/40 to-indigo-500/40 text-blue-300 border border-blue-400/50'
-                                                : isLight
-                                                    ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
-                                                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
-                                            : isColorful
-                                                ? 'text-gray-300 hover:bg-blue-500/20'
-                                                : isLight
-                                                    ? 'text-gray-600 hover:bg-gray-50'
-                                                    : 'text-gray-300 hover:bg-gray-700'
+                                        ? isColorful
+                                            ? 'bg-gradient-to-r from-blue-500/40 to-indigo-500/40 text-blue-300 border border-blue-400/50'
+                                            : isLight
+                                                ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
+                                                : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
+                                        : isColorful
+                                            ? 'text-gray-300 hover:bg-blue-500/20'
+                                            : isLight
+                                                ? 'text-gray-600 hover:bg-gray-50'
+                                                : 'text-gray-300 hover:bg-gray-700'
                                         }`}
                                 >
                                     <span className="material-symbols text-lg">{tab.icon}</span>
@@ -334,8 +342,8 @@ export default function MarketIntelligenceClient() {
                                 {/* Problem vs Solution */}
                                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                                     <div className={`p-8 rounded-3xl ${isColorful
-                                            ? 'bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20'
-                                            : isLight ? 'bg-red-50' : 'bg-gray-800/50 border border-red-900/50'
+                                        ? 'bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20'
+                                        : isLight ? 'bg-red-50' : 'bg-gray-800/50 border border-red-900/50'
                                         }`}>
                                         <span className="material-symbols text-4xl text-red-500 mb-4 block">warning</span>
                                         <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-red-400' : isLight ? 'text-red-900' : 'text-red-400'
@@ -345,8 +353,8 @@ export default function MarketIntelligenceClient() {
                                     </div>
 
                                     <div className={`p-8 rounded-3xl ${isColorful
-                                            ? 'bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20'
-                                            : isLight ? 'bg-emerald-50' : 'bg-gray-800/50 border border-emerald-900/50'
+                                        ? 'bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20'
+                                        : isLight ? 'bg-emerald-50' : 'bg-gray-800/50 border border-emerald-900/50'
                                         }`}>
                                         <span className="material-symbols text-4xl text-emerald-500 mb-4 block">lightbulb</span>
                                         <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-emerald-400' : isLight ? 'text-emerald-900' : 'text-emerald-400'
@@ -364,8 +372,8 @@ export default function MarketIntelligenceClient() {
                                     transition={{ duration: 0.6, delay: 0.2 }}
                                 >
                                     <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400'
-                                            : isLight ? 'text-gray-900' : 'text-white'
+                                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400'
+                                        : isLight ? 'text-gray-900' : 'text-white'
                                         }`}>{content.objectivesTitle}</h2>
 
                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -377,8 +385,8 @@ export default function MarketIntelligenceClient() {
                                             { icon: "security", text: content.objective5 }
                                         ].map((objective, index) => (
                                             <div key={index} className={`p-6 rounded-2xl ${isColorful
-                                                    ? 'bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-400/30 backdrop-blur-lg'
-                                                    : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                                                ? 'bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-400/30 backdrop-blur-lg'
+                                                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                                                 }`}>
                                                 <span className={`material-symbols text-2xl mb-4 block ${isColorful ? 'text-blue-400' : isLight ? 'text-indigo-500' : 'text-indigo-400'
                                                     }`}>{objective.icon}</span>
@@ -402,11 +410,11 @@ export default function MarketIntelligenceClient() {
                                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                                     {/* iOS Patterns */}
                                     <div className={`p-8 rounded-2xl ${isColorful
-                                            ? 'bg-gradient-to-br from-zinc-800/80 to-stone-900/80 border border-zinc-600/50'
-                                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
+                                        ? 'bg-gradient-to-br from-zinc-800/80 to-stone-900/80 border border-zinc-600/50'
+                                        : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
                                         }`}>
                                         <div className="flex items-center mb-6">
-                                            <span className="material-symbols text-3xl text-gray-400 mr-4">apple</span>
+                                            <span className="material-symbols text-3xl text-gray-400 mr-4">phone_iphone</span>
                                             <h3 className={`text-2xl font-bold ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'
                                                 }`}>{content.iosPatternsTitle}</h3>
                                         </div>
@@ -416,8 +424,8 @@ export default function MarketIntelligenceClient() {
 
                                     {/* Android Patterns */}
                                     <div className={`p-8 rounded-2xl ${isColorful
-                                            ? 'bg-gradient-to-br from-green-900/40 to-emerald-900/40 border border-green-500/30'
-                                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
+                                        ? 'bg-gradient-to-br from-green-900/40 to-emerald-900/40 border border-green-500/30'
+                                        : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
                                         }`}>
                                         <div className="flex items-center mb-6">
                                             <span className="material-symbols text-3xl text-green-500 mr-4">android</span>
@@ -436,8 +444,8 @@ export default function MarketIntelligenceClient() {
                                     transition={{ duration: 0.6, delay: 0.2 }}
                                 >
                                     <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400'
-                                            : isLight ? 'text-gray-900' : 'text-white'
+                                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400'
+                                        : isLight ? 'text-gray-900' : 'text-white'
                                         }`}>{content.coreFlowsTitle}</h2>
 
                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -449,8 +457,8 @@ export default function MarketIntelligenceClient() {
                                             { icon: "notifications_active", text: content.flow5 }
                                         ].map((flow, index) => (
                                             <div key={index} className={`p-6 rounded-2xl flex items-center space-x-4 ${isColorful
-                                                    ? 'bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-400/30 backdrop-blur-lg'
-                                                    : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                                                ? 'bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-400/30 backdrop-blur-lg'
+                                                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                                                 }`}>
                                                 <div className={`flex items-center justify-center w-12 h-12 rounded-full ${isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-900/50 text-indigo-400'
                                                     }`}>
@@ -477,8 +485,8 @@ export default function MarketIntelligenceClient() {
                                     {/* Frame & Latency */}
                                     <div>
                                         <div className={`p-8 rounded-2xl mb-8 ${isColorful
-                                                ? 'bg-gradient-to-br from-blue-900/40 to-indigo-900/40 border border-blue-500/30'
-                                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
+                                            ? 'bg-gradient-to-br from-blue-900/40 to-indigo-900/40 border border-blue-500/30'
+                                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
                                             }`}>
                                             <div className="flex items-center mb-6">
                                                 <span className="material-symbols text-3xl text-blue-500 mr-4">construction</span>
@@ -490,8 +498,8 @@ export default function MarketIntelligenceClient() {
                                         </div>
 
                                         <div className={`p-8 rounded-2xl ${isColorful
-                                                ? 'bg-gradient-to-br from-orange-900/40 to-red-900/40 border border-orange-500/30'
-                                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
+                                            ? 'bg-gradient-to-br from-orange-900/40 to-red-900/40 border border-orange-500/30'
+                                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
                                             }`}>
                                             <div className="flex items-center mb-6">
                                                 <span className="material-symbols text-3xl text-orange-500 mr-4">hourglass_top</span>
@@ -506,8 +514,8 @@ export default function MarketIntelligenceClient() {
                                     {/* AI Patterns & Trust */}
                                     <div>
                                         <div className={`p-8 rounded-2xl mb-8 ${isColorful
-                                                ? 'bg-gradient-to-br from-purple-900/40 to-fuchsia-900/40 border border-purple-500/30'
-                                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
+                                            ? 'bg-gradient-to-br from-purple-900/40 to-fuchsia-900/40 border border-purple-500/30'
+                                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
                                             }`}>
                                             <div className="flex items-center mb-6">
                                                 <span className="material-symbols text-3xl text-purple-500 mr-4">psychology</span>
@@ -519,8 +527,8 @@ export default function MarketIntelligenceClient() {
                                         </div>
 
                                         <div className={`p-8 rounded-2xl ${isColorful
-                                                ? 'bg-gradient-to-br from-emerald-900/40 to-teal-900/40 border border-emerald-500/30'
-                                                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
+                                            ? 'bg-gradient-to-br from-emerald-900/40 to-teal-900/40 border border-emerald-500/30'
+                                            : isLight ? 'bg-white shadow-xl' : 'bg-gray-800'
                                             }`}>
                                             <div className="flex items-center mb-6">
                                                 <span className="material-symbols text-3xl text-emerald-500 mr-4">policy</span>
@@ -550,20 +558,20 @@ export default function MarketIntelligenceClient() {
                                     transition={{ duration: 0.6, delay: 0.2 }}
                                 >
                                     <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400'
-                                            : isLight ? 'text-gray-900' : 'text-white'
+                                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400'
+                                        : isLight ? 'text-gray-900' : 'text-white'
                                         }`}>{content.metricsTitle}</h2>
 
                                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                                         {[
                                             { icon: "ads_click", text: content.captureMetric },
-                                            { icon: "verified", text: content.trustMetric },
-                                            { icon: "vital_signs", text: content.engagementMetric },
-                                            { icon: "calendar_month", text: content.retentionMetric },
+                                            { icon: "check_circle", text: content.trustMetric },
+                                            { icon: "monitoring", text: content.engagementMetric },
+                                            { icon: "event", text: content.retentionMetric },
                                         ].map((objective, index) => (
                                             <div key={index} className={`p-6 rounded-2xl ${isColorful
-                                                    ? 'bg-gradient-to-br from-teal-900/30 to-emerald-900/30 border border-teal-400/30 backdrop-blur-lg'
-                                                    : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                                                ? 'bg-gradient-to-br from-teal-900/30 to-emerald-900/30 border border-teal-400/30 backdrop-blur-lg'
+                                                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                                                 }`}>
                                                 <span className={`material-symbols text-3xl mb-4 block ${isColorful ? 'text-teal-400' : isLight ? 'text-teal-500' : 'text-teal-400'
                                                     }`}>{objective.icon}</span>
@@ -580,6 +588,72 @@ export default function MarketIntelligenceClient() {
                     </div>
                 </div>
             </main>
+
+            {/* Full Screen Prototype Modal */}
+            <AnimatePresence>
+                {isPrototypeModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8"
+                    >
+                        <div className="relative w-full max-w-7xl h-full max-h-[90vh] flex flex-col bg-gray-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
+
+                            {/* Modal Header */}
+                            <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0">
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white">Interactive Prototypes</h2>
+                                    <p className="text-gray-400">Experience the AI-powered interface natively across iOS and Android</p>
+                                </div>
+                                <button
+                                    onClick={() => setIsPrototypeModalOpen(false)}
+                                    className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+                                >
+                                    <span className="material-symbols text-3xl">close</span>
+                                </button>
+                            </div>
+
+                            {/* Modal Content - Side by Side Iframes */}
+                            <div className="flex-1 flex flex-col md:flex-row gap-8 p-6 md:p-8 overflow-y-auto bg-black/50">
+                                {/* iOS Prototype */}
+                                <div className="flex-1 flex flex-col items-center">
+                                    <div className="flex items-center space-x-2 mb-4 text-white">
+                                        <span className="material-symbols text-2xl">phone_iphone</span>
+                                        <h3 className="text-xl font-medium">iOS 26 Style</h3>
+                                    </div>
+                                    <div className="w-full max-w-[390px] h-[844px] shrink-0 rounded-[3rem] border-[8px] border-neutral-800 bg-black overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-3xl z-50"></div>
+                                        <iframe
+                                            src="/mobile?os=ios"
+                                            title="iOS Prototype"
+                                            className="w-full h-full border-none"
+                                            allow="payment; fullscreen"
+                                        />
+                                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-white/30 rounded-full z-50"></div>
+                                    </div>
+                                </div>
+
+                                {/* Android Prototype */}
+                                <div className="flex-1 flex flex-col items-center">
+                                    <div className="flex items-center space-x-2 mb-4 text-[#4dd0e1]">
+                                        <span className="material-symbols text-2xl">android</span>
+                                        <h3 className="text-xl font-medium font-sans">Android 16 Style</h3>
+                                    </div>
+                                    <div className="w-full max-w-[412px] h-[892px] shrink-0 rounded-[2.5rem] border-[6px] border-neutral-800 bg-black overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
+                                        <iframe
+                                            src="/mobile?os=android"
+                                            title="Android Prototype"
+                                            className="w-full h-full border-none"
+                                            allow="payment; fullscreen"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
