@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -9,7 +9,6 @@ import Navigation from '@/components/Navigation';
 
 export default function MarketIntelligenceClient() {
     const [activeTab, setActiveTab] = useState(0);
-    const [isPrototypeModalOpen, setIsPrototypeModalOpen] = useState(false);
 
     useEffect(() => {
         // Ensure Tajawal font is loaded
@@ -218,7 +217,12 @@ export default function MarketIntelligenceClient() {
                                     {content.subtitle}
                                 </p>
                                 <button
-                                    onClick={() => setIsPrototypeModalOpen(true)}
+                                    onClick={() => {
+                                        setActiveTab(0);
+                                        setTimeout(() => {
+                                            document.getElementById('interactive-prototypes')?.scrollIntoView({ behavior: 'smooth' });
+                                        }, 100);
+                                    }}
                                     className="mt-6 flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-indigo-500/30"
                                 >
                                     <span className="material-symbols text-2xl">play_circle</span>
@@ -394,6 +398,66 @@ export default function MarketIntelligenceClient() {
                                                     }`}>{objective.text}</p>
                                             </div>
                                         ))}
+                                    </div>
+                                </motion.section>
+
+                                {/* Embedded Mobile Prototypes */}
+                                <motion.section
+                                    id="interactive-prototypes"
+                                    className="pt-16 mt-16 border-t border-gray-200 dark:border-gray-800"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                >
+                                    <div className="text-center mb-12">
+                                        <h2 className={`text-3xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400' : isLight ? 'text-gray-900' : 'text-white'}`}>Interactive Prototypes</h2>
+                                        <p className={`text-lg max-w-2xl mx-auto ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>Experience the AI-powered interface natively across iOS and Android side-by-side.</p>
+                                    </div>
+
+                                    <div className="flex flex-col xl:flex-row gap-12 items-center xl:items-start justify-center overflow-visible">
+                                        {/* iOS Prototype */}
+                                        <div className="flex flex-col items-center">
+                                            <div className={`flex items-center space-x-2 mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
+                                                <span className="material-symbols text-2xl">phone_iphone</span>
+                                                <h3 className="text-xl font-medium">iOS 26 Style</h3>
+                                            </div>
+                                            <div className="transform scale-[0.80] sm:scale-[0.85] origin-top">
+                                                <div
+                                                    className={`w-[390px] h-[844px] shrink-0 rounded-[3rem] border-[8px] overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)] ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
+                                                    style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', isolation: 'isolate' }}
+                                                >
+                                                    <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] rounded-b-3xl z-50 ${isLight ? 'bg-gray-800' : 'bg-black'}`}></div>
+                                                    <iframe
+                                                        src={`/mobile?os=ios&theme=${theme}`}
+                                                        title="iOS Prototype"
+                                                        className="w-full h-full border-none rounded-[2.5rem]"
+                                                        allow="payment; fullscreen"
+                                                    />
+                                                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-white/30 rounded-full z-50"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Android Prototype */}
+                                        <div className="flex flex-col items-center">
+                                            <div className={`flex items-center space-x-2 mb-6 ${isLight ? 'text-teal-600' : 'text-[#4dd0e1]'}`}>
+                                                <span className="material-symbols text-2xl">android</span>
+                                                <h3 className="text-xl font-medium font-sans">Android 16 Style</h3>
+                                            </div>
+                                            <div className="transform scale-[0.80] sm:scale-[0.85] origin-top">
+                                                <div
+                                                    className={`w-[412px] h-[892px] shrink-0 rounded-[2.5rem] border-[6px] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)] relative ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
+                                                    style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', isolation: 'isolate' }}
+                                                >
+                                                    <iframe
+                                                        src={`/mobile?os=android&theme=${theme}`}
+                                                        title="Android Prototype"
+                                                        className="w-full h-full border-none rounded-[2rem]"
+                                                        allow="payment; fullscreen"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </motion.section>
                             </motion.div>
@@ -588,72 +652,6 @@ export default function MarketIntelligenceClient() {
                     </div>
                 </div>
             </main>
-
-            {/* Full Screen Prototype Modal */}
-            <AnimatePresence>
-                {isPrototypeModalOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8"
-                    >
-                        <div className="relative w-full max-w-7xl h-full max-h-[90vh] flex flex-col bg-gray-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
-
-                            {/* Modal Header */}
-                            <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0">
-                                <div>
-                                    <h2 className="text-2xl font-bold text-white">Interactive Prototypes</h2>
-                                    <p className="text-gray-400">Experience the AI-powered interface natively across iOS and Android</p>
-                                </div>
-                                <button
-                                    onClick={() => setIsPrototypeModalOpen(false)}
-                                    className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
-                                >
-                                    <span className="material-symbols text-3xl">close</span>
-                                </button>
-                            </div>
-
-                            {/* Modal Content - Side by Side Iframes */}
-                            <div className="flex-1 flex flex-col md:flex-row gap-8 p-6 md:p-8 overflow-y-auto bg-black/50">
-                                {/* iOS Prototype */}
-                                <div className="flex-1 flex flex-col items-center">
-                                    <div className="flex items-center space-x-2 mb-4 text-white">
-                                        <span className="material-symbols text-2xl">phone_iphone</span>
-                                        <h3 className="text-xl font-medium">iOS 26 Style</h3>
-                                    </div>
-                                    <div className="w-full max-w-[390px] h-[844px] shrink-0 rounded-[3rem] border-[8px] border-neutral-800 bg-black overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-3xl z-50"></div>
-                                        <iframe
-                                            src="/mobile?os=ios"
-                                            title="iOS Prototype"
-                                            className="w-full h-full border-none"
-                                            allow="payment; fullscreen"
-                                        />
-                                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-white/30 rounded-full z-50"></div>
-                                    </div>
-                                </div>
-
-                                {/* Android Prototype */}
-                                <div className="flex-1 flex flex-col items-center">
-                                    <div className="flex items-center space-x-2 mb-4 text-[#4dd0e1]">
-                                        <span className="material-symbols text-2xl">android</span>
-                                        <h3 className="text-xl font-medium font-sans">Android 16 Style</h3>
-                                    </div>
-                                    <div className="w-full max-w-[412px] h-[892px] shrink-0 rounded-[2.5rem] border-[6px] border-neutral-800 bg-black overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
-                                        <iframe
-                                            src="/mobile?os=android"
-                                            title="Android Prototype"
-                                            className="w-full h-full border-none"
-                                            allow="payment; fullscreen"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </div>
     );
 }
