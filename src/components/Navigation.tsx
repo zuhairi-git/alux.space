@@ -49,6 +49,7 @@ const navItems: NavItem[] = [
       { href: '/portfolio/accessibility', labelKey: 'portfolio.cases.accessibility', icon: 'accessibility_new' },
       { href: '/portfolio/collaboration', labelKey: 'portfolio.cases.collaboration', icon: 'groups' },
       { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history' },
+      { href: '/portfolio/market-intelligence-app', labelKey: 'portfolio.cases.marketIntelligence', icon: 'smartphone' },
     ]
   },
   { href: '/blog', labelKey: 'nav.blog', icon: 'article' },
@@ -93,16 +94,16 @@ const Navigation = () => {
   // Helper to check if a nav item is active
   const isNavItemActive = (item: NavItem): boolean => {
     const itemPath = localizedHref(item.href);
-    
+
     // Remove hash anchors for comparison (e.g., /#work-experience -> /)
     const cleanPathname = pathname.split('#')[0];
     const cleanItemPath = itemPath.split('#')[0];
-    
+
     // Exact match for home page
     if (cleanItemPath === `/${locale}` || cleanItemPath === `/${locale}/`) {
       return cleanPathname === `/${locale}` || cleanPathname === `/${locale}/`;
     }
-    
+
     // For other pages, check if current path starts with item path
     // This handles both exact matches and child pages
     return cleanPathname.startsWith(cleanItemPath);
@@ -111,22 +112,22 @@ const Navigation = () => {
   return (
     <>
       {/* Desktop Navigation (Top Pill) */}
-      <DesktopNav 
-        hidden={hidden} 
-        theme={theme} 
-        t={t} 
-        localizedHref={localizedHref} 
+      <DesktopNav
+        hidden={hidden}
+        theme={theme}
+        t={t}
+        localizedHref={localizedHref}
         trackEvent={trackEvent}
         pathname={pathname}
         isNavItemActive={isNavItemActive}
       />
 
       {/* Mobile Navigation (Bottom Dock) */}
-      <MobileNav 
-        hidden={hidden} 
-        theme={theme} 
-        t={t} 
-        localizedHref={localizedHref} 
+      <MobileNav
+        hidden={hidden}
+        theme={theme}
+        t={t}
+        localizedHref={localizedHref}
         pathname={pathname}
         isNavItemActive={isNavItemActive}
       />
@@ -164,14 +165,14 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
       }}
     >
       {/* Logo/Avatar */}
-      <Link 
+      <Link
         href={localizedHref('/')}
         className={`
           flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg ml-1 mr-2 shadow-md transition-all duration-300
-          ${theme === 'colorful' 
-            ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-fuchsia-500/25' 
-            : theme === 'light' 
-              ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-blue-500/25' 
+          ${theme === 'colorful'
+            ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-fuchsia-500/25'
+            : theme === 'light'
+              ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-blue-500/25'
               : 'bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-blue-400/25'
           }
         `}
@@ -183,11 +184,11 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
       {/* Nav Items */}
       <div className="flex items-center gap-1">
         {navItems.map((item) => (
-          <DesktopNavItem 
-            key={item.href} 
-            item={item} 
-            theme={theme} 
-            t={t} 
+          <DesktopNavItem
+            key={item.href}
+            item={item}
+            theme={theme}
+            t={t}
             localizedHref={localizedHref}
             trackEvent={trackEvent}
             isActive={isNavItemActive(item)}
@@ -230,13 +231,13 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
   const isChildActive = (childHref: string): boolean => {
     const cleanPathname = pathname.split('#')[0];
     const cleanChildPath = localizedHref(childHref).split('#')[0];
-    
+
     // Exact match
     return cleanPathname === cleanChildPath;
   };
 
   return (
-    <div 
+    <div
       className="relative"
       onMouseEnter={() => {
         setHoveredTab(item.href);
@@ -252,8 +253,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
         onClick={() => trackEvent('desktop_nav_click', 'navigation', item.labelKey)}
         className={`
           relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 whitespace-nowrap
-          ${isActive 
-            ? (theme === 'colorful' ? 'text-fuchsia-400 bg-fuchsia-500/20' : theme === 'light' ? 'text-blue-600 bg-blue-50' : 'text-blue-400 bg-blue-900/20') 
+          ${isActive
+            ? (theme === 'colorful' ? 'text-fuchsia-400 bg-fuchsia-500/20' : theme === 'light' ? 'text-blue-600 bg-blue-50' : 'text-blue-400 bg-blue-900/20')
             : (theme === 'colorful' ? 'text-purple-200 hover:text-white' : theme === 'light' ? 'text-gray-600 hover:text-gray-900' : 'text-gray-400 hover:text-gray-100')
           }
         `}
@@ -285,8 +286,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
               absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
               ${theme === 'colorful'
                 ? 'bg-[#050023]/90 border-purple-500/30'
-                : theme === 'light' 
-                  ? 'bg-white/90 border-gray-200' 
+                : theme === 'light'
+                  ? 'bg-white/90 border-gray-200'
                   : 'bg-gray-900/90 border-gray-700'
               }
             `}
@@ -305,8 +306,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                         : 'bg-blue-900/30 text-blue-400 font-medium')
                     : (theme === 'colorful'
                       ? 'text-purple-200 hover:bg-purple-900/40 hover:text-fuchsia-400'
-                      : theme === 'light' 
-                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' 
+                      : theme === 'light'
+                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
                         : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400')
                   }
                 `}
@@ -351,38 +352,38 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
           md:hidden fixed bottom-6 left-4 right-4 z-50 h-16 rounded-2xl border backdrop-blur-xl shadow-lg shadow-black/10 flex items-center justify-between px-2
           ${theme === 'colorful'
             ? 'bg-[#050023]/80 border-purple-500/30'
-            : theme === 'light' 
-              ? 'bg-white/80 border-white/50' 
+            : theme === 'light'
+              ? 'bg-white/80 border-white/50'
               : 'bg-gray-900/80 border-gray-800/50'
           }
         `}
       >
         {/* Main Links */}
         <div className="flex items-center justify-around w-full">
-          <MobileDockItem 
-            href="/" 
-            icon="home" 
-            label={t('nav.home')} 
+          <MobileDockItem
+            href="/"
+            icon="home"
+            label={t('nav.home')}
             isActive={pathname === localizedHref('/') || pathname === localizedHref('/')}
             theme={theme}
             localizedHref={localizedHref}
           />
-          <MobileDockItem 
-            href="/portfolio" 
-            icon="work" 
-            label={t('nav.portfolio')} 
+          <MobileDockItem
+            href="/portfolio"
+            icon="work"
+            label={t('nav.portfolio')}
             isActive={isNavItemActive({ href: '/portfolio', labelKey: 'nav.portfolio', icon: 'work' })}
             theme={theme}
             localizedHref={localizedHref}
           />
-          
+
           {/* Center Action Button (Menu) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`
               relative -top-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-95
-              ${isMenuOpen 
-                ? 'bg-red-500 text-white rotate-90' 
+              ${isMenuOpen
+                ? 'bg-red-500 text-white rotate-90'
                 : theme === 'colorful'
                   ? 'bg-gradient-to-br from-fuchsia-600 to-purple-600 text-white'
                   : 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
@@ -393,18 +394,18 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             <span className="material-symbols text-2xl">{isMenuOpen ? 'close' : 'grid_view'}</span>
           </button>
 
-          <MobileDockItem 
-            href="/blog" 
-            icon="article" 
-            label={t('nav.blog')} 
+          <MobileDockItem
+            href="/blog"
+            icon="article"
+            label={t('nav.blog')}
             isActive={isNavItemActive({ href: '/blog', labelKey: 'nav.blog', icon: 'article' })}
             theme={theme}
             localizedHref={localizedHref}
           />
-          <MobileDockItem 
-            href="/audio" 
-            icon="audio_file" 
-            label={t('nav.audio')} 
+          <MobileDockItem
+            href="/audio"
+            icon="audio_file"
+            label={t('nav.audio')}
             isActive={isNavItemActive({ href: '/audio', labelKey: 'nav.audio', icon: 'audio_file' })}
             theme={theme}
             localizedHref={localizedHref}
@@ -453,8 +454,8 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                               : 'bg-blue-900/30 border-blue-600/50 text-blue-300 ring-2 ring-blue-600/30')
                           : (theme === 'colorful'
                             ? 'bg-purple-900/20 border-purple-500/30 text-purple-100'
-                            : theme === 'light' 
-                              ? 'bg-gray-50 border-gray-200 text-gray-800' 
+                            : theme === 'light'
+                              ? 'bg-gray-50 border-gray-200 text-gray-800'
                               : 'bg-gray-800/50 border-gray-700 text-gray-200')
                         }
                       `}
@@ -511,8 +512,8 @@ const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDo
       href={localizedHref(href)}
       className={`
         flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors
-        ${isActive 
-          ? (theme === 'colorful' ? 'text-fuchsia-400' : theme === 'light' ? 'text-blue-600' : 'text-blue-400') 
+        ${isActive
+          ? (theme === 'colorful' ? 'text-fuchsia-400' : theme === 'light' ? 'text-blue-600' : 'text-blue-400')
           : (theme === 'colorful' ? 'text-purple-300' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
         }
       `}
@@ -522,7 +523,7 @@ const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDo
       </span>
       {/* <span className="text-[10px] font-medium">{label}</span> */}
       {isActive && (
-        <motion.div 
+        <motion.div
           layoutId="dock-dot"
           className={`w-1 h-1 rounded-full ${theme === 'colorful' ? 'bg-fuchsia-400' : theme === 'light' ? 'bg-blue-600' : 'bg-blue-400'}`}
         />

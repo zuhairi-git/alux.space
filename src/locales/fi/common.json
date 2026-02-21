@@ -1,4 +1,5 @@
-{  "nav": {
+{
+  "nav": {
     "home": "Etusivu",
     "portfolio": "Portfolio",
     "blog": "Blogi",
@@ -9,21 +10,27 @@
     "strengthsSkills": "Vahvuudet & Taidot",
     "testimonials": "Suositukset"
   },
-  "close": "Sulje","portfolio": {
+  "close": "Sulje",
+  "portfolio": {
     "overview": "Kaikki Projektit",
     "cases": {
-      "accessibility": "Inklusiivinen suunnittelujärjestelmä",
+      "accessibility": "Digitaalinen saavutettavuus (WCAG)",
       "healthcare": "Terveydenhuollon priorisointi",
-      "collaboration": "Yhteistyö & Johtajuus",
-      "jobseeking": "Työnhaku"
+      "collaboration": "Työkalupakki etäyhteistyöhön",
+      "jobseeking": "Työnhakuavustaja",
+      "marketIntelligence": "Markkinatieto"
     }
-  },  "home": {    "hero": {
+  },
+  "home": {
+    "hero": {
       "title": "Hei, olen Ali Al-Zuhairi",
       "subtitle": "Tekoälyyn keskittynyt tuotejohtaja, joka muuttaa monimutkaisuuden selkeydeksi.",
       "cta": "Näytä Portfolio"
-    },    "about": {
+    },
+    "about": {
       "title": "Digitaalisten unelmien muuttaminen todellisuudeksi",
-      "intro": "Hei siellä! Olen Ali, suunnittelija, joka käyttää tekoälyä voimakkaana työkaluna uusien luovuuden tasojen avaamiseen. Damaskoksesta Helsinkiin, matkani on opettanut minulle, että hyvä suunnittelu tapahtuu inhimillisen intuition ja älykkään teknologian risteyksessä. Integroimalla tekoälyä prosessiini, tutkin tuoreita ideoita, ratkaisin monimutkaisia ongelmia ja luon kokemuksia, jotka ovat sekä merkityksellisiä että saavutettavia.",      "quote": "Inhimillisen luovuuden ja tekoälyinnovaation risteyskohdassa — missä täsmällinen prompt-tekniikka kohtaa visionäärisen suunnittelun.",
+      "intro": "Hei siellä! Olen Ali, suunnittelija, joka käyttää tekoälyä voimakkaana työkaluna uusien luovuuden tasojen avaamiseen. Damaskoksesta Helsinkiin, matkani on opettanut minulle, että hyvä suunnittelu tapahtuu inhimillisen intuition ja älykkään teknologian risteyksessä. Integroimalla tekoälyä prosessiini, tutkin tuoreita ideoita, ratkaisin monimutkaisia ongelmia ja luon kokemuksia, jotka ovat sekä merkityksellisiä että saavutettavia.",
+      "quote": "Inhimillisen luovuuden ja tekoälyinnovaation risteyskohdassa — missä täsmällinen prompt-tekniikka kohtaa visionäärisen suunnittelun.",
       "second": "Viimeisten parin vuoden aikana, kun tekoälyteknologiat nousivat nopeasti esiin, olin varhaisten omaksujien joukossa—innokas kokeilemaan ja integroimaan niitä todellisiin suunnittelutyönkulkuihin. Olen erikoistunut prompt-tekniikan käyttämiseen digitaalisten tuotteiden elävöittämiseen, tehden tekoälystä inhimillisemmän, saavutettavamman ja huomattavasti voimakkaampan tarkoituksellisen suunnittelun ja strategisen vuorovaikutuksen kautta.",
       "third": "Kun en suunnittele tekoälyn kanssa, löydät minut kokeilemasta uusia tekoälytyökaluja, luomasta tarkkoja prompteja jotka avaavat luovia mahdollisuuksia, tai mentoroimassa muita tekoälyn hyödyntämisessä parempien suunnittelutulosten saamiseksi."
     },
@@ -63,10 +70,12 @@
   "jobseeking": {
     "title": "Työnhakusovellus",
     "intro": "Mobiilisovellus, joka on suunniteltu virtaviivaistamaan työnhakua – erityisesti paikallisiin, osa-aikaisiin ja viikonlopputöihin. Luotu tekemään työnhausta nopeampaa, helpompaa ja tehokkaampaa ihmisille, jotka etsivät lisätuloja."
-  },  "blogPage": {
+  },
+  "blogPage": {
     "title": "Blogi & Näkemykset",
     "description": "Ajatuksia, oppimista ja näkökulmia suunnittelujohtajuuteen, tuotehallintaan ja luovuuden ja teknologian risteyskohtaan."
-  },  "blog": {
+  },
+  "blog": {
     "aria": {
       "listenToArticle": "Kuuntele artikkeli",
       "breadcrumb": "Blogin navigointi",
@@ -88,7 +97,8 @@
   "promptsPage": {
     "title": "Kehotekokoelma",
     "subtitle": "Kokoelma kehotteitani erilaisille luoville tekoälytyökaluille"
-  },  "footer": {
+  },
+  "footer": {
     "copyright": "Kaikki oikeudet pidätetään.",
     "quickLinks": "Pikavalinnat",
     "portfolio": "Portfolio",
@@ -103,7 +113,8 @@
       "portfolioLinks": "Portfolio- ja työlinkit",
       "emailContact": "Sähköpostiyhteydenottotiedot"
     }
-  },"languageSwitcher": {
+  },
+  "languageSwitcher": {
     "title": "Kieli",
     "en": "Englanti",
     "fi": "Suomi"
