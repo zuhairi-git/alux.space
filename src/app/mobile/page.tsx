@@ -161,7 +161,7 @@ function HomeView({ os, theme, onNavigate }: { os: string, theme: string, onNavi
             <div className={`p-5 shadow-sm ${isIOS ? (isLight ? 'bg-white border-black/5 rounded-3xl' : 'bg-[#1C1C1E] border-white/5 rounded-3xl') : (isLight ? 'bg-[#F3EDF7] rounded-[28px]' : 'bg-[#2B2930] rounded-[28px]')}`}>
                 <div className="flex items-center space-x-3 mb-4">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isIOS ? 'bg-[#007AFF] text-white' : 'bg-[#D0BCFF] text-[#381E72]'}`}>
-                        <Icon name="smart_toy" className="text-lg" />
+                        <Icon name="auto_awesome" className="text-lg" />
                     </div>
                     <h2 className={`font-semibold text-lg ${isIOS ? 'tracking-tight' : ''}`}>AI Assistant</h2>
                 </div>
@@ -355,7 +355,7 @@ function AssistantView({ os, theme }: { os: string, theme: string }) {
             {/* Header */}
             <div className={`p-4 flex justify-between items-center shrink-0 ${headerClass} ${isIOS ? 'pt-4' : 'pt-6'}`}>
                 <div className="flex gap-2 items-center">
-                    <Icon name="smart_toy" className={`text-2xl ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`} />
+                    <Icon name="auto_awesome" className={`text-2xl ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`} />
                     <h2 className="text-xl font-bold tracking-tight">AI Assistant</h2>
                 </div>
             </div>
@@ -596,16 +596,35 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                             <span className={`text-xs font-bold px-2 py-1 rounded-md ${isIOS ? 'bg-[#34C759]/10 text-[#34C759]' : 'bg-[#146C2E]/10 text-[#146C2E]'}`}>+12.4%</span>
                         </div>
 
-                        {/* Mock Graph Bars */}
-                        <div className="h-24 flex items-end justify-between gap-1.5 px-1 mt-6">
-                            {[40, 65, 45, 80, 55, 90, 75].map((height, i) => (
-                                <div key={i} className="w-full h-full relative group flex items-end">
+                        {/* Elegant Multi-Color Graph Bars */}
+                        <div className="h-28 flex items-end justify-between gap-2 px-1 mt-6 relative z-10">
+                            {/* Horizontal background lines wrapper */}
+                            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-between pointer-events-none opacity-[0.03] dark:opacity-10 z-0 border-b border-black dark:border-white">
+                                <div className="border-t border-black dark:border-white w-full h-1/3"></div>
+                                <div className="border-t border-black dark:border-white w-full h-1/3"></div>
+                                <div className="border-t border-black dark:border-white w-full h-1/3"></div>
+                            </div>
+
+                            {[
+                                { height: 40, colors: isIOS ? 'from-blue-400 to-blue-600' : 'from-purple-400 to-purple-600' },
+                                { height: 65, colors: isIOS ? 'from-indigo-400 to-indigo-600' : 'from-fuchsia-400 to-fuchsia-600' },
+                                { height: 45, colors: isIOS ? 'from-cyan-400 to-cyan-600' : 'from-pink-400 to-pink-600' },
+                                { height: 80, colors: isIOS ? 'from-teal-400 to-teal-600' : 'from-rose-400 to-rose-600' },
+                                { height: 55, colors: isIOS ? 'from-emerald-400 to-emerald-600' : 'from-orange-400 to-orange-600' },
+                                { height: 90, colors: isIOS ? 'from-green-400 to-green-600' : 'from-amber-400 to-amber-600' },
+                                { height: 75, colors: isIOS ? 'from-[#007AFF] to-[#5856D6] shadow-[0_4px_10px_rgba(0,122,255,0.4)]' : 'from-[#6750A4] to-[#D0BCFF] shadow-[0_4px_10px_rgba(103,80,164,0.4)]' }
+                            ].map((item, i) => (
+                                <div key={i} className="w-full h-full relative group flex items-end justify-center z-10">
                                     <motion.div
                                         initial={{ height: 0 }}
-                                        animate={{ height: `${height}%` }}
-                                        transition={{ duration: 0.8, delay: i * 0.1 }}
-                                        className={`w-full rounded-t-md transition-all group-hover:opacity-80 shadow-sm ${i === 6 ? (isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]') : (isLight ? 'bg-black/20' : 'bg-white/20')}`}
+                                        animate={{ height: `${item.height}%` }}
+                                        transition={{ duration: 1, delay: i * 0.1, ease: [0.25, 1, 0.5, 1] }}
+                                        className={`w-full max-w-[12px] rounded-t-full transition-all duration-300 bg-gradient-to-t ${item.colors} group-hover:brightness-110`}
                                     />
+                                    {/* Tooltip element */}
+                                    <div className="absolute -top-7 bg-black/80 dark:bg-white/90 text-white dark:text-black text-[10px] font-bold px-2 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap z-20">
+                                        ${item.height}k
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -620,28 +639,61 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                             </div>
                         </div>
 
-                        {/* Mock Donut Chart / Progress */}
-                        <div className="flex items-center space-x-6 mt-4">
-                            <div className="relative w-16 h-16 flex items-center justify-center shrink-0">
+                        {/* Premium Multi-Color Donut Chart */}
+                        <div className="flex items-center space-x-6 mt-6">
+                            <div className="relative w-20 h-20 flex items-center justify-center shrink-0 drop-shadow-md">
                                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                    <path className={isLight ? "text-black/5" : "text-white/5"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    {/* Background Track */}
+                                    <path className={isLight ? "text-gray-200" : "text-white/10"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+
+                                    {/* Neutral Segment */}
                                     <motion.path
                                         initial={{ strokeDasharray: "0, 100" }}
-                                        animate={{ strokeDasharray: "75, 100" }}
-                                        transition={{ duration: 1.5, ease: "easeOut" }}
-                                        className={isIOS ? "text-[#AF52DE]" : "text-[#D0BCFF]"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        animate={{ strokeDasharray: "15, 100" }}
+                                        transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                                        strokeLinecap="round"
+                                        strokeDashoffset={"-85"}
+                                        className={isIOS ? "text-orange-400" : "text-amber-500"} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                     />
+
+                                    {/* Bearish Segment */}
+                                    <motion.path
+                                        initial={{ strokeDasharray: "0, 100" }}
+                                        animate={{ strokeDasharray: "20, 100" }}
+                                        transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                                        strokeLinecap="round"
+                                        strokeDashoffset={"-65"}
+                                        className={isIOS ? "text-pink-500" : "text-rose-500"} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    />
+
+                                    {/* Bullish Segment */}
+                                    <motion.path
+                                        initial={{ strokeDasharray: "0, 100" }}
+                                        animate={{ strokeDasharray: "65, 100" }}
+                                        transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                                        strokeLinecap="round"
+                                        className={isIOS ? "text-[#007AFF]" : "text-[#D0BCFF]"} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    />
+
+                                    {/* Inner subtle ring */}
+                                    <circle cx="18" cy="18" r="13" fill="none" stroke="currentColor" className={isLight ? "text-gray-50" : "text-white/5"} strokeWidth="0.5" />
                                 </svg>
-                                <span className="absolute text-sm font-bold">75%</span>
+                                <div className="absolute flex flex-col items-center justify-center">
+                                    <span className={`text-[17px] font-extrabold tracking-tight ${isIOS ? 'text-[#007AFF]' : 'text-[#D0BCFF]'}`}>65%</span>
+                                </div>
                             </div>
                             <div className="flex-1 space-y-2">
-                                <div className="flex justify-between text-xs">
-                                    <span className="opacity-70 flex items-center"><span className={`w-2 h-2 rounded-full mr-1.5 ${isIOS ? 'bg-[#AF52DE]' : 'bg-[#D0BCFF]'}`}></span>Bullish</span>
-                                    <span className="font-semibold">75%</span>
+                                <div className="flex justify-between text-xs items-center p-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                                    <span className="opacity-80 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 shadow-sm ${isIOS ? 'bg-[#007AFF]' : 'bg-[#D0BCFF]'}`}></span>Bullish</span>
+                                    <span className="font-bold">65%</span>
                                 </div>
-                                <div className="flex justify-between text-xs">
-                                    <span className="opacity-70 flex items-center"><span className={`w-2 h-2 rounded-full mr-1.5 ${isLight ? 'bg-black/10' : 'bg-white/10'}`}></span>Bearish</span>
-                                    <span className="font-semibold">25%</span>
+                                <div className="flex justify-between text-xs items-center p-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                                    <span className="opacity-80 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 shadow-sm ${isIOS ? 'bg-pink-500' : 'bg-rose-500'}`}></span>Bearish</span>
+                                    <span className="font-bold">20%</span>
+                                </div>
+                                <div className="flex justify-between text-xs items-center p-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                                    <span className="opacity-80 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 shadow-sm ${isIOS ? 'bg-orange-400' : 'bg-amber-500'}`}></span>Neutral</span>
+                                    <span className="font-bold">15%</span>
                                 </div>
                             </div>
                         </div>
@@ -691,7 +743,7 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
     return (
         <nav className={`absolute bottom-0 w-full flex justify-around items-center px-2 z-40 transition-all duration-300 ${navClass}`}>
             <NavBtn icon="home" label="Home" active={activeTab === 'home'} onClick={() => setActiveTab('home')} os={os} theme={theme} />
-            <NavBtn icon="smart_toy" label="Assistant" active={activeTab === 'assistant'} onClick={() => setActiveTab('assistant')} os={os} theme={theme} />
+            <NavBtn icon="auto_awesome" label="Assistant" active={activeTab === 'assistant'} onClick={() => setActiveTab('assistant')} os={os} theme={theme} />
             <NavBtn icon="notifications" label="Alerts" active={activeTab === 'alerts'} onClick={() => setActiveTab('alerts')} os={os} theme={theme} />
             <NavBtn icon="sentiment_satisfied" label="Profile" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} os={os} theme={theme} />
         </nav>
