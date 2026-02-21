@@ -49,7 +49,7 @@ const navItems: NavItem[] = [
       { href: '/portfolio/accessibility', labelKey: 'portfolio.cases.accessibility', icon: 'accessibility_new' },
       { href: '/portfolio/collaboration', labelKey: 'portfolio.cases.collaboration', icon: 'groups' },
       { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history' },
-      { href: '/portfolio/market-intelligence-app', labelKey: 'portfolio.cases.marketIntelligence', icon: 'smartphone' },
+      { href: '/portfolio/market-intelligence', labelKey: 'portfolio.cases.marketIntelligence', icon: 'smartphone' },
     ]
   },
   { href: '/blog', labelKey: 'nav.blog', icon: 'article' },
