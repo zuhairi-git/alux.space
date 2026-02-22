@@ -284,8 +284,8 @@ export default function MarketIntelligenceClient() {
                                 <button
                                     onClick={() => setIsWorkflowModalOpen(true)}
                                     className={`mt-4 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${isColorful
-                                            ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
-                                            : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
+                                        ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
+                                        : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
                                         }`}
                                 >
                                     <span className="material-symbols text-2xl">account_tree</span>
@@ -838,7 +838,7 @@ export default function MarketIntelligenceClient() {
                                     <div className={`absolute bottom-0 -right-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-emerald-600' : 'bg-teal-600'}`}></div>
                                 </div>
 
-                                <WorkflowDiagram theme={theme} isColorful={isColorful} />
+                                <WorkflowDiagram theme={theme} />
                             </div>
                         </motion.div>
                     </div>
@@ -851,10 +851,10 @@ export default function MarketIntelligenceClient() {
 // ------------------------------------------------------------------------------------------------
 // Workflow Diagram Component (FigJam Style)
 // ------------------------------------------------------------------------------------------------
-function WorkflowDiagram({ theme, isColorful }: { theme: string, isColorful: boolean }) {
+function WorkflowDiagram({ theme }: { theme: string }) {
     const isLight = theme === 'light';
 
-    const FlowNode = ({ icon, title, desc, bg, color, delay = 0, isLarge = false }: any) => (
+    const FlowNode = ({ icon, title, desc, bg, color, delay = 0, isLarge = false }: { icon: string, title: string, desc: string, bg: string, color: string, delay?: number, isLarge?: boolean }) => (
         <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -926,10 +926,10 @@ function WorkflowDiagram({ theme, isColorful }: { theme: string, isColorful: boo
 
             {/* 3. Features */}
             <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 relative z-10">
-                <FlowNode delay={0.5} icon="forum" title="Conversational UI" desc="Query market data naturally via text/voice." bg="bg-teal-50 dark:bg-teal-900/30" color="bg-teal-100 text-teal-600 dark:bg-teal-800 dark:text-teal-200" />
-                <FlowNode delay={0.6} icon="summarize" title="Source Summaries" desc="Cited brief generations with inline proofs." bg="bg-emerald-50 dark:bg-emerald-900/30" color="bg-emerald-100 text-emerald-600 dark:bg-emerald-800 dark:text-emerald-200" />
-                <FlowNode delay={0.7} icon="trending_up" title="Sentiment Score" desc="Bull/Bear indicators from aggregated data." bg="bg-orange-50 dark:bg-orange-900/30" color="bg-orange-100 text-orange-600 dark:bg-orange-800 dark:text-orange-200" />
-                <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Event-driven push & background updates." bg="bg-rose-50 dark:bg-rose-900/30" color="bg-rose-100 text-rose-600 dark:bg-rose-800 dark:text-rose-200" />
+                <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bg="bg-teal-50 dark:bg-teal-900/30" color="bg-teal-100 text-teal-600 dark:bg-teal-800 dark:text-teal-200" />
+                <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bg="bg-emerald-50 dark:bg-emerald-900/30" color="bg-emerald-100 text-emerald-600 dark:bg-emerald-800 dark:text-emerald-200" />
+                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bg="bg-orange-50 dark:bg-orange-900/30" color="bg-orange-100 text-orange-600 dark:bg-orange-800 dark:text-orange-200" />
+                <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bg="bg-rose-50 dark:bg-rose-900/30" color="bg-rose-100 text-rose-600 dark:bg-rose-800 dark:text-rose-200" />
             </div>
 
             {/* Connector 3 */}
@@ -952,7 +952,7 @@ function WorkflowDiagram({ theme, isColorful }: { theme: string, isColorful: boo
 
             {/* 4. End User App */}
             <div className="relative z-10 w-full flex justify-center pb-8">
-                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (End User App)" desc="Native iOS & Android UX bringing data, summaries, and alerts neatly into the user's hand." bg="bg-slate-100 dark:bg-zinc-800/90" color="bg-white text-slate-700 dark:bg-zinc-700 dark:text-slate-200 shadow-md" />
+                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile — corporate-grade iOS & Android experience." bg="bg-slate-100 dark:bg-zinc-800/90" color="bg-white text-slate-700 dark:bg-zinc-700 dark:text-slate-200 shadow-md" />
             </div>
 
         </div>
