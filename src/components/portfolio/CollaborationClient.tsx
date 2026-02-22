@@ -45,6 +45,15 @@ export default function CollaborationClient() {
         deliveryPhase: "Delivery Phase",
         completed: "Completed",
         learnMore: "Learn more",
+        livePrototypes: "Live Prototypes",
+        livePrototypesIntro: "Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.",
+        iosPrototype: "iOS Prototype",
+        iosPrototypeDesc: "Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.",
+        androidPrototype: "Android Prototype",
+        androidPrototypeDesc: "Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.",
+        adminPortal: "Admin Portal",
+        adminPortalDesc: "Enterprise-grade admin dashboard with collapsible sidebar, KPI cards, data tables, AI logs, and analytics.",
+        openPrototype: "Open Prototype",
       },
       fi: {
         title: "Yhteistyön työnkulkualusta",
@@ -68,10 +77,19 @@ export default function CollaborationClient() {
         testScenarioValue: "Määritä uusi laite käyttäen prototyyppiä",
         focusAreas: "Keskittymisalueet",
         deliveryPhase: "Toimitusvaihe",
-        completed: "Valmis",        learnMore: "Lue lisää",
+        completed: "Valmis", learnMore: "Lue lisää",
+        livePrototypes: "Interaktiiviset prototyypit",
+        livePrototypesIntro: "Tutustu alustan interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.",
+        iosPrototype: "iOS-prototyyppi",
+        iosPrototypeDesc: "Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.",
+        androidPrototype: "Android-prototyyppi",
+        androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.",
+        adminPortal: "Hallintapaneeli",
+        adminPortalDesc: "Yritystason hallintapaneeli sivupalkilla, KPI-korteilla, datataulukoilla, tekoälylokeilla ja analytiikalla.",
+        openPrototype: "Avaa prototyyppi",
       }
     };
-    
+
     return content[locale as keyof typeof content] || content.en;
   };
 
@@ -89,38 +107,38 @@ export default function CollaborationClient() {
         "Selkeytä jokaisen vaiheen tarkoitus parempaa käyttäjäymmärrystä varten",
         "Kommunikoi käyttäen liiketoimintalogiikkaa",
         "Tarjoa käyttöliittymän mukauttamista",
-        "Ylläpidä johdonmukaisia käyttöliittymäkuvioita",        "Varmista mobiilipainotteinen responsiivinen suunnittelu"
+        "Ylläpidä johdonmukaisia käyttöliittymäkuvioita", "Varmista mobiilipainotteinen responsiivinen suunnittelu"
       ]
     };
-    
+
     return objectives[locale as keyof typeof objectives] || objectives.en;
   };
 
   const content = getLocalizedContent();
   const objectives = getObjectives();
   const designProcessSteps = [
-    { 
+    {
       phase: locale === 'fi' ? "Tutki" : "Discover",
       desc: locale === 'fi' ? "Tutki käyttäjien tarpeita ja kipupisteitä" : "Research user needs and pain points",
       icon: (
         <span className="material-symbols text-4xl">search</span>
       )
     },
-    { 
+    {
       phase: locale === 'fi' ? "Määrittele" : "Define",
       desc: locale === 'fi' ? "Analysoi oivalluksia haasteen rajaamiseksi" : "Analyze insights to scope the challenge",
       icon: (
         <span className="material-symbols text-4xl">notes</span>
       )
     },
-    { 
+    {
       phase: locale === 'fi' ? "Kehitä" : "Develop",
       desc: locale === 'fi' ? "Luo ratkaisukonsepteja" : "Create solution concepts",
       icon: (
         <span className="material-symbols text-4xl">edit</span>
       )
     },
-    { 
+    {
       phase: locale === 'fi' ? "Toimita" : "Deliver",
       desc: locale === 'fi' ? "Testaa käyttäjillä ja iteroidu" : "Test with users and iterate",
       icon: (
@@ -128,37 +146,36 @@ export default function CollaborationClient() {
       )
     }
   ];
-    // Translation for roles
-  const roles = locale === 'fi' ? 
+  // Translation for roles
+  const roles = locale === 'fi' ?
     ["Tuotesuunnittelija", "Tuotepäällikkö", "Käyttäjätutkimus", "Testaus", "Analytiikka"] :
     ["Product Designer", "Product Manager", "User Research", "Testing", "Analytics"];
   // Localized metrics
   const metrics = [
-    { 
-      label: locale === 'fi' ? "Luovuuden arvo" : "Creativity Value", 
-      value: 90 
+    {
+      label: locale === 'fi' ? "Luovuuden arvo" : "Creativity Value",
+      value: 90
     },
-    { 
-      label: locale === 'fi' ? "Käyttäjäystävällisyys" : "User-Friendliness", 
-      value: 95 
+    {
+      label: locale === 'fi' ? "Käyttäjäystävällisyys" : "User-Friendliness",
+      value: 95
     },
-    { 
-      label: locale === 'fi' ? "Värien hyväksyntä" : "Color Approval", 
-      value: 80 
+    {
+      label: locale === 'fi' ? "Värien hyväksyntä" : "Color Approval",
+      value: 80
     },
-    { 
-      label: locale === 'fi' ? "Esteettömyys" : "Accessibility", 
-      value: 85 
+    {
+      label: locale === 'fi' ? "Esteettömyys" : "Accessibility",
+      value: 85
     }
   ];
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      theme === 'colorful' 
-        ? 'bg-[#050023]' 
-        : isLight 
-          ? 'bg-gradient-to-br from-slate-50 to-gray-100' 
-          : 'bg-gradient-to-br from-gray-900 to-black'
-    }`}>
+    <div className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
+      ? 'bg-[#050023]'
+      : isLight
+        ? 'bg-gradient-to-br from-slate-50 to-gray-100'
+        : 'bg-gradient-to-br from-gray-900 to-black'
+      }`}>
       <Navigation /><article className="pt-24 pb-16">
         <div className="max-w-6xl mx-auto px-6">          {/* Hero Section */}
           <div className="relative h-96 overflow-hidden rounded-xl mb-16">
@@ -183,20 +200,19 @@ export default function CollaborationClient() {
           </div>
 
           {/* Intro Section */}
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${
-              theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
-            }`}>
+            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>
               {content.intro}
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="initial"
             animate="animate"
             variants={{
@@ -204,84 +220,72 @@ export default function CollaborationClient() {
               animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
             }}
           >          {/* Project Details Grid */}
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className={`p-6 rounded-xl ${
-              theme === 'colorful' 
-                ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg' 
+            <motion.div
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg'
                 : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-            }`}>
-              <h3 className={`font-semibold mb-2 ${
-                theme === 'colorful' 
-                  ? 'text-cyan-300' 
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                  ? 'text-cyan-300'
                   : isLight ? 'text-gray-900' : 'text-white'
-              }`}>{content.projectType}</h3>
-              <p className={`text-sm ${
-                theme === 'colorful' 
-                  ? 'text-gray-300' 
+                  }`}>{content.projectType}</h3>
+                <p className={`text-sm ${theme === 'colorful'
+                  ? 'text-gray-300'
                   : isLight ? 'text-gray-600' : 'text-gray-300'
-              }`}>{content.projectTypeValues}</p>
-            </div>
-            
-            <div className={`p-6 rounded-xl ${
-              theme === 'colorful' 
-                ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg' 
-                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-            }`}>
-              <h3 className={`font-semibold mb-2 ${
-                theme === 'colorful' 
-                  ? 'text-purple-300' 
-                  : isLight ? 'text-gray-900' : 'text-white'
-              }`}>{content.timeline}</h3>
-              <p className={`text-sm ${
-                theme === 'colorful' 
-                  ? 'text-gray-300' 
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
-              }`}>{content.timelineValue}</p>
-            </div>
-            
-            <div className={`p-6 rounded-xl ${
-              theme === 'colorful' 
-                ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg' 
-                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-            }`}>
-              <h3 className={`font-semibold mb-2 ${
-                theme === 'colorful' 
-                  ? 'text-blue-300' 
-                  : isLight ? 'text-gray-900' : 'text-white'
-              }`}>{content.tools}</h3>
-              <p className={`text-sm ${
-                theme === 'colorful' 
-                  ? 'text-gray-300' 
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
-              }`}>{content.toolsValue}</p>
-            </div>
-            
-            <div className={`p-6 rounded-xl ${
-              theme === 'colorful' 
-                ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg' 
-                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-            }`}>
-              <h3 className={`font-semibold mb-2 ${
-                theme === 'colorful' 
-                  ? 'text-fuchsia-300' 
-                  : isLight ? 'text-gray-900' : 'text-white'
-              }`}>{content.roles}</h3>
-              <div className={`text-sm ${
-                theme === 'colorful' 
-                  ? 'text-gray-300' 
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
-              }`}>
-                {roles.map((role, index) => (
-                  <div key={index}>{role}</div>
-                ))}
+                  }`}>{content.projectTypeValues}</p>
               </div>
-            </div>
-          </motion.div>
+
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg'
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                  ? 'text-purple-300'
+                  : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.timeline}</h3>
+                <p className={`text-sm ${theme === 'colorful'
+                  ? 'text-gray-300'
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>{content.timelineValue}</p>
+              </div>
+
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg'
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                  ? 'text-blue-300'
+                  : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.tools}</h3>
+                <p className={`text-sm ${theme === 'colorful'
+                  ? 'text-gray-300'
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>{content.toolsValue}</p>
+              </div>
+
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg'
+                : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                  ? 'text-fuchsia-300'
+                  : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.roles}</h3>
+                <div className={`text-sm ${theme === 'colorful'
+                  ? 'text-gray-300'
+                  : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>
+                  {roles.map((role, index) => (
+                    <div key={index}>{role}</div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
 
             {/* Objectives */}
             <motion.section variants={fadeInUp} className="mb-16">
@@ -340,7 +344,7 @@ export default function CollaborationClient() {
                             animate={{ width: `${metric.value}%` }}
                             transition={{ duration: 1, ease: "easeOut" }}
                             className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400 `}
-                            style={{ 
+                            style={{
                               width: `${metric.value}%`
                             }}
                           />
@@ -352,25 +356,25 @@ export default function CollaborationClient() {
                 <div className="p-6 rounded-lg">
                   <h3 className="text-xl font-semibold text-primary mb-6">{content.keyRecommendations}</h3>
                   <div className="space-y-4">
-                    {[                      {
-                        title: locale === 'fi' ? "Parannettu saavutettavuus" : "Enhanced Accessibility",
-                        description: locale === 'fi' ? "Lisää selkeät etiketit kaikkiin kuvakkeisiin ja kuviin" : "Add clear labels to all icons and images",
-                        icon: (
-                          <span className="material-symbols text-4xl">person</span>
-                        )
-                      },                      {
-                        title: locale === 'fi' ? "Näppäimistön navigointi" : "Keyboard Navigation",
-                        description: locale === 'fi' ? "Paranna kohdistustiloja ja näppäimistön pikavalintoja" : "Improve focus states and keyboard shortcuts",
-                        icon: (
-                          <span className="material-symbols text-4xl">keyboard</span>
-                        )
-                      },                      {
-                        title: locale === 'fi' ? "Värikontrasti" : "Color Contrast",
-                        description: locale === 'fi' ? "Paranna kontrastisuhteita paremman luettavuuden vuoksi" : "Enhance contrast ratios for better readability",
-                        icon: (
-                          <span className="material-symbols text-4xl">palette</span>
-                        )
-                      }
+                    {[{
+                      title: locale === 'fi' ? "Parannettu saavutettavuus" : "Enhanced Accessibility",
+                      description: locale === 'fi' ? "Lisää selkeät etiketit kaikkiin kuvakkeisiin ja kuviin" : "Add clear labels to all icons and images",
+                      icon: (
+                        <span className="material-symbols text-4xl">person</span>
+                      )
+                    }, {
+                      title: locale === 'fi' ? "Näppäimistön navigointi" : "Keyboard Navigation",
+                      description: locale === 'fi' ? "Paranna kohdistustiloja ja näppäimistön pikavalintoja" : "Improve focus states and keyboard shortcuts",
+                      icon: (
+                        <span className="material-symbols text-4xl">keyboard</span>
+                      )
+                    }, {
+                      title: locale === 'fi' ? "Värikontrasti" : "Color Contrast",
+                      description: locale === 'fi' ? "Paranna kontrastisuhteita paremman luettavuuden vuoksi" : "Enhance contrast ratios for better readability",
+                      icon: (
+                        <span className="material-symbols text-4xl">palette</span>
+                      )
+                    }
                     ].map((item, index) => (
                       <motion.div
                         key={index}
@@ -399,27 +403,27 @@ export default function CollaborationClient() {
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.userPersonas}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                { [                  {
-                    name: locale === 'fi' ? "John J." : "John J.",
-                    role: locale === 'fi' ? "Markkinointipäällikkö" : "Marketing Manager",
-                    traits: locale === 'fi' ? ["Teknologiaosaava", "Innovaatioihin keskittyvä"] : ["Tech-savvy", "Innovation-focused"],
-                    needs: locale === 'fi' ? ["Yhteistyötyökalut", "Strategian yhdenmukaistaminen"] : ["Collaboration tools", "Strategy alignment"],
-                    goals: locale === 'fi' ? ["Tehosta tiimiviestintää", "Ota käyttöön uusia markkinointistrategioita"] : ["Streamline team communication", "Implement new marketing strategies"],
-                    painPoints: locale === 'fi' ? ["Monimutkaiset hyväksymisprosessit", "Hajautetut palautekanavat"] : ["Complex approval processes", "Scattered feedback channels"],
-                    icon: (
-                      <span className="material-symbols text-4xl">groups</span>
-                    )
-                  },                  {
-                    name: locale === 'fi' ? "Julia Romes" : "Julia Romes",
-                    role: locale === 'fi' ? "Myyntijohtaja" : "Sales Director",
-                    traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Mobiilipainotteinen"] : ["Results-driven", "Mobile-first"],
-                    needs: locale === 'fi' ? ["Nopea yhteistyö", "Liikkuva pääsy"] : ["Quick collaboration", "On-the-go access"],
-                    goals: locale === 'fi' ? ["Sulje kaupat nopeammin", "Paranna tiimikoordinointia"] : ["Close deals faster", "Improve team coordination"],
-                    painPoints: locale === 'fi' ? ["Rajoitettu mobiilitoiminnallisuus", "Viivästyneet vastaukset"] : ["Limited mobile functionality", "Delayed responses"],
-                    icon: (
-                      <span className="material-symbols text-4xl">groups</span>
-                    )
-                  }
+                {[{
+                  name: locale === 'fi' ? "John J." : "John J.",
+                  role: locale === 'fi' ? "Markkinointipäällikkö" : "Marketing Manager",
+                  traits: locale === 'fi' ? ["Teknologiaosaava", "Innovaatioihin keskittyvä"] : ["Tech-savvy", "Innovation-focused"],
+                  needs: locale === 'fi' ? ["Yhteistyötyökalut", "Strategian yhdenmukaistaminen"] : ["Collaboration tools", "Strategy alignment"],
+                  goals: locale === 'fi' ? ["Tehosta tiimiviestintää", "Ota käyttöön uusia markkinointistrategioita"] : ["Streamline team communication", "Implement new marketing strategies"],
+                  painPoints: locale === 'fi' ? ["Monimutkaiset hyväksymisprosessit", "Hajautetut palautekanavat"] : ["Complex approval processes", "Scattered feedback channels"],
+                  icon: (
+                    <span className="material-symbols text-4xl">groups</span>
+                  )
+                }, {
+                  name: locale === 'fi' ? "Julia Romes" : "Julia Romes",
+                  role: locale === 'fi' ? "Myyntijohtaja" : "Sales Director",
+                  traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Mobiilipainotteinen"] : ["Results-driven", "Mobile-first"],
+                  needs: locale === 'fi' ? ["Nopea yhteistyö", "Liikkuva pääsy"] : ["Quick collaboration", "On-the-go access"],
+                  goals: locale === 'fi' ? ["Sulje kaupat nopeammin", "Paranna tiimikoordinointia"] : ["Close deals faster", "Improve team coordination"],
+                  painPoints: locale === 'fi' ? ["Rajoitettu mobiilitoiminnallisuus", "Viivästyneet vastaukset"] : ["Limited mobile functionality", "Delayed responses"],
+                  icon: (
+                    <span className="material-symbols text-4xl">groups</span>
+                  )
+                }
                 ].map((persona, index) => (
                   <motion.div
                     key={index}
@@ -435,7 +439,7 @@ export default function CollaborationClient() {
                         <p className="text-opacity-80">{persona.role}</p>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-4">
                       <div>
                         <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Ominaisuudet" : "Traits"}</h4>
@@ -447,7 +451,7 @@ export default function CollaborationClient() {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div>
                         <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                         <ul className="space-y-2">
@@ -459,7 +463,7 @@ export default function CollaborationClient() {
                           ))}
                         </ul>
                       </div>
-                      
+
                       <div>
                         <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
                         <ul className="space-y-2">
@@ -471,7 +475,7 @@ export default function CollaborationClient() {
                           ))}
                         </ul>
                       </div>
-                      
+
                       <div>
                         <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                         <ul className="space-y-2">
@@ -495,33 +499,34 @@ export default function CollaborationClient() {
                 <div className="p-6 rounded-lg">
                   <h2 className="text-3xl font-bold mb-6 text-primary">{content.productRequirements}</h2>
                   <div className="space-y-4">
-                    {[                      {
-                        title: locale === 'fi' ? "Tiimiviestintä" : "Team Communication",
-                        description: locale === 'fi' ? "Mahdollista saumaton reaaliaikainen yhteistyö" : "Enable seamless real-time collaboration",
-                        icon: (
-                          <span className="material-symbols text-4xl">group</span>
-                        )                      },
-                      {
-                        title: locale === 'fi' ? "Käyttäjäpalautesilmukka" : "User Feedback Loop",
-                        description: locale === 'fi' ? "Jatkuva käyttäjäoivallusten kerääminen" : "Continuous collection of user insights",
-                        icon: (
-                          <span className="material-symbols text-4xl">feedback</span>
-                        )
-                      },
-                      {
-                        title: locale === 'fi' ? "Koulutusresurssit" : "Training Resources",
-                        description: locale === 'fi' ? "Monitasoiset oppimateriaalit" : "Multi-level learning materials",
-                        icon: (
-                          <span className="material-symbols text-4xl">school</span>
-                        )
-                      },
-                      {
-                        title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
-                        description: locale === 'fi' ? "Kattavat tukiresurssit" : "Comprehensive support resources",
-                        icon: (
-                          <span className="material-symbols text-4xl">description</span>
-                        )
-                      }
+                    {[{
+                      title: locale === 'fi' ? "Tiimiviestintä" : "Team Communication",
+                      description: locale === 'fi' ? "Mahdollista saumaton reaaliaikainen yhteistyö" : "Enable seamless real-time collaboration",
+                      icon: (
+                        <span className="material-symbols text-4xl">group</span>
+                      )
+                    },
+                    {
+                      title: locale === 'fi' ? "Käyttäjäpalautesilmukka" : "User Feedback Loop",
+                      description: locale === 'fi' ? "Jatkuva käyttäjäoivallusten kerääminen" : "Continuous collection of user insights",
+                      icon: (
+                        <span className="material-symbols text-4xl">feedback</span>
+                      )
+                    },
+                    {
+                      title: locale === 'fi' ? "Koulutusresurssit" : "Training Resources",
+                      description: locale === 'fi' ? "Monitasoiset oppimateriaalit" : "Multi-level learning materials",
+                      icon: (
+                        <span className="material-symbols text-4xl">school</span>
+                      )
+                    },
+                    {
+                      title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
+                      description: locale === 'fi' ? "Kattavat tukiresurssit" : "Comprehensive support resources",
+                      icon: (
+                        <span className="material-symbols text-4xl">description</span>
+                      )
+                    }
                     ].map((req, index) => (
                       <motion.div
                         key={index}
@@ -555,30 +560,30 @@ export default function CollaborationClient() {
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-4">{content.focusAreas}</h3>
                     <div className="grid grid-cols-2 gap-4 grid-flow-row auto-rows-auto">
-                      { [                        {
-                          area: locale === 'fi' ? "Käytettävyys" : "Usability",
-                          icon: (
-                            <span className="material-symbols text-4xl">touch_app</span>
-                          )
-                        },
-                        {
-                          area: locale === 'fi' ? "Luovuus" : "Creativity",
-                          icon: (
-                            <span className="material-symbols text-4xl">brush</span>
-                          )
-                        },
-                        {
-                          area: locale === 'fi' ? "Esteettömyys" : "Accessibility",
-                          icon: (
-                            <span className="material-symbols text-4xl">accessibility</span>
-                          )
-                        },
-                        {
-                          area: locale === 'fi' ? "Visuaalinen suunnittelu" : "Visual Design",
-                          icon: (
-                            <span className="material-symbols text-4xl">image</span>
-                          )
-                        }
+                      {[{
+                        area: locale === 'fi' ? "Käytettävyys" : "Usability",
+                        icon: (
+                          <span className="material-symbols text-4xl">touch_app</span>
+                        )
+                      },
+                      {
+                        area: locale === 'fi' ? "Luovuus" : "Creativity",
+                        icon: (
+                          <span className="material-symbols text-4xl">brush</span>
+                        )
+                      },
+                      {
+                        area: locale === 'fi' ? "Esteettömyys" : "Accessibility",
+                        icon: (
+                          <span className="material-symbols text-4xl">accessibility</span>
+                        )
+                      },
+                      {
+                        area: locale === 'fi' ? "Visuaalinen suunnittelu" : "Visual Design",
+                        icon: (
+                          <span className="material-symbols text-4xl">image</span>
+                        )
+                      }
                       ].map((focus, index) => (
                         <div
                           key={index}
@@ -602,38 +607,38 @@ export default function CollaborationClient() {
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.deliveryPhase}</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                { [                  {
-                    title: locale === 'fi' ? "Korkean tarkkuuden prototyyppi" : "High Fidelity Prototype",
-                    description: locale === 'fi' ? "Vuorovaikutteiset suunnitelmat, jotka esittelevät keskeisiä ominaisuuksia käyttäjien tavoitteiden ja käytettävyyden periaatteiden mukaisesti" : "Interactive designs showcasing key features aligned with user goals and usability principles",
-                    progress: 100,
-                    icon: (
-                      <span className="material-symbols text-4xl">devices</span>
-                    )
-                  },
-                  {
-                    title: locale === 'fi' ? "Suunnittelukatsaukset" : "Design Reviews",
-                    description: locale === 'fi' ? "Rakenteelliset palautesessiot sidosryhmien kanssa dokumentoimaan keskeisiä päätöksiä ja parannuksia" : "Structured feedback sessions with stakeholders to document key decisions and improvements",
-                    progress: 100,
-                    icon: (
-                      <span className="material-symbols text-4xl">reviews</span>
-                    )
-                  },
-                  {
-                    title: locale === 'fi' ? "Laadunvarmistus" : "Quality Assurance",
-                    description: locale === 'fi' ? "Kattava testaus eri laitteilla varmistamaan johdonmukainen kokemus ja suorituskyky" : "Comprehensive testing across devices to ensure consistent experience and performance",
-                    progress: 100,
-                    icon: (
-                      <span className="material-symbols text-4xl">verified</span>
-                    )
-                  },
-                  {
-                    title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
-                    description: locale === 'fi' ? "Selkeä dokumentaatio tulevaa kehitystä ja monitoimista yhteistyötä varten." : "Clear documentation for future development and cross-functional collaboration.",
-                    progress: 100,
-                    icon: (
-                      <span className="material-symbols text-4xl">folder</span>
-                    )
-                  }
+                {[{
+                  title: locale === 'fi' ? "Korkean tarkkuuden prototyyppi" : "High Fidelity Prototype",
+                  description: locale === 'fi' ? "Vuorovaikutteiset suunnitelmat, jotka esittelevät keskeisiä ominaisuuksia käyttäjien tavoitteiden ja käytettävyyden periaatteiden mukaisesti" : "Interactive designs showcasing key features aligned with user goals and usability principles",
+                  progress: 100,
+                  icon: (
+                    <span className="material-symbols text-4xl">devices</span>
+                  )
+                },
+                {
+                  title: locale === 'fi' ? "Suunnittelukatsaukset" : "Design Reviews",
+                  description: locale === 'fi' ? "Rakenteelliset palautesessiot sidosryhmien kanssa dokumentoimaan keskeisiä päätöksiä ja parannuksia" : "Structured feedback sessions with stakeholders to document key decisions and improvements",
+                  progress: 100,
+                  icon: (
+                    <span className="material-symbols text-4xl">reviews</span>
+                  )
+                },
+                {
+                  title: locale === 'fi' ? "Laadunvarmistus" : "Quality Assurance",
+                  description: locale === 'fi' ? "Kattava testaus eri laitteilla varmistamaan johdonmukainen kokemus ja suorituskyky" : "Comprehensive testing across devices to ensure consistent experience and performance",
+                  progress: 100,
+                  icon: (
+                    <span className="material-symbols text-4xl">verified</span>
+                  )
+                },
+                {
+                  title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
+                  description: locale === 'fi' ? "Selkeä dokumentaatio tulevaa kehitystä ja monitoimista yhteistyötä varten." : "Clear documentation for future development and cross-functional collaboration.",
+                  progress: 100,
+                  icon: (
+                    <span className="material-symbols text-4xl">folder</span>
+                  )
+                }
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -675,6 +680,68 @@ export default function CollaborationClient() {
                       </div>
                     </div>
                   </motion.div>
+                ))}
+              </div>
+            </motion.section>
+
+            {/* Live Prototypes */}
+            <motion.section variants={fadeInUp} className="mb-16">
+              <h2 className="text-3xl font-bold mb-3 text-primary">{content.livePrototypes}</h2>
+              <p className="text-opacity-80 mb-8 max-w-2xl">{content.livePrototypesIntro}</p>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    title: content.iosPrototype,
+                    description: content.iosPrototypeDesc,
+                    href: "/mobile/ios",
+                    icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
+                    gradient: "from-blue-500/20 to-indigo-500/20",
+                    borderColor: "border-blue-500/30",
+                    iconBg: "bg-blue-500/10 text-blue-400",
+                    buttonBg: "bg-blue-600 hover:bg-blue-700",
+                  },
+                  {
+                    title: content.androidPrototype,
+                    description: content.androidPrototypeDesc,
+                    href: "/mobile/android",
+                    icon: (<span className="material-symbols text-4xl">phone_android</span>),
+                    gradient: "from-green-500/20 to-emerald-500/20",
+                    borderColor: "border-green-500/30",
+                    iconBg: "bg-green-500/10 text-green-400",
+                    buttonBg: "bg-green-600 hover:bg-green-700",
+                  },
+                  {
+                    title: content.adminPortal,
+                    description: content.adminPortalDesc,
+                    href: "/admin",
+                    icon: (<span className="material-symbols text-4xl">admin_panel_settings</span>),
+                    gradient: "from-purple-500/20 to-fuchsia-500/20",
+                    borderColor: "border-purple-500/30",
+                    iconBg: "bg-purple-500/10 text-purple-400",
+                    buttonBg: "bg-purple-600 hover:bg-purple-700",
+                  },
+                ].map((proto, index) => (
+                  <motion.a
+                    key={index}
+                    href={proto.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group theme-card-flex p-6 rounded-xl hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.15 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className={`h-[68px] w-[68px] flex items-center justify-center rounded-lg mb-4 ${proto.iconBg}`}>
+                      {proto.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold text-primary mb-2">{proto.title}</h3>
+                    <p className="text-opacity-80 text-sm mb-6 flex-grow">{proto.description}</p>
+                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                      <span>{content.openPrototype}</span>
+                      <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                    </div>
+                  </motion.a>
                 ))}
               </div>
             </motion.section>
