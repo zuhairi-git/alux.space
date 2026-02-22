@@ -809,7 +809,7 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
             <NavBtn icon="home" label="Home" active={activeTab === 'home'} onClick={() => setActiveTab('home')} os={os} theme={theme} />
             <NavBtn icon="auto_awesome" label="Assistant" active={activeTab === 'assistant'} onClick={() => setActiveTab('assistant')} os={os} theme={theme} />
             <NavBtn icon="notifications" label="Alerts" active={activeTab === 'alerts'} onClick={() => setActiveTab('alerts')} os={os} theme={theme} />
-            <NavBtn icon="sentiment_satisfied" label="My Space" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} os={os} theme={theme} />
+            <NavBtn icon="person" label="My Space" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} os={os} theme={theme} />
         </nav>
     );
 }
