@@ -63,9 +63,23 @@ export default function MarketIntelligenceClient() {
                 objective4: "Optimize rendering of dense financial data for mobile",
                 objective5: "Enforce enterprise-grade security and compliance",
 
+                // Strategic Choices Section
+                rationaleTitle: "Strategic Design Rationale",
+                rationaleSubtitle: "Translating high-density desktop financial data into a low-friction, high-trust mobile experience.",
+                rationaleItem1Title: "Conversational AI vs. Traditional Filters",
+                rationaleItem1Desc: "Drastically reduces time-to-insight. Users can simply ask natural language questions rather than navigating complex menus or sifting through search results on a small screen.",
+                rationaleItem2Title: "Strict Source-Grounded Outputs",
+                rationaleItem2Desc: "Prioritizes trust mechanisms over raw AI generation. Every response includes inline citations and source previews, allowing users to instantly verify the exact earnings call or filing.",
+                rationaleItem3Title: "Proactive 'Smart Event' Alerts",
+                rationaleItem3Desc: "Moves from a 'pull' to a 'push' model using OS-native features. Synthesized, actionable insights are pushed to the lock screen the moment market-moving events occur.",
+                rationaleItem4Title: "Automated Audio & Text Briefings",
+                rationaleItem4Desc: "Personalized daily briefings can be consumed as short text snippets or generated audio, enabling hands-free consumption during commutes.",
+                rationaleItem5Title: "Streaming Latency & Native Patterns",
+                rationaleItem5Desc: "Streaming token rendering combined with platform-native components ensures the AI generation feels incredibly fast and premium on both iOS and Android.",
+
                 // UI Framework
-                frameworkTitle: "Tailwind CSS & Architecture",
-                frameworkDesc: "Built on Tailwind CSS to ensure rapid, highly customizable iOS and Android styling while sharing a core component architecture and design tokens.",
+                frameworkTitle: "Native iOS & Android Architecture",
+                frameworkDesc: "Built using native iOS (SwiftUI) and Android (Jetpack Compose) frameworks to ensure rapid, highly customizable styling while sharing a core component architecture and design tokens.",
 
                 // UX Section
                 iosPatternsTitle: "iOS 26 Best Practices",
@@ -97,6 +111,18 @@ export default function MarketIntelligenceClient() {
                 trustMetric: "Citation click-through rate",
                 engagementMetric: "Daily Queries & Alert interactions",
                 retentionMetric: "Weekly Active Users",
+
+                // App Functionality
+                appFunctionalityTitle: "Core App Functionality",
+                appFunctionalityDesc: "A powerful suite of tools designed to provide actionable intelligence at your fingertips, anytime, anywhere.",
+                feat1Title: "Conversational AI Search",
+                feat1Desc: "Ask complex market questions in natural language and receive detailed, source-grounded answers instantly.",
+                feat2Title: "Real-Time Sentiment Analysis",
+                feat2Desc: "Monitor market sentiment with AI-driven analysis of news, earnings calls, and financial reports as they happen.",
+                feat3Title: "Smart Event Alerts",
+                feat3Desc: "Set custom triggers for portfolio-relevant events and receive push notifications before the market reacts.",
+                feat4Title: "Automated Briefings",
+                feat4Desc: "Start your day with generated audio and text summaries covering the most impactful events tailored to your watchlists",
 
             },
             fi: {
@@ -134,9 +160,23 @@ export default function MarketIntelligenceClient() {
                 objective4: "Optimoida tiheän taloudellisen tiedon renderöinti mobiiliin",
                 objective5: "Valvoa yritystason turvallisuutta ja vaatimustenmukaisuutta",
 
+                // Strategic Choices Section
+                rationaleTitle: "Strateginen suunnitteluperustelu",
+                rationaleSubtitle: "Suuren tiheyden työpöydän taloustiedon kääntäminen vähäkitkaiseksi, korkean luottamuksen mobiilikokemukseksi.",
+                rationaleItem1Title: "Keskusteleva tekoäly vs. perinteiset suodattimet",
+                rationaleItem1Desc: "Lyhentää merkittävästi aikaa oivallukseen. Käyttäjät voivat yksinkertaisesti esittää kysymyksiä luonnollisella kielellä sen sijaan, että navigoisi monimutkaisissa valikoissa tai etsiisi tuloksia pieneltä näytöltä.",
+                rationaleItem2Title: "Tiukasti lähteisiin perustuvat tulosteet",
+                rationaleItem2Desc: "Asettaa luottamusmekanismit pelkän tekoälysukupolven edelle. Jokainen vastaus sisältää viitteet ja lähde-esikatselun, jonka avulla käyttäjät voivat heti vahvistaa tarkan tulosjulkistuksen tai ilmoituksen.",
+                rationaleItem3Title: "Proaktiiviset 'älykkään tapahtuman' hälytykset",
+                rationaleItem3Desc: "Siirtyy 'veto'-mallista 'työntö'-malliin OS-alkuperäisiä ominaisuuksia hyödyntäen. Yhteenvedetyt, käyttökelpoiset oivallukset työnnetään lukitusnäytölle heti, kun markkinoihin vaikuttavia tapahtumia ilmenee.",
+                rationaleItem4Title: "Automaattiset ääni- ja tekstikatsaukset",
+                rationaleItem4Desc: "Personoidut päivittäiset katsaukset voidaan kuluttaa lyhyinä tekstipätkinä tai luotuna äänenä, mahdollistaen handsfree-kulutuksen työmatkan aikana.",
+                rationaleItem5Title: "Virtaava viive & alkuperäiset mallit",
+                rationaleItem5Desc: "Virtaava renderöinti yhdistettynä alustan alkuperäisiin komponentteihin varmistaa, että tekoälysukupolvi tuntuu uskomattoman nopealta ja laadukkaalta sekä iOS:ssä että Androidissa.",
+
                 // UI Framework
-                frameworkTitle: "Tailwind CSS ja arkkitehtuuri",
-                frameworkDesc: "Rakennettu Tailwind CSS:n päälle varmistaakseen nopean ja erittäin mukautettavan iOS- ja Android-tyylin samalla kun jaetaan ydinkomponenttiarkkitehtuuri ja suunnittelutokenit.",
+                frameworkTitle: "Alkuperäinen iOS- ja Android-arkkitehtuuri",
+                frameworkDesc: "Rakennettu käyttämällä alkuperäisiä iOS (SwiftUI) - ja Android (Jetpack Compose) -kehikoita, mikä varmistaa nopean ja erittäin muokattavan tyylin samalla kun jaetaan ydinkomponenttiarkkitehtuuri ja suunnittelutunnukset.",
 
                 // UX Section
                 iosPatternsTitle: "iOS 26 -parhaat käytännöt",
@@ -168,6 +208,18 @@ export default function MarketIntelligenceClient() {
                 trustMetric: "Viitteiden klikkausprosentti",
                 engagementMetric: "Päivittäiset kyselyt ja hälytysten vuorovaikutukset",
                 retentionMetric: "Viikottaiset aktiiviset käyttäjät",
+
+                // App Functionality
+                appFunctionalityTitle: "Sovelluksen ydintoiminnot",
+                appFunctionalityDesc: "Tehokas työkaluvalikoima, joka on suunniteltu tarjoamaan käyttökelpoista tietoa sormenpäidesi ulottuvilla, milloin ja missä tahansa.",
+                feat1Title: "Keskusteleva tekoälyhaku",
+                feat1Desc: "Esitä monimutkaisia markkinakysymyksiä luonnollisella kielellä ja saat yksityiskohtaisia, lähteisiin perustuvia vastauksia välittömästi.",
+                feat2Title: "Reaaliaikainen sentimenttianalyysi",
+                feat2Desc: "Seuraa markkinoiden asennetta tekoälypohjaisella uutisten, tulosjulkistusten ja talousraporttien analyysillä niiden tapahtuessa.",
+                feat3Title: "Älykkäät tapahtumahälytykset",
+                feat3Desc: "Aseta mukautettuja laukaisijoita salkkuun liittyville tapahtumille ja vastaanota push-ilmoituksia ennen kuin markkinat reagoivat.",
+                feat4Title: "Automaattiset katsaukset",
+                feat4Desc: "Aloita päiväsi luoduilla ääni- ja tekstiyhteenvedoilla, jotka kattavat seurantalistoillesi räätälöidyt vaikuttavimmat tapahtumat.",
             }
         };
         return content[locale as keyof typeof content] || content.en;
@@ -401,6 +453,44 @@ export default function MarketIntelligenceClient() {
                                     </div>
                                 </motion.section>
 
+                                {/* Strategic Choices Section */}
+                                <motion.section
+                                    className="mb-16 pt-16 border-t border-gray-200 dark:border-gray-800"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8 }}
+                                >
+                                    <div className="text-center mb-12">
+                                        <h2 className={`text-3xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                                            {content.rationaleTitle}
+                                        </h2>
+                                        <p className={`text-lg max-w-2xl mx-auto ${isColorful ? 'text-purple-200' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+                                            {content.rationaleSubtitle}
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        {[
+                                            { index: "01", title: content.rationaleItem1Title, desc: content.rationaleItem1Desc, color: "text-blue-500", bg: isColorful ? "from-blue-900/40 to-indigo-900/40 border-blue-500/30" : isLight ? "from-blue-50 to-indigo-50" : "from-blue-900/20 to-indigo-900/20 border-blue-800/50" },
+                                            { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc, color: "text-emerald-500", bg: isColorful ? "from-emerald-900/40 to-teal-900/40 border-emerald-500/30" : isLight ? "from-emerald-50 to-teal-50" : "from-emerald-900/20 to-teal-900/20 border-emerald-800/50" },
+                                            { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc, color: "text-orange-500", bg: isColorful ? "from-orange-900/40 to-red-900/40 border-orange-500/30" : isLight ? "from-orange-50 to-red-50" : "from-orange-900/20 to-red-900/20 border-orange-800/50" },
+                                            { index: "04", title: content.rationaleItem4Title, desc: content.rationaleItem4Desc, color: "text-purple-500", bg: isColorful ? "from-purple-900/40 to-fuchsia-900/40 border-purple-500/30" : isLight ? "from-purple-50 to-fuchsia-50" : "from-purple-900/20 to-fuchsia-900/20 border-purple-800/50" },
+                                            { index: "05", title: content.rationaleItem5Title, desc: content.rationaleItem5Desc, color: "text-rose-500", bg: isColorful ? "from-rose-900/40 to-pink-900/40 border-rose-500/30" : isLight ? "from-rose-50 to-pink-50" : "from-rose-900/20 to-pink-900/20 border-rose-800/50" }
+                                        ].map((item, i) => (
+                                            <div key={i} className={`p-8 rounded-3xl flex flex-col md:flex-row gap-6 md:items-center ${isColorful ? `bg-gradient-to-r border backdrop-blur-md ${item.bg}` : isLight ? `bg-gradient-to-r ${item.bg} border border-transparent` : `bg-gradient-to-r border ${item.bg}`}`}>
+                                                <div className={`text-4xl md:text-5xl font-black ${item.color} opacity-80 shrink-0`}>
+                                                    {item.index}
+                                                </div>
+                                                <div>
+                                                    <h3 className={`text-xl font-bold mb-2 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h3>
+                                                    <p className={`leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-700' : 'text-gray-400'}`}>{item.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </motion.section>
+
                                 {/* Embedded Mobile Prototypes */}
                                 <motion.section
                                     id="interactive-prototypes"
@@ -459,6 +549,43 @@ export default function MarketIntelligenceClient() {
                                             </div>
                                         </div>
                                     </div>
+
+                                    {/* App Functionality Section */}
+                                    <motion.div
+                                        className="mt-20 border-t border-gray-200 dark:border-gray-800 pt-16"
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.8 }}
+                                    >
+                                        <div className="text-center mb-12">
+                                            <h3 className={`text-3xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                                                {content.appFunctionalityTitle}
+                                            </h3>
+                                            <p className={`text-lg max-w-2xl mx-auto ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+                                                {content.appFunctionalityDesc}
+                                            </p>
+                                        </div>
+
+                                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                            {[
+                                                { icon: "search_insights", title: content.feat1Title, desc: content.feat1Desc },
+                                                { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc },
+                                                { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc },
+                                                { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc }
+                                            ].map((feature, index) => (
+                                                <div key={index} className={`p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 ${isColorful
+                                                    ? 'bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 shadow-lg shadow-indigo-500/10'
+                                                    : isLight ? 'bg-white shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10' : 'bg-gray-800/80 hover:bg-gray-800 hover:shadow-xl hover:shadow-indigo-500/10 border border-gray-700/50'}`}>
+                                                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 ${isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-900/50 text-indigo-400'}`}>
+                                                        <span className="material-symbols text-3xl">{feature.icon}</span>
+                                                    </div>
+                                                    <h4 className={`text-xl font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{feature.title}</h4>
+                                                    <p className={`leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{feature.desc}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </motion.div>
                                 </motion.section>
                             </motion.div>
                         )}
