@@ -107,7 +107,7 @@ function MobilePrototypeContent() {
                 <AnimatePresence mode="wait">
                     {activeTab === 'home' && <HomeView key="home" os={os} theme={theme} onNavigate={(tab) => setActiveTab(tab)} />}
                     {activeTab === 'alerts' && <AlertsView key="alerts" os={os} theme={theme} />}
-                    {activeTab === 'profile' && <ProfileView key="profile" os={os} theme={theme} />}
+                    {activeTab === 'profile' && <ProfileView key="profile" os={os} theme={theme} setTheme={setTheme} />}
                     {activeTab === 'assistant' && <AssistantView key="assistant" os={os} theme={theme} />}
                 </AnimatePresence>
             </main>
@@ -527,9 +527,72 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     );
 }
 
-function ProfileView({ os, theme }: { os: string, theme: string }) {
+function ThemeModal({ os, theme, onClose, onChangeTheme }: { os: string, theme: string, onClose: () => void, onChangeTheme: (t: string) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+
+    const themes = [
+        { value: 'light', label: 'Light', icon: 'light_mode', colorClass: 'text-orange-500' },
+        { value: 'dark', label: 'Dark', icon: 'dark_mode', colorClass: 'text-blue-400' },
+        { value: 'colorful', label: 'Colorful', icon: 'palette', colorClass: 'text-purple-500' }
+    ];
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-auto">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+                className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/90 backdrop-blur-xl' : 'bg-[#1C1C1E]/90 backdrop-blur-xl text-white') : (isLight ? 'bg-[#FEF7FF]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}
+            >
+                <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-xl font-bold">App Theme</h3>
+                    <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/10">
+                        <Icon name="close" className="text-sm" />
+                    </button>
+                </div>
+
+                <div className="space-y-3">
+                    {themes.map((t) => {
+                        const isActive = theme === t.value;
+                        return (
+                            <button
+                                key={t.value}
+                                onClick={() => onChangeTheme(t.value)}
+                                className={`w-full flex items-center justify-between p-4 rounded-2xl transition-all ${isActive
+                                        ? (isIOS ? (isLight ? 'bg-[#007AFF]/10 border-[#007AFF]/30' : 'bg-[#0A84FF]/20 border-[#0A84FF]/30') : (isLight ? 'bg-[#EADDFF] border-[#EADDFF]' : 'bg-[#4A4458] border-[#4A4458]'))
+                                        : (isIOS ? (isLight ? 'bg-black/5 border-transparent' : 'bg-white/5 border-transparent') : (isLight ? 'bg-transparent border-black/10' : 'bg-transparent border-white/10'))
+                                    } border`}
+                            >
+                                <div className="flex items-center space-x-3">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isActive ? (isLight ? 'bg-white shadow-sm' : 'bg-black/20') : 'bg-transparent'}`}>
+                                        <Icon name={t.icon} className={isActive ? t.colorClass : 'opacity-70'} />
+                                    </div>
+                                    <span className={`font-medium ${isActive ? 'font-bold' : ''}`}>{t.label}</span>
+                                </div>
+                                {isActive && (
+                                    <Icon name="check_circle" className={isActive ? t.colorClass : ''} />
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+            </motion.div>
+        </div>
+    );
+}
+
+function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTheme: (t: string) => void }) {
+    const isIOS = os === 'ios';
+    const isLight = theme === 'light';
+    const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
 
     const cardClass = isIOS
         ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/60 rounded-[20px]' : 'bg-[#2C2C2E]/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/10 rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,0.2)]')
@@ -545,7 +608,10 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
             <div className={`p-1 flex justify-between items-center shrink-0 mb-4`}>
                 <h2 className="text-xl font-bold tracking-tight ml-1">My Space</h2>
                 <div className="flex gap-3">
-                    <button className={`w-8 h-8 rounded-full flex items-center justify-center ${isIOS ? (isLight ? 'bg-black/5' : 'bg-white/10') : 'bg-[#EADDFF]/50 dark:bg-[#4A4458]/50'}`}>
+                    <button
+                        onClick={() => setIsThemeModalOpen(true)}
+                        className={`w-8 h-8 rounded-full flex items-center justify-center ${isIOS ? (isLight ? 'bg-black/5' : 'bg-white/10') : 'bg-[#EADDFF]/50 dark:bg-[#4A4458]/50'}`}
+                    >
                         <Icon name="settings" className="opacity-70 text-[18px]" />
                     </button>
                 </div>
@@ -711,6 +777,17 @@ function ProfileView({ os, theme }: { os: string, theme: string }) {
                     </div>
                 </button>
             </div>
+
+            <AnimatePresence>
+                {isThemeModalOpen && (
+                    <ThemeModal
+                        os={os}
+                        theme={theme}
+                        onClose={() => setIsThemeModalOpen(false)}
+                        onChangeTheme={(t) => { setTheme(t); setIsThemeModalOpen(false); }}
+                    />
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 }
