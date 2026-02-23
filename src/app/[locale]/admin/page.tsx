@@ -172,12 +172,17 @@ export default function AdminPanel() {
 
             {/* Global AI Copilot Floating Button */}
             <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowCopilot(true)}
-                className="fixed bottom-8 right-8 w-14 h-14 bg-[#7C3AED] rounded-full shadow-2xl shadow-[#7C3AED]/30 flex items-center justify-center text-white z-50 hover:bg-[#6D28D9] transition-colors"
+                className="fixed bottom-8 right-8 w-14 h-14 z-50 group"
             >
-                <Icon name="auto_awesome" className="text-2xl" />
+                <div className="absolute inset-0 rounded-full bg-[#7C3AED] opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="relative w-full h-full rounded-[1.25rem] bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1.5px] shadow-2xl overflow-hidden before:absolute before:inset-0 before:bg-[url('https://grainy-gradients.vercel.app/noise.svg')] before:opacity-20 before:mix-blend-overlay">
+                    <div className={`w-full h-full rounded-[1.25rem] flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
+                        <Icon name="auto_awesome" className="text-2xl bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+                    </div>
+                </div>
             </motion.button>
 
             {/* Global AI Copilot Slide-over */}
@@ -201,9 +206,11 @@ export default function AdminPanel() {
                             <div className={`flex items-center justify-between p-5 border-b relative overflow-hidden z-10 ${isLight ? 'border-gray-200 bg-white/50 backdrop-blur-xl' : 'border-white/10 bg-[#12121A]/80 backdrop-blur-xl'}`}>
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#A78BFA] via-[#7C3AED] to-[#A78BFA]" />
                                 <div className="flex items-center space-x-3">
-                                    <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A78BFA] flex items-center justify-center text-white shadow-lg shadow-[#7C3AED]/30">
-                                        <Icon name="auto_awesome" />
-                                        <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#12121A] rounded-full" />
+                                    <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1.5px] shadow-lg overflow-hidden before:absolute before:inset-0 before:bg-[url('https://grainy-gradients.vercel.app/noise.svg')] before:opacity-20 before:mix-blend-overlay">
+                                        <div className={`w-full h-full rounded-xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#12121A]'}`}>
+                                            <Icon name="auto_awesome" className="text-lg bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+                                        </div>
+                                        <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-[#12121A] rounded-full z-20" />
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg leading-tight bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Copilot</h3>
@@ -228,8 +235,10 @@ export default function AdminPanel() {
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} key={i} className={`flex flex-col ${h.role === 'user' ? 'items-end' : 'items-start'} relative z-10`}>
                                         <div className="flex w-full items-end justify-start">
                                             {h.role === 'ai' && (
-                                                <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A78BFA] flex flex-shrink-0 items-center justify-center text-white mr-3 shadow-sm shadow-[#7C3AED]/20">
-                                                    <Icon name="auto_awesome" className="text-[14px]" />
+                                                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1px] shadow-sm overflow-hidden flex-shrink-0 mr-3">
+                                                    <div className={`w-full h-full rounded-lg flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
+                                                        <Icon name="auto_awesome" className="text-[14px] bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+                                                    </div>
                                                 </div>
                                             )}
                                             <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
