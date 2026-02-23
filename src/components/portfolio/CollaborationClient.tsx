@@ -197,6 +197,29 @@ export default function CollaborationClient() {
                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
                   {locale === 'fi' ? 'Tekoälyllä toimiva yhteistyöalusta tiimeille' : 'AI-powered collaboration platform for teams'}
                 </p>
+                <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                  <button
+                    onClick={() => {
+                      document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="flex items-center justify-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-indigo-500/30 w-full sm:w-auto"
+                  >
+                    <span className="material-symbols text-2xl">play_circle</span>
+                    <span>{locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'View Interactive Prototypes'}</span>
+                  </button>
+                  <a
+                    href="https://ds.alux.space/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${theme === 'colorful'
+                      ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
+                      : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
+                      }`}
+                  >
+                    <span className="material-symbols text-2xl">design_services</span>
+                    <span>{locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System'}</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -719,7 +742,7 @@ export default function CollaborationClient() {
             </motion.section>
 
             {/* Live Prototypes */}
-            <motion.section variants={fadeInUp} className="mb-16">
+            <motion.section variants={fadeInUp} className="mb-16" id="live-prototypes">
               <h2 className="text-3xl font-bold mb-3 text-primary">{content.livePrototypes}</h2>
               <p className="text-opacity-80 mb-8 max-w-2xl">{content.livePrototypesIntro}</p>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

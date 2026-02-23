@@ -269,28 +269,42 @@ export default function MarketIntelligenceClient() {
                                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
                                     {content.subtitle}
                                 </p>
-                                <button
-                                    onClick={() => {
-                                        setActiveTab(0);
-                                        setTimeout(() => {
-                                            document.getElementById('interactive-prototypes')?.scrollIntoView({ behavior: 'smooth' });
-                                        }, 100);
-                                    }}
-                                    className="mt-6 flex items-center justify-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-indigo-500/30 w-full sm:w-auto"
-                                >
-                                    <span className="material-symbols text-2xl">play_circle</span>
-                                    <span>View Interactive Prototypes</span>
-                                </button>
-                                <button
-                                    onClick={() => setIsWorkflowModalOpen(true)}
-                                    className={`mt-4 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${isColorful
-                                        ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
-                                        : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
-                                        }`}
-                                >
-                                    <span className="material-symbols text-2xl">account_tree</span>
-                                    <span>App Architecture & Workflow</span>
-                                </button>
+                                <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                                    <button
+                                        onClick={() => {
+                                            setActiveTab(0);
+                                            setTimeout(() => {
+                                                document.getElementById('interactive-prototypes')?.scrollIntoView({ behavior: 'smooth' });
+                                            }, 100);
+                                        }}
+                                        className="flex items-center justify-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-indigo-500/30 w-full sm:w-auto"
+                                    >
+                                        <span className="material-symbols text-2xl">play_circle</span>
+                                        <span>{locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'View Interactive Prototypes'}</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setIsWorkflowModalOpen(true)}
+                                        className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${isColorful
+                                            ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
+                                            : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
+                                            }`}
+                                    >
+                                        <span className="material-symbols text-2xl">account_tree</span>
+                                        <span>{locale === 'fi' ? 'Sovelluksen arkkitehtuuri & työnkulku' : 'App Architecture & Workflow'}</span>
+                                    </button>
+                                    <a
+                                        href="https://ds.alux.space/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${isColorful
+                                            ? 'bg-teal-600 hover:bg-teal-500 text-white shadow-teal-500/30'
+                                            : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
+                                            }`}
+                                    >
+                                        <span className="material-symbols text-2xl">design_services</span>
+                                        <span>{locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System'}</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

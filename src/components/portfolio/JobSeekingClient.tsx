@@ -111,23 +111,23 @@ export default function JobSeekingClient() {
         qa: "Laadunvarmistus:",
         qaDesc: "Kattaa käytettävyyden, laiteyhteensopivuuden ja visuaalisen johdonmukaisuuden",
         designDocs: "Suunnitteludokumentaatio:",
-        designDocsDesc: "Viimeistellyt resurssit, suunnittelupäätökset ja luovutusmateriaalit – valmiina kehitysyhteistyöhön.",      }
+        designDocsDesc: "Viimeistellyt resurssit, suunnittelupäätökset ja luovutusmateriaalit – valmiina kehitysyhteistyöhön.",
+      }
     };
-    
+
     return content[locale as keyof typeof content] || content.en;
   };
 
   const content = getLocalizedContent();
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      theme === 'colorful' 
-        ? 'bg-[#050023]' 
-        : isLight 
-          ? 'bg-gradient-to-br from-slate-50 to-gray-100' 
+    <div className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
+        ? 'bg-[#050023]'
+        : isLight
+          ? 'bg-gradient-to-br from-slate-50 to-gray-100'
           : 'bg-gradient-to-br from-gray-900 to-black'
-    }`}>
+      }`}>
       <Navigation />
-      
+
       <main className="pt-24 pb-16">
         <div className="max-w-6xl mx-auto px-6">          {/* Hero Section */}
           <div className="relative h-96 overflow-hidden rounded-xl mb-16">
@@ -147,25 +147,38 @@ export default function JobSeekingClient() {
                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
                   {locale === 'fi' ? 'Työnhakusovellus tehokkaaseen työpaikan etsintään' : 'Job seeking app for efficient job searching'}
                 </p>
+                <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="https://ds.alux.space/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${theme === 'colorful'
+                        ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
+                        : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
+                      }`}
+                  >
+                    <span className="material-symbols text-2xl">design_services</span>
+                    <span>{locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System'}</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Intro Section */}
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${
-              theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
-            }`}>
+            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+              }`}>
               {content.intro}
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="initial"
             animate="animate"
             variants={{
@@ -173,78 +186,66 @@ export default function JobSeekingClient() {
               animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
             }}
           >            {/* Project Details Grid */}
-            <motion.div 
+            <motion.div
               className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className={`p-6 rounded-xl ${
-                theme === 'colorful' 
-                  ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg' 
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                  ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg'
                   : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-                <h3 className={`font-semibold mb-2 ${
-                  theme === 'colorful' 
-                    ? 'text-cyan-300' 
-                    : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.projectType}</h3>
-                <p className={`text-sm ${
-                  theme === 'colorful' 
-                    ? 'text-gray-300' 
-                    : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.projectTypeValues}</p>
-              </div>
-              
-              <div className={`p-6 rounded-xl ${
-                theme === 'colorful' 
-                  ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg' 
-                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-                <h3 className={`font-semibold mb-2 ${
-                  theme === 'colorful' 
-                    ? 'text-purple-300' 
-                    : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.timeline}</h3>
-                <p className={`text-sm ${
-                  theme === 'colorful' 
-                    ? 'text-gray-300' 
-                    : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.timelineValue}</p>
-              </div>
-              
-              <div className={`p-6 rounded-xl ${
-                theme === 'colorful' 
-                  ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg' 
-                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-                <h3 className={`font-semibold mb-2 ${
-                  theme === 'colorful' 
-                    ? 'text-blue-300' 
-                    : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.tools}</h3>
-                <p className={`text-sm ${
-                  theme === 'colorful' 
-                    ? 'text-gray-300' 
-                    : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.toolsValue}</p>
-              </div>
-              
-              <div className={`p-6 rounded-xl ${
-                theme === 'colorful' 
-                  ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg' 
-                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-                <h3 className={`font-semibold mb-2 ${
-                  theme === 'colorful' 
-                    ? 'text-fuchsia-300' 
-                    : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.roles}</h3>
-                <div className={`text-sm ${
-                  theme === 'colorful' 
-                    ? 'text-gray-300' 
-                    : isLight ? 'text-gray-600' : 'text-gray-300'
                 }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                    ? 'text-cyan-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.projectType}</h3>
+                <p className={`text-sm ${theme === 'colorful'
+                    ? 'text-gray-300'
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>{content.projectTypeValues}</p>
+              </div>
+
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                  ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg'
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                    ? 'text-purple-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.timeline}</h3>
+                <p className={`text-sm ${theme === 'colorful'
+                    ? 'text-gray-300'
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>{content.timelineValue}</p>
+              </div>
+
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                  ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg'
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                    ? 'text-blue-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.tools}</h3>
+                <p className={`text-sm ${theme === 'colorful'
+                    ? 'text-gray-300'
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>{content.toolsValue}</p>
+              </div>
+
+              <div className={`p-6 rounded-xl ${theme === 'colorful'
+                  ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg'
+                  : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                }`}>
+                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
+                    ? 'text-fuchsia-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                  }`}>{content.roles}</h3>
+                <div className={`text-sm ${theme === 'colorful'
+                    ? 'text-gray-300'
+                    : isLight ? 'text-gray-600' : 'text-gray-300'
+                  }`}>
                   <div>{locale === 'fi' ? 'Tuotesuunnittelija' : 'Product Designer'}</div>
                   <div>{locale === 'fi' ? 'Tuotejohtaja' : 'Product Manager'}</div>
                   <div>{locale === 'fi' ? 'Käyttäjätutkimus' : 'User Research'}</div>
@@ -339,9 +340,9 @@ export default function JobSeekingClient() {
                       <h3 className="text-xl font-semibold text-primary mb-2">{content.primaryResearch}</h3>
                       <div className="mb-2 font-medium">{content.objectives}</div>
                       <ul className="list-inside mb-4 opacity-80 space-y-1">                        <li className="flex items-center">
-                          <span className="material-symbols text-sm text-purple-400 mr-2">target</span>
-                          {locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : 'Gauge app awareness and usage'}
-                        </li>
+                        <span className="material-symbols text-sm text-purple-400 mr-2">target</span>
+                        {locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : 'Gauge app awareness and usage'}
+                      </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">psychology</span>
                           {locale === 'fi' ? 'Tunnista käyttäjien kipupisteet' : 'Identify user pain points'}
@@ -353,9 +354,9 @@ export default function JobSeekingClient() {
                       </ul>
                       <div className="mb-2 font-medium">{content.methods}</div>
                       <ul className="list-inside mb-4 opacity-80 space-y-1">                        <li className="flex items-center">
-                          <span className="material-symbols text-sm text-purple-400 mr-2">group</span>
-                          {locale === 'fi' ? 'Haastattelut (puolistrukturoidut)' : 'Interviews (semi-structured)'}
-                        </li>
+                        <span className="material-symbols text-sm text-purple-400 mr-2">group</span>
+                        {locale === 'fi' ? 'Haastattelut (puolistrukturoidut)' : 'Interviews (semi-structured)'}
+                      </li>
                         <li className="flex items-center">
                           <span className="material-symbols text-sm text-purple-400 mr-2">list_alt</span>
                           {locale === 'fi' ? 'Kyselyt (sekalaiset kysymykset)' : 'Surveys (mixed questions)'}
@@ -455,7 +456,7 @@ export default function JobSeekingClient() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="theme-card">
                   <div className="theme-card-content p-8">
                     <h2 className="text-2xl font-bold mb-6 text-primary">{content.deliverPhase}</h2>
