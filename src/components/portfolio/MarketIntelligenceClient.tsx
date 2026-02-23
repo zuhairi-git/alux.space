@@ -543,12 +543,15 @@ export default function MarketIntelligenceClient() {
                                                     style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', isolation: 'isolate' }}
                                                 >
                                                     <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] rounded-b-3xl z-50 ${isLight ? 'bg-gray-800' : 'bg-black'}`}></div>
-                                                    <iframe
-                                                        src={`/mobile?os=ios&theme=${theme}`}
-                                                        title="iOS Prototype"
-                                                        className="w-full h-full border-none rounded-[2.5rem]"
-                                                        allow="payment; fullscreen"
-                                                    />
+                                                    <div className="w-full h-full overflow-hidden rounded-[2.5rem]">
+                                                        <iframe
+                                                            src={`/mobile?os=ios&theme=${theme}`}
+                                                            title="iOS Prototype"
+                                                            className="w-full h-[calc(100%+32px)] border-none"
+                                                            style={{ marginTop: '-16px' }}
+                                                            allow="payment; fullscreen"
+                                                        />
+                                                    </div>
                                                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-white/30 rounded-full z-50"></div>
                                                 </div>
                                             </div>
@@ -565,12 +568,15 @@ export default function MarketIntelligenceClient() {
                                                     className={`w-[412px] h-[892px] shrink-0 rounded-[2.5rem] border-[6px] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)] relative ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
                                                     style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', isolation: 'isolate' }}
                                                 >
-                                                    <iframe
-                                                        src={`/mobile?os=android&theme=${theme}`}
-                                                        title="Android Prototype"
-                                                        className="w-full h-full border-none rounded-[2rem]"
-                                                        allow="payment; fullscreen"
-                                                    />
+                                                    <div className="w-full h-full overflow-hidden rounded-[2rem]">
+                                                        <iframe
+                                                            src={`/mobile?os=android&theme=${theme}`}
+                                                            title="Android Prototype"
+                                                            className="w-full h-[calc(100%+32px)] border-none"
+                                                            style={{ marginTop: '-16px' }}
+                                                            allow="payment; fullscreen"
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
