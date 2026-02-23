@@ -75,16 +75,16 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
 function WorkflowDiagram({ theme }: { theme: string }) {
     const isLight = theme === 'light';
 
-    const FlowNode = ({ icon, title, desc, bg, color, delay = 0, isLarge = false }: { icon: string, title: string, desc: string, bg: string, color: string, delay?: number, isLarge?: boolean }) => (
+    const FlowNode = ({ icon, title, desc, bgLight, bgDark, colorLight, colorDark, delay = 0, isLarge = false }: { icon: string, title: string, desc: string, bgLight: string, bgDark: string, colorLight: string, colorDark: string, delay?: number, isLarge?: boolean }) => (
         <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "0px 0px -50px 0px" }}
             transition={{ delay, duration: 0.5, type: 'spring', bounce: 0.4 }}
             whileHover={{ scale: 1.03, y: -4 }}
-            className={`flex items-start gap-4 p-5 sm:p-6 rounded-3xl shadow-md border border-black/5 dark:border-white/5 backdrop-blur-md w-full ${bg} ${isLarge ? 'md:w-[450px] mx-auto' : ''} z-10 relative`}
+            className={`flex items-start gap-4 p-5 sm:p-6 rounded-3xl shadow-md border backdrop-blur-md w-full ${isLight ? bgLight : bgDark} ${isLight ? 'border-black/5' : 'border-white/5'} ${isLarge ? 'md:w-[450px] mx-auto' : ''} z-10 relative`}
         >
-            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${color}`}>
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${isLight ? colorLight : colorDark}`}>
                 <span className="material-symbols text-2xl">{icon}</span>
             </div>
             <div>
@@ -102,9 +102,9 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* 1. Data Integrations */}
             <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                <FlowNode delay={0.1} icon="article" title="News & Media" desc="Real-time global financial news streams via APIs." bg="bg-blue-50 dark:bg-blue-900/30" color="bg-blue-100 text-blue-600 dark:bg-blue-800 dark:text-blue-200" />
-                <FlowNode delay={0.2} icon="account_balance" title="SEC Filings" desc="Automated parsing of 10-K, 10-Q & 8-K reports." bg="bg-indigo-50 dark:bg-indigo-900/30" color="bg-indigo-100 text-indigo-600 dark:bg-indigo-800 dark:text-indigo-200" />
-                <FlowNode delay={0.3} icon="record_voice_over" title="Earnings Calls" desc="Live audio transcriptions & NLP semantic extraction." bg="bg-purple-50 dark:bg-purple-900/30" color="bg-purple-100 text-purple-600 dark:bg-purple-800 dark:text-purple-200" />
+                <FlowNode delay={0.1} icon="article" title="News & Media" desc="Real-time global financial news streams via APIs." bgLight="bg-blue-50" bgDark="bg-blue-900/30" colorLight="bg-blue-100 text-blue-600" colorDark="bg-blue-800 text-blue-200" />
+                <FlowNode delay={0.2} icon="account_balance" title="SEC Filings" desc="Automated parsing of 10-K, 10-Q & 8-K reports." bgLight="bg-indigo-50" bgDark="bg-indigo-900/30" colorLight="bg-indigo-100 text-indigo-600" colorDark="bg-indigo-800 text-indigo-200" />
+                <FlowNode delay={0.3} icon="record_voice_over" title="Earnings Calls" desc="Live audio transcriptions & NLP semantic extraction." bgLight="bg-purple-50" bgDark="bg-purple-900/30" colorLight="bg-purple-100 text-purple-600" colorDark="bg-purple-800 text-purple-200" />
             </div>
 
             {/* Connector 1 */}
@@ -122,7 +122,7 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* 2. Core Engine */}
             <div className="relative z-10 w-full flex justify-center">
-                <FlowNode isLarge delay={0.4} icon="psychology" title="AI Orchestration Engine" desc="RAG pipeline that retrieves market data, summarizes dense content, and cross-references citations using LLMs." bg="bg-fuchsia-50 dark:bg-fuchsia-900/30" color="bg-fuchsia-200 text-fuchsia-700 dark:bg-fuchsia-800 dark:text-fuchsia-200" />
+                <FlowNode isLarge delay={0.4} icon="psychology" title="AI Orchestration Engine" desc="RAG pipeline that retrieves market data, summarizes dense content, and cross-references citations using LLMs." bgLight="bg-fuchsia-50" bgDark="bg-fuchsia-900/30" colorLight="bg-fuchsia-200 text-fuchsia-700" colorDark="bg-fuchsia-800 text-fuchsia-200" />
             </div>
 
             {/* Connector 2 */}
@@ -147,10 +147,10 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* 3. Features */}
             <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 relative z-10">
-                <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bg="bg-teal-50 dark:bg-teal-900/30" color="bg-teal-100 text-teal-600 dark:bg-teal-800 dark:text-teal-200" />
-                <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bg="bg-emerald-50 dark:bg-emerald-900/30" color="bg-emerald-100 text-emerald-600 dark:bg-emerald-800 dark:text-emerald-200" />
-                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bg="bg-orange-50 dark:bg-orange-900/30" color="bg-orange-100 text-orange-600 dark:bg-orange-800 dark:text-orange-200" />
-                <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bg="bg-rose-50 dark:bg-rose-900/30" color="bg-rose-100 text-rose-600 dark:bg-rose-800 dark:text-rose-200" />
+                <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bgLight="bg-teal-50" bgDark="bg-teal-900/30" colorLight="bg-teal-100 text-teal-600" colorDark="bg-teal-800 text-teal-200" />
+                <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bgLight="bg-emerald-50" bgDark="bg-emerald-900/30" colorLight="bg-emerald-100 text-emerald-600" colorDark="bg-emerald-800 text-emerald-200" />
+                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-orange-50" bgDark="bg-orange-900/30" colorLight="bg-orange-100 text-orange-600" colorDark="bg-orange-800 text-orange-200" />
+                <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bgLight="bg-rose-50" bgDark="bg-rose-900/30" colorLight="bg-rose-100 text-rose-600" colorDark="bg-rose-800 text-rose-200" />
             </div>
 
             {/* Connector 3 */}
@@ -173,7 +173,7 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* 4. End User App */}
             <div className="relative z-10 w-full flex justify-center pb-8">
-                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile — corporate-grade iOS & Android experience." bg="bg-slate-100 dark:bg-zinc-800/90" color="bg-white text-slate-700 dark:bg-zinc-700 dark:text-slate-200 shadow-md" />
+                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile — corporate-grade iOS & Android experience." bgLight="bg-slate-100" bgDark="bg-zinc-800/90" colorLight="bg-white text-slate-700 shadow-md" colorDark="bg-zinc-700 text-slate-200 shadow-md" />
             </div>
 
         </div>
