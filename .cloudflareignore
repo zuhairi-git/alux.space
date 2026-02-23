@@ -1,6 +1,9 @@
 # Exclude large webpack cache and build internals from Cloudflare Pages deployment
 cache/
 .next/
+.out/cache/
+out/cache/
+out/cache/**
 *.log
 .eslint_output.txt
 eslint-client.json

@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build && node scripts/seo-build.js",
+    "postbuild": "rm -rf out/cache || true",
+    "clean:out-cache": "rm -rf out/cache || true",
     "start": "next start",
     "lint": "next lint",
     "seo:audit": "node scripts/seo-dev.js audit",
