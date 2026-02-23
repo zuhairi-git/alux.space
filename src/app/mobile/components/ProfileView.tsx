@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Icon, stagger, fadeUp } from '../shared';
 import type { MobileTheme } from '../themes';
 
@@ -25,12 +26,14 @@ export function ProfileView({ card, isLight, themeMode, setThemeMode, theme }: P
             <motion.div variants={fadeUp} className="flex flex-col items-center py-4">
                 <div className="relative mb-3">
                     <div className={`w-24 h-24 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}>
-                        <div className={`w-full h-full rounded-full overflow-hidden ${isLight ? 'bg-white' : 'bg-black/80'}`}>
-                            <img
+                        <div className={`w-full h-full rounded-full overflow-hidden relative ${isLight ? 'bg-white' : 'bg-black/80'}`}>
+                            <Image
                                 src="/images/me/ali.png"
-                                className="w-full h-full object-cover scale-110"
+                                className="object-cover scale-110"
                                 alt="Ali"
-                                onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar}&color=fff` }}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar.replace('#', '')}&color=fff` }}
                             />
                         </div>
                     </div>

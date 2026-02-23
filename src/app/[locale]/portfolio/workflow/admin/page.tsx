@@ -26,6 +26,7 @@ const sections: { key: Section, icon: string, label: string }[] = [
 export default function PortalPanel() {
     const [activeSection, setActiveSection] = useState<Section>('start');
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     const [theme, setTheme] = useState('dark');
 
     const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -59,8 +60,8 @@ export default function PortalPanel() {
     const bg = isLight ? 'bg-[#F8F9FA] text-[#1C1B1F]' : 'bg-[#0A0A0F] text-[#E2E2E6]';
     const sidebarBg = isLight ? 'bg-white border-r border-gray-200' : 'bg-[#12121A] border-r border-white/5';
     const cardClass = isLight
-        ? 'bg-white rounded-2xl shadow-sm border border-gray-100 p-6'
-        : 'bg-[#1A1A24]/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/5 p-6';
+        ? 'bg-white rounded-2xl shadow-sm border border-gray-100 p-4 md:p-6'
+        : 'bg-[#1A1A24]/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/5 p-4 md:p-6';
 
     const handleCopilotSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -74,9 +75,9 @@ export default function PortalPanel() {
     };
 
     return (
-        <div className={`flex min-h-screen w-full ${bg} transition-colors duration-300`}>
-            {/* Sidebar */}
-            <aside className={`${sidebarCollapsed ? 'w-[72px]' : 'w-[260px]'} ${sidebarBg} flex flex-col shrink-0 transition-all duration-300 sticky top-0 h-screen overflow-hidden`}>
+        <div className={`flex min-h-screen w-full ${bg} transition-colors duration-300 relative`}>
+            {/* Desktop Sidebar */}
+            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[72px]' : 'w-[260px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-300 sticky top-0 h-screen overflow-hidden z-40`}>
                 <div className={`flex items-center h-16 px-4 ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
                     {!sidebarCollapsed && <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Portal</span>}
                     <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-white/5 ${isLight ? 'hover:bg-black/5' : ''}`}>
@@ -102,19 +103,71 @@ export default function PortalPanel() {
                         );
                     })}
                 </nav>
-
-                {/* Theme Toggle has been moved to top bar profile dropdown */}
             </aside>
 
+            {/* Mobile Sidebar Overlay */}
+            <AnimatePresence>
+                {mobileSidebarOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+                            onClick={() => setMobileSidebarOpen(false)}
+                        />
+                        <motion.aside
+                            initial={{ x: '-100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '-100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className={`fixed inset-y-0 left-0 z-50 w-[260px] ${sidebarBg} flex flex-col md:hidden`}
+                        >
+                            <div className="flex items-center justify-between h-16 px-4">
+                                <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Portal</span>
+                                <button onClick={() => setMobileSidebarOpen(false)} className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-white/5 ${isLight ? 'hover:bg-black/5' : ''}`}>
+                                    <Icon name="close" className="text-lg opacity-60" />
+                                </button>
+                            </div>
+                            <nav className="flex-1 py-2 px-2 space-y-1 overflow-y-auto">
+                                <div className="pt-2 pb-1 px-3">
+                                    <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Workflow</span>
+                                </div>
+                                {sections.map(s => {
+                                    const active = activeSection === s.key;
+                                    return (
+                                        <button key={s.key} onClick={() => { setActiveSection(s.key); setMobileSidebarOpen(false); }}
+                                            className={`w-full flex items-center px-3 py-2.5 rounded-xl transition-all text-[14px] ${active
+                                                ? (isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED] font-semibold' : 'bg-[#A78BFA]/10 text-[#A78BFA] font-semibold')
+                                                : (isLight ? 'text-gray-600 hover:bg-gray-100' : 'text-gray-400 hover:bg-white/5')}`}>
+                                            <Icon name={s.icon} className={`text-xl mr-3 ${active ? '' : 'opacity-60'}`} />
+                                            <span>{s.label}</span>
+                                        </button>
+                                    );
+                                })}
+                            </nav>
+                        </motion.aside>
+                    </>
+                )}
+            </AnimatePresence>
+
             {/* Main Content */}
-            <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
+            <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0">
                 {/* Top Bar */}
-                <header className={`h-16 flex items-center justify-between px-8 sticky top-0 z-30 ${isLight ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200' : 'bg-[#0A0A0F]/80 backdrop-blur-xl border-b border-white/5'}`}>
-                    <h1 className="text-xl font-bold capitalize">{activeSection.replace('-', ' ')}</h1>
-                    <div className="flex items-center space-x-3">
-                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex items-center space-x-2 px-3 py-2 rounded-xl text-sm ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'} transition-colors cursor-text`}>
+                <header className={`h-16 flex items-center justify-between px-4 md:px-8 sticky top-0 z-30 ${isLight ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200' : 'bg-[#0A0A0F]/80 backdrop-blur-xl border-b border-white/5'}`}>
+                    <div className="flex items-center">
+                        <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-3 w-9 h-9 flex items-center justify-center rounded-xl ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
+                            <Icon name="menu" className="text-lg opacity-80" />
+                        </button>
+                        <h1 className="text-lg md:text-xl font-bold capitalize truncate">{activeSection.replace('-', ' ')}</h1>
+                    </div>
+                    <div className="flex items-center space-x-2 md:space-x-3 shrink-0">
+                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-2 px-3 py-2 rounded-xl text-sm ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'} transition-colors cursor-text`}>
                             <Icon name="search" className="text-base opacity-40" />
                             <span className="opacity-40">AI Commands&hellip; (⌘K)</span>
+                        </motion.button>
+                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-9 h-9 rounded-xl ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
+                            <Icon name="search" className="text-lg opacity-60" />
                         </motion.button>
                         <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-9 h-9 rounded-xl flex items-center justify-center ${isLight ? 'bg-gray-100' : 'bg-white/5'}`}>
                             <Icon name="notifications" className="text-lg opacity-60" />
@@ -156,7 +209,7 @@ export default function PortalPanel() {
                 </header>
 
                 {/* Page Content */}
-                <main className="flex-1 p-8">
+                <main className="flex-1 p-4 md:p-8">
                     <AnimatePresence mode="wait">
                         {activeSection === 'start' && <StartSection key="start" card={cardClass} isLight={isLight} />}
                         {activeSection === 'dashboard' && <DashboardSection key="dash" card={cardClass} isLight={isLight} />}
@@ -201,9 +254,9 @@ export default function PortalPanel() {
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`w-full max-w-md h-full shadow-2xl flex flex-col relative ${isLight ? 'bg-[#F8F9FA] border-l border-gray-200' : 'bg-[#0A0A0F] border-l border-white/10'}`}
+                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative ${isLight ? 'bg-[#F8F9FA] border-l border-gray-200' : 'bg-[#0A0A0F] border-l border-white/10'}`}
                         >
-                            <div className={`flex items-center justify-between p-5 border-b relative overflow-hidden z-10 ${isLight ? 'border-gray-200 bg-white/50 backdrop-blur-xl' : 'border-white/10 bg-[#12121A]/80 backdrop-blur-xl'}`}>
+                            <div className={`flex items-center justify-between p-4 md:p-5 border-b relative overflow-hidden z-10 ${isLight ? 'border-gray-200 bg-white/50 backdrop-blur-xl' : 'border-white/10 bg-[#12121A]/80 backdrop-blur-xl'}`}>
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#A78BFA] via-[#7C3AED] to-[#A78BFA]" />
                                 <div className="flex items-center space-x-3">
                                     <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1.5px] shadow-lg overflow-hidden before:absolute before:inset-0 before:bg-[url('https://grainy-gradients.vercel.app/noise.svg')] before:opacity-20 before:mix-blend-overlay">
@@ -372,7 +425,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 {/* Activity Chart */}
-                <motion.div variants={itemVariants} className={`${card} col-span-2`}>
+                <motion.div variants={itemVariants} className={`${card} xl:col-span-2`}>
                     <h3 className="font-semibold text-lg mb-4">User Activity (30 Days)</h3>
                     <div className="h-48 flex items-end justify-between gap-1 px-2">
                         {activityChartTops.map((h: number, i: number) => (
@@ -419,7 +472,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                 <motion.div variants={itemVariants} className={card}>
                     <h3 className="font-semibold text-lg mb-4">AI Copilot Usage</h3>
-                    <div className="flex items-center space-x-8">
+                    <div className="flex flex-col sm:flex-row items-center sm:space-x-8 space-y-6 sm:space-y-0">
                         <motion.div whileHover={{ scale: 1.05 }} className="relative w-32 h-32 flex items-center justify-center shrink-0 cursor-pointer">
                             <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                                 <path className={isLight ? "text-gray-100" : "text-white/5"} stroke="currentColor" strokeWidth="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -430,7 +483,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                             </svg>
                             <span className="absolute text-xl font-bold">2,891</span>
                         </motion.div>
-                        <div className="flex-1 space-y-2">
+                        <div className="flex-1 w-full space-y-2">
                             {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-[#A78BFA]' }, { label: 'Design Reviews', pct: '25%', color: 'bg-emerald-500' }, { label: 'Analytics', pct: '20%', color: 'bg-amber-500' }, { label: 'General', pct: '20%', color: 'bg-rose-500' }].map(s => (
                                 <motion.div key={s.label} whileHover={{ scale: 1.02, x: 2 }} className={`flex justify-between text-sm items-center p-2 rounded-lg cursor-pointer ${isLight ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white/[0.03] hover:bg-white/[0.06]'} transition-colors`}>
                                     <span className="flex items-center opacity-70"><span className={`w-2.5 h-2.5 rounded-full mr-2.5 ${s.color}`} />{s.label}</span>
@@ -489,19 +542,19 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
 
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <div>
                     <h2 className="text-lg font-bold">Portal User Management</h2>
                     <p className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{users.length} total users</p>
                 </div>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="px-4 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors flex items-center space-x-2 shadow-lg shadow-[#7C3AED]/20">
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-4 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors flex items-center space-x-2 shadow-lg shadow-[#7C3AED]/20">
                     <Icon name="person_add" className="text-base" /><span>Add User</span>
                 </motion.button>
             </div>
 
             <motion.div variants={itemVariants} className={card}>
-                <div className="overflow-x-auto">
-                    <table className="w-full">
+                <div className="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
+                    <table className="w-full min-w-[600px]">
                         <thead>
                             <tr className={`text-left text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                                 <th className="pb-4 font-medium">User</th>
@@ -589,9 +642,9 @@ function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }
 
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <h2 className="text-lg font-bold">Portal Administration</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="px-4 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors flex items-center space-x-2 shadow-lg shadow-[#7C3AED]/20">
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-4 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors flex items-center space-x-2 shadow-lg shadow-[#7C3AED]/20">
                     <Icon name="add" className="text-base" /><span>New Workspace</span>
                 </motion.button>
             </div>
@@ -738,9 +791,9 @@ function AlertsConfigSection({ card, isLight }: { card: string, isLight: boolean
 function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean }) {
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <h2 className="text-lg font-bold">Usage Analytics</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center space-x-2 ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center space-x-2 ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
                     <Icon name="download" className="text-base" /><span>Export Data</span>
                 </motion.button>
             </div>
