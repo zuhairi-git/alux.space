@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const localizedMetadata = {
         en: {
             title: 'Workflow Platform Case Study | Portfolio',
-            description: 'A case study on building an AI-powered platform for seamless team collaboration, intelligent workspaces, and real-time activity tracking across iOS, Android, and admin portal.',
+            description: 'A case study on building an AI-powered platform for seamless team collaboration, intelligent workspaces, and real-time activity tracking across iOS, Android, and collaboration portal.',
         },
         fi: {
             title: 'Työnkulkualustan tapaustutkimus | Portfolio',

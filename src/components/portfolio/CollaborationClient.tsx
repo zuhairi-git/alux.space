@@ -51,15 +51,15 @@ export default function CollaborationClient() {
         iosPrototypeDesc: "Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.",
         androidPrototype: "Android Prototype",
         androidPrototypeDesc: "Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.",
-        adminPortal: "Admin Portal",
-        adminPortalDesc: "Enterprise-grade admin dashboard with collapsible sidebar, KPI cards, data tables, AI copilot logs, and usage analytics.",
+        adminPortal: "Collaboration Portal",
+        adminPortalDesc: "Enterprise-grade collaboration dashboard with collapsible sidebar, KPI cards, data tables, AI portal logs, and usage analytics.",
         openPrototype: "Open Prototype",
       },
       fi: {
         title: "Työnkulkualusta",
-        intro: "Tekoälyllä toimiva alusta, joka tehostaa tiimien yhteistyötä älykkäiden työtilojen, tekoälyavustajan ja reaaliaikaisen toiminnan seurannan avulla — rakennettu saumattomiin kokemuksiin iOS:lle, Androidille ja hallintaportaalille.",
+        intro: "Tekoälyllä toimiva alusta, joka tehostaa tiimien yhteistyötä älykkäiden työtilojen, tekoälyavustajan ja reaaliaikaisen toiminnan seurannan avulla — rakennettu saumattomiin kokemuksiin iOS:lle, Androidille ja portaalille.",
         projectType: "Projektityyppi",
-        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, tekoälypohjainen hallintaportaali",
+        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, tekoälypohjainen yhteistyöportaali",
         timeline: "Aikataulu",
         timelineValue: "18 viikkoa",
         tools: "Työkalut",
@@ -85,8 +85,8 @@ export default function CollaborationClient() {
         iosPrototypeDesc: "Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.",
         androidPrototype: "Android-prototyyppi",
         androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.",
-        adminPortal: "Hallintapaneeli",
-        adminPortalDesc: "Yritystason hallintapaneeli sivupalkilla, KPI-korteilla, datataulukoilla, tekoälylokilla ja käyttöanalytiikalla.",
+        adminPortal: "Yhteistyöportaali",
+        adminPortalDesc: "Yritystason portaali sivupalkilla, KPI-korteilla, datataulukoilla, tekoälylokilla ja käyttöanalytiikalla.",
         openPrototype: "Avaa prototyyppi",
       }
     };
@@ -108,7 +108,7 @@ export default function CollaborationClient() {
         "Integroi tekoälyavustaja älykkääseen työtila-avustukseen",
         "Mahdollista tiimien reaaliaikainen yhteistyö työtiloissa",
         "Tarjoa käytännöllisiä tekoälypohjaisia näkemyksiä ja analytiikkaa",
-        "Tue alustojen välistä johdonmukaisuutta (iOS, Android, Web-hallinta)",
+        "Tue alustojen välistä johdonmukaisuutta (iOS, Android, Web-portaali)",
         "Varmista saavutettava, mobiilipainotteinen responsiivinen suunnittelu"
       ]
     };
@@ -135,7 +135,7 @@ export default function CollaborationClient() {
     },
     {
       phase: locale === 'fi' ? "Kehitä" : "Develop",
-      desc: locale === 'fi' ? "Rakenna tekoälypohjaiset prototyypit mobiili- ja hallinta-alustoille" : "Build AI-powered prototypes across mobile and admin platforms",
+      desc: locale === 'fi' ? "Rakenna tekoälypohjaiset prototyypit mobiili- ja portaalialustoille" : "Build AI-powered prototypes across mobile and admin platforms",
       icon: (
         <span className="material-symbols text-4xl">edit</span>
       )
@@ -427,7 +427,7 @@ export default function CollaborationClient() {
                       )
                     }, {
                       title: locale === 'fi' ? "Alustasynkronointi" : "Cross-Platform Sync",
-                      description: locale === 'fi' ? "Saumaton työtilan jatkuvuus iOS:n, Androidin ja hallintaportaalin välillä" : "Seamless workspace continuity across iOS, Android, and Admin Portal",
+                      description: locale === 'fi' ? "Saumaton työtilan jatkuvuus iOS:n, Androidin ja portaalin välillä" : "Seamless workspace continuity across iOS, Android, and Admin Portal",
                       icon: (
                         <span className="material-symbols text-4xl">devices</span>
                       )
@@ -666,7 +666,7 @@ export default function CollaborationClient() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {[{
                   title: locale === 'fi' ? "Tekoälypohjaiset prototyypit" : "AI-Powered Prototypes",
-                  description: locale === 'fi' ? "Interaktiiviset tekoälypohjaiset prototyypit iOS:lle, Androidille ja hallintaportaalille" : "Interactive AI-powered prototypes for iOS, Android, and Admin portal with copilot integration",
+                  description: locale === 'fi' ? "Interaktiiviset tekoälypohjaiset prototyypit iOS:lle, Androidille ja yhteistyöportaalille" : "Interactive AI-powered prototypes for iOS, Android, and Admin portal with copilot integration",
                   progress: 100,
                   icon: (
                     <span className="material-symbols text-4xl">devices</span>
@@ -682,7 +682,7 @@ export default function CollaborationClient() {
                 },
                 {
                   title: locale === 'fi' ? "Laadunvarmistus" : "Quality Assurance",
-                  description: locale === 'fi' ? "Monialustainen testaus mobiilissa ja hallinnassa johdonmukaisen tekoälyavustajakokemuksen varmistamiseksi" : "Cross-platform testing across mobile and admin to ensure consistent AI copilot experience",
+                  description: locale === 'fi' ? "Monialustainen testaus mobiilissa ja portaalissa johdonmukaisen tekoälyavustajakokemuksen varmistamiseksi" : "Cross-platform testing across mobile and admin to ensure consistent AI copilot experience",
                   progress: 100,
                   icon: (
                     <span className="material-symbols text-4xl">verified</span>
@@ -770,7 +770,7 @@ export default function CollaborationClient() {
                   {
                     title: content.adminPortal,
                     description: content.adminPortalDesc,
-                    href: "/admin",
+                    href: "/portfolio/workflow/admin",
                     icon: (<span className="material-symbols text-4xl">admin_panel_settings</span>),
                     gradient: "from-purple-500/20 to-fuchsia-500/20",
                     borderColor: "border-purple-500/30",

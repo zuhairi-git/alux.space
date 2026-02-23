@@ -37,7 +37,7 @@ export function ProfileView({ card, isLight, themeMode, setThemeMode, theme }: P
                     <div className={`absolute bottom-0 right-0 w-6 h-6 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#FAF8FC]' : 'border-[#111114]') : (isLight ? 'border-[#F2F2F7]' : 'border-black')}`} />
                 </div>
                 <h2 className="font-bold text-2xl">Ali Al-Zuhairi</h2>
-                <p className={`text-sm font-medium mt-0.5 ${p.roleColor}`}>Platform Administrator</p>
+                <p className={`text-sm font-medium mt-0.5 ${p.roleColor}`}>Platform Lead</p>
             </motion.div>
 
             {/* Collaboration Stats */}

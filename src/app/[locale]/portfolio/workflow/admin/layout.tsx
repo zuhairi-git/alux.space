@@ -2,12 +2,12 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Admin Panel | Workflow Platform',
-    description: 'Platform administration dashboard for managing users, workspaces, and AI collaboration tools',
+    title: 'Portal | Workflow Platform',
+    description: 'Platform collaboration portal for managing users, workspaces, and AI tools',
     robots: { index: false, follow: false },
 };
 
-export default function AdminLayout({
+export default function PortalLayout({
     children,
 }: {
     children: React.ReactNode;

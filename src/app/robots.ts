@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
         disallow: [
           '/api/',
-          '/admin/',
+          '/portfolio/workflow/admin/',
           '/_next/',
           '/private/',
           '*.json',
@@ -26,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: [
           'ChatGPT-User',
-          'GPTBot', 
+          'GPTBot',
           'Google-Extended',
           'Claude-Web',
           'ClaudeBot',
@@ -41,7 +41,7 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 2,
         disallow: [
           '/api/',
-          '/admin/',
+          '/portfolio/workflow/admin/',
           '/private/',
           '/temp/',
           '/staging/',
@@ -61,7 +61,7 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
         disallow: [
           '/api/',
-          '/admin/',
+          '/portfolio/workflow/admin/',
           '/private/',
         ],
       },
@@ -83,7 +83,7 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 3,
         disallow: [
           '/api/',
-          '/admin/',
+          '/portfolio/workflow/admin/',
           '/_next/',
           '/private/',
           '/temp/',

@@ -1,16 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-export default function AdminRedirect() {
+export default function RootAdminRedirect() {
     const router = useRouter();
-    const params = useParams();
-    const locale = params?.locale || 'en';
 
     useEffect(() => {
-        router.replace(`/${locale}/portfolio/workflow/admin`);
-    }, [router, locale]);
+        router.replace('/en/portfolio/workflow/admin');
+    }, [router]);
 
     return (
         <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">

@@ -150,7 +150,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Tekoälypohjainen yhteistyö'
       },
       desc: {
-        en: 'An AI-powered platform with intelligent workspaces, AI copilot, and cross-platform prototypes for iOS, Android, and admin portal.',
+        en: 'An AI-powered platform with intelligent workspaces, AI copilot, and cross-platform prototypes for iOS, Android, and collaboration portal.',
         fi: 'Tekoälypohjainen alusta älykkäillä työtiloilla, tekoälyavustajalla ja monialustaisilla prototyypeillä iOS:lle, Androidille ja hallintaportaalille.'
       },
       link: `/${locale}/portfolio/workflow`,
