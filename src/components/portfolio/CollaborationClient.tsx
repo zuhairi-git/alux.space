@@ -23,24 +23,24 @@ export default function CollaborationClient() {
     const content = {
       en: {
         title: "Collaboration Workflow Platform",
-        intro: "A platform designed to simplify live collaboration, improve communication, and help teams deliver content more efficiently across devices, time zones, and locations.",
+        intro: "An AI-powered platform designed to streamline team collaboration through intelligent workspaces, an AI copilot assistant, and real-time activity tracking — built for seamless experiences across iOS, Android, and a dedicated admin portal.",
         projectType: "Project Type",
-        projectTypeValues: "Landing Page, Web & Mobile Platform, Mobile Application",
+        projectTypeValues: "Landing Page, Web & Mobile Platform, AI-Powered Admin Portal",
         timeline: "Timeline",
         timelineValue: "18 Weeks",
         tools: "Tools",
-        toolsValue: "Figma, FigJam, Maze",
+        toolsValue: "Next.js, Figma, FigJam, Maze",
         roles: "Roles",
         objectives: "Objectives",
         designProcess: "Design Process",
         researchInsights: "Research Insights",
-        participantFeedback: "Participant Feedback",
+        participantFeedback: "Platform Metrics",
         keyRecommendations: "Key Recommendations",
         userPersonas: "User Personas",
         productRequirements: "Product Requirements",
         userTesting: "User Testing",
         testScenario: "Test Scenario",
-        testScenarioValue: "Configure a new device using the prototype",
+        testScenarioValue: "Collaborate on a design review using AI Copilot assistance",
         focusAreas: "Focus Areas",
         deliveryPhase: "Delivery Phase",
         completed: "Completed",
@@ -52,32 +52,33 @@ export default function CollaborationClient() {
         androidPrototype: "Android Prototype",
         androidPrototypeDesc: "Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.",
         adminPortal: "Admin Portal",
-        adminPortalDesc: "Enterprise-grade admin dashboard with collapsible sidebar, KPI cards, data tables, AI logs, and analytics.",
+        adminPortalDesc: "Enterprise-grade admin dashboard with collapsible sidebar, KPI cards, data tables, AI copilot logs, and usage analytics.",
         openPrototype: "Open Prototype",
       },
       fi: {
         title: "Yhteistyön työnkulkualusta",
-        intro: "Alusta, joka on suunniteltu yksinkertaistamaan reaaliaikaista yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin eri laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+        intro: "Tekoälyllä toimiva alusta, joka tehostaa tiimien yhteistyötä älykkäiden työtilojen, tekoälyavustajan ja reaaliaikaisen toiminnan seurannan avulla — rakennettu saumattomiin kokemuksiin iOS:lle, Androidille ja hallintaportaalille.",
         projectType: "Projektityyppi",
-        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, mobiilisovellus",
+        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, tekoälypohjainen hallintaportaali",
         timeline: "Aikataulu",
         timelineValue: "18 viikkoa",
         tools: "Työkalut",
-        toolsValue: "Figma, FigJam, Maze",
+        toolsValue: "Next.js, Figma, FigJam, Maze",
         roles: "Roolit",
         objectives: "Tavoitteet",
         designProcess: "Suunnitteluprosessi",
         researchInsights: "Tutkimustulokset",
-        participantFeedback: "Osallistujien palaute",
+        participantFeedback: "Alustan mittarit",
         keyRecommendations: "Tärkeimmät suositukset",
         userPersonas: "Käyttäjäpersoonat",
         productRequirements: "Tuotevaatimukset",
         userTesting: "Käyttäjätestaus",
         testScenario: "Testiskenaario",
-        testScenarioValue: "Määritä uusi laite käyttäen prototyyppiä",
+        testScenarioValue: "Tee suunnittelukatselmus tekoälyavustajan tuella",
         focusAreas: "Keskittymisalueet",
         deliveryPhase: "Toimitusvaihe",
-        completed: "Valmis", learnMore: "Lue lisää",
+        completed: "Valmis",
+        learnMore: "Lue lisää",
         livePrototypes: "Interaktiiviset prototyypit",
         livePrototypesIntro: "Tutustu alustan interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.",
         iosPrototype: "iOS-prototyyppi",
@@ -85,7 +86,7 @@ export default function CollaborationClient() {
         androidPrototype: "Android-prototyyppi",
         androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.",
         adminPortal: "Hallintapaneeli",
-        adminPortalDesc: "Yritystason hallintapaneeli sivupalkilla, KPI-korteilla, datataulukoilla, tekoälylokeilla ja analytiikalla.",
+        adminPortalDesc: "Yritystason hallintapaneeli sivupalkilla, KPI-korteilla, datataulukoilla, tekoälylokilla ja käyttöanalytiikalla.",
         openPrototype: "Avaa prototyyppi",
       }
     };
@@ -97,17 +98,18 @@ export default function CollaborationClient() {
   const getObjectives = () => {
     const objectives = {
       en: [
-        "Clarify each step's purpose for better user understanding",
-        "Communicate using business logic",
-        "Offer UI customization",
-        "Maintain consistent UI patterns",
-        "Ensure mobile-first responsive design"
+        "Integrate AI Copilot for intelligent workspace assistance",
+        "Enable real-time team collaboration across workspaces",
+        "Provide actionable AI-driven insights and analytics",
+        "Support cross-platform consistency (iOS, Android, Web Admin)",
+        "Ensure accessible, mobile-first responsive design"
       ],
       fi: [
-        "Selkeytä jokaisen vaiheen tarkoitus parempaa käyttäjäymmärrystä varten",
-        "Kommunikoi käyttäen liiketoimintalogiikkaa",
-        "Tarjoa käyttöliittymän mukauttamista",
-        "Ylläpidä johdonmukaisia käyttöliittymäkuvioita", "Varmista mobiilipainotteinen responsiivinen suunnittelu"
+        "Integroi tekoälyavustaja älykkääseen työtila-avustukseen",
+        "Mahdollista tiimien reaaliaikainen yhteistyö työtiloissa",
+        "Tarjoa käytännöllisiä tekoälypohjaisia näkemyksiä ja analytiikkaa",
+        "Tue alustojen välistä johdonmukaisuutta (iOS, Android, Web-hallinta)",
+        "Varmista saavutettava, mobiilipainotteinen responsiivinen suunnittelu"
       ]
     };
 
@@ -119,28 +121,28 @@ export default function CollaborationClient() {
   const designProcessSteps = [
     {
       phase: locale === 'fi' ? "Tutki" : "Discover",
-      desc: locale === 'fi' ? "Tutki käyttäjien tarpeita ja kipupisteitä" : "Research user needs and pain points",
+      desc: locale === 'fi' ? "Tutki tiimien yhteistyön kipupisteitä ja tekoälymahdollisuuksia" : "Research team collaboration pain points and AI opportunities",
       icon: (
         <span className="material-symbols text-4xl">search</span>
       )
     },
     {
       phase: locale === 'fi' ? "Määrittele" : "Define",
-      desc: locale === 'fi' ? "Analysoi oivalluksia haasteen rajaamiseksi" : "Analyze insights to scope the challenge",
+      desc: locale === 'fi' ? "Määrittele tekoälyavustajan laajuus ja työtila-arkkitehtuuri" : "Define AI copilot scope and workspace architecture",
       icon: (
         <span className="material-symbols text-4xl">notes</span>
       )
     },
     {
       phase: locale === 'fi' ? "Kehitä" : "Develop",
-      desc: locale === 'fi' ? "Luo ratkaisukonsepteja" : "Create solution concepts",
+      desc: locale === 'fi' ? "Rakenna tekoälypohjaiset prototyypit mobiili- ja hallinta-alustoille" : "Build AI-powered prototypes across mobile and admin platforms",
       icon: (
         <span className="material-symbols text-4xl">edit</span>
       )
     },
     {
       phase: locale === 'fi' ? "Toimita" : "Deliver",
-      desc: locale === 'fi' ? "Testaa käyttäjillä ja iteroidu" : "Test with users and iterate",
+      desc: locale === 'fi' ? "Validoi käyttäjillä kaikilla alustoilla ja iteroi" : "Validate with users across all platforms and iterate",
       icon: (
         <span className="material-symbols text-4xl">rocket_launch</span>
       )
@@ -148,25 +150,25 @@ export default function CollaborationClient() {
   ];
   // Translation for roles
   const roles = locale === 'fi' ?
-    ["Tuotesuunnittelija", "Tuotepäällikkö", "Käyttäjätutkimus", "Testaus", "Analytiikka"] :
-    ["Product Designer", "Product Manager", "User Research", "Testing", "Analytics"];
+    ["Tuotesuunnittelija", "AI/UX-strategi", "Käyttäjätutkimus", "Prototypointi", "Analytiikka"] :
+    ["Product Designer", "AI/UX Strategist", "User Research", "Prototyping", "Analytics"];
   // Localized metrics
   const metrics = [
     {
-      label: locale === 'fi' ? "Luovuuden arvo" : "Creativity Value",
-      value: 90
+      label: locale === 'fi' ? "Tekoälyavustajan käyttöaste" : "AI Copilot Adoption",
+      value: 92
     },
     {
-      label: locale === 'fi' ? "Käyttäjäystävällisyys" : "User-Friendliness",
+      label: locale === 'fi' ? "Työtilan sitoutuminen" : "Workspace Engagement",
+      value: 88
+    },
+    {
+      label: locale === 'fi' ? "Alustayhtenäisyys" : "Cross-Platform Consistency",
       value: 95
     },
     {
-      label: locale === 'fi' ? "Värien hyväksyntä" : "Color Approval",
-      value: 80
-    },
-    {
-      label: locale === 'fi' ? "Esteettömyys" : "Accessibility",
-      value: 85
+      label: locale === 'fi' ? "Tehtävien suoritusaste" : "Task Completion Rate",
+      value: 89
     }
   ];
   return (
@@ -193,7 +195,7 @@ export default function CollaborationClient() {
                   {content.title}
                 </h1>
                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
-                  {locale === 'fi' ? 'Tehokas yhteistyöalusta tiimeille' : 'Efficient collaboration platform for teams'}
+                  {locale === 'fi' ? 'Tekoälyllä toimiva yhteistyöalusta tiimeille' : 'AI-powered collaboration platform for teams'}
                 </p>
               </div>
             </div>
@@ -226,62 +228,94 @@ export default function CollaborationClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
+              {/* Project Type Card */}
               <div className={`p-6 rounded-xl ${theme === 'colorful'
                 ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg'
                 : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                 }`}>
-                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
-                  ? 'text-cyan-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.projectType}</h3>
-                <p className={`text-sm ${theme === 'colorful'
-                  ? 'text-gray-300'
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
-                  }`}>{content.projectTypeValues}</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-cyan-400/15 text-cyan-300' : isLight ? 'bg-purple-100 text-purple-600' : 'bg-purple-400/10 text-purple-400'}`}>
+                    <span className="material-symbols text-xl">category</span>
+                  </div>
+                  <h3 className={`font-semibold ${theme === 'colorful'
+                    ? 'text-cyan-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                    }`}>{content.projectType}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {content.projectTypeValues.split(', ').map((item: string, i: number) => (
+                    <span key={i} className={`text-xs px-2.5 py-1 rounded-full font-medium ${theme === 'colorful'
+                      ? 'bg-cyan-400/10 text-cyan-200 border border-cyan-400/20'
+                      : isLight ? 'bg-purple-50 text-purple-700 border border-purple-200' : 'bg-purple-400/10 text-purple-300 border border-purple-400/20'
+                      }`}>{item}</span>
+                  ))}
+                </div>
               </div>
 
+              {/* Timeline Card */}
               <div className={`p-6 rounded-xl ${theme === 'colorful'
                 ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg'
                 : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                 }`}>
-                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
-                  ? 'text-purple-300'
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-purple-400/15 text-purple-300' : isLight ? 'bg-blue-100 text-blue-600' : 'bg-blue-400/10 text-blue-400'}`}>
+                    <span className="material-symbols text-xl">schedule</span>
+                  </div>
+                  <h3 className={`font-semibold ${theme === 'colorful'
+                    ? 'text-purple-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                    }`}>{content.timeline}</h3>
+                </div>
+                <p className={`text-2xl font-bold ${theme === 'colorful'
+                  ? 'text-white'
                   : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.timeline}</h3>
-                <p className={`text-sm ${theme === 'colorful'
-                  ? 'text-gray-300'
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
                   }`}>{content.timelineValue}</p>
               </div>
 
+              {/* Tools Card */}
               <div className={`p-6 rounded-xl ${theme === 'colorful'
                 ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg'
                 : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                 }`}>
-                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
-                  ? 'text-blue-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.tools}</h3>
-                <p className={`text-sm ${theme === 'colorful'
-                  ? 'text-gray-300'
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
-                  }`}>{content.toolsValue}</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-blue-400/15 text-blue-300' : isLight ? 'bg-emerald-100 text-emerald-600' : 'bg-emerald-400/10 text-emerald-400'}`}>
+                    <span className="material-symbols text-xl">build</span>
+                  </div>
+                  <h3 className={`font-semibold ${theme === 'colorful'
+                    ? 'text-blue-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                    }`}>{content.tools}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {content.toolsValue.split(', ').map((tool: string, i: number) => (
+                    <span key={i} className={`text-xs px-2.5 py-1 rounded-full font-medium ${theme === 'colorful'
+                      ? 'bg-blue-400/10 text-blue-200 border border-blue-400/20'
+                      : isLight ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-emerald-400/10 text-emerald-300 border border-emerald-400/20'
+                      }`}>{tool}</span>
+                  ))}
+                </div>
               </div>
 
+              {/* Roles Card */}
               <div className={`p-6 rounded-xl ${theme === 'colorful'
                 ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg'
                 : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                 }`}>
-                <h3 className={`font-semibold mb-2 ${theme === 'colorful'
-                  ? 'text-fuchsia-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.roles}</h3>
-                <div className={`text-sm ${theme === 'colorful'
-                  ? 'text-gray-300'
-                  : isLight ? 'text-gray-600' : 'text-gray-300'
-                  }`}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-fuchsia-400/15 text-fuchsia-300' : isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-400/10 text-amber-400'}`}>
+                    <span className="material-symbols text-xl">groups</span>
+                  </div>
+                  <h3 className={`font-semibold ${theme === 'colorful'
+                    ? 'text-fuchsia-300'
+                    : isLight ? 'text-gray-900' : 'text-white'
+                    }`}>{content.roles}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
                   {roles.map((role, index) => (
-                    <div key={index}>{role}</div>
+                    <span key={index} className={`text-xs px-2.5 py-1 rounded-full font-medium ${theme === 'colorful'
+                      ? 'bg-fuchsia-400/10 text-fuchsia-200 border border-fuchsia-400/20'
+                      : isLight ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-amber-400/10 text-amber-300 border border-amber-400/20'
+                      }`}>{role}</span>
                   ))}
                 </div>
               </div>
@@ -357,22 +391,22 @@ export default function CollaborationClient() {
                   <h3 className="text-xl font-semibold text-primary mb-6">{content.keyRecommendations}</h3>
                   <div className="space-y-4">
                     {[{
-                      title: locale === 'fi' ? "Parannettu saavutettavuus" : "Enhanced Accessibility",
-                      description: locale === 'fi' ? "Lisää selkeät etiketit kaikkiin kuvakkeisiin ja kuviin" : "Add clear labels to all icons and images",
+                      title: locale === 'fi' ? "Tekoälypohjaiset näkemykset" : "AI-Powered Insights",
+                      description: locale === 'fi' ? "Hyödynnä tekoälyavustajaa sprintti- ja suunnittelukatsausten näkemysten esiin tuomiseen" : "Leverage AI copilot to surface actionable sprint and design review insights",
                       icon: (
-                        <span className="material-symbols text-4xl">person</span>
+                        <span className="material-symbols text-4xl">auto_awesome</span>
                       )
                     }, {
-                      title: locale === 'fi' ? "Näppäimistön navigointi" : "Keyboard Navigation",
-                      description: locale === 'fi' ? "Paranna kohdistustiloja ja näppäimistön pikavalintoja" : "Improve focus states and keyboard shortcuts",
+                      title: locale === 'fi' ? "Älykkäät ilmoitukset" : "Smart Notifications",
+                      description: locale === 'fi' ? "Tekoälyn priorisoimat hälytykset työtilan toiminnan ja määräaikojen perusteella" : "AI-prioritized alerts based on workspace activity and deadlines",
                       icon: (
-                        <span className="material-symbols text-4xl">keyboard</span>
+                        <span className="material-symbols text-4xl">notifications_active</span>
                       )
                     }, {
-                      title: locale === 'fi' ? "Värikontrasti" : "Color Contrast",
-                      description: locale === 'fi' ? "Paranna kontrastisuhteita paremman luettavuuden vuoksi" : "Enhance contrast ratios for better readability",
+                      title: locale === 'fi' ? "Alustasynkronointi" : "Cross-Platform Sync",
+                      description: locale === 'fi' ? "Saumaton työtilan jatkuvuus iOS:n, Androidin ja hallintaportaalin välillä" : "Seamless workspace continuity across iOS, Android, and Admin Portal",
                       icon: (
-                        <span className="material-symbols text-4xl">palette</span>
+                        <span className="material-symbols text-4xl">devices</span>
                       )
                     }
                     ].map((item, index) => (
@@ -404,24 +438,24 @@ export default function CollaborationClient() {
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.userPersonas}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[{
-                  name: locale === 'fi' ? "John J." : "John J.",
-                  role: locale === 'fi' ? "Markkinointipäällikkö" : "Marketing Manager",
-                  traits: locale === 'fi' ? ["Teknologiaosaava", "Innovaatioihin keskittyvä"] : ["Tech-savvy", "Innovation-focused"],
-                  needs: locale === 'fi' ? ["Yhteistyötyökalut", "Strategian yhdenmukaistaminen"] : ["Collaboration tools", "Strategy alignment"],
-                  goals: locale === 'fi' ? ["Tehosta tiimiviestintää", "Ota käyttöön uusia markkinointistrategioita"] : ["Streamline team communication", "Implement new marketing strategies"],
-                  painPoints: locale === 'fi' ? ["Monimutkaiset hyväksymisprosessit", "Hajautetut palautekanavat"] : ["Complex approval processes", "Scattered feedback channels"],
+                  name: locale === 'fi' ? "Sara K." : "Sara K.",
+                  role: locale === 'fi' ? "Vanhempi tuotesuunnittelija" : "Senior Product Designer",
+                  traits: locale === 'fi' ? ["Teknologiaosaava", "Suunnittelukeskeinen"] : ["Tech-savvy", "Design-focused"],
+                  needs: locale === 'fi' ? ["Tekoälyavusteiset katselmukset", "Suunnittelujärjestelmätyökalut"] : ["AI-assisted reviews", "Design system tools"],
+                  goals: locale === 'fi' ? ["Tehosta suunnittelun luovutusta", "Hyödynnä tekoälyä saavutettavuustarkistuksissa"] : ["Streamline design handoff", "Leverage AI for accessibility audits"],
+                  painPoints: locale === 'fi' ? ["Hajautettu palaute", "Manuaaliset katselmusprosessit"] : ["Scattered feedback channels", "Manual review processes"],
                   icon: (
-                    <span className="material-symbols text-4xl">groups</span>
+                    <span className="material-symbols text-4xl">palette</span>
                   )
                 }, {
-                  name: locale === 'fi' ? "Julia Romes" : "Julia Romes",
-                  role: locale === 'fi' ? "Myyntijohtaja" : "Sales Director",
-                  traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Mobiilipainotteinen"] : ["Results-driven", "Mobile-first"],
-                  needs: locale === 'fi' ? ["Nopea yhteistyö", "Liikkuva pääsy"] : ["Quick collaboration", "On-the-go access"],
-                  goals: locale === 'fi' ? ["Sulje kaupat nopeammin", "Paranna tiimikoordinointia"] : ["Close deals faster", "Improve team coordination"],
-                  painPoints: locale === 'fi' ? ["Rajoitettu mobiilitoiminnallisuus", "Viivästyneet vastaukset"] : ["Limited mobile functionality", "Delayed responses"],
+                  name: locale === 'fi' ? "James L." : "James L.",
+                  role: locale === 'fi' ? "Tiimipäällikkö" : "Engineering Team Lead",
+                  traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Datalähtöinen"] : ["Results-driven", "Data-oriented"],
+                  needs: locale === 'fi' ? ["Sprinttimittarit", "Työtilan koordinointi"] : ["Sprint metrics", "Workspace coordination"],
+                  goals: locale === 'fi' ? ["Paranna tiimin nopeutta", "Vähennä kokousaikaa"] : ["Improve team velocity", "Reduce meeting overhead"],
+                  painPoints: locale === 'fi' ? ["Kontekstin vaihtaminen", "Viivästyneet hyväksynnät"] : ["Context switching between tools", "Delayed approvals"],
                   icon: (
-                    <span className="material-symbols text-4xl">groups</span>
+                    <span className="material-symbols text-4xl">engineering</span>
                   )
                 }
                 ].map((persona, index) => (
@@ -500,31 +534,31 @@ export default function CollaborationClient() {
                   <h2 className="text-3xl font-bold mb-6 text-primary">{content.productRequirements}</h2>
                   <div className="space-y-4">
                     {[{
-                      title: locale === 'fi' ? "Tiimiviestintä" : "Team Communication",
-                      description: locale === 'fi' ? "Mahdollista saumaton reaaliaikainen yhteistyö" : "Enable seamless real-time collaboration",
+                      title: locale === 'fi' ? "Tekoälyavustaja" : "AI Copilot",
+                      description: locale === 'fi' ? "Kontekstitietoinen tekoälyavustaja työtilakysymyksiin ja sprinttien tilaan" : "Context-aware AI assistant for workspace queries and sprint status",
                       icon: (
-                        <span className="material-symbols text-4xl">group</span>
+                        <span className="material-symbols text-4xl">auto_awesome</span>
                       )
                     },
                     {
-                      title: locale === 'fi' ? "Käyttäjäpalautesilmukka" : "User Feedback Loop",
-                      description: locale === 'fi' ? "Jatkuva käyttäjäoivallusten kerääminen" : "Continuous collection of user insights",
+                      title: locale === 'fi' ? "Älykkäät työtilat" : "Smart Workspaces",
+                      description: locale === 'fi' ? "Organisoidut yhteistyötilat reaaliaikaisen toiminnan seurannalla" : "Organized collaboration spaces with real-time activity tracking",
                       icon: (
-                        <span className="material-symbols text-4xl">feedback</span>
+                        <span className="material-symbols text-4xl">workspaces</span>
                       )
                     },
                     {
-                      title: locale === 'fi' ? "Koulutusresurssit" : "Training Resources",
-                      description: locale === 'fi' ? "Monitasoiset oppimateriaalit" : "Multi-level learning materials",
+                      title: locale === 'fi' ? "Älykkäät hälytykset" : "Intelligent Alerts",
+                      description: locale === 'fi' ? "Tekoälyn priorisoimat ilmoitukset kiireellisyyden ja kontekstin perusteella" : "AI-prioritized notifications based on urgency and context",
                       icon: (
-                        <span className="material-symbols text-4xl">school</span>
+                        <span className="material-symbols text-4xl">notifications_active</span>
                       )
                     },
                     {
-                      title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
-                      description: locale === 'fi' ? "Kattavat tukiresurssit" : "Comprehensive support resources",
+                      title: locale === 'fi' ? "Käyttöanalytiikka" : "Usage Analytics",
+                      description: locale === 'fi' ? "Kattava alustan analytiikka sitoutumistiedoilla" : "Comprehensive platform analytics with engagement insights",
                       icon: (
-                        <span className="material-symbols text-4xl">description</span>
+                        <span className="material-symbols text-4xl">analytics</span>
                       )
                     }
                     ].map((req, index) => (
@@ -561,27 +595,27 @@ export default function CollaborationClient() {
                     <h3 className="text-xl font-semibold text-primary mb-4">{content.focusAreas}</h3>
                     <div className="grid grid-cols-2 gap-4 grid-flow-row auto-rows-auto">
                       {[{
-                        area: locale === 'fi' ? "Käytettävyys" : "Usability",
+                        area: locale === 'fi' ? "Tekoälyintegraatio" : "AI Integration",
                         icon: (
-                          <span className="material-symbols text-4xl">touch_app</span>
+                          <span className="material-symbols text-4xl">auto_awesome</span>
                         )
                       },
                       {
-                        area: locale === 'fi' ? "Luovuus" : "Creativity",
+                        area: locale === 'fi' ? "Monialustaisuus" : "Cross-Platform",
                         icon: (
-                          <span className="material-symbols text-4xl">brush</span>
+                          <span className="material-symbols text-4xl">devices</span>
                         )
                       },
                       {
-                        area: locale === 'fi' ? "Esteettömyys" : "Accessibility",
+                        area: locale === 'fi' ? "Saavutettavuus" : "Accessibility",
                         icon: (
                           <span className="material-symbols text-4xl">accessibility</span>
                         )
                       },
                       {
-                        area: locale === 'fi' ? "Visuaalinen suunnittelu" : "Visual Design",
+                        area: locale === 'fi' ? "Reaaliaikainen yhteistyö" : "Real-Time Collab",
                         icon: (
-                          <span className="material-symbols text-4xl">image</span>
+                          <span className="material-symbols text-4xl">groups</span>
                         )
                       }
                       ].map((focus, index) => (
@@ -608,8 +642,8 @@ export default function CollaborationClient() {
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.deliveryPhase}</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {[{
-                  title: locale === 'fi' ? "Korkean tarkkuuden prototyyppi" : "High Fidelity Prototype",
-                  description: locale === 'fi' ? "Vuorovaikutteiset suunnitelmat, jotka esittelevät keskeisiä ominaisuuksia käyttäjien tavoitteiden ja käytettävyyden periaatteiden mukaisesti" : "Interactive designs showcasing key features aligned with user goals and usability principles",
+                  title: locale === 'fi' ? "Tekoälypohjaiset prototyypit" : "AI-Powered Prototypes",
+                  description: locale === 'fi' ? "Interaktiiviset tekoälypohjaiset prototyypit iOS:lle, Androidille ja hallintaportaalille" : "Interactive AI-powered prototypes for iOS, Android, and Admin portal with copilot integration",
                   progress: 100,
                   icon: (
                     <span className="material-symbols text-4xl">devices</span>
@@ -617,7 +651,7 @@ export default function CollaborationClient() {
                 },
                 {
                   title: locale === 'fi' ? "Suunnittelukatsaukset" : "Design Reviews",
-                  description: locale === 'fi' ? "Rakenteelliset palautesessiot sidosryhmien kanssa dokumentoimaan keskeisiä päätöksiä ja parannuksia" : "Structured feedback sessions with stakeholders to document key decisions and improvements",
+                  description: locale === 'fi' ? "Tekoälyavusteiset suunnittelukatsaukset ja rakenteelliset palautesessiot" : "AI-assisted design review workflows with structured feedback sessions across stakeholders",
                   progress: 100,
                   icon: (
                     <span className="material-symbols text-4xl">reviews</span>
@@ -625,7 +659,7 @@ export default function CollaborationClient() {
                 },
                 {
                   title: locale === 'fi' ? "Laadunvarmistus" : "Quality Assurance",
-                  description: locale === 'fi' ? "Kattava testaus eri laitteilla varmistamaan johdonmukainen kokemus ja suorituskyky" : "Comprehensive testing across devices to ensure consistent experience and performance",
+                  description: locale === 'fi' ? "Monialustainen testaus mobiilissa ja hallinnassa johdonmukaisen tekoälyavustajakokemuksen varmistamiseksi" : "Cross-platform testing across mobile and admin to ensure consistent AI copilot experience",
                   progress: 100,
                   icon: (
                     <span className="material-symbols text-4xl">verified</span>
@@ -633,7 +667,7 @@ export default function CollaborationClient() {
                 },
                 {
                   title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
-                  description: locale === 'fi' ? "Selkeä dokumentaatio tulevaa kehitystä ja monitoimista yhteistyötä varten." : "Clear documentation for future development and cross-functional collaboration.",
+                  description: locale === 'fi' ? "Kattava alustadokumentaatio tekoälyavustajan käyttäytymisspesifikaatioineen" : "Comprehensive platform docs including AI copilot behavior specifications and integration guides",
                   progress: 100,
                   icon: (
                     <span className="material-symbols text-4xl">folder</span>
