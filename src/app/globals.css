@@ -147,6 +147,7 @@ body {
   overflow: hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
+  border-radius: inherit;
   z-index: 1;
   height: 100%;
   display: flex;

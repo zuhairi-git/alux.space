@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build && node scripts/seo-build.js",
-    "postbuild": "rm -rf out/cache || true",
-    "clean:out-cache": "rm -rf out/cache || true",
+    "postbuild": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"",
+    "clean:out-cache": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"",
     "start": "next start",
     "lint": "next lint",
     "seo:audit": "node scripts/seo-dev.js audit",

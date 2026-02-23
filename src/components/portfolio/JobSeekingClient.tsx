@@ -420,7 +420,7 @@ export default function JobSeekingClient() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <motion.div
-                className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
                 whileHover={{ y: -5 }}
               >
                 <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
@@ -433,7 +433,7 @@ export default function JobSeekingClient() {
               </motion.div>
 
               <motion.div
-                className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
                 whileHover={{ y: -5 }}
               >
                 <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
@@ -446,7 +446,7 @@ export default function JobSeekingClient() {
               </motion.div>
 
               <motion.div
-                className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
                 whileHover={{ y: -5 }}
               >
                 <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
@@ -459,7 +459,7 @@ export default function JobSeekingClient() {
               </motion.div>
 
               <motion.div
-                className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
                 whileHover={{ y: -5 }}
               >
                 <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
@@ -569,53 +569,58 @@ export default function JobSeekingClient() {
                   ].map((persona, index) => (
                     <motion.div
                       key={index}
-                      className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex flex-col h-full"
+                      className="theme-card h-full"
                       whileHover={{ y: -5 }}
                     >
-                      <div className="flex items-center mb-6">
-                        <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-4">
-                          {persona.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-semibold text-primary">{persona.name}</h3>
-                          <p className="text-opacity-80 text-sm">{persona.role}</p>
-                        </div>
-                      </div>
-
-                      <div className="space-y-4 flex-grow">
-                        <div>
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-2 opacity-80">{locale === 'fi' ? "Ominaisuudet" : "Traits"}</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {persona.traits.map((trait, i) => (
-                              <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
-                                {trait}
-                              </span>
-                            ))}
+                      <div className="theme-card-glow theme-card-glow-secondary"></div>
+                      <div className="theme-card-content p-8 hover:bg-theme/70 transition-all duration-300 flex flex-col h-full border-t-4 border-t-purple-500/50">
+                        <div className="flex flex-col items-center text-center mb-6">
+                          <div className="flex-shrink-0 h-20 w-20 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-4 shadow-lg shadow-purple-500/20">
+                            {persona.icon}
+                          </div>
+                          <div>
+                            <h3 className="text-xl font-bold text-primary mb-1">{persona.name}</h3>
+                            <p className="text-opacity-80 text-sm font-medium uppercase tracking-wider">{persona.role}</p>
                           </div>
                         </div>
 
-                        <div>
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-2 opacity-80">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
-                          <ul className="space-y-1.5">
-                            {persona.needs.map((need, i) => (
-                              <li key={i} className="flex items-start text-opacity-80 text-sm">
-                                <span className="material-symbols text-sm mr-2 mt-0.5 opacity-60">check_circle</span>
-                                <span>{need}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        <div className="space-y-5 flex-grow flex flex-col">
+                          <div className="bg-purple-500/5 p-4 rounded-xl border border-purple-500/10">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-3 opacity-80 flex items-center justify-center gap-2"><span className="material-symbols text-sm">stars</span>{locale === 'fi' ? "Ominaisuudet" : "Traits"}</h4>
+                            <div className="flex flex-wrap justify-center gap-2">
+                              {persona.traits.map((trait, i) => (
+                                <span key={i} className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold shadow-sm">
+                                  {trait}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
 
-                        <div>
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-2 opacity-80">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
-                          <ul className="space-y-1.5">
-                            {persona.painPoints.map((point, i) => (
-                              <li key={i} className="flex items-start text-opacity-80 text-sm">
-                                <span className="material-symbols text-sm mr-2 mt-0.5 opacity-60">warning</span>
-                                <span>{point}</span>
-                              </li>
-                            ))}
-                          </ul>
+                          <div className="grid grid-cols-1 gap-4 flex-grow">
+                            <div className="bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/10">
+                              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-3 flex items-center gap-1"><span className="material-symbols text-sm">check_circle</span>{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
+                              <ul className="space-y-2">
+                                {persona.needs.map((need, i) => (
+                                  <li key={i} className="flex items-start text-[14px] leading-snug">
+                                    <span className="material-symbols text-[16px] text-emerald-500 mr-2 mt-0.5">done</span>
+                                    <span className="opacity-90">{need}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="bg-rose-500/5 p-4 rounded-xl border border-rose-500/10">
+                              <h4 className="text-xs font-bold uppercase tracking-wider text-rose-500 mb-3 flex items-center gap-1"><span className="material-symbols text-sm">warning</span>{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
+                              <ul className="space-y-2">
+                                {persona.painPoints.map((point, i) => (
+                                  <li key={i} className="flex items-start text-[14px] leading-snug">
+                                    <span className="material-symbols text-[16px] text-rose-500 mr-2 mt-0.5">close</span>
+                                    <span className="opacity-90">{point}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -638,40 +643,42 @@ export default function JobSeekingClient() {
           </motion.section>
 
           {/* AI Capabilities Section */}
-          <motion.section variants={fadeInUp} className="mb-16">
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="h-1 bg-purple-500 flex-1 rounded-full opacity-20" />
-              <h2 className="text-3xl font-bold text-primary flex items-center shrink-0">
-                <span className="material-symbols text-purple-400 mr-2">auto_awesome</span>
-                {content.aiCapabilities}
-              </h2>
-              <div className="h-1 bg-purple-500 flex-1 rounded-full opacity-20" />
+          <motion.section variants={fadeInUp} className="mb-20">
+            <div className="flex flex-col items-center text-center space-y-4 mb-12">
+              <div className="inline-flex items-center justify-center p-3 bg-purple-500/10 rounded-2xl text-purple-500 mb-2">
+                <span className="material-symbols text-4xl">auto_awesome</span>
+              </div>
+              <h2 className="text-4xl font-extrabold text-primary">{content.aiCapabilities}</h2>
+              <div className="h-1.5 w-24 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full opacity-80" />
             </div>
 
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { icon: 'edit_document', title: content.aiResume, desc: content.aiResumeDesc },
-                { icon: 'target', title: content.aiMatch, desc: content.aiMatchDesc },
-                { icon: 'psychology', title: content.aiCoach, desc: content.aiCoachDesc }
+                { icon: 'edit_document', title: content.aiResume, desc: content.aiResumeDesc, glow: 'theme-card-glow-primary' },
+                { icon: 'target', title: content.aiMatch, desc: content.aiMatchDesc, glow: 'theme-card-glow-secondary' },
+                { icon: 'psychology', title: content.aiCoach, desc: content.aiCoachDesc, glow: 'theme-card-glow-tertiary' }
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-[1.02] flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-8"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  className="theme-card h-full group perspective-1000"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <div className="flex-shrink-0 h-[80px] w-[80px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-2xl group-hover:scale-110 transition-transform">
-                    <span className="material-symbols text-4xl">{feature.icon}</span>
-                  </div>
-                  <div className="flex-grow text-center md:text-left">
-                    <h3 className="text-2xl font-bold mb-2 text-primary">{feature.title}</h3>
-                    <p className="opacity-80 text-lg leading-relaxed max-w-2xl">{feature.desc}</p>
+                  <div className={`theme-card-glow ${feature.glow}`}></div>
+                  <div className="theme-card-content p-8 hover:bg-theme/80 transition-all duration-500 transform hover:-translate-y-2 flex flex-col items-center text-center h-full">
+                    <div className="flex-shrink-0 h-24 w-24 flex items-center justify-center text-primary bg-primary/10 rounded-[2rem] mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl shadow-primary/20">
+                      <span className="material-symbols text-5xl">{feature.icon}</span>
+                    </div>
+                    <div className="flex-grow flex flex-col">
+                      <h3 className="text-2xl font-bold mb-4 text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-purple-500 transition-all duration-300">{feature.title}</h3>
+                      <p className="opacity-80 text-base leading-relaxed">{feature.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.section >
+          </motion.section>
 
           {/* Develop & Deliver Phases */}
           <motion.section variants={fadeInUp} className="mb-16">
@@ -748,7 +755,7 @@ export default function JobSeekingClient() {
                   href={proto.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group theme-card-flex p-6 rounded-xl hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col`}
+                  className={`group theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.15 }}
