@@ -16,10 +16,9 @@ const nextConfig = {
   }, env: {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space',
     NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.MGCOVB5mKIixxirqfmmamrLRlykJIbc2ZDD5jo3lXbE,
-  },// Using static export mode for deployment
-  // output: 'export',
+  },
+  output: 'export',
   trailingSlash: true,
-  distDir: 'out',
   // Enable TypeScript type checking during build
   typescript: {
     ignoreBuildErrors: false,
