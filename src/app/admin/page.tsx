@@ -573,7 +573,7 @@ function SettingsSection({ card, isLight }: { card: string, isLight: boolean }) 
                 <div className="space-y-4">
                     <div>
                         <label className="text-sm font-medium block mb-1.5">Platform Name</label>
-                        <input type="text" defaultValue="Collaboration Workflow Platform" className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none ${isLight ? 'bg-gray-50 border border-gray-200 focus:border-[#7C3AED]' : 'bg-white/5 border border-white/10 focus:border-[#A78BFA]'} transition-colors`} />
+                        <input type="text" defaultValue="Workflow Platform" className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none ${isLight ? 'bg-gray-50 border border-gray-200 focus:border-[#7C3AED]' : 'bg-white/5 border border-white/10 focus:border-[#A78BFA]'} transition-colors`} />
                     </div>
                     <div>
                         <label className="text-sm font-medium block mb-1.5">Support Email</label>

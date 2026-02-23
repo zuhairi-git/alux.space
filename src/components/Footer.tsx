@@ -46,7 +46,7 @@ const Footer = () => {
   const portfolioLinks = [
     { href: '/portfolio/healthcare-prioritization', textKey: 'portfolio.cases.healthcare' },
     { href: '/portfolio/accessibility', textKey: 'portfolio.cases.accessibility' },
-    { href: '/portfolio/collaboration', textKey: 'portfolio.cases.collaboration' },
+    { href: '/portfolio/workflow', textKey: 'portfolio.cases.collaboration' },
     { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking' },
     { href: '/portfolio/market-intelligence', textKey: 'portfolio.cases.marketIntelligence' }
   ];

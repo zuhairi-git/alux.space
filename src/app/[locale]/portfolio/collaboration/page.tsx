@@ -10,19 +10,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
-    const localizedMetadata = {
+  const localizedMetadata = {
     en: {
-      title: 'Collaboration Workflow Platform Case Study | Portfolio',
+      title: 'Workflow Platform Case Study | Portfolio',
       description: 'A case study on building a platform for seamless team collaboration, improving communication, and content delivery across devices and time zones.',
     },
     fi: {
-      title: 'Yhteistyön työnkulkualustan tapaustutkimus | Portfolio',
+      title: 'Työnkulkualustan tapaustutkimus | Portfolio',
       description: 'Tapaustutkimus alustasta saumattomaan tiimityöskentelyyn, viestinnän parantamiseen ja sisällön toimittamiseen eri laitteilla ja aikavyöhykkeillä.',
     }
   };
-    const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
+  const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
   const imageUrl = `${baseUrl}/images/portfolio/collaboration/cover.jpg`;
-  
+
   return {
     title: metadata.title,
     description: metadata.description,

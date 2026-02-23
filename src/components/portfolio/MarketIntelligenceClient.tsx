@@ -257,7 +257,7 @@ export default function MarketIntelligenceClient() {
                             onError={(e) => {
                                 // Fallback mechanism in case cover doesn't exist
                                 const target = e.target as HTMLImageElement;
-                                target.src = '/images/portfolio/collaboration/cover.jpg';
+                                target.src = '/images/portfolio/workflow/cover.jpg';
                             }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />

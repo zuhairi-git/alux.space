@@ -142,18 +142,18 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
     },
     {
       title: {
-        en: 'Collaboration & Leadership',
-        fi: 'Yhteistyö & Johtajuus'
+        en: 'Workflow Platform',
+        fi: 'Työnkulkualusta'
       },
       type: {
-        en: 'Team Management',
-        fi: 'Tiimin hallinta'
+        en: 'AI-Powered Collaboration',
+        fi: 'Tekoälypohjainen yhteistyö'
       },
       desc: {
-        en: 'Building bridges between design, development, and business through effective collaboration.',
-        fi: 'Rakentaa siltoja suunnittelun, kehityksen ja liiketoiminnan välille tehokkaan yhteistyön avulla.'
+        en: 'An AI-powered platform with intelligent workspaces, AI copilot, and cross-platform prototypes for iOS, Android, and admin portal.',
+        fi: 'Tekoälypohjainen alusta älykkäillä työtiloilla, tekoälyavustajalla ja monialustaisilla prototyypeillä iOS:lle, Androidille ja hallintaportaalille.'
       },
-      link: `/${locale}/portfolio/collaboration`,
+      link: `/${locale}/portfolio/workflow`,
       gradient: 'from-blue-400 to-purple-500',
       status: {
         en: 'Accomplished',
@@ -161,7 +161,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         type: 'accomplished'
       },
       photo: {
-        url: '/images/portfolio/collaboration/cover.jpg'
+        url: '/images/portfolio/workflow/cover.jpg'
       }
     },
     {
@@ -203,8 +203,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         // Special search terms for specific portfolio items
         if (item.title.en.includes('Inclusive') || item.title.en.includes('Accessibility')) {
           searchQuery = 'inclusive design accessibility diversity design system';
-        } else if (item.title.en.includes('Collaboration')) {
-          searchQuery = 'team collaboration workplace';
+        } else if (item.title.en.includes('Workflow')) {
+          searchQuery = 'team collaboration ai workspace';
         } else if (item.title.en.includes('Career') || item.title.en.includes('Job')) {
           searchQuery = 'career growth professional development';
         } else if (item.title.en.includes('Healthcare')) {
@@ -232,7 +232,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       return {
         ...item,
         photo: {
-          url: '/images/portfolio/collaboration/cover.jpg', // Use existing image as fallback
+          url: '/images/portfolio/workflow/cover.jpg', // Use existing image as fallback
           author: {
             name: 'Default',
             username: 'default',

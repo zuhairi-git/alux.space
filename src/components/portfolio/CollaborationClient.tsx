@@ -22,7 +22,7 @@ export default function CollaborationClient() {
   const getLocalizedContent = () => {
     const content = {
       en: {
-        title: "Collaboration Workflow Platform",
+        title: "Workflow Platform",
         intro: "An AI-powered platform designed to streamline team collaboration through intelligent workspaces, an AI copilot assistant, and real-time activity tracking — built for seamless experiences across iOS, Android, and a dedicated admin portal.",
         projectType: "Project Type",
         projectTypeValues: "Landing Page, Web & Mobile Platform, AI-Powered Admin Portal",
@@ -56,7 +56,7 @@ export default function CollaborationClient() {
         openPrototype: "Open Prototype",
       },
       fi: {
-        title: "Yhteistyön työnkulkualusta",
+        title: "Työnkulkualusta",
         intro: "Tekoälyllä toimiva alusta, joka tehostaa tiimien yhteistyötä älykkäiden työtilojen, tekoälyavustajan ja reaaliaikaisen toiminnan seurannan avulla — rakennettu saumattomiin kokemuksiin iOS:lle, Androidille ja hallintaportaalille.",
         projectType: "Projektityyppi",
         projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, tekoälypohjainen hallintaportaali",
@@ -182,7 +182,7 @@ export default function CollaborationClient() {
         <div className="max-w-6xl mx-auto px-6">          {/* Hero Section */}
           <div className="relative h-96 overflow-hidden rounded-xl mb-16">
             <Image
-              src="/images/portfolio/collaboration/cover.jpg"
+              src="/images/portfolio/workflow/cover.jpg"
               alt={content.title}
               fill
               className="object-cover"

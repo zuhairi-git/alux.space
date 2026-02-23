@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Admin Panel | Collaboration Workflow Platform',
+    title: 'Admin Panel | Workflow Platform',
     description: 'Platform administration dashboard for managing users, workspaces, and AI collaboration tools',
     robots: { index: false, follow: false },
 };

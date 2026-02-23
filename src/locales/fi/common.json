@@ -16,7 +16,7 @@
     "cases": {
       "accessibility": "Digitaalinen saavutettavuus (WCAG)",
       "healthcare": "Terveydenhuollon priorisointi",
-      "collaboration": "Työkalupakki etäyhteistyöhön",
+      "collaboration": "Työnkulkualusta",
       "jobseeking": "Työnhakuavustaja",
       "marketIntelligence": "Markkinatieto"
     }
@@ -48,8 +48,8 @@
     }
   },
   "collaboration": {
-    "title": "Yhteistyön työnkulkualusta",
-    "intro": "Yhteistyön työnkulkualustan ytimessä on sitoutuminen luovuuteen, yhteenliitettävyyteen ja reaaliaikaiseen tiimityöhön. Tämä alusta on suunniteltu yksinkertaistamaan elävää yhteistyötä, parantamaan viestintää ja auttamaan tiimejä toimittamaan sisältöä tehokkaammin laitteiden, aikavyöhykkeiden ja sijaintien välillä.",
+    "title": "Työnkulkualusta",
+    "intro": "Työnkulkualustan ytimessä on sitoutuminen tekoälypohjaiseen yhteistyöhön, älykkäisiin työtiloihin ja reaaliaikaiseen tiimityöhön. Alusta tehostaa tiimien työnkulkuja tekoälyavustajan, älykkäiden ilmoitusten ja saumattomien monialustakokemusten avulla iOS:lle, Androidille ja hallintaportaalille.",
     "projectType": "Projektityyppi",
     "timeline": "Aikataulu",
     "tools": "Työkalut",
