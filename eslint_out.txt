@@ -1,0 +1,17 @@
+
+C:\Users\zohai\Documents\GitHub\alux.space\src\components\mobile\jobseeking\views\DashboardView.tsx
+  12:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  62:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  83:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\zohai\Documents\GitHub\alux.space\src\components\mobile\jobseeking\views\NotificationsView.tsx
+  63:59  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  63:76  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\zohai\Documents\GitHub\alux.space\src\components\mobile\jobseeking\views\ProfileView.tsx
+   2:18  error  'AnimatePresence' is defined but never used  @typescript-eslint/no-unused-vars
+  57:58  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  81:59  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+✖ 8 problems (8 errors, 0 warnings)
+
