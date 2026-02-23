@@ -469,9 +469,68 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
     );
 }
 
-// ═══════════════════════════════════════════════════════════
-// USERS
-// ═══════════════════════════════════════════════════════════
+interface UserRowProps {
+    user: { name: string, email: string, role: string, status: string, lastActive: string };
+    index: number;
+    isLight: boolean;
+    roleBadge: (r: string) => string;
+    statusDot: (s: string) => string;
+}
+
+function UserRow({ user: u, index: i, isLight, roleBadge, statusDot }: UserRowProps) {
+    const [expanded, setExpanded] = useState(false);
+    return (
+        <React.Fragment>
+            <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
+                onClick={() => setExpanded(!expanded)}
+                className={`${isLight ? 'hover:bg-gray-50 divide-gray-100' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
+                <td className="py-3">
+                    <div className="flex items-center space-x-3">
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold ${isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED] group-hover:bg-[#7C3AED]/20' : 'bg-[#A78BFA]/10 text-[#A78BFA] group-hover:bg-[#A78BFA]/20'} transition-colors`}>
+                            {u.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div>
+                            <span className="font-medium text-sm block">{u.name}</span>
+                            <span className="text-xs opacity-50">{u.email}</span>
+                        </div>
+                    </div>
+                </td>
+                <td className="py-3"><span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${roleBadge(u.role)}`}>{u.role}</span></td>
+                <td className="py-3"><span className="flex items-center text-sm"><span className={`w-2 h-2 rounded-full mr-2 ${statusDot(u.status)}`} />{u.status}</span></td>
+                <td className="py-3 text-sm opacity-60">{u.lastActive}</td>
+                <td className="py-3 text-right">
+                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-8 h-8 rounded-lg inline-flex items-center justify-center ${isLight ? 'hover:bg-gray-200' : 'hover:bg-white/10'} transition-colors`}>
+                        <Icon name={expanded ? "expand_less" : "expand_more"} className="text-base opacity-50" />
+                    </motion.button>
+                </td>
+            </motion.tr>
+            <AnimatePresence>
+                {expanded && (
+                    <tr>
+                        <td colSpan={5} className="p-0 border-0">
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                                <div className={`m-2 p-4 rounded-xl flex items-start space-x-4 ${isLight ? 'bg-gray-50' : 'bg-white/[0.02]'}`}>
+                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isLight ? 'bg-white shadow-sm' : 'bg-white/5'}`}>
+                                        <Icon name="auto_awesome" className={isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-semibold mb-1">AI User Summary</h4>
+                                        <p className="text-xs opacity-70 leading-relaxed max-w-2xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
+                                        <div className="flex space-x-3 mt-3">
+                                            <button className={`text-xs font-semibold px-3 py-1.5 rounded-lg ${isLight ? 'bg-white border border-gray-200 hover:bg-gray-50' : 'bg-white/5 border border-white/5 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
+                                            <button className={`text-xs font-semibold px-3 py-1.5 rounded-lg text-[#7C3AED] ${isLight ? 'bg-[#7C3AED]/10 hover:bg-[#7C3AED]/20' : 'bg-[#A78BFA]/10 hover:bg-[#A78BFA]/20'} transition-colors flex items-center`}><Icon name="mail" className="text-[14px] mr-1.5" /> Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </td>
+                    </tr>
+                )}
+            </AnimatePresence>
+        </React.Fragment>
+    );
+}
+
 function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
     const users = [
         { name: 'Sara Kim', email: 'sara@company.com', role: 'Admin', status: 'Active', lastActive: '5 min ago' },
@@ -512,60 +571,9 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
-                            {users.map((u, i) => {
-                                // eslint-disable-next-line react-hooks/rules-of-hooks
-                                const [expanded, setExpanded] = useState(false);
-                                return (
-                                    <React.Fragment key={i}>
-                                        <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
-                                            onClick={() => setExpanded(!expanded)}
-                                            className={`${isLight ? 'hover:bg-gray-50 divide-gray-100' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
-                                            <td className="py-3">
-                                                <div className="flex items-center space-x-3">
-                                                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold ${isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED] group-hover:bg-[#7C3AED]/20' : 'bg-[#A78BFA]/10 text-[#A78BFA] group-hover:bg-[#A78BFA]/20'} transition-colors`}>
-                                                        {u.name.split(' ').map(n => n[0]).join('')}
-                                                    </div>
-                                                    <div>
-                                                        <span className="font-medium text-sm block">{u.name}</span>
-                                                        <span className="text-xs opacity-50">{u.email}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="py-3"><span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${roleBadge(u.role)}`}>{u.role}</span></td>
-                                            <td className="py-3"><span className="flex items-center text-sm"><span className={`w-2 h-2 rounded-full mr-2 ${statusDot(u.status)}`} />{u.status}</span></td>
-                                            <td className="py-3 text-sm opacity-60">{u.lastActive}</td>
-                                            <td className="py-3 text-right">
-                                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-8 h-8 rounded-lg inline-flex items-center justify-center ${isLight ? 'hover:bg-gray-200' : 'hover:bg-white/10'} transition-colors`}>
-                                                    <Icon name={expanded ? "expand_less" : "expand_more"} className="text-base opacity-50" />
-                                                </motion.button>
-                                            </td>
-                                        </motion.tr>
-                                        <AnimatePresence>
-                                            {expanded && (
-                                                <tr>
-                                                    <td colSpan={5} className="p-0 border-0">
-                                                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                                                            <div className={`m-2 p-4 rounded-xl flex items-start space-x-4 ${isLight ? 'bg-gray-50' : 'bg-white/[0.02]'}`}>
-                                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isLight ? 'bg-white shadow-sm' : 'bg-white/5'}`}>
-                                                                    <Icon name="auto_awesome" className={isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'} />
-                                                                </div>
-                                                                <div>
-                                                                    <h4 className="text-sm font-semibold mb-1">AI User Summary</h4>
-                                                                    <p className="text-xs opacity-70 leading-relaxed max-w-2xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
-                                                                    <div className="flex space-x-3 mt-3">
-                                                                        <button className={`text-xs font-semibold px-3 py-1.5 rounded-lg ${isLight ? 'bg-white border border-gray-200 hover:bg-gray-50' : 'bg-white/5 border border-white/5 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
-                                                                        <button className={`text-xs font-semibold px-3 py-1.5 rounded-lg text-[#7C3AED] ${isLight ? 'bg-[#7C3AED]/10 hover:bg-[#7C3AED]/20' : 'bg-[#A78BFA]/10 hover:bg-[#A78BFA]/20'} transition-colors flex items-center`}><Icon name="mail" className="text-[14px] mr-1.5" /> Message</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </motion.div>
-                                                    </td>
-                                                </tr>
-                                            )}
-                                        </AnimatePresence>
-                                    </React.Fragment>
-                                )
-                            })}
+                            {users.map((u, i) => (
+                                <UserRow key={i} user={u} index={i} isLight={isLight} roleBadge={roleBadge} statusDot={statusDot} />
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -574,9 +582,44 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
     );
 }
 
-// ═══════════════════════════════════════════════════════════
-// WORKSPACES
-// ═══════════════════════════════════════════════════════════
+interface WorkspaceCardProps {
+    workspace: { name: string, members: number, docs: number, queries: number, status: string };
+    card: string;
+    isLight: boolean;
+}
+
+function WorkspaceCard({ workspace: ws, card, isLight }: WorkspaceCardProps) {
+    const [showDetails, setShowDetails] = useState(false);
+    return (
+        <motion.div variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowDetails(!showDetails)} className={`${card} cursor-pointer transition-colors hover:border-[#7C3AED]/30`}>
+            <div className="flex justify-between items-start mb-4">
+                <h3 className="font-bold">{ws.name}</h3>
+                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${ws.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500' : ws.status === 'Review' ? 'bg-amber-500/10 text-amber-500' : 'bg-gray-500/10 text-gray-400'}`}>{ws.status}</span>
+            </div>
+            <div className="grid grid-cols-3 gap-3 text-center mb-1">
+                {[{ v: ws.members, l: 'Members' }, { v: ws.docs, l: 'Docs' }, { v: ws.queries, l: 'AI Queries' }].map(s => (
+                    <div key={s.l} className={`p-2 rounded-xl ${isLight ? 'bg-gray-50' : 'bg-white/[0.03]'}`}>
+                        <span className="text-lg font-bold block">{s.v}</span>
+                        <span className="text-[10px] opacity-50">{s.l}</span>
+                    </div>
+                ))}
+            </div>
+            <AnimatePresence>
+                {showDetails && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-4 pt-4 border-t border-gray-200/20 dark:border-white/10">
+                        <div className="flex items-center space-x-2 mb-2">
+                            <Icon name="insights" className={isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'} />
+                            <span className="text-xs font-semibold">Workspace Health: Excellent</span>
+                        </div>
+                        <p className="text-xs opacity-70 mb-3">Participation is up 12% this week. Most activity is centered around the new requirements document.</p>
+                        <button className={`w-full py-2 rounded-xl text-xs font-semibold ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'} transition-colors`}>View Dashboard</button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+}
+
 function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }) {
     const workspaces = [
         { name: 'Design System v3', members: 8, docs: 24, queries: 156, status: 'Active' },
@@ -597,38 +640,9 @@ function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {workspaces.map((ws, i) => {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    const [showDetails, setShowDetails] = useState(false);
-                    return (
-                        <motion.div key={i} variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowDetails(!showDetails)} className={`${card} cursor-pointer transition-colors hover:border-[#7C3AED]/30`}>
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="font-bold">{ws.name}</h3>
-                                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${ws.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500' : ws.status === 'Review' ? 'bg-amber-500/10 text-amber-500' : 'bg-gray-500/10 text-gray-400'}`}>{ws.status}</span>
-                            </div>
-                            <div className="grid grid-cols-3 gap-3 text-center mb-1">
-                                {[{ v: ws.members, l: 'Members' }, { v: ws.docs, l: 'Docs' }, { v: ws.queries, l: 'AI Queries' }].map(s => (
-                                    <div key={s.l} className={`p-2 rounded-xl ${isLight ? 'bg-gray-50' : 'bg-white/[0.03]'}`}>
-                                        <span className="text-lg font-bold block">{s.v}</span>
-                                        <span className="text-[10px] opacity-50">{s.l}</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <AnimatePresence>
-                                {showDetails && (
-                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-4 pt-4 border-t border-gray-200/20 dark:border-white/10">
-                                        <div className="flex items-center space-x-2 mb-2">
-                                            <Icon name="insights" className={isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'} />
-                                            <span className="text-xs font-semibold">Workspace Health: Excellent</span>
-                                        </div>
-                                        <p className="text-xs opacity-70 mb-3">Participation is up 12% this week. Most activity is centered around the new requirements document.</p>
-                                        <button className={`w-full py-2 rounded-xl text-xs font-semibold ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'} transition-colors`}>View Dashboard</button>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    )
-                })}
+                {workspaces.map((ws, i) => (
+                    <WorkspaceCard key={i} workspace={ws} card={card} isLight={isLight} />
+                ))}
             </div>
         </motion.div>
     );
