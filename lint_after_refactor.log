@@ -1,5 +1,0 @@
-
-./src/app/[locale]/admin/page.tsx
-592:48  Error: 'i' is defined but never used.  @typescript-eslint/no-unused-vars
-
-info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
