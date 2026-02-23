@@ -333,7 +333,7 @@ function MarketsView({ os, theme }: { os: string, theme: string }) {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50">
                         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedTicker(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] p-6 pb-10 ${isIOS ? (isLight ? 'bg-white' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FEF7FF]' : 'bg-[#2B2930]')}`}>
+                            className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] p-6 pb-28 ${isIOS ? (isLight ? 'bg-white' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FEF7FF]' : 'bg-[#2B2930]')}`}>
                             <div className="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600 mx-auto mb-6" />
                             {(() => {
                                 const t = trending.find(x => x.ticker === selectedTicker)!; return (<>
