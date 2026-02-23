@@ -23,8 +23,22 @@ export function ProfileView({ card, isLight, themeMode, setThemeMode, theme }: P
 
             {/* Avatar */}
             <motion.div variants={fadeUp} className="flex flex-col items-center py-4">
-                <div className="relative mb-3"><div className={`w-24 h-24 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}><div className={`w-full h-full rounded-full overflow-hidden ${isLight ? 'bg-white' : 'bg-black/80'}`}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="Ali" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar}&color=fff` }} /></div></div><div className={`absolute bottom-0 right-0 w-6 h-6 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#FAF8FC]' : 'border-[#111114]') : (isLight ? 'border-[#F2F2F7]' : 'border-black')}`} /></div>
-                <h2 className="font-bold text-2xl">Ali Al-Zuhairi</h2><p className={`text-sm font-medium mt-0.5 ${p.roleColor}`}>Platform Administrator</p>
+                <div className="relative mb-3">
+                    <div className={`w-24 h-24 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}>
+                        <div className={`w-full h-full rounded-full overflow-hidden ${isLight ? 'bg-white' : 'bg-black/80'}`}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/images/me/ali.png"
+                                className="w-full h-full object-cover scale-110"
+                                alt="Ali"
+                                onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar}&color=fff` }}
+                            />
+                        </div>
+                    </div>
+                    <div className={`absolute bottom-0 right-0 w-6 h-6 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#FAF8FC]' : 'border-[#111114]') : (isLight ? 'border-[#F2F2F7]' : 'border-black')}`} />
+                </div>
+                <h2 className="font-bold text-2xl">Ali Al-Zuhairi</h2>
+                <p className={`text-sm font-medium mt-0.5 ${p.roleColor}`}>Platform Administrator</p>
             </motion.div>
 
             {/* Collaboration Stats */}
