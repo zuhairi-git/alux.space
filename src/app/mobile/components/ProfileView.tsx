@@ -26,7 +26,6 @@ export function ProfileView({ card, isLight, themeMode, setThemeMode, theme }: P
                 <div className="relative mb-3">
                     <div className={`w-24 h-24 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}>
                         <div className={`w-full h-full rounded-full overflow-hidden ${isLight ? 'bg-white' : 'bg-black/80'}`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src="/images/me/ali.png"
                                 className="w-full h-full object-cover scale-110"

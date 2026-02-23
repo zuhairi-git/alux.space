@@ -15,7 +15,7 @@ const nextConfig = {
     ],
   }, env: {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space',
-    NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.MGCOVB5mKIixxirqfmmamrLRlykJIbc2ZDD5jo3lXbE,
+    NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
   },
   output: 'export',
   trailingSlash: true,

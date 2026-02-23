@@ -1,0 +1,142 @@
+
+> alux.space@0.1.0 build
+> next build && node scripts/seo-build.js
+
+   ▲ Next.js 15.3.0
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 4.0s
+   Linting and checking validity of types ...
+
+./src/app/mobile/components/ProfileView.tsx
+29:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/71) ...
+   Generating static pages (17/71) 
+   Generating static pages (35/71) 
+   Generating static pages (53/71) 
+ ✓ Generating static pages (71/71)
+   Finalizing page optimization ...
+   Collecting build traces ...
+ ⚠ Statically exporting a Next.js application via `next export` disables API routes and middleware.
+This command is meant for static-only hosts, and is not necessary to make your application static.
+Pages in your application without server-side data dependencies will be automatically statically exported by `next build`, including pages powered by `getStaticProps`.
+Learn more: https://nextjs.org/docs/messages/api-routes-static-export
+   Exporting (0/3) ...
+ ✓ Exporting (3/3)
+
+Route (app)                                           Size  First Load JS
+┌ ○ /                                                196 B         188 kB
+├ ○ /_not-found                                      981 B         102 kB
+├ ● /[locale]                                        211 B         188 kB
+├   ├ /en
+├   └ /fi
+├ ● /[locale]/admin                                13.5 kB         153 kB
+├   ├ /en/admin
+├   └ /fi/admin
+├ ● /[locale]/audio                                2.45 kB         171 kB
+├   ├ /en/audio
+├   └ /fi/audio
+├ ● /[locale]/audio/[slug]                         2.68 kB         180 kB
+├   ├ /en/audio/embracing-ai-era
+├   ├ /en/audio/embracing-ai-alternative
+├   ├ /en/audio/sharpened-by-machine
+├   └ [+7 more paths]
+├ ● /[locale]/blog                                   161 B         199 kB
+├   ├ /en/blog
+├   └ /fi/blog
+├ ● /[locale]/blog/[slug]                          6.23 kB         202 kB
+├   ├ /en/blog/sharpened-by-machine
+├   ├ /en/blog/ios-notifications
+├   ├ /en/blog/circle-of-rhythm
+├   └ [+7 more paths]
+├ ● /[locale]/coming-soon                            177 B         143 kB
+├   ├ /en/coming-soon
+├   └ /fi/coming-soon
+├ ● /[locale]/design                                 175 B         101 kB
+├   ├ /en/design
+├   └ /fi/design
+├ ● /[locale]/design/coming-soon                     729 B         102 kB
+├   ├ /en/design/coming-soon
+├   └ /fi/design/coming-soon
+├ ● /[locale]/portfolio                            3.42 kB         179 kB
+├   ├ /en/portfolio
+├   └ /fi/portfolio
+├ ● /[locale]/portfolio/accessibility              11.5 kB         176 kB
+├   ├ /en/portfolio/accessibility
+├   └ /fi/portfolio/accessibility
+├ ● /[locale]/portfolio/collaboration                156 B         172 kB
+├   ├ /en/portfolio/collaboration
+├   └ /fi/portfolio/collaboration
+├ ● /[locale]/portfolio/healthcare-prioritization   7.9 kB         173 kB
+├   ├ /en/portfolio/healthcare-prioritization
+├   └ /fi/portfolio/healthcare-prioritization
+├ ● /[locale]/portfolio/jobseeking                 5.99 kB         171 kB
+├   ├ /en/portfolio/jobseeking
+├   └ /fi/portfolio/jobseeking
+├ ● /[locale]/portfolio/market-intelligence        11.5 kB         176 kB
+├   ├ /en/portfolio/market-intelligence
+├   └ /fi/portfolio/market-intelligence
+├ ● /[locale]/portfolio/workflow                     156 B         172 kB
+├   ├ /en/portfolio/workflow
+├   └ /fi/portfolio/workflow
+├ ● /[locale]/prompt                                 191 B         170 kB
+├   ├ /en/prompt
+├   └ /fi/prompt
+├ ○ /blog                                            161 B         199 kB
+├ ● /blog/[slug]                                     175 B         101 kB
+├   ├ /blog/sharpened-by-machine
+├   ├ /blog/ios-notifications
+├   ├ /blog/circle-of-rhythm
+├   └ [+2 more paths]
+├ ○ /coming-soon                                     175 B         143 kB
+├ ○ /design                                          175 B         101 kB
+├ ○ /design/coming-soon                              730 B         102 kB
+├ ○ /design/media-cards                            2.76 kB         172 kB
+├ ○ /design/timeline-cards                         30.8 kB         171 kB
+├ ○ /mobile                                        12.2 kB         152 kB
+├ ○ /mobile/android                                  274 B         152 kB
+├ ○ /mobile/ios                                      274 B         152 kB
+├ ○ /prompt                                          190 B         170 kB
+├ ○ /robots.txt                                      175 B         101 kB
+└ ○ /sitemap.xml                                     175 B         101 kB
++ First Load JS shared by all                       101 kB
+  ├ chunks/1684-271bdfbf97a143fc.js                  46 kB
+  ├ chunks/4bd1b696-02d02d2a6b5b88fa.js            53.2 kB
+  └ other shared chunks (total)                    2.03 kB
+
+
+ƒ Middleware                                       33.4 kB
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+
+🚀 Starting SEO build tasks...
+
+📍 Generating sitemap...
+   ✓ Sitemap copied from out to public folder and URLs fixed
+   ✓ Sitemap validated (28 URLs)
+🤖 Validating robots.txt...
+   ✓ robots.txt validated and copied to public folder
+🔍 Running SEO audit...
+   ✓ SEO audit completed (Score: 85/100)
+   ✓ Analytics tracking found in 7 components
+📊 Generating structured data...
+   ✓ Structured data generated
+🏷️  Optimizing meta tags...
+   ✓ Meta tags optimization checked
+⚡ Checking performance...
+   ✓ Performance check completed (29 images found)
+📈 Testing analytics implementation...
+   ✓ Analytics implementation tested (3/3 functions found)
+   ✓ Hero components with analytics: 5
+   ✓ Portfolio components with analytics: 1
+   ✓ Blog components with analytics: 1
+
+✅ All SEO build tasks completed successfully!
+
+> alux.space@0.1.0 postbuild
+> rm -rf out/cache || true
+
