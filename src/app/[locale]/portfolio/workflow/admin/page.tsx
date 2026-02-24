@@ -36,11 +36,9 @@ export default function PortalPanel() {
         { role: 'ai', msg: "Hello! I am Copilot. I'm ready to analyze metrics, audit components, or configure alerts for you." }
     ]);
 
-    // Prevent background scrolling when modals/menus are open to stop layout shift
     useEffect(() => {
         if (showCopilot || showProfileMenu) {
             document.body.style.overflow = 'hidden';
-            // Only add padding if the window width is larger than the client width (meaning a scrollbar exists)
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
             if (scrollbarWidth > 0) {
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -57,48 +55,70 @@ export default function PortalPanel() {
 
     const isLight = theme === 'light';
 
-    const bg = isLight ? 'bg-[#F8F9FA] text-[#1C1B1F]' : 'bg-[#0A0A0F] text-[#E2E2E6]';
-    const sidebarBg = isLight ? 'bg-white border-r border-gray-200' : 'bg-[#12121A] border-r border-white/5';
+    const bg = isLight ? 'bg-slate-50 text-slate-800' : 'bg-[#0B0B13] text-slate-100';
+    const sidebarBg = isLight 
+        ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60 shadow-[4px_0_24px_0_rgba(0,0,0,0.02)]' 
+        : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[4px_0_24px_0_rgba(0,0,0,0.2)]';
+    const headerBg = isLight
+        ? 'bg-white/40 backdrop-blur-2xl border-b border-white/60'
+        : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
-        ? 'bg-white rounded-2xl shadow-sm border border-gray-100 p-4 md:p-6'
-        : 'bg-[#1A1A24]/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/5 p-4 md:p-6';
+        ? 'bg-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] border border-white/80 p-5 md:p-7'
+        : 'bg-white/[0.03] backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-white/10 p-5 md:p-7';
 
     const handleCopilotSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!copilotMsg.trim()) return;
         setCopilotHistory(prev => [...prev, { role: 'user', msg: copilotMsg }]);
         setCopilotMsg('');
-        // Mock AI response
         setTimeout(() => {
             setCopilotHistory(prev => [...prev, { role: 'ai', msg: 'I received your request. Integrating more insights shortly.' }]);
         }, 1000);
     };
 
     return (
-        <div className={`flex min-h-screen w-full ${bg} transition-colors duration-300 relative`}>
+        <div className={`flex min-h-screen w-full ${bg} transition-colors duration-500 relative overflow-hidden font-sans`}>
+            {/* Animated Mesh Gradient Background */}
+            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+                <div className={`absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-pulse ${isLight ? 'bg-fuchsia-300' : 'bg-fuchsia-600/30'}`} style={{ animationDuration: '15s' }} />
+                <div className={`absolute top-[10%] -right-[10%] w-[60%] h-[60%] rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-pulse ${isLight ? 'bg-cyan-300' : 'bg-cyan-600/30'}`} style={{ animationDuration: '20s', animationDelay: '2s' }} />
+                <div className={`absolute -bottom-[20%] left-[20%] w-[80%] h-[80%] rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-pulse ${isLight ? 'bg-amber-300' : 'bg-amber-600/30'}`} style={{ animationDuration: '18s', animationDelay: '4s' }} />
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+            </div>
+
             {/* Desktop Sidebar */}
-            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[72px]' : 'w-[260px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-300 sticky top-0 h-screen overflow-hidden z-40`}>
-                <div className={`flex items-center h-16 px-4 ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
-                    {!sidebarCollapsed && <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Portal</span>}
-                    <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-white/5 ${isLight ? 'hover:bg-black/5' : ''}`}>
-                        <Icon name={sidebarCollapsed ? "menu" : "menu_open"} className="text-lg opacity-60" />
+            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[80px]' : 'w-[280px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-500 sticky top-0 h-screen z-40`}>
+                <div className={`flex items-center h-20 px-5 ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
+                    {!sidebarCollapsed && (
+                        <div className="flex items-center space-x-2">
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-fuchsia-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-fuchsia-500/20">
+                                <Icon name="blur_on" className="text-white text-lg" />
+                            </div>
+                            <span className="text-xl font-black tracking-tight bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Portal</span>
+                        </div>
+                    )}
+                    <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                        <Icon name={sidebarCollapsed ? "menu" : "menu_open"} className="text-xl" />
                     </button>
                 </div>
 
-                <nav className="flex-1 py-2 px-2 space-y-1">
-                    <div className="pt-2 pb-1 px-3">
-                        {!sidebarCollapsed && <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Workflow</span>}
+                <nav className="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto no-scrollbar">
+                    <div className="pt-2 pb-3 px-3">
+                        {!sidebarCollapsed && <span className="text-xs font-bold uppercase tracking-widest opacity-50">Menu</span>}
                     </div>
 
                     {sections.map(s => {
                         const active = activeSection === s.key;
                         return (
                             <button key={s.key} onClick={() => setActiveSection(s.key)}
-                                className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-2' : 'px-3'} py-2.5 rounded-xl transition-all text-[14px] ${active
-                                    ? (isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED] font-semibold' : 'bg-[#A78BFA]/10 text-[#A78BFA] font-semibold')
-                                    : (isLight ? 'text-gray-600 hover:bg-gray-100' : 'text-gray-400 hover:bg-white/5')}`}>
-                                <Icon name={s.icon} className={`text-xl ${sidebarCollapsed ? '' : 'mr-3'} ${active ? '' : 'opacity-60'}`} />
-                                {!sidebarCollapsed && <span>{s.label}</span>}
+                                className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
+                                    ? (isLight ? 'text-fuchsia-600 shadow-sm' : 'text-white shadow-lg shadow-fuchsia-500/10')
+                                    : (isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-white/5')}`}>
+                                {active && (
+                                    <motion.div layoutId="activeNav" className={`absolute inset-0 ${isLight ? 'bg-white/80 border border-white' : 'bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 border border-white/10'} rounded-2xl -z-10`} />
+                                )}
+                                <Icon name={s.icon} className={`text-[22px] ${sidebarCollapsed ? '' : 'mr-3'} ${active ? (isLight ? 'text-fuchsia-500' : 'text-cyan-400') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
+                                {!sidebarCollapsed && <span className="relative z-10">{s.label}</span>}
                             </button>
                         );
                     })}
@@ -113,7 +133,7 @@ export default function PortalPanel() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+                            className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm md:hidden"
                             onClick={() => setMobileSidebarOpen(false)}
                         />
                         <motion.aside
@@ -121,27 +141,35 @@ export default function PortalPanel() {
                             animate={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className={`fixed inset-y-0 left-0 z-50 w-[260px] ${sidebarBg} flex flex-col md:hidden`}
+                            className={`fixed inset-y-0 left-0 z-50 w-[280px] ${sidebarBg} flex flex-col md:hidden`}
                         >
-                            <div className="flex items-center justify-between h-16 px-4">
-                                <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Portal</span>
-                                <button onClick={() => setMobileSidebarOpen(false)} className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-white/5 ${isLight ? 'hover:bg-black/5' : ''}`}>
-                                    <Icon name="close" className="text-lg opacity-60" />
+                            <div className="flex items-center justify-between h-20 px-5">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-fuchsia-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-fuchsia-500/20">
+                                        <Icon name="blur_on" className="text-white text-lg" />
+                                    </div>
+                                    <span className="text-xl font-black tracking-tight bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Portal</span>
+                                </div>
+                                <button onClick={() => setMobileSidebarOpen(false)} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                                    <Icon name="close" className="text-xl" />
                                 </button>
                             </div>
-                            <nav className="flex-1 py-2 px-2 space-y-1 overflow-y-auto">
-                                <div className="pt-2 pb-1 px-3">
-                                    <span className="text-lg font-bold bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Workflow</span>
+                            <nav className="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto">
+                                <div className="pt-2 pb-3 px-3">
+                                    <span className="text-xs font-bold uppercase tracking-widest opacity-50">Menu</span>
                                 </div>
                                 {sections.map(s => {
                                     const active = activeSection === s.key;
                                     return (
                                         <button key={s.key} onClick={() => { setActiveSection(s.key); setMobileSidebarOpen(false); }}
-                                            className={`w-full flex items-center px-3 py-2.5 rounded-xl transition-all text-[14px] ${active
-                                                ? (isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED] font-semibold' : 'bg-[#A78BFA]/10 text-[#A78BFA] font-semibold')
-                                                : (isLight ? 'text-gray-600 hover:bg-gray-100' : 'text-gray-400 hover:bg-white/5')}`}>
-                                            <Icon name={s.icon} className={`text-xl mr-3 ${active ? '' : 'opacity-60'}`} />
-                                            <span>{s.label}</span>
+                                            className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
+                                                ? (isLight ? 'text-fuchsia-600 shadow-sm' : 'text-white shadow-lg shadow-fuchsia-500/10')
+                                                : (isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-white/5')}`}>
+                                            {active && (
+                                                <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isLight ? 'bg-white/80 border border-white' : 'bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 border border-white/10'} rounded-2xl -z-10`} />
+                                            )}
+                                            <Icon name={s.icon} className={`text-[22px] mr-3 ${active ? (isLight ? 'text-fuchsia-500' : 'text-cyan-400') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
+                                            <span className="relative z-10">{s.label}</span>
                                         </button>
                                     );
                                 })}
@@ -152,52 +180,52 @@ export default function PortalPanel() {
             </AnimatePresence>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0">
+            <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0 relative z-10">
                 {/* Top Bar */}
-                <header className={`h-16 flex items-center justify-between px-4 md:px-8 sticky top-0 z-30 ${isLight ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200' : 'bg-[#0A0A0F]/80 backdrop-blur-xl border-b border-white/5'}`}>
+                <header className={`h-20 flex items-center justify-between px-5 md:px-10 sticky top-0 z-30 ${headerBg}`}>
                     <div className="flex items-center">
-                        <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-3 w-9 h-9 flex items-center justify-center rounded-xl ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
-                            <Icon name="menu" className="text-lg opacity-80" />
+                        <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <Icon name="menu" className="text-xl" />
                         </button>
-                        <h1 className="text-lg md:text-xl font-bold capitalize truncate">{activeSection.replace('-', ' ')}</h1>
+                        <h1 className="text-xl md:text-2xl font-black capitalize tracking-tight">{activeSection.replace('-', ' ')}</h1>
                     </div>
-                    <div className="flex items-center space-x-2 md:space-x-3 shrink-0">
-                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-2 px-3 py-2 rounded-xl text-sm ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'} transition-colors cursor-text`}>
-                            <Icon name="search" className="text-base opacity-40" />
-                            <span className="opacity-40">AI Commands&hellip; (⌘K)</span>
+                    <div className="flex items-center space-x-3 md:space-x-4 shrink-0">
+                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-text`}>
+                            <Icon name="search" className="text-lg opacity-50" />
+                            <span className="opacity-50">Search anything... (⌘K)</span>
                         </motion.button>
-                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-9 h-9 rounded-xl ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
-                            <Icon name="search" className="text-lg opacity-60" />
+                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
-                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-9 h-9 rounded-xl flex items-center justify-center ${isLight ? 'bg-gray-100' : 'bg-white/5'}`}>
-                            <Icon name="notifications" className="text-lg opacity-60" />
-                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+                        <motion.button whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <Icon name="notifications" className="text-xl opacity-70" />
+                            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-fuchsia-500 border-2 border-transparent rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
-                            <motion.button onClick={() => setShowProfileMenu(!showProfileMenu)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-9 h-9 rounded-xl overflow-hidden border-2 transition-all ${isLight ? 'border-gray-200 hover:border-[#7C3AED]' : 'border-white/10 hover:border-[#A78BFA]'}`}>
+                            <motion.button onClick={() => setShowProfileMenu(!showProfileMenu)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-fuchsia-400' : 'border-white/10 hover:border-cyan-400'}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Portal" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Portal&background=7C3AED&color=fff" }} />
+                                <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Portal" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Portal&background=d946ef&color=fff" }} />
                             </motion.button>
                             <AnimatePresence>
                                 {showProfileMenu && (
                                     <>
                                         <div className="fixed inset-0 z-40" onClick={() => setShowProfileMenu(false)} />
-                                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-2 w-56 rounded-2xl shadow-xl overflow-hidden z-50 border ${isLight ? 'bg-white border-gray-100 shadow-gray-200/50' : 'bg-[#1A1A24] border-white/5 shadow-black/50'}`}>
-                                            <div className={`p-4 border-b ${isLight ? 'border-gray-100' : 'border-white/5'}`}>
-                                                <p className="font-semibold text-sm">Ali Al-Zuhairi</p>
-                                                <p className="text-xs opacity-60 mt-0.5">admin@alux.space</p>
+                                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
+                                            <div className={`p-5 border-b ${isLight ? 'border-slate-100' : 'border-white/5'}`}>
+                                                <p className="font-bold text-base">Ali Al-Zuhairi</p>
+                                                <p className="text-xs font-medium opacity-60 mt-1">admin@alux.space</p>
                                             </div>
-                                            <div className="p-2 space-y-1">
-                                                <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-3 py-2.5 rounded-xl text-sm transition-colors ${isLight ? 'hover:bg-gray-50' : 'hover:bg-white/5'}`}>
-                                                    <Icon name="settings" className={`mr-3 opacity-60 text-lg ${isLight ? 'text-gray-600' : 'text-gray-300'}`} />
+                                            <div className="p-3 space-y-1">
+                                                <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'}`}>
+                                                    <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-slate-400' : 'text-slate-400'}`} />
                                                     Settings
                                                 </button>
-                                                <button onClick={() => { setTheme(isLight ? 'dark' : 'light'); setShowProfileMenu(false); }} className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-colors ${isLight ? 'hover:bg-gray-50 text-gray-800' : 'hover:bg-white/5 text-gray-200'}`}>
+                                                <button onClick={() => { setTheme(isLight ? 'dark' : 'light'); setShowProfileMenu(false); }} className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'}`}>
                                                     <div className="flex items-center">
-                                                        <Icon name={isLight ? 'dark_mode' : 'light_mode'} className="mr-3 opacity-60 text-lg" />
+                                                        <Icon name={isLight ? 'dark_mode' : 'light_mode'} className="mr-3 text-xl opacity-70" />
                                                         Theme
                                                     </div>
-                                                    <span className="text-[10px] uppercase font-bold tracking-wider opacity-40">{isLight ? 'Light' : 'Dark'}</span>
+                                                    <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-lg ${isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-slate-300'}`}>{isLight ? 'Light' : 'Dark'}</span>
                                                 </button>
                                             </div>
                                         </motion.div>
@@ -209,7 +237,7 @@ export default function PortalPanel() {
                 </header>
 
                 {/* Page Content */}
-                <main className="flex-1 p-4 md:p-8">
+                <main className="flex-1 p-5 md:p-10">
                     <AnimatePresence mode="wait">
                         {activeSection === 'start' && <StartSection key="start" card={cardClass} isLight={isLight} setActiveSection={setActiveSection} />}
                         {activeSection === 'dashboard' && <DashboardSection key="dash" card={cardClass} isLight={isLight} />}
@@ -225,15 +253,15 @@ export default function PortalPanel() {
 
             {/* Global AI Copilot Floating Button */}
             <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowCopilot(true)}
-                className="fixed bottom-8 right-8 w-14 h-14 z-50 group"
+                className="fixed bottom-8 right-8 w-16 h-16 z-50 group"
             >
-                <div className="absolute inset-0 rounded-full bg-[#7C3AED] opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500" />
-                <div className="relative w-full h-full rounded-[1.25rem] bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1.5px] shadow-2xl overflow-hidden before:absolute before:inset-0 before:bg-[url('https://grainy-gradients.vercel.app/noise.svg')] before:opacity-20 before:mix-blend-overlay">
-                    <div className={`w-full h-full rounded-[1.25rem] flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
-                        <Icon name="auto_awesome" className="text-2xl bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse" />
+                <div className="relative w-full h-full rounded-[1.5rem] bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-cyan-400 p-[2px] shadow-2xl overflow-hidden">
+                    <div className={`w-full h-full rounded-[1.5rem] flex items-center justify-center backdrop-blur-xl ${isLight ? 'bg-white/80' : 'bg-black/40'}`}>
+                        <Icon name="auto_awesome" className="text-3xl bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-400" />
                     </div>
                 </div>
             </motion.button>
@@ -245,7 +273,7 @@ export default function PortalPanel() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex justify-end bg-black/20 backdrop-blur-sm"
+                        className="fixed inset-0 z-50 flex justify-end bg-slate-900/20 backdrop-blur-sm"
                         onClick={() => setShowCopilot(false)}
                     >
                         <motion.div
@@ -254,56 +282,55 @@ export default function PortalPanel() {
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative ${isLight ? 'bg-[#F8F9FA] border-l border-gray-200' : 'bg-[#0A0A0F] border-l border-white/10'}`}
+                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : 'bg-[#0B0B13]/80 border-l border-white/10'}`}
                         >
-                            <div className={`flex items-center justify-between p-4 md:p-5 border-b relative overflow-hidden z-10 ${isLight ? 'border-gray-200 bg-white/50 backdrop-blur-xl' : 'border-white/10 bg-[#12121A]/80 backdrop-blur-xl'}`}>
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#A78BFA] via-[#7C3AED] to-[#A78BFA]" />
-                                <div className="flex items-center space-x-3">
-                                    <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1.5px] shadow-lg overflow-hidden before:absolute before:inset-0 before:bg-[url('https://grainy-gradients.vercel.app/noise.svg')] before:opacity-20 before:mix-blend-overlay">
-                                        <div className={`w-full h-full rounded-xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#12121A]'}`}>
-                                            <Icon name="auto_awesome" className="text-lg bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+                            <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
+                                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500" />
+                                <div className="flex items-center space-x-4">
+                                    <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-cyan-400 p-[2px] shadow-lg">
+                                        <div className={`w-full h-full rounded-2xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#12121A]'}`}>
+                                            <Icon name="auto_awesome" className="text-2xl bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-500" />
                                         </div>
-                                        <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-[#12121A] rounded-full z-20" />
+                                        <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-white dark:border-[#12121A] rounded-full z-20 shadow-sm" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg leading-tight bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Copilot</h3>
-                                        <p className="text-[11px] font-medium opacity-60 flex items-center mt-0.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse" /> Always active</p>
+                                        <h3 className="font-black text-xl tracking-tight bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Copilot</h3>
+                                        <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" /> Online & Ready</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <button className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isLight ? 'hover:bg-gray-200' : 'hover:bg-white/10'}`} title="History">
-                                        <Icon name="history" className="text-[18px] opacity-60" />
+                                    <button className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'}`} title="History">
+                                        <Icon name="history" className="text-xl opacity-60" />
                                     </button>
-                                    <button onClick={() => setShowCopilot(false)} className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isLight ? 'hover:bg-gray-200' : 'hover:bg-white/10'}`}>
-                                        <Icon name="close" className="opacity-60" />
+                                    <button onClick={() => setShowCopilot(false)} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'}`}>
+                                        <Icon name="close" className="text-xl opacity-60" />
                                     </button>
                                 </div>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto p-5 space-y-5 z-0 relative">
-                                {/* Subtle background glow */}
-                                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#7C3AED]/10 blur-[80px] rounded-full pointer-events-none" />
+                            <div className="flex-1 overflow-y-auto p-6 space-y-6 z-0 relative no-scrollbar">
+                                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-fuchsia-500/10 blur-[80px] rounded-full pointer-events-none" />
 
                                 {copilotHistory.map((h, i) => (
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} key={i} className={`flex flex-col ${h.role === 'user' ? 'items-end' : 'items-start'} relative z-10`}>
                                         <div className="flex w-full items-end justify-start">
                                             {h.role === 'ai' && (
-                                                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[1px] shadow-sm overflow-hidden flex-shrink-0 mr-3">
-                                                    <div className={`w-full h-full rounded-lg flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
-                                                        <Icon name="auto_awesome" className="text-[14px] bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+                                                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-cyan-400 p-[2px] shadow-sm overflow-hidden flex-shrink-0 mr-3">
+                                                    <div className={`w-full h-full rounded-2xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
+                                                        <Icon name="auto_awesome" className="text-lg bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-500" />
                                                     </div>
                                                 </div>
                                             )}
                                             <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
-                                                {h.role === 'ai' && <span className="text-[10px] font-semibold opacity-50 mb-1 ml-1 tracking-wider uppercase">Portal AI</span>}
-                                                <div className={`max-w-[85%] p-3.5 rounded-2xl text-[13px] leading-relaxed shadow-sm ${h.role === 'user' ? 'bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white rounded-br-sm shadow-[#7C3AED]/20' : isLight ? 'bg-white border border-gray-100 text-gray-800 rounded-bl-sm shadow-gray-200/50' : 'bg-[#1A1A24] border border-white/5 text-gray-200 rounded-bl-sm shadow-black/50'} relative`}>
+                                                {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ml-1 tracking-wider uppercase">Portal AI</span>}
+                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? 'bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-br-sm shadow-fuchsia-500/20' : isLight ? 'bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-slate-200/50' : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
                                                     {h.msg}
                                                     {h.role === 'ai' && i === copilotHistory.length - 1 && (
-                                                        <div className="flex items-center space-x-2 mt-3 pt-3 border-t border-current/10">
-                                                            <button className="flex items-center space-x-1 text-[10px] opacity-70 hover:opacity-100 transition-opacity"><Icon name="content_copy" className="text-[12px]" /> <span>Copy</span></button>
-                                                            <button className="flex items-center space-x-1 text-[10px] opacity-70 hover:opacity-100 transition-opacity"><Icon name="ios_share" className="text-[12px]" /> <span>Share</span></button>
-                                                            <button className="flex items-center space-x-1 text-[10px] opacity-70 hover:opacity-100 transition-opacity"><Icon name="thumb_up" className="text-[12px]" /></button>
-                                                            <button className="flex items-center space-x-1 text-[10px] opacity-70 hover:opacity-100 transition-opacity"><Icon name="thumb_down" className="text-[12px]" /></button>
+                                                        <div className="flex items-center space-x-3 mt-4 pt-3 border-t border-current/10">
+                                                            <button className="flex items-center space-x-1.5 text-xs opacity-60 hover:opacity-100 transition-opacity"><Icon name="content_copy" className="text-[14px]" /> <span>Copy</span></button>
+                                                            <button className="flex items-center space-x-1.5 text-xs opacity-60 hover:opacity-100 transition-opacity"><Icon name="ios_share" className="text-[14px]" /> <span>Share</span></button>
+                                                            <button className="flex items-center space-x-1.5 text-xs opacity-60 hover:opacity-100 transition-opacity"><Icon name="thumb_up" className="text-[14px]" /></button>
+                                                            <button className="flex items-center space-x-1.5 text-xs opacity-60 hover:opacity-100 transition-opacity"><Icon name="thumb_down" className="text-[14px]" /></button>
                                                         </div>
                                                     )}
                                                 </div>
@@ -313,41 +340,41 @@ export default function PortalPanel() {
                                 ))}
 
                                 {copilotHistory.length === 1 && (
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="pt-4 grid grid-cols-1 gap-2">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="pt-6 grid grid-cols-1 gap-3">
                                         {[
-                                            { icon: 'analytics', label: 'Analyze weekly engagement' },
-                                            { icon: 'security', label: 'Audit recent admin actions' },
-                                            { icon: 'speed', label: 'Optimize query performance' }
+                                            { icon: 'analytics', label: 'Analyze weekly engagement', color: 'text-fuchsia-500', bg: 'bg-fuchsia-500/10' },
+                                            { icon: 'security', label: 'Audit recent admin actions', color: 'text-cyan-500', bg: 'bg-cyan-500/10' },
+                                            { icon: 'speed', label: 'Optimize query performance', color: 'text-amber-500', bg: 'bg-amber-500/10' }
                                         ].map(opt => (
-                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-3 p-3 text-left rounded-xl transition-all ${isLight ? 'bg-white border border-gray-200 hover:border-[#7C3AED] hover:shadow-md' : 'bg-[#1A1A24] border border-white/10 hover:border-[#A78BFA] hover:bg-white/5'} text-[13px]`}>
-                                                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED]' : 'bg-[#A78BFA]/10 text-[#A78BFA]'}`}>
-                                                    <Icon name={opt.icon} className="text-[16px]" />
+                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? 'bg-white/60 border border-white hover:border-fuchsia-300 hover:shadow-lg hover:shadow-fuchsia-500/5' : 'bg-white/5 border border-white/5 hover:border-cyan-500/50 hover:bg-white/10'} text-[14px] font-medium backdrop-blur-xl`}>
+                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${opt.bg} ${opt.color}`}>
+                                                    <Icon name={opt.icon} className="text-xl" />
                                                 </div>
-                                                <span className="font-medium">{opt.label}</span>
+                                                <span>{opt.label}</span>
                                             </button>
                                         ))}
                                     </motion.div>
                                 )}
                             </div>
 
-                            <div className={`p-4 border-t relative z-10 ${isLight ? 'border-gray-200 bg-white/80 backdrop-blur-md' : 'border-white/10 bg-[#12121A]/80 backdrop-blur-md'}`}>
-                                <form onSubmit={handleCopilotSubmit} className={`flex items-center space-x-2 px-2 py-1.5 rounded-2xl border shadow-sm transition-all duration-300 ${isLight ? 'bg-gray-50 border-gray-200 focus-within:bg-white focus-within:border-[#7C3AED] focus-within:shadow-[#7C3AED]/10' : 'bg-[#1A1A24]/50 border-white/10 focus-within:bg-[#1A1A24] focus-within:border-[#A78BFA] focus-within:shadow-[#A78BFA]/10'}`}>
-                                    <button type="button" className={`w-9 h-9 flex shrink-0 items-center justify-center rounded-xl transition-colors ${isLight ? 'hover:bg-gray-200 text-gray-500' : 'hover:bg-white/10 text-gray-400'}`}>
-                                        <Icon name="attach_file" className="text-[18px]" />
+                            <div className={`p-5 border-t relative z-10 ${isLight ? 'border-slate-200/50 bg-white/80 backdrop-blur-2xl' : 'border-white/10 bg-[#0B0B13]/80 backdrop-blur-2xl'}`}>
+                                <form onSubmit={handleCopilotSubmit} className={`flex items-center space-x-2 px-2 py-2 rounded-3xl border shadow-sm transition-all duration-300 ${isLight ? 'bg-white border-slate-200 focus-within:border-fuchsia-400 focus-within:shadow-fuchsia-500/10' : 'bg-white/5 border-white/10 focus-within:bg-white/10 focus-within:border-cyan-400 focus-within:shadow-cyan-500/10'}`}>
+                                    <button type="button" className={`w-10 h-10 flex shrink-0 items-center justify-center rounded-2xl transition-colors ${isLight ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-white/10 text-slate-400'}`}>
+                                        <Icon name="attach_file" className="text-xl" />
                                     </button>
                                     <input
                                         type="text"
                                         value={copilotMsg}
                                         onChange={(e) => setCopilotMsg(e.target.value)}
                                         placeholder="Ask Copilot anything..."
-                                        className="flex-1 bg-transparent border-none outline-none text-[13px] py-2 w-full min-w-0"
+                                        className="flex-1 bg-transparent border-none outline-none text-[14px] font-medium py-2 w-full min-w-0"
                                     />
-                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-9 h-9 shrink-0 flex items-center justify-center rounded-xl transition-all ${copilotMsg.trim() ? 'bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white shadow-md shadow-[#7C3AED]/30' : isLight ? 'bg-gray-200 text-gray-400' : 'bg-white/10 text-gray-500'}`}>
-                                        <Icon name="arrow_upward" className="text-base font-bold" />
+                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? 'bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white shadow-lg shadow-fuchsia-500/30' : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/10 text-slate-500'}`}>
+                                        <Icon name="arrow_upward" className="text-lg font-bold" />
                                     </motion.button>
                                 </form>
-                                <div className="text-center mt-3 flex justify-center w-full">
-                                    <span className="text-[10px] opacity-40">AI can make mistakes. Check important info.</span>
+                                <div className="text-center mt-4 flex justify-center w-full">
+                                    <span className="text-[11px] font-medium opacity-40">AI can make mistakes. Check important info.</span>
                                 </div>
                             </div>
                         </motion.div>
@@ -361,35 +388,35 @@ export default function PortalPanel() {
 // ═══════════════════════════════════════════════════════════
 // SHARED
 // ═══════════════════════════════════════════════════════════
-const pageVariants = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0, transition: { duration: 0.3, staggerChildren: 0.06 } }, exit: { opacity: 0, y: -12 } };
-const itemVariants = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 } };
+const pageVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.1 } }, exit: { opacity: 0, y: -20 } };
+const itemVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
 function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string, label: string, value: string, trend: string, trendUp: boolean, isLight: boolean }) {
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-gray-100 shadow-sm' : 'bg-[#1A1A24]/80 border border-white/5'} rounded-2xl p-5 flex flex-col cursor-pointer transition-colors hover:border-[#7C3AED]/30`}>
-            <div className="flex items-center justify-between mb-3">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isLight ? 'bg-[#7C3AED]/10' : 'bg-[#A78BFA]/10'}`}>
-                    <Icon name={icon} className={`text-lg ${isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'}`} />
+        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white/60 backdrop-blur-2xl border border-white shadow-sm' : 'bg-white/5 backdrop-blur-2xl border border-white/10'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-fuchsia-500/5`}>
+            <div className="flex items-center justify-between mb-4">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-fuchsia-100 to-cyan-100' : 'from-fuchsia-500/20 to-cyan-500/20'}`}>
+                    <Icon name={icon} className={`text-2xl ${isLight ? 'text-fuchsia-600' : 'text-cyan-400'}`} />
                 </div>
-                <span className={`text-xs font-bold px-2 py-1 rounded-lg flex items-center space-x-1 ${trendUp ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'}`}>
-                    <Icon name={trendUp ? "trending_up" : "trending_down"} className="text-[12px]" />
+                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1 ${trendUp ? 'bg-emerald-500/10 text-emerald-500' : 'bg-rose-500/10 text-rose-500'}`}>
+                    <Icon name={trendUp ? "trending_up" : "trending_down"} className="text-[14px]" />
                     <span>{trend}</span>
                 </span>
             </div>
-            <span className="text-2xl font-bold">{value}</span>
-            <span className={`text-sm mt-1 flex justify-between items-center ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+            <span className="text-3xl font-black tracking-tight">{value}</span>
+            <span className={`text-sm font-medium mt-1 flex justify-between items-center ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
                 {label}
-                <Icon name="info" className="text-[14px] opacity-40 hover:opacity-100 transition-opacity" />
+                <Icon name="info" className="text-[16px] opacity-40 hover:opacity-100 transition-opacity" />
             </span>
 
             <AnimatePresence>
                 {showInsight && (
-                    <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 12 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
-                        <div className={`p-3 rounded-xl text-xs flex items-start space-x-2 ${isLight ? 'bg-[#7C3AED]/5 text-[#7C3AED]' : 'bg-[#A78BFA]/10 text-[#A78BFA]'}`}>
-                            <Icon name="auto_awesome" className="text-[14px] shrink-0 mt-0.5" />
-                            <span>AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
+                    <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 16 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
+                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-fuchsia-50 text-fuchsia-700' : 'bg-fuchsia-500/10 text-fuchsia-300'}`}>
+                            <Icon name="auto_awesome" className="text-[16px] shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
                         </div>
                     </motion.div>
                 )}
@@ -403,64 +430,64 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
 // ═══════════════════════════════════════════════════════════
 function DashboardSection({ card, isLight }: { card: string, isLight: boolean }) {
     const recentActivity = [
-        { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette' },
-        { user: 'James L.', action: 'Added 3 comments to Sprint Review', time: '12 min ago', icon: 'chat' },
-        { user: 'Mia C.', action: 'Completed UX research report', time: '28 min ago', icon: 'description' },
-        { user: 'Alex R.', action: 'Created Q1 Planning workspace', time: '1h ago', icon: 'add_circle' },
-        { user: 'Lena T.', action: 'Asked Copilot about metrics', time: '2h ago', icon: 'auto_awesome' },
+        { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette', color: 'text-fuchsia-500', bg: 'bg-fuchsia-500/10' },
+        { user: 'James L.', action: 'Added 3 comments to Sprint Review', time: '12 min ago', icon: 'chat', color: 'text-cyan-500', bg: 'bg-cyan-500/10' },
+        { user: 'Mia C.', action: 'Completed UX research report', time: '28 min ago', icon: 'description', color: 'text-amber-500', bg: 'bg-amber-500/10' },
+        { user: 'Alex R.', action: 'Created Q1 Planning workspace', time: '1h ago', icon: 'add_circle', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+        { user: 'Lena T.', action: 'Asked Copilot about metrics', time: '2h ago', icon: 'auto_awesome', color: 'text-indigo-500', bg: 'bg-indigo-500/10' },
     ];
 
     const activityChartTops = useMemo(() => Array.from({ length: 30 }, (_, i) => 20 + Math.sin(i * 0.5) * 30 + Math.random() * 30), []);
     const heatmapData = useMemo(() => Array.from({ length: 35 }, () => Math.random()), []);
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             {/* KPIs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                 <KPICard icon="group" label="Total Users" value="1,247" trend="+12.4%" trendUp={true} isLight={isLight} />
                 <KPICard icon="workspaces" label="Active Workspaces" value="38" trend="+8.2%" trendUp={true} isLight={isLight} />
                 <KPICard icon="auto_awesome" label="AI Queries Today" value="2,891" trend="+24.1%" trendUp={true} isLight={isLight} />
                 <KPICard icon="speed" label="Platform Uptime" value="99.97%" trend="+0.02%" trendUp={true} isLight={isLight} />
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
                 {/* Activity Chart */}
                 <motion.div variants={itemVariants} className={`${card} xl:col-span-2`}>
-                    <h3 className="font-semibold text-lg mb-4">User Activity (30 Days)</h3>
-                    <div className="h-48 flex items-end justify-between gap-1 px-2">
+                    <h3 className="font-bold text-xl mb-6">User Activity (30 Days)</h3>
+                    <div className="h-56 flex items-end justify-between gap-1.5 px-2">
                         {activityChartTops.map((h: number, i: number) => (
                             <motion.div key={i} className="relative w-full h-full flex items-end group">
-                                <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.6, delay: i * 0.02 }}
-                                    whileHover={{ backgroundColor: isLight ? '#6D28D9' : '#8B5CF6' }}
-                                    className={`w-full rounded-t-sm ${isLight ? 'bg-[#7C3AED]/60' : 'bg-[#A78BFA]/40'} transition-colors cursor-pointer relative z-10`} />
+                                <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.02 }}
+                                    whileHover={{ backgroundColor: isLight ? '#d946ef' : '#22d3ee' }}
+                                    className={`w-full rounded-t-md ${isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
                                 {/* Tooltip */}
-                                <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2 py-1 rounded text-xs whitespace-nowrap pointer-events-none ${isLight ? 'bg-gray-800 text-white' : 'bg-white text-gray-900 shadow-xl'}`}>
+                                <div className={`absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
                                     {Math.round(h * 15)} Interactions
                                 </div>
                             </motion.div>
                         ))}
                     </div>
-                    <div className="flex justify-between mt-2 text-[10px] opacity-40 px-2">
+                    <div className="flex justify-between mt-4 text-xs font-medium opacity-50 px-2">
                         <span>Jan 23</span><span>Feb 1</span><span>Feb 8</span><span>Feb 15</span><span>Feb 22</span>
                     </div>
                 </motion.div>
 
                 {/* Recent Activity */}
                 <motion.div variants={itemVariants} className={card}>
-                    <h3 className="font-semibold text-lg mb-4">Recent Activity</h3>
-                    <div className="space-y-3">
+                    <h3 className="font-bold text-xl mb-6">Recent Activity</h3>
+                    <div className="space-y-4">
                         {recentActivity.map((a, i) => (
                             <motion.div
                                 key={i}
-                                whileHover={{ x: 4, backgroundColor: isLight ? 'rgba(0,0,0,0.02)' : 'rgba(255,255,255,0.02)' }}
-                                className="flex items-start space-x-3 p-2 -mx-2 rounded-xl cursor-pointer transition-colors"
+                                whileHover={{ x: 6, backgroundColor: isLight ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.05)' }}
+                                className="flex items-start space-x-4 p-3 -mx-3 rounded-2xl cursor-pointer transition-all duration-300"
                             >
-                                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${isLight ? 'bg-gray-100' : 'bg-white/5'}`}>
-                                    <Icon name={a.icon} className="text-sm opacity-60" />
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${a.bg} ${a.color}`}>
+                                    <Icon name={a.icon} className="text-lg" />
                                 </div>
-                                <div className="min-w-0">
-                                    <p className="text-[13px]"><span className="font-semibold">{a.user}</span> {a.action}</p>
-                                    <span className="text-[11px] opacity-40">{a.time}</span>
+                                <div className="min-w-0 pt-0.5">
+                                    <p className="text-[14px] font-medium leading-snug"><span className="font-bold">{a.user}</span> {a.action}</p>
+                                    <span className="text-xs font-medium opacity-50 mt-1 block">{a.time}</span>
                                 </div>
                             </motion.div>
                         ))}
@@ -469,25 +496,28 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
             </div>
 
             {/* AI Usage Donut + Workspace Heatmap */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                 <motion.div variants={itemVariants} className={card}>
-                    <h3 className="font-semibold text-lg mb-4">AI Copilot Usage</h3>
-                    <div className="flex flex-col sm:flex-row items-center sm:space-x-8 space-y-6 sm:space-y-0">
-                        <motion.div whileHover={{ scale: 1.05 }} className="relative w-32 h-32 flex items-center justify-center shrink-0 cursor-pointer">
-                            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <path className={isLight ? "text-gray-100" : "text-white/5"} stroke="currentColor" strokeWidth="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "35, 100" }} transition={{ duration: 1.2 }} strokeLinecap="round" className="text-[#A78BFA] hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "25, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-35" strokeLinecap="round" className="text-emerald-500 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-60" strokeLinecap="round" className="text-amber-500 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-80" strokeLinecap="round" className="text-rose-500 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <h3 className="font-bold text-xl mb-6">AI Copilot Usage</h3>
+                    <div className="flex flex-col sm:flex-row items-center sm:space-x-10 space-y-8 sm:space-y-0">
+                        <motion.div whileHover={{ scale: 1.05 }} className="relative w-40 h-40 flex items-center justify-center shrink-0 cursor-pointer">
+                            <svg className="w-full h-full transform -rotate-90 drop-shadow-xl" viewBox="0 0 36 36">
+                                <path className={isLight ? "text-slate-100" : "text-white/5"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "35, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeLinecap="round" className="text-fuchsia-500 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "25, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-35" strokeLinecap="round" className="text-cyan-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-60" strokeLinecap="round" className="text-amber-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-80" strokeLinecap="round" className="text-rose-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             </svg>
-                            <span className="absolute text-xl font-bold">2,891</span>
+                            <div className="absolute flex flex-col items-center">
+                                <span className="text-2xl font-black">2,891</span>
+                                <span className="text-[10px] font-bold uppercase tracking-wider opacity-50">Queries</span>
+                            </div>
                         </motion.div>
-                        <div className="flex-1 w-full space-y-2">
-                            {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-[#A78BFA]' }, { label: 'Design Reviews', pct: '25%', color: 'bg-emerald-500' }, { label: 'Analytics', pct: '20%', color: 'bg-amber-500' }, { label: 'General', pct: '20%', color: 'bg-rose-500' }].map(s => (
-                                <motion.div key={s.label} whileHover={{ scale: 1.02, x: 2 }} className={`flex justify-between text-sm items-center p-2 rounded-lg cursor-pointer ${isLight ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white/[0.03] hover:bg-white/[0.06]'} transition-colors`}>
-                                    <span className="flex items-center opacity-70"><span className={`w-2.5 h-2.5 rounded-full mr-2.5 ${s.color}`} />{s.label}</span>
-                                    <span className="font-semibold">{s.pct}</span>
+                        <div className="flex-1 w-full space-y-3">
+                            {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-fuchsia-500' }, { label: 'Design Reviews', pct: '25%', color: 'bg-cyan-400' }, { label: 'Analytics', pct: '20%', color: 'bg-amber-400' }, { label: 'General', pct: '20%', color: 'bg-rose-400' }].map(s => (
+                                <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
+                                    <span className="flex items-center"><span className={`w-3 h-3 rounded-full mr-3 shadow-sm ${s.color}`} />{s.label}</span>
+                                    <span className="font-bold">{s.pct}</span>
                                 </motion.div>
                             ))}
                         </div>
@@ -495,23 +525,23 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                 </motion.div>
 
                 <motion.div variants={itemVariants} className={card}>
-                    <h3 className="font-semibold text-lg mb-4">Workspace Activity Heatmap</h3>
-                    <div className="grid grid-cols-7 gap-1.5">
+                    <h3 className="font-bold text-xl mb-6">Workspace Activity Heatmap</h3>
+                    <div className="grid grid-cols-7 gap-2">
                         {heatmapData.map((intensity: number, i: number) => {
-                            const bg = intensity > 0.7 ? (isLight ? 'bg-[#7C3AED]' : 'bg-[#A78BFA]') : intensity > 0.4 ? (isLight ? 'bg-[#7C3AED]/50' : 'bg-[#A78BFA]/40') : intensity > 0.1 ? (isLight ? 'bg-[#7C3AED]/20' : 'bg-[#A78BFA]/15') : (isLight ? 'bg-gray-100' : 'bg-white/5');
-                            return <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.01 }} whileHover={{ scale: 1.2, zIndex: 10 }} className={`aspect-square rounded-md ${bg} cursor-pointer hover:shadow-lg transition-shadow relative group`}>
+                            const bg = intensity > 0.7 ? (isLight ? 'bg-fuchsia-500' : 'bg-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-fuchsia-300/30' : 'bg-cyan-400/20') : (isLight ? 'bg-slate-100' : 'bg-white/5');
+                            return <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.01 }} whileHover={{ scale: 1.2, zIndex: 10 }} className={`aspect-square rounded-lg ${bg} cursor-pointer hover:shadow-lg transition-shadow relative group`}>
                                 {/* Tooltip */}
-                                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-1 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2 py-1 rounded text-xs whitespace-nowrap pointer-events-none ${isLight ? 'bg-gray-800 text-white' : 'bg-white text-gray-900 shadow-xl'}`}>
+                                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
                                     Score: {Math.round(intensity * 100)}
                                 </div>
                             </motion.div>;
                         })}
                     </div>
-                    <div className="flex justify-between items-center mt-3 text-[11px] opacity-40">
+                    <div className="flex justify-between items-center mt-5 text-xs font-medium opacity-50">
                         <span>Less active</span>
-                        <div className="flex space-x-1">
-                            {[isLight ? 'bg-gray-100' : 'bg-white/5', isLight ? 'bg-[#7C3AED]/20' : 'bg-[#A78BFA]/15', isLight ? 'bg-[#7C3AED]/50' : 'bg-[#A78BFA]/40', isLight ? 'bg-[#7C3AED]' : 'bg-[#A78BFA]'].map((c, i) => (
-                                <div key={i} className={`w-3 h-3 rounded-sm ${c}`} />
+                        <div className="flex space-x-1.5">
+                            {[isLight ? 'bg-slate-100' : 'bg-white/5', isLight ? 'bg-fuchsia-300/30' : 'bg-cyan-400/20', isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/60', isLight ? 'bg-fuchsia-500' : 'bg-cyan-400'].map((c, i) => (
+                                <div key={i} className={`w-4 h-4 rounded-md ${c}`} />
                             ))}
                         </div>
                         <span>More active</span>
@@ -537,34 +567,34 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
         { name: 'Ethan Patel', email: 'ethan@company.com', role: 'Editor', status: 'Invited', lastActive: 'Never' },
     ];
 
-    const roleBadge = (r: string) => r === 'Admin' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : r === 'Editor' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-gray-500/10 text-gray-400 border-gray-500/20';
-    const statusDot = (s: string) => s === 'Active' ? 'bg-emerald-500' : s === 'Invited' ? 'bg-amber-500' : 'bg-gray-400';
+    const roleBadge = (r: string) => r === 'Admin' ? 'bg-fuchsia-500/10 text-fuchsia-500 border-fuchsia-500/20' : r === 'Editor' ? 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20' : 'bg-slate-500/10 text-slate-500 border-slate-500/20';
+    const statusDot = (s: string) => s === 'Active' ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]' : s === 'Invited' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-slate-400';
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <div>
-                    <h2 className="text-lg font-bold">Portal User Management</h2>
-                    <p className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{users.length} total users</p>
+                    <h2 className="text-2xl font-black tracking-tight">Portal User Management</h2>
+                    <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>{users.length} total users</p>
                 </div>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-4 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors flex items-center space-x-2 shadow-lg shadow-[#7C3AED]/20">
-                    <Icon name="person_add" className="text-base" /><span>Add User</span>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-fuchsia-500/20">
+                    <Icon name="person_add" className="text-lg" /><span>Add User</span>
                 </motion.button>
             </div>
 
             <motion.div variants={itemVariants} className={card}>
-                <div className="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
-                    <table className="w-full min-w-[600px]">
+                <div className="overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
+                    <table className="w-full min-w-[700px]">
                         <thead>
-                            <tr className={`text-left text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                                <th className="pb-4 font-medium">User</th>
-                                <th className="pb-4 font-medium">Role</th>
-                                <th className="pb-4 font-medium">Status</th>
-                                <th className="pb-4 font-medium">Last Active</th>
-                                <th className="pb-4 font-medium text-right">Actions</th>
+                            <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-slate-500'}`}>
+                                <th className="pb-5">User</th>
+                                <th className="pb-5">Role</th>
+                                <th className="pb-5">Status</th>
+                                <th className="pb-5">Last Active</th>
+                                <th className="pb-5 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5">
+                        <tbody className="divide-y divide-white/10">
                             {users.map((u, i) => {
                                 // eslint-disable-next-line react-hooks/rules-of-hooks
                                 const [expanded, setExpanded] = useState(false);
@@ -572,24 +602,24 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                                     <React.Fragment key={i}>
                                         <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
                                             onClick={() => setExpanded(!expanded)}
-                                            className={`${isLight ? 'hover:bg-gray-50 divide-gray-100' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
-                                            <td className="py-3">
-                                                <div className="flex items-center space-x-3">
-                                                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold ${isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED] group-hover:bg-[#7C3AED]/20' : 'bg-[#A78BFA]/10 text-[#A78BFA] group-hover:bg-[#A78BFA]/20'} transition-colors`}>
+                                            className={`${isLight ? 'hover:bg-white/50 divide-slate-100' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
+                                            <td className="py-4">
+                                                <div className="flex items-center space-x-4">
+                                                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black ${isLight ? 'bg-fuchsia-500/10 text-fuchsia-600 group-hover:bg-fuchsia-500/20' : 'bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500/20'} transition-colors`}>
                                                         {u.name.split(' ').map(n => n[0]).join('')}
                                                     </div>
                                                     <div>
-                                                        <span className="font-medium text-sm block">{u.name}</span>
-                                                        <span className="text-xs opacity-50">{u.email}</span>
+                                                        <span className="font-bold text-[15px] block">{u.name}</span>
+                                                        <span className="text-xs font-medium opacity-60">{u.email}</span>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="py-3"><span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${roleBadge(u.role)}`}>{u.role}</span></td>
-                                            <td className="py-3"><span className="flex items-center text-sm"><span className={`w-2 h-2 rounded-full mr-2 ${statusDot(u.status)}`} />{u.status}</span></td>
-                                            <td className="py-3 text-sm opacity-60">{u.lastActive}</td>
-                                            <td className="py-3 text-right">
-                                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-8 h-8 rounded-lg inline-flex items-center justify-center ${isLight ? 'hover:bg-gray-200' : 'hover:bg-white/10'} transition-colors`}>
-                                                    <Icon name={expanded ? "expand_less" : "expand_more"} className="text-base opacity-50" />
+                                            <td className="py-4"><span className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${roleBadge(u.role)}`}>{u.role}</span></td>
+                                            <td className="py-4"><span className="flex items-center text-sm font-medium"><span className={`w-2.5 h-2.5 rounded-full mr-3 ${statusDot(u.status)}`} />{u.status}</span></td>
+                                            <td className="py-4 text-sm font-medium opacity-60">{u.lastActive}</td>
+                                            <td className="py-4 text-right">
+                                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-9 h-9 rounded-xl inline-flex items-center justify-center ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'} transition-colors`}>
+                                                    <Icon name={expanded ? "expand_less" : "expand_more"} className="text-xl opacity-60" />
                                                 </motion.button>
                                             </td>
                                         </motion.tr>
@@ -598,16 +628,16 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                                                 <tr>
                                                     <td colSpan={5} className="p-0 border-0">
                                                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                                                            <div className={`m-2 p-4 rounded-xl flex items-start space-x-4 ${isLight ? 'bg-gray-50' : 'bg-white/[0.02]'}`}>
-                                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isLight ? 'bg-white shadow-sm' : 'bg-white/5'}`}>
-                                                                    <Icon name="auto_awesome" className={isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'} />
+                                                            <div className={`m-3 p-5 rounded-2xl flex items-start space-x-5 ${isLight ? 'bg-white/80 shadow-sm border border-white' : 'bg-white/[0.03] border border-white/5'}`}>
+                                                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-gradient-to-br ${isLight ? 'from-fuchsia-100 to-cyan-100' : 'from-fuchsia-500/20 to-cyan-500/20'}`}>
+                                                                    <Icon name="auto_awesome" className={`text-xl ${isLight ? 'text-fuchsia-600' : 'text-cyan-400'}`} />
                                                                 </div>
                                                                 <div>
-                                                                    <h4 className="text-sm font-semibold mb-1">AI Portal Summary</h4>
-                                                                    <p className="text-xs opacity-70 leading-relaxed max-w-2xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
-                                                                    <div className="flex space-x-3 mt-3">
-                                                                        <button className={`text-xs font-semibold px-3 py-1.5 rounded-lg ${isLight ? 'bg-white border border-gray-200 hover:bg-gray-50' : 'bg-white/5 border border-white/5 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
-                                                                        <button className={`text-xs font-semibold px-3 py-1.5 rounded-lg text-[#7C3AED] ${isLight ? 'bg-[#7C3AED]/10 hover:bg-[#7C3AED]/20' : 'bg-[#A78BFA]/10 hover:bg-[#A78BFA]/20'} transition-colors flex items-center`}><Icon name="mail" className="text-[14px] mr-1.5" /> Message</button>
+                                                                    <h4 className="text-[15px] font-bold mb-1.5">AI Portal Summary</h4>
+                                                                    <p className="text-[13px] font-medium opacity-70 leading-relaxed max-w-3xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
+                                                                    <div className="flex space-x-3 mt-4">
+                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl ${isLight ? 'bg-white border border-slate-200 hover:bg-slate-50' : 'bg-white/5 border border-white/10 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
+                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl text-white bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:shadow-lg hover:shadow-fuchsia-500/20 transition-all flex items-center`}><Icon name="mail" className="text-[16px] mr-2" /> Message</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -641,41 +671,41 @@ function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }
     ];
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-                <h2 className="text-lg font-bold">Portal Administration</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-4 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors flex items-center space-x-2 shadow-lg shadow-[#7C3AED]/20">
-                    <Icon name="add" className="text-base" /><span>New Workspace</span>
+                <h2 className="text-2xl font-black tracking-tight">Portal Administration</h2>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-fuchsia-500/20">
+                    <Icon name="add" className="text-lg" /><span>New Workspace</span>
                 </motion.button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {workspaces.map((ws, i) => {
                     // eslint-disable-next-line react-hooks/rules-of-hooks
                     const [showDetails, setShowDetails] = useState(false);
                     return (
-                        <motion.div key={i} variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowDetails(!showDetails)} className={`${card} cursor-pointer transition-colors hover:border-[#7C3AED]/30`}>
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="font-bold">{ws.name}</h3>
-                                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${ws.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500' : ws.status === 'Review' ? 'bg-amber-500/10 text-amber-500' : 'bg-gray-500/10 text-gray-400'}`}>{ws.status}</span>
+                        <motion.div key={i} variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowDetails(!showDetails)} className={`${card} cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-fuchsia-500/5`}>
+                            <div className="flex justify-between items-start mb-5">
+                                <h3 className="font-bold text-lg">{ws.name}</h3>
+                                <span className={`text-xs font-bold px-3 py-1 rounded-xl ${ws.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500' : ws.status === 'Review' ? 'bg-amber-500/10 text-amber-500' : 'bg-slate-500/10 text-slate-500'}`}>{ws.status}</span>
                             </div>
-                            <div className="grid grid-cols-3 gap-3 text-center mb-1">
+                            <div className="grid grid-cols-3 gap-4 text-center mb-2">
                                 {[{ v: ws.members, l: 'Members' }, { v: ws.docs, l: 'Docs' }, { v: ws.queries, l: 'AI Queries' }].map(s => (
-                                    <div key={s.l} className={`p-2 rounded-xl ${isLight ? 'bg-gray-50' : 'bg-white/[0.03]'}`}>
-                                        <span className="text-lg font-bold block">{s.v}</span>
-                                        <span className="text-[10px] opacity-50">{s.l}</span>
+                                    <div key={s.l} className={`p-3 rounded-2xl ${isLight ? 'bg-white/50 border border-white' : 'bg-white/[0.03] border border-white/5'}`}>
+                                        <span className="text-xl font-black block">{s.v}</span>
+                                        <span className="text-[11px] font-bold uppercase tracking-wider opacity-50 mt-1 block">{s.l}</span>
                                     </div>
                                 ))}
                             </div>
                             <AnimatePresence>
                                 {showDetails && (
-                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-4 pt-4 border-t border-gray-200/20 dark:border-white/10">
-                                        <div className="flex items-center space-x-2 mb-2">
-                                            <Icon name="insights" className={isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'} />
-                                            <span className="text-xs font-semibold">Workspace Health: Excellent</span>
+                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-5 pt-5 border-t border-white/10">
+                                        <div className="flex items-center space-x-2 mb-3">
+                                            <Icon name="insights" className={`text-lg ${isLight ? 'text-fuchsia-600' : 'text-cyan-400'}`} />
+                                            <span className="text-sm font-bold">Workspace Health: Excellent</span>
                                         </div>
-                                        <p className="text-xs opacity-70 mb-3">Participation is up 12% this week. Most activity is centered around the new requirements document.</p>
-                                        <button className={`w-full py-2 rounded-xl text-xs font-semibold ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'} transition-colors`}>View Dashboard</button>
+                                        <p className="text-[13px] font-medium opacity-70 mb-4 leading-relaxed">Participation is up 12% this week. Most activity is centered around the new requirements document.</p>
+                                        <button className={`w-full py-2.5 rounded-xl text-sm font-bold ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-colors`}>View Dashboard</button>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -700,33 +730,33 @@ function PortalLogsSection({ card, isLight }: { card: string, isLight: boolean }
     ];
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
-            <h2 className="text-lg font-bold">Portal AI Conversation Logs</h2>
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
+            <h2 className="text-2xl font-black tracking-tight">Portal AI Conversation Logs</h2>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
                 {logs.map((log) => (
                     <motion.div key={log.id} variants={itemVariants} onClick={() => setExpanded(expanded === log.id ? null : log.id)}
-                        className={`${card} cursor-pointer hover:scale-[1.005] transition-transform`}>
+                        className={`${card} cursor-pointer hover:scale-[1.01] transition-transform duration-300`}>
                         <div className="flex items-start justify-between">
-                            <div className="flex items-center space-x-3">
-                                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold ${isLight ? 'bg-[#7C3AED]/10 text-[#7C3AED]' : 'bg-[#A78BFA]/10 text-[#A78BFA]'}`}>
+                            <div className="flex items-center space-x-4">
+                                <div className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black ${isLight ? 'bg-fuchsia-500/10 text-fuchsia-600' : 'bg-cyan-500/10 text-cyan-400'}`}>
                                     {log.user.split(' ').map(n => n[0]).join('')}
                                 </div>
                                 <div>
-                                    <span className="font-medium text-sm">{log.user}</span>
-                                    <span className="text-xs opacity-40 ml-2">{log.time}</span>
+                                    <span className="font-bold text-[15px]">{log.user}</span>
+                                    <span className="text-xs font-medium opacity-50 ml-3">{log.time}</span>
                                 </div>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <span className={`text-xs font-semibold px-2 py-1 rounded-lg ${log.confidence >= 90 ? 'bg-emerald-500/10 text-emerald-500' : 'bg-amber-500/10 text-amber-500'}`}>{log.confidence}% conf.</span>
-                                <span className={`text-xs px-2 py-1 rounded-lg ${isLight ? 'bg-gray-100' : 'bg-white/5'}`}>{log.citations} sources</span>
+                            <div className="flex items-center space-x-3">
+                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${log.confidence >= 90 ? 'bg-emerald-500/10 text-emerald-500' : 'bg-amber-500/10 text-amber-500'}`}>{log.confidence}% conf.</span>
+                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white/80 border border-slate-100' : 'bg-white/5 border border-white/5'}`}>{log.citations} sources</span>
                             </div>
                         </div>
-                        <p className={`mt-3 text-sm font-medium ${isLight ? 'text-[#7C3AED]' : 'text-[#A78BFA]'}`}>&ldquo;{log.query}&rdquo;</p>
+                        <p className={`mt-4 text-[15px] font-bold ${isLight ? 'text-fuchsia-600' : 'text-cyan-400'}`}>&ldquo;{log.query}&rdquo;</p>
                         <AnimatePresence>
                             {expanded === log.id && (
                                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
-                                    <p className={`mt-3 pt-3 text-sm border-t ${isLight ? 'text-gray-600 border-gray-200' : 'text-gray-300 border-white/5'}`}>{log.response}</p>
+                                    <p className={`mt-4 pt-4 text-[14px] font-medium leading-relaxed border-t ${isLight ? 'text-slate-600 border-slate-200/50' : 'text-slate-300 border-white/10'}`}>{log.response}</p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -751,31 +781,31 @@ function AlertsConfigSection({ card, isLight }: { card: string, isLight: boolean
         { id: 'system', name: 'System Health', desc: 'Monitor uptime and performance', trigger: '< 99.5% uptime', channel: 'Email + Webhook', priority: 'Critical' },
     ];
 
-    const priorityColor = (p: string) => p === 'Critical' ? 'text-red-400 bg-red-500/10' : p === 'Warning' ? 'text-amber-400 bg-amber-500/10' : 'text-blue-400 bg-blue-500/10';
+    const priorityColor = (p: string) => p === 'Critical' ? 'text-rose-500 bg-rose-500/10' : p === 'Warning' ? 'text-amber-500 bg-amber-500/10' : 'text-cyan-500 bg-cyan-500/10';
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
-            <h2 className="text-lg font-bold">Alert Configuration</h2>
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
+            <h2 className="text-2xl font-black tracking-tight">Alert Configuration</h2>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
                 {rules.map((r) => (
                     <motion.div key={r.id} variants={itemVariants} className={card}>
                         <div className="flex items-center justify-between">
                             <div className="flex-1">
-                                <div className="flex items-center space-x-3 mb-1">
-                                    <h3 className="font-semibold text-sm">{r.name}</h3>
-                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${priorityColor(r.priority)}`}>{r.priority}</span>
+                                <div className="flex items-center space-x-4 mb-2">
+                                    <h3 className="font-bold text-lg">{r.name}</h3>
+                                    <span className={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-xl ${priorityColor(r.priority)}`}>{r.priority}</span>
                                 </div>
-                                <p className="text-xs opacity-50 mb-2">{r.desc}</p>
-                                <div className="flex items-center space-x-4 text-xs opacity-60">
-                                    <span className="flex items-center"><Icon name="bolt" className="text-xs mr-1" />{r.trigger}</span>
-                                    <span className="flex items-center"><Icon name="send" className="text-xs mr-1" />{r.channel}</span>
+                                <p className="text-[14px] font-medium opacity-60 mb-3">{r.desc}</p>
+                                <div className="flex items-center space-x-6 text-xs font-bold opacity-70">
+                                    <span className="flex items-center"><Icon name="bolt" className="text-[16px] mr-1.5" />{r.trigger}</span>
+                                    <span className="flex items-center"><Icon name="send" className="text-[16px] mr-1.5" />{r.channel}</span>
                                 </div>
                             </div>
                             <button onClick={() => setToggles(prev => ({ ...prev, [r.id]: !prev[r.id] }))}
-                                className={`w-12 h-7 rounded-full transition-colors relative ${toggles[r.id] ? 'bg-[#7C3AED]' : (isLight ? 'bg-gray-300' : 'bg-white/10')}`}>
-                                <motion.div animate={{ x: toggles[r.id] ? 22 : 2 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                                    className="absolute top-1 w-5 h-5 rounded-full bg-white shadow-sm" />
+                                className={`w-14 h-8 rounded-full transition-colors relative ${toggles[r.id] ? 'bg-gradient-to-r from-fuchsia-500 to-cyan-500' : (isLight ? 'bg-slate-200' : 'bg-white/10')}`}>
+                                <motion.div animate={{ x: toggles[r.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                                    className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                             </button>
                         </div>
                     </motion.div>
@@ -790,25 +820,25 @@ function AlertsConfigSection({ card, isLight }: { card: string, isLight: boolean
 // ═══════════════════════════════════════════════════════════
 function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean }) {
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-                <h2 className="text-lg font-bold">Usage Analytics</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center space-x-2 ${isLight ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/5 hover:bg-white/10'}`}>
-                    <Icon name="download" className="text-base" /><span>Export Data</span>
+                <h2 className="text-2xl font-black tracking-tight">Usage Analytics</h2>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-5 py-3 rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : 'bg-white/5 hover:bg-white/10 border border-white/5'}`}>
+                    <Icon name="download" className="text-lg" /><span>Export Data</span>
                 </motion.button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                 <KPICard icon="visibility" label="Page Views" value="48.2K" trend="+18%" trendUp={true} isLight={isLight} />
                 <KPICard icon="schedule" label="Avg. Session" value="12m 34s" trend="+8%" trendUp={true} isLight={isLight} />
                 <KPICard icon="thumb_up" label="Satisfaction" value="4.7/5" trend="+0.3" trendUp={true} isLight={isLight} />
                 <KPICard icon="bolt" label="Avg. Response" value="1.2s" trend="-15%" trendUp={true} isLight={isLight} />
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                 <motion.div variants={itemVariants} className={card}>
-                    <h3 className="font-semibold text-lg mb-4">Engagement by Feature</h3>
-                    <div className="space-y-3">
+                    <h3 className="font-bold text-xl mb-6">Engagement by Feature</h3>
+                    <div className="space-y-5">
                         {[
                             { feature: 'AI Copilot', usage: 82 },
                             { feature: 'Workspaces', usage: 74 },
@@ -817,13 +847,13 @@ function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean })
                             { feature: 'Analytics', usage: 42 },
                         ].map((f, i) => (
                             <div key={f.feature}>
-                                <div className="flex justify-between text-sm mb-1">
+                                <div className="flex justify-between text-[14px] font-bold mb-2">
                                     <span>{f.feature}</span>
-                                    <span className="font-semibold">{f.usage}%</span>
+                                    <span className="text-fuchsia-500">{f.usage}%</span>
                                 </div>
-                                <div className={`h-2 rounded-full overflow-hidden ${isLight ? 'bg-gray-100' : 'bg-white/5'}`}>
-                                    <motion.div initial={{ width: 0 }} animate={{ width: `${f.usage}%` }} transition={{ duration: 0.8, delay: i * 0.1 }}
-                                        className="h-full rounded-full bg-gradient-to-r from-[#7C3AED] to-[#A78BFA]" />
+                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : 'bg-white/5'}`}>
+                                    <motion.div initial={{ width: 0 }} animate={{ width: `${f.usage}%` }} transition={{ duration: 1, delay: i * 0.1, ease: "easeOut" }}
+                                        className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400" />
                                 </div>
                             </div>
                         ))}
@@ -831,19 +861,19 @@ function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean })
                 </motion.div>
 
                 <motion.div variants={itemVariants} className={card}>
-                    <h3 className="font-semibold text-lg mb-4">Weekly Active Users</h3>
-                    <div className="h-48 flex items-end justify-between gap-3 px-2">
+                    <h3 className="font-bold text-xl mb-6">Weekly Active Users</h3>
+                    <div className="h-56 flex items-end justify-between gap-4 px-2">
                         {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => {
                             const h = [65, 78, 82, 90, 85, 40, 35][i];
                             return (
                                 <div key={day} className="flex-1 flex flex-col items-center group relative">
-                                    <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.6, delay: i * 0.06 }}
-                                        whileHover={{ backgroundColor: isLight ? '#6D28D9' : '#8B5CF6' }}
-                                        className={`w-full max-w-[32px] rounded-t-lg ${isLight ? 'bg-[#7C3AED]/60' : 'bg-[#A78BFA]/40'} transition-colors cursor-pointer relative z-10`} />
-                                    <span className="text-[10px] mt-2 opacity-40">{day}</span>
+                                    <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.06, ease: "easeOut" }}
+                                        whileHover={{ backgroundColor: isLight ? '#d946ef' : '#22d3ee' }}
+                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
+                                    <span className="text-xs font-bold mt-3 opacity-50">{day}</span>
 
                                     {/* Tooltip */}
-                                    <div className={`absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2 py-1 rounded text-xs whitespace-nowrap pointer-events-none ${isLight ? 'bg-gray-800 text-white' : 'bg-white text-gray-900 shadow-xl'}`}>
+                                    <div className={`absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
                                         {Math.round(h * 123)} Active
                                     </div>
                                 </div>
@@ -877,94 +907,94 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
     };
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="max-w-4xl mx-auto space-y-8 pb-12">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="max-w-5xl mx-auto space-y-10 pb-12">
             {/* Hero Greeting Section */}
-            <motion.div variants={itemVariants} className="text-center mb-10 pt-4">
+            <motion.div variants={itemVariants} className="text-center mb-12 pt-8">
                 <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="inline-flex items-center justify-center w-24 h-24 mb-6 relative group cursor-pointer"
+                    className="inline-flex items-center justify-center w-28 h-28 mb-8 relative group cursor-pointer"
                 >
                     {/* Glowing AI Orb */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-cyan-500 opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500" />
-                    <div className="relative w-full h-full rounded-[2rem] bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[2px] shadow-xl overflow-hidden before:absolute before:inset-0 before:bg-[url('https://grainy-gradients.vercel.app/noise.svg')] before:opacity-20 before:mix-blend-overlay">
-                        <div className={`w-full h-full rounded-[2rem] flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
-                            <Icon name="auto_awesome" className={`text-4xl bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-fuchsia-500`} />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-cyan-500 opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse" />
+                    <div className="relative w-full h-full rounded-[2.5rem] bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-cyan-400 p-[3px] shadow-2xl overflow-hidden">
+                        <div className={`w-full h-full rounded-[2.5rem] flex items-center justify-center backdrop-blur-xl ${isLight ? 'bg-white/80' : 'bg-black/40'}`}>
+                            <Icon name="auto_awesome" className={`text-5xl bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-400`} />
                         </div>
                     </div>
                 </motion.div>
 
-                <h1 className={`text-4xl md:text-5xl font-black tracking-tight mb-3 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                    {greeting()}, <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-fuchsia-500">Ali</span>
+                <h1 className={`text-5xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                    {greeting()}, <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 to-cyan-400">Ali</span>
                 </h1>
-                <p className={`text-base font-medium ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                <p className={`text-lg font-bold ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
                     Today is {currentTime ? currentTime.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) : 'loading...'}
                 </p>
             </motion.div>
 
             {/* AI Daily Summary Block */}
             <motion.div variants={itemVariants} className={`${card} relative overflow-hidden`}>
-                <div className={`absolute top-0 right-0 w-64 h-64 bg-indigo-500 opacity-[0.03] blur-3xl rounded-full -mr-20 -mt-20 pointer-events-none`} />
+                <div className={`absolute top-0 right-0 w-80 h-80 bg-fuchsia-500 opacity-10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none`} />
 
-                <div className="flex items-start md:items-center space-x-4 mb-5 relative z-10">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-indigo-500/10 text-indigo-500 shadow-inner">
-                        <Icon name="auto_awesome" className="text-[20px]" />
+                <div className="flex items-start md:items-center space-x-5 mb-6 relative z-10">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 text-fuchsia-500 shadow-inner">
+                        <Icon name="auto_awesome" className="text-2xl" />
                     </div>
                     <div>
-                        <h2 className="text-lg font-bold">Your Daily Briefing</h2>
-                        <p className={`text-xs ${isLight ? 'text-gray-500' : 'opacity-60'}`}>AI-generated summary of your workspace</p>
+                        <h2 className="text-xl font-black tracking-tight">Your Daily Briefing</h2>
+                        <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : 'opacity-60'}`}>AI-generated summary of your workspace</p>
                     </div>
                 </div>
 
-                <div className={`space-y-3 text-[14px] leading-relaxed relative z-10 ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
-                    <p>Good morning! You have <strong className={isLight ? 'text-indigo-600' : 'text-indigo-400'}>3 overdue sprint reviews</strong> waiting for your approval. In the <span className="underline decoration-indigo-500/30 underline-offset-4 cursor-pointer hover:text-indigo-500 transition-colors">Design System v3</span> workspace, 5 new comments were left regarding the new elevation tokens.</p>
+                <div className={`space-y-4 text-[15px] font-medium leading-relaxed relative z-10 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>
+                    <p>Good morning! You have <strong className={isLight ? 'text-fuchsia-600' : 'text-fuchsia-400'}>3 overdue sprint reviews</strong> waiting for your approval. In the <span className="underline decoration-fuchsia-500/50 underline-offset-4 cursor-pointer hover:text-fuchsia-500 transition-colors">Design System v3</span> workspace, 5 new comments were left regarding the new elevation tokens.</p>
                     <p>Also, I noticed a <strong>12% drop in workflow completion</strong> yesterday. Would you like me to analyze the bottleneck?</p>
                 </div>
             </motion.div>
 
             {/* Quick AI Starters */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
                     { icon: 'task_alt', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-emerald-400 to-emerald-600', hue: 'emerald', nav: 'workspaces' as Section },
                     { icon: 'forum', title: 'Catch up', desc: '5 unread comments', color: 'from-fuchsia-400 to-fuchsia-600', hue: 'fuchsia', nav: 'copilot-logs' as Section },
-                    { icon: 'troubleshoot', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-indigo-400 to-indigo-600', hue: 'indigo', nav: 'analytics' as Section },
+                    { icon: 'troubleshoot', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-cyan-400 to-cyan-600', hue: 'cyan', nav: 'analytics' as Section },
                 ].map((action, i) => (
-                    <motion.div key={i} variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                    <motion.div key={i} variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveSection(action.nav)}
-                        className={`group p-4 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:border-[#7C3AED]/30`}>
-                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500 rounded-full -mr-8 -mt-8 pointer-events-none`} />
+                        className={`group p-6 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-${action.hue}-500/10`}>
+                        <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500 rounded-full -mr-10 -mt-10 pointer-events-none`} />
 
-                        <div className={`w-9 h-9 rounded-xl mb-3 flex items-center justify-center text-white bg-gradient-to-br ${action.color} shadow-sm`}>
-                            <Icon name={action.icon} className="text-[18px]" />
+                        <div className={`w-12 h-12 rounded-2xl mb-4 flex items-center justify-center text-white bg-gradient-to-br ${action.color} shadow-lg`}>
+                            <Icon name={action.icon} className="text-2xl" />
                         </div>
-                        <h3 className="font-bold text-[14px] mb-0.5">{action.title}</h3>
-                        <p className={`text-[11px] ${isLight ? 'text-gray-500' : 'opacity-50'}`}>{action.desc}</p>
+                        <h3 className="font-bold text-lg mb-1">{action.title}</h3>
+                        <p className={`text-sm font-medium ${isLight ? 'text-slate-500' : 'opacity-60'}`}>{action.desc}</p>
 
-                        <div className={`mt-3 w-7 h-7 rounded-full flex items-center justify-center opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${isLight ? 'bg-gray-100 text-gray-900' : 'bg-white/10 text-white'}`}>
-                            <Icon name="arrow_forward" className="text-[12px]" />
+                        <div className={`mt-5 w-8 h-8 rounded-full flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white'}`}>
+                            <Icon name="arrow_forward" className="text-sm" />
                         </div>
                     </motion.div>
                 ))}
             </div>
 
             {/* Floating Input */}
-            <motion.div variants={itemVariants} className="pt-4">
-                <div className={`relative flex items-center p-1.5 rounded-2xl shadow-sm transition-all duration-300 border ${isLight ? 'bg-white shadow-gray-200/50 border-gray-200 focus-within:border-indigo-500/50 focus-within:shadow-indigo-500/10' : 'bg-[#1A1A24]/90 border-white/10 focus-within:border-[#A78BFA]/50 focus-within:shadow-[#A78BFA]/10'}`}>
-                    <div className="pl-3 pr-2 opacity-50">
-                        <Icon name="auto_awesome" className="text-[18px]" />
+            <motion.div variants={itemVariants} className="pt-6">
+                <div className={`relative flex items-center p-2 rounded-3xl shadow-lg transition-all duration-300 border backdrop-blur-2xl ${isLight ? 'bg-white/80 shadow-slate-200/50 border-white focus-within:border-fuchsia-400 focus-within:shadow-fuchsia-500/20' : 'bg-white/5 border-white/10 focus-within:border-cyan-400 focus-within:shadow-cyan-500/20'}`}>
+                    <div className="pl-4 pr-3 opacity-60">
+                        <Icon name="auto_awesome" className="text-2xl" />
                     </div>
                     <input
                         type="text"
                         placeholder="Ask AI to find a file, summarize a workspace, or draft an email&hellip;"
-                        className={`w-full bg-transparent py-2.5 outline-none text-[13px] ${isLight ? 'text-gray-900 placeholder-gray-400' : 'text-white placeholder-white/30'}`}
+                        className={`w-full bg-transparent py-3 outline-none text-[15px] font-medium ${isLight ? 'text-slate-900 placeholder-slate-400' : 'text-white placeholder-white/40'}`}
                     />
-                    <button className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white flex items-center justify-center hover:shadow-md hover:shadow-indigo-500/30 transition-all shrink-0 ml-2">
-                        <Icon name="arrow_upward" className="text-[16px]" />
+                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-cyan-500 text-white flex items-center justify-center hover:shadow-lg hover:shadow-fuchsia-500/40 transition-all shrink-0 ml-2">
+                        <Icon name="arrow_upward" className="text-xl" />
                     </button>
                 </div>
-                <div className="text-center mt-3">
-                    <span className="text-[10px] opacity-40">AI can make mistakes. Check important info.</span>
+                <div className="text-center mt-4">
+                    <span className="text-xs font-medium opacity-50">AI can make mistakes. Check important info.</span>
                 </div>
             </motion.div>
 
@@ -998,26 +1028,26 @@ function SettingsSection({ card, isLight, setTheme }: { card: string, isLight: b
     ];
 
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-6 max-w-3xl">
-            <h2 className="text-lg font-bold">Portal Settings</h2>
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8 max-w-4xl">
+            <h2 className="text-2xl font-black tracking-tight">Portal Settings</h2>
 
             {settingGroups.map((group) => (
                 <motion.div key={group.title} variants={itemVariants} className={card}>
-                    <h3 className="font-semibold mb-4">{group.title}</h3>
-                    <div className={`space-y-0 divide-y ${isLight ? 'divide-gray-100' : 'divide-white/5'}`}>
+                    <h3 className="font-bold text-lg mb-6">{group.title}</h3>
+                    <div className={`space-y-0 divide-y ${isLight ? 'divide-slate-100' : 'divide-white/10'}`}>
                         {group.items.map((item) => (
-                            <div key={item.id} className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
+                            <div key={item.id} className="flex items-center justify-between py-5 first:pt-0 last:pb-0">
                                 {item.custom && item.id === 'theme-toggle' ? (
                                     <>
                                         <div>
-                                            <span className="font-medium text-sm block">Theme Preference</span>
-                                            <span className="text-xs opacity-50">Choose between light and dark mode</span>
+                                            <span className="font-bold text-[15px] block">Theme Preference</span>
+                                            <span className="text-[13px] font-medium opacity-60 mt-1 block">Choose between light and dark mode</span>
                                         </div>
-                                        <div className={`flex rounded-xl p-1 bg-opacity-50 ${isLight ? 'bg-gray-100' : 'bg-white/5'}`}>
-                                            <button onClick={() => setTheme('light')} className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${isLight ? 'bg-white shadow-sm text-gray-900' : 'text-gray-400 hover:text-white'}`}>
+                                        <div className={`flex rounded-2xl p-1.5 ${isLight ? 'bg-slate-100' : 'bg-white/10'}`}>
+                                            <button onClick={() => setTheme('light')} className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${isLight ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-white'}`}>
                                                 Light
                                             </button>
-                                            <button onClick={() => setTheme('dark')} className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${!isLight ? 'bg-[#1A1A24] shadow-sm text-white' : 'text-gray-500 hover:text-gray-900'}`}>
+                                            <button onClick={() => setTheme('dark')} className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${!isLight ? 'bg-[#1A1A24] shadow-sm text-white' : 'text-slate-500 hover:text-slate-900'}`}>
                                                 Dark
                                             </button>
                                         </div>
@@ -1025,13 +1055,13 @@ function SettingsSection({ card, isLight, setTheme }: { card: string, isLight: b
                                 ) : (
                                     <>
                                         <div>
-                                            <span className="font-medium text-sm block">{item.name}</span>
-                                            <span className="text-xs opacity-50">{item.desc}</span>
+                                            <span className="font-bold text-[15px] block">{item.name}</span>
+                                            <span className="text-[13px] font-medium opacity-60 mt-1 block">{item.desc}</span>
                                         </div>
                                         <button onClick={() => setToggles(prev => ({ ...prev, [item.id]: !prev[item.id] }))}
-                                            className={`w-12 h-7 rounded-full transition-colors relative shrink-0 ml-4 ${toggles[item.id] ? 'bg-[#7C3AED]' : (isLight ? 'bg-gray-300' : 'bg-white/10')}`}>
-                                            <motion.div animate={{ x: toggles[item.id] ? 22 : 2 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                                                className="absolute top-1 w-5 h-5 rounded-full bg-white shadow-sm" />
+                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ml-6 ${toggles[item.id] ? 'bg-gradient-to-r from-fuchsia-500 to-cyan-500' : (isLight ? 'bg-slate-200' : 'bg-white/10')}`}>
+                                            <motion.div animate={{ x: toggles[item.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                                                className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                                         </button>
                                     </>
                                 )}
@@ -1042,17 +1072,17 @@ function SettingsSection({ card, isLight, setTheme }: { card: string, isLight: b
             ))}
 
             <motion.div variants={itemVariants} className={card}>
-                <h3 className="font-semibold mb-4">Platform</h3>
-                <div className="space-y-4">
+                <h3 className="font-bold text-lg mb-6">Platform</h3>
+                <div className="space-y-5">
                     <div>
-                        <label className="text-sm font-medium block mb-1.5">Platform Name</label>
-                        <input type="text" defaultValue="Workflow Platform" className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none ${isLight ? 'bg-gray-50 border border-gray-200 focus:border-[#7C3AED]' : 'bg-white/5 border border-white/10 focus:border-[#A78BFA]'} transition-colors`} />
+                        <label className="text-sm font-bold block mb-2">Platform Name</label>
+                        <input type="text" defaultValue="Workflow Platform" className={`w-full px-5 py-3 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-fuchsia-400 focus:shadow-[0_0_0_4px_rgba(217,70,239,0.1)]' : 'bg-white/5 border border-white/10 focus:border-cyan-400 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.1)]'} transition-all`} />
                     </div>
                     <div>
-                        <label className="text-sm font-medium block mb-1.5">Support Email</label>
-                        <input type="email" defaultValue="admin@collabplatform.com" className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none ${isLight ? 'bg-gray-50 border border-gray-200 focus:border-[#7C3AED]' : 'bg-white/5 border border-white/10 focus:border-[#A78BFA]'} transition-colors`} />
+                        <label className="text-sm font-bold block mb-2">Support Email</label>
+                        <input type="email" defaultValue="admin@collabplatform.com" className={`w-full px-5 py-3 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-fuchsia-400 focus:shadow-[0_0_0_4px_rgba(217,70,239,0.1)]' : 'bg-white/5 border border-white/10 focus:border-cyan-400 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.1)]'} transition-all`} />
                     </div>
-                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="px-6 py-2.5 bg-[#7C3AED] text-white rounded-xl text-sm font-semibold hover:bg-[#6D28D9] transition-colors shadow-lg shadow-[#7C3AED]/20 mt-2">Save Platform Configuration</motion.button>
+                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="px-8 py-3.5 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all shadow-lg shadow-fuchsia-500/20 mt-4">Save Platform Configuration</motion.button>
                 </div>
             </motion.div>
         </motion.div>
