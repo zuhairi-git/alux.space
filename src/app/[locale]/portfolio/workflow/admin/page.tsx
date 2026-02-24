@@ -446,7 +446,7 @@ export default function PortalPanel() {
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} key={i} className={`flex flex-col ${h.role === 'user' ? 'items-end' : 'items-start'} relative z-10`}>
                                         <div className={`flex w-full ${h.role === 'user' ? 'items-end justify-end' : 'items-start justify-start'}`}>
                                             {h.role === 'ai' && (
-                                                <AIStamp isLight={isLight} size="md" className="mr-3 mt-1 shadow-sm shrink-0" />
+                                                <AIStamp isLight={isLight} size="md" variant="secondary" className="mr-3 mt-1" />
                                             )}
                                             <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
                                                 {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ml-1 tracking-wider uppercase">Portal AI</span>}
@@ -516,8 +516,25 @@ export default function PortalPanel() {
 // SHARED
 // ═══════════════════════════════════════════════════════════
 type AIStampSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type AIStampVariant = 'primary' | 'secondary';
 
-function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '' }: { isLight: boolean, size?: AIStampSize, icon?: string, className?: string }) {
+function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '', variant = 'primary' }: { isLight: boolean, size?: AIStampSize, icon?: string, className?: string, variant?: AIStampVariant }) {
+    if (variant === 'secondary') {
+        const sec: Record<AIStampSize, { outer: string, icon: string }> = {
+            xs: { outer: 'w-6 h-6 rounded-lg',   icon: 'text-[10px]' },
+            sm: { outer: 'w-8 h-8 rounded-xl',    icon: 'text-[12px]' },
+            md: { outer: 'w-9 h-9 rounded-xl',    icon: 'text-[14px]' },
+            lg: { outer: 'w-11 h-11 rounded-2xl', icon: 'text-base' },
+            xl: { outer: 'w-14 h-14 rounded-2xl', icon: 'text-xl' },
+        };
+        const s = sec[size];
+        return (
+            <div className={`${s.outer} flex items-center justify-center shrink-0 ${isLight ? 'bg-violet-100 text-violet-500' : 'bg-violet-500/15 text-violet-400'} ${className}`}>
+                <Icon name={icon} className={s.icon} />
+            </div>
+        );
+    }
+
     const sizeClasses: Record<AIStampSize, { outer: string, inner: string, icon: string }> = {
         xs: { outer: 'w-7 h-7 rounded-xl p-[2px]', inner: 'rounded-[calc(0.75rem-2px)]', icon: 'text-[14px]' },
         sm: { outer: 'w-10 h-10 rounded-2xl p-[2px]', inner: 'rounded-[calc(1rem-2px)]', icon: 'text-lg' },
@@ -564,7 +581,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
                 {showInsight && (
                     <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 16 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
                         <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-blue-50 text-blue-700' : 'bg-blue-500/10 text-blue-300'}`}>
-                            <AIStamp isLight={isLight} size="xs" className="shrink-0 mt-0.5" />
+                            <AIStamp isLight={isLight} size="xs" variant="secondary" className="mt-0.5" />
                             <span className="leading-relaxed">AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
                         </div>
                     </motion.div>
@@ -786,7 +803,7 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                                                     <td colSpan={5} className="p-0 border-0">
                                                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                                                             <div className={`m-3 p-5 rounded-2xl flex items-start space-x-5 ${isLight ? 'bg-white/80 shadow-sm border border-white' : 'bg-white/[0.03] border border-white/5'}`}>
-                                                                <AIStamp isLight={isLight} size="md" className="shrink-0" />
+                                                                <AIStamp isLight={isLight} size="md" variant="secondary" />
                                                                 <div>
                                                                     <h4 className="text-[15px] font-bold mb-1.5">AI Portal Summary</h4>
                                                                     <p className="text-[13px] font-medium opacity-70 leading-relaxed max-w-3xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
@@ -1261,7 +1278,7 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
                 <div className={`absolute top-0 right-0 w-80 h-80 bg-fuchsia-500 opacity-10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none`} />
 
                 <div className="flex items-start md:items-center space-x-5 mb-6 relative z-10">
-                    <AIStamp isLight={isLight} size="md" className="shrink-0" />
+                    <AIStamp isLight={isLight} size="md" variant="secondary" />
                     <div>
                         <h2 className="text-xl font-black tracking-tight">Your Daily Briefing</h2>
                         <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : 'opacity-60'}`}>AI-generated summary of your workspace</p>
@@ -1303,7 +1320,7 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
             <motion.div variants={itemVariants} className="pt-6">
                 <div className={`relative flex items-center p-2 rounded-3xl shadow-lg transition-all duration-300 border backdrop-blur-2xl ${isLight ? 'bg-white/80 shadow-slate-200/50 border-white focus-within:border-fuchsia-400 focus-within:shadow-fuchsia-500/20' : 'bg-white/5 border-white/10 focus-within:border-cyan-400 focus-within:shadow-cyan-500/20'}`}>
                     <div className="pl-3 pr-2">
-                        <AIStamp isLight={isLight} size="sm" />
+                        <AIStamp isLight={isLight} size="sm" variant="secondary" />
                     </div>
                     <input
                         type="text"
