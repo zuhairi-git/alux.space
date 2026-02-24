@@ -556,6 +556,10 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
 // USERS
 // ═══════════════════════════════════════════════════════════
 function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
+    const [showWizard, setShowWizard] = useState(false);
+    const [wizardStep, setWizardStep] = useState(1);
+    const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Viewer' });
+
     const users = [
         { name: 'Sara Kim', email: 'sara@company.com', role: 'Admin', status: 'Active', lastActive: '5 min ago' },
         { name: 'James Lee', email: 'james@company.com', role: 'Editor', status: 'Active', lastActive: '12 min ago' },
@@ -570,14 +574,18 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
     const roleBadge = (r: string) => r === 'Admin' ? 'bg-fuchsia-500/10 text-fuchsia-500 border-fuchsia-500/20' : r === 'Editor' ? 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20' : 'bg-slate-500/10 text-slate-500 border-slate-500/20';
     const statusDot = (s: string) => s === 'Active' ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]' : s === 'Invited' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-slate-400';
 
+    const handleNext = () => setWizardStep(prev => Math.min(prev + 1, 3));
+    const handleBack = () => setWizardStep(prev => Math.max(prev - 1, 1));
+    const handleClose = () => { setShowWizard(false); setTimeout(() => { setWizardStep(1); setNewUser({ name: '', email: '', role: 'Viewer' }); }, 300); };
+
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8 relative">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <div>
                     <h2 className="text-2xl font-black tracking-tight">Portal User Management</h2>
                     <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>{users.length} total users</p>
                 </div>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-fuchsia-500/20">
+                <motion.button onClick={() => setShowWizard(true)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-fuchsia-500/20">
                     <Icon name="person_add" className="text-lg" /><span>Add User</span>
                 </motion.button>
             </div>
@@ -653,6 +661,88 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                     </table>
                 </div>
             </motion.div>
+
+            {/* Add User Wizard Modal */}
+            <AnimatePresence>
+                {showWizard && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={handleClose} />
+                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : 'bg-[#0B0B13]/90 border border-white/10'}`}>
+                            {/* Header */}
+                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
+                                <div>
+                                    <h3 className="text-xl font-black tracking-tight">Add New User</h3>
+                                    <p className="text-xs font-medium opacity-60 mt-1">Step {wizardStep} of 3</p>
+                                </div>
+                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'}`}>
+                                    <Icon name="close" className="text-xl opacity-60" />
+                                </button>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-6 flex-1 overflow-y-auto">
+                                <AnimatePresence mode="wait">
+                                    {wizardStep === 1 && (
+                                        <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
+                                            <div>
+                                                <label className="text-sm font-bold block mb-2">Full Name</label>
+                                                <input type="text" value={newUser.name} onChange={e => setNewUser({...newUser, name: e.target.value})} placeholder="e.g. Jane Doe" className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-fuchsia-400 focus:shadow-[0_0_0_4px_rgba(217,70,239,0.1)]' : 'bg-white/5 border border-white/10 focus:border-cyan-400 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.1)]'} transition-all`} />
+                                            </div>
+                                            <div>
+                                                <label className="text-sm font-bold block mb-2">Email Address</label>
+                                                <input type="email" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} placeholder="jane@company.com" className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-fuchsia-400 focus:shadow-[0_0_0_4px_rgba(217,70,239,0.1)]' : 'bg-white/5 border border-white/10 focus:border-cyan-400 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.1)]'} transition-all`} />
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                    {wizardStep === 2 && (
+                                        <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-3">
+                                            <label className="text-sm font-bold block mb-2">Select Role</label>
+                                            {[
+                                                { role: 'Admin', desc: 'Full access to all settings and workspaces', icon: 'shield' },
+                                                { role: 'Editor', desc: 'Can create and edit workspaces', icon: 'edit' },
+                                                { role: 'Viewer', desc: 'Read-only access to assigned workspaces', icon: 'visibility' }
+                                            ].map(r => (
+                                                <div key={r.role} onClick={() => setNewUser({...newUser, role: r.role})} className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center space-x-4 ${newUser.role === r.role ? (isLight ? 'border-fuchsia-500 bg-fuchsia-50' : 'border-cyan-400 bg-cyan-500/10') : (isLight ? 'border-slate-200 hover:border-fuchsia-300' : 'border-white/10 hover:border-cyan-500/50')}`}>
+                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${newUser.role === r.role ? (isLight ? 'bg-fuchsia-500 text-white' : 'bg-cyan-400 text-[#0B0B13]') : (isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-slate-400')}`}>
+                                                        <Icon name={r.icon} className="text-xl" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-[15px]">{r.role}</h4>
+                                                        <p className="text-xs font-medium opacity-60 mt-0.5">{r.desc}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                    {wizardStep === 3 && (
+                                        <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6 text-center py-4">
+                                            <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-fuchsia-500 to-cyan-500 p-[2px] shadow-xl">
+                                                <div className={`w-full h-full rounded-3xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#0B0B13]'}`}>
+                                                    <Icon name="mail" className="text-3xl bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-500" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-black mb-2">Ready to Invite?</h3>
+                                                <p className="text-[14px] font-medium opacity-70 leading-relaxed">An invitation email will be sent to <strong className={isLight ? 'text-fuchsia-600' : 'text-cyan-400'}>{newUser.email || 'the user'}</strong> to join the portal as a <strong>{newUser.role}</strong>.</p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
+                            {/* Footer */}
+                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : 'border-white/10 bg-black/20'}`}>
+                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                                    {wizardStep === 1 ? 'Cancel' : 'Back'}
+                                </button>
+                                <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && (!newUser.name || !newUser.email)} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && (!newUser.name || !newUser.email) ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white' : 'bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white hover:shadow-fuchsia-500/30 hover:scale-105'}`}>
+                                    {wizardStep === 3 ? 'Send Invitation' : 'Continue'}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 }
@@ -661,6 +751,10 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
 // WORKSPACES
 // ═══════════════════════════════════════════════════════════
 function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }) {
+    const [showWizard, setShowWizard] = useState(false);
+    const [wizardStep, setWizardStep] = useState(1);
+    const [newWorkspace, setNewWorkspace] = useState({ name: '', desc: '', template: 'Blank' });
+
     const workspaces = [
         { name: 'Design System v3', members: 8, docs: 24, queries: 156, status: 'Active' },
         { name: 'UX Research Q4', members: 5, docs: 12, queries: 89, status: 'Active' },
@@ -670,11 +764,15 @@ function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }
         { name: 'Q1 Planning 2026', members: 6, docs: 3, queries: 12, status: 'Active' },
     ];
 
+    const handleNext = () => setWizardStep(prev => Math.min(prev + 1, 3));
+    const handleBack = () => setWizardStep(prev => Math.max(prev - 1, 1));
+    const handleClose = () => { setShowWizard(false); setTimeout(() => { setWizardStep(1); setNewWorkspace({ name: '', desc: '', template: 'Blank' }); }, 300); };
+
     return (
-        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
+        <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8 relative">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <h2 className="text-2xl font-black tracking-tight">Portal Administration</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-fuchsia-500/20">
+                <motion.button onClick={() => setShowWizard(true)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-fuchsia-500/20">
                     <Icon name="add" className="text-lg" /><span>New Workspace</span>
                 </motion.button>
             </div>
@@ -713,6 +811,88 @@ function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }
                     )
                 })}
             </div>
+
+            {/* New Workspace Wizard Modal */}
+            <AnimatePresence>
+                {showWizard && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={handleClose} />
+                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : 'bg-[#0B0B13]/90 border border-white/10'}`}>
+                            {/* Header */}
+                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
+                                <div>
+                                    <h3 className="text-xl font-black tracking-tight">Create Workspace</h3>
+                                    <p className="text-xs font-medium opacity-60 mt-1">Step {wizardStep} of 3</p>
+                                </div>
+                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'}`}>
+                                    <Icon name="close" className="text-xl opacity-60" />
+                                </button>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-6 flex-1 overflow-y-auto">
+                                <AnimatePresence mode="wait">
+                                    {wizardStep === 1 && (
+                                        <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
+                                            <div>
+                                                <label className="text-sm font-bold block mb-2">Workspace Name</label>
+                                                <input type="text" value={newWorkspace.name} onChange={e => setNewWorkspace({...newWorkspace, name: e.target.value})} placeholder="e.g. Q1 Marketing Launch" className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-fuchsia-400 focus:shadow-[0_0_0_4px_rgba(217,70,239,0.1)]' : 'bg-white/5 border border-white/10 focus:border-cyan-400 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.1)]'} transition-all`} />
+                                            </div>
+                                            <div>
+                                                <label className="text-sm font-bold block mb-2">Description (Optional)</label>
+                                                <textarea value={newWorkspace.desc} onChange={e => setNewWorkspace({...newWorkspace, desc: e.target.value})} placeholder="What is this workspace for?" rows={3} className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none resize-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-fuchsia-400 focus:shadow-[0_0_0_4px_rgba(217,70,239,0.1)]' : 'bg-white/5 border border-white/10 focus:border-cyan-400 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.1)]'} transition-all`} />
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                    {wizardStep === 2 && (
+                                        <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-3">
+                                            <label className="text-sm font-bold block mb-2">Choose a Template</label>
+                                            {[
+                                                { name: 'Blank', desc: 'Start from scratch', icon: 'check_box_outline_blank' },
+                                                { name: 'Design System', desc: 'Pre-configured for UI/UX teams', icon: 'palette' },
+                                                { name: 'Sprint Planning', desc: 'Agile boards and task tracking', icon: 'view_kanban' }
+                                            ].map(t => (
+                                                <div key={t.name} onClick={() => setNewWorkspace({...newWorkspace, template: t.name})} className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center space-x-4 ${newWorkspace.template === t.name ? (isLight ? 'border-fuchsia-500 bg-fuchsia-50' : 'border-cyan-400 bg-cyan-500/10') : (isLight ? 'border-slate-200 hover:border-fuchsia-300' : 'border-white/10 hover:border-cyan-500/50')}`}>
+                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${newWorkspace.template === t.name ? (isLight ? 'bg-fuchsia-500 text-white' : 'bg-cyan-400 text-[#0B0B13]') : (isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-slate-400')}`}>
+                                                        <Icon name={t.icon} className="text-xl" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-[15px]">{t.name}</h4>
+                                                        <p className="text-xs font-medium opacity-60 mt-0.5">{t.desc}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                    {wizardStep === 3 && (
+                                        <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6 text-center py-4">
+                                            <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-fuchsia-500 to-cyan-500 p-[2px] shadow-xl">
+                                                <div className={`w-full h-full rounded-3xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#0B0B13]'}`}>
+                                                    <Icon name="rocket_launch" className="text-3xl bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-500" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-black mb-2">Ready for Liftoff!</h3>
+                                                <p className="text-[14px] font-medium opacity-70 leading-relaxed">Your new workspace <strong className={isLight ? 'text-fuchsia-600' : 'text-cyan-400'}>{newWorkspace.name || 'Untitled'}</strong> will be created using the <strong>{newWorkspace.template}</strong> template.</p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
+                            {/* Footer */}
+                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : 'border-white/10 bg-black/20'}`}>
+                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                                    {wizardStep === 1 ? 'Cancel' : 'Back'}
+                                </button>
+                                <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && !newWorkspace.name} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && !newWorkspace.name ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white' : 'bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white hover:shadow-fuchsia-500/30 hover:scale-105'}`}>
+                                    {wizardStep === 3 ? 'Create Workspace' : 'Continue'}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 }
