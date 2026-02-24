@@ -293,43 +293,76 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
               }
             `}
           >
-            {item.children.map((child: NavItem, idx: number) => (
+            {/* Overview items — no category */}
+            {item.children.filter((c) => !c.category).map((child, idx) => (
               <Link
-                key={idx}
+                key={`ov-${idx}`}
                 href={localizedHref(child.href)}
-                className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap
-                  ${isChildActive(child.href)
-                    ? (theme === 'colorful'
-                      ? 'bg-fuchsia-500/20 text-fuchsia-400 font-medium'
-                      : theme === 'light'
-                        ? 'bg-blue-50 text-blue-600 font-medium'
-                        : 'bg-blue-900/30 text-blue-400 font-medium')
-                    : (theme === 'colorful'
-                      ? 'text-purple-200 hover:bg-purple-900/40 hover:text-fuchsia-400'
-                      : theme === 'light'
-                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                        : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400')
-                  }
-                `}
                 onClick={() => setIsOpen(false)}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
+                  isChildActive(child.href)
+                    ? (theme === 'colorful' ? 'bg-fuchsia-500/20 text-fuchsia-400 font-medium' : theme === 'light' ? 'bg-blue-50 text-blue-600 font-medium' : 'bg-blue-900/30 text-blue-400 font-medium')
+                    : (theme === 'colorful' ? 'text-purple-200 hover:bg-purple-900/40 hover:text-fuchsia-400' : theme === 'light' ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400')
+                }`}
               >
-                <span className="material-symbols text-[18px] opacity-70">{child.icon}</span>
-                <span className="flex-1">{t(child.labelKey)}</span>
-                {child.category === 'case-study' && (
-                  <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-semibold border border-violet-500/25 bg-violet-500/15 text-violet-400 whitespace-nowrap">
-                    <span className="material-symbols" style={{ fontSize: '8px' }}>school</span>
-                    Case Study
-                  </span>
-                )}
-                {child.category === 'prototype' && (
-                  <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-semibold border border-teal-500/25 bg-teal-500/15 text-teal-400 whitespace-nowrap">
-                    <span className="material-symbols" style={{ fontSize: '8px' }}>devices</span>
-                    Prototype
-                  </span>
-                )}
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${theme === 'colorful' ? 'bg-purple-800/60' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'}`}>
+                  <span className="material-symbols text-[15px]">{child.icon}</span>
+                </div>
+                <span className="flex-1 font-medium">{t(child.labelKey)}</span>
               </Link>
             ))}
+
+            {/* Case Studies section */}
+            {item.children.some((c) => c.category === 'case-study') && (
+              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-purple-500/20' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'}`}>
+                <div className="px-2 pb-1.5">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-violet-400">Case Studies</span>
+                </div>
+                {item.children.filter((c) => c.category === 'case-study').map((child, idx) => (
+                  <Link
+                    key={`cs-${idx}`}
+                    href={localizedHref(child.href)}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
+                      isChildActive(child.href)
+                        ? (theme === 'colorful' ? 'bg-fuchsia-500/20 text-fuchsia-400 font-medium' : theme === 'light' ? 'bg-violet-50 text-violet-700 font-medium' : 'bg-violet-900/30 text-violet-300 font-medium')
+                        : (theme === 'colorful' ? 'text-purple-200 hover:bg-violet-900/30 hover:text-violet-300' : theme === 'light' ? 'text-gray-700 hover:bg-violet-50 hover:text-violet-700' : 'text-gray-300 hover:bg-violet-900/20 hover:text-violet-300')
+                    }`}
+                  >
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-violet-500/15">
+                      <span className="material-symbols text-[15px] text-violet-400">{child.icon}</span>
+                    </div>
+                    <span className="flex-1 font-medium">{t(child.labelKey)}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {/* Prototypes section */}
+            {item.children.some((c) => c.category === 'prototype') && (
+              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-purple-500/20' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'}`}>
+                <div className="px-2 pb-1.5">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-teal-400">Prototypes</span>
+                </div>
+                {item.children.filter((c) => c.category === 'prototype').map((child, idx) => (
+                  <Link
+                    key={`pt-${idx}`}
+                    href={localizedHref(child.href)}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
+                      isChildActive(child.href)
+                        ? (theme === 'colorful' ? 'bg-fuchsia-500/20 text-fuchsia-400 font-medium' : theme === 'light' ? 'bg-teal-50 text-teal-700 font-medium' : 'bg-teal-900/30 text-teal-300 font-medium')
+                        : (theme === 'colorful' ? 'text-purple-200 hover:bg-teal-900/30 hover:text-teal-300' : theme === 'light' ? 'text-gray-700 hover:bg-teal-50 hover:text-teal-700' : 'text-gray-300 hover:bg-teal-900/20 hover:text-teal-300')
+                    }`}
+                  >
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-teal-500/15">
+                      <span className="material-symbols text-[15px] text-teal-400">{child.icon}</span>
+                    </div>
+                    <span className="flex-1 font-medium">{t(child.labelKey)}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -350,6 +383,7 @@ interface MobileNavProps {
 
 const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive }: MobileNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
   return (
     <>
@@ -392,7 +426,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
 
           {/* Center Action Button (Menu) */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => { if (isMenuOpen) setExpandedItem(null); setIsMenuOpen(!isMenuOpen); }}
             className={`
               relative -top-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-95
               ${isMenuOpen
@@ -440,65 +474,139 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
               backdrop-blur-xl
             `}
           >
-            <div className="flex flex-col gap-6">
-              {/* Menu Header */}
-              <div className="text-center mb-4">
-                <h2 className={`text-2xl font-bold ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>
-                  Menu
-                </h2>
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className={`flex items-center mb-5 pb-4 border-b ${theme === 'colorful' ? 'border-purple-500/20' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'}`}>
+                <span className={`text-xs font-bold uppercase tracking-widest ${theme === 'colorful' ? 'text-purple-400' : theme === 'light' ? 'text-gray-400' : 'text-white/30'}`}>Navigation</span>
               </div>
 
-              {/* Menu Grid */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Nav List */}
+              <div className="flex flex-col gap-0.5">
                 {navItems.map((item) => {
                   const itemIsActive = isNavItemActive(item);
+                  const isExpanded = expandedItem === item.href;
+
+                  if (item.type === 'dropdown' && item.children) {
+                    return (
+                      <div key={item.href}>
+                        <button
+                          onClick={() => setExpandedItem(isExpanded ? null : item.href)}
+                          className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-left ${
+                            itemIsActive
+                              ? (theme === 'colorful' ? 'bg-fuchsia-500/15 text-fuchsia-300' : theme === 'light' ? 'bg-blue-50 text-blue-700' : 'bg-blue-900/25 text-blue-300')
+                              : (theme === 'colorful' ? 'text-purple-100 hover:bg-purple-900/30' : theme === 'light' ? 'text-gray-800 hover:bg-gray-50' : 'text-gray-200 hover:bg-gray-800/50')
+                          }`}
+                        >
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                            itemIsActive
+                              ? (theme === 'colorful' ? 'bg-fuchsia-500/25' : theme === 'light' ? 'bg-blue-100' : 'bg-blue-900/40')
+                              : (theme === 'colorful' ? 'bg-purple-800/50' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
+                          }`}>
+                            <span className={`material-symbols text-xl ${
+                              itemIsActive
+                                ? (theme === 'colorful' ? 'text-fuchsia-400' : theme === 'light' ? 'text-blue-600' : 'text-blue-400')
+                                : (theme === 'colorful' ? 'text-purple-300' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
+                            }`}>{item.icon}</span>
+                          </div>
+                          <span className="flex-1 font-semibold text-[15px]">{t(item.labelKey)}</span>
+                          <motion.span
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className={`material-symbols text-[18px] shrink-0 ${
+                              theme === 'colorful' ? 'text-purple-400' : theme === 'light' ? 'text-gray-400' : 'text-white/30'
+                            }`}
+                          >expand_more</motion.span>
+                        </button>
+                        <AnimatePresence>
+                          {isExpanded && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.22, ease: 'easeInOut' }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pt-1 pb-2 pl-4 pr-1 flex flex-col gap-0.5">
+                                {item.children.map((child, cidx) => {
+                                  const childIsActive = pathname.split('#')[0] === localizedHref(child.href).split('#')[0];
+                                  return (
+                                    <Link
+                                      key={cidx}
+                                      href={localizedHref(child.href)}
+                                      onClick={() => { setIsMenuOpen(false); setExpandedItem(null); }}
+                                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] ${
+                                        childIsActive
+                                          ? (theme === 'colorful'
+                                            ? 'bg-fuchsia-500/15 text-fuchsia-400 font-medium'
+                                            : child.category === 'case-study'
+                                              ? (theme === 'light' ? 'bg-violet-50 text-violet-700 font-medium' : 'bg-violet-900/20 text-violet-300 font-medium')
+                                              : child.category === 'prototype'
+                                                ? (theme === 'light' ? 'bg-teal-50 text-teal-700 font-medium' : 'bg-teal-900/20 text-teal-300 font-medium')
+                                                : (theme === 'light' ? 'bg-blue-50 text-blue-700 font-medium' : 'bg-blue-900/20 text-blue-300 font-medium'))
+                                          : (theme === 'colorful' ? 'text-purple-200 hover:bg-purple-900/30' : theme === 'light' ? 'text-gray-700 hover:bg-gray-50' : 'text-gray-300 hover:bg-gray-800/40')
+                                      }`}
+                                    >
+                                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                                        child.category === 'case-study' ? 'bg-violet-500/15'
+                                        : child.category === 'prototype' ? 'bg-teal-500/15'
+                                        : (theme === 'colorful' ? 'bg-purple-800/40' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
+                                      }`}>
+                                        <span className={`material-symbols text-[13px] ${
+                                          child.category === 'case-study' ? 'text-violet-400'
+                                          : child.category === 'prototype' ? 'text-teal-400'
+                                          : (theme === 'colorful' ? 'text-purple-300' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
+                                        }`}>{child.icon}</span>
+                                      </div>
+                                      <span className="flex-1">{t(child.labelKey)}</span>
+                                      {child.category === 'case-study' && (
+                                        <span className="text-[9px] font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-1.5 py-0.5 rounded-full shrink-0">Study</span>
+                                      )}
+                                      {child.category === 'prototype' && (
+                                        <span className="text-[9px] font-semibold text-teal-400 bg-teal-500/10 border border-teal-500/20 px-1.5 py-0.5 rounded-full shrink-0">Proto</span>
+                                      )}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
                   return (
                     <Link
                       key={item.href}
                       href={localizedHref(item.href)}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`
-                        flex flex-col items-center justify-center p-6 rounded-2xl border transition-all active:scale-95 whitespace-nowrap
-                        ${itemIsActive
-                          ? (theme === 'colorful'
-                            ? 'bg-fuchsia-500/20 border-fuchsia-500/50 text-fuchsia-300 ring-2 ring-fuchsia-500/30'
-                            : theme === 'light'
-                              ? 'bg-blue-50 border-blue-300 text-blue-800 ring-2 ring-blue-200'
-                              : 'bg-blue-900/30 border-blue-600/50 text-blue-300 ring-2 ring-blue-600/30')
-                          : (theme === 'colorful'
-                            ? 'bg-purple-900/20 border-purple-500/30 text-purple-100'
-                            : theme === 'light'
-                              ? 'bg-gray-50 border-gray-200 text-gray-800'
-                              : 'bg-gray-800/50 border-gray-700 text-gray-200')
-                        }
-                      `}
+                      className={`flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] ${
+                        itemIsActive
+                          ? (theme === 'colorful' ? 'bg-fuchsia-500/15 text-fuchsia-300' : theme === 'light' ? 'bg-blue-50 text-blue-700' : 'bg-blue-900/25 text-blue-300')
+                          : (theme === 'colorful' ? 'text-purple-100 hover:bg-purple-900/30' : theme === 'light' ? 'text-gray-800 hover:bg-gray-50' : 'text-gray-200 hover:bg-gray-800/50')
+                      }`}
                     >
-                      <div className={`
-                        w-12 h-12 rounded-full flex items-center justify-center mb-3 text-2xl
-                        ${itemIsActive
-                          ? (theme === 'colorful'
-                            ? 'bg-fuchsia-500/30 text-fuchsia-400'
-                            : theme === 'light' ? 'bg-blue-100 shadow-sm text-blue-600' : 'bg-blue-800/50 text-blue-400')
-                          : (theme === 'colorful'
-                            ? 'bg-purple-800/50 text-fuchsia-400'
-                            : theme === 'light' ? 'bg-white shadow-sm text-blue-600' : 'bg-gray-700 text-blue-400')
-                        }
-                      `}>
-                        <span className="material-symbols">{item.icon}</span>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        itemIsActive
+                          ? (theme === 'colorful' ? 'bg-fuchsia-500/25' : theme === 'light' ? 'bg-blue-100' : 'bg-blue-900/40')
+                          : (theme === 'colorful' ? 'bg-purple-800/50' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
+                      }`}>
+                        <span className={`material-symbols text-xl ${
+                          itemIsActive
+                            ? (theme === 'colorful' ? 'text-fuchsia-400' : theme === 'light' ? 'text-blue-600' : 'text-blue-400')
+                            : (theme === 'colorful' ? 'text-purple-300' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
+                        }`}>{item.icon}</span>
                       </div>
-                      <span className={`font-medium ${itemIsActive ? 'font-semibold' : ''}`}>{t(item.labelKey)}</span>
+                      <span className="flex-1 font-semibold text-[15px]">{t(item.labelKey)}</span>
                     </Link>
                   );
                 })}
               </div>
 
-              {/* Settings Section */}
-              <div className={`
-                mt-auto p-4 rounded-2xl border flex items-center justify-between
-                ${theme === 'colorful'
-                  ? 'bg-purple-900/20 border-purple-500/30'
-                  : theme === 'light' ? 'bg-gray-50 border-gray-200' : 'bg-gray-800/50 border-gray-700'}
-              `}>
+              {/* Settings */}
+              <div className={`mt-auto pt-4 border-t flex items-center justify-between ${
+                theme === 'colorful' ? 'border-purple-500/20' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'
+              }`}>
                 <LanguageSwitcher />
                 <ThemeSwitch />
               </div>
