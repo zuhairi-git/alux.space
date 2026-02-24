@@ -160,10 +160,10 @@ export default function PortfolioClient({ items }: Props) {
                   <RadioGroup.Option value="case-study">
                     {({ checked }) => (
                       <button
-                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all ${
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all border ${
                           checked
-                            ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-md'
-                            : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                            ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-md border-transparent'
+                            : 'bg-violet-500/10 text-violet-400 hover:bg-violet-500/20 border-violet-500/25'
                         }`}
                       >
                         <span className="material-symbols text-sm">school</span>
@@ -175,10 +175,10 @@ export default function PortfolioClient({ items }: Props) {
                   <RadioGroup.Option value="prototype">
                     {({ checked }) => (
                       <button
-                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all ${
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all border ${
                           checked
-                            ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-md'
-                            : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                            ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-md border-transparent'
+                            : 'bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 border-teal-500/25'
                         }`}
                       >
                         <span className="material-symbols text-sm">devices</span>

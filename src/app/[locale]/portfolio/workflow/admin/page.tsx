@@ -291,13 +291,14 @@ export default function PortalPanel() {
                         <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
-                        <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
-                            <Icon name="notifications" className="text-xl opacity-70" />
-                            {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-fuchsia-500' : 'bg-blue-500'}`} />}
-                        </motion.button>
-                        <AnimatePresence>
-                            {showNotifications && (
-                                <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`absolute right-16 top-16 mt-3 w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
+                        <div className="relative">
+                            <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                                <Icon name="notifications" className="text-xl opacity-70" />
+                                {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-fuchsia-500' : 'bg-blue-500'}`} />}
+                            </motion.button>
+                            <AnimatePresence>
+                                {showNotifications && (
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`absolute right-0 top-full mt-2 w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
@@ -317,8 +318,9 @@ export default function PortalPanel() {
                                             ))}
                                         </div>
                                     </motion.div>
-                            )}
-                        </AnimatePresence>
+                                )}
+                            </AnimatePresence>
+                        </div>
                         <div className="relative">
                             <motion.button onClick={toggleProfileMenu} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-blue-400' : isColorful ? 'border-fuchsia-500/30 hover:border-fuchsia-400' : 'border-white/10 hover:border-blue-400'}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}

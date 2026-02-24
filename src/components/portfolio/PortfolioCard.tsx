@@ -137,8 +137,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
           ? 'bg-violet-500/20 text-violet-300 border-violet-500/40'
           : 'bg-violet-900/30 text-violet-300 border-violet-500/40';
       return (
-        <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${cls}`}>
-          <span className="material-symbols text-xs">school</span>
+        <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold border ${cls}`}>
+          <span className="material-symbols text-[10px]">school</span>
           {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
         </span>
       );
@@ -149,8 +149,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
         ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
         : 'bg-teal-900/30 text-teal-300 border-teal-500/40';
     return (
-      <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${cls}`}>
-        <span className="material-symbols text-xs">devices</span>
+      <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold border ${cls}`}>
+        <span className="material-symbols text-[10px]">devices</span>
         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
       </span>
     );
@@ -222,13 +222,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   {getType()}
                 </span>
               </div>
-
-              {/* Category Badge - Top Left */}
-              {item.category && (
-                <div className="absolute top-3 left-3">
-                  {getCategoryBadge()}
-                </div>
-              )}
               
               {/* Icon and Title Section */}
               <div className="flex items-start gap-4 mb-4">
@@ -254,8 +247,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   </div>
                 )}
                 
-                {/* Status Badge - Aligned Right */}
-                <div className="flex-shrink-0 ml-auto">
+                {/* Category + Status — bottom right */}
+                <div className="flex-shrink-0 ml-auto flex items-center gap-2">
+                  {item.category && getCategoryBadge()}
                   <span className={getStatusClasses()}>
                     {getStatus()}
                   </span>
@@ -318,13 +312,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 {getType()}
               </span>
             </div>
-
-            {/* Category badge - top left */}
-            {item.category && (
-              <div className="absolute top-3 left-3 z-10">
-                {getCategoryBadge()}
-              </div>
-            )}
           </div>
           
           {/* Content Section */}
@@ -352,8 +339,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 </div>
               )}
               
-              {/* Status Badge - Aligned Right */}
-              <div className="flex-shrink-0 ml-auto">
+              {/* Category + Status — bottom right */}
+              <div className="flex-shrink-0 ml-auto flex items-center gap-2">
+                {item.category && getCategoryBadge()}
                 <span className={getStatusClasses()}>
                   {getStatus()}
                 </span>

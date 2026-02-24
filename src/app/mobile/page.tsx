@@ -63,7 +63,7 @@ function MobilePrototypeContent() {
     };
 
     return (
-        <div className={`flex flex-col min-h-[100dvh] w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+        <div className={`flex flex-col h-[100dvh] overflow-hidden w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
             {/* Header */}
             <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
                 ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
