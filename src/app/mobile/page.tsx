@@ -406,7 +406,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
 function CopilotView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
-    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const messagesContainerRef = useRef<HTMLDivElement>(null);
     const [messages, setMessages] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
@@ -418,7 +418,11 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         { text: "I found 3 recent analyst upgrades for NVDA, predominantly citing strong margin expansion (+340bps) and a robust supply chain recovery. Price targets range from $950 to $1,200 with a consensus of $1,050.", citations: [{ source: "Goldman Sachs Research", snippet: "Upgrading to Conviction Buy..." }, { source: "Morgan Stanley Note", snippet: "Data center revenue exceeding..." }] },
     ];
 
-    const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const scrollToBottom = () => {
+        if (messagesContainerRef.current) {
+            messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+        }
+    };
     useEffect(() => { if (messages.length > 0) scrollToBottom(); }, [messages]);
 
     const handleSend = (overrideText?: string) => {
@@ -491,7 +495,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                     </div>
                 </div>
             ) : (
-                <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-none pb-24">
+                <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-none pb-24">
                     {messages.map(msg => (
                         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className="flex flex-col max-w-[88%]">
@@ -531,7 +535,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             ))}
                         </motion.div>
                     )}
-                    <div ref={messagesEndRef} className="pb-4" />
+                    <div className="pb-4" />
                 </div>
             )}
             <div className={`px-4 pt-3 pb-[90px] flex items-end space-x-2 shrink-0 z-30 w-full ${inputArea}`}>

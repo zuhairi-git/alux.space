@@ -138,7 +138,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
           : 'bg-violet-900/30 text-violet-300 border-violet-500/40';
       return (
         <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold border ${cls}`}>
-          <span className="material-symbols text-[10px]">school</span>
+          <span className="material-symbols" style={{ fontSize: '8px' }}>school</span>
           {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
         </span>
       );
@@ -150,7 +150,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
         : 'bg-teal-900/30 text-teal-300 border-teal-500/40';
     return (
       <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold border ${cls}`}>
-        <span className="material-symbols text-[10px]">devices</span>
+        <span className="material-symbols" style={{ fontSize: '8px' }}>devices</span>
         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
       </span>
     );

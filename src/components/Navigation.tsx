@@ -20,6 +20,7 @@ interface NavItem {
   icon: string;
   type?: 'link' | 'dropdown';
   children?: NavItem[];
+  category?: 'case-study' | 'prototype';
 }
 
 // --- Configuration ---
@@ -45,11 +46,11 @@ const navItems: NavItem[] = [
     type: 'dropdown',
     children: [
       { href: '/portfolio', labelKey: 'portfolio.overview', icon: 'dashboard' },
-      { href: '/portfolio/healthcare-prioritization', labelKey: 'portfolio.cases.healthcare', icon: 'health_and_safety' },
-      { href: '/portfolio/accessibility', labelKey: 'portfolio.cases.accessibility', icon: 'accessibility_new' },
-      { href: '/portfolio/workflow', labelKey: 'portfolio.cases.collaboration', icon: 'groups' },
-      { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history' },
-      { href: '/portfolio/market-intelligence', labelKey: 'portfolio.cases.marketIntelligence', icon: 'smartphone' },
+      { href: '/portfolio/healthcare-prioritization', labelKey: 'portfolio.cases.healthcare', icon: 'health_and_safety', category: 'case-study' },
+      { href: '/portfolio/accessibility', labelKey: 'portfolio.cases.accessibility', icon: 'accessibility_new', category: 'case-study' },
+      { href: '/portfolio/workflow', labelKey: 'portfolio.cases.collaboration', icon: 'groups', category: 'prototype' },
+      { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history', category: 'prototype' },
+      { href: '/portfolio/market-intelligence', labelKey: 'portfolio.cases.marketIntelligence', icon: 'smartphone', category: 'prototype' },
     ]
   },
   { href: '/blog', labelKey: 'nav.blog', icon: 'article' },
@@ -283,7 +284,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className={`
-              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
+              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
               ${theme === 'colorful'
                 ? 'bg-[#050023]/90 border-purple-500/30'
                 : theme === 'light'
@@ -314,7 +315,19 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 onClick={() => setIsOpen(false)}
               >
                 <span className="material-symbols text-[18px] opacity-70">{child.icon}</span>
-                {t(child.labelKey)}
+                <span className="flex-1">{t(child.labelKey)}</span>
+                {child.category === 'case-study' && (
+                  <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-semibold border border-violet-500/25 bg-violet-500/15 text-violet-400 whitespace-nowrap">
+                    <span className="material-symbols" style={{ fontSize: '8px' }}>school</span>
+                    Case Study
+                  </span>
+                )}
+                {child.category === 'prototype' && (
+                  <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-semibold border border-teal-500/25 bg-teal-500/15 text-teal-400 whitespace-nowrap">
+                    <span className="material-symbols" style={{ fontSize: '8px' }}>devices</span>
+                    Prototype
+                  </span>
+                )}
               </Link>
             ))}
           </motion.div>
