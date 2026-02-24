@@ -392,7 +392,7 @@ export default function PortalPanel() {
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowCopilot(true)}
-                className="fixed bottom-24 right-8 w-16 h-16 z-50 group"
+                className="fixed bottom-24 right-6 w-16 h-16 z-50 group"
             >
                 <div className={`absolute inset-0 rounded-full opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse bg-gradient-to-r ${isColorful ? 'from-fuchsia-500 to-purple-500' : 'from-blue-500 to-purple-500'}`} />
                 <div className={`relative w-full h-full rounded-[1.5rem] p-[2px] shadow-2xl overflow-hidden bg-gradient-to-tr ${isColorful ? 'from-fuchsia-500 via-purple-500 to-cyan-400' : 'from-blue-500 via-indigo-500 to-purple-500'}`}>
