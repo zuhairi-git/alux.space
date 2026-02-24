@@ -521,11 +521,11 @@ type AIStampVariant = 'primary' | 'secondary';
 function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '', variant = 'primary' }: { isLight: boolean, size?: AIStampSize, icon?: string, className?: string, variant?: AIStampVariant }) {
     if (variant === 'secondary') {
         const sec: Record<AIStampSize, { outer: string, icon: string }> = {
-            xs: { outer: 'w-6 h-6 rounded-lg',   icon: 'text-[10px]' },
-            sm: { outer: 'w-8 h-8 rounded-xl',    icon: 'text-[12px]' },
-            md: { outer: 'w-9 h-9 rounded-xl',    icon: 'text-[14px]' },
-            lg: { outer: 'w-11 h-11 rounded-2xl', icon: 'text-base' },
-            xl: { outer: 'w-14 h-14 rounded-2xl', icon: 'text-xl' },
+            xs: { outer: 'w-7 h-7 rounded-xl',    icon: '!text-[12px]' },
+            sm: { outer: 'w-9 h-9 rounded-xl',    icon: '!text-[13px]' },
+            md: { outer: 'w-10 h-10 rounded-2xl', icon: '!text-[13px]' },
+            lg: { outer: 'w-12 h-12 rounded-2xl', icon: '!text-[14px]' },
+            xl: { outer: 'w-16 h-16 rounded-3xl', icon: '!text-[16px]' },
         };
         const s = sec[size];
         return (
