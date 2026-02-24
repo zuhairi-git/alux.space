@@ -211,7 +211,7 @@ export default function PortalPanel() {
                 {/* Page Content */}
                 <main className="flex-1 p-4 md:p-8">
                     <AnimatePresence mode="wait">
-                        {activeSection === 'start' && <StartSection key="start" card={cardClass} isLight={isLight} />}
+                        {activeSection === 'start' && <StartSection key="start" card={cardClass} isLight={isLight} setActiveSection={setActiveSection} />}
                         {activeSection === 'dashboard' && <DashboardSection key="dash" card={cardClass} isLight={isLight} />}
                         {activeSection === 'users' && <UsersSection key="users" card={cardClass} isLight={isLight} />}
                         {activeSection === 'workspaces' && <WorkspacesSection key="ws" card={cardClass} isLight={isLight} />}
@@ -859,7 +859,7 @@ function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean })
 // ═══════════════════════════════════════════════════════════
 // START SECTION (OVERVIEW)
 // ═══════════════════════════════════════════════════════════
-function StartSection({ card, isLight }: { card: string, isLight: boolean }) {
+function StartSection({ card, isLight, setActiveSection }: { card: string, isLight: boolean, setActiveSection: (s: Section) => void }) {
     const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
     useEffect(() => {
@@ -926,11 +926,12 @@ function StartSection({ card, isLight }: { card: string, isLight: boolean }) {
             {/* Quick AI Starters */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                    { icon: 'task_alt', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-emerald-400 to-emerald-600', hue: 'emerald' },
-                    { icon: 'forum', title: 'Catch up', desc: '5 unread comments', color: 'from-fuchsia-400 to-fuchsia-600', hue: 'fuchsia' },
-                    { icon: 'troubleshoot', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-indigo-400 to-indigo-600', hue: 'indigo' },
+                    { icon: 'task_alt', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-emerald-400 to-emerald-600', hue: 'emerald', nav: 'workspaces' as Section },
+                    { icon: 'forum', title: 'Catch up', desc: '5 unread comments', color: 'from-fuchsia-400 to-fuchsia-600', hue: 'fuchsia', nav: 'copilot-logs' as Section },
+                    { icon: 'troubleshoot', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-indigo-400 to-indigo-600', hue: 'indigo', nav: 'analytics' as Section },
                 ].map((action, i) => (
                     <motion.div key={i} variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                        onClick={() => setActiveSection(action.nav)}
                         className={`group p-4 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:border-[#7C3AED]/30`}>
                         <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500 rounded-full -mr-8 -mt-8 pointer-events-none`} />
 
