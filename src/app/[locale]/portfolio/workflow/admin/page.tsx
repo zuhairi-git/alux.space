@@ -129,10 +129,10 @@ export default function PortalPanel() {
             ? 'bg-[#050023]/80 backdrop-blur-2xl border-b border-fuchsia-500/30'
             : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
-        ? 'bg-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] border border-white/80 p-5 md:p-7'
+        ? 'bg-white rounded-3xl border border-slate-200 shadow-[0_12px_34px_rgba(15,23,42,0.08)] p-5 md:p-7'
         : isColorful
-            ? 'bg-[#050023]/75 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(255,0,204,0.18)] border border-fuchsia-500/30 p-5 md:p-7'
-            : 'bg-white/[0.03] backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-white/10 p-5 md:p-7';
+            ? 'bg-[#0A0138]/95 rounded-3xl border border-fuchsia-500/35 shadow-[0_14px_36px_rgba(255,0,204,0.20)] p-5 md:p-7'
+            : 'bg-[#111827] rounded-3xl border border-slate-700 shadow-[0_12px_34px_rgba(0,0,0,0.45)] p-5 md:p-7';
 
     const handleCopilotSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -399,7 +399,7 @@ export default function PortalPanel() {
             <motion.button
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
-                animate={{ y: showBackToTop ? -72 : 0, x: showBackToTop ? -12 : 0 }}
+                animate={{ y: showBackToTop ? -76 : 0, x: 0 }}
                 transition={{ type: 'spring', stiffness: 320, damping: 24 }}
                 onClick={() => setShowCopilot(true)}
                 className="fixed bottom-8 right-8 w-16 h-16 z-50 group"
@@ -541,10 +541,10 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white/60 backdrop-blur-2xl border border-white shadow-sm' : 'bg-white/5 backdrop-blur-2xl border border-white/10'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-fuchsia-500/5`}>
+        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-slate-200 shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : 'bg-[#111827] border border-slate-700 shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl`}>
             <div className="flex items-center justify-between mb-4">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-fuchsia-100 to-cyan-100' : 'from-fuchsia-500/20 to-cyan-500/20'}`}>
-                    <Icon name={icon} className={`text-2xl ${isLight ? 'text-fuchsia-600' : 'text-cyan-400'}`} />
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-blue-100 to-indigo-100' : 'from-blue-500/20 to-indigo-500/20'}`}>
+                    <Icon name={icon} className={`text-2xl ${isLight ? 'text-blue-600' : 'text-blue-400'}`} />
                 </div>
                 <span className={`text-xs font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1 ${trendUp ? 'bg-emerald-500/10 text-emerald-500' : 'bg-rose-500/10 text-rose-500'}`}>
                     <Icon name={trendUp ? "trending_up" : "trending_down"} className="text-[14px]" />
@@ -560,7 +560,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
             <AnimatePresence>
                 {showInsight && (
                     <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 16 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
-                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-fuchsia-50 text-fuchsia-700' : 'bg-fuchsia-500/10 text-fuchsia-300'}`}>
+                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-blue-50 text-blue-700' : 'bg-blue-500/10 text-blue-300'}`}>
                             <Icon name="auto_awesome" className="text-[16px] shrink-0 mt-0.5" />
                             <span className="leading-relaxed">AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
                         </div>
