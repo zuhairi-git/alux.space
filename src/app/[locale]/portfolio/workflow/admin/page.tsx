@@ -125,6 +125,10 @@ export default function PortalPanel() {
         : isColorful
             ? 'bg-[#0A0138]/95 rounded-3xl border border-fuchsia-500/35 shadow-[0_14px_36px_rgba(255,0,204,0.20)] p-5 md:p-7'
             : 'bg-[#111827] rounded-3xl border border-slate-700 shadow-[0_12px_34px_rgba(0,0,0,0.45)] p-5 md:p-7';
+    const aiGradientStrong = 'from-fuchsia-500 via-violet-500 to-sky-400';
+    const aiGradientSoft = 'from-violet-500 to-sky-400';
+    const aiGradientGlow = 'from-fuchsia-500 to-sky-400';
+    const aiHoverBorder = 'hover:border-violet-300 hover:shadow-violet-500/10';
 
     const handleCopilotSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -392,14 +396,10 @@ export default function PortalPanel() {
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowCopilot(true)}
-                className="fixed bottom-24 right-6 w-16 h-16 z-50 group"
+                className="fixed bottom-24 right-6 w-16 h-16 z-50 group overflow-visible"
             >
-                <div className={`absolute inset-0 rounded-full opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse bg-gradient-to-r ${isColorful ? 'from-fuchsia-500 to-purple-500' : 'from-blue-500 to-purple-500'}`} />
-                <div className={`relative w-full h-full rounded-[1.5rem] p-[2px] shadow-2xl overflow-hidden bg-gradient-to-tr ${isColorful ? 'from-fuchsia-500 via-purple-500 to-cyan-400' : 'from-blue-500 via-indigo-500 to-purple-500'}`}>
-                    <div className={`w-full h-full rounded-[1.5rem] flex items-center justify-center backdrop-blur-xl ${isLight ? 'bg-white/80' : isColorful ? 'bg-[#050023]/70' : 'bg-black/40'}`}>
-                        <Icon name="auto_awesome" className={`text-3xl bg-clip-text text-transparent bg-gradient-to-br ${isColorful ? 'from-fuchsia-500 to-cyan-400' : 'from-blue-500 to-indigo-500'}`} />
-                    </div>
-                </div>
+                <span className={`absolute inset-0 rounded-[1.6rem] opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse bg-gradient-to-r ${aiGradientGlow}`} />
+                <AIStamp isLight={isLight} size="lg" className="relative shadow-2xl" />
             </motion.button>
 
             {/* Global AI Copilot Slide-over */}
@@ -421,16 +421,11 @@ export default function PortalPanel() {
                             className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[#050023]/90 border-l border-fuchsia-500/30 text-purple-100' : 'bg-[#0B0B13]/80 border-l border-white/10'}`}
                         >
                             <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
-                                <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${isColorful ? 'from-fuchsia-500 via-purple-500 to-cyan-500' : 'from-blue-500 via-indigo-500 to-purple-500'}`} />
+                                <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
                                 <div className="flex items-center space-x-4">
-                                    <div className={`relative w-12 h-12 rounded-2xl p-[2px] shadow-lg bg-gradient-to-tr ${isColorful ? 'from-fuchsia-500 to-cyan-400' : 'from-blue-500 to-indigo-500'}`}>
-                                        <div className={`w-full h-full rounded-2xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#12121A]'}`}>
-                                            <Icon name={`auto_awesome`} className={`text-2xl bg-clip-text text-transparent bg-gradient-to-br ${isColorful ? 'from-fuchsia-500 to-cyan-500' : 'from-blue-500 to-indigo-500'}`} />
-                                        </div>
-                                        <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-white dark:border-[#12121A] rounded-full z-20 shadow-sm" />
-                                    </div>
+                                    <AIStamp isLight={isLight} size="md" className="shadow-lg" />
                                     <div>
-                                        <h3 className={`font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${isColorful ? 'from-fuchsia-500 to-cyan-500' : 'from-blue-500 to-indigo-500'}`}>Copilot</h3>
+                                        <h3 className={`font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${aiGradientSoft}`}>Copilot</h3>
                                         <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" /> Online & Ready</p>
                                     </div>
                                 </div>
@@ -449,17 +444,13 @@ export default function PortalPanel() {
 
                                 {copilotHistory.map((h, i) => (
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} key={i} className={`flex flex-col ${h.role === 'user' ? 'items-end' : 'items-start'} relative z-10`}>
-                                        <div className="flex w-full items-end justify-start">
+                                        <div className={`flex w-full ${h.role === 'user' ? 'items-end justify-end' : 'items-start justify-start'}`}>
                                             {h.role === 'ai' && (
-                                                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-cyan-400 p-[2px] shadow-sm overflow-hidden flex-shrink-0 mr-3">
-                                                    <div className={`w-full h-full rounded-2xl flex items-center justify-center ${isLight ? 'bg-white' : 'bg-[#1A1A24]'}`}>
-                                                        <Icon name="auto_awesome" className="text-lg bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-500" />
-                                                    </div>
-                                                </div>
+                                                <AIStamp isLight={isLight} size="md" className="mr-3 mt-1 shadow-sm shrink-0" />
                                             )}
                                             <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
                                                 {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ml-1 tracking-wider uppercase">Portal AI</span>}
-                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? 'bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-br-sm shadow-fuchsia-500/20' : isLight ? 'bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-slate-200/50' : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
+                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-br-sm ${isColorful ? 'shadow-fuchsia-500/20' : 'shadow-blue-500/20'}` : isLight ? 'bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-slate-200/50' : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
                                                     {h.msg}
                                                     {h.role === 'ai' && i === copilotHistory.length - 1 && (
                                                         <div className="flex items-center space-x-3 mt-4 pt-3 border-t border-current/10">
@@ -482,7 +473,7 @@ export default function PortalPanel() {
                                             { icon: 'security', label: 'Audit recent admin actions', color: 'text-cyan-500', bg: 'bg-cyan-500/10' },
                                             { icon: 'speed', label: 'Optimize query performance', color: 'text-amber-500', bg: 'bg-amber-500/10' }
                                         ].map(opt => (
-                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? 'bg-white/60 border border-white hover:border-fuchsia-300 hover:shadow-lg hover:shadow-fuchsia-500/5' : 'bg-white/5 border border-white/5 hover:border-cyan-500/50 hover:bg-white/10'} text-[14px] font-medium backdrop-blur-xl`}>
+                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? `bg-white/60 border border-white ${aiHoverBorder} hover:shadow-lg` : `bg-white/5 border border-white/5 ${isColorful ? 'hover:border-cyan-500/50' : 'hover:border-blue-400/50'} hover:bg-white/10`} text-[14px] font-medium backdrop-blur-xl`}>
                                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${opt.bg} ${opt.color}`}>
                                                     <Icon name={opt.icon} className="text-xl" />
                                                 </div>
@@ -494,7 +485,7 @@ export default function PortalPanel() {
                             </div>
 
                             <div className={`p-5 border-t relative z-10 ${isLight ? 'border-slate-200/50 bg-white/80 backdrop-blur-2xl' : 'border-white/10 bg-[#0B0B13]/80 backdrop-blur-2xl'}`}>
-                                <form onSubmit={handleCopilotSubmit} className={`flex items-center space-x-2 px-2 py-2 rounded-3xl border shadow-sm transition-all duration-300 ${isLight ? 'bg-white border-slate-200 focus-within:border-fuchsia-400 focus-within:shadow-fuchsia-500/10' : 'bg-white/5 border-white/10 focus-within:bg-white/10 focus-within:border-cyan-400 focus-within:shadow-cyan-500/10'}`}>
+                                <form onSubmit={handleCopilotSubmit} className={`flex items-center space-x-2 px-2 py-2 rounded-3xl border shadow-sm transition-all duration-300 ${isLight ? `bg-white border-slate-200 ${isColorful ? 'focus-within:border-fuchsia-400 focus-within:shadow-fuchsia-500/10' : 'focus-within:border-blue-400 focus-within:shadow-blue-500/10'}` : `bg-white/5 border-white/10 focus-within:bg-white/10 ${isColorful ? 'focus-within:border-cyan-400 focus-within:shadow-cyan-500/10' : 'focus-within:border-blue-400 focus-within:shadow-blue-500/10'}`}`}>
                                     <button type="button" className={`w-10 h-10 flex shrink-0 items-center justify-center rounded-2xl transition-colors ${isLight ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-white/10 text-slate-400'}`}>
                                         <Icon name="attach_file" className="text-xl" />
                                     </button>
@@ -505,7 +496,7 @@ export default function PortalPanel() {
                                         placeholder="Ask Copilot anything..."
                                         className="flex-1 bg-transparent border-none outline-none text-[14px] font-medium py-2 w-full min-w-0"
                                     />
-                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? 'bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white shadow-lg shadow-fuchsia-500/30' : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/10 text-slate-500'}`}>
+                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? `bg-gradient-to-r ${aiGradientSoft} text-white shadow-lg shadow-violet-500/30` : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/10 text-slate-500'}`}>
                                         <Icon name="arrow_upward" className="text-lg font-bold" />
                                     </motion.button>
                                 </form>
@@ -524,6 +515,28 @@ export default function PortalPanel() {
 // ═══════════════════════════════════════════════════════════
 // SHARED
 // ═══════════════════════════════════════════════════════════
+type AIStampSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '' }: { isLight: boolean, size?: AIStampSize, icon?: string, className?: string }) {
+    const sizeClasses: Record<AIStampSize, { outer: string, inner: string, icon: string }> = {
+        xs: { outer: 'w-7 h-7 rounded-xl p-[2px]', inner: 'rounded-[calc(0.75rem-2px)]', icon: 'text-[14px]' },
+        sm: { outer: 'w-10 h-10 rounded-2xl p-[2px]', inner: 'rounded-[calc(1rem-2px)]', icon: 'text-lg' },
+        md: { outer: 'w-12 h-12 rounded-2xl p-[2px]', inner: 'rounded-[calc(1rem-2px)]', icon: 'text-2xl' },
+        lg: { outer: 'w-16 h-16 rounded-[1.6rem] p-[2px]', inner: 'rounded-[calc(1.6rem-2px)]', icon: 'text-3xl' },
+        xl: { outer: 'w-28 h-28 rounded-[2.5rem] p-[3px]', inner: 'rounded-[calc(2.5rem-3px)]', icon: 'text-5xl' },
+    };
+
+    const stamp = sizeClasses[size];
+
+    return (
+        <div className={`${stamp.outer} bg-gradient-to-tr from-fuchsia-500 via-violet-500 to-sky-400 ${className}`}>
+            <div className={`w-full h-full ${stamp.inner} border ${isLight ? 'border-white/80 bg-[#EAE6F8]/95' : 'border-white/25 bg-[#1C1730]/85'} flex items-center justify-center backdrop-blur-xl`}>
+                <Icon name={icon} className={`${stamp.icon} bg-clip-text text-transparent bg-gradient-to-br from-violet-500 to-sky-400`} />
+            </div>
+        </div>
+    );
+}
+
 const pageVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.1 } }, exit: { opacity: 0, y: -20 } };
 const itemVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
@@ -551,7 +564,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
                 {showInsight && (
                     <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 16 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
                         <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-blue-50 text-blue-700' : 'bg-blue-500/10 text-blue-300'}`}>
-                            <Icon name="auto_awesome" className="text-[16px] shrink-0 mt-0.5" />
+                            <AIStamp isLight={isLight} size="xs" className="shrink-0 mt-0.5" />
                             <span className="leading-relaxed">AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
                         </div>
                     </motion.div>
@@ -773,9 +786,7 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                                                     <td colSpan={5} className="p-0 border-0">
                                                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                                                             <div className={`m-3 p-5 rounded-2xl flex items-start space-x-5 ${isLight ? 'bg-white/80 shadow-sm border border-white' : 'bg-white/[0.03] border border-white/5'}`}>
-                                                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-gradient-to-br ${isLight ? 'from-fuchsia-100 to-cyan-100' : 'from-fuchsia-500/20 to-cyan-500/20'}`}>
-                                                                    <Icon name="auto_awesome" className={`text-xl ${isLight ? 'text-fuchsia-600' : 'text-cyan-400'}`} />
-                                                                </div>
+                                                                <AIStamp isLight={isLight} size="md" className="shrink-0" />
                                                                 <div>
                                                                     <h4 className="text-[15px] font-bold mb-1.5">AI Portal Summary</h4>
                                                                     <p className="text-[13px] font-medium opacity-70 leading-relaxed max-w-3xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
@@ -1233,12 +1244,8 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
                     className="inline-flex items-center justify-center w-28 h-28 mb-8 relative group cursor-pointer"
                 >
                     {/* Glowing AI Orb */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-cyan-500 opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse" />
-                    <div className="relative w-full h-full rounded-[2.5rem] bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-cyan-400 p-[3px] shadow-2xl overflow-hidden">
-                        <div className={`w-full h-full rounded-[2.5rem] flex items-center justify-center backdrop-blur-xl ${isLight ? 'bg-white/80' : 'bg-black/40'}`}>
-                            <Icon name="auto_awesome" className={`text-5xl bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-cyan-400`} />
-                        </div>
-                    </div>
+                    <span className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-fuchsia-500 to-sky-400 opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse" />
+                    <AIStamp isLight={isLight} size="xl" className="relative shadow-2xl" />
                 </motion.div>
 
                 <h1 className={`text-5xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -1254,9 +1261,7 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
                 <div className={`absolute top-0 right-0 w-80 h-80 bg-fuchsia-500 opacity-10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none`} />
 
                 <div className="flex items-start md:items-center space-x-5 mb-6 relative z-10">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 text-fuchsia-500 shadow-inner">
-                        <Icon name="auto_awesome" className="text-2xl" />
-                    </div>
+                    <AIStamp isLight={isLight} size="md" className="shrink-0" />
                     <div>
                         <h2 className="text-xl font-black tracking-tight">Your Daily Briefing</h2>
                         <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : 'opacity-60'}`}>AI-generated summary of your workspace</p>
@@ -1297,15 +1302,15 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
             {/* Floating Input */}
             <motion.div variants={itemVariants} className="pt-6">
                 <div className={`relative flex items-center p-2 rounded-3xl shadow-lg transition-all duration-300 border backdrop-blur-2xl ${isLight ? 'bg-white/80 shadow-slate-200/50 border-white focus-within:border-fuchsia-400 focus-within:shadow-fuchsia-500/20' : 'bg-white/5 border-white/10 focus-within:border-cyan-400 focus-within:shadow-cyan-500/20'}`}>
-                    <div className="pl-4 pr-3 opacity-60">
-                        <Icon name="auto_awesome" className="text-2xl" />
+                    <div className="pl-3 pr-2">
+                        <AIStamp isLight={isLight} size="sm" />
                     </div>
                     <input
                         type="text"
                         placeholder="Ask AI to find a file, summarize a workspace, or draft an email&hellip;"
                         className={`w-full bg-transparent py-3 outline-none text-[15px] font-medium ${isLight ? 'text-slate-900 placeholder-slate-400' : 'text-white placeholder-white/40'}`}
                     />
-                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-cyan-500 text-white flex items-center justify-center hover:shadow-lg hover:shadow-fuchsia-500/40 transition-all shrink-0 ml-2">
+                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-violet-500 to-sky-400 text-white flex items-center justify-center hover:shadow-lg hover:shadow-violet-500/30 transition-all shrink-0 ml-2">
                         <Icon name="arrow_upward" className="text-xl" />
                     </button>
                 </div>
