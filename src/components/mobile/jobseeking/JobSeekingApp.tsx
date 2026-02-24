@@ -72,15 +72,15 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
             <main className="flex-1 relative w-full overflow-hidden">
                 <AnimatePresence mode="wait">
                     {activeTab === 'dashboard' && <DashboardView key="d" card={card} isLight={isLight} onNav={(t: string) => setActiveTab(t as JobTabType)} theme={theme} />}
-                    {activeTab === 'jobs' && <JobsView key="j" card={card} isLight={isLight} theme={theme} />}
+                    {activeTab === 'jobs' && <JobsView key="j" card={card} isLight={isLight} theme={theme} onNav={(t) => setActiveTab(t as JobTabType)} />}
                     {activeTab === 'copilot' && <CopilotView key="c" isLight={isLight} theme={theme} />}
-                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} theme={theme} />}
+                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} theme={theme} onNav={(t) => setActiveTab(t as JobTabType)} />}
                     {activeTab === 'profile' && <ProfileView key="p" card={card} isLight={isLight} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} />}
                 </AnimatePresence>
             </main>
 
             {/* Bottom Navigation */}
-            <nav className={`absolute bottom-0 w-full flex justify-around ${theme.platform === 'ios' ? 'items-start px-2 h-[82px] pt-2' : 'items-center px-1 h-20 pb-2'} z-40 border-t ${isLight ? theme.nav.light : theme.nav.dark}`}>
+            <nav className={`absolute bottom-0 w-full flex justify-around ${theme.platform === 'ios' ? 'items-start px-2 h-[82px] pt-2' : 'items-center px-1 h-20 pb-2'} z-40 border-t ${isLight ? theme.nav.light : isColorful && theme.nav.colorful ? theme.nav.colorful : theme.nav.dark}`}>
                 {jobTabs.map(([k, ic, lb]) => {
                     const a = activeTab === k;
                     return (

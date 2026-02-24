@@ -7,9 +7,10 @@ interface ViewProps {
     card?: string;
     isLight: boolean;
     theme: MobileTheme;
+    onNav?: (tab: string) => void;
 }
 
-export function NotificationsView({ card, isLight, theme }: ViewProps) {
+export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
     const listVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -40,7 +41,7 @@ export function NotificationsView({ card, isLight, theme }: ViewProps) {
                                     Cafe Local wants to schedule an interview for the Weekend Barista position.
                                 </p>
                                 <div className="flex space-x-2 border-t border-black/5 border-white/10 pt-3">
-                                    <button className={`text-[13px] font-semibold flex items-center ${theme.notification.askAiColor} active:scale-95 transition-transform`}>
+                                    <button onClick={() => onNav?.('copilot')} className={`text-[13px] font-semibold flex items-center ${theme.notification.askAiColor} active:scale-95 transition-transform`}>
                                         <Icon name="auto_awesome" className="text-[14px] mr-1.5" /> Prep with AI
                                     </button>
                                 </div>

@@ -9,10 +9,12 @@ interface WorkspacesViewProps {
     card: string;
     isLight: boolean;
     theme: MobileTheme;
+    onNav?: (tab: string) => void;
 }
 
-export function WorkspacesView({ card, isLight, theme }: WorkspacesViewProps) {
+export function WorkspacesView({ card, isLight, theme, onNav }: WorkspacesViewProps) {
     const [sel, setSel] = useState<string | null>(null);
+    const [expanded, setExpanded] = useState(false);
     const ws = theme.workspace;
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 ${theme.contentPaddingTop}`}>
@@ -51,17 +53,59 @@ export function WorkspacesView({ card, isLight, theme }: WorkspacesViewProps) {
             <AnimatePresence>{sel && (() => {
                 const w = workspaces.find(x => x.id === sel)!; return (
                     <motion.div key="ws-sheet" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-[60]">
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSel(null)} />
+                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => { setSel(null); setExpanded(false); }} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} p-6 pb-10 ${ws.sheetBg(isLight)}`}>
-                            <div className="w-10 h-1 rounded-full bg-gray-400/30 mx-auto mb-6" />
+                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} pt-4 pb-10 ${ws.sheetBg(isLight)}`}>
+                            {/* Drag handle — tap to expand */}
+                            <button onClick={() => setExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
+                                <div className="w-10 h-1 rounded-full bg-gray-400/30" />
+                                <Icon name={expanded ? 'expand_more' : 'expand_less'} className="text-[14px] opacity-30 mt-1" />
+                            </button>
+                            <div className="px-6">
                             <div className="flex items-center space-x-3 mb-4">
                                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${ws.iconBg(isLight)}`}><Icon name={w.icon} className={`text-2xl ${ws.iconColor(isLight)}`} /></div>
                                 <div><h3 className="text-xl font-bold">{w.name}</h3><p className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{w.members} members · {w.docs} docs</p></div>
                             </div>
                             <div className="mb-4 flex items-center space-x-4"><Sparkline data={w.data} color={ws.sheetAccent} width={180} height={40} /><span className="font-bold text-xl" style={{ color: ws.sheetAccent }}>{w.activity}%</span></div>
-                            <div className="grid grid-cols-3 gap-3">
-                                {['Open', 'Ask AI', 'Share'].map((l, i) => (<button key={l} className={`py-3 ${theme.radii.sheetButton} text-[13px] font-semibold active:scale-95 ${i === 0 ? ws.primaryButton : ws.secondaryButton(isLight)}`}>{l}</button>))}
+
+                            {/* Expandable details */}
+                            <AnimatePresence>
+                            {expanded && (
+                                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
+                                    <div className={`mb-4 p-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
+                                        <h4 className="text-[12px] font-bold uppercase tracking-widest opacity-50 mb-2">Recent Documents</h4>
+                                        {['Q4 Sprint Plan', 'Design Tokens v2', 'API Integration Notes'].map((doc, i) => (
+                                            <div key={i} className="flex items-center space-x-2 py-1.5">
+                                                <Icon name="description" className="text-[16px] opacity-40" />
+                                                <span className="text-[13px] font-medium">{doc}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className={`mb-4 p-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
+                                        <h4 className="text-[12px] font-bold uppercase tracking-widest opacity-50 mb-2">Activity</h4>
+                                        {['Sara updated Design Tokens', 'James added 3 tasks', 'AI generated sprint summary'].map((act, i) => (
+                                            <div key={i} className="flex items-center space-x-2 py-1.5">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-current opacity-30 shrink-0" />
+                                                <span className={`text-[12px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{act}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className={`mb-4 p-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
+                                        <h4 className="text-[12px] font-bold uppercase tracking-widest opacity-50 mb-2">Status</h4>
+                                        <div className="flex items-center justify-between">
+                                            <span className={`text-[13px] ${ws.statusActive} px-2 py-0.5 rounded-full font-semibold`}>{w.status}</span>
+                                            <span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Updated 2h ago</span>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                            </AnimatePresence>
+
+                            <div className="grid grid-cols-3 gap-3 mt-2">
+                                {['Open', 'Ask AI', 'Share'].map((l, i) => (<button key={l} onClick={() => {
+                                    if (l === 'Ask AI') { setSel(null); setExpanded(false); onNav?.('copilot'); }
+                                }} className={`py-3 ${theme.radii.sheetButton} text-[13px] font-semibold active:scale-95 ${i === 0 ? ws.primaryButton : ws.secondaryButton(isLight)}`}>{l}</button>))}
+                            </div>
                             </div>
                         </motion.div>
                     </motion.div>

@@ -31,6 +31,7 @@ interface PortfolioCardProps {
     };
     tags?: string[];
     date?: string;
+    category?: 'case-study' | 'prototype';
     photo?: {
       url: string;
       author?: {
@@ -127,6 +128,34 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   // Create tags array that includes the type as first tag
   const cardTags = item.tags?.length ? item.tags.slice(0, 2) : [];
 
+  const getCategoryBadge = () => {
+    if (!item.category) return null;
+    if (item.category === 'case-study') {
+      const cls = theme === 'light'
+        ? 'bg-violet-50 text-violet-700 border-violet-200'
+        : theme === 'colorful'
+          ? 'bg-violet-500/20 text-violet-300 border-violet-500/40'
+          : 'bg-violet-900/30 text-violet-300 border-violet-500/40';
+      return (
+        <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${cls}`}>
+          <span className="material-symbols text-xs">school</span>
+          {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
+        </span>
+      );
+    }
+    const cls = theme === 'light'
+      ? 'bg-teal-50 text-teal-700 border-teal-200'
+      : theme === 'colorful'
+        ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
+        : 'bg-teal-900/30 text-teal-300 border-teal-500/40';
+    return (
+      <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${cls}`}>
+        <span className="material-symbols text-xs">devices</span>
+        {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
+      </span>
+    );
+  };
+
   // Format link for navigation with proper localization
   const cardLink = localizedHref(item.link);
   
@@ -193,6 +222,13 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   {getType()}
                 </span>
               </div>
+
+              {/* Category Badge - Top Left */}
+              {item.category && (
+                <div className="absolute top-3 left-3">
+                  {getCategoryBadge()}
+                </div>
+              )}
               
               {/* Icon and Title Section */}
               <div className="flex items-start gap-4 mb-4">
@@ -282,6 +318,13 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 {getType()}
               </span>
             </div>
+
+            {/* Category badge - top left */}
+            {item.category && (
+              <div className="absolute top-3 left-3 z-10">
+                {getCategoryBadge()}
+              </div>
+            )}
           </div>
           
           {/* Content Section */}

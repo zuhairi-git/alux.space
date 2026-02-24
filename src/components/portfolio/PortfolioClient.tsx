@@ -30,6 +30,7 @@ interface PortfolioItem {
   };
   tags?: string[];
   date?: string;
+  category?: 'case-study' | 'prototype';
   photo?: {
     url: string;
     author?: {
@@ -55,9 +56,11 @@ export default function PortfolioClient({ items }: Props) {
     new Set(items.map(item => item.type.en))
   );
   
-  // Filter items by type
+  // Filter items by type or category
   const filteredItems = filter
-    ? items.filter(item => item.type.en === filter)
+    ? (filter === 'case-study' || filter === 'prototype')
+      ? items.filter(item => item.category === filter)
+      : items.filter(item => item.type.en === filter)
     : items;
   
   // Translate static UI text
@@ -149,6 +152,37 @@ export default function PortfolioClient({ items }: Props) {
                         }`}
                       >
                         {getAllText()}
+                      </button>
+                    )}
+                  </RadioGroup.Option>
+
+                  {/* Category badges: Case Study & Prototype */}
+                  <RadioGroup.Option value="case-study">
+                    {({ checked }) => (
+                      <button
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all ${
+                          checked
+                            ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-md'
+                            : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                        }`}
+                      >
+                        <span className="material-symbols text-sm">school</span>
+                        {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
+                      </button>
+                    )}
+                  </RadioGroup.Option>
+
+                  <RadioGroup.Option value="prototype">
+                    {({ checked }) => (
+                      <button
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all ${
+                          checked
+                            ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-md'
+                            : 'bg-gray-200/10 text-gray-400 hover:bg-gray-200/20'
+                        }`}
+                      >
+                        <span className="material-symbols text-sm">devices</span>
+                        {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
                       </button>
                     )}
                   </RadioGroup.Option>

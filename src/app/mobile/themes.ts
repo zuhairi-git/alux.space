@@ -13,7 +13,7 @@ export interface MobileTheme {
     // Header chrome per theme mode
     header: { dark: string; light: string; colorful: string };
     // Nav bar container
-    nav: { dark: string; light: string };
+    nav: { dark: string; light: string; colorful?: string };
     // Nav tab item styles
     navTab: {
         active: (isLight: boolean) => string;
@@ -141,6 +141,7 @@ export const androidTheme: MobileTheme = {
     nav: {
         dark: 'bg-[#2B2930] border-[#4A4458]/50',
         light: 'bg-[#F3EDF7] border-[#EADDFF]/50',
+        colorful: 'bg-[#0A0138]/80 backdrop-blur-xl border-purple-500/20',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-[#1D192B] font-variation-fill' : 'text-[#E8DEF8] font-variation-fill',
@@ -243,6 +244,7 @@ export const iosTheme: MobileTheme = {
     nav: {
         dark: 'bg-[#1C1C1E]/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-white/10',
         light: 'bg-[#F2F2F7]/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-black/5',
+        colorful: 'bg-[#1a0040]/70 backdrop-blur-[20px] border-purple-500/15',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]',

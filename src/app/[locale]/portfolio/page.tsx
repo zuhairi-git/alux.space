@@ -28,6 +28,7 @@ interface PortfolioItem {
     fi?: string;
     type: 'in-progress' | 'accomplished';
   };
+  category?: 'case-study' | 'prototype';
   photo?: {
     url: string;
     author?: {
@@ -89,6 +90,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Kehitteillä',
         type: 'in-progress'
       },
+      category: 'prototype',
       photo: {
         url: '/images/portfolio/market/market-intellegence.jpg'
       }
@@ -113,6 +115,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Saavutettu',
         type: 'accomplished'
       },
+      category: 'case-study',
       photo: {
         url: '/images/portfolio/healthcare/healthcare.jpg'
       }
@@ -136,6 +139,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Kehitteillä',
         type: 'in-progress'
       },
+      category: 'case-study',
       photo: {
         url: '/images/portfolio/accessibility/accessiblity-showcase.jpg'
       }
@@ -160,6 +164,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Saavutettu',
         type: 'accomplished'
       },
+      category: 'prototype',
       photo: {
         url: '/images/portfolio/workflow/cover.jpg'
       }
@@ -184,6 +189,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Saavutettu',
         type: 'accomplished'
       },
+      category: 'prototype',
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpg'
       }

@@ -104,7 +104,7 @@ function MobilePrototypeContent() {
             <main className="flex-1 relative overflow-hidden w-full z-10">
                 <AnimatePresence mode="wait">
                     {activeTab === 'dashboard' && <DashboardView key="dash" os={os} theme={theme} onNavigate={setActiveTab} />}
-                    {activeTab === 'markets' && <MarketsView key="markets" os={os} theme={theme} />}
+                    {activeTab === 'markets' && <MarketsView key="markets" os={os} theme={theme} onNavigate={setActiveTab} />}
                     {activeTab === 'copilot' && <CopilotView key="copilot" os={os} theme={theme} />}
                     {activeTab === 'alerts' && <AlertsView key="alerts" os={os} theme={theme} />}
                     {activeTab === 'profile' && <ProfileView key="profile" os={os} theme={theme} setTheme={setTheme} />}
@@ -233,10 +233,14 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
 // ═══════════════════════════════════════════════════════════
 // MARKETS VIEW
 // ═══════════════════════════════════════════════════════════
-function MarketsView({ os, theme }: { os: string, theme: string }) {
+function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onNavigate?: (t: TabType) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+    const [tickerExpanded, setTickerExpanded] = useState(false);
+    const [alertSet, setAlertSet] = useState<string | null>(null);
+    useEffect(() => { setTickerExpanded(false); setAlertSet(null); }, [selectedTicker]);
     const card = isIOS
         ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
         : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
@@ -329,29 +333,68 @@ function MarketsView({ os, theme }: { os: string, theme: string }) {
 
             {/* Bottom Sheet for Ticker Detail */}
             <AnimatePresence>
-                {selectedTicker && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50">
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedTicker(null)} />
-                        <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] p-6 pb-28 ${isIOS ? (isLight ? 'bg-white' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FEF7FF]' : 'bg-[#2B2930]')}`}>
-                            <div className="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600 mx-auto mb-6" />
-                            {(() => {
-                                const t = trending.find(x => x.ticker === selectedTicker)!; return (<>
+                {selectedTicker && (() => {
+                    const t = trending.find(x => x.ticker === selectedTicker)!;
+                    const metrics = [
+                        { label: 'Market Cap', value: t.ticker === 'NVDA' ? '$2.15T' : t.ticker === 'META' ? '$1.25T' : t.ticker === 'TSLA' ? '$558B' : t.ticker === 'AMZN' ? '$1.87T' : '$58B' },
+                        { label: 'P/E Ratio', value: t.ticker === 'NVDA' ? '64.2x' : t.ticker === 'META' ? '24.1x' : t.ticker === 'TSLA' ? '43.8x' : t.ticker === 'AMZN' ? '36.7x' : '18.3x' },
+                        { label: '52W High', value: t.ticker === 'NVDA' ? '$974.00' : t.ticker === 'META' ? '$531.49' : t.ticker === 'TSLA' ? '$299.29' : t.ticker === 'AMZN' ? '$201.20' : '$1,229.15' },
+                        { label: '52W Low', value: t.ticker === 'NVDA' ? '$373.54' : t.ticker === 'META' ? '$274.38' : t.ticker === 'TSLA' ? '$138.80' : t.ticker === 'AMZN' ? '$118.35' : '$406.32' },
+                    ];
+                    return (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50">
+                            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedTicker(null)} />
+                            <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#1a0040]' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FEF7FF]' : isColorful ? 'bg-[#0A0138]' : 'bg-[#2B2930]')}`}>
+                                {/* Drag handle — tap to expand */}
+                                <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
+                                    <div className="w-10 h-1 rounded-full bg-gray-400/30" />
+                                    <Icon name={tickerExpanded ? 'expand_more' : 'expand_less'} className="text-[14px] opacity-30 mt-1" />
+                                </button>
+                                <div className="px-6">
                                     <div className="flex justify-between items-start mb-4">
                                         <div><h3 className="text-2xl font-bold">{t.ticker}</h3><p className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{t.name}</p></div>
                                         <div className="text-right"><span className="text-2xl font-bold">{t.price}</span><span className={`block text-sm font-bold ${t.up ? 'text-emerald-500' : 'text-red-500'}`}>{t.change}</span></div>
                                     </div>
-                                    <Sparkline data={t.data} color={t.up ? '#34C759' : '#FF3B30'} width={340} height={100} />
-                                    <div className="grid grid-cols-3 gap-3 mt-6">
+                                    <Sparkline data={t.data} color={t.up ? '#34C759' : '#FF3B30'} width={340} height={80} />
+                                    {/* Expandable metrics */}
+                                    <AnimatePresence>
+                                        {tickerExpanded && (
+                                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
+                                                <div className="grid grid-cols-2 gap-2.5 mt-4 mb-4">
+                                                    {metrics.map(m => (
+                                                        <div key={m.label} className={`p-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.06]'}`}>
+                                                            <span className="text-[11px] opacity-50 block mb-0.5">{m.label}</span>
+                                                            <span className="text-[15px] font-bold">{m.value}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <div className={`p-3 rounded-2xl mb-3 flex items-center space-x-3 ${isLight ? 'bg-emerald-50 border border-emerald-100' : 'bg-emerald-900/20 border border-emerald-500/15'}`}>
+                                                    <Icon name="bar_chart" className="text-emerald-500 text-[20px] shrink-0" />
+                                                    <div><span className="text-[11px] opacity-50 block">Analyst Consensus</span><span className="text-[14px] font-bold text-emerald-500">{t.up ? 'Buy' : 'Hold'} · {t.up ? '72%' : '54%'} bullish</span></div>
+                                                </div>
+                                                <div className={`p-3 rounded-2xl mb-4 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
+                                                    <div className="flex items-center space-x-1.5 mb-1"><Icon name="auto_awesome" className={`text-[14px] ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-400' : 'text-[#6750A4]'}`} /><span className="text-[11px] font-bold opacity-50">AI Insight</span></div>
+                                                    <p className={`text-[12px] leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{t.up ? `${t.ticker} shows strong momentum with institutional buying pressure. Watch for resistance near ${metrics[2].value}.` : `${t.ticker} faces near-term headwinds. Support levels at ${metrics[3].value} remain key.`}</p>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                    <div className="grid grid-cols-3 gap-3 mt-4">
                                         {['Ask AI', 'Add Alert', 'Share'].map((label, i) => (
-                                            <button key={label} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? (isIOS ? 'bg-[#007AFF] text-white' : 'bg-[#6750A4] text-white') : (isLight ? 'bg-gray-100 text-gray-800' : 'bg-white/10 text-white')}`}>{label}</button>
+                                            <button key={label} onClick={() => {
+                                                if (label === 'Ask AI') { setSelectedTicker(null); onNavigate?.('copilot'); }
+                                                if (label === 'Add Alert') { setAlertSet(t.ticker); setTimeout(() => setAlertSet(null), 2500); }
+                                            }} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? (isIOS ? 'bg-[#007AFF] text-white' : isColorful ? 'bg-purple-500 text-white' : 'bg-[#6750A4] text-white') : label === 'Add Alert' && alertSet === t.ticker ? 'bg-emerald-500 text-white' : (isLight ? 'bg-gray-100 text-gray-800' : isColorful ? 'bg-white/10 text-white' : 'bg-white/10 text-white')}`}>
+                                                {label === 'Add Alert' && alertSet === t.ticker ? '✓ Alert Set' : label}
+                                            </button>
                                         ))}
                                     </div>
-                                </>);
-                            })()}
+                                </div>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                )}
+                    );
+                })()}
             </AnimatePresence>
         </motion.div>
     );
@@ -375,8 +418,8 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         { text: "I found 3 recent analyst upgrades for NVDA, predominantly citing strong margin expansion (+340bps) and a robust supply chain recovery. Price targets range from $950 to $1,200 with a consensus of $1,050.", citations: [{ source: "Goldman Sachs Research", snippet: "Upgrading to Conviction Buy..." }, { source: "Morgan Stanley Note", snippet: "Data center revenue exceeding..." }] },
     ];
 
-    const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    useEffect(() => { if (messages.length > 0) scrollToBottom(); }, [messages, isTyping, streamText]);
+    const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    useEffect(() => { if (messages.length > 0) scrollToBottom(); }, [messages]);
 
     const handleSend = (overrideText?: string) => {
         const txt = overrideText || input;
@@ -472,6 +515,21 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                     )}
                     {isTyping && !streamText && (
                         <div className="flex justify-start"><div className={`px-4 py-3 flex space-x-1.5 ${botBubble}`}><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '150ms' }} /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '300ms' }} /></div></div>
+                    )}
+                    {/* Post-chat actions */}
+                    {messages.length > 0 && !isTyping && (
+                        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex flex-wrap gap-2 px-1 pb-2">
+                            {[
+                                { icon: 'bookmark', label: 'Save Summary' },
+                                { icon: 'share', label: 'Share' },
+                                { icon: 'add_comment', label: 'Follow-up' },
+                            ].map((a) => (
+                                <motion.button key={a.label} whileTap={{ scale: 0.95 }}
+                                    className={`flex items-center space-x-1.5 px-3 py-2 rounded-2xl text-[12px] font-semibold ${isIOS ? (isLight ? 'bg-black/5 text-[#007AFF]' : 'bg-white/8 text-[#0A84FF]') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
+                                    <Icon name={a.icon} className="text-[14px]" /><span>{a.label}</span>
+                                </motion.button>
+                            ))}
+                        </motion.div>
                     )}
                     <div ref={messagesEndRef} className="pb-4" />
                 </div>
@@ -677,9 +735,10 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
 function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, setActiveTab: (t: TabType) => void, os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     const navClass = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-black/5 pb-5 h-[82px]' : 'bg-[#1C1C1E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-white/5 pb-5 h-[82px]')
-        : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : 'bg-[#2B2930] h-20 pb-2 border-t border-[#4A4458]/50');
+        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-[#1a0040]/70 backdrop-blur-[20px] border-t border-purple-500/15 pb-5 h-[82px]' : 'bg-[#1C1C1E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-white/5 pb-5 h-[82px]')
+        : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : isColorful ? 'bg-[#0A0138]/80 h-20 pb-2 border-t border-purple-500/20' : 'bg-[#2B2930] h-20 pb-2 border-t border-[#4A4458]/50');
 
     const tabs: { key: TabType, icon: string, label: string }[] = [
         { key: 'dashboard', icon: 'space_dashboard', label: 'Home' },
@@ -701,16 +760,18 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
 function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, label: string, active: boolean, onClick: () => void, os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     if (isIOS) {
+        const activeColor = isColorful ? 'text-purple-400' : 'text-[#007AFF]';
         return (
             <button onClick={onClick} className="flex flex-col items-center justify-center w-14 h-full pt-1 transition-transform active:scale-90">
-                <span className={`material-symbols text-[26px] mb-0.5 transition-colors ${active ? 'text-[#007AFF] font-variation-fill' : (isLight ? 'text-[#8E8E93]' : 'text-[#98989D]')}`}>{icon}</span>
-                <span className={`text-[10px] font-medium transition-colors ${active ? 'text-[#007AFF]' : (isLight ? 'text-[#8E8E93]' : 'text-[#98989D]')}`}>{label}</span>
+                <span className={`material-symbols text-[26px] mb-0.5 transition-colors ${active ? `${activeColor} font-variation-fill` : (isLight ? 'text-[#8E8E93]' : 'text-[#98989D]')}`}>{icon}</span>
+                <span className={`text-[10px] font-medium transition-colors ${active ? activeColor : (isLight ? 'text-[#8E8E93]' : 'text-[#98989D]')}`}>{label}</span>
             </button>
         );
     }
-    const pillBg = active ? (isLight ? 'bg-[#E8DEF8]' : 'bg-[#4A4458]') : 'bg-transparent';
-    const iconColor = active ? (isLight ? 'text-[#1D192B]' : 'text-[#E8DEF8]') : (isLight ? 'text-[#49454F]' : 'text-[#CAC4D0]');
+    const pillBg = active ? (isLight ? 'bg-[#E8DEF8]' : isColorful ? 'bg-purple-500/25' : 'bg-[#4A4458]') : 'bg-transparent';
+    const iconColor = active ? (isLight ? 'text-[#1D192B]' : isColorful ? 'text-purple-300' : 'text-[#E8DEF8]') : (isLight ? 'text-[#49454F]' : 'text-[#CAC4D0]');
     return (
         <button onClick={onClick} className="flex flex-col items-center justify-center w-16 h-full relative pt-2 transition-transform active:scale-95">
             <div className={`w-14 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${pillBg}`}>
