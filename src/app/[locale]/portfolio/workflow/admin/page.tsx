@@ -43,7 +43,6 @@ export default function PortalPanel() {
     const [showNotifications, setShowNotifications] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [showBackToTop, setShowBackToTop] = useState(false);
     const [showCopilot, setShowCopilot] = useState(false);
     const [copilotMsg, setCopilotMsg] = useState('');
     const [notifications, setNotifications] = useState<NotificationItem[]>([
@@ -79,13 +78,6 @@ export default function PortalPanel() {
             document.body.style.paddingRight = '';
         };
     }, [showCopilot, showProfileMenu, showSearch]);
-
-    useEffect(() => {
-        const handleScroll = () => setShowBackToTop(window.scrollY > 300);
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
@@ -157,7 +149,7 @@ export default function PortalPanel() {
             )}
 
             {/* Desktop Sidebar */}
-            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[80px]' : 'w-[280px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-500 sticky top-0 h-screen z-40`}>
+            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[80px]' : 'w-[280px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-500 fixed left-0 top-0 h-screen z-40`}>
                 <div className={`flex items-center h-20 px-5 ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
                     {!sidebarCollapsed && (
                         <div className="flex items-center space-x-2">
@@ -250,9 +242,9 @@ export default function PortalPanel() {
             </AnimatePresence>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0 relative z-10">
+            <div className={`flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0 relative z-10 ${sidebarCollapsed ? 'md:ml-[80px]' : 'md:ml-[280px]'}`}>
                 {/* Top Bar */}
-                <header className={`h-20 flex items-center justify-between px-5 md:px-10 sticky top-0 z-30 ${headerBg}`}>
+                <header className={`h-20 flex items-center justify-between px-5 md:px-10 fixed top-0 left-0 right-0 z-30 ${sidebarCollapsed ? 'md:left-[80px]' : 'md:left-[280px]'} ${headerBg}`}>
                     <div className="flex items-center">
                         <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="menu" className="text-xl" />
@@ -341,7 +333,7 @@ export default function PortalPanel() {
                 </header>
 
                 {/* Page Content */}
-                <main className="flex-1 p-5 md:p-10">
+                <main className="flex-1 p-5 pt-24 md:p-10 md:pt-24">
                     <AnimatePresence mode="wait">
                         {activeSection === 'start' && <StartSection key="start" card={cardClass} isLight={isLight} setActiveSection={setActiveSection} />}
                         {activeSection === 'dashboard' && <DashboardSection key="dash" card={cardClass} isLight={isLight} />}
@@ -399,10 +391,8 @@ export default function PortalPanel() {
             <motion.button
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
-                animate={{ y: showBackToTop ? -76 : 0, x: 0 }}
-                transition={{ type: 'spring', stiffness: 320, damping: 24 }}
                 onClick={() => setShowCopilot(true)}
-                className="fixed bottom-8 right-8 w-16 h-16 z-50 group"
+                className="fixed bottom-24 right-8 w-16 h-16 z-50 group"
             >
                 <div className={`absolute inset-0 rounded-full opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse bg-gradient-to-r ${isColorful ? 'from-fuchsia-500 to-purple-500' : 'from-blue-500 to-purple-500'}`} />
                 <div className={`relative w-full h-full rounded-[1.5rem] p-[2px] shadow-2xl overflow-hidden bg-gradient-to-tr ${isColorful ? 'from-fuchsia-500 via-purple-500 to-cyan-400' : 'from-blue-500 via-indigo-500 to-purple-500'}`}>
