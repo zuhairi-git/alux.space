@@ -6,12 +6,14 @@ import type { MobileTheme } from '@/app/mobile/themes';
 interface ViewProps {
     card?: string;
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
     themeMode: string;
     setThemeMode: (mode: string) => void;
 }
 
-export function ProfileView({ card, isLight, theme, themeMode, setThemeMode }: ViewProps) {
+export function ProfileView({ card, isLight, isColorful, theme, themeMode, setThemeMode }: ViewProps) {
+    const settingsBgClass = isColorful ? 'bg-white/10' : theme.profile.settingsBg(isLight);
     const sectionVariants = {
         hidden: { opacity: 0, y: 15 },
         visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
@@ -29,15 +31,15 @@ export function ProfileView({ card, isLight, theme, themeMode, setThemeMode }: V
                 <div className={`text-[15px] font-medium mb-4 ${theme.profile.roleColor}`}>Hospitality & Retail Enthusiast</div>
 
                 <div className="flex space-x-3 w-full justify-center">
-                    <div className={`flex flex-col items-center p-3 rounded-2xl flex-1 ${theme.profile.settingsBg(isLight)}`}>
+                    <div className={`flex flex-col items-center p-3 rounded-2xl flex-1 ${settingsBgClass}`}>
                         <span className="font-bold text-[18px]">12</span>
                         <span className="text-[12px] opacity-70">Jobs Saved</span>
                     </div>
-                    <div className={`flex flex-col items-center p-3 rounded-2xl flex-1 ${theme.profile.settingsBg(isLight)}`}>
+                    <div className={`flex flex-col items-center p-3 rounded-2xl flex-1 ${settingsBgClass}`}>
                         <span className="font-bold text-[18px]">4</span>
                         <span className="text-[12px] opacity-70">Applications</span>
                     </div>
-                    <div className={`flex flex-col items-center p-3 rounded-2xl flex-1 ${theme.profile.settingsBg(isLight)}`}>
+                    <div className={`flex flex-col items-center p-3 rounded-2xl flex-1 ${settingsBgClass}`}>
                         <span className="font-bold text-[18px]">88%</span>
                         <span className="text-[12px] opacity-70">Avg Match</span>
                     </div>

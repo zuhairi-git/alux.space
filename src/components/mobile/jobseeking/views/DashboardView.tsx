@@ -8,11 +8,16 @@ import type { MobileTheme } from '@/app/mobile/themes';
 interface ViewProps {
     card?: string;
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
     onNav?: (tab: string) => void;
 }
 
-export function DashboardView({ card, isLight, theme, onNav }: ViewProps) {
+export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
+    const accentColor = isColorful ? 'text-fuchsia-400' : theme.dashboard.briefingAccent(isLight);
+    const highlightColor = isColorful ? 'text-fuchsia-300 font-semibold' : theme.dashboard.briefingHighlight;
+    const followUpColor = isColorful ? 'text-fuchsia-400' : theme.dashboard.followUpColor;
+    const seeAllColor = isColorful ? 'text-fuchsia-400' : theme.dashboard.seeAllColor;
     const listVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -31,17 +36,17 @@ export function DashboardView({ card, isLight, theme, onNav }: ViewProps) {
             >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-500/20 to-transparent rounded-bl-full pointer-events-none" />
                 <div className="flex items-center mb-3">
-                    <Icon name="auto_awesome" className={`text-[20px] mr-2 ${theme.dashboard.briefingAccent(isLight)}`} />
+                    <Icon name="auto_awesome" className={`text-[20px] mr-2 ${accentColor}`} />
                     <h2 className={`text-sm font-semibold tracking-wide uppercase ${isLight ? 'text-gray-500' : 'text-white/60'}`}>Daily Match Briefing</h2>
                 </div>
                 <p className="text-[17px] leading-relaxed mb-4 font-medium">
-                    You have <span className={theme.dashboard.briefingHighlight}>3 new local jobs</span> matching your availability, and your resume score improved by 15% after recent AI tweaks.
+                    You have <span className={highlightColor}>3 new local jobs</span> matching your availability, and your resume score improved by 15% after recent AI tweaks.
                 </p>
                 <div className="flex space-x-3">
-                    <button onClick={() => onNav?.('jobs')} className={`text-sm font-medium ${theme.dashboard.followUpColor} flex items-center bg-white/5 px-3 py-1.5 rounded-full active:scale-95 transition-transform`}>
+                    <button onClick={() => onNav?.('jobs')} className={`text-sm font-medium ${followUpColor} flex items-center bg-white/5 px-3 py-1.5 rounded-full active:scale-95 transition-transform`}>
                         <Icon name="work" className="text-[16px] mr-1.5" /> View Jobs
                     </button>
-                    <button onClick={() => onNav?.('copilot')} className={`text-sm font-medium ${theme.dashboard.followUpColor} flex items-center bg-white/5 px-3 py-1.5 rounded-full active:scale-95 transition-transform`}>
+                    <button onClick={() => onNav?.('copilot')} className={`text-sm font-medium ${followUpColor} flex items-center bg-white/5 px-3 py-1.5 rounded-full active:scale-95 transition-transform`}>
                         <Icon name="edit_document" className="text-[16px] mr-1.5" /> Prep Interview
                     </button>
                 </div>
@@ -69,7 +74,7 @@ export function DashboardView({ card, isLight, theme, onNav }: ViewProps) {
             {/* Recent Applications Feed */}
             <div className="mb-4 flex justify-between items-end">
                 <h3 className={`text-[22px] font-bold tracking-tight ${theme.platform === 'ios' ? 'font-serif' : ''}`}>Recent Applications</h3>
-                <button className={`text-[13px] font-semibold ${theme.dashboard.seeAllColor}`}>See All</button>
+                <button className={`text-[13px] font-semibold ${seeAllColor}`}>See All</button>
             </div>
 
             <motion.div variants={listVariants} initial="hidden" animate="visible" className="space-y-3">

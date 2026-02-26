@@ -6,6 +6,7 @@ import type { MobileTheme } from '@/app/mobile/themes';
 interface ViewProps {
     card?: string;
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
     onNav?: (tab: string) => void;
 }
@@ -22,7 +23,9 @@ const FILTERS = ['All', 'Weekend', 'Evening', 'Remote', 'Retail'];
 
 type SheetMode = 'detail' | 'form' | 'success';
 
-export function JobsView({ card, isLight, theme, onNav }: ViewProps) {
+export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
+    const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : theme.workspace.searchBar(isLight);
+    const sheetBgClass = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const [activeFilter, setActiveFilter] = useState('All');
     const [selectedJob, setSelectedJob] = useState<typeof JOBS[0] | null>(null);
     const [sheetMode, setSheetMode] = useState<SheetMode>('detail');
@@ -45,7 +48,7 @@ export function JobsView({ card, isLight, theme, onNav }: ViewProps) {
         <div className={`h-full w-full overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
             {/* Search Bar */}
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-                className={`flex items-center px-4 py-3 mb-6 ${theme.radii.search} ${theme.workspace.searchBar(isLight)}`}
+                className={`flex items-center px-4 py-3 mb-6 ${theme.radii.search} ${searchBarClass}`}
             >
                 <Icon name="search" className={`text-[20px] mr-3 ${theme.workspace.searchText(isLight)}`} />
                 <input type="text" placeholder="Search jobs, skills, companies..." className="bg-transparent border-none outline-none flex-1 text-[16px] placeholder:opacity-40" readOnly />
@@ -116,7 +119,7 @@ export function JobsView({ card, isLight, theme, onNav }: ViewProps) {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50">
                         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedJob(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} p-6 pb-10 ${theme.workspace.sheetBg(isLight)}`}>
+                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} p-6 pb-10 ${sheetBgClass}`}>
                             <div className="w-10 h-1 rounded-full bg-gray-400/30 mx-auto mb-5" />
 
                             {/* SUCCESS */}

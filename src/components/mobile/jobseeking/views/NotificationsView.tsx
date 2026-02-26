@@ -6,11 +6,13 @@ import type { MobileTheme } from '@/app/mobile/themes';
 interface ViewProps {
     card?: string;
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
     onNav?: (tab: string) => void;
 }
 
-export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
+export function NotificationsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
+    const askAiColor = isColorful ? 'text-fuchsia-400' : theme.notification.askAiColor;
     const listVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -41,7 +43,7 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
                                     Cafe Local wants to schedule an interview for the Weekend Barista position.
                                 </p>
                                 <div className="flex space-x-2 border-t border-black/5 border-white/10 pt-3">
-                                    <button onClick={() => onNav?.('copilot')} className={`text-[13px] font-semibold flex items-center ${theme.notification.askAiColor} active:scale-95 transition-transform`}>
+                                    <button onClick={() => onNav?.('copilot')} className={`text-[13px] font-semibold flex items-center ${askAiColor} active:scale-95 transition-transform`}>
                                         <Icon name="auto_awesome" className="text-[14px] mr-1.5" /> Prep with AI
                                     </button>
                                 </div>

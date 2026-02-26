@@ -7,15 +7,26 @@ import type { MobileTheme } from '../themes';
 
 interface CopilotViewProps {
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
 }
 
-export function CopilotView({ isLight, theme }: CopilotViewProps) {
+export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [msgs, setMsgs] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState(""); const [typing, setTyping] = useState(false); const [stream, setStream] = useState("");
     const ub = theme.copilot.userBubble;
-    const bb = theme.copilot.botBubble(isLight);
+    const bb = isColorful
+        ? `${theme.platform === 'ios' ? 'bg-[#1a0040]/60 backdrop-blur-[20px] border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-purple-900/40 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
+        : theme.copilot.botBubble(isLight);
+    const inputBarClass = isColorful ? 'bg-[#050023]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
+    const inputFieldClass = isColorful
+        ? `bg-white/10 text-white ${theme.platform === 'ios' ? 'rounded-[18px]' : 'rounded-[24px]'} px-5 py-3 placeholder:text-white/40`
+        : theme.copilot.inputField(isLight);
+    const promptCardClass = isColorful
+        ? `${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} bg-purple-500/10 text-white backdrop-blur-xl border border-purple-500/20`
+        : theme.copilot.promptCard(isLight);
+    const promptIconColor = isColorful ? 'text-fuchsia-400' : theme.copilot.promptIconColor;
     useEffect(() => { if (msgs.length > 0) ref.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs, typing, stream]);
 
     const send = (txt?: string) => {
@@ -34,9 +45,9 @@ export function CopilotView({ isLight, theme }: CopilotViewProps) {
                         <h3 className="font-bold text-lg mb-1">Collaboration Copilot</h3><p className={`text-sm text-center max-w-[240px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Ask about workspaces, team activity, sprint status, or design reviews.</p>
                     </motion.div>
                     <div className="w-full mt-auto pb-4 shrink-0">
-                        <label className="text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 text-white/40">Suggested</label>
+                        <label className={`text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
                         <div className="grid grid-cols-2 gap-2.5">
-                            {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-left p-3.5 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} ${theme.copilot.promptCard(isLight)}`}><Icon name={p.icon} className={`mb-1.5 text-lg ${theme.copilot.promptIconColor}`} /><span className="font-semibold text-[13px]">{p.label}</span></motion.button>))}
+                            {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-left p-3.5 ${promptCardClass}`}><Icon name={p.icon} className={`mb-1.5 text-lg ${promptIconColor}`} /><span className="font-semibold text-[13px]">{p.label}</span></motion.button>))}
                         </div>
                     </div>
                 </div>
@@ -51,8 +62,8 @@ export function CopilotView({ isLight, theme }: CopilotViewProps) {
                     <div ref={ref} className="pb-4" />
                 </div>
             )}
-            <div className={`px-4 pt-3 pb-[90px] flex items-end space-x-2 shrink-0 z-30 w-full ${theme.copilot.inputBar(isLight)}`}>
-                <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask about your team..." className={`flex-1 outline-none text-[14px] ${theme.copilot.inputField(isLight)}`} />
+            <div className={`px-4 pt-3 pb-[90px] flex items-end space-x-2 shrink-0 z-30 w-full ${inputBarClass}`}>
+                <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask about your team..." className={`flex-1 outline-none text-[14px] ${inputFieldClass}`} />
                 <button onClick={() => send()} disabled={!input.trim()} className={`w-10 h-10 flex justify-center items-center shrink-0 disabled:opacity-40 ${theme.radii.sendButtonBg} text-white ${theme.radii.sendButton}`}><Icon name="arrow_upward" className="text-lg" /></button>
             </div>
         </motion.div>

@@ -8,12 +8,17 @@ import type { MobileTheme } from '../themes';
 interface DashboardViewProps {
     card: string;
     isLight: boolean;
+    isColorful?: boolean;
     onNav: (t: TabType) => void;
     theme: MobileTheme;
 }
 
-export function DashboardView({ card, isLight, onNav, theme }: DashboardViewProps) {
+export function DashboardView({ card, isLight, isColorful = false, onNav, theme }: DashboardViewProps) {
     const d = theme.dashboard;
+    const accentColor = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
+    const highlightColor = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const followUpColor = isColorful ? 'text-fuchsia-400' : d.followUpColor;
+    const seeAllColor = isColorful ? 'text-fuchsia-400' : d.seeAllColor;
     const quickActions = [
         { icon: 'edit_document', label: 'New Doc', desc: 'Create document', g: theme.platform === 'android' ? 'from-purple-500/20 to-fuchsia-500/20' : 'from-blue-500/10 to-indigo-500/10 border-blue-500/20' },
         { icon: 'groups', label: 'Join Room', desc: 'Live session', g: theme.platform === 'android' ? 'from-blue-500/20 to-cyan-500/20' : 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20' },
@@ -26,16 +31,16 @@ export function DashboardView({ card, isLight, onNav, theme }: DashboardViewProp
             {/* AI Briefing Card */}
             <motion.div variants={fadeUp} className={`p-5 ${card}`}>
                 <div className="flex items-center space-x-2.5 mb-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}><Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} /></div>
-                    <span className={`text-xs font-bold uppercase tracking-widest ${d.briefingAccent(isLight)}`}>AI Collaboration Briefing</span>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}><Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} /></div>
+                    <span className={`text-xs font-bold uppercase tracking-widest ${accentColor}`}>AI Collaboration Briefing</span>
                 </div>
-                <p className={`text-[14px] leading-[1.65] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>Your team had a <span className={`font-semibold ${d.briefingHighlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.</p>
-                <button onClick={() => onNav('copilot')} className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${d.followUpColor}`}><span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" /></button>
+                <p className={`text-[14px] leading-[1.65] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>Your team had a <span className={`font-semibold ${highlightColor}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.</p>
+                <button onClick={() => onNav('copilot')} className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${followUpColor}`}><span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" /></button>
             </motion.div>
 
             {/* Workspace Activity Carousel */}
             <motion.div variants={fadeUp}>
-                <div className="flex justify-between items-center mb-3 px-1"><h3 className={`font-bold text-base ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>Workspace Activity</h3><button className={`text-xs font-semibold ${d.seeAllColor}`}>See All</button></div>
+                <div className="flex justify-between items-center mb-3 px-1"><h3 className={`font-bold text-base ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>Workspace Activity</h3><button className={`text-xs font-semibold ${seeAllColor}`}>See All</button></div>
                 <div className="flex space-x-3 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {workspaces.slice(0, 4).map((ws, i) => (
                         <motion.div key={ws.id} initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 + i * 0.07, type: 'spring', stiffness: 400, damping: 30 }}

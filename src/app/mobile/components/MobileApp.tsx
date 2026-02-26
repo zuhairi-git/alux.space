@@ -51,11 +51,11 @@ export function MobileApp({ theme }: MobileAppProps) {
             {/* Content */}
             <main className="flex-1 relative w-full">
                 <AnimatePresence mode="wait">
-                    {activeTab === 'dashboard' && <DashboardView key="d" card={card} isLight={isLight} onNav={setActiveTab} theme={theme} />}
-                    {activeTab === 'workspaces' && <WorkspacesView key="w" card={card} isLight={isLight} theme={theme} onNav={(t) => setActiveTab(t as TabType)} />}
-                    {activeTab === 'copilot' && <CopilotView key="c" isLight={isLight} theme={theme} />}
-                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} theme={theme} />}
-                    {activeTab === 'profile' && <ProfileView key="p" card={card} isLight={isLight} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} />}
+                    {activeTab === 'dashboard' && <DashboardView key="d" card={card} isLight={isLight} isColorful={isColorful} onNav={setActiveTab} theme={theme} />}
+                    {activeTab === 'workspaces' && <WorkspacesView key="w" card={card} isLight={isLight} isColorful={isColorful} theme={theme} onNav={(t) => setActiveTab(t as TabType)} />}
+                    {activeTab === 'copilot' && <CopilotView key="c" isLight={isLight} isColorful={isColorful} theme={theme} />}
+                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} isColorful={isColorful} theme={theme} />}
+                    {activeTab === 'profile' && <ProfileView key="p" card={card} isLight={isLight} isColorful={isColorful} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} />}
                 </AnimatePresence>
             </main>
 

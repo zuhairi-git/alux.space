@@ -71,11 +71,11 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
             {/* Content */}
             <main className="flex-1 relative w-full overflow-hidden">
                 <AnimatePresence mode="wait">
-                    {activeTab === 'dashboard' && <DashboardView key="d" card={card} isLight={isLight} onNav={(t: string) => setActiveTab(t as JobTabType)} theme={theme} />}
-                    {activeTab === 'jobs' && <JobsView key="j" card={card} isLight={isLight} theme={theme} onNav={(t) => setActiveTab(t as JobTabType)} />}
-                    {activeTab === 'copilot' && <CopilotView key="c" isLight={isLight} theme={theme} />}
-                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} theme={theme} onNav={(t) => setActiveTab(t as JobTabType)} />}
-                    {activeTab === 'profile' && <ProfileView key="p" card={card} isLight={isLight} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} />}
+                    {activeTab === 'dashboard' && <DashboardView key="d" card={card} isLight={isLight} isColorful={isColorful} onNav={(t: string) => setActiveTab(t as JobTabType)} theme={theme} />}
+                    {activeTab === 'jobs' && <JobsView key="j" card={card} isLight={isLight} isColorful={isColorful} theme={theme} onNav={(t) => setActiveTab(t as JobTabType)} />}
+                    {activeTab === 'copilot' && <CopilotView key="c" isLight={isLight} isColorful={isColorful} theme={theme} />}
+                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} isColorful={isColorful} theme={theme} onNav={(t) => setActiveTab(t as JobTabType)} />}
+                    {activeTab === 'profile' && <ProfileView key="p" card={card} isLight={isLight} isColorful={isColorful} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} />}
                 </AnimatePresence>
             </main>
 

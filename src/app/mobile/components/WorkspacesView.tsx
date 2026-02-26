@@ -8,21 +8,24 @@ import type { MobileTheme } from '../themes';
 interface WorkspacesViewProps {
     card: string;
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
     onNav?: (tab: string) => void;
 }
 
-export function WorkspacesView({ card, isLight, theme, onNav }: WorkspacesViewProps) {
+export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav }: WorkspacesViewProps) {
     const [sel, setSel] = useState<string | null>(null);
     const [expanded, setExpanded] = useState(false);
     const ws = theme.workspace;
+    const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : ws.searchBar(isLight);
+    const sheetBgClass = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : ws.sheetBg(isLight);
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 ${theme.contentPaddingTop}`}>
             {/* Scrollable list */}
             <div className="overflow-y-auto scrollbar-none h-full pb-28 px-4 space-y-5">
                 {/* Search Bar */}
                 <motion.div variants={fadeUp}>
-                    <div className={`flex items-center space-x-3 px-4 ${theme.platform === 'ios' ? 'py-2.5' : 'py-3'} ${theme.radii.search} ${ws.searchBar(isLight)}`}>
+                    <div className={`flex items-center space-x-3 px-4 ${theme.platform === 'ios' ? 'py-2.5' : 'py-3'} ${theme.radii.search} ${searchBarClass}`}>
                         <Icon name="search" className={`text-lg ${theme.platform === 'ios' ? ws.searchText(isLight) : 'opacity-50'}`} />
                         <span className={`${theme.platform === 'ios' ? 'text-[16px]' : 'text-[14px]'} ${ws.searchText(isLight)}`}>{theme.platform === 'ios' ? 'Search' : 'Search workspaces...'}</span>
                     </div>
@@ -55,7 +58,7 @@ export function WorkspacesView({ card, isLight, theme, onNav }: WorkspacesViewPr
                     <motion.div key="ws-sheet" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-[60]">
                         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => { setSel(null); setExpanded(false); }} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} pt-4 pb-10 ${ws.sheetBg(isLight)}`}>
+                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} pt-4 pb-10 ${sheetBgClass}`}>
                             {/* Drag handle — tap to expand */}
                             <button onClick={() => setExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
                                 <div className="w-10 h-1 rounded-full bg-gray-400/30" />

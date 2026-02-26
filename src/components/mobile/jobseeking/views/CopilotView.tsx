@@ -14,10 +14,22 @@ interface Message {
 
 interface ViewProps {
     isLight: boolean;
+    isColorful?: boolean;
     theme: MobileTheme;
 }
 
-export function CopilotView({ isLight, theme }: ViewProps) {
+export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
+    const promptCardClass = isColorful
+        ? 'rounded-2xl bg-purple-500/10 text-white backdrop-blur-xl border border-purple-500/20'
+        : theme.copilot.promptCard(isLight);
+    const promptIconColor = isColorful ? 'text-fuchsia-400' : theme.copilot.promptIconColor;
+    const inputBarClass = isColorful ? 'bg-[#050023]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
+    const inputFieldClass = isColorful
+        ? 'bg-white/10 text-white border border-white/10'
+        : theme.copilot.inputField(isLight);
+    const bb = isColorful
+        ? 'bg-[#1a0040]/60 backdrop-blur-[20px] border border-purple-500/20 text-white rounded-2xl'
+        : theme.copilot.botBubble(isLight);
     const defaultMessages: Message[] = [
         {
             id: '1',
@@ -102,7 +114,7 @@ export function CopilotView({ isLight, theme }: ViewProps) {
                                     <Icon name="auto_awesome" className="text-white text-[16px]" />
                                 </div>
                             )}
-                            <div className={`max-w-[75%] px-4 py-3 text-[16px] leading-relaxed ${msg.sender === 'user' ? theme.copilot.userBubble : theme.copilot.botBubble(isLight)}`}>
+                            <div className={`max-w-[75%] px-4 py-3 text-[16px] leading-relaxed ${msg.sender === 'user' ? theme.copilot.userBubble : bb}`}>
                                 <p>{msg.text}</p>
                                 {msg.citations && msg.citations.length > 0 && (
                                     <div className="mt-3 pt-3 border-t border-black/5 border-white/10 flex gap-2 overflow-x-auto no-scrollbar pb-1">
@@ -123,7 +135,7 @@ export function CopilotView({ isLight, theme }: ViewProps) {
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 mt-1 shrink-0 ${theme.copilot.heroGradient}`}>
                                 <Icon name="auto_awesome" className="text-white text-[16px]" />
                             </div>
-                            <div className={`px-5 py-3.5 flex items-center space-x-1.5 w-[72px] h-[48px] ${theme.copilot.botBubble(isLight)}`}>
+                            <div className={`px-5 py-3.5 flex items-center space-x-1.5 w-[72px] h-[48px] ${bb}`}>
                                 {[0, 1, 2].map((i) => (
                                     <motion.div key={i} animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
                                         className={`w-2 h-2 rounded-full ${isLight ? 'bg-gray-400' : 'bg-gray-500'}`}
@@ -137,8 +149,8 @@ export function CopilotView({ isLight, theme }: ViewProps) {
             </div>
 
             {/* Input Bar */}
-            <div className={`w-full p-4 pb-[100px] border-t border-black/5 border-white/5 ${theme.copilot.inputBar(isLight)}`}>
-                <div className={`flex items-center p-1.5 w-full ${theme.radii.search} ${theme.copilot.inputField(isLight)}`}>
+            <div className={`w-full p-4 pb-[100px] border-t border-black/5 border-white/5 ${inputBarClass}`}>
+                <div className={`flex items-center p-1.5 w-full ${theme.radii.search} ${inputFieldClass}`}>
                     <button className={`w-10 h-10 rounded-full flex items-center justify-center ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                         <Icon name="add" className="text-[24px]" />
                     </button>
