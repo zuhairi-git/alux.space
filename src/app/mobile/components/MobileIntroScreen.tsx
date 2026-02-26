@@ -68,7 +68,7 @@ const pageVariants = {
 export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScreenProps) {
     const [step, setStep] = useState(0);
     const [direction, setDirection] = useState(1);
-    const [selectedTheme, setSelectedTheme] = useState<string>('dark');
+    const [selectedTheme, setSelectedTheme] = useState<string>('colorful');
     const TOTAL_STEPS = 4;
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
@@ -380,13 +380,13 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                             <div className={`w-14 h-14 rounded-xl ${t.swatchBg} flex flex-col justify-between p-2 overflow-hidden shadow-md shrink-0 relative`}>
                                                 {/* Tiny mockup header */}
                                                 <div className="flex items-center gap-1">
-                                                    <div className="w-3 h-3 rounded-full bg-white/20" />
-                                                    <div className="flex-1 h-1.5 rounded-full bg-white/15" />
+                                                    <div className={`w-3 h-3 rounded-full ${t.v === 'light' ? 'bg-gray-400/60' : 'bg-white/20'}`} />
+                                                    <div className={`flex-1 h-1.5 rounded-full ${t.v === 'light' ? 'bg-gray-300/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {/* Tiny mockup cards */}
                                                 <div className="space-y-1">
-                                                    <div className="h-1.5 rounded-full bg-white/25 w-full" />
-                                                    <div className="h-1.5 rounded-full bg-white/15 w-3/4" />
+                                                    <div className={`h-1.5 rounded-full w-full ${t.v === 'light' ? 'bg-gray-300/80' : 'bg-white/25'}`} />
+                                                    <div className={`h-1.5 rounded-full w-3/4 ${t.v === 'light' ? 'bg-gray-200/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {t.v === 'colorful' && (
                                                     <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/30 to-purple-600/20 rounded-xl" />

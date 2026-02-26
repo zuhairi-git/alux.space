@@ -48,7 +48,7 @@ interface MobileAppProps {
 
 export function MobileApp({ theme }: MobileAppProps) {
     const [showIntro, setShowIntro] = useState(true);
-    const [themeMode, setThemeMode] = useState('dark');
+    const [themeMode, setThemeMode] = useState('colorful');
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
     const isLight = themeMode === 'light';
     const isColorful = themeMode === 'colorful';

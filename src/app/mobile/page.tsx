@@ -66,7 +66,7 @@ type TabType = 'dashboard' | 'markets' | 'copilot' | 'alerts' | 'profile';
 function MobilePrototypeContent() {
     const searchParams = useSearchParams();
     const initialOs = searchParams.get('os') === 'android' ? 'android' : 'ios';
-    const initialTheme = searchParams.get('theme') || 'dark';
+    const initialTheme = searchParams.get('theme') || 'colorful';
 
     const [os] = useState<'ios' | 'android'>(initialOs);
     const [theme, setTheme] = useState(initialTheme);

@@ -50,7 +50,7 @@ interface JobSeekingAppProps {
 
 export function JobSeekingApp({ theme }: JobSeekingAppProps) {
     const [showIntro, setShowIntro] = useState(true);
-    const [themeMode, setThemeMode] = useState('dark');
+    const [themeMode, setThemeMode] = useState('colorful');
     const [activeTab, setActiveTab] = useState<JobTabType>('dashboard');
     const isLight = themeMode === 'light';
     const isColorful = themeMode === 'colorful';
