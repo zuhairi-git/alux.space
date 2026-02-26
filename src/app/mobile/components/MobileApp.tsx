@@ -9,12 +9,45 @@ import { WorkspacesView } from './WorkspacesView';
 import { CopilotView } from './CopilotView';
 import { NotificationsView } from './NotificationsView';
 import { ProfileView } from './ProfileView';
+import { MobileIntroScreen, type MobileIntroConfig } from './MobileIntroScreen';
+
+const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
+    appName: 'Workflow Platform',
+    tagline: 'Your AI-powered team collaboration hub — manage workspaces, projects, and insights all in one place.',
+    appIcon: 'blur_on',
+    accentGradient: 'from-indigo-500 to-violet-600',
+    aiTips: [
+        {
+            icon: 'query_stats',
+            title: 'Ask about your team',
+            body: 'Ask Copilot "Which workspaces are most active?" or "Who needs a review reminder?" and get instant, context-aware answers.',
+        },
+        {
+            icon: 'edit_document',
+            title: 'Surface key decisions fast',
+            body: 'Copilot reads your workspace docs and highlights open items, blockers, and decisions — no more digging through threads.',
+        },
+        {
+            icon: 'schedule',
+            title: 'Stay ahead of deadlines',
+            body: 'Ask "What is due this sprint?" and Copilot cross-references all workspaces to give you a prioritised rundown.',
+        },
+    ],
+    features: [
+        { icon: 'space_dashboard', label: 'Dashboard', desc: 'Team activity feed, AI morning briefing, and your most urgent workspaces at a glance.' },
+        { icon: 'workspaces', label: 'Workspaces', desc: 'Browse and manage all project workspaces, docs, timelines, and team members.' },
+        { icon: 'auto_awesome', label: 'Copilot', desc: 'Conversational AI with full workspace context for smart recommendations and summaries.' },
+        { icon: 'notifications', label: 'Notifications', desc: 'Critical alerts, sprint reminders, and team activity — automatically prioritised by AI.' },
+        { icon: 'person', label: 'My Profile', desc: 'Your contributions, engagement stats, and app appearance settings.' },
+    ],
+};
 
 interface MobileAppProps {
     theme: MobileTheme;
 }
 
 export function MobileApp({ theme }: MobileAppProps) {
+    const [showIntro, setShowIntro] = useState(true);
     const [themeMode, setThemeMode] = useState('dark');
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
     const isLight = themeMode === 'light';
@@ -25,6 +58,28 @@ export function MobileApp({ theme }: MobileAppProps) {
 
     return (
         <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+            {/* Intro screen overlay */}
+            <AnimatePresence>
+                {showIntro && (
+                    <motion.div
+                        key="intro"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0, scale: 1.04 }}
+                        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                        className="absolute inset-0 z-50"
+                    >
+                        <MobileIntroScreen
+                            config={WORKFLOW_PLATFORM_INTRO}
+                            theme={theme}
+                            onComplete={(chosenTheme) => {
+                                setThemeMode(chosenTheme);
+                                setShowIntro(false);
+                            }}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Header */}
             <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-3 px-5 z-40 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">

@@ -3,6 +3,39 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
+import { MobileIntroScreen, type MobileIntroConfig } from './components/MobileIntroScreen';
+import { iosTheme, androidTheme } from './themes';
+
+const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
+    appName: 'Market Intelligence',
+    tagline: 'Real-time market insights, AI-powered summaries, and personalised alerts — all in your pocket.',
+    appIcon: 'candlestick_chart',
+    accentGradient: 'from-blue-500 to-indigo-600',
+    aiTips: [
+        {
+            icon: 'chat',
+            title: 'Ask anything in plain English',
+            body: 'Type "Why did NVDA surge today?" or "Summarise Apple\'s last earnings call" and get a grounded, cited answer in seconds.',
+        },
+        {
+            icon: 'source',
+            title: 'Every answer is source-backed',
+            body: 'Copilot attaches citations from filings, earnings transcripts, and research so you can verify every insight.',
+        },
+        {
+            icon: 'notifications_active',
+            title: 'Set smart AI alerts',
+            body: 'Ask Copilot to monitor a ticker or theme — it will proactively surface breaking news and notable price moves just for you.',
+        },
+    ],
+    features: [
+        { icon: 'space_dashboard', label: 'Dashboard', desc: 'Live watchlist, AI briefing, and top market movers at a glance.' },
+        { icon: 'show_chart', label: 'Markets', desc: 'Deep-dive into stocks, sectors, and macro trends with interactive charts.' },
+        { icon: 'auto_awesome', label: 'Copilot', desc: 'Conversational AI for research — ask follow-ups, compare companies, and more.' },
+        { icon: 'notifications', label: 'Alerts', desc: 'Customisable real-time alerts for price, volatility, and news events.' },
+        { icon: 'person', label: 'My Space', desc: 'Manage your watchlist, app theme, and account preferences.' },
+    ],
+};
 
 const Icon = ({ name, className = "" }: { name: string, className?: string }) => (
     <span className={`material-symbols ${className}`}>{name}</span>
@@ -37,6 +70,7 @@ function MobilePrototypeContent() {
 
     const [os] = useState<'ios' | 'android'>(initialOs);
     const [theme, setTheme] = useState(initialTheme);
+    const [showIntro, setShowIntro] = useState(true);
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
 
     useEffect(() => {
@@ -64,6 +98,28 @@ function MobilePrototypeContent() {
 
     return (
         <div className={`flex flex-col h-[100dvh] overflow-hidden w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+            {/* Intro screen overlay */}
+            <AnimatePresence>
+                {showIntro && (
+                    <motion.div
+                        key="intro"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0, scale: 1.04 }}
+                        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                        className="absolute inset-0 z-50"
+                    >
+                        <MobileIntroScreen
+                            config={MARKET_INTELLIGENCE_INTRO}
+                            theme={os === 'ios' ? iosTheme : androidTheme}
+                            onComplete={(chosenTheme) => {
+                                setTheme(chosenTheme);
+                                setShowIntro(false);
+                            }}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Header */}
             <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
                 ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')

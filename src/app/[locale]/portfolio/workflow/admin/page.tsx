@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import type { Theme } from '@/context/ThemeContext';
 
-const Icon = ({ name, className = "" }: { name: string, className?: string }) => (
-    <span className={`material-symbols ${className}`}>{name}</span>
+const Icon = ({ name, className = "", style }: { name: string, className?: string, style?: React.CSSProperties }) => (
+    <span className={`material-symbols ${className}`} style={style}>{name}</span>
 );
 
 type Section = 'start' | 'dashboard' | 'users' | 'workspaces' | 'copilot-logs' | 'alerts-config' | 'analytics' | 'settings';
@@ -38,6 +38,7 @@ export default function PortalPanel() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     const { theme, setTheme } = useTheme();
+    const [showIntro, setShowIntro] = useState(true);
 
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
@@ -170,6 +171,19 @@ export default function PortalPanel() {
 
     return (
         <div className={`flex min-h-screen w-full ${bg} transition-colors duration-500 relative overflow-hidden font-sans`}>
+            {/* Portal Intro Overlay */}
+            <AnimatePresence>
+                {showIntro && (
+                    <PortalIntroOverlay
+                        onComplete={(chosenTheme) => {
+                            setTheme(chosenTheme as Theme);
+                            setShowIntro(false);
+                        }}
+                        currentTheme={theme}
+                    />
+                )}
+            </AnimatePresence>
+
             {/* Animated Mesh Gradient Background (Colorful Only) */}
             {isColorful && (
                 <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
@@ -1461,6 +1475,567 @@ function SettingsSection({ card, isLight, theme, setTheme }: { card: string, isL
                     <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="px-8 py-3.5 bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white rounded-2xl text-sm font-bold transition-all shadow-lg shadow-fuchsia-500/20 mt-4">Save Platform Configuration</motion.button>
                 </div>
             </motion.div>
+        </motion.div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════
+// PORTAL INTRO OVERLAY
+// ═══════════════════════════════════════════════════════════
+const PORTAL_STEPS = [
+    {
+        id: 'welcome',
+        icon: 'blur_on',
+        title: 'Workflow Portal',
+        subtitle: 'Your AI-powered collaboration hub',
+        body: 'Manage your entire team, workspaces, and platform health from a single intelligent dashboard — designed for platform admins and power users.',
+    },
+    {
+        id: 'ai',
+        icon: 'smart_toy',
+        title: 'Meet Your Copilot',
+        subtitle: 'AI that watches your platform so you don\'t have to',
+        body: 'Ask Copilot anything about your team or platform in plain English.',
+    },
+    {
+        id: 'features',
+        icon: 'apps',
+        title: 'What\'s Inside',
+        subtitle: 'Everything at your fingertips',
+        body: 'Eight fully interactive sections to manage and analyse your platform.',
+    },
+    {
+        id: 'theme',
+        icon: 'palette',
+        title: 'Choose Your Theme',
+        subtitle: 'Make it yours',
+        body: 'Pick the look that works best for your environment.',
+    },
+];
+
+const AI_TIPS = [
+    { icon: 'query_stats', title: 'Ask about metrics', body: '"Which workspaces are declining in engagement this week?" — get instant, data-backed answers.' },
+    { icon: 'group', title: 'Analyse your team', body: '"Who hasn\'t been active in Design System v3?" surfaces team health issues before they become blockers.' },
+    { icon: 'notifications_active', title: 'Configure smart alerts', body: '"Notify me when sprint reviews are overdue by more than 24 hours" — set it once, rely on it always.' },
+    { icon: 'trending_up', title: 'Forecast & compare', body: '"Compare workspace activity in Q3 vs Q4" for trend analysis and executive reporting.' },
+];
+
+const PORTAL_FEATURES = [
+    { icon: 'home', label: 'Start', desc: 'Quick-access launchpad with KPIs, recent activity, and AI highlights.' },
+    { icon: 'dashboard', label: 'Dashboard', desc: 'Live platform metrics — workspace health, team velocity, and AI-driven insights.' },
+    { icon: 'group', label: 'Users', desc: 'Manage members, roles, permissions, and team engagement at scale.' },
+    { icon: 'workspaces', label: 'Workspaces', desc: 'Monitor all project workspaces, docs, and collaboration activity.' },
+    { icon: 'smart_toy', label: 'Copilot Logs', desc: 'Audit all AI interactions across the platform with full transparency.' },
+    { icon: 'notifications_active', label: 'Alerts Config', desc: 'Create and tune intelligent alerts for critical platform events.' },
+    { icon: 'analytics', label: 'Analytics', desc: 'Deep-dive reports on productivity, engagement, and usage trends.' },
+    { icon: 'settings', label: 'Settings', desc: 'Platform configuration, appearance, integrations, and admin controls.' },
+];
+
+const PORTAL_THEMES = [
+    { v: 'dark' as Theme, label: 'Dark', icon: 'dark_mode', desc: 'Low-glare, great for long sessions', bg: 'bg-gray-900', border: 'border-blue-500' },
+    { v: 'light' as Theme, label: 'Light', icon: 'light_mode', desc: 'Clean and presentation-ready', bg: 'bg-white', border: 'border-amber-400' },
+    { v: 'colorful' as Theme, label: 'Colorful', icon: 'palette', desc: 'Vivid cosmic gradient look', bg: 'bg-[#050023]', border: 'border-fuchsia-500' },
+];
+
+const portalPageVariants = {
+    enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 56 : -56 }),
+    center: { opacity: 1, x: 0, transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] as [number,number,number,number] } },
+    exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -56 : 56, transition: { duration: 0.28, ease: [0.32, 0.72, 0, 1] as [number,number,number,number] } }),
+};
+
+interface PortalIntroOverlayProps {
+    onComplete: (theme: string) => void;
+    currentTheme: Theme;
+}
+
+function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProps) {
+    const [step, setStep] = useState(0);
+    const [direction, setDirection] = useState(1);
+    const [selectedTheme, setSelectedTheme] = useState<Theme>(currentTheme);
+    const TOTAL = PORTAL_STEPS.length;
+    const isLast = step === TOTAL - 1;
+
+    const overlayBg =
+        selectedTheme === 'light'
+            ? 'bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900'
+            : selectedTheme === 'colorful'
+                ? 'bg-[#050023] text-white'
+                : 'bg-[#0D0D14] text-white';
+
+    const muted = selectedTheme === 'light' ? 'text-slate-500' : 'text-white/50';
+
+    const cardClass =
+        selectedTheme === 'light'
+            ? 'bg-white border border-slate-200/80 shadow-sm'
+            : selectedTheme === 'colorful'
+                ? 'bg-white/[0.06] border border-fuchsia-500/15'
+                : 'bg-white/[0.05] border border-white/[0.07]';
+
+    const accentGradient = selectedTheme === 'colorful'
+        ? 'from-fuchsia-500 to-purple-600'
+        : selectedTheme === 'light'
+            ? 'from-blue-500 to-indigo-600'
+            : 'from-blue-400 to-indigo-600';
+
+    const accentColor = selectedTheme === 'colorful' ? '#d946ef' : selectedTheme === 'light' ? '#3b82f6' : '#60a5fa';
+
+    const handleNext = () => {
+        if (isLast) {
+            onComplete(selectedTheme);
+        } else {
+            setDirection(1);
+            setStep((s) => s + 1);
+        }
+    };
+
+    const handleBack = () => {
+        setDirection(-1);
+        setStep((s) => Math.max(s - 1, 0));
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+            className={`fixed inset-0 z-[200] flex flex-col ${overlayBg} transition-colors duration-500 overflow-hidden`}
+        >
+            {/* Colorful ambient glows */}
+            {selectedTheme === 'colorful' && (
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div className="absolute -top-1/4 -left-1/4 w-[60vw] h-[60vw] rounded-full bg-fuchsia-600/20 blur-[120px] animate-pulse" style={{ animationDuration: '10s' }} />
+                    <div className="absolute -bottom-1/4 -right-1/4 w-[50vw] h-[50vw] rounded-full bg-purple-600/15 blur-[120px] animate-pulse" style={{ animationDuration: '14s', animationDelay: '4s' }} />
+                </div>
+            )}
+
+            {/* ── DESKTOP SPLIT LAYOUT ── */}
+            <div className="hidden md:flex flex-1 min-h-0">
+                {/* Left panel — fixed hero */}
+                <div className={`w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative ${selectedTheme === 'light' ? 'border-r border-slate-200/60' : selectedTheme === 'colorful' ? 'border-r border-fuchsia-500/20' : 'border-r border-white/[0.06]'}`}>
+                    <motion.div
+                        key={selectedTheme + '-icon'}
+                        initial={{ scale: 0.7, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                        className={`w-24 h-24 rounded-[30px] bg-gradient-to-br ${accentGradient} flex items-center justify-center mb-8 shadow-2xl`}
+                        style={{ boxShadow: `0 24px 72px ${accentColor}50` }}
+                    >
+                        <Icon name="blur_on" className="text-white text-[48px]" />
+                    </motion.div>
+                    <motion.h1
+                        key={selectedTheme + '-name'}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-[32px] font-extrabold tracking-tight text-center mb-3"
+                    >
+                        Workflow Portal
+                    </motion.h1>
+                    <motion.p
+                        key={selectedTheme + '-sub'}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 }}
+                        className={`text-[15px] text-center leading-relaxed ${muted}`}
+                    >
+                        AI-powered team collaboration and platform management — designed for admins who move fast.
+                    </motion.p>
+
+                    {/* Step indicators */}
+                    <div className="flex gap-2 mt-10">
+                        {Array.from({ length: TOTAL }).map((_, i) => (
+                            <motion.div
+                                key={i}
+                                animate={{ width: i === step ? '2rem' : '0.5rem', opacity: i <= step ? 1 : 0.3 }}
+                                transition={{ duration: 0.3 }}
+                                className="h-1.5 rounded-full"
+                                style={{ backgroundColor: accentColor }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Step labels */}
+                    <div className="mt-6 space-y-2 w-full">
+                        {PORTAL_STEPS.map((s, i) => (
+                            <button
+                                key={s.id}
+                                onClick={() => { setDirection(i > step ? 1 : -1); setStep(i); }}
+                                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-medium transition-all ${i === step
+                                    ? (selectedTheme === 'light' ? 'bg-white shadow-sm border border-slate-200' : selectedTheme === 'colorful' ? 'bg-white/10 border border-fuchsia-500/30' : 'bg-white/10 border border-white/10')
+                                    : (selectedTheme === 'light' ? 'text-slate-400 hover:bg-white/60' : 'text-white/40 hover:bg-white/5')
+                                }`}
+                            >
+                                <Icon name={s.icon} className={`text-[18px] ${i === step ? '' : 'opacity-40'}`} style={i === step ? { color: accentColor } as React.CSSProperties : {}} />
+                                <span className={i === step ? 'font-bold' : ''}>{s.title}</span>
+                                {i < step && <Icon name="check" className="ml-auto text-[16px]" style={{ color: accentColor } as React.CSSProperties} />}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Right panel — dynamic content */}
+                <div className="flex-1 flex flex-col min-h-0">
+                    <div className="flex-1 overflow-y-auto px-10 xl:px-16 py-14 no-scrollbar relative">
+                        <AnimatePresence custom={direction} mode="wait">
+                            {/* ── Step 0: Welcome ── */}
+                            {step === 0 && (
+                                <motion.div key="portal-step0" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
+                                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
+                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-blue-50 text-blue-600' : selectedTheme === 'colorful' ? 'bg-fuchsia-500/15 text-fuchsia-300' : 'bg-blue-500/15 text-blue-300'}`}>
+                                            <Icon name="waving_hand" className="text-[14px]" />
+                                            Welcome to the Portal
+                                        </span>
+                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                            Your team&apos;s command <br />centre
+                                        </h2>
+                                        <p className={`text-[16px] leading-relaxed ${muted}`}>
+                                            This portal gives you full visibility and control over your platform — from workspace health to individual team performance. Everything is interactive: click, explore, and drill down.
+                                        </p>
+                                    </motion.div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        {[
+                                            { icon: 'groups', label: '24 Team Members', sub: 'Across 5 active workspaces' },
+                                            { icon: 'bolt', label: '88% Activity Rate', sub: 'Up 12% this quarter' },
+                                            { icon: 'smart_toy', label: 'AI-Powered', sub: 'Copilot analyses everything' },
+                                            { icon: 'shield', label: 'Admin Access', sub: 'Full platform controls' },
+                                        ].map((stat, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, y: 16 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: i * 0.08 + 0.2, type: 'spring', stiffness: 300, damping: 24 }}
+                                                className={`p-5 rounded-2xl flex gap-4 items-start ${cardClass}`}
+                                            >
+                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}>
+                                                    <Icon name={stat.icon} className="text-white text-[18px]" />
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold text-[15px]">{stat.label}</div>
+                                                    <div className={`text-[12px] mt-0.5 ${muted}`}>{stat.sub}</div>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {/* ── Step 1: AI Tips ── */}
+                            {step === 1 && (
+                                <motion.div key="portal-step1" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
+                                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-violet-50 text-violet-600' : 'bg-violet-500/15 text-violet-300'}`}>
+                                            <Icon name="auto_awesome" className="text-[14px]" />
+                                            AI Copilot
+                                        </span>
+                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                            Ask anything, <br />get answers instantly
+                                        </h2>
+                                        <p className={`text-[16px] leading-relaxed ${muted}`}>
+                                            Click the <strong>✦ sparkle button</strong> in the top-right header to open Copilot at any time. It has full context of your platform data.
+                                        </p>
+                                    </motion.div>
+
+                                    <div className="grid grid-cols-1 gap-4">
+                                        {AI_TIPS.map((tip, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: i * 0.08 + 0.15, type: 'spring', stiffness: 300, damping: 24 }}
+                                                className={`p-5 rounded-2xl flex gap-4 ${cardClass}`}
+                                            >
+                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}>
+                                                    <Icon name={tip.icon} className="text-white text-[18px]" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-semibold text-[14px] mb-1">{tip.title}</h4>
+                                                    <p className={`text-[13px] leading-relaxed ${muted}`}>{tip.body}</p>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {/* ── Step 2: Features ── */}
+                            {step === 2 && (
+                                <motion.div key="portal-step2" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
+                                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-emerald-50 text-emerald-700' : 'bg-emerald-500/15 text-emerald-300'}`}>
+                                            <Icon name="grid_view" className="text-[14px]" />
+                                            8 Sections
+                                        </span>
+                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                            Everything you <br />need to run your platform
+                                        </h2>
+                                    </motion.div>
+
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {PORTAL_FEATURES.map((f, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, y: 14 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: i * 0.06 + 0.12, type: 'spring', stiffness: 340, damping: 26 }}
+                                                className={`flex items-center gap-3 p-4 rounded-2xl ${cardClass}`}
+                                            >
+                                                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}>
+                                                    <Icon name={f.icon} className="text-white text-[16px]" />
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold text-[13px]">{f.label}</div>
+                                                    <div className={`text-[11px] leading-snug mt-0.5 ${muted}`}>{f.desc}</div>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {/* ── Step 3: Theme ── */}
+                            {step === 3 && (
+                                <motion.div key="portal-step3" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
+                                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-pink-50 text-pink-600' : 'bg-pink-500/15 text-pink-300'}`}>
+                                            <Icon name="palette" className="text-[14px]" />
+                                            Appearance
+                                        </span>
+                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                            Make it look <br />exactly right
+                                        </h2>
+                                        <p className={`text-[16px] leading-relaxed ${muted}`}>
+                                            Choose your preferred theme. The portal adapts its entire colour system and chrome immediately. You can switch anytime from the profile menu.
+                                        </p>
+                                    </motion.div>
+
+                                    <div className="space-y-4">
+                                        {PORTAL_THEMES.map((t, i) => {
+                                            const selected = selectedTheme === t.v;
+                                            return (
+                                                <motion.button
+                                                    key={t.v}
+                                                    initial={{ opacity: 0, y: 14 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: i * 0.1 + 0.1 }}
+                                                    onClick={() => setSelectedTheme(t.v)}
+                                                    className={`w-full flex items-center gap-5 p-5 rounded-2xl border-2 transition-all duration-200 text-left ${selected
+                                                        ? (selectedTheme === 'light' ? 'border-blue-500 bg-blue-50' : selectedTheme === 'colorful' ? 'border-fuchsia-500 bg-fuchsia-500/10' : 'border-blue-400 bg-blue-500/10')
+                                                        : (selectedTheme === 'light' ? 'border-slate-200 bg-white hover:border-slate-300' : selectedTheme === 'colorful' ? 'border-white/10 bg-white/5 hover:border-white/20' : 'border-white/8 bg-white/[0.03] hover:border-white/15')
+                                                    }`}
+                                                >
+                                                    {/* Swatch */}
+                                                    <div className={`w-[80px] h-[52px] rounded-xl ${t.bg} shrink-0 flex flex-col justify-between p-2.5 shadow-md overflow-hidden relative`}>
+                                                        <div className="flex items-center gap-1.5">
+                                                            <div className="w-4 h-4 rounded-md bg-white/20" />
+                                                            <div className="flex-1 h-1.5 rounded-full bg-white/15" />
+                                                        </div>
+                                                        <div className="space-y-1">
+                                                            <div className="h-1.5 rounded-full bg-white/25 w-full" />
+                                                            <div className="h-1.5 rounded-full bg-white/15 w-2/3" />
+                                                        </div>
+                                                        {t.v === 'colorful' && <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/30 to-purple-600/20 rounded-xl" />}
+                                                        {t.v === 'light' && <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-xl" />}
+                                                    </div>
+
+                                                    <div className="flex-1">
+                                                        <div className="flex items-center gap-2 mb-1">
+                                                            <Icon name={t.icon} className="text-[18px]" style={selected ? { color: accentColor } as React.CSSProperties : {}} />
+                                                            <span className="font-bold text-[16px]">{t.label}</span>
+                                                        </div>
+                                                        <p className={`text-[13px] ${muted}`}>{t.desc}</p>
+                                                    </div>
+
+                                                    <motion.div
+                                                        animate={{ scale: selected ? 1 : 0, opacity: selected ? 1 : 0 }}
+                                                        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+                                                    >
+                                                        <Icon name="check_circle" className="text-[28px]" style={{ color: accentColor } as React.CSSProperties} />
+                                                    </motion.div>
+                                                </motion.button>
+                                            );
+                                        })}
+                                    </div>
+
+                                    <motion.p
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 0.5 }}
+                                        className={`text-center text-[13px] mt-6 ${muted}`}
+                                    >
+                                        Your selection applies immediately when you click &ldquo;Launch Portal&rdquo;
+                                    </motion.p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Desktop bottom bar */}
+                    <div className={`px-10 xl:px-16 py-6 flex items-center justify-between border-t ${selectedTheme === 'light' ? 'border-slate-200/60' : selectedTheme === 'colorful' ? 'border-fuchsia-500/20' : 'border-white/[0.06]'}`}>
+                        <div className={`text-sm ${muted}`}>
+                            Step {step + 1} of {TOTAL}
+                        </div>
+                        <div className="flex gap-3">
+                            {step > 0 && (
+                                <motion.button
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    onClick={handleBack}
+                                    className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all ${selectedTheme === 'light' ? 'bg-slate-100 text-slate-700 hover:bg-slate-200' : 'bg-white/10 text-white hover:bg-white/15'}`}
+                                >
+                                    Back
+                                </motion.button>
+                            )}
+                            <motion.button
+                                onClick={handleNext}
+                                whileTap={{ scale: 0.97 }}
+                                className={`px-8 py-3 rounded-2xl font-bold text-sm text-white flex items-center gap-2 bg-gradient-to-r ${accentGradient} shadow-lg transition-all`}
+                                style={{ boxShadow: `0 8px 28px ${accentColor}40` }}
+                            >
+                                {isLast ? (
+                                    <>
+                                        <Icon name="rocket_launch" className="text-[17px]" />
+                                        Launch Portal
+                                    </>
+                                ) : (
+                                    <>
+                                        Continue
+                                        <Icon name="arrow_forward" className="text-[17px]" />
+                                    </>
+                                )}
+                            </motion.button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* ── MOBILE STACKED LAYOUT ── */}
+            <div className="flex md:hidden flex-col flex-1 min-h-0">
+                {/* Progress */}
+                <div className="flex justify-center gap-2 px-6 pt-14 pb-4">
+                    {Array.from({ length: TOTAL }).map((_, i) => (
+                        <motion.div
+                            key={i}
+                            animate={{ width: i === step ? '1.75rem' : '0.5rem' }}
+                            transition={{ duration: 0.3 }}
+                            className="h-1.5 rounded-full"
+                            style={{ backgroundColor: i <= step ? accentColor : (selectedTheme === 'light' ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.15)') }}
+                        />
+                    ))}
+                </div>
+
+                {/* Mobile content */}
+                <div className="flex-1 overflow-hidden relative">
+                    <AnimatePresence custom={direction} mode="wait">
+                        {step === 0 && (
+                            <motion.div key="m-step0" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
+                                className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
+                                <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, type: 'spring', stiffness: 260, damping: 18 }}
+                                    className={`w-20 h-20 rounded-[26px] bg-gradient-to-br ${accentGradient} flex items-center justify-center mb-7 shadow-2xl`}
+                                    style={{ boxShadow: `0 20px 60px ${accentColor}50` }}>
+                                    <Icon name="blur_on" className="text-white text-[40px]" />
+                                </motion.div>
+                                <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-[26px] font-extrabold tracking-tight mb-3">Workflow Portal</motion.h1>
+                                <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className={`text-[14px] leading-relaxed ${muted}`}>
+                                    AI-powered team collaboration and platform management for admins who move fast.
+                                </motion.p>
+                            </motion.div>
+                        )}
+                        {step === 1 && (
+                            <motion.div key="m-step1" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
+                                className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
+                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="auto_awesome" className="text-white text-[16px]" /></div>
+                                    <h2 className="text-[20px] font-extrabold tracking-tight">AI Copilot</h2>
+                                </motion.div>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Get the most from your AI assistant</motion.p>
+                                <div className="space-y-3">
+                                    {AI_TIPS.map((tip, i) => (
+                                        <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 + 0.12, type: 'spring', stiffness: 300, damping: 24 }} className={`p-4 rounded-2xl flex gap-4 ${cardClass}`}>
+                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}><Icon name={tip.icon} className="text-white text-[18px]" /></div>
+                                            <div className="min-w-0">
+                                                <h4 className="font-semibold text-[14px] mb-0.5">{tip.title}</h4>
+                                                <p className={`text-[12px] leading-relaxed ${muted}`}>{tip.body}</p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                        {step === 2 && (
+                            <motion.div key="m-step2" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
+                                className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
+                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="apps" className="text-white text-[16px]" /></div>
+                                    <h2 className="text-[20px] font-extrabold tracking-tight">What&apos;s Inside</h2>
+                                </motion.div>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>8 fully interactive sections</motion.p>
+                                <div className="space-y-2.5">
+                                    {PORTAL_FEATURES.map((f, i) => (
+                                        <motion.div key={i} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 + 0.1, type: 'spring', stiffness: 340, damping: 26 }} className={`flex items-center gap-4 p-4 rounded-2xl ${cardClass}`}>
+                                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`} style={{ boxShadow: `0 4px 12px ${accentColor}35` }}><Icon name={f.icon} className="text-white text-[16px]" /></div>
+                                            <div>
+                                                <div className="font-bold text-[14px]">{f.label}</div>
+                                                <div className={`text-[12px] ${muted}`}>{f.desc}</div>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                        {step === 3 && (
+                            <motion.div key="m-step3" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
+                                className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
+                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="palette" className="text-white text-[16px]" /></div>
+                                    <h2 className="text-[20px] font-extrabold tracking-tight">Choose Your Look</h2>
+                                </motion.div>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>
+                                <div className="space-y-3">
+                                    {PORTAL_THEMES.map((t, i) => {
+                                        const selected = selectedTheme === t.v;
+                                        return (
+                                            <motion.button key={t.v} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 + 0.1 }} onClick={() => setSelectedTheme(t.v)}
+                                                className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all active:scale-[0.98] ${selected ? '' : (selectedTheme === 'light' ? 'border-gray-100 bg-white' : 'border-white/8 bg-white/[0.05]')}`}
+                                                style={selected ? { borderColor: accentColor, backgroundColor: `${accentColor}12` } : {}}>
+                                                <div className={`w-12 h-12 rounded-xl ${t.bg} flex flex-col justify-between p-2 shadow shrink-0 overflow-hidden relative`}>
+                                                    <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-white/20" /><div className="flex-1 h-1.5 rounded-full bg-white/15" /></div>
+                                                    <div className="space-y-1"><div className="h-1.5 rounded-full bg-white/25 w-full" /><div className="h-1.5 rounded-full bg-white/15 w-3/4" /></div>
+                                                    {t.v === 'colorful' && <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/30 to-purple-600/20 rounded-xl" />}
+                                                </div>
+                                                <div className="flex-1 text-left">
+                                                    <div className="flex items-center gap-2 mb-0.5">
+                                                        <Icon name={t.icon} className="text-[18px]" style={selected ? { color: accentColor } as React.CSSProperties : {}} />
+                                                        <span className="font-bold text-[15px]">{t.label}</span>
+                                                    </div>
+                                                    <p className={`text-[12px] ${muted}`}>{t.desc}</p>
+                                                </div>
+                                                <motion.div animate={{ scale: selected ? 1 : 0, opacity: selected ? 1 : 0 }} transition={{ type: 'spring', stiffness: 400, damping: 22 }}>
+                                                    <Icon name="check_circle" className="text-[26px]" style={{ color: accentColor } as React.CSSProperties} />
+                                                </motion.div>
+                                            </motion.button>
+                                        );
+                                    })}
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+
+                {/* Mobile bottom nav */}
+                <div className="px-5 pb-10 pt-3 flex gap-3">
+                    {step > 0 && (
+                        <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} onClick={handleBack}
+                            className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedTheme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-white/10 text-white'}`}>
+                            <Icon name="arrow_back" className="text-[20px]" />
+                        </motion.button>
+                    )}
+                    <motion.button layout onClick={handleNext} whileTap={{ scale: 0.97 }}
+                        className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white bg-gradient-to-r ${accentGradient} shadow-lg`}
+                        style={{ boxShadow: `0 8px 28px ${accentColor}45` }}>
+                        {isLast ? <><Icon name="rocket_launch" className="text-[18px]" />Launch Portal</> : <>Continue<Icon name="arrow_forward" className="text-[18px]" /></>}
+                    </motion.button>
+                </div>
+            </div>
         </motion.div>
     );
 }

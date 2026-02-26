@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@/app/mobile/shared';
 import type { MobileTheme } from '@/app/mobile/themes';
+import { MobileIntroScreen, type MobileIntroConfig } from '@/app/mobile/components/MobileIntroScreen';
 import { DashboardView } from './views/DashboardView';
 import { JobsView } from './views/JobsView';
 import { CopilotView } from './views/CopilotView';
@@ -12,11 +13,43 @@ import { ProfileView } from './views/ProfileView';
 
 export type JobTabType = 'dashboard' | 'jobs' | 'copilot' | 'notifications' | 'profile';
 
+const JOB_SEEKING_INTRO: MobileIntroConfig = {
+    appName: 'Job Seeker',
+    tagline: 'Find trusted local, part-time, and weekend work — with an AI career coach that knows your skills.',
+    appIcon: 'work_history',
+    accentGradient: 'from-cyan-500 to-blue-600',
+    aiTips: [
+        {
+            icon: 'psychology',
+            title: 'Your personal career coach',
+            body: 'Ask Copilot "What jobs match my profile?" or "Help me write a cover letter for this barista role" — it tailors advice to you.',
+        },
+        {
+            icon: 'manage_search',
+            title: 'Smart job matching',
+            body: 'Copilot analyses your skills and availability to surface the most relevant local gigs automatically.',
+        },
+        {
+            icon: 'rate_review',
+            title: 'Interview & application help',
+            body: 'Need to prepare for an interview? Ask Copilot for common questions, salary benchmarks, and tips for your specific role.',
+        },
+    ],
+    features: [
+        { icon: 'space_dashboard', label: 'Home', desc: 'Your personalised job feed, match highlights, and activity overview.' },
+        { icon: 'work', label: 'Local Jobs', desc: 'Browse gigs and positions near you, filtered by availability and pay.' },
+        { icon: 'auto_awesome', label: 'Copilot', desc: 'AI career coach for applications, CVs, interview prep, and job advice.' },
+        { icon: 'notifications', label: 'Alerts & Matches', desc: 'Instant notifications when a new job matches your profile.' },
+        { icon: 'person', label: 'My Profile / CV', desc: 'Manage skills, availability, and your digital CV — all in one place.' },
+    ],
+};
+
 interface JobSeekingAppProps {
     theme: MobileTheme;
 }
 
 export function JobSeekingApp({ theme }: JobSeekingAppProps) {
+    const [showIntro, setShowIntro] = useState(true);
     const [themeMode, setThemeMode] = useState('dark');
     const [activeTab, setActiveTab] = useState<JobTabType>('dashboard');
     const isLight = themeMode === 'light';
@@ -45,6 +78,28 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
 
     return (
         <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+            {/* Intro screen overlay */}
+            <AnimatePresence>
+                {showIntro && (
+                    <motion.div
+                        key="job-intro"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0, scale: 1.04 }}
+                        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                        className="absolute inset-0 z-50"
+                    >
+                        <MobileIntroScreen
+                            config={JOB_SEEKING_INTRO}
+                            theme={theme}
+                            onComplete={(chosenTheme) => {
+                                setThemeMode(chosenTheme);
+                                setShowIntro(false);
+                            }}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Header */}
             <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-3 px-5 z-40 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">
@@ -100,3 +155,4 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
         </div>
     );
 }
+
