@@ -317,6 +317,11 @@ export default function PortalPanel() {
                         <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
+                        {/* AI Copilot — mobile only, replaces floating button */}
+                        <motion.button onClick={() => setShowCopilot(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all ${isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-violet-600 shadow-lg shadow-fuchsia-500/30' : isLight ? 'bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20' : 'bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20'}`}>
+                            <Icon name="auto_awesome" className="text-xl text-white" />
+                            <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                        </motion.button>
                         <div className="relative">
                             <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                                 <Icon name="notifications" className="text-xl opacity-70" />
@@ -324,7 +329,7 @@ export default function PortalPanel() {
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`absolute right-0 top-full mt-2 w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`absolute right-0 top-full mt-2 w-[calc(100vw-1.5rem)] sm:w-[22rem] max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
@@ -441,12 +446,12 @@ export default function PortalPanel() {
                 )}
             </AnimatePresence>
 
-            {/* Global AI Copilot Floating Button */}
+            {/* Global AI Copilot Floating Button — hidden on mobile (use topbar button instead) */}
             <motion.button
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowCopilot(true)}
-                className="fixed bottom-24 right-6 w-16 h-16 z-50 group overflow-visible"
+                className="hidden md:block fixed bottom-24 right-6 w-16 h-16 z-50 group overflow-visible"
             >
                 <span className={`absolute inset-0 rounded-[1.6rem] opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse bg-gradient-to-r ${aiGradientGlow}`} />
                 <AIStamp isLight={isLight} size="lg" className="relative shadow-2xl" />
