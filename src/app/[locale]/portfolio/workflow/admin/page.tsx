@@ -329,7 +329,7 @@ export default function PortalPanel() {
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`absolute right-0 top-full mt-2 w-[calc(100vw-1.5rem)] sm:w-[22rem] max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
@@ -780,6 +780,7 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
     const [showWizard, setShowWizard] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
     const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Viewer' });
+    const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
     const users = [
         { name: 'Sara Kim', email: 'sara@company.com', role: 'Admin', status: 'Active', lastActive: '5 min ago' },
@@ -812,7 +813,55 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
             </div>
 
             <motion.div variants={itemVariants} className={card}>
-                <div className="overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
+                {/* Mobile Card List — visible on small screens only */}
+                <div className="sm:hidden space-y-3">
+                    {users.map((u, i) => (
+                        <div key={i} className={`rounded-2xl border transition-all ${isLight ? 'bg-white/70 border-slate-200' : 'bg-white/[0.03] border-white/10'}`}>
+                            <div
+                                onClick={() => setExpandedCard(expandedCard === i ? null : i)}
+                                className="flex items-center gap-3 p-4 cursor-pointer"
+                            >
+                                <div className={`w-11 h-11 shrink-0 rounded-2xl flex items-center justify-center text-sm font-black ${isLight ? 'bg-fuchsia-500/10 text-fuchsia-600' : 'bg-cyan-500/10 text-cyan-400'}`}>
+                                    {u.name.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center justify-between gap-2">
+                                        <span className="font-bold text-[14px] truncate">{u.name}</span>
+                                        <span className={`text-[11px] font-bold px-2.5 py-1 rounded-xl border shrink-0 ${roleBadge(u.role)}`}>{u.role}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className={`w-2 h-2 rounded-full shrink-0 ${statusDot(u.status)}`} />
+                                        <span className={`text-[12px] font-medium ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>{u.status}</span>
+                                        <span className={`text-[11px] opacity-50 ml-auto`}>{u.lastActive}</span>
+                                    </div>
+                                </div>
+                                <Icon name={expandedCard === i ? 'expand_less' : 'expand_more'} className="text-xl opacity-50 shrink-0" />
+                            </div>
+                            <AnimatePresence>
+                                {expandedCard === i && (
+                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                                        <div className={`mx-3 mb-3 p-4 rounded-2xl flex items-start gap-3 ${isLight ? 'bg-slate-50 border border-slate-100' : 'bg-white/[0.03] border border-white/5'}`}>
+                                            <AIStamp isLight={isLight} size="sm" variant="secondary" />
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="text-[13px] font-bold mb-1">AI Portal Summary</h4>
+                                                <p className={`text-[12px] leading-relaxed ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>{u.name} is highly engaged with design system components. Consider offering them early access to the new Design Tokens beta.</p>
+                                                <div className="flex gap-2 mt-3">
+                                                    <button className={`text-[11px] font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white border border-slate-200' : 'bg-white/5 border border-white/10'}`}>View Profile</button>
+                                                    <button className="text-[11px] font-bold px-3 py-1.5 rounded-xl text-white bg-gradient-to-r from-fuchsia-500 to-cyan-500 flex items-center gap-1">
+                                                        <Icon name="mail" className="text-[13px]" /> Message
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Desktop Table — hidden on small screens */}
+                <div className="hidden sm:block overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
                     <table className="w-full min-w-[700px]">
                         <thead>
                             <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-slate-500'}`}>

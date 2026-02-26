@@ -166,7 +166,7 @@ export default function PortfolioClient({ items }: Props) {
                             : 'bg-violet-500/10 text-violet-400 hover:bg-violet-500/20 border-violet-500/25'
                         }`}
                       >
-                        <span className="material-symbols text-sm">school</span>
+                        <span className="material-symbols text-[13px] leading-none">school</span>
                         {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
                       </button>
                     )}
@@ -181,7 +181,7 @@ export default function PortfolioClient({ items }: Props) {
                             : 'bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 border-teal-500/25'
                         }`}
                       >
-                        <span className="material-symbols text-sm">devices</span>
+                        <span className="material-symbols text-[13px] leading-none">devices</span>
                         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
                       </button>
                     )}
