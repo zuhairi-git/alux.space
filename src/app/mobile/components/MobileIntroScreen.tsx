@@ -74,7 +74,6 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isLast = step === TOTAL_STEPS - 1;
 
     const accentColor = isIOS ? '#007AFF' : '#6750A4';
-    const accentColorSecondary = isIOS ? '#5856D6' : '#D0BCFF';
 
     const bgClass =
         selectedTheme === 'light'
@@ -97,8 +96,6 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 : isIOS
                     ? 'bg-white/[0.08] border border-white/[0.06]'
                     : 'bg-[#2B2930]/80 border border-[#4A4458]/40';
-
-    const activeBorder = `border-[${accentColor}]`;
 
     const handleNext = () => {
         if (isLast) {
