@@ -11,6 +11,14 @@ interface ViewProps {
     onNav?: (tab: string) => void;
 }
 
+const JOB_ICONS: Record<string, string> = {
+    'Weekend Bartender': 'sports_bar',
+    'Retail Assistant': 'shopping_bag',
+    'Event Security': 'security',
+    'Tutor (Math)': 'school',
+    'Cafe Barista': 'local_cafe',
+};
+
 const JOBS = [
     { title: 'Weekend Bartender', company: 'The Local Pub', location: '1.2 km away', wage: '€14-16/h', match: 95, tag: 'High Match', type: 'Weekend' },
     { title: 'Retail Assistant', company: 'Tech Store M', location: 'City Center', wage: '€12.5/h', match: 88, tag: 'New', type: 'Retail' },
@@ -72,40 +80,51 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                     </motion.div>
                 ) : filteredJobs.map((job, i) => (
                     <motion.div key={i} variants={itemVariants} onClick={() => openSheet(job)}
-                        className={`${card} p-5 relative overflow-hidden active:scale-[0.99] transition-transform cursor-pointer`}>
-                        {job.tag && (
-                            <div className={`absolute top-0 right-0 px-3 py-1 rounded-bl-[16px] text-[11px] font-bold uppercase tracking-wider ${job.tag === 'High Match' ? 'bg-purple-500 text-white' : 'bg-blue-500 text-white'}`}>
-                                {job.tag}
-                            </div>
-                        )}
-                        <div className="flex items-start mb-3">
-                            <div className={`w-12 h-12 rounded-[16px] flex items-center justify-center mr-4 ${theme.workspace.iconBg(isLight)}`}>
-                                <Icon name="work" className={`text-[22px] ${theme.workspace.iconColor(isLight)}`} />
-                            </div>
-                            <div className="flex-1">
-                                <h3 className="text-[17px] font-bold mb-0.5">{job.title}</h3>
-                                <p className={`text-[14px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{job.company}</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center">
-                                <Icon name="location_on" className={`text-[14px] mr-1 ${isLight ? 'text-gray-400' : 'text-white/40'}`} />
-                                <span className={`text-[13px] ${isLight ? 'text-gray-600' : 'text-white/60'}`}>{job.location}</span>
-                            </div>
-                            <div className="flex items-center">
-                                <Icon name="payments" className={`text-[14px] mr-1 ${isLight ? 'text-gray-400' : 'text-white/40'}`} />
-                                <span className={`text-[13px] font-semibold ${isLight ? 'text-gray-800' : 'text-white/80'}`}>{job.wage}</span>
-                            </div>
-                        </div>
-                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-black/5 dark:border-white/10">
-                            <div className="flex items-center">
-                                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-purple-500/10 mr-2">
-                                    <span className="text-purple-500 font-bold text-[12px]">{job.match}%</span>
+                        className={`${card} overflow-hidden active:scale-[0.99] transition-transform cursor-pointer`}>
+                        {/* Top row */}
+                        <div className="p-4 pb-3">
+                            <div className="flex items-start gap-3">
+                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${theme.workspace.iconBg(isLight)}`}>
+                                    <Icon name={JOB_ICONS[job.title] || 'work'} className={`text-[22px] ${theme.workspace.iconColor(isLight)}`} />
                                 </div>
-                                <span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-white/50'}`}>Match</span>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-start justify-between gap-2">
+                                        <h3 className="text-[16px] font-bold leading-tight">{job.title}</h3>
+                                        {job.tag && (
+                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-emerald-500/15 text-emerald-500' : 'bg-blue-500/15 text-blue-500'}`}>
+                                                {job.tag}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <p className={`text-[13px] mt-0.5 ${isLight ? 'text-gray-500' : 'text-white/50'}`}>{job.company}</p>
+                                </div>
+                            </div>
+
+                            {/* Meta row */}
+                            <div className={`flex items-center gap-4 mt-3 pt-3 border-t ${isLight ? 'border-black/5' : 'border-white/8'}`}>
+                                <div className="flex items-center gap-1">
+                                    <Icon name="location_on" className={`text-[14px] ${isLight ? 'text-gray-400' : 'text-white/30'}`} />
+                                    <span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-white/50'}`}>{job.location}</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <Icon name="payments" className={`text-[14px] ${isLight ? 'text-gray-400' : 'text-white/30'}`} />
+                                    <span className={`text-[12px] font-semibold ${isLight ? 'text-gray-700' : 'text-white/70'}`}>{job.wage}</span>
+                                </div>
+                                <span className={`ml-auto text-[11px] font-medium px-2 py-0.5 rounded-full ${isLight ? 'bg-gray-100 text-gray-500' : 'bg-white/8 text-white/40'}`}>{job.type}</span>
+                            </div>
+                        </div>
+
+                        {/* Footer action row */}
+                        <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
+                            <div className="flex items-center gap-2">
+                                <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-emerald-500' : job.match >= 80 ? 'bg-blue-500' : 'bg-amber-400'}`}
+                                        style={{ width: `${job.match}%` }} />
+                                </div>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-emerald-500' : job.match >= 80 ? 'text-blue-400' : 'text-amber-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
-                                className={`px-4 py-2 ${theme.radii.sendButton} font-semibold text-[14px] bg-gradient-to-r from-blue-500 to-purple-500 text-white active:scale-95 transition-transform`}>
+                                className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-blue-500 to-purple-500 text-white active:scale-95 transition-transform`}>
                                 Quick Apply
                             </button>
                         </div>

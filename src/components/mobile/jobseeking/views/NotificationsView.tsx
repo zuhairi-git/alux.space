@@ -11,8 +11,7 @@ interface ViewProps {
     onNav?: (tab: string) => void;
 }
 
-export function NotificationsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
-    const askAiColor = isColorful ? 'text-fuchsia-400' : theme.notification.askAiColor;
+export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
     const listVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -26,66 +25,93 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
     return (
         <div className={`h-full w-full overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
             <AnimatePresence>
-                <motion.div variants={listVariants} initial="hidden" animate="visible" className="space-y-4">
+                <motion.div variants={listVariants} initial="hidden" animate="visible" className="space-y-3">
 
-                    {/* Priority Alert */}
-                    <motion.div variants={itemVariants} className={`${card} p-5 border-l-4 border-emerald-500`}>
-                        <div className="flex items-start">
-                            <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 bg-emerald-500/15 shrink-0">
-                                <Icon name="task_alt" className="text-[20px] text-emerald-500" />
+                    {/* Priority Alert - Interview Invite */}
+                    <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
+                        <div className={`px-4 py-2 flex items-center gap-2 bg-emerald-500/10 border-b ${isLight ? 'border-emerald-500/15' : 'border-emerald-500/20'}`}>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-500">Action Required</span>
+                            <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>Just now</span>
+                        </div>
+                        <div className="p-4">
+                            <div className="flex items-start gap-3">
+                                <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-emerald-500/15 shrink-0">
+                                    <Icon name="celebration" className="text-[20px] text-emerald-500" />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="font-bold text-[15px] mb-0.5">Interview Invite</h3>
+                                    <p className={`text-[13px] leading-snug ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
+                                        <strong>Cafe Local</strong> wants to schedule your Weekend Barista interview.
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <div className="flex justify-between items-center mb-1">
-                                    <h3 className="font-bold text-[16px]">Application Accepted</h3>
-                                    <span className="text-[12px] opacity-60">Just now</span>
-                                </div>
-                                <p className={`text-[14px] leading-snug mb-3 ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
-                                    Cafe Local wants to schedule an interview for the Weekend Barista position.
-                                </p>
-                                <div className="flex space-x-2 border-t border-black/5 border-white/10 pt-3">
-                                    <button onClick={() => onNav?.('copilot')} className={`text-[13px] font-semibold flex items-center ${askAiColor} active:scale-95 transition-transform`}>
-                                        <Icon name="auto_awesome" className="text-[14px] mr-1.5" /> Prep with AI
-                                    </button>
-                                </div>
+                            <div className="flex gap-2 mt-3">
+                                <button onClick={() => onNav?.('copilot')}
+                                    className={`flex-1 py-2 rounded-xl text-[12px] font-semibold flex items-center justify-center gap-1.5 ${isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-white/80'} active:scale-95 transition-transform`}>
+                                    <Icon name="auto_awesome" className="text-[13px]" /> Prep with AI
+                                </button>
+                                <button className="flex-1 py-2 rounded-xl text-[12px] font-semibold bg-emerald-500 text-white flex items-center justify-center gap-1.5 active:scale-95 transition-transform">
+                                    <Icon name="event" className="text-[13px]" /> Schedule
+                                </button>
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* Standard Alert */}
-                    <motion.div variants={itemVariants} className={`${card} p-5`}>
-                        <div className="flex items-start">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 shrink-0 ${theme.notification.infoIconBg}`}>
-                                <Icon name="work" className={`text-[20px] ${theme.notification.infoIconColor}`} />
-                            </div>
-                            <div>
-                                <div className="flex justify-between items-center mb-1">
-                                    <h3 className="font-bold text-[16px]">New AI Match</h3>
-                                    <span className="text-[12px] opacity-60">2h ago</span>
+                    {/* AI Match */}
+                    <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-blue-500/8 border-b border-blue-500/10' : 'bg-blue-500/10 border-b border-blue-500/15'}`}>
+                            <Icon name="auto_awesome" className="text-[13px] text-blue-400" />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isLight ? 'text-blue-600' : 'text-blue-400'}`}>New AI Match</span>
+                            <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>2h ago</span>
+                        </div>
+                        <div className="p-4">
+                            <div className="flex items-start gap-3">
+                                <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${theme.notification.infoIconBg}`}>
+                                    <Icon name="shopping_bag" className={`text-[20px] ${theme.notification.infoIconColor}`} />
                                 </div>
-                                <p className={`text-[14px] leading-snug mb-3 ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
-                                    Found a 95% match for &apos;Retail Assistant&apos; matching your weekend availability.
-                                </p>
+                                <div className="flex-1">
+                                    <div className="flex items-center justify-between mb-0.5">
+                                        <h3 className="font-bold text-[15px]">Retail Assistant</h3>
+                                        <span className="text-[12px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-lg">95% match</span>
+                                    </div>
+                                    <p className={`text-[13px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>City Center · €12.5/h · Weekend shifts</p>
+                                </div>
                             </div>
+                            <button onClick={() => onNav?.('jobs')}
+                                className={`mt-3 w-full py-2 rounded-xl text-[12px] font-semibold flex items-center justify-center gap-1.5 ${isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-white/80'} active:scale-95 transition-transform`}>
+                                <Icon name="work" className="text-[13px]" /> View Job
+                            </button>
                         </div>
                     </motion.div>
 
-                    {/* Weekly Report */}
-                    <motion.div variants={itemVariants} className={`${card} p-5`}>
-                        <div className="flex items-start">
-                            <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 bg-purple-500/10 shrink-0">
-                                <Icon name="insights" className="text-[20px] text-purple-500" />
+                    {/* Weekly Insights */}
+                    <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-purple-500/5 border-b border-purple-500/10' : 'bg-purple-500/10 border-b border-purple-500/15'}`}>
+                            <Icon name="insights" className="text-[13px] text-purple-400" />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider text-purple-400`}>Weekly Insights</span>
+                            <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>1d ago</span>
+                        </div>
+                        <div className="p-4">
+                            <div className="grid grid-cols-3 gap-2 mb-3">
+                                {[
+                                    { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-purple-400' },
+                                    { label: 'Applications', value: '4', icon: 'send', color: 'text-blue-400' },
+                                    { label: 'Avg Match', value: '88%', icon: 'stars', color: 'text-amber-400' },
+                                ].map(stat => (
+                                    <div key={stat.label} className={`flex flex-col items-center py-2.5 rounded-xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>
+                                        <Icon name={stat.icon} className={`text-[16px] mb-1 ${stat.color}`} />
+                                        <span className="font-bold text-[14px]">{stat.value}</span>
+                                        <span className={`text-[10px] text-center leading-tight mt-0.5 ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{stat.label}</span>
+                                    </div>
+                                ))}
                             </div>
-                            <div>
-                                <div className="flex justify-between items-center mb-1">
-                                    <h3 className="font-bold text-[16px]">Weekly Insights</h3>
-                                    <span className="text-[12px] opacity-60">1d ago</span>
-                                </div>
-                                <p className={`text-[14px] leading-snug ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
-                                    Your profile views are up 20% this week. Keep your availability updated!
-                                </p>
-                            </div>
+                            <p className={`text-[13px] leading-snug ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                                Keep your availability updated to boost your match rate.
+                            </p>
                         </div>
                     </motion.div>
+
                 </motion.div>
             </AnimatePresence>
         </div>

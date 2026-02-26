@@ -78,28 +78,39 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
 
             <motion.div variants={listVariants} initial="hidden" animate="visible" className="space-y-3">
                 {[
-                    { company: 'Cafe Local', role: 'Weekend Barista', time: '2h ago', status: 'Applied', icon: 'local_cafe', color: 'amber' },
-                    { company: 'City Events Co.', role: 'Event Staff', time: '1d ago', status: 'Interview', icon: 'celebration', color: 'purple' },
-                    { company: 'Bookstore Downtown', role: 'Retail Assistant', time: '3d ago', status: 'Viewed', icon: 'menu_book', color: 'blue' }
-                ].map((item, i) => (
-                    <motion.div key={i} variants={itemVariants} className={`${card} p-4 flex items-center active:scale-[0.98] transition-all`}>
-                        <div className={`w-12 h-12 rounded-[16px] flex items-center justify-center mr-4 ${theme.dashboard.teamColorMap[item.color]}`}>
-                            <Icon name={item.icon as string} className="text-[22px]" />
-                        </div>
-                        <div className="flex-1">
-                            <div className="flex justify-between items-start mb-0.5">
-                                <h4 className="font-semibold text-[16px] line-clamp-1">{item.role}</h4>
-                                <span className={`text-[12px] whitespace-nowrap ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{item.time}</span>
+                    { company: 'Cafe Local', role: 'Weekend Barista', time: '2h ago', status: 'Interview', icon: 'local_cafe', color: 'amber', match: 95, wage: '€13/h' },
+                    { company: 'City Events Co.', role: 'Event Staff', time: '1d ago', status: 'Applied', icon: 'celebration', color: 'purple', match: 82, wage: '€16/h' },
+                    { company: 'Bookstore Downtown', role: 'Retail Assistant', time: '3d ago', status: 'Viewed', icon: 'menu_book', color: 'blue', match: 75, wage: '€12.5/h' }
+                ].map((item, i) => {
+                    const statusStyle = item.status === 'Interview'
+                        ? 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'
+                        : item.status === 'Applied'
+                        ? (isLight ? 'bg-blue-500/10 text-blue-600 border-blue-200' : 'bg-blue-500/15 text-blue-400 border-blue-500/30')
+                        : (isLight ? 'bg-gray-100 text-gray-500 border-gray-200' : 'bg-white/8 text-white/50 border-white/10');
+                    const matchColor = item.match >= 90 ? 'text-emerald-500' : item.match >= 80 ? 'text-blue-400' : 'text-amber-400';
+                    const matchBg = item.match >= 90 ? 'bg-emerald-500/10' : item.match >= 80 ? 'bg-blue-500/10' : 'bg-amber-500/10';
+                    return (
+                        <motion.div key={i} variants={itemVariants} onClick={() => onNav?.('jobs')}
+                            className={`${card} p-4 flex items-center gap-3 active:scale-[0.98] transition-all cursor-pointer group`}>
+                            <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${theme.dashboard.teamColorMap[item.color]}`}>
+                                <Icon name={item.icon as string} className="text-[20px]" />
                             </div>
-                            <div className="flex justify-between items-center">
-                                <p className={`text-[14px] line-clamp-1 ${isLight ? 'text-gray-600' : 'text-white/60'}`}>{item.company}</p>
-                                <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${item.status === 'Interview' ? (isLight ? 'bg-purple-100 text-purple-700 border-purple-200' : 'bg-purple-900/40 text-purple-300 border-purple-700/50') :
-                                    (isLight ? 'bg-gray-100 text-gray-700 border-gray-200' : 'bg-white/10 text-white/70 border-white/10')
-                                    }`}>{item.status}</span>
+                            <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between mb-0.5">
+                                    <h4 className="font-semibold text-[15px] truncate mr-2">{item.role}</h4>
+                                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-lg border shrink-0 ${statusStyle}`}>{item.status}</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-white/50'}`}>{item.company} · {item.time}</span>
+                                    <div className={`flex items-center gap-1 px-1.5 py-0.5 rounded-lg ${matchBg}`}>
+                                        <span className={`text-[11px] font-bold ${matchColor}`}>{item.match}%</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+                            <Icon name="chevron_right" className={`text-[18px] opacity-20 group-hover:opacity-50 transition-opacity shrink-0`} />
+                        </motion.div>
+                    );
+                })}
             </motion.div>
         </div>
     );
