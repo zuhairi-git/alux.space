@@ -217,6 +217,12 @@ export default function PortalPanel() {
                         );
                     })}
                 </nav>
+                <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-fuchsia-500/20' : 'border-white/5'}`}>
+                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-purple-300 hover:bg-purple-900/40' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                        <Icon name="arrow_back" className={`text-[20px] ${sidebarCollapsed ? '' : 'mr-3'} opacity-60 group-hover:opacity-100 transition-opacity`} />
+                        {!sidebarCollapsed && <span>Back to Case Study</span>}
+                    </a>
+                </div>
             </aside>
 
             {/* Mobile Sidebar Overlay */}
@@ -268,6 +274,12 @@ export default function PortalPanel() {
                                     );
                                 })}
                             </nav>
+                            <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-fuchsia-500/20' : 'border-white/5'}`}>
+                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-purple-300 hover:bg-purple-900/40' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                                    <Icon name="arrow_back" className="text-[20px] mr-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                    <span>Back to Case Study</span>
+                                </a>
+                            </div>
                         </motion.aside>
                     </>
                 )}
@@ -321,7 +333,7 @@ export default function PortalPanel() {
                                 )}
                             </AnimatePresence>
                         </div>
-                        <div className="relative">
+                        <div className="relative translate-y-[2px]">
                             <motion.button onClick={toggleProfileMenu} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-blue-400' : isColorful ? 'border-fuchsia-500/30 hover:border-fuchsia-400' : 'border-white/10 hover:border-blue-400'}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Portal" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Portal&background=d946ef&color=fff" }} />
@@ -364,12 +376,12 @@ export default function PortalPanel() {
                 <main className="flex-1 p-5 pt-24 md:p-10 md:pt-24">
                     <AnimatePresence mode="wait">
                         {activeSection === 'start' && <StartSection key="start" card={cardClass} isLight={isLight} setActiveSection={setActiveSection} />}
-                        {activeSection === 'dashboard' && <DashboardSection key="dash" card={cardClass} isLight={isLight} />}
+                        {activeSection === 'dashboard' && <DashboardSection key="dash" card={cardClass} isLight={isLight} isColorful={isColorful} />}
                         {activeSection === 'users' && <UsersSection key="users" card={cardClass} isLight={isLight} />}
                         {activeSection === 'workspaces' && <WorkspacesSection key="ws" card={cardClass} isLight={isLight} />}
                         {activeSection === 'copilot-logs' && <PortalLogsSection key="logs" card={cardClass} isLight={isLight} />}
                         {activeSection === 'alerts-config' && <AlertsConfigSection key="alerts" card={cardClass} isLight={isLight} />}
-                        {activeSection === 'analytics' && <AnalyticsSection key="analytics" card={cardClass} isLight={isLight} />}
+                        {activeSection === 'analytics' && <AnalyticsSection key="analytics" card={cardClass} isLight={isLight} isColorful={isColorful} />}
                         {activeSection === 'settings' && <SettingsSection key="settings" card={cardClass} isLight={isLight} theme={theme} setTheme={setTheme} />}
                     </AnimatePresence>
                 </main>
@@ -581,14 +593,14 @@ function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '', 
 const pageVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.1 } }, exit: { opacity: 0, y: -20 } };
 const itemVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
-function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string, label: string, value: string, trend: string, trendUp: boolean, isLight: boolean }) {
+function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = false }: { icon: string, label: string, value: string, trend: string, trendUp: boolean, isLight: boolean, isColorful?: boolean }) {
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-slate-200 shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : 'bg-[#111827] border border-slate-700 shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl`}>
+        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-slate-200 shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : isColorful ? 'bg-[#0A0138]/95 border border-fuchsia-500/35 shadow-[0_10px_28px_rgba(255,0,204,0.18)]' : 'bg-[#111827] border border-slate-700 shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl`}>
             <div className="flex items-center justify-between mb-4">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-blue-100 to-indigo-100' : 'from-blue-500/20 to-indigo-500/20'}`}>
-                    <Icon name={icon} className={`text-2xl ${isLight ? 'text-blue-600' : 'text-blue-400'}`} />
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-blue-100 to-indigo-100' : isColorful ? 'from-fuchsia-500/25 to-purple-500/25' : 'from-blue-500/20 to-indigo-500/20'}`}>
+                    <Icon name={icon} className={`text-2xl ${isLight ? 'text-blue-600' : isColorful ? 'text-fuchsia-400' : 'text-blue-400'}`} />
                 </div>
                 <span className={`text-xs font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1 ${trendUp ? 'bg-emerald-500/10 text-emerald-500' : 'bg-rose-500/10 text-rose-500'}`}>
                     <Icon name={trendUp ? "trending_up" : "trending_down"} className="text-[14px]" />
@@ -604,7 +616,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
             <AnimatePresence>
                 {showInsight && (
                     <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 16 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
-                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-blue-50 text-blue-700' : 'bg-blue-500/10 text-blue-300'}`}>
+                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-blue-50 text-blue-700' : isColorful ? 'bg-fuchsia-500/10 text-fuchsia-300' : 'bg-blue-500/10 text-blue-300'}`}>
                             <AIStamp isLight={isLight} size="xs" variant="secondary" className="mt-0.5" />
                             <span className="leading-relaxed">AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
                         </div>
@@ -618,7 +630,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight }: { icon: string
 // ═══════════════════════════════════════════════════════════
 // DASHBOARD
 // ═══════════════════════════════════════════════════════════
-function DashboardSection({ card, isLight }: { card: string, isLight: boolean }) {
+function DashboardSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const recentActivity = [
         { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette', color: 'text-fuchsia-500', bg: 'bg-fuchsia-500/10' },
         { user: 'James L.', action: 'Added 3 comments to Sprint Review', time: '12 min ago', icon: 'chat', color: 'text-cyan-500', bg: 'bg-cyan-500/10' },
@@ -634,10 +646,10 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             {/* KPIs */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <KPICard icon="group" label="Total Users" value="1,247" trend="+12.4%" trendUp={true} isLight={isLight} />
-                <KPICard icon="workspaces" label="Active Workspaces" value="38" trend="+8.2%" trendUp={true} isLight={isLight} />
-                <KPICard icon="auto_awesome" label="AI Queries Today" value="2,891" trend="+24.1%" trendUp={true} isLight={isLight} />
-                <KPICard icon="speed" label="Platform Uptime" value="99.97%" trend="+0.02%" trendUp={true} isLight={isLight} />
+                <KPICard icon="group" label="Total Users" value="1,247" trend="+12.4%" trendUp={true} isLight={isLight} isColorful={isColorful} />
+                <KPICard icon="workspaces" label="Active Workspaces" value="38" trend="+8.2%" trendUp={true} isLight={isLight} isColorful={isColorful} />
+                <KPICard icon="auto_awesome" label="AI Queries Today" value="2,891" trend="+24.1%" trendUp={true} isLight={isLight} isColorful={isColorful} />
+                <KPICard icon="speed" label="Platform Uptime" value="99.97%" trend="+0.02%" trendUp={true} isLight={isLight} isColorful={isColorful} />
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -648,8 +660,8 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                         {activityChartTops.map((h: number, i: number) => (
                             <motion.div key={i} className="relative w-full h-full flex items-end group">
                                 <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.02 }}
-                                    whileHover={{ backgroundColor: isLight ? '#d946ef' : '#22d3ee' }}
-                                    className={`w-full rounded-t-md ${isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
+                                    whileHover={{ backgroundColor: isLight ? '#d946ef' : '#c026d3' }}
+                                    className={`w-full rounded-t-md ${isLight ? 'bg-fuchsia-400/60' : isColorful ? 'bg-fuchsia-500/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
                                 {/* Tooltip */}
                                 <div className={`absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
                                     {Math.round(h * 15)} Interactions
@@ -669,7 +681,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                         {recentActivity.map((a, i) => (
                             <motion.div
                                 key={i}
-                                whileHover={{ x: 6, backgroundColor: isLight ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.05)' }}
+                                whileHover={{ x: 6, backgroundColor: isLight ? 'rgba(255,255,255,0.5)' : isColorful ? 'rgba(147,51,234,0.12)' : 'rgba(255,255,255,0.05)' }}
                                 className="flex items-start space-x-4 p-3 -mx-3 rounded-2xl cursor-pointer transition-all duration-300"
                             >
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${a.bg} ${a.color}`}>
@@ -705,7 +717,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                         </motion.div>
                         <div className="flex-1 w-full space-y-3">
                             {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-fuchsia-500' }, { label: 'Design Reviews', pct: '25%', color: 'bg-cyan-400' }, { label: 'Analytics', pct: '20%', color: 'bg-amber-400' }, { label: 'General', pct: '20%', color: 'bg-rose-400' }].map(s => (
-                                <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
+                                <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : isColorful ? 'bg-fuchsia-500/5 hover:bg-fuchsia-500/10' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
                                     <span className="flex items-center"><span className={`w-3 h-3 rounded-full mr-3 shadow-sm ${s.color}`} />{s.label}</span>
                                     <span className="font-bold">{s.pct}</span>
                                 </motion.div>
@@ -718,7 +730,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                     <h3 className="font-bold text-xl mb-6">Workspace Activity Heatmap</h3>
                     <div className="grid grid-cols-7 gap-2">
                         {heatmapData.map((intensity: number, i: number) => {
-                            const bg = intensity > 0.7 ? (isLight ? 'bg-fuchsia-500' : 'bg-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-fuchsia-300/30' : 'bg-cyan-400/20') : (isLight ? 'bg-slate-100' : 'bg-white/5');
+                            const bg = intensity > 0.7 ? (isLight ? 'bg-fuchsia-500' : isColorful ? 'bg-fuchsia-500' : 'bg-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-fuchsia-400/60' : isColorful ? 'bg-fuchsia-500/60' : 'bg-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-fuchsia-300/30' : isColorful ? 'bg-fuchsia-500/25' : 'bg-cyan-400/20') : (isLight ? 'bg-slate-100' : isColorful ? 'bg-fuchsia-900/30' : 'bg-white/5');
                             return <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.01 }} whileHover={{ scale: 1.2, zIndex: 10 }} className={`aspect-square rounded-lg ${bg} cursor-pointer hover:shadow-lg transition-shadow relative group`}>
                                 {/* Tooltip */}
                                 <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
@@ -730,7 +742,7 @@ function DashboardSection({ card, isLight }: { card: string, isLight: boolean })
                     <div className="flex justify-between items-center mt-5 text-xs font-medium opacity-50">
                         <span>Less active</span>
                         <div className="flex space-x-1.5">
-                            {[isLight ? 'bg-slate-100' : 'bg-white/5', isLight ? 'bg-fuchsia-300/30' : 'bg-cyan-400/20', isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/60', isLight ? 'bg-fuchsia-500' : 'bg-cyan-400'].map((c, i) => (
+                            {[isLight ? 'bg-slate-100' : isColorful ? 'bg-fuchsia-900/30' : 'bg-white/5', isLight ? 'bg-fuchsia-300/30' : isColorful ? 'bg-fuchsia-500/25' : 'bg-cyan-400/20', isLight ? 'bg-fuchsia-400/60' : isColorful ? 'bg-fuchsia-500/60' : 'bg-cyan-400/60', isLight ? 'bg-fuchsia-500' : isColorful ? 'bg-fuchsia-500' : 'bg-cyan-400'].map((c, i) => (
                                 <div key={i} className={`w-4 h-4 rounded-md ${c}`} />
                             ))}
                         </div>
@@ -1186,7 +1198,7 @@ function AlertsConfigSection({ card, isLight }: { card: string, isLight: boolean
 // ═══════════════════════════════════════════════════════════
 // ANALYTICS
 // ═══════════════════════════════════════════════════════════
-function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean }) {
+function AnalyticsSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
@@ -1197,10 +1209,10 @@ function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean })
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <KPICard icon="visibility" label="Page Views" value="48.2K" trend="+18%" trendUp={true} isLight={isLight} />
-                <KPICard icon="schedule" label="Avg. Session" value="12m 34s" trend="+8%" trendUp={true} isLight={isLight} />
-                <KPICard icon="thumb_up" label="Satisfaction" value="4.7/5" trend="+0.3" trendUp={true} isLight={isLight} />
-                <KPICard icon="bolt" label="Avg. Response" value="1.2s" trend="-15%" trendUp={true} isLight={isLight} />
+                <KPICard icon="visibility" label="Page Views" value="48.2K" trend="+18%" trendUp={true} isLight={isLight} isColorful={isColorful} />
+                <KPICard icon="schedule" label="Avg. Session" value="12m 34s" trend="+8%" trendUp={true} isLight={isLight} isColorful={isColorful} />
+                <KPICard icon="thumb_up" label="Satisfaction" value="4.7/5" trend="+0.3" trendUp={true} isLight={isLight} isColorful={isColorful} />
+                <KPICard icon="bolt" label="Avg. Response" value="1.2s" trend="-15%" trendUp={true} isLight={isLight} isColorful={isColorful} />
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
@@ -1219,7 +1231,7 @@ function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean })
                                     <span>{f.feature}</span>
                                     <span className="text-fuchsia-500">{f.usage}%</span>
                                 </div>
-                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : 'bg-white/5'}`}>
+                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : isColorful ? 'bg-fuchsia-900/40' : 'bg-white/5'}`}>
                                     <motion.div initial={{ width: 0 }} animate={{ width: `${f.usage}%` }} transition={{ duration: 1, delay: i * 0.1, ease: "easeOut" }}
                                         className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400" />
                                 </div>
@@ -1236,8 +1248,8 @@ function AnalyticsSection({ card, isLight }: { card: string, isLight: boolean })
                             return (
                                 <div key={day} className="flex-1 flex flex-col items-center group relative">
                                     <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.06, ease: "easeOut" }}
-                                        whileHover={{ backgroundColor: isLight ? '#d946ef' : '#22d3ee' }}
-                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-fuchsia-400/60' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
+                                        whileHover={{ backgroundColor: isLight ? '#d946ef' : '#c026d3' }}
+                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-fuchsia-400/60' : isColorful ? 'bg-fuchsia-500/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
                                     <span className="text-xs font-bold mt-3 opacity-50">{day}</span>
 
                                     {/* Tooltip */}
@@ -1318,24 +1330,23 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
             {/* Quick AI Starters */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                    { icon: 'task_alt', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-emerald-400 to-emerald-600', hue: 'emerald', nav: 'workspaces' as Section },
-                    { icon: 'forum', title: 'Catch up', desc: '5 unread comments', color: 'from-fuchsia-400 to-fuchsia-600', hue: 'fuchsia', nav: 'copilot-logs' as Section },
-                    { icon: 'troubleshoot', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-cyan-400 to-cyan-600', hue: 'cyan', nav: 'analytics' as Section },
+                    { icon: 'workspaces', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-emerald-400 to-emerald-600', hue: 'emerald', nav: 'workspaces' as Section },
+                    { icon: 'smart_toy', title: 'Catch up', desc: '5 unread comments', color: 'from-fuchsia-400 to-fuchsia-600', hue: 'fuchsia', nav: 'copilot-logs' as Section },
+                    { icon: 'analytics', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-cyan-400 to-cyan-600', hue: 'cyan', nav: 'analytics' as Section },
                 ].map((action, i) => (
-                    <motion.div key={i} variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                    <motion.div key={i} variants={itemVariants} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveSection(action.nav)}
-                        className={`group p-6 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-${action.hue}-500/10`}>
-                        <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500 rounded-full -mr-10 -mt-10 pointer-events-none`} />
+                        className={`group flex items-center gap-4 px-4 py-3 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-${action.hue}-500/10`}>
+                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-15 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
 
-                        <div className={`w-12 h-12 rounded-2xl mb-4 flex items-center justify-center text-white bg-gradient-to-br ${action.color} shadow-lg`}>
-                            <Icon name={action.icon} className="text-2xl" />
+                        <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${action.color} shadow-md`}>
+                            <Icon name={action.icon} className="text-[18px]" />
                         </div>
-                        <h3 className="font-bold text-lg mb-1">{action.title}</h3>
-                        <p className={`text-sm font-medium ${isLight ? 'text-slate-500' : 'opacity-60'}`}>{action.desc}</p>
-
-                        <div className={`mt-5 w-8 h-8 rounded-full flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white'}`}>
-                            <Icon name="arrow_forward" className="text-sm" />
+                        <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-[14px] leading-tight">{action.title}</h3>
+                            <p className={`text-xs font-medium truncate ${isLight ? 'text-slate-500' : 'opacity-60'}`}>{action.desc}</p>
                         </div>
+                        <Icon name="arrow_forward" className={`text-sm shrink-0 opacity-0 group-hover:opacity-60 transition-opacity`} />
                     </motion.div>
                 ))}
             </div>

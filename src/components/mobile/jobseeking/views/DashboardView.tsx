@@ -55,18 +55,17 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             {/* Quick Actions Grid */}
             <motion.div variants={listVariants} initial="hidden" animate="visible" className="grid grid-cols-2 gap-3 mb-8">
                 {[
-                    { icon: 'search', label: 'Local Jobs', bg: 'from-blue-500/20 to-cyan-500/20', nv: 'jobs' },
-                    { icon: 'description', label: 'Update CV', bg: 'from-purple-500/20 to-pink-500/20', nv: 'profile' },
-                    { icon: 'schedule', label: 'Availability', bg: 'from-orange-500/20 to-amber-500/20', nv: 'profile' },
-                    { icon: 'insights', label: 'Analytics', bg: 'from-emerald-500/20 to-teal-500/20', nv: 'dashboard' },
+                    { icon: 'search', label: 'Local Jobs', desc: 'Browse nearby', bg: 'from-blue-500/20 to-cyan-500/20', nv: 'jobs' },
+                    { icon: 'description', label: 'Update CV', desc: 'Improve profile', bg: 'from-purple-500/20 to-pink-500/20', nv: 'profile' },
+                    { icon: 'schedule', label: 'Availability', desc: 'Manage shifts', bg: 'from-orange-500/20 to-amber-500/20', nv: 'profile' },
+                    { icon: 'insights', label: 'Analytics', desc: 'View insights', bg: 'from-emerald-500/20 to-teal-500/20', nv: 'dashboard' },
                 ].map((action, i) => (
-                    <motion.button key={i} variants={itemVariants} onClick={() => onNav?.(action.nv)}
-                        className={`p-4 flex flex-col items-start ${theme.radii.card} ${theme.dashboard.quickActionBg(isLight, action.bg)} active:scale-[0.97] transition-transform`}
+                    <motion.button key={i} variants={itemVariants} whileTap={{ scale: 0.96 }} onClick={() => onNav?.(action.nv)}
+                        className={`flex flex-col text-left p-4 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} ${theme.dashboard.quickActionBg(isLight, action.bg)}`}
                     >
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-white/10 ${theme.dashboard.quickActionIconColor(isLight)}`}>
-                            <Icon name={action.icon as string} className="text-[20px]" />
-                        </div>
-                        <span className="font-semibold text-[15px]">{action.label}</span>
+                        <Icon name={action.icon as string} className={`mb-2 text-xl ${theme.dashboard.quickActionIconColor(isLight)}`} />
+                        <span className="font-semibold text-[14px] mb-0.5">{action.label}</span>
+                        <span className="text-[11px] opacity-60">{action.desc}</span>
                     </motion.button>
                 ))}
             </motion.div>

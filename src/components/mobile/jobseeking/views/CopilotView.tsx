@@ -78,7 +78,10 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     };
 
     const suggestedPrompts = [
-        "Find weekend jobs", "Tailor CV for Hospitality", "Prep for Barista interview", "Update my skills"
+        { icon: 'search', label: 'Find Jobs', prompt: 'Find weekend jobs near me' },
+        { icon: 'description', label: 'Tailor CV', prompt: 'Tailor my CV for Hospitality' },
+        { icon: 'record_voice_over', label: 'Interview Prep', prompt: 'Prep for a Barista interview' },
+        { icon: 'bolt', label: 'Update Skills', prompt: 'Update my skills profile' },
     ];
 
     return (
@@ -94,12 +97,12 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                         <p className={`text-center text-[15px] mb-8 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Smart AI matchmaking & CV tailoring</p>
 
                         <div className="grid grid-cols-2 gap-3">
-                            {suggestedPrompts.map((prompt, i) => (
-                                <motion.button key={i} whileTap={{ scale: 0.95 }} onClick={() => handleSend(prompt)}
-                                    className={`p-3 rounded-2xl text-left text-[14px] font-medium leading-snug flex items-center justify-between ${theme.copilot.promptCard(isLight)}`}
+                            {suggestedPrompts.map((p, i) => (
+                                <motion.button key={i} whileTap={{ scale: 0.95 }} onClick={() => handleSend(p.prompt)}
+                                    className={`flex flex-col text-left p-3.5 ${promptCardClass}`}
                                 >
-                                    <span>{prompt}</span>
-                                    {theme.copilot.promptIconColor && <Icon name="arrow_upward" className={`text-[16px] ${theme.copilot.promptIconColor}`} />}
+                                    <Icon name={p.icon} className={`mb-1.5 text-lg ${promptIconColor}`} />
+                                    <span className="font-semibold text-[13px]">{p.label}</span>
                                 </motion.button>
                             ))}
                         </div>
