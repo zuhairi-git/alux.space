@@ -122,8 +122,8 @@ function MobilePrototypeContent() {
 
             {/* Header */}
             <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
-                : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-2xl border-b border-[#4A4458]/50 shadow-md')
+                ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-purple-500/15' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
+                : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/80 backdrop-blur-2xl border-b border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-2xl border-b border-[#4A4458]/50 shadow-md')
                 }`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
@@ -186,9 +186,10 @@ export default function MobilePrototypePage() {
 function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, onNavigate: (t: TabType) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
+        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[24px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
 
     const watchlist = [
         { ticker: 'AAPL', name: 'Apple', price: '$198.11', change: '+2.4%', up: true, data: [140, 145, 142, 155, 160, 158, 170, 175, 180, 190, 185, 198] },
@@ -213,12 +214,12 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isIOS ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]' : 'bg-[#D0BCFF]'}`}>
                         <Icon name="auto_awesome" className={`text-base ${isIOS ? 'text-white' : 'text-[#381E72]'}`} />
                     </div>
-                    <span className={`text-xs font-bold uppercase tracking-widest ${isIOS ? (isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]') : (isLight ? 'text-[#6750A4]' : 'text-[#D0BCFF]')}`}>AI Morning Briefing</span>
+                    <span className={`text-xs font-bold uppercase tracking-widest ${isIOS ? (isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]') : (isLight ? 'text-[#6750A4]' : isColorful ? 'text-purple-300' : 'text-[#D0BCFF]')}`}>AI Morning Briefing</span>
                 </div>
                 <p className={`text-[14px] leading-[1.65] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
                     Markets are poised for a <span className="font-semibold text-green-500">bullish open</span>. NVIDIA earnings beat estimates by 22%, driving AI sector momentum. Fed minutes suggest a <span className="font-semibold">rate pause</span> in Q2. Your watchlist is up 3.1% pre-market.
                 </p>
-                <button onClick={() => onNavigate('copilot')} className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>
+                <button onClick={() => onNavigate('copilot')} className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-300' : 'text-[#6750A4]'}`}>
                     <span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" />
                 </button>
             </motion.div>
@@ -227,7 +228,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
             <motion.div variants={fadeUp}>
                 <div className="flex justify-between items-center mb-3 px-1">
                     <h3 className={`font-bold text-base ${isIOS ? 'tracking-tight' : ''}`}>Watchlist</h3>
-                    <button className={`text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>See All</button>
+                    <button className={`text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-300' : 'text-[#6750A4]'}`}>See All</button>
                 </div>
                 <div className="flex space-x-3 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {watchlist.map((s, i) => (
@@ -235,7 +236,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                             className={`shrink-0 w-[155px] p-4 ${card} active:scale-[0.97] transition-transform`}>
                             <div className="flex justify-between items-start mb-1">
                                 <span className="font-bold text-[15px]">{s.ticker}</span>
-                                <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${s.up ? (isIOS ? 'bg-[#34C759]/15 text-[#34C759]' : 'bg-[#146C2E]/15 text-[#146C2E]') : 'bg-red-500/15 text-red-500'}`}>{s.change}</span>
+                                <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${s.up ? (isIOS ? 'bg-[#34C759]/15 text-[#34C759]' : isColorful ? 'bg-emerald-500/20 text-emerald-400' : 'bg-[#146C2E]/15 text-[#146C2E]') : 'bg-red-500/15 text-red-500'}`}>{s.change}</span>
                             </div>
                             <span className={`text-[11px] block mb-2 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{s.name}</span>
                             <Sparkline data={s.data} color={s.up ? '#34C759' : '#FF3B30'} width={120} height={28} />
@@ -273,7 +274,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                         { icon: 'grid_view', label: 'Sectors', desc: 'Heatmap', color: isIOS ? 'from-orange-500/10 to-amber-500/10 border-orange-500/20' : 'bg-[#F3EDF7]' },
                     ].map((a) => (
                         <motion.button key={a.label} whileTap={{ scale: 0.96 }} onClick={() => onNavigate('copilot')}
-                            className={`flex flex-col text-left p-4 rounded-[20px] transition-all ${isIOS ? (isLight ? `bg-gradient-to-br ${a.color} border` : `bg-gradient-to-br ${a.color.replace('/10', '/20').replace('/20', '/30')} border`) : (isLight ? a.color + ' text-[#1D192B]' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
+                            className={`flex flex-col text-left p-4 rounded-[20px] transition-all ${isIOS ? (isLight ? `bg-gradient-to-br ${a.color} border` : `bg-gradient-to-br ${a.color.replace('/10', '/20').replace('/20', '/30')} border`) : (isLight ? a.color + ' text-[#1D192B]' : isColorful ? 'bg-white/5 border border-purple-500/20' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
                             <Icon name={a.icon} className={`mb-2 text-xl ${isIOS ? (isLight ? 'text-gray-700' : 'text-gray-300') : ''}`} />
                             <span className="font-semibold text-[14px] mb-0.5">{a.label}</span>
                             <span className="text-[11px] opacity-60">{a.desc}</span>
@@ -298,8 +299,8 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
     const [alertSet, setAlertSet] = useState<string | null>(null);
     useEffect(() => { setTickerExpanded(false); setAlertSet(null); }, [selectedTicker]);
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
+        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[24px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
 
     const indices = [
         { name: 'S&P 500', value: '5,234.18', change: '+0.87%', up: true, data: [5100, 5120, 5150, 5180, 5200, 5210, 5190, 5220, 5234] },
@@ -462,6 +463,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
 function CopilotView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const [messages, setMessages] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState("");
@@ -504,14 +506,14 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6] text-white rounded-[22px] rounded-tr-md shadow-[0_6px_20px_rgba(0,122,255,0.3)]'
         : 'bg-gradient-to-br from-[#6750A4] to-[#9a82db] text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(103,80,164,0.3)]';
     const botBubble = isIOS
-        ? (isLight ? 'bg-white/70 backdrop-blur-xl border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl border border-[#4A4458]/40 text-[#E8DEF8] rounded-[22px] rounded-tl-sm shadow-sm');
+        ? (isLight ? 'bg-white/70 backdrop-blur-xl border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-[22px] rounded-tl-sm shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl border border-[#4A4458]/40 text-[#E8DEF8] rounded-[22px] rounded-tl-sm shadow-sm');
     const inputArea = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-xl border-t border-black/5' : 'bg-[#1C1C1E]/60 backdrop-blur-xl border-t border-white/8')
-        : (isLight ? 'bg-[#F3EDF7] rounded-t-[28px]' : 'bg-[#2B2930] rounded-t-[28px]');
+        ? (isLight ? 'bg-white/60 backdrop-blur-xl border-t border-black/5' : isColorful ? 'bg-[#1a0040]/80 backdrop-blur-xl border-t border-purple-500/20' : 'bg-[#1C1C1E]/60 backdrop-blur-xl border-t border-white/8')
+        : (isLight ? 'bg-[#F3EDF7] rounded-t-[28px]' : isColorful ? 'bg-[#0A0138]/90 rounded-t-[28px]' : 'bg-[#2B2930] rounded-t-[28px]');
     const inputBox = isIOS
-        ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
-        : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[24px] px-5 py-3' : 'bg-[#4A4458] text-[#E8DEF8] rounded-[24px] px-5 py-3');
+        ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : isColorful ? 'bg-purple-500/10 rounded-full px-5 py-3 border border-purple-500/20' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
+        : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[24px] px-5 py-3' : isColorful ? 'bg-purple-500/15 text-white rounded-[24px] px-5 py-3' : 'bg-[#4A4458] text-[#E8DEF8] rounded-[24px] px-5 py-3');
 
     const prompts = [
         { icon: 'bolt', label: 'Earnings', prompt: 'Analyze AAPL Q3 Earnings Impact' },
@@ -542,7 +544,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             {prompts.map((p, i) => (
                                 <motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => handleSend(p.prompt)}
                                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }}
-                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : 'bg-[#1C1C1E]/60 border border-white/8') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
+                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-[#1a0040]/60 border border-purple-500/20' : 'bg-[#1C1C1E]/60 border border-white/8') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : isColorful ? 'bg-purple-500/10 border border-purple-500/20' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${isIOS ? (isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]') : ''}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
                                 </motion.button>
@@ -561,7 +563,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                                         {msg.citations.map((c, i) => (
                                             <motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
                                                 className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${isLight ? 'bg-indigo-50/80 border border-indigo-100' : 'bg-indigo-900/20 border border-indigo-500/15'}`}>
-                                                <Icon name="verified" className={`text-sm shrink-0 mt-0.5 ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`} />
+                                                <Icon name="verified" className={`text-sm shrink-0 mt-0.5 ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-400' : 'text-[#6750A4]'}`} />
                                                 <div><span className="font-semibold block">{c.source}</span><span className={`${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{c.snippet}</span></div>
                                             </motion.div>
                                         ))}
@@ -610,10 +612,11 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
 function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     const [expanded, setExpanded] = useState<number | null>(null);
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[20px] border border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[20px] border border-[#4A4458]/40 shadow-lg');
+        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[20px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[20px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[20px] border border-[#4A4458]/40 shadow-lg');
 
     const alerts = [
         { id: 1, priority: 'critical', icon: 'trending_down', title: 'TSLA Dropped 5.2%', desc: 'Pre-market trading indicates a significant drop ahead of SEC quarterly earnings disclosure.', detail: 'Tesla shares fell sharply after reports of slowing EV deliveries in China and increased competition from BYD. Analyst consensus has shifted to a Hold rating.', time: '10 min ago', color: 'red' },
@@ -636,7 +639,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-3">
             {/* Header */}
             <motion.div variants={fadeUp} className="flex justify-between items-center px-1 mb-1">
-                <h2 className={`${isIOS ? 'text-2xl font-bold tracking-tight' : 'text-xl font-medium text-[#6750A4]'}`}>Market Alerts</h2>
+                <h2 className={`${isIOS ? 'text-2xl font-bold tracking-tight' : isColorful ? 'text-xl font-medium text-purple-300' : 'text-xl font-medium text-[#6750A4]'}`}>Market Alerts</h2>
                 <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${priorityBadge('critical')}`}>2 urgent</span>
             </motion.div>
 
@@ -658,7 +661,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                                 {expanded === a.id && (
                                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}>
                                         <p className={`text-[13px] leading-relaxed mt-2 pt-2 border-t ${isLight ? 'text-gray-700 border-gray-200' : 'text-gray-300 border-white/5'}`}>{a.detail}</p>
-                                        <button className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>
+                                        <button className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-300' : 'text-[#6750A4]'}`}>
                                             <Icon name="auto_awesome" className="text-sm" /><span>Ask AI about this</span>
                                         </button>
                                     </motion.div>
@@ -679,10 +682,11 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
 function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTheme: (t: string) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
     const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[20px] border border-[#EADDFF]/50 shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[20px] border border-[#4A4458]/40 shadow-lg');
+        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[20px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[20px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[20px] border border-[#4A4458]/40 shadow-lg');
 
     const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
     const fadeUp = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 400, damping: 30 } } };
@@ -709,7 +713,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                     <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-500 border-[3px] border-white dark:border-[#1C1C1E] rounded-full" />
                 </div>
                 <h2 className="font-bold text-2xl tracking-tight">Ali Al-Zuhairi</h2>
-                <p className={`text-sm font-medium mt-0.5 ${isIOS ? 'text-[#007AFF]' : 'text-[#6750A4]'}`}>Alux Space Founder</p>
+                <p className={`text-sm font-medium mt-0.5 ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-300' : 'text-[#6750A4]'}`}>Alux Space Founder</p>
             </motion.div>
 
             {/* Portfolio Performance */}
