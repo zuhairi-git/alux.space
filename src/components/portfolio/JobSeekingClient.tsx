@@ -542,9 +542,7 @@ export default function JobSeekingClient() {
                       traits: locale === 'fi' ? ["Satunnainen", "Joustava"] : ["Infrequent", "Flexible"],
                       needs: locale === 'fi' ? ["Nopea raha", "Luotettavat työvuorot"] : ["Quick cash", "Reliable shifts"],
                       painPoints: locale === 'fi' ? ["Sitoutumispaine", "Epäselvä aikataulu"] : ["Commitment pressure", "Unclear scheduling"],
-                      icon: (
-                        <span className="material-symbols text-4xl">person</span>
-                      )
+                      photo: "/images/portfolio/profile-img/allen-student.jpg"
                     },
                     {
                       name: locale === 'fi' ? "James (23, Yliopisto-opiskelija)" : "James (23, Uni Student)",
@@ -552,9 +550,7 @@ export default function JobSeekingClient() {
                       traits: locale === 'fi' ? ["Johdonmukainen", "Säännöllinen"] : ["Consistent", "Regular"],
                       needs: locale === 'fi' ? ["2-3 vuoroa/vko", "Tuttuja paikkoja"] : ["2-3 shifts/week", "Familiar venues"],
                       painPoints: locale === 'fi' ? ["Kilpailevat vuorot", "Opiskelu tasapaino"] : ["Competing shifts", "Study balance"],
-                      icon: (
-                        <span className="material-symbols text-4xl">school</span>
-                      )
+                      photo: "/images/portfolio/profile-img/james-uni.jpg"
                     },
                     {
                       name: locale === 'fi' ? "Eeva (40, Säännöllinen)" : "Eeva (40, Regular)",
@@ -562,9 +558,7 @@ export default function JobSeekingClient() {
                       traits: locale === 'fi' ? ["Luotettava", "Suunnitelmallinen"] : ["Dependable", "Planner"],
                       needs: locale === 'fi' ? ["Säännölliset tulot", "Joustavat toimet"] : ["Steady income", "Flexible roles"],
                       painPoints: locale === 'fi' ? ["Viivästynyt palkka", "Huonot varaukset"] : ["Delayed payout", "Poor booking UX"],
-                      icon: (
-                        <span className="material-symbols text-4xl">work</span>
-                      )
+                      photo: "/images/portfolio/profile-img/eva-pro.jpg"
                     }
                   ].map((persona, index) => (
                     <motion.div
@@ -575,8 +569,8 @@ export default function JobSeekingClient() {
                       <div className="theme-card-glow theme-card-glow-secondary"></div>
                       <div className="theme-card-content p-8 hover:bg-theme/70 transition-all duration-300 flex flex-col h-full border-t-4 border-t-purple-500/50">
                         <div className="flex flex-col items-center text-center mb-6">
-                          <div className="flex-shrink-0 h-20 w-20 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-4 shadow-lg shadow-purple-500/20">
-                            {persona.icon}
+                          <div className="flex-shrink-0 h-20 w-20 rounded-full mb-4 shadow-lg shadow-purple-500/20 overflow-hidden ring-2 ring-purple-400/30">
+                            <Image src={persona.photo} alt={persona.name} width={80} height={80} className="w-full h-full object-cover" />
                           </div>
                           <div>
                             <h3 className="text-xl font-bold text-primary mb-1">{persona.name}</h3>

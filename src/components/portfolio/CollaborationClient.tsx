@@ -459,7 +459,7 @@ export default function CollaborationClient() {
             {/* Personas */}
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">{content.userPersonas}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[{
                   name: locale === 'fi' ? "Sara K." : "Sara K.",
                   role: locale === 'fi' ? "Vanhempi tuotesuunnittelija" : "Senior Product Designer",
@@ -467,9 +467,7 @@ export default function CollaborationClient() {
                   needs: locale === 'fi' ? ["Tekoälyavusteiset katselmukset", "Suunnittelujärjestelmätyökalut"] : ["AI-assisted reviews", "Design system tools"],
                   goals: locale === 'fi' ? ["Tehosta suunnittelun luovutusta", "Hyödynnä tekoälyä saavutettavuustarkistuksissa"] : ["Streamline design handoff", "Leverage AI for accessibility audits"],
                   painPoints: locale === 'fi' ? ["Hajautettu palaute", "Manuaaliset katselmusprosessit"] : ["Scattered feedback channels", "Manual review processes"],
-                  icon: (
-                    <span className="material-symbols text-4xl">palette</span>
-                  )
+                  photo: "/images/portfolio/profile-img/sara-k.jpg"
                 }, {
                   name: locale === 'fi' ? "James L." : "James L.",
                   role: locale === 'fi' ? "Tiimipäällikkö" : "Engineering Team Lead",
@@ -477,72 +475,87 @@ export default function CollaborationClient() {
                   needs: locale === 'fi' ? ["Sprinttimittarit", "Työtilan koordinointi"] : ["Sprint metrics", "Workspace coordination"],
                   goals: locale === 'fi' ? ["Paranna tiimin nopeutta", "Vähennä kokousaikaa"] : ["Improve team velocity", "Reduce meeting overhead"],
                   painPoints: locale === 'fi' ? ["Kontekstin vaihtaminen", "Viivästyneet hyväksynnät"] : ["Context switching between tools", "Delayed approvals"],
-                  icon: (
-                    <span className="material-symbols text-4xl">engineering</span>
-                  )
+                  photo: "/images/portfolio/profile-img/james-l.jpg"
                 }
                 ].map((persona, index) => (
                   <motion.div
                     key={index}
-                    className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
+                    className="theme-card h-full"
                     whileHover={{ y: -5 }}
                   >
-                    <div className="flex items-center mb-6">
-                      <div className="h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-4">
-                        {persona.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-primary">{persona.name}</h3>
-                        <p className="text-opacity-80">{persona.role}</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Ominaisuudet" : "Traits"}</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {persona.traits.map((trait, i) => (
-                            <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                              {trait}
-                            </span>
-                          ))}
+                    <div className="theme-card-glow theme-card-glow-secondary"></div>
+                    <div className="theme-card-content p-8 hover:bg-theme/70 transition-all duration-300 flex flex-col h-full border-t-4 border-t-purple-500/50">
+                      <div className="flex flex-col items-center text-center mb-6">
+                        <div className="flex-shrink-0 h-20 w-20 rounded-full mb-4 shadow-lg shadow-purple-500/20 overflow-hidden ring-2 ring-purple-400/30">
+                          <Image src={persona.photo} alt={persona.name} width={80} height={80} className="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-primary mb-1">{persona.name}</h3>
+                          <p className="text-opacity-80 text-sm font-medium uppercase tracking-wider">{persona.role}</p>
                         </div>
                       </div>
 
-                      <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
-                        <ul className="space-y-2">
-                          {persona.needs.map((need, i) => (
-                            <li key={i} className="flex items-center text-opacity-80">
-                              <span className="material-symbols text-sm mr-2">check_circle</span>
-                              {need}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <div className="space-y-4 flex-grow flex flex-col">
+                        <div className="bg-purple-500/5 p-4 rounded-xl border border-purple-500/10">
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-3 opacity-80 flex items-center justify-center gap-2">
+                            <span className="material-symbols text-sm">stars</span>
+                            {locale === 'fi' ? "Ominaisuudet" : "Traits"}
+                          </h4>
+                          <div className="flex flex-wrap justify-center gap-2">
+                            {persona.traits.map((trait, i) => (
+                              <span key={i} className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold shadow-sm">
+                                {trait}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
 
-                      <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
-                        <ul className="space-y-2">
-                          {persona.goals.map((goal, i) => (
-                            <li key={i} className="flex items-center text-opacity-80">
-                              <span className="material-symbols text-sm mr-2">arrow_forward</span>
-                              {goal}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                        <div className="grid grid-cols-1 gap-4 flex-grow">
+                          <div className="bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/10">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-3 flex items-center gap-1">
+                              <span className="material-symbols text-sm">check_circle</span>
+                              {locale === 'fi' ? "Tarpeet" : "Needs"}
+                            </h4>
+                            <ul className="space-y-2">
+                              {persona.needs.map((need, i) => (
+                                <li key={i} className="flex items-start text-[14px] leading-snug">
+                                  <span className="material-symbols text-[16px] text-emerald-500 mr-2 mt-0.5">done</span>
+                                  <span className="opacity-90">{need}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                      <div>
-                        <h4 className="text-sm font-medium text-primary mb-2">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
-                        <ul className="space-y-2">
-                          {persona.painPoints.map((point, i) => (
-                            <li key={i} className="flex items-center text-opacity-80">
-                              <span className="material-symbols text-sm mr-2">warning</span>
-                              {point}
-                            </li>
-                          ))}
-                        </ul>
+                          <div className="bg-blue-500/5 p-4 rounded-xl border border-blue-500/10">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-500 mb-3 flex items-center gap-1">
+                              <span className="material-symbols text-sm">arrow_forward</span>
+                              {locale === 'fi' ? "Tavoitteet" : "Goals"}
+                            </h4>
+                            <ul className="space-y-2">
+                              {persona.goals.map((goal, i) => (
+                                <li key={i} className="flex items-start text-[14px] leading-snug">
+                                  <span className="material-symbols text-[16px] text-blue-500 mr-2 mt-0.5">arrow_forward</span>
+                                  <span className="opacity-90">{goal}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="bg-rose-500/5 p-4 rounded-xl border border-rose-500/10">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-rose-500 mb-3 flex items-center gap-1">
+                              <span className="material-symbols text-sm">warning</span>
+                              {locale === 'fi' ? "Kipupisteet" : "Pain Points"}
+                            </h4>
+                            <ul className="space-y-2">
+                              {persona.painPoints.map((point, i) => (
+                                <li key={i} className="flex items-start text-[14px] leading-snug">
+                                  <span className="material-symbols text-[16px] text-rose-500 mr-2 mt-0.5">close</span>
+                                  <span className="opacity-90">{point}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

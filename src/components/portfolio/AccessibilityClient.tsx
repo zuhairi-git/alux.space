@@ -1497,7 +1497,7 @@ export default function AccessibilityClient() {
           }`}>
             {activeTab > 0 ? (
               <button
-                onClick={() => setActiveTab(activeTab - 1)}
+                onClick={() => { setActiveTab(activeTab - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
                   isColorful
                     ? 'text-gray-300 hover:text-white hover:bg-cyan-500/20'
@@ -1515,7 +1515,7 @@ export default function AccessibilityClient() {
             ) : <div />}
             {activeTab < tabs.length - 1 ? (
               <button
-                onClick={() => setActiveTab(activeTab + 1)}
+                onClick={() => { setActiveTab(activeTab + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
                   isColorful
                     ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 text-white hover:from-cyan-500/30 hover:to-purple-500/30'
