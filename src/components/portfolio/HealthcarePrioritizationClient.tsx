@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
@@ -8,8 +8,6 @@ import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 
 export default function HealthcarePrioritizationClient() {
-  const mainRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState(0);
 
   const { theme } = useTheme();
   const { locale } = useLanguage();
@@ -264,11 +262,6 @@ export default function HealthcarePrioritizationClient() {
   };
 
   const content = getLocalizedContent();
-  const tabs = [
-    { id: 0, label: content.overviewTab, icon: "analytics" },
-    { id: 1, label: content.processTab, icon: "handshake" },
-    { id: 2, label: content.impactTab, icon: "lightbulb" }
-  ];
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isColorful
@@ -360,95 +353,13 @@ export default function HealthcarePrioritizationClient() {
             })}
           </motion.div>
 
-          {/* Tab Navigation */}
+          {/* Case Study Sections */}
           <motion.div
-            ref={mainRef}
-            className="mb-12"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center justify-between mb-3">
-              <span className={`text-xs font-bold uppercase tracking-widest ${
-                isColorful ? 'text-purple-400' : isLight ? 'text-blue-600' : 'text-gray-500'
-              }`}>Case Study</span>
-              <span className={`text-sm tabular-nums ${
-                isColorful ? 'text-gray-400' : isLight ? 'text-gray-500' : 'text-gray-500'
-              }`}>{activeTab + 1} <span className="opacity-50">/</span> {tabs.length}</span>
-            </div>
-            <div className={`w-full h-0.5 rounded-full mb-6 overflow-hidden ${
-              isColorful ? 'bg-purple-900/50' : isLight ? 'bg-gray-200' : 'bg-gray-700'
-            }`}>
-              <div
-                className={`h-full rounded-full transition-all duration-500 ease-out ${
-                  isColorful
-                    ? 'bg-gradient-to-r from-blue-400 to-purple-400'
-                    : 'bg-gradient-to-r from-blue-500 to-purple-500'
-                }`}
-                style={{ width: `${((activeTab + 1) / tabs.length) * 100}%` }}
-              />
-            </div>
-            <div className="flex gap-3">
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 flex flex-col items-start p-4 rounded-2xl transition-all duration-300 text-left group border ${
-                    activeTab === tab.id
-                      ? isColorful
-                        ? 'bg-gradient-to-br from-blue-500/20 to-purple-500/20 border-blue-400/50 shadow-lg shadow-blue-900/30'
-                        : isLight
-                          ? 'bg-gradient-to-br from-blue-500 to-purple-600 border-transparent shadow-lg'
-                          : 'bg-gradient-to-br from-blue-600/25 to-purple-600/25 border-blue-500/40 shadow-lg'
-                      : isColorful
-                        ? 'border-white/5 bg-purple-900/10 hover:bg-purple-500/15 hover:border-purple-400/25'
-                        : isLight
-                          ? 'border-gray-200 bg-white hover:bg-gray-50 hover:shadow-md hover:border-blue-200'
-                          : 'border-gray-700/60 bg-gray-800/40 hover:bg-gray-700/50 hover:border-gray-600'
-                  }`}
-                >
-                  <div className="flex items-center gap-2 mb-2.5">
-                    <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all ${
-                      activeTab === tab.id
-                        ? isColorful
-                          ? 'bg-blue-500 text-white'
-                          : isLight
-                            ? 'bg-white/30 text-white'
-                            : 'bg-blue-500 text-white'
-                        : isColorful
-                          ? 'bg-purple-800/50 text-gray-400 group-hover:bg-purple-700/50 group-hover:text-gray-200'
-                          : isLight
-                            ? 'bg-gray-100 text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600'
-                            : 'bg-gray-700 text-gray-400 group-hover:bg-gray-600 group-hover:text-gray-200'
-                    }`}>
-                      {index + 1}
-                    </span>
-                    <span className={`material-symbols text-base transition-all ${
-                      activeTab === tab.id
-                        ? isColorful ? 'text-blue-300' : isLight ? 'text-white/90' : 'text-blue-300'
-                        : isColorful ? 'text-gray-500 group-hover:text-gray-300' : isLight ? 'text-gray-400 group-hover:text-blue-500' : 'text-gray-500 group-hover:text-gray-300'
-                    }`}>{tab.icon}</span>
-                  </div>
-                  <span className={`font-semibold text-sm leading-snug ${
-                    activeTab === tab.id
-                      ? 'text-white'
-                      : isColorful ? 'text-gray-300 group-hover:text-white' : isLight ? 'text-gray-600 group-hover:text-gray-900' : 'text-gray-400 group-hover:text-white'
-                  }`}>{tab.label}</span>
-                </button>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Tab Content */}
-          <div>
-            {/* Overview Tab */}
-            {activeTab === 0 && (
-              <motion.div
-                key="overview"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
                 {/* Context & Conflict Row */}
                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                   <div className={`p-8 rounded-2xl ${isColorful
@@ -604,17 +515,27 @@ export default function HealthcarePrioritizationClient() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            )}
+          </motion.div>
 
-            {/* Process Tab */}
-            {activeTab === 1 && (
-              <motion.div
-                key="process"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
+            {/* ───────── Section Divider ───────── */}
+            <div className="relative my-20">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-purple-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
+              </div>
+              <div className="relative flex justify-center">
+                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-purple-500/30 text-purple-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
+                  <span className="material-symbols text-base">handshake</span>
+                  {content.processTab}
+                </div>
+              </div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
                 {/* Resolution Process */}
                 <motion.section
                   className="mb-16"
@@ -728,17 +649,27 @@ export default function HealthcarePrioritizationClient() {
                     </div>
                   </div>
                 </motion.section>
-              </motion.div>
-            )}
+            </motion.div>
 
-            {/* Impact Tab */}
-            {activeTab === 2 && (
-              <motion.div
-                key="impact"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
+            {/* ───────── Section Divider ───────── */}
+            <div className="relative my-20">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-purple-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
+              </div>
+              <div className="relative flex justify-center">
+                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-purple-500/30 text-purple-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
+                  <span className="material-symbols text-base">lightbulb</span>
+                  {content.impactTab}
+                </div>
+              </div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
                 {/* Takeaways */}
                 <div className="grid md:grid-cols-3 gap-6 mb-16">
                   {[
@@ -775,50 +706,6 @@ export default function HealthcarePrioritizationClient() {
                   <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">{content.summaryDesc}</p>
                 </div>
               </motion.div>
-            )}
-          </div>
-
-          {/* Section Navigation */}
-          <div className={`flex items-center justify-between mt-10 pt-8 border-t ${
-            isColorful ? 'border-purple-400/20' : isLight ? 'border-gray-200' : 'border-gray-700'
-          }`}>
-            {activeTab > 0 ? (
-              <button
-                onClick={() => { setActiveTab(activeTab - 1); if (mainRef.current) { window.scrollTo({ top: mainRef.current.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }}
-                className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
-                  isColorful
-                    ? 'text-gray-300 hover:text-white hover:bg-purple-500/20'
-                    : isLight
-                      ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                      : 'text-gray-400 hover:text-white hover:bg-gray-800'
-                }`}
-              >
-                <span className="material-symbols text-lg">arrow_back</span>
-                <div className="text-left">
-                  <div className={`text-xs mb-0.5 ${isColorful ? 'text-purple-400' : isLight ? 'text-blue-500' : 'text-gray-500'}`}>Previous</div>
-                  <div className="font-semibold text-sm">{tabs[activeTab - 1].label}</div>
-                </div>
-              </button>
-            ) : <div />}
-            {activeTab < tabs.length - 1 ? (
-              <button
-                onClick={() => { setActiveTab(activeTab + 1); if (mainRef.current) { window.scrollTo({ top: mainRef.current.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }}
-                className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
-                  isColorful
-                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 text-white hover:from-blue-500/30 hover:to-purple-500/30'
-                    : isLight
-                      ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:shadow-lg'
-                      : 'bg-gradient-to-r from-blue-600/25 to-purple-600/25 border border-blue-500/30 text-white hover:from-blue-600/40 hover:to-purple-600/40'
-                }`}
-              >
-                <div className="text-right">
-                  <div className={`text-xs mb-0.5 ${isColorful ? 'text-blue-300/70' : isLight ? 'text-white/70' : 'text-blue-300/70'}`}>Next Section</div>
-                  <div className="font-semibold text-sm">{tabs[activeTab + 1].label}</div>
-                </div>
-                <span className="material-symbols text-lg">arrow_forward</span>
-              </button>
-            ) : <div />}
-          </div>
         </div>
       </main>
     </div>

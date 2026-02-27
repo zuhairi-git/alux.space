@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
@@ -9,9 +9,7 @@ import Navigation from '@/components/Navigation';
 import AppArchitectureModal from './AppArchitectureModal';
 
 export default function MarketIntelligenceClient() {
-    const [activeTab, setActiveTab] = useState(0);
     const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false);
-    const mainRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Ensure Tajawal font is loaded
@@ -230,13 +228,6 @@ export default function MarketIntelligenceClient() {
 
     const content = getLocalizedContent();
 
-    const tabs = [
-        { id: 0, label: content.overviewTab, icon: "visibility" },
-        { id: 1, label: content.uxTab, icon: "smartphone" },
-        { id: 2, label: content.systemTab, icon: "shield" },
-        { id: 3, label: content.impactTab, icon: "account_tree" }
-    ];
-
     return (
         <div className={`min-h-screen transition-colors duration-300 ${isColorful
             ? 'bg-[#050023]'
@@ -274,7 +265,6 @@ export default function MarketIntelligenceClient() {
                                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
                                     <button
                                         onClick={() => {
-                                            setActiveTab(0);
                                             setTimeout(() => {
                                                 document.getElementById('interactive-prototypes')?.scrollIntoView({ behavior: 'smooth' });
                                             }, 100);
@@ -376,96 +366,13 @@ export default function MarketIntelligenceClient() {
                         </div>
                     </motion.div>
 
-                    {/* Tab Navigation */}
-                    <motion.div
-                        ref={mainRef}
-                        className="mb-12"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                    >
-                        <div className="flex items-center justify-between mb-3">
-                            <span className={`text-xs font-bold uppercase tracking-widest ${
-                                isColorful ? 'text-blue-400' : isLight ? 'text-blue-600' : 'text-gray-500'
-                            }`}>Case Study</span>
-                            <span className={`text-sm tabular-nums ${
-                                isColorful ? 'text-gray-400' : isLight ? 'text-gray-500' : 'text-gray-500'
-                            }`}>{activeTab + 1} <span className="opacity-50">/</span> {tabs.length}</span>
-                        </div>
-                        <div className={`w-full h-0.5 rounded-full mb-6 overflow-hidden ${
-                            isColorful ? 'bg-blue-900/50' : isLight ? 'bg-gray-200' : 'bg-gray-700'
-                        }`}>
-                            <div
-                                className={`h-full rounded-full transition-all duration-500 ease-out ${
-                                    isColorful
-                                        ? 'bg-gradient-to-r from-blue-400 to-indigo-400'
-                                        : 'bg-gradient-to-r from-blue-500 to-indigo-500'
-                                }`}
-                                style={{ width: `${((activeTab + 1) / tabs.length) * 100}%` }}
-                            />
-                        </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            {tabs.map((tab, index) => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`flex flex-col items-start p-4 rounded-2xl transition-all duration-300 text-left group border ${
-                                        activeTab === tab.id
-                                            ? isColorful
-                                                ? 'bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border-blue-400/50 shadow-lg shadow-blue-900/30'
-                                                : isLight
-                                                    ? 'bg-gradient-to-br from-blue-500 to-indigo-600 border-transparent shadow-lg'
-                                                    : 'bg-gradient-to-br from-blue-600/25 to-indigo-600/25 border-blue-500/40 shadow-lg'
-                                            : isColorful
-                                                ? 'border-white/5 bg-blue-900/10 hover:bg-blue-500/10 hover:border-blue-400/20'
-                                                : isLight
-                                                    ? 'border-gray-200 bg-white hover:bg-gray-50 hover:shadow-md hover:border-blue-200'
-                                                    : 'border-gray-700/60 bg-gray-800/40 hover:bg-gray-700/50 hover:border-gray-600'
-                                    }`}
-                                >
-                                    <div className="flex items-center gap-2 mb-2.5">
-                                        <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all ${
-                                            activeTab === tab.id
-                                                ? isColorful
-                                                    ? 'bg-blue-500 text-white'
-                                                    : isLight
-                                                        ? 'bg-white/30 text-white'
-                                                        : 'bg-blue-500 text-white'
-                                                : isColorful
-                                                    ? 'bg-blue-900/50 text-gray-400 group-hover:bg-blue-800/50 group-hover:text-gray-200'
-                                                    : isLight
-                                                        ? 'bg-gray-100 text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600'
-                                                        : 'bg-gray-700 text-gray-400 group-hover:bg-gray-600 group-hover:text-gray-200'
-                                        }`}>
-                                            {index + 1}
-                                        </span>
-                                        <span className={`material-symbols text-base transition-all ${
-                                            activeTab === tab.id
-                                                ? isColorful ? 'text-blue-300' : isLight ? 'text-white/90' : 'text-blue-300'
-                                                : isColorful ? 'text-gray-500 group-hover:text-gray-300' : isLight ? 'text-gray-400 group-hover:text-blue-500' : 'text-gray-500 group-hover:text-gray-300'
-                                        }`}>{tab.icon}</span>
-                                    </div>
-                                    <span className={`font-semibold text-sm leading-snug ${
-                                        activeTab === tab.id
-                                            ? 'text-white'
-                                            : isColorful ? 'text-gray-300 group-hover:text-white' : isLight ? 'text-gray-600 group-hover:text-gray-900' : 'text-gray-400 group-hover:text-white'
-                                    }`}>{tab.label}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </motion.div>
-
-                    {/* Tab Content */}
-                    <div>
-
-                        {/* Overview Tab */}
-                        {activeTab === 0 && (
-                            <motion.div
-                                key="overview"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                            >
+                    {/* Case Study Sections */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
                                 {/* Problem vs Solution */}
                                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                                     <div className={`p-8 rounded-3xl ${isColorful
@@ -664,17 +571,27 @@ export default function MarketIntelligenceClient() {
                                         </div>
                                     </motion.div>
                                 </motion.section>
-                            </motion.div>
-                        )}
+                        </motion.div>
 
-                        {/* UX & Patterns Tab */}
-                        {activeTab === 1 && (
-                            <motion.div
-                                key="system"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.4 }}
-                            >
+                        {/* ───────── Section Divider ───────── */}
+                        <div className="relative my-20">
+                            <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-blue-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
+                            </div>
+                            <div className="relative flex justify-center">
+                                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-blue-500/30 text-blue-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
+                                    <span className="material-symbols text-base">smartphone</span>
+                                    {content.uxTab}
+                                </div>
+                            </div>
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
                                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                                     {/* iOS Patterns */}
                                     <div className={`p-8 rounded-2xl ${isColorful
@@ -738,17 +655,27 @@ export default function MarketIntelligenceClient() {
                                         ))}
                                     </div>
                                 </motion.section>
-                            </motion.div>
-                        )}
+                        </motion.div>
 
-                        {/* Design System & Trust Tab */}
-                        {activeTab === 2 && (
-                            <motion.div
-                                key="system2"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.4 }}
-                            >
+                        {/* ───────── Section Divider ───────── */}
+                        <div className="relative my-20">
+                            <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-blue-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
+                            </div>
+                            <div className="relative flex justify-center">
+                                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-blue-500/30 text-blue-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
+                                    <span className="material-symbols text-base">shield</span>
+                                    {content.systemTab}
+                                </div>
+                            </div>
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
                                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                                     {/* Frame & Latency */}
                                     <div>
@@ -808,17 +735,27 @@ export default function MarketIntelligenceClient() {
                                         </div>
                                     </div>
                                 </div>
-                            </motion.div>
-                        )}
+                        </motion.div>
 
-                        {/* Implementation Tab */}
-                        {activeTab === 3 && (
-                            <motion.div
-                                key="impact"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.4 }}
-                            >
+                        {/* ───────── Section Divider ───────── */}
+                        <div className="relative my-20">
+                            <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-blue-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
+                            </div>
+                            <div className="relative flex justify-center">
+                                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-blue-500/30 text-blue-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
+                                    <span className="material-symbols text-base">account_tree</span>
+                                    {content.impactTab}
+                                </div>
+                            </div>
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
                                 <motion.section
                                     className="mb-16"
                                     initial={{ opacity: 0, y: 30 }}
@@ -851,51 +788,6 @@ export default function MarketIntelligenceClient() {
                                 </motion.section>
 
                             </motion.div>
-                        )}
-
-                    </div>
-
-                    {/* Section Navigation */}
-                    <div className={`flex items-center justify-between mt-10 pt-8 border-t ${
-                        isColorful ? 'border-blue-400/20' : isLight ? 'border-gray-200' : 'border-gray-700'
-                    }`}>
-                        {activeTab > 0 ? (
-                            <button
-                                onClick={() => { setActiveTab(activeTab - 1); if (mainRef.current) { window.scrollTo({ top: mainRef.current.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }}
-                                className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
-                                    isColorful
-                                        ? 'text-gray-300 hover:text-white hover:bg-blue-500/20'
-                                        : isLight
-                                            ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                                            : 'text-gray-400 hover:text-white hover:bg-gray-800'
-                                }`}
-                            >
-                                <span className="material-symbols text-lg">arrow_back</span>
-                                <div className="text-left">
-                                    <div className={`text-xs mb-0.5 ${isColorful ? 'text-blue-400' : isLight ? 'text-blue-500' : 'text-gray-500'}`}>Previous</div>
-                                    <div className="font-semibold text-sm">{tabs[activeTab - 1].label}</div>
-                                </div>
-                            </button>
-                        ) : <div />}
-                        {activeTab < tabs.length - 1 ? (
-                            <button
-                                onClick={() => { setActiveTab(activeTab + 1); if (mainRef.current) { window.scrollTo({ top: mainRef.current.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }}
-                                className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
-                                    isColorful
-                                        ? 'bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border border-blue-400/30 text-white hover:from-blue-500/30 hover:to-indigo-500/30'
-                                        : isLight
-                                            ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white hover:shadow-lg'
-                                            : 'bg-gradient-to-r from-blue-600/25 to-indigo-600/25 border border-blue-500/30 text-white hover:from-blue-600/40 hover:to-indigo-600/40'
-                                }`}
-                            >
-                                <div className="text-right">
-                                    <div className={`text-xs mb-0.5 ${isColorful ? 'text-blue-300/70' : isLight ? 'text-white/70' : 'text-blue-300/70'}`}>Next Section</div>
-                                    <div className="font-semibold text-sm">{tabs[activeTab + 1].label}</div>
-                                </div>
-                                <span className="material-symbols text-lg">arrow_forward</span>
-                            </button>
-                        ) : <div />}
-                    </div>
                 </div>
             </main>
 
