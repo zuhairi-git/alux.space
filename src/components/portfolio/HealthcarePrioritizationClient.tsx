@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
@@ -8,6 +8,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 
 export default function HealthcarePrioritizationClient() {
+  const mainRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState(0);
 
   const { theme } = useTheme();
@@ -361,6 +362,7 @@ export default function HealthcarePrioritizationClient() {
 
           {/* Tab Navigation */}
           <motion.div
+            ref={mainRef}
             className="mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -782,7 +784,7 @@ export default function HealthcarePrioritizationClient() {
           }`}>
             {activeTab > 0 ? (
               <button
-                onClick={() => { setActiveTab(activeTab - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                onClick={() => { setActiveTab(activeTab - 1); if (mainRef.current) { window.scrollTo({ top: mainRef.current.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }}
                 className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
                   isColorful
                     ? 'text-gray-300 hover:text-white hover:bg-purple-500/20'
@@ -800,7 +802,7 @@ export default function HealthcarePrioritizationClient() {
             ) : <div />}
             {activeTab < tabs.length - 1 ? (
               <button
-                onClick={() => { setActiveTab(activeTab + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                onClick={() => { setActiveTab(activeTab + 1); if (mainRef.current) { window.scrollTo({ top: mainRef.current.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }}
                 className={`flex items-center gap-3 px-5 py-3 rounded-xl transition-all ${
                   isColorful
                     ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 text-white hover:from-blue-500/30 hover:to-purple-500/30'
