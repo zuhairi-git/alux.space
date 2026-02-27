@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@/app/mobile/shared';
 import type { MobileTheme } from '@/app/mobile/themes';
@@ -69,6 +69,8 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const [step, setStep] = useState(0);
     const [direction, setDirection] = useState(1);
     const [selectedTheme, setSelectedTheme] = useState<string>('colorful');
+    const touchStartX = useRef<number | null>(null);
+    const touchStartY = useRef<number | null>(null);
     const TOTAL_STEPS = 4;
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
@@ -111,6 +113,42 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
         setStep((s) => s - 1);
     };
 
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        if (e.touches.length !== 1) {
+            return;
+        }
+
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+        if (touchStartX.current === null || touchStartY.current === null || e.changedTouches.length === 0) {
+            return;
+        }
+
+        const dx = e.changedTouches[0].clientX - touchStartX.current;
+        const dy = e.changedTouches[0].clientY - touchStartY.current;
+        touchStartX.current = null;
+        touchStartY.current = null;
+
+        // Treat only deliberate horizontal swipes as navigation to avoid fighting vertical scroll.
+        const horizontalSwipeThreshold = 48;
+        const isHorizontalIntent = Math.abs(dx) > Math.abs(dy) * 1.2;
+        if (!isHorizontalIntent || Math.abs(dx) < horizontalSwipeThreshold) {
+            return;
+        }
+
+        if (dx < 0 && !isLast) {
+            handleNext();
+            return;
+        }
+
+        if (dx > 0 && step > 0) {
+            handleBack();
+        }
+    };
+
     return (
         <div className={`absolute inset-0 z-50 flex flex-col ${bgClass} transition-colors duration-500 overflow-hidden`}>
 
@@ -142,7 +180,11 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             </div>
 
             {/* Page content */}
-            <div className="flex-1 overflow-hidden relative">
+            <div
+                className="flex-1 overflow-hidden relative"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
                 <AnimatePresence custom={direction} mode="wait">
 
                     {/* ── Step 0: Welcome ── */}
