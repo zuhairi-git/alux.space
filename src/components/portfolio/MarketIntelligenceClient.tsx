@@ -454,7 +454,7 @@ export default function MarketIntelligenceClient() {
                     </motion.div>
 
                     {/* Tab Content */}
-                    <div className="min-h-screen">
+                    <div>
 
                         {/* Overview Tab */}
                         {activeTab === 0 && (

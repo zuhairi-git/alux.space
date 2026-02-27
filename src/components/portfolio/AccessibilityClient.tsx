@@ -652,7 +652,7 @@ export default function AccessibilityClient() {
           </motion.div>
 
           {/* Tab Content */}
-          <div className="min-h-screen">
+          <div>
             {/* Overview Tab */}
             {activeTab === 0 && (
               <motion.div
