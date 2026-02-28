@@ -72,6 +72,56 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const { locale } = await params; const portfolioItems: PortfolioItem[] = [
     {
       title: {
+        en: 'Game Development Strategy',
+        fi: 'Pelinkehitysstrategia'
+      },
+      type: {
+        en: 'Strategic Case Study',
+        fi: 'Strateginen tapaustutkimus'
+      },
+      desc: {
+        en: 'A data-driven game development and marketing strategy — from user personas and gameplay mechanics to launch planning and long-term retention.',
+        fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia — käyttäjäpersoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkäaikaiseen pysyvyyteen.'
+      },
+      link: `/${locale}/portfolio/game-strategy`,
+      gradient: 'from-red-500 to-orange-400',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
+      category: 'case-study',
+      photo: {
+        url: '/images/portfolio/workflow/cover.jpg'
+      }
+    },
+    {
+      title: {
+        en: 'Workflow Platform',
+        fi: 'Työnkulkualusta'
+      },
+      type: {
+        en: 'AI-Powered Collaboration',
+        fi: 'Tekoälypohjainen yhteistyö'
+      },
+      desc: {
+        en: 'An AI-powered platform with intelligent workspaces, AI copilot, and cross-platform prototypes for iOS, Android, and collaboration portal.',
+        fi: 'Tekoälypohjainen alusta älykkäillä työtiloilla, tekoälyavustajalla ja monialustaisilla prototyypeillä iOS:lle, Androidille ja hallintaportaalille.'
+      },
+      link: `/${locale}/portfolio/workflow`,
+      gradient: 'from-blue-400 to-purple-500',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
+      category: 'prototype',
+      photo: {
+        url: '/images/portfolio/workflow/cover.jpg'
+      }
+    },
+    {
+      title: {
         en: 'AI-Powered Market Intelligence',
         fi: 'Tekoälypohjainen markkinatieto'
       },
@@ -146,31 +196,6 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
     },
     {
       title: {
-        en: 'Workflow Platform',
-        fi: 'Työnkulkualusta'
-      },
-      type: {
-        en: 'AI-Powered Collaboration',
-        fi: 'Tekoälypohjainen yhteistyö'
-      },
-      desc: {
-        en: 'An AI-powered platform with intelligent workspaces, AI copilot, and cross-platform prototypes for iOS, Android, and collaboration portal.',
-        fi: 'Tekoälypohjainen alusta älykkäillä työtiloilla, tekoälyavustajalla ja monialustaisilla prototyypeillä iOS:lle, Androidille ja hallintaportaalille.'
-      },
-      link: `/${locale}/portfolio/workflow`,
-      gradient: 'from-blue-400 to-purple-500',
-      status: {
-        en: 'Accomplished',
-        fi: 'Saavutettu',
-        type: 'accomplished'
-      },
-      category: 'prototype',
-      photo: {
-        url: '/images/portfolio/workflow/cover.jpg'
-      }
-    },
-    {
-      title: {
         en: 'Career Development',
         fi: 'Urakehitys'
       },
@@ -192,31 +217,6 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'prototype',
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpg'
-      }
-    },
-    {
-      title: {
-        en: 'Game Development Strategy',
-        fi: 'Pelinkehitysstrategia'
-      },
-      type: {
-        en: 'Strategic Case Study',
-        fi: 'Strateginen tapaustutkimus'
-      },
-      desc: {
-        en: 'A data-driven game development and marketing strategy — from user personas and gameplay mechanics to launch planning and long-term retention.',
-        fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia — käyttäjäpersoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkäaikaiseen pysyvyyteen.'
-      },
-      link: `/${locale}/portfolio/game-strategy`,
-      gradient: 'from-red-500 to-orange-400',
-      status: {
-        en: 'Accomplished',
-        fi: 'Saavutettu',
-        type: 'accomplished'
-      },
-      category: 'case-study',
-      photo: {
-        url: '/images/portfolio/workflow/cover.jpg'
       }
     }
   ];
