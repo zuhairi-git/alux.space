@@ -54,7 +54,7 @@ export function middleware(request: NextRequest) {
 // - public files (with extensions like .ico, .jpg, etc.)
 export const config = {
   matcher: [
-    // Skip public files and API routes
-    '/((?!api|_next/static|_next/image|images|audio|favicon.ico|favicon.png|robots.txt).*)',
+    // Skip public files, API routes, and mobile app routes
+    '/((?!api|_next/static|_next/image|images|audio|mobile|favicon.ico|favicon.png|robots.txt).*)',
   ],
 };
