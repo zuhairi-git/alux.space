@@ -86,7 +86,7 @@ function MobilePrototypeContent() {
         ? (isIOS ? 'bg-[#F2F2F7] text-black' : 'bg-[#FAF8FC] text-[#1C1B1F]')
         : isColorful
             ? 'bg-[#050023] text-white'
-            : (isIOS ? 'bg-black text-white' : 'bg-[#111114] text-[#E2E2E6]');
+            : (isIOS ? 'bg-black text-white' : 'bg-[#131316] text-[#E2E2E6]');
 
     const headerTitles: Record<TabType, { sub: string, title: string }> = {
         dashboard: { sub: 'Welcome Back', title: 'Ali Al-Zuhairi' },
@@ -122,8 +122,8 @@ function MobilePrototypeContent() {
 
             {/* Header */}
             <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-purple-500/15' : 'bg-[#2C2C2E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-white/5')
-                : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/80 backdrop-blur-2xl border-b border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-2xl border-b border-[#4A4458]/50 shadow-md')
+                ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/5' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-purple-500/15' : 'bg-[#2C2C2E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/5')
+                : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/80 backdrop-blur-2xl border-b border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-2xl border-b border-[#49454F]/50 shadow-md')
                 }`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
@@ -174,7 +174,7 @@ function MobilePrototypeContent() {
 
 export default function MobilePrototypePage() {
     return (
-        <Suspense fallback={<div className="min-h-[100dvh] w-full bg-[#111114]" />}>
+        <Suspense fallback={<div className="min-h-[100dvh] w-full bg-[#131316]" />}>
             <MobilePrototypeContent />
         </Suspense>
     );
@@ -188,8 +188,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[24px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/40');
 
     const watchlist = [
         { ticker: 'AAPL', name: 'Apple', price: '$198.11', change: '+2.4%', up: true, data: [140, 145, 142, 155, 160, 158, 170, 175, 180, 190, 185, 198] },
@@ -299,8 +299,8 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
     const [alertSet, setAlertSet] = useState<string | null>(null);
     useEffect(() => { setTickerExpanded(false); setAlertSet(null); }, [selectedTicker]);
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[24px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[24px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[24px] shadow-lg border border-[#4A4458]/40');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/40');
 
     const indices = [
         { name: 'S&P 500', value: '5,234.18', change: '+0.87%', up: true, data: [5100, 5120, 5150, 5180, 5200, 5210, 5190, 5220, 5234] },
@@ -402,7 +402,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50">
                             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedTicker(null)} />
                             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#1a0040]' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FEF7FF]' : isColorful ? 'bg-[#0A0138]' : 'bg-[#2B2930]')}`}>
+                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#1a0040]' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FDF7FF]' : isColorful ? 'bg-[#0A0138]' : 'bg-[#2D2B33]')}`}>
                                 {/* Drag handle — tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
                                     <div className="w-10 h-1 rounded-full bg-gray-400/30" />
@@ -506,14 +506,14 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6] text-white rounded-[22px] rounded-tr-md shadow-[0_6px_20px_rgba(0,122,255,0.3)]'
         : 'bg-gradient-to-br from-[#6750A4] to-[#9a82db] text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(103,80,164,0.3)]';
     const botBubble = isIOS
-        ? (isLight ? 'bg-white/70 backdrop-blur-xl border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/80 backdrop-blur-xl border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-[22px] rounded-tl-sm shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#2B2930]/90 backdrop-blur-xl border border-[#4A4458]/40 text-[#E8DEF8] rounded-[22px] rounded-tl-sm shadow-sm');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-[22px] rounded-tl-sm shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#2D2B33]/90 backdrop-blur-xl border border-[#49454F]/40 text-[#E8DEF8] rounded-[22px] rounded-tl-sm shadow-sm');
     const inputArea = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-xl border-t border-black/5' : isColorful ? 'bg-[#1a0040]/80 backdrop-blur-xl border-t border-purple-500/20' : 'bg-[#1C1C1E]/60 backdrop-blur-xl border-t border-white/8')
-        : (isLight ? 'bg-[#F3EDF7] rounded-t-[28px]' : isColorful ? 'bg-[#0A0138]/90 rounded-t-[28px]' : 'bg-[#2B2930] rounded-t-[28px]');
+        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-purple-500/20' : 'bg-[#1C1C1E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
+        : (isLight ? 'bg-[#F3EDF7] rounded-t-[28px]' : isColorful ? 'bg-[#0A0138]/90 rounded-t-[28px]' : 'bg-[#2D2B33] rounded-t-[28px]');
     const inputBox = isIOS
         ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : isColorful ? 'bg-purple-500/10 rounded-full px-5 py-3 border border-purple-500/20' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
-        : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[24px] px-5 py-3' : isColorful ? 'bg-purple-500/15 text-white rounded-[24px] px-5 py-3' : 'bg-[#4A4458] text-[#E8DEF8] rounded-[24px] px-5 py-3');
+        : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[28px] px-5 py-3' : isColorful ? 'bg-purple-500/15 text-white rounded-[28px] px-5 py-3' : 'bg-[#4F378B] text-[#E8DEF8] rounded-[28px] px-5 py-3');
 
     const prompts = [
         { icon: 'bolt', label: 'Earnings', prompt: 'Analyze AAPL Q3 Earnings Impact' },
@@ -615,8 +615,8 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isColorful = theme === 'colorful';
     const [expanded, setExpanded] = useState<number | null>(null);
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[20px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[20px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[20px] border border-[#4A4458]/40 shadow-lg');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
 
     const alerts = [
         { id: 1, priority: 'critical', icon: 'trending_down', title: 'TSLA Dropped 5.2%', desc: 'Pre-market trading indicates a significant drop ahead of SEC quarterly earnings disclosure.', detail: 'Tesla shares fell sharply after reports of slowing EV deliveries in China and increased competition from BYD. Analyst consensus has shifted to a Hold rating.', time: '10 min ago', color: 'red' },
@@ -685,8 +685,8 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
     const isColorful = theme === 'colorful';
     const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
     const card = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/40 backdrop-blur-[20px] backdrop-saturate-[180%] border border-purple-500/20 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/70 backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/8 rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FEF7FF]/90 backdrop-blur-xl rounded-[20px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[20px] shadow-lg border border-purple-500/20' : 'bg-[#2B2930]/90 backdrop-blur-xl rounded-[20px] border border-[#4A4458]/40 shadow-lg');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
 
     const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
     const fadeUp = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 400, damping: 30 } } };
@@ -765,7 +765,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-auto">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsThemeModalOpen(false)} className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
                         <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/90 backdrop-blur-xl' : 'bg-[#1C1C1E]/95 backdrop-blur-xl text-white') : (isLight ? 'bg-[#FEF7FF]' : 'bg-[#2B2930] text-[#E6E1E5]')}`}>
+                            className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/80 backdrop-blur-[30px] backdrop-saturate-[200%]' : 'bg-[#1C1C1E]/80 backdrop-blur-[30px] backdrop-saturate-[200%] text-white') : (isLight ? 'bg-[#FDF7FF]' : 'bg-[#2D2B33] text-[#E6E1E5]')}`}>
                             <div className="flex justify-between items-center mb-5">
                                 <h3 className="text-xl font-bold">App Theme</h3>
                                 <button onClick={() => setIsThemeModalOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/10"><Icon name="close" className="text-sm" /></button>
@@ -801,8 +801,8 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
     const navClass = isIOS
-        ? (isLight ? 'bg-white/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-[#1a0040]/70 backdrop-blur-[20px] border-t border-purple-500/15 pb-5 h-[82px]' : 'bg-[#1C1C1E]/60 backdrop-blur-[20px] backdrop-saturate-[180%] border-t border-white/5 pb-5 h-[82px]')
-        : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : isColorful ? 'bg-[#0A0138]/80 h-20 pb-2 border-t border-purple-500/20' : 'bg-[#2B2930] h-20 pb-2 border-t border-[#4A4458]/50');
+        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-purple-500/15 pb-5 h-[82px]' : 'bg-[#1C1C1E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/5 pb-5 h-[82px]')
+        : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : isColorful ? 'bg-[#0A0138]/80 h-20 pb-2 border-t border-purple-500/20' : 'bg-[#2D2B33] h-20 pb-2 border-t border-[#49454F]/50');
 
     const tabs: { key: TabType, icon: string, label: string }[] = [
         { key: 'dashboard', icon: 'space_dashboard', label: 'Home' },
@@ -834,11 +834,11 @@ function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, lab
             </button>
         );
     }
-    const pillBg = active ? (isLight ? 'bg-[#E8DEF8]' : isColorful ? 'bg-purple-500/25' : 'bg-[#4A4458]') : 'bg-transparent';
+    const pillBg = active ? (isLight ? 'bg-[#E8DEF8]' : isColorful ? 'bg-purple-500/25' : 'bg-[#4F378B]') : 'bg-transparent';
     const iconColor = active ? (isLight ? 'text-[#1D192B]' : isColorful ? 'text-purple-300' : 'text-[#E8DEF8]') : (isLight ? 'text-[#49454F]' : 'text-[#CAC4D0]');
     return (
         <button onClick={onClick} className="flex flex-col items-center justify-center w-16 h-full relative pt-2 transition-transform active:scale-95">
-            <div className={`w-14 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${pillBg}`}>
+            <div className={`w-16 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${pillBg}`}>
                 <span className={`material-symbols text-[22px] transition-colors ${iconColor} ${active ? 'font-variation-fill' : ''}`}>{icon}</span>
             </div>
             <span className={`text-[11px] mt-0.5 font-medium transition-colors ${iconColor}`}>{label}</span>

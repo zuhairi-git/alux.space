@@ -92,12 +92,14 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
 
     const cardClass =
         selectedTheme === 'light'
-            ? 'bg-white border border-gray-100 shadow-sm'
+            ? isIOS
+                ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
+                : 'bg-[#FEF7FF]/95 border border-[#E7E0EC]/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : selectedTheme === 'colorful'
-                ? 'bg-white/[0.07] border border-fuchsia-500/15'
+                ? 'bg-white/[0.06] border border-fuchsia-500/12'
                 : isIOS
-                    ? 'bg-white/[0.08] border border-white/[0.06]'
-                    : 'bg-[#2B2930]/80 border border-[#4A4458]/40';
+                    ? 'bg-white/[0.06] backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.05]'
+                    : 'bg-[#2D2B33]/80 border border-[#49454F]/30';
 
     const handleNext = () => {
         if (isLast) {

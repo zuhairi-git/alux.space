@@ -2,7 +2,7 @@
 
 const nextConfig = {
   images: {
-    unoptimized: true, // <- disables image optimization for export mode
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,7 +17,6 @@ const nextConfig = {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space',
     NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
   },
-  output: 'export',
   trailingSlash: true,
   // Enable TypeScript type checking during build
   typescript: {

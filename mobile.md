@@ -1,5 +1,5 @@
 # AI-Powered Market Intelligence Mobile App  
-## Structured Implementation Plan (iOS 26 & Android 16)
+## Structured Implementation Plan (iOS 26 Liquid Glass & Android 16 Material 3 Expressive)
 
 ---
 
@@ -101,29 +101,44 @@ Tailwind CSS will be customized to:
 
 ---
 
-### iOS 26 Best Practices
+### iOS 26 Best Practices (Liquid Glass Design System)
 
-- Large title navigation
-- Native bottom sheets
-- Context-aware toolbars
-- Advanced haptics
-- Dynamic Type support
+- **Liquid Glass** material for tab bars, navigation bars, and floating controls
+- Liquid Glass creates a distinct functional layer that floats above the content layer
+- Content peeks through Liquid Glass with blur and saturation effects
+- Standard materials (ultra-thin, thin, regular, thick) for content layer elements
+- Do NOT use Liquid Glass in the content layer — reserve it for controls and navigation
+- Minimizable tab bar that collapses when scrolling
+- Native bottom sheets with Liquid Glass background
+- SF Symbols with filled variants for active tab icons
+- Dynamic Type support with SF Pro text scaling
 - Live Activities integration
 - Lock screen widgets
-- Smooth, physics-based transitions
+- Physics-based, natural spring transitions
+- Context-aware toolbars
+- Advanced haptic feedback patterns
+- Vibrant colors on top of materials for legibility
+- WCAG 2.2 AA color contrast on all materials
 
 ---
 
-### Android 16 Best Practices
+### Android 16 Best Practices (Material Design 3 Expressive)
 
-- Material dynamic color
-- Predictive back navigation
-- Edge-to-edge layouts
-- Modal bottom sheets
-- Large-screen responsiveness
-- Foldable layout optimization
-- Rich notification channels
+- **Material Design 3 Expressive** with dynamic color theming
+- Material You user-generated dynamic color palettes
+- Navigation bar with rounded pill active indicator (wider 64dp pill)
+- Predictive back gesture support with cross-activity animations
+- **Edge-to-edge** layouts extending behind system bars
+- Content renders behind status bar and navigation bar
+- Modal bottom sheets with 32dp top corner radius
+- Container cards with 28dp rounded corners
+- Large-screen and foldable-aware responsive layouts
+- Window size classes (compact, medium, expanded)
+- Rich notification channels with smart grouping
 - Adaptive icons
+- M3 typography scale with Roboto Flex variable font
+- M3 elevation system using tonal color instead of shadows
+- Design tokens for cross-platform consistency
 
 ---
 
@@ -142,21 +157,23 @@ Tailwind CSS will be customized to:
 
 ### Design System Goals
 
-- Shared token system
-- Cross-platform parity
-- Native behavioral adaptation
+- Shared token system aligned with M3 design tokens specification
+- Cross-platform parity with platform-native behavioral adaptation
+- iOS 26 Liquid Glass for functional/navigation layer
+- Android 16 M3 Expressive for components and surfaces
 - Accessibility compliance (WCAG 2.2 AA)
+- Support for reduced motion, high contrast, and increased transparency preferences
 
 ---
 
 ### Design System Structure
 
 #### Foundations
-- Color tokens (semantic + enterprise neutral base)
-- Typography scale
-- Elevation system
-- Spacing system
-- Motion principles
+- Color tokens (semantic + enterprise neutral base + M3 tonal palettes)
+- Typography scale (SF Pro Dynamic Type / Roboto Flex M3)
+- Elevation system (iOS standard materials / M3 tonal elevation)
+- Spacing system (8dp grid)
+- Motion principles (iOS spring physics / M3 Expressive curves)
 
 #### Components (Built with Tailwind CSS)
 - AI Response Card
@@ -174,12 +191,15 @@ Tailwind CSS will be customized to:
 
 ### Platform Adaptation Strategy
 
-| Pattern | iOS 26 | Android 16 |
+| Pattern | iOS 26 (Liquid Glass) | Android 16 (M3 Expressive) |
 |----------|--------|------------|
-| Navigation | Tab bar + stack | Bottom navigation |
-| Sheet behavior | Pull-down dismiss | Predictive back |
-| Theming | Semantic system | Dynamic Material |
-| Motion | Subtle easing | Material motion curves |
+| Navigation | Liquid Glass floating tab bar | M3 Navigation bar with pill indicator |
+| Sheet behavior | Pull-down dismiss with Liquid Glass backdrop | Predictive back with M3 bottom sheets |
+| Theming | Semantic system colors + Liquid Glass material | Dynamic Material You color + tonal elevation |
+| Motion | Natural spring physics transitions | Material motion curves (M3 Expressive) |
+| Controls | Liquid Glass floating layer | M3 Filled/Outlined components |
+| Cards | Standard materials (not Liquid Glass) | M3 containers with 28dp corners |
+| Typography | SF Pro with Dynamic Type | Roboto Flex variable font |
 
 ---
 
@@ -248,26 +268,30 @@ Trigger types:
 
 ### Native Integrations
 
-#### iOS
-- Live Activities
+#### iOS (Liquid Glass Native Integrations)
+- Live Activities with Liquid Glass appearance
 - Lock screen widgets
 - Focus filters
+- Minimizable tab bar with attached accessories
 
-#### Android
-- Notification channels
-- Rich push interactions
-- Home screen widgets
+#### Android (M3 Expressive Native Integrations)
+- Notification channels with M3 styling
+- Rich push interactions with predictive back
+- Home screen widgets with dynamic color
+- Edge-to-edge content behind system bars
 
 ---
 
 ## 9. Accessibility Strategy
 
-- VoiceOver and TalkBack support
-- Scalable typography
-- High contrast modes
-- Reduced motion support
-- Clear tap targets
-- Screen reader-friendly AI responses
+- VoiceOver and TalkBack full support
+- Scalable typography (Dynamic Type / M3 type scale)
+- High contrast modes with vibrant colors on materials
+- Reduced motion support (disable spring animations)
+- Reduced transparency support (opaque fallback materials)
+- Clear tap targets (minimum 44pt iOS / 48dp Android)
+- Screen reader-friendly AI responses with semantic labels
+- WCAG 2.2 AA compliance across all materials and themes
 
 ---
 
@@ -346,11 +370,14 @@ Trigger types:
 ## 15. Future Expansion
 
 - AI portfolio forecasting
-- Voice-based query mode
+- Voice-based query mode with on-device processing
 - Executive briefing auto-generation
-- Cross-device intelligence sync
-- Tablet-optimized dashboard mode
-- Foldable adaptive layouts
+- Cross-device intelligence sync (Handoff / Nearby Share)
+- Tablet-optimized dashboard with sidebar navigation
+- Foldable adaptive layouts with window size classes
+- Apple Intelligence / Gemini Nano on-device integration
+- Liquid Glass Live Activities for real-time price tracking
+- M3 Expressive motion for richer micro-interactions
 
 ---
 
