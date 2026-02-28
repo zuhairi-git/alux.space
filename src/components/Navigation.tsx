@@ -51,6 +51,7 @@ const navItems: NavItem[] = [
       { href: '/portfolio/workflow', labelKey: 'portfolio.cases.collaboration', icon: 'groups', category: 'prototype' },
       { href: '/portfolio/jobseeking', labelKey: 'portfolio.cases.jobseeking', icon: 'work_history', category: 'prototype' },
       { href: '/portfolio/market-intelligence', labelKey: 'portfolio.cases.marketIntelligence', icon: 'smartphone', category: 'prototype' },
+      { href: '/portfolio/game-strategy', labelKey: 'portfolio.cases.gameStrategy', icon: 'sports_esports', category: 'case-study' },
     ]
   },
   { href: '/blog', labelKey: 'nav.blog', icon: 'article' },

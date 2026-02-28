@@ -92,7 +92,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       category: 'case-study',
       photo: {
-        url: '/images/portfolio/workflow/cover.jpg'
+        url: '/images/portfolio/game-dev/cover.jpg'
       }
     },
     {

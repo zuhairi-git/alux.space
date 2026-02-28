@@ -252,7 +252,7 @@ export default function GameStrategyClient() {
             subtitle={locale === 'fi'
               ? 'Dataohjattu lähestymistapa pelisuunnitteluun, käyttäjäkokemukseen ja kasvustrategiaan — käyttäjäpersoonista julkaisusuunnitelmiin.'
               : 'A data-driven approach to game design, UX, and growth strategy — from user personas to launch plans.'}
-            image="/images/portfolio/workflow/cover.jpg"
+            image="/images/portfolio/game-dev/cover.jpg"
             tags={['Game Design', 'Marketing Strategy', 'User Research', 'Growth']}
             meta={[
               { label: locale === 'fi' ? 'Projektityyppi' : 'Project Type', value: locale === 'fi' ? 'Strateginen tapaustutkimus' : 'Strategic Case Study', icon: 'category' },

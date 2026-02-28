@@ -48,7 +48,8 @@ const Footer = () => {
     { href: '/portfolio/accessibility', textKey: 'portfolio.cases.accessibility' },
     { href: '/portfolio/workflow', textKey: 'portfolio.cases.collaboration' },
     { href: '/portfolio/jobseeking', textKey: 'portfolio.cases.jobseeking' },
-    { href: '/portfolio/market-intelligence', textKey: 'portfolio.cases.marketIntelligence' }
+    { href: '/portfolio/market-intelligence', textKey: 'portfolio.cases.marketIntelligence' },
+    { href: '/portfolio/game-strategy', textKey: 'portfolio.cases.gameStrategy' }
   ];
   // Debug translations if needed - enable this temporarily to troubleshoot
   const debugTranslations = false; // Set to false once translations are working

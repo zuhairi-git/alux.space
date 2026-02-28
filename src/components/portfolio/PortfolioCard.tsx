@@ -65,32 +65,32 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   const getStatus = (): string => {
     return item.status[locale as keyof typeof item.status] || item.status.en;
   };  const getStatusClasses = (): string => {
-    const baseClasses = 'px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap border transition-all duration-200';
+    const baseClasses = 'px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide whitespace-nowrap border transition-all duration-200';
     
     switch (item.status.type) {
       case 'in-progress':
         if (theme === 'light') {
           return `${baseClasses} bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100`;
         } else if (theme === 'colorful') {
-          return `${baseClasses} bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500/30`;
+          return `${baseClasses} bg-amber-500/60 text-white border-amber-400/80 hover:bg-amber-500/70 shadow-sm shadow-amber-500/30`;
         } else {
-          return `${baseClasses} bg-amber-900/30 text-amber-300 border-amber-500/40 hover:bg-amber-900/50`;
+          return `${baseClasses} bg-amber-600/50 text-white border-amber-400/70 hover:bg-amber-600/60 shadow-sm shadow-amber-500/20`;
         }
       case 'accomplished':
         if (theme === 'light') {
           return `${baseClasses} bg-green-50 text-green-700 border-green-200 hover:bg-green-100`;
         } else if (theme === 'colorful') {
-          return `${baseClasses} bg-green-500/20 text-green-300 border-green-500/40 hover:bg-green-500/30`;
+          return `${baseClasses} bg-emerald-500/60 text-white border-emerald-400/80 hover:bg-emerald-500/70 shadow-sm shadow-emerald-500/30`;
         } else {
-          return `${baseClasses} bg-green-900/30 text-green-300 border-green-500/40 hover:bg-green-900/50`;
+          return `${baseClasses} bg-emerald-600/50 text-white border-emerald-400/70 hover:bg-emerald-600/60 shadow-sm shadow-emerald-500/20`;
         }
       default:
         if (theme === 'light') {
           return `${baseClasses} bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100`;
         } else if (theme === 'colorful') {
-          return `${baseClasses} bg-gray-500/20 text-gray-300 border-gray-500/40 hover:bg-gray-500/30`;
+          return `${baseClasses} bg-gray-500/60 text-white border-gray-400/80 hover:bg-gray-500/70`;
         } else {
-          return `${baseClasses} bg-gray-800/50 text-gray-300 border-gray-600/40 hover:bg-gray-800/70`;        }
+          return `${baseClasses} bg-gray-600/50 text-white border-gray-500/70 hover:bg-gray-600/60`;        }
     }
   };
   
