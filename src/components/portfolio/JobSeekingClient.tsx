@@ -6,13 +6,11 @@ import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
+import CaseStudyHero from './CaseStudyHero';
+import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
+import CaseStudyProgress from './CaseStudyProgress';
 
 export default function JobSeekingClient() {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
-  };
 
   const { theme } = useTheme();
   const { locale } = useLanguage();
@@ -182,249 +180,132 @@ export default function JobSeekingClient() {
         : 'bg-gradient-to-br from-gray-900 to-black'
       }`}>
       <Navigation />
+      <CaseStudyProgress />
 
       <main className="pt-24 pb-16">
-        <div className="max-w-6xl mx-auto px-6">          {/* Hero Section */}
-          <div className="relative h-96 overflow-hidden rounded-xl mb-16">
-            <Image
-              src="/images/portfolio/jobseeking/cover.jpg"
-              alt={content.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <div className="text-white">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                  {content.title}
-                </h1>
-                <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
-                  {locale === 'fi' ? 'Työnhakusovellus tehokkaaseen työpaikan etsintään' : 'Job seeking app for efficient job searching'}
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                  <button
-                    onClick={() => {
-                      document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="flex items-center justify-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-indigo-500/30 w-full sm:w-auto"
-                  >
-                    <span className="material-symbols text-2xl">play_circle</span>
-                    <span>{locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'View Interactive Prototypes'}</span>
-                  </button>
-                  <a
-                    href="https://ds.alux.space/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${theme === 'colorful'
-                      ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
-                      : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
-                      }`}
-                  >
-                    <span className="material-symbols text-2xl">design_services</span>
-                    <span>{locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System'}</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Hero Section */}
+          <CaseStudyHero
+            title={content.title}
+            subtitle={locale === 'fi' ? 'Työnhakusovellus tehokkaaseen työpaikan etsintään' : 'Job seeking app for efficient job searching'}
+            image="/images/portfolio/jobseeking/cover.jpg"
+            tags={roles}
+            actions={[
+              {
+                label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'View Interactive Prototypes',
+                icon: 'play_circle',
+                onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
+              },
+              {
+                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                icon: 'design_services',
+                href: 'https://ds.alux.space/',
+                variant: 'secondary',
+              },
+            ]}
+            meta={[
+              { label: content.projectType, value: content.projectTypeValues, icon: 'category' },
+              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
+              { label: content.tools, value: content.toolsValue, icon: 'build' },
+              { label: content.roles, value: roles.join(', '), icon: 'groups' },
+            ]}
+          />
 
           {/* Intro Section */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>
               {content.intro}
             </p>
           </motion.div>
 
-          {/* Project Details Grid */}
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {/* Project Type */}
-            <div className={`p-6 rounded-xl ${theme === 'colorful'
-              ? 'bg-gradient-to-br from-cyan-500/20 to-fuchsia-600/20 border border-cyan-400/30 backdrop-blur-lg'
-              : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-cyan-400/15 text-cyan-300' : isLight ? 'bg-purple-100 text-purple-600' : 'bg-purple-400/10 text-purple-400'}`}>
-                  <span className="material-symbols text-xl">category</span>
-                </div>
-                <h3 className={`font-semibold ${theme === 'colorful'
-                  ? 'text-cyan-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.projectType}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {content.projectTypeValues.split(', ').map((item: string, i: number) => (
-                  <span key={i} className={`text-xs px-2.5 py-1 rounded-full font-medium ${theme === 'colorful'
-                    ? 'bg-cyan-400/10 text-cyan-200 border border-cyan-400/20'
-                    : isLight ? 'bg-purple-50 text-purple-700 border border-purple-200' : 'bg-purple-400/10 text-purple-300 border border-purple-400/20'
-                    }`}>{item}</span>
-                ))}
-              </div>
-            </div>
-
-            {/* Timeline */}
-            <div className={`p-6 rounded-xl ${theme === 'colorful'
-              ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30 backdrop-blur-lg'
-              : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-purple-400/15 text-purple-300' : isLight ? 'bg-blue-100 text-blue-600' : 'bg-blue-400/10 text-blue-400'}`}>
-                  <span className="material-symbols text-xl">schedule</span>
-                </div>
-                <h3 className={`font-semibold ${theme === 'colorful'
-                  ? 'text-purple-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.timeline}</h3>
-              </div>
-              <p className={`text-2xl font-bold ${theme === 'colorful'
-                ? 'text-white'
-                : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.timelineValue}</p>
-            </div>
-
-            {/* Tools */}
-            <div className={`p-6 rounded-xl ${theme === 'colorful'
-              ? 'bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 backdrop-blur-lg'
-              : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-blue-400/15 text-blue-300' : isLight ? 'bg-emerald-100 text-emerald-600' : 'bg-emerald-400/10 text-emerald-400'}`}>
-                  <span className="material-symbols text-xl">build</span>
-                </div>
-                <h3 className={`font-semibold ${theme === 'colorful'
-                  ? 'text-blue-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.tools}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {content.toolsValue.split(', ').map((tool: string, i: number) => (
-                  <span key={i} className={`text-xs px-2.5 py-1 rounded-full font-medium ${theme === 'colorful'
-                    ? 'bg-blue-400/10 text-blue-200 border border-blue-400/20'
-                    : isLight ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-emerald-400/10 text-emerald-300 border border-emerald-400/20'
-                    }`}>{tool}</span>
-                ))}
-              </div>
-            </div>
-
-            {/* Roles */}
-            <div className={`p-6 rounded-xl ${theme === 'colorful'
-              ? 'bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 border border-fuchsia-400/30 backdrop-blur-lg'
-              : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-              }`}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`h-10 w-10 flex items-center justify-center rounded-lg ${theme === 'colorful' ? 'bg-fuchsia-400/15 text-fuchsia-300' : isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-400/10 text-amber-400'}`}>
-                  <span className="material-symbols text-xl">groups</span>
-                </div>
-                <h3 className={`font-semibold ${theme === 'colorful'
-                  ? 'text-fuchsia-300'
-                  : isLight ? 'text-gray-900' : 'text-white'
-                  }`}>{content.roles}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {roles.map((role, index) => (
-                  <span key={index} className={`text-xs px-2.5 py-1 rounded-full font-medium ${theme === 'colorful'
-                    ? 'bg-fuchsia-400/10 text-fuchsia-200 border border-fuchsia-400/20'
-                    : isLight ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-amber-400/10 text-amber-300 border border-amber-400/20'
-                    }`}>{role}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
           {/* Objectives */}
-          <motion.section variants={fadeInUp} className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-primary">{content.objectives}</h2>
-            <ul className="list-none space-y-4">
+          <CaseStudySection title={content.objectives} icon="flag" accent="purple" number={1}>
+            <ul className="list-none space-y-4 max-w-3xl mx-auto">
               {objectives.map((objective: string, index: number) => (
-                <li key={index} className={`flex items-start `}>
-                  <span className={`inline-block w-2 h-2 mt-2  bg-primary rounded-full`}></span>
-                  <span className="opacity-80 ml-3">{objective}</span>
-                </li>
+                <CaseStudyItem key={index}>
+                  <li className="flex items-start gap-3">
+                    <span className="inline-block w-2 h-2 mt-2 bg-primary rounded-full flex-shrink-0" />
+                    <span className="opacity-80">{objective}</span>
+                  </li>
+                </CaseStudyItem>
               ))}
             </ul>
-          </motion.section>
+          </CaseStudySection>
 
           {/* Design Process */}
-          <motion.section variants={fadeInUp} className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-primary">{content.designProcess}</h2>
+          <CaseStudySection title={content.designProcess} icon="design_services" accent="blue" number={2}>
             <div className="mb-4 opacity-80">{content.designModel} <span className="font-semibold text-primary">{content.doubleD}</span></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="theme-card">
-                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
-                  <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
-                    <span className="material-symbols text-3xl text-purple-400">search</span>
-                  </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
+                  <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
+                    <span className="material-symbols text-2xl text-purple-400">search</span>
+                  </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                     {locale === 'fi' ? "Löydä" : "Discover"}
                   </h3>
-                  <p className="opacity-80">
+                  <p className="opacity-80 text-sm">
                     {locale === 'fi' ? "Tutkimukset ja haastattelut käyttäjien kipupisteiden ymmärtämiseksi" : "Research and interviews to understand user pain points"}
                   </p>
                 </div>
               </div>
 
               <div className="theme-card">
-                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
-                  <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
-                    <span className="material-symbols text-3xl text-purple-400">notes</span>
-                  </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
+                  <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
+                    <span className="material-symbols text-2xl text-purple-400">notes</span>
+                  </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                     {locale === 'fi' ? "Määrittele" : "Define"}
                   </h3>
-                  <p className="opacity-80">
+                  <p className="opacity-80 text-sm">
                     {locale === 'fi' ? "Analysoi oivalluksia selkeiden suunnitteluongelmien määrittämiseksi" : "Analyze insights to frame clear design problems"}
                   </p>
                 </div>
               </div>
 
               <div className="theme-card">
-                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
-                  <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
-                    <span className="material-symbols text-3xl text-purple-400">edit</span>
-                  </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
+                  <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
+                    <span className="material-symbols text-2xl text-purple-400">edit</span>
+                  </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                     {locale === 'fi' ? "Kehitä" : "Develop"}
                   </h3>
-                  <p className="opacity-80">
+                  <p className="opacity-80 text-sm">
                     {locale === 'fi' ? "Ideoi ratkaisuja ja testaa prototyyppejä" : "Ideate solutions and test prototypes"}
                   </p>
                 </div>
               </div>
 
               <div className="theme-card">
-                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
-                  <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
-                    <span className="material-symbols text-3xl text-purple-400">rocket_launch</span>
-                  </div>                    <h3 className="text-xl font-semibold text-primary mb-2">
+                <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
+                  <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
+                    <span className="material-symbols text-2xl text-purple-400">rocket_launch</span>
+                  </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                     {locale === 'fi' ? "Toimita" : "Deliver"}
                   </h3>
-                  <p className="opacity-80">
+                  <p className="opacity-80 text-sm">
                     {locale === 'fi' ? "Viimeistele ratkaisu iteratiivisen testauksen ja palautteen avulla" : "Finalize solution through iterative testing and feedback"}
                   </p>
                 </div>
               </div>
             </div>
-          </motion.section>
+          </CaseStudySection>
 
           {/* Discover Phase */}
-          <motion.section variants={fadeInUp} className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-primary">{content.discoverPhase}</h2>
+          <CaseStudySection title={content.discoverPhase} icon="search" accent="green" number={3}>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <motion.div
-                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
-                whileHover={{ y: -5 }}
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
+                whileHover={{ y: -2 }}
               >
-                <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
-                  <span className="material-symbols text-4xl">warning</span>
+                <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <span className="material-symbols text-2xl">warning</span>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-primary mb-2">{content.challenge}</h3>
@@ -433,40 +314,40 @@ export default function JobSeekingClient() {
               </motion.div>
 
               <motion.div
-                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
-                whileHover={{ y: -5 }}
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
+                whileHover={{ y: -2 }}
               >
-                <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
-                  <span className="material-symbols text-4xl">travel_explore</span>
+                <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <span className="material-symbols text-2xl">travel_explore</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">{content.discoveryInsights}</h3>
+                  <h3 className="text-lg font-semibold text-primary mb-2">{content.discoveryInsights}</h3>
                   <p className="opacity-80 text-sm leading-relaxed">{content.discoveryDesc}</p>
                 </div>
               </motion.div>
 
               <motion.div
-                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
-                whileHover={{ y: -5 }}
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
+                whileHover={{ y: -2 }}
               >
-                <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
-                  <span className="material-symbols text-4xl">search_insights</span>
+                <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <span className="material-symbols text-2xl">search_insights</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">{content.initialResearch}</h3>
+                  <h3 className="text-lg font-semibold text-primary mb-2">{content.initialResearch}</h3>
                   <p className="opacity-80 text-sm leading-relaxed">{content.initialResearchDesc}</p>
                 </div>
               </motion.div>
 
               <motion.div
-                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
-                whileHover={{ y: -5 }}
+                className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
+                whileHover={{ y: -2 }}
               >
-                <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
-                  <span className="material-symbols text-4xl">lightbulb</span>
+                <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <span className="material-symbols text-2xl">lightbulb</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">{content.hypothesis}</h3>
+                  <h3 className="text-lg font-semibold text-primary mb-2">{content.hypothesis}</h3>
                   <p className="opacity-80 text-sm leading-relaxed">{content.hypothesisDesc}</p>
                 </div>
               </motion.div>
@@ -475,7 +356,7 @@ export default function JobSeekingClient() {
             <div className="theme-card">
               <div className="theme-card-content p-8">
                 <h3 className="text-2xl font-semibold text-primary mb-6">{content.primaryResearch}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div>
                     <div className="mb-4 font-bold text-lg text-primary">{content.objectivesLabel}</div>
                     <ul className="space-y-3">
@@ -526,106 +407,14 @@ export default function JobSeekingClient() {
                 </div>
               </div>
             </div>
-          </motion.section>
+          </CaseStudySection>
 
           {/* Define Phase */}
-          <motion.section variants={fadeInUp} className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-primary">{content.definePhase}</h2>
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-6 text-primary">{content.personas}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {[
-                    {
-                      name: locale === 'fi' ? "Allen (20, Opiskelija)" : "Allen (20, Student)",
-                      role: locale === 'fi' ? "Satunnainen käyttäjä" : "Casual User",
-                      traits: locale === 'fi' ? ["Satunnainen", "Joustava"] : ["Infrequent", "Flexible"],
-                      needs: locale === 'fi' ? ["Nopea raha", "Luotettavat työvuorot"] : ["Quick cash", "Reliable shifts"],
-                      painPoints: locale === 'fi' ? ["Sitoutumispaine", "Epäselvä aikataulu"] : ["Commitment pressure", "Unclear scheduling"],
-                      photo: "/images/portfolio/profile-img/allen-student.jpg"
-                    },
-                    {
-                      name: locale === 'fi' ? "James (23, Yliopisto-opiskelija)" : "James (23, Uni Student)",
-                      role: locale === 'fi' ? "Viikonlopputyöntekijä" : "Weekend Worker",
-                      traits: locale === 'fi' ? ["Johdonmukainen", "Säännöllinen"] : ["Consistent", "Regular"],
-                      needs: locale === 'fi' ? ["2-3 vuoroa/vko", "Tuttuja paikkoja"] : ["2-3 shifts/week", "Familiar venues"],
-                      painPoints: locale === 'fi' ? ["Kilpailevat vuorot", "Opiskelu tasapaino"] : ["Competing shifts", "Study balance"],
-                      photo: "/images/portfolio/profile-img/james-uni.jpg"
-                    },
-                    {
-                      name: locale === 'fi' ? "Eeva (40, Säännöllinen)" : "Eeva (40, Regular)",
-                      role: locale === 'fi' ? "Kokenut keikkailija" : "Pro Gig Worker",
-                      traits: locale === 'fi' ? ["Luotettava", "Suunnitelmallinen"] : ["Dependable", "Planner"],
-                      needs: locale === 'fi' ? ["Säännölliset tulot", "Joustavat toimet"] : ["Steady income", "Flexible roles"],
-                      painPoints: locale === 'fi' ? ["Viivästynyt palkka", "Huonot varaukset"] : ["Delayed payout", "Poor booking UX"],
-                      photo: "/images/portfolio/profile-img/eva-pro.jpg"
-                    }
-                  ].map((persona, index) => (
-                    <motion.div
-                      key={index}
-                      className="theme-card h-full"
-                      whileHover={{ y: -5 }}
-                    >
-                      <div className="theme-card-glow theme-card-glow-secondary"></div>
-                      <div className="theme-card-content p-8 hover:bg-theme/70 transition-all duration-300 flex flex-col h-full border-t-4 border-t-purple-500/50">
-                        <div className="flex flex-col items-center text-center mb-6">
-                          <div className="flex-shrink-0 h-20 w-20 rounded-full mb-4 shadow-lg shadow-purple-500/20 overflow-hidden ring-2 ring-purple-400/30">
-                            <Image src={persona.photo} alt={persona.name} width={80} height={80} className="w-full h-full object-cover" />
-                          </div>
-                          <div>
-                            <h3 className="text-xl font-bold text-primary mb-1">{persona.name}</h3>
-                            <p className="text-opacity-80 text-sm font-medium uppercase tracking-wider">{persona.role}</p>
-                          </div>
-                        </div>
-
-                        <div className="space-y-5 flex-grow flex flex-col">
-                          <div className="bg-purple-500/5 p-4 rounded-xl border border-purple-500/10">
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-3 opacity-80 flex items-center justify-center gap-2"><span className="material-symbols text-sm">stars</span>{locale === 'fi' ? "Ominaisuudet" : "Traits"}</h4>
-                            <div className="flex flex-wrap justify-center gap-2">
-                              {persona.traits.map((trait, i) => (
-                                <span key={i} className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold shadow-sm">
-                                  {trait}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="grid grid-cols-1 gap-4 flex-grow">
-                            <div className="bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/10">
-                              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-3 flex items-center gap-1"><span className="material-symbols text-sm">check_circle</span>{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
-                              <ul className="space-y-2">
-                                {persona.needs.map((need, i) => (
-                                  <li key={i} className="flex items-start text-[14px] leading-snug">
-                                    <span className="material-symbols text-[16px] text-emerald-500 mr-2 mt-0.5">done</span>
-                                    <span className="opacity-90">{need}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            <div className="bg-rose-500/5 p-4 rounded-xl border border-rose-500/10">
-                              <h4 className="text-xs font-bold uppercase tracking-wider text-rose-500 mb-3 flex items-center gap-1"><span className="material-symbols text-sm">warning</span>{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
-                              <ul className="space-y-2">
-                                {persona.painPoints.map((point, i) => (
-                                  <li key={i} className="flex items-start text-[14px] leading-snug">
-                                    <span className="material-symbols text-[16px] text-rose-500 mr-2 mt-0.5">close</span>
-                                    <span className="opacity-90">{point}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="theme-card">
+          <CaseStudySection title={content.definePhase} icon="notes" accent="orange" number={4}>
+            <div className="theme-card">
                 <div className="theme-card-content p-8">
                   <div className="flex items-center mb-4">
-                    <div className="h-12 w-12 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-4">
+                    <div className="h-12 w-12 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mr-4">
                       <span className="material-symbols text-2xl text-purple-400">route</span>
                     </div>
                     <h3 className="text-2xl font-bold text-primary">{content.userFlow}</h3>
@@ -633,20 +422,109 @@ export default function JobSeekingClient() {
                   <p className="opacity-80 text-lg">{content.userFlowDesc}</p>
                 </div>
               </div>
+          </CaseStudySection>
+
+          {/* User Personas */}
+          <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="pink" number={5}>
+            <div className="space-y-8">
+                  {[
+                    {
+                      name: locale === 'fi' ? "Allen (20, Opiskelija)" : "Allen (20, Student)",
+                      role: locale === 'fi' ? "Satunnainen käyttäjä" : "Casual User",
+                      traits: locale === 'fi' ? ["Satunnainen", "Joustava"] : ["Infrequent", "Flexible"],
+                      needs: locale === 'fi' ? ["Nopea raha", "Luotettavat työvuorot"] : ["Quick cash", "Reliable shifts"],
+                      painPoints: locale === 'fi' ? ["Sitoutumispaine", "Epäselvä aikataulu"] : ["Commitment pressure", "Unclear scheduling"],
+                      photo: "/images/portfolio/profile-img/allen-student.jpg",
+                      gradient: "from-emerald-500 via-teal-500 to-cyan-500"
+                    },
+                    {
+                      name: locale === 'fi' ? "James (23, Yliopisto-opiskelija)" : "James (23, Uni Student)",
+                      role: locale === 'fi' ? "Viikonlopputyöntekijä" : "Weekend Worker",
+                      traits: locale === 'fi' ? ["Johdonmukainen", "Säännöllinen"] : ["Consistent", "Regular"],
+                      needs: locale === 'fi' ? ["2-3 vuoroa/vko", "Tuttuja paikkoja"] : ["2-3 shifts/week", "Familiar venues"],
+                      painPoints: locale === 'fi' ? ["Kilpailevat vuorot", "Opiskelu tasapaino"] : ["Competing shifts", "Study balance"],
+                      photo: "/images/portfolio/profile-img/james-uni.jpg",
+                      gradient: "from-violet-500 via-purple-500 to-fuchsia-500"
+                    },
+                    {
+                      name: locale === 'fi' ? "Eeva (40, Säännöllinen)" : "Eeva (40, Regular)",
+                      role: locale === 'fi' ? "Kokenut keikkailija" : "Pro Gig Worker",
+                      traits: locale === 'fi' ? ["Luotettava", "Suunnitelmallinen"] : ["Dependable", "Planner"],
+                      needs: locale === 'fi' ? ["Säännölliset tulot", "Joustavat toimet"] : ["Steady income", "Flexible roles"],
+                      painPoints: locale === 'fi' ? ["Viivästynyt palkka", "Huonot varaukset"] : ["Delayed payout", "Poor booking UX"],
+                      photo: "/images/portfolio/profile-img/eva-pro.jpg",
+                      gradient: "from-amber-500 via-orange-500 to-red-500"
+                    }
+                  ].map((persona, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.15 }}
+                    >
+                      <div className="theme-card overflow-hidden">
+                        <div className="theme-card-content p-0">
+                          <div className={`h-1.5 bg-gradient-to-r ${persona.gradient}`} />
+                          <div className="p-7 md:p-9">
+                            <div className="flex items-center gap-5 mb-7">
+                              <div className={`relative p-[3px] rounded-full bg-gradient-to-br ${persona.gradient}`}>
+                                <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden ring-2 ring-black/20">
+                                  <Image src={persona.photo} alt={persona.name} fill className="object-cover" />
+                                </div>
+                              </div>
+                              <div>
+                                <h3 className="text-2xl font-bold text-primary tracking-tight">{persona.name}</h3>
+                                <p className="text-sm font-medium uppercase tracking-widest opacity-50 mt-0.5">{persona.role}</p>
+                              </div>
+                            </div>
+                            <div className="mb-7">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 mb-3 flex items-center gap-2">
+                                <span className="material-symbols text-[15px]">stars</span>
+                                {locale === 'fi' ? "Piirteet" : "Traits"}
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {persona.traits.map((trait, i) => (
+                                  <span key={i} className="px-3 py-1.5 bg-amber-500/8 border border-amber-500/15 text-amber-500 rounded-full text-xs font-medium">{trait}</span>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                              <div className="rounded-2xl bg-emerald-500/[0.04] border border-emerald-500/10 p-5">
+                                <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-4 flex items-center gap-2">
+                                  <span className="material-symbols text-[15px]">check_circle</span>
+                                  {locale === 'fi' ? "Tarpeet" : "Needs"}
+                                </h4>
+                                <ul className="space-y-2.5">
+                                  {persona.needs.map((need, i) => (
+                                    <li key={i} className="text-sm leading-relaxed opacity-75">{need}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div className="rounded-2xl bg-rose-500/[0.04] border border-rose-500/10 p-5">
+                                <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-4 flex items-center gap-2">
+                                  <span className="material-symbols text-[15px]">warning</span>
+                                  {locale === 'fi' ? "Kipupisteet" : "Pain Points"}
+                                </h4>
+                                <ul className="space-y-2.5">
+                                  {persona.painPoints.map((point, i) => (
+                                    <li key={i} className="text-sm leading-relaxed opacity-75">{point}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
             </div>
-          </motion.section>
+          </CaseStudySection>
 
           {/* AI Capabilities Section */}
-          <motion.section variants={fadeInUp} className="mb-20">
-            <div className="flex flex-col items-center text-center space-y-4 mb-12">
-              <div className="inline-flex items-center justify-center p-3 bg-purple-500/10 rounded-2xl text-purple-500 mb-2">
-                <span className="material-symbols text-4xl">auto_awesome</span>
-              </div>
-              <h2 className="text-4xl font-extrabold text-primary">{content.aiCapabilities}</h2>
-              <div className="h-1.5 w-24 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full opacity-80" />
-            </div>
+          <CaseStudySection title={content.aiCapabilities} icon="auto_awesome" accent="purple" number={6}>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { icon: 'edit_document', title: content.aiResume, desc: content.aiResumeDesc, glow: 'theme-card-glow-primary' },
                 { icon: 'target', title: content.aiMatch, desc: content.aiMatchDesc, glow: 'theme-card-glow-secondary' },
@@ -654,47 +532,46 @@ export default function JobSeekingClient() {
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className="theme-card h-full group perspective-1000"
-                  initial={{ opacity: 0, y: 30 }}
+                  className="theme-card h-full group"
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <div className={`theme-card-glow ${feature.glow}`}></div>
-                  <div className="theme-card-content p-8 hover:bg-theme/80 transition-all duration-500 transform hover:-translate-y-2 flex flex-col items-center text-center h-full">
-                    <div className="flex-shrink-0 h-24 w-24 flex items-center justify-center text-primary bg-primary/10 rounded-[2rem] mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl shadow-primary/20">
-                      <span className="material-symbols text-5xl">{feature.icon}</span>
+                  <div className="theme-card-content p-6 hover:bg-theme/80 transition-all duration-300 flex flex-col items-center text-center h-full">
+                    <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-5 group-hover:scale-105 transition-transform duration-300">
+                      <span className="material-symbols text-2xl">{feature.icon}</span>
                     </div>
                     <div className="flex-grow flex flex-col">
-                      <h3 className="text-2xl font-bold mb-4 text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-purple-500 transition-all duration-300">{feature.title}</h3>
-                      <p className="opacity-80 text-base leading-relaxed">{feature.desc}</p>
+                      <h3 className="text-lg font-bold mb-3 text-primary">{feature.title}</h3>
+                      <p className="opacity-80 text-sm leading-relaxed">{feature.desc}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.section>
+          </CaseStudySection>
 
           {/* Develop & Deliver Phases */}
-          <motion.section variants={fadeInUp} className="mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <CaseStudySection title={content.developPhase + ' & ' + content.deliverPhase} icon="rocket_launch" accent="teal" number={7}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="theme-card">
-                <div className="theme-card-content p-8">
-                  <h2 className="text-2xl font-bold mb-6 text-primary">{content.developPhase}</h2>
+                <div className="theme-card-content p-6">
+                  <h2 className="text-xl font-bold mb-5 text-primary">{content.developPhase}</h2>
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xl font-semibold text-primary mb-2">{content.epicGoal}</h3>
+                      <h3 className="text-lg font-semibold text-primary mb-2">{content.epicGoal}</h3>
                       <div className="flex items-center">
-                        <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-3">
-                          <span className="material-symbols text-3xl text-purple-400">flight_takeoff</span>
+                        <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mr-3">
+                          <span className="material-symbols text-2xl text-purple-400">flight_takeoff</span>
                         </div>
                         <p className="opacity-80">{content.epicGoalDesc}</p>
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-primary mb-2">{content.userTesting}</h3>
+                      <h3 className="text-lg font-semibold text-primary mb-2">{content.userTesting}</h3>
                       <div className="flex items-center">
-                        <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-3">
-                          <span className="material-symbols text-3xl text-purple-400">checklist</span>
+                        <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mr-3">
+                          <span className="material-symbols text-2xl text-purple-400">checklist</span>
                         </div>
                         <p className="opacity-80">{content.inProgress}</p>
                       </div>
@@ -704,8 +581,8 @@ export default function JobSeekingClient() {
               </div>
 
               <div className="theme-card">
-                <div className="theme-card-content p-8">
-                  <h2 className="text-2xl font-bold mb-6 text-primary">{content.deliverPhase}</h2>
+                <div className="theme-card-content p-6">
+                  <h2 className="text-xl font-bold mb-5 text-primary">{content.deliverPhase}</h2>
                   <ul className={`list-disc  opacity-80 space-y-3`}>
                     <li><span className="font-semibold text-primary">{content.hifiProto}</span> {content.hifiProtoDesc}</li>
                     <li><span className="font-semibold text-primary">{content.designReviews}</span> {content.designReviewsDesc}</li>
@@ -715,11 +592,10 @@ export default function JobSeekingClient() {
                 </div>
               </div>
             </div>
-          </motion.section >
+          </CaseStudySection>
 
           {/* Live Prototypes */}
-          <motion.section variants={fadeInUp} className="mb-16" id="live-prototypes">
-            <h2 className="text-3xl font-bold mb-3 text-primary">{content.livePrototypes}</h2>
+          <CaseStudySection title={content.livePrototypes} icon="devices" accent="cyan" number={8} id="live-prototypes">
             <p className="text-opacity-80 mb-8 max-w-2xl">{content.livePrototypesIntro}</p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {[
@@ -749,16 +625,16 @@ export default function JobSeekingClient() {
                   href={proto.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col`}
-                  initial={{ opacity: 0, y: 20 }}
+                  className={`group theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col`}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.15 }}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -2 }}
                 >
-                  <div className={`h-[68px] w-[68px] flex items-center justify-center rounded-lg mb-4 ${proto.iconBg}`}>
+                  <div className={`h-10 w-10 flex items-center justify-center rounded-full mb-3 ${proto.iconBg}`}>
                     {proto.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">{proto.title}</h3>
+                  <h3 className="text-lg font-semibold text-primary mb-2">{proto.title}</h3>
                   <p className="text-opacity-80 text-sm mb-6 flex-grow">{proto.description}</p>
                   <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
                     <span>{content.openPrototype}</span>
@@ -767,7 +643,7 @@ export default function JobSeekingClient() {
                 </motion.a>
               ))}
             </div>
-          </motion.section>
+          </CaseStudySection>
         </div>
       </main>
     </div>

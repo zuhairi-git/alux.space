@@ -1,11 +1,14 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
+import CaseStudyHero from './CaseStudyHero';
+import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
+import CaseStudyProgress from './CaseStudyProgress';
 
 export default function AccessibilityClient() {
 
@@ -464,121 +467,45 @@ export default function AccessibilityClient() {
           : 'bg-gradient-to-br from-gray-900 to-black'
       }`}>
       <Navigation />
+      <CaseStudyProgress />
 
       <main className="pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-6">          {/* Hero Section */}
-          <div className="relative h-96 overflow-hidden rounded-xl mb-16">
-            <Image
-              src="/images/portfolio/accessibility/accessiblity-showcase.jpg"
-              alt={content.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <div className="text-white">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                  {content.title}
-                </h1>
-                <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
-                  {content.subtitle}
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="https://ds.alux.space/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${isColorful
-                        ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/30'
-                        : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
-                      }`}
-                  >
-                    <span className="material-symbols text-2xl">design_services</span>
-                    <span>{locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System'}</span>
-                  </a>
-                </div>
-              </div>
-            </div>          </div>
+        <div className="max-w-6xl mx-auto px-6">
+          <CaseStudyHero
+            title={content.title}
+            subtitle={content.subtitle}
+            image="/images/portfolio/accessibility/accessiblity-showcase.jpg"
+            tags={[content.projectTypeValues, content.standardsValue]}
+            actions={[
+              {
+                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                icon: 'design_services',
+                variant: 'primary',
+                href: 'https://ds.alux.space/',
+              },
+            ]}
+            meta={[
+              { label: content.projectType, value: content.projectTypeValues, icon: 'rocket_launch' },
+              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
+              { label: content.standards, value: content.standardsValue, icon: 'verified' },
+              { label: content.roles, value: content.rolesValue, icon: 'person' },
+            ]}
+          />
 
-          {/* Intro Section */}
+          {/* Intro */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>
               {content.intro}
             </p>
           </motion.div>
 
-          {/* Project Overview Cards */}
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                ? 'bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/30'
-                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
-              }`}>
-              <span className="material-symbols text-3xl text-cyan-400 mb-3 block">rocket_launch</span>
-              <h3 className={`font-bold mb-2 ${isColorful ? 'text-cyan-300' : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.projectType}</h3>
-              <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.projectTypeValues}</p>
-            </div>
-
-            <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                ? 'bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-400/30'
-                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
-              }`}>
-              <span className="material-symbols text-3xl text-purple-400 mb-3 block">schedule</span>
-              <h3 className={`font-bold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.timeline}</h3>
-              <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.timelineValue}</p>
-            </div>
-
-            <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                ? 'bg-gradient-to-br from-green-500/20 to-emerald-600/20 border border-green-400/30'
-                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
-              }`}>
-              <span className="material-symbols text-3xl text-green-400 mb-3 block">verified</span>
-              <h3 className={`font-bold mb-2 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.standards}</h3>
-              <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.standardsValue}</p>
-            </div>
-
-            <div className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                ? 'bg-gradient-to-br from-orange-500/20 to-red-600/20 border border-orange-400/30'
-                : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
-              }`}>
-              <span className="material-symbols text-3xl text-orange-400 mb-3 block">person</span>
-              <h3 className={`font-bold mb-2 ${isColorful ? 'text-orange-300' : isLight ? 'text-gray-900' : 'text-white'
-                }`}>{content.roles}</h3>
-              <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                }`}>{content.rolesValue}</p>
-            </div>
-          </motion.div>
-
-          {/* Case Study Sections */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >                {/* Objectives Section */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
+          <CaseStudySection title={content.overviewTab} icon="visibility" number={1} accent="blue">            <CaseStudyItem>
                   <h2 className={`text-3xl font-bold mb-8 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
                       : isLight ? 'text-gray-900' : 'text-white'
@@ -591,47 +518,41 @@ export default function AccessibilityClient() {
                     { icon: "integration_instructions", text: content.objective4 },
                     { icon: "language", text: content.objective5 }
                     ].map((objective, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${isColorful
+                      <div key={index} className={`p-5 rounded-2xl ${isColorful
                           ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <span className={`material-symbols text-2xl mb-4 block ${isColorful ? 'text-cyan-400' : isLight ? 'text-blue-500' : 'text-blue-400'
+                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-cyan-400' : isLight ? 'text-blue-500' : 'text-blue-400'
                           }`}>{objective.icon}</span>
                         <p className={`font-medium ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
                           }`}>{objective.text}</p>
                       </div>
                     ))}
                   </div>
-                </motion.section>
+            </CaseStudyItem>
 
-                {/* Design Process Section */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+            <CaseStudyItem>
+                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.designProcess}</h2>
 
-                  <div className={`p-8 rounded-2xl mb-8 ${isColorful
+                  <div className={`p-6 rounded-2xl mb-6 ${isColorful
                       ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                    }`}>                    <div className="flex items-center mb-8">
-                      <span className={`text-lg font-medium mr-4 ${isColorful
+                      : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                    }`}>                    <div className="flex items-center mb-6">
+                      <span className={`text-sm font-medium mr-3 ${isColorful
                           ? 'text-cyan-300'
                           : isLight ? 'text-gray-700' : 'text-gray-300'
                         }`}>{content.designModel}</span>
-                      <span className={`text-2xl font-bold ${isColorful
+                      <span className={`text-lg font-bold ${isColorful
                           ? 'bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent'
                           : 'bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent'
                         }`}>
                         {content.doubleD}
                       </span>
-                    </div>                      {/* Revolutionary Interactive Double Diamond */}
-                    <div className="relative mb-16 overflow-hidden">
+                    </div>                      {/* Interactive Double Diamond */}
+                    <div className="relative mb-10 overflow-hidden">
                       {/* Ambient background */}
                       <div className={`absolute inset-0 ${isColorful
                           ? 'bg-gradient-to-br from-indigo-900/20 via-purple-900/10 to-pink-900/20'
@@ -639,29 +560,25 @@ export default function AccessibilityClient() {
                         } blur-3xl`}></div>
 
                       <div className="relative">
-                        {/* Floating header */}
-                        <div className="text-center mb-12">
-                          <div className={`inline-flex items-center gap-4 px-8 py-4 rounded-full backdrop-blur-xl border ${isColorful
-                              ? 'bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 border-white/20'
-                              : isLight ? 'bg-white/80 border-gray-200/50 shadow-lg' : 'bg-gray-800/80 border-gray-700/50'
+                        {/* Phase labels */}
+                        <div className="text-center mb-8">
+                          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full border ${isColorful
+                              ? 'bg-white/5 border-white/10'
+                              : isLight ? 'bg-white/80 border-gray-200/50 shadow-sm' : 'bg-gray-800/80 border-gray-700/50'
                             }`}>
-                            <span className={`w-2 h-2 rounded-full ${isColorful ? 'bg-cyan-400' : isLight ? 'bg-blue-500' : 'bg-blue-400'
-                              } animate-pulse`}></span>
-                            <span className={`text-sm font-medium ${isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
+                            <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
                               }`}>Problem Discovery</span>
 
-                            <div className={`w-px h-6 ${isColorful ? 'bg-gradient-to-b from-cyan-400 to-pink-400' : 'bg-gray-300'
+                            <div className={`w-px h-4 ${isColorful ? 'bg-gradient-to-b from-cyan-400 to-pink-400' : 'bg-gray-300'
                               }`}></div>
 
-                            <span className={`w-2 h-2 rounded-full ${isColorful ? 'bg-pink-400' : isLight ? 'bg-pink-500' : 'bg-pink-400'
-                              } animate-pulse delay-1000`}></span>
-                            <span className={`text-sm font-medium ${isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
+                            <span className={`text-xs font-medium ${isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
                               }`}>Solution Creation</span>
                           </div>
                         </div>
 
                         {/* Interactive Phase Cards */}
-                        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 max-w-7xl mx-auto px-6">
+                        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mx-auto px-4">
                           {[
                             {
                               phase: content.discoverPhase,
@@ -694,15 +611,15 @@ export default function AccessibilityClient() {
                           ].map((phase, index) => (
                             <div
                               key={index}
-                              className={`group relative p-6 rounded-3xl backdrop-blur-xl border transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer ${isColorful
+                              className={`group relative p-5 rounded-2xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-0.5 cursor-pointer ${isColorful
                                   ? `bg-gradient-to-br ${phase.gradient} border-white/10 hover:border-white/20`
                                   : isLight
-                                    ? `bg-gradient-to-br ${phase.gradient} border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-xl`
+                                    ? `bg-gradient-to-br ${phase.gradient} border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-md`
                                     : `bg-gradient-to-br ${phase.gradient} border-gray-700/30 hover:border-gray-600/50`
                                 }`}
                             >                              {/* Floating icon */}
-                              <div className={`relative mb-6 ${index % 2 === 0 ? 'text-left' : 'text-right'
-                                }`}>                                <div className={`inline-flex w-16 h-16 items-center justify-center rounded-2xl ${isColorful
+                              <div className={`relative mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'
+                                }`}>                                <div className={`inline-flex w-11 h-11 items-center justify-center rounded-full ${isColorful
                                     ? `bg-gradient-to-br from-${phase.color}-400/30 to-${phase.color}-500/20 backdrop-blur-sm`
                                     : isLight
                                       ? phase.color === 'blue'
@@ -719,8 +636,8 @@ export default function AccessibilityClient() {
                                           : phase.color === 'pink'
                                             ? 'bg-gradient-to-br from-pink-400 to-pink-500 shadow-lg'
                                             : 'bg-gradient-to-br from-green-400 to-green-500 shadow-lg'
-                                  } group-hover:scale-110 transition-transform duration-300`}>
-                                  <span className={`material-symbols text-2xl font-bold ${isColorful
+                                  } group-hover:scale-105 transition-transform duration-300`}>
+                                  <span className={`material-symbols text-lg font-bold ${isColorful
                                       ? `text-${phase.color}-300`
                                       : isLight
                                         ? 'text-white'
@@ -730,7 +647,7 @@ export default function AccessibilityClient() {
                               </div>
 
                               {/* Phase title */}
-                              <h3 className={`text-xl font-bold mb-3 ${isColorful
+                              <h3 className={`text-lg font-bold mb-2 ${isColorful
                                   ? `text-${phase.color}-200`
                                   : isLight
                                     ? `text-${phase.color}-800`
@@ -747,7 +664,7 @@ export default function AccessibilityClient() {
 
                               {/* Connection indicator */}
                               {index < 3 && (
-                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-0.5 ${isColorful
+                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 ${isColorful
                                     ? 'bg-gradient-to-r from-white/30 to-transparent'
                                     : isLight
                                       ? 'bg-gradient-to-r from-gray-300 to-transparent'
@@ -759,7 +676,7 @@ export default function AccessibilityClient() {
                               )}
 
                               {/* Hover glow effect */}
-                              <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isColorful
+                              <div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isColorful
                                   ? `bg-gradient-to-br from-${phase.color}-400/5 to-transparent`
                                   : isLight
                                     ? `bg-gradient-to-br from-${phase.color}-200/20 to-transparent`
@@ -770,21 +687,21 @@ export default function AccessibilityClient() {
                         </div>
 
                         {/* Methodology indicator */}
-                        <div className="text-center mt-12">
-                          <div className={`inline-flex items-center gap-6 px-8 py-4 rounded-full backdrop-blur-xl ${isColorful
+                        <div className="text-center mt-8">
+                          <div className={`inline-flex items-center gap-4 px-6 py-3 rounded-full ${isColorful
                               ? 'bg-white/5 border border-white/10'
                               : isLight
-                                ? 'bg-white/60 border border-gray-200/50 shadow-lg'
+                                ? 'bg-white/60 border border-gray-200/50 shadow-sm'
                                 : 'bg-gray-800/60 border border-gray-700/50'
                             }`}>
                             <div className="flex items-center gap-2">
-                              <div className={`w-3 h-3 rounded-full ${isColorful ? 'bg-cyan-400' : 'bg-blue-500'
-                                } animate-pulse`}></div>
+                              <div className={`w-2 h-2 rounded-full ${isColorful ? 'bg-cyan-400' : 'bg-blue-500'
+                                }`}></div>
                               <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
                                 }`}>Divergent</span>
                             </div>
 
-                            <div className={`w-8 h-px ${isColorful
+                            <div className={`w-6 h-px ${isColorful
                                 ? 'bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400'
                                 : 'bg-gradient-to-r from-blue-400 to-pink-400'
                               }`}></div>
@@ -792,35 +709,26 @@ export default function AccessibilityClient() {
                             <div className="flex items-center gap-2">
                               <span className={`text-xs font-medium ${isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
                                 }`}>Convergent</span>
-                              <div className={`w-3 h-3 rounded-full ${isColorful ? 'bg-pink-400' : 'bg-pink-500'
-                                } animate-pulse delay-500`}></div>
+                              <div className={`w-2 h-2 rounded-full ${isColorful ? 'bg-pink-400' : 'bg-pink-500'
+                                }`}></div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>                  </div>
-                </motion.section>
+            </CaseStudyItem>
+          </CaseStudySection>
 
-                {/* Research Insights */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
-                    }`}>{content.researchTitle}</h2>
-
-                  <div className={`p-8 rounded-2xl mb-8 ${isColorful
+          <CaseStudySection title={content.researchTitle} icon="science" number={2} accent="green">
+            <CaseStudyItem>
+                  <div className={`p-6 rounded-2xl mb-6 ${isColorful
                       ? 'bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                      : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                     }`}>
-                    <h3 className={`text-xl font-bold mb-6 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-4 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
                       }`}>{content.participantFeedback}</h3>
 
-                    <div className="grid md:grid-cols-4 gap-6 mb-8">
+                    <div className="grid md:grid-cols-4 gap-6 mb-6">
                       {[{ label: content.accessibilityValue, value: "92%", icon: "accessibility" },
                       { label: content.usabilityScore, value: "88%", icon: "thumb_up" },
                       { label: content.inclusionApproval, value: "95%", icon: "groups" },
@@ -841,7 +749,7 @@ export default function AccessibilityClient() {
                       ))}
                     </div>
 
-                    <h3 className={`text-xl font-bold mb-6 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-4 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
                       }`}>{content.keyRecommendations}</h3>
 
                     <div className="grid md:grid-cols-3 gap-6">
@@ -862,7 +770,7 @@ export default function AccessibilityClient() {
                           desc: content.colorContrastDesc
                         }
                       ].map((item, index) => (
-                        <div key={index} className={`p-4 rounded-xl ${isColorful
+                        <div key={index} className={`p-4 rounded-2xl ${isColorful
                             ? 'bg-green-900/20 border border-green-400/20'
                             : isLight ? 'bg-green-50 border border-green-100' : 'bg-green-900/20 border border-green-800'
                           }`}>
@@ -876,21 +784,12 @@ export default function AccessibilityClient() {
                       ))}
                     </div>
                   </div>
-                </motion.section>
+            </CaseStudyItem>
+          </CaseStudySection>
 
-                {/* User Personas */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
-                    }`}>{content.userPersonasTitle}</h2>
-
-                  <div className="grid md:grid-cols-2 gap-8">
+          {/* User Personas */}
+          <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" number={3} accent="pink">
+            <div className="space-y-8">
                     {[
                       {
                         name: content.persona1Name,
@@ -899,8 +798,8 @@ export default function AccessibilityClient() {
                         needs: content.persona1Needs,
                         goals: content.persona1Goals,
                         pains: content.persona1Pains,
-                        icon: "code",
-                        gradient: "from-blue-500 to-purple-500"
+                        photo: "/images/portfolio/profile-img/sara-m.jpg",
+                        gradient: "from-purple-500 via-fuchsia-500 to-pink-500"
                       },
                       {
                         name: content.persona2Name,
@@ -909,96 +808,97 @@ export default function AccessibilityClient() {
                         needs: content.persona2Needs,
                         goals: content.persona2Goals,
                         pains: content.persona2Pains,
-                        icon: "design_services",
-                        gradient: "from-purple-500 to-pink-500"
+                        photo: "/images/portfolio/profile-img/alex-chen.jpg",
+                        gradient: "from-blue-500 via-cyan-500 to-teal-500"
                       }
                     ].map((persona, index) => (
-                      <div key={index} className={`p-8 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                        }`}>
-                        <div className="flex items-center mb-6">
-                          <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${persona.gradient} flex items-center justify-center mr-4`}>
-                            <span className="material-symbols text-white text-lg">{persona.icon}</span>
-                          </div>
-                          <div>
-                            <h3 className={`text-xl font-bold ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'
-                              }`}>{persona.name}</h3>
-                            <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                              }`}>{persona.role}</p>
-                          </div>
-                        </div>
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.15 }}
+                      >
+                        <div className="theme-card overflow-hidden">
+                          <div className="theme-card-content p-0">
+                            {/* Top gradient bar */}
+                            <div className={`h-1.5 bg-gradient-to-r ${persona.gradient}`} />
 
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className={`font-semibold mb-2 ${isColorful ? 'text-cyan-300' : isLight ? 'text-gray-900' : 'text-white'
-                              }`}>Traits</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {persona.traits.map((trait, i) => (
-                                <span key={i} className={`px-3 py-1 rounded-full text-sm ${isColorful
-                                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30'
-                                    : isLight ? 'bg-blue-100 text-blue-700' : 'bg-blue-900/30 text-blue-300'
-                                  }`}>{trait}</span>
-                              ))}
+                            <div className="p-7 md:p-9">
+                              {/* Identity */}
+                              <div className="flex items-center gap-5 mb-7">
+                                <div className={`relative p-[3px] rounded-full bg-gradient-to-br ${persona.gradient}`}>
+                                  <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden ring-2 ring-black/20">
+                                    <Image src={persona.photo} alt={persona.name} fill className="object-cover" />
+                                  </div>
+                                </div>
+                                <div>
+                                  <h3 className="text-2xl font-bold text-primary tracking-tight">{persona.name}</h3>
+                                  <p className="text-sm font-medium uppercase tracking-widest opacity-50 mt-0.5">{persona.role}</p>
+                                </div>
+                              </div>
+
+                              {/* Traits */}
+                              <div className="mb-7">
+                                <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 mb-3 flex items-center gap-2">
+                                  <span className="material-symbols text-[15px]">stars</span>
+                                  Traits
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {persona.traits.map((trait, i) => (
+                                    <span key={i} className="px-3 py-1.5 bg-amber-500/8 border border-amber-500/15 text-amber-500 rounded-full text-xs font-medium">{trait}</span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Details */}
+                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                                <div className="rounded-2xl bg-emerald-500/[0.04] border border-emerald-500/10 p-5">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-4 flex items-center gap-2">
+                                    <span className="material-symbols text-[15px]">check_circle</span>
+                                    Needs
+                                  </h4>
+                                  <ul className="space-y-2.5">
+                                    {persona.needs.map((need, i) => (
+                                      <li key={i} className="text-sm leading-relaxed opacity-75">{need}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+
+                                <div className="rounded-2xl bg-blue-500/[0.04] border border-blue-500/10 p-5">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-4 flex items-center gap-2">
+                                    <span className="material-symbols text-[15px]">arrow_forward</span>
+                                    Goals
+                                  </h4>
+                                  <ul className="space-y-2.5">
+                                    {persona.goals.map((goal, i) => (
+                                      <li key={i} className="text-sm leading-relaxed opacity-75">{goal}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+
+                                <div className="rounded-2xl bg-rose-500/[0.04] border border-rose-500/10 p-5">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-4 flex items-center gap-2">
+                                    <span className="material-symbols text-[15px]">warning</span>
+                                    Pain Points
+                                  </h4>
+                                  <ul className="space-y-2.5">
+                                    {persona.pains.map((pain, i) => (
+                                      <li key={i} className="text-sm leading-relaxed opacity-75">{pain}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
                           </div>
-
-                          <div>
-                            <h4 className={`font-semibold mb-2 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
-                              }`}>Needs</h4>
-                            {persona.needs.map((need, i) => (
-                              <div key={i} className="flex items-center mb-1">
-                                <span className={`material-symbols text-sm mr-2 ${isColorful ? 'text-green-400' : isLight ? 'text-green-500' : 'text-green-400'
-                                  }`}>check_circle</span>
-                                <span className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                                  }`}>{need}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <div>
-                            <h4 className={`font-semibold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
-                              }`}>Goals</h4>
-                            {persona.goals.map((goal, i) => (
-                              <div key={i} className="flex items-center mb-1">
-                                <span className={`material-symbols text-sm mr-2 ${isColorful ? 'text-purple-400' : isLight ? 'text-purple-500' : 'text-purple-400'
-                                  }`}>arrow_forward</span>
-                                <span className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                                  }`}>{goal}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <div>
-                            <h4 className={`font-semibold mb-2 ${isColorful ? 'text-orange-300' : isLight ? 'text-gray-900' : 'text-white'
-                              }`}>Pain Points</h4>
-                            {persona.pains.map((pain, i) => (
-                              <div key={i} className="flex items-center mb-1">
-                                <span className={`material-symbols text-sm mr-2 ${isColorful ? 'text-orange-400' : isLight ? 'text-orange-500' : 'text-orange-400'
-                                  }`}>warning</span>
-                                <span className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                                  }`}>{pain}</span>
-                              </div>
-                            ))}
-                          </div>
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
-                </motion.section>
+            </div>
+          </CaseStudySection>
 
-                {/* System Requirements */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
-                    }`}>{content.requirementsTitle}</h2>
-
+          <CaseStudySection title={content.requirementsTitle} icon="checklist" number={4} accent="orange">
+            <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6">
                     {[
                       {
@@ -1026,11 +926,11 @@ export default function AccessibilityClient() {
                         gradient: "from-orange-500 to-red-500"
                       }
                     ].map((req, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${isColorful
+                      <div key={index} className={`p-5 rounded-2xl ${isColorful
                           ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${req.gradient} flex items-center justify-center mb-4`}>
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${req.gradient} flex items-center justify-center mb-3`}>
                           <span className="material-symbols text-white text-lg">{req.icon}</span>
                         </div>
                         <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'
@@ -1040,28 +940,22 @@ export default function AccessibilityClient() {
                       </div>
                     ))}
                   </div>
-                </motion.section>
+            </CaseStudyItem>
 
-                {/* User Testing */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+            <CaseStudyItem>
+                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.userTestingTitle}</h2>
 
-                  <div className={`p-8 rounded-2xl mb-8 ${isColorful
+                  <div className={`p-6 rounded-2xl mb-6 ${isColorful
                       ? 'bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                      : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                     }`}>
-                    <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-indigo-300' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-indigo-300' : isLight ? 'text-gray-900' : 'text-white'
                       }`}>{content.testScenario}</h3>
 
-                    <div className={`p-6 rounded-xl mb-6 ${isColorful
+                    <div className={`p-4 rounded-lg mb-5 ${isColorful
                         ? 'bg-indigo-900/20 border border-indigo-400/20'
                         : isLight ? 'bg-indigo-50 border border-indigo-100' : 'bg-indigo-900/20 border border-indigo-800'
                       }`}>
@@ -1069,10 +963,10 @@ export default function AccessibilityClient() {
                         }`}>{content.testScenarioDesc}</p>
                     </div>
 
-                    <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-indigo-300' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-indigo-300' : isLight ? 'text-gray-900' : 'text-white'
                       }`}>{content.focusAreas}</h3>
 
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-3">
                       {[
                         { icon: "touch_app", label: content.usabilityFocus },
                         { icon: "accessibility", label: content.accessibilityFocus },
@@ -1088,21 +982,17 @@ export default function AccessibilityClient() {
                         </div>
                       ))}                    </div>
                   </div>
-                </motion.section>
+            </CaseStudyItem>
+          </CaseStudySection>
 
-                {/* System Solutions */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className={`p-8 rounded-2xl ${isColorful
+          <CaseStudySection title={content.principlesTitle} icon="lightbulb" number={5} accent="purple">
+            <CaseStudyItem>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className={`p-6 rounded-2xl ${isColorful
                         ? 'bg-gradient-to-br from-red-900/30 to-orange-900/30 border border-red-400/30 backdrop-blur-lg'
                         : isLight ? 'bg-gradient-to-r from-red-50 to-orange-50 border border-red-100' : 'bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-800'
                       }`}>
-                      <h3 className={`text-xl font-bold mb-4 ${isColorful
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful
                           ? 'text-red-300'
                           : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.problemTitle}</h3>
@@ -1112,11 +1002,11 @@ export default function AccessibilityClient() {
                         }`}>{content.problemDesc}</p>
                     </div>
 
-                    <div className={`p-8 rounded-2xl ${isColorful
+                    <div className={`p-6 rounded-2xl ${isColorful
                         ? 'bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-400/30 backdrop-blur-lg'
                         : isLight ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100' : 'bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-800'
                       }`}>
-                      <h3 className={`text-xl font-bold mb-4 ${isColorful
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful
                           ? 'text-green-300'
                           : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.solutionTitle}</h3>
@@ -1126,32 +1016,26 @@ export default function AccessibilityClient() {
                         }`}>{content.solutionDesc}</p>
                     </div>
                   </div>
-                </motion.section>
+            </CaseStudyItem>
 
-                {/* Key Principles */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+            <CaseStudyItem>
+                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.principlesTitle}</h2>
-                  <div className="grid md:grid-cols-3 gap-8">
+                  <div className="grid md:grid-cols-3 gap-6">
                     {[
                       { title: content.principle1, desc: content.principle1Desc, icon: 'accessibility' },
                       { title: content.principle2, desc: content.principle2Desc, icon: 'integration_instructions' },
                       { title: content.principle3, desc: content.principle3Desc, icon: 'developer_mode' }
                     ].map((principle, index) => (
-                      <div key={index} className={`p-8 rounded-2xl ${isColorful
+                      <div key={index} className={`p-6 rounded-2xl ${isColorful
                           ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <span className={`material-symbols text-4xl mb-4 block ${isColorful ? 'text-purple-400' : isLight ? 'text-purple-500' : 'text-purple-400'
+                        <span className={`material-symbols text-2xl mb-3 block ${isColorful ? 'text-purple-400' : isLight ? 'text-purple-500' : 'text-purple-400'
                           }`}>{principle.icon}</span>
-                        <h3 className={`text-xl font-bold mb-4 ${isColorful
+                        <h3 className={`text-lg font-bold mb-3 ${isColorful
                             ? 'text-purple-300'
                             : isLight ? 'text-gray-900' : 'text-white'
                           }`}>{principle.title}</h3>
@@ -1162,49 +1046,25 @@ export default function AccessibilityClient() {
                       </div>
                     ))}
                   </div>
-                </motion.section>
-          </motion.div>
+            </CaseStudyItem>
+          </CaseStudySection>
 
-          {/* Section Divider: Design System */}
-          <div className="relative my-20">
-            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
-            </div>
-            <div className="relative flex justify-center">
-              <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-cyan-500/30 text-cyan-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
-                <span className="material-symbols text-base">design_services</span>
-                {content.systemTab}
-              </div>
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-                {/* Color System */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+          <CaseStudySection title={content.systemTab} icon="design_services" number={6} accent="cyan">
+            <CaseStudyItem>
+                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.colorsTitle}</h2>
-                  <p className={`text-lg mb-8 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                  <p className={`text-base mb-6 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
                     }`}>{content.colorsDesc}</p>
 
-                  <div className="grid md:grid-cols-3 gap-8 mb-8">
+                  <div className="grid md:grid-cols-3 gap-6 mb-6">
                     {colorThemes.map((colorTheme, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${isColorful
+                      <div key={index} className={`p-5 rounded-2xl ${isColorful
                           ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <div className={`h-32 rounded-xl mb-4 ${colorTheme.preview}`}></div>
+                        <div className={`h-24 rounded-lg mb-3 ${colorTheme.preview}`}></div>
                         <h3 className={`font-bold mb-2 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
                           }`}>{colorTheme.name}</h3>
                         <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${isColorful
@@ -1217,36 +1077,30 @@ export default function AccessibilityClient() {
                     ))}
                   </div>
 
-                  <div className={`p-6 rounded-2xl ${isColorful
+                  <div className={`p-5 rounded-2xl ${isColorful
                       ? 'bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border border-blue-400/30 backdrop-blur-lg'
                       : isLight ? 'bg-blue-50 border border-blue-100' : 'bg-blue-900/20 border border-blue-800'
                     }`}>
-                    <span className="material-symbols text-2xl text-blue-400 mb-2 block">info</span>
+                    <span className="material-symbols text-xl text-blue-400 mb-2 block">info</span>
                     <p className={`${isColorful ? 'text-gray-200' : isLight ? 'text-blue-700' : 'text-blue-300'
                       }`}>{content.contrastInfo}</p>
                   </div>
-                </motion.section>
+            </CaseStudyItem>
 
-                {/* Typography System */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+            <CaseStudyItem>
+                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.inclusiveTypographyTitle}</h2>
-                  <p className={`text-lg mb-8 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                  <p className={`text-base mb-6 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
                     }`}>{content.inclusiveTypographyDesc}</p>
 
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className={`p-8 rounded-2xl ${isColorful
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className={`p-6 rounded-2xl ${isColorful
                         ? 'bg-gradient-to-br from-green-900/30 to-teal-900/30 border border-green-400/30 backdrop-blur-lg'
                         : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
                       }`}>
-                      <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.englishType}</h3>
                       <div className="space-y-4">
                         <div>
@@ -1266,11 +1120,11 @@ export default function AccessibilityClient() {
                         </div>
                       </div>
                     </div>
-                    <div className={`p-8 rounded-2xl ${isColorful
+                    <div className={`p-6 rounded-2xl ${isColorful
                         ? 'bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                        : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                       }`}>
-                      <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-orange-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-orange-300' : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.arabicType}</h3>
                       <div className="space-y-4" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
                         <div>
@@ -1299,76 +1153,43 @@ export default function AccessibilityClient() {
                       </div>
                     </div>
                   </div>
-                </motion.section>
+            </CaseStudyItem>
 
-                {/* Design System Features */}
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+            <CaseStudyItem>
+                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>Core System Features</h2>
 
-                  <div className="grid md:grid-cols-3 gap-8">
+                  <div className="grid md:grid-cols-3 gap-6">
                     {designSystemFeatures.map((feature, index) => (
-                      <div key={index} className={`p-8 rounded-2xl ${isColorful
+                      <div key={index} className={`p-6 rounded-2xl ${isColorful
                           ? 'bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <span className={`material-symbols text-4xl mb-4 block bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                        <span className={`material-symbols text-2xl mb-3 block bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
                           {feature.icon}
                         </span>
-                        <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                        <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
                           }`}>{feature.title}</h3>
                         <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
                           }`}>{feature.description}</p>
                       </div>
                     ))}
-                  </div>                </motion.section>
-          </motion.div>
+                  </div>
+            </CaseStudyItem>
+          </CaseStudySection>
 
-          {/* Section Divider: Implementation */}
-          <div className="relative my-20">
-            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
-            </div>
-            <div className="relative flex justify-center">
-              <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-cyan-500/30 text-cyan-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
-                <span className="material-symbols text-base">code</span>
-                {content.implementationTab}
-              </div>
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-                <motion.section
-                  className="mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
-                    }`}>{content.technicalTitle}</h2>
-
-                  <div className="grid md:grid-cols-2 gap-8 mb-12">
-                    <div className={`p-8 rounded-2xl ${isColorful
+          <CaseStudySection title={content.implementationTab} icon="code" number={7} accent="teal">
+            <CaseStudyItem>
+                  <div className="grid md:grid-cols-2 gap-6 mb-10">
+                    <div className={`p-6 rounded-2xl ${isColorful
                         ? 'bg-gradient-to-br from-green-900/30 to-teal-900/30 border border-green-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                        : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                       }`}>
-                      <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.headlessTitle}</h3>
-                      <p className={`mb-6 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                      <p className={`mb-4 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
                         }`}>{content.headlessDesc}</p>
 
                       <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-100' : 'bg-gray-900'
@@ -1379,13 +1200,13 @@ export default function AccessibilityClient() {
                       </div>
                     </div>
 
-                    <div className={`p-8 rounded-2xl ${isColorful
+                    <div className={`p-6 rounded-2xl ${isColorful
                         ? 'bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                        : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                       }`}>
-                      <h3 className={`text-xl font-bold mb-4 ${isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.testingTitle}</h3>
-                      <p className={`mb-6 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                      <p className={`mb-4 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
                         }`}>{content.testingDesc}</p>
 
                       <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-100' : 'bg-gray-900'
@@ -1405,11 +1226,11 @@ export default function AccessibilityClient() {
                       { title: content.ariaLabels, icon: 'accessibility', desc: 'Complete ARIA implementation' },
                       { title: content.keyboardSupport, icon: 'keyboard', desc: 'Full keyboard navigation' }
                     ].map((standard, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${isColorful
+                      <div key={index} className={`p-5 rounded-2xl ${isColorful
                           ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <span className={`material-symbols text-3xl mb-4 block ${isColorful ? 'text-purple-400' : isLight ? 'text-blue-500' : 'text-blue-400'
+                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-purple-400' : isLight ? 'text-blue-500' : 'text-blue-400'
                           }`}>{standard.icon}</span>
                         <h3 className={`font-bold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
                           }`}>{standard.title}</h3>
@@ -1418,8 +1239,8 @@ export default function AccessibilityClient() {
                       </div>
                     ))}
                   </div>
-                </motion.section>
-            </motion.div>
+            </CaseStudyItem>
+          </CaseStudySection>
         </div>
       </main>
     </div>

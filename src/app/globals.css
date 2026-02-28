@@ -109,7 +109,7 @@ body {
 /* Card component styling */
 .theme-card {
   position: relative;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   padding: 2px;
   transform-style: preserve-3d;
 }
@@ -117,10 +117,10 @@ body {
 .theme-card-glow {
   position: absolute;
   inset: -1px;
-  border-radius: 1rem;
-  filter: blur(1rem);
-  transition: all 0.3s;
-  opacity: 0.7;
+  border-radius: 1.25rem;
+  filter: blur(1.25rem);
+  transition: all 0.4s ease;
+  opacity: 0.5;
   background: linear-gradient(to right, var(--card-shadow-color), var(--card-shadow-color));
 }
 
@@ -143,7 +143,7 @@ body {
 .theme-card-content {
   position: relative;
   backdrop-filter: blur(0.25rem);
-  transition: all 0.3s;
+  transition: all 0.4s ease;
   overflow: hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
@@ -156,12 +156,12 @@ body {
 
 .theme-card-flex {
   position: relative;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   backdrop-filter: blur(0.25rem);
-  transition: all 0.3s;
+  transition: all 0.4s ease;
   overflow: hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
-  border: 1px solid var(--card-border);
+  border: 1px solid color-mix(in srgb, var(--card-border) 70%, transparent);
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -174,19 +174,19 @@ body {
 
 /* Light theme specific card styling */
 .theme-light .theme-card-content {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02);
 }
 
 .theme-light .theme-card-content:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
 }
 
 .theme-light .theme-card-glow {
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 .theme-light .theme-card-glow:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .theme-light .theme-card-glow-primary {
@@ -271,10 +271,10 @@ body {
   position: relative;
   border-radius: 2rem;
   backdrop-filter: blur(0.75rem);
-  transition: all 0.3s;
+  transition: all 0.4s ease;
   overflow: hidden;
   background: linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg));
-  border: 1px solid var(--card-border);
+  border: 1px solid color-mix(in srgb, var(--card-border) 60%, transparent);
   z-index: 1;
 }
 
@@ -282,10 +282,10 @@ body {
   position: relative;
   border-radius: 2rem;
   backdrop-filter: blur(0.75rem);
-  transition: all 0.3s;
+  transition: all 0.4s ease;
   overflow: hidden;
   background: linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg));
-  border: 1px solid var(--card-border);
+  border: 1px solid color-mix(in srgb, var(--card-border) 60%, transparent);
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -293,7 +293,7 @@ body {
 
 .theme-colorful .theme-card-content:hover {
   border-color: var(--card-border-hover);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15), 0 4px 8px -4px rgba(0, 0, 0, 0.08);
 }
 
 .theme-colorful .theme-card-glow {

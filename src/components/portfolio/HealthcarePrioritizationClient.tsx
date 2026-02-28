@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
+import CaseStudyHero from './CaseStudyHero';
+import CaseStudySection from './CaseStudySection';
+import CaseStudyProgress from './CaseStudyProgress';
 
 export default function HealthcarePrioritizationClient() {
 
@@ -271,121 +273,73 @@ export default function HealthcarePrioritizationClient() {
           : 'bg-gradient-to-br from-gray-900 to-black'
       }`}>
       <Navigation />
+      <CaseStudyProgress />
 
       <main className="pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           {/* Hero Section */}
-          <div className="relative h-96 overflow-hidden rounded-xl mb-16">
-            <Image
-              src="/images/portfolio/healthcare/healthcare.jpg"
-              alt={content.title}
-              fill
-              className="object-cover"
-              priority
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <div className="text-white">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                  {content.title}
-                </h1>
-                <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
-                  {content.subtitle}
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="https://ds.alux.space/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${isColorful
-                        ? 'bg-teal-600 hover:bg-teal-500 text-white shadow-teal-500/30'
-                        : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20'
-                      }`}
-                  >
-                    <span className="material-symbols text-2xl">design_services</span>
-                    <span>{locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System'}</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CaseStudyHero
+            title={content.title}
+            subtitle={content.subtitle}
+            image="/images/portfolio/healthcare/healthcare.jpg"
+            tags={[content.rolesValue]}
+            actions={[
+              {
+                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                icon: 'design_services',
+                href: 'https://ds.alux.space/',
+                variant: 'secondary',
+              },
+            ]}
+            meta={[
+              { label: content.projectType, value: content.projectTypeValues, icon: 'assignment' },
+              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
+              { label: content.tools, value: content.toolsValue, icon: 'build' },
+              { label: content.standards, value: content.standardsValue, icon: 'gavel' },
+            ]}
+          />
 
           {/* Intro Section */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-4xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
               }`}>
               {content.intro}
             </p>
           </motion.div>
 
-          {/* Project Overview Cards */}
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {[
-              { label: content.projectType, value: content.projectTypeValues, icon: "assignment", color: "blue" },
-              { label: content.timeline, value: content.timelineValue, icon: "schedule", color: "purple" },
-              { label: content.tools, value: content.toolsValue, icon: "build", color: "green" },
-              { label: content.standards, value: content.standardsValue, icon: "gavel", color: "orange" },
-            ].map((item, index) => {
-              const styles = getColorStyles(item.color);
-              return (
-                <div key={index} className={`p-6 rounded-2xl backdrop-blur-lg ${isColorful
-                    ? styles.cardBg
-                    : isLight ? 'bg-white shadow-xl' : 'bg-gray-800/80'
-                  }`}>
-                  <span className={`material-symbols text-3xl mb-3 block ${styles.iconText}`}>{item.icon}</span>
-                  <h3 className={`font-bold mb-2 ${isColorful ? styles.titleText : isLight ? 'text-gray-900' : 'text-white'
-                    }`}>{item.label}</h3>
-                  <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
-                    }`}>{item.value}</p>
-                </div>
-              );
-            })}
-          </motion.div>
-
           {/* Case Study Sections */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <CaseStudySection title={content.overviewTab} icon="visibility" accent="blue" number={1}>
                 {/* Context & Conflict Row */}
-                <div className="grid md:grid-cols-2 gap-8 mb-16">
-                  <div className={`p-8 rounded-2xl ${isColorful
-                      ? 'bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                    }`}>
-                    <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white'
-                      }`}>{content.contextTitle}</h3>
-                    <p className={`text-lg leading-relaxed ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
-                      }`}>{content.contextDesc}</p>
-                  </div>
-
-                  <div className={`p-8 rounded-2xl ${isColorful
-                      ? 'bg-gradient-to-br from-red-900/30 to-orange-900/30 border border-red-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                    }`}>
-                    <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white'
-                      }`}>{content.conflictTitle}</h3>
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-red-100 text-red-700' : 'bg-red-900/40 text-red-300'}`}>QA Team</div>
-                      <span className="font-bold text-xl">VS</span>
-                      <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-blue-100 text-blue-700' : 'bg-blue-900/40 text-blue-300'}`}>CTO</div>
-                    </div>
-                    <p className={`text-lg leading-relaxed ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
-                      }`}>{content.conflictDesc}</p>
-                  </div>
+                <div className="grid md:grid-cols-2 gap-8 mb-14">
+                  {[
+                    { title: content.contextTitle, desc: content.contextDesc, colorful: 'bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white', extra: null },
+                    { title: content.conflictTitle, desc: content.conflictDesc, colorful: 'bg-gradient-to-br from-red-900/20 to-orange-900/20 border border-red-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white', extra: 'conflict' },
+                  ].map((card, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ y: -4 }}
+                      className={`p-6 rounded-2xl transition-shadow duration-300 ${isColorful ? card.colorful : isLight ? card.light : card.dark}`}
+                    >
+                      <h3 className={`text-xl font-semibold mb-3 ${card.titleColor}`}>{card.title}</h3>
+                      {card.extra === 'conflict' && (
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-red-100 text-red-700' : 'bg-red-900/40 text-red-300'}`}>QA Team</div>
+                          <span className="font-bold text-xl">VS</span>
+                          <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-blue-100 text-blue-700' : 'bg-blue-900/40 text-blue-300'}`}>CTO</div>
+                        </div>
+                      )}
+                      <p className={`leading-relaxed ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{card.desc}</p>
+                    </motion.div>
+                  ))}
                 </div>
 
                 {/* Priorities Section */}
@@ -395,7 +349,7 @@ export default function HealthcarePrioritizationClient() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+                  <h2 className={`text-xl font-semibold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.prioritiesTitle}</h2>
@@ -464,10 +418,17 @@ export default function HealthcarePrioritizationClient() {
                       }[item.color] || 'border-l-gray-500';
 
                       return (
-                        <div key={index} className={`p-4 rounded-lg flex flex-col gap-3 border-l-4 shadow-sm hover:shadow-md transition-shadow ${borderLeftClass
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 16 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: '-20px' }}
+                          transition={{ duration: 0.4, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          whileHover={{ y: -3 }}
+                          className={`p-4 rounded-lg flex flex-col gap-3 border-l-4 transition-shadow duration-300 hover:shadow-md ${borderLeftClass
                           } ${isColorful
                             ? 'bg-gray-800/80 backdrop-blur-sm border-y border-r border-white/10'
-                            : isLight ? 'bg-white border-y border-r border-gray-100' : 'bg-gray-800 border-y border-r border-gray-700'
+                            : isLight ? 'bg-white border-y border-r border-gray-100 shadow-sm' : 'bg-gray-800 border-y border-r border-gray-700'
                           }`}>
                           <div className="flex justify-between items-start">
                             <div className="flex items-center gap-2">
@@ -494,48 +455,36 @@ export default function HealthcarePrioritizationClient() {
                               {item.status}
                             </div>
                           </div>
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </div>
                 </motion.section>
 
                 {/* Decision Framework / Rejection */}
-                <div className={`p-8 rounded-2xl ${isColorful
-                    ? 'bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-400/30 backdrop-blur-lg'
-                    : isLight ? 'bg-gray-50 border border-gray-200' : 'bg-gray-800 border border-gray-700'
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className={`p-6 rounded-2xl ${isColorful
+                    ? 'bg-gradient-to-br from-purple-900/15 to-pink-900/15 border border-purple-400/15'
+                    : isLight ? 'bg-gray-50/80 border border-gray-200/60' : 'bg-gray-800/40 border border-gray-700/30'
                   }`}>
-                  <div className="flex items-start gap-4">
-                    <span className={`material-symbols text-4xl ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>filter_alt_off</span>
+                  <div className="flex items-start gap-3">
+                    <span className={`material-symbols text-2xl ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>filter_alt_off</span>
                     <div>
-                      <h3 className={`text-xl font-bold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-xl font-semibold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.decisionTitle}</h3>
                       <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
                         }`}>{content.decisionDesc}</p>
                     </div>
                   </div>
-                </div>
-          </motion.div>
+                </motion.div>
+          </CaseStudySection>
 
-            {/* ───────── Section Divider ───────── */}
-            <div className="relative my-20">
-              <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-purple-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
-              </div>
-              <div className="relative flex justify-center">
-                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-purple-500/30 text-purple-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
-                  <span className="material-symbols text-base">handshake</span>
-                  {content.processTab}
-                </div>
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+          {/* Resolution Process Section */}
+          <CaseStudySection title={content.processTab} icon="handshake" accent="green" number={2}>
                 {/* Resolution Process */}
                 <motion.section
                   className="mb-16"
@@ -543,41 +492,53 @@ export default function HealthcarePrioritizationClient() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+                  <h2 className={`text-xl font-semibold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.resolutionTitle}</h2>
 
-                  <div className="grid md:grid-cols-2 gap-8 mb-12">
-                    <div className={`p-8 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-green-900/30 to-teal-900/30 border border-green-400/30'
-                        : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                      }`}>
-                      <span className="material-symbols text-4xl mb-4 text-green-500">handshake</span>
-                      <h3 className={`text-xl font-bold mb-3 ${isLight ? 'text-gray-900' : 'text-white'}`}>{content.resolutionStep1}</h3>
-                      <p className={`${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{content.resolutionStep1Desc}</p>
-                    </div>
-                    <div className={`p-8 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-400/30'
-                        : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                      }`}>
-                      <span className="material-symbols text-4xl mb-4 text-blue-500">lightbulb</span>
-                      <h3 className={`text-xl font-bold mb-3 ${isLight ? 'text-gray-900' : 'text-white'}`}>{content.resolutionStep2}</h3>
-                      <p className={`${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{content.resolutionStep2Desc}</p>
-                    </div>
+                  <div className="grid md:grid-cols-2 gap-8 mb-10">
+                    {[
+                      { icon: 'handshake', color: isColorful ? 'bg-green-500/15 text-green-400' : isLight ? 'bg-green-50 text-green-500' : 'bg-green-900/30 text-green-400', title: content.resolutionStep1, desc: content.resolutionStep1Desc },
+                      { icon: 'lightbulb', color: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400', title: content.resolutionStep2, desc: content.resolutionStep2Desc },
+                    ].map((step, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-30px' }}
+                        transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                        className="flex items-start gap-4"
+                      >
+                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${step.color}`}>
+                          <span className="material-symbols text-lg">{step.icon}</span>
+                        </div>
+                        <div>
+                          <h3 className={`text-lg font-semibold mb-2 ${isLight ? 'text-gray-900' : 'text-white'}`}>{step.title}</h3>
+                          <p className={`leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{step.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
 
-                  <div className={`p-8 rounded-2xl ${isColorful
-                      ? 'bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-400/20'
-                      : isLight ? 'bg-blue-50' : 'bg-blue-900/10'
+                  <div className={`p-6 rounded-2xl ${isColorful
+                      ? 'bg-gradient-to-br from-blue-900/10 to-purple-900/10 border border-blue-400/15'
+                      : isLight ? 'bg-blue-50/60' : 'bg-blue-900/8'
                     }`}>
-                    <h3 className={`text-xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>{content.actionsTitle}</h3>
+                    <h3 className={`text-lg font-semibold mb-4 ${isLight ? 'text-gray-900' : 'text-white'}`}>{content.actionsTitle}</h3>
                     <div className="space-y-4">
                       {[content.action1, content.action2, content.action3].map((action, i) => (
-                        <div key={i} className="flex items-start gap-3">
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -12 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, margin: '-20px' }}
+                          transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          className="flex items-start gap-3"
+                        >
                           <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">{i + 1}</span>
                           <p className={`${isLight ? 'text-gray-700' : 'text-gray-300'}`}>{action}</p>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
@@ -590,31 +551,37 @@ export default function HealthcarePrioritizationClient() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
+                  <h2 className={`text-xl font-semibold mb-6 ${isColorful
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.preventionTitle}</h2>
-                  <p className={`text-lg mb-12 ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{content.preventionDesc}</p>
+                  <p className={`text-base mb-10 max-w-3xl ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{content.preventionDesc}</p>
 
                   <div className="grid md:grid-cols-2 gap-8 relative">
                     {/* Connecting Arrow for Desktop */}
-                    <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full items-center justify-center z-10 ${isColorful ? 'bg-purple-500/20 text-purple-300' : isLight ? 'bg-white shadow text-gray-400' : 'bg-gray-700 text-gray-300'
+                    <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full items-center justify-center z-10 ${isColorful ? 'bg-purple-500/15 text-purple-300' : isLight ? 'bg-white shadow-sm text-gray-400' : 'bg-gray-700/80 text-gray-300'
                       }`}>
-                      <span className="material-symbols">arrow_forward</span>
+                      <span className="material-symbols text-lg">arrow_forward</span>
                     </div>
 
                     {/* Step 1 */}
-                    <div className={`p-8 rounded-2xl relative border ${isColorful
-                        ? 'bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border-indigo-400/30'
-                        : isLight ? 'bg-white shadow-lg border-gray-100' : 'bg-gray-800 border-gray-700'
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ y: -4 }}
+                      className={`p-6 rounded-2xl relative border transition-shadow duration-300 ${isColorful
+                        ? 'bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border-indigo-400/20'
+                        : isLight ? 'bg-white shadow-sm hover:shadow-md border-gray-100' : 'bg-gray-800/60 border-gray-700/30'
                       }`}>
-                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-2xl ${isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-50 text-indigo-600' : 'bg-indigo-900/40 text-indigo-300'
+                      <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 text-xl ${isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-50 text-indigo-600' : 'bg-indigo-900/40 text-indigo-300'
                         }`}>
                         <span className="material-symbols">fact_check</span>
                       </div>
 
-                      <div className="flex items-center gap-2 mb-3">
-                        <h4 className={`text-xl font-bold ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <h4 className={`text-lg font-semibold ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-900' : 'text-white'}`}>
                           {content.preventionStep1}
                         </h4>
                         <div className="relative group/info">
@@ -633,45 +600,34 @@ export default function HealthcarePrioritizationClient() {
                       </div>
 
                       <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{content.preventionStep1Desc}</p>
-                    </div>
+                    </motion.div>
 
                     {/* Step 2 */}
-                    <div className={`p-8 rounded-2xl relative border ${isColorful
-                        ? 'bg-gradient-to-br from-pink-900/30 to-rose-900/30 border-pink-400/30'
-                        : isLight ? 'bg-white shadow-lg border-gray-100' : 'bg-gray-800 border-gray-700'
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.5, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ y: -4 }}
+                      className={`p-6 rounded-2xl relative border transition-shadow duration-300 ${isColorful
+                        ? 'bg-gradient-to-br from-pink-900/20 to-rose-900/20 border-pink-400/20'
+                        : isLight ? 'bg-white shadow-sm hover:shadow-md border-gray-100' : 'bg-gray-800/60 border-gray-700/30'
                       }`}>
-                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-2xl ${isColorful ? 'bg-pink-500/20 text-pink-300' : isLight ? 'bg-pink-50 text-pink-600' : 'bg-pink-900/40 text-pink-300'
+                      <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 text-xl ${isColorful ? 'bg-pink-500/20 text-pink-300' : isLight ? 'bg-pink-50 text-pink-600' : 'bg-pink-900/40 text-pink-300'
                         }`}>
                         <span className="material-symbols">gavel</span>
                       </div>
-                      <h4 className={`text-xl font-bold mb-3 ${isColorful ? 'text-pink-200' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.preventionStep2}</h4>
+                      <h4 className={`text-lg font-semibold mb-2 ${isColorful ? 'text-pink-200' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.preventionStep2}</h4>
                       <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{content.preventionStep2Desc}</p>
-                    </div>
+                    </motion.div>
                   </div>
                 </motion.section>
-            </motion.div>
+            </CaseStudySection>
 
-            {/* ───────── Section Divider ───────── */}
-            <div className="relative my-20">
-              <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                <div className={`w-full h-px ${isColorful ? 'bg-gradient-to-r from-transparent via-purple-500/40 to-transparent' : isLight ? 'bg-gradient-to-r from-transparent via-gray-200 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-700 to-transparent'}`} />
-              </div>
-              <div className="relative flex justify-center">
-                <div className={`flex items-center gap-3 px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase ${isColorful ? 'bg-[#050023] border border-purple-500/30 text-purple-300' : isLight ? 'bg-slate-50 border border-gray-200 text-gray-500 shadow-sm' : 'bg-gray-900 border border-gray-800 text-gray-400'}`}>
-                  <span className="material-symbols text-base">lightbulb</span>
-                  {content.impactTab}
-                </div>
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+          {/* Outcomes Section */}
+          <CaseStudySection title={content.impactTab} icon="lightbulb" accent="teal" number={3}>
                 {/* Takeaways */}
-                <div className="grid md:grid-cols-3 gap-6 mb-16">
+                <div className="grid md:grid-cols-3 gap-8 mb-14">
                   {[
                     { title: content.takeaway1, desc: content.takeaway1Desc, icon: "ads_click", color: "blue" },
                     { title: content.takeaway2, desc: content.takeaway2Desc, icon: "balance", color: "purple" },
@@ -679,33 +635,51 @@ export default function HealthcarePrioritizationClient() {
                   ].map((item, index) => {
                     const styles = getColorStyles(item.color);
                     return (
-                      <div key={index} className={`p-8 rounded-2xl text-center ${isColorful
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-30px' }}
+                        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        whileHover={{ y: -5 }}
+                        className={`p-6 rounded-2xl text-center transition-shadow duration-300 ${isColorful
                           ? styles.takeawayBg
-                          : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
-                        }`}>
-                        <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 ${isColorful ? styles.takeawayIconBg : isLight ? `${styles.iconBg} ${styles.iconText}` : `${styles.iconBg} ${styles.iconText}`
+                          : isLight ? 'bg-white shadow-sm hover:shadow-md' : 'bg-gray-800/60 border border-gray-700/30'
+                        }`}
+                      >
+                        <div className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-3 ${isColorful ? styles.takeawayIconBg : isLight ? `${styles.iconBg} ${styles.iconText}` : `${styles.iconBg} ${styles.iconText}`
                           }`}>
-                          <span className="material-symbols text-3xl">{item.icon}</span>
+                          <span className="material-symbols text-xl">{item.icon}</span>
                         </div>
-                        <h3 className={`text-xl font-bold mb-2 ${isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h3>
+                        <h3 className={`text-lg font-semibold mb-2 ${isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h3>
                         <p className={`${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{item.desc}</p>
-                      </div>
+                      </motion.div>
                     );
                   })}
                 </div>
 
-                {/* Summary Box */}
-                <div className={`p-10 rounded-3xl text-center ${isColorful
-                    ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600'
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-700'
-                  }`}>
-                  <div className="flex justify-center mb-4">
-                    <span className="material-symbols text-4xl text-white">star</span>
-                  </div>
-                  <h2 className="text-3xl font-bold text-white mb-4">{content.summaryTitle}</h2>
-                  <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">{content.summaryDesc}</p>
-                </div>
-              </motion.div>
+                {/* Summary */}
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-center max-w-2xl mx-auto pt-10"
+                >
+                  <div className={`mx-auto w-px h-12 mb-8 ${isColorful ? 'bg-gradient-to-b from-transparent via-purple-400/40 to-transparent' : isLight ? 'bg-gray-200' : 'bg-gray-700/60'}`} />
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                    className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-5 ${isColorful ? 'bg-purple-500/15 text-purple-300' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/20 text-blue-400'}`}
+                  >
+                    <span className="material-symbols text-xl">star</span>
+                  </motion.div>
+                  <h2 className={`text-xl font-semibold mb-3 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-teal-300' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.summaryTitle}</h2>
+                  <p className={`text-lg leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>{content.summaryDesc}</p>
+                </motion.div>
+              </CaseStudySection>
         </div>
       </main>
     </div>
