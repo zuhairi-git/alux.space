@@ -159,22 +159,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   // Format link for navigation with proper localization
   const cardLink = localizedHref(item.link);
   
-  // Get icon based on project type
-  const getTypeIcon = () => {
-    const type = getType().toLowerCase();
-    
-    if (type.includes('team') || type.includes('management')) {
-      return 'groups';
-    } else if (type.includes('growth') || type.includes('professional')) {
-      return 'trending_up';
-    } else if (type.includes('ux') || type.includes('design')) {
-      return 'brush';
-    } else if (type.includes('development') || type.includes('programming')) {
-      return 'code';
-    } else {
-      return 'folder'; // Default icon
-    }
-  };
   // Render card based on view mode
   if (viewMode === 'overlay') {
     return (
@@ -183,21 +167,15 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        whileHover={{ y: -5 }}
-        className="h-full w-full"
+        className="h-full w-full group"
       >
-        <div className="relative h-full w-full overflow-hidden rounded-xl border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-2xl">
           {/* Background Image */}
           <div className="absolute inset-0">
             <motion.div
               className="absolute inset-0 w-full h-full"
-              whileHover={{ scale: 1.05 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 15, 
-                duration: 0.2
-              }}
+              whileHover={{ scale: 1.06 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <Image
                 src={item.photo?.url || '/images/placeholder.jpg'}
@@ -209,60 +187,42 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             </motion.div>
             
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
-          </div>          <Link 
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          </div>
+
+          <Link 
             href={cardLink} 
-            className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
+            className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl"
             aria-label={`${getTitle()} - ${getType()} - ${getStatus()}`}
             onClick={() => trackEvent('portfolio_card_click', 'portfolio', `overlay_${getTitle()}_${getType()}`)}
           >
-            <div className="relative h-full flex flex-col justify-end p-6 z-10">              {/* Project Type Badge - Top Right */}
-              <div className="absolute top-3 right-3">
-                <span className={getTypeBadgeClasses()}>
-                  {getType()}
+            <div className="relative h-full flex flex-col justify-between p-6 z-10">
+              {/* Top: Badges */}
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-2">
+                  {item.category && getCategoryBadge()}
+                </div>
+                <span className={getStatusClasses()}>
+                  {getStatus()}
                 </span>
               </div>
-              
-              {/* Icon and Title Section */}
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0 h-16 w-16 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-                  <span className="material-symbols text-3xl text-white">
-                    {getTypeIcon()}
+
+              {/* Bottom: Content */}
+              <div>
+                <div className="mb-3">
+                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-semibold mb-3 bg-white/15 backdrop-blur-sm text-white/90 border border-white/10`}>
+                    {getType()}
                   </span>
+                  <h3 className="text-2xl font-bold text-white leading-tight mb-2">{getTitle()}</h3>
+                  <p className="text-white/70 text-sm line-clamp-2 leading-relaxed">{getDesc()}</p>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{getTitle()}</h3>
-                  <p className="text-white/80 text-sm line-clamp-3">{getDesc()}</p>
-                </div>
-              </div>
-                {/* Footer with Tags and Status */}
-              <div className="flex flex-wrap items-center justify-between gap-2">                {/* Tags */}
-                {cardTags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {cardTags.map((tag, idx) => (
-                      <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/30 text-white font-medium border border-white/20 hover:bg-white/40 transition-all duration-200">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
                 
-                {/* Category + Status — bottom right */}
-                <div className="flex-shrink-0 ml-auto flex items-center gap-2">
-                  {item.category && getCategoryBadge()}
-                  <span className={getStatusClasses()}>
-                    {getStatus()}
-                  </span>
+                {/* Explore indicator */}
+                <div className="flex items-center gap-2 text-white/50 text-xs font-medium group-hover:text-white/80 transition-colors">
+                  <span>{locale === 'fi' ? 'Tutustu' : 'Explore project'}</span>
+                  <span className="material-symbols text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
                 </div>
               </div>
-              
-              {/* Date */}
-              {item.date && (
-                <div className="text-xs mt-4 flex items-center gap-1 text-white/60">
-                  <span className="material-symbols text-sm">schedule</span>
-                  <span>{item.date}</span>
-                </div>
-              )}
             </div>
           </Link>
         </div>
@@ -277,26 +237,21 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      className="h-full w-full"
-    >      <div className="theme-card-flex p-0 rounded-xl h-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
+      className="h-full w-full group"
+    >
+      <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:shadow-xl border border-gray-200/20 dark:border-neutral-700/20 group-hover:border-primary/20">
         <Link 
           href={cardLink} 
           className="h-full flex flex-col"
           onClick={() => trackEvent('portfolio_card_click', 'portfolio', `standard_${getTitle()}_${getType()}`)}
         >
           {/* Image Section */}
-          <div className="relative w-full h-48 overflow-hidden">
-            <div className="absolute inset-0 overflow-hidden bg-black">
+          <div className="relative w-full h-52 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden">
               <motion.div
                 className="absolute inset-0 w-full h-full scale-[1.01]"
-                whileHover={{ scale: 1.05 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 300, 
-                  damping: 15, 
-                  duration: 0.2
-                }}
+                whileHover={{ scale: 1.06 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Image
                   src={item.photo?.url || '/images/placeholder.jpg'}
@@ -306,55 +261,48 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </motion.div>
-            </div>            {/* Display project type as badge */}
+            </div>
+            
+            {/* Gradient overlay on image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            
+            {/* Status badge - top right */}
             <div className="absolute top-3 right-3 z-10">
-              <span className={getTypeBadgeClasses()}>
-                {getType()}
+              <span className={getStatusClasses()}>
+                {getStatus()}
               </span>
             </div>
           </div>
           
           {/* Content Section */}
           <div className="p-6 flex-1 flex flex-col">
-            <div className="flex items-start mb-4 gap-4">
-              <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-primary bg-primary/10 rounded-lg">
-                <span className="material-symbols text-4xl">
-                  {getTypeIcon()}
-                </span>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-primary mb-1">{getTitle()}</h3>
-                <div className="opacity-80 text-sm line-clamp-2">{getDesc()}</div>
-              </div>
+            {/* Type + Category */}
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
+              <span className={getTypeBadgeClasses()}>
+                {getType()}
+              </span>
+              {item.category && getCategoryBadge()}
             </div>
-              {/* Footer with Tags and Status */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mt-auto">
-              {/* Tags */}              {cardTags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+            
+            <h3 className="text-lg font-bold text-primary mb-2 leading-snug group-hover:opacity-80 transition-opacity">{getTitle()}</h3>
+            <p className="opacity-60 text-sm line-clamp-2 leading-relaxed mb-4">{getDesc()}</p>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between mt-auto pt-4 border-t border-current/5">
+              {/* Tags */}
+              {cardTags.length > 0 ? (
+                <div className="flex flex-wrap gap-1.5">
                   {cardTags.map((tag, idx) => (
                     <span key={idx} className={getTagClasses()}>
                       {tag}
                     </span>
                   ))}
                 </div>
-              )}
+              ) : <div />}
               
-              {/* Category + Status — bottom right */}
-              <div className="flex-shrink-0 ml-auto flex items-center gap-2">
-                {item.category && getCategoryBadge()}
-                <span className={getStatusClasses()}>
-                  {getStatus()}
-                </span>
-              </div>
+              {/* Arrow */}
+              <span className="material-symbols text-lg opacity-30 group-hover:opacity-70 transition-all group-hover:translate-x-0.5">arrow_forward</span>
             </div>
-            
-            {/* Date if available */}
-            {item.date && (
-              <div className="text-xs mt-4 pt-4 flex items-center gap-1 border-t border-current/10">
-                <span className="material-symbols text-sm text-primary">schedule</span>
-                <span className="opacity-80">{item.date}</span>
-              </div>
-            )}
           </div>
         </Link>
       </div>

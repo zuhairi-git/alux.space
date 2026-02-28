@@ -39,32 +39,32 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
     return (
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className={`absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden ${theme.contentPaddingTop} bg-transparent`}>
             {msgs.length === 0 ? (
-                <div className="flex-1 flex flex-col p-6 items-center overflow-y-auto scrollbar-none">
-                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center pt-[5vh] pb-8 shrink-0">
-                        <div className="relative w-20 h-20 flex items-center justify-center mb-6"><div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${theme.copilot.pingBg}`} style={{ animationDuration: '2s', animationIterationCount: 2 }} /><div className={`w-full h-full rounded-full flex items-center justify-center shadow-2xl ${theme.copilot.heroGradient}`}><Icon name="auto_awesome" className="text-4xl text-white" /></div></div>
-                        <h3 className="font-bold text-lg mb-1">Collaboration Copilot</h3><p className={`text-sm text-center max-w-[240px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Ask about workspaces, team activity, sprint status, or design reviews.</p>
+                <div className="flex-1 flex flex-col p-7 items-center overflow-y-auto scrollbar-none">
+                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center pt-[5vh] pb-10 shrink-0">
+                        <div className="relative w-24 h-24 flex items-center justify-center mb-7"><div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${theme.copilot.pingBg}`} style={{ animationDuration: '2s', animationIterationCount: 2 }} /><div className={`w-full h-full rounded-full flex items-center justify-center shadow-2xl ${theme.copilot.heroGradient}`}><Icon name="auto_awesome" className="text-[42px] text-white" /></div></div>
+                        <h3 className="font-bold text-xl mb-2">Collaboration Copilot</h3><p className={`text-[15px] text-center max-w-[260px] leading-relaxed ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Ask about workspaces, team activity, sprint status, or design reviews.</p>
                     </motion.div>
-                    <div className="w-full mt-auto pb-4 shrink-0">
-                        <label className={`text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
-                        <div className="grid grid-cols-2 gap-2.5">
-                            {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-left p-3.5 ${promptCardClass}`}><Icon name={p.icon} className={`mb-1.5 text-lg ${promptIconColor}`} /><span className="font-semibold text-[13px]">{p.label}</span></motion.button>))}
+                    <div className="w-full mt-auto pb-5 shrink-0">
+                        <label className={`text-[11px] font-bold uppercase tracking-widest mb-4 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
+                        <div className="grid grid-cols-2 gap-3">
+                            {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-left p-4 ${promptCardClass}`}><Icon name={p.icon} className={`mb-2 text-xl ${promptIconColor}`} /><span className="font-semibold text-[14px]">{p.label}</span></motion.button>))}
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-none pb-24">
+                <div className="flex-1 overflow-y-auto p-5 space-y-4 scrollbar-none pb-24">
                     {msgs.map(m => (<motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className="flex flex-col max-w-[88%]"><div className={`px-4 py-3 text-[14px] leading-relaxed ${m.role === 'user' ? ub : bb}`}>{m.text}</div>
-                            {m.role === 'assistant' && m.citations && <div className="mt-2 space-y-1.5 ml-1">{m.citations.map((c, i) => (<motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }} className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${theme.copilot.citationCard(isLight)}`}><Icon name="verified" className={`text-sm shrink-0 mt-0.5 ${theme.copilot.citationIcon}`} /><div><span className="font-semibold block">{c.source}</span><span className="text-gray-400">{c.snippet}</span></div></motion.div>))}</div>}
+                        <div className="flex flex-col max-w-[85%]"><div className={`px-5 py-3.5 text-[15px] leading-[1.7] ${m.role === 'user' ? ub : bb}`}>{m.text}</div>
+                            {m.role === 'assistant' && m.citations && <div className="mt-2.5 space-y-2 ml-1">{m.citations.map((c, i) => (<motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }} className={`flex items-start space-x-2.5 p-3 rounded-xl text-[12px] ${theme.copilot.citationCard(isLight)}`}><Icon name="verified" className={`text-[15px] shrink-0 mt-0.5 ${theme.copilot.citationIcon}`} /><div><span className="font-semibold block">{c.source}</span><span className="text-gray-400">{c.snippet}</span></div></motion.div>))}</div>}
                         </div></motion.div>))}
-                    {typing && stream && <div className="flex justify-start"><div className={`max-w-[88%] px-4 py-3 text-[14px] leading-relaxed ${bb}`}>{stream}<span className="inline-block w-0.5 h-4 ml-0.5 bg-current animate-pulse align-text-bottom" /></div></div>}
-                    {typing && !stream && <div className="flex justify-start"><div className={`px-4 py-3 flex space-x-1.5 ${bb}`}><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '150ms' }} /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '300ms' }} /></div></div>}
-                    <div ref={ref} className="pb-4" />
+                    {typing && stream && <div className="flex justify-start"><div className={`max-w-[85%] px-5 py-3.5 text-[15px] leading-[1.7] ${bb}`}>{stream}<span className="inline-block w-0.5 h-4 ml-0.5 bg-current animate-pulse align-text-bottom" /></div></div>}
+                    {typing && !stream && <div className="flex justify-start"><div className={`px-5 py-3.5 flex space-x-2 ${bb}`}><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '150ms' }} /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '300ms' }} /></div></div>}
+                    <div ref={ref} className="pb-5" />
                 </div>
             )}
-            <div className={`px-4 pt-3 pb-[90px] flex items-end space-x-2 shrink-0 z-30 w-full ${inputBarClass}`}>
-                <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask about your team..." className={`flex-1 outline-none text-[14px] ${inputFieldClass}`} />
-                <button onClick={() => send()} disabled={!input.trim()} className={`w-10 h-10 flex justify-center items-center shrink-0 disabled:opacity-40 ${theme.radii.sendButtonBg} text-white ${theme.radii.sendButton}`}><Icon name="arrow_upward" className="text-lg" /></button>
+            <div className={`px-5 pt-3.5 pb-[90px] flex items-end space-x-2.5 shrink-0 z-30 w-full ${inputBarClass}`}>
+                <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask about your team..." className={`flex-1 outline-none text-[15px] ${inputFieldClass}`} />
+                <button onClick={() => send()} disabled={!input.trim()} className={`w-11 h-11 flex justify-center items-center shrink-0 disabled:opacity-40 ${theme.radii.sendButtonBg} text-white ${theme.radii.sendButton}`}><Icon name="arrow_upward" className="text-lg" /></button>
             </div>
         </motion.div>
     );

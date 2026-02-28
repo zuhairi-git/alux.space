@@ -25,14 +25,14 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
         ? 'bg-purple-500/20 border border-purple-500/30'
         : p.modalActiveItem(isLight);
     return (
-        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-4 space-y-5`}>
+        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-6`}>
             {/* Header */}
-            <motion.div variants={fadeUp} className="flex justify-between items-center px-1"><h2 className={`text-xl font-bold ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>{theme.titles.profile.title}</h2><button onClick={() => setModal(true)} className={`w-9 h-9 rounded-full flex items-center justify-center ${p.settingsBg(isLight)}`}><Icon name="settings" className="opacity-70 text-[18px]" /></button></motion.div>
+            <motion.div variants={fadeUp} className="flex justify-between items-center px-1"><h2 className={`text-xl font-bold ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>{theme.titles.profile.title}</h2><button onClick={() => setModal(true)} className={`w-10 h-10 rounded-full flex items-center justify-center ${p.settingsBg(isLight)}`}><Icon name="settings" className="opacity-70 text-[20px]" /></button></motion.div>
 
             {/* Avatar */}
-            <motion.div variants={fadeUp} className="flex flex-col items-center py-4">
-                <div className="relative mb-3">
-                    <div className={`w-24 h-24 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}>
+            <motion.div variants={fadeUp} className="flex flex-col items-center py-6">
+                <div className="relative mb-4">
+                    <div className={`w-28 h-28 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}>
                         <div className={`w-full h-full rounded-full overflow-hidden relative ${isLight ? 'bg-white' : 'bg-black/80'}`}>
                             <Image
                                 src="/images/me/ali.png"
@@ -44,25 +44,25 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
                             />
                         </div>
                     </div>
-                    <div className={`absolute bottom-0 right-0 w-6 h-6 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#FAF8FC]' : 'border-[#111114]') : (isLight ? 'border-[#F2F2F7]' : 'border-black')}`} />
+                    <div className={`absolute bottom-0.5 right-0.5 w-7 h-7 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#FAF8FC]' : 'border-[#111114]') : (isLight ? 'border-[#F2F2F7]' : 'border-black')}`} />
                 </div>
-                <h2 className="font-bold text-2xl">Ali Al-Zuhairi</h2>
-                <p className={`text-sm font-medium mt-0.5 ${p.roleColor}`}>Platform Lead</p>
+                <h2 className="font-bold text-2xl tracking-tight">Ali Al-Zuhairi</h2>
+                <p className={`text-[15px] font-medium mt-1 ${p.roleColor}`}>Platform Lead</p>
             </motion.div>
 
             {/* Collaboration Stats */}
-            <motion.div variants={fadeUp} className={`p-5 ${card}`}>
-                <div className="flex justify-between items-start mb-4"><div><h4 className="font-semibold text-[15px]">Collaboration Stats</h4><p className="text-[11px] opacity-50 mt-0.5">This month</p></div><span className={`text-xs font-bold px-2 py-1 rounded-lg ${p.statBadge}`}>+22%</span></div>
-                <div className="h-24 flex items-end justify-between gap-2 px-1">{[40, 65, 45, 80, 55, 90, 75].map((h, i) => (<div key={i} className="w-full h-full flex items-end justify-center"><motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.08, ease: [0.25, 1, 0.5, 1] }} className={`w-full max-w-[10px] rounded-t-full bg-gradient-to-t ${p.barGradients[i]}`} /></div>))}</div>
+            <motion.div variants={fadeUp} className={`p-6 ${card}`}>
+                <div className="flex justify-between items-start mb-5"><div><h4 className="font-semibold text-[16px]">Collaboration Stats</h4><p className="text-[12px] opacity-50 mt-1">This month</p></div><span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${p.statBadge}`}>+22%</span></div>
+                <div className="h-28 flex items-end justify-between gap-2.5 px-1">{[40, 65, 45, 80, 55, 90, 75].map((h, i) => (<div key={i} className="w-full h-full flex items-end justify-center"><motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.08, ease: [0.25, 1, 0.5, 1] }} className={`w-full max-w-[12px] rounded-t-full bg-gradient-to-t ${p.barGradients[i]}`} /></div>))}</div>
             </motion.div>
 
             {/* Team Engagement */}
-            <motion.div variants={fadeUp} className={`p-5 ${card}`}>
-                <h4 className="font-semibold text-[15px] mb-4">Team Engagement</h4>
-                <div className="flex items-center space-x-5"><div className="relative flex items-center justify-center shrink-0">
-                    <svg className="w-[72px] h-[72px] -rotate-90" viewBox="0 0 36 36"><path className={isLight ? "text-gray-200" : "text-white/10"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "72, 100" }} transition={{ duration: 1.2 }} strokeLinecap="round" className={p.donutPrimary} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "18, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-72" strokeLinecap="round" className="text-rose-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "10, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-90" strokeLinecap="round" className="text-amber-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /></svg>
-                    <span className={`absolute text-[15px] font-extrabold ${p.donutLabel}`}>72%</span></div>
-                    <div className="flex-1 space-y-1.5">{[{ l: 'Active', pe: '72%', c: p.engagementActiveBg }, { l: 'Reviewing', pe: '18%', c: 'bg-rose-500' }, { l: 'Idle', pe: '10%', c: 'bg-amber-500' }].map(s => (<div key={s.l} className={`flex justify-between text-[11px] items-center p-1.5 rounded-lg ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}><span className="opacity-70 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 ${s.c}`} />{s.l}</span><span className="font-bold">{s.pe}</span></div>))}</div>
+            <motion.div variants={fadeUp} className={`p-6 ${card}`}>
+                <h4 className="font-semibold text-[16px] mb-5">Team Engagement</h4>
+                <div className="flex items-center space-x-6"><div className="relative flex items-center justify-center shrink-0">
+                    <svg className="w-[80px] h-[80px] -rotate-90" viewBox="0 0 36 36"><path className={isLight ? "text-gray-200" : "text-white/10"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "72, 100" }} transition={{ duration: 1.2 }} strokeLinecap="round" className={p.donutPrimary} stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "18, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-72" strokeLinecap="round" className="text-rose-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "10, 100" }} transition={{ duration: 1.2 }} strokeDashoffset="-90" strokeLinecap="round" className="text-amber-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /></svg>
+                    <span className={`absolute text-[16px] font-extrabold ${p.donutLabel}`}>72%</span></div>
+                    <div className="flex-1 space-y-2">{[{ l: 'Active', pe: '72%', c: p.engagementActiveBg }, { l: 'Reviewing', pe: '18%', c: 'bg-rose-500' }, { l: 'Idle', pe: '10%', c: 'bg-amber-500' }].map(s => (<div key={s.l} className={`flex justify-between text-[12px] items-center p-2 rounded-xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}><span className="opacity-70 flex items-center font-medium"><span className={`w-2.5 h-2.5 rounded-full mr-2.5 ${s.c}`} />{s.l}</span><span className="font-bold">{s.pe}</span></div>))}</div>
                 </div>
             </motion.div>
 

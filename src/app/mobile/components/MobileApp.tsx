@@ -81,11 +81,11 @@ export function MobileApp({ theme }: MobileAppProps) {
             </AnimatePresence>
 
             {/* Header */}
-            <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-3 px-5 z-40 ${headerStyle}`}>
+            <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-4 px-6 z-40 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">
-                    <div className="flex items-center space-x-3.5">
+                    <div className="flex items-center space-x-4">
                         <button onClick={() => setActiveTab('profile')} className="relative active:scale-95 transition-transform">
-                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${theme.accent.avatarBorder(isLight)} ${theme.accent.avatarGradient}`}>
+                            <div className={`w-12 h-12 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${theme.accent.avatarBorder(isLight)} ${theme.accent.avatarGradient}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>
@@ -93,11 +93,11 @@ export function MobileApp({ theme }: MobileAppProps) {
                         </button>
                         <div className="flex flex-col">
                             <AnimatePresence mode="wait"><motion.span key={activeTab + "-s"} initial={{ opacity: 0, y: -2 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 2 }} className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/40' : 'text-[#49454F]') : 'text-white/40'}`}>{theme.titles[activeTab].sub}</motion.span></AnimatePresence>
-                            <AnimatePresence mode="wait"><motion.h1 key={activeTab + "-t"} initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 5 }} transition={{ delay: 0.05 }} className="text-[18px] font-extrabold tracking-tight leading-none">{theme.titles[activeTab].title}</motion.h1></AnimatePresence>
+                            <AnimatePresence mode="wait"><motion.h1 key={activeTab + "-t"} initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 5 }} transition={{ delay: 0.05 }} className="text-[20px] font-extrabold tracking-tight leading-none">{theme.titles[activeTab].title}</motion.h1></AnimatePresence>
                         </div>
                     </div>
-                    <button onClick={() => setActiveTab('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center active:scale-95 ${theme.accent.aiButton(isLight)}`}>
-                        <Icon name="auto_awesome" className="text-[20px]" />
+                    <button onClick={() => setActiveTab('copilot')} className={`relative w-11 h-11 rounded-full flex justify-center items-center active:scale-95 ${theme.accent.aiButton(isLight)}`}>
+                        <Icon name="auto_awesome" className="text-[22px]" />
                         <span className={`absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-[#FF9500] rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_8px_rgba(255,149,0,0.8)]' : ''}`} />
                     </button>
                 </div>
