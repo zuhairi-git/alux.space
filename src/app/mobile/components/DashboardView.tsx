@@ -253,86 +253,539 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
     void theme;
 }
 
-export function DashboardView({ card, isLight, isColorful = false, onNav, theme }: DashboardViewProps) {
-    const d = theme.dashboard;
-    const accentColor = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
-    const highlightColor = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
-    const followUpColor = isColorful ? 'text-fuchsia-400' : d.followUpColor;
-    const seeAllColor = isColorful ? 'text-fuchsia-400' : d.seeAllColor;
-    const [activeAction, setActiveAction] = useState<QuickActionKey>(null);
-    const sheetBg = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+// ─── Layout Mode Types ────────────────────────────────────────────────────────
+type LayoutMode = 'bento' | 'feed' | 'cards' | 'pulse';
 
-    const quickActions = [
-        { key: 'new-doc' as QuickActionKey, icon: 'edit_document', label: 'New Doc', desc: 'Create document', g: theme.platform === 'android' ? 'from-purple-500/20 to-fuchsia-500/20' : 'from-blue-500/10 to-indigo-500/10 border-blue-500/20' },
-        { key: 'join-room' as QuickActionKey, icon: 'groups', label: 'Join Room', desc: 'Live session', g: theme.platform === 'android' ? 'from-blue-500/20 to-cyan-500/20' : 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20' },
-        { key: 'schedule' as QuickActionKey, icon: 'calendar_today', label: 'Schedule', desc: 'Plan meeting', g: theme.platform === 'android' ? 'from-emerald-500/20 to-teal-500/20' : 'from-purple-500/10 to-fuchsia-500/10 border-purple-500/20' },
-        { key: 'analytics' as QuickActionKey, icon: 'analytics', label: 'Analytics', desc: 'View stats', g: theme.platform === 'android' ? 'from-amber-500/20 to-orange-500/20' : 'from-orange-500/10 to-amber-500/10 border-orange-500/20' },
-    ];
+const layoutMeta: { key: LayoutMode; icon: string; label: string }[] = [
+    { key: 'bento', icon: 'grid_view', label: 'Bento' },
+    { key: 'feed', icon: 'view_stream', label: 'Feed' },
+    { key: 'cards', icon: 'filter_center_focus', label: 'Focus' },
+    { key: 'pulse', icon: 'blur_circular', label: 'Pulse' },
+];
+
+// ─── Layout Picker ────────────────────────────────────────────────────────────
+function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
+    active: LayoutMode; onChange: (m: LayoutMode) => void; isLight: boolean; isColorful: boolean; theme: MobileTheme;
+}) {
+    return (
+        <motion.div variants={fadeUp} className="flex justify-center">
+            <div className={`inline-flex items-center p-1 gap-0.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} ${isLight ? 'bg-black/[0.05]' : isColorful ? 'bg-white/[0.06] border border-purple-500/10' : 'bg-white/[0.08]'}`}>
+                {layoutMeta.map(l => {
+                    const isActive = active === l.key;
+                    return (
+                        <button key={l.key} onClick={() => onChange(l.key)}
+                            className={`relative flex items-center gap-1.5 px-3 py-[7px] rounded-full text-[11px] font-semibold transition-all duration-300 active:scale-95 ${isActive
+                                ? (isColorful ? 'text-purple-200' : isLight ? 'text-gray-900' : 'text-white')
+                                : (isLight ? 'text-gray-400' : 'text-white/30')}`}>
+                            {isActive && (
+                                <motion.div layoutId="layout-pill" className={`absolute inset-0 ${theme.platform === 'ios' ? 'rounded-[10px]' : 'rounded-full'} ${isColorful ? 'bg-purple-500/25' : isLight ? 'bg-white shadow-sm' : 'bg-white/12'}`}
+                                    transition={{ type: 'spring', stiffness: 500, damping: 35 }} />
+                            )}
+                            <span className="relative z-10 flex items-center gap-1.5">
+                                <Icon name={l.icon} className="text-[14px]" />
+                                {isActive && <motion.span initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: 'auto' }} exit={{ opacity: 0, width: 0 }}>{l.label}</motion.span>}
+                            </span>
+                        </button>
+                    );
+                })}
+            </div>
+        </motion.div>
+    );
+}
+
+// ─── Shared layout props ──────────────────────────────────────────────────────
+interface LayoutProps {
+    card: string; isLight: boolean; isColorful: boolean; theme: MobileTheme;
+    onNav: (t: TabType) => void; onAction: (a: QuickActionKey) => void;
+}
+
+const quickActionDefs = (theme: MobileTheme): { key: QuickActionKey; icon: string; label: string; desc: string; color: string }[] => [
+    { key: 'new-doc', icon: 'edit_document', label: 'New Doc', desc: 'Create document', color: theme.platform === 'android' ? 'from-purple-500/20 to-fuchsia-500/20' : 'from-blue-500/10 to-indigo-500/10 border-blue-500/20' },
+    { key: 'join-room', icon: 'groups', label: 'Join Room', desc: 'Live session', color: theme.platform === 'android' ? 'from-blue-500/20 to-cyan-500/20' : 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20' },
+    { key: 'schedule', icon: 'calendar_today', label: 'Schedule', desc: 'Plan meeting', color: theme.platform === 'android' ? 'from-emerald-500/20 to-teal-500/20' : 'from-purple-500/10 to-fuchsia-500/10 border-purple-500/20' },
+    { key: 'analytics', icon: 'analytics', label: 'Analytics', desc: 'View stats', color: theme.platform === 'android' ? 'from-amber-500/20 to-orange-500/20' : 'from-orange-500/10 to-amber-500/10 border-orange-500/20' },
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// BENTO LAYOUT — Asymmetric grid with varied-size tiles
+// ═══════════════════════════════════════════════════════════════════════════════
+function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
+    const d = theme.dashboard;
+    const accent = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
+    const highlight = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const actions = quickActionDefs(theme);
 
     return (
-        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: 20 }} variants={stagger} className="absolute inset-0">
-            {/* Scrollable content — isolated from overlay so bottom sheet always anchors to frame */}
-            <div className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-6`}>
-                {/* AI Briefing Card */}
-                <motion.div variants={fadeUp} className={`p-6 ${card}`}>
-                    <div className="flex items-center space-x-3 mb-4">
-                        <div className={`w-9 h-9 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}><Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} /></div>
-                        <span className={`text-[11px] font-bold uppercase tracking-widest ${accentColor}`}>AI Collaboration Briefing</span>
+        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, scale: 0.97 }} variants={stagger} className="space-y-3">
+            {/* AI Hero — full width */}
+            <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-left p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
+                <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-indigo-500/10 to-purple-500/10 blur-2xl group-active:scale-110 transition-transform" />
+                <div className="flex items-center space-x-2.5 mb-3 relative z-10">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}>
+                        <Icon name="auto_awesome" className={`text-sm ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} />
                     </div>
-                    <p className={`text-[15px] leading-[1.75] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>Your team had a <span className={`font-semibold ${highlightColor}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.</p>
-                    <button onClick={() => onNav('copilot')} className={`mt-4 flex items-center space-x-2 text-[13px] font-semibold ${followUpColor}`}><span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" /></button>
-                </motion.div>
+                    <span className={`text-[10px] font-bold uppercase tracking-[0.15em] ${accent}`}>AI Briefing</span>
+                    <span className="ml-auto text-[10px] font-medium opacity-30">Just now</span>
+                </div>
+                <p className={`text-[14px] leading-[1.7] relative z-10 ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
+                    Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 docs updated, 3 design reviews completed. <span className="font-semibold">2 pending approvals</span> await.
+                </p>
+                <span className={`mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.followUpColor}`}>
+                    Ask follow-up <Icon name="arrow_forward" className="text-[12px]" />
+                </span>
+            </motion.button>
 
-                {/* Workspace Activity Carousel */}
-                <motion.div variants={fadeUp}>
-                    <div className="flex justify-between items-center mb-4 px-1"><h3 className={`font-bold text-[17px] ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>Workspace Activity</h3><button className={`text-[13px] font-semibold ${seeAllColor}`}>See All</button></div>
-                    <div className="flex space-x-3.5 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
-                        {workspaces.slice(0, 4).map((ws, i) => (
-                            <motion.div key={ws.id} initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 + i * 0.07, type: 'spring', stiffness: 400, damping: 30 }}
-                                className={`shrink-0 w-[160px] p-5 ${card} active:scale-[0.97] transition-transform`}>
-                                <div className="flex justify-between items-start mb-1.5">
-                                    <span className="font-bold text-[14px] truncate max-w-[80px]">{ws.name.split(' ')[0]}</span>
-                                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : ws.status === 'Review' ? 'bg-amber-500/15 text-amber-400' : 'bg-gray-500/15 text-gray-400'}`}>{ws.status}</span>
+            {/* Bento Grid — 4 columns, asymmetric tiles */}
+            <div className="grid grid-cols-4 gap-2.5">
+                {/* Workspace 1 — 2 cols, tall */}
+                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 row-span-2 text-left p-4 ${card} active:scale-[0.97] transition-transform`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${theme.workspace.iconBg(isLight)}`}>
+                        <Icon name={workspaces[0].icon} className={`text-xl ${theme.workspace.iconColor(isLight)}`} />
+                    </div>
+                    <span className="font-bold text-[14px] block mb-1">{workspaces[0].name.split(' ').slice(0, 2).join(' ')}</span>
+                    <span className={`text-[11px] block mb-3 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{workspaces[0].members} members · {workspaces[0].docs} docs</span>
+                    <Sparkline data={workspaces[0].data} color={theme.workspace.sparklineHigh} width={130} height={36} />
+                    <div className="flex items-center justify-between mt-3">
+                        <span className="text-[16px] font-bold">{workspaces[0].activity}%</span>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${theme.workspace.statusActive}`}>{workspaces[0].status}</span>
+                    </div>
+                </motion.button>
+
+                {/* Workspace 2 — 2 cols, short */}
+                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
+                    <div className="flex items-center gap-2.5 mb-2">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${theme.workspace.iconBg(isLight)}`}>
+                            <Icon name={workspaces[1].icon} className={`text-[16px] ${theme.workspace.iconColor(isLight)}`} />
+                        </div>
+                        <div>
+                            <span className="font-semibold text-[13px] block leading-tight">{workspaces[1].name.split(' ').slice(0, 2).join(' ')}</span>
+                            <span className={`text-[10px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{workspaces[1].members} members</span>
+                        </div>
+                    </div>
+                    <Sparkline data={workspaces[1].data} color={theme.workspace.sparklineMid} width={120} height={24} />
+                </motion.button>
+
+                {/* Workspace 3 — 2 cols, short */}
+                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
+                    <div className="flex items-center gap-2.5 mb-2">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${theme.workspace.iconBg(isLight)}`}>
+                            <Icon name={workspaces[2].icon} className={`text-[16px] ${theme.workspace.iconColor(isLight)}`} />
+                        </div>
+                        <div>
+                            <span className="font-semibold text-[13px] block leading-tight">{workspaces[2].name.split(' ').slice(0, 2).join(' ')}</span>
+                            <span className={`text-[10px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{workspaces[2].members} members</span>
+                        </div>
+                    </div>
+                    <Sparkline data={workspaces[2].data} color={theme.workspace.sparklineHigh} width={120} height={24} />
+                </motion.button>
+            </div>
+
+            {/* Quick Action Capsules — horizontal scroll */}
+            <motion.div variants={fadeUp}>
+                <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
+                    {actions.map((a, i) => (
+                        <motion.button key={a.key} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.06 }}
+                            onClick={() => onAction(a.key)} className={`shrink-0 flex items-center gap-2 px-4 py-2.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} active:scale-95 transition-transform ${isLight ? 'bg-black/[0.04]' : isColorful ? 'bg-white/[0.06] border border-purple-500/10' : 'bg-white/[0.07]'}`}>
+                            <Icon name={a.icon} className={`text-[16px] ${d.quickActionIconColor(isLight)}`} />
+                            <span className="text-[12px] font-semibold whitespace-nowrap">{a.label}</span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Team Activity */}
+            <motion.div variants={fadeUp} className={`p-5 ${card}`}>
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="font-bold text-[15px]">Team Activity</h3>
+                    <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>See All</button>
+                </div>
+                <div className="space-y-3">
+                    {teamActivity.map((a, i) => (
+                        <motion.button key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 + i * 0.05 }}
+                            onClick={() => onNav('workspaces')} className="w-full flex items-center justify-between active:opacity-70 transition-opacity">
+                            <div className="flex items-center space-x-3 flex-1 min-w-0">
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${d.teamColorMap[a.color] || 'bg-gray-500/15 text-gray-400'}`}><Icon name={a.icon} className="text-[14px]" /></div>
+                                <span className="text-[13px] truncate"><span className="font-semibold">{a.user}</span> {a.action}</span>
+                            </div>
+                            <span className="text-[11px] text-gray-500 shrink-0 ml-2">{a.time}</span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FEED LAYOUT — Classic vertical stream with rich cards
+// ═══════════════════════════════════════════════════════════════════════════════
+function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
+    const d = theme.dashboard;
+    const accent = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
+    const highlight = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const actions = quickActionDefs(theme);
+
+    return (
+        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, y: 12 }} variants={stagger} className="space-y-5">
+            {/* AI Briefing Card */}
+            <motion.div variants={fadeUp} className={`p-6 ${card}`}>
+                <div className="flex items-center space-x-3 mb-4">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}>
+                        <Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} />
+                    </div>
+                    <span className={`text-[11px] font-bold uppercase tracking-widest ${accent}`}>AI Collaboration Briefing</span>
+                </div>
+                <p className={`text-[15px] leading-[1.75] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
+                    Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
+                </p>
+                <button onClick={() => onNav('copilot')} className={`mt-4 flex items-center space-x-2 text-[13px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.followUpColor}`}>
+                    <span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" />
+                </button>
+            </motion.div>
+
+            {/* Workspace Activity Carousel */}
+            <motion.div variants={fadeUp}>
+                <div className="flex justify-between items-center mb-4 px-1">
+                    <h3 className={`font-bold text-[17px] ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>Workspace Activity</h3>
+                    <button onClick={() => onNav('workspaces')} className={`text-[13px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>See All</button>
+                </div>
+                <div className="flex space-x-3.5 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
+                    {workspaces.slice(0, 4).map((ws, i) => (
+                        <motion.button key={ws.id} initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 + i * 0.07, type: 'spring', stiffness: 400, damping: 30 }}
+                            onClick={() => onNav('workspaces')} className={`shrink-0 w-[160px] p-5 ${card} active:scale-[0.97] transition-transform text-left`}>
+                            <div className="flex justify-between items-start mb-1.5">
+                                <span className="font-bold text-[14px] truncate max-w-[80px]">{ws.name.split(' ')[0]}</span>
+                                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : ws.status === 'Review' ? 'bg-amber-500/15 text-amber-400' : 'bg-gray-500/15 text-gray-400'}`}>{ws.status}</span>
+                            </div>
+                            <span className={`text-[12px] block mb-3 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{ws.members} members</span>
+                            <Sparkline data={ws.data} color={ws.activity > 70 ? theme.workspace.sparklineHigh : ws.activity > 50 ? theme.workspace.sparklineMid : theme.workspace.sparklineLow} width={120} height={32} />
+                            <span className="text-[15px] font-semibold mt-2.5 block">{ws.activity}% active</span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Team Activity */}
+            <motion.div variants={fadeUp} className={`p-6 ${card}`}>
+                <h3 className="font-bold text-[16px] mb-4">Team Activity</h3>
+                <div className="space-y-3.5">
+                    {teamActivity.map((a, i) => (
+                        <motion.button key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.05 }}
+                            onClick={() => onNav('workspaces')} className="w-full flex items-center justify-between active:opacity-70">
+                            <div className="flex items-center space-x-3.5 flex-1 min-w-0">
+                                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${d.teamColorMap[a.color] || 'bg-gray-500/15 text-gray-400'}`}><Icon name={a.icon} className="text-[15px]" /></div>
+                                <span className="text-[14px] truncate"><span className="font-semibold">{a.user}</span> {a.action}</span>
+                            </div>
+                            <span className="text-[12px] text-gray-500 shrink-0 ml-2">{a.time}</span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Quick Actions */}
+            <motion.div variants={fadeUp}>
+                <h3 className="font-bold text-[17px] mb-4 px-1">Quick Actions</h3>
+                <div className="grid grid-cols-2 gap-3.5">
+                    {actions.map(a => (
+                        <motion.button key={a.label} whileTap={{ scale: 0.96 }} onClick={() => onAction(a.key)}
+                            className={`flex flex-col text-left p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} ${d.quickActionBg(isLight, a.color)}`}>
+                            <Icon name={a.icon} className={`mb-3 text-[22px] ${d.quickActionIconColor(isLight)}`} />
+                            <span className="font-semibold text-[15px] mb-1">{a.label}</span>
+                            <span className="text-[12px] opacity-50">{a.desc}</span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CARDS LAYOUT — Full-screen focus cards, one at a time
+// ═══════════════════════════════════════════════════════════════════════════════
+function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
+    const [idx, setIdx] = useState(0);
+    const d = theme.dashboard;
+    const accent = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
+    const highlight = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const actions = quickActionDefs(theme);
+
+    const cards = [
+        // Card 0: AI Briefing
+        {
+            key: 'briefing',
+            render: () => (
+                <div className={`h-full flex flex-col justify-between p-6 ${card}`}>
+                    <div>
+                        <div className="flex items-center space-x-3 mb-6">
+                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}>
+                                <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} />
+                            </div>
+                            <div>
+                                <span className={`text-[10px] font-bold uppercase tracking-[0.15em] block ${accent}`}>AI Briefing</span>
+                                <span className="text-[18px] font-bold block">Good morning</span>
+                            </div>
+                        </div>
+                        <p className={`text-[16px] leading-[1.8] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
+                            Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
+                        </p>
+                    </div>
+                    <button onClick={() => onNav('copilot')} className={`mt-6 w-full py-4 rounded-2xl text-[15px] font-bold active:scale-[0.97] transition-transform ${isColorful ? 'bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white' : theme.workspace.primaryButton}`}>
+                        <Icon name="auto_awesome" className="mr-2 text-[16px]" />Ask Copilot
+                    </button>
+                </div>
+            ),
+        },
+        // Card 1: Workspaces Overview
+        {
+            key: 'workspaces',
+            render: () => (
+                <div className={`h-full flex flex-col p-6 ${card}`}>
+                    <div className="flex justify-between items-center mb-5">
+                        <h3 className="text-[18px] font-bold">Workspaces</h3>
+                        <button onClick={() => onNav('workspaces')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>View All</button>
+                    </div>
+                    <div className="flex-1 space-y-3 overflow-y-auto scrollbar-none">
+                        {workspaces.map((ws, i) => (
+                            <motion.button key={ws.id} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }}
+                                onClick={() => onNav('workspaces')} className={`w-full flex items-center justify-between p-4 ${card} active:scale-[0.98] transition-transform`}>
+                                <div className="flex items-center space-x-3">
+                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${theme.workspace.iconBg(isLight)}`}>
+                                        <Icon name={ws.icon} className={`text-lg ${theme.workspace.iconColor(isLight)}`} />
+                                    </div>
+                                    <div className="text-left">
+                                        <span className="font-semibold text-[14px] block">{ws.name}</span>
+                                        <span className={`text-[11px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{ws.members} members · {ws.docs} docs</span>
+                                    </div>
                                 </div>
-                                <span className={`text-[12px] block mb-3 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{ws.members} members</span>
-                                <Sparkline data={ws.data} color={ws.activity > 70 ? theme.workspace.sparklineHigh : ws.activity > 50 ? theme.workspace.sparklineMid : theme.workspace.sparklineLow} width={120} height={32} />
-                                <span className="text-[15px] font-semibold mt-2.5 block">{ws.activity}% active</span>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* Team Activity */}
-                <motion.div variants={fadeUp} className={`p-6 ${card}`}>
-                    <h3 className="font-bold text-[16px] mb-4">Team Activity</h3>
-                    <div className="space-y-3.5">
-                        {teamActivity.map((a, i) => (
-                            <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.05 }} className="flex items-center justify-between">
-                                <div className="flex items-center space-x-3.5 flex-1 min-w-0">
-                                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${d.teamColorMap[a.color] || 'bg-gray-500/15 text-gray-400'}`}><Icon name={a.icon} className="text-[15px]" /></div>
-                                    <span className="text-[14px] truncate"><span className="font-semibold">{a.user}</span> {a.action}</span>
+                                <div className="flex items-center gap-2">
+                                    <Sparkline data={ws.data} color={ws.activity > 70 ? theme.workspace.sparklineHigh : theme.workspace.sparklineMid} width={44} height={18} />
+                                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : 'bg-amber-500/15 text-amber-400'}`}>{ws.status}</span>
                                 </div>
-                                <span className="text-[12px] text-gray-500 shrink-0 ml-2">{a.time}</span>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* Quick Actions */}
-                <motion.div variants={fadeUp}>
-                    <h3 className="font-bold text-[17px] mb-4 px-1">Quick Actions</h3>
-                    <div className="grid grid-cols-2 gap-3.5">
-                        {quickActions.map(a => (
-                            <motion.button key={a.label} whileTap={{ scale: 0.96 }} onClick={() => setActiveAction(a.key)}
-                                className={`flex flex-col text-left p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} ${d.quickActionBg(isLight, a.g)}`}>
-                                <Icon name={a.icon} className={`mb-3 text-[22px] ${d.quickActionIconColor(isLight)}`} /><span className="font-semibold text-[15px] mb-1">{a.label}</span><span className="text-[12px] opacity-50">{a.desc}</span>
                             </motion.button>
                         ))}
                     </div>
-                </motion.div>
+                </div>
+            ),
+        },
+        // Card 2: Team Activity
+        {
+            key: 'activity',
+            render: () => (
+                <div className={`h-full flex flex-col p-6 ${card}`}>
+                    <div className="flex justify-between items-center mb-5">
+                        <h3 className="text-[18px] font-bold">Team Activity</h3>
+                        <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>Alerts</button>
+                    </div>
+                    <div className="flex-1 space-y-4 overflow-y-auto scrollbar-none">
+                        {teamActivity.map((a, i) => (
+                            <motion.button key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
+                                onClick={() => onNav('workspaces')} className="w-full flex items-start gap-3.5 active:opacity-70">
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${d.teamColorMap[a.color] || 'bg-gray-500/15 text-gray-400'}`}>
+                                    <Icon name={a.icon} className="text-[17px]" />
+                                </div>
+                                <div className="flex-1 text-left">
+                                    <span className="text-[14px] block"><span className="font-semibold">{a.user}</span> {a.action}</span>
+                                    <span className={`text-[12px] mt-1 block ${isLight ? 'text-gray-400' : 'text-white/30'}`}>{a.time} ago</span>
+                                </div>
+                            </motion.button>
+                        ))}
+                    </div>
+                    <button onClick={() => onNav('notifications')} className={`mt-4 w-full py-3 rounded-2xl text-[13px] font-semibold text-center active:scale-[0.97] transition-transform ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.06]'}`}>
+                        View All Notifications
+                    </button>
+                </div>
+            ),
+        },
+        // Card 3: Quick Actions
+        {
+            key: 'actions',
+            render: () => (
+                <div className={`h-full flex flex-col p-6 ${card}`}>
+                    <h3 className="text-[18px] font-bold mb-5">Quick Actions</h3>
+                    <div className="flex-1 grid grid-cols-2 gap-3 content-start">
+                        {actions.map((a, i) => (
+                            <motion.button key={a.key} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.08 }}
+                                onClick={() => onAction(a.key)} className={`flex flex-col items-center text-center p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} active:scale-95 transition-transform ${d.quickActionBg(isLight, a.color)}`}>
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 ${isLight ? 'bg-white/60' : 'bg-white/[0.06]'}`}>
+                                    <Icon name={a.icon} className={`text-[26px] ${d.quickActionIconColor(isLight)}`} />
+                                </div>
+                                <span className="font-semibold text-[14px] mb-1">{a.label}</span>
+                                <span className="text-[11px] opacity-50">{a.desc}</span>
+                            </motion.button>
+                        ))}
+                    </div>
+                </div>
+            ),
+        },
+    ];
+
+    const totalCards = cards.length;
+    const goNext = () => setIdx(i => Math.min(i + 1, totalCards - 1));
+    const goPrev = () => setIdx(i => Math.max(i - 1, 0));
+
+    return (
+        <div className="relative h-[calc(100dvh-200px)] flex flex-col">
+            {/* Card viewport */}
+            <div className="flex-1 relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                    <motion.div key={cards[idx].key}
+                        initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -60 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                        className="absolute inset-0">
+                        {cards[idx].render()}
+                    </motion.div>
+                </AnimatePresence>
             </div>
 
-            {/* Quick Action Sheets — sibling of scroller so they anchor to the frame, not scroll content */}
+            {/* Navigation */}
+            <div className="flex items-center justify-center gap-4 py-4">
+                <button onClick={goPrev} disabled={idx === 0}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 ${idx === 0 ? 'opacity-20' : isLight ? 'bg-black/[0.05] active:bg-black/10' : 'bg-white/[0.08] active:bg-white/15'}`}>
+                    <Icon name="chevron_left" className="text-[20px]" />
+                </button>
+                <div className="flex gap-2">
+                    {cards.map((c, i) => (
+                        <button key={c.key} onClick={() => setIdx(i)}
+                            className={`rounded-full transition-all duration-300 ${i === idx ? `w-6 h-2 ${isColorful ? 'bg-fuchsia-400' : theme.platform === 'ios' ? 'bg-[#007AFF]' : 'bg-[#D0BCFF]'}` : `w-2 h-2 ${isLight ? 'bg-black/15' : 'bg-white/15'}`}`} />
+                    ))}
+                </div>
+                <button onClick={goNext} disabled={idx === totalCards - 1}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 ${idx === totalCards - 1 ? 'opacity-20' : isLight ? 'bg-black/[0.05] active:bg-black/10' : 'bg-white/[0.08] active:bg-white/15'}`}>
+                    <Icon name="chevron_right" className="text-[20px]" />
+                </button>
+            </div>
+        </div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PULSE LAYOUT — Radial hub with concentric data rings
+// ═══════════════════════════════════════════════════════════════════════════════
+function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
+    const d = theme.dashboard;
+    const actions = quickActionDefs(theme);
+
+    const stats = [
+        { label: 'Active', value: '12', icon: 'workspaces', color: 'emerald' },
+        { label: 'Docs', value: '48', icon: 'description', color: 'blue' },
+        { label: 'AI Queries', value: '183', icon: 'auto_awesome', color: 'purple' },
+    ];
+
+    const colorMap: Record<string, string> = {
+        emerald: isColorful ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/20' : isLight ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
+        blue: isColorful ? 'bg-blue-500/20 text-blue-400 border-blue-500/20' : isLight ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-blue-500/15 text-blue-400 border-blue-500/20',
+        purple: isColorful ? 'bg-purple-500/20 text-purple-400 border-purple-500/20' : isLight ? 'bg-purple-50 text-purple-600 border-purple-200' : 'bg-purple-500/15 text-purple-400 border-purple-500/20',
+    };
+
+    return (
+        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, scale: 0.95 }} variants={stagger} className="space-y-6 flex flex-col items-center">
+            {/* Central AI Hub */}
+            <motion.button variants={fadeUp} onClick={() => onNav('copilot')}
+                className="relative w-36 h-36 flex items-center justify-center active:scale-95 transition-transform">
+                {/* Outer pulse rings */}
+                <div className={`absolute inset-0 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-fuchsia-500' : theme.platform === 'ios' ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '3s' }} />
+                <div className={`absolute inset-3 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-purple-500' : theme.platform === 'ios' ? 'bg-[#5856D6]' : 'bg-[#D0BCFF]'}`} style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+                {/* Gradient ring */}
+                <div className={`absolute inset-4 rounded-full ${isColorful ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20' : isLight ? 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10' : 'bg-gradient-to-br from-indigo-500/15 to-purple-500/15'} border ${isColorful ? 'border-purple-500/20' : isLight ? 'border-blue-200' : 'border-indigo-500/20'}`} />
+                {/* Inner hub */}
+                <div className={`relative w-20 h-20 rounded-full flex flex-col items-center justify-center ${isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : theme.platform === 'ios' ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]' : 'bg-[#D0BCFF]'} shadow-lg`}>
+                    <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' && !isColorful ? 'text-[#381E72]' : 'text-white'}`} />
+                    <span className={`text-[9px] font-bold mt-0.5 ${theme.platform === 'android' && !isColorful ? 'text-[#381E72]' : 'text-white/80'}`}>ASK AI</span>
+                </div>
+            </motion.button>
+
+            {/* Stats Ring */}
+            <motion.div variants={fadeUp} className="flex justify-center gap-3 w-full px-4">
+                {stats.map((s, i) => (
+                    <motion.button key={s.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.08 }}
+                        onClick={() => onAction('analytics')} className={`flex-1 flex flex-col items-center p-4 rounded-2xl border active:scale-95 transition-transform ${colorMap[s.color]}`}>
+                        <Icon name={s.icon} className="text-[20px] mb-1.5" />
+                        <span className="text-[20px] font-bold">{s.value}</span>
+                        <span className={`text-[10px] font-medium mt-0.5 ${isLight ? 'opacity-60' : 'opacity-50'}`}>{s.label}</span>
+                    </motion.button>
+                ))}
+            </motion.div>
+
+            {/* Workspace Orbit */}
+            <motion.div variants={fadeUp} className="w-full px-1">
+                <div className="flex justify-between items-center mb-3 px-3">
+                    <h3 className="font-bold text-[15px]">Workspaces</h3>
+                    <button onClick={() => onNav('workspaces')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>See All</button>
+                </div>
+                <div className="flex gap-2.5 overflow-x-auto scrollbar-none pb-1 px-3">
+                    {workspaces.slice(0, 4).map((ws, i) => (
+                        <motion.button key={ws.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.06 }}
+                            onClick={() => onNav('workspaces')} className={`shrink-0 w-[130px] p-4 ${card} active:scale-[0.96] transition-transform text-center`}>
+                            <div className={`w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-2 ${theme.workspace.iconBg(isLight)}`}>
+                                <Icon name={ws.icon} className={`text-xl ${theme.workspace.iconColor(isLight)}`} />
+                            </div>
+                            <span className="font-semibold text-[12px] block truncate">{ws.name.split(' ')[0]}</span>
+                            <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{ws.activity}% active</span>
+                            <Sparkline data={ws.data} color={ws.activity > 70 ? theme.workspace.sparklineHigh : theme.workspace.sparklineMid} width={90} height={20} />
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Quick Action Ring */}
+            <motion.div variants={fadeUp} className="w-full px-4">
+                <div className="flex gap-2">
+                    {actions.map((a, i) => (
+                        <motion.button key={a.key} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }}
+                            onClick={() => onAction(a.key)} className={`flex-1 flex flex-col items-center p-3 rounded-2xl active:scale-95 transition-transform ${isLight ? 'bg-black/[0.03]' : isColorful ? 'bg-white/[0.04] border border-purple-500/10' : 'bg-white/[0.05]'}`}>
+                            <Icon name={a.icon} className={`text-[20px] mb-1 ${d.quickActionIconColor(isLight)}`} />
+                            <span className="text-[10px] font-semibold">{a.label}</span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Activity Feed */}
+            <motion.div variants={fadeUp} className={`w-full p-5 ${card}`}>
+                <div className="flex justify-between items-center mb-3">
+                    <h3 className="font-bold text-[15px]">Recent Activity</h3>
+                    <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>All</button>
+                </div>
+                {teamActivity.slice(0, 3).map((a, i) => (
+                    <motion.button key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.05 }}
+                        onClick={() => onNav('workspaces')} className="w-full flex items-center gap-3 py-2 active:opacity-70">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${d.teamColorMap[a.color]}`}><Icon name={a.icon} className="text-[13px]" /></div>
+                        <span className="text-[12px] truncate flex-1 text-left"><span className="font-semibold">{a.user}</span> {a.action}</span>
+                        <span className="text-[10px] opacity-40 shrink-0">{a.time}</span>
+                    </motion.button>
+                ))}
+            </motion.div>
+        </motion.div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MAIN DASHBOARD VIEW — Configurable layout orchestrator
+// ═══════════════════════════════════════════════════════════════════════════════
+export function DashboardView({ card, isLight, isColorful = false, onNav, theme }: DashboardViewProps) {
+    const [layout, setLayout] = useState<LayoutMode>('bento');
+    const [activeAction, setActiveAction] = useState<QuickActionKey>(null);
+    const sheetBg = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const layoutProps: LayoutProps = { card, isLight, isColorful: isColorful ?? false, theme, onNav, onAction: setActiveAction };
+
+    return (
+        <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: 20 }} variants={stagger} className="absolute inset-0">
+            {/* Scrollable content */}
+            <div className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-5`}>
+                {/* Layout Picker */}
+                <LayoutPicker active={layout} onChange={setLayout} isLight={isLight} isColorful={isColorful ?? false} theme={theme} />
+
+                {/* Active Layout */}
+                <AnimatePresence mode="wait">
+                    {layout === 'bento' && <BentoLayout key="bento" {...layoutProps} />}
+                    {layout === 'feed' && <FeedLayout key="feed" {...layoutProps} />}
+                    {layout === 'cards' && <CardsLayout key="cards" {...layoutProps} />}
+                    {layout === 'pulse' && <PulseLayout key="pulse" {...layoutProps} />}
+                </AnimatePresence>
+            </div>
+
+            {/* Quick Action Sheets */}
             <AnimatePresence>
                 {activeAction && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50">
