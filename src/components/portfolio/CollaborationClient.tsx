@@ -325,7 +325,7 @@ export default function CollaborationClient() {
 
             {/* User Personas */}
             <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="pink" number={4}>
-              <div className="space-y-8">
+              <div className="space-y-10">
                 {[{
                   name: locale === 'fi' ? "Sara K." : "Sara K.",
                   role: locale === 'fi' ? "Vanhempi tuotesuunnittelija" : "Senior Product Designer",
@@ -333,8 +333,7 @@ export default function CollaborationClient() {
                   needs: locale === 'fi' ? ["Tekoälyavusteiset katselmukset", "Suunnittelujärjestelmätyökalut"] : ["AI-assisted reviews", "Design system tools"],
                   goals: locale === 'fi' ? ["Tehosta suunnittelun luovutusta", "Hyödynnä tekoälyä saavutettavuustarkistuksissa"] : ["Streamline design handoff", "Leverage AI for accessibility audits"],
                   painPoints: locale === 'fi' ? ["Hajautettu palaute", "Manuaaliset katselmusprosessit"] : ["Scattered feedback channels", "Manual review processes"],
-                  photo: "/images/portfolio/profile-img/sara-k.jpg",
-                  gradient: "from-pink-500 via-rose-500 to-orange-500"
+                  photo: "/images/portfolio/profile-img/sara-k.jpg"
                 }, {
                   name: locale === 'fi' ? "James L." : "James L.",
                   role: locale === 'fi' ? "Tiimipäällikkö" : "Engineering Team Lead",
@@ -342,74 +341,62 @@ export default function CollaborationClient() {
                   needs: locale === 'fi' ? ["Sprinttimittarit", "Työtilan koordinointi"] : ["Sprint metrics", "Workspace coordination"],
                   goals: locale === 'fi' ? ["Paranna tiimin nopeutta", "Vähennä kokousaikaa"] : ["Improve team velocity", "Reduce meeting overhead"],
                   painPoints: locale === 'fi' ? ["Kontekstin vaihtaminen", "Viivästyneet hyväksynnät"] : ["Context switching between tools", "Delayed approvals"],
-                  photo: "/images/portfolio/profile-img/james-l.jpg",
-                  gradient: "from-indigo-500 via-blue-500 to-cyan-500"
+                  photo: "/images/portfolio/profile-img/james-l.jpg"
                 }
                 ].map((persona, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                    className="theme-card overflow-hidden"
                   >
-                    <div className="theme-card overflow-hidden">
-                      <div className="theme-card-content p-0">
-                        <div className={`h-1.5 bg-gradient-to-r ${persona.gradient}`} />
-                        <div className="p-7 md:p-9">
-                          <div className="flex items-center gap-5 mb-7">
-                            <div className={`relative p-[3px] rounded-full bg-gradient-to-br ${persona.gradient}`}>
-                              <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden ring-2 ring-black/20">
-                                <Image src={persona.photo} alt={persona.name} fill className="object-cover" />
-                              </div>
-                            </div>
-                            <div>
-                              <h3 className="text-2xl font-bold text-primary tracking-tight">{persona.name}</h3>
-                              <p className="text-sm font-medium uppercase tracking-widest opacity-50 mt-0.5">{persona.role}</p>
-                            </div>
+                    <div className="theme-card-content p-0">
+                      <div className="flex flex-col md:flex-row">
+                        {/* Photo column */}
+                        <div className="relative w-full md:w-56 flex-shrink-0">
+                          <div className="relative h-56 md:h-full w-full">
+                            <Image src={persona.photo} alt={persona.name} fill className="object-cover" />
                           </div>
-                          <div className="mb-7">
-                            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 mb-3 flex items-center gap-2">
-                              <span className="material-symbols text-[15px]">stars</span>
-                              {locale === 'fi' ? "Piirteet" : "Traits"}
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {persona.traits.map((trait, i) => (
-                                <span key={i} className="px-3 py-1.5 bg-amber-500/8 border border-amber-500/15 text-amber-500 rounded-full text-xs font-medium">{trait}</span>
-                              ))}
-                            </div>
+                        </div>
+
+                        {/* Content column */}
+                        <div className="flex-1 p-6 md:p-8">
+                          <div className="mb-5">
+                            <h3 className="text-2xl font-bold text-primary tracking-tight leading-tight">{persona.name}</h3>
+                            <p className="text-xs font-mono uppercase tracking-widest opacity-40 mt-1">{persona.role}</p>
                           </div>
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                            <div className="rounded-2xl bg-emerald-500/[0.04] border border-emerald-500/10 p-5">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-4 flex items-center gap-2">
-                                <span className="material-symbols text-[15px]">check_circle</span>
-                                {locale === 'fi' ? "Tarpeet" : "Needs"}
-                              </h4>
-                              <ul className="space-y-2.5">
+
+                          <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
+                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
+                            <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div className="border-l-2 border-emerald-500/30 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
+                              <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
-                                  <li key={i} className="text-sm leading-relaxed opacity-75">{need}</li>
+                                  <li key={i} className="text-sm leading-relaxed opacity-70">{need}</li>
                                 ))}
                               </ul>
                             </div>
-                            <div className="rounded-2xl bg-blue-500/[0.04] border border-blue-500/10 p-5">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-4 flex items-center gap-2">
-                                <span className="material-symbols text-[15px]">arrow_forward</span>
-                                {locale === 'fi' ? "Tavoitteet" : "Goals"}
-                              </h4>
-                              <ul className="space-y-2.5">
+
+                            <div className="border-l-2 border-blue-500/30 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-3">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
+                              <ul className="space-y-1.5">
                                 {persona.goals.map((goal, i) => (
-                                  <li key={i} className="text-sm leading-relaxed opacity-75">{goal}</li>
+                                  <li key={i} className="text-sm leading-relaxed opacity-70">{goal}</li>
                                 ))}
                               </ul>
                             </div>
-                            <div className="rounded-2xl bg-rose-500/[0.04] border border-rose-500/10 p-5">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-4 flex items-center gap-2">
-                                <span className="material-symbols text-[15px]">warning</span>
-                                {locale === 'fi' ? "Kipupisteet" : "Pain Points"}
-                              </h4>
-                              <ul className="space-y-2.5">
+
+                            <div className="border-l-2 border-rose-500/30 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
+                              <ul className="space-y-1.5">
                                 {persona.painPoints.map((point, i) => (
-                                  <li key={i} className="text-sm leading-relaxed opacity-75">{point}</li>
+                                  <li key={i} className="text-sm leading-relaxed opacity-70">{point}</li>
                                 ))}
                               </ul>
                             </div>

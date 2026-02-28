@@ -789,7 +789,7 @@ export default function AccessibilityClient() {
 
           {/* User Personas */}
           <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" number={3} accent="pink">
-            <div className="space-y-8">
+            <div className="space-y-10">
                     {[
                       {
                         name: content.persona1Name,
@@ -799,7 +799,7 @@ export default function AccessibilityClient() {
                         goals: content.persona1Goals,
                         pains: content.persona1Pains,
                         photo: "/images/portfolio/profile-img/sara-m.jpg",
-                        gradient: "from-purple-500 via-fuchsia-500 to-pink-500"
+                        accent: "purple"
                       },
                       {
                         name: content.persona2Name,
@@ -809,82 +809,65 @@ export default function AccessibilityClient() {
                         goals: content.persona2Goals,
                         pains: content.persona2Pains,
                         photo: "/images/portfolio/profile-img/alex-chen.jpg",
-                        gradient: "from-blue-500 via-cyan-500 to-teal-500"
+                        accent: "blue"
                       }
                     ].map((persona, index) => (
                       <motion.div
                         key={index}
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.15 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        className="theme-card overflow-hidden"
                       >
-                        <div className="theme-card overflow-hidden">
-                          <div className="theme-card-content p-0">
-                            {/* Top gradient bar */}
-                            <div className={`h-1.5 bg-gradient-to-r ${persona.gradient}`} />
+                        <div className="theme-card-content p-0">
+                          <div className="flex flex-col md:flex-row">
+                            {/* Photo column */}
+                            <div className="relative w-full md:w-56 flex-shrink-0">
+                              <div className="relative h-56 md:h-full w-full">
+                                <Image src={persona.photo} alt={persona.name} fill className="object-cover" />
+                              </div>
+                            </div>
 
-                            <div className="p-7 md:p-9">
-                              {/* Identity */}
-                              <div className="flex items-center gap-5 mb-7">
-                                <div className={`relative p-[3px] rounded-full bg-gradient-to-br ${persona.gradient}`}>
-                                  <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden ring-2 ring-black/20">
-                                    <Image src={persona.photo} alt={persona.name} fill className="object-cover" />
-                                  </div>
-                                </div>
-                                <div>
-                                  <h3 className="text-2xl font-bold text-primary tracking-tight">{persona.name}</h3>
-                                  <p className="text-sm font-medium uppercase tracking-widest opacity-50 mt-0.5">{persona.role}</p>
-                                </div>
+                            {/* Content column */}
+                            <div className="flex-1 p-6 md:p-8">
+                              {/* Name & Role */}
+                              <div className="mb-5">
+                                <h3 className="text-2xl font-bold text-primary tracking-tight leading-tight">{persona.name}</h3>
+                                <p className="text-xs font-mono uppercase tracking-widest opacity-40 mt-1">{persona.role}</p>
                               </div>
 
-                              {/* Traits */}
-                              <div className="mb-7">
-                                <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 mb-3 flex items-center gap-2">
-                                  <span className="material-symbols text-[15px]">stars</span>
-                                  Traits
-                                </h4>
-                                <div className="flex flex-wrap gap-2">
-                                  {persona.traits.map((trait, i) => (
-                                    <span key={i} className="px-3 py-1.5 bg-amber-500/8 border border-amber-500/15 text-amber-500 rounded-full text-xs font-medium">{trait}</span>
-                                  ))}
-                                </div>
+                              {/* Traits — inline text, not pills */}
+                              <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
+                                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 flex-shrink-0">Traits</span>
+                                <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
                               </div>
 
-                              {/* Details */}
-                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                                <div className="rounded-2xl bg-emerald-500/[0.04] border border-emerald-500/10 p-5">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-4 flex items-center gap-2">
-                                    <span className="material-symbols text-[15px]">check_circle</span>
-                                    Needs
-                                  </h4>
-                                  <ul className="space-y-2.5">
+                              {/* Detail columns — left-border accent, no boxes */}
+                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                                <div className="border-l-2 border-emerald-500/30 pl-4">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-3">Needs</h4>
+                                  <ul className="space-y-1.5">
                                     {persona.needs.map((need, i) => (
-                                      <li key={i} className="text-sm leading-relaxed opacity-75">{need}</li>
+                                      <li key={i} className="text-sm leading-relaxed opacity-70">{need}</li>
                                     ))}
                                   </ul>
                                 </div>
 
-                                <div className="rounded-2xl bg-blue-500/[0.04] border border-blue-500/10 p-5">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-4 flex items-center gap-2">
-                                    <span className="material-symbols text-[15px]">arrow_forward</span>
-                                    Goals
-                                  </h4>
-                                  <ul className="space-y-2.5">
+                                <div className="border-l-2 border-blue-500/30 pl-4">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-3">Goals</h4>
+                                  <ul className="space-y-1.5">
                                     {persona.goals.map((goal, i) => (
-                                      <li key={i} className="text-sm leading-relaxed opacity-75">{goal}</li>
+                                      <li key={i} className="text-sm leading-relaxed opacity-70">{goal}</li>
                                     ))}
                                   </ul>
                                 </div>
 
-                                <div className="rounded-2xl bg-rose-500/[0.04] border border-rose-500/10 p-5">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-4 flex items-center gap-2">
-                                    <span className="material-symbols text-[15px]">warning</span>
-                                    Pain Points
-                                  </h4>
-                                  <ul className="space-y-2.5">
+                                <div className="border-l-2 border-rose-500/30 pl-4">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-3">Pain Points</h4>
+                                  <ul className="space-y-1.5">
                                     {persona.pains.map((pain, i) => (
-                                      <li key={i} className="text-sm leading-relaxed opacity-75">{pain}</li>
+                                      <li key={i} className="text-sm leading-relaxed opacity-70">{pain}</li>
                                     ))}
                                   </ul>
                                 </div>
