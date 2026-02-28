@@ -175,12 +175,27 @@ function MobilePrototypeContent() {
 
     return (
         <div className={`flex flex-col h-[100dvh] overflow-hidden w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
-            {/* Ambient Background Effects */}
-            {isColorful && !showIntro && (
+            {/* Ambient Background Effects - all themes */}
+            {!showIntro && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                    <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
-                    <div className="absolute top-1/3 -right-16 w-48 h-48 bg-blue-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }} />
-                    <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-fuchsia-600/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
+                    {isColorful ? (
+                        <>
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
+                            <div className="absolute top-1/3 -right-16 w-48 h-48 bg-blue-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }} />
+                            <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
+                            <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
+                        </>
+                    ) : isLight ? (
+                        <>
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-indigo-400/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-purple-400/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
+                        </>
+                    ) : (
+                        <>
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-blue-600/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
+                        </>
+                    )}
                 </div>
             )}
             {/* Intro screen overlay */}
@@ -189,8 +204,8 @@ function MobilePrototypeContent() {
                     <motion.div
                         key="intro"
                         initial={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 1.06, filter: 'blur(8px)' }}
-                        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+                        exit={{ opacity: 0, scale: 1.2, y: -30 }}
+                        transition={{ duration: 0.65, ease: [0.32, 0.72, 0, 1] }}
                         className="absolute inset-0 z-50"
                     >
                         <MobileIntroScreen
@@ -242,7 +257,7 @@ function MobilePrototypeContent() {
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 relative overflow-hidden w-full z-10">
+            <main className="flex-1 relative overflow-hidden w-full z-10" style={{ perspective: '1200px' }}>
                 <AnimatePresence mode="wait" custom={directionRef.current}>
                     {activeTab === 'dashboard' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="dash" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><DashboardView os={os} theme={theme} onNavigate={handleTabChange} /></motion.div>; })()}
                     {activeTab === 'markets' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="markets" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><MarketsView os={os} theme={theme} onNavigate={handleTabChange} /></motion.div>; })()}
@@ -289,8 +304,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
         { ticker: 'PLTR', change: '+8.7%', up: true }, { ticker: 'RIVN', change: '-7.3%', up: false },
     ];
 
-    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } } };
-    const fadeUp = { hidden: { opacity: 0, y: 18, scale: 0.98, filter: 'blur(3px)' }, show: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 420, damping: 28, mass: 0.9 } } };
+    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
+    const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
 
     return (
         <motion.div initial="hidden" animate="show" variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-5">
@@ -298,6 +313,14 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient accent line */}
                 <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-500 opacity-70" />
+                {/* Shimmer sweep on card */}
+                <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%)' }}
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '200%' }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', repeatDelay: 4, delay: 1 }}
+                />
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center space-x-2">
                         <PulseBeacon color="emerald" />
@@ -359,8 +382,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
                 <div className="flex space-x-3 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {watchlist.map((s, i) => (
-                        <motion.div key={s.ticker} initial={{ opacity: 0, scale: 0.92, filter: 'blur(3px)' }} animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }} transition={{ delay: 0.12 + i * 0.06, type: 'spring', stiffness: 420, damping: 26, mass: 0.85 }}
-                            whileTap={{ scale: 0.97 }}
+                        <motion.div key={s.ticker} initial={{ opacity: 0, scale: 0.8, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: 0.15 + i * 0.1, type: 'spring', stiffness: 300, damping: 22, mass: 0.85 }}
+                            whileTap={{ scale: 0.95 }}
                             className={`shrink-0 w-[155px] p-4 ${card} cursor-pointer relative overflow-hidden`}>
                             {/* Subtle top gradient accent */}
                             <div className={`absolute top-0 left-0 right-0 h-[2px] ${s.up ? 'bg-gradient-to-r from-emerald-400/60 to-emerald-500/30' : 'bg-gradient-to-r from-red-400/60 to-red-500/30'}`} />
@@ -387,7 +410,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
                 <div className="space-y-2.5">
                     {movers.map((m, i) => (
-                        <motion.div key={m.ticker} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 + i * 0.04, type: 'spring', stiffness: 400, damping: 28 }} className="flex items-center justify-between">
+                        <motion.div key={m.ticker} initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 + i * 0.08, type: 'spring', stiffness: 300, damping: 24 }} className="flex items-center justify-between">
                             <div className="flex items-center space-x-2.5">
                                 <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-[10px] font-bold ${m.up ? (isLight ? 'bg-emerald-50 text-emerald-600' : 'bg-emerald-500/15 text-emerald-400') : (isLight ? 'bg-red-50 text-red-600' : 'bg-red-500/15 text-red-400')}`}>{i + 1}</div>
                                 <span className="font-semibold text-[14px]">{m.ticker}</span>
@@ -470,8 +493,8 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
         { ticker: 'AMZN', name: 'Amazon.com', price: '$178.25', change: '+1.9%', up: true, data: [168, 170, 172, 174, 175, 177, 178], extData: [155, 158, 162, 165, 168, 170, 171, 172, 173, 174, 175, 176, 177, 178] },
     ];
 
-    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } } };
-    const fadeUp = { hidden: { opacity: 0, y: 18, scale: 0.98, filter: 'blur(3px)' }, show: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 420, damping: 28, mass: 0.9 } } };
+    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
+    const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
     const featured = trending[featuredIdx];
 
     return (
@@ -479,7 +502,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
             {/* ── Index Strip ── */}
             <motion.div variants={fadeUp} className="flex space-x-3 overflow-x-auto scrollbar-none pb-1">
                 {indices.map((idx, i) => (
-                    <motion.div key={idx.name} initial={{ opacity: 0, y: 10, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.08 + i * 0.05, type: 'spring', stiffness: 400, damping: 26 }}
+                    <motion.div key={idx.name} initial={{ opacity: 0, y: 20, scale: 0.85 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.1 + i * 0.1, type: 'spring', stiffness: 300, damping: 22 }}
                         className={`shrink-0 flex items-center space-x-3 px-4 py-3 ${card}`}>
                         <div>
                             <span className={`text-[11px] font-semibold block ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{idx.name}</span>
@@ -537,8 +560,8 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                 <h3 className="font-bold text-base mb-3 px-1">Sector Heatmap</h3>
                 <div className="grid grid-cols-3 gap-2">
                     {sectors.map((s, i) => (
-                        <motion.div key={s.short} initial={{ opacity: 0, scale: 0.88, filter: 'blur(2px)' }} animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }} transition={{ delay: 0.15 + i * 0.04, type: 'spring', stiffness: 380, damping: 24, mass: 0.85 }}
-                            whileTap={{ scale: 0.95 }}
+                        <motion.div key={s.short} initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 + i * 0.07, type: 'spring', stiffness: 280, damping: 20, mass: 0.85 }}
+                            whileTap={{ scale: 0.93 }}
                             className={`relative overflow-hidden p-3 rounded-2xl text-center cursor-pointer ${i === 0 ? 'col-span-2 row-span-1' : ''} ${s.up
                                 ? (isLight ? 'bg-emerald-50 border border-emerald-200' : 'bg-emerald-900/25 border border-emerald-500/20')
                                 : (isLight ? 'bg-red-50 border border-red-200' : 'bg-red-900/25 border border-red-500/20')
@@ -558,9 +581,9 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                 <h3 className="font-bold text-base mb-3 px-1">Trending</h3>
                 <div className="space-y-2">
                     {trending.map((t, i) => (
-                        <motion.button key={t.ticker} initial={{ opacity: 0, x: -14, filter: 'blur(2px)' }} animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }} transition={{ delay: 0.2 + i * 0.04, type: 'spring', stiffness: 400, damping: 28 }}
+                        <motion.button key={t.ticker} initial={{ opacity: 0, x: -30, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.2 + i * 0.08, type: 'spring', stiffness: 280, damping: 22 }}
                             onClick={() => setSelectedTicker(selectedTicker === t.ticker ? null : t.ticker)}
-                            whileTap={{ scale: 0.98 }}
+                            whileTap={{ scale: 0.96 }}
                             className={`w-full flex items-center justify-between p-4 transition-all ${card}`}>
                             <div className="flex items-center space-x-3">
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-[11px] ${isIOS ? (t.up ? 'bg-[#007AFF]/10 text-[#007AFF]' : 'bg-red-500/10 text-red-500') : (t.up ? 'bg-[#D0BCFF] text-[#381E72]' : 'bg-[#F2B8B5] text-[#601410]')}`}>{t.ticker.slice(0, 3)}</div>
@@ -592,9 +615,9 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                         { label: '52W Low', value: t.ticker === 'NVDA' ? '$373.54' : t.ticker === 'META' ? '$274.38' : t.ticker === 'TSLA' ? '$138.80' : t.ticker === 'AMZN' ? '$118.35' : '$406.32' },
                     ];
                     return (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="fixed inset-0 z-50">
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedTicker(null)} />
-                            <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-50">
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} className="absolute inset-0 bg-black/50 backdrop-blur-md" onClick={() => setSelectedTicker(null)} />
+                            <motion.div initial={{ y: '100%', scale: 0.95, opacity: 0 }} animate={{ y: 0, scale: 1, opacity: 1 }} exit={{ y: '100%', scale: 0.95, opacity: 0 }} transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 1 }}
                                 className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#1a0040]' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FDF7FF]' : isColorful ? 'bg-[#0A0138]' : 'bg-[#2D2B33]')}`}>
                                 {/* Drag handle — tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
@@ -720,7 +743,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
             className="absolute z-[10] inset-0 flex flex-col w-full h-full overflow-hidden pt-[110px] bg-transparent">
             {messages.length === 0 ? (
                 <div className="flex-1 flex flex-col p-6 items-center overflow-y-auto scrollbar-none">
-                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, duration: 0.5 }}
+                    <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, type: 'spring', stiffness: 250, damping: 20, mass: 0.9 }}
                         className="flex flex-col items-center pt-[5vh] pb-8 shrink-0">
                         <div className="relative w-20 h-20 flex items-center justify-center mb-6">
                             <div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${isIOS ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '2s', animationIterationCount: 2, animationFillMode: 'forwards' }} />
@@ -735,8 +758,8 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                         <label className={`text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
                         <div className="grid grid-cols-2 gap-2.5">
                             {prompts.map((p, i) => (
-                                <motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => handleSend(p.prompt)}
-                                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }}
+                                <motion.button key={p.label} whileTap={{ scale: 0.93 }} onClick={() => handleSend(p.prompt)}
+                                    initial={{ opacity: 0, y: 24, scale: 0.88 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.2 + i * 0.1, type: 'spring', stiffness: 280, damping: 22 }}
                                     className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-[#1a0040]/60 border border-purple-500/20' : 'bg-[#1C1C1E]/60 border border-white/8') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : isColorful ? 'bg-purple-500/10 border border-purple-500/20' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${isIOS ? (isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]') : ''}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
@@ -748,13 +771,13 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
             ) : (
                 <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-none pb-24">
                     {messages.map(msg => (
-                        <motion.div initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'spring', stiffness: 400, damping: 28 }} key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }} key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className="flex flex-col max-w-[88%]">
                                 <div className={`px-4 py-3 text-[14px] leading-relaxed ${msg.role === 'user' ? userBubble : botBubble}`}>{msg.text}</div>
                                 {msg.role === 'assistant' && msg.citations && (
                                     <div className="mt-2 space-y-1.5 ml-1">
                                         {msg.citations.map((c, i) => (
-                                            <motion.div key={i} initial={{ opacity: 0, x: -10, filter: 'blur(2px)' }} animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }} transition={{ delay: 0.1 + i * 0.08, type: 'spring', stiffness: 380, damping: 26 }}
+                                            <motion.div key={i} initial={{ opacity: 0, x: -20, scale: 0.9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.15 + i * 0.12, type: 'spring', stiffness: 280, damping: 22 }}
                                                 className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${isLight ? 'bg-indigo-50/80 border border-indigo-100' : 'bg-indigo-900/20 border border-indigo-500/15'}`}>
                                                 <Icon name="verified" className={`text-sm shrink-0 mt-0.5 ${isIOS ? 'text-[#007AFF]' : isColorful ? 'text-purple-400' : 'text-[#6750A4]'}`} />
                                                 <div><span className="font-semibold block">{c.source}</span><span className={`${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{c.snippet}</span></div>
@@ -830,8 +853,8 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
         return map[c] || 'bg-gray-400';
     };
 
-    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } } };
-    const fadeUp = { hidden: { opacity: 0, y: 18, scale: 0.98, filter: 'blur(3px)' }, show: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 420, damping: 28, mass: 0.9 } } };
+    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
+    const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
 
     return (
         <motion.div initial="hidden" animate="show" variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-0">
@@ -911,8 +934,8 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
         ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
         : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
 
-    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } } };
-    const fadeUp = { hidden: { opacity: 0, y: 18, scale: 0.98, filter: 'blur(3px)' }, show: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 420, damping: 28, mass: 0.9 } } };
+    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
+    const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
 
     return (
         <motion.div initial="hidden" animate="show" variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-5">
@@ -1016,9 +1039,9 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
             <AnimatePresence>
                 {isThemeModalOpen && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-auto">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsThemeModalOpen(false)} className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-                        <motion.div initial={{ opacity: 0, scale: 0.92, y: 24, filter: 'blur(4px)' }} animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, scale: 0.92, y: 24, filter: 'blur(4px)' }}
-                            transition={{ type: 'spring', stiffness: 380, damping: 28, mass: 0.9 }}
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsThemeModalOpen(false)} className="absolute inset-0 bg-black/50 backdrop-blur-md" />
+                        <motion.div initial={{ opacity: 0, scale: 0.7, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.7, y: 40 }}
+                            transition={{ type: 'spring', stiffness: 280, damping: 24, mass: 0.85 }}
                             className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/80 backdrop-blur-[30px] backdrop-saturate-[200%]' : 'bg-[#1C1C1E]/80 backdrop-blur-[30px] backdrop-saturate-[200%] text-white') : (isLight ? 'bg-[#FDF7FF]' : 'bg-[#2D2B33] text-[#E6E1E5]')}`}>
                             <div className="flex justify-between items-center mb-5">
                                 <h3 className="text-xl font-bold">App Theme</h3>
@@ -1083,10 +1106,10 @@ function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, lab
     if (isIOS) {
         const activeColor = isColorful ? 'text-purple-400' : 'text-[#007AFF]';
         return (
-            <motion.button onClick={onClick} className="flex flex-col items-center justify-center w-14 h-full pt-1" whileTap={{ scale: 0.85 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
+            <motion.button onClick={onClick} className="flex flex-col items-center justify-center w-14 h-full pt-1" whileTap={{ scale: 0.78 }} transition={{ type: 'spring', stiffness: 500, damping: 25 }}>
                 <motion.span
-                    animate={{ scale: active ? 1.15 : 1, y: active ? -1 : 0 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                    animate={{ scale: active ? 1.25 : 1, y: active ? -2 : 0 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     className={`material-symbols text-[26px] mb-0.5 transition-colors duration-200 ${active ? `${activeColor} font-variation-fill` : (isLight ? 'text-[#8E8E93]' : 'text-[#98989D]')}`}
                 >
                     {icon}
@@ -1097,18 +1120,18 @@ function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, lab
     }
     const iconColor = active ? (isLight ? 'text-[#1D192B]' : isColorful ? 'text-purple-300' : 'text-[#E8DEF8]') : (isLight ? 'text-[#49454F]' : 'text-[#CAC4D0]');
     return (
-        <motion.button onClick={onClick} className="flex flex-col items-center justify-center w-16 h-full relative pt-2" whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
+        <motion.button onClick={onClick} className="flex flex-col items-center justify-center w-16 h-full relative pt-2" whileTap={{ scale: 0.82 }} transition={{ type: 'spring', stiffness: 500, damping: 25 }}>
             <div className="relative w-16 h-8 rounded-full flex items-center justify-center">
                 {active && (
                     <motion.div
                         layoutId="mi-nav-pill"
                         className={`absolute inset-0 rounded-full ${isLight ? 'bg-[#E8DEF8]' : isColorful ? 'bg-purple-500/25' : 'bg-[#4F378B]'}`}
-                        transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
+                        transition={{ type: 'spring', stiffness: 350, damping: 24, mass: 0.8 }}
                     />
                 )}
                 <motion.span
-                    animate={{ scale: active ? 1.1 : 1 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                    animate={{ scale: active ? 1.2 : 1 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     className={`relative material-symbols text-[22px] transition-colors duration-200 ${iconColor} ${active ? 'font-variation-fill' : ''}`}
                 >
                     {icon}

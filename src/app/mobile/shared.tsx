@@ -44,35 +44,35 @@ export const springPresets = {
 } as const;
 
 // ─── Directional Tab Transition Variants ─────────────────────────────────────
-// Creates iOS-style cross-dissolve with axis motion / Android shared-axis transitions
+// Creates dramatic cross-dissolve with perspective-like axis motion
 export const getTabTransitionVariants = (direction: number): Variants => ({
     initial: {
         opacity: 0,
-        x: direction * 30,
-        scale: 0.97,
-        filter: 'blur(4px)',
+        x: direction * 80,
+        scale: 0.88,
+        rotateY: direction * 8,
     },
     animate: {
         opacity: 1,
         x: 0,
         scale: 1,
-        filter: 'blur(0px)',
+        rotateY: 0,
         transition: {
             type: 'spring',
-            stiffness: 380,
-            damping: 32,
-            mass: 0.9,
-            opacity: { duration: 0.25, ease: [0.32, 0.72, 0, 1] },
-            filter: { duration: 0.2 },
+            stiffness: 280,
+            damping: 28,
+            mass: 0.8,
+            opacity: { duration: 0.35, ease: [0.32, 0.72, 0, 1] },
+            rotateY: { type: 'spring', stiffness: 200, damping: 25 },
         } as Transition,
     },
     exit: {
         opacity: 0,
-        x: direction * -20,
-        scale: 0.98,
-        filter: 'blur(3px)',
+        x: direction * -50,
+        scale: 0.92,
+        rotateY: direction * -5,
         transition: {
-            duration: 0.22,
+            duration: 0.3,
             ease: [0.32, 0.72, 0, 1],
         } as Transition,
     },
@@ -81,35 +81,35 @@ export const getTabTransitionVariants = (direction: number): Variants => ({
 // ─── Enhanced Stagger & Fade Variants ────────────────────────────────────────
 export const stagger: Variants = {
     hidden: {},
-    show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } },
+    show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } },
 };
 export const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 18, scale: 0.98 },
+    hidden: { opacity: 0, y: 36, scale: 0.9 },
     show: {
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: { type: 'spring', stiffness: 420, damping: 28, mass: 0.9 },
+        transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 },
     },
 };
 
 // Scale-in variant for cards and interactive elements
 export const scaleIn: Variants = {
-    hidden: { opacity: 0, scale: 0.92 },
+    hidden: { opacity: 0, scale: 0.75 },
     show: {
         opacity: 1,
         scale: 1,
-        transition: { type: 'spring', stiffness: 400, damping: 26, mass: 0.85 },
+        transition: { type: 'spring', stiffness: 300, damping: 22, mass: 0.85 },
     },
 };
 
 // Slide-in from right for detail panels
 export const slideInRight: Variants = {
-    hidden: { opacity: 0, x: 24 },
+    hidden: { opacity: 0, x: 50 },
     show: {
         opacity: 1,
         x: 0,
-        transition: { type: 'spring', stiffness: 380, damping: 30 },
+        transition: { type: 'spring', stiffness: 300, damping: 26 },
     },
 };
 
@@ -123,34 +123,34 @@ export const sheetSpring: Transition = {
 
 // ─── Header Title Transition ─────────────────────────────────────────────────
 export const headerSubVariants: Variants = {
-    initial: { opacity: 0, y: -6, filter: 'blur(4px)' },
+    initial: { opacity: 0, y: -12, scale: 0.9 },
     animate: {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
-        transition: { duration: 0.3, ease: [0.32, 0.72, 0, 1] },
+        scale: 1,
+        transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
     },
     exit: {
         opacity: 0,
-        y: 6,
-        filter: 'blur(3px)',
-        transition: { duration: 0.18, ease: [0.32, 0.72, 0, 1] },
+        y: 12,
+        scale: 0.9,
+        transition: { duration: 0.25, ease: [0.32, 0.72, 0, 1] },
     },
 };
 
 export const headerTitleVariants: Variants = {
-    initial: { opacity: 0, x: -8, filter: 'blur(4px)' },
+    initial: { opacity: 0, x: -20, scale: 0.9 },
     animate: {
         opacity: 1,
         x: 0,
-        filter: 'blur(0px)',
-        transition: { duration: 0.32, delay: 0.04, ease: [0.32, 0.72, 0, 1] },
+        scale: 1,
+        transition: { duration: 0.45, delay: 0.06, ease: [0.32, 0.72, 0, 1] },
     },
     exit: {
         opacity: 0,
-        x: 8,
-        filter: 'blur(3px)',
-        transition: { duration: 0.18, ease: [0.32, 0.72, 0, 1] },
+        x: 16,
+        scale: 0.9,
+        transition: { duration: 0.25, ease: [0.32, 0.72, 0, 1] },
     },
 };
 

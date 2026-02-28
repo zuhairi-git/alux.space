@@ -76,7 +76,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                     <motion.div
                         key="intro"
                         initial={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 1.06, filter: 'blur(8px)' }}
+                        exit={{ opacity: 0, scale: 1.06 }}
                         transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
                         className="absolute inset-0 z-50"
                     >
