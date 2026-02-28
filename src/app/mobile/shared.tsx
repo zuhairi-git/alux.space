@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import type { Transition, Variants } from 'framer-motion';
 
 export const Icon = ({ name, className = "" }: { name: string, className?: string }) => (
     <span className={`material-symbols ${className}`}>{name}</span>
@@ -24,8 +25,145 @@ export const Sparkline = ({ data, color, width = 80, height = 32 }: { data: numb
     );
 };
 
-export const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
-export const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 400, damping: 30 } } };
+// ─── Platform-Aware Spring Configs ───────────────────────────────────────────
+// iOS: Higher damping for controlled, precise feel (Apple HIG)
+// Android: Slightly bouncier, expressive motion (Material 3 Expressive)
+export const springPresets = {
+    ios: {
+        snappy: { type: 'spring' as const, stiffness: 500, damping: 35, mass: 0.8 },
+        gentle: { type: 'spring' as const, stiffness: 300, damping: 28, mass: 1 },
+        bounce: { type: 'spring' as const, stiffness: 400, damping: 22, mass: 0.9 },
+        sheet: { type: 'spring' as const, stiffness: 340, damping: 34, mass: 1 },
+    },
+    android: {
+        snappy: { type: 'spring' as const, stiffness: 450, damping: 30, mass: 0.85 },
+        gentle: { type: 'spring' as const, stiffness: 280, damping: 24, mass: 1.1 },
+        bounce: { type: 'spring' as const, stiffness: 350, damping: 18, mass: 0.95 },
+        sheet: { type: 'spring' as const, stiffness: 320, damping: 30, mass: 1 },
+    },
+} as const;
+
+// ─── Directional Tab Transition Variants ─────────────────────────────────────
+// Creates iOS-style cross-dissolve with axis motion / Android shared-axis transitions
+export const getTabTransitionVariants = (direction: number): Variants => ({
+    initial: {
+        opacity: 0,
+        x: direction * 30,
+        scale: 0.97,
+        filter: 'blur(4px)',
+    },
+    animate: {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        filter: 'blur(0px)',
+        transition: {
+            type: 'spring',
+            stiffness: 380,
+            damping: 32,
+            mass: 0.9,
+            opacity: { duration: 0.25, ease: [0.32, 0.72, 0, 1] },
+            filter: { duration: 0.2 },
+        } as Transition,
+    },
+    exit: {
+        opacity: 0,
+        x: direction * -20,
+        scale: 0.98,
+        filter: 'blur(3px)',
+        transition: {
+            duration: 0.22,
+            ease: [0.32, 0.72, 0, 1],
+        } as Transition,
+    },
+});
+
+// ─── Enhanced Stagger & Fade Variants ────────────────────────────────────────
+export const stagger: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } },
+};
+export const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 18, scale: 0.98 },
+    show: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: { type: 'spring', stiffness: 420, damping: 28, mass: 0.9 },
+    },
+};
+
+// Scale-in variant for cards and interactive elements
+export const scaleIn: Variants = {
+    hidden: { opacity: 0, scale: 0.92 },
+    show: {
+        opacity: 1,
+        scale: 1,
+        transition: { type: 'spring', stiffness: 400, damping: 26, mass: 0.85 },
+    },
+};
+
+// Slide-in from right for detail panels
+export const slideInRight: Variants = {
+    hidden: { opacity: 0, x: 24 },
+    show: {
+        opacity: 1,
+        x: 0,
+        transition: { type: 'spring', stiffness: 380, damping: 30 },
+    },
+};
+
+// ─── Bottom Sheet Spring ─────────────────────────────────────────────────────
+export const sheetSpring: Transition = {
+    type: 'spring',
+    stiffness: 340,
+    damping: 32,
+    mass: 1,
+};
+
+// ─── Header Title Transition ─────────────────────────────────────────────────
+export const headerSubVariants: Variants = {
+    initial: { opacity: 0, y: -6, filter: 'blur(4px)' },
+    animate: {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        transition: { duration: 0.3, ease: [0.32, 0.72, 0, 1] },
+    },
+    exit: {
+        opacity: 0,
+        y: 6,
+        filter: 'blur(3px)',
+        transition: { duration: 0.18, ease: [0.32, 0.72, 0, 1] },
+    },
+};
+
+export const headerTitleVariants: Variants = {
+    initial: { opacity: 0, x: -8, filter: 'blur(4px)' },
+    animate: {
+        opacity: 1,
+        x: 0,
+        filter: 'blur(0px)',
+        transition: { duration: 0.32, delay: 0.04, ease: [0.32, 0.72, 0, 1] },
+    },
+    exit: {
+        opacity: 0,
+        x: 8,
+        filter: 'blur(3px)',
+        transition: { duration: 0.18, ease: [0.32, 0.72, 0, 1] },
+    },
+};
+
+// ─── Utility: Tab index map for direction calculation ────────────────────────
+export function getTabDirection<T extends string>(
+    tabs: readonly T[],
+    from: T,
+    to: T,
+): number {
+    const fromIdx = tabs.indexOf(from);
+    const toIdx = tabs.indexOf(to);
+    return toIdx > fromIdx ? 1 : -1;
+}
 
 export type TabType = 'dashboard' | 'workspaces' | 'copilot' | 'notifications' | 'profile';
 

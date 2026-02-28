@@ -630,8 +630,8 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <div className="flex-1 relative overflow-hidden">
                 <AnimatePresence mode="wait">
                     <motion.div key={cards[idx].key}
-                        initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -60 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                        initial={{ opacity: 0, x: 60, scale: 0.97 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: -60, scale: 0.97 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 32, mass: 0.8 }}
                         className="absolute inset-0">
                         {cards[idx].render()}
                     </motion.div>
@@ -788,9 +788,9 @@ export function DashboardView({ card, isLight, isColorful = false, onNav, theme 
             {/* Quick Action Sheets */}
             <AnimatePresence>
                 {activeAction && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50">
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setActiveAction(null)} />
-                        <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-50">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setActiveAction(null)} />
+                        <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 overflow-y-auto max-h-[85%] ${sheetBg}`}>
                             <div className="w-10 h-1 rounded-full bg-gray-400/30 mx-auto mb-5" />
                             <button onClick={() => setActiveAction(null)} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-500/20 flex items-center justify-center active:scale-95">

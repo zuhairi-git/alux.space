@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
@@ -332,9 +332,9 @@ export default function MarketIntelligenceClient() {
                     {/* ═══ LIVE INTELLIGENCE METRICS ═══ */}
                     <motion.div
                         className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20"
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 0.8, delay: 0.3 }}
                     >
                         {[
                             { icon: 'query_stats', value: 98, suffix: '%', label: locale === 'fi' ? 'Lähdetarkkuus' : 'Source Accuracy', color: 'from-emerald-500 to-teal-500', dotColor: 'bg-emerald-400' },
@@ -344,10 +344,10 @@ export default function MarketIntelligenceClient() {
                         ].map((metric, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                                initial={{ opacity: 0, y: 16, scale: 0.94 }}
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                                transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-                                whileHover={{ y: -3, scale: 1.02 }}
+                                transition={{ type: 'spring', stiffness: 340, damping: 26, mass: 0.8, delay: 0.4 + i * 0.08 }}
+                                whileHover={{ y: -4, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                 className={`relative group p-5 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-300 ${isColorful
                                     ? 'bg-white/[0.04] border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.06]'
                                     : isLight
@@ -380,9 +380,9 @@ export default function MarketIntelligenceClient() {
                     {/* ═══ INTRO ═══ */}
                     <motion.div
                         className="text-center mb-20 relative"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                        initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 28, delay: 0.1 }}
                     >
                         <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
                             {content.intro}
@@ -399,11 +399,11 @@ export default function MarketIntelligenceClient() {
                                 ].map((card, i) => (
                                     <motion.div
                                         key={i}
-                                        initial={{ opacity: 0, y: 24 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, y: 28, scale: 0.96, filter: 'blur(4px)' }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
                                         viewport={{ once: true, margin: '-40px' }}
-                                        transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ y: -6, scale: 1.01 }}
+                                        transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: i * 0.12 }}
+                                        whileHover={{ y: -6, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 ${isColorful
                                             ? `bg-gradient-to-br from-white/[0.03] to-white/[0.01] ${card.borderColor} hover:from-white/[0.06] hover:to-white/[0.02]`
                                             : isLight
@@ -443,8 +443,8 @@ export default function MarketIntelligenceClient() {
                                         initial={{ opacity: 0, x: -16 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true, margin: '-20px' }}
-                                        transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ x: 6 }}
+                                        transition={{ type: 'spring', stiffness: 360, damping: 28, delay: index * 0.06 }}
+                                        whileHover={{ x: 6, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`group flex items-center gap-4 py-4 px-4 rounded-xl transition-all duration-300 ${isColorful ? 'hover:bg-white/[0.03]' : isLight ? 'hover:bg-gray-50' : 'hover:bg-white/[0.03]'}`}
                                     >
                                         <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${isColorful
@@ -485,8 +485,8 @@ export default function MarketIntelligenceClient() {
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-40px" }}
-                                        transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ x: 8 }}
+                                        transition={{ type: 'spring', stiffness: 320, damping: 28, delay: i * 0.08 }}
+                                        whileHover={{ x: 8, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`group relative flex gap-6 items-start py-6 pl-2 pr-4 rounded-xl transition-all duration-300 ${isLight ? 'hover:bg-gray-50/80' : 'hover:bg-white/[0.02]'}`}
                                     >
                                         {/* Timeline dot */}
@@ -526,10 +526,10 @@ export default function MarketIntelligenceClient() {
                                         <h3 className={`text-lg font-semibold ${isLight ? 'text-gray-900' : 'text-white'}`}>iOS 26</h3>
                                     </motion.div>
                                     <motion.div
-                                        initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                        initial={{ opacity: 0, y: 30, scale: 0.93, filter: 'blur(6px)' }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
                                         viewport={{ once: true, margin: '-60px' }}
-                                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                                        transition={{ type: 'spring', stiffness: 220, damping: 28, mass: 1 }}
                                         className="transform scale-[0.80] sm:scale-[0.85] origin-top"
                                     >
                                         <div className={`w-[390px] h-[844px] shrink-0 rounded-[3rem] border-[8px] overflow-hidden relative ${isColorful ? 'shadow-[0_0_60px_rgba(99,102,241,0.15)]' : 'shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]'} ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
@@ -556,10 +556,10 @@ export default function MarketIntelligenceClient() {
                                         <h3 className={`text-lg font-semibold ${isLight ? 'text-teal-600' : 'text-[#4dd0e1]'}`}>Android 16</h3>
                                     </motion.div>
                                     <motion.div
-                                        initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                        initial={{ opacity: 0, y: 30, scale: 0.93, filter: 'blur(6px)' }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
                                         viewport={{ once: true, margin: '-60px' }}
-                                        transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                                        transition={{ type: 'spring', stiffness: 220, damping: 28, mass: 1, delay: 0.12 }}
                                         className="transform scale-[0.80] sm:scale-[0.85] origin-top"
                                     >
                                         <div className={`w-[412px] h-[892px] shrink-0 rounded-[2.5rem] border-[6px] overflow-hidden relative ${isColorful ? 'shadow-[0_0_60px_rgba(77,208,225,0.1)]' : 'shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]'} ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
@@ -577,10 +577,10 @@ export default function MarketIntelligenceClient() {
                         <CaseStudyItem>
                             <motion.div
                                 className="mt-20"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
+                                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8 }}
+                                transition={{ type: 'spring', stiffness: 260, damping: 28 }}
                             >
                                 <div className="text-center mb-14">
                                     <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400' : isLight ? 'text-gray-900' : 'text-white'}`}>
@@ -607,7 +607,8 @@ export default function MarketIntelligenceClient() {
                                                 initial={{ opacity: 0, x: -12 }}
                                                 whileInView={{ opacity: 1, x: 0 }}
                                                 viewport={{ once: true }}
-                                                transition={{ duration: 0.4, delay: index * 0.08 }}
+                                                transition={{ type: 'spring', stiffness: 380, damping: 28, delay: index * 0.06 }}
+                                                whileTap={{ scale: 0.97 }}
                                                 className={`group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 ${activeFeature === index
                                                     ? isColorful
                                                         ? 'bg-white/[0.06] border border-white/[0.12] shadow-lg'
@@ -626,7 +627,7 @@ export default function MarketIntelligenceClient() {
                                                     <motion.div
                                                         layoutId="activeFeatureIndicator"
                                                         className={`absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-gradient-to-b ${feature.gradient}`}
-                                                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                                        transition={{ type: 'spring', stiffness: 420, damping: 26, mass: 0.8 }}
                                                     />
                                                 )}
                                                 <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${activeFeature === index
@@ -646,12 +647,14 @@ export default function MarketIntelligenceClient() {
                                     </div>
 
                                     {/* Active feature detail card */}
+                                    <AnimatePresence mode="wait">
                                     <motion.div
                                         className="lg:col-span-3"
                                         key={activeFeature}
-                                        initial={{ opacity: 0, x: 20, scale: 0.98 }}
-                                        animate={{ opacity: 1, x: 0, scale: 1 }}
-                                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                        initial={{ opacity: 0, x: 24, scale: 0.97, filter: 'blur(4px)' }}
+                                        animate={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
+                                        exit={{ opacity: 0, x: -16, scale: 0.97, filter: 'blur(4px)' }}
+                                        transition={{ type: 'spring', stiffness: 340, damping: 28, mass: 0.8 }}
                                     >
                                         {(() => {
                                             const features = [
@@ -680,11 +683,13 @@ export default function MarketIntelligenceClient() {
                                                     {/* Feature progress indicator */}
                                                     <div className="mt-8 flex gap-2">
                                                         {[0, 1, 2, 3].map((dot) => (
-                                                            <div
+                                                            <motion.div
                                                                 key={dot}
-                                                                className={`h-1 rounded-full transition-all duration-500 ${dot === activeFeature
-                                                                    ? `w-8 bg-gradient-to-r ${f.gradient}`
-                                                                    : `w-4 ${isColorful ? 'bg-white/10' : isLight ? 'bg-gray-200' : 'bg-gray-700'}`
+                                                                animate={{ width: dot === activeFeature ? '2rem' : '1rem' }}
+                                                                transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+                                                                className={`h-1 rounded-full ${dot === activeFeature
+                                                                    ? `bg-gradient-to-r ${f.gradient}`
+                                                                    : `${isColorful ? 'bg-white/10' : isLight ? 'bg-gray-200' : 'bg-gray-700'}`
                                                                     }`}
                                                             />
                                                         ))}
@@ -693,6 +698,7 @@ export default function MarketIntelligenceClient() {
                                             );
                                         })()}
                                     </motion.div>
+                                    </AnimatePresence>
                                 </div>
                             </motion.div>
                         </CaseStudyItem>
@@ -708,11 +714,11 @@ export default function MarketIntelligenceClient() {
                                 ].map((platform, i) => (
                                     <motion.div
                                         key={i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                         viewport={{ once: true, margin: '-30px' }}
-                                        transition={{ duration: 0.5, delay: i * 0.12 }}
-                                        whileHover={{ y: -4 }}
+                                        transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.1 }}
+                                        whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 ${isColorful
                                             ? `bg-white/[0.03] ${platform.borderColor} hover:bg-white/[0.05]`
                                             : isLight
@@ -747,11 +753,11 @@ export default function MarketIntelligenceClient() {
                                 ].map((flow, index) => (
                                     <motion.div
                                         key={index}
-                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        initial={{ opacity: 0, scale: 0.94 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true, margin: '-20px' }}
-                                        transition={{ duration: 0.4, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ y: -3, scale: 1.02 }}
+                                        transition={{ type: 'spring', stiffness: 360, damping: 26, delay: index * 0.06 }}
+                                        whileHover={{ y: -3, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 ${isColorful
                                             ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1]'
                                             : isLight
@@ -782,11 +788,11 @@ export default function MarketIntelligenceClient() {
                                 ].map((item, i) => (
                                     <motion.div
                                         key={i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                         viewport={{ once: true, margin: '-30px' }}
-                                        transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ y: -4 }}
+                                        transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.08 }}
+                                        whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 ${isColorful
                                             ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1]'
                                             : isLight
@@ -795,9 +801,9 @@ export default function MarketIntelligenceClient() {
                                             }`}
                                     >
                                         <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${item.gradient} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
-                                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${item.iconBg} mb-5 transition-transform group-hover:scale-110 duration-300`}>
+                                        <motion.div whileHover={{ scale: 1.12, rotate: 3 }} transition={{ type: 'spring', stiffness: 400, damping: 18 }} className={`w-12 h-12 rounded-xl flex items-center justify-center ${item.iconBg} mb-5`}>
                                             <span className="material-symbols text-2xl">{item.icon}</span>
-                                        </div>
+                                        </motion.div>
                                         <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h3>
                                         <p className={`leading-relaxed text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>{item.desc}</p>
                                     </motion.div>
@@ -818,11 +824,11 @@ export default function MarketIntelligenceClient() {
                                 ].map((metric, index) => (
                                     <motion.div
                                         key={index}
-                                        initial={{ opacity: 0, y: 24 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                         viewport={{ once: true, margin: '-30px' }}
-                                        transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ y: -6, scale: 1.02 }}
+                                        transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: index * 0.1 }}
+                                        whileHover={{ y: -6, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                         className={`group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 ${isColorful
                                             ? 'bg-gradient-to-br from-white/[0.04] to-white/[0.01] border-white/[0.08] hover:border-white/[0.15]'
                                             : isLight
@@ -841,7 +847,7 @@ export default function MarketIntelligenceClient() {
                                                 initial={{ width: '0%' }}
                                                 whileInView={{ width: `${metric.value}%` }}
                                                 viewport={{ once: true }}
-                                                transition={{ duration: 1.5, delay: 0.3 + index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                                                transition={{ type: 'spring', stiffness: 60, damping: 18, mass: 1, delay: 0.2 + index * 0.12 }}
                                             />
                                         </div>
                                         <div className={`mt-2 text-right text-xs font-medium tabular-nums ${isColorful ? 'text-gray-500' : isLight ? 'text-gray-400' : 'text-gray-600'}`}>

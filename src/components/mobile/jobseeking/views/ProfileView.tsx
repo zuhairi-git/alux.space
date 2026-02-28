@@ -44,7 +44,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
 
     const sectionVariants = {
         hidden: { opacity: 0, y: 15 },
-        visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
+        visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 380, damping: 26, mass: 0.8 } }
     };
 
     // Analytics data

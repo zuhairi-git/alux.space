@@ -60,9 +60,9 @@ const THEME_OPTIONS = [
 ] as const;
 
 const pageVariants = {
-    enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 48 : -48 }),
-    center: { opacity: 1, x: 0, transition: { duration: 0.36, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
-    exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -48 : 48, transition: { duration: 0.28, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } }),
+    enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 56 : -56, scale: 0.97, filter: 'blur(4px)' }),
+    center: { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 360, damping: 34, mass: 0.8 } },
+    exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -56 : 56, scale: 0.97, filter: 'blur(4px)', transition: { type: 'spring', stiffness: 360, damping: 34, mass: 0.8 } }),
 };
 
 export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScreenProps) {
@@ -170,8 +170,8 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
                     <motion.div
                         key={i}
-                        animate={{ width: i === step ? '1.75rem' : '0.5rem' }}
-                        transition={{ duration: 0.3 }}
+                        animate={{ width: i === step ? '1.75rem' : '0.5rem', opacity: i <= step ? 1 : 0.4 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                         className={`h-1.5 rounded-full ${i <= step
                             ? `bg-[${accentColor}]`
                             : selectedTheme === 'light' ? 'bg-black/10' : 'bg-white/15'
@@ -202,9 +202,9 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         >
                             {/* App icon */}
                             <motion.div
-                                initial={{ scale: 0.4, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: 0.08, type: 'spring', stiffness: 260, damping: 18 }}
+                                initial={{ scale: 0.3, opacity: 0, rotate: -8 }}
+                                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                                transition={{ delay: 0.06, type: 'spring', stiffness: 300, damping: 16, mass: 0.8 }}
                                 className={`w-[88px] h-[88px] rounded-[28px] bg-gradient-to-br ${config.accentGradient} flex items-center justify-center shadow-2xl mb-8`}
                                 style={{ boxShadow: `0 20px 60px ${accentColor}55` }}
                             >
@@ -279,7 +279,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                         key={i}
                                         initial={{ opacity: 0, x: 24 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.1 + 0.12, type: 'spring', stiffness: 300, damping: 24 }}
+                                        transition={{ delay: i * 0.08 + 0.1, type: 'spring', stiffness: 380, damping: 26, mass: 0.8 }}
                                         className={`p-4 rounded-2xl flex gap-4 ${cardClass}`}
                                     >
                                         <div
@@ -348,7 +348,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                         key={i}
                                         initial={{ opacity: 0, y: 14 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.07 + 0.1, type: 'spring', stiffness: 340, damping: 26 }}
+                                        transition={{ delay: i * 0.06 + 0.08, type: 'spring', stiffness: 380, damping: 26, mass: 0.8 }}
                                         className={`flex items-center gap-4 p-4 rounded-2xl ${cardClass}`}
                                     >
                                         <div
@@ -409,7 +409,8 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: i * 0.1 + 0.1, type: 'spring', stiffness: 300, damping: 24 }}
                                             onClick={() => setSelectedTheme(t.v)}
-                                            className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-200 active:scale-[0.98] ${selected
+                                            whileTap={{ scale: 0.975 }}
+                                            className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-200 ${selected
                                                 ? ''
                                                 : selectedTheme === 'light'
                                                     ? 'border-gray-150 bg-white'
@@ -482,10 +483,13 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             <div className={`px-5 pb-10 pt-3 flex gap-3 items-center`}>
                 {step > 0 && (
                     <motion.button
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.6 }}
                         animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 24 }}
                         onClick={handleBack}
-                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all active:scale-95 ${selectedTheme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-white/10 text-white'}`}
+                        whileTap={{ scale: 0.88 }}
+                        className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedTheme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-white/10 text-white'}`}
                     >
                         <Icon name="arrow_back" className="text-[20px]" />
                     </motion.button>
@@ -493,10 +497,11 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
 
                 <motion.button
                     layout
+                    transition={{ layout: { type: 'spring', stiffness: 400, damping: 28 } }}
                     onClick={handleNext}
-                    className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white transition-all active:scale-[0.97] shadow-lg bg-gradient-to-r ${config.accentGradient}`}
+                    className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white shadow-lg bg-gradient-to-r ${config.accentGradient}`}
                     style={{ boxShadow: `0 8px 28px ${accentColor}45` }}
-                    whileTap={{ scale: 0.97 }}
+                    whileTap={{ scale: 0.95 }}
                 >
                     {isLast ? (
                         <>

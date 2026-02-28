@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon, type TabType } from '../shared';
+import { Icon, type TabType, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../shared';
 import type { MobileTheme } from '../themes';
 import { DashboardView } from './DashboardView';
 import { WorkspacesView } from './WorkspacesView';
@@ -46,15 +46,27 @@ interface MobileAppProps {
     theme: MobileTheme;
 }
 
+const TAB_ORDER: readonly TabType[] = ['dashboard', 'workspaces', 'copilot', 'notifications', 'profile'] as const;
+
 export function MobileApp({ theme }: MobileAppProps) {
     const [showIntro, setShowIntro] = useState(true);
     const [themeMode, setThemeMode] = useState('colorful');
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
+    const prevTabRef = useRef<TabType>('dashboard');
+    const directionRef = useRef(1);
     const isLight = themeMode === 'light';
     const isColorful = themeMode === 'colorful';
     const bgClass = isLight ? theme.bg.light : isColorful ? theme.bg.colorful : theme.bg.dark;
     const card = isColorful ? theme.card.colorful : isLight ? theme.card.light : theme.card.dark;
     const headerStyle = isLight ? theme.header.light : isColorful ? theme.header.colorful : theme.header.dark;
+
+    const handleTabChange = useCallback((newTab: TabType) => {
+        directionRef.current = getTabDirection(TAB_ORDER, prevTabRef.current, newTab);
+        prevTabRef.current = newTab;
+        setActiveTab(newTab);
+    }, []);
+
+    const tabVariants = getTabTransitionVariants(directionRef.current);
 
     return (
         <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
@@ -64,8 +76,8 @@ export function MobileApp({ theme }: MobileAppProps) {
                     <motion.div
                         key="intro"
                         initial={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 1.04 }}
-                        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                        exit={{ opacity: 0, scale: 1.06, filter: 'blur(8px)' }}
+                        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
                         className="absolute inset-0 z-50"
                     >
                         <MobileIntroScreen
@@ -84,33 +96,65 @@ export function MobileApp({ theme }: MobileAppProps) {
             <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-4 px-6 z-40 transition-all duration-300 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-4">
-                        <button onClick={() => setActiveTab('profile')} className="relative active:scale-95 transition-transform">
+                        <motion.button
+                            onClick={() => handleTabChange('profile')}
+                            className="relative"
+                            whileTap={{ scale: 0.92 }}
+                            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                        >
                             <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} overflow-hidden border-2 ${theme.accent.avatarBorder(isLight)} ${theme.accent.avatarGradient}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>
                             <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-[2px] ${theme.accent.statusDot(isLight)}`} />
-                        </button>
+                        </motion.button>
                         <div className="flex flex-col">
-                            <AnimatePresence mode="wait"><motion.span key={activeTab + "-s"} initial={{ opacity: 0, y: -2 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 2 }} className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-[#49454F]') : 'text-white/35'}`}>{theme.titles[activeTab].sub}</motion.span></AnimatePresence>
-                            <AnimatePresence mode="wait"><motion.h1 key={activeTab + "-t"} initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 5 }} transition={{ delay: 0.05 }} className={`text-[19px] font-bold tracking-tight leading-none ${theme.platform === 'ios' ? '' : 'font-medium'}`}>{theme.titles[activeTab].title}</motion.h1></AnimatePresence>
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={activeTab + "-s"}
+                                    variants={headerSubVariants}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-[#49454F]') : 'text-white/35'}`}
+                                >
+                                    {theme.titles[activeTab].sub}
+                                </motion.span>
+                            </AnimatePresence>
+                            <AnimatePresence mode="wait">
+                                <motion.h1
+                                    key={activeTab + "-t"}
+                                    variants={headerTitleVariants}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                    className={`text-[19px] font-bold tracking-tight leading-none ${theme.platform === 'ios' ? '' : 'font-medium'}`}
+                                >
+                                    {theme.titles[activeTab].title}
+                                </motion.h1>
+                            </AnimatePresence>
                         </div>
                     </div>
-                    <button onClick={() => setActiveTab('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center active:scale-95 transition-transform ${theme.accent.aiButton(isLight)}`}>
+                    <motion.button
+                        onClick={() => handleTabChange('copilot')}
+                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${theme.accent.aiButton(isLight)}`}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    >
                         <Icon name="auto_awesome" className="text-[20px]" />
                         <span className={`absolute top-[8px] right-[8px] w-[5px] h-[5px] bg-[#FF9500] rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_6px_rgba(255,149,0,0.7)]' : ''}`} />
-                    </button>
+                    </motion.button>
                 </div>
             </header>
 
             {/* Content */}
             <main className="flex-1 relative w-full">
-                <AnimatePresence mode="wait">
-                    {activeTab === 'dashboard' && <DashboardView key="d" card={card} isLight={isLight} isColorful={isColorful} onNav={setActiveTab} theme={theme} />}
-                    {activeTab === 'workspaces' && <WorkspacesView key="w" card={card} isLight={isLight} isColorful={isColorful} theme={theme} onNav={(t) => setActiveTab(t as TabType)} />}
-                    {activeTab === 'copilot' && <CopilotView key="c" isLight={isLight} isColorful={isColorful} theme={theme} />}
-                    {activeTab === 'notifications' && <NotificationsView key="n" card={card} isLight={isLight} isColorful={isColorful} theme={theme} />}
-                    {activeTab === 'profile' && <ProfileView key="p" card={card} isLight={isLight} isColorful={isColorful} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} />}
+                <AnimatePresence mode="wait" custom={directionRef.current}>
+                    {activeTab === 'dashboard' && <motion.div key="d" variants={tabVariants} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><DashboardView card={card} isLight={isLight} isColorful={isColorful} onNav={handleTabChange} theme={theme} /></motion.div>}
+                    {activeTab === 'workspaces' && <motion.div key="w" variants={tabVariants} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><WorkspacesView card={card} isLight={isLight} isColorful={isColorful} theme={theme} onNav={(t) => handleTabChange(t as TabType)} /></motion.div>}
+                    {activeTab === 'copilot' && <motion.div key="c" variants={tabVariants} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><CopilotView isLight={isLight} isColorful={isColorful} theme={theme} /></motion.div>}
+                    {activeTab === 'notifications' && <motion.div key="n" variants={tabVariants} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><NotificationsView card={card} isLight={isLight} isColorful={isColorful} theme={theme} /></motion.div>}
+                    {activeTab === 'profile' && <motion.div key="p" variants={tabVariants} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><ProfileView card={card} isLight={isLight} isColorful={isColorful} themeMode={themeMode} setThemeMode={setThemeMode} theme={theme} /></motion.div>}
                 </AnimatePresence>
             </main>
 
@@ -122,18 +166,50 @@ export function MobileApp({ theme }: MobileAppProps) {
                 {theme.tabs.map(([k, ic, lb]) => {
                     const a = activeTab === k;
                     return (
-                        <button key={k} onClick={() => setActiveTab(k)} className={`flex flex-col items-center ${theme.platform === 'android' ? 'w-[68px] h-full pt-3 gap-0.5' : 'w-16 pt-1'} active:scale-95 transition-transform`}>
+                        <motion.button
+                            key={k}
+                            onClick={() => handleTabChange(k)}
+                            className={`flex flex-col items-center ${theme.platform === 'android' ? 'w-[68px] h-full pt-3 gap-0.5' : 'w-16 pt-1'}`}
+                            whileTap={{ scale: 0.88 }}
+                            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                        >
                             {theme.navTab.pill ? (
-                                /* Android M3: Wider pill indicator for active state */
-                                <div className={`relative flex items-center justify-center transition-all duration-300 ${a ? `w-16 h-8 rounded-full ${theme.navTab.pill(isLight)}` : 'w-14 h-8 rounded-full'}`}>
-                                    <span className={`material-symbols ${theme.navTab.iconSize} transition-colors ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}>{ic}</span>
+                                /* Android M3: Animated pill indicator */
+                                <div className="relative flex items-center justify-center">
+                                    {a && (
+                                        <motion.div
+                                            layoutId="nav-pill"
+                                            className={`absolute inset-0 w-16 h-8 rounded-full ${theme.navTab.pill(isLight)}`}
+                                            transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
+                                        />
+                                    )}
+                                    <div className="relative w-16 h-8 rounded-full flex items-center justify-center">
+                                        <motion.span
+                                            animate={{ scale: a ? 1.1 : 1 }}
+                                            transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                        >
+                                            {ic}
+                                        </motion.span>
+                                    </div>
                                 </div>
                             ) : (
-                                /* iOS 26: Clean icon, no pill — Liquid Glass tab bar handles visual weight */
-                                <span className={`material-symbols ${theme.navTab.iconSize} transition-colors ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}>{ic}</span>
+                                /* iOS 26: Clean icon with scale animation */
+                                <motion.span
+                                    animate={{ scale: a ? 1.12 : 1, y: a ? -1 : 0 }}
+                                    transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                >
+                                    {ic}
+                                </motion.span>
                             )}
-                            <span className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}>{lb}</span>
-                        </button>
+                            <motion.span
+                                animate={{ opacity: a ? 1 : 0.6 }}
+                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                            >
+                                {lb}
+                            </motion.span>
+                        </motion.button>
                     );
                 })}
             </nav>
