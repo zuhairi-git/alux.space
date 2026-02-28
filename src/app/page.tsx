@@ -64,7 +64,7 @@ const InteractiveSkillCard = ({
       `}
       onMouseEnter={handleSkillInteraction}
       whileHover={{ y: -4 }}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
@@ -309,11 +309,8 @@ export default function Home() {
       </div>
 
       {/* About Section with Digital Dreams anchor */}
-      <motion.section
+      <section
         ref={aboutRef}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
         className="py-20 relative overflow-hidden"
         id="digital-dreams"
       >
@@ -322,9 +319,9 @@ export default function Home() {
           {/* Section Header */}
           <div className="text-center mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20"
             >
               <span className="material-symbols text-xl text-blue-500">auto_awesome</span>
@@ -338,18 +335,18 @@ export default function Home() {
             </motion.div>
             
             <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               {t('home.about.title')}
             </motion.h2>
             
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="text-lg opacity-70 max-w-3xl mx-auto"
             >
               {t('home.about.intro')}
@@ -360,7 +357,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Card 1: AI Integration */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -393,7 +390,7 @@ export default function Home() {
 
             {/* Card 2: Creative Exploration */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -427,7 +424,7 @@ export default function Home() {
 
           {/* Quote Block */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -439,11 +436,8 @@ export default function Home() {
             />
           </motion.div>
         </div>
-      </motion.section>        {/* Skills Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+      </section>        {/* Skills Section */}
+      <section 
         className="relative overflow-hidden py-24 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent"
         id="strengths-skills"
       >
@@ -453,7 +447,7 @@ export default function Home() {
           {/* Section header with enhanced typography */}
           <div className="text-center mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
@@ -474,7 +468,7 @@ export default function Home() {
             
             <motion.h3 
               className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-current via-current to-current bg-clip-text"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -484,7 +478,7 @@ export default function Home() {
             
             <motion.p
               className="text-lg opacity-70 max-w-2xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -498,7 +492,7 @@ export default function Home() {
 
           {/* Experience Overview Row */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -536,9 +530,9 @@ export default function Home() {
                 ].map((item, index) => (
                   <motion.div 
                     key={index}
-                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    initial={{ opacity: 0, y: 12, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ delay: 0.1 * index, duration: 0.5 }}
+                    transition={{ delay: 0.08 * index, duration: 0.4 }}
                     whileHover={{ 
                       scale: 1.05, 
                       y: -5,
@@ -634,7 +628,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.5 }}
           >            {skills.map((skill, index) => (
               <InteractiveSkillCard key={index} skill={skill} />
             ))}
@@ -643,10 +637,10 @@ export default function Home() {
           {/* Call-to-action section */}
           <motion.div
             className="text-center mt-20"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.5 }}
           >            <p className="text-lg opacity-60 mb-6">
               {locale === 'fi' 
                 ? 'Tutustu joihinkin töihini'
@@ -676,11 +670,8 @@ export default function Home() {
             </motion.a>
           </motion.div>
         </div>
-      </motion.section>{/* Testimonials Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+      </section>{/* Testimonials Section */}
+      <section 
         className="py-24 bg-black/5 relative overflow-hidden"
         id="testimonials"
       >
@@ -723,10 +714,10 @@ export default function Home() {
             {testimonials.map((testimonial, index) => (
               <motion.div 
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
                 className="theme-card relative overflow-hidden"
               >                <div className="theme-card-content p-8 md:p-10">                  {/* Quote icon */}
@@ -775,7 +766,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
       
       {/* Footer */}
     </main>

@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import SkipLinks from "@/components/ui/SkipLinks";
 import { i18n } from '../i18n';
 import { AnalyticsProvider } from "../../seo/AnalyticsProvider";
+import SmoothMotionProvider from "@/components/SmoothMotionProvider";
 import { structuredDataGenerator } from "../../seo/structured-data";
 
 // Add Material Symbols stylesheet with better support for all languages including RTL
@@ -137,6 +138,10 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <head>
+        {/* Blocking script: detect mobile + reduced-motion BEFORE first paint.
+            Sets window.__ALUX_DISABLE_ANIM which SmoothMotionProvider reads
+            via useSyncExternalStore — zero-gap, no flicker. */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement,w=window,m=w.innerWidth<=768,r=w.matchMedia("(prefers-reduced-motion:reduce)").matches;if(m)d.setAttribute("data-mobile-device","");if(r)d.setAttribute("data-reduce-motion","");w.__ALUX_DISABLE_ANIM=m||r}catch(e){}})()` }} />
         <link href={materialSymbolsUrl} rel="stylesheet" />
         {/* Additional favicon meta tags for better browser support */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
@@ -153,11 +158,14 @@ export default function RootLayout({
       </head>      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
-            <AnalyticsProvider>              <SkipLinks />
+            <AnalyticsProvider>
+              <SmoothMotionProvider>
+              <SkipLinks />
               {children}
               <BackToTop />
               <TranslationBadge />
               <Footer />
+              </SmoothMotionProvider>
             </AnalyticsProvider>
           </LanguageProvider>
         </ThemeProvider>

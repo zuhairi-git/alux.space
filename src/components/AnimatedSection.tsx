@@ -1,8 +1,7 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useAnimation, useReducedMotion } from 'framer-motion';
-import { useAnimationsDisabled, useOptimizedDuration, useOptimizedDelay } from '@/utils/deviceUtils';
+import { useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 type AnimationType = 'fade-in' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right';
 
@@ -18,62 +17,47 @@ interface AnimatedSectionProps {
   'aria-label'?: string;
 }
 
+/**
+ * Scroll-reveal section.
+ *
+ * On mobile / reduced-motion the global SmoothMotionProvider sets
+ * `reducedMotion="always"` on the MotionConfig, so framer-motion
+ * automatically skips initial states and renders the final value.
+ * No custom disabling logic needed — zero flicker.
+ *
+ * On desktop the element starts slightly offset and fades in when
+ * it enters the viewport.
+ */
 export default function AnimatedSection({
   id,
   className,
   children,
   animation = 'fade-in',
-  delay = 0.2,
-  duration = 0.8,
+  delay = 0,
+  duration = 0.45,
   once = true,
   role,
   'aria-label': ariaLabel,
 }: AnimatedSectionProps) {
-  const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once, margin: '-100px 0px' });
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-  const animationsDisabled = useAnimationsDisabled();
-  
-  // Get optimized timing values based on device type
-  const optimizedDuration = useOptimizedDuration(duration);
-  const optimizedDelay = useOptimizedDelay(delay);
+  const skip = useReducedMotion(); // respects MotionConfig.reducedMotion
 
-  // Combine reduced motion preferences with mobile animation settings
-  const disableAnimations = shouldReduceMotion || animationsDisabled;  // Define animation variants with reduced motion and mobile animation support
-  const variants = {
-    hidden: disableAnimations ? { opacity: 0.8 } : {
-      opacity: 0,
-      y: animation === 'slide-up' ? 50 : animation === 'slide-down' ? -50 : 0,
-      x: animation === 'slide-left' ? -50 : animation === 'slide-right' ? 50 : 0,
-    },
-    visible: disableAnimations ? { opacity: 1 } : {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      transition: {
-        duration: optimizedDuration * 0.6, // Apply device-optimized duration
-        delay: optimizedDelay * 0.5, // Apply device-optimized delay
-        ease: [0.25, 0.1, 0.25, 1.0], // Custom easing curve
-      },
-    },
-  };
+  const y = animation === 'slide-up' ? 16 : animation === 'slide-down' ? -16 : 0;
+  const x = animation === 'slide-left' ? -16 : animation === 'slide-right' ? 16 : 0;
 
-  useEffect(() => {
-    if (isInView && !hasAnimated) {
-      controls.start('visible');
-      setHasAnimated(true);
-    }
-  }, [isInView, controls, hasAnimated]);
   return (
     <motion.section
       id={id}
       ref={ref}
       className={className}
-      initial={disableAnimations ? false : "hidden"}
-      animate={controls}
-      variants={disableAnimations ? undefined : variants}
+      {...(skip
+        ? {}
+        : {
+            initial: { opacity: 0, y, x },
+            whileInView: { opacity: 1, y: 0, x: 0 },
+            viewport: { once, margin: '-60px 0px' },
+            transition: { duration, delay, ease: [0.22, 1, 0.36, 1] },
+          })}
       role={role}
       aria-label={ariaLabel}
     >

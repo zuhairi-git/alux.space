@@ -478,7 +478,7 @@ export default function AccessibilityClient() {
             tags={[content.projectTypeValues, content.standardsValue]}
             actions={[
               {
-                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                 icon: 'design_services',
                 variant: 'primary',
                 href: 'https://ds.alux.space/',

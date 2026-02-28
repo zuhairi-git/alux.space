@@ -188,12 +188,12 @@ export default function CollaborationClient() {
             tags={roles}
             actions={[
               {
-                label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'View Interactive Prototypes',
+                label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
                 icon: 'play_circle',
                 onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
               },
               {
-                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                 icon: 'design_services',
                 href: 'https://ds.alux.space/',
                 variant: 'secondary',

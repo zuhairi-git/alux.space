@@ -1498,6 +1498,47 @@ body {
   will-change: transform;
 }
 
+/* =====================================================
+   Anti-flicker & smooth animation utilities
+   ===================================================== */
+
+/*
+ * When the OS prefers reduced motion OR the blocking script in
+ * layout.tsx detected a mobile device, ensure content is always
+ * immediately visible — no hidden initial states from framer-motion.
+ *
+ * This CSS acts as a safety net for the brief window between the
+ * browser painting the SSR HTML and React hydrating. Once
+ * SmoothMotionProvider runs (with reducedMotion="always"),
+ * framer-motion itself stops applying initial states.
+ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile safety net: override inline opacity:0 that SSR might emit */
+html[data-mobile-device] [style*="opacity"] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html[data-reduce-motion] [style*="opacity"] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* GPU-hint for elements that will animate (desktop only) */
+@media (prefers-reduced-motion: no-preference) {
+  [style*="will-change"] {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
 .animation-delay-2000 {
   animation-delay: 2s;
 }

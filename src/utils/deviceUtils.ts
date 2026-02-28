@@ -1,58 +1,55 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore, useCallback } from 'react';
 import { AnimationConfig } from '@/config/animations';
 
+// ──────────────────────────────────────────────────────────────────
+// Stable subscribe functions (module-level so references never change)
+// ──────────────────────────────────────────────────────────────────
+
+function subscribeResize(cb: () => void) {
+  window.addEventListener('resize', cb);
+  return () => window.removeEventListener('resize', cb);
+}
+
+function subscribeMotion(cb: () => void) {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', cb);
+  return () => mq.removeEventListener('change', cb);
+}
+
+const serverFalse = () => false;
+
+// ──────────────────────────────────────────────────────────────────
+// Hooks — powered by useSyncExternalStore for ZERO hydration gap.
+// The client snapshot is read synchronously during hydration and,
+// if it differs from the server snapshot, React re-renders before
+// the browser ever paints. Result: no flicker.
+// ──────────────────────────────────────────────────────────────────
+
 /**
- * Detect if the current device is mobile based on screen size
- * Uses the breakpoint defined in AnimationConfig
+ * Returns `true` when the viewport is at or below the mobile breakpoint.
  */
 export function useIsMobile(breakpoint: number = AnimationConfig.MOBILE_BREAKPOINT): boolean {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= breakpoint);
-    };
-
-    // Set initial value
-    checkIsMobile();
-
-    // Add event listener for window resize
-    window.addEventListener('resize', checkIsMobile);
-
-    return () => {
-      window.removeEventListener('resize', checkIsMobile);
-    };
-  }, [breakpoint]);
-
-  return isMobile;
+  const getSnapshot = useCallback(
+    () => window.innerWidth <= breakpoint,
+    [breakpoint],
+  );
+  return useSyncExternalStore(subscribeResize, getSnapshot, serverFalse);
 }
 
 /**
- * Hook to determine if animations should be disabled
- * Combines mobile detection with animation settings and accessibility preferences
+ * Returns `true` when animations should be completely disabled
+ * (mobile with config off, or OS reduced-motion preference).
  */
 export function useAnimationsDisabled(): boolean {
   const isMobile = useIsMobile();
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    // Check for user's motion preferences
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-  // Disable animations if:
-  // 1. User prefers reduced motion (accessibility)
-  // 2. On mobile and mobile animations are disabled via config
-  return prefersReducedMotion || (isMobile && !AnimationConfig.ENABLE_MOBILE_ANIMATIONS);
+  const prefersReduced = useSyncExternalStore(
+    subscribeMotion,
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    serverFalse,
+  );
+  return prefersReduced || (isMobile && !AnimationConfig.ENABLE_MOBILE_ANIMATIONS);
 }
 
 /**

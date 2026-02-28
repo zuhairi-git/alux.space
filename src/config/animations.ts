@@ -24,14 +24,14 @@ export const AnimationConfig = {
    * When mobile animations are enabled, multiply all durations by this value
    * Use values < 1 to make animations faster on mobile (e.g., 0.7 for 30% faster)
    */
-  MOBILE_DURATION_MULTIPLIER: 0.8,
+  MOBILE_DURATION_MULTIPLIER: 0.6,
 
   /**
    * Animation delay multiplier for mobile devices
    * When mobile animations are enabled, multiply all delays by this value
    * Use values < 1 to reduce delays on mobile (e.g., 0.5 for 50% shorter delays)
    */
-  MOBILE_DELAY_MULTIPLIER: 0.5,
+  MOBILE_DELAY_MULTIPLIER: 0.3,
 
   /**
    * Reduced motion settings
@@ -41,7 +41,7 @@ export const AnimationConfig = {
     // Still show subtle opacity transitions even with reduced motion
     ENABLE_OPACITY_TRANSITIONS: true,
     // Duration for reduced motion animations (in seconds)
-    DURATION: 0.3,
+    DURATION: 0.2,
   },
 
   /**
@@ -57,18 +57,13 @@ export const AnimationConfig = {
 } as const;
 
 /**
- * Quick toggle functions for development
- * Uncomment these to quickly test different animation states
+ * Shared easing curves — use these in components for consistency
  */
-
-// Disable all mobile animations
-// AnimationConfig.ENABLE_MOBILE_ANIMATIONS = false;
-
-// Make mobile animations faster
-// AnimationConfig.MOBILE_DURATION_MULTIPLIER = 0.5;
-// AnimationConfig.MOBILE_DELAY_MULTIPLIER = 0.3;
-
-// Enable only minimal animations
-// AnimationConfig.ENABLE_MOBILE_ANIMATIONS = true;
-// AnimationConfig.MOBILE_DURATION_MULTIPLIER = 0.6;
-// AnimationConfig.MOBILE_DELAY_MULTIPLIER = 0.2;
+export const Easing = {
+  /** Smooth deceleration — the default for reveal animations */
+  smoothOut: [0.22, 1, 0.36, 1] as const,
+  /** Standard ease-in-out for hover/tap interactions */
+  standard: [0.4, 0, 0.2, 1] as const,
+  /** Gentle spring-like deceleration */
+  gentle: [0.16, 1, 0.3, 1] as const,
+} as const;

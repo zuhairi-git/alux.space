@@ -285,7 +285,7 @@ export default function HealthcarePrioritizationClient() {
             tags={[content.rolesValue]}
             actions={[
               {
-                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                 icon: 'design_services',
                 href: 'https://ds.alux.space/',
                 variant: 'secondary',

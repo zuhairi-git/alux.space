@@ -299,7 +299,7 @@ export default function MarketIntelligenceClient() {
                         tags={[content.projectTypeValues, content.rolesValue]}
                         actions={[
                             {
-                                label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'View Interactive Prototypes',
+                                label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
                                 icon: 'play_circle',
                                 variant: 'primary',
                                 onClick: () => {
@@ -309,13 +309,13 @@ export default function MarketIntelligenceClient() {
                                 },
                             },
                             {
-                                label: locale === 'fi' ? 'Sovelluksen arkkitehtuuri & työnkulku' : 'App Architecture & Workflow',
+                                label: locale === 'fi' ? 'Sovelluksen arkkitehtuuri & työnkulku' : 'Architect & Workflow',
                                 icon: 'account_tree',
                                 variant: 'secondary',
                                 onClick: () => setIsWorkflowModalOpen(true),
                             },
                             {
-                                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'View Design System',
+                                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                                 icon: 'design_services',
                                 variant: 'secondary',
                                 href: 'https://ds.alux.space/',
