@@ -193,6 +193,31 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpg'
       }
+    },
+    {
+      title: {
+        en: 'Game Development Strategy',
+        fi: 'Pelinkehitysstrategia'
+      },
+      type: {
+        en: 'Strategic Case Study',
+        fi: 'Strateginen tapaustutkimus'
+      },
+      desc: {
+        en: 'A data-driven game development and marketing strategy — from user personas and gameplay mechanics to launch planning and long-term retention.',
+        fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia — käyttäjäpersoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkäaikaiseen pysyvyyteen.'
+      },
+      link: `/${locale}/portfolio/game-strategy`,
+      gradient: 'from-red-500 to-orange-400',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
+      category: 'case-study',
+      photo: {
+        url: '/images/portfolio/workflow/cover.jpg'
+      }
     }
   ];
 
