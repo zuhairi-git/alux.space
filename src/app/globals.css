@@ -70,9 +70,9 @@
   --gradient-mid: #ff00cc;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(255, 0, 204, 0.3);
-  --card-from-bg: rgba(20, 10, 50, 0.8);
-  --card-to-bg: rgba(10, 5, 30, 0.8);
-  --card-border: rgba(128, 0, 255, 0.3);
+  --card-from-bg: rgba(30, 18, 70, 0.9);
+  --card-to-bg: rgba(18, 10, 50, 0.9);
+  --card-border: rgba(128, 0, 255, 0.4);
   --card-border-hover: rgba(0, 255, 255, 0.6);
   --card-shadow-color: rgba(255, 0, 204, 0.3);
   --scrollbar-thumb: #d100ff;
@@ -220,6 +220,18 @@ body {
 /* Theme support for blog post section */
 .bg-theme-light {
   background-color: #f9fafb;
+}
+
+/* Blog filter select styling */
+.theme-dark select option,
+.theme-colorful select option {
+  background-color: #1a1a2e;
+  color: #ededed;
+}
+
+.theme-light select option {
+  background-color: #ffffff;
+  color: #1f2937;
 }
 
 .bg-theme-dark {
