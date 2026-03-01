@@ -11,7 +11,7 @@ export const AnimationConfig = {
    * Set to false to disable all animations on mobile devices (screen width <= 768px)
    * Set to true to enable animations on all devices
    */
-  ENABLE_MOBILE_ANIMATIONS: false,
+  ENABLE_MOBILE_ANIMATIONS: true, // Enable mobile animations
 
   /**
    * Mobile breakpoint in pixels

@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
@@ -169,56 +170,113 @@ export default function CollaborationClient() {
       value: 89
     }
   ];
-  return (
-    <div className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
-      ? 'bg-[#050023]'
-      : isLight
-        ? 'bg-gradient-to-br from-slate-50 to-gray-100'
-        : 'bg-gradient-to-br from-gray-900 to-black'
-      }`}>
-      <Navigation />
-      <CaseStudyProgress />
-      <article className="pt-24 pb-16">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Hero Section */}
-          <CaseStudyHero
-            title={content.title}
-            subtitle={locale === 'fi' ? 'Tekoälyllä toimiva yhteistyöalusta tiimeille' : 'AI-powered collaboration platform for teams'}
-            image="/images/portfolio/workflow/cover.jpg"
-            tags={roles}
-            actions={[
-              {
-                label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
-                icon: 'play_circle',
-                onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
-              },
-              {
-                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
-                icon: 'design_services',
-                href: 'https://ds.alux.space/',
-                variant: 'secondary',
-              },
-            ]}
-            meta={[
-              { label: content.projectType, value: content.projectTypeValues, icon: 'category' },
-              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
-              { label: content.tools, value: content.toolsValue, icon: 'build' },
-              { label: content.roles, value: roles.join(', '), icon: 'groups' },
-            ]}
-          />
+  const pathname = usePathname();
+  const [direction, setDirection] = useState(0);
 
-          {/* Intro Section */}
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
-              }`}>
-              {content.intro}
-            </p>
-          </motion.div>
+  // Define route order for directional transitions
+  const ROUTES = [
+    '/portfolio/workflow',
+    '/portfolio/jobseeking',
+    '/portfolio/market-intelligence',
+    '/portfolio/accessibility',
+    '/portfolio/game-strategy',
+    '/portfolio/healthcare-prioritization'
+  ];
+
+  useEffect(() => {
+    const prevPath = sessionStorage.getItem('prevPath');
+    if (prevPath) {
+      const prevIdx = ROUTES.findIndex(r => pathname.includes(r.split('/').pop()!));
+      const currIdx = ROUTES.findIndex(r => prevPath.includes(r.split('/').pop()!));
+      // Inverse logic: if we came from a high index to low, we slide right (1)
+      setDirection(prevIdx > currIdx ? 1 : -1);
+    }
+    sessionStorage.setItem('prevPath', pathname);
+  }, [pathname]);
+
+  const pageVariants = {
+    initial: (dir: number) => ({
+      opacity: 0,
+      x: dir * 60,
+      scale: 0.98
+    }),
+    animate: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+        staggerChildren: 0.1
+      }
+    },
+    exit: (dir: number) => ({
+      opacity: 0,
+      x: dir * -40,
+      scale: 0.98,
+      transition: { duration: 0.3 }
+    })
+  };
+
+  return (
+    <AnimatePresence mode="wait" custom={direction}>
+      <motion.div
+        key={pathname}
+        custom={direction}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageVariants}
+        className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
+          ? 'bg-[#050023]'
+          : isLight
+            ? 'bg-gradient-to-br from-slate-50 to-gray-100'
+            : 'bg-gradient-to-br from-gray-900 to-black'
+          }`}
+      >
+        <Navigation />
+        <CaseStudyProgress />
+        <article className="pt-24 pb-16">
+          <div className="max-w-6xl mx-auto px-6">
+            {/* Hero Section */}
+            <CaseStudyHero
+              title={content.title}
+              subtitle={locale === 'fi' ? 'Tekoälyllä toimiva yhteistyöalusta tiimeille' : 'AI-powered collaboration platform for teams'}
+              image="/images/portfolio/workflow/cover.jpg"
+              tags={roles}
+              actions={[
+                {
+                  label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
+                  icon: 'play_circle',
+                  onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
+                },
+                {
+                  label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
+                  icon: 'design_services',
+                  href: 'https://ds.alux.space/',
+                  variant: 'secondary',
+                },
+              ]}
+              meta={[
+                { label: content.projectType, value: content.projectTypeValues, icon: 'category' },
+                { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
+                { label: content.tools, value: content.toolsValue, icon: 'build' },
+                { label: content.roles, value: roles.join(', '), icon: 'groups' },
+              ]}
+            />
+
+            {/* Intro Section */}
+            <motion.div
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                }`}>
+                {content.intro}
+              </p>
+            </motion.div>
 
             {/* Objectives */}
             <CaseStudySection title={content.objectives} icon="flag" accent="purple" number={1}>
@@ -630,8 +688,9 @@ export default function CollaborationClient() {
                 ))}
               </div>
             </CaseStudySection>
-        </div>
-      </article>
-    </div>
+          </div>
+        </article>
+      </motion.div>
+    </AnimatePresence>
   );
 }
