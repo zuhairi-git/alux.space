@@ -173,17 +173,15 @@ export default function CollaborationClient() {
   const pathname = usePathname();
   const [direction, setDirection] = useState(0);
 
-  // Define route order for directional transitions
-  const ROUTES = [
-    '/portfolio/workflow',
-    '/portfolio/jobseeking',
-    '/portfolio/market-intelligence',
-    '/portfolio/accessibility',
-    '/portfolio/game-strategy',
-    '/portfolio/healthcare-prioritization'
-  ];
-
   useEffect(() => {
+    const ROUTES = [
+      '/portfolio/workflow',
+      '/portfolio/jobseeking',
+      '/portfolio/market-intelligence',
+      '/portfolio/accessibility',
+      '/portfolio/game-strategy',
+      '/portfolio/healthcare-prioritization'
+    ];
     const prevPath = sessionStorage.getItem('prevPath');
     if (prevPath) {
       const prevIdx = ROUTES.findIndex(r => pathname.includes(r.split('/').pop()!));
@@ -636,7 +634,7 @@ export default function CollaborationClient() {
                   {
                     title: content.iosPrototype,
                     description: content.iosPrototypeDesc,
-                    href: "/mobile/ios",
+                    href: "/mobile/workflow/ios",
                     icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
                     gradient: "from-blue-500/20 to-indigo-500/20",
                     borderColor: "border-blue-500/30",
@@ -646,7 +644,7 @@ export default function CollaborationClient() {
                   {
                     title: content.androidPrototype,
                     description: content.androidPrototypeDesc,
-                    href: "/mobile/android",
+                    href: "/mobile/workflow/android",
                     icon: (<span className="material-symbols text-4xl">phone_android</span>),
                     gradient: "from-green-500/20 to-emerald-500/20",
                     borderColor: "border-green-500/30",

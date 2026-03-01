@@ -267,16 +267,15 @@ export default function MarketIntelligenceClient() {
     const [direction, setDirection] = useState(0);
 
     // Define route order for directional transitions
-    const ROUTES = [
-        '/portfolio/workflow',
-        '/portfolio/jobseeking',
-        '/portfolio/market-intelligence',
-        '/portfolio/accessibility',
-        '/portfolio/game-strategy',
-        '/portfolio/healthcare-prioritization'
-    ];
-
     useEffect(() => {
+        const ROUTES = [
+            '/portfolio/workflow',
+            '/portfolio/jobseeking',
+            '/portfolio/market-intelligence',
+            '/portfolio/accessibility',
+            '/portfolio/game-strategy',
+            '/portfolio/healthcare-prioritization'
+        ];
         const prevPath = sessionStorage.getItem('prevPath');
         if (prevPath) {
             const prevIdx = ROUTES.findIndex(r => pathname.includes(r.split('/').pop()!));
@@ -566,67 +565,55 @@ export default function MarketIntelligenceClient() {
                         <CaseStudySection title={locale === 'fi' ? 'Interaktiiviset prototyypit' : 'Interactive Prototypes'} icon="smartphone" number={3} accent="indigo" id="interactive-prototypes">
                             <CaseStudyItem>
                                 <p className={`text-lg max-w-2xl mx-auto mb-10 ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-                                    {locale === 'fi' ? 'Koe tekoälypohjainen käyttöliittymä natiivisti iOS:lla ja Androidilla rinnakkain.' : 'Experience the AI-powered interface natively across iOS and Android side-by-side.'}
+                                    {locale === 'fi' ? 'Tutustu tekoälypohjaisen käyttöliittymän interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.' : 'Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.'}
                                 </p>
 
-                                <div className="flex flex-col xl:flex-row gap-12 items-center xl:items-start justify-center overflow-visible">
-                                    {/* iOS Prototype */}
-                                    <div className="flex flex-col items-center">
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                    {[
+                                        {
+                                            title: locale === 'fi' ? 'iOS-prototyyppi' : 'iOS Prototype',
+                                            description: locale === 'fi' ? 'Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.' : 'Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.',
+                                            href: "/mobile/market-intelligence/ios",
+                                            icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
+                                            gradient: "from-blue-500/20 to-indigo-500/20",
+                                            borderColor: "border-blue-500/30",
+                                            iconBg: "bg-blue-500/10 text-blue-400",
+                                            buttonBg: "bg-blue-600 hover:bg-blue-700",
+                                        },
+                                        {
+                                            title: locale === 'fi' ? 'Android-prototyyppi' : 'Android Prototype',
+                                            description: locale === 'fi' ? 'Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.' : 'Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.',
+                                            href: "/mobile/market-intelligence/android",
+                                            icon: (<span className="material-symbols text-4xl">phone_android</span>),
+                                            gradient: "from-green-500/20 to-emerald-500/20",
+                                            borderColor: "border-green-500/30",
+                                            iconBg: "bg-green-500/10 text-green-400",
+                                            buttonBg: "bg-green-600 hover:bg-green-700",
+                                        },
+                                    ].map((proto, index) => (
+                                        <motion.a
+                                            key={index}
+                                            href={proto.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`group p-6 rounded-2xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col ${isColorful ? 'hover:bg-white/[0.06]' : isLight ? 'hover:shadow-lg bg-white/80' : 'hover:bg-white/[0.05]'}`}
+                                            initial={{ opacity: 0, y: 14 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
-                                            transition={{ duration: 0.5 }}
-                                            className={`flex items-center gap-2 mb-6 px-4 py-2 rounded-full ${isColorful ? 'bg-white/[0.05] border border-white/10' : isLight ? 'bg-gray-100' : 'bg-gray-800/60 border border-gray-700/50'}`}
+                                            transition={{ delay: index * 0.15 }}
+                                            whileHover={{ y: -2 }}
                                         >
-                                            <span className={`material-symbols text-xl ${isLight ? 'text-gray-900' : 'text-white'}`}>phone_iphone</span>
-                                            <h3 className={`text-lg font-semibold ${isLight ? 'text-gray-900' : 'text-white'}`}>iOS 26</h3>
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 30, scale: 0.93, filter: 'blur(6px)' }}
-                                            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                                            viewport={{ once: true, margin: '-60px' }}
-                                            transition={{ type: 'spring', stiffness: 220, damping: 28, mass: 1 }}
-                                            className="transform scale-[0.80] sm:scale-[0.85] origin-top"
-                                        >
-                                            <div className={`w-[390px] h-[844px] shrink-0 rounded-[3rem] border-[8px] overflow-hidden relative ${isColorful ? 'shadow-[0_0_60px_rgba(99,102,241,0.15)]' : 'shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]'} ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
-                                                style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', isolation: 'isolate' }}>
-                                                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] rounded-b-3xl z-50 ${isLight ? 'bg-gray-800' : 'bg-black'}`} />
-                                                <div className="w-full h-full overflow-hidden rounded-[2.5rem]">
-                                                    <iframe src={`/mobile?os=ios&theme=${theme}`} title="iOS Prototype" className="w-full h-[calc(100%+32px)] border-none" style={{ marginTop: '-16px' }} allow="payment; fullscreen" />
-                                                </div>
-                                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-white/30 rounded-full z-50" />
+                                            <div className={`h-10 w-10 flex items-center justify-center rounded-full mb-3 ${proto.iconBg}`}>
+                                                {proto.icon}
                                             </div>
-                                        </motion.div>
-                                    </div>
-
-                                    {/* Android Prototype */}
-                                    <div className="flex flex-col items-center">
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.5, delay: 0.1 }}
-                                            className={`flex items-center gap-2 mb-6 px-4 py-2 rounded-full ${isColorful ? 'bg-teal-500/10 border border-teal-500/20' : isLight ? 'bg-teal-50' : 'bg-teal-900/20 border border-teal-700/30'}`}
-                                        >
-                                            <span className={`material-symbols text-xl ${isLight ? 'text-teal-600' : 'text-[#4dd0e1]'}`}>android</span>
-                                            <h3 className={`text-lg font-semibold ${isLight ? 'text-teal-600' : 'text-[#4dd0e1]'}`}>Android 16</h3>
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 30, scale: 0.93, filter: 'blur(6px)' }}
-                                            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                                            viewport={{ once: true, margin: '-60px' }}
-                                            transition={{ type: 'spring', stiffness: 220, damping: 28, mass: 1, delay: 0.12 }}
-                                            className="transform scale-[0.80] sm:scale-[0.85] origin-top"
-                                        >
-                                            <div className={`w-[412px] h-[892px] shrink-0 rounded-[2.5rem] border-[6px] overflow-hidden relative ${isColorful ? 'shadow-[0_0_60px_rgba(77,208,225,0.1)]' : 'shadow-[0_0_50px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]'} ${isLight ? 'border-gray-800 bg-white' : 'border-neutral-800 bg-black'}`}
-                                                style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', isolation: 'isolate' }}>
-                                                <div className="w-full h-full overflow-hidden rounded-[2rem]">
-                                                    <iframe src={`/mobile?os=android&theme=${theme}`} title="Android Prototype" className="w-full h-[calc(100%+32px)] border-none" style={{ marginTop: '-16px' }} allow="payment; fullscreen" />
-                                                </div>
+                                            <h3 className={`text-lg font-semibold mb-2 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{proto.title}</h3>
+                                            <p className={`text-sm mb-6 flex-grow ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{proto.description}</p>
+                                            <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                                                <span>{locale === 'fi' ? 'Avaa prototyyppi' : 'Open Prototype'}</span>
+                                                <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                                             </div>
-                                        </motion.div>
-                                    </div>
+                                        </motion.a>
+                                    ))}
                                 </div>
                             </CaseStudyItem>
 

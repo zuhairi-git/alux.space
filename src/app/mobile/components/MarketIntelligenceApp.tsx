@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
-import { MobileIntroScreen, type MobileIntroConfig } from './components/MobileIntroScreen';
-import { iosTheme, androidTheme } from './themes';
-import { getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from './shared';
+import { MobileIntroScreen, type MobileIntroConfig } from './MobileIntroScreen';
+import { iosTheme, androidTheme } from '../themes';
+import { getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../shared';
 
 const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
     appName: 'Market Intelligence',
@@ -132,13 +131,9 @@ function AreaChart({ data, color, width = 300, height = 100, className = '' }: {
 type TabType = 'dashboard' | 'markets' | 'copilot' | 'alerts' | 'profile';
 const MI_TAB_ORDER: readonly TabType[] = ['dashboard', 'markets', 'copilot', 'alerts', 'profile'] as const;
 
-function MobilePrototypeContent() {
-    const searchParams = useSearchParams();
-    const initialOs = searchParams.get('os') === 'android' ? 'android' : 'ios';
-    const initialTheme = searchParams.get('theme') || 'colorful';
-
-    const [os] = useState<'ios' | 'android'>(initialOs);
-    const [theme, setTheme] = useState(initialTheme);
+export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android' }) {
+    const os = initialOs;
+    const [theme, setTheme] = useState(initialOs === 'ios' ? 'colorful' : 'colorful');
     const [showIntro, setShowIntro] = useState(true);
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
     const prevTabRef = useRef<TabType>('dashboard');
@@ -149,11 +144,6 @@ function MobilePrototypeContent() {
         prevTabRef.current = newTab;
         setActiveTab(newTab);
     }, []);
-
-    useEffect(() => {
-        const urlTheme = searchParams.get('theme');
-        if (urlTheme) setTheme(urlTheme);
-    }, [searchParams]);
 
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
@@ -174,7 +164,7 @@ function MobilePrototypeContent() {
     };
 
     return (
-        <div className={`flex flex-col h-[100dvh] overflow-hidden w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+        <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
             {/* Ambient Background Effects - all themes */}
             {!showIntro && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -272,13 +262,7 @@ function MobilePrototypeContent() {
     );
 }
 
-export default function MobilePrototypePage() {
-    return (
-        <Suspense fallback={<div className="min-h-[100dvh] w-full bg-[#131316]" />}>
-            <MobilePrototypeContent />
-        </Suspense>
-    );
-}
+// Views follow below — exported from same file for colocation
 
 // ═══════════════════════════════════════════════════════════
 // DASHBOARD VIEW

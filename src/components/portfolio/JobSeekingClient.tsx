@@ -176,17 +176,15 @@ export default function JobSeekingClient() {
   const pathname = usePathname();
   const [direction, setDirection] = useState(0);
 
-  // Define route order for directional transitions
-  const ROUTES = [
-    '/portfolio/workflow',
-    '/portfolio/jobseeking',
-    '/portfolio/market-intelligence',
-    '/portfolio/accessibility',
-    '/portfolio/game-strategy',
-    '/portfolio/healthcare-prioritization'
-  ];
-
   useEffect(() => {
+    const ROUTES = [
+      '/portfolio/workflow',
+      '/portfolio/jobseeking',
+      '/portfolio/market-intelligence',
+      '/portfolio/accessibility',
+      '/portfolio/game-strategy',
+      '/portfolio/healthcare-prioritization'
+    ];
     const prevPath = sessionStorage.getItem('prevPath');
     if (prevPath) {
       const prevIdx = ROUTES.findIndex(r => pathname.includes(r.split('/').pop()!));
