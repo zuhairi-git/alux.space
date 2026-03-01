@@ -39,7 +39,7 @@ const tajawal = Tajawal({
 
 export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
   const locale = params.locale || i18n.defaultLocale;
-  
+
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
   const localeSpecificMetadata = {
     en: {
@@ -53,14 +53,14 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       keywords: 'Tuoteomistaja, Design-johtaja, UX-suunnittelu, UI-suunnittelu, Agile, Scrum, Helsinki, Suomi, Digitaalinen innovaatio, Käyttäjäkokemus, Muotoilumenetelmät',
     }
   };
-  
+
   const metadata = localeSpecificMetadata[locale as keyof typeof localeSpecificMetadata] || localeSpecificMetadata.en;
-  
+
   const alternateLanguages = i18n.locales.reduce((acc, lang) => {
     acc[lang] = `${baseUrl}/${lang}`;
     return acc;
   }, {} as Record<string, string>);
-    return {
+  return {
     metadataBase: new URL(baseUrl),
     title: {
       default: metadata.title,
@@ -87,7 +87,8 @@ export async function generateMetadata({ params }: { params: { locale?: string }
         { url: '/favicon.png?v=2', type: 'image/png' }
       ],
       apple: '/favicon.png?v=2',
-      shortcut: '/favicon.ico?v=2',    },
+      shortcut: '/favicon.ico?v=2',
+    },
     openGraph: {
       title: metadata.title,
       description: metadata.description,
@@ -95,9 +96,9 @@ export async function generateMetadata({ params }: { params: { locale?: string }
       url: `${baseUrl}/${locale}`,
       siteName: 'Ali Al-Zuhairi',
       locale: locale === 'en' ? 'en_US' : 'fi_FI',
-      alternateLocale: i18n.locales.filter(l => l !== locale).map(l => 
+      alternateLocale: i18n.locales.filter(l => l !== locale).map(l =>
         l === 'en' ? 'en_US' : 'fi_FI'
-      ),      images: [
+      ), images: [
         {
           url: `${baseUrl}/images/main.jpg`,
           width: 1200,
@@ -134,14 +135,15 @@ export default function RootLayout({
     url: 'https://alux.space',
     pageType: 'homepage'
   });
-  
+
   return (
     <html suppressHydrationWarning>
       <head>
         {/* Blocking script: detect mobile + reduced-motion BEFORE first paint.
             Sets window.__ALUX_DISABLE_ANIM which SmoothMotionProvider reads
-            via useSyncExternalStore — zero-gap, no flicker. */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement,w=window,m=w.innerWidth<=768,r=w.matchMedia("(prefers-reduced-motion:reduce)").matches;if(m)d.setAttribute("data-mobile-device","");if(r)d.setAttribute("data-reduce-motion","");w.__ALUX_DISABLE_ANIM=m||r}catch(e){}})()` }} />
+            via useSyncExternalStore — zero-gap, no flicker.
+            Note: mobile animations are now ENABLED — only prefers-reduced-motion disables them. */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement,w=window,m=w.innerWidth<=768,r=w.matchMedia("(prefers-reduced-motion:reduce)").matches;if(m)d.setAttribute("data-mobile-device","");if(r)d.setAttribute("data-reduce-motion","");w.__ALUX_DISABLE_ANIM=r}catch(e){}})()` }} />
         <link href={materialSymbolsUrl} rel="stylesheet" />
         {/* Additional favicon meta tags for better browser support */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
@@ -149,7 +151,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png?v=2" />
         <meta name="msapplication-TileImage" content="/favicon.png?v=2" />
         {/* Structured Data */}
-        <script 
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData)
@@ -160,11 +162,11 @@ export default function RootLayout({
           <LanguageProvider>
             <AnalyticsProvider>
               <SmoothMotionProvider>
-              <SkipLinks />
-              {children}
-              <BackToTop />
-              <TranslationBadge />
-              <Footer />
+                <SkipLinks />
+                {children}
+                <BackToTop />
+                <TranslationBadge />
+                <Footer />
               </SmoothMotionProvider>
             </AnalyticsProvider>
           </LanguageProvider>

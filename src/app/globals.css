@@ -1520,12 +1520,7 @@ body {
   }
 }
 
-/* Mobile safety net: override inline opacity:0 that SSR might emit */
-html[data-mobile-device] [style*="opacity"] {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
+/* Reduced-motion safety net: override inline opacity:0 that SSR might emit */
 html[data-reduce-motion] [style*="opacity"] {
   opacity: 1 !important;
   transform: none !important;
