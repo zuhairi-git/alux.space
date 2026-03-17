@@ -72,6 +72,131 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const { locale } = await params; const portfolioItems: PortfolioItem[] = [
     {
       title: {
+        en: 'PromptForge',
+        fi: 'PromptForge'
+      },
+      type: {
+        en: 'AI Design Workflow Tool',
+        fi: 'AI-pohjainen suunnittelutyökalu'
+      },
+      desc: {
+        en: 'An AI-powered design workflow tool that turns prompts into UI concepts.',
+        fi: 'Tekoälypohjainen suunnittelutyökalu, joka muuttaa kehotteet UI-konsepteiksi.'
+      },
+      link: `/${locale}/portfolio/promptforge`,
+      gradient: 'from-purple-500 to-indigo-500',
+      status: {
+        en: 'In Progress',
+        fi: 'Kehitteillä',
+        type: 'in-progress'
+      },
+      category: 'prototype',
+      photo: {
+        url: '/images/portfolio/five-cases/PromptForge.jpg'
+      }
+    },
+    {
+      title: {
+        en: 'Intelligence by Design',
+        fi: 'Intelligence by Design'
+      },
+      type: {
+        en: 'Product & AI UX Case Study',
+        fi: 'Tuote- ja tekoäly-UX:n tapaustutkimus'
+      },
+      desc: {
+        en: 'Documenting the real impact of AI integration in a live product.',
+        fi: 'Tekoälyintegraation todellisen vaikutuksen dokumentointi elävässä tuotteessa.'
+      },
+      link: `/${locale}/portfolio/intelligence-by-design`,
+      gradient: 'from-blue-600 to-cyan-500',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
+      category: 'case-study',
+      photo: {
+        url: '/images/portfolio/five-cases/IntelligencebyDesign.jpg'
+      }
+    },
+    {
+      title: {
+        en: 'Axiom',
+        fi: 'Axiom'
+      },
+      type: {
+        en: 'AI-Driven Design System',
+        fi: 'Tekoälyohjattu suunnittelujärjestelmä'
+      },
+      desc: {
+        en: 'A design system where AI is part of the foundation, not an afterthought.',
+        fi: 'Suunnittelujärjestelmä, jossa tekoäly on osa perustaa, ei jälkiajatus.'
+      },
+      link: `/${locale}/portfolio/axiom`,
+      gradient: 'from-emerald-500 to-teal-400',
+      status: {
+        en: 'In Progress',
+        fi: 'Kehitteillä',
+        type: 'in-progress'
+      },
+      category: 'case-study',
+      photo: {
+        url: '/images/portfolio/five-cases/Axiom.jpg'
+      }
+    },
+    {
+      title: {
+        en: 'Prompt as UX',
+        fi: 'Prompt as UX'
+      },
+      type: {
+        en: 'Prompt Engineering Strategy',
+        fi: 'Kehotteiden suunnittelustrategia'
+      },
+      desc: {
+        en: 'What if writing prompts is the most important UX skill of the next decade?',
+        fi: 'Mitä jos kehotteiden kirjoittaminen on seuraavan vuosikymmenen tärkein UX-taito?'
+      },
+      link: `/${locale}/portfolio/prompt-as-ux`,
+      gradient: 'from-pink-500 to-rose-400',
+      status: {
+        en: 'Accomplished',
+        fi: 'Saavutettu',
+        type: 'accomplished'
+      },
+      category: 'case-study',
+      photo: {
+        url: '/images/portfolio/five-cases/PromptasUX.jpg'
+      }
+    },
+    {
+      title: {
+        en: 'Delegate',
+        fi: 'Delegate'
+      },
+      type: {
+        en: 'Agentic AI Workflows',
+        fi: 'Agentti-tekoälyn työnkulut'
+      },
+      desc: {
+        en: 'Designing trust, transparency, and control for agentic AI workflows.',
+        fi: 'Luottamuksen, läpinäkyvyyden ja hallinnan suunnittelu agentti-tekoälytyönkuluille.'
+      },
+      link: `/${locale}/portfolio/delegate`,
+      gradient: 'from-amber-500 to-orange-400',
+      status: {
+        en: 'In Progress',
+        fi: 'Kehitteillä',
+        type: 'in-progress'
+      },
+      category: 'case-study',
+      photo: {
+        url: '/images/portfolio/five-cases/Delegate.jpg'
+      }
+    },
+    {
+      title: {
         en: 'Game Development Strategy',
         fi: 'Pelinkehitysstrategia'
       },
