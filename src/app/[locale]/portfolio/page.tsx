@@ -37,6 +37,7 @@ interface PortfolioItem {
       link: string;
     };
   };
+  displayState: 'published' | 'archived' | 'coming-soon';
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -93,7 +94,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'prototype',
       photo: {
         url: '/images/portfolio/five-cases/PromptForge.jpg'
-      }
+      },
+      displayState: 'coming-soon'
     },
     {
       title: {
@@ -118,7 +120,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/five-cases/IntelligencebyDesign.jpg'
-      }
+      },
+      displayState: 'coming-soon'
     },
     {
       title: {
@@ -143,7 +146,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/five-cases/Axiom.jpg'
-      }
+      },
+      displayState: 'coming-soon'
     },
     {
       title: {
@@ -168,7 +172,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/five-cases/PromptasUX.jpg'
-      }
+      },
+      displayState: 'coming-soon'
     },
     {
       title: {
@@ -193,7 +198,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/five-cases/Delegate.jpg'
-      }
+      },
+      displayState: 'coming-soon'
     },
     {
       title: {
@@ -218,7 +224,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/game-dev/cover.jpg'
-      }
+      },
+      displayState: 'published'
     },
     {
       title: {
@@ -243,7 +250,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'prototype',
       photo: {
         url: '/images/portfolio/workflow/cover.jpg'
-      }
+      },
+      displayState: 'published'
     },
     {
       title: {
@@ -268,7 +276,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'prototype',
       photo: {
         url: '/images/portfolio/market/market-intellegence.jpg'
-      }
+      },
+      displayState: 'published'
     },
     {
       title: {
@@ -293,7 +302,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/healthcare/healthcare.jpg'
-      }
+      },
+      displayState: 'published'
     },
     {
       title: {
@@ -317,7 +327,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'case-study',
       photo: {
         url: '/images/portfolio/accessibility/accessiblity-showcase.jpg'
-      }
+      },
+      displayState: 'published'
     },
     {
       title: {
@@ -342,7 +353,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       category: 'prototype',
       photo: {
         url: '/images/portfolio/jobseeking/cover.jpg'
-      }
+      },
+      displayState: 'published'
     }
   ];
 

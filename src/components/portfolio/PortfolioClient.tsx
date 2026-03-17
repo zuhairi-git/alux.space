@@ -41,6 +41,7 @@ interface PortfolioItem {
       link: string;
     };
   };
+  displayState: 'published' | 'archived' | 'coming-soon';
 }
 
 interface Props {
@@ -56,7 +57,7 @@ export default function PortfolioClient({ items }: Props) {
   const prevFilterRef = useRef<string | null>(null);
   const directionRef = useRef(1);
 
-  const FILTER_ORDER = [null, 'case-study', 'prototype'] as const;
+  const FILTER_ORDER = [null, 'case-study', 'prototype', 'coming-soon', 'archived'] as const;
 
   const handleFilterChange = (newFilter: string | null) => {
     directionRef.current = getTabDirection(
@@ -68,16 +69,23 @@ export default function PortfolioClient({ items }: Props) {
     setFilter(newFilter);
   };
 
-  // Filter items by type or category
+  // Filter items by state and then by category/type
   const filteredItems = filter
-    ? (filter === 'case-study' || filter === 'prototype')
-      ? items.filter(item => item.category === filter)
-      : items.filter(item => item.type.en === filter)
-    : items;
+    ? filter === 'archived'
+      ? items.filter(item => item.displayState === 'archived')
+      : filter === 'coming-soon'
+        ? items.filter(item => item.displayState === 'coming-soon')
+        : (filter === 'case-study' || filter === 'prototype')
+          ? items.filter(item => item.displayState === 'published' && item.category === filter)
+          : items.filter(item => item.displayState === 'published' && item.type.en === filter)
+    : items.filter(item => item.displayState === 'published');
 
-  // Count items per category
-  const caseStudyCount = items.filter(i => i.category === 'case-study').length;
-  const prototypeCount = items.filter(i => i.category === 'prototype').length;
+  // Count items per category (only published for main tabs)
+  const caseStudyCount = items.filter(i => i.displayState === 'published' && i.category === 'case-study').length;
+  const prototypeCount = items.filter(i => i.displayState === 'published' && i.category === 'prototype').length;
+  const comingSoonCount = items.filter(i => i.displayState === 'coming-soon').length;
+  const archivedCount = items.filter(i => i.displayState === 'archived').length;
+  const publishedCount = items.filter(i => i.displayState === 'published').length;
 
   // Translate static UI text
   const getPortfolioTitle = (): string => {
@@ -176,46 +184,53 @@ export default function PortfolioClient({ items }: Props) {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
           >
-            {/* Filter Tabs */}
-            <div className="flex items-center gap-1">
-              {[
-                { value: null, label: getAllText(), count: items.length },
-                { value: 'case-study' as const, label: locale === 'fi' ? 'Tapaustutkimus' : 'Case Study', count: caseStudyCount },
-                { value: 'prototype' as const, label: locale === 'fi' ? 'Prototyyppi' : 'Prototype', count: prototypeCount },
-              ].map((tab) => {
-                const isActive = filter === tab.value;
-                return (
-                  <button
-                    key={tab.label}
-                    onClick={() => handleFilterChange(tab.value)}
-                    className={`relative px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap rounded-lg ${isActive
-                        ? theme === 'light'
-                          ? 'text-gray-900'
-                          : 'text-white'
-                        : theme === 'light'
-                          ? 'text-gray-400 hover:text-gray-600'
-                          : 'text-gray-500 hover:text-gray-300'
-                      }`}
-                  >
-                    {tab.label}
-                    <span className={`ml-1.5 text-xs tabular-nums ${isActive ? 'opacity-50' : 'opacity-30'}`}>
-                      {tab.count}
-                    </span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeFilterIndicator"
-                        className={`absolute inset-0 rounded-lg -z-10 ${theme === 'light'
-                            ? 'bg-gray-100'
-                            : theme === 'colorful'
-                              ? 'bg-white/[0.08]'
-                              : 'bg-white/[0.08]'
-                          }`}
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
+            {/* Filter Tabs - Horizontally scrollable on mobile */}
+            <div className="w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+              <div className="flex items-center gap-1 min-w-max sm:min-w-0">
+                {[
+                  { value: null, label: getAllText(), count: publishedCount, icon: 'work' },
+                  { value: 'case-study' as const, label: locale === 'fi' ? 'Tapaustutkimus' : 'Case Study', count: caseStudyCount, icon: 'school' },
+                  { value: 'prototype' as const, label: locale === 'fi' ? 'Prototyyppi' : 'Prototype', count: prototypeCount, icon: 'devices' },
+                  { value: 'coming-soon' as const, label: locale === 'fi' ? 'Tulossa' : 'Coming Soon', count: comingSoonCount, icon: 'schedule' },
+                  { value: 'archived' as const, label: locale === 'fi' ? 'Arkistoitu' : 'Archived', count: archivedCount, icon: 'archive' },
+                ].map((tab) => {
+                  const isActive = filter === tab.value;
+                  return (
+                    <button
+                      key={tab.label}
+                      onClick={() => handleFilterChange(tab.value)}
+                      className={`relative px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap rounded-lg ${isActive
+                          ? theme === 'light'
+                            ? 'text-gray-900'
+                            : 'text-white'
+                          : theme === 'light'
+                            ? 'text-gray-400 hover:text-gray-600'
+                            : 'text-gray-500 hover:text-gray-300'
+                        }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="material-symbols text-sm hidden sm:inline">{tab.icon}</span>
+                        {tab.label}
+                      </span>
+                      <span className={`ml-1.5 text-xs tabular-nums ${isActive ? 'opacity-50' : 'opacity-30'}`}>
+                        {tab.count}
+                      </span>
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeFilterIndicator"
+                          className={`absolute inset-0 rounded-lg -z-10 ${theme === 'light'
+                              ? 'bg-gray-100'
+                              : theme === 'colorful'
+                                ? 'bg-white/[0.08]'
+                                : 'bg-white/[0.08]'
+                            }`}
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* View Mode Toggle */}

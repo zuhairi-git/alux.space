@@ -40,6 +40,7 @@ interface PortfolioCardProps {
         link: string;
       };
     };
+    displayState: 'published' | 'archived' | 'coming-soon';
   };
   index: number;
   viewMode?: 'standard' | 'overlay';

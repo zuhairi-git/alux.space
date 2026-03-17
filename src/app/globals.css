@@ -489,6 +489,15 @@ body {
   background: transparent !important;
 }
 
+/* Scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Global Thin Scrollbar Styling */
 * {
   /* Firefox */
