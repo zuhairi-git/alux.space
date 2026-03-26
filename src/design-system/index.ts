@@ -21,3 +21,11 @@ export {
   transition,
   zIndex,
 } from './tokens';
+
+export {
+  componentRegistry,
+  getComponent,
+  getByCategory,
+} from './components';
+
+export type { ComponentEntry, ComponentProp } from './components';

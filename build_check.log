@@ -1,0 +1,381 @@
+   ▲ Next.js 15.3.0
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 13.0s
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./src/app/design/page.tsx
+463:29  Warning: Avoid hardcoded color "#00ffff". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+463:29  Warning: Avoid hardcoded color "#ff00cc". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+463:29  Warning: Avoid hardcoded color "#3b82f6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/CopilotView.tsx
+20:41  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+22:40  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/DashboardView.tsx
+23:34  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+324:125  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+324:208  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+324:208  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+325:104  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+433:125  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+433:208  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+433:208  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+434:106  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+521:134  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+521:217  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+521:217  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+522:113  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+650:166  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+650:183  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+687:149  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+687:166  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+688:148  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+688:165  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+692:203  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+692:203  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+692:253  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+693:116  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+694:115  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+769:34  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/MarketIntelligenceApp.tsx
+153:20  Warning: Avoid hardcoded color "#F2F2F7". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+153:48  Warning: Avoid hardcoded color "#FAF8FC". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+153:48  Warning: Avoid hardcoded color "#1C1B1F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+155:15  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+156:48  Warning: Avoid hardcoded color "#131316". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+156:48  Warning: Avoid hardcoded color "#E2E2E6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+215:129  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+215:225  Warning: Avoid hardcoded color "#2C2C2E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+216:30  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+216:30  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+216:120  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+216:188  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+216:188  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+221:175  Warning: Avoid hardcoded color "#2C2C2E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+225:126  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+225:156  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+225:156  Warning: Avoid hardcoded color "#32D74B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+241:246  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+241:246  Warning: Avoid hardcoded color "#1D192B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+241:281  Warning: Avoid hardcoded color "#4A4458". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+241:281  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+243:45  Warning: Avoid hardcoded color "#FF9500". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+276:172  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+276:317  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+277:22  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+277:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+277:124  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+277:214  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+277:214  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+316:144  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+316:214  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+337:130  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+344:96  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+344:96  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+344:145  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+344:145  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+347:106  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+347:106  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+347:156  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+348:102  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+350:108  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+350:127  Warning: Avoid hardcoded color "#0A84FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+350:158  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+350:210  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+355:146  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+355:198  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+365:73  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+365:125  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+376:116  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+376:116  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+376:203  Warning: Avoid hardcoded color "#146C2E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+376:203  Warning: Avoid hardcoded color "#146C2E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+379:68  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+379:80  Warning: Avoid hardcoded color "#FF3B30". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+454:172  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+454:317  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+455:22  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+455:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+455:124  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+455:214  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+455:214  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+496:72  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+496:84  Warning: Avoid hardcoded color "#FF3B30". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+518:77  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+518:89  Warning: Avoid hardcoded color "#FF3B30". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+525:137  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+525:207  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+534:166  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+534:256  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+573:144  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+573:144  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+573:219  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+573:219  Warning: Avoid hardcoded color "#381E72". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+573:251  Warning: Avoid hardcoded color "#F2B8B5". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+573:251  Warning: Avoid hardcoded color "#601410". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+580:72  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+580:84  Warning: Avoid hardcoded color "#FF3B30". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:153  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:170  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:199  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:229  Warning: Avoid hardcoded color "#0A0138". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:246  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+616:76  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+616:88  Warning: Avoid hardcoded color "#FF3B30". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+634:165  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+634:217  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+645:155  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+645:225  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+706:11  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+706:11  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+707:11  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+707:11  Warning: Avoid hardcoded color "#9a82db". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+709:197  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+709:367  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:22  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:22  Warning: Avoid hardcoded color "#1D192B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:153  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:268  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:268  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+710:268  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+712:121  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+712:217  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+713:22  Warning: Avoid hardcoded color "#F3EDF7". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+713:69  Warning: Avoid hardcoded color "#0A0138". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+713:106  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+716:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+716:22  Warning: Avoid hardcoded color "#1D192B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+716:149  Warning: Avoid hardcoded color "#4F378B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+716:149  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+733:110  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+733:127  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+734:127  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+734:127  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+734:177  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+747:181  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+747:229  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+747:283  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+747:283  Warning: Avoid hardcoded color "#1D192B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+747:377  Warning: Avoid hardcoded color "#4A4458". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+747:377  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+748:105  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+748:124  Warning: Avoid hardcoded color "#0A84FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+766:117  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+766:169  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+790:148  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+790:178  Warning: Avoid hardcoded color "#0A84FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+790:220  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+790:220  Warning: Avoid hardcoded color "#1D192B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+790:252  Warning: Avoid hardcoded color "#4A4458". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+790:252  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+801:192  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+801:233  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+818:172  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+818:317  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+819:22  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+819:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+819:124  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+819:214  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+819:214  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+847:134  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+863:132  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+863:153  Warning: Avoid hardcoded color "#131316". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+892:140  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+892:192  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+918:172  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+918:317  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+919:22  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+919:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+919:124  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+919:214  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+919:214  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+929:186  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+929:186  Warning: Avoid hardcoded color "#4A4458". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+943:36  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+946:69  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+946:121  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+957:87  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+957:139  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+969:116  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+969:116  Warning: Avoid hardcoded color "#34C759". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+969:151  Warning: Avoid hardcoded color "#146C2E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+969:151  Warning: Avoid hardcoded color "#146C2E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1000:227  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1002:74  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1005:78  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1029:180  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1029:269  Warning: Avoid hardcoded color "#FDF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1029:286  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1029:286  Warning: Avoid hardcoded color "#E6E1E5". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:169  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:169  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:209  Warning: Avoid hardcoded color "#0A84FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:209  Warning: Avoid hardcoded color "#0A84FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:261  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:261  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:295  Warning: Avoid hardcoded color "#4A4458". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1040:295  Warning: Avoid hardcoded color "#4A4458". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1066:135  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1066:245  Warning: Avoid hardcoded color "#1C1C1E". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1067:22  Warning: Avoid hardcoded color "#F3EDF7". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1067:22  Warning: Avoid hardcoded color "#EADDFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1067:91  Warning: Avoid hardcoded color "#0A0138". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1067:151  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1067:151  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1091:62  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1097:161  Warning: Avoid hardcoded color "#8E8E93". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1097:180  Warning: Avoid hardcoded color "#98989D". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1101:173  Warning: Avoid hardcoded color "#8E8E93". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1101:192  Warning: Avoid hardcoded color "#98989D". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1105:43  Warning: Avoid hardcoded color "#1D192B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1105:95  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1105:126  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1105:145  Warning: Avoid hardcoded color "#CAC4D0". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1112:79  Warning: Avoid hardcoded color "#E8DEF8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1112:130  Warning: Avoid hardcoded color "#4F378B". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/MobileApp.tsx
+119:166  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+145:42  Warning: Avoid hardcoded color "#FF9500". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/MobileIntroScreen.tsx
+41:19  Warning: Avoid hardcoded color "#111114". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+49:19  Warning: Avoid hardcoded color "#F7F7FA". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+57:19  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+109:33  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+109:45  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+114:19  Warning: Avoid hardcoded color "#F2F2F7". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+115:19  Warning: Avoid hardcoded color "#FAF8FC". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+115:19  Warning: Avoid hardcoded color "#1C1B1F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+117:19  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+120:23  Warning: Avoid hardcoded color "#111114". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+120:23  Warning: Avoid hardcoded color "#E2E2E6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+128:19  Warning: Avoid hardcoded color "#FEF7FF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+128:19  Warning: Avoid hardcoded color "#E7E0EC". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+133:23  Warning: Avoid hardcoded color "#2D2B33". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+133:23  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/ProfileView.tsx
+22:11  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+35:136  Warning: Avoid hardcoded color "#6750A4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+35:136  Warning: Avoid hardcoded color "#D0BCFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+35:168  Warning: Avoid hardcoded color "#007AFF". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+35:168  Warning: Avoid hardcoded color "#5856D6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+47:175  Warning: Avoid hardcoded color "#FAF8FC". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+47:196  Warning: Avoid hardcoded color "#111114". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+47:229  Warning: Avoid hardcoded color "#F2F2F7". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/mobile/components/WorkspacesView.tsx
+21:39  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/portfolio/workflow/admin/page.tsx
+14:24  Warning: Avoid hardcoded color "#0A0A0F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+16:32  Warning: Avoid hardcoded color "#7C3AED". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/prompt/page.tsx
+236:14  Warning: Avoid hardcoded color "#fdfdfd". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+236:14  Warning: Avoid hardcoded color "#f3f4f6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+236:14  Warning: Avoid hardcoded color "#fdfdfd". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+236:14  Warning: Avoid hardcoded color "#f3f4f6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+236:14  Warning: Avoid hardcoded color "#1f2937". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/[locale]/admin/page.tsx
+16:24  Warning: Avoid hardcoded color "#0A0A0F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+18:32  Warning: Avoid hardcoded color "#7C3AED". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/app/[locale]/portfolio/workflow/admin/page.tsx
+140:15  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+145:15  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+150:15  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+155:15  Warning: Avoid hardcoded color "#0A0138". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+156:15  Warning: Avoid hardcoded color "#111827". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+307:224  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+307:224  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+313:306  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+313:306  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+317:269  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+317:269  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+326:266  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+326:266  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+332:475  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+332:555  Warning: Avoid hardcoded color "#1A1A24". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+362:380  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+362:460  Warning: Avoid hardcoded color "#1A1A24". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+374:129  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+413:347  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+413:438  Warning: Avoid hardcoded color "#12121A". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+476:182  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+476:249  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+542:139  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:78  Warning: Avoid hardcoded color "#EAE6F8". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+605:114  Warning: Avoid hardcoded color "#1C1730". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+619:241  Warning: Avoid hardcoded color "#0A0138". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+619:332  Warning: Avoid hardcoded color "#111827". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+682:78  Warning: Avoid hardcoded color "#d946ef". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+682:90  Warning: Avoid hardcoded color "#c026d3". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+938:324  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+974:193  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+988:150  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1088:324  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1124:202  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1138:150  Warning: Avoid hardcoded color "#0B0B13". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1319:82  Warning: Avoid hardcoded color "#d946ef". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1319:94  Warning: Avoid hardcoded color "#c026d3". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1491:220  Warning: Avoid hardcoded color "#1A1A24". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1591:107  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1616:19  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1617:19  Warning: Avoid hardcoded color "#0D0D14". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1634:56  Warning: Avoid hardcoded color "#d946ef". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1634:96  Warning: Avoid hardcoded color "#3b82f6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+1634:108  Warning: Avoid hardcoded color "#60a5fa". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/Footer.tsx
+19:22  Error: React Hook "useLanguage" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+20:17  Error: React Hook "useTranslations" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+21:61  Error: React Hook "useAnalyticsTracking" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+64:3  Error: React Hook "React.useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+
+./src/components/hero/variants/CreativeHero.tsx
+151:36  Warning: Avoid hardcoded color "#00ffff". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+151:36  Warning: Avoid hardcoded color "#ff00cc". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+151:36  Warning: Avoid hardcoded color "#3b82f6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/mobile/jobseeking/JobSeekingApp.tsx
+125:271  Warning: Avoid hardcoded color "#49454F". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+134:42  Warning: Avoid hardcoded color "#FF9500". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/mobile/jobseeking/views/CopilotView.tsx
+26:40  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+31:11  Warning: Avoid hardcoded color "#1a0040". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/mobile/jobseeking/views/DashboardView.tsx
+267:34  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+348:65  Warning: Avoid hardcoded color "#06b6d4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+349:67  Warning: Avoid hardcoded color "#6366f1". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/mobile/jobseeking/views/JobsView.tsx
+36:39  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/mobile/jobseeking/views/ProfileView.tsx
+20:34  Warning: Avoid hardcoded color "#050023". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+77:65  Warning: Avoid hardcoded color "#06b6d4". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+78:67  Warning: Avoid hardcoded color "#6366f1". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/TimelineCard.tsx
+45:14  Warning: Avoid hardcoded color "#120025". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+45:14  Warning: Avoid hardcoded color "#000428". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+48:14  Warning: Avoid hardcoded color "#0a1425". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+48:14  Warning: Avoid hardcoded color "#040a20". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+./src/components/ui/Button.tsx
+48:5  Warning: Avoid hardcoded color "#00ffff". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+48:5  Warning: Avoid hardcoded color "#ff00cc". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+48:5  Warning: Avoid hardcoded color "#3b82f6". Use a CSS custom property from tokens.css or import from @/design-system.  design-system/no-hardcoded-colors
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

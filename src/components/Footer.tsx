@@ -12,13 +12,12 @@ import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
 const Footer = () => {
   const pathname = usePathname();
-
-  // Hide footer on design system pages
-  if (pathname?.startsWith('/design')) return null;
-
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const { trackEvent, trackNavigation, trackSocialShare } = useAnalyticsTracking();
+
+  // Hide footer on design system pages
+  if (pathname?.startsWith('/design')) return null;
 
   const currentYear = new Date().getFullYear();
 

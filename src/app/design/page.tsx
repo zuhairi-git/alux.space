@@ -8,6 +8,14 @@ import QuoteBlock from '@/components/ui/QuoteBlock';
 import Icon from '@/components/ui/Icon';
 import Tooltip from '@/components/ui/Tooltip';
 import AnimatedSection from '@/components/AnimatedSection';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
+import Input from '@/components/ui/Input';
+import Toggle from '@/components/ui/Toggle';
+import Avatar from '@/components/ui/Avatar';
+import Divider from '@/components/ui/Divider';
+import CodeSnippet from '@/components/CodeSnippet';
+import ChapterDivider from '@/components/ui/ChapterDivider';
 import { getByCategory } from '@/design-system/components';
 import type { ComponentEntry } from '@/design-system/components';
 
@@ -67,6 +75,22 @@ const colorTokenSections = [
       { name: '--color-gray-950', label: '950' },
     ],
   },
+  {
+    title: 'Palette — Accents',
+    tokens: [
+      { name: '--color-indigo-400', label: 'Indigo 400' },
+      { name: '--color-indigo-500', label: 'Indigo 500' },
+      { name: '--color-pink-400',   label: 'Pink 400' },
+      { name: '--color-pink-500',   label: 'Pink 500' },
+      { name: '--color-fuchsia-400',label: 'Fuchsia 400' },
+      { name: '--color-fuchsia-500',label: 'Fuchsia 500' },
+      { name: '--color-cyan-400',   label: 'Cyan 400' },
+      { name: '--color-cyan-500',   label: 'Cyan 500' },
+      { name: '--color-magenta',    label: 'Magenta' },
+      { name: '--color-yellow-500', label: 'Yellow 500' },
+      { name: '--color-orange-500', label: 'Orange 500' },
+    ],
+  },
 ];
 
 const spacingTokens = [
@@ -101,52 +125,76 @@ const shadowTokens = [
   { name: '--shadow-glow-purple',label: 'glow-purple' },
 ];
 
+/* ── Helper: copy-to-clipboard ─────────────────────────── */
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="text-[10px] opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity font-mono cursor-pointer"
+      title={`Copy ${text}`}
+    >
+      {copied ? '✓' : 'copy'}
+    </button>
+  );
+}
+
 /* ── Small sub-components ──────────────────────────────── */
 
 function Swatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 group">
       <div
-        className="w-12 h-12 rounded-lg border border-gray-300 dark:border-gray-600"
+        className="w-12 h-12 rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm"
         style={{ backgroundColor: `var(${cssVar})` }}
       />
       <span className="text-[10px] text-center opacity-70 leading-tight">{label}</span>
+      <CopyButton text={cssVar} />
     </div>
   );
 }
 
 function ShadowSwatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 group">
       <div
         className="w-16 h-16 rounded-lg bg-white dark:bg-gray-800"
         style={{ boxShadow: `var(${cssVar})` }}
       />
       <span className="text-[10px] text-center opacity-70">{label}</span>
+      <CopyButton text={cssVar} />
     </div>
   );
 }
 
 function SpacingSwatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 group">
       <div
         className="h-4 bg-primary/40 rounded"
         style={{ width: `var(${cssVar})` }}
       />
       <span className="text-xs opacity-70 whitespace-nowrap">{label}</span>
+      <CopyButton text={cssVar} />
     </div>
   );
 }
 
 function RadiusSwatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 group">
       <div
         className="w-14 h-14 border-2 border-primary/50 bg-primary/10"
         style={{ borderRadius: `var(${cssVar})` }}
       />
       <span className="text-[10px] text-center opacity-70">{label}</span>
+      <CopyButton text={cssVar} />
     </div>
   );
 }
@@ -237,6 +285,29 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
   );
 }
 
+/* ── Code-toggle wrapper ──────────────────────────────── */
+
+function DemoSection({ children, code, language = 'tsx' }: { children: React.ReactNode; code: string; language?: string }) {
+  const [showCode, setShowCode] = useState(false);
+  return (
+    <div className="space-y-4">
+      <div className="theme-card-flex p-6 rounded-xl">
+        {children}
+      </div>
+      <div className="flex justify-end">
+        <button
+          onClick={() => setShowCode(!showCode)}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+        >
+          <span className="material-symbols text-sm">{showCode ? 'visibility_off' : 'code'}</span>
+          {showCode ? 'Hide code' : 'View code'}
+        </button>
+      </div>
+      {showCode && <CodeSnippet code={code} language={language} />}
+    </div>
+  );
+}
+
 /* ── Main Page ─────────────────────────────────────────── */
 
 const registryCategories: { key: ComponentEntry['category']; label: string }[] = [
@@ -268,15 +339,63 @@ function ColorsSection() {
 
 function TypographySection() {
   return (
-    <div className="space-y-3">
-      {['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'].map(size => (
-        <div key={size} className="flex items-baseline gap-4">
-          <span className="w-12 text-right text-xs opacity-50 font-mono">{size}</span>
-          <span style={{ fontSize: `var(--font-size-${size})` }}>
-            The quick brown fox
-          </span>
+    <div className="space-y-8">
+      {/* Scale */}
+      <div>
+        <h4 className="text-sm font-medium mb-3 opacity-60">Type Scale</h4>
+        <div className="space-y-3">
+          {['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'].map(size => (
+            <div key={size} className="flex items-baseline gap-4 group">
+              <span className="w-12 text-right text-xs opacity-50 font-mono">{size}</span>
+              <span style={{ fontSize: `var(--font-size-${size})` }}>
+                The quick brown fox
+              </span>
+              <CopyButton text={`--font-size-${size}`} />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+
+      {/* Weights */}
+      <div>
+        <h4 className="text-sm font-medium mb-3 opacity-60">Font Weights</h4>
+        <div className="space-y-2">
+          {[
+            { label: 'Normal (400)', weight: 'var(--font-normal)' },
+            { label: 'Medium (500)', weight: 'var(--font-medium)' },
+            { label: 'Semibold (600)', weight: 'var(--font-semibold)' },
+            { label: 'Bold (700)', weight: 'var(--font-bold)' },
+          ].map(w => (
+            <div key={w.label} className="flex items-baseline gap-4">
+              <span className="w-28 text-right text-xs opacity-50 font-mono">{w.label}</span>
+              <span className="text-lg" style={{ fontWeight: w.weight }}>
+                The quick brown fox jumps over the lazy dog
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Line heights */}
+      <div>
+        <h4 className="text-sm font-medium mb-3 opacity-60">Line Heights</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { label: 'tight (1.25)', value: 'var(--leading-tight)' },
+            { label: 'snug (1.375)', value: 'var(--leading-snug)' },
+            { label: 'normal (1.5)', value: 'var(--leading-normal)' },
+            { label: 'relaxed (1.625)', value: 'var(--leading-relaxed)' },
+          ].map(lh => (
+            <div key={lh.label} className="theme-card-flex p-4 rounded-lg">
+              <span className="text-xs font-mono opacity-50 block mb-2">{lh.label}</span>
+              <p className="text-sm" style={{ lineHeight: lh.value }}>
+                The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.
+                How vexingly quick daft zebras jump.
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -337,57 +456,421 @@ function MotionSection() {
   );
 }
 
-function CardsSection() {
+function GradientsSection() {
+  const gradients = [
+    { label: 'Primary', css: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))' },
+    { label: 'Card', css: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))' },
+    { label: 'Cosmic', css: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)' },
+  ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {(['primary', 'secondary', 'tertiary', 'muted'] as const).map(variant => (
-        <Card key={variant} variant={variant}>
-          <CardContent title={variant} subtitle="Card variant">
-            <p className="text-sm opacity-70">
-              A sample card using the <code className="text-xs">{variant}</code> variant.
-            </p>
-          </CardContent>
-        </Card>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {gradients.map(g => (
+        <div key={g.label} className="flex flex-col items-center gap-2">
+          <div
+            className="w-full h-24 rounded-xl border border-gray-200 dark:border-gray-700"
+            style={{ background: g.css }}
+          />
+          <span className="text-xs font-medium opacity-60">{g.label}</span>
+        </div>
       ))}
     </div>
+  );
+}
+
+/* ── Component demo sections ─────────────────────────── */
+
+function ButtonsSection() {
+  return (
+    <DemoSection code={`import Button from '@/components/ui/Button';
+
+// Variants
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="cosmic">Cosmic</Button>
+
+// Sizes
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+
+// States
+<Button loading>Loading...</Button>
+<Button disabled>Disabled</Button>
+
+// With icons
+<Button leftIcon={<Icon name="add" />}>Create</Button>`}>
+      <div className="space-y-6">
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Variants</h4>
+          <div className="flex flex-wrap gap-3">
+            <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="cosmic">Cosmic</Button>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Sizes</h4>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button size="sm">Small</Button>
+            <Button size="md">Medium</Button>
+            <Button size="lg">Large</Button>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">States</h4>
+          <div className="flex flex-wrap gap-3">
+            <Button loading>Loading...</Button>
+            <Button disabled>Disabled</Button>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">With Icons</h4>
+          <div className="flex flex-wrap gap-3">
+            <Button leftIcon={<Icon name="add" />}>Create New</Button>
+            <Button variant="outline" rightIcon={<Icon name="arrow_forward" />}>Continue</Button>
+            <Button variant="secondary" leftIcon={<Icon name="download" />}>Download</Button>
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function BadgesSection() {
+  return (
+    <DemoSection code={`import Badge from '@/components/ui/Badge';
+
+<Badge variant="default">Default</Badge>
+<Badge variant="success" dot>Active</Badge>
+<Badge variant="warning">Pending</Badge>
+<Badge variant="error">Critical</Badge>
+<Badge variant="info">New</Badge>
+<Badge variant="outline">v2.0.1</Badge>`}>
+      <div className="space-y-6">
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Variants</h4>
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="default">Default</Badge>
+            <Badge variant="success">Success</Badge>
+            <Badge variant="warning">Warning</Badge>
+            <Badge variant="error">Error</Badge>
+            <Badge variant="info">Info</Badge>
+            <Badge variant="outline">Outline</Badge>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">With Status Dot</h4>
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="success" dot>Active</Badge>
+            <Badge variant="error" dot>Critical</Badge>
+            <Badge variant="warning" dot>Pending</Badge>
+            <Badge variant="info" dot>New</Badge>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Sizes</h4>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge size="sm">Small</Badge>
+            <Badge size="md">Medium</Badge>
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function InputsSection() {
+  const [value, setValue] = useState('');
+  return (
+    <DemoSection code={`import Input from '@/components/ui/Input';
+
+<Input label="Email" placeholder="you@example.com" />
+<Input label="Search" leftIcon={<Icon name="search" />} />
+<Input error="This field is required" label="Name" />
+<Input helperText="We'll never share your email" label="Email" />`}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+        <Input label="Email" placeholder="you@example.com" type="email" />
+        <Input
+          label="Search"
+          placeholder="Search..."
+          leftIcon={<span className="material-symbols text-[18px]">search</span>}
+        />
+        <Input
+          label="Password"
+          type="password"
+          placeholder="Enter password"
+          rightIcon={<span className="material-symbols text-[18px]">visibility</span>}
+        />
+        <Input
+          label="Name"
+          placeholder="Enter name"
+          error="This field is required"
+        />
+        <Input
+          label="With helper"
+          placeholder="you@example.com"
+          helperText="We'll never share your email"
+          value={value}
+          onChange={e => setValue(e.target.value)}
+        />
+        <Input
+          label="Disabled"
+          placeholder="Can't edit this"
+          disabled
+        />
+      </div>
+    </DemoSection>
+  );
+}
+
+function TogglesSection() {
+  const [t1, setT1] = useState(true);
+  const [t2, setT2] = useState(false);
+  const [t3, setT3] = useState(true);
+  return (
+    <DemoSection code={`import Toggle from '@/components/ui/Toggle';
+
+<Toggle checked={enabled} onChange={setEnabled} label="Notifications" />
+<Toggle checked={false} onChange={() => {}} label="Disabled" disabled />
+<Toggle checked={true} onChange={() => {}} size="sm" label="Small" />`}>
+      <div className="space-y-4">
+        <Toggle checked={t1} onChange={setT1} label="Enable notifications" />
+        <Toggle checked={t2} onChange={setT2} label="Dark mode" />
+        <Toggle checked={t3} onChange={setT3} label="Auto-save" size="sm" />
+        <Toggle checked={false} onChange={() => {}} label="Disabled toggle" disabled />
+      </div>
+    </DemoSection>
+  );
+}
+
+function AvatarsSection() {
+  return (
+    <DemoSection code={`import Avatar from '@/components/ui/Avatar';
+
+<Avatar initials="AZ" size="lg" status="online" />
+<Avatar initials="JD" size="md" />
+<Avatar size="sm" />  // icon fallback`}>
+      <div className="space-y-6">
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Sizes</h4>
+          <div className="flex items-end gap-4">
+            <Avatar initials="SM" size="sm" />
+            <Avatar initials="MD" size="md" />
+            <Avatar initials="LG" size="lg" />
+            <Avatar initials="XL" size="xl" />
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Fallbacks</h4>
+          <div className="flex items-center gap-4">
+            <Avatar initials="AZ" size="lg" />
+            <Avatar size="lg" />
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">With Status</h4>
+          <div className="flex items-center gap-4">
+            <Avatar initials="ON" size="lg" status="online" />
+            <Avatar initials="AW" size="lg" status="away" />
+            <Avatar initials="OF" size="lg" status="offline" />
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function DividersSection() {
+  return (
+    <DemoSection code={`import Divider from '@/components/ui/Divider';
+
+<Divider />
+<Divider label="Or continue with" />
+
+// Vertical (inside a flex row)
+<div className="flex items-center gap-4 h-10">
+  <span>Left</span>
+  <Divider orientation="vertical" />
+  <span>Right</span>
+</div>`}>
+      <div className="space-y-6">
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Horizontal</h4>
+          <Divider />
+        </div>
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">With Label</h4>
+          <Divider label="Or continue with" />
+        </div>
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Vertical</h4>
+          <div className="flex items-center gap-4 h-10">
+            <span className="text-sm opacity-70">Section A</span>
+            <Divider orientation="vertical" />
+            <span className="text-sm opacity-70">Section B</span>
+            <Divider orientation="vertical" />
+            <span className="text-sm opacity-70">Section C</span>
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function TooltipsSection() {
+  return (
+    <DemoSection code={`import Tooltip from '@/components/ui/Tooltip';
+
+<Tooltip text="I appear on hover">
+  <button>Hover me</button>
+</Tooltip>`}>
+      <div>
+        <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-4">Hover over each button</h4>
+        <div className="flex flex-wrap gap-4">
+          {['Top tooltip', 'Another tooltip', 'With longer text that wraps nicely', 'Quick tip'].map(text => (
+            <Tooltip key={text} text={text}>
+              <button className="px-4 py-2 text-sm rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                {text.split(' ').slice(0, 2).join(' ')}
+              </button>
+            </Tooltip>
+          ))}
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function CardsSection() {
+  return (
+    <DemoSection code={`import Card from '@/components/Card';
+import CardContent from '@/components/CardContent';
+
+<Card variant="primary">
+  <CardContent title="Title" subtitle="Subtitle">
+    <p>Card content goes here.</p>
+  </CardContent>
+</Card>`}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {(['primary', 'secondary', 'tertiary', 'muted'] as const).map(variant => (
+          <Card key={variant} variant={variant}>
+            <CardContent title={variant} subtitle="Card variant">
+              <p className="text-sm opacity-70">
+                A sample card using the <code className="text-xs">{variant}</code> variant.
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </DemoSection>
   );
 }
 
 function QuotesSection() {
   return (
-    <div className="space-y-4">
-      <QuoteBlock quote="Design is thinking made visual." author="Saul Bass" variant="default" />
-      <QuoteBlock quote="Good design is obvious. Great design is transparent." author="Joe Sparano" variant="simple" />
-      <QuoteBlock quote="Simplicity is the ultimate sophistication." author="Leonardo da Vinci" variant="minimal" />
-    </div>
+    <DemoSection code={`import QuoteBlock from '@/components/ui/QuoteBlock';
+
+<QuoteBlock
+  quote="Design is thinking made visual."
+  author="Saul Bass"
+  variant="default"
+/>`}>
+      <div className="space-y-4">
+        <QuoteBlock quote="Design is thinking made visual." author="Saul Bass" variant="default" />
+        <QuoteBlock quote="Good design is obvious. Great design is transparent." author="Joe Sparano" variant="simple" />
+        <QuoteBlock quote="Simplicity is the ultimate sophistication." author="Leonardo da Vinci" variant="minimal" />
+      </div>
+    </DemoSection>
   );
 }
 
 function IconsSection() {
   return (
-    <div className="flex flex-wrap gap-4">
-      {['home', 'search', 'settings', 'favorite', 'star', 'palette', 'code', 'dark_mode', 'light_mode', 'accessibility_new'].map(name => (
-        <Tooltip key={name} text={name}>
-          <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-            <Icon name={name} />
-          </div>
-        </Tooltip>
-      ))}
-    </div>
+    <DemoSection code={`import Icon from '@/components/ui/Icon';
+
+<Icon name="home" />
+<Icon name="search" />
+<Icon name="settings" className="text-primary" />`}>
+      <div className="flex flex-wrap gap-4">
+        {['home', 'search', 'settings', 'favorite', 'star', 'palette', 'code', 'dark_mode', 'light_mode', 'accessibility_new', 'add', 'delete', 'edit', 'visibility', 'download', 'upload'].map(name => (
+          <Tooltip key={name} text={name}>
+            <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors">
+              <Icon name={name} />
+            </div>
+          </Tooltip>
+        ))}
+      </div>
+    </DemoSection>
   );
 }
 
 function AnimationsSection() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {(['slide-up', 'slide-left', 'slide-right'] as const).map((anim, i) => (
-        <AnimatedSection key={anim} animation={anim} delay={i * 0.1} once={false}>
-          <div className="theme-card-flex p-4 rounded-xl text-center">
-            <span className="text-sm font-mono opacity-60">{anim}</span>
-          </div>
-        </AnimatedSection>
-      ))}
-    </div>
+    <DemoSection code={`import AnimatedSection from '@/components/AnimatedSection';
+
+<AnimatedSection animation="slide-up" delay={0.1}>
+  <div>Content slides up on scroll</div>
+</AnimatedSection>`}>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {(['slide-up', 'slide-left', 'slide-right'] as const).map((anim, i) => (
+          <AnimatedSection key={anim} animation={anim} delay={i * 0.1} once={false}>
+            <div className="theme-card-flex p-4 rounded-xl text-center">
+              <span className="text-sm font-mono opacity-60">{anim}</span>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </DemoSection>
+  );
+}
+
+function CodeSnippetSection() {
+  return (
+    <DemoSection code={`import CodeSnippet from '@/components/CodeSnippet';
+
+<CodeSnippet
+  code="const greeting = 'Hello, World!';"
+  language="javascript"
+/>`}>
+      <div className="space-y-4">
+        <CodeSnippet
+          code={`import { palette, semantic, transition } from '@/design-system';
+
+// Use tokens in Framer Motion
+const fadeIn = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: transition.enter,
+};`}
+          language="typescript"
+        />
+      </div>
+    </DemoSection>
+  );
+}
+
+function ChapterDividerSection() {
+  return (
+    <DemoSection code={`import ChapterDivider from '@/components/ui/ChapterDivider';
+
+<ChapterDivider title="Getting Started" number={1} />`}>
+      <div className="space-y-6">
+        <ChapterDivider title="Getting Started" number={1} />
+        <p className="text-sm opacity-60 pl-4">Section content would go here...</p>
+        <ChapterDivider title="Advanced Usage" number={2} />
+        <p className="text-sm opacity-60 pl-4">More content...</p>
+      </div>
+    </DemoSection>
   );
 }
 
@@ -596,21 +1079,35 @@ interface SectionDef {
 }
 
 const allSections: SectionDef[] = [
+  // Foundations
   { key: 'colors',     title: 'Color Tokens',             render: () => <ColorsSection /> },
   { key: 'typography', title: 'Typography Scale',          render: () => <TypographySection /> },
   { key: 'spacing',    title: 'Spacing Scale',             render: () => <SpacingSection /> },
   { key: 'radius',     title: 'Border Radius',             render: () => <RadiusSection /> },
   { key: 'shadows',    title: 'Shadows & Elevation',       render: () => <ShadowsSection /> },
   { key: 'motion',     title: 'Motion & Easing',           render: () => <MotionSection /> },
+  { key: 'gradients',  title: 'Gradients',                 render: () => <GradientsSection /> },
+  // Components
+  { key: 'buttons',    title: 'Buttons',                   render: () => <ButtonsSection /> },
+  { key: 'badges',     title: 'Badges',                    render: () => <BadgesSection /> },
+  { key: 'inputs',     title: 'Inputs',                    render: () => <InputsSection /> },
+  { key: 'toggles',    title: 'Toggles',                   render: () => <TogglesSection /> },
+  { key: 'avatars',    title: 'Avatars',                   render: () => <AvatarsSection /> },
+  { key: 'dividers',   title: 'Dividers',                  render: () => <DividersSection /> },
+  { key: 'tooltips',   title: 'Tooltips',                  render: () => <TooltipsSection /> },
   { key: 'cards',      title: 'Card Variants',             render: () => <CardsSection /> },
   { key: 'quotes',     title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
   { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
+  { key: 'code-snippet', title: 'Code Snippet',            render: () => <CodeSnippetSection /> },
+  { key: 'chapter-divider', title: 'Chapter Divider',      render: () => <ChapterDividerSection /> },
+  // Registry
   ...registryCategories.map(c => ({
     key: c.key === 'primitive' ? 'primitives' : c.key,
     title: c.label,
     render: () => <RegistrySection categoryKey={c.key} />,
   })),
+  // Governance
   { key: 'conventions',  title: 'Conventions',   render: () => <ConventionsSection /> },
   { key: 'contributing', title: 'Contributing',  render: () => <ContributingSection /> },
   { key: 'lint-rules',   title: 'Lint Rules',    render: () => <LintRulesSection /> },
@@ -629,15 +1126,25 @@ function OverviewGrid() {
         { key: 'radius',     icon: 'rounded_corner',  label: 'Radius' },
         { key: 'shadows',    icon: 'layers',          label: 'Shadows' },
         { key: 'motion',     icon: 'animation',       label: 'Motion' },
+        { key: 'gradients',  icon: 'gradient',        label: 'Gradients' },
       ],
     },
     {
       title: 'Components',
       items: [
-        { key: 'cards',      icon: 'dashboard',           label: 'Cards' },
-        { key: 'quotes',     icon: 'format_quote',        label: 'Quotes' },
-        { key: 'icons',      icon: 'emoji_symbols',       label: 'Icons' },
-        { key: 'animations', icon: 'motion_photos_auto',  label: 'Animations' },
+        { key: 'buttons',    icon: 'smart_button',       label: 'Buttons' },
+        { key: 'badges',     icon: 'label',              label: 'Badges' },
+        { key: 'inputs',     icon: 'text_fields',        label: 'Inputs' },
+        { key: 'toggles',    icon: 'toggle_on',          label: 'Toggles' },
+        { key: 'avatars',    icon: 'account_circle',     label: 'Avatars' },
+        { key: 'dividers',   icon: 'horizontal_rule',    label: 'Dividers' },
+        { key: 'tooltips',   icon: 'info',               label: 'Tooltips' },
+        { key: 'cards',      icon: 'dashboard',          label: 'Cards' },
+        { key: 'quotes',     icon: 'format_quote',       label: 'Quotes' },
+        { key: 'icons',      icon: 'emoji_symbols',      label: 'Icons' },
+        { key: 'animations', icon: 'motion_photos_auto', label: 'Animations' },
+        { key: 'code-snippet', icon: 'code',             label: 'Code Snippet' },
+        { key: 'chapter-divider', icon: 'format_list_numbered', label: 'Chapter Divider' },
       ],
     },
     {
