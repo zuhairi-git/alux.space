@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useState, useCallback, Suspense } from 'react';
+import Navigation from '@/components/Navigation';
 
 /* ── Sidebar nav structure ──────────────────────────────── */
 
@@ -90,6 +91,9 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-screen flex flex-col">
+      {/* Site navigation */}
+      <Navigation />
+
       {/* Mobile header */}
       <div className="lg:hidden shrink-0 flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-[var(--background)]">
         <button

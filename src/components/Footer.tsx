@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -10,6 +11,11 @@ import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  // Hide footer on design system pages
+  if (pathname?.startsWith('/design')) return null;
+
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const { trackEvent, trackNavigation, trackSocialShare } = useAnalyticsTracking();
