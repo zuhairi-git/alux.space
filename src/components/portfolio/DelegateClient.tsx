@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { useTheme } from '@/context/ThemeContext';
@@ -20,7 +21,7 @@ export default function DelegateClient() {
             en: {
                 title: "Delegate",
                 subtitle: "Designing trust, transparency, and control for agentic AI workflows",
-                intro: "AI agents can now autonomously complete multi-step tasks — but the UX for delegating to and monitoring these agents barely exists. Users either over-trust (and get burned) or under-trust (and micromanage). Delegate is a conceptual UX framework for the space in between.",
+                intro: "AI agents can now autonomously complete multi-step tasks ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but the UX for delegating to and monitoring these agents barely exists. Users either over-trust (and get burned) or under-trust (and micromanage). Delegate is a conceptual UX framework for the space in between.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -31,7 +32,7 @@ export default function DelegateClient() {
             fi: {
                 title: "Delegate",
                 subtitle: "Designing trust, transparency, and control for agentic AI workflows",
-                intro: "AI agents can now autonomously complete multi-step tasks — but the UX for delegating to and monitoring these agents barely exists. Users either over-trust (and get burned) or under-trust (and micromanage). Delegate is a conceptual UX framework for the space in between.",
+                intro: "AI agents can now autonomously complete multi-step tasks ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but the UX for delegating to and monitoring these agents barely exists. Users either over-trust (and get burned) or under-trust (and micromanage). Delegate is a conceptual UX framework for the space in between.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -58,7 +59,7 @@ export default function DelegateClient() {
             features: [
                 "Transparency: what is the agent doing right now?",
                 "Control: how does the user pause, redirect, or stop?",
-                "Error recovery: agent failed — what does the user see?",
+                "Error recovery: agent failed ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â what does the user see?",
                 "Trust calibration: how does confidence get communicated?"
             ]
         },
@@ -71,7 +72,7 @@ export default function DelegateClient() {
                 "Live progress feed with plain-language step summaries",
                 "Intervention panel (pause / redirect / abort)",
                 "Error state with explanation and suggested next action",
-                "Audit trail — full log of what the agent did and why"
+                "Audit trail ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â full log of what the agent did and why"
             ]
         },
         {
@@ -114,8 +115,8 @@ export default function DelegateClient() {
 
     const pageVariants = {
         initial: (dir: number) => ({ opacity: 0, x: dir * 60, scale: 0.98 }),
-        animate: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.1 } },
-        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: { duration: 0.3 } })
+        animate: { opacity: 1, x: 0, scale: 1, transition: { ...t.enter, staggerChildren: stagger.slow } },
+        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: t.snap })
     };
 
     return (
@@ -154,7 +155,7 @@ export default function DelegateClient() {
                             ]}
                         />
 
-                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.enterSlow, delay: delaySeconds.md }}>
                             <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
                                 {content.intro}
                             </p>
@@ -175,7 +176,7 @@ export default function DelegateClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">•</span>
+                                                        <span className="text-blue-400 mt-0.5">ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -190,9 +191,9 @@ export default function DelegateClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "Users don't need to see every step — they need to know they can take control at any moment.",
+                                    "Users don't need to see every step ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they need to know they can take control at any moment.",
                                     "Trust in AI agents is built through transparency, not capability.",
-                                    "Error states are the most important screens to design — they define whether a user will ever delegate again."
+                                    "Error states are the most important screens to design ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they define whether a user will ever delegate again."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
                                         <span className="material-symbols text-4xl text-purple-400/20 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>

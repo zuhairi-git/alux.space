@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { durationSeconds } from '@/design-system';
 import { useLanguage } from '@/context/LanguageContext';
 import { LiveRegion } from '../ui/LiveRegion';
 
@@ -54,7 +55,7 @@ export function ReadingProgress() {
             scaleX: scrollProgress, 
             transformOrigin: '0%',
           }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: durationSeconds.instant }}
         />
       </div>
       <LiveRegion message={announcement} />

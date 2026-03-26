@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 import Link from 'next/link';
 
@@ -30,7 +31,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: durationSeconds.dramatic }}
       className="my-20 relative"
     >
       {/* Abstract background shapes */}
@@ -53,7 +54,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
                   duration: 2, 
                   repeat: Infinity, 
                   repeatType: "reverse",
-                  delay: i * 0.3
+                  delay: i * delaySeconds.lg
                 }}
               ></motion.div>
             ))}
@@ -67,7 +68,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ ...t.enterSlow, delay: delaySeconds.md }}
             className="relative"
           >
             {/* Subtle glow behind number */}
@@ -87,7 +88,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ ...t.enterSlow, delay: delaySeconds.lg }}
           className="text-center mb-6 relative"
         >
           <h2 className={`text-2xl md:text-3xl font-bold ${textColor} mb-2`}>
@@ -100,7 +101,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
             initial={{ width: "0%" }}
             whileInView={{ width: "50%" }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
           ></motion.div>
         </motion.div>
         
@@ -109,7 +110,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ ...t.enterSlow, delay: delaySeconds['3xl'] }}
           className="text-center"
         >
           <Link 

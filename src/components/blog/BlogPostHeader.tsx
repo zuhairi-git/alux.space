@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { delaySeconds } from '@/design-system';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -97,7 +98,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: delaySeconds.xs }}
         aria-labelledby="blog-title"
       >
         <div className="flex flex-wrap gap-2 mb-4" role="list" aria-label={t('blog.aria.tags')}>
@@ -172,7 +173,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: delaySeconds.sm }}
           aria-labelledby="audio-section"
         >
           <h2 id="audio-section" className="sr-only">{t('blog.aria.audioNarration')}</h2>          <AudioPlayer
@@ -187,7 +188,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
       <motion.figure
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: delaySeconds.md }}
         className={`relative w-full h-[60vh] max-h-[500px] rounded-2xl overflow-hidden mb-10 ${isLight ? 'shadow-md' : ''}`}
         role="img"
         aria-labelledby="featured-image-caption"
@@ -206,7 +207,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: delaySeconds.xl }}
             className="absolute top-4 left-4 z-10"
           >
             <div className="bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs italic font-normal shadow-lg border border-white/20">

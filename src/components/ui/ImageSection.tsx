@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { durationSeconds } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 
 interface ImageSectionProps {
@@ -35,7 +36,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: durationSeconds.slow }}
       className="my-12 max-w-4xl mx-auto"
     >
       <div className={`relative rounded-xl overflow-hidden ${getHeightClass()} ${

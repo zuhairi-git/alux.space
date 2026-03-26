@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { durationSeconds, delaySeconds } from '@/design-system';
 import { MotionDiv, MotionButton } from '@/components/ui/MotionWrapper';
 import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { AnimationConfig } from '@/config/animations';
@@ -42,7 +43,7 @@ export default function MobileAnimationDemo() {
           <MotionDiv
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: durationSeconds.dramatic, delay: delaySeconds.md }}
             className="bg-blue-500 text-white p-4 rounded"
           >
             This box slides up from below. On mobile with animations disabled, it appears instantly.
@@ -67,7 +68,7 @@ export default function MobileAnimationDemo() {
           <motion.div
             initial={animationsDisabled ? { opacity: 1 } : { opacity: 0, scale: 0.5 }}
             animate={animationsDisabled ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-            transition={animationsDisabled ? { duration: 0 } : { duration: 0.6 }}
+            transition={animationsDisabled ? { duration: 0 } : { duration: durationSeconds.slower }}
             className="bg-green-500 text-white p-4 rounded w-32 h-32 flex items-center justify-center"
           >
             Scale Effect
@@ -83,7 +84,7 @@ export default function MobileAnimationDemo() {
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: durationSeconds.slow, delay: index * delaySeconds.xs }}
                 className="bg-orange-500 text-white p-4 rounded w-16 h-16 flex items-center justify-center"
               >
                 {item}

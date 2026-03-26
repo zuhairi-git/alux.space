@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { transition as t } from '@/design-system';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
@@ -166,7 +167,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={t.enterSlow}
         viewport={{ once: true }}
         className="h-full w-full group"
       >
@@ -176,7 +177,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             <motion.div
               className="absolute inset-0 w-full h-full"
               whileHover={{ scale: 1.06 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={t.enterSlow}
             >
               <Image
                 src={item.photo?.url || '/images/placeholder.jpg'}
@@ -236,7 +237,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={t.enterSlow}
       viewport={{ once: true }}
       className="h-full w-full group"
     >
@@ -252,7 +253,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
               <motion.div
                 className="absolute inset-0 w-full h-full scale-[1.01]"
                 whileHover={{ scale: 1.06 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={t.enterSlow}
               >
                 <Image
                   src={item.photo?.url || '/images/placeholder.jpg'}

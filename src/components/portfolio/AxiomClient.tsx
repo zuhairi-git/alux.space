@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { useTheme } from '@/context/ThemeContext';
@@ -108,8 +109,8 @@ export default function AxiomClient() {
 
     const pageVariants = {
         initial: (dir: number) => ({ opacity: 0, x: dir * 60, scale: 0.98 }),
-        animate: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.1 } },
-        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: { duration: 0.3 } })
+        animate: { opacity: 1, x: 0, scale: 1, transition: { ...t.enter, staggerChildren: stagger.slow } },
+        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: t.snap })
     };
 
     return (
@@ -141,7 +142,7 @@ export default function AxiomClient() {
                             ]}
                         />
 
-                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.enterSlow, delay: delaySeconds.md }}>
                             <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
                                 {content.intro}
                             </p>
@@ -162,7 +163,7 @@ export default function AxiomClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">â€¢</span>
+                                                        <span className="text-blue-400 mt-0.5">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -177,7 +178,7 @@ export default function AxiomClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "Accessibility isn't a checklist â€” it's a design constraint that makes everything better.",
+                                    "Accessibility isn't a checklist ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it's a design constraint that makes everything better.",
                                     "AI-generated documentation is 80% there. The remaining 20% is where the real design thinking lives.",
                                     "Consistent token naming is the most underrated part of a scalable design system."
                                 ].map((insight, index) => (

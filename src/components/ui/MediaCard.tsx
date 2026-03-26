@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { durationSeconds } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 
 interface MediaCardProps {
@@ -94,7 +95,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         stiffness: 500, 
         damping: 15,
         mass: 0.8,
-        duration: 0.15 
+        duration: durationSeconds.fast 
       } 
     },
   };
@@ -176,7 +177,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
                     type: "spring", 
                     stiffness: 300, 
                     damping: 15, 
-                    duration: 0.2
+                    duration: durationSeconds.brisk
                   }}
                 >
                   <Image
@@ -247,7 +248,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
                     type: "spring", 
                     stiffness: 300, 
                     damping: 15, 
-                    duration: 0.2
+                    duration: durationSeconds.brisk
                   }}
                 >
                   <Image
@@ -326,7 +327,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
-        duration: 0.4,
+        duration: durationSeconds.ease,
         ease: [0.25, 0.1, 0.25, 1] // Smooth cubic-bezier easing
       }}
       style={{ 

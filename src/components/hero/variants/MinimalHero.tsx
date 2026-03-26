@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
@@ -30,13 +31,13 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
   return (    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: durationSeconds.ease }}
       className="container mx-auto px-4 relative z-10"
     >
       <div className="max-w-3xl mx-auto">        <motion.h2
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          transition={t.snap}
           className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
         >
           {title}
@@ -46,7 +47,7 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
+            transition={{ ...t.snap, delay: delaySeconds.xs }}
             className="text-xl text-gray-300 mb-8"
           >
             {subtitle}
@@ -57,7 +58,7 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
+            transition={{ ...t.snap, delay: delaySeconds.md }}
           >
             <Link 
               href={localizedHref(cta.href)}
@@ -73,7 +74,7 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
         {showPodcastPlayer && (          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.3 }}
+            transition={{ ...t.snap, delay: delaySeconds.lg }}
             className="mt-16 max-w-3xl"
           >
             <PodcastPlayer />

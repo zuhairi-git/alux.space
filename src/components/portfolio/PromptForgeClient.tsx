@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { useTheme } from '@/context/ThemeContext';
@@ -21,7 +22,7 @@ export default function PromptForgeClient() {
             en: {
                 title: "PromptForge",
                 subtitle: "An AI-powered design workflow tool that turns prompts into UI concepts",
-                intro: "Designers waste hours in the ideation phase â€” sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
+                intro: "Designers waste hours in the ideation phase ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
                 projectType: "Project Type",
                 projectTypeValues: "Prototype",
                 tools: "Tools",
@@ -36,7 +37,7 @@ export default function PromptForgeClient() {
             fi: {
                 title: "PromptForge",
                 subtitle: "An AI-powered design workflow tool that turns prompts into UI concepts",
-                intro: "Designers waste hours in the ideation phase â€” sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
+                intro: "Designers waste hours in the ideation phase ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
                 projectType: "Project Type",
                 projectTypeValues: "Prototype",
                 tools: "Tools",
@@ -111,8 +112,8 @@ export default function PromptForgeClient() {
 
     const pageVariants = {
         initial: (dir: number) => ({ opacity: 0, x: dir * 60, scale: 0.98 }),
-        animate: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.1 } },
-        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: { duration: 0.3 } })
+        animate: { opacity: 1, x: 0, scale: 1, transition: { ...t.enter, staggerChildren: stagger.slow } },
+        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: t.snap })
     };
 
     return (
@@ -150,7 +151,7 @@ export default function PromptForgeClient() {
                             ]}
                         />
 
-                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.enterSlow, delay: delaySeconds.md }}>
                             <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
                                 {content.intro}
                             </p>
@@ -169,9 +170,9 @@ export default function PromptForgeClient() {
 
                                         {index === 2 && (
                                             <div className="mt-4 pt-4 border-t border-current/[0.06] space-y-2">
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">â€¢ Input form:</span> brief, platform, design style, goal</p>
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">â€¢ AI output:</span> wireframe desc, component suggestions, tone, mood</p>
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">â€¢ Iteration:</span> refine, regenerate, compare</p>
+                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ Input form:</span> brief, platform, design style, goal</p>
+                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ AI output:</span> wireframe desc, component suggestions, tone, mood</p>
+                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ Iteration:</span> refine, regenerate, compare</p>
                                             </div>
                                         )}
                                     </div>
@@ -184,7 +185,7 @@ export default function PromptForgeClient() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
                                     "A good prompt is a design brief in disguise.",
-                                    "AI doesn't replace ideation â€” it removes the blank page.",
+                                    "AI doesn't replace ideation ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it removes the blank page.",
                                     "The real skill is knowing what to ask, not what to draw."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">

@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import { durationSeconds, delaySeconds } from '@/design-system';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
 import PodcastPlayer from '@/components/PodcastPlayer';
@@ -30,13 +31,13 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
   return (    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: durationSeconds.ease }}
       className="container mx-auto px-4 text-center relative z-10"
     >
       <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">        <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
+          transition={{ duration: durationSeconds.ease, delay: delaySeconds.xs }}
           className="text-left"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -62,7 +63,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
         <motion.div
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          transition={{ duration: durationSeconds.ease, delay: delaySeconds.md }}
           className="relative"
         >
           {quote && (
@@ -72,7 +73,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
                 {quote.text}
                 <span className="absolute -bottom-4 right-0 text-blue-400 text-3xl">&rdquo;</span>
               </p>
-              <p className="text-blue-400 mt-6 text-right">— {quote.author}</p>
+              <p className="text-blue-400 mt-6 text-right">Ã¢â‚¬â€ {quote.author}</p>
             </div>
           )}        </motion.div>
       </div>
@@ -81,7 +82,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
       {showPodcastPlayer && (        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: delaySeconds.lg }}
           className="mt-16 max-w-3xl mx-auto"
         >
           <PodcastPlayer />

@@ -15,6 +15,9 @@ export {
   shadow,
   duration,
   durationSeconds,
+  delaySeconds,
+  stagger,
   easing,
+  transition,
   zIndex,
 } from './tokens';

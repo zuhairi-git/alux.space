@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { durationSeconds } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 
 interface QuoteBlockProps {
@@ -27,7 +28,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         initial={{ opacity: 0.5, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: durationSeconds.slow }}
         className="my-8 max-w-4xl mx-auto relative"
         role="region"
         aria-label="Quote"
@@ -41,7 +42,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         
         {author && (
           <footer className="text-right mt-2">
-            <cite className="font-medium text-primary">— {author}</cite>
+            <cite className="font-medium text-primary">ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â {author}</cite>
           </footer>
         )}
       </motion.div>
@@ -54,7 +55,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         initial={{ opacity: 0.5, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: durationSeconds.slow }}
         className="my-10 max-w-4xl mx-auto relative"
         role="region"
         aria-label="Quote"
@@ -73,7 +74,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
           
           {author && (
             <footer className="text-right">
-              <cite className="font-medium text-primary">— {author}</cite>
+              <cite className="font-medium text-primary">ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â {author}</cite>
             </footer>
           )}
         </div>
@@ -86,7 +87,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
       initial={{ opacity: 0.5, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: durationSeconds.slow }}
       className={`my-12 max-w-4xl mx-auto relative ${isLight ? 'text-gray-800' : 'text-gray-100'}`}
       role="region"
       aria-label="Quote"

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -43,7 +44,7 @@ export default function CaseStudyHero({
       <motion.nav
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: durationSeconds.ease }}
         className="mb-8"
       >
         <Link
@@ -88,7 +89,7 @@ export default function CaseStudyHero({
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              transition={{ ...t.enter, delay: delaySeconds.lg }}
               className="flex flex-wrap gap-2 mb-4"
             >
               {tags.map((tag, i) => (
@@ -105,7 +106,7 @@ export default function CaseStudyHero({
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
+            transition={{ ...t.enterSlow, delay: delaySeconds.sm }}
             className="text-4xl md:text-5xl font-bold text-white mb-3"
           >
             {title}
@@ -114,7 +115,7 @@ export default function CaseStudyHero({
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.5 }}
+            transition={{ ...t.enter, delay: delaySeconds.lg }}
             className="text-lg md:text-xl text-gray-200 max-w-2xl mb-6"
           >
             {subtitle}
@@ -125,7 +126,7 @@ export default function CaseStudyHero({
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
+              transition={{ ...t.enter, delay: delaySeconds.xl }}
               className="flex flex-col sm:flex-row gap-3"
             >
               {actions.map((action, i) => {
@@ -175,7 +176,7 @@ export default function CaseStudyHero({
           className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-14 px-2"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ ...t.enter, delay: delaySeconds.lg }}
         >
           {meta.map((item, i) => (
             <motion.div
@@ -183,7 +184,7 @@ export default function CaseStudyHero({
               className="flex items-start gap-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.35 + i * 0.07 }}
+              transition={{ duration: durationSeconds.ease, delay: 0.35 + i * 0.07 }}
             >
               <span className={`material-symbols text-lg mt-0.5 flex-shrink-0 ${
                 isColorful ? 'text-purple-400/60' : isLight ? 'text-primary/50' : 'text-primary/50'

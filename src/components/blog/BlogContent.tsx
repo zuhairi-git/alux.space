@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { delaySeconds } from '@/design-system';
 import QuoteBlock from '../ui/QuoteBlock';
 import ChapterDivider from '../ui/ChapterDivider';
 
@@ -82,7 +83,7 @@ function formatRegularContent(content: string) {
             id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: delaySeconds.xs }}
             className="text-3xl font-bold mt-12 mb-6 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
             tabIndex={-1}
           >
@@ -101,7 +102,7 @@ function formatRegularContent(content: string) {
             id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: delaySeconds.xs }}
             className="text-2xl font-bold mt-10 mb-5 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
             tabIndex={-1}
           >
@@ -120,7 +121,7 @@ function formatRegularContent(content: string) {
             id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: delaySeconds.xs }}
             className="text-xl font-semibold mt-8 mb-4 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
             tabIndex={-1}
           >
@@ -139,7 +140,7 @@ function formatRegularContent(content: string) {
             id={headingId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: delaySeconds.xs }}
             className="text-lg font-semibold mt-6 mb-3 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
             tabIndex={-1}
           >
@@ -158,7 +159,7 @@ function formatRegularContent(content: string) {
           key={index} 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: delaySeconds.xs }}
           className="list-disc pl-6 mb-6 space-y-2"
         >
           {items.map((item, i) => (
@@ -179,7 +180,7 @@ function formatRegularContent(content: string) {
           key={index} 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: delaySeconds.xs }}
           className="list-decimal pl-6 mb-6 space-y-2"
         >
           {items.map((item, i) => (
@@ -198,7 +199,7 @@ function formatRegularContent(content: string) {
           key={index} 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: delaySeconds.xs }}
           className="mb-6"
         >
           <strong className="text-primary">{trimmedBlock.split('\n')[0]}</strong>
@@ -216,7 +217,7 @@ function formatRegularContent(content: string) {
           key={index}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: delaySeconds.xs }}
           className="mb-6"
           role="region"
           aria-label={`Code block in ${language}`}
@@ -236,18 +237,18 @@ function formatRegularContent(content: string) {
     if (trimmedBlock.startsWith('>')) {
       const quoteContent = trimmedBlock.replace(/^>\s?/, '').replace(/\n>\s?/g, '\n');
       
-      // Detect if there's an author attribution in the format "> Quote text\n> — Author"
-      const authorMatch = quoteContent.match(/\n—\s*(.+)$/);
+      // Detect if there's an author attribution in the format "> Quote text\n> ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â Author"
+      const authorMatch = quoteContent.match(/\nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â\s*(.+)$/);
       
       if (authorMatch) {
-        const quote = quoteContent.replace(/\n—\s*.+$/, '');
+        const quote = quoteContent.replace(/\nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â\s*.+$/, '');
         const author = authorMatch[1];
         return (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: delaySeconds.xs }}
           >
             <QuoteBlock quote={quote} author={author} variant="default" />
           </motion.div>
@@ -258,7 +259,7 @@ function formatRegularContent(content: string) {
             key={index}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: delaySeconds.xs }}
           >
             <QuoteBlock quote={quoteContent} variant="default" />
           </motion.div>
@@ -274,7 +275,7 @@ function formatRegularContent(content: string) {
           key={index} 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: delaySeconds.xs }}
           className="mb-6 text-lg text-theme leading-relaxed"
         >
           {parts.map((part, i) => {
@@ -295,7 +296,7 @@ function formatRegularContent(content: string) {
           key={index} 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: delaySeconds.xs }}
           className="mb-6 text-lg text-theme leading-relaxed"
         >
           {parts.map((part, i) => {
@@ -314,7 +315,7 @@ function formatRegularContent(content: string) {
         key={index} 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: delaySeconds.xs }}
         className="mb-6 text-lg text-theme leading-relaxed"
       >
         {trimmedBlock}
@@ -341,7 +342,7 @@ function processIntroduction(intro: string) {
         id="top"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: delaySeconds.xs }}
         className="text-3xl font-bold mb-10 text-center text-primary"
       >
         {title}
@@ -358,7 +359,7 @@ function processIntroduction(intro: string) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: delaySeconds.md }}
             className="max-w-3xl mx-auto mb-8 text-center"
           >
             <p className="text-xl text-theme leading-relaxed italic">
@@ -372,7 +373,7 @@ function processIntroduction(intro: string) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: delaySeconds.md }}
           className="max-w-3xl mx-auto mb-16"
         >
           {formatRegularContent(remainingContent)}

@@ -170,18 +170,52 @@ export const shadow = {
 // ─── Motion ─────────────────────────────────────────────────
 
 export const duration = {
+  instant: '100ms',
   fast:    '150ms',
   normal:  '300ms',
   slow:    '500ms',
+  slower:  '600ms',
   glacial: '1000ms',
 } as const;
 
 /** Numeric seconds — use with Framer Motion `transition.duration` */
 export const durationSeconds = {
+  instant: 0.1,
   fast:    0.15,
+  brisk:   0.2,
   normal:  0.3,
+  ease:    0.4,
   slow:    0.5,
+  slower:  0.6,
+  dramatic:0.8,
   glacial: 1,
+  ultra:   1.5,
+  cinematic: 2,
+  ambient: 4,
+} as const;
+
+/** Standard delay values (seconds) for Framer Motion */
+export const delaySeconds = {
+  none:  0,
+  xs:    0.1,
+  sm:    0.15,
+  md:    0.2,
+  lg:    0.3,
+  xl:    0.4,
+  '2xl': 0.5,
+  '3xl': 0.6,
+  '4xl': 0.8,
+  '5xl': 1,
+} as const;
+
+/** Stagger multipliers for staggered list animations (seconds per item) */
+export const stagger = {
+  fast:   0.06,
+  normal: 0.08,
+  slow:   0.1,
+  relaxed:0.12,
+  lazy:   0.15,
+  dramatic: 0.2,
 } as const;
 
 /** Easing curves as CSS and as Framer Motion tuples */
@@ -189,6 +223,25 @@ export const easing = {
   out:      { css: 'cubic-bezier(0.22,1,0.36,1)',   array: [0.22, 1, 0.36, 1] as const },
   standard: { css: 'cubic-bezier(0.4,0,0.2,1)',     array: [0.4, 0, 0.2, 1]   as const },
   gentle:   { css: 'cubic-bezier(0.16,1,0.3,1)',    array: [0.16, 1, 0.3, 1]  as const },
+} as const;
+
+// ─── Framer Motion Transition Presets ───────────────────────
+// Drop-in `transition` objects for the most common animation patterns.
+
+/** Fade/slide in — standard page content entrance */
+export const transition = {
+  /** duration: 0.6s, ease-out — hero text, section entrances */
+  enterSlow: { duration: durationSeconds.slower, ease: easing.out.array },
+  /** duration: 0.5s, ease-out — cards, blocks */
+  enter:     { duration: durationSeconds.slow,   ease: easing.out.array },
+  /** duration: 0.3s, standard — toggles, small UI */
+  snap:      { duration: durationSeconds.normal, ease: easing.standard.array },
+  /** duration: 0.2s — micro-interactions, hover feedback */
+  micro:     { duration: durationSeconds.brisk },
+  /** spring — bouncy interactive elements */
+  spring:    { type: 'spring' as const, stiffness: 400, damping: 30 },
+  /** spring — softer, modal/sheet reveals */
+  springGentle: { type: 'spring' as const, stiffness: 300, damping: 30 },
 } as const;
 
 // ─── Z-Index ────────────────────────────────────────────────

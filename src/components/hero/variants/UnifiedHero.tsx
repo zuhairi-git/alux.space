@@ -10,7 +10,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
-import { palette } from '@/design-system';
+import { durationSeconds, delaySeconds, transition as t, palette } from '@/design-system';
 import { 
   MotionDiv, 
   MotionH1, 
@@ -55,12 +55,12 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={t.snap}
         >            {/* Corner decorative accents */}            <MotionDiv
               className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              transition={{ ...t.snap, delay: delaySeconds.xs }}
             >
               <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-cyan-400/30' : 'border-blue-400/30'} rounded-tl-lg`} />
             </MotionDiv>
@@ -69,7 +69,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              transition={{ ...t.snap, delay: delaySeconds.xs }}
             >
               <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-fuchsia-400/30' : 'border-purple-400/30'} rounded-br-lg`} />
             </MotionDiv>
@@ -78,7 +78,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute -left-20 top-[40%] hidden md:block" 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: durationSeconds.glacial, delay: delaySeconds['2xl'] }}
             >
               <div className="flex flex-col items-center gap-3">
                 <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-blue-400/30 to-transparent'}`}></div>
@@ -90,7 +90,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute -right-20 top-[40%] hidden md:block" 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: durationSeconds.glacial, delay: delaySeconds['2xl'] }}
             >
               <div className="flex flex-col items-center gap-3">
                 <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-blue-400/30 to-transparent'}`}></div>
@@ -116,7 +116,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={t.snap}
               className="absolute inset-0 -z-10 opacity-20 overflow-hidden"
             >
               <div className="absolute top-0 left-[20%] w-3/5 h-full" 
@@ -135,7 +135,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: durationSeconds.slow }}
               >
                 {words.map((word, i) => (
                   <MotionSpan
@@ -143,8 +143,8 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ 
-                      delay: i * 0.2, 
-                      duration: 0.8,
+                      delay: i * delaySeconds.md, 
+                      duration: durationSeconds.dramatic,
                       ease: [0.19, 1, 0.22, 1]
                     }}
                     className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
@@ -163,14 +163,14 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: durationSeconds.slow }}
               >
                 {/* Decorative line above title */}
                 <MotionSpan 
                   className="block mx-auto w-12 h-1 bg-gradient-to-r from-blue-400/50 to-purple-400/50 mb-6"
                   initial={{ width: 0 }}
                   animate={{ width: 48 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
+                  transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
                 />
                 
                 {title}
@@ -180,7 +180,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   className="absolute -z-10 h-4 rounded-full bg-blue-400/10 bottom-1"
                   initial={{ width: 0, x: '50%' }}
                   animate={{ width: '70%', x: '15%' }}
-                  transition={{ duration: 0.8, delay: 1.2 }}
+                  transition={{ duration: durationSeconds.dramatic, delay: 1.2 }}
                 />
               </MotionH1>
             )}
@@ -193,7 +193,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: durationSeconds.dramatic, delay: delaySeconds.lg }}
             className={`relative z-20 ${
               isColorful 
                 ? 'mb-16 max-w-5xl mx-auto' 
@@ -204,7 +204,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             <MotionDiv
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
               className={`w-24 h-0.5 mx-auto mb-6 ${
                 isColorful
                   ? 'bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-blue-500'
@@ -217,7 +217,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             <MotionP
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['3xl'] }}
               className={`${
                 isColorful 
                   ? 'text-2xl md:text-3xl lg:text-4xl leading-relaxed' 
@@ -238,13 +238,13 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             >
               {/* Split subtitle into parts for better visual hierarchy */}
               <span className="block">
-                {subtitle.split('—')[0]?.trim()}
+                {subtitle.split('Ã¢â‚¬â€')[0]?.trim()}
               </span>
-              {subtitle.includes('—') && (
+              {subtitle.includes('Ã¢â‚¬â€') && (
                 <MotionSpan 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.9 }}
+                  transition={{ duration: durationSeconds.dramatic, delay: 0.9 }}
                   className={`block mt-4 ${
                     isColorful ? 'text-lg md:text-xl lg:text-2xl' : 'text-lg md:text-xl'
                   }`}
@@ -258,7 +258,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     opacity: 0.85
                   }}
                 >
-                  — {subtitle.split('—')[1]?.trim()}
+                  Ã¢â‚¬â€ {subtitle.split('Ã¢â‚¬â€')[1]?.trim()}
                 </MotionSpan>
               )}
             </MotionP>
@@ -267,7 +267,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             <MotionDiv
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.8 }}
+              transition={{ duration: 1.2, delay: delaySeconds['4xl'] }}
               className="absolute inset-0 -z-10 blur-2xl"
               style={{
                 background: isColorful
@@ -324,7 +324,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: isColorful ? 0.8 : 0.6, duration: 0.8 }}
+            transition={{ delay: isColorful ? delaySeconds['4xl'] : delaySeconds['3xl'], duration: durationSeconds.dramatic }}
             className={`relative ${isColorful ? 'max-w-4xl mx-auto mb-12' : 'max-w-2xl mx-auto mt-16 p-8 rounded-lg bg-white/5 backdrop-blur-sm border-t border-l border-white/10'}`}
           >
             {isColorful ? (
@@ -371,9 +371,9 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     className="block text-blue-400 mt-6 text-center"
                     initial={{ x: -10, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 1 }}
+                    transition={{ delay: delaySeconds['5xl'] }}
                   >
-                    — {quote.author}
+                    Ã¢â‚¬â€ {quote.author}
                   </MotionSpan>
                 </p>
                 
@@ -403,7 +403,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            transition={{ delay: delaySeconds['4xl'], duration: durationSeconds.dramatic }}
             className="text-center relative"
           >
             <MotionDiv
@@ -411,7 +411,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={t.snap}
               className="inline-block relative"
             >
               <MotionDiv 

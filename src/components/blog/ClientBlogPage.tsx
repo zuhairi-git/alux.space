@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { durationSeconds, delaySeconds, stagger, transition as mt } from '@/design-system';
 import BlogCard from './BlogCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -36,7 +37,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
   const categoryTranslations: Record<string, Record<string, string>> = {
       'Artificial Intelligence': {
         en: 'Artificial Intelligence',
-        fi: 'Tekoäly'
+        fi: 'TekoÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ly'
       },
       'Technology': {
         en: 'Technology',
@@ -79,7 +80,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
       },
       'Work-Life Balance': {
         'en': 'Work-Life Balance',
-        'fi': 'Työelämän ja vapaa-ajan tasapaino'
+        'fi': 'TyÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶elÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤mÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤n ja vapaa-ajan tasapaino'
       },
       'Creativity': {
         'en': 'Creativity',
@@ -99,7 +100,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
   
   const getNoPostsText = (): string => {
     switch(locale) {
-      case 'fi': return 'Ei artikkeleita tässä kategoriassa.';
+      case 'fi': return 'Ei artikkeleita tÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ssÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ kategoriassa.';
       default: return 'No posts found in this category.';
     }
   };
@@ -148,7 +149,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: durationSeconds.slow }}
             className="text-4xl md:text-5xl font-bold mb-4 tracking-tight"
             tabIndex={-1}
             id="blog-page-title"
@@ -159,7 +160,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ ...mt.enter, delay: delaySeconds.md }}
             className="text-lg opacity-50 max-w-2xl leading-relaxed"
             role="doc-subtitle"
           >
@@ -172,7 +173,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-current/10"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          transition={{ duration: durationSeconds.ease, delay: delaySeconds.lg }}
           role="region" 
           aria-labelledby="blog-controls"
         >
@@ -256,7 +257,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
               show: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.08
+                  staggerChildren: stagger.normal
                 }
               }
             }}
@@ -281,7 +282,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
                   }}
                   className={`h-full ${viewMode === 'overlay' ? 'aspect-[3/4]' : ''}`}
                   whileHover={{ y: -4 }}
-                  transition={{ duration: 0.25 }}
+                  transition={{ duration: durationSeconds.brisk }}
                   role="article"
                   aria-labelledby={`post-title-${post.slug}`}
                 >

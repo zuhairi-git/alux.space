@@ -31,7 +31,7 @@ const BackToTop: React.FC = () => {
     switch(locale) {
       case 'fi':
         return {
-          label: 'Takaisin ylös',
+          label: 'Takaisin ylÃƒÆ’Ã‚Â¶s',
           announcement: 'Siirretty sivun alkuun'
         };
       default:

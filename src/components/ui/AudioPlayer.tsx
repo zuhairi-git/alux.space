@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { durationSeconds, delaySeconds } from '@/design-system';
 
 interface AudioPlayerProps {
   src: string;
@@ -619,7 +620,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               className="flex items-center space-x-3 mb-2"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: delaySeconds.md }}
             >
               <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${styles.progressGradient}`} />
               <span className={`text-sm uppercase tracking-wider font-medium ${styles.textSecondary}`}>
@@ -629,7 +630,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               className={`text-xl font-bold ${styles.textPrimary}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: delaySeconds.lg }}
             >
               {title || 'Untitled Audio'}
             </motion.h3>
@@ -652,7 +653,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             }`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: delaySeconds['2xl'] }}
             whileHover={{ scale: 1.05 }}
             title={availableLanguages.length > 1 ? `Available in ${availableLanguages.length} languages` : `Audio language: ${language.toUpperCase()}`}
           >
@@ -667,7 +668,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
         className="h-12 flex items-end justify-center gap-1 mb-4 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: delaySeconds['3xl'] }}
       >
         {waveformBars.map((bar) => (
           <motion.div
@@ -752,7 +753,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             setIsTouching(false);
           }}
           whileHover={!isMobile && !animationsDisabled ? { height: 16 } : {}}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: durationSeconds.brisk }}
         >
           {/* Buffered ranges */}
           {bufferedRanges.map((range, index) => (
@@ -785,7 +786,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               className="absolute top-2/2 transform -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg border-2 border-purple-500 opacity-100"
               style={{ left: `${progressPercentage}%`, transform: 'translate(-50%, -50%)' }}
               animate={isTouching && !animationsDisabled ? { scale: 1.3 } : {}}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: durationSeconds.brisk }}
             />
           )}
           
@@ -916,7 +917,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 fill="currentColor" 
                 viewBox="0 0 20 20"
                 whileHover={!isMobile && !animationsDisabled ? { rotate: 90 } : {}}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: durationSeconds.normal }}
               >
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
               </motion.svg>
@@ -942,7 +943,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 exit={animationsDisabled ? {} : { y: 10, opacity: 0 }}
                 className={styles.textAccent}
               >
-                {playbackRate}×
+                {playbackRate}ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
               </motion.span>
             </motion.button>
               {/* Share button - Enhanced for mobile */}
@@ -967,7 +968,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   animate={animationsDisabled ? {} : { rotate: showShareMenu ? 15 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: durationSeconds.normal }}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                 </motion.svg>
@@ -981,10 +982,10 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                       className={`absolute ${styles.container} rounded-2xl backdrop-blur-2xl p-4 min-w-[250px] shadow-2xl border border-white/10`}
                       data-share-menu
                       transition={{ 
-                        duration: 0.2, 
+                        duration: durationSeconds.brisk, 
                         ease: "easeOut",
-                        opacity: { duration: 0.15 },
-                        scale: { duration: 0.2 }
+                        opacity: { duration: durationSeconds.fast },
+                        scale: { duration: durationSeconds.brisk }
                       }}style={{
                       zIndex: 999999,
                       position: 'absolute',
@@ -1198,7 +1199,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 : 'bg-green-900/30 text-green-300 border border-green-800'
             } shadow-xl z-50`}
           >
-            ✓ {t('blog.aria.audioLinkCopied')}
+            ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ {t('blog.aria.audioLinkCopied')}
           </motion.div>
         )}
       </AnimatePresence>

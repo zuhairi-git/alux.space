@@ -8,6 +8,7 @@ import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
+import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 
 const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { locale } = useLanguage();
@@ -29,14 +30,14 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
   };  return (    <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: durationSeconds.ease }}
       className={`container mx-auto px-4 relative z-10`}
     >
       {/* Decorative accents */}      <motion.div
         className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
+        transition={{ ...t.snap, delay: delaySeconds.xs }}
       >
         <div className="w-full h-full border-t-2 border-l-2 border-blue-400/30 rounded-tl-lg" />
       </motion.div>
@@ -45,7 +46,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
+        transition={{ ...t.snap, delay: delaySeconds.xs }}
       >
         <div className="w-full h-full border-b-2 border-r-2 border-purple-400/30 rounded-br-lg" />
       </motion.div>
@@ -53,7 +54,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         className="absolute -left-20 top-[40%] hidden md:block" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: durationSeconds.slow, delay: delaySeconds.md }}
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
@@ -65,7 +66,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         className="absolute -right-20 top-[40%] hidden md:block" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: durationSeconds.slow, delay: delaySeconds.md }}
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-400/30 to-transparent"></div>
@@ -84,14 +85,14 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           className="text-5xl md:text-6xl font-bold mb-6 text-center relative"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: durationSeconds.ease }}
         >
           {/* Decorative line above title */}
           <motion.span 
             className="block mx-auto w-12 h-1 bg-gradient-to-r from-blue-400/50 to-purple-400/50 mb-6"
             initial={{ width: 0 }}
             animate={{ width: 48 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: durationSeconds.ease, delay: delaySeconds.md }}
           ></motion.span>
           
           {title}
@@ -100,21 +101,21 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             className="absolute -z-10 h-4 rounded-full bg-blue-400/10 bottom-1"
             initial={{ width: 0, x: '50%' }}
             animate={{ width: '70%', x: '15%' }}
-            transition={{ duration: 0.4, delay: 0.6 }}
+            transition={{ duration: durationSeconds.ease, delay: delaySeconds['3xl'] }}
           />
         </motion.h1>
           <motion.p 
           className="text-xl md:text-2xl text-gray-300 mb-8 text-center relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.15 }}
+          transition={{ duration: durationSeconds.ease, delay: delaySeconds.sm }}
         >
           {subtitle}
         </motion.p>
       </div>      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.25 }}
+        transition={{ delay: delaySeconds.lg }}
         className="text-center relative"
       >{cta && (
           <motion.div
@@ -154,7 +155,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
       {quote && (        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: delaySeconds.xl }}
           className="relative max-w-2xl mx-auto mt-16 p-8 rounded-lg bg-white/5 backdrop-blur-sm text-center border-t border-l border-white/10"
         >
           {/* Decorative elements */}          <motion.div 
@@ -192,9 +193,9 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="block text-blue-400 mt-6 text-center"
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 1 }}
+              transition={{ delay: delaySeconds['5xl'] }}
             >
-              — {quote.author}
+              Ã¢â‚¬â€ {quote.author}
             </motion.span>
           </p>
           
@@ -220,7 +221,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: delaySeconds['4xl'] }}
           className="mt-16"
         >
           <PodcastPlayer />

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { useTheme } from '@/context/ThemeContext';
@@ -20,7 +21,7 @@ export default function IntelligenceByDesignClient() {
             en: {
                 title: "Intelligence by Design",
                 subtitle: "Documenting the real impact of AI integration in a live product",
-                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully â€” not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
+                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -31,7 +32,7 @@ export default function IntelligenceByDesignClient() {
             fi: {
                 title: "Intelligence by Design",
                 subtitle: "Documenting the real impact of AI integration in a live product",
-                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully â€” not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
+                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -112,8 +113,8 @@ export default function IntelligenceByDesignClient() {
 
     const pageVariants = {
         initial: (dir: number) => ({ opacity: 0, x: dir * 60, scale: 0.98 }),
-        animate: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.1 } },
-        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: { duration: 0.3 } })
+        animate: { opacity: 1, x: 0, scale: 1, transition: { ...t.enter, staggerChildren: stagger.slow } },
+        exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98, transition: t.snap })
     };
 
     return (
@@ -144,7 +145,7 @@ export default function IntelligenceByDesignClient() {
                             ]}
                         />
 
-                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                        <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.enterSlow, delay: delaySeconds.md }}>
                             <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
                                 {content.intro}
                             </p>
@@ -165,7 +166,7 @@ export default function IntelligenceByDesignClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">â€¢</span>
+                                                        <span className="text-blue-400 mt-0.5">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -180,9 +181,9 @@ export default function IntelligenceByDesignClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "Users don't want AI to think for them â€” they want it to handle the parts they find tedious.",
+                                    "Users don't want AI to think for them ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they want it to handle the parts they find tedious.",
                                     "AI features without explainability create distrust, not efficiency.",
-                                    "The biggest win wasn't the AI output â€” it was removing 3 manual steps from a daily workflow."
+                                    "The biggest win wasn't the AI output ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it was removing 3 manual steps from a daily workflow."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
                                         <span className="material-symbols text-4xl text-purple-400/20 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>

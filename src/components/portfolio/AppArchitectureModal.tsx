@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { durationSeconds } from '@/design-system';
 
 interface AppArchitectureModalProps {
     isOpen: boolean;
@@ -80,7 +81,7 @@ function WorkflowDiagram({ theme }: { theme: string }) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "0px 0px -50px 0px" }}
-            transition={{ delay, duration: 0.5, type: 'spring', bounce: 0.4 }}
+            transition={{ delay, duration: durationSeconds.slow, type: 'spring', bounce: 0.4 }}
             whileHover={{ scale: 1.03, y: -4 }}
             className={`flex items-start gap-4 p-5 sm:p-6 rounded-3xl shadow-md border backdrop-blur-md w-full ${isLight ? bgLight : bgDark} ${isLight ? 'border-black/5' : 'border-white/5'} ${isLarge ? 'md:w-[450px] mx-auto' : ''} z-10 relative`}
         >
@@ -113,11 +114,11 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <div className={`absolute top-0 left-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-0 left-1/2 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-0 right-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
 
             {/* 2. Core Engine */}
@@ -135,14 +136,14 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <div className={`absolute top-1/2 right-[37.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-1/2 right-[12.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
 
             {/* 3. Features */}
@@ -164,16 +165,16 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
                 <div className={`absolute top-1/2 left-1/2 h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-solid ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
 
             {/* 4. End User App */}
             <div className="relative z-10 w-full flex justify-center pb-8">
-                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile — corporate-grade iOS & Android experience." bgLight="bg-slate-100" bgDark="bg-zinc-800/90" colorLight="bg-white text-slate-700 shadow-md" colorDark="bg-zinc-700 text-slate-200 shadow-md" />
+                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile Ã¢â‚¬â€ corporate-grade iOS & Android experience." bgLight="bg-slate-100" bgDark="bg-zinc-800/90" colorLight="bg-white text-slate-700 shadow-md" colorDark="bg-zinc-700 text-slate-200 shadow-md" />
             </div>
 
         </div>

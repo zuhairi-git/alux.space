@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import { useLanguage } from '@/context/LanguageContext';
@@ -38,7 +39,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
   return (    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: durationSeconds.ease }}
       className="container mx-auto px-4 relative z-10"
     >
       {/* Title Section */}
@@ -82,8 +83,8 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
-                    delay: i * 0.1, 
-                    duration: 0.4,
+                    delay: i * delaySeconds.xs, 
+                    duration: durationSeconds.ease,
                     ease: [0.19, 1, 0.22, 1]
                   }}
                   className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
@@ -96,7 +97,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
             {/* Decorative elements */}            <motion.div 
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 0.7 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              transition={{ delay: delaySeconds.md, duration: durationSeconds.slow }}
               className="absolute -z-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500/10 to-fuchsia-600/10 blur-3xl"
               style={{
                 left: '50%',
@@ -110,7 +111,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
         {subtitle && (          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ duration: durationSeconds.ease, delay: delaySeconds.lg }}
             className={`text-2xl md:text-3xl  ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
           >
             {subtitle}
@@ -120,7 +121,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
         {quote && (          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.4 }}
+            transition={{ delay: delaySeconds.xl, duration: durationSeconds.ease }}
             className="relative max-w-4xl mx-auto mb-12"
           >
             <QuoteBlock 
@@ -134,7 +135,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
         {cta && (          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.4 }}
+            transition={{ delay: delaySeconds['2xl'], duration: durationSeconds.ease }}
             className="text-center"
           ><Link
               href={localizedHref(cta.href)}
@@ -161,7 +162,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               {theme === 'colorful' && (
                 <motion.div 
                   className="absolute inset-0 bg-black/10"
-                  transition={{ duration: 0.3 }}
+                  transition={t.snap}
                 />
               )}
               
@@ -186,7 +187,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
         {showPodcastPlayer && (          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.4 }}
+            transition={{ delay: delaySeconds['3xl'], duration: durationSeconds.ease }}
             className="mt-16 max-w-3xl mx-auto"
           >
             <PodcastPlayer />

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 
 interface CaseStudySectionProps {
@@ -111,7 +112,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6 }}
+      transition={t.enterSlow}
       className={`mb-20 md:mb-24 relative ${className}`}
     >
       {/* Abstract background shapes */}
@@ -151,7 +152,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
                 initial={{ scale: 0.9, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ ...t.enterSlow, delay: delaySeconds.md }}
                 className="relative"
               >
                 {/* Subtle glow behind */}
@@ -177,7 +178,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ ...t.enterSlow, delay: delaySeconds.lg }}
             className="text-center mb-14 relative"
           >
             <h2 className={`text-2xl md:text-3xl font-bold ${isLight ? 'text-gray-900' : 'text-white'}`}>
@@ -196,7 +197,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
           hidden: {},
           visible: {
             transition: {
-              staggerChildren: 0.08,
+              staggerChildren: stagger.normal,
             },
           },
         }}
@@ -222,7 +223,7 @@ export const CaseStudyItem: React.FC<{
       visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+        transition: t.enter,
       },
     }}
     className={className}
