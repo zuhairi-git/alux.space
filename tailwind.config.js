@@ -35,6 +35,11 @@ module.exports = {
           thumb: 'var(--scrollbar-thumb)',
           'thumb-hover': 'var(--scrollbar-thumb-hover)',
         },
+        // Navigation colors (from tokens.css)
+        nav: {
+          bg: 'var(--nav-bg)',
+          border: 'var(--nav-border)',
+        },
       },
       
       // Typography
@@ -132,17 +137,17 @@ module.exports = {
         },
       },
       
-      // Box shadow configurations
+      // Box shadow configurations — values mirror tokens.css
       boxShadow: {
-        'glow-sm': '0 0 10px rgba(59, 130, 246, 0.3)',
-        'glow': '0 0 20px rgba(59, 130, 246, 0.4)',
-        'glow-lg': '0 0 30px rgba(59, 130, 246, 0.5)',
-        'glow-purple': '0 0 20px rgba(168, 85, 247, 0.4)',
-        'glow-pink': '0 0 20px rgba(255, 0, 204, 0.4)',
-        'glow-cyan': '0 0 20px rgba(0, 255, 255, 0.4)',
-        'card-light': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
-        'card-light-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08)',
-        'card-colorful': '0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+        'glow-sm': 'var(--shadow-glow-sm)',
+        'glow': 'var(--shadow-glow)',
+        'glow-lg': 'var(--shadow-glow-lg)',
+        'glow-purple': 'var(--shadow-glow-purple)',
+        'glow-pink': 'var(--shadow-glow-pink)',
+        'glow-cyan': 'var(--shadow-glow-cyan)',
+        'card-light': 'var(--shadow-card-light)',
+        'card-light-hover': 'var(--shadow-card-light-hover)',
+        'card-colorful': 'var(--shadow-card-colorful)',
       },
       
       // Border radius for theme consistency
