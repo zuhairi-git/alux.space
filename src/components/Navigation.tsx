@@ -162,8 +162,8 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-2 p-2 rounded-full border backdrop-blur-xl shadow-lg shadow-black/5"
       style={{
-        backgroundColor: theme === 'colorful' ? 'rgba(5, 0, 35, 0.8)' : theme === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(17, 24, 39, 0.8)',
-        borderColor: theme === 'colorful' ? 'rgba(255, 0, 204, 0.3)' : theme === 'light' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)',
+        backgroundColor: 'var(--nav-bg)',
+        borderColor: 'var(--nav-border)',
       }}
     >
       {/* Logo/Avatar */}
@@ -287,7 +287,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
             className={`
               absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
               ${theme === 'colorful'
-                ? 'bg-[#050023]/90 border-purple-500/30'
+                ? 'bg-[var(--background)]/90 border-purple-500/30'
                 : theme === 'light'
                   ? 'bg-white/90 border-gray-200'
                   : 'bg-gray-900/90 border-gray-700'
@@ -399,7 +399,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
         className={`
           md:hidden fixed bottom-6 left-4 right-4 z-50 h-16 rounded-2xl border backdrop-blur-xl shadow-lg shadow-black/10 flex items-center justify-between px-2
           ${theme === 'colorful'
-            ? 'bg-[#050023]/80 border-purple-500/30'
+            ? 'bg-[var(--background)]/80 border-purple-500/30'
             : theme === 'light'
               ? 'bg-white/80 border-white/50'
               : 'bg-gray-900/80 border-gray-800/50'
@@ -471,7 +471,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className={`
               fixed inset-0 z-40 flex flex-col pt-20 pb-28 px-6 overflow-y-auto
-              ${theme === 'colorful' ? 'bg-[#050023]/95' : theme === 'light' ? 'bg-white/95' : 'bg-gray-900/95'}
+              ${theme === 'colorful' ? 'bg-[var(--background)]/95' : theme === 'light' ? 'bg-white/95' : 'bg-gray-900/95'}
               backdrop-blur-xl
             `}
           >

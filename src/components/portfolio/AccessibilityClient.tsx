@@ -461,7 +461,7 @@ export default function AccessibilityClient() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isColorful
-        ? 'bg-[#050023]'
+        ? 'bg-[var(--background)]'
         : isLight
           ? 'bg-gradient-to-br from-slate-50 to-gray-100'
           : 'bg-gradient-to-br from-gray-900 to-black'

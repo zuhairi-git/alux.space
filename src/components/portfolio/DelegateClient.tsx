@@ -127,7 +127,7 @@ export default function DelegateClient() {
                 animate="animate"
                 exit="exit"
                 variants={pageVariants}
-                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[#050023]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
+                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[var(--background)]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
             >
                 <Navigation />
                 <CaseStudyProgress />
