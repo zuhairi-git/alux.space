@@ -403,6 +403,190 @@ function RegistrySection({ categoryKey }: { categoryKey: ComponentEntry['categor
   );
 }
 
+/* ── Governance sections ──────────────────────────────── */
+
+function ConventionsSection() {
+  return (
+    <div className="space-y-6">
+      <div className="theme-card-flex p-5 rounded-xl space-y-4">
+        <h4 className="text-sm font-semibold">Token Usage Rules</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left border-b border-gray-200 dark:border-gray-700">
+                <th className="py-1.5 pr-4 font-medium">Context</th>
+                <th className="py-1.5 pr-4 font-medium">Use</th>
+                <th className="py-1.5 font-medium">Avoid</th>
+              </tr>
+            </thead>
+            <tbody className="font-mono text-xs">
+              {/* eslint-disable design-system/no-hardcoded-colors -- example content showing what to avoid */}
+              {[
+                ['CSS / Tailwind', 'var(--primary), bg-primary', '#3b82f6, bg-[#3b82f6]'],
+                ['Inline styles', 'var(--space-4)', '16px'],
+                ['Framer Motion', 'tokens.durationSeconds.normal', '0.3'],
+                ['Canvas / SVG JS', 'palette.blue[500]', "'#3b82f6'"],
+              ].map(([ctx, use, avoid]) => (
+              /* eslint-enable design-system/no-hardcoded-colors */
+                <tr key={ctx} className="border-b border-gray-100 dark:border-gray-800">
+                  <td className="py-1.5 pr-4 font-sans text-sm">{ctx}</td>
+                  <td className="py-1.5 pr-4 text-green-600 dark:text-green-400">{use}</td>
+                  <td className="py-1.5 text-red-500 dark:text-red-400 line-through opacity-70">{avoid}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="theme-card-flex p-5 rounded-xl space-y-3">
+        <h4 className="text-sm font-semibold">Token Files</h4>
+        <ul className="space-y-2 text-sm">
+          {[
+            ['tokens.css', 'Single source of truth — CSS custom properties'],
+            ['tokens.ts', 'Typed JS mirror for Framer Motion / canvas'],
+            ['components.ts', 'Component registry (props, tokens, a11y)'],
+          ].map(([file, desc]) => (
+            <li key={file} className="flex gap-2">
+              <code className="text-xs px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 shrink-0">{file}</code>
+              <span className="opacity-70">{desc}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="theme-card-flex p-5 rounded-xl space-y-3">
+        <h4 className="text-sm font-semibold">Theme Compatibility</h4>
+        <p className="text-sm opacity-70">Every new color must work across all three themes:</p>
+        <div className="flex gap-2">
+          {['Light', 'Dark', 'Colorful'].map(t => (
+            <span key={t} className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">{t}</span>
+          ))}
+        </div>
+        <p className="text-sm opacity-70">
+          Define defaults in <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">:root</code> and
+          override in each <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">.theme-*</code> block.
+        </p>
+      </div>
+
+      <div className="theme-card-flex p-5 rounded-xl space-y-3">
+        <h4 className="text-sm font-semibold">Naming Conventions</h4>
+        <ul className="space-y-1 text-sm opacity-70">
+          <li><strong>Components:</strong> PascalCase — <code className="text-xs">CardContent.tsx</code></li>
+          <li><strong>Hooks/utils:</strong> camelCase — <code className="text-xs">useTheme.ts</code></li>
+          <li><strong>Routes:</strong> kebab-case — <code className="text-xs">timeline-cards/page.tsx</code></li>
+          <li><strong>Tokens:</strong> --category-name — <code className="text-xs">--color-blue-500</code>, <code className="text-xs">--space-4</code></li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function ContributingSection() {
+  const steps = [
+    {
+      title: 'Adding a Token',
+      icon: 'add_circle',
+      items: [
+        'Define the CSS custom property in tokens.css under the correct category',
+        'Add theme overrides in .theme-light, .theme-dark, .theme-colorful if needed',
+        'Mirror in tokens.ts for programmatic access',
+        'Extend tailwind.config.js if it needs utility classes',
+        'Add a swatch to the design system showcase page',
+      ],
+    },
+    {
+      title: 'Adding a Component',
+      icon: 'widgets',
+      items: [
+        'Create the file under src/components/ (use tokens, not hardcoded values)',
+        'Register in components.ts with props, tokens, a11y, and variants',
+        'Add a live demo section in the showcase page',
+        'Add a sidebar link in layout.tsx if significant',
+      ],
+    },
+    {
+      title: 'Adding a Demo Page',
+      icon: 'web',
+      items: [
+        'Create src/app/design/<slug>/page.tsx',
+        'Add a sidebar entry under Pages in layout.tsx',
+        'The page inherits the sidebar layout automatically',
+      ],
+    },
+  ];
+
+  return (
+    <div className="space-y-4">
+      {steps.map(step => (
+        <div key={step.title} className="theme-card-flex p-5 rounded-xl">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="material-symbols text-primary text-xl">{step.icon}</span>
+            <h4 className="text-sm font-semibold">{step.title}</h4>
+          </div>
+          <ol className="list-decimal list-inside space-y-1 text-sm opacity-70">
+            {step.items.map((item, i) => <li key={i}>{item}</li>)}
+          </ol>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LintRulesSection() {
+  return (
+    <div className="space-y-4">
+      <div className="theme-card-flex p-5 rounded-xl space-y-3">
+        <div className="flex items-center gap-2">
+          <span className="material-symbols text-primary">rule</span>
+          <h4 className="text-sm font-semibold">design-system/no-hardcoded-colors</h4>
+        </div>
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <span className="text-xs font-medium opacity-50">Severity</span>
+            <p><span className="px-2 py-0.5 text-xs rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">warn</span></p>
+          </div>
+          <div>
+            <span className="text-xs font-medium opacity-50">Scope</span>
+            <p className="font-mono text-xs">src/components/** &amp; src/app/**</p>
+          </div>
+        </div>
+        <div className="text-sm space-y-1">
+          <span className="text-xs font-medium opacity-50">What it flags</span>
+          <p className="opacity-70">Hex color literals (<code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">#xxx</code>, <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">#xxxxxx</code>, <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">#xxxxxxxx</code>) in string and template literals.</p>
+        </div>
+        <div className="text-sm space-y-1">
+          <span className="text-xs font-medium opacity-50">How to fix</span>
+          <p className="opacity-70">Replace with <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">var(--token-name)</code> or import from <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">@/design-system</code>.</p>
+        </div>
+        <div className="text-sm space-y-1">
+          <span className="text-xs font-medium opacity-50">Exceptions</span>
+          <p className="opacity-70">For canvas/SVG contexts that can&apos;t read CSS variables, use <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">palette.*</code> from tokens.ts and add an eslint-disable comment with reason.</p>
+        </div>
+      </div>
+
+      <div className="theme-card-flex p-5 rounded-xl space-y-3">
+        <h4 className="text-sm font-semibold">Pre-commit Checklist</h4>
+        <ul className="space-y-2 text-sm">
+          {[
+            'No new hardcoded hex colors (npm run lint)',
+            'New tokens added to both tokens.css and tokens.ts',
+            'Component works in all 3 themes',
+            'Component registered in components.ts (if reusable)',
+            'Accessibility: keyboard navigable, screen reader tested',
+            'Build passes: npm run build',
+          ].map(item => (
+            <li key={item} className="flex items-start gap-2">
+              <span className="material-symbols text-[16px] text-primary mt-0.5">check_box_outline_blank</span>
+              <span className="opacity-70">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 /* ── Section map ──────────────────────────────────────── */
 
 interface SectionDef {
@@ -427,6 +611,9 @@ const allSections: SectionDef[] = [
     title: c.label,
     render: () => <RegistrySection categoryKey={c.key} />,
   })),
+  { key: 'conventions',  title: 'Conventions',   render: () => <ConventionsSection /> },
+  { key: 'contributing', title: 'Contributing',  render: () => <ContributingSection /> },
+  { key: 'lint-rules',   title: 'Lint Rules',    render: () => <LintRulesSection /> },
 ];
 
 /* ── Overview (landing when no section selected) ─────── */
@@ -461,6 +648,14 @@ function OverviewGrid() {
         { key: 'section',    icon: 'view_agenda',      label: 'Section-Level' },
         { key: 'a11y',       icon: 'accessibility_new',label: 'Accessibility' },
         { key: 'layout',     icon: 'grid_view',        label: 'Layout' },
+      ],
+    },
+    {
+      title: 'Governance',
+      items: [
+        { key: 'conventions',  icon: 'gavel',     label: 'Conventions' },
+        { key: 'contributing', icon: 'handshake',  label: 'Contributing' },
+        { key: 'lint-rules',   icon: 'rule',       label: 'Lint Rules' },
       ],
     },
   ];

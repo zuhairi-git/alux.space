@@ -57,6 +57,14 @@ const sidebarNav: NavGroup[] = [
       { label: 'Media Cards',    href: '/design/media-cards',    icon: 'perm_media' },
     ],
   },
+  {
+    title: 'Governance',
+    items: [
+      { label: 'Conventions',   section: 'conventions',   icon: 'gavel' },
+      { label: 'Contributing',  section: 'contributing',  icon: 'handshake' },
+      { label: 'Lint Rules',    section: 'lint-rules',    icon: 'rule' },
+    ],
+  },
 ];
 
 /* ── Inner layout (needs Suspense for useSearchParams) ── */
