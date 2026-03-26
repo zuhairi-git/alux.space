@@ -21,7 +21,7 @@ export default function PromptAsUxClient() {
             en: {
                 title: "Prompt as UX",
                 subtitle: "What if writing prompts is the most important UX skill of the next decade?",
-                intro: "Most designers treat prompt engineering as a productivity hack. This project makes the case that prompt design IS UX design ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â that structuring human intent for an AI system requires the same empathy, clarity, and iteration as designing any user interface.",
+                intro: "Most designers treat prompt engineering as a productivity hack. This project makes the case that prompt design IS UX design — that structuring human intent for an AI system requires the same empathy, clarity, and iteration as designing any user interface.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -32,7 +32,7 @@ export default function PromptAsUxClient() {
             fi: {
                 title: "Prompt as UX",
                 subtitle: "What if writing prompts is the most important UX skill of the next decade?",
-                intro: "Most designers treat prompt engineering as a productivity hack. This project makes the case that prompt design IS UX design ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â that structuring human intent for an AI system requires the same empathy, clarity, and iteration as designing any user interface.",
+                intro: "Most designers treat prompt engineering as a productivity hack. This project makes the case that prompt design IS UX design — that structuring human intent for an AI system requires the same empathy, clarity, and iteration as designing any user interface.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -52,10 +52,10 @@ export default function PromptAsUxClient() {
             desc: "Map the parallels between UX design and prompt engineering.",
             icon: "transform",
             features: [
-                "User research ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ context setting in prompts",
-                "Information architecture ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ prompt structure",
-                "Microcopy ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ instruction clarity",
-                "Usability testing ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ prompt iteration and evaluation"
+                "User research → context setting in prompts",
+                "Information architecture → prompt structure",
+                "Microcopy → instruction clarity",
+                "Usability testing → prompt iteration and evaluation"
             ]
         },
         {
@@ -72,7 +72,7 @@ export default function PromptAsUxClient() {
         },
         {
             phase: "3. Library",
-            desc: "Document 30+ real prompts used across design, research, and product work ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â each with annotation explaining the UX decisions behind it.",
+            desc: "Document 30+ real prompts used across design, research, and product work — each with annotation explaining the UX decisions behind it.",
             icon: "collections_bookmark"
         },
         {
@@ -169,7 +169,7 @@ export default function PromptAsUxClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢</span>
+                                                        <span className="text-blue-400 mt-0.5">•</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -184,9 +184,9 @@ export default function PromptAsUxClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "A poorly designed prompt is a poorly designed user flow ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â both produce confusion.",
+                                    "A poorly designed prompt is a poorly designed user flow — both produce confusion.",
                                     "Prompt engineering is the new microcopy.",
-                                    "The best prompts are invisible ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the user just gets what they needed."
+                                    "The best prompts are invisible — the user just gets what they needed."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
                                         <span className="material-symbols text-4xl text-purple-400/20 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>

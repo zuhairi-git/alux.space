@@ -73,7 +73,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
                 {quote.text}
                 <span className="absolute -bottom-4 right-0 text-blue-400 text-3xl">&rdquo;</span>
               </p>
-              <p className="text-blue-400 mt-6 text-right">Ã¢â‚¬â€ {quote.author}</p>
+              <p className="text-blue-400 mt-6 text-right">— {quote.author}</p>
             </div>
           )}        </motion.div>
       </div>

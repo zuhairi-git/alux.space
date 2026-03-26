@@ -290,7 +290,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                         onClick={() => setSelectedLanguage(lang as 'en' | 'fi' | 'ar')}
                         className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${getLanguageButtonStyles(selectedLanguage === lang)}`}
                       >
-                        {lang === 'en' ? 'English' : lang === 'fi' ? 'Suomi' : 'ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©'}
+                        {lang === 'en' ? 'English' : lang === 'fi' ? 'Suomi' : 'العربية'}
                       </button>
                     ))}
                   </div>
@@ -366,7 +366,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
           </h2>
           <AudioPlayer
             src={audio.filePath}
-            title={`${audio.title} (${selectedLanguage === 'en' ? 'English' : selectedLanguage === 'fi' ? 'Suomi' : 'ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©'})`}
+            title={`${audio.title} (${selectedLanguage === 'en' ? 'English' : selectedLanguage === 'fi' ? 'Suomi' : 'العربية'})`}
             category={audio.category}
             language={selectedLanguage}
             availableLanguages={availableLanguages}

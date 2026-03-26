@@ -238,9 +238,9 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             >
               {/* Split subtitle into parts for better visual hierarchy */}
               <span className="block">
-                {subtitle.split('Ã¢â‚¬â€')[0]?.trim()}
+                {subtitle.split('—')[0]?.trim()}
               </span>
-              {subtitle.includes('Ã¢â‚¬â€') && (
+              {subtitle.includes('—') && (
                 <MotionSpan 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -258,7 +258,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     opacity: 0.85
                   }}
                 >
-                  Ã¢â‚¬â€ {subtitle.split('Ã¢â‚¬â€')[1]?.trim()}
+                  — {subtitle.split('—')[1]?.trim()}
                 </MotionSpan>
               )}
             </MotionP>
@@ -373,7 +373,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: delaySeconds['5xl'] }}
                   >
-                    Ã¢â‚¬â€ {quote.author}
+                    — {quote.author}
                   </MotionSpan>
                 </p>
                 

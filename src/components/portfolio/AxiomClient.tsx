@@ -163,7 +163,7 @@ export default function AxiomClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢</span>
+                                                        <span className="text-blue-400 mt-0.5">•</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -178,7 +178,7 @@ export default function AxiomClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "Accessibility isn't a checklist ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it's a design constraint that makes everything better.",
+                                    "Accessibility isn't a checklist — it's a design constraint that makes everything better.",
                                     "AI-generated documentation is 80% there. The remaining 20% is where the real design thinking lives.",
                                     "Consistent token naming is the most underrated part of a scalable design system."
                                 ].map((insight, index) => (

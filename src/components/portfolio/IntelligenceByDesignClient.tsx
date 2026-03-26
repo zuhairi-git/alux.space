@@ -21,7 +21,7 @@ export default function IntelligenceByDesignClient() {
             en: {
                 title: "Intelligence by Design",
                 subtitle: "Documenting the real impact of AI integration in a live product",
-                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
+                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully — not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -32,7 +32,7 @@ export default function IntelligenceByDesignClient() {
             fi: {
                 title: "Intelligence by Design",
                 subtitle: "Documenting the real impact of AI integration in a live product",
-                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
+                intro: "AI features are being bolted onto products without a coherent design strategy. At Webropol, the challenge was to integrate AI meaningfully — not as a gimmick, but as a genuine workflow accelerator for users who rely on survey and feedback data daily.",
                 projectType: "Project Type",
                 projectTypeValues: "Case Study",
                 tools: "Tools",
@@ -166,7 +166,7 @@ export default function IntelligenceByDesignClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢</span>
+                                                        <span className="text-blue-400 mt-0.5">•</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -181,9 +181,9 @@ export default function IntelligenceByDesignClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "Users don't want AI to think for them ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they want it to handle the parts they find tedious.",
+                                    "Users don't want AI to think for them — they want it to handle the parts they find tedious.",
                                     "AI features without explainability create distrust, not efficiency.",
-                                    "The biggest win wasn't the AI output ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it was removing 3 manual steps from a daily workflow."
+                                    "The biggest win wasn't the AI output — it was removing 3 manual steps from a daily workflow."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
                                         <span className="material-symbols text-4xl text-purple-400/20 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>

@@ -943,7 +943,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 exit={animationsDisabled ? {} : { y: 10, opacity: 0 }}
                 className={styles.textAccent}
               >
-                {playbackRate}ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+                {playbackRate}×
               </motion.span>
             </motion.button>
               {/* Share button - Enhanced for mobile */}
@@ -1199,7 +1199,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 : 'bg-green-900/30 text-green-300 border border-green-800'
             } shadow-xl z-50`}
           >
-            ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ {t('blog.aria.audioLinkCopied')}
+            ✓ {t('blog.aria.audioLinkCopied')}
           </motion.div>
         )}
       </AnimatePresence>

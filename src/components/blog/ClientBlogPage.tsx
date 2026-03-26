@@ -37,7 +37,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
   const categoryTranslations: Record<string, Record<string, string>> = {
       'Artificial Intelligence': {
         en: 'Artificial Intelligence',
-        fi: 'TekoÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ly'
+        fi: 'Tekoäly'
       },
       'Technology': {
         en: 'Technology',
@@ -80,7 +80,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
       },
       'Work-Life Balance': {
         'en': 'Work-Life Balance',
-        'fi': 'TyÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶elÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤mÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤n ja vapaa-ajan tasapaino'
+        'fi': 'Työelämän ja vapaa-ajan tasapaino'
       },
       'Creativity': {
         'en': 'Creativity',
@@ -100,7 +100,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
   
   const getNoPostsText = (): string => {
     switch(locale) {
-      case 'fi': return 'Ei artikkeleita tÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ssÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤ kategoriassa.';
+      case 'fi': return 'Ei artikkeleita tässä kategoriassa.';
       default: return 'No posts found in this category.';
     }
   };

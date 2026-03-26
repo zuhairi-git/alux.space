@@ -195,7 +195,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: delaySeconds['5xl'] }}
             >
-              Ã¢â‚¬â€ {quote.author}
+              — {quote.author}
             </motion.span>
           </p>
           
