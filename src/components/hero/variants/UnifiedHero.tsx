@@ -10,6 +10,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
+import { palette } from '@/design-system';
 import { 
   MotionDiv, 
   MotionH1, 
@@ -224,10 +225,10 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               } font-medium text-center relative subtitle-gradient-animated`}
               style={{
                 background: isColorful
-                  ? 'linear-gradient(135deg, #06b6d4 0%, #ec4899 50%, #3b82f6 100%)'
+                  ? `linear-gradient(135deg, ${palette.cyan[500]} 0%, ${palette.pink[500]} 50%, ${palette.blue[500]} 100%)`
                   : isLight
-                  ? 'linear-gradient(135deg, #1e40af 0%, #7c3aed 100%)'
-                  : 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
+                  ? `linear-gradient(135deg, ${palette.blue[700]} 0%, ${palette.purple[700]} 100%)`
+                  : `linear-gradient(135deg, ${palette.blue[400]} 0%, ${palette.purple[400]} 100%)`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -249,8 +250,8 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   }`}
                   style={{
                     background: isLight
-                      ? 'linear-gradient(135deg, #374151 0%, #6b7280 100%)'
-                      : 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)',
+                      ? `linear-gradient(135deg, ${palette.gray[700]} 0%, ${palette.gray[500]} 100%)`
+                      : `linear-gradient(135deg, ${palette.gray[300]} 0%, ${palette.gray[400]} 100%)`,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',

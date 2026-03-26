@@ -29,7 +29,7 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        className={`relative w-full max-w-6xl h-[90vh] sm:h-[85vh] rounded-[2rem] shadow-2xl flex flex-col overflow-hidden border ${isLight ? 'bg-[#FAFAFA] border-gray-300' : 'bg-[#111114] border-gray-800'}`}
+                        className={`relative w-full max-w-6xl h-[90vh] sm:h-[85vh] rounded-[2rem] shadow-2xl flex flex-col overflow-hidden border ${isLight ? 'bg-gray-50 border-gray-300' : 'bg-gray-950 border-gray-800'}`}
                     >
                         {/* Modal Header */}
                         <div className={`flex justify-between items-center p-4 sm:p-6 border-b shrink-0 ${isLight ? 'bg-white/80 border-gray-200' : 'bg-black/40 border-gray-800'} backdrop-blur-md z-20 relative`}>

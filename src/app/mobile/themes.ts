@@ -1,3 +1,4 @@
+/* eslint-disable design-system/no-hardcoded-colors -- Platform-specific Material Design 3 / iOS system colors for mobile mockups */
 'use client';
 
 import type { TabType } from './shared';

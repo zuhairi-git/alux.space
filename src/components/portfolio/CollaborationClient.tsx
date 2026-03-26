@@ -22,7 +22,7 @@ export default function CollaborationClient() {
     const content = {
       en: {
         title: "Workflow Platform",
-        intro: "An AI-powered platform designed to streamline team collaboration through intelligent workspaces, an AI copilot assistant, and real-time activity tracking — built for seamless experiences across iOS, Android, and a dedicated admin portal.",
+        intro: "An AI-powered platform designed to streamline team collaboration through intelligent workspaces, an AI copilot assistant, and real-time activity tracking â€” built for seamless experiences across iOS, Android, and a dedicated admin portal.",
         projectType: "Project Type",
         projectTypeValues: "Landing Page, Web & Mobile Platform, AI-Powered Admin Portal",
         timeline: "Timeline",
@@ -45,47 +45,47 @@ export default function CollaborationClient() {
         completed: "Completed",
         learnMore: "Learn more",
         livePrototypes: "Live Prototypes",
-        livePrototypesIntro: "Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.",
+        livePrototypesIntro: "Explore the interactive prototypes built for this platform â€” each designed to follow native design guidelines for their target platform.",
         iosPrototype: "iOS Prototype",
-        iosPrototypeDesc: "Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.",
+        iosPrototypeDesc: "Built with iOS 26 Human Interface Guidelines â€” frosted glass vibrancy, SF system colors, and native tab bar navigation.",
         androidPrototype: "Android Prototype",
-        androidPrototypeDesc: "Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.",
+        androidPrototypeDesc: "Built with Material You (Android 16) â€” dynamic color, pill navigation, rounded containers, and Material Symbols.",
         adminPortal: "Collaboration Portal",
         adminPortalDesc: "Enterprise-grade collaboration dashboard with collapsible sidebar, KPI cards, data tables, AI portal logs, and usage analytics.",
         openPrototype: "Open Prototype",
       },
       fi: {
-        title: "Työnkulkualusta",
-        intro: "Tekoälyllä toimiva alusta, joka tehostaa tiimien yhteistyötä älykkäiden työtilojen, tekoälyavustajan ja reaaliaikaisen toiminnan seurannan avulla — rakennettu saumattomiin kokemuksiin iOS:lle, Androidille ja portaalille.",
+        title: "TyÃ¶nkulkualusta",
+        intro: "TekoÃ¤lyllÃ¤ toimiva alusta, joka tehostaa tiimien yhteistyÃ¶tÃ¤ Ã¤lykkÃ¤iden tyÃ¶tilojen, tekoÃ¤lyavustajan ja reaaliaikaisen toiminnan seurannan avulla â€” rakennettu saumattomiin kokemuksiin iOS:lle, Androidille ja portaalille.",
         projectType: "Projektityyppi",
-        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, tekoälypohjainen yhteistyöportaali",
+        projectTypeValues: "Laskeutumissivu, verkko- ja mobiilialusta, tekoÃ¤lypohjainen yhteistyÃ¶portaali",
         timeline: "Aikataulu",
         timelineValue: "18 viikkoa",
-        tools: "Työkalut",
+        tools: "TyÃ¶kalut",
         toolsValue: "Next.js, Figma, FigJam, Maze",
         roles: "Roolit",
         objectives: "Tavoitteet",
         designProcess: "Suunnitteluprosessi",
         researchInsights: "Tutkimustulokset",
         participantFeedback: "Alustan mittarit",
-        keyRecommendations: "Tärkeimmät suositukset",
-        userPersonas: "Käyttäjäpersoonat",
+        keyRecommendations: "TÃ¤rkeimmÃ¤t suositukset",
+        userPersonas: "KÃ¤yttÃ¤jÃ¤persoonat",
         productRequirements: "Tuotevaatimukset",
-        userTesting: "Käyttäjätestaus",
+        userTesting: "KÃ¤yttÃ¤jÃ¤testaus",
         testScenario: "Testiskenaario",
-        testScenarioValue: "Tee suunnittelukatselmus tekoälyavustajan tuella",
+        testScenarioValue: "Tee suunnittelukatselmus tekoÃ¤lyavustajan tuella",
         focusAreas: "Keskittymisalueet",
         deliveryPhase: "Toimitusvaihe",
         completed: "Valmis",
-        learnMore: "Lue lisää",
+        learnMore: "Lue lisÃ¤Ã¤",
         livePrototypes: "Interaktiiviset prototyypit",
-        livePrototypesIntro: "Tutustu alustan interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.",
+        livePrototypesIntro: "Tutustu alustan interaktiivisiin prototyyppeihin â€” jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.",
         iosPrototype: "iOS-prototyyppi",
-        iosPrototypeDesc: "Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.",
+        iosPrototypeDesc: "Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan â€” lasiset efektit, jÃ¤rjestelmÃ¤vÃ¤rit ja natiivi vÃ¤lilehtipalkkinavigointi.",
         androidPrototype: "Android-prototyyppi",
-        androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.",
-        adminPortal: "Yhteistyöportaali",
-        adminPortalDesc: "Yritystason portaali sivupalkilla, KPI-korteilla, datataulukoilla, tekoälylokilla ja käyttöanalytiikalla.",
+        androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan â€” dynaaminen vÃ¤ri, pillerinavigointi ja Material Symbols.",
+        adminPortal: "YhteistyÃ¶portaali",
+        adminPortalDesc: "Yritystason portaali sivupalkilla, KPI-korteilla, datataulukoilla, tekoÃ¤lylokilla ja kÃ¤yttÃ¶analytiikalla.",
         openPrototype: "Avaa prototyyppi",
       }
     };
@@ -104,10 +104,10 @@ export default function CollaborationClient() {
         "Ensure accessible, mobile-first responsive design"
       ],
       fi: [
-        "Integroi tekoälyavustaja älykkääseen työtila-avustukseen",
-        "Mahdollista tiimien reaaliaikainen yhteistyö työtiloissa",
-        "Tarjoa käytännöllisiä tekoälypohjaisia näkemyksiä ja analytiikkaa",
-        "Tue alustojen välistä johdonmukaisuutta (iOS, Android, Web-portaali)",
+        "Integroi tekoÃ¤lyavustaja Ã¤lykkÃ¤Ã¤seen tyÃ¶tila-avustukseen",
+        "Mahdollista tiimien reaaliaikainen yhteistyÃ¶ tyÃ¶tiloissa",
+        "Tarjoa kÃ¤ytÃ¤nnÃ¶llisiÃ¤ tekoÃ¤lypohjaisia nÃ¤kemyksiÃ¤ ja analytiikkaa",
+        "Tue alustojen vÃ¤listÃ¤ johdonmukaisuutta (iOS, Android, Web-portaali)",
         "Varmista saavutettava, mobiilipainotteinen responsiivinen suunnittelu"
       ]
     };
@@ -120,28 +120,28 @@ export default function CollaborationClient() {
   const designProcessSteps = [
     {
       phase: locale === 'fi' ? "Tutki" : "Discover",
-      desc: locale === 'fi' ? "Tutki tiimien yhteistyön kipupisteitä ja tekoälymahdollisuuksia" : "Research team collaboration pain points and AI opportunities",
+      desc: locale === 'fi' ? "Tutki tiimien yhteistyÃ¶n kipupisteitÃ¤ ja tekoÃ¤lymahdollisuuksia" : "Research team collaboration pain points and AI opportunities",
       icon: (
         <span className="material-symbols text-4xl">search</span>
       )
     },
     {
-      phase: locale === 'fi' ? "Määrittele" : "Define",
-      desc: locale === 'fi' ? "Määrittele tekoälyavustajan laajuus ja työtila-arkkitehtuuri" : "Define AI copilot scope and workspace architecture",
+      phase: locale === 'fi' ? "MÃ¤Ã¤rittele" : "Define",
+      desc: locale === 'fi' ? "MÃ¤Ã¤rittele tekoÃ¤lyavustajan laajuus ja tyÃ¶tila-arkkitehtuuri" : "Define AI copilot scope and workspace architecture",
       icon: (
         <span className="material-symbols text-4xl">notes</span>
       )
     },
     {
-      phase: locale === 'fi' ? "Kehitä" : "Develop",
-      desc: locale === 'fi' ? "Rakenna tekoälypohjaiset prototyypit mobiili- ja portaalialustoille" : "Build AI-powered prototypes across mobile and admin platforms",
+      phase: locale === 'fi' ? "KehitÃ¤" : "Develop",
+      desc: locale === 'fi' ? "Rakenna tekoÃ¤lypohjaiset prototyypit mobiili- ja portaalialustoille" : "Build AI-powered prototypes across mobile and admin platforms",
       icon: (
         <span className="material-symbols text-4xl">edit</span>
       )
     },
     {
       phase: locale === 'fi' ? "Toimita" : "Deliver",
-      desc: locale === 'fi' ? "Validoi käyttäjillä kaikilla alustoilla ja iteroi" : "Validate with users across all platforms and iterate",
+      desc: locale === 'fi' ? "Validoi kÃ¤yttÃ¤jillÃ¤ kaikilla alustoilla ja iteroi" : "Validate with users across all platforms and iterate",
       icon: (
         <span className="material-symbols text-4xl">rocket_launch</span>
       )
@@ -149,24 +149,24 @@ export default function CollaborationClient() {
   ];
   // Translation for roles
   const roles = locale === 'fi' ?
-    ["Tuotesuunnittelija", "AI/UX-strategi", "Käyttäjätutkimus", "Prototypointi", "Analytiikka"] :
+    ["Tuotesuunnittelija", "AI/UX-strategi", "KÃ¤yttÃ¤jÃ¤tutkimus", "Prototypointi", "Analytiikka"] :
     ["Product Designer", "AI/UX Strategist", "User Research", "Prototyping", "Analytics"];
   // Localized metrics
   const metrics = [
     {
-      label: locale === 'fi' ? "Tekoälyavustajan käyttöaste" : "AI Copilot Adoption",
+      label: locale === 'fi' ? "TekoÃ¤lyavustajan kÃ¤yttÃ¶aste" : "AI Copilot Adoption",
       value: 92
     },
     {
-      label: locale === 'fi' ? "Työtilan sitoutuminen" : "Workspace Engagement",
+      label: locale === 'fi' ? "TyÃ¶tilan sitoutuminen" : "Workspace Engagement",
       value: 88
     },
     {
-      label: locale === 'fi' ? "Alustayhtenäisyys" : "Cross-Platform Consistency",
+      label: locale === 'fi' ? "AlustayhtenÃ¤isyys" : "Cross-Platform Consistency",
       value: 95
     },
     {
-      label: locale === 'fi' ? "Tehtävien suoritusaste" : "Task Completion Rate",
+      label: locale === 'fi' ? "TehtÃ¤vien suoritusaste" : "Task Completion Rate",
       value: 89
     }
   ];
@@ -226,7 +226,7 @@ export default function CollaborationClient() {
         exit="exit"
         variants={pageVariants}
         className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
-          ? 'bg-[#050023]'
+          ? 'bg-[var(--color-colorful-bg)]'
           : isLight
             ? 'bg-gradient-to-br from-slate-50 to-gray-100'
             : 'bg-gradient-to-br from-gray-900 to-black'
@@ -239,7 +239,7 @@ export default function CollaborationClient() {
             {/* Hero Section */}
             <CaseStudyHero
               title={content.title}
-              subtitle={locale === 'fi' ? 'Tekoälyllä toimiva yhteistyöalusta tiimeille' : 'AI-powered collaboration platform for teams'}
+              subtitle={locale === 'fi' ? 'TekoÃ¤lyllÃ¤ toimiva yhteistyÃ¶alusta tiimeille' : 'AI-powered collaboration platform for teams'}
               image="/images/portfolio/workflow/cover.jpg"
               tags={roles}
               actions={[
@@ -249,7 +249,7 @@ export default function CollaborationClient() {
                   onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
                 },
                 {
-                  label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
+                  label: locale === 'fi' ? 'Tarkastele suunnittelujÃ¤rjestelmÃ¤Ã¤' : 'Design System',
                   icon: 'design_services',
                   href: 'https://ds.alux.space/',
                   variant: 'secondary',
@@ -345,16 +345,16 @@ export default function CollaborationClient() {
                   <h3 className="text-lg font-semibold text-primary mb-6">{content.keyRecommendations}</h3>
                   <div className="space-y-6">
                     {[{
-                      title: locale === 'fi' ? "Tekoälypohjaiset näkemykset" : "AI-Powered Insights",
-                      description: locale === 'fi' ? "Hyödynnä tekoälyavustajaa sprintti- ja suunnittelukatsausten näkemysten esiin tuomiseen" : "Leverage AI copilot to surface actionable sprint and design review insights",
+                      title: locale === 'fi' ? "TekoÃ¤lypohjaiset nÃ¤kemykset" : "AI-Powered Insights",
+                      description: locale === 'fi' ? "HyÃ¶dynnÃ¤ tekoÃ¤lyavustajaa sprintti- ja suunnittelukatsausten nÃ¤kemysten esiin tuomiseen" : "Leverage AI copilot to surface actionable sprint and design review insights",
                       icon: "auto_awesome"
                     }, {
-                      title: locale === 'fi' ? "Älykkäät ilmoitukset" : "Smart Notifications",
-                      description: locale === 'fi' ? "Tekoälyn priorisoimat hälytykset työtilan toiminnan ja määräaikojen perusteella" : "AI-prioritized alerts based on workspace activity and deadlines",
+                      title: locale === 'fi' ? "Ã„lykkÃ¤Ã¤t ilmoitukset" : "Smart Notifications",
+                      description: locale === 'fi' ? "TekoÃ¤lyn priorisoimat hÃ¤lytykset tyÃ¶tilan toiminnan ja mÃ¤Ã¤rÃ¤aikojen perusteella" : "AI-prioritized alerts based on workspace activity and deadlines",
                       icon: "notifications_active"
                     }, {
                       title: locale === 'fi' ? "Alustasynkronointi" : "Cross-Platform Sync",
-                      description: locale === 'fi' ? "Saumaton työtilan jatkuvuus iOS:n, Androidin ja portaalin välillä" : "Seamless workspace continuity across iOS, Android, and Admin Portal",
+                      description: locale === 'fi' ? "Saumaton tyÃ¶tilan jatkuvuus iOS:n, Androidin ja portaalin vÃ¤lillÃ¤" : "Seamless workspace continuity across iOS, Android, and Admin Portal",
                       icon: "devices"
                     }
                     ].map((item, index) => (
@@ -380,23 +380,23 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* User Personas */}
-            <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="pink" number={4}>
+            <CaseStudySection title={locale === 'fi' ? "KÃ¤yttÃ¤jÃ¤persoonat" : "User Personas"} icon="groups" accent="pink" number={4}>
               <div className="space-y-10">
                 {[{
                   name: locale === 'fi' ? "Sara K." : "Sara K.",
                   role: locale === 'fi' ? "Vanhempi tuotesuunnittelija" : "Senior Product Designer",
                   traits: locale === 'fi' ? ["Teknologiaosaava", "Suunnittelukeskeinen"] : ["Tech-savvy", "Design-focused"],
-                  needs: locale === 'fi' ? ["Tekoälyavusteiset katselmukset", "Suunnittelujärjestelmätyökalut"] : ["AI-assisted reviews", "Design system tools"],
-                  goals: locale === 'fi' ? ["Tehosta suunnittelun luovutusta", "Hyödynnä tekoälyä saavutettavuustarkistuksissa"] : ["Streamline design handoff", "Leverage AI for accessibility audits"],
+                  needs: locale === 'fi' ? ["TekoÃ¤lyavusteiset katselmukset", "SuunnittelujÃ¤rjestelmÃ¤tyÃ¶kalut"] : ["AI-assisted reviews", "Design system tools"],
+                  goals: locale === 'fi' ? ["Tehosta suunnittelun luovutusta", "HyÃ¶dynnÃ¤ tekoÃ¤lyÃ¤ saavutettavuustarkistuksissa"] : ["Streamline design handoff", "Leverage AI for accessibility audits"],
                   painPoints: locale === 'fi' ? ["Hajautettu palaute", "Manuaaliset katselmusprosessit"] : ["Scattered feedback channels", "Manual review processes"],
                   photo: "/images/portfolio/profile-img/sara-k.jpg"
                 }, {
                   name: locale === 'fi' ? "James L." : "James L.",
-                  role: locale === 'fi' ? "Tiimipäällikkö" : "Engineering Team Lead",
-                  traits: locale === 'fi' ? ["Tuloksiin keskittyvä", "Datalähtöinen"] : ["Results-driven", "Data-oriented"],
-                  needs: locale === 'fi' ? ["Sprinttimittarit", "Työtilan koordinointi"] : ["Sprint metrics", "Workspace coordination"],
-                  goals: locale === 'fi' ? ["Paranna tiimin nopeutta", "Vähennä kokousaikaa"] : ["Improve team velocity", "Reduce meeting overhead"],
-                  painPoints: locale === 'fi' ? ["Kontekstin vaihtaminen", "Viivästyneet hyväksynnät"] : ["Context switching between tools", "Delayed approvals"],
+                  role: locale === 'fi' ? "TiimipÃ¤Ã¤llikkÃ¶" : "Engineering Team Lead",
+                  traits: locale === 'fi' ? ["Tuloksiin keskittyvÃ¤", "DatalÃ¤htÃ¶inen"] : ["Results-driven", "Data-oriented"],
+                  needs: locale === 'fi' ? ["Sprinttimittarit", "TyÃ¶tilan koordinointi"] : ["Sprint metrics", "Workspace coordination"],
+                  goals: locale === 'fi' ? ["Paranna tiimin nopeutta", "VÃ¤hennÃ¤ kokousaikaa"] : ["Improve team velocity", "Reduce meeting overhead"],
+                  painPoints: locale === 'fi' ? ["Kontekstin vaihtaminen", "ViivÃ¤styneet hyvÃ¤ksynnÃ¤t"] : ["Context switching between tools", "Delayed approvals"],
                   photo: "/images/portfolio/profile-img/james-l.jpg"
                 }
                 ].map((persona, index) => (
@@ -426,7 +426,7 @@ export default function CollaborationClient() {
 
                           <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
                             <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
-                            <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
+                            <span className="text-sm opacity-60">{persona.traits.join(' Â· ')}</span>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -472,22 +472,22 @@ export default function CollaborationClient() {
                   <h3 className="text-lg font-semibold text-primary mb-5">{content.productRequirements}</h3>
                   <div className="space-y-5">
                     {[{
-                      title: locale === 'fi' ? "Tekoälyavustaja" : "AI Copilot",
-                      description: locale === 'fi' ? "Kontekstitietoinen tekoälyavustaja työtilakysymyksiin ja sprinttien tilaan" : "Context-aware AI assistant for workspace queries and sprint status",
+                      title: locale === 'fi' ? "TekoÃ¤lyavustaja" : "AI Copilot",
+                      description: locale === 'fi' ? "Kontekstitietoinen tekoÃ¤lyavustaja tyÃ¶tilakysymyksiin ja sprinttien tilaan" : "Context-aware AI assistant for workspace queries and sprint status",
                       icon: "auto_awesome"
                     },
                     {
-                      title: locale === 'fi' ? "Älykkäät työtilat" : "Smart Workspaces",
-                      description: locale === 'fi' ? "Organisoidut yhteistyötilat reaaliaikaisen toiminnan seurannalla" : "Organized collaboration spaces with real-time activity tracking",
+                      title: locale === 'fi' ? "Ã„lykkÃ¤Ã¤t tyÃ¶tilat" : "Smart Workspaces",
+                      description: locale === 'fi' ? "Organisoidut yhteistyÃ¶tilat reaaliaikaisen toiminnan seurannalla" : "Organized collaboration spaces with real-time activity tracking",
                       icon: "workspaces"
                     },
                     {
-                      title: locale === 'fi' ? "Älykkäät hälytykset" : "Intelligent Alerts",
-                      description: locale === 'fi' ? "Tekoälyn priorisoimat ilmoitukset kiireellisyyden ja kontekstin perusteella" : "AI-prioritized notifications based on urgency and context",
+                      title: locale === 'fi' ? "Ã„lykkÃ¤Ã¤t hÃ¤lytykset" : "Intelligent Alerts",
+                      description: locale === 'fi' ? "TekoÃ¤lyn priorisoimat ilmoitukset kiireellisyyden ja kontekstin perusteella" : "AI-prioritized notifications based on urgency and context",
                       icon: "notifications_active"
                     },
                     {
-                      title: locale === 'fi' ? "Käyttöanalytiikka" : "Usage Analytics",
+                      title: locale === 'fi' ? "KÃ¤yttÃ¶analytiikka" : "Usage Analytics",
                       description: locale === 'fi' ? "Kattava alustan analytiikka sitoutumistiedoilla" : "Comprehensive platform analytics with engagement insights",
                       icon: "analytics"
                     }
@@ -522,7 +522,7 @@ export default function CollaborationClient() {
                     <h4 className="text-sm font-medium text-primary mb-4">{content.focusAreas}</h4>
                     <div className="grid grid-cols-2 gap-3">
                       {[{
-                        area: locale === 'fi' ? "Tekoälyintegraatio" : "AI Integration",
+                        area: locale === 'fi' ? "TekoÃ¤lyintegraatio" : "AI Integration",
                         icon: "auto_awesome"
                       },
                       {
@@ -534,7 +534,7 @@ export default function CollaborationClient() {
                         icon: "accessibility"
                       },
                       {
-                        area: locale === 'fi' ? "Reaaliaikainen yhteistyö" : "Real-Time Collab",
+                        area: locale === 'fi' ? "Reaaliaikainen yhteistyÃ¶" : "Real-Time Collab",
                         icon: "groups"
                       }
                       ].map((focus, index) => (
@@ -558,26 +558,26 @@ export default function CollaborationClient() {
             <CaseStudySection title={content.deliveryPhase} icon="rocket_launch" accent="teal" number={6}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {[{
-                  title: locale === 'fi' ? "Tekoälypohjaiset prototyypit" : "AI-Powered Prototypes",
-                  description: locale === 'fi' ? "Interaktiiviset tekoälypohjaiset prototyypit iOS:lle, Androidille ja yhteistyöportaalille" : "Interactive AI-powered prototypes for iOS, Android, and Admin portal with copilot integration",
+                  title: locale === 'fi' ? "TekoÃ¤lypohjaiset prototyypit" : "AI-Powered Prototypes",
+                  description: locale === 'fi' ? "Interaktiiviset tekoÃ¤lypohjaiset prototyypit iOS:lle, Androidille ja yhteistyÃ¶portaalille" : "Interactive AI-powered prototypes for iOS, Android, and Admin portal with copilot integration",
                   progress: 100,
                   icon: "devices"
                 },
                 {
                   title: locale === 'fi' ? "Suunnittelukatsaukset" : "Design Reviews",
-                  description: locale === 'fi' ? "Tekoälyavusteiset suunnittelukatsaukset ja rakenteelliset palautesessiot" : "AI-assisted design review workflows with structured feedback sessions across stakeholders",
+                  description: locale === 'fi' ? "TekoÃ¤lyavusteiset suunnittelukatsaukset ja rakenteelliset palautesessiot" : "AI-assisted design review workflows with structured feedback sessions across stakeholders",
                   progress: 100,
                   icon: "reviews"
                 },
                 {
                   title: locale === 'fi' ? "Laadunvarmistus" : "Quality Assurance",
-                  description: locale === 'fi' ? "Monialustainen testaus mobiilissa ja portaalissa johdonmukaisen tekoälyavustajakokemuksen varmistamiseksi" : "Cross-platform testing across mobile and admin to ensure consistent AI copilot experience",
+                  description: locale === 'fi' ? "Monialustainen testaus mobiilissa ja portaalissa johdonmukaisen tekoÃ¤lyavustajakokemuksen varmistamiseksi" : "Cross-platform testing across mobile and admin to ensure consistent AI copilot experience",
                   progress: 100,
                   icon: "verified"
                 },
                 {
                   title: locale === 'fi' ? "Dokumentaatio" : "Documentation",
-                  description: locale === 'fi' ? "Kattava alustadokumentaatio tekoälyavustajan käyttäytymisspesifikaatioineen" : "Comprehensive platform docs including AI copilot behavior specifications and integration guides",
+                  description: locale === 'fi' ? "Kattava alustadokumentaatio tekoÃ¤lyavustajan kÃ¤yttÃ¤ytymisspesifikaatioineen" : "Comprehensive platform docs including AI copilot behavior specifications and integration guides",
                   progress: 100,
                   icon: "folder"
                 }

@@ -21,7 +21,7 @@ export default function PromptForgeClient() {
             en: {
                 title: "PromptForge",
                 subtitle: "An AI-powered design workflow tool that turns prompts into UI concepts",
-                intro: "Designers waste hours in the ideation phase — sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
+                intro: "Designers waste hours in the ideation phase â€” sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
                 projectType: "Project Type",
                 projectTypeValues: "Prototype",
                 tools: "Tools",
@@ -36,7 +36,7 @@ export default function PromptForgeClient() {
             fi: {
                 title: "PromptForge",
                 subtitle: "An AI-powered design workflow tool that turns prompts into UI concepts",
-                intro: "Designers waste hours in the ideation phase — sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
+                intro: "Designers waste hours in the ideation phase â€” sketching, iterating, and discarding ideas before a single pixel is placed. PromptForge explores how prompt engineering can compress that phase dramatically, turning a well-crafted prompt into a structured UI concept in minutes.",
                 projectType: "Project Type",
                 projectTypeValues: "Prototype",
                 tools: "Tools",
@@ -124,7 +124,7 @@ export default function PromptForgeClient() {
                 animate="animate"
                 exit="exit"
                 variants={pageVariants}
-                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[#050023]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
+                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[var(--color-colorful-bg)]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
             >
                 <Navigation />
                 <CaseStudyProgress />
@@ -169,9 +169,9 @@ export default function PromptForgeClient() {
 
                                         {index === 2 && (
                                             <div className="mt-4 pt-4 border-t border-current/[0.06] space-y-2">
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">• Input form:</span> brief, platform, design style, goal</p>
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">• AI output:</span> wireframe desc, component suggestions, tone, mood</p>
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">• Iteration:</span> refine, regenerate, compare</p>
+                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">â€¢ Input form:</span> brief, platform, design style, goal</p>
+                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">â€¢ AI output:</span> wireframe desc, component suggestions, tone, mood</p>
+                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">â€¢ Iteration:</span> refine, regenerate, compare</p>
                                             </div>
                                         )}
                                     </div>
@@ -184,7 +184,7 @@ export default function PromptForgeClient() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
                                     "A good prompt is a design brief in disguise.",
-                                    "AI doesn't replace ideation — it removes the blank page.",
+                                    "AI doesn't replace ideation â€” it removes the blank page.",
                                     "The real skill is knowing what to ask, not what to draw."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">

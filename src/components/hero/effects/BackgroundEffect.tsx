@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Theme } from '@/context/ThemeContext';
+import { palette } from '@/design-system';
 
 interface Props {
   type: 'particles' | 'design-code' | 'gradient' | 'none' | 'abstract-modern' | 'modern-flow';
@@ -165,17 +166,17 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
         {/* Rotating neural network */}
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1000 1000">
           <g className="animate-gentle-drift" style={{ transformOrigin: '500px 500px' }}>
-            <circle cx="500" cy="200" r="3" fill="#a855f7" />
-            <circle cx="300" cy="400" r="3" fill="#eab308" />
-            <circle cx="700" cy="400" r="3" fill="#ec4899" />
-            <circle cx="400" cy="700" r="3" fill="#3b82f6" />
-            <circle cx="600" cy="700" r="3" fill="#a855f7" />
-            <line x1="500" y1="200" x2="300" y2="400" stroke="#a855f7" strokeWidth="0.5" opacity="0.4" />
-            <line x1="500" y1="200" x2="700" y2="400" stroke="#eab308" strokeWidth="0.5" opacity="0.4" />
-            <line x1="300" y1="400" x2="400" y2="700" stroke="#ec4899" strokeWidth="0.5" opacity="0.4" />
-            <line x1="700" y1="400" x2="600" y2="700" stroke="#3b82f6" strokeWidth="0.5" opacity="0.4" />
-            <line x1="300" y1="400" x2="700" y2="400" stroke="#a855f7" strokeWidth="0.5" opacity="0.3" />
-            <line x1="400" y1="700" x2="600" y2="700" stroke="#eab308" strokeWidth="0.5" opacity="0.3" />
+            <circle cx="500" cy="200" r="3" fill={palette.purple[500]} />
+            <circle cx="300" cy="400" r="3" fill={palette.yellow[500]} />
+            <circle cx="700" cy="400" r="3" fill={palette.pink[500]} />
+            <circle cx="400" cy="700" r="3" fill={palette.blue[500]} />
+            <circle cx="600" cy="700" r="3" fill={palette.purple[500]} />
+            <line x1="500" y1="200" x2="300" y2="400" stroke={palette.purple[500]} strokeWidth="0.5" opacity="0.4" />
+            <line x1="500" y1="200" x2="700" y2="400" stroke={palette.yellow[500]} strokeWidth="0.5" opacity="0.4" />
+            <line x1="300" y1="400" x2="400" y2="700" stroke={palette.pink[500]} strokeWidth="0.5" opacity="0.4" />
+            <line x1="700" y1="400" x2="600" y2="700" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.4" />
+            <line x1="300" y1="400" x2="700" y2="400" stroke={palette.purple[500]} strokeWidth="0.5" opacity="0.3" />
+            <line x1="400" y1="700" x2="600" y2="700" stroke={palette.yellow[500]} strokeWidth="0.5" opacity="0.3" />
           </g>
         </svg>
         
@@ -196,7 +197,7 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
 
   if (isColorful) {
     return (
-      <div className="absolute inset-0 overflow-hidden bg-[#050023]">
+      <div className="absolute inset-0 overflow-hidden bg-[var(--color-colorful-bg)]">
         {/* Quantum Canvas Layer */}
         <canvas
           ref={canvasRef}
@@ -237,17 +238,17 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
       {/* Subtle rotating constellation */}
       <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 1000 1000">
         <g className="animate-gentle-drift" style={{ transformOrigin: '500px 500px' }}>
-          <circle cx="500" cy="200" r="2" fill="#3b82f6" />
-          <circle cx="300" cy="400" r="2" fill="#6366f1" />
-          <circle cx="700" cy="400" r="2" fill="#8b5cf6" />
-          <circle cx="400" cy="700" r="2" fill="#3b82f6" />
-          <circle cx="600" cy="700" r="2" fill="#6366f1" />
-          <line x1="500" y1="200" x2="300" y2="400" stroke="#3b82f6" strokeWidth="0.5" opacity="0.3" />
-          <line x1="500" y1="200" x2="700" y2="400" stroke="#6366f1" strokeWidth="0.5" opacity="0.3" />
-          <line x1="300" y1="400" x2="400" y2="700" stroke="#8b5cf6" strokeWidth="0.5" opacity="0.3" />
-          <line x1="700" y1="400" x2="600" y2="700" stroke="#3b82f6" strokeWidth="0.5" opacity="0.3" />
-          <line x1="300" y1="400" x2="700" y2="400" stroke="#6366f1" strokeWidth="0.5" opacity="0.2" />
-          <line x1="400" y1="700" x2="600" y2="700" stroke="#8b5cf6" strokeWidth="0.5" opacity="0.2" />
+          <circle cx="500" cy="200" r="2" fill={palette.blue[500]} />
+          <circle cx="300" cy="400" r="2" fill={palette.indigo[500]} />
+          <circle cx="700" cy="400" r="2" fill={palette.violet[500]} />
+          <circle cx="400" cy="700" r="2" fill={palette.blue[500]} />
+          <circle cx="600" cy="700" r="2" fill={palette.indigo[500]} />
+          <line x1="500" y1="200" x2="300" y2="400" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.3" />
+          <line x1="500" y1="200" x2="700" y2="400" stroke={palette.indigo[500]} strokeWidth="0.5" opacity="0.3" />
+          <line x1="300" y1="400" x2="400" y2="700" stroke={palette.violet[500]} strokeWidth="0.5" opacity="0.3" />
+          <line x1="700" y1="400" x2="600" y2="700" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.3" />
+          <line x1="300" y1="400" x2="700" y2="400" stroke={palette.indigo[500]} strokeWidth="0.5" opacity="0.2" />
+          <line x1="400" y1="700" x2="600" y2="700" stroke={palette.violet[500]} strokeWidth="0.5" opacity="0.2" />
         </g>
       </svg>
       

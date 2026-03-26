@@ -127,7 +127,7 @@ export default function HealthcarePrioritizationClient() {
 
         // Overview section
         contextTitle: "The Contest",
-        contextDesc: "In a healthcare SaaS platform supporting nurses and doctors, prioritization isn't just about business value—it's about patient safety. We faced a critical backlog containing a mix of safety issues, UX improvements, and strategic integrations.",
+        contextDesc: "In a healthcare SaaS platform supporting nurses and doctors, prioritization isn't just about business valueâ€”it's about patient safety. We faced a critical backlog containing a mix of safety issues, UX improvements, and strategic integrations.",
         conflictTitle: "The Conflict",
         conflictDesc: "A critical release standoff occurred: QA demanded a delay due to incomplete verification documentation, while the CTO pushed for release to maintain schedule commitments.",
 
@@ -138,9 +138,9 @@ export default function HealthcarePrioritizationClient() {
         priority2: "Nurse UX (Critical)",
         priority2Desc: "Improving alert visibility to ensure clinical awareness.",
         priority3: "Strategic Growth (Medium)",
-        priority3Desc: "HL7/FHIR export features—valuable but scoped for dedicated capacity.",
+        priority3Desc: "HL7/FHIR export featuresâ€”valuable but scoped for dedicated capacity.",
         priority4: "Marketing Analytics (Low)",
-        priority4Desc: "Push notification stats—valuable for growth, but safe to defer.",
+        priority4Desc: "Push notification statsâ€”valuable for growth, but safe to defer.",
         priority5: "Automated Urgent Messages (Rejected)",
         priority5Desc: "High clinical risk and lack of medical oversight.",
 
@@ -185,15 +185,15 @@ export default function HealthcarePrioritizationClient() {
       fi: {
         title: "Terveydenhuollon tuotepriorisointi",
         subtitle: "Strateginen konfliktinratkaisu SaaS-palvelussa",
-        intro: "Tasapainoilu tiukan sääntelyn noudattamisen ja ketterän tuotekehityksen välillä. Tapaustutkimus priorisoinnista, sidosryhmien hallinnasta ja prosessien optimoinnista.",
+        intro: "Tasapainoilu tiukan sÃ¤Ã¤ntelyn noudattamisen ja ketterÃ¤n tuotekehityksen vÃ¤lillÃ¤. Tapaustutkimus priorisoinnista, sidosryhmien hallinnasta ja prosessien optimoinnista.",
         projectType: "Projektityyppi",
         projectTypeValues: "Tuotehallinnan tapaustutkimus",
         timeline: "Aikataulu",
         timelineValue: "2 viikon sprinttisykli",
-        tools: "Työkalut & Menetelmät",
-        toolsValue: "Agile, Jira, Riskimatriisi, Sidosryhmäkartta",
+        tools: "TyÃ¶kalut & MenetelmÃ¤t",
+        toolsValue: "Agile, Jira, Riskimatriisi, SidosryhmÃ¤kartta",
         standards: "Vaatimustenmukaisuus",
-        standardsValue: "HIPAA, Lääkinnällisten laitteiden säädökset",
+        standardsValue: "HIPAA, LÃ¤Ã¤kinnÃ¤llisten laitteiden sÃ¤Ã¤dÃ¶kset",
         roles: "Roolini",
         rolesValue: "Tuoteomistaja (Product Owner)",
 
@@ -204,60 +204,60 @@ export default function HealthcarePrioritizationClient() {
 
         // Overview section
         contextTitle: "Konteksti",
-        contextDesc: "Sairaanhoitajia ja lääkäreitä tukevassa terveydenhuollon SaaS-alustassa priorisointi ei ole vain liiketoiminta-arvoa – kyse on potilasturvallisuudesta. Kohtasimme kriittisen kehitysjonon, jossa oli sekoitus turvallisuusongelmia, UX-parannuksia ja strategisia integraatioita.",
+        contextDesc: "Sairaanhoitajia ja lÃ¤Ã¤kÃ¤reitÃ¤ tukevassa terveydenhuollon SaaS-alustassa priorisointi ei ole vain liiketoiminta-arvoa â€“ kyse on potilasturvallisuudesta. Kohtasimme kriittisen kehitysjonon, jossa oli sekoitus turvallisuusongelmia, UX-parannuksia ja strategisia integraatioita.",
         conflictTitle: "Konflikti",
-        conflictDesc: "Syntyi kriittinen julkaisuristiriita: QA vaati viivästystä puutteellisen dokumentaation vuoksi, kun taas teknologiajohtaja vaati julkaisua aikataulussa pysymiseksi.",
+        conflictDesc: "Syntyi kriittinen julkaisuristiriita: QA vaati viivÃ¤stystÃ¤ puutteellisen dokumentaation vuoksi, kun taas teknologiajohtaja vaati julkaisua aikataulussa pysymiseksi.",
 
         // Priorities
         prioritiesTitle: "Strateginen priorisointi",
         priority1: "Potilasturvallisuus (Kriittinen)",
         priority1Desc: "Tietojen synkronointivirheiden korjaaminen, jotka vaikuttavat 2%:iin tapaamisista. Ei neuvoteltavissa.",
         priority2: "Hoitaja-UX (Kriittinen)",
-        priority2Desc: "Hälytysten näkyvyyden parantaminen kliinisen tietoisuuden varmistamiseksi.",
+        priority2Desc: "HÃ¤lytysten nÃ¤kyvyyden parantaminen kliinisen tietoisuuden varmistamiseksi.",
         priority3: "Strateginen kasvu (Keskitaso)",
-        priority3Desc: "HL7/FHIR-vientitoiminnot – arvokkaita, mutta vaativat oman resursoinnin.",
+        priority3Desc: "HL7/FHIR-vientitoiminnot â€“ arvokkaita, mutta vaativat oman resursoinnin.",
         priority4: "Markkinointianalytiikka (Matala)",
-        priority4Desc: "Push-ilmoitustilastot – arvokkaita kasvulle, mutta voidaan lykätä.",
-        priority5: "Automaattiset viestit (Hylätty)",
+        priority4Desc: "Push-ilmoitustilastot â€“ arvokkaita kasvulle, mutta voidaan lykÃ¤tÃ¤.",
+        priority5: "Automaattiset viestit (HylÃ¤tty)",
         priority5Desc: "Korkea kliininen riski ja valvonnan puute.",
 
         // Decision Making
-        decisionTitle: "Päätöksentekokehys",
-        decisionDesc: "Käytimme riskiperusteista lähestymistapaa pyyntöjen suodattamiseen. Esimerkki: Hylkäsimme pyynnön 'automaattisista kiireellisistä viesteistä lomakevastausten perusteella' korkean kliinisen riskin ja lääketieteellisen valvonnan puutteen vuoksi.",
+        decisionTitle: "PÃ¤Ã¤tÃ¶ksentekokehys",
+        decisionDesc: "KÃ¤ytimme riskiperusteista lÃ¤hestymistapaa pyyntÃ¶jen suodattamiseen. Esimerkki: HylkÃ¤simme pyynnÃ¶n 'automaattisista kiireellisistÃ¤ viesteistÃ¤ lomakevastausten perusteella' korkean kliinisen riskin ja lÃ¤Ã¤ketieteellisen valvonnan puutteen vuoksi.",
 
         // Resolution Process
         resolutionTitle: "Konfliktinratkaisu",
-        resolutionStep1: "Yhteisymmärrys saavutettu",
-        resolutionStep1Desc: "Tunnustettiin, että sääntelyn noudattaminen ja turvallisuus eivät ole neuvoteltavissa, mutta toimitusvarmuus on myös kriittinen.",
+        resolutionStep1: "YhteisymmÃ¤rrys saavutettu",
+        resolutionStep1Desc: "Tunnustettiin, ettÃ¤ sÃ¤Ã¤ntelyn noudattaminen ja turvallisuus eivÃ¤t ole neuvoteltavissa, mutta toimitusvarmuus on myÃ¶s kriittinen.",
         resolutionStep2: "Keskeinen tulos",
-        resolutionStep2Desc: "Edistetään yhteistyötä kompromissien sijaan. Ylläpidetään toimituskuria standardeja kunnioittaen.",
+        resolutionStep2Desc: "EdistetÃ¤Ã¤n yhteistyÃ¶tÃ¤ kompromissien sijaan. YllÃ¤pidetÃ¤Ã¤n toimituskuria standardeja kunnioittaen.",
 
         // Agreed Actions
         actionsTitle: "Sovitut toimenpiteet",
-        action1: "QA määrittää vaatimustenmukaisuuden edellyttämän kriittisen minimidokumentaation.",
+        action1: "QA mÃ¤Ã¤rittÃ¤Ã¤ vaatimustenmukaisuuden edellyttÃ¤mÃ¤n kriittisen minimidokumentaation.",
         action2: "Kehitys jatkuu rinnakkain ei-riskialttiilla alueilla.",
-        action3: "Lopullinen valmiustarkistus QA:n hyväksyntää varten.",
+        action3: "Lopullinen valmiustarkistus QA:n hyvÃ¤ksyntÃ¤Ã¤ varten.",
 
         // Prevention
-        preventionTitle: "Ennaltaehkäisystrategia",
-        preventionDesc: "Ratkaistaksemme pysyvästi nopeuden ja turvallisuuden välisen ristiriidan, suunnittelimme toimitusprosessimme uudelleen.",
+        preventionTitle: "EnnaltaehkÃ¤isystrategia",
+        preventionDesc: "Ratkaistaksemme pysyvÃ¤sti nopeuden ja turvallisuuden vÃ¤lisen ristiriidan, suunnittelimme toimitusprosessimme uudelleen.",
         preventionStep1: "Laadunvarmistuksen aikaistaminen",
-        preventionStep1Desc: "Integroimme QA-vaatimukset käyttäjätarinoiden 'Definition of Ready' -määritelmään. Siirsimme tarkistukset grooming-vaiheeseen, estäen dokumentaatiovelan kertymisen.",
-        shiftLeftInfo: "Shift-Left -käsite: Kriittisten testaus- ja vaatimustenmukaisuustoimien siirtäminen kehityskaaren aikaisempaan vaiheeseen ('vasemmalle') sen sijaan, että odotettaisiin lopputarkistuksia.",
-        preventionStep2: "Yhtenäistetty julkaisukäytäntö",
-        preventionStep2Desc: "Perustimme virallisen 'Go/No-Go' -neuvoston, jossa Tuote-, Tekniikka- ja QA-johdon on hyväksyttävä julkaisu 48h etukäteen.",
+        preventionStep1Desc: "Integroimme QA-vaatimukset kÃ¤yttÃ¤jÃ¤tarinoiden 'Definition of Ready' -mÃ¤Ã¤ritelmÃ¤Ã¤n. Siirsimme tarkistukset grooming-vaiheeseen, estÃ¤en dokumentaatiovelan kertymisen.",
+        shiftLeftInfo: "Shift-Left -kÃ¤site: Kriittisten testaus- ja vaatimustenmukaisuustoimien siirtÃ¤minen kehityskaaren aikaisempaan vaiheeseen ('vasemmalle') sen sijaan, ettÃ¤ odotettaisiin lopputarkistuksia.",
+        preventionStep2: "YhtenÃ¤istetty julkaisukÃ¤ytÃ¤ntÃ¶",
+        preventionStep2Desc: "Perustimme virallisen 'Go/No-Go' -neuvoston, jossa Tuote-, Tekniikka- ja QA-johdon on hyvÃ¤ksyttÃ¤vÃ¤ julkaisu 48h etukÃ¤teen.",
 
         // Outcomes
         takeawaysTitle: "Keskeiset oivallukset",
-        takeaway1: "Vaikutuslähtöinen",
+        takeaway1: "VaikutuslÃ¤htÃ¶inen",
         takeaway1Desc: "Potilasturvallisuus ja luotettavuus tulevat aina ensin.",
         takeaway2: "Riskitietoinen",
-        takeaway2Desc: "Tasapaino nopeuden ja tiukkojen vaatimusten välillä.",
-        takeaway3: "Yhteistyökeskeinen",
-        takeaway3Desc: "Edistetään linjakkuutta auktoriteetin sijaan.",
+        takeaway2Desc: "Tasapaino nopeuden ja tiukkojen vaatimusten vÃ¤lillÃ¤.",
+        takeaway3: "YhteistyÃ¶keskeinen",
+        takeaway3Desc: "EdistetÃ¤Ã¤n linjakkuutta auktoriteetin sijaan.",
 
         summaryTitle: "Tuoteomistajan erinomaisuus",
-        summaryDesc: "Menestys tarkoittaa sidosryhmien tarpeiden, teknisten rajoitteiden ja liiketoiminta-arvon tasapainottamista keskittyen samalla käyttäjätuloksiin ja tiimiyhteistyöhön."
+        summaryDesc: "Menestys tarkoittaa sidosryhmien tarpeiden, teknisten rajoitteiden ja liiketoiminta-arvon tasapainottamista keskittyen samalla kÃ¤yttÃ¤jÃ¤tuloksiin ja tiimiyhteistyÃ¶hÃ¶n."
       }
     };
     return content[locale as keyof typeof content] || content.en;
@@ -267,7 +267,7 @@ export default function HealthcarePrioritizationClient() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isColorful
-        ? 'bg-[#050023]'
+        ? 'bg-[var(--color-colorful-bg)]'
         : isLight
           ? 'bg-gradient-to-br from-slate-50 to-gray-100'
           : 'bg-gradient-to-br from-gray-900 to-black'
@@ -285,7 +285,7 @@ export default function HealthcarePrioritizationClient() {
             tags={[content.rolesValue]}
             actions={[
               {
-                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
+                label: locale === 'fi' ? 'Tarkastele suunnittelujÃ¤rjestelmÃ¤Ã¤' : 'Design System',
                 icon: 'design_services',
                 href: 'https://ds.alux.space/',
                 variant: 'secondary',

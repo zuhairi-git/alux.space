@@ -67,7 +67,7 @@ export default function MarketIntelligenceClient() {
             en: {
                 title: "AI-Powered Market Intelligence",
                 subtitle: "Mobile-First Enterprise App Design",
-                intro: "Designing the future of market research—a mobile application delivering conversational AI search, source-grounded summaries, and personalized intelligence for enterprise users.",
+                intro: "Designing the future of market researchâ€”a mobile application delivering conversational AI search, source-grounded summaries, and personalized intelligence for enterprise users.",
                 projectType: "Project Type",
                 projectTypeValues: "Mobile UX/UI Design",
                 timeline: "Timeline",
@@ -162,100 +162,100 @@ export default function MarketIntelligenceClient() {
 
             },
             fi: {
-                title: "Tekoälypohjainen markkinatieto",
-                subtitle: "Mobiililähtöinen yrityssovellussuunnittelu",
-                intro: "Suunnittelemme markkinatutkimuksen tulevaisuutta—mobiilisovellus, joka tarjoaa keskustelevaa tekoälyhakua, lähteisiin perustuvia yhteenvetoja ja personoitua tietoa yrityskäyttäjille.",
+                title: "TekoÃ¤lypohjainen markkinatieto",
+                subtitle: "MobiililÃ¤htÃ¶inen yrityssovellussuunnittelu",
+                intro: "Suunnittelemme markkinatutkimuksen tulevaisuuttaâ€”mobiilisovellus, joka tarjoaa keskustelevaa tekoÃ¤lyhakua, lÃ¤hteisiin perustuvia yhteenvetoja ja personoitua tietoa yrityskÃ¤yttÃ¤jille.",
                 projectType: "Projektityyppi",
                 projectTypeValues: "Mobiili UX/UI -suunnittelu",
                 timeline: "Aikataulu",
-                timelineValue: "Käynnissä",
-                tools: "Työkalut & Teknologiat",
+                timelineValue: "KÃ¤ynnissÃ¤",
+                tools: "TyÃ¶kalut & Teknologiat",
                 toolsValue: "Figma, React, Tailwind CSS, iOS 26/Android 16 -mallit",
-                standards: "Tärkeimmät ominaisuudet",
-                standardsValue: "Keskusteleva tekoäly, reaaliaikaiset hälytykset, virtaava UX",
+                standards: "TÃ¤rkeimmÃ¤t ominaisuudet",
+                standardsValue: "Keskusteleva tekoÃ¤ly, reaaliaikaiset hÃ¤lytykset, virtaava UX",
                 roles: "Roolini",
-                rolesValue: "Tuotepäällikkö & Suunnittelija",
+                rolesValue: "TuotepÃ¤Ã¤llikkÃ¶ & Suunnittelija",
 
                 // Navigation tabs
                 overviewTab: "Yleiskatsaus",
                 uxTab: "UX & Alustamallit",
-                systemTab: "Suunnittelujärjestelmä & Luottamus",
+                systemTab: "SuunnittelujÃ¤rjestelmÃ¤ & Luottamus",
                 impactTab: "Toteutussuunnitelma",
 
                 // Overview section
                 problemTitle: "Haaste",
-                problemDesc: "Yrityskäyttäjät tarvitsevat nopeita, luotettavia ja toimivia oivalluksia tiheästä taloudellisesta sisällöstä, kuten tulosjulkistuksista liikkeellä ollessaan, mutta perinteisillä sovelluksilla on vaikeuksia tarjota merkityksellisiä yhteenvetoja pienillä näytöillä.",
+                problemDesc: "YrityskÃ¤yttÃ¤jÃ¤t tarvitsevat nopeita, luotettavia ja toimivia oivalluksia tiheÃ¤stÃ¤ taloudellisesta sisÃ¤llÃ¶stÃ¤, kuten tulosjulkistuksista liikkeellÃ¤ ollessaan, mutta perinteisillÃ¤ sovelluksilla on vaikeuksia tarjota merkityksellisiÃ¤ yhteenvetoja pienillÃ¤ nÃ¤ytÃ¶illÃ¤.",
                 solutionTitle: "Ratkaisumme",
-                solutionDesc: "Mobiililähtöinen sovellus, joka yhdistää tekoälyavustajan tehon yritystiedon tarkkuuteen ja tarjoaa lähteisiin perustuvia yhteenvetoja ja luonnollista keskusteluhakua, joka rakentaa luottamusta ajan myötä.",
+                solutionDesc: "MobiililÃ¤htÃ¶inen sovellus, joka yhdistÃ¤Ã¤ tekoÃ¤lyavustajan tehon yritystiedon tarkkuuteen ja tarjoaa lÃ¤hteisiin perustuvia yhteenvetoja ja luonnollista keskusteluhakua, joka rakentaa luottamusta ajan myÃ¶tÃ¤.",
 
                 // Objectives
                 objectivesTitle: "Keskeiset tavoitteet",
-                objective1: "Suunnitella intuitiivinen keskusteleva tekoälyhakemus",
-                objective2: "Varmistaa ehdoton luottamus lähteisiin perustuvilla tuloksilla",
-                objective3: "Tarjota personoituja, reaaliaikaisia tietosyötteitä",
-                objective4: "Optimoida tiheän taloudellisen tiedon renderöinti mobiiliin",
+                objective1: "Suunnitella intuitiivinen keskusteleva tekoÃ¤lyhakemus",
+                objective2: "Varmistaa ehdoton luottamus lÃ¤hteisiin perustuvilla tuloksilla",
+                objective3: "Tarjota personoituja, reaaliaikaisia tietosyÃ¶tteitÃ¤",
+                objective4: "Optimoida tiheÃ¤n taloudellisen tiedon renderÃ¶inti mobiiliin",
                 objective5: "Valvoa yritystason turvallisuutta ja vaatimustenmukaisuutta",
 
                 // Strategic Choices Section
                 rationaleTitle: "Strateginen suunnitteluperustelu",
-                rationaleSubtitle: "Suuren tiheyden työpöydän taloustiedon kääntäminen vähäkitkaiseksi, korkean luottamuksen mobiilikokemukseksi.",
-                rationaleItem1Title: "Keskusteleva tekoäly vs. perinteiset suodattimet",
-                rationaleItem1Desc: "Lyhentää merkittävästi aikaa oivallukseen. Käyttäjät voivat yksinkertaisesti esittää kysymyksiä luonnollisella kielellä sen sijaan, että navigoisi monimutkaisissa valikoissa tai etsiisi tuloksia pieneltä näytöltä.",
-                rationaleItem2Title: "Tiukasti lähteisiin perustuvat tulosteet",
-                rationaleItem2Desc: "Asettaa luottamusmekanismit pelkän tekoälysukupolven edelle. Jokainen vastaus sisältää viitteet ja lähde-esikatselun, jonka avulla käyttäjät voivat heti vahvistaa tarkan tulosjulkistuksen tai ilmoituksen.",
-                rationaleItem3Title: "Proaktiiviset 'älykkään tapahtuman' hälytykset",
-                rationaleItem3Desc: "Siirtyy 'veto'-mallista 'työntö'-malliin OS-alkuperäisiä ominaisuuksia hyödyntäen. Yhteenvedetyt, käyttökelpoiset oivallukset työnnetään lukitusnäytölle heti, kun markkinoihin vaikuttavia tapahtumia ilmenee.",
-                rationaleItem4Title: "Automaattiset ääni- ja tekstikatsaukset",
-                rationaleItem4Desc: "Personoidut päivittäiset katsaukset voidaan kuluttaa lyhyinä tekstipätkinä tai luotuna äänenä, mahdollistaen handsfree-kulutuksen työmatkan aikana.",
-                rationaleItem5Title: "Virtaava viive & alkuperäiset mallit",
-                rationaleItem5Desc: "Virtaava renderöinti yhdistettynä alustan alkuperäisiin komponentteihin varmistaa, että tekoälysukupolvi tuntuu uskomattoman nopealta ja laadukkaalta sekä iOS:ssä että Androidissa.",
+                rationaleSubtitle: "Suuren tiheyden tyÃ¶pÃ¶ydÃ¤n taloustiedon kÃ¤Ã¤ntÃ¤minen vÃ¤hÃ¤kitkaiseksi, korkean luottamuksen mobiilikokemukseksi.",
+                rationaleItem1Title: "Keskusteleva tekoÃ¤ly vs. perinteiset suodattimet",
+                rationaleItem1Desc: "LyhentÃ¤Ã¤ merkittÃ¤vÃ¤sti aikaa oivallukseen. KÃ¤yttÃ¤jÃ¤t voivat yksinkertaisesti esittÃ¤Ã¤ kysymyksiÃ¤ luonnollisella kielellÃ¤ sen sijaan, ettÃ¤ navigoisi monimutkaisissa valikoissa tai etsiisi tuloksia pieneltÃ¤ nÃ¤ytÃ¶ltÃ¤.",
+                rationaleItem2Title: "Tiukasti lÃ¤hteisiin perustuvat tulosteet",
+                rationaleItem2Desc: "Asettaa luottamusmekanismit pelkÃ¤n tekoÃ¤lysukupolven edelle. Jokainen vastaus sisÃ¤ltÃ¤Ã¤ viitteet ja lÃ¤hde-esikatselun, jonka avulla kÃ¤yttÃ¤jÃ¤t voivat heti vahvistaa tarkan tulosjulkistuksen tai ilmoituksen.",
+                rationaleItem3Title: "Proaktiiviset 'Ã¤lykkÃ¤Ã¤n tapahtuman' hÃ¤lytykset",
+                rationaleItem3Desc: "Siirtyy 'veto'-mallista 'tyÃ¶ntÃ¶'-malliin OS-alkuperÃ¤isiÃ¤ ominaisuuksia hyÃ¶dyntÃ¤en. Yhteenvedetyt, kÃ¤yttÃ¶kelpoiset oivallukset tyÃ¶nnetÃ¤Ã¤n lukitusnÃ¤ytÃ¶lle heti, kun markkinoihin vaikuttavia tapahtumia ilmenee.",
+                rationaleItem4Title: "Automaattiset Ã¤Ã¤ni- ja tekstikatsaukset",
+                rationaleItem4Desc: "Personoidut pÃ¤ivittÃ¤iset katsaukset voidaan kuluttaa lyhyinÃ¤ tekstipÃ¤tkinÃ¤ tai luotuna Ã¤Ã¤nenÃ¤, mahdollistaen handsfree-kulutuksen tyÃ¶matkan aikana.",
+                rationaleItem5Title: "Virtaava viive & alkuperÃ¤iset mallit",
+                rationaleItem5Desc: "Virtaava renderÃ¶inti yhdistettynÃ¤ alustan alkuperÃ¤isiin komponentteihin varmistaa, ettÃ¤ tekoÃ¤lysukupolvi tuntuu uskomattoman nopealta ja laadukkaalta sekÃ¤ iOS:ssÃ¤ ettÃ¤ Androidissa.",
 
                 // UI Framework
-                frameworkTitle: "Alkuperäinen iOS- ja Android-arkkitehtuuri",
-                frameworkDesc: "Rakennettu käyttämällä alkuperäisiä iOS (SwiftUI) - ja Android (Jetpack Compose) -kehikoita, mikä varmistaa nopean ja erittäin muokattavan tyylin samalla kun jaetaan ydinkomponenttiarkkitehtuuri ja suunnittelutunnukset.",
+                frameworkTitle: "AlkuperÃ¤inen iOS- ja Android-arkkitehtuuri",
+                frameworkDesc: "Rakennettu kÃ¤yttÃ¤mÃ¤llÃ¤ alkuperÃ¤isiÃ¤ iOS (SwiftUI) - ja Android (Jetpack Compose) -kehikoita, mikÃ¤ varmistaa nopean ja erittÃ¤in muokattavan tyylin samalla kun jaetaan ydinkomponenttiarkkitehtuuri ja suunnittelutunnukset.",
 
                 // UX Section
-                iosPatternsTitle: "iOS 26 -parhaat käytännöt",
-                iosPatternsDesc: "Hyödyntää suuria otsikoita, natiiveja alalehtiä, kontekstitietoisia työkalurivejä, edistynyttä haptiikkaa ja Dynamic Type -tukea.",
+                iosPatternsTitle: "iOS 26 -parhaat kÃ¤ytÃ¤nnÃ¶t",
+                iosPatternsDesc: "HyÃ¶dyntÃ¤Ã¤ suuria otsikoita, natiiveja alalehtiÃ¤, kontekstitietoisia tyÃ¶kalurivejÃ¤, edistynyttÃ¤ haptiikkaa ja Dynamic Type -tukea.",
                 androidPatternsTitle: "Android 16 -ominaisuudet",
-                androidPatternsDesc: "Sisällyttää Material dynamic color, ennakoivan takaisin-navigoinnin, modaaliset alalehdet, reunasta reunaan asettelut ja taitettavat asettelut.",
+                androidPatternsDesc: "SisÃ¤llyttÃ¤Ã¤ Material dynamic color, ennakoivan takaisin-navigoinnin, modaaliset alalehdet, reunasta reunaan asettelut ja taitettavat asettelut.",
 
                 // Features
-                aiPatternsTitle: "Tekoälyn vuorovaikutusmallit",
-                aiPatternsDesc: "Keskittyminen virtaaviin vastauksiin, viitteisiin tekstissä, luottamusindikaattoreihin ja selkeisiin rajoihin tekoälyn ja alkuperäisen lähdetekstin välillä.",
+                aiPatternsTitle: "TekoÃ¤lyn vuorovaikutusmallit",
+                aiPatternsDesc: "Keskittyminen virtaaviin vastauksiin, viitteisiin tekstissÃ¤, luottamusindikaattoreihin ja selkeisiin rajoihin tekoÃ¤lyn ja alkuperÃ¤isen lÃ¤hdetekstin vÃ¤lillÃ¤.",
                 latencyStrategyTitle: "Viiveen strategia",
-                latencyStrategyDesc: "Odotusaikojen käsittely virtaavalla renderöinnillä, progressiivisella skeleton UI:lla ja selkeillä tilaindikaattoreilla.",
+                latencyStrategyDesc: "Odotusaikojen kÃ¤sittely virtaavalla renderÃ¶innillÃ¤, progressiivisella skeleton UI:lla ja selkeillÃ¤ tilaindikaattoreilla.",
                 trustTitle: "Luottamusmekanismit",
-                trustDesc: "Pakollinen viitekerros, lähteen esikatseluvetoketjut, aikaleimat ja laajennettava päättely tekoälyn hallusinaatioiden lieventämiseksi.",
-                featureAlertsTitle: "Reaaliaikaiset hälytykset",
-                featureAlertsDesc: "Räätälöidyt push-ilmoitukset, jotka on yhdistetty iOS Live Activities- ja Android Notification -kanaviin välitöntä tiedonantoa varten.",
+                trustDesc: "Pakollinen viitekerros, lÃ¤hteen esikatseluvetoketjut, aikaleimat ja laajennettava pÃ¤Ã¤ttely tekoÃ¤lyn hallusinaatioiden lieventÃ¤miseksi.",
+                featureAlertsTitle: "Reaaliaikaiset hÃ¤lytykset",
+                featureAlertsDesc: "RÃ¤Ã¤tÃ¤lÃ¶idyt push-ilmoitukset, jotka on yhdistetty iOS Live Activities- ja Android Notification -kanaviin vÃ¤litÃ¶ntÃ¤ tiedonantoa varten.",
 
                 // Journey
-                coreFlowsTitle: "Keskeiset käyttäjävirrat",
-                flow1: "Tekoälyhaku ja keskustelukysely",
-                flow2: "Tekoäly-yhteenvetokortti ja kopiot",
-                flow3: "Personoitu tietosyöte",
-                flow4: "Yhtiön syväluotaava kojelauta",
-                flow5: "Hälytykset ja ilmoitusjärjestelmä",
+                coreFlowsTitle: "Keskeiset kÃ¤yttÃ¤jÃ¤virrat",
+                flow1: "TekoÃ¤lyhaku ja keskustelukysely",
+                flow2: "TekoÃ¤ly-yhteenvetokortti ja kopiot",
+                flow3: "Personoitu tietosyÃ¶te",
+                flow4: "YhtiÃ¶n syvÃ¤luotaava kojelauta",
+                flow5: "HÃ¤lytykset ja ilmoitusjÃ¤rjestelmÃ¤",
 
                 // Results
                 metricsTitle: "Menestysmittariston viitekehys",
-                captureMetric: "% käyttäjistä tekee ensimmäisen kyselyn",
+                captureMetric: "% kÃ¤yttÃ¤jistÃ¤ tekee ensimmÃ¤isen kyselyn",
                 trustMetric: "Viitteiden klikkausprosentti",
-                engagementMetric: "Päivittäiset kyselyt ja hälytysten vuorovaikutukset",
-                retentionMetric: "Viikottaiset aktiiviset käyttäjät",
+                engagementMetric: "PÃ¤ivittÃ¤iset kyselyt ja hÃ¤lytysten vuorovaikutukset",
+                retentionMetric: "Viikottaiset aktiiviset kÃ¤yttÃ¤jÃ¤t",
 
                 // App Functionality
                 appFunctionalityTitle: "Sovelluksen ydintoiminnot",
-                appFunctionalityDesc: "Tehokas työkaluvalikoima, joka on suunniteltu tarjoamaan käyttökelpoista tietoa sormenpäidesi ulottuvilla, milloin ja missä tahansa.",
-                feat1Title: "Keskusteleva tekoälyhaku",
-                feat1Desc: "Esitä monimutkaisia markkinakysymyksiä luonnollisella kielellä ja saat yksityiskohtaisia, lähteisiin perustuvia vastauksia välittömästi.",
+                appFunctionalityDesc: "Tehokas tyÃ¶kaluvalikoima, joka on suunniteltu tarjoamaan kÃ¤yttÃ¶kelpoista tietoa sormenpÃ¤idesi ulottuvilla, milloin ja missÃ¤ tahansa.",
+                feat1Title: "Keskusteleva tekoÃ¤lyhaku",
+                feat1Desc: "EsitÃ¤ monimutkaisia markkinakysymyksiÃ¤ luonnollisella kielellÃ¤ ja saat yksityiskohtaisia, lÃ¤hteisiin perustuvia vastauksia vÃ¤littÃ¶mÃ¤sti.",
                 feat2Title: "Reaaliaikainen sentimenttianalyysi",
-                feat2Desc: "Seuraa markkinoiden asennetta tekoälypohjaisella uutisten, tulosjulkistusten ja talousraporttien analyysillä niiden tapahtuessa.",
-                feat3Title: "Älykkäät tapahtumahälytykset",
+                feat2Desc: "Seuraa markkinoiden asennetta tekoÃ¤lypohjaisella uutisten, tulosjulkistusten ja talousraporttien analyysillÃ¤ niiden tapahtuessa.",
+                feat3Title: "Ã„lykkÃ¤Ã¤t tapahtumahÃ¤lytykset",
                 feat3Desc: "Aseta mukautettuja laukaisijoita salkkuun liittyville tapahtumille ja vastaanota push-ilmoituksia ennen kuin markkinat reagoivat.",
                 feat4Title: "Automaattiset katsaukset",
-                feat4Desc: "Aloita päiväsi luoduilla ääni- ja tekstiyhteenvedoilla, jotka kattavat seurantalistoillesi räätälöidyt vaikuttavimmat tapahtumat.",
+                feat4Desc: "Aloita pÃ¤ivÃ¤si luoduilla Ã¤Ã¤ni- ja tekstiyhteenvedoilla, jotka kattavat seurantalistoillesi rÃ¤Ã¤tÃ¤lÃ¶idyt vaikuttavimmat tapahtumat.",
             }
         };
         return content[locale as keyof typeof content] || content.en;
@@ -319,7 +319,7 @@ export default function MarketIntelligenceClient() {
                 exit="exit"
                 variants={pageVariants}
                 className={`min-h-screen transition-colors duration-300 relative ${isColorful
-                    ? 'bg-[#050023]'
+                    ? 'bg-[var(--color-colorful-bg)]'
                     : isLight
                         ? 'bg-gradient-to-br from-slate-50 to-gray-100'
                         : 'bg-gradient-to-br from-gray-900 to-black'
@@ -365,13 +365,13 @@ export default function MarketIntelligenceClient() {
                                     },
                                 },
                                 {
-                                    label: locale === 'fi' ? 'Sovelluksen arkkitehtuuri & työnkulku' : 'Architect & Workflow',
+                                    label: locale === 'fi' ? 'Sovelluksen arkkitehtuuri & tyÃ¶nkulku' : 'Architect & Workflow',
                                     icon: 'account_tree',
                                     variant: 'secondary',
                                     onClick: () => setIsWorkflowModalOpen(true),
                                 },
                                 {
-                                    label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
+                                    label: locale === 'fi' ? 'Tarkastele suunnittelujÃ¤rjestelmÃ¤Ã¤' : 'Design System',
                                     icon: 'design_services',
                                     variant: 'secondary',
                                     href: 'https://ds.alux.space/',
@@ -385,7 +385,7 @@ export default function MarketIntelligenceClient() {
                             ]}
                         />
 
-                        {/* ═══ LIVE INTELLIGENCE METRICS ═══ */}
+                        {/* â•â•â• LIVE INTELLIGENCE METRICS â•â•â• */}
                         <motion.div
                             className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20"
                             initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
@@ -393,10 +393,10 @@ export default function MarketIntelligenceClient() {
                             transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 0.8, delay: 0.3 }}
                         >
                             {[
-                                { icon: 'query_stats', value: 98, suffix: '%', label: locale === 'fi' ? 'Lähdetarkkuus' : 'Source Accuracy', color: 'from-emerald-500 to-teal-500', dotColor: 'bg-emerald-400' },
-                                { icon: 'speed', value: 200, suffix: 'ms', label: locale === 'fi' ? 'Keskimääräinen viive' : 'Avg Response', color: 'from-blue-500 to-indigo-500', dotColor: 'bg-blue-400' },
-                                { icon: 'trending_up', value: 15, suffix: 'K+', label: locale === 'fi' ? 'Päivittäiset kyselyt' : 'Daily Queries', color: 'from-purple-500 to-pink-500', dotColor: 'bg-purple-400' },
-                                { icon: 'shield', value: 99, suffix: '.9%', label: locale === 'fi' ? 'Käytettävyys' : 'Uptime', color: 'from-orange-500 to-amber-500', dotColor: 'bg-orange-400' },
+                                { icon: 'query_stats', value: 98, suffix: '%', label: locale === 'fi' ? 'LÃ¤hdetarkkuus' : 'Source Accuracy', color: 'from-emerald-500 to-teal-500', dotColor: 'bg-emerald-400' },
+                                { icon: 'speed', value: 200, suffix: 'ms', label: locale === 'fi' ? 'KeskimÃ¤Ã¤rÃ¤inen viive' : 'Avg Response', color: 'from-blue-500 to-indigo-500', dotColor: 'bg-blue-400' },
+                                { icon: 'trending_up', value: 15, suffix: 'K+', label: locale === 'fi' ? 'PÃ¤ivittÃ¤iset kyselyt' : 'Daily Queries', color: 'from-purple-500 to-pink-500', dotColor: 'bg-purple-400' },
+                                { icon: 'shield', value: 99, suffix: '.9%', label: locale === 'fi' ? 'KÃ¤ytettÃ¤vyys' : 'Uptime', color: 'from-orange-500 to-amber-500', dotColor: 'bg-orange-400' },
                             ].map((metric, i) => (
                                 <motion.div
                                     key={i}
@@ -433,7 +433,7 @@ export default function MarketIntelligenceClient() {
                             ))}
                         </motion.div>
 
-                        {/* ═══ INTRO ═══ */}
+                        {/* â•â•â• INTRO â•â•â• */}
                         <motion.div
                             className="text-center mb-20 relative"
                             initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
@@ -445,7 +445,7 @@ export default function MarketIntelligenceClient() {
                             </p>
                         </motion.div>
 
-                        {/* ═══ SECTION 1: OVERVIEW ═══ */}
+                        {/* â•â•â• SECTION 1: OVERVIEW â•â•â• */}
                         <CaseStudySection title={content.overviewTab} icon="visibility" number={1} accent="blue">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-8 mb-14">
@@ -518,7 +518,7 @@ export default function MarketIntelligenceClient() {
                             </CaseStudyItem>
                         </CaseStudySection>
 
-                        {/* ═══ SECTION 2: STRATEGIC RATIONALE ═══ */}
+                        {/* â•â•â• SECTION 2: STRATEGIC RATIONALE â•â•â• */}
                         <CaseStudySection title={content.rationaleTitle} icon="lightbulb" number={2} accent="purple">
                             <CaseStudyItem>
                                 <p className={`text-lg max-w-3xl mx-auto mb-12 ${isColorful ? 'text-purple-200/80' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>
@@ -561,18 +561,18 @@ export default function MarketIntelligenceClient() {
                             </CaseStudyItem>
                         </CaseStudySection>
 
-                        {/* ═══ SECTION 3: INTERACTIVE PROTOTYPES ═══ */}
+                        {/* â•â•â• SECTION 3: INTERACTIVE PROTOTYPES â•â•â• */}
                         <CaseStudySection title={locale === 'fi' ? 'Interaktiiviset prototyypit' : 'Interactive Prototypes'} icon="smartphone" number={3} accent="indigo" id="interactive-prototypes">
                             <CaseStudyItem>
                                 <p className={`text-lg max-w-2xl mx-auto mb-10 ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-                                    {locale === 'fi' ? 'Tutustu tekoälypohjaisen käyttöliittymän interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.' : 'Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.'}
+                                    {locale === 'fi' ? 'Tutustu tekoÃ¤lypohjaisen kÃ¤yttÃ¶liittymÃ¤n interaktiivisiin prototyyppeihin â€” jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.' : 'Explore the interactive prototypes built for this platform â€” each designed to follow native design guidelines for their target platform.'}
                                 </p>
 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                     {[
                                         {
                                             title: locale === 'fi' ? 'iOS-prototyyppi' : 'iOS Prototype',
-                                            description: locale === 'fi' ? 'Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.' : 'Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.',
+                                            description: locale === 'fi' ? 'Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan â€” lasiset efektit, jÃ¤rjestelmÃ¤vÃ¤rit ja natiivi vÃ¤lilehtipalkkinavigointi.' : 'Built with iOS 26 Human Interface Guidelines â€” frosted glass vibrancy, SF system colors, and native tab bar navigation.',
                                             href: "/mobile/market-intelligence/ios",
                                             icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
                                             gradient: "from-blue-500/20 to-indigo-500/20",
@@ -582,7 +582,7 @@ export default function MarketIntelligenceClient() {
                                         },
                                         {
                                             title: locale === 'fi' ? 'Android-prototyyppi' : 'Android Prototype',
-                                            description: locale === 'fi' ? 'Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.' : 'Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.',
+                                            description: locale === 'fi' ? 'Rakennettu Material You (Android 16) -standardin mukaan â€” dynaaminen vÃ¤ri, pillerinavigointi ja Material Symbols.' : 'Built with Material You (Android 16) â€” dynamic color, pill navigation, rounded containers, and Material Symbols.',
                                             href: "/mobile/market-intelligence/android",
                                             icon: (<span className="material-symbols text-4xl">phone_android</span>),
                                             gradient: "from-green-500/20 to-emerald-500/20",
@@ -617,7 +617,7 @@ export default function MarketIntelligenceClient() {
                                 </div>
                             </CaseStudyItem>
 
-                            {/* ═══ CORE APP FUNCTIONALITY — INTERACTIVE SHOWCASE ═══ */}
+                            {/* â•â•â• CORE APP FUNCTIONALITY â€” INTERACTIVE SHOWCASE â•â•â• */}
                             <CaseStudyItem>
                                 <motion.div
                                     className="mt-20"
@@ -748,7 +748,7 @@ export default function MarketIntelligenceClient() {
                             </CaseStudyItem>
                         </CaseStudySection>
 
-                        {/* ═══ SECTION 4: UX & PLATFORM PATTERNS ═══ */}
+                        {/* â•â•â• SECTION 4: UX & PLATFORM PATTERNS â•â•â• */}
                         <CaseStudySection title={content.uxTab} icon="devices" number={4} accent="green">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-6 mb-14">
@@ -820,7 +820,7 @@ export default function MarketIntelligenceClient() {
                             </CaseStudyItem>
                         </CaseStudySection>
 
-                        {/* ═══ SECTION 5: DESIGN SYSTEM & TRUST ═══ */}
+                        {/* â•â•â• SECTION 5: DESIGN SYSTEM & TRUST â•â•â• */}
                         <CaseStudySection title={content.systemTab} icon="shield" number={5} accent="orange">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-6">
@@ -856,7 +856,7 @@ export default function MarketIntelligenceClient() {
                             </CaseStudyItem>
                         </CaseStudySection>
 
-                        {/* ═══ SECTION 6: IMPLEMENTATION PLAN — LIVE METRICS ═══ */}
+                        {/* â•â•â• SECTION 6: IMPLEMENTATION PLAN â€” LIVE METRICS â•â•â• */}
                         <CaseStudySection title={content.impactTab} icon="account_tree" number={6} accent="teal">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">

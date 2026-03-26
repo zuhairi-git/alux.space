@@ -121,7 +121,7 @@ export default function AxiomClient() {
                 animate="animate"
                 exit="exit"
                 variants={pageVariants}
-                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[#050023]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
+                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[var(--color-colorful-bg)]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
             >
                 <Navigation />
                 <CaseStudyProgress />
@@ -162,7 +162,7 @@ export default function AxiomClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">•</span>
+                                                        <span className="text-blue-400 mt-0.5">â€¢</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
@@ -177,7 +177,7 @@ export default function AxiomClient() {
                         <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
-                                    "Accessibility isn't a checklist — it's a design constraint that makes everything better.",
+                                    "Accessibility isn't a checklist â€” it's a design constraint that makes everything better.",
                                     "AI-generated documentation is 80% there. The remaining 20% is where the real design thinking lives.",
                                     "Consistent token naming is the most underrated part of a scalable design system."
                                 ].map((insight, index) => (

@@ -41,7 +41,7 @@ export default function JobSeekingClient() {
         challenge: "Challenge",
         challengeDesc: "How can users quickly find trustworthy local jobs, either temporary or permanent?",
         discoveryInsights: "Discovery Insights",
-        discoveryDesc: "Rising living costs are pushing people to seek extra income—weekend jobs being the most flexible option. A reliable job app helps users showcase their availability and skills efficiently.",
+        discoveryDesc: "Rising living costs are pushing people to seek extra incomeâ€”weekend jobs being the most flexible option. A reliable job app helps users showcase their availability and skills efficiently.",
         initialResearch: "Initial Research",
         initialResearchDesc: "Job platforms vary in usability and trust. One solution is to introduce job contracts post-match for more reliability and user trust.",
         hypothesis: "Hypothesis",
@@ -52,7 +52,7 @@ export default function JobSeekingClient() {
         ethics: "Ethics:",
         personas: "Personas",
         userFlow: "User Flow",
-        userFlowDesc: "MVP supports quick ideation and development for early product maturity—ideal for independent designers and startups.",
+        userFlowDesc: "MVP supports quick ideation and development for early product maturityâ€”ideal for independent designers and startups.",
         appFeatures: "App Features",
         epicGoal: "Epic Goal",
         epicGoalDesc: "Enable fast income opportunities via local gigs",
@@ -65,7 +65,7 @@ export default function JobSeekingClient() {
         qa: "Quality Assurance:",
         qaDesc: "Covers usability, cross-device compatibility, and visual consistency",
         designDocs: "Design Documentation:",
-        designDocsDesc: "Finalized assets, design decisions, and handoff materials—ready for development collaboration.",
+        designDocsDesc: "Finalized assets, design decisions, and handoff materialsâ€”ready for development collaboration.",
         aiCapabilities: "AI Capabilities",
         aiResume: "AI Resume Tailoring",
         aiResumeDesc: "Instantly optimize your resume for specific job descriptions.",
@@ -74,72 +74,72 @@ export default function JobSeekingClient() {
         aiCoach: "Interview Prep",
         aiCoachDesc: "Converse with an AI coach to prepare for upcoming interviews.",
         livePrototypes: "Live Prototypes",
-        livePrototypesIntro: "Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.",
+        livePrototypesIntro: "Explore the interactive prototypes built for this platform â€” each designed to follow native design guidelines for their target platform.",
         iosPrototype: "iOS Prototype",
-        iosPrototypeDesc: "Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.",
+        iosPrototypeDesc: "Built with iOS 26 Human Interface Guidelines â€” frosted glass vibrancy, SF system colors, and native tab bar navigation.",
         androidPrototype: "Android Prototype",
-        androidPrototypeDesc: "Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.",
+        androidPrototypeDesc: "Built with Material You (Android 16) â€” dynamic color, pill navigation, rounded containers, and Material Symbols.",
         openPrototype: "Open Prototype",
       },
       fi: {
-        title: "Työnhakusovellus",
-        intro: "Monialustainen mobiilisovellus, joka on suunniteltu tehostamaan työnhakua paikallisiin, osa-aikaisiin ja viikonlopputöihin. Varustettu älykkäällä AI Copilotilla ja mukautetuilla iOS/Android-teemoilla nopeampaa ja älykkäämpää keikkatyön löytämistä varten.",
+        title: "TyÃ¶nhakusovellus",
+        intro: "Monialustainen mobiilisovellus, joka on suunniteltu tehostamaan tyÃ¶nhakua paikallisiin, osa-aikaisiin ja viikonlopputÃ¶ihin. Varustettu Ã¤lykkÃ¤Ã¤llÃ¤ AI Copilotilla ja mukautetuilla iOS/Android-teemoilla nopeampaa ja Ã¤lykkÃ¤Ã¤mpÃ¤Ã¤ keikkatyÃ¶n lÃ¶ytÃ¤mistÃ¤ varten.",
         projectType: "Projektityyppi",
-        projectTypeValues: "Mobiilialusta, Tekoälypohjainen uravalmentaja",
+        projectTypeValues: "Mobiilialusta, TekoÃ¤lypohjainen uravalmentaja",
         timeline: "Aikataulu",
         timelineValue: "8 viikkoa",
-        tools: "Työkalut",
+        tools: "TyÃ¶kalut",
         toolsValue: "Next.js, Figma, FigJam",
         roles: "Roolit",
         objectives: "Tavoitteet",
         designProcess: "Suunnitteluprosessi",
         designModel: "Malli:",
         doubleD: "Double Diamond",
-        discoverPhase: "Löytämisvaihe",
-        definePhase: "Määrittelyvaihe",
+        discoverPhase: "LÃ¶ytÃ¤misvaihe",
+        definePhase: "MÃ¤Ã¤rittelyvaihe",
         developPhase: "Kehitysvaihe",
         deliverPhase: "Toimitusvaihe",
         challenge: "Haaste",
-        challengeDesc: "Miten käyttäjät voivat nopeasti löytää luotettavia paikallisia työpaikkoja, joko tilapäisiä tai pysyviä?",
-        discoveryInsights: "Löydökset",
-        discoveryDesc: "Nousevat elinkustannukset ajavat ihmisiä etsimään lisätuloja – viikonlopputyöt ovat joustavin vaihtoehto. Luotettava työnhakusovellus auttaa käyttäjiä esittelemään saatavuutensa ja taitonsa tehokkaasti.",
+        challengeDesc: "Miten kÃ¤yttÃ¤jÃ¤t voivat nopeasti lÃ¶ytÃ¤Ã¤ luotettavia paikallisia tyÃ¶paikkoja, joko tilapÃ¤isiÃ¤ tai pysyviÃ¤?",
+        discoveryInsights: "LÃ¶ydÃ¶kset",
+        discoveryDesc: "Nousevat elinkustannukset ajavat ihmisiÃ¤ etsimÃ¤Ã¤n lisÃ¤tuloja â€“ viikonlopputyÃ¶t ovat joustavin vaihtoehto. Luotettava tyÃ¶nhakusovellus auttaa kÃ¤yttÃ¤jiÃ¤ esittelemÃ¤Ã¤n saatavuutensa ja taitonsa tehokkaasti.",
         initialResearch: "Alustava tutkimus",
-        initialResearchDesc: "Työalustat vaihtelevat käytettävyydessä ja luotettavuudessa. Yksi ratkaisu on ottaa käyttöön työsopimukset sovittelun jälkeen paremman luotettavuuden ja käyttäjien luottamuksen varmistamiseksi.",
+        initialResearchDesc: "TyÃ¶alustat vaihtelevat kÃ¤ytettÃ¤vyydessÃ¤ ja luotettavuudessa. Yksi ratkaisu on ottaa kÃ¤yttÃ¶Ã¶n tyÃ¶sopimukset sovittelun jÃ¤lkeen paremman luotettavuuden ja kÃ¤yttÃ¤jien luottamuksen varmistamiseksi.",
         hypothesis: "Hypoteesi",
-        hypothesisDesc: "Paikallisesti keskittynyt, helppokäyttöinen työnhakusovellus personoiduilla profiileilla voi palvella työnhakijoita paremmin verrattuna globaaleihin alustoihin.",
+        hypothesisDesc: "Paikallisesti keskittynyt, helppokÃ¤yttÃ¶inen tyÃ¶nhakusovellus personoiduilla profiileilla voi palvella tyÃ¶nhakijoita paremmin verrattuna globaaleihin alustoihin.",
         primaryResearch: "Ensisijainen tutkimus",
         objectivesLabel: "Tavoitteet:",
-        methods: "Menetelmät:",
+        methods: "MenetelmÃ¤t:",
         ethics: "Eettiset periaatteet:",
-        personas: "Käyttäjäpersoonat",
-        userFlow: "Käyttäjäpolku",
-        userFlowDesc: "MVP tukee nopeaa ideointia ja kehitystä varhaiselle tuotekypsyydelle – ihanteellinen itsenäisille suunnittelijoille ja startupeille.",
+        personas: "KÃ¤yttÃ¤jÃ¤persoonat",
+        userFlow: "KÃ¤yttÃ¤jÃ¤polku",
+        userFlowDesc: "MVP tukee nopeaa ideointia ja kehitystÃ¤ varhaiselle tuotekypsyydelle â€“ ihanteellinen itsenÃ¤isille suunnittelijoille ja startupeille.",
         appFeatures: "Sovelluksen Ominaisuudet",
         epicGoal: "Epiiinen tavoite",
-        epicGoalDesc: "Mahdollistaa nopeat tulomahdollisuudet paikallisten keikkatöiden kautta",
-        userTesting: "Käyttäjätestaus",
-        inProgress: "Käynnissä",
+        epicGoalDesc: "Mahdollistaa nopeat tulomahdollisuudet paikallisten keikkatÃ¶iden kautta",
+        userTesting: "KÃ¤yttÃ¤jÃ¤testaus",
+        inProgress: "KÃ¤ynnissÃ¤",
         hifiProto: "Korkean tarkkuuden prototyyppi:",
-        hifiProtoDesc: "Visuaalinen läpikäynti lopullisesta käyttöliittymästä, testattu käyttäjien tavoitteita vastaan.",
+        hifiProtoDesc: "Visuaalinen lÃ¤pikÃ¤ynti lopullisesta kÃ¤yttÃ¶liittymÃ¤stÃ¤, testattu kÃ¤yttÃ¤jien tavoitteita vastaan.",
         designReviews: "Suunnittelukatsaukset:",
-        designReviewsDesc: "Strukturoidut palautesessiot käyttöliittymän laadun ja käytettävyyden arvioimiseksi. Kaikki palaute dokumentoidaan.",
+        designReviewsDesc: "Strukturoidut palautesessiot kÃ¤yttÃ¶liittymÃ¤n laadun ja kÃ¤ytettÃ¤vyyden arvioimiseksi. Kaikki palaute dokumentoidaan.",
         qa: "Laadunvarmistus:",
-        qaDesc: "Kattaa käytettävyyden, laiteyhteensopivuuden ja visuaalisen johdonmukaisuuden",
+        qaDesc: "Kattaa kÃ¤ytettÃ¤vyyden, laiteyhteensopivuuden ja visuaalisen johdonmukaisuuden",
         designDocs: "Suunnitteludokumentaatio:",
-        designDocsDesc: "Viimeistellyt resurssit, suunnittelupäätökset ja luovutusmateriaalit – valmiina kehitysyhteistyöhön.",
-        aiCapabilities: "Tekoälyominaisuudet",
-        aiResume: "Ansioluettelon räätälöinti",
-        aiResumeDesc: "Optimoi ansioluettelosi välittömästi tiettyyn työpaikkailmoitukseen.",
-        aiMatch: "Älykäs täsmäys",
-        aiMatchDesc: "Tekoälypohjaiset työpaikkasuositukset perustuen taitoihisi ja saatavuuteesi.",
+        designDocsDesc: "Viimeistellyt resurssit, suunnittelupÃ¤Ã¤tÃ¶kset ja luovutusmateriaalit â€“ valmiina kehitysyhteistyÃ¶hÃ¶n.",
+        aiCapabilities: "TekoÃ¤lyominaisuudet",
+        aiResume: "Ansioluettelon rÃ¤Ã¤tÃ¤lÃ¶inti",
+        aiResumeDesc: "Optimoi ansioluettelosi vÃ¤littÃ¶mÃ¤sti tiettyyn tyÃ¶paikkailmoitukseen.",
+        aiMatch: "Ã„lykÃ¤s tÃ¤smÃ¤ys",
+        aiMatchDesc: "TekoÃ¤lypohjaiset tyÃ¶paikkasuositukset perustuen taitoihisi ja saatavuuteesi.",
         aiCoach: "Haastatteluvalmennus",
-        aiCoachDesc: "Keskustele tekoälyvalmentajan kanssa valmistautuaksesi tuleviin haastatteluihin.",
+        aiCoachDesc: "Keskustele tekoÃ¤lyvalmentajan kanssa valmistautuaksesi tuleviin haastatteluihin.",
         livePrototypes: "Interaktiiviset prototyypit",
-        livePrototypesIntro: "Tutustu alustan interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.",
+        livePrototypesIntro: "Tutustu alustan interaktiivisiin prototyyppeihin â€” jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.",
         iosPrototype: "iOS-prototyyppi",
-        iosPrototypeDesc: "Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.",
+        iosPrototypeDesc: "Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan â€” lasiset efektit, jÃ¤rjestelmÃ¤vÃ¤rit ja natiivi vÃ¤lilehtipalkkinavigointi.",
         androidPrototype: "Android-prototyyppi",
-        androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.",
+        androidPrototypeDesc: "Rakennettu Material You (Android 16) -standardin mukaan â€” dynaaminen vÃ¤ri, pillerinavigointi ja Material Symbols.",
         openPrototype: "Avaa prototyyppi",
       }
     };
@@ -157,11 +157,11 @@ export default function JobSeekingClient() {
         "Maintain accessible design paradigms with intelligent quick-actions"
       ],
       fi: [
-        "Toimita AI Copilot interaktiiviseen työhaastatteluihin valmistautumiseen",
-        "Toteuta saumaton paikallisten osa-aika- ja viikonlopputöiden haku",
+        "Toimita AI Copilot interaktiiviseen tyÃ¶haastatteluihin valmistautumiseen",
+        "Toteuta saumaton paikallisten osa-aika- ja viikonlopputÃ¶iden haku",
         "Mahdollista mukaansatempaavat vuorovaikutukset dynaamisilla Kojelaudoilla",
         "Varmista natiivin tuntuinen kokemus niin iOS- kuin Android-laitteille",
-        "Ylläpidä saavutettavuutta älykkäillä pikatoiminnoilla"
+        "YllÃ¤pidÃ¤ saavutettavuutta Ã¤lykkÃ¤illÃ¤ pikatoiminnoilla"
       ]
     };
     return objectives[locale as keyof typeof objectives] || objectives.en;
@@ -170,7 +170,7 @@ export default function JobSeekingClient() {
   const content = getLocalizedContent();
   const objectives = getObjectives();
   const roles = locale === 'fi' ?
-    ["Tuotesuunnittelija", "Frontend-kehittäjä", "Tekoäly-integraatio", "Prototypointi"] :
+    ["Tuotesuunnittelija", "Frontend-kehittÃ¤jÃ¤", "TekoÃ¤ly-integraatio", "Prototypointi"] :
     ["Product Designer", "Frontend Developer", "AI Integration", "Prototyping"];
 
   const pathname = usePathname();
@@ -228,7 +228,7 @@ export default function JobSeekingClient() {
         exit="exit"
         variants={pageVariants}
         className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
-          ? 'bg-[#050023]'
+          ? 'bg-[var(--color-colorful-bg)]'
           : isLight
             ? 'bg-gradient-to-br from-slate-50 to-gray-100'
             : 'bg-gradient-to-br from-gray-900 to-black'
@@ -242,7 +242,7 @@ export default function JobSeekingClient() {
             {/* Hero Section */}
             <CaseStudyHero
               title={content.title}
-              subtitle={locale === 'fi' ? 'Työnhakusovellus tehokkaaseen työpaikan etsintään' : 'Job seeking app for efficient job searching'}
+              subtitle={locale === 'fi' ? 'TyÃ¶nhakusovellus tehokkaaseen tyÃ¶paikan etsintÃ¤Ã¤n' : 'Job seeking app for efficient job searching'}
               image="/images/portfolio/jobseeking/cover.jpg"
               tags={roles}
               actions={[
@@ -252,7 +252,7 @@ export default function JobSeekingClient() {
                   onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
                 },
                 {
-                  label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
+                  label: locale === 'fi' ? 'Tarkastele suunnittelujÃ¤rjestelmÃ¤Ã¤' : 'Design System',
                   icon: 'design_services',
                   href: 'https://ds.alux.space/',
                   variant: 'secondary',
@@ -302,10 +302,10 @@ export default function JobSeekingClient() {
                     <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
                       <span className="material-symbols text-2xl text-purple-400">search</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Löydä" : "Discover"}
+                      {locale === 'fi' ? "LÃ¶ydÃ¤" : "Discover"}
                     </h3>
                     <p className="opacity-80 text-sm">
-                      {locale === 'fi' ? "Tutkimukset ja haastattelut käyttäjien kipupisteiden ymmärtämiseksi" : "Research and interviews to understand user pain points"}
+                      {locale === 'fi' ? "Tutkimukset ja haastattelut kÃ¤yttÃ¤jien kipupisteiden ymmÃ¤rtÃ¤miseksi" : "Research and interviews to understand user pain points"}
                     </p>
                   </div>
                 </div>
@@ -315,10 +315,10 @@ export default function JobSeekingClient() {
                     <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
                       <span className="material-symbols text-2xl text-purple-400">notes</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Määrittele" : "Define"}
+                      {locale === 'fi' ? "MÃ¤Ã¤rittele" : "Define"}
                     </h3>
                     <p className="opacity-80 text-sm">
-                      {locale === 'fi' ? "Analysoi oivalluksia selkeiden suunnitteluongelmien määrittämiseksi" : "Analyze insights to frame clear design problems"}
+                      {locale === 'fi' ? "Analysoi oivalluksia selkeiden suunnitteluongelmien mÃ¤Ã¤rittÃ¤miseksi" : "Analyze insights to frame clear design problems"}
                     </p>
                   </div>
                 </div>
@@ -328,10 +328,10 @@ export default function JobSeekingClient() {
                     <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
                       <span className="material-symbols text-2xl text-purple-400">edit</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
-                      {locale === 'fi' ? "Kehitä" : "Develop"}
+                      {locale === 'fi' ? "KehitÃ¤" : "Develop"}
                     </h3>
                     <p className="opacity-80 text-sm">
-                      {locale === 'fi' ? "Ideoi ratkaisuja ja testaa prototyyppejä" : "Ideate solutions and test prototypes"}
+                      {locale === 'fi' ? "Ideoi ratkaisuja ja testaa prototyyppejÃ¤" : "Ideate solutions and test prototypes"}
                     </p>
                   </div>
                 </div>
@@ -417,15 +417,15 @@ export default function JobSeekingClient() {
                       <ul className="space-y-3">
                         <li className="flex items-start">
                           <span className="material-symbols text-purple-400 mr-3 mt-0.5">target</span>
-                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : 'Gauge app awareness and usage'}</span>
+                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Mittaa sovellustietoisuutta ja kÃ¤yttÃ¶Ã¤' : 'Gauge app awareness and usage'}</span>
                         </li>
                         <li className="flex items-start">
                           <span className="material-symbols text-purple-400 mr-3 mt-0.5">psychology</span>
-                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Tunnista käyttäjien kipupisteet' : 'Identify user pain points'}</span>
+                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Tunnista kÃ¤yttÃ¤jien kipupisteet' : 'Identify user pain points'}</span>
                         </li>
                         <li className="flex items-start">
                           <span className="material-symbols text-purple-400 mr-3 mt-0.5">tips_and_updates</span>
-                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Kerää käyttökokemuksen parannusehdotuksia' : 'Gather UX improvement suggestions'}</span>
+                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'KerÃ¤Ã¤ kÃ¤yttÃ¶kokemuksen parannusehdotuksia' : 'Gather UX improvement suggestions'}</span>
                         </li>
                       </ul>
                     </div>
@@ -443,7 +443,7 @@ export default function JobSeekingClient() {
                         </li>
                         <li className="flex items-start">
                           <span className="material-symbols text-purple-400 mr-3 mt-0.5">monitoring</span>
-                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Sovelluksen käytön seuranta' : 'App usage tracking'}</span>
+                          <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Sovelluksen kÃ¤ytÃ¶n seuranta' : 'App usage tracking'}</span>
                         </li>
                         <li className="flex items-start">
                           <span className="material-symbols text-purple-400 mr-3 mt-0.5">analytics</span>
@@ -480,31 +480,31 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* User Personas */}
-            <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="pink" number={5}>
+            <CaseStudySection title={locale === 'fi' ? "KÃ¤yttÃ¤jÃ¤persoonat" : "User Personas"} icon="groups" accent="pink" number={5}>
               <div className="space-y-10">
                 {[
                   {
                     name: locale === 'fi' ? "Allen (20, Opiskelija)" : "Allen (20, Student)",
-                    role: locale === 'fi' ? "Satunnainen käyttäjä" : "Casual User",
+                    role: locale === 'fi' ? "Satunnainen kÃ¤yttÃ¤jÃ¤" : "Casual User",
                     traits: locale === 'fi' ? ["Satunnainen", "Joustava"] : ["Infrequent", "Flexible"],
-                    needs: locale === 'fi' ? ["Nopea raha", "Luotettavat työvuorot"] : ["Quick cash", "Reliable shifts"],
-                    painPoints: locale === 'fi' ? ["Sitoutumispaine", "Epäselvä aikataulu"] : ["Commitment pressure", "Unclear scheduling"],
+                    needs: locale === 'fi' ? ["Nopea raha", "Luotettavat tyÃ¶vuorot"] : ["Quick cash", "Reliable shifts"],
+                    painPoints: locale === 'fi' ? ["Sitoutumispaine", "EpÃ¤selvÃ¤ aikataulu"] : ["Commitment pressure", "Unclear scheduling"],
                     photo: "/images/portfolio/profile-img/allen-student.jpg"
                   },
                   {
                     name: locale === 'fi' ? "James (23, Yliopisto-opiskelija)" : "James (23, Uni Student)",
-                    role: locale === 'fi' ? "Viikonlopputyöntekijä" : "Weekend Worker",
-                    traits: locale === 'fi' ? ["Johdonmukainen", "Säännöllinen"] : ["Consistent", "Regular"],
+                    role: locale === 'fi' ? "ViikonlopputyÃ¶ntekijÃ¤" : "Weekend Worker",
+                    traits: locale === 'fi' ? ["Johdonmukainen", "SÃ¤Ã¤nnÃ¶llinen"] : ["Consistent", "Regular"],
                     needs: locale === 'fi' ? ["2-3 vuoroa/vko", "Tuttuja paikkoja"] : ["2-3 shifts/week", "Familiar venues"],
                     painPoints: locale === 'fi' ? ["Kilpailevat vuorot", "Opiskelu tasapaino"] : ["Competing shifts", "Study balance"],
                     photo: "/images/portfolio/profile-img/james-uni.jpg"
                   },
                   {
-                    name: locale === 'fi' ? "Eeva (40, Säännöllinen)" : "Eeva (40, Regular)",
+                    name: locale === 'fi' ? "Eeva (40, SÃ¤Ã¤nnÃ¶llinen)" : "Eeva (40, Regular)",
                     role: locale === 'fi' ? "Kokenut keikkailija" : "Pro Gig Worker",
                     traits: locale === 'fi' ? ["Luotettava", "Suunnitelmallinen"] : ["Dependable", "Planner"],
-                    needs: locale === 'fi' ? ["Säännölliset tulot", "Joustavat toimet"] : ["Steady income", "Flexible roles"],
-                    painPoints: locale === 'fi' ? ["Viivästynyt palkka", "Huonot varaukset"] : ["Delayed payout", "Poor booking UX"],
+                    needs: locale === 'fi' ? ["SÃ¤Ã¤nnÃ¶lliset tulot", "Joustavat toimet"] : ["Steady income", "Flexible roles"],
+                    painPoints: locale === 'fi' ? ["ViivÃ¤stynyt palkka", "Huonot varaukset"] : ["Delayed payout", "Poor booking UX"],
                     photo: "/images/portfolio/profile-img/eva-pro.jpg"
                   }
                 ].map((persona, index) => (
@@ -534,7 +534,7 @@ export default function JobSeekingClient() {
 
                           <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
                             <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
-                            <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
+                            <span className="text-sm opacity-60">{persona.traits.join(' Â· ')}</span>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

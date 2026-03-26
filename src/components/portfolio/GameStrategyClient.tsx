@@ -10,7 +10,7 @@ import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 
-// ─── User Persona Data ───────────────────────────────────────────────────────
+// â”€â”€â”€ User Persona Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 interface Persona {
   name: string;
@@ -31,14 +31,14 @@ interface Persona {
 const personas: Persona[] = [
   {
     name: 'Victor Chen',
-    age: '16–22',
+    age: '16â€“22',
     avatar: 'sports_esports',
     image: '/images/portfolio/profile-img/vector-chen.jpg',
     occupation: 'Student / Part-time Streamer',
     platforms: ['Mobile', 'PC', 'Console'],
-    weeklyHours: '20–30 hrs',
+    weeklyHours: '20â€“30 hrs',
     motivation: 'Competition, social validation, streaming content',
-    spendingBehavior: 'Spends on cosmetics & battle passes ($10–25/mo)',
+    spendingBehavior: 'Spends on cosmetics & battle passes ($10â€“25/mo)',
     favoriteGenres: ['Battle Royale', 'MOBAs', 'Action RPGs'],
     painPoints: ['Pay-to-win mechanics', 'Slow matchmaking', 'Lack of cross-play'],
     quote: '"I want to show off my skills and look good doing it."',
@@ -46,29 +46,29 @@ const personas: Persona[] = [
   },
   {
     name: 'Vivian Wonderoos',
-    age: '25–34',
+    age: '25â€“34',
     avatar: 'person',
     image: '/images/portfolio/profile-img/vivian-wonderoos.jpg',
     occupation: 'UX Designer / Casual Gamer',
     platforms: ['Mobile', 'Nintendo Switch'],
-    weeklyHours: '5–10 hrs',
+    weeklyHours: '5â€“10 hrs',
     motivation: 'Relaxation, narrative immersion, aesthetic pleasure',
-    spendingBehavior: 'Selective premium purchases ($5–15/mo)',
+    spendingBehavior: 'Selective premium purchases ($5â€“15/mo)',
     favoriteGenres: ['Puzzle', 'Narrative Adventure', 'Simulation'],
     painPoints: ['Aggressive monetization', 'Excessive notifications', 'Time-gated content'],
-    quote: '"Games are my creative escape — don\'t ruin it with pop-ups."',
+    quote: '"Games are my creative escape â€” don\'t ruin it with pop-ups."',
     color: 'teal',
   },
   {
     name: 'Marcus Johnson',
-    age: '28–40',
+    age: '28â€“40',
     avatar: 'military_tech',
     image: '/images/portfolio/profile-img/markus-johnson.jpg',
     occupation: 'Software Engineer / Hardcore Gamer',
     platforms: ['PC', 'Console'],
-    weeklyHours: '15–25 hrs',
+    weeklyHours: '15â€“25 hrs',
     motivation: 'Mastery, deep progression systems, community leadership',
-    spendingBehavior: 'High-value purchases for meaningful content ($30–60/mo)',
+    spendingBehavior: 'High-value purchases for meaningful content ($30â€“60/mo)',
     favoriteGenres: ['Strategy', 'Survival', 'MMORPGs'],
     painPoints: ['Shallow endgame', 'Server instability', 'Lack of mod support'],
     quote: '"Give me systems I can master over hundreds of hours."',
@@ -76,14 +76,14 @@ const personas: Persona[] = [
   },
   {
     name: 'Yuki Tanaka',
-    age: '18–28',
+    age: '18â€“28',
     avatar: 'group',
     image: '/images/portfolio/profile-img/yuki-tanaka.jpg',
     occupation: 'Content Creator / Community Manager',
     platforms: ['Mobile', 'PC'],
-    weeklyHours: '10–20 hrs',
+    weeklyHours: '10â€“20 hrs',
     motivation: 'Social connection, community building, co-op experiences',
-    spendingBehavior: 'Social/gifting purchases & subscriptions ($15–30/mo)',
+    spendingBehavior: 'Social/gifting purchases & subscriptions ($15â€“30/mo)',
     favoriteGenres: ['Co-op RPGs', 'Social Sims', 'Party Games'],
     painPoints: ['Solo-focused design', 'Toxic communities', 'No guild systems'],
     quote: '"The best games are the ones I play with my community."',
@@ -91,7 +91,7 @@ const personas: Persona[] = [
   },
 ];
 
-// ─── Component ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export default function GameStrategyClient() {
   const { theme } = useTheme();
@@ -100,7 +100,7 @@ export default function GameStrategyClient() {
   const isColorful = theme === 'colorful';
   const [activePersona, setActivePersona] = useState(0);
 
-  // ── Theme-aware color helpers ────────────────────────────────────────────
+  // â”€â”€ Theme-aware color helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   const getColorStyles = (color: string) => {
     const styles: Record<string, { cardBg: string; iconText: string; iconBg: string; borderColor: string }> = {
@@ -173,7 +173,7 @@ export default function GameStrategyClient() {
   const activeP = personas[activePersona];
   const activeColor = getColorStyles(activeP.color);
 
-  // ── Market Research Data ─────────────────────────────────────────────────
+  // â”€â”€ Market Research Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   const marketStats = [
     { label: 'Global Gaming Market', value: '$187.7B', icon: 'public', note: '2024 Revenue', color: 'blue' },
@@ -192,8 +192,8 @@ export default function GameStrategyClient() {
   ];
 
   const gameplayMechanics = [
-    { title: 'Core Loop', icon: 'replay', desc: 'Explore → Battle → Loot → Upgrade — a satisfying loop driven by persona research showing 73% of target players prioritize progression.', color: 'purple' },
-    { title: 'Social Systems', icon: 'diversity_3', desc: 'Guild alliances, real-time co-op raids, and social gifting. Designed for Yuki\'s persona — players who stay 2.4x longer with social features.', color: 'blue' },
+    { title: 'Core Loop', icon: 'replay', desc: 'Explore â†’ Battle â†’ Loot â†’ Upgrade â€” a satisfying loop driven by persona research showing 73% of target players prioritize progression.', color: 'purple' },
+    { title: 'Social Systems', icon: 'diversity_3', desc: 'Guild alliances, real-time co-op raids, and social gifting. Designed for Yuki\'s persona â€” players who stay 2.4x longer with social features.', color: 'blue' },
     { title: 'Skill-Based PvP', icon: 'swords', desc: 'ELO-ranked matchmaking with seasonal leagues. Victor\'s persona data shows competitive players have 40% higher ARPU.', color: 'red' },
     { title: 'Dynamic Difficulty', icon: 'tune', desc: 'ML-powered difficulty scaling that adapts to player skill. Reduces churn by 31% for Vivian\'s casual segment.', color: 'green' },
     { title: 'Narrative Branching', icon: 'auto_stories', desc: 'Choice-driven story with 4 endings. Vivian\'s persona research shows narrative games see 58% higher completion rates.', color: 'teal' },
@@ -201,14 +201,14 @@ export default function GameStrategyClient() {
   ];
 
   const uxPrinciples = [
-    { title: 'Onboarding Flow', icon: 'school', desc: 'Progressive disclosure tutorial — 3 guided sessions introducing mechanics gradually. A/B tested: skip rate dropped from 42% to 11%.', metric: '11% skip rate' },
+    { title: 'Onboarding Flow', icon: 'school', desc: 'Progressive disclosure tutorial â€” 3 guided sessions introducing mechanics gradually. A/B tested: skip rate dropped from 42% to 11%.', metric: '11% skip rate' },
     { title: 'Accessibility', icon: 'accessibility_new', desc: 'Full colorblind modes, scalable UI, one-handed controls, subtitles with speaker identification. WCAG 2.1 AA compliance.', metric: 'WCAG 2.1 AA' },
-    { title: 'Session Design', icon: 'hourglass_top', desc: 'Meaningful 3-minute sessions for mobile, with deep 45+ minute sessions for PC/console. Respects all persona time budgets.', metric: '3–45 min range' },
+    { title: 'Session Design', icon: 'hourglass_top', desc: 'Meaningful 3-minute sessions for mobile, with deep 45+ minute sessions for PC/console. Respects all persona time budgets.', metric: '3â€“45 min range' },
     { title: 'Notification Ethics', icon: 'notifications_off', desc: 'Opt-in smart notifications only. Vivian\'s persona data: 67% of casual players uninstall games with aggressive push notifications.', metric: 'Opt-in only' },
   ];
 
   const marketingChannels = [
-    { channel: 'Influencer Partnerships', icon: 'videocam', desc: 'Micro-influencers (10K–100K) for authenticity, macro for launch. Focus on gameplay, not ads.', kpi: 'CPI: $1.20 target', color: 'purple' },
+    { channel: 'Influencer Partnerships', icon: 'videocam', desc: 'Micro-influencers (10Kâ€“100K) for authenticity, macro for launch. Focus on gameplay, not ads.', kpi: 'CPI: $1.20 target', color: 'purple' },
     { channel: 'App Store Optimization', icon: 'store', desc: 'Keyword-optimized listings, A/B tested screenshots, preview videos. Conversion rate optimization.', kpi: 'CVR: 35% target', color: 'blue' },
     { channel: 'Performance Marketing', icon: 'ads_click', desc: 'UA campaigns across Meta, TikTok, Unity Ads. Lookalike audiences from soft-launch data.', kpi: 'ROAS: 140% D30', color: 'green' },
     { channel: 'Community & Discord', icon: 'forum', desc: 'Pre-launch Discord server, beta access, creator program. Build before you launch.', kpi: '50K pre-registrations', color: 'teal' },
@@ -225,18 +225,18 @@ export default function GameStrategyClient() {
   ];
 
   const monetizationModel = [
-    { model: 'Cosmetic Shop', icon: 'palette', revenue: '45%', desc: 'Skins, emotes, effects — no gameplay advantage. Validated by Victor\'s persona: willingness to pay for self-expression.' },
+    { model: 'Cosmetic Shop', icon: 'palette', revenue: '45%', desc: 'Skins, emotes, effects â€” no gameplay advantage. Validated by Victor\'s persona: willingness to pay for self-expression.' },
     { model: 'Battle Pass', icon: 'card_membership', revenue: '30%', desc: '$9.99/season with guaranteed value. Marcus\'s data: high-engagement players prefer predictable spending.' },
     { model: 'Ad Monetization', icon: 'play_circle', revenue: '15%', desc: 'Opt-in rewarded videos only. Respects Vivian\'s anti-interruption preference while monetizing non-payers.' },
     { model: 'Starter Packs', icon: 'redeem', revenue: '10%', desc: 'One-time value offers at key progression gates. Conversion-optimized for new players at hours 2, 5, and 10.' },
   ];
 
-  // ── Render ───────────────────────────────────────────────────────────────
+  // â”€â”€ Render â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       isColorful
-        ? 'bg-[#050023]'
+        ? 'bg-[var(--color-colorful-bg)]'
         : isLight
           ? 'bg-gradient-to-br from-slate-50 to-gray-100'
           : 'bg-gradient-to-br from-gray-900 to-black'
@@ -246,23 +246,23 @@ export default function GameStrategyClient() {
       <article className="pt-24 pb-16">
         <div className="max-w-6xl mx-auto px-6">
 
-          {/* ── Hero ──────────────────────────────────────────────────────── */}
+          {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudyHero
             title={locale === 'fi' ? 'Pelinkehitys- ja markkinointistrategia' : 'Game Development & Marketing Strategy'}
             subtitle={locale === 'fi'
-              ? 'Dataohjattu lähestymistapa pelisuunnitteluun, käyttäjäkokemukseen ja kasvustrategiaan — käyttäjäpersoonista julkaisusuunnitelmiin.'
-              : 'A data-driven approach to game design, UX, and growth strategy — from user personas to launch plans.'}
+              ? 'Dataohjattu lÃ¤hestymistapa pelisuunnitteluun, kÃ¤yttÃ¤jÃ¤kokemukseen ja kasvustrategiaan â€” kÃ¤yttÃ¤jÃ¤persoonista julkaisusuunnitelmiin.'
+              : 'A data-driven approach to game design, UX, and growth strategy â€” from user personas to launch plans.'}
             image="/images/portfolio/game-dev/cover.jpg"
             tags={['Game Design', 'Marketing Strategy', 'User Research', 'Growth']}
             meta={[
               { label: locale === 'fi' ? 'Projektityyppi' : 'Project Type', value: locale === 'fi' ? 'Strateginen tapaustutkimus' : 'Strategic Case Study', icon: 'category' },
               { label: locale === 'fi' ? 'Painopiste' : 'Focus', value: locale === 'fi' ? 'Kehitys & markkinointi' : 'Development & Marketing', icon: 'target' },
-              { label: locale === 'fi' ? 'Menetelmät' : 'Methods', value: locale === 'fi' ? 'Persoonat, data-analyysi, A/B-testaus' : 'Personas, Data Analysis, A/B Testing', icon: 'build' },
+              { label: locale === 'fi' ? 'MenetelmÃ¤t' : 'Methods', value: locale === 'fi' ? 'Persoonat, data-analyysi, A/B-testaus' : 'Personas, Data Analysis, A/B Testing', icon: 'build' },
               { label: locale === 'fi' ? 'Alusta' : 'Platform', value: locale === 'fi' ? 'Mobiili, PC, konsoli' : 'Mobile, PC, Console', icon: 'devices' },
             ]}
           />
 
-          {/* ── Intro ─────────────────────────────────────────────────────── */}
+          {/* â”€â”€ Intro â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
@@ -273,12 +273,12 @@ export default function GameStrategyClient() {
               isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
             }`}>
               {locale === 'fi'
-                ? 'Tämä strateginen tapaustutkimus yhdistää pelisuunnittelun, markkinointistrategian ja käyttäjätutkimuksen yhtenäiseksi viitekehykseksi. Jokainen päätös — mekaniikasta monetisaatioon — pohjautuu kohderyhmätietoihin ja käyttäjäpersooniin.'
-                : 'This strategic case study bridges game design, marketing strategy, and user research into a unified framework. Every decision — from mechanics to monetization — is grounded in audience data and validated through user personas.'}
+                ? 'TÃ¤mÃ¤ strateginen tapaustutkimus yhdistÃ¤Ã¤ pelisuunnittelun, markkinointistrategian ja kÃ¤yttÃ¤jÃ¤tutkimuksen yhtenÃ¤iseksi viitekehykseksi. Jokainen pÃ¤Ã¤tÃ¶s â€” mekaniikasta monetisaatioon â€” pohjautuu kohderyhmÃ¤tietoihin ja kÃ¤yttÃ¤jÃ¤persooniin.'
+                : 'This strategic case study bridges game design, marketing strategy, and user research into a unified framework. Every decision â€” from mechanics to monetization â€” is grounded in audience data and validated through user personas.'}
             </p>
           </motion.div>
 
-          {/* ── 1. Market Research ─────────────────────────────────────────── */}
+          {/* â”€â”€ 1. Market Research â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudySection title={locale === 'fi' ? 'Markkinatutkimus & tilannekatsaus' : 'Market Research & Landscape'} icon="analytics" accent="blue" number={1}>
             <CaseStudyItem>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
@@ -316,7 +316,7 @@ export default function GameStrategyClient() {
                     </h4>
                     <p className={`text-sm leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
                       {locale === 'fi'
-                        ? 'Markkinatutkimus paljasti aliedustetun segmentin: pelit, jotka yhdistävät taitopohjaisen PvP:n, rikkaan tarinankerronnan ja reilun monetisaation. Suurimmat kilpailijat suosivat joko hardcore- tai casual-segmenttejä, jättäen "ammattitaitoisen keskisegmentin" vajaasti palvelluksi.'
+                        ? 'Markkinatutkimus paljasti aliedustetun segmentin: pelit, jotka yhdistÃ¤vÃ¤t taitopohjaisen PvP:n, rikkaan tarinankerronnan ja reilun monetisaation. Suurimmat kilpailijat suosivat joko hardcore- tai casual-segmenttejÃ¤, jÃ¤ttÃ¤en "ammattitaitoisen keskisegmentin" vajaasti palvelluksi.'
                         : 'Market research revealed an underserved segment: games combining skill-based PvP with rich narrative and fair monetization. Top competitors favor either hardcore or casual segments, leaving the "skilled mid-core" underserved.'}
                     </p>
                   </div>
@@ -325,7 +325,7 @@ export default function GameStrategyClient() {
                   {[
                     { label: locale === 'fi' ? 'Suora kilpailu' : 'Direct Competitors', value: '12', icon: 'swords' },
                     { label: locale === 'fi' ? 'Markkinamahdollisuus' : 'Market Opportunity', value: '$2.4B', icon: 'trending_up' },
-                    { label: locale === 'fi' ? 'Keskimääräinen CPI' : 'Average CPI', value: '$1.80', icon: 'payments' },
+                    { label: locale === 'fi' ? 'KeskimÃ¤Ã¤rÃ¤inen CPI' : 'Average CPI', value: '$1.80', icon: 'payments' },
                   ].map((item, i) => (
                     <div key={i} className={`flex items-center gap-3 p-3 rounded-xl ${isColorful ? 'bg-white/[0.04]' : isLight ? 'bg-gray-50' : 'bg-white/[0.03]'}`}>
                       <span className={`material-symbols text-lg ${getColorStyles('blue').iconText}`}>{item.icon}</span>
@@ -340,12 +340,12 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 2. User Personas ──────────────────────────────────────────── */}
-          <CaseStudySection title={locale === 'fi' ? 'Käyttäjäpersoonat & kohderyhmätutkimus' : 'User Personas & Audience Research'} icon="groups" accent="purple" number={2}>
+          {/* â”€â”€ 2. User Personas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          <CaseStudySection title={locale === 'fi' ? 'KÃ¤yttÃ¤jÃ¤persoonat & kohderyhmÃ¤tutkimus' : 'User Personas & Audience Research'} icon="groups" accent="purple" number={2}>
             <CaseStudyItem>
               <p className={`text-center text-sm mb-8 max-w-2xl mx-auto ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                 {locale === 'fi'
-                  ? 'Nämä persoonat on rakennettu kyselytutkimusten (n=1,200), pelikäyttäytymisdatan ja markkinatutkimuksen pohjalta ohjaamaan jokaista suunnittelu- ja markkinointipäätöstä.'
+                  ? 'NÃ¤mÃ¤ persoonat on rakennettu kyselytutkimusten (n=1,200), pelikÃ¤yttÃ¤ytymisdatan ja markkinatutkimuksen pohjalta ohjaamaan jokaista suunnittelu- ja markkinointipÃ¤Ã¤tÃ¶stÃ¤.'
                   : 'These personas are built from survey data (n=1,200), behavioral analytics, and market research to inform every design and marketing decision.'}
               </p>
 
@@ -395,7 +395,7 @@ export default function GameStrategyClient() {
                         <div>
                           <h4 className={`text-xl font-bold ${isLight ? 'text-gray-900' : 'text-white'}`}>{activeP.name}</h4>
                           <p className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{activeP.occupation}</p>
-                          <p className={`text-xs font-medium mt-1 ${activeColor.iconText}`}>{locale === 'fi' ? 'Ikä' : 'Age'}: {activeP.age}</p>
+                          <p className={`text-xs font-medium mt-1 ${activeColor.iconText}`}>{locale === 'fi' ? 'IkÃ¤' : 'Age'}: {activeP.age}</p>
                         </div>
                       </div>
 
@@ -408,7 +408,7 @@ export default function GameStrategyClient() {
                         </div>
                         <div>
                           <p className={`text-xs font-semibold uppercase tracking-wider mb-2 ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>
-                            {locale === 'fi' ? 'Kulutuskäyttäytyminen' : 'Spending Behavior'}
+                            {locale === 'fi' ? 'KulutuskÃ¤yttÃ¤ytyminen' : 'Spending Behavior'}
                           </p>
                           <p className={`text-sm ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>{activeP.spendingBehavior}</p>
                         </div>
@@ -472,41 +472,41 @@ export default function GameStrategyClient() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Persona → Design Impact Connection */}
+              {/* Persona â†’ Design Impact Connection */}
               <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
                 <div className={`${cardClass} p-5`}>
                   <div className="flex items-center gap-3 mb-3">
                     <span className={`material-symbols text-lg ${getColorStyles('green').iconText}`}>link</span>
                     <h5 className={`text-sm font-bold ${isLight ? 'text-gray-800' : 'text-white'}`}>
-                      {locale === 'fi' ? 'Persoonasta suunnitteluun' : 'Persona → Design Decisions'}
+                      {locale === 'fi' ? 'Persoonasta suunnitteluun' : 'Persona â†’ Design Decisions'}
                     </h5>
                   </div>
                   <ul className={`text-sm space-y-2 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-                    <li>• Victor → Competitive ranked modes + cosmetic shop</li>
-                    <li>• Vivian → Accessibility features + ethical monetization</li>
-                    <li>• Marcus → Deep progression + endgame systems</li>
-                    <li>• Yuki → Social guilds + co-op content pipeline</li>
+                    <li>â€¢ Victor â†’ Competitive ranked modes + cosmetic shop</li>
+                    <li>â€¢ Vivian â†’ Accessibility features + ethical monetization</li>
+                    <li>â€¢ Marcus â†’ Deep progression + endgame systems</li>
+                    <li>â€¢ Yuki â†’ Social guilds + co-op content pipeline</li>
                   </ul>
                 </div>
                 <div className={`${cardClass} p-5`}>
                   <div className="flex items-center gap-3 mb-3">
                     <span className={`material-symbols text-lg ${getColorStyles('orange').iconText}`}>campaign</span>
                     <h5 className={`text-sm font-bold ${isLight ? 'text-gray-800' : 'text-white'}`}>
-                      {locale === 'fi' ? 'Persoonasta markkinointiin' : 'Persona → Marketing Approach'}
+                      {locale === 'fi' ? 'Persoonasta markkinointiin' : 'Persona â†’ Marketing Approach'}
                     </h5>
                   </div>
                   <ul className={`text-sm space-y-2 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-                    <li>• Victor → Twitch/YouTube influencer campaigns</li>
-                    <li>• Vivian → ASO + aesthetic social media content</li>
-                    <li>• Marcus → Community forums + dev diaries</li>
-                    <li>• Yuki → Discord community + creator program</li>
+                    <li>â€¢ Victor â†’ Twitch/YouTube influencer campaigns</li>
+                    <li>â€¢ Vivian â†’ ASO + aesthetic social media content</li>
+                    <li>â€¢ Marcus â†’ Community forums + dev diaries</li>
+                    <li>â€¢ Yuki â†’ Discord community + creator program</li>
                   </ul>
                 </div>
               </div>
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 3. Game Concept & Mechanics ────────────────────────────────── */}
+          {/* â”€â”€ 3. Game Concept & Mechanics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudySection title={locale === 'fi' ? 'Pelikonsepti & mekaniikka' : 'Game Concept & Mechanics'} icon="sports_esports" accent="red" number={3}>
             <CaseStudyItem>
               <div className={`${cardClass} p-8 mb-8 text-center`}>
@@ -515,8 +515,8 @@ export default function GameStrategyClient() {
                 </h4>
                 <p className={`text-base leading-relaxed max-w-2xl mx-auto ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>
                   {locale === 'fi'
-                    ? 'Tarinavetoinen action-RPG, jossa yhdistyvät taitopohjaiset taistelut, sosiaalit yhteistyöjärjestelmät ja reilun free-to-play -monetisaation malli — suunniteltu palvelemaan kaikkia neljää kohdepersoonaa ilman kompromisseja.'
-                    : 'A narrative-driven action RPG combining skill-based combat, social cooperative systems, and a fair free-to-play monetization model — designed to serve all four target personas without compromise.'}
+                    ? 'Tarinavetoinen action-RPG, jossa yhdistyvÃ¤t taitopohjaiset taistelut, sosiaalit yhteistyÃ¶jÃ¤rjestelmÃ¤t ja reilun free-to-play -monetisaation malli â€” suunniteltu palvelemaan kaikkia neljÃ¤Ã¤ kohdepersoonaa ilman kompromisseja.'
+                    : 'A narrative-driven action RPG combining skill-based combat, social cooperative systems, and a fair free-to-play monetization model â€” designed to serve all four target personas without compromise.'}
                 </p>
               </div>
             </CaseStudyItem>
@@ -546,7 +546,7 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 4. UX Design Principles ────────────────────────────────────── */}
+          {/* â”€â”€ 4. UX Design Principles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudySection title={locale === 'fi' ? 'UX-suunnitteluperiaatteet' : 'UX Design Principles'} icon="design_services" accent="teal" number={4}>
             <CaseStudyItem>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -573,7 +573,7 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 5. Development Phases ──────────────────────────────────────── */}
+          {/* â”€â”€ 5. Development Phases â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudySection title={locale === 'fi' ? 'Kehitysvaiheet & aikataulu' : 'Development Phases & Timeline'} icon="timeline" accent="green" number={5}>
             <CaseStudyItem>
               <div className="relative">
@@ -593,7 +593,7 @@ export default function GameStrategyClient() {
                         transition={{ delay: i * 0.08 }}
                       >
                         {/* Timeline dot */}
-                        <div className={`absolute -left-[3.25rem] top-6 w-5 h-5 rounded-full hidden md:flex items-center justify-center ${c.iconBg} ring-4 ${isColorful ? 'ring-[#050023]' : isLight ? 'ring-gray-50' : 'ring-gray-900'}`}>
+                        <div className={`absolute -left-[3.25rem] top-6 w-5 h-5 rounded-full hidden md:flex items-center justify-center ${c.iconBg} ring-4 ${isColorful ? 'ring-[var(--color-colorful-bg)]' : isLight ? 'ring-gray-50' : 'ring-gray-900'}`}>
                           <span className={`material-symbols text-xs ${c.iconText}`}>{phase.icon}</span>
                         </div>
 
@@ -626,13 +626,13 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 6. Monetization Model ─────────────────────────────────────── */}
+          {/* â”€â”€ 6. Monetization Model â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudySection title={locale === 'fi' ? 'Monetisaatiomalli' : 'Monetization Model'} icon="payments" accent="orange" number={6}>
             <CaseStudyItem>
               <p className={`text-center text-sm mb-8 max-w-2xl mx-auto ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                 {locale === 'fi'
-                  ? 'Reilun monetisaation malli, joka on suunniteltu persoonatietojen perusteella — ei pay-to-win-mekaniikkoja, keskittyen kosmeettisiin ostoksiin ja vapaaehtoiseen mainosten katseluun.'
-                  : 'A fair monetization model designed from persona data — zero pay-to-win mechanics, focusing on cosmetic purchases and opt-in ad viewing.'}
+                  ? 'Reilun monetisaation malli, joka on suunniteltu persoonatietojen perusteella â€” ei pay-to-win-mekaniikkoja, keskittyen kosmeettisiin ostoksiin ja vapaaehtoiseen mainosten katseluun.'
+                  : 'A fair monetization model designed from persona data â€” zero pay-to-win mechanics, focusing on cosmetic purchases and opt-in ad viewing.'}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
@@ -685,22 +685,22 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 7. Marketing Strategy ─────────────────────────────────────── */}
-          <CaseStudySection title={locale === 'fi' ? 'Markkinointistrategia & käyttäjähankinta' : 'Marketing Strategy & User Acquisition'} icon="campaign" accent="pink" number={7}>
+          {/* â”€â”€ 7. Marketing Strategy â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          <CaseStudySection title={locale === 'fi' ? 'Markkinointistrategia & kÃ¤yttÃ¤jÃ¤hankinta' : 'Marketing Strategy & User Acquisition'} icon="campaign" accent="pink" number={7}>
             <CaseStudyItem>
               <div className={`${cardClass} p-8 mb-8`}>
                 <h4 className={`text-lg font-bold mb-3 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                  {locale === 'fi' ? 'Asemointi ja brändäys' : 'Positioning & Branding'}
+                  {locale === 'fi' ? 'Asemointi ja brÃ¤ndÃ¤ys' : 'Positioning & Branding'}
                 </h4>
                 <p className={`text-sm leading-relaxed mb-4 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
                   {locale === 'fi'
-                    ? 'Asemoidutaan "reiluna taitopohjaisena RPG:nä, joka kunnioittaa pelaajan aikaa ja lompakkoa". Brändi-identiteetti yhdistää elokuvallisen visuaalisuuden saavutettavaan pelattavuuteen — houkutellen sekä Victor:n kilpailullista intoa että Vivian:n esteettistä herkkyyttä.'
-                    : 'Positioned as "the fair skill-based RPG that respects your time and wallet." Brand identity merges cinematic visuals with approachable gameplay — attracting both Victor\'s competitive drive and Vivian\'s aesthetic sensibility.'}
+                    ? 'Asemoidutaan "reiluna taitopohjaisena RPG:nÃ¤, joka kunnioittaa pelaajan aikaa ja lompakkoa". BrÃ¤ndi-identiteetti yhdistÃ¤Ã¤ elokuvallisen visuaalisuuden saavutettavaan pelattavuuteen â€” houkutellen sekÃ¤ Victor:n kilpailullista intoa ettÃ¤ Vivian:n esteettistÃ¤ herkkyyttÃ¤.'
+                    : 'Positioned as "the fair skill-based RPG that respects your time and wallet." Brand identity merges cinematic visuals with approachable gameplay â€” attracting both Victor\'s competitive drive and Vivian\'s aesthetic sensibility.'}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
-                    { label: locale === 'fi' ? 'Ääni' : 'Brand Voice', value: locale === 'fi' ? 'Rohkea, reilu, yhteisöllinen' : 'Bold, fair, community-first', icon: 'record_voice_over' },
-                    { label: locale === 'fi' ? 'Visuaalinen identiteetti' : 'Visual Identity', value: locale === 'fi' ? 'Elokuvallinen mutta leikkisä' : 'Cinematic yet playful', icon: 'palette' },
+                    { label: locale === 'fi' ? 'Ã„Ã¤ni' : 'Brand Voice', value: locale === 'fi' ? 'Rohkea, reilu, yhteisÃ¶llinen' : 'Bold, fair, community-first', icon: 'record_voice_over' },
+                    { label: locale === 'fi' ? 'Visuaalinen identiteetti' : 'Visual Identity', value: locale === 'fi' ? 'Elokuvallinen mutta leikkisÃ¤' : 'Cinematic yet playful', icon: 'palette' },
                     { label: locale === 'fi' ? 'Arvolupaus' : 'Value Proposition', value: locale === 'fi' ? 'Ei pay-to-win, kaikki ovat tervetulleita' : 'Zero pay-to-win, everyone belongs', icon: 'verified' },
                   ].map((b, i) => (
                     <div key={i} className={`p-4 rounded-xl ${isColorful ? 'bg-white/[0.04]' : isLight ? 'bg-gray-50' : 'bg-white/[0.03]'}`}>
@@ -747,9 +747,9 @@ export default function GameStrategyClient() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {[
                     { phase: locale === 'fi' ? 'T-12 viikkoa' : 'T-12 Weeks', label: locale === 'fi' ? 'Tease & hype' : 'Tease & Hype', items: ['Cinematic teaser trailer', 'Social media presence launch', 'Press kit distribution'], icon: 'movie', color: 'purple' },
-                    { phase: locale === 'fi' ? 'T-8 viikkoa' : 'T-8 Weeks', label: locale === 'fi' ? 'Yhteisön rakentaminen' : 'Community Building', items: ['Discord server launch', 'Creator beta access', 'Dev diary series start'], icon: 'groups', color: 'blue' },
+                    { phase: locale === 'fi' ? 'T-8 viikkoa' : 'T-8 Weeks', label: locale === 'fi' ? 'YhteisÃ¶n rakentaminen' : 'Community Building', items: ['Discord server launch', 'Creator beta access', 'Dev diary series start'], icon: 'groups', color: 'blue' },
                     { phase: locale === 'fi' ? 'T-4 viikkoa' : 'T-4 Weeks', label: locale === 'fi' ? 'UA-ramppi' : 'UA Ramp-Up', items: ['Performance ad campaigns', 'Influencer gameplay reveals', 'Pre-registration push'], icon: 'rocket_launch', color: 'green' },
-                    { phase: locale === 'fi' ? 'Julkaisupäivä' : 'Launch Day', label: locale === 'fi' ? 'Globaali julkaisu' : 'Global Release', items: ['App Store featuring push', 'Live launch event stream', '24hr community war event'], icon: 'celebration', color: 'orange' },
+                    { phase: locale === 'fi' ? 'JulkaisupÃ¤ivÃ¤' : 'Launch Day', label: locale === 'fi' ? 'Globaali julkaisu' : 'Global Release', items: ['App Store featuring push', 'Live launch event stream', '24hr community war event'], icon: 'celebration', color: 'orange' },
                   ].map((t, i) => {
                     const c = getColorStyles(t.color);
                     return (
@@ -775,8 +775,8 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 8. Community & Retention ───────────────────────────────────── */}
-          <CaseStudySection title={locale === 'fi' ? 'Yhteisö & pitkäaikainen pysyvyys' : 'Community & Long-Term Retention'} icon="loyalty" accent="indigo" number={8}>
+          {/* â”€â”€ 8. Community & Retention â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          <CaseStudySection title={locale === 'fi' ? 'YhteisÃ¶ & pitkÃ¤aikainen pysyvyys' : 'Community & Long-Term Retention'} icon="loyalty" accent="indigo" number={8}>
             <CaseStudyItem>
               <div className="space-y-4">
                 {retentionTactics.map((rt, i) => {
@@ -812,9 +812,9 @@ export default function GameStrategyClient() {
             <CaseStudyItem>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8">
                 {[
-                  { title: locale === 'fi' ? 'Discord-yhteisö' : 'Discord Community', icon: 'forum', desc: locale === 'fi' ? 'Moderoidut kanavat, AMA-sessiot kehittäjien kanssa, pelaajapalautejärjestelmä' : 'Moderated channels, developer AMAs, player feedback pipeline', metric: '50K+ members target', color: 'indigo' },
-                  { title: locale === 'fi' ? 'Sisällönluojaohjelma' : 'Creator Program', icon: 'videocam', desc: locale === 'fi' ? 'Porrastettu kumppanuusohjelma yksinomaisella pääsyllä, tulonjako ja markkinointituki' : 'Tiered partnership program with exclusive access, revenue share, and marketing support', metric: '200 creators at launch', color: 'purple' },
-                  { title: locale === 'fi' ? 'Pelaajan ääni -ohjelma' : 'Player Voice Program', icon: 'how_to_vote', desc: locale === 'fi' ? 'Kuukausittaiset kyselyt, ominaisuusäänestykset ja beeta-testiryhmä — pelaajat ohjaavat tuotetta' : 'Monthly surveys, feature voting, and beta testing group — players shape the roadmap', metric: '82% satisfaction target', color: 'teal' },
+                  { title: locale === 'fi' ? 'Discord-yhteisÃ¶' : 'Discord Community', icon: 'forum', desc: locale === 'fi' ? 'Moderoidut kanavat, AMA-sessiot kehittÃ¤jien kanssa, pelaajapalautejÃ¤rjestelmÃ¤' : 'Moderated channels, developer AMAs, player feedback pipeline', metric: '50K+ members target', color: 'indigo' },
+                  { title: locale === 'fi' ? 'SisÃ¤llÃ¶nluojaohjelma' : 'Creator Program', icon: 'videocam', desc: locale === 'fi' ? 'Porrastettu kumppanuusohjelma yksinomaisella pÃ¤Ã¤syllÃ¤, tulonjako ja markkinointituki' : 'Tiered partnership program with exclusive access, revenue share, and marketing support', metric: '200 creators at launch', color: 'purple' },
+                  { title: locale === 'fi' ? 'Pelaajan Ã¤Ã¤ni -ohjelma' : 'Player Voice Program', icon: 'how_to_vote', desc: locale === 'fi' ? 'Kuukausittaiset kyselyt, ominaisuusÃ¤Ã¤nestykset ja beeta-testiryhmÃ¤ â€” pelaajat ohjaavat tuotetta' : 'Monthly surveys, feature voting, and beta testing group â€” players shape the roadmap', metric: '82% satisfaction target', color: 'teal' },
                 ].map((pillar, i) => {
                   const c = getColorStyles(pillar.color);
                   return (
@@ -832,49 +832,49 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 9. Data-Driven Decision Framework ─────────────────────────── */}
-          <CaseStudySection title={locale === 'fi' ? 'Dataohjattu päätöksenteko' : 'Data-Driven Decision Framework'} icon="insights" accent="cyan" number={9}>
+          {/* â”€â”€ 9. Data-Driven Decision Framework â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          <CaseStudySection title={locale === 'fi' ? 'Dataohjattu pÃ¤Ã¤tÃ¶ksenteko' : 'Data-Driven Decision Framework'} icon="insights" accent="cyan" number={9}>
             <CaseStudyItem>
               <div className={`${cardClass} p-8 mb-8`}>
                 <div className="text-center mb-8">
                   <h4 className={`text-lg font-bold mb-3 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                    {locale === 'fi' ? 'Kuinka data ohjaa jokaista päätöstä' : 'How Data Informs Every Decision'}
+                    {locale === 'fi' ? 'Kuinka data ohjaa jokaista pÃ¤Ã¤tÃ¶stÃ¤' : 'How Data Informs Every Decision'}
                   </h4>
                   <p className={`text-sm max-w-2xl mx-auto ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                     {locale === 'fi'
-                      ? 'Silta yleisötutkimuksen, tuotesuunnittelun ja markkinoinnin toteutuksen välillä — jokainen piirre ja kampanja on jäljitettävissä persoonatietoihin.'
-                      : 'The bridge between audience research, product design, and marketing execution — every feature and campaign is traceable to persona data.'}
+                      ? 'Silta yleisÃ¶tutkimuksen, tuotesuunnittelun ja markkinoinnin toteutuksen vÃ¤lillÃ¤ â€” jokainen piirre ja kampanja on jÃ¤ljitettÃ¤vissÃ¤ persoonatietoihin.'
+                      : 'The bridge between audience research, product design, and marketing execution â€” every feature and campaign is traceable to persona data.'}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {[
                     {
-                      title: locale === 'fi' ? 'Tutkimus → Suunnittelu' : 'Research → Design',
+                      title: locale === 'fi' ? 'Tutkimus â†’ Suunnittelu' : 'Research â†’ Design',
                       icon: 'science',
                       color: 'purple',
                       connections: [
-                        { from: locale === 'fi' ? '73% haluaa etenemistä' : '73% want progression', to: locale === 'fi' ? 'Monikerroksinen loot-järjestelmä' : 'Multi-layered loot system' },
+                        { from: locale === 'fi' ? '73% haluaa etenemistÃ¤' : '73% want progression', to: locale === 'fi' ? 'Monikerroksinen loot-jÃ¤rjestelmÃ¤' : 'Multi-layered loot system' },
                         { from: locale === 'fi' ? '67% poistaa aggressiivisen pelin' : '67% uninstall aggressive apps', to: locale === 'fi' ? 'Eettinen monetisaatio' : 'Ethical monetization' },
-                        { from: locale === 'fi' ? '2.4x pidempi sessio sosiaalisella' : '2.4x longer sessions w/ social', to: locale === 'fi' ? 'Guild-järjestelmä päivästä 1' : 'Guild system from day 1' },
+                        { from: locale === 'fi' ? '2.4x pidempi sessio sosiaalisella' : '2.4x longer sessions w/ social', to: locale === 'fi' ? 'Guild-jÃ¤rjestelmÃ¤ pÃ¤ivÃ¤stÃ¤ 1' : 'Guild system from day 1' },
                       ]
                     },
                     {
-                      title: locale === 'fi' ? 'Suunnittelu → Markkinointi' : 'Design → Marketing',
+                      title: locale === 'fi' ? 'Suunnittelu â†’ Markkinointi' : 'Design â†’ Marketing',
                       icon: 'sync_alt',
                       color: 'blue',
                       connections: [
                         { from: locale === 'fi' ? 'Taitopohjainen PvP' : 'Skill-based PvP', to: locale === 'fi' ? 'Esports-markkinointi' : 'Esports marketing angle' },
-                        { from: locale === 'fi' ? 'Kaunis taide' : 'Beautiful art style', to: locale === 'fi' ? 'Visuaalinen somesisältö' : 'Visual social media content' },
+                        { from: locale === 'fi' ? 'Kaunis taide' : 'Beautiful art style', to: locale === 'fi' ? 'Visuaalinen somesisÃ¤ltÃ¶' : 'Visual social media content' },
                         { from: locale === 'fi' ? 'Reilu F2P' : 'Fair F2P model', to: locale === 'fi' ? '"Ei P2W" -positiointi' : '"No P2W" positioning' },
                       ]
                     },
                     {
-                      title: locale === 'fi' ? 'Markkinointi → Kasvu' : 'Marketing → Growth',
+                      title: locale === 'fi' ? 'Markkinointi â†’ Kasvu' : 'Marketing â†’ Growth',
                       icon: 'trending_up',
                       color: 'green',
                       connections: [
-                        { from: locale === 'fi' ? 'Discord-yhteisö' : 'Discord community', to: locale === 'fi' ? 'Orgaaninen WoM-kasvu' : 'Organic WoM growth' },
+                        { from: locale === 'fi' ? 'Discord-yhteisÃ¶' : 'Discord community', to: locale === 'fi' ? 'Orgaaninen WoM-kasvu' : 'Organic WoM growth' },
                         { from: locale === 'fi' ? 'Vaikuttajakampanjat' : 'Influencer campaigns', to: locale === 'fi' ? 'Edullinen CPI' : 'Low-cost CPI acquisition' },
                         { from: locale === 'fi' ? 'Kausitapahtumat' : 'Seasonal events', to: locale === 'fi' ? 'Menetettyjen pelaajien palautus' : 'Lapsed player reactivation' },
                       ]
@@ -906,14 +906,14 @@ export default function GameStrategyClient() {
             </CaseStudyItem>
           </CaseStudySection>
 
-          {/* ── 10. Key Takeaways ──────────────────────────────────────────── */}
+          {/* â”€â”€ 10. Key Takeaways â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <CaseStudySection title={locale === 'fi' ? 'Keskeiset opit' : 'Key Takeaways'} icon="emoji_objects" accent="purple" number={10} showDivider={true}>
             <CaseStudyItem>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
                 {[
-                  { title: locale === 'fi' ? 'Käyttäjälähtöinen' : 'User-Centered', icon: 'person_search', desc: locale === 'fi' ? 'Jokainen mekaniikka, ominaisuus ja markkinointikanava on jäljitettävissä tunnistettuun käyttäjätarpeeseen.' : 'Every mechanic, feature, and marketing channel traces back to a validated user need.', color: 'purple' },
-                  { title: locale === 'fi' ? 'Dataohjattu' : 'Data-Driven', icon: 'query_stats', desc: locale === 'fi' ? 'Kvantitatiiviset mittarit ohjaavat priorisointia — ei oletuksia, vaan näyttöä persoonatiedoista ja vertailuarvoista.' : 'Quantitative metrics guide prioritization — no assumptions, just evidence from persona data and benchmarks.', color: 'blue' },
-                  { title: locale === 'fi' ? 'Strateginen linjaus' : 'Strategic Alignment', icon: 'hub', desc: locale === 'fi' ? 'Suunnittelu, kehitys ja markkinointi toimivat yhtenäisenä järjestelmänä — ei erillisinä toimintoina.' : 'Design, development, and marketing operate as a unified system — not separate functions.', color: 'green' },
+                  { title: locale === 'fi' ? 'KÃ¤yttÃ¤jÃ¤lÃ¤htÃ¶inen' : 'User-Centered', icon: 'person_search', desc: locale === 'fi' ? 'Jokainen mekaniikka, ominaisuus ja markkinointikanava on jÃ¤ljitettÃ¤vissÃ¤ tunnistettuun kÃ¤yttÃ¤jÃ¤tarpeeseen.' : 'Every mechanic, feature, and marketing channel traces back to a validated user need.', color: 'purple' },
+                  { title: locale === 'fi' ? 'Dataohjattu' : 'Data-Driven', icon: 'query_stats', desc: locale === 'fi' ? 'Kvantitatiiviset mittarit ohjaavat priorisointia â€” ei oletuksia, vaan nÃ¤yttÃ¶Ã¤ persoonatiedoista ja vertailuarvoista.' : 'Quantitative metrics guide prioritization â€” no assumptions, just evidence from persona data and benchmarks.', color: 'blue' },
+                  { title: locale === 'fi' ? 'Strateginen linjaus' : 'Strategic Alignment', icon: 'hub', desc: locale === 'fi' ? 'Suunnittelu, kehitys ja markkinointi toimivat yhtenÃ¤isenÃ¤ jÃ¤rjestelmÃ¤nÃ¤ â€” ei erillisinÃ¤ toimintoina.' : 'Design, development, and marketing operate as a unified system â€” not separate functions.', color: 'green' },
                 ].map((takeaway, i) => {
                   const c = getColorStyles(takeaway.color);
                   return (
