@@ -682,7 +682,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                                 <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.02 }}
                                     whileHover={{ backgroundColor: isLight ? palette.ember.DEFAULT : palette.ember.dark }}
                                     className={`w-full rounded-t-md ${isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-ember)]/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
-                                {/* Tooltip */}}
+                                {/* Tooltip */}
                                 <div className={`absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
                                     {Math.round(h * 15)} Interactions
                                 </div>

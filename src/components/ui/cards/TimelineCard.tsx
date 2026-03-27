@@ -1,4 +1,3 @@
-/* eslint-disable design-system/no-hardcoded-colors -- intentional per-theme gradient values (colorful/dark/light); these are fixed art-direction choices, not semantic tokens */
 'use client';
 
 import { useState, useEffect } from 'react';
