@@ -49,124 +49,36 @@ const MediaCardsShowcase = () => {
     <div className="py-12">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-center">Media Cards</h2>
-        
-        {/* Light Theme Cards */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-semibold mb-6">Light Theme Media Cards</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <MediaCard
+            variant="basic"
+            title={cardData[0].title}
+            description={cardData[0].description}
+            imagePath={cardData[0].imagePath}
+            tags={cardData[0].tags}
+            date={cardData[0].date}
+            imageAttribution={cardData[0].imageAttribution}
+          />
+          <MediaCard
+            variant="overlay"
+            title={cardData[1].title}
+            description={cardData[1].description}
+            imagePath={cardData[1].imagePath}
+            tags={cardData[1].tags}
+            date={cardData[1].date}
+            imageAttribution={cardData[1].imageAttribution}
+          />
+          <div className="h-full">
             <MediaCard
-              theme="light"
-              variant="basic"
-              title={cardData[0].title}
-              description={cardData[0].description}
-              imagePath={cardData[0].imagePath}
-              tags={cardData[0].tags}
-              date={cardData[0].date}
-              imageAttribution={cardData[0].imageAttribution}
+              variant="horizontal"
+              title={cardData[2].title}
+              description={cardData[2].description}
+              imagePath={cardData[2].imagePath}
+              tags={cardData[2].tags}
+              date={cardData[2].date}
+              imageAttribution={cardData[2].imageAttribution}
+              className="h-full"
             />
-            <MediaCard
-              theme="light"
-              variant="overlay"
-              title={cardData[1].title}
-              description={cardData[1].description}
-              imagePath={cardData[1].imagePath}
-              tags={cardData[1].tags}
-              date={cardData[1].date}
-              imageAttribution={cardData[1].imageAttribution}
-            />
-            <div className="h-full">
-              <MediaCard
-                theme="light"
-                variant="horizontal"
-                title={cardData[2].title}
-                description={cardData[2].description}
-                imagePath={cardData[2].imagePath}
-                tags={cardData[2].tags}
-                date={cardData[2].date}
-                imageAttribution={cardData[2].imageAttribution}
-                className="h-full"
-              />
-            </div>
-          </div>
-        </div>
-        
-        {/* Dark Theme Cards */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-semibold mb-6">Dark Theme Media Cards</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <MediaCard
-              theme="dark"
-              variant="basic"
-              title={cardData[0].title}
-              description={cardData[0].description}
-              imagePath={cardData[0].imagePath}
-              tags={cardData[0].tags}
-              date={cardData[0].date}
-              imageAttribution={cardData[0].imageAttribution}
-            />
-            <MediaCard
-              theme="dark"
-              variant="overlay"
-              title={cardData[1].title}
-              description={cardData[1].description}
-              imagePath={cardData[1].imagePath}
-              tags={cardData[1].tags}
-              date={cardData[1].date}
-              imageAttribution={cardData[1].imageAttribution}
-            />
-            <div className="h-full">
-              <MediaCard
-                theme="dark"
-                variant="horizontal"
-                title={cardData[2].title}
-                description={cardData[2].description}
-                imagePath={cardData[2].imagePath}
-                tags={cardData[2].tags}
-                date={cardData[2].date}
-                imageAttribution={cardData[2].imageAttribution}
-                className="h-full"
-              />
-            </div>
-          </div>
-        </div>
-        
-        {/* Colorful Theme Cards */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-6">Colorful Theme Media Cards</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <MediaCard
-              theme="colorful"
-              variant="basic"
-              title={cardData[0].title}
-              description={cardData[0].description}
-              imagePath={cardData[0].imagePath}
-              tags={cardData[0].tags}
-              date={cardData[0].date}
-              imageAttribution={cardData[0].imageAttribution}
-            />
-            <MediaCard
-              theme="colorful"
-              variant="overlay"
-              title={cardData[1].title}
-              description={cardData[1].description}
-              imagePath={cardData[1].imagePath}
-              tags={cardData[1].tags}
-              date={cardData[1].date}
-              imageAttribution={cardData[1].imageAttribution}
-            />
-            <div className="h-full">
-              <MediaCard
-                theme="colorful"
-                variant="horizontal"
-                title={cardData[2].title}
-                description={cardData[2].description}
-                imagePath={cardData[2].imagePath}
-                tags={cardData[2].tags}
-                date={cardData[2].date}
-                imageAttribution={cardData[2].imageAttribution}
-                className="h-full"
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -175,3 +87,4 @@ const MediaCardsShowcase = () => {
 };
 
 export default MediaCardsShowcase;
+

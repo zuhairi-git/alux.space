@@ -65,8 +65,6 @@ const sidebarNav: NavGroup[] = [
       { label: 'Timeline',         section: 'cards-timeline',  icon: 'view_timeline' },
       { label: 'Media',            section: 'cards-media',     icon: 'perm_media' },
       { label: 'Domain',           section: 'cards-domain',    icon: 'apps' },
-      { label: 'Timeline demo',    href: '/design/timeline-cards', icon: 'open_in_new' },
-      { label: 'Media showcase',   href: '/design/media-cards',    icon: 'open_in_new' },
     ],
   },
   {

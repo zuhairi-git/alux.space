@@ -28,7 +28,7 @@ import Skeleton from '@/components/ui/Skeleton';
 import Progress from '@/components/ui/Progress';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Text from '@/components/ui/Text';
-import Link from 'next/link';
+import { useTheme } from '@/context/ThemeContext';
 import { getByCategory } from '@/design-system/components';
 import type { ComponentEntry } from '@/design-system/components';
 
@@ -912,17 +912,17 @@ import SurfaceCard from '@/components/ui/cards/SurfaceCard';
 }
 
 function CardsTimelineSection() {
+  const { theme } = useTheme();
   return (
     <div className="space-y-4">
       <p className="text-sm opacity-60">
         Animated entry cards with floating particles — designed for experience and education timelines.
-        {' '}<Link href="/design/timeline-cards" className="text-primary underline">View full theme demo →</Link>
       </p>
       <DemoSection code={`import { TimelineCard } from '@/components/ui/cards';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 <TimelineCard
-  theme="dark"
+  theme="${theme}"
   materialIcon={RocketLaunchIcon}
   title="Product Designer"
   date="2023 – Present"
@@ -931,7 +931,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 />`}>
         <div className="max-w-xs mx-auto">
           <TimelineCard
-            theme="dark"
+            theme={theme}
             materialIcon={RocketLaunchIcon}
             title="Product Designer"
             date="2023 – Present"
@@ -949,7 +949,6 @@ function CardsMediaSection() {
     <div className="space-y-4">
       <p className="text-sm opacity-60">
         Image-first cards with three layout variants.
-        {' '}<Link href="/design/media-cards" className="text-primary underline">View full theme showcase →</Link>
       </p>
       <DemoSection code={`import { MediaCard } from '@/components/ui/cards';
 
