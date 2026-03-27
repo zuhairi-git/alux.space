@@ -53,15 +53,15 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
   const getThemeColors = () => {
     if (theme === 'colorful') {
       return {
-        cardBg: 'bg-gradient-to-br from-purple-900/40 via-fuchsia-900/30 to-blue-900/40',
-        cardBorder: 'border-purple-500/30',
-        cardGlow: 'shadow-2xl shadow-purple-500/20',
-        accentGradient: 'from-purple-400 via-fuchsia-400 to-blue-400',
-        buttonBg: 'bg-purple-500/20 hover:bg-purple-500/30',
-        buttonActive: 'bg-gradient-to-r from-purple-500 to-fuchsia-500',
-        iconColor: 'text-purple-400',
-        progressBg: 'bg-purple-500/20',
-        progressFill: 'from-purple-500 via-fuchsia-500 to-blue-500',
+        cardBg: 'bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)]',
+        cardBorder: 'border-[var(--card-border)]',
+        cardGlow: 'shadow-2xl shadow-[var(--primary)]/20',
+        accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+        buttonBg: 'bg-[var(--primary)]/10 hover:bg-[var(--primary)]/20',
+        buttonActive: 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]',
+        iconColor: 'text-[var(--primary)]',
+        progressBg: 'bg-[var(--primary)]/20',
+        progressFill: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
       };
     } else if (theme === 'dark') {
       return {
@@ -118,11 +118,11 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
   return (
     <div ref={containerRef} className="py-20 relative overflow-hidden">
       {/* Animated background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-start)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5" />
       
       {/* Floating orbs */}
       <motion.div 
-        className="absolute w-96 h-96 rounded-full bg-gradient-to-br from-purple-500/10 to-blue-500/10 blur-3xl"
+        className="absolute w-96 h-96 rounded-full bg-gradient-to-br from-[var(--gradient-mid)]/10 to-[var(--gradient-end)]/10 blur-3xl"
         animate={{ 
           x: [0, 100, 0],
           y: [0, -50, 0],
@@ -132,7 +132,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
         style={{ left: '10%', top: '20%' }}
       />
       <motion.div 
-        className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-pink-500/10 to-purple-500/10 blur-3xl"
+        className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 blur-3xl"
         animate={{ 
           x: [0, -100, 0],
           y: [0, 50, 0],
@@ -158,7 +158,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
             >
               work_history
             </motion.span>
-            <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-purple-600 via-blue-600 to-pink-600">
+            <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
               {t('home.workExperience.title')}
             </h3>
           </motion.div>
@@ -298,8 +298,8 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                       </div>
 
                       {/* Decorative elements */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-bl-full" />
-                      <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-tr-full" />
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--gradient-mid)]/10 to-transparent rounded-bl-full" />
+                      <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-[var(--gradient-end)]/10 to-transparent rounded-tr-full" />
                     </div>
                   );
                 })()}

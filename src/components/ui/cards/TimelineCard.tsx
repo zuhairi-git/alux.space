@@ -199,7 +199,7 @@ export default function TimelineCard({
               {title}
             </h3>
             <div className={`inline-flex items-center justify-center px-3 py-1.5 my-2 text-sm font-medium rounded-full ${
-              theme === 'colorful' ? 'bg-fuchsia-900/30' : 
+              theme === 'colorful' ? 'bg-[#ff8c42]/15' : 
               theme === 'dark' ? 'bg-blue-900/30' : 
               'bg-blue-100'
             } transition-all duration-300`}>
@@ -213,7 +213,7 @@ export default function TimelineCard({
           </div>
           
           <div className={`relative px-4 py-3.5 rounded-lg backdrop-blur-md mx-1 ${
-            theme === 'colorful' ? 'bg-gradient-to-br from-fuchsia-900/10 to-purple-900/10 border border-fuchsia-500/10' : 
+            theme === 'colorful' ? 'bg-gradient-to-br from-[#ff8c42]/10 to-[#4338ca]/10 border border-[#ff8c42]/10' : 
             theme === 'dark' ? 'bg-gradient-to-br from-blue-900/10 to-indigo-900/10 border border-blue-500/10' : 
             'bg-gradient-to-br from-blue-50/60 to-white/60 border border-blue-200/20'
           } transition-all duration-300`}>

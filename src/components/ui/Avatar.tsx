@@ -23,9 +23,9 @@ const sizeMap: Record<AvatarSize, { container: string; text: string; px: number;
 };
 
 const statusColors: Record<string, string> = {
-  online: 'bg-emerald-500',
-  offline: 'bg-gray-400',
-  away: 'bg-amber-500',
+  online:  'bg-[var(--color-success)]',
+  offline: 'bg-[var(--color-gray-400)]',
+  away:    'bg-[var(--color-warning)]',
 };
 
 export default function Avatar({

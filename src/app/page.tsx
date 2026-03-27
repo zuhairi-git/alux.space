@@ -31,7 +31,7 @@ const InteractiveSkillCard = ({
   // Get card styles based on theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-purple-500/5 via-fuchsia-500/5 to-pink-500/5 border-fuchsia-500/20 hover:border-fuchsia-400/40 hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-pink-500/10';
+      return 'bg-gradient-to-br from-[var(--primary)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--primary)]/10 hover:via-[var(--gradient-mid)]/10 hover:to-[var(--gradient-end)]/10';
     } else if (theme === 'dark') {
       return 'bg-gradient-to-br from-slate-800/40 via-slate-700/40 to-slate-800/40 border-slate-600/30 hover:border-blue-400/40 hover:from-slate-800/60 hover:via-slate-700/60 hover:to-slate-800/60';
     } else {
@@ -40,7 +40,7 @@ const InteractiveSkillCard = ({
   };
 
   const getIconColor = () => {
-    if (theme === 'colorful') return 'text-fuchsia-400';
+    if (theme === 'colorful') return 'text-[var(--primary)]';
     if (theme === 'dark') return 'text-blue-400';
     return 'text-blue-600';
   };
@@ -72,7 +72,7 @@ const InteractiveSkillCard = ({
       <div className={`
         absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
         ${theme === 'colorful' 
-          ? 'bg-gradient-to-br from-fuchsia-500/5 to-purple-500/5' 
+          ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5' 
           : theme === 'dark'
           ? 'bg-gradient-to-br from-blue-500/5 to-indigo-500/5'
           : 'bg-gradient-to-br from-blue-500/3 to-indigo-500/3'
@@ -84,7 +84,7 @@ const InteractiveSkillCard = ({
         inline-flex items-center justify-center w-12 h-12 mb-4 rounded-lg
         transition-all duration-300 group-hover:scale-110
         ${theme === 'colorful'
-          ? 'bg-fuchsia-500/10 group-hover:bg-fuchsia-500/20'
+          ? 'bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20'
           : theme === 'dark'
           ? 'bg-blue-500/10 group-hover:bg-blue-500/20'
           : 'bg-blue-500/10 group-hover:bg-blue-500/15'
@@ -116,7 +116,7 @@ const InteractiveSkillCard = ({
         absolute bottom-0 left-0 right-0 h-0.5 transform origin-left scale-x-0 
         group-hover:scale-x-100 transition-transform duration-300
         ${theme === 'colorful' 
-          ? 'bg-gradient-to-r from-fuchsia-500 to-purple-500' 
+          ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]' 
           : theme === 'dark'
           ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
           : 'bg-gradient-to-r from-blue-500 to-indigo-600'
@@ -322,11 +322,11 @@ export default function Home() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20"
+              className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)]"
             >
-              <span className="material-symbols text-xl text-blue-500">auto_awesome</span>
+              <span className="material-symbols text-xl text-[var(--primary)]">auto_awesome</span>
               <span className={`text-sm font-medium ${
-                theme === 'colorful' ? 'text-cyan-400' :
+                theme === 'colorful' ? 'text-[var(--primary)]' :
                 theme === 'dark' ? 'text-blue-400' :
                 'text-blue-600'
               }`}>
@@ -363,7 +363,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className={`p-8 rounded-3xl border ${
                 theme === 'colorful' 
-                  ? 'bg-gradient-to-br from-purple-900/20 to-blue-900/20 border-purple-500/20' 
+                  ? 'bg-[var(--card-from-bg)] border-[var(--card-border)]' 
                   : theme === 'dark'
                   ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50'
                   : 'bg-gradient-to-br from-gray-50 to-white border-gray-200'
@@ -371,7 +371,7 @@ export default function Home() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className={`p-3 rounded-xl ${
-                  theme === 'colorful' ? 'bg-cyan-500/20 text-cyan-400' :
+                  theme === 'colorful' ? 'bg-[var(--primary)]/15 text-[var(--primary)]' :
                   theme === 'dark' ? 'bg-blue-500/20 text-blue-400' :
                   'bg-blue-500/10 text-blue-600'
                 }`}>
@@ -396,7 +396,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className={`p-8 rounded-3xl border ${
                 theme === 'colorful' 
-                  ? 'bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20' 
+                  ? 'bg-[var(--card-from-bg)] border-[var(--card-border)]' 
                   : theme === 'dark'
                   ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50'
                   : 'bg-gradient-to-br from-gray-50 to-white border-gray-200'
@@ -404,7 +404,7 @@ export default function Home() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className={`p-3 rounded-xl ${
-                  theme === 'colorful' ? 'bg-purple-500/20 text-purple-400' :
+                  theme === 'colorful' ? 'bg-[var(--gradient-mid)]/15 text-[var(--gradient-mid)]' :
                   theme === 'dark' ? 'bg-indigo-500/20 text-indigo-400' :
                   'bg-indigo-500/10 text-indigo-600'
                 }`}>
@@ -456,7 +456,7 @@ export default function Home() {
               <span className={`
                 material-symbols text-4xl p-4 rounded-2xl
                 ${theme === 'colorful' 
-                  ? 'text-fuchsia-500 bg-fuchsia-500/10 border border-fuchsia-500/20' 
+                  ? 'text-[var(--primary)] bg-[var(--primary)]/10 border border-[var(--card-border)]' 
                   : theme === 'dark'
                   ? 'text-blue-400 bg-blue-500/10 border border-blue-500/20'
                   : 'text-blue-600 bg-blue-500/10 border border-blue-500/20'
@@ -502,12 +502,12 @@ export default function Home() {
               {/* Decorative background blur orbs */}
               <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
                 <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl ${
-                  theme === 'colorful' ? 'bg-fuchsia-500/20' :
+                  theme === 'colorful' ? 'bg-[var(--primary)]/20' :
                   theme === 'dark' ? 'bg-blue-500/20' :
                   'bg-blue-400/15'
                 }`} />
                 <div className={`absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl ${
-                  theme === 'colorful' ? 'bg-purple-500/20' :
+                  theme === 'colorful' ? 'bg-[var(--gradient-mid)]/20' :
                   theme === 'dark' ? 'bg-cyan-500/20' :
                   'bg-indigo-400/15'
                 }`} />
@@ -516,7 +516,7 @@ export default function Home() {
               <div className={`
                 relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 p-8 md:p-10 rounded-3xl border-2 backdrop-blur-xl
                 ${theme === 'colorful'
-                  ? 'bg-gradient-to-br from-fuchsia-900/30 via-purple-900/20 to-blue-900/30 border-fuchsia-500/30 shadow-2xl shadow-fuchsia-500/20'
+                  ? 'bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)] border-[var(--card-border)] shadow-2xl shadow-[var(--primary)]/20'
                   : theme === 'dark'
                   ? 'bg-gradient-to-br from-gray-900/60 via-blue-900/40 to-gray-900/60 border-blue-500/30 shadow-2xl shadow-blue-500/10'
                   : 'bg-white/80 border-blue-200/50 shadow-2xl shadow-blue-200/30'
@@ -541,7 +541,7 @@ export default function Home() {
                     className={`
                       group relative p-6 rounded-2xl backdrop-blur-sm transition-all duration-300
                       ${theme === 'colorful'
-                        ? 'bg-gradient-to-br from-fuchsia-500/10 to-purple-500/10 hover:from-fuchsia-500/20 hover:to-purple-500/20 border border-fuchsia-500/20'
+                        ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5 hover:from-[var(--primary)]/10 hover:to-[var(--gradient-mid)]/10 border border-[var(--card-border)]'
                         : theme === 'dark'
                         ? 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10 hover:from-blue-500/20 hover:to-cyan-500/20 border border-blue-500/20'
                         : 'bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200/50'
@@ -551,7 +551,7 @@ export default function Home() {
                     {/* Gradient overlay on hover */}
                     <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                       theme === 'colorful'
-                        ? 'bg-gradient-to-br from-fuchsia-500/5 to-purple-500/5'
+                        ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5'
                         : theme === 'dark'
                         ? 'bg-gradient-to-br from-blue-500/5 to-cyan-500/5'
                         : 'bg-gradient-to-br from-blue-100/50 to-indigo-100/50'
@@ -562,7 +562,7 @@ export default function Home() {
                       className={`
                         inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl mb-4 transition-all duration-300
                         ${theme === 'colorful'
-                          ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 group-hover:from-fuchsia-500/30 group-hover:to-purple-500/30'
+                          ? 'bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20 group-hover:from-[var(--primary)]/30 group-hover:to-[var(--gradient-mid)]/30'
                           : theme === 'dark'
                           ? 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 group-hover:from-blue-500/30 group-hover:to-cyan-500/30'
                           : 'bg-gradient-to-br from-blue-100 to-indigo-100 group-hover:from-blue-200 group-hover:to-indigo-200'
@@ -572,7 +572,7 @@ export default function Home() {
                       transition={{ duration: 0.6 }}
                     >
                       <span className={`material-symbols text-2xl md:text-3xl ${
-                        theme === 'colorful' ? 'text-fuchsia-400' :
+                        theme === 'colorful' ? 'text-[var(--primary)]' :
                         theme === 'dark' ? 'text-blue-400' :
                         'text-blue-600'
                       }`}>
@@ -585,7 +585,7 @@ export default function Home() {
                       <div className={`
                         text-4xl md:text-5xl font-bold leading-none bg-gradient-to-r bg-clip-text text-transparent
                         ${theme === 'colorful'
-                          ? 'from-fuchsia-400 via-purple-400 to-blue-400'
+                          ? 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
                           : theme === 'dark'
                           ? 'from-blue-400 via-cyan-400 to-indigo-400'
                           : 'from-blue-600 via-indigo-600 to-purple-600'
@@ -611,7 +611,7 @@ export default function Home() {
                     {/* Decorative element */}
                     <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl ${
                       theme === 'colorful'
-                        ? 'bg-gradient-to-r from-fuchsia-500 via-purple-500 to-blue-500'
+                        ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
                         : theme === 'dark'
                         ? 'bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500'
                         : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500'
@@ -652,7 +652,7 @@ export default function Home() {
                 inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-medium
                 transition-all duration-300 border backdrop-blur-sm
                 ${theme === 'colorful'
-                  ? 'bg-gradient-to-r from-fuchsia-500/10 to-purple-500/10 border-fuchsia-500/30 text-fuchsia-300 hover:from-fuchsia-500/20 hover:to-purple-500/20 hover:border-fuchsia-500/50'
+                  ? 'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border-[var(--card-border)] text-[var(--primary)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50'
                   : theme === 'dark'
                   ? 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/30 text-blue-300 hover:from-blue-500/20 hover:to-indigo-500/20 hover:border-blue-500/50'
                   : 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/30 text-blue-600 hover:from-blue-500/20 hover:to-indigo-500/20 hover:border-blue-500/50'
@@ -677,8 +677,8 @@ export default function Home() {
       >
         {/* Background decorative elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10 blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--gradient-mid)]/10 to-[var(--gradient-end)]/10 blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 blur-3xl"></div>
         </div>
 
         <div className="container mx-auto px-4 max-w-6xl">
@@ -693,16 +693,14 @@ export default function Home() {
             </motion.span>
             <motion.h3 
               className="text-3xl text-center md:text-4xl font-bold"
-              animate={{ 
-                textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
-              }}
+              animate={{}}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
             >
               {t('home.testimonials.title')}
             </motion.h3>
             
             <motion.div
-              className="h-1 w-0 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6"
+              className="h-1 w-0 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] mx-auto mt-6"
               initial={{ width: "0%" }}
               whileInView={{ width: "80px" }}
               viewport={{ once: true }}
@@ -728,9 +726,9 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
                     {/* Avatar */}
                     <div className="flex-shrink-0 md:ml-0 md:mr-8">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center p-1">
+                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-[var(--gradient-start)]/20 to-[var(--gradient-end)]/20 flex items-center justify-center p-1">
                         <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
-                          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">
+                          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]">
                             {index === 0 ? 'FM' : 'CB'}
                           </span>
                         </div>
@@ -755,7 +753,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>                  <motion.div 
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]"
                     initial={{ scaleX: 0, transformOrigin: "left" }}
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 0.8 }}

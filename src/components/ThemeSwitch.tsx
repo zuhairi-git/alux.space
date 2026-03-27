@@ -23,15 +23,7 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <div className={`
-      flex items-center p-1 rounded-full gap-1 border transition-colors duration-300
-      ${theme === 'colorful' 
-        ? 'bg-purple-900/20 border-purple-500/30' 
-        : theme === 'light'
-          ? 'bg-gray-100 border-gray-200'
-          : 'bg-gray-800/50 border-gray-700'
-      }
-    `}>
+    <div className="flex items-center p-1 rounded-full gap-1 border transition-colors duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)]">
       {themes.map((t) => {
         const isActive = theme === t.value;
         return (
@@ -42,7 +34,7 @@ export default function ThemeSwitch() {
               className={`
                 relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200
                 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1
-                ${!isActive && (theme === 'colorful' ? 'text-purple-300 hover:text-white' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200')}
+                ${!isActive && 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}
               `}
               aria-label={`Switch to ${t.label} theme`}
               aria-pressed={isActive}
@@ -53,7 +45,7 @@ export default function ThemeSwitch() {
                   className={`
                     absolute inset-0 rounded-full shadow-sm
                     ${theme === 'colorful' 
-                      ? 'bg-purple-600' 
+                      ? 'bg-[var(--btn-primary-bg)]' 
                       : theme === 'light'
                         ? 'bg-white'
                         : 'bg-gray-700'
@@ -65,7 +57,7 @@ export default function ThemeSwitch() {
               <span className={`
                 material-symbols text-[18px] relative z-10 
                 ${isActive 
-                  ? (t.value === 'colorful' ? 'text-white' : t.value === 'light' ? 'text-orange-500' : 'text-blue-400') 
+                  ? (t.value === 'colorful' ? 'text-white' : t.value === 'light' ? 'text-[var(--primary)]' : 'text-[var(--primary)]') 
                   : ''
                 }
               `}>

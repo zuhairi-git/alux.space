@@ -53,7 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               'placeholder:text-[var(--foreground)]/30',
               'focus:outline-none focus:ring-2 focus:ring-offset-1',
               error
-                ? 'border-red-500 focus:ring-red-500/30 focus:border-red-500'
+                ? 'border-[var(--color-error)] focus:ring-[var(--color-error)]/30 focus:border-[var(--color-error)]'
                 : 'border-[var(--card-border)] hover:border-[var(--btn-primary-bg)]/40 focus:border-[var(--btn-primary-bg)] focus:ring-[var(--btn-primary-bg)]/25',
               disabled && 'opacity-50 cursor-not-allowed',
               leftIcon ? 'pl-10' : '',
@@ -72,7 +72,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {error && (
-          <p id={errorId} className="text-xs text-red-500 dark:text-red-400" role="alert">
+          <p id={errorId} className="text-xs text-[var(--color-error)]" role="alert">
             {error}
           </p>
         )}

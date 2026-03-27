@@ -63,7 +63,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               animate={{ opacity: 1, scale: 1 }}
               transition={{ ...t.snap, delay: delaySeconds.xs }}
             >
-              <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-fuchsia-400/30' : 'border-purple-400/30'} rounded-br-lg`} />
+              <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-[var(--primary)]/30' : 'border-purple-400/30'} rounded-br-lg`} />
             </MotionDiv>
               {/* Side line decorations */}
             <MotionDiv 
@@ -74,7 +74,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             >
               <div className="flex flex-col items-center gap-3">
                 <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-blue-400/30 to-transparent'}`}></div>
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-fuchsia-400/30 to-transparent' : 'from-transparent via-purple-400/30 to-transparent'}`}></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-[var(--primary)]/30 to-transparent' : 'from-transparent via-purple-400/30 to-transparent'}`}></div>
               </div>
             </MotionDiv>
             
@@ -86,7 +86,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             >
               <div className="flex flex-col items-center gap-3">
                 <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-blue-400/30 to-transparent'}`}></div>
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-fuchsia-400/30 to-transparent' : 'from-transparent via-purple-400/30 to-transparent'}`}></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-[var(--primary)]/30 to-transparent' : 'from-transparent via-purple-400/30 to-transparent'}`}></div>
               </div>
             </MotionDiv>
           </MotionDiv>
@@ -139,7 +139,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                       duration: durationSeconds.dramatic,
                       ease: [0.19, 1, 0.22, 1]
                     }}
-                    className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
+                    className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] relative"
                   >
                     {word}
                   </MotionSpan>
@@ -199,7 +199,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
               className={`w-24 h-0.5 mx-auto mb-6 ${
                 isColorful
-                  ? 'bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-blue-500'
+                  ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
                   : isLight
                   ? 'bg-gradient-to-r from-blue-500 to-purple-500'
                   : 'bg-gradient-to-r from-blue-400 to-purple-400'
@@ -303,7 +303,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               }}
               className={`absolute -bottom-4 -right-4 w-2 h-2 rounded-full ${
                 isColorful
-                  ? 'bg-gradient-to-r from-fuchsia-400 to-pink-500'
+                  ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]'
                   : 'bg-gradient-to-r from-purple-400 to-pink-400'
               } shadow-lg`}
             />

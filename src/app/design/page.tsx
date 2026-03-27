@@ -44,6 +44,9 @@ const colorTokenSections = [
       { name: '--foreground',        label: 'Foreground' },
       { name: '--primary',           label: 'Primary' },
       { name: '--primary-hover',     label: 'Primary Hover' },
+      { name: '--primary-glow',      label: 'Primary Glow' },
+      { name: '--btn-primary-bg',    label: 'Button Primary Bg' },
+      { name: '--muted-foreground',  label: 'Muted Text' },
       { name: '--gradient-start',    label: 'Gradient Start' },
       { name: '--gradient-mid',      label: 'Gradient Mid' },
       { name: '--gradient-end',      label: 'Gradient End' },
@@ -53,6 +56,33 @@ const colorTokenSections = [
       { name: '--card-border-hover', label: 'Card Border Hover' },
       { name: '--nav-bg',            label: 'Nav Background' },
       { name: '--nav-border',        label: 'Nav Border' },
+    ],
+  },
+  {
+    title: 'State Colors (theme-resolved)',
+    tokens: [
+      { name: '--color-success',        label: 'Success' },
+      { name: '--color-success-bg',     label: 'Success Bg' },
+      { name: '--color-success-border', label: 'Success Border' },
+      { name: '--color-warning',        label: 'Warning' },
+      { name: '--color-warning-bg',     label: 'Warning Bg' },
+      { name: '--color-warning-border', label: 'Warning Border' },
+      { name: '--color-error',          label: 'Error' },
+      { name: '--color-error-bg',       label: 'Error Bg' },
+      { name: '--color-error-border',   label: 'Error Border' },
+      { name: '--color-info',           label: 'Info' },
+      { name: '--color-info-bg',        label: 'Info Bg' },
+      { name: '--color-info-border',    label: 'Info Border' },
+    ],
+  },
+  {
+    title: 'Palette — Colorful / Ember',
+    tokens: [
+      { name: '--color-ember',       label: 'Ember (primary)' },
+      { name: '--color-ember-dark',  label: 'Ember Dark' },
+      { name: '--color-ember-light', label: 'Ember Light' },
+      { name: '--color-colorful-bg', label: 'Colorful Bg' },
+      { name: '--color-cobalt-700',  label: 'Cobalt 700' },
     ],
   },
   {
@@ -526,9 +556,10 @@ function GradientsSection() {
     { label: 'Card', css: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))' },
     // eslint-disable-next-line design-system/no-hardcoded-colors
     { label: 'Cosmic', css: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)' },
+    { label: 'Ember (Colorful)', css: 'linear-gradient(135deg, var(--color-ember) 0%, var(--color-purple-700) 55%, var(--color-cobalt-700) 100%)' },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {gradients.map(g => (
         <div key={g.label} className="flex flex-col items-center gap-2">
           <div
