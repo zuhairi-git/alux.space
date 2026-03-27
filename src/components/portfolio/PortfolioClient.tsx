@@ -197,6 +197,7 @@ export default function PortfolioClient({ items }: Props) {
                 ].map((tab) => {
                   const isActive = filter === tab.value;
                   return (
+                    // eslint-disable-next-line design-system/no-raw-html-elements -- segmented filter tabs with Framer Motion layoutId active indicator
                     <button
                       key={tab.label}
                       onClick={() => handleFilterChange(tab.value)}
@@ -239,6 +240,7 @@ export default function PortfolioClient({ items }: Props) {
               {(['standard', 'overlay'] as const).map((mode) => {
                 const isActive = viewMode === mode;
                 return (
+                  // eslint-disable-next-line design-system/no-raw-html-elements -- segmented view toggle with Framer Motion layoutId active indicator
                   <button
                     key={mode}
                     onClick={() => setViewMode(mode)}

@@ -16,6 +16,23 @@ const Footer = () => {
   const { t } = useTranslations(locale);
   const { trackEvent, trackNavigation, trackSocialShare } = useAnalyticsTracking();
 
+  // Debug translations if needed - enable this temporarily to troubleshoot
+  const debugTranslations = false; // Set to false once translations are working
+
+  // Use useEffect to avoid console spam during renders
+  React.useEffect(() => {
+    if (debugTranslations) {
+      console.group(`Footer Translations (${locale})`);
+      console.log(`Quick Links: "${t('footer.quickLinks')}"`);
+      console.log(`Portfolio: "${t('footer.portfolio')}"`);
+      console.log(`Contact: "${t('footer.contact')}"`);
+      console.log(`Copyright: "${t('footer.copyright')}"`);
+      console.log(`Additional Info Title: "${t('footer.additionalInfo.title')}"`);
+      console.log(`Additional Info Content: "${t('footer.additionalInfo.content')}"`);
+      console.groupEnd();
+    }
+  }, [locale, t, debugTranslations]);
+
   // Hide footer on design system pages
   if (pathname?.startsWith('/design')) return null;
 
@@ -56,22 +73,8 @@ const Footer = () => {
     { href: '/portfolio/market-intelligence', textKey: 'portfolio.cases.marketIntelligence' },
     { href: '/portfolio/game-strategy', textKey: 'portfolio.cases.gameStrategy' }
   ];
-  // Debug translations if needed - enable this temporarily to troubleshoot
-  const debugTranslations = false; // Set to false once translations are working
 
-  // Use useEffect to avoid console spam during renders
-  React.useEffect(() => {
-    if (debugTranslations) {
-      console.group(`Footer Translations (${locale})`);
-      console.log(`Quick Links: "${t('footer.quickLinks')}"`);
-      console.log(`Portfolio: "${t('footer.portfolio')}"`);
-      console.log(`Contact: "${t('footer.contact')}"`);
-      console.log(`Copyright: "${t('footer.copyright')}"`);
-      console.log(`Additional Info Title: "${t('footer.additionalInfo.title')}"`);
-      console.log(`Additional Info Content: "${t('footer.additionalInfo.content')}"`);
-      console.groupEnd();
-    }
-  }, [locale, t, debugTranslations]); return (
+  return (
     <footer
       id="footer"
       className="bg-theme border-t border-gray-200/10 pt-12 pb-32 md:pb-4"

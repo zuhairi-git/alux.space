@@ -426,6 +426,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
           />
 
           {/* Center Action Button (Menu) */}
+          {/* eslint-disable-next-line design-system/no-raw-html-elements -- custom FAB with round shape, rotation animation, and gradient that doesn't map to DS Button */}
           <button
             onClick={() => { if (isMenuOpen) setExpandedItem(null); setIsMenuOpen(!isMenuOpen); }}
             className={`
@@ -490,6 +491,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                   if (item.type === 'dropdown' && item.children) {
                     return (
                       <div key={item.href}>
+                        {/* eslint-disable-next-line design-system/no-raw-html-elements -- nav menu item with custom active/theme styles and icon layout */}
                         <button
                           onClick={() => setExpandedItem(isExpanded ? null : item.href)}
                           className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-left ${

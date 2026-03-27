@@ -36,6 +36,7 @@ export default function ThemeSwitch() {
         const isActive = theme === t.value;
         return (
           <Tooltip key={t.value} text={t.label}>
+            {/* eslint-disable-next-line design-system/no-raw-html-elements -- theme picker with Framer Motion layoutId pill indicator */}
             <button
               onClick={() => handleThemeChange(t.value as Theme)}
               className={`

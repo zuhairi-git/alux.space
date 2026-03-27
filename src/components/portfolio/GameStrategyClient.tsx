@@ -356,6 +356,7 @@ export default function GameStrategyClient() {
                   const isActive = activePersona === i;
                   const pColor = getColorStyles(p.color);
                   return (
+                    // eslint-disable-next-line design-system/no-raw-html-elements -- persona selector tab with dynamic color themes and avatar image
                     <button
                       key={i}
                       onClick={() => setActivePersona(i)}

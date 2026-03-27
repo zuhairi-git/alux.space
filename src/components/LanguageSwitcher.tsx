@@ -21,6 +21,7 @@ export default function LanguageSwitcher() {
   return (
     <>
       <Tooltip text={locale === 'en' ? 'Switch to Finnish' : 'Switch to English'}>
+        {/* eslint-disable-next-line design-system/no-raw-html-elements -- animated language toggle with AnimatePresence and custom round styling */}
         <button
           onClick={toggleLanguage}
           className={`

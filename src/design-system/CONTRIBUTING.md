@@ -78,6 +78,10 @@ For standalone pages (like Timeline Cards or Media Cards):
 
 The `precommit` script runs `npm run lint && npm run seo:audit`. Add it to your git hooks or run manually before pushing.
 
+The lint step includes two design-system rules:
+- `no-hardcoded-colors` — flags hex literals; use tokens instead
+- `no-raw-html-elements` — flags raw `<button>`, `<input>`, `<select>`; use DS components instead
+
 ---
 
 ## File Map

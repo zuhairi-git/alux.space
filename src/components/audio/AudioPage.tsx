@@ -11,6 +11,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
 import { getRelatedAudio, getAudioLanguages, getAudioVersion } from '@/data/audioLibrary';
 import AudioPlayer from '@/components/ui/AudioPlayer';
+import Button from '@/components/ui/Button';
 import AudioCard from './AudioCard';
 
 interface AudioPageProps {
@@ -95,25 +96,6 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     }
   };
 
-  const getButtonStyles = () => {
-    if (isLight) {
-      return {
-        primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-        secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
-      };
-    } else if (isColorful) {
-      return {
-        primary: 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white',
-        secondary: 'bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30'
-      };
-    } else {
-      return {
-        primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-        secondary: 'bg-gray-700 hover:bg-gray-600 text-gray-300 border border-gray-600'
-      };
-    }
-  };
-
   const getLinkStyles = () => {
     if (isLight) {
       return 'no-underline hover:bg-blue-50 px-1 py-0.5 rounded transition-colors duration-150';
@@ -141,7 +123,6 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
   };
 
   const textStyles = getTextStyles();
-  const buttonStyles = getButtonStyles();
   const fallbackImage = '/images/main.jpg';
 
   // Share functionality
@@ -285,6 +266,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                   </label>
                   <div className="flex gap-2">
                     {availableLanguages.map((lang) => (
+                      // eslint-disable-next-line design-system/no-raw-html-elements -- language chip toggle with custom active/inactive theme styles
                       <button
                         key={lang}
                         onClick={() => setSelectedLanguage(lang as 'en' | 'fi' | 'ar')}
@@ -324,29 +306,29 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4">
-                <button
+                <Button
+                  variant="primary"
                   onClick={handlePlayButtonClick}
-                  className={`${buttonStyles.primary} px-6 py-3 rounded-lg flex items-center gap-2 font-semibold transition-colors`}
+                  leftIcon={<span className="material-symbols text-lg">play_arrow</span>}
                 >
-                  <span className="material-symbols text-lg">play_arrow</span>
                   Play Audio
-                </button>
+                </Button>
                 
-                <button
+                <Button
+                  variant="secondary"
                   onClick={handleShare}
-                  className={`${buttonStyles.secondary} px-6 py-3 rounded-lg flex items-center gap-2 font-semibold transition-colors`}
+                  leftIcon={<span className="material-symbols text-lg">share</span>}
                 >
-                  <span className="material-symbols text-lg">share</span>
                   Share
-                </button>
+                </Button>
                 
-                <button
+                <Button
+                  variant="secondary"
                   onClick={downloadAudio}
-                  className={`${buttonStyles.secondary} px-6 py-3 rounded-lg flex items-center gap-2 font-semibold transition-colors`}
+                  leftIcon={<span className="material-symbols text-lg">download</span>}
                 >
-                  <span className="material-symbols text-lg">download</span>
                   Download
-                </button>
+                </Button>
               </div>
             </motion.div>
           </div>

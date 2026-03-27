@@ -153,8 +153,45 @@ When adding a component that is reusable beyond a single page:
 Before committing changes that touch components or tokens:
 
 - [ ] No new hardcoded hex colors (run `npm run lint`)
+- [ ] No raw `<button>`, `<input>`, or `<select>` — use DS components
 - [ ] New tokens added to both `tokens.css` and `tokens.ts` (if needed)
 - [ ] Component works in all 3 themes
 - [ ] Component registered in `components.ts` (if reusable)
 - [ ] Accessibility: keyboard navigable, screen reader tested
 - [ ] Build passes: `npm run build`
+
+---
+
+## 9. Component Usage
+
+### Rule: Always use design-system components
+
+Do **not** use raw HTML interactive elements when a design-system equivalent exists:
+
+| HTML element | DS component | Import |
+|-------------|-------------|--------|
+| `<button>` | `Button` | `@/components/ui/Button` |
+| `<input>` | `Input` | `@/components/ui/Input` |
+| `<select>` | `Select` | `@/components/ui/Select` |
+
+### ESLint enforcement
+
+The custom rule `design-system/no-raw-html-elements` flags violations. Run:
+
+```bash
+npm run lint
+```
+
+### Exceptions
+
+Some cases legitimately need raw elements (e.g. internal toggle thumb, audio `<input type="range">`). Use:
+
+```ts
+// eslint-disable-next-line design-system/no-raw-html-elements -- <reason>
+```
+
+### Excluded paths
+
+- `src/components/ui/` — the DS component sources themselves
+- `src/app/mobile/`, `src/components/mobile/` — prototype mockups
+- `src/app/design/` — showcase page

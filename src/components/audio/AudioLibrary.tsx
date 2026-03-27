@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { audioLibrary, audioLibraryConfig, getAudioCategories, getAudioTags, searchAudio } from '@/data/audioLibrary';
 import AudioCard from './AudioCard';
+import Button from '@/components/ui/Button';
 
 const AudioLibrary: React.FC = () => {
   const { theme } = useTheme();
@@ -186,6 +187,7 @@ const AudioLibrary: React.FC = () => {
             <div className="flex items-center gap-3">
               {/* View Mode Toggle */}
               <div className="flex items-center rounded-lg">
+                {/* eslint-disable-next-line design-system/no-raw-html-elements -- view mode toggle with custom active/inactive theme styles */}
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`m-1 pe-2 ps-2 pt-1 pb-1 rounded-md transition-colors ${
@@ -197,6 +199,7 @@ const AudioLibrary: React.FC = () => {
                 >
                   <span className="material-symbols text-lg pt-1">grid_view</span>
                 </button>
+                {/* eslint-disable-next-line design-system/no-raw-html-elements -- view mode toggle with custom active/inactive theme styles */}
                 <button
                   onClick={() => setViewMode('list')}
                   className={`m-1 pe-2 ps-2 pt-1 pb-1 rounded-md transition-colors ${
@@ -211,16 +214,16 @@ const AudioLibrary: React.FC = () => {
               </div>
 
               {/* Filter Toggle */}
-              <button
+              <Button
+                variant="secondary"
                 onClick={() => setShowFilters(!showFilters)}
-                className={`${buttonStyles.secondary} px-4 py-2 rounded-lg flex items-center gap-2 transition-colors`}
               >
                 <span className="material-symbols text-lg">filter_list</span>
                 <span className="hidden sm:inline">Filters</span>
                 {hasActiveFilters && (
                   <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -244,6 +247,7 @@ const AudioLibrary: React.FC = () => {
                       Search
                     </label>
                     <div className="relative">
+                      {/* eslint-disable-next-line design-system/no-raw-html-elements -- search input with left icon overlay layout */}
                       <input
                         type="text"
                         value={searchQuery}
@@ -266,6 +270,7 @@ const AudioLibrary: React.FC = () => {
                     <label className={`block text-sm font-medium mb-2 ${textStyles.text}`}>
                       Category
                     </label>
+                    {/* eslint-disable-next-line design-system/no-raw-html-elements -- native select with option children for form semantics */}
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
@@ -289,6 +294,7 @@ const AudioLibrary: React.FC = () => {
                     <label className={`block text-sm font-medium mb-2 ${textStyles.text}`}>
                       Sort By
                     </label>
+                    {/* eslint-disable-next-line design-system/no-raw-html-elements -- native select with option children for form semantics */}
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'title')}
@@ -312,6 +318,7 @@ const AudioLibrary: React.FC = () => {
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {tags.map(tag => (
+                      // eslint-disable-next-line design-system/no-raw-html-elements -- filter tag chip with custom active/inactive theme styles
                       <button
                         key={tag}
                         onClick={() => handleTagToggle(tag)}
@@ -330,13 +337,13 @@ const AudioLibrary: React.FC = () => {
                 {/* Clear Filters */}
                 {hasActiveFilters && (
                   <div className="mt-6 flex justify-end">
-                    <button
+                    <Button
+                      variant="secondary"
                       onClick={clearAllFilters}
-                      className={`${buttonStyles.secondary} px-4 py-2 rounded-lg flex items-center gap-2 transition-colors`}
+                      leftIcon={<span className="material-symbols text-lg">clear</span>}
                     >
-                      <span className="material-symbols text-lg">clear</span>
                       Clear All Filters
-                    </button>
+                    </Button>
                   </div>
                 )}
               </div>
@@ -373,12 +380,12 @@ const AudioLibrary: React.FC = () => {
                 Try adjusting your search or filter criteria.
               </p>
               {hasActiveFilters && (
-                <button
+                <Button
+                  variant="primary"
                   onClick={clearAllFilters}
-                  className={`${buttonStyles.primary} px-6 py-2 rounded-lg`}
                 >
                   Clear All Filters
-                </button>
+                </Button>
               )}
             </motion.div>
           ) : (

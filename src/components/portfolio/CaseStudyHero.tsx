@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
+import Button from '@/components/ui/Button';
+import Icon from '@/components/ui/Icon';
 
 interface HeroAction {
   label: string;
@@ -130,17 +132,8 @@ export default function CaseStudyHero({
               className="flex flex-col sm:flex-row gap-3"
             >
               {actions.map((action, i) => {
-                const cls =
-                  action.variant === 'secondary'
-                    ? `${isColorful ? 'bg-white/10 hover:bg-white/20' : 'bg-white/10 hover:bg-white/20'} text-white backdrop-blur-md border border-white/20`
-                    : `${isColorful ? 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-500/30' : 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-500/30'} text-white`;
-
-                const inner = (
-                  <>
-                    <span className="material-symbols text-xl">{action.icon}</span>
-                    <span>{action.label}</span>
-                  </>
-                );
+                const variant = action.variant === 'secondary' ? 'outline' as const : 'primary' as const;
+                const icon = <Icon name={action.icon} />;
 
                 if (action.href) {
                   return (
@@ -149,20 +142,24 @@ export default function CaseStudyHero({
                       href={action.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${cls}`}
+                      className="w-full sm:w-auto"
                     >
-                      {inner}
+                      <Button variant={variant} leftIcon={icon} className="w-full">
+                        {action.label}
+                      </Button>
                     </a>
                   );
                 }
                 return (
-                  <button
+                  <Button
                     key={i}
+                    variant={variant}
+                    leftIcon={icon}
                     onClick={action.onClick}
-                    className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg w-full sm:w-auto ${cls}`}
+                    className="w-full sm:w-auto"
                   >
-                    {inner}
-                  </button>
+                    {action.label}
+                  </Button>
                 );
               })}
             </motion.div>

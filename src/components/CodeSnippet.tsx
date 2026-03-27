@@ -27,6 +27,7 @@ export default function CodeSnippet({ code, language = 'jsx' }: CodeSnippetProps
     <div className="relative font-mono text-sm rounded-xl overflow-hidden bg-neutral-950 dark:bg-black">
       <div className="flex items-center justify-between bg-neutral-900 dark:bg-neutral-950 px-4 py-2 border-b border-neutral-800">
         <div className="text-neutral-400 font-medium">{language}</div>
+        {/* eslint-disable-next-line design-system/no-raw-html-elements -- specialized code block toolbar button with context-specific dark theme styling */}
         <button
           onClick={copyToClipboard}
           className={`copy-btn flex items-center space-x-1 px-2 py-1 rounded-md transition-all ${

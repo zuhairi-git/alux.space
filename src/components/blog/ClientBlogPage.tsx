@@ -182,6 +182,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           {/* Category Dropdown */}
           <div className="flex items-center gap-3">
             <span className="material-symbols-rounded text-lg opacity-40" aria-hidden="true">filter_list</span>
+            {/* eslint-disable-next-line design-system/no-raw-html-elements -- native select with option children and custom appearance styling */}
             <select
               value={filter || ''}
               onChange={(e) => setFilter(e.target.value || null)}
@@ -210,6 +211,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           
           {/* View Mode Toggle */}
           <div className="flex items-center gap-1 rounded-lg border border-current/10 p-1" role="radiogroup" aria-label={t('blog.aria.viewMode')}>
+            {/* eslint-disable-next-line design-system/no-raw-html-elements -- radio group view mode toggle with custom active/inactive styling */}
             <button
               onClick={() => setViewMode('standard')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
@@ -224,6 +226,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
               <span className="material-symbols-rounded text-base" aria-hidden="true">grid_view</span>
               <span>{getViewModeText('standard')}</span>
             </button>
+            {/* eslint-disable-next-line design-system/no-raw-html-elements -- radio group view mode toggle with custom active/inactive styling */}
             <button
               onClick={() => setViewMode('overlay')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
