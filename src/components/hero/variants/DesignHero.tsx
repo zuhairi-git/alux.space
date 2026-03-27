@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import Button from '@/components/ui/Button';
 import { durationSeconds, delaySeconds } from '@/design-system';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
@@ -50,12 +51,13 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           )}
 
           {cta && (
-            <Link 
+            <Link
               href={localizedHref(cta.href)}
-              className="inline-block px-8 py-3 bg-blue-500 text-white rounded-lg"
               onClick={() => trackEvent('hero_cta_click', 'hero', `design_variant_${cta.text}`)}
             >
-              {cta.text}
+              <Button variant="primary" size="md">
+                {cta.text}
+              </Button>
             </Link>
           )}
         </motion.div>

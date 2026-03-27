@@ -6,6 +6,8 @@ import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
+import Button from '@/components/ui/Button';
+import Icon from '@/components/ui/Icon';
 import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
@@ -436,17 +438,14 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-              />                  <Link 
+              />
+              <Link 
                 href={localizedHref(cta.href)} 
-                className={`relative inline-block px-8 py-4 bg-gradient-to-r ${isColorful ? 'from-cyan-500 to-fuchsia-500' : 'from-blue-500 to-purple-500'} text-white rounded-lg shadow-lg z-10`}
                 onClick={() => trackEvent('hero_cta_click', 'hero', `${isColorful ? 'colorful' : 'default'}_theme_${cta.text}`)}
               >
-                <div className="flex items-center justify-center gap-2">
-                  <span>{cta.text}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </div>
+                <Button variant="primary" size="lg" rightIcon={<Icon name="arrow_forward" />}>
+                  {cta.text}
+                </Button>
               </Link>
             </MotionDiv>
           </MotionDiv>

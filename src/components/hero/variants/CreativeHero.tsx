@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import Button from '@/components/ui/Button';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
@@ -139,47 +140,11 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
             className="text-center"
           ><Link
               href={localizedHref(cta.href)}
-              className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
-                theme === 'colorful' 
-                  ? 'text-white border border-transparent shadow-lg' 
-                  : isLight
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-blue-500 text-white'
-              } cosmic-shimmer`}
-              style={{
-                ...(theme === 'colorful' ? {
-                  backgroundImage: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
-                  backgroundSize: '200% 200%',
-                  animation: 'gradientShift 3s ease infinite',
-                } : {})
-              }}
               onClick={() => trackEvent('hero_cta_click', 'hero', `creative_variant_${cta.text}`)}
-            ><motion.span
-                className="relative z-10"
-              >
+            >
+              <Button size="lg" variant={theme === 'colorful' ? 'cosmic' : 'primary'}>
                 {cta.text}
-              </motion.span>
-              {theme === 'colorful' && (
-                <motion.div 
-                  className="absolute inset-0 bg-black/10"
-                  transition={t.snap}
-                />
-              )}
-              
-              {/* Animated glow effect */}              <motion.div 
-                className="absolute -z-10 inset-0 bg-gradient-to-r from-cyan-500/30 via-fuchsia-500/30 to-blue-500/30 blur-lg opacity-30"
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  repeatType: 'loop'
-                }}
-                style={{
-                  backgroundSize: '200% 200%'
-                }}
-              />
+              </Button>
             </Link>
           </motion.div>        )}
         

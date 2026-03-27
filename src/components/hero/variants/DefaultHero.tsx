@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import Button from '@/components/ui/Button';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
@@ -136,15 +137,16 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               }}
             ></motion.div><Link 
               href={localizedHref(cta.href)} 
-              className="relative inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg z-10"
               onClick={() => trackEvent('hero_cta_click', 'hero', `default_variant_${cta.text}`)}
+              className="relative z-10 block"
             >
-              <div className="flex items-center justify-center gap-2">
-                <span>{cta.text}</span>
+              <Button size="lg" variant="cosmic" rightIcon={
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </div>
+              }>
+                {cta.text}
+              </Button>
             </Link>
           </motion.div>
         )}

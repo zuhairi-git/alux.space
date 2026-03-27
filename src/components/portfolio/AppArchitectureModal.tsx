@@ -3,6 +3,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { durationSeconds } from '@/design-system';
+import Button from '@/components/ui/Button';
+import Icon from '@/components/ui/Icon';
 
 interface AppArchitectureModalProps {
     isOpen: boolean;
@@ -44,12 +46,14 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                                 </div>
                             </div>
                             <div className="flex items-center">
-                                <button
+                            <Button
+                                    variant="icon"
+                                    size="md"
                                     onClick={onClose}
-                                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${isLight ? 'bg-gray-200 hover:bg-gray-300 text-gray-600' : 'bg-gray-800 hover:bg-gray-700 text-gray-400'}`}
+                                    aria-label="Close modal"
                                 >
-                                    <span className="material-symbols">close</span>
-                                </button>
+                                    <Icon name="close" />
+                                </Button>
                             </div>
                         </div>
 

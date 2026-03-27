@@ -489,60 +489,107 @@ function GradientsSection() {
 function ButtonsSection() {
   return (
     <DemoSection code={`import Button from '@/components/ui/Button';
+import Icon from '@/components/ui/Icon';
 
-// Variants
-<Button variant="primary">Primary</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="cosmic">Cosmic</Button>
+// Primary — filled, highest emphasis
+<Button variant="primary">Save changes</Button>
+<Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
 
-// Sizes
+// Secondary — outlined, medium emphasis
+<Button variant="secondary">Cancel</Button>
+<Button variant="secondary" rightIcon={<Icon name="arrow_forward" />}>View all</Button>
+
+// Tertiary — text-only, low emphasis
+<Button variant="tertiary">Learn more</Button>
+<Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
+
+// Icon — square, icon-only
+<Button variant="icon" size="sm"><Icon name="close" /></Button>
+<Button variant="icon"><Icon name="more_vert" /></Button>
+<Button variant="icon" size="lg"><Icon name="settings" /></Button>
+
+// Sizes (all variants)
 <Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
 <Button size="lg">Large</Button>
 
 // States
-<Button loading>Loading...</Button>
-<Button disabled>Disabled</Button>
-
-// With icons
-<Button leftIcon={<Icon name="add" />}>Create</Button>`}>
+<Button loading>Saving…</Button>
+<Button disabled>Disabled</Button>`}>
       <div className="space-y-6">
+        {/* Primary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Variants</h4>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="cosmic">Cosmic</Button>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Primary — Filled</h4>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="primary">Save changes</Button>
+            <Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
+            <Button variant="primary" rightIcon={<Icon name="arrow_forward" />}>Get started</Button>
           </div>
         </div>
         <Divider />
+        {/* Secondary */}
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Secondary — Outlined</h4>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="secondary">Cancel</Button>
+            <Button variant="secondary" leftIcon={<Icon name="download" />}>Export</Button>
+            <Button variant="secondary" rightIcon={<Icon name="arrow_forward" />}>View all</Button>
+          </div>
+        </div>
+        <Divider />
+        {/* Tertiary */}
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Tertiary — Text only</h4>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="tertiary">Learn more</Button>
+            <Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
+            <Button variant="tertiary" rightIcon={<Icon name="open_in_new" />}>Open link</Button>
+          </div>
+        </div>
+        <Divider />
+        {/* Icon */}
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon — Square</h4>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="icon" size="sm"><Icon name="close" /></Button>
+            <Button variant="icon"><Icon name="more_vert" /></Button>
+            <Button variant="icon" size="lg"><Icon name="settings" /></Button>
+            <Button variant="icon"><Icon name="share" /></Button>
+            <Button variant="icon"><Icon name="bookmark" /></Button>
+          </div>
+        </div>
+        <Divider />
+        {/* Sizes */}
         <div>
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Sizes</h4>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-end gap-3">
             <Button size="sm">Small</Button>
             <Button size="md">Medium</Button>
             <Button size="lg">Large</Button>
+            <Button variant="secondary" size="sm">Small</Button>
+            <Button variant="secondary" size="md">Medium</Button>
+            <Button variant="secondary" size="lg">Large</Button>
           </div>
         </div>
         <Divider />
+        {/* States */}
         <div>
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">States</h4>
           <div className="flex flex-wrap gap-3">
-            <Button loading>Loading...</Button>
+            <Button loading>Saving…</Button>
+            <Button variant="secondary" loading>Loading…</Button>
             <Button disabled>Disabled</Button>
+            <Button variant="secondary" disabled>Disabled</Button>
+            <Button variant="tertiary" disabled>Disabled</Button>
           </div>
         </div>
         <Divider />
+        {/* Special */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">With Icons</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Special — Cosmic</h4>
           <div className="flex flex-wrap gap-3">
-            <Button leftIcon={<Icon name="add" />}>Create New</Button>
-            <Button variant="outline" rightIcon={<Icon name="arrow_forward" />}>Continue</Button>
-            <Button variant="secondary" leftIcon={<Icon name="download" />}>Download</Button>
+            <Button variant="cosmic">Cosmic</Button>
+            <Button variant="cosmic" leftIcon={<Icon name="auto_awesome" />}>Magic</Button>
           </div>
         </div>
       </div>

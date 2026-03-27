@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import QuoteBlock from '@/components/ui/QuoteBlock';
+import Button from '@/components/ui/Button';
 import { useTheme } from '@/context/ThemeContext';
 
 // Data structure for prompts with enhanced categorization
@@ -835,19 +836,19 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
           </div>
         )}        {/* Action Buttons */}
         <div className="flex gap-2">
-          <button
+          <Button
+            variant="primary"
+            size="sm"
+            className="flex-1"
             onClick={() => setIsExpanded(!isExpanded)}
-                        className="flex-1 py-2 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium shadow-lg hover:shadow-xl"
           >
             {isExpanded ? 'Show Less' : 'View Details'}
-          </button>
-          <button
-            className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm"
-          >
+          </Button>
+          <Button variant="icon" size="sm" aria-label="More options">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
             </svg>
-          </button>
+          </Button>
         </div>      </div>
     </div>
   );
@@ -894,12 +895,14 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
           </div>
         </div>        {/* Expand Button */}
         <div className="mt-4 pt-4 border-t border-white/10">
-          <button
+          <Button
+            variant="tertiary"
+            size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-sm text-purple-400 hover:text-purple-300"
           >
             {isExpanded ? '↑ Show Less' : '↓ Show More'}
-          </button>        </div>
+          </Button>
+        </div>
       </div>
     </div>
   );

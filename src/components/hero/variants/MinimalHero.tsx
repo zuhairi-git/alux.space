@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import Button from '@/components/ui/Button';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
@@ -60,12 +61,13 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
             animate={{ y: 0, opacity: 1 }}
             transition={{ ...t.snap, delay: delaySeconds.md }}
           >
-            <Link 
+            <Link
               href={localizedHref(cta.href)}
-              className="inline-block px-6 py-3 bg-gray-800 text-white rounded-lg"
               onClick={() => trackEvent('hero_cta_click', 'hero', `minimal_variant_${cta.text}`)}
             >
-              {cta.text}
+              <Button variant="primary" size="lg">
+                {cta.text}
+              </Button>
             </Link>
           </motion.div>
         )}
