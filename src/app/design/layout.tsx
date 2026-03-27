@@ -43,7 +43,6 @@ const sidebarNav: NavGroup[] = [
       { label: 'Avatars',    section: 'avatars',     icon: 'account_circle' },
       { label: 'Dividers',   section: 'dividers',    icon: 'horizontal_rule' },
       { label: 'Tooltips',   section: 'tooltips',    icon: 'info' },
-      { label: 'Cards',      section: 'cards',       icon: 'dashboard' },
       { label: 'Quotes',     section: 'quotes',      icon: 'format_quote' },
       { label: 'Icons',      section: 'icons',        icon: 'emoji_symbols' },
       { label: 'Animations', section: 'animations',   icon: 'motion_photos_auto' },
@@ -59,6 +58,17 @@ const sidebarNav: NavGroup[] = [
     ],
   },
   {
+    title: 'Cards',
+    items: [
+      { label: 'Surface',          section: 'cards-surface',   icon: 'dashboard' },
+      { label: 'Timeline',         section: 'cards-timeline',  icon: 'view_timeline' },
+      { label: 'Media',            section: 'cards-media',     icon: 'perm_media' },
+      { label: 'Domain',           section: 'cards-domain',    icon: 'apps' },
+      { label: 'Timeline demo',    href: '/design/timeline-cards', icon: 'open_in_new' },
+      { label: 'Media showcase',   href: '/design/media-cards',    icon: 'open_in_new' },
+    ],
+  },
+  {
     title: 'Registry',
     items: [
       { label: 'Primitives',    section: 'primitives', icon: 'widgets' },
@@ -66,13 +76,6 @@ const sidebarNav: NavGroup[] = [
       { label: 'Section-Level', section: 'section',    icon: 'view_agenda' },
       { label: 'Accessibility', section: 'a11y',       icon: 'accessibility_new' },
       { label: 'Layout',        section: 'layout',     icon: 'grid_view' },
-    ],
-  },
-  {
-    title: 'Pages',
-    items: [
-      { label: 'Timeline Cards', href: '/design/timeline-cards', icon: 'view_timeline' },
-      { label: 'Media Cards',    href: '/design/media-cards',    icon: 'perm_media' },
     ],
   },
   {

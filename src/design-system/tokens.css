@@ -267,6 +267,19 @@
   --font-medium:    500;
   --font-semibold:  600;
   --font-bold:      700;
+
+  /* Letter spacing */
+  --ls-tight:    -0.025em;
+  --ls-normal:    0em;
+  --ls-wide:      0.04em;
+  --ls-wider:     0.08em;
+
+  /* Fluid heading sizes (clamp: min / preferred / max) */
+  --text-hero:  clamp(3rem, 6vw, 5rem);
+  --text-h1:    clamp(2rem, 4vw, 3rem);
+  --text-h2:    clamp(1.5rem, 3vw, 2.25rem);
+  --text-h3:    clamp(1.25rem, 2vw, 1.75rem);
+  --text-h4:    clamp(1rem, 1.5vw, 1.25rem);
 }
 
 /* -------------------------------------------------------
@@ -322,6 +335,15 @@
   --shadow-card-light:       0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --shadow-card-light-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
   --shadow-card-colorful:    0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* Surface elevation (references semantic card tokens) */
+  --surface-0:          var(--background);
+  --surface-1:          var(--card-from-bg);
+  --surface-2:          color-mix(in srgb, var(--card-from-bg) 80%, var(--background));
+  --surface-border:     var(--card-border);
+  --surface-shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --surface-shadow-md:  0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --surface-shadow-lg:  0 8px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
 }
 
 /* -------------------------------------------------------

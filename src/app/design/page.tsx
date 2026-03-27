@@ -4,6 +4,9 @@ import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
+import TimelineCard from '@/components/TimelineCard';
+import MediaCard from '@/components/ui/MediaCard';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import Icon from '@/components/ui/Icon';
 import Tooltip from '@/components/ui/Tooltip';
@@ -805,7 +808,7 @@ function TooltipsSection() {
   );
 }
 
-function CardsSection() {
+function CardsSurfaceSection() {
   return (
     <DemoSection code={`import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
@@ -827,6 +830,138 @@ import CardContent from '@/components/CardContent';
         ))}
       </div>
     </DemoSection>
+  );
+}
+
+function CardsTimelineSection() {
+  return (
+    <div className="space-y-4">
+      <p className="text-sm opacity-60">
+        Animated entry cards with floating particles — designed for experience and education timelines.
+        {' '}<a href="/design/timeline-cards" className="text-primary underline">View full theme demo →</a>
+      </p>
+      <DemoSection code={`import { TimelineCard } from '@/components/ui/cards';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+
+<TimelineCard
+  theme="dark"
+  materialIcon={RocketLaunchIcon}
+  title="Product Designer"
+  date="2023 – Present"
+  location="Helsinki, Finland"
+  description="Product vision and design system ownership."
+/>`}>
+        <div className="max-w-xs mx-auto">
+          <TimelineCard
+            theme="dark"
+            materialIcon={RocketLaunchIcon}
+            title="Product Designer"
+            date="2023 – Present"
+            location="Helsinki, Finland"
+            description="Product vision, design system ownership, and developer handoff."
+          />
+        </div>
+      </DemoSection>
+    </div>
+  );
+}
+
+function CardsMediaSection() {
+  return (
+    <div className="space-y-4">
+      <p className="text-sm opacity-60">
+        Image-first cards with three layout variants.
+        {' '}<a href="/design/media-cards" className="text-primary underline">View full theme showcase →</a>
+      </p>
+      <DemoSection code={`import { MediaCard } from '@/components/ui/cards';
+
+<MediaCard
+  variant="basic"
+  title="Article Title"
+  description="Short description of the content."
+  imagePath="/images/blog/ai-brain.jpg"
+  tags={['Design', 'AI']}
+/>
+// variant="overlay"  — text overlaid on image
+// variant="horizontal" — image left, content right`}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {(['basic', 'overlay', 'horizontal'] as const).map(v => (
+            <MediaCard
+              key={v}
+              variant={v}
+              title={`${v.charAt(0).toUpperCase() + v.slice(1)} variant`}
+              description="A media card demonstrating the image layout pattern."
+              imagePath="/images/blog/ai-brain.jpg"
+              tags={['Design', 'UI']}
+            />
+          ))}
+        </div>
+      </DemoSection>
+    </div>
+  );
+}
+
+function CardsDomainSection() {
+  const items = [
+    {
+      label: 'BlogCard',
+      icon: 'article',
+      desc: 'Article card with featured/standard/overlay view modes, tags, and read-time.',
+      href: '/blog',
+      importLine: "import { BlogCard } from '@/components/ui/cards';",
+      prop: 'viewMode="standard | overlay | featured"',
+    },
+    {
+      label: 'PortfolioCard',
+      icon: 'work',
+      desc: 'Project card with localized title/description, status badge, and tag chips.',
+      href: '/portfolio',
+      importLine: "import { PortfolioCard } from '@/components/ui/cards';",
+      prop: 'displayState="published | archived | coming-soon"',
+    },
+    {
+      label: 'AudioCard',
+      icon: 'headphones',
+      desc: 'Podcast/audio episode card with cover image, category, and language badges.',
+      href: '/podcast',
+      importLine: "import { AudioCard } from '@/components/ui/cards';",
+      prop: 'variant="grid | list"',
+    },
+  ];
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm opacity-60">
+        Page-specific cards with rich localized data schemas. All available from{' '}
+        <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">@/components/ui/cards</code>{' '}
+        or <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">@/design-system</code>.
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {items.map(item => (
+          <a
+            key={item.label}
+            href={item.href}
+            className="theme-card-flex p-5 rounded-xl hover:border-primary/40 transition-colors group"
+          >
+            <span className="material-symbols text-2xl text-primary/60 group-hover:text-primary mb-3 block">
+              {item.icon}
+            </span>
+            <h4 className="font-semibold text-sm font-mono mb-1">{item.label}</h4>
+            <p className="text-xs opacity-60 leading-relaxed mb-3">{item.desc}</p>
+            <code className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 font-mono block truncate opacity-70 mb-1">
+              {item.importLine}
+            </code>
+            <code className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono block truncate">
+              {item.prop}
+            </code>
+            <span className="text-xs text-primary mt-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              View live examples{' '}
+              <span className="material-symbols text-sm">arrow_forward</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -1365,9 +1500,13 @@ const allSections: SectionDef[] = [
   { key: 'toggles',    title: 'Toggles',                   render: () => <TogglesSection /> },
   { key: 'avatars',    title: 'Avatars',                   render: () => <AvatarsSection /> },
   { key: 'dividers',   title: 'Dividers',                  render: () => <DividersSection /> },
-  { key: 'tooltips',   title: 'Tooltips',                  render: () => <TooltipsSection /> },
-  { key: 'cards',      title: 'Card Variants',             render: () => <CardsSection /> },
-  { key: 'quotes',     title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
+  { key: 'tooltips',        title: 'Tooltips',                  render: () => <TooltipsSection /> },
+  // ── Cards (per category) ────────────────────────────
+  { key: 'cards-surface',  title: 'Cards — Surface',           render: () => <CardsSurfaceSection /> },
+  { key: 'cards-timeline', title: 'Cards — Timeline',          render: () => <CardsTimelineSection /> },
+  { key: 'cards-media',    title: 'Cards — Media',             render: () => <CardsMediaSection /> },
+  { key: 'cards-domain',   title: 'Cards — Domain',            render: () => <CardsDomainSection /> },
+  { key: 'quotes',         title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
   { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
   { key: 'code-snippet', title: 'Code Snippet',            render: () => <CodeSnippetSection /> },
@@ -1417,7 +1556,6 @@ function OverviewGrid() {
         { key: 'avatars',    icon: 'account_circle',     label: 'Avatars' },
         { key: 'dividers',   icon: 'horizontal_rule',    label: 'Dividers' },
         { key: 'tooltips',   icon: 'info',               label: 'Tooltips' },
-        { key: 'cards',      icon: 'dashboard',          label: 'Cards' },
         { key: 'quotes',     icon: 'format_quote',       label: 'Quotes' },
         { key: 'icons',      icon: 'emoji_symbols',      label: 'Icons' },
         { key: 'animations', icon: 'motion_photos_auto', label: 'Animations' },
@@ -1430,6 +1568,15 @@ function OverviewGrid() {
         { key: 'skeletons',  icon: 'hourglass_empty',        label: 'Skeletons' },
         { key: 'progress',   icon: 'donut_large',            label: 'Progress' },
         { key: 'breadcrumbs',icon: 'more_horiz',             label: 'Breadcrumbs' },
+      ],
+    },
+    {
+      title: 'Cards',
+      items: [
+        { key: 'cards-surface',  icon: 'dashboard',      label: 'Surface' },
+        { key: 'cards-timeline', icon: 'view_timeline',  label: 'Timeline' },
+        { key: 'cards-media',    icon: 'perm_media',     label: 'Media' },
+        { key: 'cards-domain',   icon: 'apps',           label: 'Domain' },
       ],
     },
     {
