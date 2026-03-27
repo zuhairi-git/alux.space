@@ -32,6 +32,7 @@ import type { ComponentEntry } from '@/design-system';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import AnimatedSection from '@/components/AnimatedSection';
 import CodeSnippet from '@/components/CodeSnippet';
+import PodcastPlayer from '@/components/PodcastPlayer';
 import { useTheme } from '@/context/ThemeContext';
 
 /* ── Token swatch data ────────────────────────────────── */
@@ -134,6 +135,26 @@ const colorTokenSections = [
       { name: '--color-magenta',    label: 'Magenta' },
       { name: '--color-yellow-500', label: 'Yellow 500' },
       { name: '--color-orange-500', label: 'Orange 500' },
+    ],
+  },
+  {
+    title: 'Audio Player Tokens',
+    tokens: [
+      { name: '--player-bg',            label: 'Player Bg' },
+      { name: '--player-border',        label: 'Player Border' },
+      { name: '--player-accent',        label: 'Player Accent' },
+      { name: '--player-progress-from', label: 'Progress Start' },
+      { name: '--player-progress-via',  label: 'Progress Mid' },
+      { name: '--player-progress-to',   label: 'Progress End' },
+      { name: '--player-btn-from',      label: 'Button Start' },
+      { name: '--player-btn-to',        label: 'Button End' },
+      { name: '--player-btn-glow',      label: 'Button Glow' },
+      { name: '--player-ctrl-bg',       label: 'Control Bg' },
+      { name: '--player-ctrl-border',   label: 'Control Border' },
+      { name: '--player-ctrl-text',     label: 'Control Text' },
+      { name: '--player-tag-bg',        label: 'Tag Bg' },
+      { name: '--player-tag-text',      label: 'Tag Text' },
+      { name: '--player-tag-border',    label: 'Tag Border' },
     ],
   },
 ];
@@ -1437,6 +1458,50 @@ function RegistrySection({ categoryKey }: { categoryKey: ComponentEntry['categor
 
 /* â”€â”€ Governance sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
+function PodcastPlayerSection() {
+  return (
+    <div className="space-y-10">
+      <div>
+        <h4 className="text-sm font-medium mb-3 opacity-60">Live Demo</h4>
+        <p className="text-sm opacity-70 mb-4">
+          Full-featured podcast player used in the hero section. All colors adapt via{' '}
+          <code className="font-mono text-xs bg-[var(--card-from-bg)] px-1.5 py-0.5 rounded">--player-*</code>{' '}
+          CSS tokens — switch the theme to see the colorful ember palette.
+        </p>
+        <DemoSection code={`<PodcastPlayer />`}>
+          <div className="max-w-sm mx-auto">
+            <PodcastPlayer />
+          </div>
+        </DemoSection>
+      </div>
+      <div>
+        <h4 className="text-sm font-medium mb-3 opacity-60">Theme Tokens</h4>
+        <div className="flex flex-wrap gap-3">
+          {[
+            { name: '--player-bg',            label: 'Player Bg' },
+            { name: '--player-border',        label: 'Player Border' },
+            { name: '--player-accent',        label: 'Player Accent' },
+            { name: '--player-progress-from', label: 'Progress Start' },
+            { name: '--player-progress-via',  label: 'Progress Mid' },
+            { name: '--player-progress-to',   label: 'Progress End' },
+            { name: '--player-btn-from',      label: 'Button Start' },
+            { name: '--player-btn-to',        label: 'Button End' },
+            { name: '--player-btn-glow',      label: 'Button Glow' },
+            { name: '--player-ctrl-bg',       label: 'Control Bg' },
+            { name: '--player-ctrl-border',   label: 'Control Border' },
+            { name: '--player-ctrl-text',     label: 'Control Text' },
+            { name: '--player-tag-bg',        label: 'Tag Bg' },
+            { name: '--player-tag-text',      label: 'Tag Text' },
+            { name: '--player-tag-border',    label: 'Tag Border' },
+          ].map(t => (
+            <Swatch key={t.name} cssVar={t.name} label={t.label} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ConventionsSection() {
   return (
     <div className="space-y-6">
@@ -1662,6 +1727,8 @@ const allSections: SectionDef[] = [
   { key: 'progress',   title: 'Progress',                   render: () => <ProgressSection /> },
   { key: 'breadcrumbs',title: 'Breadcrumbs',                render: () => <BreadcrumbSection /> },
   { key: 'text',       title: 'Text Component',             render: () => <TextSection /> },
+  // Section-Level
+  { key: 'podcast-player', title: 'Podcast Player',           render: () => <PodcastPlayerSection /> },
   // Registry
   ...registryCategories.map(c => ({
     key: c.key === 'primitive' ? 'primitives' : c.key,
@@ -1713,6 +1780,7 @@ function OverviewGrid() {
         { key: 'progress',   icon: 'donut_large',            label: 'Progress' },
         { key: 'breadcrumbs',icon: 'more_horiz',             label: 'Breadcrumbs' },
         { key: 'text',       icon: 'title',                  label: 'Text' },
+        { key: 'podcast-player', icon: 'podcasts',            label: 'Podcast Player' },
       ],
     },
     {
