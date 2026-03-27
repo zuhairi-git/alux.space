@@ -89,9 +89,8 @@ const variantClasses: Record<ButtonVariant, string> = {
   ].join(' '),
 
   // ── Cosmic: animated gradient — special decoration ─────────
-  // eslint-disable-next-line design-system/no-hardcoded-colors -- gradient literals; can't use var() inside Tailwind class strings
   cosmic: [
-    'bg-gradient-to-r from-[#00ffff] via-[#ff00cc] to-[#3b82f6]',
+    'bg-gradient-to-r from-[#00ffff] via-[#ff00cc] to-[#3b82f6]', // eslint-disable-line design-system/no-hardcoded-colors -- gradient art-direction literals; var() not usable inside Tailwind arbitrary value strings
     'bg-[length:200%_200%] animate-gradient-shift',
     'text-white font-medium',
     'rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5',

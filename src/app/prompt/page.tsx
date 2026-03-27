@@ -234,6 +234,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
     bugsFixed: 17,
     technologies: ["CSS", "Theme System"],
     description: "Implement comprehensive light theme with soft gradients and accessible colors.",
+    // eslint-disable-next-line design-system/no-hardcoded-colors -- hex values are documentation text content (CSS examples), not applied styles
     content: `Light Theme Styling Instructions:
 • Background Gradient:
 Apply a soft, light gradient background that transitions from near-white to soft gray:
@@ -583,7 +584,8 @@ export default function PromptPage() {
             <div className="theme-card-content p-6 rounded-2xl backdrop-blur-sm overflow-visible">
               <div className="flex flex-col lg:flex-row gap-6 items-center justify-between overflow-visible">                {/* Category Dropdown */}
                 <div className="relative dropdown-container z-[80]">
-                  <button
+                  <Button
+                    variant="ghost"
                     onClick={() => {
                       setCategoryDropdownOpen(!categoryDropdownOpen);
                       setStatusDropdownOpen(false);
@@ -599,7 +601,7 @@ export default function PromptPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                  </button>
+                  </Button>
                   
                   <AnimatePresence>
                     {categoryDropdownOpen && (                      <motion.div
@@ -625,7 +627,8 @@ export default function PromptPage() {
                   </AnimatePresence>
                 </div>                {/* Status Dropdown */}
                 <div className="relative dropdown-container z-[80]">
-                  <button
+                  <Button
+                    variant="ghost"
                     onClick={() => {
                       setStatusDropdownOpen(!statusDropdownOpen);
                       setCategoryDropdownOpen(false);
@@ -641,7 +644,7 @@ export default function PromptPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                  </button>
+                  </Button>
                   
                   <AnimatePresence>
                     {statusDropdownOpen && (                      <motion.div

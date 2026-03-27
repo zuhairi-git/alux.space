@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
-import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
+import { durationSeconds, delaySeconds } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import { useLanguage } from '@/context/LanguageContext';
