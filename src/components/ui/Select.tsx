@@ -132,17 +132,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             onClick={() => !disabled && setOpen(!open)}
             onKeyDown={handleKeyDown}
             className={[
-              'w-full flex items-center justify-between',
-              'px-3 py-2.5 text-sm rounded-[var(--radius-md)]',
-              'border transition-colors duration-200',
+              'w-full h-10 flex items-center justify-between',
+              'px-3.5 text-[14px] rounded-md',
+              'border shadow-sm transition-all duration-150 ease-out',
               'bg-[var(--background)] text-[var(--foreground)]',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--btn-primary-bg)]/25 focus-visible:ring-offset-1',
               'cursor-pointer',
               hasError
                 ? 'border-[var(--color-error)]'
                 : open
-                  ? 'border-[var(--primary)]'
-                  : 'border-[var(--card-border)] hover:border-[var(--card-border-hover)]',
+                  ? 'border-[var(--btn-primary-bg)] ring-2 ring-[var(--btn-primary-bg)]/25'
+                  : 'border-[var(--card-border)] hover:border-[var(--btn-primary-bg)]/40',
               disabled && 'opacity-50 cursor-not-allowed',
             ]
               .filter(Boolean)
@@ -180,10 +180,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                   aria-selected={option.value === value}
                   className={[
                     'px-3 py-2 text-sm cursor-pointer transition-colors',
-                    index === activeIndex && 'bg-[var(--primary)]/10',
-                    option.value === value && 'text-[var(--primary)] font-medium',
+                    index === activeIndex && 'bg-[var(--btn-primary-bg)]/10',
+                    option.value === value && 'text-[var(--btn-primary-bg)] font-medium',
                     option.value !== value && 'text-[var(--foreground)]',
-                    'hover:bg-[var(--primary)]/10',
+                    'hover:bg-[var(--btn-primary-bg)]/10',
                   ]
                     .filter(Boolean)
                     .join(' ')}

@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
+import Button from '@/components/ui/Button';
+import Icon from '@/components/ui/Icon';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'full';
 
@@ -134,13 +136,9 @@ export default function Modal({
             <h2 id={titleId} className="text-lg font-semibold text-[var(--foreground)]">
               {title}
             </h2>
-            <button
-              onClick={onClose}
-              className="p-1 rounded-lg text-[var(--foreground)] opacity-50 hover:opacity-100 hover:bg-[var(--card-from-bg)] transition-all cursor-pointer"
-              aria-label="Close dialog"
-            >
-              <span className="material-symbols text-xl" aria-hidden="true">close</span>
-            </button>
+            <Button variant="icon" size="sm" onClick={onClose} aria-label="Close dialog">
+              <Icon name="close" />
+            </Button>
           </div>
         )}
 
@@ -151,13 +149,9 @@ export default function Modal({
 
         {/* Close button if no title */}
         {!title && (
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 p-1 rounded-lg text-[var(--foreground)] opacity-50 hover:opacity-100 hover:bg-[var(--card-from-bg)] transition-all cursor-pointer"
-            aria-label="Close dialog"
-          >
-            <span className="material-symbols text-xl" aria-hidden="true">close</span>
-          </button>
+          <Button variant="icon" size="sm" onClick={onClose} aria-label="Close dialog" className="absolute top-3 right-3">
+            <Icon name="close" />
+          </Button>
         )}
       </div>
     </div>

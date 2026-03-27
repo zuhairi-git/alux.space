@@ -80,9 +80,9 @@ export default function Tabs({ tabs, defaultTab, onChange, className = '' }: Tab
               className={[
                 'relative inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium',
                 'transition-colors duration-200 cursor-pointer',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 rounded-t-lg',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--btn-primary-bg)] focus-visible:ring-offset-2 rounded-t-lg',
                 isActive
-                  ? 'text-[var(--primary)]'
+                  ? 'text-[var(--btn-primary-bg)]'
                   : 'text-[var(--foreground)] opacity-60 hover:opacity-100',
               ].join(' ')}
             >
@@ -91,7 +91,7 @@ export default function Tabs({ tabs, defaultTab, onChange, className = '' }: Tab
               {/* Active indicator */}
               {isActive && (
                 <span
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--primary)] rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--btn-primary-bg)] rounded-full"
                   aria-hidden="true"
                 />
               )}

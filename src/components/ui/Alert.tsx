@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import Button from '@/components/ui/Button';
+import Icon from '@/components/ui/Icon';
 
 type AlertVariant = 'info' | 'success' | 'warning' | 'error';
 
@@ -85,13 +87,9 @@ export default function Alert({
 
       {/* Dismiss button */}
       {dismissible && (
-        <button
-          onClick={handleDismiss}
-          className="shrink-0 p-0.5 rounded opacity-50 hover:opacity-100 transition-opacity cursor-pointer"
-          aria-label="Dismiss alert"
-        >
-          <span className="material-symbols text-lg" aria-hidden="true">close</span>
-        </button>
+        <Button variant="icon" size="sm" onClick={handleDismiss} aria-label="Dismiss alert" className="shrink-0 -mr-1 -mt-0.5">
+          <Icon name="close" />
+        </Button>
       )}
     </div>
   );

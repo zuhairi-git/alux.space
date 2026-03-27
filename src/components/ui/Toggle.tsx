@@ -60,12 +60,12 @@ export default function Toggle({
         className={[
           'relative inline-flex shrink-0 rounded-full',
           'transition-colors duration-200 ease-out',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--btn-primary-bg)] focus-visible:ring-offset-2',
           'cursor-pointer',
           trackSize[size],
           checked
-            ? 'bg-[var(--primary)]'
-            : 'bg-[var(--card-border)]',
+            ? 'bg-[var(--btn-primary-bg)]'
+            : 'bg-[var(--foreground)]/15',
           disabled && 'opacity-50 cursor-not-allowed',
         ]
           .filter(Boolean)
