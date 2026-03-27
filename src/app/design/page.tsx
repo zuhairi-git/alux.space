@@ -16,6 +16,13 @@ import Avatar from '@/components/ui/Avatar';
 import Divider from '@/components/ui/Divider';
 import CodeSnippet from '@/components/CodeSnippet';
 import ChapterDivider from '@/components/ui/ChapterDivider';
+import Select from '@/components/ui/Select';
+import Modal from '@/components/ui/Modal';
+import Tabs from '@/components/ui/Tabs';
+import Alert from '@/components/ui/Alert';
+import Skeleton from '@/components/ui/Skeleton';
+import Progress from '@/components/ui/Progress';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 import { getByCategory } from '@/design-system/components';
 import type { ComponentEntry } from '@/design-system/components';
 
@@ -874,6 +881,223 @@ function ChapterDividerSection() {
   );
 }
 
+function SelectSection() {
+  const [selected, setSelected] = useState('');
+  const options = [
+    { value: 'react', label: 'React' },
+    { value: 'next', label: 'Next.js' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'angular', label: 'Angular' },
+    { value: 'svelte', label: 'Svelte' },
+  ];
+  return (
+    <DemoSection code={`import Select from '@/components/ui/Select';
+
+<Select
+  label="Framework"
+  placeholder="Choose a framework"
+  options={[
+    { value: 'react', label: 'React' },
+    { value: 'next', label: 'Next.js' },
+  ]}
+  value={selected}
+  onChange={setSelected}
+/>
+<Select label="With error" error="Selection required" options={options} />
+<Select label="Disabled" disabled options={options} />`}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl">
+        <Select
+          label="Framework"
+          placeholder="Choose a framework"
+          options={options}
+          value={selected}
+          onChange={setSelected}
+        />
+        <Select
+          label="With error"
+          placeholder="Select..."
+          options={options}
+          error="This field is required"
+        />
+        <Select
+          label="Disabled"
+          placeholder="Can't select"
+          options={options}
+          disabled
+        />
+      </div>
+    </DemoSection>
+  );
+}
+
+function ModalSection() {
+  const [openSm, setOpenSm] = useState(false);
+  const [openMd, setOpenMd] = useState(false);
+  const [openLg, setOpenLg] = useState(false);
+  return (
+    <DemoSection code={`import Modal from '@/components/ui/Modal';
+
+<Modal open={isOpen} onClose={() => setOpen(false)} title="Dialog Title" size="md">
+  <p>Modal content goes here.</p>
+</Modal>`}>
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-3">
+          <Button variant="primary" size="sm" onClick={() => setOpenSm(true)}>Open Small</Button>
+          <Button variant="secondary" size="sm" onClick={() => setOpenMd(true)}>Open Medium</Button>
+          <Button variant="outline" size="sm" onClick={() => setOpenLg(true)}>Open Large</Button>
+        </div>
+        <Modal open={openSm} onClose={() => setOpenSm(false)} title="Small Dialog" size="sm">
+          <p className="text-sm opacity-70">This is a small modal. Press Escape or click the backdrop to close.</p>
+        </Modal>
+        <Modal open={openMd} onClose={() => setOpenMd(false)} title="Medium Dialog" size="md">
+          <p className="text-sm opacity-70">This is the default medium-sized modal with focus trapping and keyboard dismissal.</p>
+        </Modal>
+        <Modal open={openLg} onClose={() => setOpenLg(false)} title="Large Dialog" size="lg">
+          <p className="text-sm opacity-70">A larger modal for content-heavy dialogs. Supports all three themes automatically.</p>
+        </Modal>
+      </div>
+    </DemoSection>
+  );
+}
+
+function TabsSection() {
+  return (
+    <DemoSection code={`import Tabs from '@/components/ui/Tabs';
+
+<Tabs tabs={[
+  { key: 'overview', label: 'Overview', content: <p>Overview content</p> },
+  { key: 'specs', label: 'Specs', content: <p>Specs content</p> },
+  { key: 'reviews', label: 'Reviews', content: <p>Reviews content</p> },
+]} />`}>
+      <Tabs tabs={[
+        { key: 'overview', label: 'Overview', content: <p className="text-sm opacity-70">Overview tab content. Navigate between tabs using arrow keys.</p> },
+        { key: 'features', label: 'Features', content: <p className="text-sm opacity-70">Features tab content with full keyboard support (Arrow Left/Right, Home, End).</p> },
+        { key: 'pricing', label: 'Pricing', content: <p className="text-sm opacity-70">Pricing tab content. Each tab panel is properly associated with its tab via ARIA attributes.</p> },
+      ]} />
+    </DemoSection>
+  );
+}
+
+function AlertsSection() {
+  return (
+    <DemoSection code={`import Alert from '@/components/ui/Alert';
+
+<Alert variant="info" title="Info">Informational message.</Alert>
+<Alert variant="success" title="Success">Operation completed.</Alert>
+<Alert variant="warning" title="Warning">Proceed with caution.</Alert>
+<Alert variant="error" title="Error" dismissible>Something went wrong.</Alert>`}>
+      <div className="space-y-3 max-w-2xl">
+        <Alert variant="info" title="Information">This is an informational alert using semantic state tokens.</Alert>
+        <Alert variant="success" title="Success">Operation completed successfully. All changes have been saved.</Alert>
+        <Alert variant="warning" title="Warning">Your session will expire in 5 minutes. Please save your work.</Alert>
+        <Alert variant="error" title="Error" dismissible>Something went wrong. Please try again or contact support.</Alert>
+      </div>
+    </DemoSection>
+  );
+}
+
+function SkeletonSection() {
+  return (
+    <DemoSection code={`import Skeleton from '@/components/ui/Skeleton';
+
+<Skeleton variant="text" lines={3} />
+<Skeleton variant="circular" width={48} />
+<Skeleton variant="rectangular" height={120} />`}>
+      <div className="space-y-6">
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Text Lines</h4>
+          <div className="max-w-md">
+            <Skeleton variant="text" lines={3} />
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Circular</h4>
+          <div className="flex gap-4">
+            <Skeleton variant="circular" width={32} />
+            <Skeleton variant="circular" width={48} />
+            <Skeleton variant="circular" width={64} />
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Rectangular</h4>
+          <Skeleton variant="rectangular" height={100} />
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Card Placeholder</h4>
+          <div className="flex gap-4 items-start">
+            <Skeleton variant="circular" width={48} />
+            <div className="flex-1 space-y-2">
+              <Skeleton variant="text" width="60%" />
+              <Skeleton variant="text" lines={2} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function ProgressSection() {
+  return (
+    <DemoSection code={`import Progress from '@/components/ui/Progress';
+
+// Linear
+<Progress value={65} label="Upload" showValue />
+
+// Circular
+<Progress value={75} variant="circular" size="lg" showValue />`}>
+      <div className="space-y-6">
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Linear</h4>
+          <div className="space-y-4 max-w-md">
+            <Progress value={25} size="sm" label="Basic (sm)" showValue />
+            <Progress value={65} size="md" label="Upload progress" showValue />
+            <Progress value={90} size="lg" label="Almost done (lg)" showValue />
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Circular</h4>
+          <div className="flex items-end gap-6">
+            <Progress value={33} variant="circular" size="sm" showValue />
+            <Progress value={65} variant="circular" size="md" showValue />
+            <Progress value={88} variant="circular" size="lg" showValue />
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
+function BreadcrumbSection() {
+  return (
+    <DemoSection code={`import Breadcrumb from '@/components/ui/Breadcrumb';
+
+<Breadcrumb items={[
+  { label: 'Home', href: '/' },
+  { label: 'Design', href: '/design' },
+  { label: 'Components' },
+]} />`}>
+      <div className="space-y-4">
+        <Breadcrumb items={[
+          { label: 'Home', href: '/' },
+          { label: 'Design', href: '/design' },
+          { label: 'Components' },
+        ]} />
+        <Breadcrumb items={[
+          { label: 'Dashboard', href: '/' },
+          { label: 'Projects', href: '/' },
+          { label: 'alux.space', href: '/' },
+          { label: 'Settings' },
+        ]} />
+      </div>
+    </DemoSection>
+  );
+}
+
 function RegistrySection({ categoryKey }: { categoryKey: ComponentEntry['category'] }) {
   const entries = getByCategory(categoryKey);
   if (!entries.length) return <p className="text-sm opacity-60 italic">No components in this category.</p>;
@@ -1101,6 +1325,13 @@ const allSections: SectionDef[] = [
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
   { key: 'code-snippet', title: 'Code Snippet',            render: () => <CodeSnippetSection /> },
   { key: 'chapter-divider', title: 'Chapter Divider',      render: () => <ChapterDividerSection /> },
+  { key: 'selects',    title: 'Selects',                   render: () => <SelectSection /> },
+  { key: 'modals',     title: 'Modals',                     render: () => <ModalSection /> },
+  { key: 'tabs',       title: 'Tabs',                       render: () => <TabsSection /> },
+  { key: 'alerts',     title: 'Alerts',                     render: () => <AlertsSection /> },
+  { key: 'skeletons',  title: 'Skeletons',                  render: () => <SkeletonSection /> },
+  { key: 'progress',   title: 'Progress',                   render: () => <ProgressSection /> },
+  { key: 'breadcrumbs',title: 'Breadcrumbs',                render: () => <BreadcrumbSection /> },
   // Registry
   ...registryCategories.map(c => ({
     key: c.key === 'primitive' ? 'primitives' : c.key,
@@ -1145,6 +1376,13 @@ function OverviewGrid() {
         { key: 'animations', icon: 'motion_photos_auto', label: 'Animations' },
         { key: 'code-snippet', icon: 'code',             label: 'Code Snippet' },
         { key: 'chapter-divider', icon: 'format_list_numbered', label: 'Chapter Divider' },
+        { key: 'selects',    icon: 'arrow_drop_down_circle', label: 'Selects' },
+        { key: 'modals',     icon: 'open_in_new',            label: 'Modals' },
+        { key: 'tabs',       icon: 'tab',                    label: 'Tabs' },
+        { key: 'alerts',     icon: 'notification_important', label: 'Alerts' },
+        { key: 'skeletons',  icon: 'hourglass_empty',        label: 'Skeletons' },
+        { key: 'progress',   icon: 'donut_large',            label: 'Progress' },
+        { key: 'breadcrumbs',icon: 'more_horiz',             label: 'Breadcrumbs' },
       ],
     },
     {

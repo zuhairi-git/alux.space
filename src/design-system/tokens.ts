@@ -100,6 +100,18 @@ export const semantic = {
   navBorder:        'var(--nav-border)',
   scrollbarThumb:   'var(--scrollbar-thumb)',
   scrollbarHover:   'var(--scrollbar-thumb-hover)',
+  success:          'var(--color-success)',
+  successBg:        'var(--color-success-bg)',
+  successBorder:    'var(--color-success-border)',
+  warning:          'var(--color-warning)',
+  warningBg:        'var(--color-warning-bg)',
+  warningBorder:    'var(--color-warning-border)',
+  error:            'var(--color-error)',
+  errorBg:          'var(--color-error-bg)',
+  errorBorder:      'var(--color-error-border)',
+  info:             'var(--color-info)',
+  infoBg:           'var(--color-info-bg)',
+  infoBorder:       'var(--color-info-border)',
 } as const;
 
 // ─── Typography ─────────────────────────────────────────────

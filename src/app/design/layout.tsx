@@ -49,6 +49,13 @@ const sidebarNav: NavGroup[] = [
       { label: 'Animations', section: 'animations',   icon: 'motion_photos_auto' },
       { label: 'Code Snippet', section: 'code-snippet', icon: 'code' },
       { label: 'Chapter Divider', section: 'chapter-divider', icon: 'format_list_numbered' },
+      { label: 'Selects',    section: 'selects',     icon: 'arrow_drop_down_circle' },
+      { label: 'Modals',     section: 'modals',      icon: 'open_in_new' },
+      { label: 'Tabs',       section: 'tabs',        icon: 'tab' },
+      { label: 'Alerts',     section: 'alerts',      icon: 'notification_important' },
+      { label: 'Skeletons',  section: 'skeletons',   icon: 'hourglass_empty' },
+      { label: 'Progress',   section: 'progress',    icon: 'donut_large' },
+      { label: 'Breadcrumbs', section: 'breadcrumbs', icon: 'more_horiz' },
     ],
   },
   {
