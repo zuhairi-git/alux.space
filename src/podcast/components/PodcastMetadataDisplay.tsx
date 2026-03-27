@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useTheme } from '@/context/ThemeContext';
 import { PodcastMetadata } from '../types/podcast';
 import Image from 'next/image';
 
@@ -14,42 +13,8 @@ const PodcastMetadataDisplay: React.FC<PodcastMetadataDisplayProps> = ({
   metadata,
   className = ''
 }) => {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
-
-  const getTextStyle = () => {
-    if (isLight) {
-      return 'text-gray-800';
-    } else if (isColorful) {
-      return 'text-white';
-    } else {
-      return 'text-gray-100';
-    }
-  };
-
-  const getSecondaryTextStyle = () => {
-    if (isLight) {
-      return 'text-gray-600';
-    } else if (isColorful) {
-      return 'text-purple-200';
-    } else {
-      return 'text-gray-400';
-    }
-  };
-
-  const getBgStyle = () => {
-    if (isLight) {
-      return 'bg-gray-50 border border-gray-200';
-    } else if (isColorful) {
-      return 'bg-purple-500/10 border border-purple-500/30';
-    } else {
-      return 'bg-gray-800/50 border border-gray-700';
-    }
-  };
-
   return (
-    <div className={`${getBgStyle()} rounded-lg p-4 ${className}`}>
+    <div className={`bg-[var(--card-from-bg)] border border-[var(--card-border)] rounded-lg p-4 ${className}`}>
       <div className="flex items-start gap-4">
         {/* Cover Image */}
         <div className="flex-shrink-0">
@@ -64,15 +29,15 @@ const PodcastMetadataDisplay: React.FC<PodcastMetadataDisplayProps> = ({
         
         {/* Metadata */}
         <div className="flex-1 min-w-0">
-          <h4 className={`font-semibold text-sm mb-1 ${getTextStyle()}`}>
+          <h4 className="font-semibold text-sm mb-1 text-[var(--foreground)]">
             {metadata.title}
           </h4>
           
-          <p className={`text-sm mb-2 ${getSecondaryTextStyle()}`}>
+          <p className="text-sm mb-2 text-[var(--muted-foreground)]">
             by {metadata.author}
           </p>
           
-          <p className={`text-xs mb-3 line-clamp-2 ${getSecondaryTextStyle()}`}>
+          <p className="text-xs mb-3 line-clamp-2 text-[var(--muted-foreground)]">
             {metadata.description}
           </p>
           
@@ -81,18 +46,14 @@ const PodcastMetadataDisplay: React.FC<PodcastMetadataDisplayProps> = ({
               href={metadata.website}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-xs hover:underline ${
-                isLight ? 'text-blue-600 hover:text-blue-800' :
-                isColorful ? 'text-cyan-400 hover:text-cyan-300' :
-                'text-blue-400 hover:text-blue-300'
-              }`}
+              className="text-xs text-[var(--primary)] hover:text-[var(--primary-hover)] hover:underline"
             >
               Visit Website →
             </a>
           )}
           
           {metadata.copyright && (
-            <p className={`text-xs mt-2 ${getSecondaryTextStyle()}`}>
+            <p className="text-xs mt-2 text-[var(--muted-foreground)]">
               {metadata.copyright}
             </p>
           )}

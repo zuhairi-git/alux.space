@@ -17,7 +17,6 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { trackEvent } = useAnalyticsTracking();
-  const isLight = theme === 'light';
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
@@ -113,7 +112,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: durationSeconds.ease, delay: delaySeconds.lg }}
-            className={`text-2xl md:text-3xl  ${isLight ? 'text-gray-700' : 'text-white'} mb-12 relative z-20`}
+            className={`text-2xl md:text-3xl text-[var(--foreground)] mb-12 relative z-20`}
           >
             {subtitle}
           </motion.p>

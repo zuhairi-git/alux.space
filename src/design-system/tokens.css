@@ -126,6 +126,13 @@
   --color-info:            #0284c7;
   --color-info-bg:         rgba(2, 132, 199, 0.12);
   --color-info-border:     rgba(2, 132, 199, 0.25);
+
+  /* Muted / secondary text */
+  --muted-foreground:      var(--color-gray-500);
+
+  /* Floating overlay badge (e.g. TranslationBadge) */
+  --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
+  --badge-overlay-border:  rgba(0, 0, 0, 0.1);
 }
 
 .theme-light {
@@ -162,6 +169,10 @@
   --color-info:            #0284c7;
   --color-info-bg:         rgba(2, 132, 199, 0.10);
   --color-info-border:     rgba(2, 132, 199, 0.20);
+
+  --muted-foreground:      var(--color-gray-600);
+  --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
+  --badge-overlay-border:  rgba(0, 0, 0, 0.1);
 }
 
 .theme-dark {
@@ -198,6 +209,10 @@
   --color-info:            #38bdf8;
   --color-info-bg:         rgba(56, 189, 248, 0.15);
   --color-info-border:     rgba(56, 189, 248, 0.30);
+
+  --muted-foreground:      var(--color-gray-400);
+  --badge-overlay-bg:      rgba(255, 255, 255, 0.2);
+  --badge-overlay-border:  rgba(255, 255, 255, 0.1);
 }
 
 .theme-colorful {
@@ -235,6 +250,10 @@
   --color-info:            #67e8f9;
   --color-info-bg:         rgba(103, 232, 249, 0.18);
   --color-info-border:     rgba(103, 232, 249, 0.35);
+
+  --muted-foreground:      var(--color-purple-300);
+  --badge-overlay-bg:      rgba(30, 18, 70, 0.85);
+  --badge-overlay-border:  rgba(128, 0, 255, 0.3);
 }
 
 /* -------------------------------------------------------

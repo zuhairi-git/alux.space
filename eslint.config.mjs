@@ -30,8 +30,8 @@ const eslintConfig = [
       },
     },
     rules: {
-      "design-system/no-hardcoded-colors": "warn",
-      "design-system/no-raw-html-elements": "warn",
+      "design-system/no-hardcoded-colors": "error",
+      "design-system/no-raw-html-elements": "error",
     },
   },
   {
