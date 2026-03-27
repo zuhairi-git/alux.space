@@ -2,35 +2,37 @@
 
 import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Card from '@/components/ui/cards/Card';
-import CardContent from '@/components/ui/cards/CardContent';
-import SurfaceCard from '@/components/ui/cards/SurfaceCard';
-import TimelineCard from '@/components/ui/cards/TimelineCard';
-import MediaCard from '@/components/ui/cards/MediaCard';
+import {
+  Card,
+  CardContent,
+  SurfaceCard,
+  TimelineCard,
+  MediaCard,
+  QuoteBlock,
+  Icon,
+  Tooltip,
+  Button,
+  Badge,
+  Input,
+  Toggle,
+  Avatar,
+  Divider,
+  ChapterDivider,
+  Select,
+  Modal,
+  Tabs,
+  Alert,
+  Skeleton,
+  Progress,
+  Breadcrumb,
+  Text,
+  getByCategory,
+} from '@/design-system';
+import type { ComponentEntry } from '@/design-system';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import QuoteBlock from '@/components/ui/QuoteBlock';
-import Icon from '@/components/ui/Icon';
-import Tooltip from '@/components/ui/Tooltip';
 import AnimatedSection from '@/components/AnimatedSection';
-import Button from '@/components/ui/Button';
-import Badge from '@/components/ui/Badge';
-import Input from '@/components/ui/Input';
-import Toggle from '@/components/ui/Toggle';
-import Avatar from '@/components/ui/Avatar';
-import Divider from '@/components/ui/Divider';
 import CodeSnippet from '@/components/CodeSnippet';
-import ChapterDivider from '@/components/ui/ChapterDivider';
-import Select from '@/components/ui/Select';
-import Modal from '@/components/ui/Modal';
-import Tabs from '@/components/ui/Tabs';
-import Alert from '@/components/ui/Alert';
-import Skeleton from '@/components/ui/Skeleton';
-import Progress from '@/components/ui/Progress';
-import Breadcrumb from '@/components/ui/Breadcrumb';
-import Text from '@/components/ui/Text';
 import { useTheme } from '@/context/ThemeContext';
-import { getByCategory } from '@/design-system/components';
-import type { ComponentEntry } from '@/design-system/components';
 
 /* ── Token swatch data ────────────────────────────────── */
 

@@ -2,16 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { LiveRegion } from './LiveRegion';
 
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [announcement, setAnnouncement] = useState('');
-  const { theme } = useTheme();
   const { locale } = useLanguage();
-  const isLight = theme === 'light';
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -78,9 +75,7 @@ const BackToTop: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             whileFocus={{ scale: 1.1 }}
-            className={`fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg 
-                        ${isLight ? 'bg-gradient-to-br from-blue-500 to-purple-500 text-white' : 'bg-gradient-to-br from-blue-600 to-purple-600 text-white'}
-                        transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2`}
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-br from-gradient-start to-gradient-mid text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
             aria-label={text.label}
             title={text.label}
             type="button"

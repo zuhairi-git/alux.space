@@ -3,8 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
-import QuoteBlock from '@/components/ui/QuoteBlock';
-import Button from '@/components/ui/Button';
+import { QuoteBlock, Button } from '@/design-system';
 import { useTheme } from '@/context/ThemeContext';
 
 // Data structure for prompts with enhanced categorization

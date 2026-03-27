@@ -4,12 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
+import { durationSeconds, delaySeconds, transition as t, Button } from '@/design-system';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
-import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 
 const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { locale } = useLanguage();

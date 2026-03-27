@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { audioLibrary, audioLibraryConfig, getAudioCategories, getAudioTags, searchAudio } from '@/data/audioLibrary';
 import AudioCard from './AudioCard';
-import Button from '@/components/ui/Button';
+import { Button } from '@/design-system';
 
 const AudioLibrary: React.FC = () => {
   const { theme } = useTheme();

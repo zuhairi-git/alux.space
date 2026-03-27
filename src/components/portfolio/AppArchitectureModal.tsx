@@ -2,9 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { durationSeconds } from '@/design-system';
-import Button from '@/components/ui/Button';
-import Icon from '@/components/ui/Icon';
+import { durationSeconds, Button, Icon } from '@/design-system';
 
 interface AppArchitectureModalProps {
     isOpen: boolean;

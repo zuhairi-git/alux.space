@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { motion, AnimatePresence } from 'framer-motion';
-import { durationSeconds, delaySeconds } from '@/design-system';
+import { durationSeconds, delaySeconds, Button } from '@/design-system';
 
 interface AudioPlayerProps {
   src: string;
@@ -601,16 +601,13 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             <p className="font-medium">Unable to load audio file</p>
             <p className="text-sm opacity-80 mt-1">Please check the file path and try again</p>
           </div>
-          <button 
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={retryLoading}
-            className={`px-4 py-2 rounded-lg transition-colors ${
-              isLight 
-                ? 'bg-red-100 hover:bg-red-200 text-red-700' 
-                : 'bg-red-500/20 hover:bg-red-500/30 text-red-300'
-            }`}
           >
             Retry
-          </button>
+          </Button>
         </motion.div>
       )}      {/* Header section */}
       <div className="mb-4 relative z-10">

@@ -5,21 +5,11 @@ import { AnimatePresence } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
-import QuoteBlock from '@/components/ui/QuoteBlock';
-import Button from '@/components/ui/Button';
-import Icon from '@/components/ui/Icon';
 import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
-import { durationSeconds, delaySeconds, transition as t, palette } from '@/design-system';
-import { 
-  MotionDiv, 
-  MotionH1, 
-  MotionH2, 
-  MotionP, 
-  MotionSpan
-} from '@/components/ui/MotionWrapper';
+import { durationSeconds, delaySeconds, transition as t, palette, Button, Icon, QuoteBlock, MotionDiv, MotionH1, MotionH2, MotionP, MotionSpan } from '@/design-system';
 
 const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { theme } = useTheme();

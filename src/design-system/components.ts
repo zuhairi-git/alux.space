@@ -318,7 +318,7 @@ export const componentRegistry: ComponentEntry[] = [
     props: [
       { name: 'links', type: 'Array<{href, label}>', default: 'defaultLinks', description: 'Skip link definitions' },
     ],
-    tokens: [],
+    tokens: ['--background', '--primary'],
     a11y: ['aria-label="Skip navigation links"', 'sr-only → visible on focus'],
     variants: [],
   },
@@ -353,7 +353,7 @@ export const componentRegistry: ComponentEntry[] = [
     path: 'src/components/ui/BackToTop.tsx',
     category: 'a11y',
     props: [],
-    tokens: [],
+    tokens: ['--gradient-start', '--gradient-mid', '--primary'],
     a11y: ['aria-label', 'keyboard Enter/Space', 'LiveRegion announcements'],
     variants: [],
   },

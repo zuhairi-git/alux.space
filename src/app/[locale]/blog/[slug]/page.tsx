@@ -3,7 +3,7 @@ import Navigation from '@/components/Navigation';
 import BlogPostHeader from '@/components/blog/BlogPostHeader';
 import BlogPostClient from '@/components/blog/BlogPostClient';
 import BlogContent from '@/components/blog/BlogContent';
-import Card from '@/components/Card';
+import { SurfaceCard } from '@/design-system';
 import { posts } from '../../../blog/posts/data';
 import BlogPostBackground from '@/components/blog/BlogPostBackground';
 import Image from 'next/image';
@@ -223,7 +223,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
 
             <div className="mt-16">
               <h3 className="text-2xl font-bold mb-6 text-primary">{getAboutAuthorText(locale)}</h3>
-              <Card variant="primary">
+              <SurfaceCard variant="primary">
                 <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
                   <div className="w-24 h-24 relative rounded-full overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                     <Image
@@ -241,7 +241,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
                     </p>
                   </div>
                 </div>
-              </Card>
+              </SurfaceCard>
             </div>
           </BlogPostClient>
         </div>

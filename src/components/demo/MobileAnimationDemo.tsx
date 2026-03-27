@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { durationSeconds, delaySeconds } from '@/design-system';
-import { MotionDiv, MotionButton } from '@/components/ui/MotionWrapper';
+import { durationSeconds, delaySeconds, MotionDiv, MotionButton } from '@/design-system';
 import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { AnimationConfig } from '@/config/animations';
 

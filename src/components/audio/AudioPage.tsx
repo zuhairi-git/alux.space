@@ -4,14 +4,13 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { delaySeconds } from '@/design-system';
+import { delaySeconds, Button } from '@/design-system';
 import { useParams } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
 import { getRelatedAudio, getAudioLanguages, getAudioVersion } from '@/data/audioLibrary';
 import AudioPlayer from '@/components/ui/AudioPlayer';
-import Button from '@/components/ui/Button';
 import AudioCard from './AudioCard';
 
 interface AudioPageProps {

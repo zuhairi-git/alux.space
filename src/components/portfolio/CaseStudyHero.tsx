@@ -4,11 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
-import { useTheme } from '@/context/ThemeContext';
-import { useLanguage } from '@/context/LanguageContext';
-import Button from '@/components/ui/Button';
-import Icon from '@/components/ui/Icon';
+import { durationSeconds, delaySeconds, transition as t, Button, Icon } from '@/design-system';
 
 interface HeroAction {
   label: string;

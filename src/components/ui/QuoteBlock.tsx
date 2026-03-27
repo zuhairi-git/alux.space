@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { durationSeconds } from '@/design-system';
-import { useTheme } from '@/context/ThemeContext';
 
 interface QuoteBlockProps {
   quote: string;
@@ -14,8 +13,6 @@ interface QuoteBlockProps {
 }
 
 const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, lang }) => {
-  const { theme } = useTheme();  const isLight = theme === 'light';
-  
   // Determine the appropriate variant based on content if not explicitly provided
   const determinedVariant = variant || determineVariant(quote);
 
@@ -60,11 +57,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         role="region"
         aria-label="Quote"
       >
-        <div className={`py-6 px-6 border-l-4 ${
-          isLight 
-            ? 'border-primary/30 bg-gray-50' 
-            : 'border-primary/50 bg-gray-900/30'
-        } rounded-r-md`}>
+        <div className="py-6 px-6 border-l-4 border-primary/50 bg-[var(--card-from-bg)] rounded-r-md">
           <blockquote 
             className="text-xl md:text-2xl leading-relaxed mb-3 text-theme" 
             dangerouslySetInnerHTML={{ __html: quoteHtml }}
@@ -88,7 +81,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: durationSeconds.slow }}
-      className={`my-12 max-w-4xl mx-auto relative ${isLight ? 'text-gray-800' : 'text-gray-100'}`}
+      className="my-12 max-w-4xl mx-auto relative text-foreground"
       role="region"
       aria-label="Quote"
     >
@@ -105,17 +98,11 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
       </div>
       
       <div 
-        className={`py-8 px-7 md:px-12 border-l-4 ${
-          isLight 
-            ? 'border-primary/30 bg-gradient-to-r from-primary/5 to-transparent' 
-            : 'border-primary/50 bg-gradient-to-r from-primary/10 to-transparent'
-        } rounded-r-xl relative overflow-hidden`}
+        className="py-8 px-7 md:px-12 border-l-4 border-primary/50 bg-gradient-to-r from-primary/10 to-transparent rounded-r-xl relative overflow-hidden"
       >
         {/* Background decorative line */}
         <div 
-          className={`absolute h-px w-full top-1/2 -right-4 ${
-            isLight ? 'bg-gradient-to-l from-transparent via-primary/10 to-transparent' : 'bg-gradient-to-l from-transparent via-primary/20 to-transparent'
-          }`}
+          className="absolute h-px w-full top-1/2 -right-4 bg-gradient-to-l from-transparent via-primary/20 to-transparent"
           aria-hidden="true"
         />
         

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 // Card components removed as they're not used in this file
 import Hero from '@/components/hero/Hero';
-import QuoteBlock from '@/components/ui/QuoteBlock';
+import { QuoteBlock } from '@/design-system';
 import { HeroConfig } from '@/types/hero';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
