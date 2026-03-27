@@ -126,22 +126,22 @@ export const androidTheme: MobileTheme = {
     bg: {
         dark: 'bg-[#131316] text-[#E4E1E9]',
         light: 'bg-[#FDF7FF] text-[#1D1A22]',
-        colorful: 'bg-[#050023] text-white',
+        colorful: 'bg-[#06040c] text-white',
     },
     card: {
         dark: 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/30',
         light: 'bg-[#FEF7FF]/95 backdrop-blur-xl rounded-[28px] shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.06)] border border-[#E7E0EC]/60',
-        colorful: 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20',
+        colorful: 'bg-[#130a02]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-orange-500/20',
     },
     header: {
         dark: 'bg-[#1D1B20]/95 backdrop-blur-2xl border-b border-[#49454F]/30',
         light: 'bg-[#FEF7FF]/95 backdrop-blur-2xl border-b border-[#E7E0EC]/50 shadow-[0_1px_2px_rgba(0,0,0,0.05)]',
-        colorful: 'bg-[#1a0040]/80 backdrop-blur-2xl border-b border-purple-500/20',
+        colorful: 'bg-[#130a02]/80 backdrop-blur-2xl border-b border-orange-500/20',
     },
     nav: {
         dark: 'bg-[#1D1B20] border-[#49454F]/30',
         light: 'bg-[#F3EDF7] border-[#E7E0EC]/60',
-        colorful: 'bg-[#0A0138]/80 backdrop-blur-xl border-purple-500/20',
+        colorful: 'bg-[#0a0600]/80 backdrop-blur-xl border-orange-500/20',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-[#1D1A22] font-variation-fill' : 'text-[#EADDFF] font-variation-fill',
@@ -229,22 +229,22 @@ export const iosTheme: MobileTheme = {
     bg: {
         dark: 'bg-black text-white',
         light: 'bg-[#F2F2F7] text-black',
-        colorful: 'bg-[#050023] text-white',
+        colorful: 'bg-[#06040c] text-white',
     },
     card: {
         dark: 'bg-[#1C1C1E]/65 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
         light: 'bg-white/55 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/70 rounded-[22px] shadow-[0_2px_16px_rgba(0,0,0,0.04)]',
-        colorful: 'bg-[#1a0040]/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-purple-500/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
+        colorful: 'bg-[#130a02]/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-orange-500/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
     },
     header: {
         dark: 'bg-[#1C1C1E]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/[0.06]',
         light: 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/[0.04]',
-        colorful: 'bg-[#1a0040]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-purple-500/10',
+        colorful: 'bg-[#130a02]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-orange-500/10',
     },
     nav: {
         dark: 'bg-[#1C1C1E]/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-white/[0.08]',
         light: 'bg-[#F2F2F7]/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-black/[0.04]',
-        colorful: 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-purple-500/10',
+        colorful: 'bg-[#130a02]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-orange-500/10',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]',

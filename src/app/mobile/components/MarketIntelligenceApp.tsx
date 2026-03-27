@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
@@ -152,7 +152,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
     const bgClass = isLight
         ? (isIOS ? 'bg-[#F2F2F7] text-black' : 'bg-[#FAF8FC] text-[#1C1B1F]')
         : isColorful
-            ? 'bg-[#050023] text-white'
+            ? 'bg-[#06040c] text-white'
             : (isIOS ? 'bg-black text-white' : 'bg-[#131316] text-[#E2E2E6]');
 
     const headerTitles: Record<TabType, { sub: string, title: string }> = {
@@ -212,8 +212,8 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
 
             {/* Header */}
             <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/5' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-purple-500/15' : 'bg-[#2C2C2E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/5')
-                : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/80 backdrop-blur-2xl border-b border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-2xl border-b border-[#49454F]/50 shadow-md')
+                ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/5' : isColorful ? 'bg-[#130a02]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-orange-500/15' : 'bg-[#2C2C2E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/5')
+                : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-2xl border-b border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#130a02]/80 backdrop-blur-2xl border-b border-orange-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-2xl border-b border-[#49454F]/50 shadow-md')
                 }`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
@@ -273,8 +273,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
     const isColorful = theme === 'colorful';
     const [selectedTimeRange, setSelectedTimeRange] = useState('1D');
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/40');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#130a02]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-orange-500/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#130a02]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-orange-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/40');
 
     const watchlist = [
         { ticker: 'AAPL', name: 'Apple', price: '$198.11', numPrice: 198.11, change: '+2.4%', up: true, data: [140, 145, 142, 155, 160, 158, 170, 175, 180, 190, 185, 198] },
@@ -451,8 +451,8 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
     const [featuredIdx, setFeaturedIdx] = useState(0);
     useEffect(() => { setTickerExpanded(false); setAlertSet(null); }, [selectedTicker]);
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/40');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#130a02]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-orange-500/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-[#EADDFF]/50' : isColorful ? 'bg-[#130a02]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-orange-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#49454F]/40');
 
     const indices = [
         { name: 'S&P 500', value: '5,234.18', change: '+0.87%', up: true, data: [5100, 5120, 5150, 5180, 5200, 5210, 5190, 5220, 5234] },
@@ -602,7 +602,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-50">
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} className="absolute inset-0 bg-black/50 backdrop-blur-md" onClick={() => setSelectedTicker(null)} />
                             <motion.div initial={{ y: '100%', scale: 0.95, opacity: 0 }} animate={{ y: 0, scale: 1, opacity: 1 }} exit={{ y: '100%', scale: 0.95, opacity: 0 }} transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 1 }}
-                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#1a0040]' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FDF7FF]' : isColorful ? 'bg-[#0A0138]' : 'bg-[#2D2B33]')}`}>
+                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#130a02]' : 'bg-[#1C1C1E]') : (isLight ? 'bg-[#FDF7FF]' : isColorful ? 'bg-[#0a0600]' : 'bg-[#2D2B33]')}`}>
                                 {/* Drag handle — tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
                                     <div className="w-10 h-1 rounded-full bg-gray-400/30" />
@@ -706,13 +706,13 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6] text-white rounded-[22px] rounded-tr-md shadow-[0_6px_20px_rgba(0,122,255,0.3)]'
         : 'bg-gradient-to-br from-[#6750A4] to-[#9a82db] text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(103,80,164,0.3)]';
     const botBubble = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-[22px] rounded-tl-sm shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#2D2B33]/90 backdrop-blur-xl border border-[#49454F]/40 text-[#E8DEF8] rounded-[22px] rounded-tl-sm shadow-sm');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#130a02]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-orange-500/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl border border-[#EADDFF]/50 text-[#1D192B] rounded-[22px] rounded-tl-sm shadow-sm' : isColorful ? 'bg-[#130a02]/60 backdrop-blur-xl border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#2D2B33]/90 backdrop-blur-xl border border-[#49454F]/40 text-[#E8DEF8] rounded-[22px] rounded-tl-sm shadow-sm');
     const inputArea = isIOS
-        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-purple-500/20' : 'bg-[#1C1C1E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
-        : (isLight ? 'bg-[#F3EDF7] rounded-t-[28px]' : isColorful ? 'bg-[#0A0138]/90 rounded-t-[28px]' : 'bg-[#2D2B33] rounded-t-[28px]');
+        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-[#130a02]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-orange-500/20' : 'bg-[#1C1C1E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
+        : (isLight ? 'bg-[#F3EDF7] rounded-t-[28px]' : isColorful ? 'bg-[#0a0600]/90 rounded-t-[28px]' : 'bg-[#2D2B33] rounded-t-[28px]');
     const inputBox = isIOS
-        ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : isColorful ? 'bg-purple-500/10 rounded-full px-5 py-3 border border-purple-500/20' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
+        ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : isColorful ? 'bg-purple-500/10 rounded-full px-5 py-3 border border-orange-500/20' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
         : (isLight ? 'bg-[#EADDFF] text-[#1D192B] rounded-[28px] px-5 py-3' : isColorful ? 'bg-purple-500/15 text-white rounded-[28px] px-5 py-3' : 'bg-[#4F378B] text-[#E8DEF8] rounded-[28px] px-5 py-3');
 
     const prompts = [
@@ -744,7 +744,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             {prompts.map((p, i) => (
                                 <motion.button key={p.label} whileTap={{ scale: 0.93 }} onClick={() => handleSend(p.prompt)}
                                     initial={{ opacity: 0, y: 24, scale: 0.88 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.2 + i * 0.1, type: 'spring', stiffness: 280, damping: 22 }}
-                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-[#1a0040]/60 border border-purple-500/20' : 'bg-[#1C1C1E]/60 border border-white/8') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : isColorful ? 'bg-purple-500/10 border border-purple-500/20' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
+                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-[#130a02]/60 border border-orange-500/20' : 'bg-[#1C1C1E]/60 border border-white/8') : (isLight ? 'bg-[#E8DEF8] text-[#1D192B]' : isColorful ? 'bg-purple-500/10 border border-orange-500/20' : 'bg-[#4A4458] text-[#E8DEF8]')}`}>
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${isIOS ? (isLight ? 'text-[#007AFF]' : 'text-[#0A84FF]') : ''}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
                                 </motion.button>
@@ -815,8 +815,8 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isColorful = theme === 'colorful';
     const [expanded, setExpanded] = useState<number | null>(null);
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#130a02]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-orange-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#130a02]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-orange-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
 
     const alerts = [
         { id: 1, priority: 'critical', icon: 'trending_down', title: 'TSLA Dropped 5.2%', desc: 'Pre-market trading indicates a significant drop ahead of SEC quarterly earnings disclosure.', detail: 'Tesla shares fell sharply after reports of slowing EV deliveries in China and increased competition from BYD. Analyst consensus has shifted to a Hold rating.', time: '10 min ago', color: 'red' },
@@ -860,7 +860,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                     <motion.div key={a.id} variants={fadeUp} className="relative pl-12 pb-4">
                         {/* Timeline dot */}
                         <div className="absolute left-[14px] top-4 z-10">
-                            <div className={`w-[16px] h-[16px] rounded-full border-[3px] ${isLight ? 'border-white' : isColorful ? 'border-[#050023]' : 'border-[#131316]'} ${dotColor(a.color)}`}>
+                            <div className={`w-[16px] h-[16px] rounded-full border-[3px] ${isLight ? 'border-white' : isColorful ? 'border-[#06040c]' : 'border-[#131316]'} ${dotColor(a.color)}`}>
                                 {a.priority === 'critical' && (
                                     <div className={`absolute inset-[-4px] rounded-full ${dotColor(a.color)} animate-ping opacity-30`} />
                                 )}
@@ -915,8 +915,8 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
     const isColorful = theme === 'colorful';
     const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#1a0040]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-purple-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#1a0040]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-purple-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#130a02]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-orange-500/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#1C1C1E]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-[#FDF7FF]/90 backdrop-blur-xl rounded-[28px] border border-[#EADDFF]/50 shadow-sm' : isColorful ? 'bg-[#130a02]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-orange-500/20' : 'bg-[#2D2B33]/90 backdrop-blur-xl rounded-[28px] border border-[#49454F]/40 shadow-lg');
 
     const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
     const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
@@ -1063,8 +1063,8 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
     const navClass = isIOS
-        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-[#1a0040]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-purple-500/15 pb-5 h-[82px]' : 'bg-[#1C1C1E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/5 pb-5 h-[82px]')
-        : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : isColorful ? 'bg-[#0A0138]/80 h-20 pb-2 border-t border-purple-500/20' : 'bg-[#2D2B33] h-20 pb-2 border-t border-[#49454F]/50');
+        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-[#130a02]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-orange-500/15 pb-5 h-[82px]' : 'bg-[#1C1C1E]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/5 pb-5 h-[82px]')
+        : (isLight ? 'bg-[#F3EDF7] h-20 pb-2 border-t border-[#EADDFF]/50' : isColorful ? 'bg-[#0a0600]/80 h-20 pb-2 border-t border-orange-500/20' : 'bg-[#2D2B33] h-20 pb-2 border-t border-[#49454F]/50');
 
     const tabs: { key: TabType, icon: string, label: string }[] = [
         { key: 'dashboard', icon: 'space_dashboard', label: 'Home' },

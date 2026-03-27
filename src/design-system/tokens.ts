@@ -56,6 +56,11 @@ export const palette = {
     DEFAULT: '#ff00cc',
     dark:    '#d100ff',
   },
+  ember: {
+    DEFAULT: '#ff8c42',
+    dark:    '#d96820',
+    light:   '#ffb07a',
+  },
   gray: {
     50:  '#f9fafb',
     100: '#f3f4f6',
@@ -76,7 +81,7 @@ export const palette = {
   },
   yellow: { 500: '#eab308' },
   orange: { 500: '#ff9500' },
-  colorfulBg: '#050023',
+  colorfulBg: '#06040c',
 } as const;
 
 // ─── Semantic CSS-variable references ───────────────────────

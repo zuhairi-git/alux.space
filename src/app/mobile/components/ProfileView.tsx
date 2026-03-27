@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,7 +19,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
     const [modal, setModal] = useState(false);
     const p = theme.profile;
     const modalBgClass = isColorful
-        ? `${theme.radii.modal} p-6 shadow-2xl bg-[#1a0040] text-white`
+        ? `${theme.radii.modal} p-6 shadow-2xl bg-[#130a02] text-white`
         : `${theme.radii.modal} p-6 shadow-2xl ${p.modalBg(isLight)}`;
     const modalActiveItemClass = isColorful
         ? 'bg-purple-500/20 border border-purple-500/30'

@@ -17,7 +17,7 @@ type ActivePanel = 'cv' | 'shifts' | 'analytics' | null;
 export function ProfileView({ card, isLight, isColorful, theme, themeMode, setThemeMode }: ViewProps) {
     const settingsBgClass = isColorful ? 'bg-white/10' : theme.profile.settingsBg(isLight);
     const [activePanel, setActivePanel] = useState<ActivePanel>(null);
-    const sheetBg = isColorful ? 'bg-[#050023]/97 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-[#06040c]/97 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
 
     // CV skills state
     const [skills, setSkills] = useState(['Customer Service', 'Barista', 'Event Staff']);

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -264,7 +264,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
     const followUpColor = isColorful ? 'text-fuchsia-400' : theme.dashboard.followUpColor;
     const seeAllColor = isColorful ? 'text-fuchsia-400' : theme.dashboard.seeAllColor;
     const [activeSheet, setActiveSheet] = useState<ActiveSheet>(null);
-    const sheetBg = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
 
     const listVariants = {
         hidden: { opacity: 0 },

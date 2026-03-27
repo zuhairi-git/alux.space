@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,7 +18,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
     const [expanded, setExpanded] = useState(false);
     const ws = theme.workspace;
     const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : ws.searchBar(isLight);
-    const sheetBgClass = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : ws.sheetBg(isLight);
+    const sheetBgClass = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : ws.sheetBg(isLight);
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 ${theme.contentPaddingTop}`}>
             {/* Scrollable list */}

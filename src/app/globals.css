@@ -411,12 +411,12 @@ body {
 }
 
 .scrollbar-colorful::-webkit-scrollbar-thumb {
-  background: #d100ff;
+  background: #d96820;
   border-radius: 10px;
 }
 
 .scrollbar-colorful::-webkit-scrollbar-thumb:hover {
-  background: #9900cc;
+  background: #ff8c42;
 }
 
 /* Hide scrollbars inside mobile prototype frames */
@@ -497,11 +497,11 @@ body {
 
   /* Firefox-specific styling for colorful theme */
   .theme-colorful * {
-    scrollbar-color: #d100ff transparent;
+    scrollbar-color: #d96820 transparent;
   }
 
   .theme-colorful *:hover {
-    scrollbar-color: #9900cc transparent;
+    scrollbar-color: #ff8c42 transparent;
   }
 }
 
@@ -558,7 +558,7 @@ body {
 }
 
 .theme-colorful .coming-soon-page {
-  background: radial-gradient(circle at 50% 50%, rgba(128, 0, 255, 0.2), rgba(5, 0, 35, 0.95));
+  background: radial-gradient(circle at 50% 50%, rgba(255, 140, 66, 0.15), rgba(6, 4, 12, 0.96));
 }
 
 .theme-switcher-container {

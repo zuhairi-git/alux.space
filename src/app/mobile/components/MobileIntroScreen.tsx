@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -54,7 +54,7 @@ const THEME_OPTIONS = [
         label: 'Colorful',
         desc: 'Vivid & expressive',
         icon: 'palette',
-        swatchBg: 'bg-[#050023]',
+        swatchBg: 'bg-[#06040c]',
         swatchText: 'text-white',
     },
 ] as const;
@@ -114,7 +114,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 ? 'bg-[#F2F2F7] text-gray-900'
                 : 'bg-[#FAF8FC] text-[#1C1B1F]'
             : selectedTheme === 'colorful'
-                ? 'bg-[#050023] text-white'
+                ? 'bg-[#06040c] text-white'
                 : isIOS
                     ? 'bg-black text-white'
                     : 'bg-[#111114] text-[#E2E2E6]';

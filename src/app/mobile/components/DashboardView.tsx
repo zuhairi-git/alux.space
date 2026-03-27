@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,7 +20,7 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
     const [title, setTitle] = useState('');
     const [type, setType] = useState('Document');
     const [created, setCreated] = useState(false);
-    const sheetBg = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const docTypes = ['Document', 'Meeting Notes', 'Design Brief', 'Sprint Plan', 'Retrospective'];
     if (created) return (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6">
@@ -269,7 +269,7 @@ function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
 }) {
     return (
         <motion.div variants={fadeUp} className="flex justify-center">
-            <div className={`inline-flex items-center p-1 gap-0.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} ${isLight ? 'bg-black/[0.05]' : isColorful ? 'bg-white/[0.06] border border-purple-500/10' : 'bg-white/[0.08]'}`}>
+            <div className={`inline-flex items-center p-1 gap-0.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} ${isLight ? 'bg-black/[0.05]' : isColorful ? 'bg-white/[0.06] border border-orange-500/10' : 'bg-white/[0.08]'}`}>
                 {layoutMeta.map(l => {
                     const isActive = active === l.key;
                     return (
@@ -302,7 +302,7 @@ interface LayoutProps {
 const quickActionDefs = (theme: MobileTheme): { key: QuickActionKey; icon: string; label: string; desc: string; color: string }[] => [
     { key: 'new-doc', icon: 'edit_document', label: 'New Doc', desc: 'Create document', color: theme.platform === 'android' ? 'from-purple-500/20 to-fuchsia-500/20' : 'from-blue-500/10 to-indigo-500/10 border-blue-500/20' },
     { key: 'join-room', icon: 'groups', label: 'Join Room', desc: 'Live session', color: theme.platform === 'android' ? 'from-blue-500/20 to-cyan-500/20' : 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20' },
-    { key: 'schedule', icon: 'calendar_today', label: 'Schedule', desc: 'Plan meeting', color: theme.platform === 'android' ? 'from-emerald-500/20 to-teal-500/20' : 'from-purple-500/10 to-fuchsia-500/10 border-purple-500/20' },
+    { key: 'schedule', icon: 'calendar_today', label: 'Schedule', desc: 'Plan meeting', color: theme.platform === 'android' ? 'from-emerald-500/20 to-teal-500/20' : 'from-purple-500/10 to-fuchsia-500/10 border-orange-500/20' },
     { key: 'analytics', icon: 'analytics', label: 'Analytics', desc: 'View stats', color: theme.platform === 'android' ? 'from-amber-500/20 to-orange-500/20' : 'from-orange-500/10 to-amber-500/10 border-orange-500/20' },
 ];
 
@@ -385,7 +385,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {actions.map((a, i) => (
                         <motion.button key={a.key} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.06 }}
-                            onClick={() => onAction(a.key)} className={`shrink-0 flex items-center gap-2 px-4 py-2.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} active:scale-95 transition-transform ${isLight ? 'bg-black/[0.04]' : isColorful ? 'bg-white/[0.06] border border-purple-500/10' : 'bg-white/[0.07]'}`}>
+                            onClick={() => onAction(a.key)} className={`shrink-0 flex items-center gap-2 px-4 py-2.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} active:scale-95 transition-transform ${isLight ? 'bg-black/[0.04]' : isColorful ? 'bg-white/[0.06] border border-orange-500/10' : 'bg-white/[0.07]'}`}>
                             <Icon name={a.icon} className={`text-[16px] ${d.quickActionIconColor(isLight)}`} />
                             <span className="text-[12px] font-semibold whitespace-nowrap">{a.label}</span>
                         </motion.button>
@@ -675,7 +675,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     const colorMap: Record<string, string> = {
         emerald: isColorful ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/20' : isLight ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
         blue: isColorful ? 'bg-blue-500/20 text-blue-400 border-blue-500/20' : isLight ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-blue-500/15 text-blue-400 border-blue-500/20',
-        purple: isColorful ? 'bg-purple-500/20 text-purple-400 border-purple-500/20' : isLight ? 'bg-purple-50 text-purple-600 border-purple-200' : 'bg-purple-500/15 text-purple-400 border-purple-500/20',
+        purple: isColorful ? 'bg-purple-500/20 text-purple-400 border-orange-500/20' : isLight ? 'bg-purple-50 text-purple-600 border-purple-200' : 'bg-purple-500/15 text-purple-400 border-orange-500/20',
     };
 
     return (
@@ -687,7 +687,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className={`absolute inset-0 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-fuchsia-500' : theme.platform === 'ios' ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '3s' }} />
                 <div className={`absolute inset-3 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-purple-500' : theme.platform === 'ios' ? 'bg-[#5856D6]' : 'bg-[#D0BCFF]'}`} style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
                 {/* Gradient ring */}
-                <div className={`absolute inset-4 rounded-full ${isColorful ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20' : isLight ? 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10' : 'bg-gradient-to-br from-indigo-500/15 to-purple-500/15'} border ${isColorful ? 'border-purple-500/20' : isLight ? 'border-blue-200' : 'border-indigo-500/20'}`} />
+                <div className={`absolute inset-4 rounded-full ${isColorful ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20' : isLight ? 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10' : 'bg-gradient-to-br from-indigo-500/15 to-purple-500/15'} border ${isColorful ? 'border-orange-500/20' : isLight ? 'border-blue-200' : 'border-indigo-500/20'}`} />
                 {/* Inner hub */}
                 <div className={`relative w-20 h-20 rounded-full flex flex-col items-center justify-center ${isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : theme.platform === 'ios' ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]' : 'bg-[#D0BCFF]'} shadow-lg`}>
                     <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' && !isColorful ? 'text-[#381E72]' : 'text-white'}`} />
@@ -733,7 +733,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className="flex gap-2">
                     {actions.map((a, i) => (
                         <motion.button key={a.key} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }}
-                            onClick={() => onAction(a.key)} className={`flex-1 flex flex-col items-center p-3 rounded-2xl active:scale-95 transition-transform ${isLight ? 'bg-black/[0.03]' : isColorful ? 'bg-white/[0.04] border border-purple-500/10' : 'bg-white/[0.05]'}`}>
+                            onClick={() => onAction(a.key)} className={`flex-1 flex flex-col items-center p-3 rounded-2xl active:scale-95 transition-transform ${isLight ? 'bg-black/[0.03]' : isColorful ? 'bg-white/[0.04] border border-orange-500/10' : 'bg-white/[0.05]'}`}>
                             <Icon name={a.icon} className={`text-[20px] mb-1 ${d.quickActionIconColor(isLight)}`} />
                             <span className="text-[10px] font-semibold">{a.label}</span>
                         </motion.button>
@@ -766,7 +766,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
 export function DashboardView({ card, isLight, isColorful = false, onNav, theme }: DashboardViewProps) {
     const [layout, setLayout] = useState<LayoutMode>('bento');
     const [activeAction, setActiveAction] = useState<QuickActionKey>(null);
-    const sheetBg = isColorful ? 'bg-[#050023]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const layoutProps: LayoutProps = { card, isLight, isColorful: isColorful ?? false, theme, onNav, onAction: setActiveAction };
 
     return (

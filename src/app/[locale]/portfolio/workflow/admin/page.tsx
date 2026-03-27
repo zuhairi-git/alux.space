@@ -138,22 +138,22 @@ export default function PortalPanel() {
     const bg = isLight
         ? 'bg-white text-slate-800'
         : isColorful
-            ? 'bg-[#050023] text-purple-100'
+            ? 'bg-[#06040c] text-orange-50'
             : 'bg-gray-900 text-slate-100';
     const sidebarBg = isLight
         ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60 shadow-[4px_0_24px_0_rgba(0,0,0,0.02)]'
         : isColorful
-            ? 'bg-[#050023]/80 backdrop-blur-3xl border-r border-fuchsia-500/30 shadow-[4px_0_24px_0_rgba(255,0,204,0.18)]'
+            ? 'bg-[#06040c]/80 backdrop-blur-3xl border-r border-orange-500/30 shadow-[4px_0_24px_0_rgba(255,140,66,0.18)]'
             : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[4px_0_24px_0_rgba(0,0,0,0.2)]';
     const headerBg = isLight
         ? 'bg-white/40 backdrop-blur-2xl border-b border-white/60'
         : isColorful
-            ? 'bg-[#050023]/80 backdrop-blur-2xl border-b border-fuchsia-500/30'
+            ? 'bg-[#06040c]/80 backdrop-blur-2xl border-b border-orange-500/30'
             : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
         ? 'bg-white rounded-3xl border border-slate-200 shadow-[0_12px_34px_rgba(15,23,42,0.08)] p-5 md:p-7'
         : isColorful
-            ? 'bg-[#0A0138]/95 rounded-3xl border border-fuchsia-500/35 shadow-[0_14px_36px_rgba(255,0,204,0.20)] p-5 md:p-7'
+            ? 'bg-[#0a0600]/95 rounded-3xl border border-orange-500/35 shadow-[0_14px_36px_rgba(255,140,66,0.20)] p-5 md:p-7'
             : 'bg-[#111827] rounded-3xl border border-slate-700 shadow-[0_12px_34px_rgba(0,0,0,0.45)] p-5 md:p-7';
     const aiGradientStrong = 'from-fuchsia-500 via-violet-500 to-sky-400';
     const aiGradientSoft = 'from-violet-500 to-sky-400';
@@ -224,7 +224,7 @@ export default function PortalPanel() {
                                     ? (isColorful ? 'text-fuchsia-300 shadow-lg shadow-fuchsia-500/10' : isLight ? 'text-blue-600 shadow-sm' : 'text-blue-300 shadow-lg shadow-blue-500/10')
                                     : (isColorful ? 'text-purple-200 hover:bg-purple-900/40' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
                                 {active && (
-                                    <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-fuchsia-500/20 border border-fuchsia-500/30' : isLight ? 'bg-white/80 border border-white' : 'bg-blue-500/20 border border-blue-400/20'} rounded-2xl -z-10`} />
+                                    <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-fuchsia-500/20 border border-orange-500/30' : isLight ? 'bg-white/80 border border-white' : 'bg-blue-500/20 border border-blue-400/20'} rounded-2xl -z-10`} />
                                 )}
                                 <Icon name={s.icon} className={`text-[22px] ${sidebarCollapsed ? '' : 'mr-3'} ${active ? (isColorful ? 'text-fuchsia-400' : isLight ? 'text-blue-500' : 'text-blue-400') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
                                 {!sidebarCollapsed && <span className="relative z-10">{s.label}</span>}
@@ -281,7 +281,7 @@ export default function PortalPanel() {
                                                 ? (isColorful ? 'text-fuchsia-300 shadow-lg shadow-fuchsia-500/10' : isLight ? 'text-blue-600 shadow-sm' : 'text-blue-300 shadow-lg shadow-blue-500/10')
                                                 : (isColorful ? 'text-purple-200 hover:bg-purple-900/40' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
                                             {active && (
-                                                <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-fuchsia-500/20 border border-fuchsia-500/30' : isLight ? 'bg-white/80 border border-white' : 'bg-blue-500/20 border border-blue-400/20'} rounded-2xl -z-10`} />
+                                                <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-fuchsia-500/20 border border-orange-500/30' : isLight ? 'bg-white/80 border border-white' : 'bg-blue-500/20 border border-blue-400/20'} rounded-2xl -z-10`} />
                                             )}
                                             <Icon name={s.icon} className={`text-[22px] mr-3 ${active ? (isColorful ? 'text-fuchsia-400' : isLight ? 'text-blue-500' : 'text-blue-400') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
                                             <span className="relative z-10">{s.label}</span>
@@ -305,17 +305,17 @@ export default function PortalPanel() {
                 {/* Top Bar */}
                 <header className={`h-20 flex items-center justify-between px-5 md:px-10 fixed top-0 left-0 right-0 z-30 ${sidebarCollapsed ? 'md:left-[80px]' : 'md:left-[280px]'} ${headerBg}`}>
                     <div className="flex items-center">
-                        <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#06040c]/80 hover:bg-[#06040c] border border-orange-500/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="menu" className="text-xl" />
                         </button>
                         <h1 className="text-xl md:text-2xl font-black capitalize tracking-tight">{activeSection.replace('-', ' ')}</h1>
                     </div>
                     <div className="flex items-center space-x-3 md:space-x-4 shrink-0">
-                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
+                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[#06040c]/80 hover:bg-[#06040c] border border-orange-500/30 text-orange-50' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
                             <Icon name="search" className="text-lg opacity-50" />
                             <span className="opacity-50">Search anything... (Ctrl/⌘K)</span>
                         </motion.button>
-                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#06040c]/80 hover:bg-[#06040c] border border-orange-500/30 text-orange-50' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
                         {/* AI Copilot — mobile only, replaces floating button */}
@@ -324,13 +324,13 @@ export default function PortalPanel() {
                             <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
-                            <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#050023]/80 hover:bg-[#050023] border border-fuchsia-500/30 text-purple-100' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[#06040c]/80 hover:bg-[#06040c] border border-orange-500/30 text-orange-50' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                                 <Icon name="notifications" className="text-xl opacity-70" />
                                 {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-fuchsia-500' : 'bg-blue-500'}`} />}
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#06040c]/90 border-orange-500/30 shadow-orange-900/30 text-orange-50' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
@@ -354,14 +354,14 @@ export default function PortalPanel() {
                             </AnimatePresence>
                         </div>
                         <div className="relative translate-y-[2px]">
-                            <motion.button onClick={toggleProfileMenu} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-blue-400' : isColorful ? 'border-fuchsia-500/30 hover:border-fuchsia-400' : 'border-white/10 hover:border-blue-400'}`}>
+                            <motion.button onClick={toggleProfileMenu} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-blue-400' : isColorful ? 'border-orange-500/30 hover:border-fuchsia-400' : 'border-white/10 hover:border-blue-400'}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Portal" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Portal&background=d946ef&color=fff" }} />
                             </motion.button>
                             <AnimatePresence>
                                 {showProfileMenu && (
-                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#050023]/90 border-fuchsia-500/30 shadow-fuchsia-900/50 text-purple-100' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
-                                            <div className={`p-5 border-b ${isLight ? 'border-slate-100' : isColorful ? 'border-fuchsia-500/30' : 'border-white/5'}`}>
+                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[#06040c]/90 border-orange-500/30 shadow-orange-900/30 text-orange-50' : 'bg-[#1A1A24]/90 border-white/10 shadow-black/50'}`}>
+                                            <div className={`p-5 border-b ${isLight ? 'border-slate-100' : isColorful ? 'border-orange-500/30' : 'border-white/5'}`}>
                                                 <p className="font-bold text-base">Ali Al-Zuhairi</p>
                                                 <p className="text-xs font-medium opacity-60 mt-1">admin@alux.space</p>
                                             </div>
@@ -370,9 +370,9 @@ export default function PortalPanel() {
                                                     <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-slate-400' : isColorful ? 'text-purple-300' : 'text-slate-400'}`} />
                                                     Settings
                                                 </button>
-                                                <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-slate-50' : isColorful ? 'bg-purple-900/30 border border-fuchsia-500/30' : 'bg-white/5'}`}>
+                                                <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-slate-50' : isColorful ? 'bg-purple-900/30 border border-orange-500/30' : 'bg-white/5'}`}>
                                                     <span className="text-xs font-bold uppercase tracking-wider opacity-60 mb-2 block">Theme</span>
-                                                    <div className={`flex rounded-2xl p-1 ${isLight ? 'bg-white' : isColorful ? 'bg-[#050023]/80' : 'bg-black/20'}`}>
+                                                    <div className={`flex rounded-2xl p-1 ${isLight ? 'bg-white' : isColorful ? 'bg-[#06040c]/80' : 'bg-black/20'}`}>
                                                         {([
                                                             { value: 'light', label: 'Light', icon: 'light_mode' },
                                                             { value: 'dark', label: 'Dark', icon: 'dark_mode' },
@@ -411,7 +411,7 @@ export default function PortalPanel() {
                 {showSearch && (
                     <div className="fixed inset-0 z-[70] p-4 sm:p-8 flex items-start justify-center">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={() => setShowSearch(false)} />
-                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[#050023]/95 border-fuchsia-500/30 shadow-2xl shadow-fuchsia-900/50 text-purple-100' : 'bg-[#12121A]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
+                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[#06040c]/95 border-orange-500/30 shadow-2xl shadow-orange-900/30 text-orange-50' : 'bg-[#12121A]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
                             <div className={`px-5 py-4 border-b flex items-center gap-3 ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                 <Icon name="search" className="text-xl opacity-60" />
                                 <input
@@ -474,7 +474,7 @@ export default function PortalPanel() {
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[#050023]/90 border-l border-fuchsia-500/30 text-purple-100' : 'bg-[#0B0B13]/80 border-l border-white/10'}`}
+                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[#06040c]/90 border-l border-orange-500/30 text-orange-50' : 'bg-[#0B0B13]/80 border-l border-white/10'}`}
                         >
                             <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
                                 <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
@@ -617,7 +617,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-slate-200 shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : isColorful ? 'bg-[#0A0138]/95 border border-fuchsia-500/35 shadow-[0_10px_28px_rgba(255,0,204,0.18)]' : 'bg-[#111827] border border-slate-700 shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl`}>
+        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-slate-200 shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : isColorful ? 'bg-[#0a0600]/95 border border-orange-500/35 shadow-[0_10px_28px_rgba(255,140,66,0.18)]' : 'bg-[#111827] border border-slate-700 shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl`}>
             <div className="flex items-center justify-between mb-4">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-blue-100 to-indigo-100' : isColorful ? 'from-fuchsia-500/25 to-purple-500/25' : 'from-blue-500/20 to-indigo-500/20'}`}>
                     <Icon name={icon} className={`text-2xl ${isLight ? 'text-blue-600' : isColorful ? 'text-fuchsia-400' : 'text-blue-400'}`} />
@@ -1589,7 +1589,7 @@ const PORTAL_FEATURES = [
 const PORTAL_THEMES = [
     { v: 'dark' as Theme, label: 'Dark', icon: 'dark_mode', desc: 'Low-glare, great for long sessions', bg: 'bg-gray-900', border: 'border-blue-500' },
     { v: 'light' as Theme, label: 'Light', icon: 'light_mode', desc: 'Clean and presentation-ready', bg: 'bg-white', border: 'border-amber-400' },
-    { v: 'colorful' as Theme, label: 'Colorful', icon: 'palette', desc: 'Vivid cosmic gradient look', bg: 'bg-[#050023]', border: 'border-fuchsia-500' },
+    { v: 'colorful' as Theme, label: 'Colorful', icon: 'palette', desc: 'Vivid cosmic gradient look', bg: 'bg-[#06040c]', border: 'border-fuchsia-500' },
 ];
 
 const portalPageVariants = {
@@ -1614,7 +1614,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
         selectedTheme === 'light'
             ? 'bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900'
             : selectedTheme === 'colorful'
-                ? 'bg-[#050023] text-white'
+                ? 'bg-[#06040c] text-white'
                 : 'bg-[#0D0D14] text-white';
 
     const muted = selectedTheme === 'light' ? 'text-slate-500' : 'text-white/50';
@@ -1715,7 +1715,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 key={s.id}
                                 onClick={() => { setDirection(i > step ? 1 : -1); setStep(i); }}
                                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-medium transition-all ${i === step
-                                    ? (selectedTheme === 'light' ? 'bg-white shadow-sm border border-slate-200' : selectedTheme === 'colorful' ? 'bg-white/10 border border-fuchsia-500/30' : 'bg-white/10 border border-white/10')
+                                    ? (selectedTheme === 'light' ? 'bg-white shadow-sm border border-slate-200' : selectedTheme === 'colorful' ? 'bg-white/10 border border-orange-500/30' : 'bg-white/10 border border-white/10')
                                     : (selectedTheme === 'light' ? 'text-slate-400 hover:bg-white/60' : 'text-white/40 hover:bg-white/5')
                                 }`}
                             >

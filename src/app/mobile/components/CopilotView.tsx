@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -17,14 +17,14 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
     const [input, setInput] = useState(""); const [typing, setTyping] = useState(false); const [stream, setStream] = useState("");
     const ub = theme.copilot.userBubble;
     const bb = isColorful
-        ? `${theme.platform === 'ios' ? 'bg-[#1a0040]/60 backdrop-blur-[20px] border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-purple-900/40 backdrop-blur-xl border border-purple-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
+        ? `${theme.platform === 'ios' ? 'bg-[#130a02]/60 backdrop-blur-[20px] border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-orange-950/40 backdrop-blur-xl border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
         : theme.copilot.botBubble(isLight);
-    const inputBarClass = isColorful ? 'bg-[#050023]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
+    const inputBarClass = isColorful ? 'bg-[#06040c]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
         ? `bg-white/10 text-white ${theme.platform === 'ios' ? 'rounded-[18px]' : 'rounded-[24px]'} px-5 py-3 placeholder:text-white/40`
         : theme.copilot.inputField(isLight);
     const promptCardClass = isColorful
-        ? `${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} bg-purple-500/10 text-white backdrop-blur-xl border border-purple-500/20`
+        ? `${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} bg-purple-500/10 text-white backdrop-blur-xl border border-orange-500/20`
         : theme.copilot.promptCard(isLight);
     const promptIconColor = isColorful ? 'text-fuchsia-400' : theme.copilot.promptIconColor;
     useEffect(() => { if (msgs.length > 0) ref.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs, typing, stream]);
