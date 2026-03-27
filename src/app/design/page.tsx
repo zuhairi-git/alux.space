@@ -2,10 +2,11 @@
 
 import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Card from '@/components/Card';
-import CardContent from '@/components/CardContent';
-import TimelineCard from '@/components/TimelineCard';
-import MediaCard from '@/components/ui/MediaCard';
+import Card from '@/components/ui/cards/Card';
+import CardContent from '@/components/ui/cards/CardContent';
+import SurfaceCard from '@/components/ui/cards/SurfaceCard';
+import TimelineCard from '@/components/ui/cards/TimelineCard';
+import MediaCard from '@/components/ui/cards/MediaCard';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import QuoteBlock from '@/components/ui/QuoteBlock';
 import Icon from '@/components/ui/Icon';
@@ -26,10 +27,12 @@ import Alert from '@/components/ui/Alert';
 import Skeleton from '@/components/ui/Skeleton';
 import Progress from '@/components/ui/Progress';
 import Breadcrumb from '@/components/ui/Breadcrumb';
+import Text from '@/components/ui/Text';
+import Link from 'next/link';
 import { getByCategory } from '@/design-system/components';
 import type { ComponentEntry } from '@/design-system/components';
 
-/* ── Token swatch data ─────────────────────────────────── */
+/* ── Token swatch data ────────────────────────────────── */
 
 const colorTokenSections = [
   {
@@ -51,7 +54,7 @@ const colorTokenSections = [
     ],
   },
   {
-    title: 'Palette — Blues',
+    title: 'Palette â€” Blues',
     tokens: [
       { name: '--color-blue-50',  label: '50' },
       { name: '--color-blue-100', label: '100' },
@@ -64,7 +67,7 @@ const colorTokenSections = [
     ],
   },
   {
-    title: 'Palette — Purples',
+    title: 'Palette â€” Purples',
     tokens: [
       { name: '--color-purple-300', label: '300' },
       { name: '--color-purple-400', label: '400' },
@@ -74,7 +77,7 @@ const colorTokenSections = [
     ],
   },
   {
-    title: 'Palette — Grays',
+    title: 'Palette â€” Grays',
     tokens: [
       { name: '--color-gray-50',  label: '50' },
       { name: '--color-gray-100', label: '100' },
@@ -86,7 +89,7 @@ const colorTokenSections = [
     ],
   },
   {
-    title: 'Palette — Accents',
+    title: 'Palette â€” Accents',
     tokens: [
       { name: '--color-indigo-400', label: 'Indigo 400' },
       { name: '--color-indigo-500', label: 'Indigo 500' },
@@ -135,7 +138,7 @@ const shadowTokens = [
   { name: '--shadow-glow-purple',label: 'glow-purple' },
 ];
 
-/* ── Helper: copy-to-clipboard ─────────────────────────── */
+/* â”€â”€ Helper: copy-to-clipboard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -150,12 +153,12 @@ function CopyButton({ text }: { text: string }) {
       className="text-[10px] opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity font-mono cursor-pointer"
       title={`Copy ${text}`}
     >
-      {copied ? '✓' : 'copy'}
+      {copied ? 'âœ“' : 'copy'}
     </button>
   );
 }
 
-/* ── Small sub-components ──────────────────────────────── */
+/* â”€â”€ Small sub-components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function Swatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
@@ -295,7 +298,7 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
   );
 }
 
-/* ── Code-toggle wrapper ──────────────────────────────── */
+/* â”€â”€ Code-toggle wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function DemoSection({ children, code, language = 'tsx' }: { children: React.ReactNode; code: string; language?: string }) {
   const [showCode, setShowCode] = useState(false);
@@ -318,7 +321,7 @@ function DemoSection({ children, code, language = 'tsx' }: { children: React.Rea
   );
 }
 
-/* ── Main Page ─────────────────────────────────────────── */
+/* â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const registryCategories: { key: ComponentEntry['category']; label: string }[] = [
   { key: 'primitive', label: 'Primitives' },
@@ -328,7 +331,7 @@ const registryCategories: { key: ComponentEntry['category']; label: string }[] =
   { key: 'layout',    label: 'Layout & Providers' },
 ];
 
-/* ── Individual section renderers ─────────────────────── */
+/* â”€â”€ Individual section renderers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function ColorsSection() {
   return (
@@ -410,6 +413,54 @@ function TypographySection() {
   );
 }
 
+function TextSection() {
+  const variants: Array<{
+    variant: React.ComponentProps<typeof Text>['variant'];
+    label: string;
+    sample: string;
+  }> = [
+    { variant: 'hero',     label: 'hero',     sample: 'Hero Display Heading' },
+    { variant: 'h1',      label: 'h1',       sample: 'Heading 1 â€” Page Title' },
+    { variant: 'h2',      label: 'h2',       sample: 'Heading 2 â€” Section Title' },
+    { variant: 'h3',      label: 'h3',       sample: 'Heading 3 â€” Sub-section' },
+    { variant: 'h4',      label: 'h4',       sample: 'Heading 4 â€” Card Title' },
+    { variant: 'body',    label: 'body',     sample: 'Body text â€” the main reading size used for paragraphs and content.' },
+    { variant: 'body-sm', label: 'body-sm',  sample: 'Body small â€” slightly reduced for dense layouts and captions.' },
+    { variant: 'caption', label: 'caption',  sample: 'Caption text â€” muted supplemental information.' },
+    { variant: 'label',   label: 'label',    sample: 'Label / Form Field' },
+    { variant: 'overline',label: 'overline', sample: 'Overline Category Tag' },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <p className="text-sm opacity-60">
+        All 10 typography variants from the <code className="text-xs opacity-80">Text</code> component.
+        Each renders the semantic HTML tag for its scale by default.
+      </p>
+      <div className="space-y-4">
+        {variants.map(({ variant, label, sample }) => (
+          <div key={variant} className="flex items-baseline gap-4 group">
+            <span className="w-20 flex-shrink-0 text-right text-xs font-mono opacity-40">{label}</span>
+            <div className="flex-1 min-w-0">
+              <Text variant={variant}>{sample}</Text>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="theme-card-flex p-4 rounded-xl mt-4">
+        <p className="text-xs font-mono opacity-50 mb-3">Usage</p>
+        <pre className="text-xs opacity-70 whitespace-pre-wrap">{`import Text from '@/components/ui/Text';
+
+<Text variant="h2">Section Title</Text>
+<Text variant="body">Paragraph content here.</Text>
+<Text variant="overline">Category</Text>
+<Text variant="label" as="span">Form label without <label> semantics</Text>`}</pre>
+      </div>
+    </div>
+  );
+}
+
 function SpacingSection() {
   return (
     <div className="space-y-2">
@@ -470,6 +521,7 @@ function GradientsSection() {
   const gradients = [
     { label: 'Primary', css: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))' },
     { label: 'Card', css: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))' },
+    // eslint-disable-next-line design-system/no-hardcoded-colors
     { label: 'Cosmic', css: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)' },
   ];
   return (
@@ -487,26 +539,26 @@ function GradientsSection() {
   );
 }
 
-/* ── Component demo sections ─────────────────────────── */
+/* â”€â”€ Component demo sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function ButtonsSection() {
   return (
     <DemoSection code={`import Button from '@/components/ui/Button';
 import Icon from '@/components/ui/Icon';
 
-// Primary — filled, highest emphasis
+// Primary â€” filled, highest emphasis
 <Button variant="primary">Save changes</Button>
 <Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
 
-// Secondary — outlined, medium emphasis
+// Secondary â€” outlined, medium emphasis
 <Button variant="secondary">Cancel</Button>
 <Button variant="secondary" rightIcon={<Icon name="arrow_forward" />}>View all</Button>
 
-// Tertiary — text-only, low emphasis
+// Tertiary â€” text-only, low emphasis
 <Button variant="tertiary">Learn more</Button>
 <Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
 
-// Icon — square, icon-only
+// Icon â€” square, icon-only
 <Button variant="icon" size="sm"><Icon name="close" /></Button>
 <Button variant="icon"><Icon name="more_vert" /></Button>
 <Button variant="icon" size="lg"><Icon name="settings" /></Button>
@@ -517,12 +569,12 @@ import Icon from '@/components/ui/Icon';
 <Button size="lg">Large</Button>
 
 // States
-<Button loading>Saving…</Button>
+<Button loading>Savingâ€¦</Button>
 <Button disabled>Disabled</Button>`}>
       <div className="space-y-6">
         {/* Primary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Primary — Filled</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Primary â€” Filled</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="primary">Save changes</Button>
             <Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
@@ -532,7 +584,7 @@ import Icon from '@/components/ui/Icon';
         <Divider />
         {/* Secondary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Secondary — Outlined</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Secondary â€” Outlined</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary">Cancel</Button>
             <Button variant="secondary" leftIcon={<Icon name="download" />}>Export</Button>
@@ -542,7 +594,7 @@ import Icon from '@/components/ui/Icon';
         <Divider />
         {/* Tertiary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Tertiary — Text only</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Tertiary â€” Text only</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="tertiary">Learn more</Button>
             <Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
@@ -552,7 +604,7 @@ import Icon from '@/components/ui/Icon';
         <Divider />
         {/* Icon */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon — Square</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon â€” Square</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="icon" size="sm"><Icon name="close" /></Button>
             <Button variant="icon"><Icon name="more_vert" /></Button>
@@ -579,8 +631,8 @@ import Icon from '@/components/ui/Icon';
         <div>
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">States</h4>
           <div className="flex flex-wrap gap-3">
-            <Button loading>Saving…</Button>
-            <Button variant="secondary" loading>Loading…</Button>
+            <Button loading>Savingâ€¦</Button>
+            <Button variant="secondary" loading>Loadingâ€¦</Button>
             <Button disabled>Disabled</Button>
             <Button variant="secondary" disabled>Disabled</Button>
             <Button variant="tertiary" disabled>Disabled</Button>
@@ -589,7 +641,7 @@ import Icon from '@/components/ui/Icon';
         <Divider />
         {/* Special */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Special — Cosmic</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Special â€” Cosmic</h4>
           <div className="flex flex-wrap gap-3">
             <Button variant="cosmic">Cosmic</Button>
             <Button variant="cosmic" leftIcon={<Icon name="auto_awesome" />}>Magic</Button>
@@ -810,24 +862,50 @@ function TooltipsSection() {
 
 function CardsSurfaceSection() {
   return (
-    <DemoSection code={`import Card from '@/components/Card';
-import CardContent from '@/components/CardContent';
+    <DemoSection code={`import Card from '@/components/ui/cards/Card';
+// DS shell â€” elevation levels: flat | raised (default) | floating
 
-<Card variant="primary">
-  <CardContent title="Title" subtitle="Subtitle">
-    <p>Card content goes here.</p>
-  </CardContent>
-</Card>`}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {(['primary', 'secondary', 'tertiary', 'muted'] as const).map(variant => (
-          <Card key={variant} variant={variant}>
-            <CardContent title={variant} subtitle="Card variant">
-              <p className="text-sm opacity-70">
-                A sample card using the <code className="text-xs">{variant}</code> variant.
-              </p>
-            </CardContent>
-          </Card>
-        ))}
+<Card elevation="raised">
+  <p className="p-4">Standard raised card</p>
+</Card>
+
+<Card elevation="floating" glow="primary">
+  <p className="p-4">Floating card with primary glow</p>
+</Card>
+
+// SurfaceCard â€” motion wrapper with theme variants
+import SurfaceCard from '@/components/ui/cards/SurfaceCard';
+<SurfaceCard variant="primary">...</SurfaceCard>`}>
+      <div className="space-y-6">
+        {/* DS shell â€” elevation levels */}
+        <div>
+          <p className="text-xs font-mono opacity-50 mb-3">Card (DS shell) â€” elevation</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {(['flat', 'raised', 'floating'] as const).map(elevation => (
+              <Card key={elevation} elevation={elevation} glow="primary">
+                <div className="p-4">
+                  <p className="text-sm font-semibold mb-1">{elevation}</p>
+                  <p className="text-xs opacity-60">elevation=&quot;{elevation}&quot;</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+        {/* SurfaceCard â€” theme variant colours */}
+        <div>
+          <p className="text-xs font-mono opacity-50 mb-3">SurfaceCard â€” variant colours</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {(['primary', 'secondary', 'tertiary', 'muted'] as const).map(variant => (
+              <SurfaceCard key={variant} variant={variant}>
+                <CardContent title={variant} subtitle="Card variant">
+                  <p className="text-sm opacity-70">
+                    variant=&quot;{variant}&quot;
+                  </p>
+                </CardContent>
+              </SurfaceCard>
+            ))}
+          </div>
+        </div>
       </div>
     </DemoSection>
   );
@@ -837,8 +915,8 @@ function CardsTimelineSection() {
   return (
     <div className="space-y-4">
       <p className="text-sm opacity-60">
-        Animated entry cards with floating particles — designed for experience and education timelines.
-        {' '}<a href="/design/timeline-cards" className="text-primary underline">View full theme demo →</a>
+        Animated entry cards with floating particles â€” designed for experience and education timelines.
+        {' '}<Link href="/design/timeline-cards" className="text-primary underline">View full theme demo â†’</Link>
       </p>
       <DemoSection code={`import { TimelineCard } from '@/components/ui/cards';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
@@ -847,7 +925,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
   theme="dark"
   materialIcon={RocketLaunchIcon}
   title="Product Designer"
-  date="2023 – Present"
+  date="2023 â€“ Present"
   location="Helsinki, Finland"
   description="Product vision and design system ownership."
 />`}>
@@ -856,7 +934,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
             theme="dark"
             materialIcon={RocketLaunchIcon}
             title="Product Designer"
-            date="2023 – Present"
+            date="2023 â€“ Present"
             location="Helsinki, Finland"
             description="Product vision, design system ownership, and developer handoff."
           />
@@ -871,7 +949,7 @@ function CardsMediaSection() {
     <div className="space-y-4">
       <p className="text-sm opacity-60">
         Image-first cards with three layout variants.
-        {' '}<a href="/design/media-cards" className="text-primary underline">View full theme showcase →</a>
+        {' '}<Link href="/design/media-cards" className="text-primary underline">View full theme showcase â†’</Link>
       </p>
       <DemoSection code={`import { MediaCard } from '@/components/ui/cards';
 
@@ -882,8 +960,8 @@ function CardsMediaSection() {
   imagePath="/images/blog/ai-brain.jpg"
   tags={['Design', 'AI']}
 />
-// variant="overlay"  — text overlaid on image
-// variant="horizontal" — image left, content right`}>
+// variant="overlay"  â€” text overlaid on image
+// variant="horizontal" â€” image left, content right`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {(['basic', 'overlay', 'horizontal'] as const).map(v => (
             <MediaCard
@@ -1292,7 +1370,7 @@ function RegistrySection({ categoryKey }: { categoryKey: ComponentEntry['categor
   );
 }
 
-/* ── Governance sections ──────────────────────────────── */
+/* â”€â”€ Governance sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function ConventionsSection() {
   return (
@@ -1332,7 +1410,7 @@ function ConventionsSection() {
         <h4 className="text-sm font-semibold">Token Files</h4>
         <ul className="space-y-2 text-sm">
           {[
-            ['tokens.css', 'Single source of truth — CSS custom properties'],
+            ['tokens.css', 'Single source of truth â€” CSS custom properties'],
             ['tokens.ts', 'Typed JS mirror for Framer Motion / canvas'],
             ['components.ts', 'Component registry (props, tokens, a11y)'],
           ].map(([file, desc]) => (
@@ -1361,10 +1439,10 @@ function ConventionsSection() {
       <div className="theme-card-flex p-5 rounded-xl space-y-3">
         <h4 className="text-sm font-semibold">Naming Conventions</h4>
         <ul className="space-y-1 text-sm opacity-70">
-          <li><strong>Components:</strong> PascalCase — <code className="text-xs">CardContent.tsx</code></li>
-          <li><strong>Hooks/utils:</strong> camelCase — <code className="text-xs">useTheme.ts</code></li>
-          <li><strong>Routes:</strong> kebab-case — <code className="text-xs">timeline-cards/page.tsx</code></li>
-          <li><strong>Tokens:</strong> --category-name — <code className="text-xs">--color-blue-500</code>, <code className="text-xs">--space-4</code></li>
+          <li><strong>Components:</strong> PascalCase â€” <code className="text-xs">CardContent.tsx</code></li>
+          <li><strong>Hooks/utils:</strong> camelCase â€” <code className="text-xs">useTheme.ts</code></li>
+          <li><strong>Routes:</strong> kebab-case â€” <code className="text-xs">timeline-cards/page.tsx</code></li>
+          <li><strong>Tokens:</strong> --category-name â€” <code className="text-xs">--color-blue-500</code>, <code className="text-xs">--space-4</code></li>
         </ul>
       </div>
     </div>
@@ -1476,7 +1554,7 @@ function LintRulesSection() {
   );
 }
 
-/* ── Section map ──────────────────────────────────────── */
+/* â”€â”€ Section map â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 interface SectionDef {
   key: string;
@@ -1501,11 +1579,11 @@ const allSections: SectionDef[] = [
   { key: 'avatars',    title: 'Avatars',                   render: () => <AvatarsSection /> },
   { key: 'dividers',   title: 'Dividers',                  render: () => <DividersSection /> },
   { key: 'tooltips',        title: 'Tooltips',                  render: () => <TooltipsSection /> },
-  // ── Cards (per category) ────────────────────────────
-  { key: 'cards-surface',  title: 'Cards — Surface',           render: () => <CardsSurfaceSection /> },
-  { key: 'cards-timeline', title: 'Cards — Timeline',          render: () => <CardsTimelineSection /> },
-  { key: 'cards-media',    title: 'Cards — Media',             render: () => <CardsMediaSection /> },
-  { key: 'cards-domain',   title: 'Cards — Domain',            render: () => <CardsDomainSection /> },
+  // â”€â”€ Cards (per category) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  { key: 'cards-surface',  title: 'Cards â€” Surface',           render: () => <CardsSurfaceSection /> },
+  { key: 'cards-timeline', title: 'Cards â€” Timeline',          render: () => <CardsTimelineSection /> },
+  { key: 'cards-media',    title: 'Cards â€” Media',             render: () => <CardsMediaSection /> },
+  { key: 'cards-domain',   title: 'Cards â€” Domain',            render: () => <CardsDomainSection /> },
   { key: 'quotes',         title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
   { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
@@ -1518,6 +1596,7 @@ const allSections: SectionDef[] = [
   { key: 'skeletons',  title: 'Skeletons',                  render: () => <SkeletonSection /> },
   { key: 'progress',   title: 'Progress',                   render: () => <ProgressSection /> },
   { key: 'breadcrumbs',title: 'Breadcrumbs',                render: () => <BreadcrumbSection /> },
+  { key: 'text',       title: 'Text Component',             render: () => <TextSection /> },
   // Registry
   ...registryCategories.map(c => ({
     key: c.key === 'primitive' ? 'primitives' : c.key,
@@ -1530,7 +1609,7 @@ const allSections: SectionDef[] = [
   { key: 'lint-rules',   title: 'Lint Rules',    render: () => <LintRulesSection /> },
 ];
 
-/* ── Overview (landing when no section selected) ─────── */
+/* â”€â”€ Overview (landing when no section selected) â”€â”€â”€â”€â”€â”€â”€ */
 
 function OverviewGrid() {
   const groups = [
@@ -1568,6 +1647,7 @@ function OverviewGrid() {
         { key: 'skeletons',  icon: 'hourglass_empty',        label: 'Skeletons' },
         { key: 'progress',   icon: 'donut_large',            label: 'Progress' },
         { key: 'breadcrumbs',icon: 'more_horiz',             label: 'Breadcrumbs' },
+        { key: 'text',       icon: 'title',                  label: 'Text' },
       ],
     },
     {
@@ -1627,7 +1707,7 @@ function OverviewGrid() {
   );
 }
 
-/* ── Page content (reads ?s= param) ───────────────────── */
+/* â”€â”€ Page content (reads ?s= param) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function DesignPageContent() {
   const searchParams = useSearchParams();
@@ -1659,7 +1739,7 @@ function DesignPageContent() {
   );
 }
 
-/* ── Exported page (Suspense boundary) ────────────────── */
+/* â”€â”€ Exported page (Suspense boundary) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default function DesignSystemPage() {
   return (

@@ -55,6 +55,7 @@ const sidebarNav: NavGroup[] = [
       { label: 'Skeletons',  section: 'skeletons',   icon: 'hourglass_empty' },
       { label: 'Progress',   section: 'progress',    icon: 'donut_large' },
       { label: 'Breadcrumbs', section: 'breadcrumbs', icon: 'more_horiz' },
+      { label: 'Text',        section: 'text',        icon: 'title' },
     ],
   },
   {

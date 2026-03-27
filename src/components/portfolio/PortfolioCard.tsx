@@ -6,7 +6,6 @@ import { transition as t } from '@/design-system';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTheme } from '@/context/ThemeContext';
 import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
 
 interface PortfolioCardProps {
@@ -49,7 +48,6 @@ interface PortfolioCardProps {
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standard' }) => {
   const { locale } = useLanguage();
-  const { theme } = useTheme();
   const { trackEvent } = useAnalyticsTracking();
   
   // Helper functions to get localized content
@@ -68,55 +66,22 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
     return item.status[locale as keyof typeof item.status] || item.status.en;
   };  const getStatusClasses = (): string => {
     const baseClasses = 'px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide whitespace-nowrap border transition-all duration-200';
-    
     switch (item.status.type) {
       case 'in-progress':
-        if (theme === 'light') {
-          return `${baseClasses} bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100`;
-        } else if (theme === 'colorful') {
-          return `${baseClasses} bg-amber-500/60 text-white border-amber-400/80 hover:bg-amber-500/70 shadow-sm shadow-amber-500/30`;
-        } else {
-          return `${baseClasses} bg-amber-600/50 text-white border-amber-400/70 hover:bg-amber-600/60 shadow-sm shadow-amber-500/20`;
-        }
+        return `${baseClasses} bg-[var(--color-warning-bg)] text-[var(--color-warning)] border-[var(--color-warning-border)]`;
       case 'accomplished':
-        if (theme === 'light') {
-          return `${baseClasses} bg-green-50 text-green-700 border-green-200 hover:bg-green-100`;
-        } else if (theme === 'colorful') {
-          return `${baseClasses} bg-emerald-500/60 text-white border-emerald-400/80 hover:bg-emerald-500/70 shadow-sm shadow-emerald-500/30`;
-        } else {
-          return `${baseClasses} bg-emerald-600/50 text-white border-emerald-400/70 hover:bg-emerald-600/60 shadow-sm shadow-emerald-500/20`;
-        }
+        return `${baseClasses} bg-[var(--color-success-bg)] text-[var(--color-success)] border-[var(--color-success-border)]`;
       default:
-        if (theme === 'light') {
-          return `${baseClasses} bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100`;
-        } else if (theme === 'colorful') {
-          return `${baseClasses} bg-gray-500/60 text-white border-gray-400/80 hover:bg-gray-500/70`;
-        } else {
-          return `${baseClasses} bg-gray-600/50 text-white border-gray-500/70 hover:bg-gray-600/60`;        }
+        return `${baseClasses} bg-[var(--card-from-bg)] text-[var(--foreground)] opacity-60 border-[var(--card-border)]`;
     }
   };
   
   const getTagClasses = (): string => {
-    const baseClasses = 'px-3 py-1 rounded-full text-xs font-medium transition-all duration-200';
-    
-    if (theme === 'light') {
-      return `${baseClasses} bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100`;
-    } else if (theme === 'colorful') {
-      return `${baseClasses} bg-blue-500/20 text-blue-300 border border-blue-500/40 hover:bg-blue-500/30`;
-    } else {
-      return `${baseClasses} bg-blue-900/30 text-blue-300 border border-blue-500/40 hover:bg-blue-900/50`;
-    }  };
+    return 'px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 bg-[var(--color-info-bg)] text-[var(--color-info)] border border-[var(--color-info-border)] hover:opacity-80';
+  };
   
   const getTypeBadgeClasses = (): string => {
-    const baseClasses = 'px-3 py-1 rounded-full text-xs font-medium shadow-md transition-all duration-200';
-    
-    if (theme === 'light') {
-      return `${baseClasses} bg-gradient-to-r ${item.gradient || 'from-blue-600 to-purple-600'} text-white hover:shadow-lg`;
-    } else if (theme === 'colorful') {
-      return `${baseClasses} bg-gradient-to-r ${item.gradient || 'from-cyan-400 to-fuchsia-500'} text-white hover:shadow-lg hover:shadow-fuchsia-500/25`;
-    } else {
-      return `${baseClasses} bg-gradient-to-r ${item.gradient || 'from-blue-500 to-purple-500'} text-white hover:shadow-lg hover:shadow-blue-500/25`;
-    }
+    return `px-3 py-1 rounded-full text-xs font-medium text-white shadow-md hover:shadow-lg transition-all duration-200 bg-gradient-to-r ${item.gradient || 'from-blue-500 to-purple-500'}`;
   };
   
   // Create localized URL
@@ -133,25 +98,15 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   const getCategoryBadge = () => {
     if (!item.category) return null;
     if (item.category === 'case-study') {
-      const cls = theme === 'light'
-        ? 'bg-violet-50 text-violet-700 border-violet-200'
-        : theme === 'colorful'
-          ? 'bg-violet-500/20 text-violet-300 border-violet-500/40'
-          : 'bg-violet-900/30 text-violet-300 border-violet-500/40';
       return (
-        <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${cls}`}>
+        <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-violet-500/15 text-violet-400 border-violet-500/30">
           <span className="material-symbols !text-[12px]">school</span>
           {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
         </span>
       );
     }
-    const cls = theme === 'light'
-      ? 'bg-teal-50 text-teal-700 border-teal-200'
-      : theme === 'colorful'
-        ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
-        : 'bg-teal-900/30 text-teal-300 border-teal-500/40';
     return (
-      <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${cls}`}>
+      <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-teal-500/15 text-teal-400 border-teal-500/30">
         <span className="material-symbols !text-[12px]">devices</span>
         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
       </span>

@@ -67,7 +67,7 @@ export const componentRegistry: ComponentEntry[] = [
   // ─── Composite ──────────────────────────────────────────
   {
     name: 'Card',
-    path: 'src/components/Card.tsx',
+    path: 'src/components/ui/cards/SurfaceCard.tsx',
     category: 'composite',
     props: [
       { name: 'children', type: 'React.ReactNode', default: 'required', description: 'Content inside the card' },
@@ -82,7 +82,7 @@ export const componentRegistry: ComponentEntry[] = [
   },
   {
     name: 'CardContent',
-    path: 'src/components/CardContent.tsx',
+    path: 'src/components/ui/cards/CardContent.tsx',
     category: 'composite',
     props: [
       { name: 'icon', type: 'React.ReactNode', default: 'undefined', description: 'Icon element' },
@@ -152,7 +152,7 @@ export const componentRegistry: ComponentEntry[] = [
   },
   {
     name: 'MediaCard',
-    path: 'src/components/ui/MediaCard.tsx',
+    path: 'src/components/ui/cards/MediaCard.tsx',
     category: 'composite',
     props: [
       { name: 'variant', type: "'basic' | 'overlay' | 'horizontal'", default: "'basic'", description: 'Card layout variant' },
@@ -169,7 +169,7 @@ export const componentRegistry: ComponentEntry[] = [
   },
   {
     name: 'TimelineCard',
-    path: 'src/components/TimelineCard.tsx',
+    path: 'src/components/ui/cards/TimelineCard.tsx',
     category: 'composite',
     props: [
       { name: 'materialIcon', type: 'React.ElementType', default: 'undefined', description: 'MUI icon component' },
@@ -195,6 +195,48 @@ export const componentRegistry: ComponentEntry[] = [
     tokens: ['--primary'],
     a11y: ['role="article"', 'aria-labelledby', 'aria-describedby', '<time> with dateTime'],
     variants: ['standard', 'overlay', 'featured'],
+  },
+  {
+    name: 'SurfaceCard',
+    path: 'src/components/ui/cards/Card.tsx',
+    category: 'composite',
+    props: [
+      { name: 'elevation', type: "'flat' | 'raised' | 'floating'", default: "'raised'", description: 'Visual elevation level. flat=borderless, raised=standard card, floating=raised + animated glow' },
+      { name: 'glow', type: "'primary' | 'secondary' | 'tertiary' | 'muted'", default: "'primary'", description: 'Glow accent colour; only visible when elevation="floating"' },
+      { name: 'className', type: 'string', default: 'undefined', description: 'Classes applied to the outermost element' },
+      { name: 'contentClassName', type: 'string', default: 'undefined', description: 'Classes applied to the inner content element (raised/floating only)' },
+      { name: 'children', type: 'React.ReactNode', default: 'required', description: 'Card content' },
+    ],
+    tokens: ['--surface-0', '--surface-1', '--surface-2', '--surface-border', '--surface-shadow-sm', '--surface-shadow-md', '--surface-shadow-lg', '--card-from-bg', '--card-to-bg', '--card-border'],
+    a11y: [],
+    variants: ['flat', 'raised', 'floating'],
+  },
+  {
+    name: 'PortfolioCard',
+    path: 'src/components/portfolio/PortfolioCard.tsx',
+    category: 'composite',
+    props: [
+      { name: 'item', type: 'PortfolioItem', default: 'required', description: 'Portfolio item data (title, desc, link, gradient, status, tags, category, photo)' },
+      { name: 'index', type: 'number', default: 'required', description: 'Card index for stagger animations' },
+      { name: 'viewMode', type: "'standard' | 'overlay'", default: "'standard'", description: 'Card display mode; overlay renders a full-bleed image with text on top' },
+    ],
+    tokens: ['--primary', '--btn-primary-bg'],
+    a11y: ['aria-label on interactive elements', 'role="article"'],
+    variants: ['standard', 'overlay'],
+  },
+  {
+    name: 'AudioCard',
+    path: 'src/components/audio/AudioCard.tsx',
+    category: 'composite',
+    props: [
+      { name: 'audio', type: 'AudioMetadata', default: 'required', description: 'Audio episode metadata' },
+      { name: 'variant', type: "'grid' | 'list'", default: "'grid'", description: 'Layout orientation: grid = vertical card, list = horizontal row' },
+      { name: 'showPlayButton', type: 'boolean', default: 'true', description: 'Show the play button overlay' },
+      { name: 'className', type: 'string', default: "''", description: 'Additional CSS classes' },
+    ],
+    tokens: ['--primary', '--btn-primary-bg'],
+    a11y: ['aria-label on play button', 'role="article"'],
+    variants: ['grid', 'list'],
   },
 
   // ─── Section-level ──────────────────────────────────────
@@ -350,6 +392,21 @@ export const componentRegistry: ComponentEntry[] = [
   },
 
   // ─── New Foundation Primitives ─────────────────────────
+  {
+    name: 'Text',
+    path: 'src/components/ui/Text.tsx',
+    category: 'primitive',
+    props: [
+      { name: 'variant', type: "'hero' | 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'body-sm' | 'caption' | 'label' | 'overline'", default: "'body'", description: 'Typography scale variant; determines default HTML tag and styles' },
+      { name: 'as', type: 'React.ElementType', default: 'variant default tag', description: 'Override the rendered HTML element' },
+      { name: 'className', type: 'string', default: 'undefined', description: 'Additional CSS classes' },
+      { name: 'id', type: 'string', default: 'undefined', description: 'HTML id attribute' },
+      { name: 'children', type: 'React.ReactNode', default: 'required', description: 'Text content' },
+    ],
+    tokens: ['--text-hero', '--text-h1', '--text-h2', '--text-h3', '--text-h4', '--font-size-base', '--font-size-sm', '--font-size-xs', '--leading-tight', '--leading-snug', '--leading-normal', '--ls-tight', '--ls-wide', '--ls-wider', '--font-poppins'],
+    a11y: ['Semantic HTML tag per variant', 'Respects heading hierarchy when variant is h1–h4'],
+    variants: ['hero', 'h1', 'h2', 'h3', 'h4', 'body', 'body-sm', 'caption', 'label', 'overline'],
+  },
   {
     name: 'Button',
     path: 'src/components/ui/Button.tsx',
@@ -538,7 +595,7 @@ export const componentRegistry: ComponentEntry[] = [
   },
   {
     name: 'MediaCardsShowcase',
-    path: 'src/components/ui/MediaCardsShowcase.tsx',
+    path: 'src/components/ui/cards/MediaCardsShowcase.tsx',
     category: 'composite',
     props: [],
     tokens: [],

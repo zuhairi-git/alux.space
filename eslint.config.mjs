@@ -34,6 +34,14 @@ const eslintConfig = [
       "design-system/no-raw-html-elements": "warn",
     },
   },
+  {
+    // Mobile prototype has its own MobileTheme system — exempt from DS rules
+    files: ["src/components/mobile/**/*.{ts,tsx}", "src/app/mobile/**/*.{ts,tsx}"],
+    rules: {
+      "design-system/no-hardcoded-colors": "off",
+      "design-system/no-raw-html-elements": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
