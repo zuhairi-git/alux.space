@@ -95,13 +95,15 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
   const activeSection = searchParams.get('s') ?? '';
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const normalizedPathname = pathname.replace(/\/$/, '');
+
   const isActiveLink = useCallback(
     (item: NavItem) => {
-      if (item.href) return pathname === item.href;
-      if (item.section) return pathname === '/design' && activeSection === item.section;
+      if (item.href) return normalizedPathname.endsWith(item.href.replace(/\/$/, ''));
+      if (item.section) return normalizedPathname.endsWith('/design') && activeSection === item.section;
       return false;
     },
-    [pathname, activeSection],
+    [normalizedPathname, activeSection],
   );
 
   const handleNavClick = useCallback(() => {
@@ -112,10 +114,10 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
     <div className="h-screen flex flex-col">
 
       {/* Mobile header */}
-      <div className="lg:hidden shrink-0 flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-[var(--background)]">
+      <div className="lg:hidden shrink-0 flex items-center gap-3 px-4 py-3 border-b border-[var(--card-border)] bg-[var(--background)]">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="p-1.5 rounded-lg hover:bg-foreground/8 transition-colors"
           aria-label="Toggle sidebar"
         >
           <span className="material-symbols text-xl">{sidebarOpen ? 'close' : 'menu'}</span>
@@ -123,7 +125,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
         <h1 className="font-heading text-lg font-bold flex-1" style={{ textShadow: 'none' }}>
           Design System
         </h1>
-        <Link href="/" className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors opacity-60 hover:opacity-100" aria-label="Back to site">
+        <Link href="/" className="p-1.5 rounded-lg hover:bg-foreground/8 transition-colors opacity-60 hover:opacity-100" aria-label="Back to site">
           <span className="material-symbols text-xl">home</span>
         </Link>
         <ThemeSwitch />
@@ -136,7 +138,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
             fixed inset-y-0 left-0 z-30 w-64 transform transition-transform duration-200 ease-out
             lg:relative lg:translate-x-0 lg:z-auto lg:shrink-0
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            flex flex-col border-r border-gray-200 dark:border-gray-800
+            flex flex-col border-r border-[var(--card-border)]
             bg-[var(--background)]
           `}
         >
@@ -170,7 +172,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
                             flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-sm transition-colors
                             ${active
                               ? 'bg-primary/10 text-primary font-medium'
-                              : 'hover:bg-gray-100 dark:hover:bg-gray-800 opacity-70 hover:opacity-100'
+                              : 'hover:bg-foreground/8 opacity-70 hover:opacity-100'
                             }
                           `}
                         >
@@ -186,11 +188,11 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
           </nav>
 
           {/* Footer */}
-          <div className="shrink-0 px-4 py-4 border-t border-gray-200 dark:border-gray-800">
+            <div className="shrink-0 px-4 py-4 border-t border-[var(--card-border)]">
             <div className="flex items-center justify-between px-2.5">
               <Link
                 href="/"
-                className="p-1.5 rounded-lg opacity-60 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-1.5 rounded-lg opacity-60 hover:opacity-100 hover:bg-foreground/8 transition-colors"
                 aria-label="Back to site"
               >
                 <span className="material-symbols text-[20px]">home</span>

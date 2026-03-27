@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t, Button, Icon } from '@/design-system';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface HeroAction {
   label: string;
@@ -31,10 +32,7 @@ export default function CaseStudyHero({
   actions = [],
   meta = [],
 }: CaseStudyHeroProps) {
-  const { theme } = useTheme();
   const { locale } = useLanguage();
-  const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
 
   return (
     <>
@@ -47,9 +45,7 @@ export default function CaseStudyHero({
       >
         <Link
           href={`/${locale}/portfolio`}
-          className={`group inline-flex items-center gap-2 ${
-            isLight ? 'text-gray-600 hover:text-primary' : 'text-gray-400 hover:text-primary'
-          } transition-colors duration-200 rounded-sm px-1 py-1`}
+          className="group inline-flex items-center gap-2 text-foreground/60 hover:text-primary transition-colors duration-200 rounded-sm px-1 py-1"
         >
           <svg
             className="w-5 h-5 transition-transform duration-300 ease-out group-hover:-translate-x-1"
@@ -179,20 +175,14 @@ export default function CaseStudyHero({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: durationSeconds.ease, delay: 0.35 + i * 0.07 }}
             >
-              <span className={`material-symbols text-lg mt-0.5 flex-shrink-0 ${
-                isColorful ? 'text-purple-400/60' : isLight ? 'text-primary/50' : 'text-primary/50'
-              }`}>
+              <span className="material-symbols text-lg mt-0.5 flex-shrink-0 text-primary/50">
                 {item.icon}
               </span>
               <div>
-                <span className={`text-[11px] font-medium uppercase tracking-wider ${
-                  isLight ? 'text-gray-400' : 'text-gray-500'
-                }`}>
+                <span className="text-[11px] font-medium uppercase tracking-wider text-foreground/40">
                   {item.label}
                 </span>
-                <p className={`text-sm font-medium mt-0.5 leading-snug ${
-                  isLight ? 'text-gray-800' : 'text-gray-200'
-                }`}>
+                <p className="text-sm font-medium mt-0.5 leading-snug text-foreground">
                   {item.value}
                 </p>
               </div>

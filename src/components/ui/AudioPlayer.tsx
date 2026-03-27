@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo, useImperativeHandle, forwardRef } from 'react';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
@@ -45,15 +44,10 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
   const [lastTap, setLastTap] = useState(0);
   
   const shareButtonRef = useRef<HTMLButtonElement>(null);
-  const { theme } = useTheme();
   const { locale } = useLanguage();
   const { t } = useTranslations(locale);
   const isMobile = useIsMobile();
   const animationsDisabled = useAnimationsDisabled();
-  
-  // Theme-aware styling
-  const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
 
   // Generate dynamic waveform data
   const waveformBars = useMemo(() => {
@@ -62,78 +56,9 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
       baseHeight: Math.random() * 20 + 8,
       delay: Math.random() * 0.5,
       duration: 0.8 + Math.random() * 0.7,
-    }));  }, []);
+    }));
+  }, []);
 
-  // Theme-specific colors and styles
-  const getThemeStyles = (): {
-    container: string;
-    waveformActive: string;
-    waveformInactive: string;
-    progressGradient: string;
-    playButton: string;
-    controlButton: string;
-    backgroundGlow: string;
-    textPrimary: string;
-    textSecondary: string;
-    textAccent: string;
-  } => {
-    switch (theme) {
-      case 'light':
-        return {
-          container: 'bg-white/90 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-200/80',
-          waveformActive: 'from-blue-500 to-indigo-600',
-          waveformInactive: 'bg-gray-300/50',
-          progressGradient: 'from-blue-500 via-indigo-500 to-purple-500',
-          playButton: 'bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-lg shadow-blue-500/25',
-          controlButton: 'bg-white/80 hover:bg-white border border-gray-200 text-gray-700 hover:text-blue-600 shadow-sm hover:shadow-md',
-          backgroundGlow: 'from-blue-500/5 via-indigo-500/5 to-purple-500/5',
-          textPrimary: 'text-gray-900',
-          textSecondary: 'text-gray-600',
-          textAccent: 'text-blue-600',
-        };
-      case 'dark':
-        return {
-          container: 'bg-gray-900/90 shadow-[0_20px_60px_rgba(0,0,0,0.4)] border border-gray-700/50',
-          waveformActive: 'from-blue-400 to-purple-500',
-          waveformInactive: 'bg-gray-600/30',
-          progressGradient: 'from-blue-400 via-purple-500 to-pink-500',
-          playButton: 'bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg shadow-purple-500/25',
-          controlButton: 'bg-gray-800/80 hover:bg-gray-700 border border-gray-600 text-gray-300 hover:text-white shadow-sm hover:shadow-lg',
-          backgroundGlow: 'from-blue-500/10 via-purple-500/10 to-pink-500/10',
-          textPrimary: 'text-white',
-          textSecondary: 'text-gray-300',
-          textAccent: 'text-purple-400',
-        };
-      case 'colorful':
-        return {
-          container: 'bg-gray-900/80 shadow-[0_20px_60px_rgba(255,0,204,0.15)] border border-purple-500/30',
-          waveformActive: 'from-cyan-400 to-fuchsia-500',
-          waveformInactive: 'bg-purple-500/20',
-          progressGradient: 'from-cyan-400 via-fuchsia-500 to-blue-500',
-          playButton: 'bg-gradient-to-br from-cyan-400 to-fuchsia-500 hover:from-cyan-500 hover:to-fuchsia-600 shadow-lg shadow-fuchsia-500/30',
-          controlButton: 'bg-purple-900/50 hover:bg-purple-800/60 border border-purple-500/40 text-gray-200 hover:text-white shadow-sm hover:shadow-lg hover:shadow-purple-500/20',
-          backgroundGlow: 'from-cyan-500/15 via-fuchsia-500/15 to-blue-500/15',
-          textPrimary: 'text-white',
-          textSecondary: 'text-gray-300',
-          textAccent: 'text-fuchsia-400',        };
-      default:
-        // Default to colorful theme
-        return {
-          container: 'bg-gray-900/80 shadow-[0_20px_60px_rgba(255,0,204,0.15)] border border-purple-500/30',
-          waveformActive: 'from-cyan-400 to-fuchsia-500',
-          waveformInactive: 'bg-purple-500/20',
-          progressGradient: 'from-cyan-400 via-fuchsia-500 to-blue-500',
-          playButton: 'bg-gradient-to-br from-cyan-400 to-fuchsia-500 hover:from-cyan-500 hover:to-fuchsia-600 shadow-lg shadow-fuchsia-500/30',
-          controlButton: 'bg-purple-900/50 hover:bg-purple-800/60 border border-purple-500/40 text-gray-200 hover:text-white shadow-sm hover:shadow-lg hover:shadow-purple-500/20',
-          backgroundGlow: 'from-cyan-500/15 via-fuchsia-500/15 to-blue-500/15',
-          textPrimary: 'text-white',
-          textSecondary: 'text-gray-300',
-          textAccent: 'text-fuchsia-400',
-        };
-    }
-  };
-
-  const styles = getThemeStyles();
   // Audio loading and event handling
   useEffect(() => {
     console.log('AudioPlayer: Initializing with src:', src);
@@ -551,15 +476,15 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0;
   return (    <motion.div      initial={animationsDisabled ? {} : { opacity: 0, y: 20 }}
       animate={animationsDisabled ? {} : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}      className={`relative w-full rounded-2xl ${isMobile ? 'p-4' : 'p-6'} mb-6 backdrop-blur-2xl ${styles.container} podcast-player`}
+      transition={{ duration: 0.6, ease: "easeOut" }}      className={`relative w-full rounded-2xl ${isMobile ? 'p-4' : 'p-6'} mb-6 backdrop-blur-2xl bg-[var(--player-bg)] border border-[var(--player-border)] podcast-player`}
       aria-label="Enhanced Audio Player"
-      style={{ overflow: 'visible', zIndex: 100, position: 'relative' }}
+      style={{ overflow: 'visible', zIndex: 100, position: 'relative', boxShadow: 'var(--player-shadow)' }}
       data-podcast-player="true"
       data-audio-player="true"
     >      {/* Dynamic background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none rounded-2xl" style={{ zIndex: -1 }}>
         <motion.div 
-          className={`absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br ${styles.backgroundGlow} blur-3xl`}
+          className={`absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-gradient-start/5 via-gradient-mid/5 to-gradient-end/5 blur-3xl`}
           animate={isPlaying && !animationsDisabled ? {
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
@@ -571,7 +496,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           }}
         />
         <motion.div 
-          className={`absolute bottom-16 -right-32 w-80 h-80 rounded-full bg-gradient-to-br ${styles.backgroundGlow} blur-3xl`}
+          className={`absolute bottom-16 -right-32 w-80 h-80 rounded-full bg-gradient-to-br from-gradient-start/5 via-gradient-mid/5 to-gradient-end/5 blur-3xl`}
           animate={isPlaying && !animationsDisabled ? {
             scale: [1, 1.1, 1],
             rotate: [360, 180, 0],
@@ -592,7 +517,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className={`${isLight ? 'bg-red-50 border-red-200 text-red-700' : 'bg-red-900/20 border-red-800 text-red-300'} border rounded-2xl p-4 mb-6 flex items-center space-x-3`}
+          className="bg-[var(--color-error-bg)] border border-[var(--color-error-border)] text-[var(--color-error)] rounded-2xl p-4 mb-6 flex items-center space-x-3"
         >
           <svg className="w-6 h-6 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -619,12 +544,12 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: delaySeconds.md }}
             >
-              <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${styles.progressGradient}`} />
-              <span className={`text-sm uppercase tracking-wider font-medium ${styles.textSecondary}`}>
+              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]" />
+              <span className="text-sm uppercase tracking-wider font-medium text-foreground/60">
                 {category || 'Audio Content'}
               </span>
             </motion.div>            <motion.h3 
-              className={`text-xl font-bold ${styles.textPrimary}`}
+              className="text-xl font-bold text-foreground"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delaySeconds.lg }}
@@ -635,18 +560,10 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           
           {/* Language indicator */}
           <motion.div 
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${
               availableLanguages.length > 1
-                ? isLight 
-                  ? 'bg-blue-50 text-blue-700 border border-blue-200' 
-                  : isColorful
-                  ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-400/30'
-                  : 'bg-blue-500/10 text-blue-300 border border-blue-400/30'
-                : isLight 
-                  ? 'bg-gray-100 text-gray-700 border border-gray-200' 
-                  : isColorful
-                  ? 'bg-white/10 text-white/80 border border-white/20'
-                  : 'bg-gray-700/50 text-gray-300 border border-gray-600/50'
+                ? 'bg-primary/10 text-primary border-primary/30'
+                : 'bg-foreground/10 text-foreground/70 border-foreground/20'
             }`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -672,8 +589,8 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             key={bar.id}
             className={`w-1.5 rounded-full ${
               isPlaying 
-                ? `bg-gradient-to-t ${styles.waveformActive}` 
-                : styles.waveformInactive
+                ? 'bg-gradient-to-t from-[var(--player-waveform-from)] to-[var(--player-waveform-to)]'
+                : 'bg-[var(--player-waveform-off)]'
             }`}
             animate={isPlaying ? {
               height: [
@@ -702,7 +619,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
         {/* Waveform glow effect */}
         {isPlaying && (
           <motion.div
-            className={`absolute inset-0 bg-gradient-to-r ${styles.waveformActive} opacity-20 blur-xl`}
+            className="absolute inset-0 bg-gradient-to-r from-[var(--player-waveform-from)] to-[var(--player-waveform-to)] opacity-20 blur-xl"
             animate={{
               opacity: [0.1, 0.3, 0.1],
               scale: [0.8, 1.2, 0.8]
@@ -765,7 +682,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           ))}
             {/* Progress gradient - Enhanced visual feedback */}
           <motion.div 
-            className={`absolute top-0 left-0 h-full bg-gradient-to-r ${styles.progressGradient} rounded-full`}
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)] rounded-full"
             style={{ width: `${progressPercentage}%` }}
             animate={isPlaying && !animationsDisabled ? {
               boxShadow: [
@@ -794,17 +711,11 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 initial={animationsDisabled ? {} : { opacity: 0, y: 10 }}
                 animate={animationsDisabled ? {} : { opacity: 1, y: 0 }}
                 exit={animationsDisabled ? {} : { opacity: 0, y: 10 }}
-                className={`absolute -top-10 px-2 py-1 rounded text-xs font-medium ${
-                  isLight 
-                    ? 'bg-gray-900 text-white' 
-                    : 'bg-white text-gray-900'
-                } shadow-lg`}
+                className="absolute -top-10 px-2 py-1 rounded text-xs font-medium bg-foreground text-background shadow-lg"
                 style={{ left: `${(previewTime / duration) * 100}%`, transform: 'translateX(-50%)' }}
               >
                 {formatTime(previewTime)}
-                <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent ${
-                  isLight ? 'border-t-gray-900' : 'border-t-white'
-                }`} />
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-foreground" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -829,8 +740,8 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             onClick={togglePlay}
             whileTap={animationsDisabled ? {} : { scale: 0.9 }}
             whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
-            className={`relative ${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14'} flex items-center justify-center rounded-full ${styles.playButton} backdrop-blur-md overflow-hidden group transition-all duration-300 ${
-              isMobile ? 'active:shadow-2xl focus:ring-4 focus:ring-purple-500/50' : ''
+            className={`relative ${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14'} flex items-center justify-center rounded-full bg-gradient-to-br from-[var(--player-btn-from)] to-[var(--player-btn-to)] shadow-lg backdrop-blur-md overflow-hidden group transition-all duration-300 ${
+              isMobile ? 'active:shadow-2xl focus:ring-4 focus:ring-primary/50' : ''
             }`}
             disabled={loadError}
             aria-label={isPlaying ? "Pause" : "Play"}
@@ -901,9 +812,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               onClick={stopAudio}
               whileTap={animationsDisabled ? {} : { scale: 0.9 }}
               whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
-              className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200 ${
-                isMobile ? 'active:bg-purple-500/20' : ''
-              } relative z-10`}
+              className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] shadow-sm hover:shadow-md backdrop-blur-md transition-all duration-200 relative z-10`}
               disabled={loadError}
               aria-label="Stop"
               onTouchStart={() => setIsTouching(true)}
@@ -924,11 +833,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               onClick={changePlaybackRate}
               whileTap={animationsDisabled ? {} : { scale: 0.9 }}
               whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
-              className={`flex items-center justify-center ${isMobile ? 'px-4 h-12 min-w-[64px] min-h-[48px]' : 'px-4 h-10'} rounded-full ${styles.controlButton} backdrop-blur-md ${
-                isMobile ? 'text-sm' : 'text-sm'
-              } font-semibold transition-all duration-200 ${
-                isMobile ? 'active:bg-purple-500/20' : ''
-              } relative z-10`}
+              className={`flex items-center justify-center ${isMobile ? 'px-4 h-12 min-w-[64px] min-h-[48px]' : 'px-4 h-10'} rounded-full bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] text-sm font-semibold shadow-sm hover:shadow-md backdrop-blur-md transition-all duration-200 relative z-10`}
               disabled={loadError}
               aria-label={`Change playback speed, currently ${playbackRate}x`}
               onTouchStart={() => setIsTouching(true)}
@@ -938,7 +843,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 initial={animationsDisabled ? {} : { y: -10, opacity: 0 }}
                 animate={animationsDisabled ? {} : { y: 0, opacity: 1 }}
                 exit={animationsDisabled ? {} : { y: 10, opacity: 0 }}
-                className={styles.textAccent}
+                className="text-[var(--player-accent)]"
               >
                 {playbackRate}×
               </motion.span>
@@ -952,9 +857,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 }}
                 whileTap={animationsDisabled ? {} : { scale: 0.9 }}
                 whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
-                className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full ${styles.controlButton} backdrop-blur-md transition-all duration-200 ${
-                  isMobile ? 'active:bg-purple-500/20' : ''
-                } relative z-10`}
+                className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] shadow-sm hover:shadow-md backdrop-blur-md transition-all duration-200 relative z-10`}
                 disabled={loadError}
                 aria-label={t('blog.aria.shareAudio')}
                 data-share-menu
@@ -976,7 +879,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                     <div className="fixed inset-0 z-[999998]" style={{ pointerEvents: 'none' }} />
                       <motion.div
                       {...getDropdownAnimation()}
-                      className={`absolute ${styles.container} rounded-2xl backdrop-blur-2xl p-4 min-w-[250px] shadow-2xl border border-white/10`}
+                      className="absolute bg-[var(--player-bg)] border border-[var(--player-border)] rounded-2xl backdrop-blur-2xl p-4 min-w-[250px]"
                       data-share-menu
                       transition={{ 
                         duration: durationSeconds.brisk, 
@@ -986,6 +889,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                       }}style={{
                       zIndex: 999999,
                       position: 'absolute',
+                      boxShadow: 'var(--player-shadow)',
                       ...((() => {
                         const { position, alignment } = dropdownPosition;
                         const dropdownWidth = 250;
@@ -1078,18 +982,23 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                         })())
                       }}
                     >
-                      <div className={`w-0 h-0 ${
-                        dropdownPosition.position === 'top' ? `border-l-2 border-r-2 border-t-4 border-transparent ${isLight ? 'border-t-white' : 'border-t-gray-800'}` :
-                        dropdownPosition.position === 'bottom' ? `border-l-2 border-r-2 border-b-4 border-transparent ${isLight ? 'border-b-white' : 'border-b-gray-800'}` :
-                        dropdownPosition.position === 'left' ? `border-t-2 border-b-2 border-l-4 border-transparent ${isLight ? 'border-l-white' : 'border-l-gray-800'}` :
-                        `border-t-2 border-b-2 border-r-4 border-transparent ${isLight ? 'border-r-white' : 'border-r-gray-800'}`
-                      }`} />
+                      <div className="w-0 h-0 border-solid"
+                        style={{
+                          borderWidth: dropdownPosition.position === 'top' ? '0 6px 6px 6px' :
+                                       dropdownPosition.position === 'bottom' ? '6px 6px 0 6px' :
+                                       dropdownPosition.position === 'left' ? '6px 0 6px 6px' :
+                                       '6px 6px 6px 0',
+                          borderColor: dropdownPosition.position === 'top' ? `transparent transparent var(--player-bg) transparent` :
+                                       dropdownPosition.position === 'bottom' ? `var(--player-bg) transparent transparent transparent` :
+                                       dropdownPosition.position === 'left' ? `transparent transparent transparent var(--player-bg)` :
+                                       `transparent var(--player-bg) transparent transparent`,
+                        }} />
                     </div>
                     
                     <div className="space-y-2">
                         <button
                           onClick={copyAudioLink}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${styles.controlButton} transition-all duration-200 hover:scale-105`}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] transition-all duration-200 hover:scale-105`}
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -1099,7 +1008,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                         
                         <button
                           onClick={() => shareToSocialMedia('twitter')}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${styles.controlButton} transition-all duration-200 hover:scale-105`}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] transition-all duration-200 hover:scale-105`}
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
@@ -1108,7 +1017,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                         </button>
                           <button
                           onClick={() => shareToSocialMedia('whatsapp')}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${styles.controlButton} transition-all duration-200 hover:scale-105`}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] transition-all duration-200 hover:scale-105`}
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -1118,7 +1027,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                         
                         <button
                           onClick={() => shareToSocialMedia('linkedin')}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${styles.controlButton} transition-all duration-200 hover:scale-105`}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] transition-all duration-200 hover:scale-105`}
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -1128,7 +1037,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                         
                         <button
                           onClick={() => shareToSocialMedia('facebook')}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${styles.controlButton} transition-all duration-200 hover:scale-105`}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] transition-all duration-200 hover:scale-105`}
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -1136,11 +1045,11 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                           Share on Facebook
                         </button>
                         
-                        <div className={`border-t ${isLight ? 'border-gray-200' : 'border-gray-700'} my-2`} />
+                        <div className="border-t border-[var(--player-ctrl-border)] my-2" />
                         
                         <button
                           onClick={downloadAudio}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${styles.controlButton} transition-all duration-200 hover:scale-105`}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] transition-all duration-200 hover:scale-105`}
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -1154,14 +1063,14 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
         </div>        {/* Enhanced time display with duration counter - Desktop only */}
         {!isMobile && (
           <motion.div 
-            className={`flex items-center space-x-3 px-4 py-2 rounded-full backdrop-blur-md ${styles.controlButton} text-sm`}
+            className={`flex items-center space-x-3 px-4 py-2 rounded-full backdrop-blur-md bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] text-sm`}
             whileHover={!animationsDisabled ? { scale: 1.05 } : {}}
           >
-            <div className={`font-mono ${styles.textAccent}`}>
+            <div className={`font-mono text-[var(--player-accent)]`}>
               {formatTime(currentTime)}
             </div>
-            <div className={`w-1 h-1 rounded-full ${styles.textSecondary}`} />
-            <div className={`font-mono ${styles.textSecondary}`}>
+            <div className={`w-1 h-1 rounded-full text-foreground/60`} />
+            <div className={`font-mono text-foreground/60`}>
               {formatTime(duration)}
             </div>
           </motion.div>        )}</div>
@@ -1169,14 +1078,14 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
       {/* Mobile timer display */}
       {isMobile && (
         <div className="flex justify-center mt-3">
-          <div className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg ${styles.controlButton} text-sm font-mono`}>
-            <span className={styles.textAccent}>
+          <div className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] text-sm font-mono`}>
+            <span className="text-[var(--player-accent)]">
               {formatTime(currentTime)}
             </span>
-            <span className={styles.textSecondary}>
+            <span className="text-foreground/40">
               /
             </span>
-            <span className={styles.textSecondary}>
+            <span className="text-foreground/60">
               {formatTime(duration)}
             </span>
           </div>
@@ -1190,11 +1099,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className={`absolute top-4 right-4 px-4 py-2 rounded-xl text-sm font-medium backdrop-blur-md ${
-              isLight 
-                ? 'bg-green-100/90 text-green-700 border border-green-200' 
-                : 'bg-green-900/30 text-green-300 border border-green-800'
-            } shadow-xl z-50`}
+            className="absolute top-4 right-4 px-4 py-2 rounded-xl text-sm font-medium backdrop-blur-md bg-[var(--color-success-bg)] text-[var(--color-success)] border border-[var(--color-success-border)] shadow-xl z-50"
           >
             ✓ {t('blog.aria.audioLinkCopied')}
           </motion.div>

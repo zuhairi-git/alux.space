@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { delaySeconds } from '@/design-system';
-import QuoteBlock from '../ui/QuoteBlock';
-import ChapterDivider from '../ui/ChapterDivider';
+import { delaySeconds, QuoteBlock, ChapterDivider } from '@/design-system';
 
 interface BlogContentProps {
   content: string;

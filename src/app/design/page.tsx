@@ -166,7 +166,7 @@ function Swatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
     <div className="flex flex-col items-center gap-1 group">
       <div
-        className="w-12 h-12 rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm"
+        className="w-12 h-12 rounded-lg border border-[var(--card-border)] shadow-sm"
         style={{ backgroundColor: `var(${cssVar})` }}
       />
       <span className="text-[10px] text-center opacity-70 leading-tight">{label}</span>
@@ -179,7 +179,7 @@ function ShadowSwatch({ cssVar, label }: { cssVar: string; label: string }) {
   return (
     <div className="flex flex-col items-center gap-1 group">
       <div
-        className="w-16 h-16 rounded-lg bg-white dark:bg-gray-800"
+        className="w-16 h-16 rounded-lg bg-[var(--card-from-bg)] border border-[var(--card-border)]"
         style={{ boxShadow: `var(${cssVar})` }}
       />
       <span className="text-[10px] text-center opacity-70">{label}</span>
@@ -220,7 +220,7 @@ function PropsTable({ entry }: { entry: ComponentEntry }) {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="text-left border-b border-gray-200 dark:border-gray-700">
+          <tr className="text-left border-b border-[var(--card-border)]">
             <th className="py-1.5 pr-4 font-medium">Prop</th>
             <th className="py-1.5 pr-4 font-medium">Type</th>
             <th className="py-1.5 pr-4 font-medium">Default</th>
@@ -229,7 +229,7 @@ function PropsTable({ entry }: { entry: ComponentEntry }) {
         </thead>
         <tbody>
           {entry.props.map(p => (
-            <tr key={p.name} className="border-b border-gray-100 dark:border-gray-800">
+            <tr key={p.name} className="border-b border-[var(--card-border)]/60">
               <td className="py-1.5 pr-4 font-mono text-xs text-primary">{p.name}</td>
               <td className="py-1.5 pr-4 font-mono text-xs opacity-70">{p.type}</td>
               <td className="py-1.5 pr-4 text-xs opacity-60">{p.default}</td>
@@ -279,7 +279,7 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
               <span className="text-xs font-medium opacity-60">Tokens:</span>
               <div className="flex flex-wrap gap-1 mt-1">
                 {entry.tokens.map(t => (
-                  <code key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 font-mono">{t}</code>
+                  <code key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-foreground/8 font-mono">{t}</code>
                 ))}
               </div>
             </div>
@@ -305,11 +305,12 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
 function DemoSection({ children, code, language = 'tsx' }: { children: React.ReactNode; code: string; language?: string }) {
   const [showCode, setShowCode] = useState(false);
   return (
-    <div className="space-y-4">
-      <div className="theme-card-flex p-6 rounded-xl">
+    <div className="rounded-xl border border-[var(--card-border)] overflow-hidden">
+      <div className="p-6">
         {children}
       </div>
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between px-4 py-2 border-t border-[var(--card-border)] bg-foreground/[0.025]">
+        <span className="text-[10px] font-mono uppercase tracking-widest opacity-30">Preview</span>
         <button
           onClick={() => setShowCode(!showCode)}
           className="inline-flex items-center gap-1.5 text-xs font-medium text-primary opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
@@ -452,7 +453,7 @@ function TextSection() {
 
       <div className="theme-card-flex p-4 rounded-xl mt-4">
         <p className="text-xs font-mono opacity-50 mb-3">Usage</p>
-        <pre className="text-xs opacity-70 whitespace-pre-wrap">{`import Text from '@/components/ui/Text';
+        <pre className="text-xs opacity-70 whitespace-pre-wrap">{`import { Text } from '@/design-system';
 
 <Text variant="h2">Section Title</Text>
 <Text variant="body">Paragraph content here.</Text>
@@ -503,7 +504,7 @@ function MotionSection() {
       ].map(e => (
         <div key={e.name} className="theme-card-flex p-4 rounded-xl group">
           <span className="text-xs font-mono opacity-60 mb-2">{e.name}</span>
-          <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+          <div className="h-2 bg-foreground/15 rounded-full overflow-hidden">
             <div
               className="h-full bg-primary rounded-full w-0 group-hover:w-full"
               style={{
@@ -531,7 +532,7 @@ function GradientsSection() {
       {gradients.map(g => (
         <div key={g.label} className="flex flex-col items-center gap-2">
           <div
-            className="w-full h-24 rounded-xl border border-gray-200 dark:border-gray-700"
+            className="w-full h-24 rounded-xl border border-[var(--card-border)]"
             style={{ background: g.css }}
           />
           <span className="text-xs font-medium opacity-60">{g.label}</span>
@@ -545,8 +546,7 @@ function GradientsSection() {
 
 function ButtonsSection() {
   return (
-    <DemoSection code={`import Button from '@/components/ui/Button';
-import Icon from '@/components/ui/Icon';
+    <DemoSection code={`import { Button, Icon } from '@/design-system';
 
 // Primary — filled, highest emphasis
 <Button variant="primary">Save changes</Button>
@@ -656,7 +656,7 @@ import Icon from '@/components/ui/Icon';
 
 function BadgesSection() {
   return (
-    <DemoSection code={`import Badge from '@/components/ui/Badge';
+    <DemoSection code={`import { Badge } from '@/design-system';
 
 <Badge variant="default">Default</Badge>
 <Badge variant="success" dot>Active</Badge>
@@ -702,7 +702,7 @@ function BadgesSection() {
 function InputsSection() {
   const [value, setValue] = useState('');
   return (
-    <DemoSection code={`import Input from '@/components/ui/Input';
+    <DemoSection code={`import { Input } from '@/design-system';
 
 <Input label="Email" placeholder="you@example.com" />
 <Input label="Search" leftIcon={<Icon name="search" />} />
@@ -748,12 +748,12 @@ function TogglesSection() {
   const [t2, setT2] = useState(false);
   const [t3, setT3] = useState(true);
   return (
-    <DemoSection code={`import Toggle from '@/components/ui/Toggle';
+    <DemoSection code={`import { Toggle } from '@/design-system';
 
 <Toggle checked={enabled} onChange={setEnabled} label="Notifications" />
 <Toggle checked={false} onChange={() => {}} label="Disabled" disabled />
 <Toggle checked={true} onChange={() => {}} size="sm" label="Small" />`}>
-      <div className="space-y-4">
+      <div className="flex flex-col gap-3">
         <Toggle checked={t1} onChange={setT1} label="Enable notifications" />
         <Toggle checked={t2} onChange={setT2} label="Dark mode" />
         <Toggle checked={t3} onChange={setT3} label="Auto-save" size="sm" />
@@ -765,7 +765,7 @@ function TogglesSection() {
 
 function AvatarsSection() {
   return (
-    <DemoSection code={`import Avatar from '@/components/ui/Avatar';
+    <DemoSection code={`import { Avatar } from '@/design-system';
 
 <Avatar initials="AZ" size="lg" status="online" />
 <Avatar initials="JD" size="md" />
@@ -804,7 +804,7 @@ function AvatarsSection() {
 
 function DividersSection() {
   return (
-    <DemoSection code={`import Divider from '@/components/ui/Divider';
+    <DemoSection code={`import { Divider } from '@/design-system';
 
 <Divider />
 <Divider label="Or continue with" />
@@ -841,7 +841,7 @@ function DividersSection() {
 
 function TooltipsSection() {
   return (
-    <DemoSection code={`import Tooltip from '@/components/ui/Tooltip';
+    <DemoSection code={`import { Tooltip } from '@/design-system';
 
 <Tooltip text="I appear on hover">
   <button>Hover me</button>
@@ -864,7 +864,7 @@ function TooltipsSection() {
 
 function CardsSurfaceSection() {
   return (
-    <DemoSection code={`import Card from '@/components/ui/cards/Card';
+    <DemoSection code={`import { Card, SurfaceCard, CardContent } from '@/design-system';
 // DS shell — elevation levels: flat | raised (default) | floating
 
 <Card elevation="raised">
@@ -876,7 +876,7 @@ function CardsSurfaceSection() {
 </Card>
 
 // SurfaceCard — motion wrapper with theme variants
-import SurfaceCard from '@/components/ui/cards/SurfaceCard';
+import { SurfaceCard } from '@/design-system';
 <SurfaceCard variant="primary">...</SurfaceCard>`}>
       <div className="space-y-6">
         {/* DS shell — elevation levels */}
@@ -920,7 +920,7 @@ function CardsTimelineSection() {
       <p className="text-sm opacity-60">
         Animated entry cards with floating particles — designed for experience and education timelines.
       </p>
-      <DemoSection code={`import { TimelineCard } from '@/components/ui/cards';
+      <DemoSection code={`import { TimelineCard } from '@/design-system';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 <TimelineCard
@@ -952,7 +952,7 @@ function CardsMediaSection() {
       <p className="text-sm opacity-60">
         Image-first cards with three layout variants.
       </p>
-      <DemoSection code={`import { MediaCard } from '@/components/ui/cards';
+      <DemoSection code={`import { MediaCard } from '@/design-system';
 
 <MediaCard
   variant="basic"
@@ -987,7 +987,7 @@ function CardsDomainSection() {
       icon: 'article',
       desc: 'Article card with featured/standard/overlay view modes, tags, and read-time.',
       href: '/blog',
-      importLine: "import { BlogCard } from '@/components/ui/cards';",
+      importLine: "import { BlogCard } from '@/design-system';",
       prop: 'viewMode="standard | overlay | featured"',
     },
     {
@@ -995,7 +995,7 @@ function CardsDomainSection() {
       icon: 'work',
       desc: 'Project card with localized title/description, status badge, and tag chips.',
       href: '/portfolio',
-      importLine: "import { PortfolioCard } from '@/components/ui/cards';",
+      importLine: "import { PortfolioCard } from '@/design-system';",
       prop: 'displayState="published | archived | coming-soon"',
     },
     {
@@ -1003,7 +1003,7 @@ function CardsDomainSection() {
       icon: 'headphones',
       desc: 'Podcast/audio episode card with cover image, category, and language badges.',
       href: '/podcast',
-      importLine: "import { AudioCard } from '@/components/ui/cards';",
+      importLine: "import { AudioCard } from '@/design-system';",
       prop: 'variant="grid | list"',
     },
   ];
@@ -1012,8 +1012,7 @@ function CardsDomainSection() {
     <div className="space-y-4">
       <p className="text-sm opacity-60">
         Page-specific cards with rich localized data schemas. All available from{' '}
-        <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">@/components/ui/cards</code>{' '}
-        or <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">@/design-system</code>.
+        <code className="text-xs bg-foreground/8 px-1 rounded">@/design-system</code>.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {items.map(item => (
@@ -1027,7 +1026,7 @@ function CardsDomainSection() {
             </span>
             <h4 className="font-semibold text-sm font-mono mb-1">{item.label}</h4>
             <p className="text-xs opacity-60 leading-relaxed mb-3">{item.desc}</p>
-            <code className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 font-mono block truncate opacity-70 mb-1">
+            <code className="text-[10px] px-1.5 py-0.5 rounded bg-foreground/8 font-mono block truncate opacity-70 mb-1">
               {item.importLine}
             </code>
             <code className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono block truncate">
@@ -1046,7 +1045,7 @@ function CardsDomainSection() {
 
 function QuotesSection() {
   return (
-    <DemoSection code={`import QuoteBlock from '@/components/ui/QuoteBlock';
+    <DemoSection code={`import { QuoteBlock } from '@/design-system';
 
 <QuoteBlock
   quote="Design is thinking made visual."
@@ -1063,19 +1062,53 @@ function QuotesSection() {
 }
 
 function IconsSection() {
+  const iconGroups = [
+    {
+      label: 'Navigation',
+      icons: ['home', 'menu', 'close', 'arrow_back', 'arrow_forward', 'arrow_upward', 'expand_more', 'expand_less', 'chevron_right'],
+    },
+    {
+      label: 'Actions',
+      icons: ['search', 'settings', 'edit', 'delete_sweep', 'download', 'upload', 'share', 'link', 'add_circle'],
+    },
+    {
+      label: 'Content',
+      icons: ['article', 'description', 'folder', 'code', 'language', 'lightbulb', 'format_quote', 'bookmark'],
+    },
+    {
+      label: 'Status',
+      icons: ['check_circle', 'error', 'info', 'visibility', 'schedule', 'star', 'favorite', 'verified'],
+    },
+    {
+      label: 'People & Social',
+      icons: ['person', 'groups', 'account_circle', 'forum', 'chat', 'notifications_active', 'handshake'],
+    },
+    {
+      label: 'Design & Dev',
+      icons: ['palette', 'design_services', 'animation', 'dark_mode', 'light_mode', 'devices', 'smart_toy', 'rocket_launch'],
+    },
+  ];
+
   return (
-    <DemoSection code={`import Icon from '@/components/ui/Icon';
+    <DemoSection code={`import { Icon } from '@/design-system';
 
 <Icon name="home" />
 <Icon name="search" />
 <Icon name="settings" className="text-primary" />`}>
-      <div className="flex flex-wrap gap-4">
-        {['home', 'search', 'settings', 'favorite', 'star', 'palette', 'code', 'dark_mode', 'light_mode', 'accessibility_new', 'add', 'delete', 'edit', 'visibility', 'download', 'upload'].map(name => (
-          <Tooltip key={name} text={name}>
-            <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors">
-              <Icon name={name} />
+      <div className="space-y-6">
+        {iconGroups.map(group => (
+          <div key={group.label}>
+            <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">{group.label}</h4>
+            <div className="flex flex-wrap gap-3">
+              {group.icons.map(name => (
+                <Tooltip key={name} text={name}>
+                  <div className="w-10 h-10 rounded-lg bg-foreground/8 flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors cursor-default">
+                    <Icon name={name} />
+                  </div>
+                </Tooltip>
+              ))}
             </div>
-          </Tooltip>
+          </div>
         ))}
       </div>
     </DemoSection>
@@ -1129,7 +1162,7 @@ const fadeIn = {
 
 function ChapterDividerSection() {
   return (
-    <DemoSection code={`import ChapterDivider from '@/components/ui/ChapterDivider';
+    <DemoSection code={`import { ChapterDivider } from '@/design-system';
 
 <ChapterDivider title="Getting Started" number={1} />`}>
       <div className="space-y-6">
@@ -1152,7 +1185,7 @@ function SelectSection() {
     { value: 'svelte', label: 'Svelte' },
   ];
   return (
-    <DemoSection code={`import Select from '@/components/ui/Select';
+    <DemoSection code={`import { Select } from '@/design-system';
 
 <Select
   label="Framework"
@@ -1196,7 +1229,7 @@ function ModalSection() {
   const [openMd, setOpenMd] = useState(false);
   const [openLg, setOpenLg] = useState(false);
   return (
-    <DemoSection code={`import Modal from '@/components/ui/Modal';
+    <DemoSection code={`import { Modal } from '@/design-system';
 
 <Modal open={isOpen} onClose={() => setOpen(false)} title="Dialog Title" size="md">
   <p>Modal content goes here.</p>
@@ -1223,7 +1256,7 @@ function ModalSection() {
 
 function TabsSection() {
   return (
-    <DemoSection code={`import Tabs from '@/components/ui/Tabs';
+    <DemoSection code={`import { Tabs } from '@/design-system';
 
 <Tabs tabs={[
   { key: 'overview', label: 'Overview', content: <p>Overview content</p> },
@@ -1241,7 +1274,7 @@ function TabsSection() {
 
 function AlertsSection() {
   return (
-    <DemoSection code={`import Alert from '@/components/ui/Alert';
+    <DemoSection code={`import { Alert } from '@/design-system';
 
 <Alert variant="info" title="Info">Informational message.</Alert>
 <Alert variant="success" title="Success">Operation completed.</Alert>
@@ -1259,7 +1292,7 @@ function AlertsSection() {
 
 function SkeletonSection() {
   return (
-    <DemoSection code={`import Skeleton from '@/components/ui/Skeleton';
+    <DemoSection code={`import { Skeleton } from '@/design-system';
 
 <Skeleton variant="text" lines={3} />
 <Skeleton variant="circular" width={48} />
@@ -1303,7 +1336,7 @@ function SkeletonSection() {
 
 function ProgressSection() {
   return (
-    <DemoSection code={`import Progress from '@/components/ui/Progress';
+    <DemoSection code={`import { Progress } from '@/design-system';
 
 // Linear
 <Progress value={65} label="Upload" showValue />
@@ -1335,7 +1368,7 @@ function ProgressSection() {
 
 function BreadcrumbSection() {
   return (
-    <DemoSection code={`import Breadcrumb from '@/components/ui/Breadcrumb';
+    <DemoSection code={`import { Breadcrumb } from '@/design-system';
 
 <Breadcrumb items={[
   { label: 'Home', href: '/' },
@@ -1381,7 +1414,7 @@ function ConventionsSection() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left border-b border-gray-200 dark:border-gray-700">
+              <tr className="text-left border-b border-[var(--card-border)]">
                 <th className="py-1.5 pr-4 font-medium">Context</th>
                 <th className="py-1.5 pr-4 font-medium">Use</th>
                 <th className="py-1.5 font-medium">Avoid</th>
@@ -1396,10 +1429,10 @@ function ConventionsSection() {
                 ['Canvas / SVG JS', 'palette.blue[500]', "'#3b82f6'"],
               ].map(([ctx, use, avoid]) => (
               /* eslint-enable design-system/no-hardcoded-colors */
-                <tr key={ctx} className="border-b border-gray-100 dark:border-gray-800">
+                <tr key={ctx} className="border-b border-[var(--card-border)]/60">
                   <td className="py-1.5 pr-4 font-sans text-sm">{ctx}</td>
-                  <td className="py-1.5 pr-4 text-green-600 dark:text-green-400">{use}</td>
-                  <td className="py-1.5 text-red-500 dark:text-red-400 line-through opacity-70">{avoid}</td>
+                  <td className="py-1.5 pr-4 text-[var(--color-success)]">{use}</td>
+                  <td className="py-1.5 text-[var(--color-error)] line-through opacity-70">{avoid}</td>
                 </tr>
               ))}
             </tbody>
@@ -1416,7 +1449,7 @@ function ConventionsSection() {
             ['components.ts', 'Component registry (props, tokens, a11y)'],
           ].map(([file, desc]) => (
             <li key={file} className="flex gap-2">
-              <code className="text-xs px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 shrink-0">{file}</code>
+              <code className="text-xs px-1.5 py-0.5 rounded bg-foreground/8 shrink-0">{file}</code>
               <span className="opacity-70">{desc}</span>
             </li>
           ))}
@@ -1432,8 +1465,8 @@ function ConventionsSection() {
           ))}
         </div>
         <p className="text-sm opacity-70">
-          Define defaults in <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">:root</code> and
-          override in each <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">.theme-*</code> block.
+          Define defaults in <code className="text-xs bg-foreground/8 px-1 rounded">:root</code> and
+          override in each <code className="text-xs bg-foreground/8 px-1 rounded">.theme-*</code> block.
         </p>
       </div>
 
@@ -1512,7 +1545,7 @@ function LintRulesSection() {
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <span className="text-xs font-medium opacity-50">Severity</span>
-            <p><span className="px-2 py-0.5 text-xs rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">warn</span></p>
+            <p><span className="px-2 py-0.5 text-xs rounded-full bg-[var(--color-warning-bg)] text-[var(--color-warning)]">warn</span></p>
           </div>
           <div>
             <span className="text-xs font-medium opacity-50">Scope</span>
@@ -1521,15 +1554,15 @@ function LintRulesSection() {
         </div>
         <div className="text-sm space-y-1">
           <span className="text-xs font-medium opacity-50">What it flags</span>
-          <p className="opacity-70">Hex color literals (<code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">#xxx</code>, <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">#xxxxxx</code>, <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">#xxxxxxxx</code>) in string and template literals.</p>
+          <p className="opacity-70">Hex color literals (<code className="text-xs bg-foreground/8 px-1 rounded">#xxx</code>, <code className="text-xs bg-foreground/8 px-1 rounded">#xxxxxx</code>, <code className="text-xs bg-foreground/8 px-1 rounded">#xxxxxxxx</code>) in string and template literals.</p>
         </div>
         <div className="text-sm space-y-1">
           <span className="text-xs font-medium opacity-50">How to fix</span>
-          <p className="opacity-70">Replace with <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">var(--token-name)</code> or import from <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">@/design-system</code>.</p>
+          <p className="opacity-70">Replace with <code className="text-xs bg-foreground/8 px-1 rounded">var(--token-name)</code> or import from <code className="text-xs bg-foreground/8 px-1 rounded">@/design-system</code>.</p>
         </div>
         <div className="text-sm space-y-1">
           <span className="text-xs font-medium opacity-50">Exceptions</span>
-          <p className="opacity-70">For canvas/SVG contexts that can&apos;t read CSS variables, use <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">palette.*</code> from tokens.ts and add an eslint-disable comment with reason.</p>
+          <p className="opacity-70">For canvas/SVG contexts that can&apos;t read CSS variables, use <code className="text-xs bg-foreground/8 px-1 rounded">palette.*</code> from tokens.ts and add an eslint-disable comment with reason.</p>
         </div>
       </div>
 

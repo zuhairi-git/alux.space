@@ -13,19 +13,28 @@ interface ToggleProps {
   className?: string;
 }
 
+/* Track outer dimensions */
 const trackSize: Record<ToggleSize, string> = {
-  sm: 'w-8 h-[18px]',
+  sm: 'w-9 h-5',
   md: 'w-11 h-6',
 };
 
+/* Thumb circle */
 const thumbSize: Record<ToggleSize, string> = {
   sm: 'w-3.5 h-3.5',
-  md: 'w-5 h-5',
+  md: 'w-4.5 h-4.5',
 };
 
+/* Checked → slide to right end (track-width − thumb-width − 2×padding) */
 const thumbTranslate: Record<ToggleSize, string> = {
-  sm: 'translate-x-[14px]',
-  md: 'translate-x-5',
+  sm: 'translate-x-4',        /* 36 − 14 − 2×3 = 16px */
+  md: 'translate-x-[22px]',   /* 44 − 18 − 2×2 ≈ 22px */
+};
+
+/* Padding inside the track (space between edge and thumb) */
+const thumbOffset: Record<ToggleSize, string> = {
+  sm: 'top-[3px] left-[3px]',
+  md: 'top-[3px] left-[2px]',
 };
 
 export default function Toggle({
@@ -60,12 +69,12 @@ export default function Toggle({
         className={[
           'relative inline-flex shrink-0 rounded-full',
           'transition-colors duration-200 ease-out',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--btn-primary-bg)] focus-visible:ring-offset-2',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
           'cursor-pointer',
           trackSize[size],
           checked
-            ? 'bg-[var(--btn-primary-bg)]'
-            : 'bg-[var(--foreground)]/15',
+            ? 'bg-primary'
+            : 'bg-foreground/25',
           disabled && 'opacity-50 cursor-not-allowed',
         ]
           .filter(Boolean)
@@ -74,9 +83,9 @@ export default function Toggle({
         <span
           aria-hidden="true"
           className={[
-            'inline-block rounded-full bg-white shadow-sm',
-            'transform transition-transform duration-200 ease-out',
-            'mt-[2px] ml-[2px]',
+            'absolute rounded-full bg-white shadow-sm',
+            'transition-transform duration-200 ease-out',
+            thumbOffset[size],
             thumbSize[size],
             checked ? thumbTranslate[size] : 'translate-x-0',
           ].join(' ')}
@@ -84,7 +93,7 @@ export default function Toggle({
       </button>
       {label && (
         <span
-          className={`text-sm text-[var(--foreground)] ${disabled ? 'opacity-50' : 'opacity-80'}`}
+          className={`text-sm text-foreground ${disabled ? 'opacity-50' : 'opacity-80'}`}
           onClick={handleClick}
           role="presentation"
         >

@@ -4,7 +4,6 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { durationSeconds } from '@/design-system';
-import { useTheme } from '@/context/ThemeContext';
 
 interface ImageSectionProps {
   src: string;
@@ -19,9 +18,6 @@ const ImageSection: React.FC<ImageSectionProps> = ({
   caption,
   aspectRatio = 'wide' 
 }) => {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
-  
   // Define height based on aspect ratio
   const getHeightClass = () => {
     switch (aspectRatio) {
@@ -39,11 +35,10 @@ const ImageSection: React.FC<ImageSectionProps> = ({
       transition={{ duration: durationSeconds.slow }}
       className="my-12 max-w-4xl mx-auto"
     >
-      <div className={`relative rounded-xl overflow-hidden ${getHeightClass()} ${
-        isLight 
-          ? 'shadow-[0_10px_30px_-15px_rgba(0,0,0,0.2)]' 
-          : 'shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)]'
-      }`}>
+      <div
+        className={`relative rounded-xl overflow-hidden ${getHeightClass()}`}
+        style={{ boxShadow: '0 10px 30px -15px var(--card-shadow-color)' }}
+      >
         <Image
           src={src}
           alt={alt}
@@ -53,13 +48,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({
         />
         
         {/* Gradient overlay for aesthetics */}
-        <div 
-          className={`absolute inset-0 ${
-            isLight 
-              ? 'bg-gradient-to-t from-black/10 to-transparent' 
-              : 'bg-gradient-to-t from-black/30 to-transparent'
-          }`} 
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         
         {/* Decorative corner accents */}
         <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-white/30 rounded-tl-md"></div>
@@ -70,7 +59,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({
       
       {caption && (
         <div className="mt-3 text-center">
-          <p className={`text-sm italic ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+          <p className="text-sm italic text-foreground/60">
             {caption}
           </p>
         </div>

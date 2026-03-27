@@ -157,7 +157,8 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData)
           }}
         />
-      </head>      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
+      </head>
+      <body className={`${poppins.variable} ${roboto.variable} ${tajawal.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
             <AnalyticsProvider>

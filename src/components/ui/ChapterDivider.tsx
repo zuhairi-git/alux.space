@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
-import { useTheme } from '@/context/ThemeContext';
 import Link from 'next/link';
 
 interface ChapterDividerProps {
@@ -13,17 +12,8 @@ interface ChapterDividerProps {
 }
 
 const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) => {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
-  
   // Generate ID from title if not provided
   const chapterId = id || title.toLowerCase().replace(/\s+/g, '-');
-  
-  // Color variables for light/dark themes
-  const primaryColor = isLight ? 'from-purple-500 to-pink-500' : 'from-purple-400 to-pink-400';
-  const secondaryColor = isLight ? 'from-blue-400 to-indigo-500' : 'from-blue-300 to-indigo-400';
-  const textColor = isLight ? 'text-gray-900' : 'text-white';
-  const subtleTextColor = isLight ? 'text-gray-600' : 'text-gray-300';
 
   return (
     <motion.div
@@ -36,19 +26,19 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
     >
       {/* Abstract background shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 blur-3xl"></div>
-        <div className="absolute top-10 -right-10 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 blur-3xl"></div>
+        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-gradient-start to-gradient-mid blur-3xl"></div>
+        <div className="absolute top-10 -right-10 w-48 h-48 rounded-full bg-gradient-to-br from-gradient-mid to-gradient-end blur-3xl"></div>
       </div>
       
       <div className="flex flex-col items-center relative z-10">
         {/* Top design element - gradient line with dots */}
         <div className="flex items-center w-full max-w-xl mx-auto mb-8">
-          <div className={`h-px flex-1 bg-gradient-to-r ${primaryColor} opacity-30`}></div>
+          <div className="h-px flex-1 bg-gradient-to-r from-gradient-start to-gradient-mid opacity-30"></div>
           <div className="px-3 flex items-center">
             {[...Array(3)].map((_, i) => (
               <motion.div 
                 key={i} 
-                className={`w-1 h-1 rounded-full bg-gradient-to-r ${primaryColor} mx-1`}
+                className="w-1 h-1 rounded-full bg-gradient-to-r from-gradient-start to-gradient-mid mx-1"
                 animate={{ scale: [1, 1.5, 1] }}
                 transition={{ 
                   duration: 2, 
@@ -59,7 +49,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
               ></motion.div>
             ))}
           </div>
-          <div className={`h-px flex-1 bg-gradient-to-l ${primaryColor} opacity-30`}></div>
+          <div className="h-px flex-1 bg-gradient-to-l from-gradient-start to-gradient-mid opacity-30"></div>
         </div>
         
         {/* Chapter number with unique styling */}
@@ -72,11 +62,11 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
             className="relative"
           >
             {/* Subtle glow behind number */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${primaryColor} opacity-10 blur-xl rounded-full`}></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-gradient-start to-gradient-mid opacity-10 blur-xl rounded-full"></div>
             
             {/* Chapter number */}
             <div className="relative z-10 flex items-center justify-center">
-              <span className={`text-7xl font-bold bg-gradient-to-br ${primaryColor} bg-clip-text text-transparent opacity-30`}>
+              <span className="text-7xl font-bold bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-30">
                 {number}
               </span>
             </div>
@@ -91,13 +81,13 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
           transition={{ ...t.enterSlow, delay: delaySeconds.lg }}
           className="text-center mb-6 relative"
         >
-          <h2 className={`text-2xl md:text-3xl font-bold ${textColor} mb-2`}>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             {title}
           </h2>
           
           {/* Animated underline */}
           <motion.div 
-            className={`h-px w-0 bg-gradient-to-r ${secondaryColor} mx-auto`}
+            className="h-px w-0 bg-gradient-to-r from-gradient-mid to-gradient-end mx-auto"
             initial={{ width: "0%" }}
             whileInView={{ width: "50%" }}
             viewport={{ once: true }}
@@ -115,7 +105,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
         >
           <Link 
             href="#top" 
-            className={`inline-flex items-center text-xs ${subtleTextColor} hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:${primaryColor} transition duration-300`}
+            className="inline-flex items-center text-xs text-foreground/60 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-gradient-start hover:to-gradient-mid transition duration-300"
           >
             <motion.svg 
               className="w-3 h-3 mr-1" 
@@ -140,4 +130,4 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
   );
 };
 
-export default ChapterDivider; 
+export default ChapterDivider;
