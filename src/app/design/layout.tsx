@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useState, useCallback, Suspense } from 'react';
-import Navigation from '@/components/Navigation';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 /* ── Sidebar nav structure ──────────────────────────────── */
 
@@ -112,8 +112,6 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-screen flex flex-col">
-      {/* Site navigation */}
-      <Navigation />
 
       {/* Mobile header */}
       <div className="lg:hidden shrink-0 flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-[var(--background)]">
@@ -124,9 +122,13 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
         >
           <span className="material-symbols text-xl">{sidebarOpen ? 'close' : 'menu'}</span>
         </button>
-        <h1 className="font-heading text-lg font-bold" style={{ textShadow: 'none' }}>
+        <h1 className="font-heading text-lg font-bold flex-1" style={{ textShadow: 'none' }}>
           Design System
         </h1>
+        <Link href="/" className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors opacity-60 hover:opacity-100" aria-label="Back to site">
+          <span className="material-symbols text-xl">home</span>
+        </Link>
+        <ThemeSwitch />
       </div>
 
       <div className="flex flex-1 min-h-0">
@@ -186,9 +188,19 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
           </nav>
 
           {/* Footer */}
-          <div className="shrink-0 px-5 py-4 border-t border-gray-200 dark:border-gray-800">
-            <p className="text-[10px] opacity-30">
-              Tokens defined in <code>design-system/tokens.css</code>
+          <div className="shrink-0 px-4 py-4 border-t border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-between px-2.5">
+              <Link
+                href="/"
+                className="p-1.5 rounded-lg opacity-60 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Back to site"
+              >
+                <span className="material-symbols text-[20px]">home</span>
+              </Link>
+              <ThemeSwitch />
+            </div>
+            <p className="text-[10px] opacity-30 px-2.5 mt-3">
+              Tokens in <code>design-system/tokens.css</code>
             </p>
           </div>
         </aside>
