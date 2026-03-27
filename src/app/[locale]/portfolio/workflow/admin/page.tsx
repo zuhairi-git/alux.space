@@ -137,10 +137,10 @@ export default function PortalPanel() {
     const isColorful = theme === 'colorful';
 
     const bg = isLight
-        ? 'bg-white text-slate-800'
+        ? 'bg-white text-[var(--foreground)]'
         : isColorful
-            ? 'bg-[var(--color-colorful-bg)] text-orange-50'
-            : 'bg-gray-900 text-slate-100';
+            ? 'bg-[var(--color-colorful-bg)] text-[var(--foreground)]'
+            : 'bg-[var(--background)] text-[var(--foreground)]';
     const sidebarBg = isLight
         ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60 shadow-[4px_0_24px_0_rgba(0,0,0,0.02)]'
         : isColorful
@@ -152,14 +152,14 @@ export default function PortalPanel() {
             ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-2xl border-b border-orange-500/30'
             : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
-        ? 'bg-white rounded-3xl border border-slate-200 shadow-[0_12px_34px_rgba(15,23,42,0.08)] p-5 md:p-7'
+        ? 'bg-white rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_12px_34px_rgba(15,23,42,0.08)] p-5 md:p-7'
         : isColorful
-            ? 'bg-[var(--color-card-colorful-from)]/95 rounded-3xl border border-orange-500/35 shadow-[0_14px_36px_rgba(255,140,66,0.20)] p-5 md:p-7'
-            : 'bg-[var(--color-gray-900)] rounded-3xl border border-slate-700 shadow-[0_12px_34px_rgba(0,0,0,0.45)] p-5 md:p-7';
-    const aiGradientStrong = 'from-fuchsia-500 via-violet-500 to-sky-400';
-    const aiGradientSoft = 'from-violet-500 to-sky-400';
-    const aiGradientGlow = 'from-fuchsia-500 to-sky-400';
-    const aiHoverBorder = 'hover:border-violet-300 hover:shadow-violet-500/10';
+            ? 'bg-[var(--color-card-colorful-from)]/95 rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_14px_36px_rgba(255,140,66,0.15)] p-5 md:p-7'
+            : 'bg-[var(--color-gray-900)] rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_12px_34px_rgba(0,0,0,0.45)] p-5 md:p-7';
+    const aiGradientStrong = 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]';
+    const aiGradientSoft = 'from-[var(--primary)] to-[var(--gradient-mid)]';
+    const aiGradientGlow = 'from-[var(--primary)] to-[var(--gradient-mid)]';
+    const aiHoverBorder = 'hover:border-[var(--primary)]/40 hover:shadow-[var(--primary)]/10';
 
     const handleCopilotSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -189,10 +189,9 @@ export default function PortalPanel() {
             {/* Animated Mesh Gradient Background (Colorful Only) */}
             {isColorful && (
                 <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-                    <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-pulse bg-[var(--color-ember)]/25" style={{ animationDuration: '15s' }} />
-                    <div className="absolute top-[10%] -right-[10%] w-[60%] h-[60%] rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-pulse bg-[var(--color-purple-700)]/25" style={{ animationDuration: '20s', animationDelay: '2s' }} />
-                    <div className="absolute -bottom-[20%] left-[20%] w-[80%] h-[80%] rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-pulse bg-[var(--color-cobalt-700)]/20" style={{ animationDuration: '18s', animationDelay: '4s' }} />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+                    <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-pulse bg-[var(--color-ember)]/25" style={{ animationDuration: '15s' }} />
+                    <div className="absolute top-[10%] -right-[10%] w-[60%] h-[60%] rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-pulse bg-[var(--color-purple-700)]/25" style={{ animationDuration: '20s', animationDelay: '2s' }} />
+                    <div className="absolute -bottom-[20%] left-[20%] w-[80%] h-[80%] rounded-full mix-blend-multiply filter blur-[120px] opacity-15 animate-pulse bg-[var(--color-cobalt-700)]/20" style={{ animationDuration: '18s', animationDelay: '4s' }} />
                 </div>
             )}
 
@@ -201,10 +200,10 @@ export default function PortalPanel() {
                 <div className={`flex items-center h-20 px-5 ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
                     {!sidebarCollapsed && (
                         <div className="flex items-center space-x-2">
-                            <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${isColorful ? 'from-[var(--color-ember)] to-[var(--color-purple-700)] shadow-[var(--color-ember)]/20' : isLight ? 'from-blue-500 to-indigo-600 shadow-blue-500/20' : 'from-blue-400 to-purple-500 shadow-blue-400/20'} flex items-center justify-center shadow-lg`}>
+                            <div className={`w-8 h-8 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-[var(--primary)]/20 flex items-center justify-center shadow-lg`}>
                                 <Icon name="blur_on" className="text-white text-lg" />
                             </div>
-                            <span className={`text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${isColorful ? 'from-[var(--color-ember)] to-[var(--color-purple-700)]' : 'from-blue-500 to-indigo-500'}`}>Portal</span>
+                            <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]">Portal</span>
                         </div>
                     )}
                     <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
@@ -261,10 +260,10 @@ export default function PortalPanel() {
                         >
                             <div className="flex items-center justify-between h-20 px-5">
                                 <div className="flex items-center space-x-2">
-                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${isColorful ? 'from-[var(--color-ember)] to-[var(--color-purple-700)] shadow-[var(--color-ember)]/20' : isLight ? 'from-blue-500 to-indigo-600 shadow-blue-500/20' : 'from-blue-400 to-purple-500 shadow-blue-400/20'} flex items-center justify-center shadow-lg`}>
+                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-[var(--primary)]/20 flex items-center justify-center shadow-lg`}>
                                         <Icon name="blur_on" className="text-white text-lg" />
                                     </div>
-                                    <span className={`text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${isColorful ? 'from-[var(--color-ember)] to-[var(--color-purple-700)]' : 'from-blue-500 to-indigo-500'}`}>Portal</span>
+                                    <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]">Portal</span>
                                 </div>
                                 <button onClick={() => setMobileSidebarOpen(false)} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
                                     <Icon name="close" className="text-xl" />
@@ -320,7 +319,7 @@ export default function PortalPanel() {
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
                         {/* AI Copilot — mobile only, replaces floating button */}
-                        <motion.button onClick={() => setShowCopilot(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all ${isColorful ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-purple-700)] shadow-lg shadow-[var(--color-ember)]/30' : isLight ? 'bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20' : 'bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20'}`}>
+                        <motion.button onClick={() => setShowCopilot(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
                             <Icon name="auto_awesome" className="text-xl text-white" />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
                         </motion.button>
@@ -507,7 +506,7 @@ export default function PortalPanel() {
                                             )}
                                             <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
                                                 {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ml-1 tracking-wider uppercase">Portal AI</span>}
-                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-br-sm ${isColorful ? 'shadow-fuchsia-500/20' : 'shadow-blue-500/20'}` : isLight ? 'bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-slate-200/50' : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
+                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-br-sm shadow-[var(--primary)]/20` : isLight ? 'bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-slate-200/50' : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
                                                     {h.msg}
                                                     {h.role === 'ai' && i === copilotHistory.length - 1 && (
                                                         <div className="flex items-center space-x-3 mt-4 pt-3 border-t border-current/10">
@@ -542,7 +541,7 @@ export default function PortalPanel() {
                             </div>
 
                             <div className={`p-5 border-t relative z-10 ${isLight ? 'border-slate-200/50 bg-white/80 backdrop-blur-2xl' : 'border-white/10 bg-[var(--color-dark-1)]/80 backdrop-blur-2xl'}`}>
-                                <form onSubmit={handleCopilotSubmit} className={`flex items-center space-x-2 px-2 py-2 rounded-3xl border shadow-sm transition-all duration-300 ${isLight ? `bg-white border-slate-200 ${isColorful ? 'focus-within:border-[var(--color-ember)] focus-within:shadow-[var(--color-ember)]/10' : 'focus-within:border-blue-400 focus-within:shadow-blue-500/10'}` : `bg-white/5 border-white/10 focus-within:bg-white/10 ${isColorful ? 'focus-within:border-[var(--color-ember)] focus-within:shadow-[var(--color-ember)]/10' : 'focus-within:border-blue-400 focus-within:shadow-blue-500/10'}`}`}>
+                                <form onSubmit={handleCopilotSubmit} className="flex items-center space-x-2 px-2 py-2 rounded-3xl border border-[var(--card-border)] shadow-sm transition-all duration-300 bg-[var(--background)] focus-within:border-[var(--btn-primary-bg)] focus-within:shadow-[0_0_0_4px_var(--primary-glow)]">
                                     <button type="button" className={`w-10 h-10 flex shrink-0 items-center justify-center rounded-2xl transition-colors ${isLight ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-white/10 text-slate-400'}`}>
                                         <Icon name="attach_file" className="text-xl" />
                                     </button>
@@ -553,7 +552,7 @@ export default function PortalPanel() {
                                         placeholder="Ask Copilot anything..."
                                         className="flex-1 bg-transparent border-none outline-none text-[14px] font-medium py-2 w-full min-w-0"
                                     />
-                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? `bg-gradient-to-r ${aiGradientSoft} text-white shadow-lg shadow-violet-500/30` : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/10 text-slate-500'}`}>
+                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? `bg-gradient-to-r ${aiGradientSoft} text-white shadow-lg shadow-[var(--primary)]/30` : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/10 text-slate-500'}`}>
                                         <Icon name="arrow_upward" className="text-lg font-bold" />
                                     </motion.button>
                                 </form>
@@ -586,7 +585,7 @@ function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '', 
         };
         const s = sec[size];
         return (
-            <div className={`${s.outer} flex items-center justify-center shrink-0 ${isLight ? 'bg-violet-100 text-violet-500' : 'bg-violet-500/15 text-violet-400'} ${className}`}>
+            <div className={`${s.outer} flex items-center justify-center shrink-0 bg-[var(--primary)]/10 text-[var(--primary)] ${className}`}>
                 <Icon name={icon} className={s.icon} />
             </div>
         );
@@ -603,9 +602,9 @@ function AIStamp({ isLight, size = 'md', icon = 'auto_awesome', className = '', 
     const stamp = sizeClasses[size];
 
     return (
-        <div className={`${stamp.outer} bg-gradient-to-tr from-fuchsia-500 via-violet-500 to-sky-400 ${className}`}>
+        <div className={`${stamp.outer} bg-gradient-to-tr from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] ${className}`}>
             <div className={`w-full h-full ${stamp.inner} border ${isLight ? 'border-white/80 bg-[var(--color-stamp-light)]/95' : 'border-white/25 bg-[var(--color-stamp-dark)]/85'} flex items-center justify-center backdrop-blur-xl`}>
-                <Icon name={icon} className={`${stamp.icon} bg-clip-text text-transparent bg-gradient-to-br from-violet-500 to-sky-400`} />
+                <Icon name={icon} className={`${stamp.icon} bg-clip-text text-transparent bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)]`} />
             </div>
         </div>
     );
@@ -618,10 +617,10 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white border border-slate-200 shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : isColorful ? 'bg-[var(--color-card-colorful-from)]/95 border border-orange-500/35 shadow-[0_10px_28px_rgba(255,140,66,0.18)]' : 'bg-[var(--color-gray-900)] border border-slate-700 shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl`}>
+        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : isColorful ? 'bg-[var(--color-card-colorful-from)]/95 hover:shadow-[0_10px_28px_rgba(255,140,66,0.15)]' : 'bg-[var(--color-gray-900)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} border border-[var(--card-border)] rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300`}>
             <div className="flex items-center justify-between mb-4">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${isLight ? 'from-blue-100 to-indigo-100' : isColorful ? 'from-[var(--color-ember)]/25 to-[var(--color-purple-700)]/25' : 'from-blue-500/20 to-indigo-500/20'}`}>
-                    <Icon name={icon} className={`text-2xl ${isLight ? 'text-blue-600' : isColorful ? 'text-[var(--color-ember)]' : 'text-blue-400'}`} />
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[var(--primary)]/15 to-[var(--gradient-mid)]/15`}>
+                    <Icon name={icon} className="text-2xl text-[var(--primary)]" />
                 </div>
                 <span className={`text-xs font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1 ${trendUp ? 'bg-emerald-500/10 text-emerald-500' : 'bg-rose-500/10 text-rose-500'}`}>
                     <Icon name={trendUp ? "trending_up" : "trending_down"} className="text-[14px]" />
@@ -956,11 +955,11 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
                                         <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
                                             <div>
                                                 <label className="text-sm font-bold block mb-2">Full Name</label>
-                                                <input type="text" value={newUser.name} onChange={e => setNewUser({...newUser, name: e.target.value})} placeholder="e.g. Jane Doe" className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]' : 'bg-white/5 border border-white/10 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]'} transition-all`} />
+                                                <input type="text" value={newUser.name} onChange={e => setNewUser({...newUser, name: e.target.value})} placeholder="e.g. Jane Doe" className="w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none bg-[var(--background)] border border-[var(--card-border)] text-[var(--foreground)] placeholder:text-[var(--foreground)]/40 focus:border-[var(--btn-primary-bg)] focus:shadow-[0_0_0_4px_var(--primary-glow)] transition-all" />
                                             </div>
                                             <div>
                                                 <label className="text-sm font-bold block mb-2">Email Address</label>
-                                                <input type="email" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} placeholder="jane@company.com" className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]' : 'bg-white/5 border border-white/10 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]'} transition-all`} />
+                                                <input type="email" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} placeholder="jane@company.com" className="w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none bg-[var(--background)] border border-[var(--card-border)] text-[var(--foreground)] placeholder:text-[var(--foreground)]/40 focus:border-[var(--btn-primary-bg)] focus:shadow-[0_0_0_4px_var(--primary-glow)] transition-all" />
                                             </div>
                                         </motion.div>
                                     )}
@@ -1106,11 +1105,11 @@ function WorkspacesSection({ card, isLight }: { card: string, isLight: boolean }
                                         <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
                                             <div>
                                                 <label className="text-sm font-bold block mb-2">Workspace Name</label>
-                                                <input type="text" value={newWorkspace.name} onChange={e => setNewWorkspace({...newWorkspace, name: e.target.value})} placeholder="e.g. Q1 Marketing Launch" className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]' : 'bg-white/5 border border-white/10 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]'} transition-all`} />
+                                                <input type="text" value={newWorkspace.name} onChange={e => setNewWorkspace({...newWorkspace, name: e.target.value})} placeholder="e.g. Q1 Marketing Launch" className="w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none bg-[var(--background)] border border-[var(--card-border)] text-[var(--foreground)] placeholder:text-[var(--foreground)]/40 focus:border-[var(--btn-primary-bg)] focus:shadow-[0_0_0_4px_var(--primary-glow)] transition-all" />
                                             </div>
                                             <div>
                                                 <label className="text-sm font-bold block mb-2">Description (Optional)</label>
-                                                <textarea value={newWorkspace.desc} onChange={e => setNewWorkspace({...newWorkspace, desc: e.target.value})} placeholder="What is this workspace for?" rows={3} className={`w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none resize-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]' : 'bg-white/5 border border-white/10 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]'} transition-all`} />
+                                                <textarea value={newWorkspace.desc} onChange={e => setNewWorkspace({...newWorkspace, desc: e.target.value})} placeholder="What is this workspace for?" rows={3} className="w-full px-5 py-3.5 rounded-2xl text-[15px] font-medium outline-none resize-none bg-[var(--background)] border border-[var(--card-border)] text-[var(--foreground)] placeholder:text-[var(--foreground)]/40 focus:border-[var(--btn-primary-bg)] focus:shadow-[0_0_0_4px_var(--primary-glow)] transition-all" />
                                             </div>
                                         </motion.div>
                                     )}
@@ -1367,7 +1366,7 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
                     className="inline-flex items-center justify-center w-28 h-28 mb-8 relative group cursor-pointer"
                 >
                     {/* Glowing AI Orb */}
-                    <span className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-fuchsia-500 to-sky-400 opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse" />
+                    <span className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-[var(--primary)] to-[var(--gradient-mid)] opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse" />
                     <AIStamp isLight={isLight} size="xl" className="relative shadow-2xl" />
                 </motion.div>
 
@@ -1381,7 +1380,7 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
 
             {/* AI Daily Summary Block */}
             <motion.div variants={itemVariants} className={`${card} relative overflow-hidden`}>
-                <div className={`absolute top-0 right-0 w-80 h-80 bg-fuchsia-500 opacity-10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none`} />
+                <div className={`absolute top-0 right-0 w-80 h-80 bg-[var(--primary)] opacity-10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none`} />
 
                 <div className="flex items-start md:items-center space-x-5 mb-6 relative z-10">
                     <AIStamp isLight={isLight} size="md" variant="secondary" />
@@ -1400,13 +1399,13 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
             {/* Quick AI Starters */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                    { icon: 'workspaces', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-emerald-400 to-emerald-600', hue: 'emerald', nav: 'workspaces' as Section },
-                    { icon: 'smart_toy', title: 'Catch up', desc: '5 unread comments', color: 'from-[var(--color-ember)] to-[var(--color-purple-700)]', hue: 'orange', nav: 'copilot-logs' as Section },
-                    { icon: 'analytics', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-cyan-400 to-cyan-600', hue: 'cyan', nav: 'analytics' as Section },
+                    { icon: 'workspaces', title: 'Review Sprints', desc: '3 tasks need your sign-off', color: 'from-[var(--gradient-start)] to-[var(--gradient-mid)]', nav: 'workspaces' as Section },
+                    { icon: 'smart_toy', title: 'Catch up', desc: '5 unread comments', color: 'from-[var(--gradient-mid)] to-[var(--gradient-end)]', nav: 'copilot-logs' as Section },
+                    { icon: 'analytics', title: 'Analyze Drop', desc: 'Investigate 12% drop', color: 'from-[var(--primary)] to-[var(--gradient-end)]', nav: 'analytics' as Section },
                 ].map((action, i) => (
                     <motion.div key={i} variants={itemVariants} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveSection(action.nav)}
-                        className={`group flex items-center gap-4 px-4 py-3 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-${action.hue}-500/10`}>
+                        className={`group flex items-center gap-4 px-4 py-3 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-[var(--primary)]/10`}>
                         <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-15 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
 
                         <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${action.color} shadow-md`}>
@@ -1423,16 +1422,16 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
 
             {/* Floating Input */}
             <motion.div variants={itemVariants} className="pt-6">
-                <div className={`relative flex items-center p-2 rounded-3xl shadow-lg transition-all duration-300 border backdrop-blur-2xl ${isLight ? 'bg-white/80 shadow-slate-200/50 border-white focus-within:border-[var(--primary)] focus-within:shadow-[var(--primary)]/20' : 'bg-white/5 border-white/10 focus-within:border-[var(--primary)] focus-within:shadow-[var(--primary)]/20'}`}>
+                <div className="relative flex items-center p-2 rounded-3xl transition-all duration-300 border border-[var(--card-border)] backdrop-blur-2xl bg-[var(--background)] focus-within:border-[var(--btn-primary-bg)] focus-within:shadow-[0_0_0_4px_var(--primary-glow)]">
                     <div className="pl-3 pr-2">
                         <AIStamp isLight={isLight} size="sm" variant="secondary" />
                     </div>
                     <input
                         type="text"
                         placeholder="Ask AI to find a file, summarize a workspace, or draft an email&hellip;"
-                        className={`w-full bg-transparent py-3 outline-none text-[15px] font-medium ${isLight ? 'text-slate-900 placeholder-slate-400' : 'text-white placeholder-white/40'}`}
+                        className="w-full bg-transparent py-3 outline-none text-[15px] font-medium text-[var(--foreground)] placeholder:text-[var(--foreground)]/40"
                     />
-                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-violet-500 to-sky-400 text-white flex items-center justify-center hover:shadow-lg hover:shadow-violet-500/30 transition-all shrink-0 ml-2">
+                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--gradient-mid)] text-white flex items-center justify-center hover:shadow-lg hover:shadow-[var(--primary)]/30 transition-all shrink-0 ml-2">
                         <Icon name="arrow_upward" className="text-xl" />
                     </button>
                 </div>
@@ -1522,11 +1521,11 @@ function SettingsSection({ card, isLight, theme, setTheme }: { card: string, isL
                 <div className="space-y-5">
                     <div>
                         <label className="text-sm font-bold block mb-2">Platform Name</label>
-                        <input type="text" defaultValue="Workflow Platform" className={`w-full px-5 py-3 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]' : 'bg-white/5 border border-white/10 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]'} transition-all`} />
+                        <input type="text" defaultValue="Workflow Platform" className="w-full px-5 py-3 rounded-2xl text-[15px] font-medium outline-none bg-[var(--background)] border border-[var(--card-border)] text-[var(--foreground)] focus:border-[var(--btn-primary-bg)] focus:shadow-[0_0_0_4px_var(--primary-glow)] transition-all" />
                     </div>
                     <div>
                         <label className="text-sm font-bold block mb-2">Support Email</label>
-                        <input type="email" defaultValue="admin@collabplatform.com" className={`w-full px-5 py-3 rounded-2xl text-[15px] font-medium outline-none ${isLight ? 'bg-white/50 border border-slate-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]' : 'bg-white/5 border border-white/10 focus:border-[var(--primary)] focus:shadow-[0_0_0_4px_var(--primary-glow,rgba(255,140,66,0.15))]'} transition-all`} />
+                        <input type="email" defaultValue="admin@collabplatform.com" className="w-full px-5 py-3 rounded-2xl text-[15px] font-medium outline-none bg-[var(--background)] border border-[var(--card-border)] text-[var(--foreground)] focus:border-[var(--btn-primary-bg)] focus:shadow-[0_0_0_4px_var(--primary-glow)] transition-all" />
                     </div>
                     <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="px-8 py-3.5 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white rounded-2xl text-sm font-bold transition-all shadow-lg shadow-[var(--primary)]/20 mt-4">Save Platform Configuration</motion.button>
                 </div>

@@ -40,19 +40,17 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary: [
     'relative [background:var(--btn-primary-gradient)] text-white font-[500]',
     'shadow-[0_1px_2px_rgba(0,0,0,0.1),0_4px_16px_var(--btn-primary-bg)]/20',
-    'border border-black/10 dark:border-white/10 ring-1 ring-inset ring-white/20',
     'overflow-hidden',
     'hover:[background:var(--btn-primary-gradient-hover)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.15),0_6px_20px_var(--btn-primary-bg)]/30 hover:-translate-y-[1px]',
     'active:translate-y-0 active:scale-[0.98] active:shadow-sm',
   ].join(' '),
 
-  // ── Secondary: polished ghost/glass aesthetic with subtle border ─
+  // ── Secondary: gradient-tinted, primary-bordered — mirrors hero CTA style ──
   secondary: [
-    'bg-[var(--background)] dark:bg-[var(--background-secondary,rgba(255,255,255,0.03))]',
-    'border border-[var(--border,rgba(0,0,0,0.1))] dark:border-white/10',
-    'text-[var(--foreground)] font-[500] shadow-sm',
-    'hover:bg-[var(--btn-primary-bg)]/[0.04] hover:border-[var(--btn-primary-bg)]/40 hover:text-[var(--btn-primary-bg)]',
-    'hover:-translate-y-[1px]',
+    'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10',
+    'border border-[var(--card-border)]',
+    'text-[var(--primary)] font-[500]',
+    'hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50 hover:-translate-y-[1px]',
     'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),
 
@@ -74,11 +72,10 @@ const variantClasses: Record<ButtonVariant, string> = {
 
   // ── Backward-compat aliases ────────────────────────────────
   outline: [
-    'bg-[var(--background)] dark:bg-[var(--background-secondary,rgba(255,255,255,0.03))]',
-    'border border-[var(--border,rgba(0,0,0,0.1))] dark:border-white/10',
-    'text-[var(--foreground)] font-[500] shadow-sm',
-    'hover:bg-[var(--btn-primary-bg)]/[0.04] hover:border-[var(--btn-primary-bg)]/40 hover:text-[var(--btn-primary-bg)]',
-    'hover:-translate-y-[1px]',
+    'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10',
+    'border border-[var(--card-border)]',
+    'text-[var(--primary)] font-[500]',
+    'hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50 hover:-translate-y-[1px]',
     'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),
   ghost: [

@@ -514,13 +514,13 @@ export default function PromptPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-16 text-center relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-teal-600/20 rounded-3xl blur-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/20 to-[var(--gradient-mid)]/20 rounded-3xl blur-3xl"></div>
             <div className="relative z-10 theme-card-content p-12 rounded-3xl backdrop-blur-sm">
               <motion.h1 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-500 to-teal-500 bg-clip-text text-transparent"
+                className="text-6xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] bg-clip-text text-transparent"
               >
                 Project Prompts
               </motion.h1>
@@ -839,7 +839,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
         )}        {/* Action Buttons */}
         <div className="flex gap-2">
           <Button
-            variant="primary"
+            variant="tertiary"
             size="sm"
             className="flex-1"
             onClick={() => setIsExpanded(!isExpanded)}
