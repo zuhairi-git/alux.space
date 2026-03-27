@@ -3,6 +3,10 @@
         "/^\\$content = Get-Content 'c:\\\\Users\\\\zohai\\\\Documents\\\\GitHub\\\\alux\\.space\\\\src\\\\app\\\\design\\\\page\\.tsx' -Raw -Encoding UTF8; \\$idx = \\$content\\.IndexOf\\('function ConventionsSection'\\); \\$context = \\$content\\.Substring\\(\\[Math\\]::Max\\(0,\\$idx-100\\), 200\\); \\[System\\.Text\\.Encoding\\]::UTF8\\.GetBytes\\(\\$context\\) \\| ForEach-Object \\{ \"\\{0:X2\\}\" -f \\$_ \\} \\| Select-Object -First 200$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^\\$lines = \\[System\\.IO\\.File\\]::ReadAllLines\\(\"c:\\\\Users\\\\zohai\\\\Documents\\\\GitHub\\\\alux\\.space\\\\src\\\\app\\\\\\[locale\\]\\\\portfolio\\\\workflow\\\\admin\\\\page\\.tsx\", \\[System\\.Text\\.Encoding\\]::UTF8\\); \\$lines\\[678\\.\\.690\\] \\| ForEach-Object \\{ Write-Host \\$_ \\}; Write-Host \"---\"; \\$lines\\[1315\\.\\.1327\\] \\| ForEach-Object \\{ Write-Host \\$_ \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

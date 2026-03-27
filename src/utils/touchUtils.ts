@@ -190,9 +190,9 @@ export class MobileAccessibility {
     if (!element) return;
 
     const style = element.style;
-    style.outline = '3px solid #6366f1';
+    style.outline = '3px solid var(--primary)';
     style.outlineOffset = '2px';
-    style.boxShadow = '0 0 0 3px rgba(99, 102, 241, 0.2)';
+    style.boxShadow = '0 0 0 3px var(--primary-glow)';
   }
 
   /**

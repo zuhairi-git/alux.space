@@ -43,10 +43,10 @@ export default function TimelineCard({
   // Get card styles based on theme with improved visibility for dark theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[#0e0600] to-[#040402] border border-orange-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-orange-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
     } else if (theme === 'dark') {
       // Lightened the dark theme colors slightly to make animations more visible
-      return 'bg-gradient-to-br from-[#0a1425] to-[#040a20] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.35)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.35)]';
     } else {
       return 'bg-gradient-to-br from-white to-slate-100 border border-blue-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.3)]';
     }
@@ -199,7 +199,7 @@ export default function TimelineCard({
               {title}
             </h3>
             <div className={`inline-flex items-center justify-center px-3 py-1.5 my-2 text-sm font-medium rounded-full ${
-              theme === 'colorful' ? 'bg-[#ff8c42]/15' : 
+              theme === 'colorful' ? 'bg-[var(--color-ember)]/15' : 
               theme === 'dark' ? 'bg-blue-900/30' : 
               'bg-blue-100'
             } transition-all duration-300`}>
@@ -213,7 +213,7 @@ export default function TimelineCard({
           </div>
           
           <div className={`relative px-4 py-3.5 rounded-lg backdrop-blur-md mx-1 ${
-            theme === 'colorful' ? 'bg-gradient-to-br from-[#ff8c42]/10 to-[#4338ca]/10 border border-[#ff8c42]/10' : 
+            theme === 'colorful' ? 'bg-gradient-to-br from-[var(--color-ember)]/10 to-[var(--color-cobalt-700)]/10 border border-[var(--color-ember)]/10' : 
             theme === 'dark' ? 'bg-gradient-to-br from-blue-900/10 to-indigo-900/10 border border-blue-500/10' : 
             'bg-gradient-to-br from-blue-50/60 to-white/60 border border-blue-200/20'
           } transition-all duration-300`}>

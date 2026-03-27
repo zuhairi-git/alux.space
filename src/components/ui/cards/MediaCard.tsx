@@ -66,7 +66,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         };
       case 'colorful':
         return {
-          card: 'bg-[#06040c]/80 border border-[var(--card-border)] hover:border-[var(--primary)]/60 shadow-[var(--primary)]/30 hover:shadow-[var(--primary)]/50',
+          card: 'bg-[var(--color-colorful-bg)]/80 border border-[var(--card-border)] hover:border-[var(--primary)]/60 shadow-[var(--primary)]/30 hover:shadow-[var(--primary)]/50',
           text: 'text-[var(--foreground)]',
           primaryText: 'text-[var(--primary)]',
           tag: 'bg-[var(--primary)]/15 text-[var(--primary)]',

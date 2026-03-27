@@ -25,7 +25,7 @@ const AudioLibrary: React.FC = () => {
     if (isLight) {
       return 'bg-gray-50 min-h-screen pt-16';
     } else if (isColorful) {
-      return 'bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20 min-h-screen pt-16';
+      return 'bg-[var(--background)] min-h-screen pt-16';
     } else {
       return 'bg-gray-900 min-h-screen pt-16';
     }
@@ -35,7 +35,7 @@ const AudioLibrary: React.FC = () => {
     if (isLight) {
       return 'bg-white/80 backdrop-blur-sm border-b border-gray-200';
     } else if (isColorful) {
-      return 'bg-black/20 backdrop-blur-sm border-b border-purple-500/30';
+      return 'bg-[var(--nav-bg)] backdrop-blur-sm border-b border-[var(--nav-border)]';
     } else {
       return 'bg-gray-800/80 backdrop-blur-sm border-b border-gray-700';
     }
@@ -76,10 +76,10 @@ const AudioLibrary: React.FC = () => {
       };
     } else if (isColorful) {
       return {
-        primary: 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white',
-        secondary: 'bg-purple-500/20 hover:bg-purple-500/30 text-purple-300',
-        active: 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white',
-        inactive: 'bg-purple-500/20 text-purple-300'
+        primary: 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white',
+        secondary: 'bg-[var(--primary)]/20 hover:bg-[var(--primary)]/30 text-[var(--foreground)]',
+        active: 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white',
+        inactive: 'bg-[var(--primary)]/20 text-[var(--foreground)]'
       };
     } else {
       return {
@@ -95,7 +95,7 @@ const AudioLibrary: React.FC = () => {
     if (isLight) {
       return 'bg-white border border-gray-200 rounded-lg p-4';
     } else if (isColorful) {
-      return 'bg-black/20 border border-purple-500/30 rounded-lg p-4 backdrop-blur-sm';
+      return 'bg-[var(--card-from-bg)] border border-[var(--card-border)] rounded-lg p-4 backdrop-blur-sm';
     } else {
       return 'bg-gray-800 border border-gray-700 rounded-lg p-4';
     }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -590,6 +590,93 @@ function GradientsSection() {
           <span className="text-xs font-medium opacity-60">{g.label}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+function BackgroundsSection() {
+  const semanticBgs = [
+    {
+      label: 'Page Background',
+      cssVar: '--background',
+      description: 'Base page background. White in Light, near-black in Dark, void-purple in Colorful.',
+      usage: 'bg-[var(--background)]',
+    },
+    {
+      label: 'Card Surface (from)',
+      cssVar: '--card-from-bg',
+      description: 'Starting stop of card/surface gradients.',
+      usage: 'from-[var(--card-from-bg)]',
+    },
+    {
+      label: 'Card Surface (to)',
+      cssVar: '--card-to-bg',
+      description: 'Ending stop of card/surface gradients.',
+      usage: 'to-[var(--card-to-bg)]',
+    },
+    {
+      label: 'Nav Background',
+      cssVar: '--nav-bg',
+      description: 'Navigation bar / header backdrop.',
+      usage: 'bg-[var(--nav-bg)]',
+    },
+  ];
+
+  return (
+    <div className="space-y-10">
+      {/* Semantic tokens */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">Semantic Background Tokens</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {semanticBgs.map(bg => (
+            <div key={bg.cssVar} className="space-y-2">
+              <div
+                className="w-full h-20 rounded-xl border border-[var(--card-border)]"
+                style={{ background: `var(${bg.cssVar})` }}
+              />
+              <div className="text-sm font-semibold">{bg.label}</div>
+              <div className="text-xs font-mono text-[var(--primary)] mt-0.5">{bg.cssVar}</div>
+              <div className="text-xs opacity-50 leading-snug">{bg.description}</div>
+              <div className="text-xs font-mono opacity-40 truncate">{bg.usage}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Card gradient preview */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">Card Gradient Preview</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+          <div
+            className="h-24 rounded-xl border border-[var(--card-border)]"
+            style={{ background: 'linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg))' }}
+          />
+          <div className="col-span-2 space-y-1">
+            <div className="text-sm font-semibold">Card Gradient</div>
+            <div className="text-xs font-mono text-[var(--primary)]">
+              from-[var(--card-from-bg)] to-[var(--card-to-bg)]
+            </div>
+            <div className="text-xs opacity-50 mt-1">
+              Applied via <span className="font-mono">bg-gradient-to-br</span> on all card surfaces \u2014 adapts across all three themes.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Nav preview */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">Nav Background Preview</h4>
+        <div
+          className="w-full h-14 rounded-xl border border-[var(--nav-border)] flex items-center px-5 gap-3"
+          style={{ background: 'var(--nav-bg)' }}
+        >
+          <div className="w-2 h-2 rounded-full bg-[var(--primary)]" />
+          <div className="text-sm font-medium opacity-70">
+            Navigation surface \u2014{' '}
+            <span className="font-mono text-[var(--primary)] text-xs">var(--nav-bg)</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1700,7 +1787,8 @@ const allSections: SectionDef[] = [
   { key: 'radius',     title: 'Border Radius',             render: () => <RadiusSection /> },
   { key: 'shadows',    title: 'Shadows & Elevation',       render: () => <ShadowsSection /> },
   { key: 'motion',     title: 'Motion & Easing',           render: () => <MotionSection /> },
-  { key: 'gradients',  title: 'Gradients',                 render: () => <GradientsSection /> },
+  { key: 'gradients',    title: 'Gradients',                 render: () => <GradientsSection /> },
+  { key: 'backgrounds', title: 'Backgrounds',               render: () => <BackgroundsSection /> },
   // Components
   { key: 'buttons',    title: 'Buttons',                   render: () => <ButtonsSection /> },
   { key: 'badges',     title: 'Badges',                    render: () => <BadgesSection /> },
@@ -1754,7 +1842,8 @@ function OverviewGrid() {
         { key: 'radius',     icon: 'rounded_corner',  label: 'Radius' },
         { key: 'shadows',    icon: 'layers',          label: 'Shadows' },
         { key: 'motion',     icon: 'animation',       label: 'Motion' },
-        { key: 'gradients',  icon: 'gradient',        label: 'Gradients' },
+        { key: 'gradients',    icon: 'gradient',        label: 'Gradients' },
+        { key: 'backgrounds', icon: 'wallpaper',       label: 'Backgrounds' },
       ],
     },
     {

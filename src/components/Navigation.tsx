@@ -172,7 +172,7 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
         className={`
           flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg ml-1 mr-2 shadow-md transition-all duration-300
           ${theme === 'colorful'
-            ? 'bg-gradient-to-br from-[#ff8c42] to-[#4338ca] text-white shadow-[#ff8c42]/25'
+            ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-cobalt-700)] text-white shadow-[var(--color-ember)]/25'
             : theme === 'light'
               ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-blue-500/25'
               : 'bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-blue-400/25'
@@ -434,7 +434,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
               ${isMenuOpen
                 ? 'bg-red-500 text-white rotate-90'
                 : theme === 'colorful'
-                  ? 'bg-gradient-to-br from-[#ff8c42] to-[#4338ca] text-white'
+                  ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-cobalt-700)] text-white'
                   : 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
               }
             `}

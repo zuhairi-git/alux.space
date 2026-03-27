@@ -46,6 +46,7 @@ export const palette = {
   fuchsia: {
     400: '#e879f9',
     500: '#d946ef',
+    600: '#c026d3',
   },
   cyan: {
     400: '#22d3ee',
@@ -76,6 +77,28 @@ export const palette = {
   },
   white: '#ffffff',
   black: '#000000',
+  /** Blue-tinted near-blacks for dark-theme UI surfaces */
+  dark: {
+    1: '#0b0b13',  // deepest dark surface — panels, sidebars
+    2: '#12121a',  // floating dark surface — search modals
+    3: '#1a1a24',  // medium dark surface — dropdowns, notifications
+  },
+  /** AI-stamp / badge inner backgrounds */
+  stamp: {
+    dark:  '#1c1730',
+    light: '#eae6f8',
+  },
+  /** Colorful-theme card solid background (warm amber-void) */
+  cardColorfulFrom: '#0a0600',
+  /** Dark/colorful select option background */
+  selectDark: '#1a1a2e',
+  /** Timeline card gradient stops */
+  timeline: {
+    darkFrom:     '#0a1425',
+    darkTo:       '#040a20',
+    colorfulFrom: '#0e0600',
+    colorfulTo:   '#040402',
+  },
   violet: {
     500: '#8b5cf6',
   },

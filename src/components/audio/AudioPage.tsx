@@ -41,7 +41,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     if (isLight) {
       return 'bg-gray-50 min-h-screen pt-16';
     } else if (isColorful) {
-      return 'bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20 min-h-screen pt-16';
+      return 'bg-[var(--background)] min-h-screen pt-16';
     } else {
       return 'bg-gray-900 min-h-screen pt-16';
     }
@@ -51,7 +51,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     if (isLight) {
       return 'bg-white border-b border-gray-200';
     } else if (isColorful) {
-      return 'bg-gradient-to-br from-purple-900/30 to-pink-900/20 border-b border-purple-500/30 backdrop-blur-lg';
+      return 'bg-[var(--card-from-bg)] border-b border-[var(--card-border)] backdrop-blur-lg';
     } else {
       return 'bg-gray-800 border-b border-gray-700';
     }
@@ -68,11 +68,11 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
       };
     } else if (isColorful) {
       return {
-        title: 'text-white',
-        subtitle: 'text-gray-200',
-        text: 'text-gray-300',
-        muted: 'text-gray-400',
-        accent: 'text-cyan-400'
+        title: 'text-[var(--foreground)]',
+        subtitle: 'text-[var(--muted-foreground)]',
+        text: 'text-[var(--foreground)]',
+        muted: 'text-[var(--muted-foreground)]',
+        accent: 'text-[var(--primary)]'
       };
     } else {
       return {
@@ -89,7 +89,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     if (isLight) {
       return 'bg-white border border-gray-200 rounded-xl';
     } else if (isColorful) {
-      return 'bg-black/20 border border-purple-500/30 rounded-xl backdrop-blur-sm';
+      return 'bg-[var(--card-from-bg)] border border-[var(--card-border)] rounded-xl backdrop-blur-sm';
     } else {
       return 'bg-gray-800 border border-gray-700 rounded-xl';
     }
@@ -99,7 +99,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     if (isLight) {
       return 'no-underline hover:bg-blue-50 px-1 py-0.5 rounded transition-colors duration-150';
     } else if (isColorful) {
-      return 'no-underline hover:bg-cyan-500/10 px-1 py-0.5 rounded transition-colors duration-150';
+      return 'no-underline hover:bg-[var(--primary)]/10 px-1 py-0.5 rounded transition-colors duration-150';
     } else {
       return 'no-underline hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors duration-150';
     }
@@ -112,8 +112,8 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50';
     } else if (isColorful) {
       return isActive 
-        ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white border-transparent' 
-        : 'bg-purple-500/20 text-purple-300 border-purple-500/30 hover:bg-purple-500/30';
+        ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white border-transparent' 
+        : 'bg-[var(--primary)]/20 text-[var(--foreground)] border-[var(--primary)]/30 hover:bg-[var(--primary)]/30';
     } else {
       return isActive 
         ? 'bg-blue-600 text-white border-blue-600' 
@@ -235,7 +235,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
             >
               {/* Category */}
               <div className="mb-4">
-                <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${textStyles.accent} bg-blue-500/10`}>
+                <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium text-[var(--primary)] bg-[var(--primary)]/10`}>
                   {audio.category}
                 </span>
               </div>
@@ -294,7 +294,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                       isLight 
                         ? 'bg-gray-100 text-gray-700' 
                         : isColorful 
-                        ? 'bg-purple-500/20 text-purple-300' 
+                        ? 'bg-[var(--primary)]/20 text-[var(--foreground)]' 
                         : 'bg-gray-700 text-gray-300'
                     }`}
                   >

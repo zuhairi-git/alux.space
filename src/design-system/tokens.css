@@ -81,6 +81,30 @@
   --color-ember-dark: #d96820;          /* ember hover/darker */
   --color-ember-light: #ffb07a;         /* ember lighter shade */
   --color-cobalt-700: #4338ca;          /* gradient end for colorful */
+
+  /* Fuchsia extended */
+  --color-fuchsia-600: #c026d3;         /* fuchsia hover state */
+
+  /* Dark UI surface spectrum (blue-tinted near-blacks) */
+  --color-dark-1: #0b0b13;             /* deepest dark surface — panels, sidebars */
+  --color-dark-2: #12121a;             /* floating dark surface — search modals */
+  --color-dark-3: #1a1a24;             /* medium dark surface — dropdowns, notifications */
+
+  /* Stamp / AI-badge inner backgrounds */
+  --color-stamp-dark:  #1c1730;        /* AI stamp inner bg — dark theme */
+  --color-stamp-light: #eae6f8;        /* AI stamp inner bg — light theme */
+
+  /* Colorful card solid background */
+  --color-card-colorful-from: #0a0600; /* colorful card / KPI bg (warm amber-void) */
+
+  /* Select option background */
+  --color-select-dark: #1a1a2e;        /* dark/colorful theme select option bg */
+
+  /* Timeline card gradient stops */
+  --color-timeline-dark-from:     #0a1425; /* dark theme card gradient start */
+  --color-timeline-dark-to:       #040a20; /* dark theme card gradient end */
+  --color-timeline-colorful-from: #0e0600; /* colorful theme card gradient start */
+  --color-timeline-colorful-to:   #040402; /* colorful theme card gradient end */
 }
 
 /* -------------------------------------------------------
