@@ -92,7 +92,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                 )}
             </AnimatePresence>
 
-            {/* Header — Liquid Glass (iOS 26) / M3 Expressive (Android 16) */}
+            {/* Header — Liquid Glass (iOS 27) / M3 Expressive (Android 16/17) */}
             <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-4 px-6 z-40 transition-all duration-300 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-4">
@@ -116,7 +116,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                     initial="initial"
                                     animate="animate"
                                     exit="exit"
-                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-[#49454F]') : 'text-white/35'}`}
+                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-[#4b5563]') : 'text-white/35'}`}
                                 >
                                     {theme.titles[activeTab].sub}
                                 </motion.span>
@@ -158,7 +158,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                 </AnimatePresence>
             </main>
 
-            {/* Bottom Navigation — iOS 26 Liquid Glass floating / Android 16 M3 Expressive */}
+            {/* Bottom Navigation — iOS 27 Liquid Glass floating / Android 16/17 M3 Expressive */}
             <nav className={`absolute bottom-0 w-full z-40 ${theme.platform === 'ios'
                 ? `flex justify-around items-start px-3 h-[80px] pt-1.5 border-t ${isLight ? theme.nav.light : isColorful && theme.nav.colorful ? theme.nav.colorful : theme.nav.dark}`
                 : `flex justify-around items-center px-2 h-[80px] pb-1 border-t ${isLight ? theme.nav.light : isColorful && theme.nav.colorful ? theme.nav.colorful : theme.nav.dark}`
@@ -194,7 +194,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                     </div>
                                 </div>
                             ) : (
-                                /* iOS 26: Clean icon with scale animation */
+                                /* iOS 27: Clean icon with scale animation */
                                 <motion.span
                                     animate={{ scale: a ? 1.12 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}

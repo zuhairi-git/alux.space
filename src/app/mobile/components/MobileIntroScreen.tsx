@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -38,7 +38,7 @@ const THEME_OPTIONS = [
         label: 'Dark',
         desc: 'Easy on the eyes',
         icon: 'dark_mode',
-        swatchBg: 'bg-[#111114]',
+        swatchBg: 'bg-[#0b0b13]',
         swatchText: 'text-white',
     },
     {
@@ -106,18 +106,18 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
 
-    const accentColor = isIOS ? '#007AFF' : '#6750A4';
+    const accentColor = isIOS ? '#3b82f6' : '#3b82f6';
 
     const bgClass =
         selectedTheme === 'light'
             ? isIOS
-                ? 'bg-[#F2F2F7] text-gray-900'
-                : 'bg-[#FAF8FC] text-[#1C1B1F]'
+                ? 'bg-[#f3f4f6] text-gray-900'
+                : 'bg-[#f9fafb] text-[#111827]'
             : selectedTheme === 'colorful'
                 ? 'bg-[#06040c] text-white'
                 : isIOS
                     ? 'bg-black text-white'
-                    : 'bg-[#111114] text-[#E2E2E6]';
+                    : 'bg-[#0b0b13] text-[#e5e7eb]';
 
     const muted = selectedTheme === 'light' ? 'text-gray-500' : 'text-white/50';
 
@@ -125,12 +125,12 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
         selectedTheme === 'light'
             ? isIOS
                 ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
-                : 'bg-[#FEF7FF]/95 border border-[#E7E0EC]/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                : 'bg-[#f9fafb]/95 border border-[#e5e7eb]/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : selectedTheme === 'colorful'
                 ? 'bg-white/[0.06] border border-fuchsia-500/12'
                 : isIOS
                     ? 'bg-white/[0.06] backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.05]'
-                    : 'bg-[#2D2B33]/80 border border-[#49454F]/30';
+                    : 'bg-[#1a1a24]/80 border border-[#4b5563]/30';
 
     const handleNext = () => {
         if (isLast) {

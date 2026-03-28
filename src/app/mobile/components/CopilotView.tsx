@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -17,7 +17,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
     const [input, setInput] = useState(""); const [typing, setTyping] = useState(false); const [stream, setStream] = useState("");
     const ub = theme.copilot.userBubble;
     const bb = isColorful
-        ? `${theme.platform === 'ios' ? 'bg-[#130a02]/60 backdrop-blur-[20px] border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-orange-950/40 backdrop-blur-xl border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
+        ? `${theme.platform === 'ios' ? 'bg-[#0a0600]/60 backdrop-blur-[20px] border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-orange-950/40 backdrop-blur-xl border border-orange-500/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
         : theme.copilot.botBubble(isLight);
     const inputBarClass = isColorful ? 'bg-[#06040c]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful

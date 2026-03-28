@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -321,8 +321,8 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-left p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
                 <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-indigo-500/10 to-purple-500/10 blur-2xl group-active:scale-110 transition-transform" />
                 <div className="flex items-center space-x-2.5 mb-3 relative z-10">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}>
-                        <Icon name="auto_awesome" className={`text-sm ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} />
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#93c5fd]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]'}`}>
+                        <Icon name="auto_awesome" className={`text-sm ${theme.platform === 'android' ? 'text-[#1e2756]' : 'text-white'}`} />
                     </div>
                     <span className={`text-[10px] font-bold uppercase tracking-[0.15em] ${accent}`}>AI Briefing</span>
                     <span className="ml-auto text-[10px] font-medium opacity-30">Just now</span>
@@ -430,8 +430,8 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
             {/* AI Briefing Card */}
             <motion.div variants={fadeUp} className={`p-6 ${card}`}>
                 <div className="flex items-center space-x-3 mb-4">
-                    <div className={`w-9 h-9 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}>
-                        <Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} />
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#93c5fd]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]'}`}>
+                        <Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#1e2756]' : 'text-white'}`} />
                     </div>
                     <span className={`text-[11px] font-bold uppercase tracking-widest ${accent}`}>AI Collaboration Briefing</span>
                 </div>
@@ -518,8 +518,8 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className={`h-full flex flex-col justify-between p-6 ${card}`}>
                     <div>
                         <div className="flex items-center space-x-3 mb-6">
-                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#D0BCFF]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]'}`}>
-                                <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' ? 'text-[#381E72]' : 'text-white'}`} />
+                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#93c5fd]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]'}`}>
+                                <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' ? 'text-[#1e2756]' : 'text-white'}`} />
                             </div>
                             <div>
                                 <span className={`text-[10px] font-bold uppercase tracking-[0.15em] block ${accent}`}>AI Briefing</span>
@@ -647,7 +647,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className="flex gap-2">
                     {cards.map((c, i) => (
                         <button key={c.key} onClick={() => setIdx(i)}
-                            className={`rounded-full transition-all duration-300 ${i === idx ? `w-6 h-2 ${isColorful ? 'bg-fuchsia-400' : theme.platform === 'ios' ? 'bg-[#007AFF]' : 'bg-[#D0BCFF]'}` : `w-2 h-2 ${isLight ? 'bg-black/15' : 'bg-white/15'}`}`} />
+                            className={`rounded-full transition-all duration-300 ${i === idx ? `w-6 h-2 ${isColorful ? 'bg-fuchsia-400' : theme.platform === 'ios' ? 'bg-[#3b82f6]' : 'bg-[#93c5fd]'}` : `w-2 h-2 ${isLight ? 'bg-black/15' : 'bg-white/15'}`}`} />
                     ))}
                 </div>
                 <button onClick={goNext} disabled={idx === totalCards - 1}
@@ -684,14 +684,14 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.button variants={fadeUp} onClick={() => onNav('copilot')}
                 className="relative w-36 h-36 flex items-center justify-center active:scale-95 transition-transform">
                 {/* Outer pulse rings */}
-                <div className={`absolute inset-0 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-fuchsia-500' : theme.platform === 'ios' ? 'bg-[#007AFF]' : 'bg-[#6750A4]'}`} style={{ animationDuration: '3s' }} />
-                <div className={`absolute inset-3 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-purple-500' : theme.platform === 'ios' ? 'bg-[#5856D6]' : 'bg-[#D0BCFF]'}`} style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+                <div className={`absolute inset-0 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-fuchsia-500' : theme.platform === 'ios' ? 'bg-[#3b82f6]' : 'bg-[#3b82f6]'}`} style={{ animationDuration: '3s' }} />
+                <div className={`absolute inset-3 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-purple-500' : theme.platform === 'ios' ? 'bg-[#6366f1]' : 'bg-[#93c5fd]'}`} style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
                 {/* Gradient ring */}
                 <div className={`absolute inset-4 rounded-full ${isColorful ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20' : isLight ? 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10' : 'bg-gradient-to-br from-indigo-500/15 to-purple-500/15'} border ${isColorful ? 'border-orange-500/20' : isLight ? 'border-blue-200' : 'border-indigo-500/20'}`} />
                 {/* Inner hub */}
-                <div className={`relative w-20 h-20 rounded-full flex flex-col items-center justify-center ${isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : theme.platform === 'ios' ? 'bg-gradient-to-br from-[#007AFF] to-[#5856D6]' : 'bg-[#D0BCFF]'} shadow-lg`}>
-                    <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' && !isColorful ? 'text-[#381E72]' : 'text-white'}`} />
-                    <span className={`text-[9px] font-bold mt-0.5 ${theme.platform === 'android' && !isColorful ? 'text-[#381E72]' : 'text-white/80'}`}>ASK AI</span>
+                <div className={`relative w-20 h-20 rounded-full flex flex-col items-center justify-center ${isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : theme.platform === 'ios' ? 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]' : 'bg-[#93c5fd]'} shadow-lg`}>
+                    <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' && !isColorful ? 'text-[#1e2756]' : 'text-white'}`} />
+                    <span className={`text-[9px] font-bold mt-0.5 ${theme.platform === 'android' && !isColorful ? 'text-[#1e2756]' : 'text-white/80'}`}>ASK AI</span>
                 </div>
             </motion.button>
 

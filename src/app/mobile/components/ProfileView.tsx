@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,7 +19,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
     const [modal, setModal] = useState(false);
     const p = theme.profile;
     const modalBgClass = isColorful
-        ? `${theme.radii.modal} p-6 shadow-2xl bg-[#130a02] text-white`
+        ? `${theme.radii.modal} p-6 shadow-2xl bg-[#0a0600] text-white`
         : `${theme.radii.modal} p-6 shadow-2xl ${p.modalBg(isLight)}`;
     const modalActiveItemClass = isColorful
         ? 'bg-purple-500/20 border border-purple-500/30'
@@ -32,7 +32,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
             {/* Avatar */}
             <motion.div variants={fadeUp} className="flex flex-col items-center py-6">
                 <div className="relative mb-4">
-                    <div className={`w-28 h-28 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#6750A4] to-[#D0BCFF]' : 'from-[#007AFF] to-[#5856D6]'} shadow-lg`}>
+                    <div className={`w-28 h-28 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${theme.platform === 'android' ? 'from-[#3b82f6] to-[#93c5fd]' : 'from-[#3b82f6] to-[#6366f1]'} shadow-lg`}>
                         <div className={`w-full h-full rounded-full overflow-hidden relative ${isLight ? 'bg-white' : 'bg-black/80'}`}>
                             <Image
                                 src="/images/me/ali.png"
@@ -44,7 +44,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
                             />
                         </div>
                     </div>
-                    <div className={`absolute bottom-0.5 right-0.5 w-7 h-7 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#FAF8FC]' : 'border-[#111114]') : (isLight ? 'border-[#F2F2F7]' : 'border-black')}`} />
+                    <div className={`absolute bottom-0.5 right-0.5 w-7 h-7 bg-[${theme.accent.success}] border-[3px] rounded-full ${theme.platform === 'android' ? (isLight ? 'border-[#f9fafb]' : 'border-[#0b0b13]') : (isLight ? 'border-[#f3f4f6]' : 'border-black')}`} />
                 </div>
                 <h2 className="font-bold text-2xl tracking-tight">Ali Al-Zuhairi</h2>
                 <p className={`text-[15px] font-medium mt-1 ${p.roleColor}`}>Platform Lead</p>
