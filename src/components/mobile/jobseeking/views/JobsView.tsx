@@ -34,6 +34,7 @@ type SheetMode = 'detail' | 'form' | 'success';
 export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
     const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : theme.workspace.searchBar(isLight);
     const sheetBgClass = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const primaryBtnClass = isColorful ? 'bg-ds-ember text-white rounded-full' : theme.workspace.primaryButton;
     const [activeFilter, setActiveFilter] = useState('All');
     const [selectedJob, setSelectedJob] = useState<typeof JOBS[0] | null>(null);
     const [sheetMode, setSheetMode] = useState<SheetMode>('detail');
@@ -66,7 +67,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex space-x-3 mb-6 overflow-x-auto no-scrollbar pb-1 -mx-5 px-5">
                 {FILTERS.map((filter) => (
                     <button key={filter} onClick={() => setActiveFilter(filter)}
-                        className={`whitespace-nowrap px-4 py-1.5 rounded-full text-[14px] font-medium transition-colors active:scale-95 ${filter === activeFilter ? theme.workspace.primaryButton : theme.workspace.secondaryButton(isLight)}`}>
+                        className={`whitespace-nowrap px-4 py-1.5 rounded-full text-[14px] font-medium transition-colors active:scale-95 ${filter === activeFilter ? primaryBtnClass : theme.workspace.secondaryButton(isLight)}`}>
                         {filter}
                     </button>
                 ))}
@@ -84,14 +85,14 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         {/* Top row */}
                         <div className="p-4 pb-3">
                             <div className="flex items-start gap-3">
-                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${theme.workspace.iconBg(isLight)}`}>
-                                    <Icon name={JOB_ICONS[job.title] || 'work'} className={`text-[22px] ${theme.workspace.iconColor(isLight)}`} />
+                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isColorful ? 'bg-ds-ember/15' : theme.workspace.iconBg(isLight)}`}>
+                                    <Icon name={JOB_ICONS[job.title] || 'work'} className={`text-[22px] ${isColorful ? 'text-ds-ember' : theme.workspace.iconColor(isLight)}`} />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-start justify-between gap-2">
                                         <h3 className="text-[16px] font-bold leading-tight">{job.title}</h3>
                                         {job.tag && (
-                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : 'bg-ds-blue-500/15 text-ds-blue-500'}`}>
+                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : isColorful ? 'bg-ds-ember/15 text-ds-ember' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>
                                                 {job.tag}
                                             </span>
                                         )}
@@ -118,13 +119,13 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
                             <div className="flex items-center gap-2">
                                 <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
-                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? 'bg-ds-blue-500' : 'bg-amber-400'}`}
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? (isColorful ? 'bg-ds-ember' : 'bg-ds-blue-500') : 'bg-amber-400'}`}
                                         style={{ width: `${job.match}%` }} />
                                 </div>
-                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? 'text-ds-blue-400' : 'text-amber-400'}`}>{job.match}% match</span>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? (isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400') : 'text-amber-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
-                                className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-ds-blue-500 to-ds-purple-500 text-white active:scale-95 transition-transform`}>
+                                className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-gradient-start to-gradient-mid text-white active:scale-95 transition-transform`}>
                                 Quick Apply
                             </button>
                         </div>
@@ -164,7 +165,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <Icon name="arrow_back" className="text-[20px]" />
                                         </button>
                                         <h3 className="text-[18px] font-bold">Quick Apply</h3>
-                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full bg-ds-purple-500/15 text-ds-purple-500`}>{selectedJob.match}% match</span>
+                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full ${isColorful ? 'bg-ds-ember/15 text-ds-ember' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className="space-y-3 mb-5">
                                         {[
@@ -191,7 +192,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                         </div>
                                     </div>
                                     <button onClick={() => setSheetMode('success')}
-                                        className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-ds-blue-500 to-ds-purple-500 text-white`}>
+                                        className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-gradient-start to-gradient-mid text-white`}>
                                         Submit Application
                                     </button>
                                 </motion.div>
@@ -201,14 +202,14 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                             {sheetMode === 'detail' && (
                                 <>
                                     <div className="flex items-start mb-5">
-                                        <div className={`w-14 h-14 rounded-[18px] flex items-center justify-center mr-4 ${theme.workspace.iconBg(isLight)}`}>
-                                            <Icon name="work" className={`text-2xl ${theme.workspace.iconColor(isLight)}`} />
+                                        <div className={`w-14 h-14 rounded-[18px] flex items-center justify-center mr-4 ${isColorful ? 'bg-ds-ember/15' : theme.workspace.iconBg(isLight)}`}>
+                                            <Icon name="work" className={`text-2xl ${isColorful ? 'text-ds-ember' : theme.workspace.iconColor(isLight)}`} />
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-xl font-bold mb-0.5">{selectedJob.title}</h3>
                                             <p className={`text-[14px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{selectedJob.company}</p>
                                         </div>
-                                        <span className="px-3 py-1 rounded-full bg-ds-purple-500/15 font-bold text-[13px] text-ds-purple-500">{selectedJob.match}% match</span>
+                                        <span className={`px-3 py-1 rounded-full font-bold text-[13px] ${isColorful ? 'bg-ds-ember/15 text-ds-ember' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className={`p-4 rounded-2xl mb-5 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                         <div className="flex items-center justify-between mb-3">
@@ -223,7 +224,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <Icon name="auto_awesome" className="text-[16px]" /><span>Ask AI to Prep</span>
                                         </button>
                                         <button onClick={() => setSheetMode('form')}
-                                            className={`py-3 rounded-2xl text-[13px] font-semibold active:scale-95 transition-transform ${theme.workspace.primaryButton}`}>
+                                            className={`py-3 rounded-2xl text-[13px] font-semibold active:scale-95 transition-transform ${primaryBtnClass}`}>
                                             Quick Apply
                                         </button>
                                     </div>

@@ -20,9 +20,9 @@ interface ViewProps {
 
 export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     const promptCardClass = isColorful
-        ? 'rounded-2xl bg-ds-purple-500/10 text-white backdrop-blur-xl border border-ds-ember/20'
+        ? 'rounded-2xl bg-ds-ember/10 text-white backdrop-blur-xl border border-ds-ember/20'
         : theme.copilot.promptCard(isLight);
-    const promptIconColor = isColorful ? 'text-ds-fuchsia-400' : theme.copilot.promptIconColor;
+    const promptIconColor = isColorful ? 'text-ds-ember' : theme.copilot.promptIconColor;
     const inputBarClass = isColorful ? 'bg-[#06040c]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
         ? 'bg-white/10 text-white border border-white/10'
@@ -30,6 +30,11 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     const bb = isColorful
         ? 'bg-[#130a02]/60 backdrop-blur-[20px] border border-ds-ember/20 text-white rounded-2xl'
         : theme.copilot.botBubble(isLight);
+    const pingBgClass = isColorful ? 'bg-ds-ember' : theme.copilot.pingBg;
+    const heroGradientClass = isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.copilot.heroGradient;
+    const userBubbleClass = isColorful
+        ? `bg-gradient-to-br from-ds-ember to-ds-ember-dark text-white ${theme.platform === 'ios' ? 'rounded-[22px] rounded-tr-md' : 'rounded-[24px] rounded-tr-md'} shadow-[0_2px_8px_rgba(255,140,66,0.25)]`
+        : theme.copilot.userBubble;
     const defaultMessages: Message[] = [
         {
             id: '1',
@@ -90,7 +95,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
             <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-5 pb-8 pt-4 no-scrollbar">
                 {messages.length === 1 && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-8 pt-4">
-                        <div className={`mx-auto mb-4 `}>
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 ${heroGradientClass}`}>
                             <Icon name="auto_awesome" className="text-white text-[32px]" />
                         </div>
                         <h2 className="text-center font-bold text-[28px] mb-2">Job Copilot</h2>
@@ -114,10 +119,10 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                         <motion.div key={msg.id} initial={{ opacity: 0, y: 10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} className={`mb-6 flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                             {msg.sender === 'bot' && (
                                 <div className={`mr-3 mt-1 shrink-0 `}>
-                                    <Icon name="auto_awesome" className="text-white text-[16px]" />
+                                    <Icon name="auto_awesome" className={`text-[16px] text-primary`} />
                                 </div>
                             )}
-                            <div className={`max-w-[75%] px-4 py-3 text-[16px] leading-relaxed ${msg.sender === 'user' ? theme.copilot.userBubble : bb}`}>
+                            <div className={`max-w-[75%] px-4 py-3 text-[16px] leading-relaxed ${msg.sender === 'user' ? userBubbleClass : bb}`}>
                                 <p>{msg.text}</p>
                                 {msg.citations && msg.citations.length > 0 && (
                                     <div className="mt-3 pt-3 border-t border-black/5 border-white/10 flex gap-2 overflow-x-auto no-scrollbar pb-1">
@@ -135,8 +140,8 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
 
                     {isTyping && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start mb-6">
-                            <div className={`mr-3 mt-1 shrink-0 `}>
-                                <Icon name="auto_awesome" className="text-white text-[16px]" />
+                            <div className={`mr-3 mt-1 shrink-0`}>
+                                <Icon name="auto_awesome" className={`text-[16px] text-primary`} />
                             </div>
                             <div className={`px-5 py-3.5 flex items-center space-x-1.5 w-[72px] h-[48px] ${bb}`}>
                                 {[0, 1, 2].map((i) => (
@@ -166,7 +171,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                         className="flex-1 bg-transparent border-none outline-none px-2 text-[16px] placeholder:text-gray-500 min-w-0"
                     />
                     <button onClick={() => handleSend(inputValue)} disabled={!inputValue.trim()}
-                        className={`w-10 h-10 ${theme.radii.sendButton} flex items-center justify-center transition-all ${inputValue.trim() ? `${theme.copilot.pingBg} text-white shadow-md active:scale-90` : 'text-gray-400 bg-transparent'}`}
+                        className={`w-10 h-10 ${theme.radii.sendButton} flex items-center justify-center transition-all ${inputValue.trim() ? `${pingBgClass} text-white shadow-md active:scale-90` : 'text-gray-400 bg-transparent'}`}
                     >
                         <Icon name="arrow_upward" className="text-[20px]" />
                     </button>

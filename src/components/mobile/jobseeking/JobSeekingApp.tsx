@@ -60,6 +60,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
     const bgClass = isLight ? theme.bg.light : isColorful ? theme.bg.colorful : theme.bg.dark;
     const card = isColorful ? theme.card.colorful : isLight ? theme.card.light : theme.card.dark;
     const headerStyle = isLight ? theme.header.light : isColorful ? theme.header.colorful : theme.header.dark;
+    const themeClass = isColorful ? 'theme-colorful' : isLight ? 'theme-light' : 'theme-dark';
 
     const handleTabChange = useCallback((newTab: JobTabType) => {
         directionRef.current = getTabDirection(JOB_TAB_ORDER, prevTabRef.current, newTab);
@@ -86,7 +87,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
     ];
 
     return (
-        <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+        <div className={`flex flex-col h-full w-full relative ${bgClass} ${themeClass} transition-colors duration-500 font-sans`}>
             {/* Intro screen overlay */}
             <AnimatePresence>
                 {showIntro && (
@@ -114,7 +115,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
                         <motion.button onClick={() => handleTabChange('profile')} className="relative" whileTap={{ scale: 0.92 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
-                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${theme.accent.avatarBorder(isLight)} bg-gradient-to-tr ${isColorful ? 'from-ds-ember to-ds-ember-dark' : theme.accent.avatarGradient.replace('bg-gradient-to-tr ', '') || 'from-gray-50 to-gray-200 dark:from-white/10 dark:to-white/20'}`}>
+                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${isColorful ? 'border-ds-ember' : theme.accent.avatarBorder(isLight)} bg-gradient-to-tr from-gradient-start to-gradient-mid`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${isColorful ? 'f59e0b' : theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>

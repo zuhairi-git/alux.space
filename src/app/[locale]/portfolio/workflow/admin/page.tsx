@@ -142,20 +142,20 @@ export default function PortalPanel() {
             ? 'bg-[var(--color-colorful-bg)] text-[var(--foreground)]'
             : 'bg-[var(--background)] text-[var(--foreground)]';
     const sidebarBg = isLight
-        ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60 shadow-[4px_0_24px_0_rgba(0,0,0,0.02)]'
+        ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60'
         : isColorful
-            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-ds-ember/30 shadow-[4px_0_24px_0_rgba(255,140,66,0.18)]'
-            : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[4px_0_24px_0_rgba(0,0,0,0.2)]';
+            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-ds-ember/30 shadow-[2px_0_8px_0_rgba(255,140,66,0.06)]'
+            : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[2px_0_8px_0_rgba(0,0,0,0.08)]';
     const headerBg = isLight
         ? 'bg-white/40 backdrop-blur-2xl border-b border-white/60'
         : isColorful
             ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-2xl border-b border-ds-ember/30'
             : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
-        ? 'bg-white rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_12px_34px_rgba(15,23,42,0.08)] p-5 md:p-7'
+        ? 'bg-white rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(15,23,42,0.06)] p-5 md:p-7'
         : isColorful
-            ? 'bg-[var(--color-card-colorful-from)]/95 rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_14px_36px_rgba(255,140,66,0.15)] p-5 md:p-7'
-            : 'bg-[var(--color-gray-900)] rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_12px_34px_rgba(0,0,0,0.45)] p-5 md:p-7';
+            ? 'bg-[var(--color-card-colorful-from)]/95 rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(255,140,66,0.10)] p-5 md:p-7'
+            : 'bg-[var(--color-gray-900)] rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(0,0,0,0.25)] p-5 md:p-7';
     const aiGradientStrong = 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]';
     const aiGradientSoft = 'from-[var(--primary)] to-[var(--gradient-mid)]';
     const aiGradientGlow = 'from-[var(--primary)] to-[var(--gradient-mid)]';
@@ -222,7 +222,7 @@ export default function PortalPanel() {
                             <button key={s.key} onClick={() => setActiveSection(s.key)}
                                 className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
                                     ? (isColorful ? 'text-[var(--color-ember-light)] shadow-lg shadow-[var(--color-ember)]/10' : isLight ? 'text-blue-600 shadow-sm' : 'text-blue-300 shadow-lg shadow-blue-500/10')
-                                    : (isColorful ? 'text-[#ffb07a]/80 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
+                                    : (isColorful ? 'text-[var(--color-ember-light)]/80 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
                                 {active && (
                                     <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-[var(--color-ember)]/20 border border-ds-ember/30' : isLight ? 'bg-white/80 border border-white' : 'bg-blue-500/20 border border-blue-400/20'} rounded-2xl -z-10`} />
                                 )}
@@ -233,7 +233,7 @@ export default function PortalPanel() {
                     })}
                 </nav>
                 <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-ds-ember/20' : 'border-white/5'}`}>
-                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[#ffb07a]/70 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[var(--color-ember-light)]/70 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
                         <Icon name="arrow_back" className={`text-[20px] ${sidebarCollapsed ? '' : 'mr-3'} opacity-60 group-hover:opacity-100 transition-opacity`} />
                         {!sidebarCollapsed && <span>Back to Case Study</span>}
                     </a>
@@ -279,7 +279,7 @@ export default function PortalPanel() {
                                         <button key={s.key} onClick={() => { setActiveSection(s.key); setMobileSidebarOpen(false); }}
                                             className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
                                                 ? (isColorful ? 'text-[var(--color-ember-light)] shadow-lg shadow-[var(--color-ember)]/10' : isLight ? 'text-blue-600 shadow-sm' : 'text-blue-300 shadow-lg shadow-blue-500/10')
-                                                : (isColorful ? 'text-[#ffb07a]/80 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
+                                                : (isColorful ? 'text-[var(--color-ember-light)]/80 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
                                             {active && (
                                                 <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-[var(--color-ember)]/20 border border-ds-ember/30' : isLight ? 'bg-white/80 border border-white' : 'bg-blue-500/20 border border-blue-400/20'} rounded-2xl -z-10`} />
                                             )}
@@ -290,7 +290,7 @@ export default function PortalPanel() {
                                 })}
                             </nav>
                             <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-ds-ember/20' : 'border-white/5'}`}>
-                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[#ffb07a]/70 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[var(--color-ember-light)]/70 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
                                     <Icon name="arrow_back" className="text-[20px] mr-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                                     <span>Back to Case Study</span>
                                 </a>
@@ -311,11 +311,11 @@ export default function PortalPanel() {
                         <h1 className="text-xl md:text-2xl font-black capitalize tracking-tight">{activeSection.replace('-', ' ')}</h1>
                     </div>
                     <div className="flex items-center space-x-3 md:space-x-4 shrink-0">
-                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[#ffb07a]' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
+                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
                             <Icon name="search" className="text-lg opacity-50" />
                             <span className="opacity-50">Search anything... (Ctrl/⌘K)</span>
                         </motion.button>
-                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[#ffb07a]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
                         {/* AI Copilot — mobile only, replaces floating button */}
@@ -324,13 +324,13 @@ export default function PortalPanel() {
                             <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
-                            <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[#ffb07a]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                                 <Icon name="notifications" className="text-xl opacity-70" />
                                 {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-[var(--color-ember)]' : 'bg-blue-500'}`} />}
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-ember/30 shadow-[#ff8c42]/30 text-[#ffb07a]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-ember/30 shadow-[var(--color-ember)]/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
@@ -360,7 +360,7 @@ export default function PortalPanel() {
                             </motion.button>
                             <AnimatePresence>
                                 {showProfileMenu && (
-                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-ember/30 shadow-[#ff8c42]/30 text-[#ffb07a]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-ember/30 shadow-[var(--color-ember)]/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
                                             <div className={`p-5 border-b ${isLight ? 'border-slate-100' : isColorful ? 'border-ds-ember/30' : 'border-white/5'}`}>
                                                 <p className="font-bold text-base">Ali Al-Zuhairi</p>
                                                 <p className="text-xs font-medium opacity-60 mt-1">admin@alux.space</p>
@@ -378,7 +378,7 @@ export default function PortalPanel() {
                                                             { value: 'dark', label: 'Dark', icon: 'dark_mode' },
                                                             { value: 'colorful', label: 'Colorful', icon: 'palette' }
                                                         ] as { value: Theme, label: string, icon: string }[]).map(mode => (
-                                                                <button key={mode.value} aria-label={`Switch to ${mode.label} theme`} title={mode.label} onClick={() => { setTheme(mode.value); setShowProfileMenu(false); }} className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${theme === mode.value ? (isLight ? 'bg-slate-900 text-white' : isColorful ? 'bg-[var(--primary)]/20 text-white border border-[var(--primary)]/40' : 'bg-white/10 text-white border border-white/20') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[#ffb07a]/70 hover:text-white' : 'text-slate-300 hover:text-white')}`}>
+                                                                <button key={mode.value} aria-label={`Switch to ${mode.label} theme`} title={mode.label} onClick={() => { setTheme(mode.value); setShowProfileMenu(false); }} className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${theme === mode.value ? (isLight ? 'bg-slate-900 text-white' : isColorful ? 'bg-[var(--primary)]/20 text-white border border-[var(--primary)]/40' : 'bg-white/10 text-white border border-white/20') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-ember-light)]/70 hover:text-white' : 'text-slate-300 hover:text-white')}`}>
                                                                 <Icon name={mode.icon} className="text-sm" />
                                                             </button>
                                                         ))}
@@ -411,7 +411,7 @@ export default function PortalPanel() {
                 {showSearch && (
                     <div className="fixed inset-0 z-[70] p-4 sm:p-8 flex items-start justify-center">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={() => setShowSearch(false)} />
-                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border-ds-ember/30 shadow-2xl shadow-[#ff8c42]/30 text-[#ffb07a]' : 'bg-[var(--color-dark-2)]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
+                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border-ds-ember/30 shadow-2xl shadow-[var(--color-ember)]/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-2)]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
                             <div className={`px-5 py-4 border-b flex items-center gap-3 ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                 <Icon name="search" className="text-xl opacity-60" />
                                 <input
@@ -474,7 +474,7 @@ export default function PortalPanel() {
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-l border-ds-ember/30 text-[#ffb07a]' : 'bg-[var(--color-dark-1)]/80 border-l border-white/10'}`}
+                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-l border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-1)]/80 border-l border-white/10'}`}
                         >
                             <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
                                 <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
@@ -617,7 +617,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]' : isColorful ? 'bg-[var(--color-card-colorful-from)]/95 hover:shadow-[0_10px_28px_rgba(255,140,66,0.15)]' : 'bg-[var(--color-gray-900)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.45)]'} border border-[var(--card-border)] rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300`}>
+        <motion.div variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white hover:shadow-[0_4px_14px_rgba(15,23,42,0.06)]' : isColorful ? 'bg-[var(--color-card-colorful-from)]/95 hover:shadow-[0_4px_14px_rgba(255,140,66,0.10)]' : 'bg-[var(--color-gray-900)] hover:shadow-[0_4px_14px_rgba(0,0,0,0.25)]'} border border-[var(--card-border)] rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300`}>
             <div className="flex items-center justify-between mb-4">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[var(--primary)]/15 to-[var(--gradient-mid)]/15`}>
                     <Icon name={icon} className="text-2xl text-[var(--primary)]" />
@@ -675,21 +675,41 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
                 {/* Activity Chart */}
                 <motion.div variants={itemVariants} className={`${card} xl:col-span-2`}>
-                    <h3 className="font-bold text-xl mb-6">User Activity (30 Days)</h3>
-                    <div className="h-56 flex items-end justify-between gap-1.5 px-2">
-                        {activityChartTops.map((h: number, i: number) => (
-                            <motion.div key={i} className="relative w-full h-full flex items-end group">
-                                <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.02 }}
-                                    whileHover={{ backgroundColor: isLight ? palette.ember.DEFAULT : palette.ember.dark }}
-                                    className={`w-full rounded-t-md ${isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-ember)]/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
-                                {/* Tooltip */}
-                                <div className={`absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
-                                    {Math.round(h * 15)} Interactions
-                                </div>
-                            </motion.div>
+                    <h3 className="font-bold text-xl mb-1">User Activity (30 Days)</h3>
+                    <p className={`text-[12px] font-medium mb-5 ${isLight ? 'text-slate-400' : 'text-white/35'}`}>Daily interactions across the platform</p>
+                    <div className="relative h-52">
+                        {/* Horizontal grid lines */}
+                        {[25, 50, 75].map(pct => (
+                            <div key={pct} className="absolute left-0 right-0 flex items-center" style={{ bottom: `${pct}%` }}>
+                                <div className={`w-full h-px ${isLight ? 'bg-slate-100' : isColorful ? 'bg-orange-500/[0.07]' : 'bg-white/[0.05]'}`} />
+                                <span className={`absolute right-0 text-[10px] font-medium -translate-y-3 ${isLight ? 'text-slate-300' : 'text-white/20'}`}>{pct}%</span>
+                            </div>
                         ))}
+                        {/* Bars */}
+                        <div className="absolute inset-0 flex items-end justify-between gap-[3px] pb-px">
+                            {activityChartTops.map((h: number, i: number) => (
+                                <motion.div key={i} className="relative w-full h-full flex items-end group">
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: `${h}%`, opacity: 1 }}
+                                        transition={{ duration: 0.6, delay: i * 0.018, ease: [0.16, 1, 0.3, 1] }}
+                                        className="w-full rounded-full cursor-pointer relative z-10 hover:opacity-90 transition-opacity"
+                                        style={{
+                                            background: isLight
+                                                ? 'linear-gradient(to top, rgb(245, 158, 11), rgba(251,191,36,0.3))'
+                                                : isColorful
+                                                    ? 'linear-gradient(to top, rgba(255,140,66,0.95), rgba(255,140,66,0.22))'
+                                                    : 'linear-gradient(to top, rgba(34,211,238,0.88), rgba(34,211,238,0.15))'
+                                        }}
+                                    />
+                                    <div className={`absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap pointer-events-none ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
+                                        {Math.round(h * 15)}
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="flex justify-between mt-4 text-xs font-medium opacity-50 px-2">
+                    <div className="flex justify-between mt-3 text-[11px] font-medium opacity-40 px-0.5">
                         <span>Jan 23</span><span>Feb 1</span><span>Feb 8</span><span>Feb 15</span><span>Feb 22</span>
                     </div>
                 </motion.div>
@@ -1405,15 +1425,11 @@ function StartSection({ card, isLight, setActiveSection }: { card: string, isLig
                 ].map((action, i) => (
                     <motion.div key={i} variants={itemVariants} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveSection(action.nav)}
-                        className={`group flex items-center gap-4 px-4 py-3 ${card} cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-[var(--primary)]/10`}>
-                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-15 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
-
-                        <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${action.color} shadow-md`}>
-                            <Icon name={action.icon} className="text-[18px]" />
-                        </div>
+                        className={`group flex items-center gap-4 px-5 py-4 ${card} cursor-pointer relative overflow-hidden transition-all duration-300`}>
+                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-[14px] leading-tight">{action.title}</h3>
-                            <p className={`text-xs font-medium truncate ${isLight ? 'text-slate-500' : 'opacity-60'}`}>{action.desc}</p>
+                            <p className={`text-xs font-medium truncate mt-0.5 ${isLight ? 'text-slate-500' : 'opacity-60'}`}>{action.desc}</p>
                         </div>
                         <Icon name="arrow_forward" className={`text-sm shrink-0 opacity-0 group-hover:opacity-60 transition-opacity`} />
                     </motion.div>

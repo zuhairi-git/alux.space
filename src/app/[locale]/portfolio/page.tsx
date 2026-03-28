@@ -189,7 +189,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Luottamuksen, läpinäkyvyyden ja hallinnan suunnittelu agentti-tekoälytyönkuluille.'
       },
       link: `/${locale}/portfolio/delegate`,
-      gradient: 'from-amber-600 to-[#ffb07a]',
+      gradient: 'from-amber-600 to-[var(--color-ember-light)]',
       status: {
         en: 'In Progress',
         fi: 'Kehitteillä',
@@ -215,7 +215,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia — käyttäjäpersoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkäaikaiseen pysyvyyteen.'
       },
       link: `/${locale}/portfolio/game-strategy`,
-      gradient: 'from-red-600 to-[#ffb07a]',
+      gradient: 'from-red-600 to-[var(--color-ember-light)]',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',

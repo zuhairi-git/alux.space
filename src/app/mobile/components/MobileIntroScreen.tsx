@@ -106,7 +106,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
 
-    const accentColor = selectedTheme === 'colorful' ? '#ff8c42' : '#3b82f6';
+    const accentColor = selectedTheme === 'colorful' ? 'var(--color-ember)' : '#3b82f6';
     const accentGradient = selectedTheme === 'colorful' ? 'from-ds-ember to-ds-ember-dark' : config.accentGradient;
 
     const bgClass =

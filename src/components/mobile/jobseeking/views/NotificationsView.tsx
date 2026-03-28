@@ -11,7 +11,7 @@ interface ViewProps {
     onNav?: (tab: string) => void;
 }
 
-export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
+export function NotificationsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
     const listVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -60,9 +60,9 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
 
                     {/* AI Match */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-ds-blue-500/8 border-b border-blue-500/10' : 'bg-ds-blue-500/10 border-b border-blue-500/15'}`}>
-                            <Icon name="auto_awesome" className="text-[13px] text-ds-blue-400" />
-                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-ds-ember/10 border-b border-ds-ember/20' : isLight ? 'bg-ds-blue-500/8 border-b border-blue-500/10' : 'bg-ds-blue-500/10 border-b border-blue-500/15'}`}>
+                            <Icon name="auto_awesome" className={`text-[13px] ${isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400'}`} />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>2h ago</span>
                         </div>
                         <div className="p-4">
@@ -96,7 +96,7 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
                             <div className="grid grid-cols-3 gap-2 mb-3">
                                 {[
                                     { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-ds-purple-400' },
-                                    { label: 'Applications', value: '4', icon: 'send', color: 'text-ds-blue-400' },
+                                    { label: 'Applications', value: '4', icon: 'send', color: isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400' },
                                     { label: 'Avg Match', value: '88%', icon: 'stars', color: 'text-amber-400' },
                                 ].map(stat => (
                                     <div key={stat.label} className={`flex flex-col items-center py-2.5 rounded-xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>

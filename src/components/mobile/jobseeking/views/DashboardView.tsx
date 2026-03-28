@@ -35,7 +35,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
 
     if (step === 'done') return (
         <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6 text-center">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-ds-cyan-400/50/20 to-ds-blue-500/20 flex items-center justify-center mb-4 shadow-lg shadow-ds-cyan-500/10">
+            <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${isColorful ? 'from-ds-ember/15 to-ds-ember-dark/20' : 'from-ds-cyan-400/20 to-ds-blue-500/20'} flex items-center justify-center mb-4 shadow-lg`}>
                 <Icon name="verified" className="text-5xl text-ds-cyan-400" />
             </div>
             <h3 className="text-xl font-bold mb-1">Profile Updated!</h3>
@@ -45,7 +45,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
             </div>
             <div className="flex gap-3">
                 <button onClick={onClose} className="px-4 py-2.5 rounded-2xl bg-white/10 text-sm font-semibold active:scale-95">Close</button>
-                <button onClick={() => onClose()} className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-ds-cyan-400/50 to-ds-blue-500 text-white text-sm font-bold active:scale-95">View Profile</button>
+                <button onClick={() => onClose()} className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-gradient-start to-gradient-mid text-white text-sm font-bold active:scale-95">View Profile</button>
             </div>
         </motion.div>
     );
@@ -66,7 +66,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
             </div>
             <div className="flex gap-3">
                 <button onClick={() => setStep('edit')} className={`flex-1 py-3 rounded-2xl text-[14px] font-semibold ${inputBg} active:scale-95`}>Edit Again</button>
-                <button onClick={() => setStep('done')} className="flex-1 py-3 rounded-2xl bg-gradient-to-r from-ds-cyan-400/50 to-ds-blue-500 text-white text-[14px] font-bold active:scale-95">Save Profile</button>
+                <button onClick={() => setStep('done')} className="flex-1 py-3 rounded-2xl bg-gradient-to-r from-gradient-start to-gradient-mid text-white text-[14px] font-bold active:scale-95">Save Profile</button>
             </div>
         </motion.div>
     );
@@ -74,8 +74,8 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-cyan-500/20' : isLight ? 'bg-cyan-400/15' : 'bg-ds-cyan-500/15'}`}>
-                    <Icon name="edit_document" className="text-[18px] text-ds-cyan-400" />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-ember/15' : isLight ? 'bg-cyan-400/15' : 'bg-ds-cyan-500/15'}`}>
+                    <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-ds-ember' : 'text-ds-cyan-400'}`} />
                 </div>
                 <div>
                     <h3 className="text-[18px] font-bold">Update CV</h3>
@@ -92,7 +92,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
                     <div className="flex flex-wrap gap-2">
                         {skills.map(s => (
                             <button key={s} onClick={() => setSelectedSkills(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s])}
-                                className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${selectedSkills.includes(s) ? 'bg-ds-cyan-500 text-white' : (isLight ? 'bg-black/5 text-gray-600' : 'bg-white/8 text-gray-300')}`}>{s}</button>
+                                className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${selectedSkills.includes(s) ? `${isColorful ? 'bg-ds-ember' : 'bg-ds-cyan-500'} text-white` : (isLight ? 'bg-black/5 text-gray-600' : 'bg-white/8 text-gray-300')}`}>{s}</button>
                         ))}
                     </div>
                 </div>
@@ -107,7 +107,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
                 </div>
             </div>
             <button onClick={runAI} disabled={aiOptimizing}
-                className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-ds-cyan-400/50 to-ds-blue-500 text-white ${aiOptimizing ? 'opacity-70' : ''}`}>
+                className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-gradient-start to-gradient-mid text-white ${aiOptimizing ? 'opacity-70' : ''}`}>
                 {aiOptimizing ? (<><motion.span animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}><Icon name="autorenew" className="text-[18px]" /></motion.span> AI Optimising…</>) : (<><Icon name="auto_awesome" className="text-[18px]" />Improve with AI</>)}
             </button>
         </motion.div>
@@ -188,10 +188,10 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
 // ─── Analytics Sheet ─────────────────────────────────────────────────────────
 function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isColorful: boolean; theme: MobileTheme }) {
     const stats = [
-        { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', color: 'text-ds-cyan-400', bg: 'bg-ds-cyan-500/15' },
-        { label: 'Applications', value: '7', change: '+3', icon: 'send', color: 'text-ds-blue-400', bg: 'bg-ds-blue-500/15' },
+        { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', color: isColorful ? 'text-ds-ember' : 'text-ds-cyan-400', bg: isColorful ? 'bg-ds-ember/15' : 'bg-ds-cyan-500/15' },
+        { label: 'Applications', value: '7', change: '+3', icon: 'send', color: isColorful ? 'text-ds-ember' : 'text-ds-blue-400', bg: isColorful ? 'bg-ds-ember/15' : 'bg-ds-blue-500/15' },
         { label: 'Interviews', value: '2', change: '↑ new', icon: 'record_voice_over', color: 'text-green-400', bg: 'bg-ds-success/15' },
-        { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: 'text-ds-purple-400', bg: 'bg-ds-purple-500/15' },
+        { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: isColorful ? 'text-ds-ember' : 'text-ds-purple-400', bg: isColorful ? 'bg-ds-ember/15' : 'bg-ds-purple-500/15' },
     ];
     const barData = [25, 50, 40, 66, 80, 72, 90];
     const barLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
@@ -281,10 +281,10 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             icon: 'description',
             label: 'Update CV',
             desc: 'Improve profile',
-            gradient: 'from-ds-cyan-400/50 to-ds-blue-500',
-            bg: isColorful ? 'from-ds-cyan-400/50/25 to-ds-blue-500/25' : isLight ? 'from-ds-cyan-400/50/15 to-ds-blue-500/15' : 'from-ds-cyan-400/50/20 to-ds-blue-500/20',
-            iconColor: 'text-ds-cyan-400',
-            glow: isColorful ? 'shadow-ds-cyan-500/20' : '',
+            gradient: 'from-gradient-start to-gradient-mid',
+            bg: isColorful ? 'from-ds-ember/20 to-ds-ember-dark/20' : isLight ? 'from-ds-cyan-400/50/15 to-ds-blue-500/15' : 'from-ds-cyan-400/50/20 to-ds-blue-500/20',
+            iconColor: isColorful ? 'text-ds-ember-light' : 'text-ds-cyan-400',
+            glow: isColorful ? 'shadow-ds-ember/20' : '',
         },
         {
             key: 'shifts' as ActiveSheet,
@@ -330,7 +330,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             >
                 {/* Decorative blobs */}
                 <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-ds-cyan-400/20 to-transparent rounded-bl-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-ds-blue-400/15 to-transparent pointer-events-none" />
+                <div className={`absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr ${isColorful ? 'from-ds-ember/10' : 'from-ds-blue-400/15'} to-transparent pointer-events-none`} />
                 <div className="flex items-center gap-4 relative z-10">
                     {/* Circular score ring */}
                     <div className="relative w-[68px] h-[68px] shrink-0">
@@ -345,8 +345,8 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                             />
                             <defs>
                                 <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#06b6d4" />
-                                    <stop offset="100%" stopColor="#6366f1" />
+                                    <stop offset="0%" stopColor="var(--gradient-start)" />
+                                    <stop offset="100%" stopColor="var(--gradient-mid)" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -359,7 +359,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                         <h2 className={`text-[17px] font-extrabold tracking-tight mb-0.5 ${isLight ? 'text-gray-800' : 'text-white'}`}>Hi, Ali! 👋</h2>
                         <p className={`text-[13px] mb-3 leading-tight ${isLight ? 'text-gray-500' : 'text-white/50'}`}>Profile at <strong className="text-ds-cyan-400">{profileScore}%</strong> — boost it to get <em>3× more matches</em></p>
                         <button onClick={() => setActiveSheet('cv')}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-ds-cyan-400/50 to-ds-blue-500 text-white text-[12px] font-bold active:scale-95 transition-transform shadow-md shadow-ds-cyan-500/20">
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-gradient-start to-gradient-mid text-white text-[12px] font-bold active:scale-95 transition-transform shadow-md">
                             <Icon name="auto_awesome" className="text-[13px]" />Improve Profile
                         </button>
                     </div>
@@ -419,10 +419,10 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     const statusStyle = item.status === 'Interview'
                         ? 'bg-ds-success/15 text-ds-success border-green-600/30'
                         : item.status === 'Applied'
-                        ? (isLight ? 'bg-ds-blue-500/10 text-ds-blue-600 border-blue-200' : 'bg-ds-blue-500/15 text-ds-blue-400 border-blue-500/30')
+                        ? (isColorful ? 'bg-ds-ember/10 text-ds-ember border-ds-ember/30' : isLight ? 'bg-ds-blue-500/10 text-ds-blue-600 border-blue-200' : 'bg-ds-blue-500/15 text-ds-blue-400 border-blue-500/30')
                         : (isLight ? 'bg-gray-100 text-gray-500 border-gray-200' : 'bg-white/8 text-white/50 border-white/10');
-                    const matchColor = item.match >= 90 ? 'text-ds-success' : item.match >= 80 ? 'text-ds-blue-400' : 'text-amber-400';
-                    const matchBg = item.match >= 90 ? 'bg-ds-success/10' : item.match >= 80 ? 'bg-ds-blue-500/10' : 'bg-amber-600/10';
+                    const matchColor = item.match >= 90 ? 'text-ds-success' : item.match >= 80 ? (isColorful ? 'text-ds-ember' : 'text-ds-blue-400') : 'text-amber-400';
+                    const matchBg = item.match >= 90 ? 'bg-ds-success/10' : item.match >= 80 ? (isColorful ? 'bg-ds-ember/10' : 'bg-ds-blue-500/10') : 'bg-amber-600/10';
                     const iconBg = theme.dashboard.teamColorMap[item.color] ?? 'bg-gray-500/15 text-gray-400';
                     return (
                         <motion.div key={i} variants={itemVariants} onClick={() => onNav?.('jobs')}

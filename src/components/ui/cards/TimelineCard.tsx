@@ -55,8 +55,8 @@ export default function TimelineCard({
   const getIconBgStyles = () => {
     if (theme === 'colorful') {
       return isHovered 
-        ? 'bg-gradient-to-br from-[#ffb07a]/70 to-purple-700/70 backdrop-blur-lg backdrop-filter border border-[#ffb07a]/70'
-        : 'bg-gradient-to-br from-[#ff8c42]/30 to-purple-800/30 backdrop-blur-lg backdrop-filter border border-[#ffb07a]/30';
+        ? 'bg-gradient-to-br from-[var(--color-ember-light)]/70 to-purple-700/70 backdrop-blur-lg backdrop-filter border border-[var(--color-ember-light)]/70'
+        : 'bg-gradient-to-br from-[var(--color-ember)]/30 to-purple-800/30 backdrop-blur-lg backdrop-filter border border-[var(--color-ember-light)]/30';
     } else if (theme === 'dark') {
       return isHovered
         ? 'bg-gradient-to-br from-blue-400/60 to-indigo-700/60 backdrop-blur-lg backdrop-filter border border-blue-300/70'

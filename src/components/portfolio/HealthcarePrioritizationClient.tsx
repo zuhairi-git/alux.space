@@ -55,12 +55,12 @@ export default function HealthcarePrioritizationClient() {
         borderColor: isColorful ? 'border-green-600/30' : ''
       },
       orange: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : '',
-        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-ds-ember' : 'text-[#ffb07a]',
-        titleText: isColorful ? 'text-[#ffb07a]' : '',
+        cardBg: isColorful ? 'bg-gradient-to-br from-[var(--color-ember)]/20 to-[var(--color-ember-dark)]/20 border border-[var(--color-ember-light)]/30' : '',
+        iconText: isColorful ? 'text-[var(--color-ember-light)]' : isLight ? 'text-ds-ember' : 'text-[var(--color-ember-light)]',
+        titleText: isColorful ? 'text-[var(--color-ember-light)]' : '',
         iconBg: isColorful ? 'bg-ds-ember/50/20' : isLight ? 'bg-ds-ember/10' : 'bg-ds-ember/40',
-        takeawayBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/30 to-[#d96820]/30 border border-[#ffb07a]/30' : '',
-        takeawayIconBg: isColorful ? 'bg-ds-ember/50/20 text-[#ffb07a]' : '',
+        takeawayBg: isColorful ? 'bg-gradient-to-br from-[var(--color-ember)]/30 to-[var(--color-ember-dark)]/30 border border-[var(--color-ember-light)]/30' : '',
+        takeawayIconBg: isColorful ? 'bg-ds-ember/50/20 text-[var(--color-ember-light)]' : '',
         borderColor: isColorful ? 'border-ds-ember/30' : ''
       },
       red: {
@@ -319,7 +319,7 @@ export default function HealthcarePrioritizationClient() {
                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                   {[
                     { title: content.contextTitle, desc: content.contextDesc, colorful: 'bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white', extra: null },
-                    { title: content.conflictTitle, desc: content.conflictDesc, colorful: 'bg-gradient-to-br from-red-900/20 to-[#ff8c42]/20 border border-red-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white', extra: 'conflict' },
+                    { title: content.conflictTitle, desc: content.conflictDesc, colorful: 'bg-gradient-to-br from-red-900/20 to-[var(--color-ember)]/20 border border-red-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white', extra: 'conflict' },
                   ].map((card, i) => (
                     <motion.div
                       key={i}
@@ -409,7 +409,7 @@ export default function HealthcarePrioritizationClient() {
                       // Better to hardcode the border-l class based on color prop since dynamic literals don't work well
                       const borderLeftClass = {
                         red: 'border-l-red-600',
-                        orange: 'border-l-[#ff8c42]',
+                        orange: 'border-l-[var(--color-ember)]',
                         yellow: 'border-l-yellow-500',
                         blue: 'border-l-blue-500',
                         gray: 'border-l-gray-500',

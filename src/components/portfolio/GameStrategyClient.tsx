@@ -124,8 +124,8 @@ export default function GameStrategyClient() {
         borderColor: isColorful ? 'border-green-600/30' : isLight ? 'border-green-600/20' : 'border-green-600/20',
       },
       orange: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/20 border border-ds-ember/20',
-        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-ds-ember' : 'text-[#ffb07a]',
+        cardBg: isColorful ? 'bg-gradient-to-br from-[var(--color-ember)]/20 to-[var(--color-ember-dark)]/20 border border-[var(--color-ember-light)]/30' : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/20 border border-ds-ember/20',
+        iconText: isColorful ? 'text-[var(--color-ember-light)]' : isLight ? 'text-ds-ember' : 'text-[var(--color-ember-light)]',
         iconBg: isColorful ? 'bg-ds-ember/50/20' : isLight ? 'bg-ds-ember/10' : 'bg-ds-ember/40',
         borderColor: isColorful ? 'border-ds-ember/30' : isLight ? 'border-ds-ember/20' : 'border-ds-ember/20',
       },

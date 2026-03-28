@@ -42,12 +42,12 @@ const accentMap: Record<string, { gradient: string; dot: string; line: string; g
     iconBg: 'bg-green-600/15 text-green-400',
   },
   orange: {
-    gradient: 'from-[#ffb07a] to-amber-400',
-    dot: 'bg-[#ffb07a]',
-    line: 'from-[#ffb07a]/30 via-amber-400/20 to-transparent',
-    glow: 'from-[#ff8c42] to-amber-600',
-    text: 'from-[#ffb07a] to-amber-400',
-    iconBg: 'bg-ds-ember/15 text-[#ffb07a]',
+    gradient: 'from-[var(--color-ember-light)] to-amber-400',
+    dot: 'bg-[var(--color-ember-light)]',
+    line: 'from-[var(--color-ember-light)]/30 via-amber-400/20 to-transparent',
+    glow: 'from-[var(--color-ember)] to-amber-600',
+    text: 'from-[var(--color-ember-light)] to-amber-400',
+    iconBg: 'bg-ds-ember/15 text-[var(--color-ember-light)]',
   },
   red: {
     gradient: 'from-red-400 to-pink-400',

@@ -455,7 +455,7 @@ export default function AccessibilityClient() {
       title: content.spacingTitle,
       description: content.spacingDesc,
       icon: "space_bar",
-      gradient: "from-[#ff8c42] to-red-600"
+      gradient: "from-[var(--color-ember)] to-red-600"
     }
   ];
 
@@ -907,7 +907,7 @@ export default function AccessibilityClient() {
                         icon: "description",
                         title: content.requirement4,
                         desc: content.requirement4Desc,
-                        gradient: "from-[#ff8c42] to-red-600"
+                        gradient: "from-[var(--color-ember)] to-red-600"
                       }
                     ].map((req, index) => (
                       <div key={index} className={`p-5 rounded-2xl ${isColorful
@@ -973,8 +973,8 @@ export default function AccessibilityClient() {
             <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-red-600/30 to-[#ff8c42]/30 border border-red-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-gradient-to-r from-red-50 to-[#ff8c42]/5 border border-red-100' : 'bg-gradient-to-r from-red-900/20 to-[#ff8c42]/20 border border-red-800'
+                        ? 'bg-gradient-to-br from-red-600/30 to-[var(--color-ember)]/30 border border-red-400/30 backdrop-blur-lg'
+                        : isLight ? 'bg-gradient-to-r from-red-50 to-[var(--color-ember)]/5 border border-red-100' : 'bg-gradient-to-r from-red-900/20 to-[var(--color-ember)]/20 border border-red-800'
                       }`}>
                       <h3 className={`text-lg font-bold mb-3 ${isColorful
                           ? 'text-red-300'
@@ -1105,10 +1105,10 @@ export default function AccessibilityClient() {
                       </div>
                     </div>
                     <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-[#ff8c42]/30 to-red-600/30 border border-[#ffb07a]/30 backdrop-blur-lg'
+                        ? 'bg-gradient-to-br from-[var(--color-ember)]/30 to-red-600/30 border border-[var(--color-ember-light)]/30 backdrop-blur-lg'
                         : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-[#ffb07a]' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-[var(--color-ember-light)]' : isLight ? 'text-gray-900' : 'text-white'
                         }`}>{content.arabicType}</h3>
                       <div className="space-y-4" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
                         <div>
@@ -1128,11 +1128,11 @@ export default function AccessibilityClient() {
                         </div>
                       </div>
                       <div className={`mt-6 p-4 rounded-lg ${isColorful
-                          ? 'bg-ds-ember/20 border border-[#ffb07a]/30'
-                          : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/30 border border-[#d96820]'
+                          ? 'bg-ds-ember/20 border border-[var(--color-ember-light)]/30'
+                          : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/30 border border-[var(--color-ember-dark)]'
                         }`}>
-                        <span className="material-symbols text-[#ffb07a] mr-2">language</span>
-                        <span className={`text-sm ${isColorful ? 'text-[#ffb07a]' : isLight ? 'text-[#d96820]' : 'text-[#ffb07a]'
+                        <span className="material-symbols text-[var(--color-ember-light)] mr-2">language</span>
+                        <span className={`text-sm ${isColorful ? 'text-[var(--color-ember-light)]' : isLight ? 'text-[var(--color-ember-dark)]' : 'text-[var(--color-ember-light)]'
                           }`}>{content.rtlSupport}</span>
                       </div>
                     </div>
@@ -1141,7 +1141,7 @@ export default function AccessibilityClient() {
 
             <CaseStudyItem>
                   <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#ffb07a] to-red-400'
+                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-ember-light)] to-red-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>Core System Features</h2>
 
