@@ -137,7 +137,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                     </div>
                     <motion.button
                         onClick={() => handleTabChange('copilot')}
-                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${theme.accent.aiButton(isLight)}`}
+                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-ds-ember/20 text-ds-ember' : theme.accent.aiButton(isLight)}`}
                         whileTap={{ scale: 0.9 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >

@@ -171,7 +171,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     {isColorful ? (
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
-                            <div className="absolute top-1/3 -right-16 w-48 h-48 bg-blue-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }} />
+                            <div className={`absolute top-1/3 -right-16 w-48 h-48 ${isColorful ? 'bg-ds-ember/8' : 'bg-blue-600/8'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '8s', animationDelay: '2s' }} />
                             <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
                             <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
                         </>
@@ -183,7 +183,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     ) : (
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-blue-600/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
+                            <div className={`absolute bottom-20 -right-16 w-48 h-48 ${isColorful ? 'bg-ds-ember/[0.04]' : 'bg-blue-600/[0.04]'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     )}
                 </div>
@@ -344,9 +344,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 <div className={`absolute top-4 bottom-4 left-0 w-[3px] rounded-full ${isIOS ? 'bg-gradient-to-b from-ds-blue-500 to-ds-indigo-500' : 'bg-gradient-to-b from-ds-blue-500 to-ds-blue-300'}`} />
                 <div className="pl-3">
                     <div className="flex items-center space-x-2.5 mb-3">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : isIOS ? 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500' : 'bg-ds-blue-300'}`}>
-                            <Icon name="auto_awesome" className={`text-base ${isColorful ? 'text-white' : isIOS ? 'text-white' : 'text-ds-blue-900'}`} />
-                        </div>
+                        <Icon name="auto_awesome" className={`text-xl ${isColorful ? 'text-ds-ember' : 'text-ds-blue-500'}`} />
                         <span className={`text-xs font-bold uppercase tracking-widest ${isColorful ? 'text-ds-ember-light' : isLight ? 'text-ds-blue-500' : isIOS ? 'text-ds-blue-400' : 'text-ds-blue-300'}`}>AI Morning Briefing</span>
                     </div>
                     <p className={`text-[14px] leading-[1.65] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
@@ -733,9 +731,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                         className="flex flex-col items-center pt-[5vh] pb-8 shrink-0">
                         <div className="relative w-16 h-16 flex items-center justify-center mb-6">
                             <div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${isColorful ? 'bg-ds-ember' : 'bg-ds-blue-500'}`} style={{ animationDuration: '2s', animationIterationCount: 2, animationFillMode: 'forwards' }} />
-                            <div className={`w-full h-full rounded-full flex items-center justify-center shadow-2xl ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : isIOS ? 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500' : 'bg-ds-blue-500'}`}>
-                                <Icon name="auto_awesome" className="text-3xl text-white" />
-                            </div>
+                            <Icon name="auto_awesome" className={`text-[36px] ${isColorful ? 'text-ds-ember' : 'text-ds-blue-500'}`} />
                         </div>
                         <h3 className="font-bold text-lg mb-1">Market Copilot</h3>
                         <p className={`text-sm text-center max-w-[240px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Ask anything about markets, earnings, filings, or macro trends.</p>

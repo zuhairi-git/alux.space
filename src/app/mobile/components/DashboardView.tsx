@@ -314,9 +314,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-left p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
                 <div className={`absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-ds-indigo-500/10 to-ds-purple-400/10 blur-2xl group-active:scale-110 transition-transform`} />
                 <div className="flex items-center space-x-2.5 mb-3 relative z-10">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'bg-ds-blue-300' : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500'}`}>
-                        <Icon name="auto_awesome" className={`text-sm ${isColorful ? 'text-white' : theme.platform === 'android' ? 'text-ds-blue-900' : 'text-white'}`} />
-                    </div>
+                    <Icon name="auto_awesome" className={`text-xl ${isColorful ? 'text-ds-ember' : 'text-ds-blue-500'}`} />
                     <span className={`text-[10px] font-bold uppercase tracking-[0.15em] ${accent}`}>AI Briefing</span>
                     <span className="ml-auto text-[10px] font-medium opacity-30">Just now</span>
                 </div>
@@ -332,8 +330,8 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <div className="grid grid-cols-4 gap-2.5">
                 {/* Workspace 1 — 2 cols, tall */}
                 <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 row-span-2 text-left p-4 ${card} active:scale-[0.97] transition-transform`}>
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${theme.workspace.iconBg(isLight)}`}>
-                        <Icon name={workspaces[0].icon} className={`text-xl ${theme.workspace.iconColor(isLight)}`} />
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${isColorful ? 'bg-ds-ember/20' : theme.workspace.iconBg(isLight)}`}>
+                        <Icon name={workspaces[0].icon} className={`text-xl ${isColorful ? 'text-ds-ember' : theme.workspace.iconColor(isLight)}`} />
                     </div>
                     <span className="font-bold text-[14px] block mb-1">{workspaces[0].name.split(' ').slice(0, 2).join(' ')}</span>
                     <span className={`text-[11px] block mb-3 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{workspaces[0].members} members · {workspaces[0].docs} docs</span>
@@ -347,8 +345,8 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 {/* Workspace 2 — 2 cols, short */}
                 <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
                     <div className="flex items-center gap-2.5 mb-2">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${theme.workspace.iconBg(isLight)}`}>
-                            <Icon name={workspaces[1].icon} className={`text-[16px] ${theme.workspace.iconColor(isLight)}`} />
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isColorful ? 'bg-ds-ember/20' : theme.workspace.iconBg(isLight)}`}>
+                            <Icon name={workspaces[1].icon} className={`text-[16px] ${isColorful ? 'text-ds-ember' : theme.workspace.iconColor(isLight)}`} />
                         </div>
                         <div>
                             <span className="font-semibold text-[13px] block leading-tight">{workspaces[1].name.split(' ').slice(0, 2).join(' ')}</span>
@@ -361,8 +359,8 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 {/* Workspace 3 — 2 cols, short */}
                 <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
                     <div className="flex items-center gap-2.5 mb-2">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${theme.workspace.iconBg(isLight)}`}>
-                            <Icon name={workspaces[2].icon} className={`text-[16px] ${theme.workspace.iconColor(isLight)}`} />
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isColorful ? 'bg-ds-ember/20' : theme.workspace.iconBg(isLight)}`}>
+                            <Icon name={workspaces[2].icon} className={`text-[16px] ${isColorful ? 'text-ds-ember' : theme.workspace.iconColor(isLight)}`} />
                         </div>
                         <div>
                             <span className="font-semibold text-[13px] block leading-tight">{workspaces[2].name.split(' ').slice(0, 2).join(' ')}</span>
@@ -422,9 +420,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
             {/* AI Briefing Card */}
             <motion.div variants={fadeUp} className={`p-6 ${card}`}>
                 <div className="flex items-center space-x-3 mb-4">
-                    <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'bg-ds-blue-300' : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500'}`}>
-                        <Icon name="auto_awesome" className={`text-base ${isColorful ? 'text-white' : theme.platform === 'android' ? 'text-ds-blue-900' : 'text-white'}`} />
-                    </div>
+                    <Icon name="auto_awesome" className={`text-2xl ${isColorful ? 'text-ds-ember' : 'text-ds-blue-500'}`} />
                     <span className={`text-[11px] font-bold uppercase tracking-widest ${accent}`}>AI Collaboration Briefing</span>
                 </div>
                 <p className={`text-[15px] leading-[1.75] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
@@ -509,9 +505,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className={`h-full flex flex-col justify-between p-6 ${card}`}>
                     <div>
                         <div className="flex items-center space-x-3 mb-6">
-                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'bg-ds-blue-300' : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500'}`}>
-                                <Icon name="auto_awesome" className={`text-2xl ${isColorful ? 'text-white' : theme.platform === 'android' ? 'text-ds-blue-900' : 'text-white'}`} />
-                            </div>
+                            <Icon name="auto_awesome" className={`text-[32px] ${isColorful ? 'text-ds-ember' : 'text-ds-blue-500'}`} />
                             <div>
                                 <span className={`text-[10px] font-bold uppercase tracking-[0.15em] block ${accent}`}>AI Briefing</span>
                                 <span className="text-[18px] font-bold block">Good morning</span>
@@ -541,8 +535,8 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                             <motion.button key={ws.id} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }}
                                 onClick={() => onNav('workspaces')} className={`w-full flex items-center justify-between p-4 ${card} active:scale-[0.98] transition-transform`}>
                                 <div className="flex items-center space-x-3">
-                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${theme.workspace.iconBg(isLight)}`}>
-                                        <Icon name={ws.icon} className={`text-lg ${theme.workspace.iconColor(isLight)}`} />
+                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isColorful ? 'bg-ds-ember/20' : theme.workspace.iconBg(isLight)}`}>
+                                        <Icon name={ws.icon} className={`text-lg ${isColorful ? 'text-ds-ember' : theme.workspace.iconColor(isLight)}`} />
                                     </div>
                                     <div className="text-left">
                                         <span className="font-semibold text-[14px] block">{ws.name}</span>

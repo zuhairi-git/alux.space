@@ -39,7 +39,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
                             <motion.button key={w.id} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 + i * 0.05 }}
                                 onClick={() => setSel(sel === w.id ? null : w.id)} className={`w-full flex items-center justify-between p-4.5 ${card} active:scale-[0.98]`}>
                                 <div className="flex items-center space-x-3.5">
-                                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${ws.iconBg(isLight)}`}><Icon name={w.icon} className={`text-xl ${ws.iconColor(isLight)}`} /></div>
+                                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${isColorful ? 'bg-ds-ember/20' : ws.iconBg(isLight)}`}><Icon name={w.icon} className={`text-xl ${isColorful ? 'text-ds-ember' : ws.iconColor(isLight)}`} /></div>
                                     <div className="text-left"><span className="font-semibold text-[15px] block">{w.name}</span><span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{w.members} members · {w.docs} docs</span></div>
                                 </div>
                                 <div className="flex items-center space-x-2.5">
@@ -66,7 +66,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
                             </button>
                             <div className="px-7">
                             <div className="flex items-center space-x-4 mb-5">
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${ws.iconBg(isLight)}`}><Icon name={w.icon} className={`text-2xl ${ws.iconColor(isLight)}`} /></div>
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${isColorful ? 'bg-ds-ember/20' : ws.iconBg(isLight)}`}><Icon name={w.icon} className={`text-2xl ${isColorful ? 'text-ds-ember' : ws.iconColor(isLight)}`} /></div>
                                 <div><h3 className="text-xl font-bold">{w.name}</h3><p className={`text-[13px] mt-0.5 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{w.members} members · {w.docs} docs</p></div>
                             </div>
                             <div className="mb-5 flex items-center space-x-4"><Sparkline data={w.data} color={ws.sheetAccent} width={180} height={44} /><span className="font-bold text-xl" style={{ color: ws.sheetAccent }}>{w.activity}%</span></div>
@@ -107,7 +107,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
                             <div className="grid grid-cols-3 gap-3.5 mt-3">
                                 {['Open', 'Ask AI', 'Share'].map((l, i) => (<button key={l} onClick={() => {
                                     if (l === 'Ask AI') { setSel(null); setExpanded(false); onNav?.('copilot'); }
-                                }} className={`py-3.5 ${theme.radii.sheetButton} text-[14px] font-semibold active:scale-95 ${i === 0 ? ws.primaryButton : ws.secondaryButton(isLight)}`}>{l}</button>))}
+                                }} className={`py-3.5 ${theme.radii.sheetButton} text-[14px] font-semibold active:scale-95 ${i === 0 ? (isColorful ? 'bg-ds-ember text-white' : ws.primaryButton) : ws.secondaryButton(isLight)}`}>{l}</button>))}
                             </div>
                             </div>
                         </motion.div>
