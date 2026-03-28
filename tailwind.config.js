@@ -59,6 +59,15 @@ module.exports = {
         'ds-dark-1':        'var(--color-dark-1)',
         'ds-dark-2':        'var(--color-dark-2)',
         'ds-dark-3':        'var(--color-dark-3)',
+        // ── Colorful palette tokens (palette-level, never theme-switched) ───────────────
+        'ds-colorful-bg':          'rgb(var(--color-colorful-bg-rgb) / <alpha-value>)',
+        'ds-card-colorful-from':   'rgb(var(--color-card-colorful-from-rgb) / <alpha-value>)',
+        // ── Semantic theme-switched tokens ────────────────────────────────────────────
+        'accent':                  'var(--accent-text)',
+        'accent-2':                'var(--accent-text-2)',
+        'dropdown':                'var(--dropdown-bg)',
+        'dropdown-border-color':   'var(--dropdown-border)',
+        'dropdown-text':           'var(--dropdown-text)',
         // ── Design System Palette ─────────────────────────────────────
         'ds-blue': {
           50:  'var(--color-blue-50)',

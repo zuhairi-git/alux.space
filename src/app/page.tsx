@@ -28,7 +28,7 @@ const InteractiveSkillCard = ({
     trackEvent('skill_hover', 'homepage', skill.title);
   };
 
-  // Get card styles based on theme
+  // Card styles — colorful via CSS vars, dark/light via card-from-bg token
   const getCardStyles = () => {
     if (theme === 'colorful') {
       return 'bg-gradient-to-br from-[var(--primary)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--primary)]/10 hover:via-[var(--gradient-mid)]/10 hover:to-[var(--gradient-end)]/10';
@@ -37,22 +37,6 @@ const InteractiveSkillCard = ({
     } else {
       return 'bg-white/80 border-slate-200/60 hover:border-blue-300/60 hover:bg-white hover:shadow-lg hover:shadow-blue-100/50';
     }
-  };
-
-  const getIconColor = () => {
-    if (theme === 'colorful') return 'text-[var(--primary)]';
-    if (theme === 'dark') return 'text-blue-400';
-    return 'text-blue-600';
-  };
-
-  const getTitleColor = () => {
-    if (theme === 'light') return 'text-slate-900';
-    return 'text-white';
-  };
-
-  const getDescColor = () => {
-    if (theme === 'light') return 'text-slate-600';
-    return 'text-slate-300';
   };
 
   return (
@@ -73,9 +57,7 @@ const InteractiveSkillCard = ({
         absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
         ${theme === 'colorful' 
           ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5' 
-          : theme === 'dark'
-          ? 'bg-gradient-to-br from-blue-500/5 to-indigo-500/5'
-          : 'bg-gradient-to-br from-blue-500/3 to-indigo-500/3'
+          : 'bg-gradient-to-br from-blue-500/5 to-indigo-500/5'
         }
       `} />
 
@@ -85,12 +67,10 @@ const InteractiveSkillCard = ({
         transition-all duration-300 group-hover:scale-110
         ${theme === 'colorful'
           ? 'bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20'
-          : theme === 'dark'
-          ? 'bg-blue-500/10 group-hover:bg-blue-500/20'
-          : 'bg-blue-500/10 group-hover:bg-blue-500/15'
+          : 'bg-blue-500/10 group-hover:bg-blue-500/20'
         }
       `}>
-        <span className={`material-symbols text-2xl ${getIconColor()}`}>
+          <span className={`material-symbols text-2xl text-[var(--accent-text)]`}>
           {skill.title.toLowerCase().includes('leadership') ? 'groups' :
            skill.title.toLowerCase().includes('strategy') ? 'lightbulb' :
            skill.title.toLowerCase().includes('design') || skill.title.toLowerCase().includes('prototyp') ? 'palette' :
@@ -102,11 +82,11 @@ const InteractiveSkillCard = ({
 
       {/* Content */}
       <div className="relative z-10">
-        <h4 className={`text-lg font-semibold mb-2 leading-tight ${getTitleColor()}`}>
+        <h4 className={`text-lg font-semibold mb-2 leading-tight text-foreground`}>
           {skill.title}
         </h4>
         
-        <p className={`text-sm leading-relaxed ${getDescColor()}`}>
+        <p className={`text-sm leading-relaxed text-[var(--muted-foreground)]`}>
           {skill.desc}
         </p>
       </div>
@@ -117,9 +97,7 @@ const InteractiveSkillCard = ({
         group-hover:scale-x-100 transition-transform duration-300
         ${theme === 'colorful' 
           ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]' 
-          : theme === 'dark'
-          ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
-          : 'bg-gradient-to-r from-blue-500 to-indigo-600'
+          : 'bg-gradient-to-r from-blue-500 to-indigo-500'
         }
       `} />
     </motion.div>
@@ -325,11 +303,7 @@ export default function Home() {
               className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)]"
             >
               <span className="material-symbols text-xl text-[var(--primary)]">auto_awesome</span>
-              <span className={`text-sm font-medium ${
-                theme === 'colorful' ? 'text-[var(--primary)]' :
-                theme === 'dark' ? 'text-blue-400' :
-                'text-blue-600'
-              }`}>
+              <span className={`text-sm font-medium text-[var(--accent-text)]`}>
                 {locale === 'fi' ? 'PERUSTUKSEN RAKENTAMINEN' : 'FOUNDATION BUILDING'}
               </span>
             </motion.div>
@@ -361,20 +335,10 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className={`p-8 rounded-3xl border ${
-                theme === 'colorful' 
-                  ? 'bg-[var(--card-from-bg)] border-[var(--card-border)]' 
-                  : theme === 'dark'
-                  ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50'
-                  : 'bg-gradient-to-br from-gray-50 to-white border-gray-200'
-              }`}
+              className={`p-8 rounded-3xl border bg-[var(--card-from-bg)] border-[var(--card-border)]`}
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-xl ${
-                  theme === 'colorful' ? 'bg-[var(--primary)]/15 text-[var(--primary)]' :
-                  theme === 'dark' ? 'bg-blue-500/20 text-blue-400' :
-                  'bg-blue-500/10 text-blue-600'
-                }`}>
+                <div className={`p-3 rounded-xl bg-[var(--primary)]/15 text-[var(--accent-text)]`}>
                   <span className="material-symbols text-2xl">psychology</span>
                 </div>
                 <div className="flex-1">
@@ -394,20 +358,10 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className={`p-8 rounded-3xl border ${
-                theme === 'colorful' 
-                  ? 'bg-[var(--card-from-bg)] border-[var(--card-border)]' 
-                  : theme === 'dark'
-                  ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50'
-                  : 'bg-gradient-to-br from-gray-50 to-white border-gray-200'
-              }`}
+              className={`p-8 rounded-3xl border bg-[var(--card-from-bg)] border-[var(--card-border)]`}
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-xl ${
-                  theme === 'colorful' ? 'bg-[var(--gradient-mid)]/15 text-[var(--gradient-mid)]' :
-                  theme === 'dark' ? 'bg-indigo-500/20 text-indigo-400' :
-                  'bg-indigo-500/10 text-indigo-600'
-                }`}>
+                <div className={`p-3 rounded-xl bg-[var(--gradient-mid)]/15 text-[var(--accent-text-2)]`}>
                   <span className="material-symbols text-2xl">explore</span>
                 </div>
                 <div className="flex-1">
@@ -455,12 +409,7 @@ export default function Home() {
             >
               <span className={`
                 material-symbols text-4xl p-4 rounded-2xl
-                ${theme === 'colorful' 
-                  ? 'text-[var(--primary)] bg-[var(--primary)]/10 border border-[var(--card-border)]' 
-                  : theme === 'dark'
-                  ? 'text-blue-400 bg-blue-500/10 border border-blue-500/20'
-                  : 'text-blue-600 bg-blue-500/10 border border-blue-500/20'
-                }
+                text-[var(--accent-text)] bg-[var(--primary)]/10 border border-[var(--card-border)]
               `}>
                 psychology
               </span>
@@ -501,27 +450,11 @@ export default function Home() {
             <div className="relative">
               {/* Decorative background blur orbs */}
               <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
-                <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl ${
-                  theme === 'colorful' ? 'bg-[var(--primary)]/20' :
-                  theme === 'dark' ? 'bg-blue-500/20' :
-                  'bg-blue-400/15'
-                }`} />
-                <div className={`absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl ${
-                  theme === 'colorful' ? 'bg-[var(--gradient-mid)]/20' :
-                  theme === 'dark' ? 'bg-cyan-500/20' :
-                  'bg-indigo-400/15'
-                }`} />
+                <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl bg-[var(--primary)]/20`} />
+                <div className={`absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl bg-[var(--gradient-mid)]/20`} />
               </div>
 
-              <div className={`
-                relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 p-8 md:p-10 rounded-3xl border-2 backdrop-blur-xl
-                ${theme === 'colorful'
-                  ? 'bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)] border-[var(--card-border)] shadow-2xl shadow-[var(--primary)]/20'
-                  : theme === 'dark'
-                  ? 'bg-gradient-to-br from-gray-900/60 via-blue-900/40 to-gray-900/60 border-blue-500/30 shadow-2xl shadow-blue-500/10'
-                  : 'bg-white/80 border-blue-200/50 shadow-2xl shadow-blue-200/30'
-                }
-              `}>
+              <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 p-8 md:p-10 rounded-3xl border-2 backdrop-blur-xl bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)] border-[var(--card-border)] shadow-2xl shadow-[var(--card-shadow-color)]">
                 {[
                   { years: '10', title: locale === 'fi' ? 'Tuotesuunnittelu' : 'Product Design', icon: 'palette', color: 'fuchsia' },
                   { years: '8', title: locale === 'fi' ? 'Tuotehallinta' : 'Product Management', icon: 'group', color: 'purple' },
@@ -571,11 +504,7 @@ export default function Home() {
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <span className={`material-symbols text-2xl md:text-3xl ${
-                        theme === 'colorful' ? 'text-[var(--primary)]' :
-                        theme === 'dark' ? 'text-blue-400' :
-                        'text-blue-600'
-                      }`}>
+                      <span className="material-symbols text-2xl md:text-3xl text-[var(--accent-text)]">
                         {item.icon}
                       </span>
                     </motion.div>
@@ -592,19 +521,14 @@ export default function Home() {
                         }
                       `}>
                         {item.years}
-                        <span className={`text-lg md:text-xl ml-1 ${
-                          theme === 'light' ? 'text-gray-600' : 'text-white/70'
-                        }`}>
+                        <span className="text-lg md:text-xl ml-1 text-[var(--muted-foreground)]">
                           {locale === 'fi' ? 'v' : 'yrs'}
                         </span>
                       </div>
                     </div>
 
                     {/* Title */}
-                    <div className={`
-                      text-base md:text-lg font-semibold leading-tight
-                      ${theme === 'light' ? 'text-gray-800' : 'text-white/90'}
-                    `}>
+                    <div className="text-base md:text-lg font-semibold leading-tight text-foreground">
                       {item.title}
                     </div>
 
@@ -612,8 +536,6 @@ export default function Home() {
                     <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl ${
                       theme === 'colorful'
                         ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
-                        : theme === 'dark'
-                        ? 'bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500'
                         : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500'
                     }`} />
                   </motion.div>
@@ -648,16 +570,7 @@ export default function Home() {
               }
             </p><motion.a
               href={localizedHref('/portfolio')}
-              className={`
-                inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-medium
-                transition-all duration-300 border backdrop-blur-sm
-                ${theme === 'colorful'
-                  ? 'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border-[var(--card-border)] text-[var(--primary)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50'
-                  : theme === 'dark'
-                  ? 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/30 text-blue-300 hover:from-blue-500/20 hover:to-indigo-500/20 hover:border-blue-500/50'
-                  : 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/30 text-blue-600 hover:from-blue-500/20 hover:to-indigo-500/20 hover:border-blue-500/50'
-                }
-              `}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-medium transition-all duration-300 border backdrop-blur-sm bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border-[var(--card-border)] text-[var(--accent-text)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50"
               whileHover={{ 
                 scale: 1.05,
                 y: -2

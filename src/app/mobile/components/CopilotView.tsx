@@ -19,9 +19,9 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
         ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(255,140,66,0.3)]'
         : theme.copilot.userBubble;
     const bb = isColorful
-        ? `${theme.platform === 'ios' ? 'bg-[#0a0600]/60 backdrop-blur-[20px] border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#0b0b13]/40 backdrop-blur-xl border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
+        ? `${theme.platform === 'ios' ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-1/40 backdrop-blur-xl border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
         : theme.copilot.botBubble(isLight);
-    const inputBarClass = isColorful ? 'bg-[#06040c]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
+    const inputBarClass = isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
         ? `bg-white/10 text-white ${theme.platform === 'ios' ? 'rounded-[18px]' : 'rounded-[24px]'} px-5 py-3 placeholder:text-white/40`
         : theme.copilot.inputField(isLight);

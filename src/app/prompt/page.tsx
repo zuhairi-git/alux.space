@@ -360,60 +360,31 @@ export default function PromptPage() {
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
 
-  // Get theme-specific dropdown menu styles
-  const getDropdownMenuStyles = () => {
-    switch (theme) {
-      case 'light':
-        return 'bg-white border border-gray-200 text-gray-700';
-      case 'dark':
-        return 'bg-gray-900 border border-gray-700 text-gray-300';
-      case 'colorful':
-        return 'bg-purple-900/95 border border-purple-700 text-gray-200';
-      default:
-        return 'bg-gray-900 border border-gray-700 text-gray-300';
-    }
-  };
+  // Dropdown menu container styles — resolved via CSS token cascade
+  const getDropdownMenuStyles = () =>
+    'bg-[var(--dropdown-bg)] border border-[var(--dropdown-border)] text-[var(--dropdown-text)]';
 
-  // Get theme-specific dropdown item styles
   const getDropdownItemStyles = (isSelected: boolean) => {
     const baseClasses = 'w-full text-left px-4 py-3 text-sm transition-all duration-200';
-    
+
     if (isSelected) {
-      switch (theme) {
-        case 'light':
-          return `${baseClasses} bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 font-medium border-l-2 border-blue-500`;
-        case 'dark':
-          return `${baseClasses} bg-gradient-to-r from-purple-500/30 to-blue-500/30 text-white font-medium`;
-        case 'colorful':
-          return `${baseClasses} bg-gradient-to-r from-cyan-500/30 to-purple-500/30 text-white font-medium`;
-        default:
-          return `${baseClasses} bg-gradient-to-r from-purple-500/30 to-blue-500/30 text-white font-medium`;
-      }
-    } else {
-      switch (theme) {
-        case 'light':
-          return `${baseClasses} hover:bg-gray-50 text-gray-700`;
-        case 'dark':
-          return `${baseClasses} hover:bg-white/10 text-gray-300`;
-        case 'colorful':
-          return `${baseClasses} hover:bg-purple-500/20 text-gray-200`;
-        default:
-          return `${baseClasses} hover:bg-white/10 text-gray-300`;
-      }
+      if (theme === 'light')
+        return `${baseClasses} bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 font-medium border-l-2 border-blue-500`;
+      if (theme === 'colorful')
+        return `${baseClasses} bg-gradient-to-r from-cyan-500/30 to-purple-500/30 text-white font-medium`;
+      return `${baseClasses} bg-gradient-to-r from-purple-500/30 to-blue-500/30 text-white font-medium`;
     }
+
+    if (theme === 'light')
+      return `${baseClasses} hover:bg-gray-50 text-[var(--dropdown-text)]`;
+    if (theme === 'colorful')
+      return `${baseClasses} hover:bg-[var(--primary)]/20 text-[var(--dropdown-text)]`;
+    return `${baseClasses} hover:bg-white/10 text-[var(--dropdown-text)]`;
   };
-  // Get theme-specific dropdown button styles
+  // Dropdown button styles — light uses opaque white+shadow, dark/colorful use glass
   const getDropdownButtonStyles = () => {
-    switch (theme) {
-      case 'light':
-        return 'bg-white/80 hover:bg-white border border-gray-200 text-gray-700 shadow-sm';
-      case 'dark':
-        return 'bg-white/10 hover:bg-white/20 backdrop-blur-sm text-gray-300';
-      case 'colorful':
-        return 'bg-white/10 hover:bg-white/20 backdrop-blur-sm text-gray-200';
-      default:
-        return 'bg-white/10 hover:bg-white/20 backdrop-blur-sm text-gray-300';
-    }
+    if (theme === 'light') return 'bg-white/80 hover:bg-white border border-gray-200 text-gray-700 shadow-sm';
+    return 'bg-white/10 hover:bg-white/20 backdrop-blur-sm text-[var(--dropdown-text)]';
   };
 
   // Get theme-specific hover effect for dropdown items
@@ -431,30 +402,18 @@ export default function PromptPage() {
   };
   const getStatusDropdownItemStyles = (isSelected: boolean) => {
     const baseClasses = 'w-full text-left px-4 py-3 text-sm transition-all duration-200';
-    
+
     if (isSelected) {
-      switch (theme) {
-        case 'light':
-          return `${baseClasses} bg-gradient-to-r from-green-600/20 to-cyan-500/20 text-green-700 font-medium border-l-2 border-green-500`;
-        case 'dark':
-          return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
-        case 'colorful':
-          return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
-        default:
-          return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
-      }
-    } else {
-      switch (theme) {
-        case 'light':
-          return `${baseClasses} hover:bg-gray-50 text-gray-700`;
-        case 'dark':
-          return `${baseClasses} hover:bg-white/10 text-gray-300`;
-        case 'colorful':
-          return `${baseClasses} hover:bg-purple-500/20 text-gray-200`;
-        default:
-          return `${baseClasses} hover:bg-white/10 text-gray-300`;
-      }
+      if (theme === 'light')
+        return `${baseClasses} bg-gradient-to-r from-green-600/20 to-cyan-500/20 text-green-700 font-medium border-l-2 border-green-500`;
+      return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
     }
+
+    if (theme === 'light')
+      return `${baseClasses} hover:bg-gray-50 text-[var(--dropdown-text)]`;
+    if (theme === 'colorful')
+      return `${baseClasses} hover:bg-[var(--primary)]/20 text-[var(--dropdown-text)]`;
+    return `${baseClasses} hover:bg-white/10 text-[var(--dropdown-text)]`;
   };
 
   // Close dropdowns when clicking outside

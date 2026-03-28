@@ -23,12 +23,12 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
         ? 'rounded-2xl bg-ds-ember/10 text-white backdrop-blur-xl border border-ds-ember/20'
         : theme.copilot.promptCard(isLight);
     const promptIconColor = isColorful ? 'text-ds-ember' : theme.copilot.promptIconColor;
-    const inputBarClass = isColorful ? 'bg-[#06040c]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
+    const inputBarClass = isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
         ? 'bg-white/10 text-white border border-white/10'
         : theme.copilot.inputField(isLight);
     const bb = isColorful
-        ? 'bg-[#130a02]/60 backdrop-blur-[20px] border border-ds-ember/20 text-white rounded-2xl'
+        ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-ds-ember/20 text-white rounded-2xl'
         : theme.copilot.botBubble(isLight);
     const pingBgClass = isColorful ? 'bg-ds-ember' : theme.copilot.pingBg;
     const heroGradientClass = isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.copilot.heroGradient;

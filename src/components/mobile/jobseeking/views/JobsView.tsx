@@ -33,7 +33,7 @@ type SheetMode = 'detail' | 'form' | 'success';
 
 export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
     const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : theme.workspace.searchBar(isLight);
-    const sheetBgClass = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBgClass = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const primaryBtnClass = isColorful ? 'bg-ds-ember text-white rounded-full' : theme.workspace.primaryButton;
     const [activeFilter, setActiveFilter] = useState('All');
     const [selectedJob, setSelectedJob] = useState<typeof JOBS[0] | null>(null);

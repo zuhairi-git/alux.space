@@ -13,7 +13,7 @@ export interface MobileTheme {
     // Header chrome per theme mode
     header: { dark: string; light: string; colorful: string };
     // Nav bar container
-    nav: { dark: string; light: string; colorful?: string };
+    nav: { dark: string; light: string; colorful: string };
     // Nav tab item styles
     navTab: {
         active: (isLight: boolean) => string;
@@ -126,22 +126,22 @@ export const androidTheme: MobileTheme = {
     bg: {
         dark: 'bg-ds-dark-1 text-ds-gray-200',
         light: 'bg-ds-gray-50 text-ds-gray-900',
-        colorful: 'bg-[#06040c] text-white',
+        colorful: 'bg-[var(--color-colorful-bg)] text-white',
     },
     card: {
         dark: 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/30',
         light: 'bg-ds-gray-50/95 backdrop-blur-xl rounded-[28px] shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.06)] border border-ds-gray-200/60',
-        colorful: 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20',
+        colorful: 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20',
     },
     header: {
         dark: 'bg-ds-dark-2/95 backdrop-blur-2xl border-b border-ds-gray-600/30',
         light: 'bg-ds-gray-50/95 backdrop-blur-2xl border-b border-ds-gray-200/50 shadow-[0_1px_2px_rgba(0,0,0,0.05)]',
-        colorful: 'bg-[#0a0600]/80 backdrop-blur-2xl border-b border-ds-ember/20',
+        colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-2xl border-b border-ds-ember/20',
     },
     nav: {
         dark: 'bg-ds-dark-2 border-ds-gray-600/30',
         light: 'bg-ds-gray-100 border-ds-gray-200/60',
-        colorful: 'bg-[#0a0600]/80 backdrop-blur-xl border-ds-ember/20',
+        colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-xl border-ds-ember/20',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-ds-gray-900 font-variation-fill' : 'text-ds-blue-200 font-variation-fill',
@@ -229,22 +229,22 @@ export const iosTheme: MobileTheme = {
     bg: {
         dark: 'bg-black text-white',
         light: 'bg-ds-gray-100 text-black',
-        colorful: 'bg-[#06040c] text-white',
+        colorful: 'bg-[var(--color-colorful-bg)] text-white',
     },
     card: {
         dark: 'bg-ds-dark-2/65 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
         light: 'bg-white/55 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/70 rounded-[22px] shadow-[0_2px_16px_rgba(0,0,0,0.04)]',
-        colorful: 'bg-[#0a0600]/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-ds-ember/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
+        colorful: 'bg-ds-card-colorful-from/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-ds-ember/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
     },
     header: {
         dark: 'bg-ds-dark-2/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/[0.06]',
         light: 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/[0.04]',
-        colorful: 'bg-[#0a0600]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-ember/10',
+        colorful: 'bg-ds-card-colorful-from/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-ember/10',
     },
     nav: {
         dark: 'bg-ds-dark-2/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-white/[0.08]',
         light: 'bg-ds-gray-100/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-black/[0.04]',
-        colorful: 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-ds-ember/10',
+        colorful: 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-ds-ember/10',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-ds-blue-500' : 'text-ds-blue-400',

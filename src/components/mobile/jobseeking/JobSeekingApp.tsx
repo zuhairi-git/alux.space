@@ -51,16 +51,16 @@ interface JobSeekingAppProps {
 
 export function JobSeekingApp({ theme }: JobSeekingAppProps) {
     const [showIntro, setShowIntro] = useState(true);
-    const [themeMode, setThemeMode] = useState('colorful');
+    const [themeMode, setThemeMode] = useState<'dark' | 'light' | 'colorful'>('colorful');
     const [activeTab, setActiveTab] = useState<JobTabType>('dashboard');
     const prevTabRef = useRef<JobTabType>('dashboard');
     const directionRef = useRef(1);
     const isLight = themeMode === 'light';
     const isColorful = themeMode === 'colorful';
-    const bgClass = isLight ? theme.bg.light : isColorful ? theme.bg.colorful : theme.bg.dark;
-    const card = isColorful ? theme.card.colorful : isLight ? theme.card.light : theme.card.dark;
-    const headerStyle = isLight ? theme.header.light : isColorful ? theme.header.colorful : theme.header.dark;
-    const themeClass = isColorful ? 'theme-colorful' : isLight ? 'theme-light' : 'theme-dark';
+    const bgClass = theme.bg[themeMode];
+    const card = theme.card[themeMode];
+    const headerStyle = theme.header[themeMode];
+    const themeClass = `theme-${themeMode}`;
 
     const handleTabChange = useCallback((newTab: JobTabType) => {
         directionRef.current = getTabDirection(JOB_TAB_ORDER, prevTabRef.current, newTab);
@@ -149,7 +149,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
             </main>
 
             {/* Bottom Navigation */}
-            <nav className={`absolute bottom-0 w-full flex justify-around ${theme.platform === 'ios' ? 'items-start px-2 h-[82px] pt-2' : 'items-center px-1 h-20 pb-2'} z-40 border-t ${isLight ? theme.nav.light : isColorful && theme.nav.colorful ? theme.nav.colorful : theme.nav.dark}`}>
+            <nav className={`absolute bottom-0 w-full flex justify-around ${theme.platform === 'ios' ? 'items-start px-2 h-[82px] pt-2' : 'items-center px-1 h-20 pb-2'} z-40 border-t ${theme.nav[themeMode]}`}>
                 {jobTabs.map(([k, ic, lb]) => {
                     const a = activeTab === k;
                     return (

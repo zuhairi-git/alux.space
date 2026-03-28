@@ -152,7 +152,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
     const bgClass = isLight
         ? (isIOS ? 'bg-ds-gray-100 text-black' : 'bg-ds-gray-50 text-ds-gray-900')
         : isColorful
-            ? 'bg-[#06040c] text-white'
+            ? 'bg-ds-colorful-bg text-white'
             : (isIOS ? 'bg-black text-white' : 'bg-ds-dark-1 text-ds-gray-200');
 
     const headerTitles: Record<TabType, { sub: string, title: string }> = {
@@ -212,8 +212,8 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
 
             {/* Header */}
             <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/5' : isColorful ? 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-ember/15' : 'bg-ds-dark-3/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/5')
-                : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-2xl border-b border-ds-blue-100/50 shadow-sm' : isColorful ? 'bg-[#0a0600]/80 backdrop-blur-2xl border-b border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-2xl border-b border-ds-gray-600/50 shadow-md')
+                ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/5' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-ember/15' : 'bg-ds-dark-3/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/5')
+                : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-2xl border-b border-ds-blue-100/50 shadow-sm' : isColorful ? 'bg-ds-card-colorful-from/80 backdrop-blur-2xl border-b border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-2xl border-b border-ds-gray-600/50 shadow-md')
                 }`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
@@ -273,8 +273,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
     const isColorful = theme === 'colorful';
     const [selectedTimeRange, setSelectedTimeRange] = useState('1D');
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#0a0600]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-ds-blue-100/50' : isColorful ? 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/40');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-ds-blue-100/50' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/40');
 
     const watchlist = [
         { ticker: 'AAPL', name: 'Apple', price: '$198.11', numPrice: 198.11, change: '+2.4%', up: true, data: [140, 145, 142, 155, 160, 158, 170, 175, 180, 190, 185, 198] },
@@ -449,8 +449,8 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
     const [featuredIdx, setFeaturedIdx] = useState(0);
     useEffect(() => { setTickerExpanded(false); setAlertSet(null); }, [selectedTicker]);
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#0a0600]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-ds-blue-100/50' : isColorful ? 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/40');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-ds-blue-100/50' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/40');
 
     const indices = [
         { name: 'S&P 500', value: '5,234.18', change: '+0.87%', up: true, data: [5100, 5120, 5150, 5180, 5200, 5210, 5190, 5220, 5234] },
@@ -600,7 +600,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-50">
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} className="absolute inset-0 bg-black/50 backdrop-blur-md" onClick={() => setSelectedTicker(null)} />
                             <motion.div initial={{ y: '100%', scale: 0.95, opacity: 0 }} animate={{ y: 0, scale: 1, opacity: 1 }} exit={{ y: '100%', scale: 0.95, opacity: 0 }} transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 1 }}
-                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-[#0a0600]' : 'bg-ds-dark-2') : (isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-[#0a0600]' : 'bg-ds-dark-3')}`}>
+                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-2') : (isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-3')}`}>
                                 {/* Drag handle — tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
                                     <div className="w-10 h-1 rounded-full bg-gray-400/30" />
@@ -706,11 +706,11 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
             ? 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500 text-white rounded-[22px] rounded-tr-md shadow-[0_6px_20px_rgba(0,122,255,0.3)]'
             : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-400 text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(103,80,164,0.3)]';
     const botBubble = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#12121a]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : isColorful ? (isLight ? 'bg-[#ffecdf]/90 backdrop-blur-xl border border-ds-ember/20 text-ds-ember-dark rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#0a0600]/60 backdrop-blur-xl border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm') : (isLight ? 'bg-[#f9fafb]/90 backdrop-blur-xl border border-[#dbeafe]/50 text-ds-blue-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#1a1a24]/90 backdrop-blur-xl border border-[#4b5563]/40 text-ds-blue-200 rounded-[22px] rounded-tl-sm shadow-sm');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : isColorful ? (isLight ? 'bg-[#ffecdf]/90 backdrop-blur-xl border border-ds-ember/20 text-ds-ember-dark rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-card-colorful-from/60 backdrop-blur-xl border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm') : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl border border-ds-blue-100/50 text-ds-blue-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/40 text-ds-blue-200 rounded-[22px] rounded-tl-sm shadow-sm');
     const inputArea = isIOS
-        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-ds-ember/20' : 'bg-[#12121a]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
-        : (isLight ? 'bg-ds-gray-100 rounded-t-[28px]' : isColorful ? 'bg-[#0a0600]/90 rounded-t-[28px]' : 'bg-ds-dark-3 rounded-t-[28px]');
+        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-ds-ember/20' : 'bg-ds-dark-2/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
+        : (isLight ? 'bg-ds-gray-100 rounded-t-[28px]' : isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : 'bg-ds-dark-3 rounded-t-[28px]');
     const inputBox = isIOS
         ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : isColorful ? 'bg-ds-ember/10 rounded-full px-5 py-3 border border-ds-ember/20' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
         : isColorful ? (isLight ? 'bg-ds-ember/20 text-ds-ember-dark rounded-[28px] px-5 py-3' : 'bg-ds-ember/15 text-white rounded-[28px] px-5 py-3') : (isLight ? 'bg-ds-blue-100 text-ds-blue-900 rounded-[28px] px-5 py-3' : 'bg-ds-blue-800 text-ds-blue-200 rounded-[28px] px-5 py-3');
@@ -742,7 +742,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             {prompts.map((p, i) => (
                                 <motion.button key={p.label} whileTap={{ scale: 0.93 }} onClick={() => handleSend(p.prompt)}
                                     initial={{ opacity: 0, y: 24, scale: 0.88 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.2 + i * 0.1, type: 'spring', stiffness: 280, damping: 22 }}
-                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-[#0a0600]/60 border border-ds-ember/20' : 'bg-[#12121a]/60 border border-white/8') : isColorful ? (isLight ? 'bg-ds-ember/15 border border-ds-ember/20' : 'bg-ds-ember/10 border border-ds-ember/20') : (isLight ? 'bg-ds-blue-100 text-ds-blue-900' : 'bg-ds-blue-800 text-ds-blue-200')}`}>
+                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-ds-card-colorful-from/60 border border-ds-ember/20' : 'bg-ds-dark-2/60 border border-white/8') : isColorful ? (isLight ? 'bg-ds-ember/15 border border-ds-ember/20' : 'bg-ds-ember/10 border border-ds-ember/20') : (isLight ? 'bg-ds-blue-100 text-ds-blue-900' : 'bg-ds-blue-800 text-ds-blue-200')}`}>
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${isColorful ? 'text-ds-ember' : isIOS ? (isLight ? 'text-ds-blue-500' : 'text-ds-blue-400') : (isLight ? 'text-ds-blue-500' : 'text-ds-blue-400')}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
                                 </motion.button>
@@ -813,8 +813,8 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isColorful = theme === 'colorful';
     const [expanded, setExpanded] = useState<number | null>(null);
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#0a0600]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#12121a]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#f9fafb]/90 backdrop-blur-xl rounded-[28px] border border-[#dbeafe]/50 shadow-sm' : isColorful ? 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-[#1a1a24]/90 backdrop-blur-xl rounded-[28px] border border-[#4b5563]/40 shadow-lg');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] border border-ds-blue-100/50 shadow-sm' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] border border-ds-gray-600/40 shadow-lg');
 
     const alerts = [
         { id: 1, priority: 'critical', icon: 'trending_down', title: 'TSLA Dropped 5.2%', desc: 'Pre-market trading indicates a significant drop ahead of SEC quarterly earnings disclosure.', detail: 'Tesla shares fell sharply after reports of slowing EV deliveries in China and increased competition from BYD. Analyst consensus has shifted to a Hold rating.', time: '10 min ago', color: 'red' },
@@ -858,7 +858,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                     <motion.div key={a.id} variants={fadeUp} className="relative pl-12 pb-4">
                         {/* Timeline dot */}
                         <div className="absolute left-[14px] top-4 z-10">
-                            <div className={`w-[16px] h-[16px] rounded-full border-[3px] ${isLight ? 'border-white' : isColorful ? 'border-[#06040c]' : 'border-ds-dark-1'} ${dotColor(a.color)}`}>
+                            <div className={`w-[16px] h-[16px] rounded-full border-[3px] ${isLight ? 'border-white' : isColorful ? 'border-ds-colorful-bg' : 'border-ds-dark-1'} ${dotColor(a.color)}`}>
                                 {a.priority === 'critical' && (
                                     <div className={`absolute inset-[-4px] rounded-full ${dotColor(a.color)} animate-ping opacity-30`} />
                                 )}
@@ -913,8 +913,8 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
     const isColorful = theme === 'colorful';
     const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
     const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-[#0a0600]/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-[#12121a]/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-[#f9fafb]/90 backdrop-blur-xl rounded-[28px] border border-[#dbeafe]/50 shadow-sm' : isColorful ? 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-[#1a1a24]/90 backdrop-blur-xl rounded-[28px] border border-[#4b5563]/40 shadow-lg');
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-ds-ember/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] border border-ds-blue-100/50 shadow-sm' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] border border-ds-gray-600/40 shadow-lg');
 
     const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
     const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
@@ -924,7 +924,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
             {/* Header Row */}
             <motion.div variants={fadeUp} className="flex justify-between items-center px-1">
                 <h2 className="text-xl font-bold tracking-tight">My Space</h2>
-                <button onClick={() => setIsThemeModalOpen(true)} className={`w-9 h-9 rounded-full flex items-center justify-center ${isIOS ? (isLight ? 'bg-black/5' : 'bg-white/10') : 'bg-[#dbeafe]/50 dark:bg-[#1e3a8a]/50'}`}>
+                <button onClick={() => setIsThemeModalOpen(true)} className={`w-9 h-9 rounded-full flex items-center justify-center ${isIOS ? (isLight ? 'bg-black/5' : 'bg-white/10') : 'bg-ds-blue-100/50 dark:bg-ds-blue-800/50'}`}>
                     <Icon name="settings" className="opacity-70 text-[18px]" />
                 </button>
             </motion.div>
@@ -1024,7 +1024,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsThemeModalOpen(false)} className="absolute inset-0 bg-black/50 backdrop-blur-md" />
                         <motion.div initial={{ opacity: 0, scale: 0.7, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.7, y: 40 }}
                             transition={{ type: 'spring', stiffness: 280, damping: 24, mass: 0.85 }}
-                            className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/80 backdrop-blur-[30px] backdrop-saturate-[200%]' : 'bg-[#12121a]/80 backdrop-blur-[30px] backdrop-saturate-[200%] text-white') : (isLight ? 'bg-ds-gray-50' : 'bg-ds-dark-3 text-ds-gray-200')}`}>
+                            className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/80 backdrop-blur-[30px] backdrop-saturate-[200%]' : 'bg-ds-dark-2/80 backdrop-blur-[30px] backdrop-saturate-[200%] text-white') : (isLight ? 'bg-ds-gray-50' : 'bg-ds-dark-3 text-ds-gray-200')}`}>
                             <div className="flex justify-between items-center mb-5">
                                 <h3 className="text-xl font-bold">App Theme</h3>
                                 <button onClick={() => setIsThemeModalOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/10"><Icon name="close" className="text-sm" /></button>
@@ -1035,7 +1035,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                                     return (
                                         <motion.button key={t.value} onClick={() => { setTheme(t.value); setIsThemeModalOpen(false); }}
                                             whileTap={{ scale: 0.97 }}
-                                            className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all border ${active ? (isIOS ? (isLight ? 'bg-[#3b82f6]/10 border-[#3b82f6]/30' : 'bg-[#60a5fa]/20 border-[#60a5fa]/30') : (isLight ? 'bg-ds-blue-100 border-ds-blue-100' : 'bg-ds-blue-800 border-ds-blue-800')) : (isLight ? 'bg-black/[0.03] border-transparent' : 'bg-white/[0.04] border-transparent')}`}>
+                                            className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all border ${active ? (isIOS ? (isLight ? 'bg-ds-blue-500/10 border-ds-blue-500/30' : 'bg-ds-blue-400/20 border-ds-blue-400/30') : (isLight ? 'bg-ds-blue-100 border-ds-blue-100' : 'bg-ds-blue-800 border-ds-blue-800')) : (isLight ? 'bg-black/[0.03] border-transparent' : 'bg-white/[0.04] border-transparent')}`}>
                                             <div className="flex items-center space-x-3">
                                                 <Icon name={t.icon} className={active ? t.color : 'opacity-50'} />
                                                 <span className={`font-medium ${active ? 'font-bold' : ''}`}>{t.label}</span>
@@ -1061,8 +1061,8 @@ function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, 
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
     const navClass = isIOS
-        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-ds-ember/15 pb-5 h-[82px]' : 'bg-[#12121a]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/5 pb-5 h-[82px]')
-        : (isLight ? 'bg-ds-gray-100 h-20 pb-2 border-t border-[#dbeafe]/50' : isColorful ? 'bg-[#0a0600]/80 h-20 pb-2 border-t border-ds-ember/20' : 'bg-ds-dark-3 h-20 pb-2 border-t border-[#4b5563]/50');
+        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-ds-ember/15 pb-5 h-[82px]' : 'bg-ds-dark-2/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/5 pb-5 h-[82px]')
+        : (isLight ? 'bg-ds-gray-100 h-20 pb-2 border-t border-ds-blue-100/50' : isColorful ? 'bg-ds-card-colorful-from/80 h-20 pb-2 border-t border-ds-ember/20' : 'bg-ds-dark-3 h-20 pb-2 border-t border-ds-gray-600/50');
 
     const tabs: { key: TabType, icon: string, label: string }[] = [
         { key: 'dashboard', icon: 'space_dashboard', label: 'Home' },

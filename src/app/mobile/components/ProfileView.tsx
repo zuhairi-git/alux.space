@@ -11,7 +11,7 @@ interface ProfileViewProps {
     isLight: boolean;
     isColorful?: boolean;
     themeMode: string;
-    setThemeMode: (t: string) => void;
+    setThemeMode: (t: 'dark' | 'light' | 'colorful') => void;
     theme: MobileTheme;
 }
 
@@ -19,7 +19,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
     const [modal, setModal] = useState(false);
     const p = theme.profile;
     const modalBgClass = isColorful
-        ? `${theme.radii.modal} p-6 shadow-2xl bg-[#0a0600] text-white`
+        ? `${theme.radii.modal} p-6 shadow-2xl bg-ds-card-colorful-from text-white`
         : `${theme.radii.modal} p-6 shadow-2xl ${p.modalBg(isLight)}`;
     const modalActiveItemClass = isColorful
         ? 'bg-ds-ember/20 border border-ds-ember/30'
@@ -69,7 +69,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
             {/* Theme Picker Modal */}
             <AnimatePresence>{modal && <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-auto"><motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setModal(false)} className="absolute inset-0 bg-black/40 backdrop-blur-sm" /><motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-[85%] max-w-sm ${modalBgClass}`}>
                 <div className="flex justify-between items-center mb-5"><h3 className="text-xl font-bold">App Theme</h3><button onClick={() => setModal(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10"><Icon name="close" className="text-sm" /></button></div>
-                <div className="space-y-2.5">{[{ v: 'light', l: 'Light', i: 'light_mode', c: `text-ds-ember` }, { v: 'dark', l: 'Dark', i: 'dark_mode', c: isColorful ? 'text-ds-ember' : 'text-ds-blue-400' }, { v: 'colorful', l: 'Colorful', i: 'palette', c: 'text-ds-ember' }].map(t => { const a = themeMode === t.v; return (<button key={t.v} onClick={() => { setThemeMode(t.v); setModal(false); }} className={`w-full flex items-center justify-between p-3.5 ${theme.platform === 'android' ? 'rounded-2xl border' : 'rounded-[14px] transition-all'} ${a ? modalActiveItemClass : (theme.platform === 'android' ? 'bg-transparent border-transparent' : '')}`}><div className="flex items-center space-x-3"><Icon name={t.i} className={a ? t.c : 'opacity-50'} /><span className={a ? 'font-bold' : 'font-medium'}>{t.l}</span></div>{a && <Icon name="check_circle" className={p.checkColor || t.c} />}</button>); })}</div>
+                <div className="space-y-2.5">{[{ v: 'light' as const, l: 'Light', i: 'light_mode', c: `text-ds-ember` }, { v: 'dark' as const, l: 'Dark', i: 'dark_mode', c: isColorful ? 'text-ds-ember' : 'text-ds-blue-400' }, { v: 'colorful' as const, l: 'Colorful', i: 'palette', c: 'text-ds-ember' }].map(t => { const a = themeMode === t.v; return (<button key={t.v} onClick={() => { setThemeMode(t.v); setModal(false); }} className={`w-full flex items-center justify-between p-3.5 ${theme.platform === 'android' ? 'rounded-2xl border' : 'rounded-[14px] transition-all'} ${a ? modalActiveItemClass : (theme.platform === 'android' ? 'bg-transparent border-transparent' : '')}`}><div className="flex items-center space-x-3"><Icon name={t.i} className={a ? t.c : 'opacity-50'} /><span className={a ? 'font-bold' : 'font-medium'}>{t.l}</span></div>{a && <Icon name="check_circle" className={p.checkColor || t.c} />}</button>); })}</div>
             </motion.div></div>}</AnimatePresence>
         </motion.div>
     );

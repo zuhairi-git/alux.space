@@ -9,7 +9,7 @@ interface ViewProps {
     isColorful?: boolean;
     theme: MobileTheme;
     themeMode: string;
-    setThemeMode: (mode: string) => void;
+    setThemeMode: (mode: 'dark' | 'light' | 'colorful') => void;
 }
 
 type ActivePanel = 'cv' | 'shifts' | 'analytics' | null;
@@ -17,7 +17,7 @@ type ActivePanel = 'cv' | 'shifts' | 'analytics' | null;
 export function ProfileView({ card, isLight, isColorful, theme, themeMode, setThemeMode }: ViewProps) {
     const settingsBgClass = isColorful ? 'bg-white/10' : theme.profile.settingsBg(isLight);
     const [activePanel, setActivePanel] = useState<ActivePanel>(null);
-    const sheetBg = isColorful ? 'bg-[#06040c]/97 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-ds-colorful-bg/97 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
 
     // CV skills state
     const [skills, setSkills] = useState(['Customer Service', 'Barista', 'Event Staff']);
@@ -182,9 +182,9 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 <h3 className="text-[15px] font-bold tracking-wider uppercase opacity-60 mb-3 px-2">App Appearance</h3>
                 <div className={`${card} overflow-hidden`}>
                     {[
-                        { label: 'Light Theme', value: 'light', icon: 'light_mode' },
-                        { label: 'Dark Theme', value: 'dark', icon: 'dark_mode' },
-                        { label: 'Colorful Theme', value: 'colorful', icon: 'palette' }
+                        { label: 'Light Theme', value: 'light' as const, icon: 'light_mode' },
+                        { label: 'Dark Theme', value: 'dark' as const, icon: 'dark_mode' },
+                        { label: 'Colorful Theme', value: 'colorful' as const, icon: 'palette' }
                     ].map((t, i) => (
                         <button key={i} onClick={() => setThemeMode(t.value)}
                             className={`w-full flex items-center justify-between p-4 active:bg-black/5 dark:active:bg-white/5 transition-colors ${i !== 0 ? 'border-t border-black/5 border-white/5' : ''}`}

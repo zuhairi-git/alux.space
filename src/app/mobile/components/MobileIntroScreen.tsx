@@ -29,7 +29,7 @@ export interface MobileIntroConfig {
 interface MobileIntroScreenProps {
     config: MobileIntroConfig;
     theme: MobileTheme;
-    onComplete: (chosenTheme: string) => void;
+    onComplete: (chosenTheme: 'dark' | 'light' | 'colorful') => void;
 }
 
 const THEME_OPTIONS = [
@@ -54,7 +54,7 @@ const THEME_OPTIONS = [
         label: 'Colorful',
         desc: 'Vivid & expressive',
         icon: 'palette',
-        swatchBg: 'bg-[#06040c]',
+        swatchBg: 'bg-ds-colorful-bg',
         swatchText: 'text-white',
     },
 ] as const;
@@ -99,7 +99,7 @@ function FloatingOrb({ size, color, startX, startY, delay }: { size: number, col
 export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScreenProps) {
     const [step, setStep] = useState(0);
     const [direction, setDirection] = useState(1);
-    const [selectedTheme, setSelectedTheme] = useState<string>('colorful');
+    const [selectedTheme, setSelectedTheme] = useState<'dark' | 'light' | 'colorful'>('colorful');
     const touchStartX = useRef<number | null>(null);
     const touchStartY = useRef<number | null>(null);
     const TOTAL_STEPS = 4;
@@ -115,7 +115,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 ? 'bg-ds-gray-100 text-gray-900'
                 : 'bg-ds-gray-50 text-ds-gray-900'
             : selectedTheme === 'colorful'
-                ? 'bg-[#06040c] text-white'
+                ? 'bg-ds-colorful-bg text-white'
                 : isIOS
                     ? 'bg-black text-white'
                     : 'bg-ds-dark-1 text-ds-gray-200';

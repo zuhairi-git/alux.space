@@ -50,15 +50,15 @@ const TAB_ORDER: readonly TabType[] = ['dashboard', 'workspaces', 'copilot', 'no
 
 export function MobileApp({ theme }: MobileAppProps) {
     const [showIntro, setShowIntro] = useState(true);
-    const [themeMode, setThemeMode] = useState('colorful');
+    const [themeMode, setThemeMode] = useState<'dark' | 'light' | 'colorful'>('colorful');
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
     const prevTabRef = useRef<TabType>('dashboard');
     const directionRef = useRef(1);
     const isLight = themeMode === 'light';
     const isColorful = themeMode === 'colorful';
-    const bgClass = isLight ? theme.bg.light : isColorful ? theme.bg.colorful : theme.bg.dark;
-    const card = isColorful ? theme.card.colorful : isLight ? theme.card.light : theme.card.dark;
-    const headerStyle = isLight ? theme.header.light : isColorful ? theme.header.colorful : theme.header.dark;
+    const bgClass = theme.bg[themeMode];
+    const card = theme.card[themeMode];
+    const headerStyle = theme.header[themeMode];
 
     const handleTabChange = useCallback((newTab: TabType) => {
         directionRef.current = getTabDirection(TAB_ORDER, prevTabRef.current, newTab);
@@ -160,8 +160,8 @@ export function MobileApp({ theme }: MobileAppProps) {
 
             {/* Bottom Navigation — iOS 27 Liquid Glass floating / Android 16/17 M3 Expressive */}
             <nav className={`absolute bottom-0 w-full z-40 ${theme.platform === 'ios'
-                ? `flex justify-around items-start px-3 h-[80px] pt-1.5 border-t ${isLight ? theme.nav.light : isColorful && theme.nav.colorful ? theme.nav.colorful : theme.nav.dark}`
-                : `flex justify-around items-center px-2 h-[80px] pb-1 border-t ${isLight ? theme.nav.light : isColorful && theme.nav.colorful ? theme.nav.colorful : theme.nav.dark}`
+                ? `flex justify-around items-start px-3 h-[80px] pt-1.5 border-t ${theme.nav[themeMode]}`
+                : `flex justify-around items-center px-2 h-[80px] pb-1 border-t ${theme.nav[themeMode]}`
             }`}>
                 {theme.tabs.map(([k, ic, lb]) => {
                     const a = activeTab === k;

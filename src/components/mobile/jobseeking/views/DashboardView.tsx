@@ -260,11 +260,11 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
 }
 
 export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
-    const accentColor = isColorful ? 'text-ds-fuchsia-400' : theme.dashboard.briefingAccent(isLight);
-    const followUpColor = isColorful ? 'text-ds-fuchsia-400' : theme.dashboard.followUpColor;
+    const accentColor = 'text-[var(--primary)]';
+    const followUpColor = 'text-[var(--primary)]';
     const seeAllColor = isColorful ? 'text-ds-fuchsia-400' : theme.dashboard.seeAllColor;
     const [activeSheet, setActiveSheet] = useState<ActiveSheet>(null);
-    const sheetBg = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
 
     const listVariants = {
         hidden: { opacity: 0 },
@@ -373,10 +373,10 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-ds-fuchsia-500/15 to-transparent rounded-bl-full pointer-events-none" />
                 <div className="flex items-center mb-3">
                     <Icon name="auto_awesome" className={`text-[18px] mr-2 ${accentColor}`} />
-                    <h2 className={`text-[12px] font-bold tracking-widest uppercase ${isLight ? 'text-gray-400' : 'text-white/40'}`}>Daily Match Briefing</h2>
+                    <h2 className="text-[12px] font-bold tracking-widest uppercase text-[var(--muted-foreground)]">Daily Match Briefing</h2>
                 </div>
                 <p className="text-[16px] leading-relaxed font-semibold mb-3">
-                    🎯 You have <span className={isColorful ? 'text-fuchsia-300' : isLight ? 'text-ds-cyan-500' : 'text-ds-cyan-400'}>3 new local jobs</span> matching your availability, and your resume score improved by <span className="text-green-400">+15%</span> after AI tweaks.
+                    🎯 You have <span className="text-[var(--primary)]">3 new local jobs</span> matching your availability, and your resume score improved by <span className="text-[var(--color-success)]">+15%</span> after AI tweaks.
                 </p>
                 <div className="flex gap-2">
                     <button onClick={() => onNav?.('jobs')} className={`flex items-center px-3 py-1.5 rounded-full text-[12px] font-semibold ${isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-white/70'} active:scale-95`}>

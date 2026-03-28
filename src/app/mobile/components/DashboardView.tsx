@@ -20,7 +20,7 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
     const [title, setTitle] = useState('');
     const [type, setType] = useState('Document');
     const [created, setCreated] = useState(false);
-    const sheetBg = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const docTypes = ['Document', 'Meeting Notes', 'Design Brief', 'Sprint Plan', 'Retrospective'];
     if (created) return (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6">
@@ -745,7 +745,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
 export function DashboardView({ card, isLight, isColorful = false, onNav, theme }: DashboardViewProps) {
     const [layout, setLayout] = useState<LayoutMode>('bento');
     const [activeAction, setActiveAction] = useState<QuickActionKey>(null);
-    const sheetBg = isColorful ? 'bg-[#06040c]/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
+    const sheetBg = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const layoutProps: LayoutProps = { card, isLight, isColorful: isColorful ?? false, theme, onNav, onAction: setActiveAction };
 
     return (
