@@ -119,15 +119,15 @@ export default function GameStrategyClient() {
       },
       green: {
         cardBg: isColorful ? 'bg-gradient-to-br from-green-600/20 to-green-600/20 border border-green-400/30' : isLight ? 'bg-green-600/5 border border-green-600/20' : 'bg-green-600/20 border border-green-600/20',
-        iconText: isColorful ? 'text-green-400' : isLight ? 'text-green-600' : 'text-green-400',
+        iconText: isColorful ? 'text-green-400' : isLight ? 'text-ds-success' : 'text-green-400',
         iconBg: isColorful ? 'bg-green-600/20' : isLight ? 'bg-green-600/10' : 'bg-green-600/40',
         borderColor: isColorful ? 'border-green-600/30' : isLight ? 'border-green-600/20' : 'border-green-600/20',
       },
       orange: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : isLight ? 'bg-[#ff8c42]/5 border border-[#ff8c42]/20' : 'bg-[#ff8c42]/20 border border-[#ff8c42]/20',
-        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-[#ff8c42]' : 'text-[#ffb07a]',
-        iconBg: isColorful ? 'bg-[#ff8c42]/50/20' : isLight ? 'bg-[#ff8c42]/10' : 'bg-[#ff8c42]/40',
-        borderColor: isColorful ? 'border-[#ff8c42]/30' : isLight ? 'border-[#ff8c42]/20' : 'border-[#ff8c42]/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/20 border border-ds-ember/20',
+        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-ds-ember' : 'text-[#ffb07a]',
+        iconBg: isColorful ? 'bg-ds-ember/50/20' : isLight ? 'bg-ds-ember/10' : 'bg-ds-ember/40',
+        borderColor: isColorful ? 'border-ds-ember/30' : isLight ? 'border-ds-ember/20' : 'border-ds-ember/20',
       },
       teal: {
         cardBg: isColorful ? 'bg-gradient-to-br from-cyan-500/20 to-cyan-500/20 border border-cyan-400/30' : isLight ? 'bg-cyan-400/5 border border-cyan-400/20' : 'bg-cyan-500/20 border border-cyan-500/20',
@@ -143,7 +143,7 @@ export default function GameStrategyClient() {
       },
       red: {
         cardBg: isColorful ? 'bg-gradient-to-br from-red-600/20 to-red-600/20 border border-red-400/30' : isLight ? 'bg-red-600/5 border border-red-600/20' : 'bg-red-600/20 border border-red-600/20',
-        iconText: isColorful ? 'text-red-400' : isLight ? 'text-red-600' : 'text-red-400',
+        iconText: isColorful ? 'text-red-400' : isLight ? 'text-ds-error' : 'text-red-400',
         iconBg: isColorful ? 'bg-red-600/20' : isLight ? 'bg-red-600/10' : 'bg-red-600/40',
         borderColor: isColorful ? 'border-red-600/30' : isLight ? 'border-red-600/20' : 'border-red-600/20',
       },
@@ -668,14 +668,14 @@ export default function GameStrategyClient() {
                   <div className="bg-purple-400/50 h-full" style={{ width: '45%' }} title="Cosmetic Shop 45%" />
                   <div className="bg-blue-500 h-full" style={{ width: '30%' }} title="Battle Pass 30%" />
                   <div className="bg-green-600/50 h-full" style={{ width: '15%' }} title="Ad Monetization 15%" />
-                  <div className="bg-[#ff8c42]/50 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
+                  <div className="bg-ds-ember/50 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
                 </div>
                 <div className="flex flex-wrap justify-center gap-4 mt-3">
                   {[
                     { label: locale === 'fi' ? 'Kosmeettiset' : 'Cosmetics', color: 'bg-purple-400/50', pct: '45%' },
                     { label: 'Battle Pass', color: 'bg-blue-500', pct: '30%' },
                     { label: locale === 'fi' ? 'Mainokset' : 'Ads', color: 'bg-green-600/50', pct: '15%' },
-                    { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-[#ff8c42]/50', pct: '10%' },
+                    { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-ds-ember/50', pct: '10%' },
                   ].map((leg, i) => (
                     <div key={i} className="flex items-center gap-1.5 text-xs">
                       <div className={`w-2.5 h-2.5 rounded-full ${leg.color}`} />

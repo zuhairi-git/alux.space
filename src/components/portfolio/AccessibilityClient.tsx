@@ -736,7 +736,7 @@ export default function AccessibilityClient() {
                       { label: content.complianceRating, value: "100%", icon: "verified" }
                       ].map((metric, index) => (
                         <div key={index} className="text-center">
-                          <span className={`material-symbols text-3xl mb-2 block ${isColorful ? 'text-green-400' : isLight ? 'text-green-600' : 'text-green-400'
+                          <span className={`material-symbols text-3xl mb-2 block ${isColorful ? 'text-green-400' : isLight ? 'text-ds-success' : 'text-green-400'
                             }`}>{metric.icon}</span>
                           <div className={`text-2xl font-bold mb-1 ${isColorful
                               ? 'bg-gradient-to-r from-green-400 to-green-400 bg-clip-text text-transparent'
@@ -775,7 +775,7 @@ export default function AccessibilityClient() {
                             ? 'bg-green-900/20 border border-green-400/20'
                             : isLight ? 'bg-green-50 border border-green-100' : 'bg-green-900/20 border border-green-800'
                           }`}>
-                          <span className={`material-symbols text-xl mb-2 block ${isColorful ? 'text-green-400' : isLight ? 'text-green-600' : 'text-green-400'
+                          <span className={`material-symbols text-xl mb-2 block ${isColorful ? 'text-green-400' : isLight ? 'text-ds-success' : 'text-green-400'
                             }`}>{item.icon}</span>
                           <h4 className={`font-semibold mb-2 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
                             }`}>{item.title}</h4>
@@ -840,14 +840,14 @@ export default function AccessibilityClient() {
 
                               {/* Traits — inline text, not pills */}
                               <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
-                                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-600 flex-shrink-0">Traits</span>
+                                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-warning flex-shrink-0">Traits</span>
                                 <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
                               </div>
 
                               {/* Detail columns — left-border accent, no boxes */}
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 <div className="border-l-2 border-green-600/30 pl-4">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-green-600 mb-3">Needs</h4>
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">Needs</h4>
                                   <ul className="space-y-1.5">
                                     {persona.needs.map((need, i) => (
                                       <li key={i} className="text-sm leading-relaxed opacity-70">{need}</li>
@@ -1128,8 +1128,8 @@ export default function AccessibilityClient() {
                         </div>
                       </div>
                       <div className={`mt-6 p-4 rounded-lg ${isColorful
-                          ? 'bg-[#ff8c42]/20 border border-[#ffb07a]/30'
-                          : isLight ? 'bg-[#ff8c42]/5 border border-[#ff8c42]/20' : 'bg-[#ff8c42]/30 border border-[#d96820]'
+                          ? 'bg-ds-ember/20 border border-[#ffb07a]/30'
+                          : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/30 border border-[#d96820]'
                         }`}>
                         <span className="material-symbols text-[#ffb07a] mr-2">language</span>
                         <span className={`text-sm ${isColorful ? 'text-[#ffb07a]' : isLight ? 'text-[#d96820]' : 'text-[#ffb07a]'
@@ -1178,8 +1178,8 @@ export default function AccessibilityClient() {
 
                       <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-100' : 'bg-gray-900'
                         }`}>                        <div className={`${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                          <span className="text-purple-500">import</span> {`{ Menu }`} <span className="text-purple-500">from</span> <span className="text-green-600">&apos;@headlessui/react&apos;</span><br />
-                          <span className="text-purple-500">import</span> {`{ ChevronDownIcon }`} <span className="text-purple-500">from</span> <span className="text-green-600">&apos;@heroicons/react/20/solid&apos;</span>
+                          <span className="text-purple-500">import</span> {`{ Menu }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@headlessui/react&apos;</span><br />
+                          <span className="text-purple-500">import</span> {`{ ChevronDownIcon }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@heroicons/react/20/solid&apos;</span>
                         </div>
                       </div>
                     </div>
@@ -1196,7 +1196,7 @@ export default function AccessibilityClient() {
                       <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-100' : 'bg-gray-900'
                         }`}>
                         <div className={`${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                          <span className="text-blue-400">npm run</span> <span className="text-green-600">test:a11y</span><br />
+                          <span className="text-blue-400">npm run</span> <span className="text-ds-success">test:a11y</span><br />
                           <span className="text-gray-500"># ✅ 0 accessibility violations found</span>
                         </div>
                       </div>

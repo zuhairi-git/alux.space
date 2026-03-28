@@ -426,13 +426,13 @@ export default function CollaborationClient() {
                           </div>
 
                           <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-600 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
+                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-warning flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
                             <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             <div className="border-l-2 border-green-600/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-green-600 mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{need}</li>

@@ -155,6 +155,15 @@
   --color-info-bg:         rgba(2, 132, 199, 0.12);
   --color-info-border:     rgba(2, 132, 199, 0.25);
 
+  /* RGB channels for Tailwind opacity modifier support */
+  --color-success-rgb:     22 163 74;
+  --color-warning-rgb:     217 119 6;
+  --color-error-rgb:       220 38 38;
+  --color-info-rgb:        2 132 199;
+  --color-ember-rgb:       255 140 66;
+  --color-ember-dark-rgb:  217 104 32;
+  --color-ember-light-rgb: 255 176 122;
+
   /* Muted / secondary text */
   --muted-foreground:      var(--color-gray-500);
 

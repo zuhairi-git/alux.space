@@ -14,7 +14,7 @@ interface NotificationsViewProps {
 
 export function NotificationsView({ card, isLight, isColorful = false, theme }: NotificationsViewProps) {
     const [exp, setExp] = useState<number | null>(null);
-    const badge = (p: string) => p === 'critical' ? (isLight ? 'bg-red-600/10 text-red-600 border-red-600/25' : 'bg-red-400/15 text-red-400 border-red-400/20') : p === 'warning' ? (isLight ? 'bg-amber-600/10 text-amber-600 border-amber-600/25' : 'bg-amber-400/15 text-amber-400 border-amber-400/20') : (isLight ? 'bg-blue-50 text-blue-600 border-blue-100' : 'bg-blue-500/10 text-blue-400 border-blue-500/15');
+    const badge = (p: string) => p === 'critical' ? (isLight ? 'bg-red-600/10 text-ds-error border-red-600/25' : 'bg-red-400/15 text-red-400 border-red-400/20') : p === 'warning' ? (isLight ? 'bg-amber-600/10 text-ds-warning border-amber-600/25' : 'bg-amber-400/15 text-amber-400 border-amber-400/20') : (isLight ? 'bg-blue-50 text-blue-600 border-blue-100' : 'bg-blue-500/10 text-blue-400 border-blue-500/15');
     const nt = theme.notification;
     const headerAccentClass = isColorful
         ? (theme.platform === 'ios' ? 'text-xl font-bold tracking-tight text-fuchsia-400' : 'text-xl font-medium text-fuchsia-400')
@@ -26,7 +26,7 @@ export function NotificationsView({ card, isLight, isColorful = false, theme }: 
             <motion.div variants={fadeUp} className="flex justify-between items-center px-1 mb-2"><h2 className={headerAccentClass}>Notifications</h2><span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${badge('critical')}`}>1 urgent</span></motion.div>
             {alerts.map(a => (<motion.div key={a.id} variants={fadeUp} onClick={() => setExp(exp === a.id ? null : a.id)} className={`p-5 ${card} active:scale-[0.98] cursor-pointer`}>
                 <div className="flex items-start space-x-3.5">
-                    <div className={`w-12 h-12 shrink-0 rounded-2xl flex justify-center items-center ${a.priority === 'critical' ? (isLight ? 'bg-red-600/10 text-red-600' : 'bg-red-400/15 text-red-400') : a.priority === 'warning' ? (isLight ? 'bg-amber-600/10 text-amber-600' : 'bg-amber-400/15 text-amber-400') : `${nt.infoIconBg} ${nt.infoIconColor}`}`}><Icon name={a.icon} className="text-[22px]" /></div>
+                    <div className={`w-1 self-stretch rounded-full shrink-0 ${a.priority === 'critical' ? (isLight ? 'bg-ds-error' : 'bg-ds-error/80') : a.priority === 'warning' ? (isLight ? 'bg-ds-warning' : 'bg-ds-warning/80') : (isLight ? 'bg-[#0284c7]' : 'bg-[#0284c7]/60')}`} />
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1.5"><h3 className="font-semibold text-[15px] truncate pr-2">{a.title}</h3><span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${badge(a.priority)}`}>{a.priority}</span></div>
                         <p className={`text-[14px] leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{a.desc}</p>

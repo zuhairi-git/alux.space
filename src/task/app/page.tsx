@@ -43,7 +43,7 @@ export default function Home() {
             
             <button
               onClick={exportToGoogleSlides}
-              className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-green-600 text-white px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all w-full sm:w-auto justify-center"
+              className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-ds-success text-white px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all w-full sm:w-auto justify-center"
               style={{ display: 'none' }}
             >
               <svg className="w-4 h-4 sm:w-[18px] sm:h-[18px]" fill="currentColor" viewBox="0 0 24 24">

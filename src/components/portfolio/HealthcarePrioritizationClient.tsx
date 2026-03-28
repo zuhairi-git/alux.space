@@ -47,7 +47,7 @@ export default function HealthcarePrioritizationClient() {
       },
       green: {
         cardBg: isColorful ? 'bg-gradient-to-br from-green-600/20 to-green-600/20 border border-green-400/30' : '',
-        iconText: isColorful ? 'text-green-400' : isLight ? 'text-green-600' : 'text-green-400',
+        iconText: isColorful ? 'text-green-400' : isLight ? 'text-ds-success' : 'text-green-400',
         titleText: isColorful ? 'text-green-300' : '',
         iconBg: isColorful ? 'bg-green-600/20' : isLight ? 'bg-green-600/10' : 'bg-green-600/40',
         takeawayBg: isColorful ? 'bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-400/30' : '',
@@ -56,16 +56,16 @@ export default function HealthcarePrioritizationClient() {
       },
       orange: {
         cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : '',
-        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-[#ff8c42]' : 'text-[#ffb07a]',
+        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-ds-ember' : 'text-[#ffb07a]',
         titleText: isColorful ? 'text-[#ffb07a]' : '',
-        iconBg: isColorful ? 'bg-[#ff8c42]/50/20' : isLight ? 'bg-[#ff8c42]/10' : 'bg-[#ff8c42]/40',
+        iconBg: isColorful ? 'bg-ds-ember/50/20' : isLight ? 'bg-ds-ember/10' : 'bg-ds-ember/40',
         takeawayBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/30 to-[#d96820]/30 border border-[#ffb07a]/30' : '',
-        takeawayIconBg: isColorful ? 'bg-[#ff8c42]/50/20 text-[#ffb07a]' : '',
-        borderColor: isColorful ? 'border-[#ff8c42]/30' : ''
+        takeawayIconBg: isColorful ? 'bg-ds-ember/50/20 text-[#ffb07a]' : '',
+        borderColor: isColorful ? 'border-ds-ember/30' : ''
       },
       red: {
         cardBg: isColorful ? 'bg-gradient-to-br from-red-600/20 to-red-600/20 border border-red-400/30' : '',
-        iconText: isColorful ? 'text-red-400' : isLight ? 'text-red-600' : 'text-red-400',
+        iconText: isColorful ? 'text-red-400' : isLight ? 'text-ds-error' : 'text-red-400',
         titleText: isColorful ? 'text-red-300' : '',
         iconBg: isColorful ? 'bg-red-600/20' : isLight ? 'bg-red-600/10' : 'bg-red-600/40',
         takeawayBg: isColorful ? 'bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-400/30' : '',
@@ -450,7 +450,7 @@ export default function HealthcarePrioritizationClient() {
                             <div className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${item.status === 'Rejected'
                                 ? (isLight ? 'bg-gray-100 text-gray-600' : 'bg-gray-700 text-gray-300')
                                 : item.status === 'Backlog'
-                                  ? (isLight ? 'bg-amber-600/5 text-amber-600' : 'bg-amber-600/20 text-amber-400')
+                                  ? (isLight ? 'bg-amber-600/5 text-ds-warning' : 'bg-amber-600/20 text-amber-400')
                                   : (isLight ? 'bg-blue-50 text-blue-600' : 'bg-blue-900/20 text-blue-300')
                               }`}>
                               {item.status}
@@ -500,7 +500,7 @@ export default function HealthcarePrioritizationClient() {
 
                   <div className="grid md:grid-cols-2 gap-8 mb-10">
                     {[
-                      { icon: 'handshake', color: isColorful ? 'bg-green-600/50/15 text-green-400' : isLight ? 'bg-green-600/5 text-green-600' : 'bg-green-900/30 text-green-400', title: content.resolutionStep1, desc: content.resolutionStep1Desc },
+                      { icon: 'handshake', color: isColorful ? 'bg-green-600/50/15 text-green-400' : isLight ? 'bg-green-600/5 text-ds-success' : 'bg-green-900/30 text-green-400', title: content.resolutionStep1, desc: content.resolutionStep1Desc },
                       { icon: 'lightbulb', color: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400', title: content.resolutionStep2, desc: content.resolutionStep2Desc },
                     ].map((step, i) => (
                       <motion.div

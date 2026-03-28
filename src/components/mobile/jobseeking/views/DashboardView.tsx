@@ -123,7 +123,7 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
         Mon: [], Tue: [], Wed: ['Eve'], Thu: [], Fri: ['Eve'], Sat: ['All Day'], Sun: ['All Day']
     });
     const slots = ['Morning', 'Afternoon', 'Eve', 'All Day'];
-    const slotColors: Record<string, string> = { Morning: 'bg-amber-600', Afternoon: 'bg-blue-500', Eve: 'bg-violet-500', 'All Day': 'bg-green-600' };
+    const slotColors: Record<string, string> = { Morning: 'bg-ds-warning', Afternoon: 'bg-blue-500', Eve: 'bg-violet-500', 'All Day': 'bg-ds-success' };
 
     const toggle = (day: string, slot: string) => {
         setAvailability(prev => {
@@ -146,7 +146,7 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-4">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-[#ff8c42]/20' : isLight ? 'bg-[#ff8c42]/10' : 'bg-[#ff8c42]/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-ember/20' : isLight ? 'bg-ds-ember/10' : 'bg-ds-ember/15'}`}>
                     <Icon name="schedule" className="text-[18px] text-[#ffb07a]" />
                 </div>
                 <div>
@@ -221,7 +221,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                         <p className="text-[24px] font-black leading-none mb-1">{s.value}</p>
                         <div className="flex items-center justify-between">
                             <p className={`text-[11px] ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{s.label}</p>
-                            <span className={`text-[10px] font-bold ${isLight ? 'text-green-600' : 'text-green-400'}`}>{s.change}</span>
+                            <span className={`text-[10px] font-bold ${isLight ? 'text-ds-success' : 'text-green-400'}`}>{s.change}</span>
                         </div>
                     </motion.div>
                 ))}
@@ -233,7 +233,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                     {barData.map((v, i) => (
                         <div key={i} className="flex-1 flex flex-col items-center gap-1">
                             <motion.div initial={{ height: 0 }} animate={{ height: `${v}%` }} transition={{ delay: i * 0.06, type: 'spring', stiffness: 400, damping: 28 }}
-                                className={`w-full rounded-t-lg ${i === 6 ? 'bg-green-600' : isColorful ? 'bg-fuchsia-500/40' : 'bg-green-400/35'}`}
+                                className={`w-full rounded-t-lg ${i === 6 ? 'bg-ds-success' : isColorful ? 'bg-fuchsia-500/40' : 'bg-green-400/35'}`}
                                 style={{ minHeight: '4px' }} />
                         </div>
                     ))}
@@ -417,11 +417,11 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     { company: 'Bookstore Downtown', role: 'Retail Assistant', time: '3d ago', status: 'Viewed', icon: 'menu_book', color: 'blue', match: 75, wage: '€12.5/h' }
                 ].map((item, i) => {
                     const statusStyle = item.status === 'Interview'
-                        ? 'bg-green-400/15 text-green-600 border-green-600/30'
+                        ? 'bg-green-400/15 text-ds-success border-green-600/30'
                         : item.status === 'Applied'
                         ? (isLight ? 'bg-blue-500/10 text-blue-600 border-blue-200' : 'bg-blue-500/15 text-blue-400 border-blue-500/30')
                         : (isLight ? 'bg-gray-100 text-gray-500 border-gray-200' : 'bg-white/8 text-white/50 border-white/10');
-                    const matchColor = item.match >= 90 ? 'text-green-600' : item.match >= 80 ? 'text-blue-400' : 'text-amber-400';
+                    const matchColor = item.match >= 90 ? 'text-ds-success' : item.match >= 80 ? 'text-blue-400' : 'text-amber-400';
                     const matchBg = item.match >= 90 ? 'bg-green-400/10' : item.match >= 80 ? 'bg-blue-500/10' : 'bg-amber-600/10';
                     const iconBg = theme.dashboard.teamColorMap[item.color] ?? 'bg-gray-500/15 text-gray-400';
                     return (

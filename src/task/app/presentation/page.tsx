@@ -144,10 +144,10 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-3">
               {[
-                { icon: '/dt-icons/shield-heart.svg', label: 'Patient Safety', priority: 'Critical', badgeBg: 'bg-red-600' },
-                { icon: '/dt-icons/hdd.svg', label: 'Data Reliability', priority: 'High', badgeBg: 'bg-[#ff8c42]' },
-                { icon: '/dt-icons/wand-magic-sparkles.svg', label: 'Usability', priority: 'High', badgeBg: 'bg-[#ff8c42]' },
-                { icon: '/dt-icons/rocket.svg', label: 'Scalability', priority: 'Medium', badgeBg: 'bg-amber-600' }
+                { icon: '/dt-icons/shield-heart.svg', label: 'Patient Safety', priority: 'Critical', badgeBg: 'bg-ds-error' },
+                { icon: '/dt-icons/hdd.svg', label: 'Data Reliability', priority: 'High', badgeBg: 'bg-ds-ember' },
+                { icon: '/dt-icons/wand-magic-sparkles.svg', label: 'Usability', priority: 'High', badgeBg: 'bg-ds-ember' },
+                { icon: '/dt-icons/rocket.svg', label: 'Scalability', priority: 'Medium', badgeBg: 'bg-ds-warning' }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2">
                   <div className="w-6 h-6 flex items-center justify-center">
@@ -267,7 +267,7 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
       label: 'High',
       iconBg: 'bg-[#ffb07a]/20',
       priorityBadgeBg: 'from-[#ff8c42] to-[#d96820]',
-      badge: 'bg-[#ff8c42]/10 text-[#d96820] border-[#ffb07a]',
+      badge: 'bg-ds-ember/10 text-[#d96820] border-[#ffb07a]',
       priorityIcon: '/dt-icons/arrow-up.svg',
       type: 'Story',
       glowColor: 'from-[#ffb07a]/50 to-[#ffb07a]/50'

@@ -451,8 +451,8 @@ export default function MarketIntelligenceClient() {
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                                     {[
-                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-600 to-[#ff8c42]', iconBg: isColorful ? 'bg-red-600/15' : isLight ? 'bg-red-50' : 'bg-red-900/30', iconColor: 'text-red-600', borderColor: isColorful ? 'border-red-600/20' : isLight ? 'border-red-100' : 'border-red-900/40' },
-                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15' : isLight ? 'bg-green-600/5' : 'bg-green-600/30', iconColor: 'text-green-600', borderColor: isColorful ? 'border-green-600/20' : isLight ? 'border-green-600/10' : 'border-green-600/40' },
+                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-600 to-[#ff8c42]', iconBg: isColorful ? 'bg-red-600/15' : isLight ? 'bg-red-50' : 'bg-red-900/30', iconColor: 'text-ds-error', borderColor: isColorful ? 'border-red-600/20' : isLight ? 'border-red-100' : 'border-red-900/40' },
+                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15' : isLight ? 'bg-green-600/5' : 'bg-green-600/30', iconColor: 'text-ds-success', borderColor: isColorful ? 'border-green-600/20' : isLight ? 'border-green-600/10' : 'border-green-600/40' },
                                     ].map((card, i) => (
                                         <motion.div
                                             key={i}
@@ -532,8 +532,8 @@ export default function MarketIntelligenceClient() {
 
                                     {[
                                         { index: "01", title: content.rationaleItem1Title, desc: content.rationaleItem1Desc, color: "from-blue-500 to-cyan-500", dotColor: "bg-blue-500" },
-                                        { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc, color: "from-green-600 to-cyan-500", dotColor: "bg-green-600" },
-                                        { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc, color: "from-[#ff8c42] to-amber-600", dotColor: "bg-[#ff8c42]" },
+                                        { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc, color: "from-green-600 to-cyan-500", dotColor: "bg-ds-success" },
+                                        { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc, color: "from-[#ff8c42] to-amber-600", dotColor: "bg-ds-ember" },
                                         { index: "04", title: content.rationaleItem4Title, desc: content.rationaleItem4Desc, color: "from-purple-500 to-violet-500", dotColor: "bg-purple-400/50" },
                                         { index: "05", title: content.rationaleItem5Title, desc: content.rationaleItem5Desc, color: "from-pink-500 to-pink-500", dotColor: "bg-pink-500" }
                                     ].map((item, i) => (
@@ -704,8 +704,8 @@ export default function MarketIntelligenceClient() {
                                                 {(() => {
                                                     const features = [
                                                         { icon: "search_insights", title: content.feat1Title, desc: content.feat1Desc, gradient: 'from-blue-500 to-indigo-500', iconBg: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400' },
-                                                        { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-green-600' : 'bg-green-600/30 text-green-400' },
-                                                        { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-[#ff8c42] to-amber-600', iconBg: isColorful ? 'bg-[#ff8c42]/15 text-[#ffb07a]' : isLight ? 'bg-[#ff8c42]/5 text-[#ff8c42]' : 'bg-[#ff8c42]/30 text-[#ffb07a]' },
+                                                        { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-ds-success' : 'bg-green-600/30 text-green-400' },
+                                                        { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-[#ff8c42] to-amber-600', iconBg: isColorful ? 'bg-ds-ember/15 text-[#ffb07a]' : isLight ? 'bg-ds-ember/5 text-ds-ember' : 'bg-ds-ember/30 text-[#ffb07a]' },
                                                         { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc, gradient: 'from-purple-500 to-pink-500', iconBg: isColorful ? 'bg-purple-400/50/15 text-purple-400' : isLight ? 'bg-purple-400/5 text-purple-500' : 'bg-purple-600/30 text-purple-400' },
                                                     ];
                                                     const f = features[activeFeature];
@@ -827,9 +827,9 @@ export default function MarketIntelligenceClient() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {[
                                         { icon: "construction", title: content.frameworkTitle, desc: content.frameworkDesc, gradient: 'from-blue-500 to-cyan-500', iconBg: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400' },
-                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-[#ff8c42] to-amber-600', iconBg: isColorful ? 'bg-[#ff8c42]/15 text-[#ffb07a]' : isLight ? 'bg-[#ff8c42]/5 text-[#ff8c42]' : 'bg-[#ff8c42]/30 text-[#ffb07a]' },
+                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-[#ff8c42] to-amber-600', iconBg: isColorful ? 'bg-ds-ember/15 text-[#ffb07a]' : isLight ? 'bg-ds-ember/5 text-ds-ember' : 'bg-ds-ember/30 text-[#ffb07a]' },
                                         { icon: "psychology", title: content.aiPatternsTitle, desc: content.aiPatternsDesc, gradient: 'from-purple-500 to-violet-500', iconBg: isColorful ? 'bg-purple-400/50/15 text-purple-400' : isLight ? 'bg-purple-400/5 text-purple-500' : 'bg-purple-600/30 text-purple-400' },
-                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-green-600' : 'bg-green-600/30 text-green-400' },
+                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-ds-success' : 'bg-green-600/30 text-green-400' },
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}

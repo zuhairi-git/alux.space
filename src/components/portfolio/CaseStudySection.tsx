@@ -47,7 +47,7 @@ const accentMap: Record<string, { gradient: string; dot: string; line: string; g
     line: 'from-[#ffb07a]/30 via-amber-400/20 to-transparent',
     glow: 'from-[#ff8c42] to-amber-600',
     text: 'from-[#ffb07a] to-amber-400',
-    iconBg: 'bg-[#ff8c42]/15 text-[#ffb07a]',
+    iconBg: 'bg-ds-ember/15 text-[#ffb07a]',
   },
   red: {
     gradient: 'from-red-400 to-pink-400',

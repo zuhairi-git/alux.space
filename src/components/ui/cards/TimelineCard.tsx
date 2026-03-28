@@ -42,7 +42,7 @@ export default function TimelineCard({
   // Get card styles based on theme with improved visibility for dark theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-[#ff8c42]/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-ds-ember/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
     } else if (theme === 'dark') {
       // Lightened the dark theme colors slightly to make animations more visible
       return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.35)]';

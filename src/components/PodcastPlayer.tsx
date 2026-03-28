@@ -1246,7 +1246,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className={`m-4 p-4 rounded-2xl ${
-            isLight ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-red-900/20 text-red-400 border border-red-800/50'
+            isLight ? 'bg-red-50 text-ds-error border border-red-200' : 'bg-red-900/20 text-red-400 border border-red-800/50'
           } text-sm backdrop-blur-sm`}
         >
           <div className="flex items-center justify-between">
@@ -1273,8 +1273,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               whileTap={{ scale: 0.95 }}
               className={`px-3 py-2 text-xs rounded-xl font-medium transition-all duration-200 ${
                 isLight 
-                  ? 'bg-red-600 hover:bg-red-700 text-white' 
-                  : 'bg-red-600/80 hover:bg-red-600 text-white'
+                  ? 'bg-ds-error hover:bg-red-700 text-white' 
+                  : 'bg-red-600/80 hover:bg-ds-error text-white'
               }`}
             >
               {locale === 'fi' ? 'Yritä uudelleen' : 'Retry'}

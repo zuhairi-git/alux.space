@@ -378,7 +378,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 transition={{ delay: config.aiTips.length * 0.1 + 0.25 }}
                                 className={`mt-4 p-3.5 rounded-2xl flex items-center gap-3 ${selectedTheme === 'light' ? 'bg-amber-600/5 border border-amber-600/10' : 'bg-amber-600/50/10 border border-amber-600/20'}`}
                             >
-                                <Icon name="lightbulb" className="text-[20px] text-amber-600 shrink-0" />
+                                <Icon name="lightbulb" className="text-[20px] text-ds-warning shrink-0" />
                                 <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-[#d96820]' : 'text-amber-400'}`}>
                                     Tap the <span className="font-bold">✦ sparkle button</span> in the top-right corner anytime to open Copilot.
                                 </p>
