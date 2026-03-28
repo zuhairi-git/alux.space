@@ -91,7 +91,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                     <div className="flex items-start justify-between gap-2">
                                         <h3 className="text-[16px] font-bold leading-tight">{job.title}</h3>
                                         {job.tag && (
-                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-green-400/15 text-ds-success' : 'bg-blue-500/15 text-blue-500'}`}>
+                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : 'bg-ds-blue-500/15 text-ds-blue-500'}`}>
                                                 {job.tag}
                                             </span>
                                         )}
@@ -118,13 +118,13 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
                             <div className="flex items-center gap-2">
                                 <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
-                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? 'bg-blue-500' : 'bg-amber-400'}`}
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? 'bg-ds-blue-500' : 'bg-amber-400'}`}
                                         style={{ width: `${job.match}%` }} />
                                 </div>
-                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? 'text-blue-400' : 'text-amber-400'}`}>{job.match}% match</span>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? 'text-ds-blue-400' : 'text-amber-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
-                                className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-blue-500 to-purple-500 text-white active:scale-95 transition-transform`}>
+                                className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-ds-blue-500 to-ds-purple-500 text-white active:scale-95 transition-transform`}>
                                 Quick Apply
                             </button>
                         </div>
@@ -144,7 +144,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                             {/* SUCCESS */}
                             {sheetMode === 'success' && (
                                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-4">
-                                    <div className="w-20 h-20 rounded-full bg-green-400/15 flex items-center justify-center mb-4">
+                                    <div className="w-20 h-20 rounded-full bg-ds-success/15 flex items-center justify-center mb-4">
                                         <Icon name="task_alt" className="text-5xl text-ds-success" />
                                     </div>
                                     <h3 className="text-xl font-bold mb-1">Application Sent!</h3>
@@ -164,7 +164,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <Icon name="arrow_back" className="text-[20px]" />
                                         </button>
                                         <h3 className="text-[18px] font-bold">Quick Apply</h3>
-                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/15 text-purple-500`}>{selectedJob.match}% match</span>
+                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full bg-ds-purple-500/15 text-ds-purple-500`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className="space-y-3 mb-5">
                                         {[
@@ -191,7 +191,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                         </div>
                                     </div>
                                     <button onClick={() => setSheetMode('success')}
-                                        className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-blue-500 to-purple-500 text-white`}>
+                                        className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-ds-blue-500 to-ds-purple-500 text-white`}>
                                         Submit Application
                                     </button>
                                 </motion.div>
@@ -208,7 +208,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <h3 className="text-xl font-bold mb-0.5">{selectedJob.title}</h3>
                                             <p className={`text-[14px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{selectedJob.company}</p>
                                         </div>
-                                        <span className="px-3 py-1 rounded-full bg-purple-500/15 font-bold text-[13px] text-purple-500">{selectedJob.match}% match</span>
+                                        <span className="px-3 py-1 rounded-full bg-ds-purple-500/15 font-bold text-[13px] text-ds-purple-500">{selectedJob.match}% match</span>
                                     </div>
                                     <div className={`p-4 rounded-2xl mb-5 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                         <div className="flex items-center justify-between mb-3">

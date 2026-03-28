@@ -18,7 +18,7 @@ const JOB_SEEKING_INTRO: MobileIntroConfig = {
     appName: 'Job Seeker',
     tagline: 'Find trusted local, part-time, and weekend work — with an AI career coach that knows your skills.',
     appIcon: 'work_history',
-    accentGradient: 'from-cyan-500 to-blue-600',
+    accentGradient: 'from-ds-ember to-ds-ember-dark',
     aiTips: [
         {
             icon: 'psychology',
@@ -114,9 +114,9 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
                         <motion.button onClick={() => handleTabChange('profile')} className="relative" whileTap={{ scale: 0.92 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
-                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${theme.accent.avatarBorder(isLight)} bg-gradient-to-tr from-blue-500 to-cyan-400`}>
+                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${theme.accent.avatarBorder(isLight)} bg-gradient-to-tr ${isColorful ? 'from-ds-ember to-ds-ember-dark' : theme.accent.avatarGradient.replace('bg-gradient-to-tr ', '') || 'from-gray-50 to-gray-200 dark:from-white/10 dark:to-white/20'}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=007AFF&color=fff` }} />
+                                <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${isColorful ? 'f59e0b' : theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>
                             <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${theme.accent.statusDot(isLight)}`} />
                         </motion.button>

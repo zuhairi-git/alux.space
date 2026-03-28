@@ -29,14 +29,14 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
 
                     {/* Priority Alert - Interview Invite */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 bg-green-400/10 border-b ${isLight ? 'border-green-400/15' : 'border-green-400/20'}`}>
+                        <div className={`px-4 py-2 flex items-center gap-2 bg-ds-success/10 border-b ${isLight ? 'border-ds-success/15' : 'border-ds-success/20'}`}>
                             <div className="w-1.5 h-1.5 rounded-full bg-ds-success animate-pulse" />
                             <span className="text-[11px] font-bold uppercase tracking-wider text-ds-success">Action Required</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>Just now</span>
                         </div>
                         <div className="p-4">
                             <div className="flex items-start gap-3">
-                                <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-green-400/15 shrink-0">
+                                <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-ds-success/15 shrink-0">
                                     <Icon name="celebration" className="text-[20px] text-ds-success" />
                                 </div>
                                 <div className="flex-1">
@@ -60,9 +60,9 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
 
                     {/* AI Match */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-blue-500/8 border-b border-blue-500/10' : 'bg-blue-500/10 border-b border-blue-500/15'}`}>
-                            <Icon name="auto_awesome" className="text-[13px] text-blue-400" />
-                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isLight ? 'text-blue-600' : 'text-blue-400'}`}>New AI Match</span>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-ds-blue-500/8 border-b border-blue-500/10' : 'bg-ds-blue-500/10 border-b border-blue-500/15'}`}>
+                            <Icon name="auto_awesome" className="text-[13px] text-ds-blue-400" />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>2h ago</span>
                         </div>
                         <div className="p-4">
@@ -73,7 +73,7 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
                                 <div className="flex-1">
                                     <div className="flex items-center justify-between mb-0.5">
                                         <h3 className="font-bold text-[15px]">Retail Assistant</h3>
-                                        <span className="text-[12px] font-bold text-ds-success bg-green-400/10 px-2 py-0.5 rounded-lg">95% match</span>
+                                        <span className="text-[12px] font-bold text-ds-success bg-ds-success/10 px-2 py-0.5 rounded-lg">95% match</span>
                                     </div>
                                     <p className={`text-[13px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>City Center · €12.5/h · Weekend shifts</p>
                                 </div>
@@ -87,16 +87,16 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
 
                     {/* Weekly Insights */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-purple-500/5 border-b border-purple-500/10' : 'bg-purple-500/10 border-b border-purple-500/15'}`}>
-                            <Icon name="insights" className="text-[13px] text-purple-400" />
-                            <span className={`text-[11px] font-bold uppercase tracking-wider text-purple-400`}>Weekly Insights</span>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-ds-purple-500/5 border-b border-ds-purple-500/10' : 'bg-ds-purple-500/10 border-b border-ds-purple-500/15'}`}>
+                            <Icon name="insights" className="text-[13px] text-ds-purple-400" />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider text-ds-purple-400`}>Weekly Insights</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>1d ago</span>
                         </div>
                         <div className="p-4">
                             <div className="grid grid-cols-3 gap-2 mb-3">
                                 {[
-                                    { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-purple-400' },
-                                    { label: 'Applications', value: '4', icon: 'send', color: 'text-blue-400' },
+                                    { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-ds-purple-400' },
+                                    { label: 'Applications', value: '4', icon: 'send', color: 'text-ds-blue-400' },
                                     { label: 'Avg Match', value: '88%', icon: 'stars', color: 'text-amber-400' },
                                 ].map(stat => (
                                     <div key={stat.label} className={`flex flex-col items-center py-2.5 rounded-xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>
