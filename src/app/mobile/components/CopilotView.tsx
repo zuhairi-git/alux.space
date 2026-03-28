@@ -15,7 +15,9 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
     const ref = useRef<HTMLDivElement>(null);
     const [msgs, setMsgs] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState(""); const [typing, setTyping] = useState(false); const [stream, setStream] = useState("");
-    const ub = theme.copilot.userBubble;
+    const ub = isColorful
+        ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(255,140,66,0.3)]'
+        : theme.copilot.userBubble;
     const bb = isColorful
         ? `${theme.platform === 'ios' ? 'bg-[#0a0600]/60 backdrop-blur-[20px] border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-[#0b0b13]/40 backdrop-blur-xl border border-ds-ember/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
         : theme.copilot.botBubble(isLight);
@@ -24,9 +26,9 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
         ? `bg-white/10 text-white ${theme.platform === 'ios' ? 'rounded-[18px]' : 'rounded-[24px]'} px-5 py-3 placeholder:text-white/40`
         : theme.copilot.inputField(isLight);
     const promptCardClass = isColorful
-        ? `${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} bg-purple-500/10 text-white backdrop-blur-xl border border-ds-ember/20`
+        ? `${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} bg-ds-ember/10 text-white backdrop-blur-xl border border-ds-ember/20`
         : theme.copilot.promptCard(isLight);
-    const promptIconColor = isColorful ? 'text-fuchsia-400' : theme.copilot.promptIconColor;
+    const promptIconColor = isColorful ? 'text-ds-ember' : theme.copilot.promptIconColor;
     useEffect(() => { if (msgs.length > 0) ref.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs, typing, stream]);
 
     const send = (txt?: string) => {
@@ -41,7 +43,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
             {msgs.length === 0 ? (
                 <div className="flex-1 flex flex-col p-7 items-center overflow-y-auto scrollbar-none">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center pt-[5vh] pb-10 shrink-0">
-                        <div className="relative w-24 h-24 flex items-center justify-center mb-7"><div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${theme.copilot.pingBg}`} style={{ animationDuration: '2s', animationIterationCount: 2 }} /><div className={`w-full h-full rounded-full flex items-center justify-center shadow-2xl ${theme.copilot.heroGradient}`}><Icon name="auto_awesome" className="text-[42px] text-white" /></div></div>
+                        <div className="relative w-16 h-16 flex items-center justify-center mb-7"><div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${isColorful ? 'bg-ds-ember' : theme.copilot.pingBg}`} style={{ animationDuration: '2s', animationIterationCount: 2 }} /><div className={`w-full h-full rounded-full flex items-center justify-center shadow-2xl ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.copilot.heroGradient}`}><Icon name="auto_awesome" className="text-[32px] text-white" /></div></div>
                         <h3 className="font-bold text-xl mb-2">Collaboration Copilot</h3><p className={`text-[15px] text-center max-w-[260px] leading-relaxed ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Ask about workspaces, team activity, sprint status, or design reviews.</p>
                     </motion.div>
                     <div className="w-full mt-auto pb-5 shrink-0">
@@ -64,7 +66,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
             )}
             <div className={`px-5 pt-3.5 pb-[90px] flex items-end space-x-2.5 shrink-0 z-30 w-full ${inputBarClass}`}>
                 <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask about your team..." className={`flex-1 outline-none text-[15px] ${inputFieldClass}`} />
-                <button onClick={() => send()} disabled={!input.trim()} className={`w-11 h-11 flex justify-center items-center shrink-0 disabled:opacity-40 ${theme.radii.sendButtonBg} text-white ${theme.radii.sendButton}`}><Icon name="arrow_upward" className="text-lg" /></button>
+                <button onClick={() => send()} disabled={!input.trim()} className={`w-11 h-11 flex justify-center items-center shrink-0 disabled:opacity-40 ${isColorful ? 'bg-ds-ember' : theme.radii.sendButtonBg} text-white ${theme.radii.sendButton}`}><Icon name="arrow_upward" className="text-lg" /></button>
             </div>
         </motion.div>
     );

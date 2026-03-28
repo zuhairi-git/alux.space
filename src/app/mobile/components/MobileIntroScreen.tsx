@@ -38,7 +38,7 @@ const THEME_OPTIONS = [
         label: 'Dark',
         desc: 'Easy on the eyes',
         icon: 'dark_mode',
-        swatchBg: 'bg-[#0b0b13]',
+        swatchBg: 'bg-ds-dark-1',
         swatchText: 'text-white',
     },
     {
@@ -46,7 +46,7 @@ const THEME_OPTIONS = [
         label: 'Light',
         desc: 'Clean & minimal',
         icon: 'light_mode',
-        swatchBg: 'bg-[#f3f4f6]',
+        swatchBg: 'bg-ds-gray-100',
         swatchText: 'text-gray-900',
     },
     {
@@ -106,18 +106,19 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
 
-    const accentColor = isIOS ? '#3b82f6' : '#3b82f6';
+    const accentColor = selectedTheme === 'colorful' ? '#ff8c42' : '#3b82f6';
+    const accentGradient = selectedTheme === 'colorful' ? 'from-ds-ember to-ds-ember-dark' : config.accentGradient;
 
     const bgClass =
         selectedTheme === 'light'
             ? isIOS
-                ? 'bg-[#f3f4f6] text-gray-900'
-                : 'bg-[#f9fafb] text-[#111827]'
+                ? 'bg-ds-gray-100 text-gray-900'
+                : 'bg-ds-gray-50 text-ds-gray-900'
             : selectedTheme === 'colorful'
                 ? 'bg-[#06040c] text-white'
                 : isIOS
                     ? 'bg-black text-white'
-                    : 'bg-[#0b0b13] text-[#e5e7eb]';
+                    : 'bg-ds-dark-1 text-ds-gray-200';
 
     const muted = selectedTheme === 'light' ? 'text-gray-500' : 'text-white/50';
 
@@ -125,12 +126,12 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
         selectedTheme === 'light'
             ? isIOS
                 ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
-                : 'bg-[#f9fafb]/95 border border-[#e5e7eb]/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                : 'bg-ds-gray-50/95 border border-ds-gray-200/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : selectedTheme === 'colorful'
-                ? 'bg-white/[0.06] border border-fuchsia-500/12'
+                ? 'bg-white/[0.06] border border-ds-ember/12'
                 : isIOS
                     ? 'bg-white/[0.06] backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.05]'
-                    : 'bg-[#1a1a24]/80 border border-[#4b5563]/30';
+                    : 'bg-ds-dark-3/80 border border-ds-gray-600/30';
 
     const handleNext = () => {
         if (isLast) {
@@ -275,7 +276,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                     transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                                 />
                                 <div
-                                    className={`relative w-[88px] h-[88px] rounded-[28px] bg-gradient-to-br ${config.accentGradient} flex items-center justify-center shadow-2xl`}
+                                    className={`relative w-[88px] h-[88px] rounded-[28px] bg-gradient-to-br ${accentGradient} flex items-center justify-center shadow-2xl`}
                                     style={{ boxShadow: `0 20px 60px ${accentColor}55` }}
                                 >
                                     <Icon name={config.appIcon} className="text-white text-[44px]" />
@@ -334,7 +335,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 className="flex items-center gap-2.5 mb-1"
                             >
                                 <div
-                                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${config.accentGradient} flex items-center justify-center`}
+                                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}
                                 >
                                     <Icon name="auto_awesome" className="text-white text-[16px]" />
                                 </div>
@@ -359,7 +360,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                         className={`p-4 rounded-2xl flex gap-4 ${cardClass}`}
                                     >
                                         <div
-                                            className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${config.accentGradient}`}
+                                            className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}
                                         >
                                             <Icon name={tip.icon} className="text-white text-[18px]" />
                                         </div>
@@ -376,10 +377,10 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 initial={{ opacity: 0, y: 12 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: config.aiTips.length * 0.1 + 0.25 }}
-                                className={`mt-4 p-3.5 rounded-2xl flex items-center gap-3 ${selectedTheme === 'light' ? 'bg-amber-600/5 border border-amber-600/10' : 'bg-amber-600/50/10 border border-amber-600/20'}`}
+                                className={`mt-4 p-3.5 rounded-2xl flex items-center gap-3 ${selectedTheme === 'light' ? 'bg-ds-warning/5 border border-ds-warning/10' : 'bg-ds-warning/10 border border-ds-warning/20'}`}
                             >
                                 <Icon name="lightbulb" className="text-[20px] text-ds-warning shrink-0" />
-                                <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-[#d96820]' : 'text-amber-400'}`}>
+                                <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-ds-ember-dark' : 'text-ds-warning'}`}>
                                     Tap the <span className="font-bold">✦ sparkle button</span> in the top-right corner anytime to open Copilot.
                                 </p>
                             </motion.div>
@@ -403,7 +404,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 className="flex items-center gap-2.5 mb-1"
                             >
                                 <div
-                                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${config.accentGradient} flex items-center justify-center`}
+                                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}
                                 >
                                     <Icon name="apps" className="text-white text-[16px]" />
                                 </div>
@@ -428,7 +429,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                         className={`flex items-center gap-4 p-4 rounded-2xl ${cardClass}`}
                                     >
                                         <div
-                                            className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${config.accentGradient}`}
+                                            className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}
                                             style={{ boxShadow: `0 4px 16px ${accentColor}35` }}
                                         >
                                             <Icon name={f.icon} className="text-white text-[18px]" />
@@ -460,7 +461,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 className="flex items-center gap-2.5 mb-1"
                             >
                                 <div
-                                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${config.accentGradient} flex items-center justify-center`}
+                                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}
                                 >
                                     <Icon name="palette" className="text-white text-[16px]" />
                                 </div>
@@ -507,7 +508,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                                     <div className={`h-1.5 rounded-full w-3/4 ${t.v === 'light' ? 'bg-gray-200/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {t.v === 'colorful' && (
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/30 to-purple-600/20 rounded-xl" />
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-ds-ember/30 to-ds-ember-dark/20 rounded-xl" />
                                                 )}
                                             </div>
 
@@ -575,7 +576,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                     layout
                     transition={{ layout: { type: 'spring', stiffness: 350, damping: 26 } }}
                     onClick={handleNext}
-                    className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white shadow-lg bg-gradient-to-r ${config.accentGradient} relative overflow-hidden`}
+                    className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white shadow-lg bg-gradient-to-r ${accentGradient} relative overflow-hidden`}
                     style={{ boxShadow: `0 8px 28px ${accentColor}45` }}
                     whileTap={{ scale: 0.92 }}
                     whileHover={{ scale: 1.02 }}

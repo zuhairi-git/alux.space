@@ -138,11 +138,7 @@ export default function PortfolioClient({ items }: Props) {
     return 'text-gray-400 hover:text-gray-200';
   };
 
-  const getDividerClass = (): string => {
-    if (theme === 'light') return 'border-gray-200';
-    if (theme === 'colorful') return 'border-white/[0.06]';
-    return 'border-white/[0.06]';
-  };
+
 
   return (
     <main className="min-h-screen bg-theme text-theme">
@@ -270,7 +266,7 @@ export default function PortfolioClient({ items }: Props) {
           </motion.div>
 
           {/* Subtle divider */}
-          <div className={`mt-5 border-b ${getDividerClass()}`} />
+          <div className="mt-5 border-b border-[var(--card-border)]" />
         </div>
       </section>
 

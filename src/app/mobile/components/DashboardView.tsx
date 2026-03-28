@@ -24,19 +24,19 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
     const docTypes = ['Document', 'Meeting Notes', 'Design Brief', 'Sprint Plan', 'Retrospective'];
     if (created) return (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6">
-            <div className="w-20 h-20 rounded-[28px] bg-indigo-500/15 flex items-center justify-center mb-4">
-                <Icon name="check_circle" className="text-5xl text-indigo-400" />
+            <div className={`w-20 h-20 rounded-[28px] ${isColorful ? 'bg-ds-ember/15' : 'bg-ds-blue-500/15'} flex items-center justify-center mb-4`}>
+                <Icon name="check_circle" className={`text-5xl ${isColorful ? 'text-ds-ember' : 'text-ds-blue-400'}`} />
             </div>
             <h3 className="text-xl font-bold mb-1">Document Created!</h3>
             <p className={`text-[14px] text-center mb-6 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}><strong>{title || 'Untitled Document'}</strong> has been added to your workspace.</p>
-            <button onClick={onClose} className="px-6 py-3 rounded-2xl bg-indigo-500 text-white font-semibold text-[14px] active:scale-95">Open Document</button>
+            <button onClick={onClose} className={`px-6 py-3 rounded-2xl ${isColorful ? 'bg-ds-ember' : 'bg-ds-blue-500'} text-white font-semibold text-[14px] active:scale-95`}>Open Document</button>
         </motion.div>
     );
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-indigo-500/20' : isLight ? 'bg-indigo-400/10' : 'bg-indigo-500/15'}`}>
-                    <Icon name="edit_document" className="text-[18px] text-indigo-400" />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-ember/20' : isLight ? 'bg-ds-blue-400/10' : 'bg-ds-blue-500/15'}`}>
+                    <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-ds-ember' : 'text-ds-blue-400'}`} />
                 </div>
                 <h3 className="text-[18px] font-bold">New Document</h3>
             </div>
@@ -49,7 +49,7 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
                     <span className="text-[10px] opacity-50 block mb-2 uppercase tracking-wide">Type</span>
                     <div className="flex flex-wrap gap-2">
                         {docTypes.map(t => (
-                            <button key={t} onClick={() => setType(t)} className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${type === t ? (isColorful ? 'bg-indigo-500 text-white' : isLight ? 'bg-indigo-600 text-white' : 'bg-indigo-500 text-white') : (isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-gray-300')}`}>{t}</button>
+                            <button key={t} onClick={() => setType(t)} className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${type === t ? (isColorful ? 'bg-ds-ember text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-gray-300')}`}>{t}</button>
                         ))}
                     </div>
                 </div>
@@ -61,7 +61,7 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
                     </div>
                 </div>
             </div>
-                        <button onClick={() => setCreated(true)} className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform ${isColorful ? 'bg-gradient-to-r from-[#6366f1] to-[#9333ea]' : 'bg-gradient-to-r from-[#6366f1] to-[#a78bfa]'} text-white`}>
+                        <button onClick={() => setCreated(true)} className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform ${isColorful ? 'bg-gradient-to-r from-ds-ember to-ds-ember-dark' : 'bg-gradient-to-r from-ds-blue-500 to-ds-indigo-500'} text-white`}>
                 Create Document
             </button>
         </motion.div>
@@ -78,16 +78,16 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
         { name: 'Sprint Planning Q2', host: 'James L.', participants: 7, tag: 'Starting soon', color: 'amber' },
         { name: 'UX Research Debrief', host: 'Mia R.', participants: 3, tag: 'Live', color: 'blue' },
     ];
-    const colorMap: Record<string, string> = { green: 'bg-green-400/15 text-green-400', amber: 'bg-amber-400/15 text-amber-400', blue: 'bg-blue-500/15 text-blue-400' };
+    const colorMap: Record<string, string> = { green: 'bg-ds-success/15 text-ds-success', amber: 'bg-ds-warning/15 text-ds-warning', blue: 'bg-ds-blue-500/15 text-ds-blue-400' };
     if (joined) return (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6">
-            <div className="w-20 h-20 rounded-full bg-green-400/15 flex items-center justify-center mb-4">
-                <Icon name="groups" className="text-5xl text-green-400" />
+            <div className="w-20 h-20 rounded-full bg-ds-success/15 flex items-center justify-center mb-4">
+                <Icon name="groups" className="text-5xl text-ds-success" />
             </div>
             <h3 className="text-xl font-bold mb-1">You&apos;re Live!</h3>
             <p className={`text-[13px] text-center mb-6 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>You&apos;ve joined the session. Your camera and mic are ready.</p>
             <div className="flex gap-3">
-                <button className="px-5 py-2.5 rounded-2xl bg-red-400/15 text-red-400 font-semibold text-[13px]"><Icon name="mic_off" className="mr-1" />Mute</button>
+                <button className="px-5 py-2.5 rounded-2xl bg-ds-error/15 text-ds-error font-semibold text-[13px]"><Icon name="mic_off" className="mr-1" />Mute</button>
                 <button onClick={onClose} className="px-5 py-2.5 rounded-2xl bg-ds-success text-white font-semibold text-[13px]">Enter Room</button>
             </div>
         </motion.div>
@@ -95,8 +95,8 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-blue-500/20' : isLight ? 'bg-blue-100' : 'bg-blue-500/15'}`}>
-                    <Icon name="groups" className="text-[18px] text-blue-400" />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-ember/20' : isLight ? 'bg-ds-blue-100' : 'bg-ds-blue-500/15'}`}>
+                    <Icon name="groups" className={`text-[18px] ${isColorful ? 'text-ds-ember' : 'text-ds-blue-400'}`} />
                 </div>
                 <h3 className="text-[18px] font-bold">Join Live Session</h3>
             </div>
@@ -120,7 +120,7 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
                 <span className="text-[10px] opacity-50 block mb-1 uppercase tracking-wide">Or enter a room code</span>
                 <div className="flex items-center gap-3">
                     <input value={code} onChange={e => setCode(e.target.value)} placeholder="e.g. WF-2024-XK9" className="flex-1 bg-transparent outline-none text-[14px] font-medium placeholder:opacity-30" />
-                    {code && <button onClick={() => setJoined(true)} className="px-3 py-1.5 rounded-xl bg-blue-500 text-white text-[12px] font-bold active:scale-95">Join</button>}
+                    {code && <button onClick={() => setJoined(true)} className={`px-3 py-1.5 rounded-xl ${isColorful ? 'bg-ds-ember' : 'bg-ds-blue-500'} text-white text-[12px] font-bold active:scale-95`}>Join</button>}
                 </div>
             </div>
         </motion.div>
@@ -138,19 +138,19 @@ function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
     const times = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'];
     if (step === 'success') return (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6">
-            <div className="w-20 h-20 rounded-[28px] bg-purple-500/15 flex items-center justify-center mb-4">
-                <Icon name="event_available" className="text-5xl text-purple-400" />
+            <div className={`w-20 h-20 rounded-[28px] ${isColorful ? 'bg-ds-ember/15' : 'bg-ds-blue-500/15'} flex items-center justify-center mb-4`}>
+                <Icon name="event_available" className={`text-5xl ${isColorful ? 'text-ds-ember' : 'text-ds-blue-400'}`} />
             </div>
             <h3 className="text-xl font-bold mb-1">Meeting Scheduled!</h3>
             <p className={`text-[13px] text-center mb-6 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}><strong>{title || 'Team Meeting'}</strong> on {days[selectedDay]}, {selectedTime}.<br />Invites sent to your team.</p>
-            <button onClick={onClose} className="px-6 py-3 rounded-2xl bg-purple-500 text-white font-semibold text-[14px] active:scale-95">View Calendar</button>
+            <button onClick={onClose} className={`px-6 py-3 rounded-2xl ${isColorful ? 'bg-ds-ember' : 'bg-ds-blue-500'} text-white font-semibold text-[14px] active:scale-95`}>View Calendar</button>
         </motion.div>
     );
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-purple-500/20' : isLight ? 'bg-purple-400/10' : 'bg-purple-500/15'}`}>
-                    <Icon name="calendar_today" className="text-[18px] text-purple-400" />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-ember/20' : isLight ? 'bg-ds-blue-400/10' : 'bg-ds-blue-500/15'}`}>
+                    <Icon name="calendar_today" className={`text-[18px] ${isColorful ? 'text-ds-ember' : 'text-ds-blue-400'}`} />
                 </div>
                 <h3 className="text-[18px] font-bold">Schedule Meeting</h3>
             </div>
@@ -163,7 +163,7 @@ function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
                     <span className="text-[10px] opacity-50 block mb-2 uppercase tracking-wide">Day</span>
                     <div className="flex gap-2">
                         {days.map((d, i) => (
-                            <button key={d} onClick={() => setSelectedDay(i)} className={`flex-1 py-2 rounded-xl text-[13px] font-bold transition-colors active:scale-95 ${selectedDay === i ? (isColorful ? 'bg-purple-500 text-white' : 'bg-purple-500 text-white') : (isLight ? 'bg-black/5' : 'bg-white/8')}`}>{d}</button>
+                            <button key={d} onClick={() => setSelectedDay(i)} className={`flex-1 py-2 rounded-xl text-[13px] font-bold transition-colors active:scale-95 ${selectedDay === i ? (isColorful ? 'bg-ds-ember text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5' : 'bg-white/8')}`}>{d}</button>
                         ))}
                     </div>
                 </div>
@@ -171,7 +171,7 @@ function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
                     <span className="text-[10px] opacity-50 block mb-2 uppercase tracking-wide">Time</span>
                     <div className="flex flex-wrap gap-2">
                         {times.map(t => (
-                            <button key={t} onClick={() => setSelectedTime(t)} className={`px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-colors active:scale-95 ${selectedTime === t ? (isColorful ? 'bg-purple-500 text-white' : 'bg-purple-500 text-white') : (isLight ? 'bg-black/5' : 'bg-white/8')}`}>{t}</button>
+                            <button key={t} onClick={() => setSelectedTime(t)} className={`px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-colors active:scale-95 ${selectedTime === t ? (isColorful ? 'bg-ds-ember text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5' : 'bg-white/8')}`}>{t}</button>
                         ))}
                     </div>
                 </div>
@@ -179,13 +179,13 @@ function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
                     <span className="text-[10px] opacity-50 block mb-2 uppercase tracking-wide">Invite</span>
                     <div className="flex -space-x-2">
                         {['S', 'J', 'M'].map((initl, i) => (
-                            <div key={i} className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold text-white border-2 ${isLight ? 'border-gray-100' : 'border-gray-800'} ${['bg-blue-500', 'bg-ds-success', 'bg-purple-500'][i]}`}>{initl}</div>
+                            <div key={i} className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold text-white border-2 ${isLight ? 'border-gray-100' : 'border-gray-800'} ${['bg-ds-blue-500', 'bg-ds-success', 'bg-ds-purple-400'][i]}`}>{initl}</div>
                         ))}
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold border-2 ${isLight ? 'border-gray-100 bg-gray-100 text-gray-500' : 'border-gray-800 bg-white/10 text-white/50'}`}>+3</div>
                     </div>
                 </div>
             </div>
-            <button onClick={() => setStep('success')} className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white`}>
+            <button onClick={() => setStep('success')} className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform ${isColorful ? 'bg-gradient-to-r from-ds-ember to-ds-ember-dark' : 'bg-gradient-to-r from-ds-blue-500 to-ds-indigo-500'} text-white`}>
                 Schedule Meeting
             </button>
         </motion.div>
@@ -231,7 +231,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                     {barData.map((v, i) => (
                         <div key={i} className="flex-1 flex flex-col items-center gap-1">
                             <motion.div initial={{ height: 0 }} animate={{ height: `${v}%` }} transition={{ delay: i * 0.06, type: 'spring', stiffness: 400, damping: 30 }}
-                                className={`w-full rounded-t-lg ${i === 6 ? (isColorful ? 'bg-fuchsia-500' : 'bg-indigo-500') : isColorful ? 'bg-fuchsia-500/40' : isLight ? 'bg-indigo-400/40' : 'bg-indigo-500/35'}`}
+                                className={`w-full rounded-t-lg ${i === 6 ? (isColorful ? 'bg-ds-ember' : 'bg-ds-blue-500') : isColorful ? 'bg-ds-ember/40' : isLight ? 'bg-ds-blue-400/40' : 'bg-ds-blue-500/35'}`}
                                 style={{ minHeight: '4px' }} />
                         </div>
                     ))}
@@ -239,7 +239,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                 <div className="flex gap-1.5 mt-2">
                     {days.map((d, i) => (
                         <div key={i} className="flex-1 text-center">
-                            <span className={`text-[10px] font-medium ${i === 6 ? (isColorful ? 'text-fuchsia-400' : 'text-indigo-400') : 'opacity-40'}`}>{d}</span>
+                            <span className={`text-[10px] font-medium ${i === 6 ? (isColorful ? 'text-ds-ember' : 'text-ds-blue-400') : 'opacity-40'}`}>{d}</span>
                         </div>
                     ))}
                 </div>
@@ -271,10 +271,10 @@ function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
                     return (
                         <button key={l.key} onClick={() => onChange(l.key)}
                             className={`relative px-4 py-[7px] rounded-full text-[11px] font-semibold transition-all duration-300 active:scale-95 ${isActive
-                                ? (isColorful ? 'text-[#a78bfa]' : isLight ? 'text-gray-900' : 'text-white')
+                                ? (isColorful ? 'text-ds-ember-light' : isLight ? 'text-gray-900' : 'text-white')
                                 : (isLight ? 'text-gray-400' : 'text-white/30')}`}>
                             {isActive && (
-                                <motion.div layoutId="layout-pill" className={`absolute inset-0 ${theme.platform === 'ios' ? 'rounded-[10px]' : 'rounded-full'} ${isColorful ? 'bg-[#a855f7]/25' : isLight ? 'bg-white shadow-sm' : 'bg-white/12'}`}
+                                <motion.div layoutId="layout-pill" className={`absolute inset-0 ${theme.platform === 'ios' ? 'rounded-[10px]' : 'rounded-full'} ${isColorful ? 'bg-ds-ember/25' : isLight ? 'bg-white shadow-sm' : 'bg-white/12'}`}
                                     transition={{ type: 'spring', stiffness: 500, damping: 35 }} />
                             )}
                             <span className="relative z-10">{l.label}</span>
@@ -293,10 +293,10 @@ interface LayoutProps {
 }
 
 const quickActionDefs = (theme: MobileTheme): { key: QuickActionKey; icon: string; label: string; desc: string; color: string }[] => [
-    { key: 'new-doc', icon: 'edit_document', label: 'New Doc', desc: 'Create document', color: theme.platform === 'android' ? 'from-purple-500/20 to-fuchsia-500/20' : 'from-blue-500/10 to-indigo-500/10 border-blue-500/20' },
-    { key: 'join-room', icon: 'groups', label: 'Join Room', desc: 'Live session', color: theme.platform === 'android' ? 'from-blue-500/20 to-cyan-500/20' : 'from-green-600/10 to-cyan-500/10 border-green-600/20' },
-    { key: 'schedule', icon: 'calendar_today', label: 'Schedule', desc: 'Plan meeting', color: theme.platform === 'android' ? 'from-green-600/20 to-cyan-500/20' : 'from-purple-500/10 to-fuchsia-500/10 border-purple-400/20' },
-    { key: 'analytics', icon: 'analytics', label: 'Analytics', desc: 'View stats', color: theme.platform === 'android' ? 'from-[#d97706]/20 to-[#ff8c42]/20' : 'from-[#ff8c42]/10 to-[#d97706]/10 border-ds-ember/20' },
+    { key: 'new-doc', icon: 'edit_document', label: 'New Doc', desc: 'Create document', color: theme.platform === 'android' ? 'from-ds-purple-400/20 to-ds-fuchsia-400/20' : 'from-ds-blue-500/10 to-ds-indigo-500/10 border-ds-blue-500/20' },
+    { key: 'join-room', icon: 'groups', label: 'Join Room', desc: 'Live session', color: theme.platform === 'android' ? 'from-ds-blue-500/20 to-ds-cyan-400/20' : 'from-ds-success/10 to-ds-cyan-400/10 border-ds-success/20' },
+    { key: 'schedule', icon: 'calendar_today', label: 'Schedule', desc: 'Plan meeting', color: theme.platform === 'android' ? 'from-ds-success/20 to-ds-cyan-400/20' : 'from-ds-purple-400/10 to-ds-fuchsia-400/10 border-ds-purple-400/20' },
+    { key: 'analytics', icon: 'analytics', label: 'Analytics', desc: 'View stats', color: theme.platform === 'android' ? 'from-ds-warning/20 to-ds-ember/20' : 'from-ds-ember/10 to-ds-warning/10 border-ds-ember/20' },
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -304,18 +304,18 @@ const quickActionDefs = (theme: MobileTheme): { key: QuickActionKey; icon: strin
 // ═══════════════════════════════════════════════════════════════════════════════
 function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const d = theme.dashboard;
-    const accent = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
-    const highlight = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const accent = isColorful ? 'text-ds-ember' : d.briefingAccent(isLight);
+    const highlight = isColorful ? 'text-ds-ember-light' : d.briefingHighlight;
     const actions = quickActionDefs(theme);
 
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, scale: 0.97 }} variants={stagger} className="space-y-3">
             {/* AI Hero — full width */}
             <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-left p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
-                <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-indigo-500/10 to-purple-500/10 blur-2xl group-active:scale-110 transition-transform" />
+                <div className={`absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-ds-indigo-500/10 to-ds-purple-400/10 blur-2xl group-active:scale-110 transition-transform`} />
                 <div className="flex items-center space-x-2.5 mb-3 relative z-10">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#93c5fd]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]'}`}>
-                        <Icon name="auto_awesome" className={`text-sm ${theme.platform === 'android' ? 'text-[#1e2756]' : 'text-white'}`} />
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'bg-ds-blue-300' : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500'}`}>
+                        <Icon name="auto_awesome" className={`text-sm ${isColorful ? 'text-white' : theme.platform === 'android' ? 'text-ds-blue-900' : 'text-white'}`} />
                     </div>
                     <span className={`text-[10px] font-bold uppercase tracking-[0.15em] ${accent}`}>AI Briefing</span>
                     <span className="ml-auto text-[10px] font-medium opacity-30">Just now</span>
@@ -323,7 +323,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <p className={`text-[14px] leading-[1.7] relative z-10 ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
                     Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 docs updated, 3 design reviews completed. <span className="font-semibold">2 pending approvals</span> await.
                 </p>
-                <span className={`mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.followUpColor}`}>
+                <span className={`mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold ${isColorful ? 'text-ds-ember' : d.followUpColor}`}>
                     Ask follow-up <Icon name="arrow_forward" className="text-[12px]" />
                 </span>
             </motion.button>
@@ -389,7 +389,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.div variants={fadeUp} className={`p-5 ${card}`}>
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="font-bold text-[15px]">Team Activity</h3>
-                    <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>See All</button>
+                    <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-ds-ember' : d.seeAllColor}`}>See All</button>
                 </div>
                 <div className="space-y-3">
                     {teamActivity.map((a, i) => (
@@ -413,8 +413,8 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
 // ═══════════════════════════════════════════════════════════════════════════════
 function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const d = theme.dashboard;
-    const accent = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
-    const highlight = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const accent = isColorful ? 'text-ds-ember' : d.briefingAccent(isLight);
+    const highlight = isColorful ? 'text-ds-ember-light' : d.briefingHighlight;
     const actions = quickActionDefs(theme);
 
     return (
@@ -422,15 +422,15 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
             {/* AI Briefing Card */}
             <motion.div variants={fadeUp} className={`p-6 ${card}`}>
                 <div className="flex items-center space-x-3 mb-4">
-                    <div className={`w-9 h-9 rounded-full flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#93c5fd]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]'}`}>
-                        <Icon name="auto_awesome" className={`text-base ${theme.platform === 'android' ? 'text-[#1e2756]' : 'text-white'}`} />
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'bg-ds-blue-300' : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500'}`}>
+                        <Icon name="auto_awesome" className={`text-base ${isColorful ? 'text-white' : theme.platform === 'android' ? 'text-ds-blue-900' : 'text-white'}`} />
                     </div>
                     <span className={`text-[11px] font-bold uppercase tracking-widest ${accent}`}>AI Collaboration Briefing</span>
                 </div>
                 <p className={`text-[15px] leading-[1.75] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
                     Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
                 </p>
-                <button onClick={() => onNav('copilot')} className={`mt-4 flex items-center space-x-2 text-[13px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.followUpColor}`}>
+                <button onClick={() => onNav('copilot')} className={`mt-4 flex items-center space-x-2 text-[13px] font-semibold ${isColorful ? 'text-ds-ember' : d.followUpColor}`}>
                     <span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" />
                 </button>
             </motion.div>
@@ -439,7 +439,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
             <motion.div variants={fadeUp}>
                 <div className="flex justify-between items-center mb-4 px-1">
                     <h3 className={`font-bold text-[17px] ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>Workspace Activity</h3>
-                    <button onClick={() => onNav('workspaces')} className={`text-[13px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>See All</button>
+                    <button onClick={() => onNav('workspaces')} className={`text-[13px] font-semibold ${isColorful ? 'text-ds-ember' : d.seeAllColor}`}>See All</button>
                 </div>
                 <div className="flex space-x-3.5 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {workspaces.slice(0, 4).map((ws, i) => (
@@ -447,7 +447,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
                             onClick={() => onNav('workspaces')} className={`shrink-0 w-[160px] p-5 ${card} active:scale-[0.97] transition-transform text-left`}>
                             <div className="flex justify-between items-start mb-1.5">
                                 <span className="font-bold text-[14px] truncate max-w-[80px]">{ws.name.split(' ')[0]}</span>
-                                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : ws.status === 'Review' ? 'bg-amber-400/15 text-amber-400' : 'bg-gray-500/15 text-gray-400'}`}>{ws.status}</span>
+                                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : ws.status === 'Review' ? 'bg-ds-warning/15 text-ds-warning' : 'bg-gray-500/15 text-gray-400'}`}>{ws.status}</span>
                             </div>
                             <span className={`text-[12px] block mb-3 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{ws.members} members</span>
                             <Sparkline data={ws.data} color={ws.activity > 70 ? theme.workspace.sparklineHigh : ws.activity > 50 ? theme.workspace.sparklineMid : theme.workspace.sparklineLow} width={120} height={32} />
@@ -497,8 +497,8 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
 function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const [idx, setIdx] = useState(0);
     const d = theme.dashboard;
-    const accent = isColorful ? 'text-fuchsia-400' : d.briefingAccent(isLight);
-    const highlight = isColorful ? 'text-fuchsia-300' : d.briefingHighlight;
+    const accent = isColorful ? 'text-ds-ember' : d.briefingAccent(isLight);
+    const highlight = isColorful ? 'text-ds-ember-light' : d.briefingHighlight;
     const actions = quickActionDefs(theme);
 
     const cards = [
@@ -509,8 +509,8 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className={`h-full flex flex-col justify-between p-6 ${card}`}>
                     <div>
                         <div className="flex items-center space-x-3 mb-6">
-                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${theme.platform === 'android' ? 'bg-[#93c5fd]' : isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]'}`}>
-                                <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' ? 'text-[#1e2756]' : 'text-white'}`} />
+                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'bg-ds-blue-300' : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500'}`}>
+                                <Icon name="auto_awesome" className={`text-2xl ${isColorful ? 'text-white' : theme.platform === 'android' ? 'text-ds-blue-900' : 'text-white'}`} />
                             </div>
                             <div>
                                 <span className={`text-[10px] font-bold uppercase tracking-[0.15em] block ${accent}`}>AI Briefing</span>
@@ -521,7 +521,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                             Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
                         </p>
                     </div>
-                    <button onClick={() => onNav('copilot')} className={`mt-6 w-full py-4 rounded-2xl text-[15px] font-bold active:scale-[0.97] transition-transform ${isColorful ? 'bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white' : theme.workspace.primaryButton}`}>
+                    <button onClick={() => onNav('copilot')} className={`mt-6 w-full py-4 rounded-2xl text-[15px] font-bold active:scale-[0.97] transition-transform ${isColorful ? 'bg-gradient-to-r from-ds-ember to-ds-ember-dark text-white' : theme.workspace.primaryButton}`}>
                         <Icon name="auto_awesome" className="mr-2 text-[16px]" />Ask Copilot
                     </button>
                 </div>
@@ -534,7 +534,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className={`h-full flex flex-col p-6 ${card}`}>
                     <div className="flex justify-between items-center mb-5">
                         <h3 className="text-[18px] font-bold">Workspaces</h3>
-                        <button onClick={() => onNav('workspaces')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>View All</button>
+                        <button onClick={() => onNav('workspaces')} className={`text-[12px] font-semibold ${isColorful ? 'text-ds-ember' : d.seeAllColor}`}>View All</button>
                     </div>
                     <div className="flex-1 space-y-3 overflow-y-auto scrollbar-none">
                         {workspaces.map((ws, i) => (
@@ -551,7 +551,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Sparkline data={ws.data} color={ws.activity > 70 ? theme.workspace.sparklineHigh : theme.workspace.sparklineMid} width={44} height={18} />
-                                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : 'bg-amber-400/15 text-amber-400'}`}>{ws.status}</span>
+                                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : 'bg-ds-warning/15 text-ds-warning'}`}>{ws.status}</span>
                                 </div>
                             </motion.button>
                         ))}
@@ -566,7 +566,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className={`h-full flex flex-col p-6 ${card}`}>
                     <div className="flex justify-between items-center mb-5">
                         <h3 className="text-[18px] font-bold">Team Activity</h3>
-                        <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>Alerts</button>
+                        <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-ds-ember' : d.seeAllColor}`}>Alerts</button>
                     </div>
                     <div className="flex-1 space-y-4 overflow-y-auto scrollbar-none">
                         {teamActivity.map((a, i) => (
@@ -633,7 +633,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className="flex gap-2">
                     {cards.map((c, i) => (
                         <button key={c.key} onClick={() => setIdx(i)}
-                            className={`rounded-full transition-all duration-300 ${i === idx ? `w-6 h-2 ${isColorful ? 'bg-fuchsia-400' : theme.platform === 'ios' ? 'bg-[#3b82f6]' : 'bg-[#93c5fd]'}` : `w-2 h-2 ${isLight ? 'bg-black/15' : 'bg-white/15'}`}`} />
+                            className={`rounded-full transition-all duration-300 ${i === idx ? `w-6 h-2 ${isColorful ? 'bg-ds-ember' : theme.platform === 'ios' ? 'bg-ds-blue-500' : 'bg-ds-blue-300'}` : `w-2 h-2 ${isLight ? 'bg-black/15' : 'bg-white/15'}`}`} />
                     ))}
                 </div>
                 <button onClick={goNext} disabled={idx === totalCards - 1}
@@ -659,9 +659,9 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     ];
 
     const colorMap: Record<string, string> = {
-        green: isColorful ? 'bg-green-400/20 text-green-400 border-green-400/20' : isLight ? 'bg-green-600/10 text-ds-success border-green-600/20' : 'bg-green-400/15 text-green-400 border-green-400/20',
-        blue: isColorful ? 'bg-blue-500/20 text-blue-400 border-blue-500/20' : isLight ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-blue-500/15 text-blue-400 border-blue-500/20',
-        purple: isColorful ? 'bg-purple-500/20 text-purple-400 border-purple-400/20' : isLight ? 'bg-purple-400/10 text-purple-600 border-purple-400/20' : 'bg-purple-500/15 text-purple-400 border-purple-400/20',
+        green: isColorful ? 'bg-ds-success/20 text-ds-success border-ds-success/20' : isLight ? 'bg-ds-success/10 text-ds-success border-ds-success/20' : 'bg-ds-success/20 text-ds-success border-ds-success/20',
+        blue: isColorful ? 'bg-ds-blue-500/20 text-ds-blue-400 border-ds-blue-500/20' : isLight ? 'bg-ds-blue-100 text-ds-blue-500 border-ds-blue-200' : 'bg-ds-blue-500/15 text-ds-blue-400 border-ds-blue-500/20',
+        purple: isColorful ? 'bg-ds-ember/20 text-ds-ember border-ds-ember/20' : isLight ? 'bg-ds-purple-400/10 text-ds-purple-500 border-ds-purple-400/20' : 'bg-ds-purple-400/15 text-ds-purple-400 border-ds-purple-400/20',
     };
 
     return (
@@ -670,14 +670,14 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.button variants={fadeUp} onClick={() => onNav('copilot')}
                 className="relative w-36 h-36 flex items-center justify-center active:scale-95 transition-transform">
                 {/* Outer pulse rings */}
-                <div className={`absolute inset-0 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-fuchsia-500' : theme.platform === 'ios' ? 'bg-[#3b82f6]' : 'bg-[#3b82f6]'}`} style={{ animationDuration: '3s' }} />
-                <div className={`absolute inset-3 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-purple-500' : theme.platform === 'ios' ? 'bg-[#6366f1]' : 'bg-[#93c5fd]'}`} style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+                <div className={`absolute inset-0 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-ds-ember' : theme.platform === 'ios' ? 'bg-ds-blue-500' : 'bg-ds-blue-500'}`} style={{ animationDuration: '3s' }} />
+                <div className={`absolute inset-3 rounded-full animate-ping opacity-10 ${isColorful ? 'bg-ds-ember-dark' : theme.platform === 'ios' ? 'bg-ds-indigo-500' : 'bg-ds-blue-300'}`} style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
                 {/* Gradient ring */}
-                <div className={`absolute inset-4 rounded-full ${isColorful ? 'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20' : isLight ? 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10' : 'bg-gradient-to-br from-indigo-500/15 to-purple-500/15'} border ${isColorful ? 'border-ds-ember/20' : isLight ? 'border-blue-200' : 'border-indigo-500/20'}`} />
+                <div className={`absolute inset-4 rounded-full ${isColorful ? 'bg-gradient-to-br from-ds-ember/20 to-ds-ember-dark/20' : isLight ? 'bg-gradient-to-br from-ds-blue-500/10 to-ds-indigo-500/10' : 'bg-gradient-to-br from-ds-indigo-500/15 to-ds-purple-400/15'} border ${isColorful ? 'border-ds-ember/20' : isLight ? 'border-ds-blue-200' : 'border-ds-indigo-500/20'}`} />
                 {/* Inner hub */}
-                <div className={`relative w-20 h-20 rounded-full flex flex-col items-center justify-center ${isColorful ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' : theme.platform === 'ios' ? 'bg-gradient-to-br from-[#3b82f6] to-[#6366f1]' : 'bg-[#93c5fd]'} shadow-lg`}>
-                    <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' && !isColorful ? 'text-[#1e2756]' : 'text-white'}`} />
-                    <span className={`text-[9px] font-bold mt-0.5 ${theme.platform === 'android' && !isColorful ? 'text-[#1e2756]' : 'text-white/80'}`}>ASK AI</span>
+                <div className={`relative w-20 h-20 rounded-full flex flex-col items-center justify-center ${isColorful ? 'bg-gradient-to-br from-ds-ember to-ds-ember-dark' : theme.platform === 'ios' ? 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500' : 'bg-ds-blue-300'} shadow-lg`}>
+                    <Icon name="auto_awesome" className={`text-2xl ${theme.platform === 'android' && !isColorful ? 'text-ds-blue-900' : 'text-white'}`} />
+                    <span className={`text-[9px] font-bold mt-0.5 ${theme.platform === 'android' && !isColorful ? 'text-ds-blue-900' : 'text-white/80'}`}>ASK AI</span>
                 </div>
             </motion.button>
 
@@ -697,7 +697,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.div variants={fadeUp} className="w-full px-1">
                 <div className="flex justify-between items-center mb-3 px-3">
                     <h3 className="font-bold text-[15px]">Workspaces</h3>
-                    <button onClick={() => onNav('workspaces')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>See All</button>
+                    <button onClick={() => onNav('workspaces')} className={`text-[12px] font-semibold ${isColorful ? 'text-ds-ember' : d.seeAllColor}`}>See All</button>
                 </div>
                 <div className="flex gap-2.5 overflow-x-auto scrollbar-none pb-1 px-3">
                     {workspaces.slice(0, 4).map((ws, i) => (
@@ -730,7 +730,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             <motion.div variants={fadeUp} className={`w-full p-5 ${card}`}>
                 <div className="flex justify-between items-center mb-3">
                     <h3 className="font-bold text-[15px]">Recent Activity</h3>
-                    <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-fuchsia-400' : d.seeAllColor}`}>All</button>
+                    <button onClick={() => onNav('notifications')} className={`text-[12px] font-semibold ${isColorful ? 'text-ds-ember' : d.seeAllColor}`}>All</button>
                 </div>
                 {teamActivity.slice(0, 3).map((a, i) => (
                     <motion.button key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.05 }}

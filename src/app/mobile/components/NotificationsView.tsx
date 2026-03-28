@@ -14,19 +14,19 @@ interface NotificationsViewProps {
 
 export function NotificationsView({ card, isLight, isColorful = false, theme }: NotificationsViewProps) {
     const [exp, setExp] = useState<number | null>(null);
-    const badge = (p: string) => p === 'critical' ? (isLight ? 'bg-red-600/10 text-ds-error border-red-600/25' : 'bg-red-400/15 text-red-400 border-red-400/20') : p === 'warning' ? (isLight ? 'bg-amber-600/10 text-ds-warning border-amber-600/25' : 'bg-amber-400/15 text-amber-400 border-amber-400/20') : (isLight ? 'bg-blue-50 text-blue-600 border-blue-100' : 'bg-blue-500/10 text-blue-400 border-blue-500/15');
+    const badge = (p: string) => p === 'critical' ? (isLight ? 'bg-ds-error/10 text-ds-error border-ds-error/25' : 'bg-ds-error/15 text-ds-error border-ds-error/20') : p === 'warning' ? (isLight ? 'bg-ds-warning/10 text-ds-warning border-ds-warning/25' : 'bg-ds-warning/15 text-ds-warning border-ds-warning/20') : isColorful ? (isLight ? 'bg-ds-ember/20 text-ds-ember-dark border-ds-ember/30' : 'bg-ds-ember/15 text-ds-ember border-ds-ember/30') : (isLight ? 'bg-ds-blue-100 text-ds-blue-500 border-ds-blue-200' : 'bg-ds-blue-500/10 text-ds-blue-400 border-ds-blue-500/15');
     const nt = theme.notification;
     const headerAccentClass = isColorful
-        ? (theme.platform === 'ios' ? 'text-xl font-bold tracking-tight text-fuchsia-400' : 'text-xl font-medium text-fuchsia-400')
+        ? (theme.platform === 'ios' ? 'text-xl font-bold tracking-tight text-ds-ember' : 'text-xl font-medium text-ds-ember')
         : nt.headerAccent(isLight);
-    const askAiColor = isColorful ? 'text-fuchsia-400' : nt.askAiColor;
+    const askAiColor = isColorful ? 'text-ds-ember' : nt.askAiColor;
 
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-3.5`}>
             <motion.div variants={fadeUp} className="flex justify-between items-center px-1 mb-2"><h2 className={headerAccentClass}>Notifications</h2><span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${badge('critical')}`}>1 urgent</span></motion.div>
             {alerts.map(a => (<motion.div key={a.id} variants={fadeUp} onClick={() => setExp(exp === a.id ? null : a.id)} className={`p-5 ${card} active:scale-[0.98] cursor-pointer`}>
                 <div className="flex items-start space-x-3.5">
-                    <div className={`w-1 self-stretch rounded-full shrink-0 ${a.priority === 'critical' ? (isLight ? 'bg-ds-error' : 'bg-ds-error/80') : a.priority === 'warning' ? (isLight ? 'bg-ds-warning' : 'bg-ds-warning/80') : (isLight ? 'bg-[#0284c7]' : 'bg-[#0284c7]/60')}`} />
+                    <div className={`w-1 self-stretch rounded-full shrink-0 ${a.priority === 'critical' ? (isLight ? 'bg-ds-error' : 'bg-ds-error/80') : a.priority === 'warning' ? (isLight ? 'bg-ds-warning' : 'bg-ds-warning/80') : (isLight ? 'bg-ds-info' : 'bg-ds-info/60')}`} />
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1.5"><h3 className="font-semibold text-[15px] truncate pr-2">{a.title}</h3><span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${badge(a.priority)}`}>{a.priority}</span></div>
                         <p className={`text-[14px] leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{a.desc}</p>

@@ -15,7 +15,7 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
     appName: 'Workflow Platform',
     tagline: 'Your AI-powered team collaboration hub — manage workspaces, projects, and insights all in one place.',
     appIcon: 'blur_on',
-    accentGradient: 'from-indigo-500 to-purple-600',
+    accentGradient: 'from-ds-indigo-500 to-ds-purple-500',
     aiTips: [
         {
             icon: 'query_stats',
@@ -116,7 +116,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                     initial="initial"
                                     animate="animate"
                                     exit="exit"
-                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-[#4b5563]') : 'text-white/35'}`}
+                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-ds-gray-600') : 'text-white/35'}`}
                                 >
                                     {theme.titles[activeTab].sub}
                                 </motion.span>
@@ -142,7 +142,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >
                         <Icon name="auto_awesome" className="text-[20px]" />
-                        <span className={`absolute top-[8px] right-[8px] w-[5px] h-[5px] bg-[#FF9500] rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_6px_rgba(255,149,0,0.7)]' : ''}`} />
+                        <span className={`absolute top-[8px] right-[8px] w-[5px] h-[5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_6px_rgba(255,149,0,0.7)]' : ''}`} />
                     </motion.button>
                 </div>
             </header>
@@ -179,7 +179,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                     {a && (
                                         <motion.div
                                             layoutId="nav-pill"
-                                            className={`absolute inset-0 w-16 h-8 rounded-full ${theme.navTab.pill(isLight)}`}
+                                            className={`absolute inset-0 w-16 h-8 rounded-full ${isColorful ? 'bg-ds-ember/25' : theme.navTab.pill!(isLight)}`}
                                             transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
                                         />
                                     )}
@@ -187,7 +187,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                         <motion.span
                                             animate={{ scale: a ? 1.1 : 1 }}
                                             transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember-light' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                         >
                                             {ic}
                                         </motion.span>
@@ -198,14 +198,14 @@ export function MobileApp({ theme }: MobileAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.12 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>
                             )}
                             <motion.span
                                 animate={{ opacity: a ? 1 : 0.6 }}
-                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-ember' : 'text-ds-ember-light') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                             >
                                 {lb}
                             </motion.span>

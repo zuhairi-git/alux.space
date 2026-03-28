@@ -164,14 +164,14 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                     {a && (
                                         <motion.div
                                             layoutId="job-nav-pill"
-                                            className={`absolute inset-0 rounded-full ${theme.navTab.pill(isLight)}`}
+                                            className={`absolute inset-0 rounded-full ${isColorful ? 'bg-ds-ember/25' : theme.navTab.pill(isLight)}`}
                                             transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
                                         />
                                     )}
                                     <motion.span
                                         animate={{ scale: a ? 1.1 : 1 }}
                                         transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                        className={`relative material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                        className={`relative material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember-light' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                     >
                                         {ic}
                                     </motion.span>
@@ -180,14 +180,14 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.15 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>
                             )}
                             <motion.span
                                 animate={{ opacity: a ? 1 : 0.6 }}
-                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? theme.navTab.active(isLight) : theme.navTab.inactive(isLight)}`}
+                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-ember' : 'text-ds-ember-light') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                             >
                                 {lb}
                             </motion.span>
