@@ -29,15 +29,15 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
 
                     {/* Priority Alert - Interview Invite */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 bg-emerald-500/10 border-b ${isLight ? 'border-emerald-500/15' : 'border-emerald-500/20'}`}>
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-500">Action Required</span>
+                        <div className={`px-4 py-2 flex items-center gap-2 bg-green-400/10 border-b ${isLight ? 'border-green-400/15' : 'border-green-400/20'}`}>
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse" />
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-green-600">Action Required</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>Just now</span>
                         </div>
                         <div className="p-4">
                             <div className="flex items-start gap-3">
-                                <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-emerald-500/15 shrink-0">
-                                    <Icon name="celebration" className="text-[20px] text-emerald-500" />
+                                <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-green-400/15 shrink-0">
+                                    <Icon name="celebration" className="text-[20px] text-green-600" />
                                 </div>
                                 <div className="flex-1">
                                     <h3 className="font-bold text-[15px] mb-0.5">Interview Invite</h3>
@@ -51,7 +51,7 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
                                     className={`flex-1 py-2 rounded-xl text-[12px] font-semibold flex items-center justify-center gap-1.5 ${isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-white/80'} active:scale-95 transition-transform`}>
                                     <Icon name="auto_awesome" className="text-[13px]" /> Prep with AI
                                 </button>
-                                <button className="flex-1 py-2 rounded-xl text-[12px] font-semibold bg-emerald-500 text-white flex items-center justify-center gap-1.5 active:scale-95 transition-transform">
+                                <button className="flex-1 py-2 rounded-xl text-[12px] font-semibold bg-green-600 text-white flex items-center justify-center gap-1.5 active:scale-95 transition-transform">
                                     <Icon name="event" className="text-[13px]" /> Schedule
                                 </button>
                             </div>
@@ -73,7 +73,7 @@ export function NotificationsView({ card, isLight, theme, onNav }: ViewProps) {
                                 <div className="flex-1">
                                     <div className="flex items-center justify-between mb-0.5">
                                         <h3 className="font-bold text-[15px]">Retail Assistant</h3>
-                                        <span className="text-[12px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-lg">95% match</span>
+                                        <span className="text-[12px] font-bold text-green-600 bg-green-400/10 px-2 py-0.5 rounded-lg">95% match</span>
                                     </div>
                                     <p className={`text-[13px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>City Center · €12.5/h · Weekend shifts</p>
                                 </div>

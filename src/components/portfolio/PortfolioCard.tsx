@@ -99,14 +99,14 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
     if (!item.category) return null;
     if (item.category === 'case-study') {
       return (
-        <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-violet-500/15 text-violet-400 border-violet-500/30">
+        <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-violet-500/15 text-purple-400 border-violet-500/30">
           <span className="material-symbols !text-[12px]">school</span>
           {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
         </span>
       );
     }
     return (
-      <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-teal-500/15 text-teal-400 border-teal-500/30">
+      <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-cyan-500/15 text-cyan-400 border-cyan-500/30">
         <span className="material-symbols !text-[12px]">devices</span>
         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
       </span>

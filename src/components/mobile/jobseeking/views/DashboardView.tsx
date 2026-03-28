@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -35,17 +35,17 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
 
     if (step === 'done') return (
         <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6 text-center">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/10">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400/50/20 to-blue-500/20 flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/10">
                 <Icon name="verified" className="text-5xl text-cyan-400" />
             </div>
             <h3 className="text-xl font-bold mb-1">Profile Updated!</h3>
-            <p className={`text-[13px] mb-1 ${isLight ? 'text-gray-500' : 'text-white/50'}`}>Your CV score jumped from <span className="text-amber-400 font-bold">68%</span> to <span className="text-emerald-400 font-bold">91%</span></p>
+            <p className={`text-[13px] mb-1 ${isLight ? 'text-gray-500' : 'text-white/50'}`}>Your CV score jumped from <span className="text-amber-400 font-bold">68%</span> to <span className="text-green-400 font-bold">91%</span></p>
             <div className="flex items-center gap-1 mb-6">
                 {[1,2,3,4,5].map(i => <Icon key={i} name="star" className={`text-[16px] ${i <= 4 ? 'text-amber-400' : 'text-amber-400/30'}`} />)}
             </div>
             <div className="flex gap-3">
                 <button onClick={onClose} className="px-4 py-2.5 rounded-2xl bg-white/10 text-sm font-semibold active:scale-95">Close</button>
-                <button onClick={() => onClose()} className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-bold active:scale-95">View Profile</button>
+                <button onClick={() => onClose()} className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-400/50 to-blue-500 text-white text-sm font-bold active:scale-95">View Profile</button>
             </div>
         </motion.div>
     );
@@ -55,7 +55,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
             <div className="flex items-center mb-4">
                 <button onClick={() => setStep('edit')} className="mr-3 opacity-60 active:opacity-40"><Icon name="arrow_back" className="text-[20px]" /></button>
                 <h3 className="text-[18px] font-bold flex-1">AI Preview</h3>
-                <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400">+23 pts</span>
+                <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-green-400/15 text-green-400">+23 pts</span>
             </div>
             <div className={`p-4 rounded-2xl mb-4 ${inputBg} border border-cyan-500/20`}>
                 <p className={`text-[13px] leading-relaxed ${isLight ? 'text-gray-700' : 'text-gray-200'}`}>{bio}</p>
@@ -66,7 +66,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
             </div>
             <div className="flex gap-3">
                 <button onClick={() => setStep('edit')} className={`flex-1 py-3 rounded-2xl text-[14px] font-semibold ${inputBg} active:scale-95`}>Edit Again</button>
-                <button onClick={() => setStep('done')} className="flex-1 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[14px] font-bold active:scale-95">Save Profile</button>
+                <button onClick={() => setStep('done')} className="flex-1 py-3 rounded-2xl bg-gradient-to-r from-cyan-400/50 to-blue-500 text-white text-[14px] font-bold active:scale-95">Save Profile</button>
             </div>
         </motion.div>
     );
@@ -74,7 +74,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-cyan-500/20' : isLight ? 'bg-cyan-100' : 'bg-cyan-500/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-cyan-500/20' : isLight ? 'bg-cyan-400/15' : 'bg-cyan-500/15'}`}>
                     <Icon name="edit_document" className="text-[18px] text-cyan-400" />
                 </div>
                 <div>
@@ -107,7 +107,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
                 </div>
             </div>
             <button onClick={runAI} disabled={aiOptimizing}
-                className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white ${aiOptimizing ? 'opacity-70' : ''}`}>
+                className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400/50 to-blue-500 text-white ${aiOptimizing ? 'opacity-70' : ''}`}>
                 {aiOptimizing ? (<><motion.span animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}><Icon name="autorenew" className="text-[18px]" /></motion.span> AI Optimising…</>) : (<><Icon name="auto_awesome" className="text-[18px]" />Improve with AI</>)}
             </button>
         </motion.div>
@@ -123,7 +123,7 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
         Mon: [], Tue: [], Wed: ['Eve'], Thu: [], Fri: ['Eve'], Sat: ['All Day'], Sun: ['All Day']
     });
     const slots = ['Morning', 'Afternoon', 'Eve', 'All Day'];
-    const slotColors: Record<string, string> = { Morning: 'bg-amber-500', Afternoon: 'bg-sky-500', Eve: 'bg-violet-500', 'All Day': 'bg-emerald-500' };
+    const slotColors: Record<string, string> = { Morning: 'bg-amber-600', Afternoon: 'bg-blue-500', Eve: 'bg-violet-500', 'All Day': 'bg-green-600' };
 
     const toggle = (day: string, slot: string) => {
         setAvailability(prev => {
@@ -134,20 +134,20 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
 
     if (saved) return (
         <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6 text-center">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center mb-4">
-                <Icon name="event_available" className="text-5xl text-orange-400" />
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#ff8c42]/20 to-[#d97706]/20 flex items-center justify-center mb-4">
+                <Icon name="event_available" className="text-5xl text-[#ffb07a]" />
             </div>
             <h3 className="text-xl font-bold mb-1">Availability Saved!</h3>
             <p className={`text-[13px] mb-6 ${isLight ? 'text-gray-500' : 'text-white/50'}`}>Employers can now see when you&apos;re free — 3 new matches incoming!</p>
-            <button onClick={onClose} className="px-6 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-[14px] active:scale-95">Done</button>
+            <button onClick={onClose} className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#ff8c42] to-[#d97706] text-white font-bold text-[14px] active:scale-95">Done</button>
         </motion.div>
     );
 
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-4">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-orange-500/20' : isLight ? 'bg-orange-100' : 'bg-orange-500/15'}`}>
-                    <Icon name="schedule" className="text-[18px] text-orange-400" />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-[#ff8c42]/20' : isLight ? 'bg-[#ff8c42]/10' : 'bg-[#ff8c42]/15'}`}>
+                    <Icon name="schedule" className="text-[18px] text-[#ffb07a]" />
                 </div>
                 <div>
                     <h3 className="text-[18px] font-bold">Manage Shifts</h3>
@@ -177,7 +177,7 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
                     </div>
                 ))}
             </div>
-            <button onClick={() => setSaved(true)} className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-orange-500 to-amber-500 text-white`}>
+            <button onClick={() => setSaved(true)} className={`w-full py-4 rounded-2xl text-[15px] font-bold active:scale-95 transition-transform bg-gradient-to-r from-[#ff8c42] to-[#d97706] text-white`}>
                 Save Availability
             </button>
         </motion.div>
@@ -190,7 +190,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
     const stats = [
         { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', color: 'text-cyan-400', bg: 'bg-cyan-500/15' },
         { label: 'Applications', value: '7', change: '+3', icon: 'send', color: 'text-blue-400', bg: 'bg-blue-500/15' },
-        { label: 'Interviews', value: '2', change: '↑ new', icon: 'record_voice_over', color: 'text-emerald-400', bg: 'bg-emerald-500/15' },
+        { label: 'Interviews', value: '2', change: '↑ new', icon: 'record_voice_over', color: 'text-green-400', bg: 'bg-green-400/15' },
         { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: 'text-purple-400', bg: 'bg-purple-500/15' },
     ];
     const barData = [25, 50, 40, 66, 80, 72, 90];
@@ -203,8 +203,8 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-emerald-500/20' : isLight ? 'bg-emerald-100' : 'bg-emerald-500/15'}`}>
-                    <Icon name="insights" className="text-[18px] text-emerald-400" />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-green-400/20' : isLight ? 'bg-green-600/10' : 'bg-green-400/15'}`}>
+                    <Icon name="insights" className="text-[18px] text-green-400" />
                 </div>
                 <div>
                     <h3 className="text-[18px] font-bold">Your Analytics</h3>
@@ -221,7 +221,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                         <p className="text-[24px] font-black leading-none mb-1">{s.value}</p>
                         <div className="flex items-center justify-between">
                             <p className={`text-[11px] ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{s.label}</p>
-                            <span className={`text-[10px] font-bold ${isLight ? 'text-emerald-600' : 'text-emerald-400'}`}>{s.change}</span>
+                            <span className={`text-[10px] font-bold ${isLight ? 'text-green-600' : 'text-green-400'}`}>{s.change}</span>
                         </div>
                     </motion.div>
                 ))}
@@ -233,13 +233,13 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                     {barData.map((v, i) => (
                         <div key={i} className="flex-1 flex flex-col items-center gap-1">
                             <motion.div initial={{ height: 0 }} animate={{ height: `${v}%` }} transition={{ delay: i * 0.06, type: 'spring', stiffness: 400, damping: 28 }}
-                                className={`w-full rounded-t-lg ${i === 6 ? 'bg-emerald-500' : isColorful ? 'bg-fuchsia-500/40' : 'bg-emerald-500/35'}`}
+                                className={`w-full rounded-t-lg ${i === 6 ? 'bg-green-600' : isColorful ? 'bg-fuchsia-500/40' : 'bg-green-400/35'}`}
                                 style={{ minHeight: '4px' }} />
                         </div>
                     ))}
                 </div>
                 <div className="flex gap-1.5 mt-1.5">
-                    {barLabels.map((l, i) => <div key={i} className="flex-1 text-center"><span className={`text-[10px] ${i === 6 ? 'text-emerald-400 font-bold' : 'opacity-30'}`}>{l}</span></div>)}
+                    {barLabels.map((l, i) => <div key={i} className="flex-1 text-center"><span className={`text-[10px] ${i === 6 ? 'text-green-400 font-bold' : 'opacity-30'}`}>{l}</span></div>)}
                 </div>
             </div>
             {/* Badges */}
@@ -247,7 +247,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
                 <p className="text-[12px] font-bold uppercase tracking-wide opacity-50 mb-3">Achievements</p>
                 <div className="flex gap-2">
                     {badges.map((b, i) => (
-                        <div key={i} className={`flex-1 flex flex-col items-center p-3 rounded-2xl text-center ${b.earned ? (isColorful ? 'bg-fuchsia-500/15 border border-fuchsia-500/20' : isLight ? 'bg-amber-50 border border-amber-100' : 'bg-amber-500/10 border border-amber-500/20') : `${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.03]'} opacity-40`}`}>
+                        <div key={i} className={`flex-1 flex flex-col items-center p-3 rounded-2xl text-center ${b.earned ? (isColorful ? 'bg-fuchsia-500/15 border border-fuchsia-500/20' : isLight ? 'bg-amber-600/5 border border-amber-600/10' : 'bg-amber-600/10 border border-amber-600/20') : `${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.03]'} opacity-40`}`}>
                             <Icon name={b.icon} className={`text-[22px] mb-1 ${b.earned ? 'text-amber-400' : 'opacity-30'}`} />
                             <span className="text-[10px] font-semibold leading-tight">{b.label}</span>
                         </div>
@@ -281,8 +281,8 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             icon: 'description',
             label: 'Update CV',
             desc: 'Improve profile',
-            gradient: 'from-cyan-500 to-blue-500',
-            bg: isColorful ? 'from-cyan-500/25 to-blue-500/25' : isLight ? 'from-cyan-500/15 to-blue-500/15' : 'from-cyan-500/20 to-blue-500/20',
+            gradient: 'from-cyan-400/50 to-blue-500',
+            bg: isColorful ? 'from-cyan-400/50/25 to-blue-500/25' : isLight ? 'from-cyan-400/50/15 to-blue-500/15' : 'from-cyan-400/50/20 to-blue-500/20',
             iconColor: 'text-cyan-400',
             glow: isColorful ? 'shadow-cyan-500/20' : '',
         },
@@ -291,20 +291,20 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             icon: 'event',
             label: 'Availability',
             desc: 'Manage shifts',
-            gradient: 'from-orange-500 to-amber-500',
-            bg: isColorful ? 'from-orange-500/25 to-amber-500/25' : isLight ? 'from-orange-500/15 to-amber-500/15' : 'from-orange-500/20 to-amber-500/20',
-            iconColor: 'text-orange-400',
-            glow: isColorful ? 'shadow-orange-500/20' : '',
+            gradient: 'from-[#ff8c42] to-[#d97706]',
+            bg: isColorful ? 'from-[#ff8c42]/25 to-[#d97706]/25' : isLight ? 'from-[#ff8c42]/15 to-[#d97706]/15' : 'from-[#ff8c42]/20 to-[#d97706]/20',
+            iconColor: 'text-[#ffb07a]',
+            glow: isColorful ? 'shadow-[#ff8c42]/20' : '',
         },
         {
             key: 'analytics' as ActiveSheet,
             icon: 'insights',
             label: 'Analytics',
             desc: 'View my stats',
-            gradient: 'from-emerald-500 to-teal-500',
-            bg: isColorful ? 'from-emerald-500/25 to-teal-500/25' : isLight ? 'from-emerald-500/15 to-teal-500/15' : 'from-emerald-500/20 to-teal-500/20',
-            iconColor: 'text-emerald-400',
-            glow: isColorful ? 'shadow-emerald-500/20' : '',
+            gradient: 'from-green-600 to-cyan-500',
+            bg: isColorful ? 'from-green-600/25 to-cyan-500/25' : isLight ? 'from-green-600/15 to-cyan-500/15' : 'from-green-600/20 to-cyan-500/20',
+            iconColor: 'text-green-400',
+            glow: isColorful ? 'shadow-green-600/20' : '',
         },
         {
             key: null as ActiveSheet,
@@ -326,7 +326,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
 
             {/* ─── Profile Score Hero ─── */}
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-                className={`relative overflow-hidden rounded-[28px] p-5 mb-5 ${isColorful ? 'bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-fuchsia-500/20 border border-cyan-500/20' : isLight ? 'bg-gradient-to-br from-cyan-50 to-blue-50 border border-cyan-100' : 'bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-purple-500/10 border border-cyan-500/15'}`}
+                className={`relative overflow-hidden rounded-[28px] p-5 mb-5 ${isColorful ? 'bg-gradient-to-br from-cyan-400/50/20 via-blue-500/15 to-fuchsia-500/20 border border-cyan-500/20' : isLight ? 'bg-gradient-to-br from-cyan-400/5 to-blue-50 border border-cyan-400/15' : 'bg-gradient-to-br from-cyan-400/50/15 via-blue-500/10 to-purple-500/10 border border-cyan-500/15'}`}
             >
                 {/* Decorative blobs */}
                 <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-cyan-400/20 to-transparent rounded-bl-full pointer-events-none" />
@@ -359,7 +359,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                         <h2 className={`text-[17px] font-extrabold tracking-tight mb-0.5 ${isLight ? 'text-gray-800' : 'text-white'}`}>Hi, Ali! 👋</h2>
                         <p className={`text-[13px] mb-3 leading-tight ${isLight ? 'text-gray-500' : 'text-white/50'}`}>Profile at <strong className="text-cyan-400">{profileScore}%</strong> — boost it to get <em>3× more matches</em></p>
                         <button onClick={() => setActiveSheet('cv')}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[12px] font-bold active:scale-95 transition-transform shadow-md shadow-cyan-500/20">
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400/50 to-blue-500 text-white text-[12px] font-bold active:scale-95 transition-transform shadow-md shadow-cyan-500/20">
                             <Icon name="auto_awesome" className="text-[13px]" />Improve Profile
                         </button>
                     </div>
@@ -376,7 +376,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     <h2 className={`text-[12px] font-bold tracking-widest uppercase ${isLight ? 'text-gray-400' : 'text-white/40'}`}>Daily Match Briefing</h2>
                 </div>
                 <p className="text-[16px] leading-relaxed font-semibold mb-3">
-                    🎯 You have <span className={isColorful ? 'text-fuchsia-300' : isLight ? 'text-cyan-600' : 'text-cyan-300'}>3 new local jobs</span> matching your availability, and your resume score improved by <span className="text-emerald-400">+15%</span> after AI tweaks.
+                    🎯 You have <span className={isColorful ? 'text-fuchsia-300' : isLight ? 'text-cyan-500' : 'text-cyan-400'}>3 new local jobs</span> matching your availability, and your resume score improved by <span className="text-green-400">+15%</span> after AI tweaks.
                 </p>
                 <div className="flex gap-2">
                     <button onClick={() => onNav?.('jobs')} className={`flex items-center px-3 py-1.5 rounded-full text-[12px] font-semibold ${isLight ? 'bg-black/5 text-gray-700' : 'bg-white/8 text-white/70'} active:scale-95`}>
@@ -417,12 +417,12 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     { company: 'Bookstore Downtown', role: 'Retail Assistant', time: '3d ago', status: 'Viewed', icon: 'menu_book', color: 'blue', match: 75, wage: '€12.5/h' }
                 ].map((item, i) => {
                     const statusStyle = item.status === 'Interview'
-                        ? 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'
+                        ? 'bg-green-400/15 text-green-600 border-green-600/30'
                         : item.status === 'Applied'
                         ? (isLight ? 'bg-blue-500/10 text-blue-600 border-blue-200' : 'bg-blue-500/15 text-blue-400 border-blue-500/30')
                         : (isLight ? 'bg-gray-100 text-gray-500 border-gray-200' : 'bg-white/8 text-white/50 border-white/10');
-                    const matchColor = item.match >= 90 ? 'text-emerald-500' : item.match >= 80 ? 'text-blue-400' : 'text-amber-400';
-                    const matchBg = item.match >= 90 ? 'bg-emerald-500/10' : item.match >= 80 ? 'bg-blue-500/10' : 'bg-amber-500/10';
+                    const matchColor = item.match >= 90 ? 'text-green-600' : item.match >= 80 ? 'text-blue-400' : 'text-amber-400';
+                    const matchBg = item.match >= 90 ? 'bg-green-400/10' : item.match >= 80 ? 'bg-blue-500/10' : 'bg-amber-600/10';
                     const iconBg = theme.dashboard.teamColorMap[item.color] ?? 'bg-gray-500/15 text-gray-400';
                     return (
                         <motion.div key={i} variants={itemVariants} onClick={() => onNav?.('jobs')}

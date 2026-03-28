@@ -46,7 +46,7 @@ const THEME_OPTIONS = [
         label: 'Light',
         desc: 'Clean & minimal',
         icon: 'light_mode',
-        swatchBg: 'bg-[#F7F7FA]',
+        swatchBg: 'bg-[#f3f4f6]',
         swatchText: 'text-gray-900',
     },
     {
@@ -376,10 +376,10 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 initial={{ opacity: 0, y: 12 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: config.aiTips.length * 0.1 + 0.25 }}
-                                className={`mt-4 p-3.5 rounded-2xl flex items-center gap-3 ${selectedTheme === 'light' ? 'bg-amber-50 border border-amber-100' : 'bg-amber-500/10 border border-amber-500/20'}`}
+                                className={`mt-4 p-3.5 rounded-2xl flex items-center gap-3 ${selectedTheme === 'light' ? 'bg-amber-600/5 border border-amber-600/10' : 'bg-amber-600/50/10 border border-amber-600/20'}`}
                             >
-                                <Icon name="lightbulb" className="text-[20px] text-amber-500 shrink-0" />
-                                <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-amber-800' : 'text-amber-300'}`}>
+                                <Icon name="lightbulb" className="text-[20px] text-amber-600 shrink-0" />
+                                <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-[#d96820]' : 'text-amber-400'}`}>
                                     Tap the <span className="font-bold">✦ sparkle button</span> in the top-right corner anytime to open Copilot.
                                 </p>
                             </motion.div>

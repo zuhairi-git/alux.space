@@ -60,7 +60,7 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                             {/* Ambient Background Glows */}
                             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                                 <div className={`absolute top-0 -left-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-purple-600' : 'bg-indigo-600'}`}></div>
-                                <div className={`absolute bottom-0 -right-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-emerald-600' : 'bg-teal-600'}`}></div>
+                                <div className={`absolute bottom-0 -right-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-green-600' : 'bg-cyan-500'}`}></div>
                             </div>
 
                             <WorkflowDiagram theme={theme} />
@@ -150,10 +150,10 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* 3. Features */}
             <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 relative z-10">
-                <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bgLight="bg-teal-50" bgDark="bg-teal-900/30" colorLight="bg-teal-100 text-teal-600" colorDark="bg-teal-800 text-teal-200" />
-                <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bgLight="bg-emerald-50" bgDark="bg-emerald-900/30" colorLight="bg-emerald-100 text-emerald-600" colorDark="bg-emerald-800 text-emerald-200" />
-                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-orange-50" bgDark="bg-orange-900/30" colorLight="bg-orange-100 text-orange-600" colorDark="bg-orange-800 text-orange-200" />
-                <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bgLight="bg-rose-50" bgDark="bg-rose-900/30" colorLight="bg-rose-100 text-rose-600" colorDark="bg-rose-800 text-rose-200" />
+                <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bgLight="bg-cyan-400/5" bgDark="bg-cyan-500/30" colorLight="bg-cyan-400/10 text-cyan-500" colorDark="bg-cyan-500 text-cyan-400" />
+                <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bgLight="bg-green-600/5" bgDark="bg-green-600/30" colorLight="bg-green-600/10 text-green-600" colorDark="bg-green-600 text-green-400" />
+                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-[#ff8c42]/5" bgDark="bg-[#ff8c42]/30" colorLight="bg-[#ff8c42]/10 text-[#ff8c42]" colorDark="bg-[#d96820] text-[#ffb07a]" />
+                <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bgLight="bg-pink-400/5" bgDark="bg-pink-500/30" colorLight="bg-pink-400/10 text-pink-500" colorDark="bg-pink-500 text-pink-400" />
             </div>
 
             {/* Connector 3 */}

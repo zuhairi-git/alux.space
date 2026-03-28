@@ -20,7 +20,7 @@ interface ViewProps {
 
 export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     const promptCardClass = isColorful
-        ? 'rounded-2xl bg-purple-500/10 text-white backdrop-blur-xl border border-orange-500/20'
+        ? 'rounded-2xl bg-purple-500/10 text-white backdrop-blur-xl border border-[#ff8c42]/20'
         : theme.copilot.promptCard(isLight);
     const promptIconColor = isColorful ? 'text-fuchsia-400' : theme.copilot.promptIconColor;
     const inputBarClass = isColorful ? 'bg-[#06040c]/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
@@ -28,7 +28,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
         ? 'bg-white/10 text-white border border-white/10'
         : theme.copilot.inputField(isLight);
     const bb = isColorful
-        ? 'bg-[#130a02]/60 backdrop-blur-[20px] border border-orange-500/20 text-white rounded-2xl'
+        ? 'bg-[#130a02]/60 backdrop-blur-[20px] border border-[#ff8c42]/20 text-white rounded-2xl'
         : theme.copilot.botBubble(isLight);
     const defaultMessages: Message[] = [
         {

@@ -435,13 +435,13 @@ export default function PromptPage() {
     if (isSelected) {
       switch (theme) {
         case 'light':
-          return `${baseClasses} bg-gradient-to-r from-green-500/20 to-teal-500/20 text-green-700 font-medium border-l-2 border-green-500`;
+          return `${baseClasses} bg-gradient-to-r from-green-600/20 to-cyan-500/20 text-green-700 font-medium border-l-2 border-green-500`;
         case 'dark':
-          return `${baseClasses} bg-gradient-to-r from-green-500/30 to-teal-500/30 text-white font-medium`;
+          return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
         case 'colorful':
-          return `${baseClasses} bg-gradient-to-r from-emerald-500/30 to-teal-500/30 text-white font-medium`;
+          return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
         default:
-          return `${baseClasses} bg-gradient-to-r from-green-500/30 to-teal-500/30 text-white font-medium`;
+          return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
       }
     } else {
       switch (theme) {
@@ -770,8 +770,8 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const getStatusColor = (status: string) => {
     return status === 'Done' 
-      ? 'from-green-500 to-emerald-600' 
-      : 'from-red-500 to-rose-600';
+      ? 'from-green-600 to-green-600' 
+      : 'from-red-600 to-pink-500';
   };
   return (
     <div
@@ -861,8 +861,8 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
 
   const getStatusColor = (status: string) => {
     return status === 'Done' 
-      ? 'from-green-500 to-emerald-600' 
-      : 'from-red-500 to-rose-600';
+      ? 'from-green-600 to-green-600' 
+      : 'from-red-600 to-pink-500';
   };
   return (
     <div

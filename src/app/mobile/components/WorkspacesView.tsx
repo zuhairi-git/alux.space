@@ -44,7 +44,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
                                 </div>
                                 <div className="flex items-center space-x-2.5">
                                     <Sparkline data={w.data} color={w.activity > 70 ? ws.sparklineHigh : ws.sparklineMid} width={44} height={18} />
-                                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${w.status === 'Active' ? ws.statusActive : w.status === 'Review' ? 'bg-amber-500/15 text-amber-400' : 'bg-gray-500/15 text-gray-400'}`}>{w.status}</span>
+                                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${w.status === 'Active' ? ws.statusActive : w.status === 'Review' ? 'bg-amber-400/15 text-amber-400' : 'bg-gray-500/15 text-gray-400'}`}>{w.status}</span>
                                 </div>
                             </motion.button>
                         ))}

@@ -42,7 +42,7 @@ export default function TimelineCard({
   // Get card styles based on theme with improved visibility for dark theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-orange-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-[#ff8c42]/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
     } else if (theme === 'dark') {
       // Lightened the dark theme colors slightly to make animations more visible
       return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.35)]';
@@ -55,16 +55,16 @@ export default function TimelineCard({
   const getIconBgStyles = () => {
     if (theme === 'colorful') {
       return isHovered 
-        ? 'bg-gradient-to-br from-orange-400/70 to-violet-700/70 backdrop-blur-lg backdrop-filter border border-orange-300/70'
-        : 'bg-gradient-to-br from-orange-500/30 to-violet-900/30 backdrop-blur-lg backdrop-filter border border-orange-400/30';
+        ? 'bg-gradient-to-br from-[#ffb07a]/70 to-purple-700/70 backdrop-blur-lg backdrop-filter border border-[#ffb07a]/70'
+        : 'bg-gradient-to-br from-[#ff8c42]/30 to-purple-800/30 backdrop-blur-lg backdrop-filter border border-[#ffb07a]/30';
     } else if (theme === 'dark') {
       return isHovered
         ? 'bg-gradient-to-br from-blue-400/60 to-indigo-700/60 backdrop-blur-lg backdrop-filter border border-blue-300/70'
         : 'bg-gradient-to-br from-blue-500/20 to-indigo-900/20 backdrop-blur-lg backdrop-filter border border-blue-400/30';
     } else {
       return isHovered
-        ? 'bg-gradient-to-br from-blue-400/50 to-sky-400/50 backdrop-blur-lg backdrop-filter border border-blue-400/70'
-        : 'bg-gradient-to-br from-blue-500/15 to-sky-500/15 backdrop-blur-lg backdrop-filter border border-blue-300/30';
+        ? 'bg-gradient-to-br from-blue-400/50 to-blue-400/50 backdrop-blur-lg backdrop-filter border border-blue-400/70'
+        : 'bg-gradient-to-br from-blue-500/15 to-blue-500/15 backdrop-blur-lg backdrop-filter border border-blue-300/30';
     }
   };
   // Get icon color styles based on theme (no glow effect)
@@ -86,9 +86,9 @@ export default function TimelineCard({
   // Get title style based on theme - with dimensional aesthetics (no glow)
   const getTitleStyles = () => {
     if (theme === 'colorful') {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-violet-200 to-sky-200 group-hover:bg-gradient-to-r group-hover:from-sky-200 group-hover:via-amber-200 group-hover:to-violet-200 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-violet-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-amber-200 group-hover:to-violet-200 transition-all duration-700';
     } else if (theme === 'dark') {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-sky-200 group-hover:bg-gradient-to-r group-hover:from-sky-200 group-hover:via-blue-200 group-hover:to-indigo-200 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-blue-200 group-hover:to-indigo-200 transition-all duration-700';
     } else {
       return 'text-transparent bg-clip-text bg-gradient-to-r from-slate-700 via-blue-600 to-indigo-700 group-hover:bg-gradient-to-r group-hover:from-indigo-700 group-hover:via-blue-600 group-hover:to-slate-700 transition-all duration-700';
     }
@@ -124,7 +124,7 @@ export default function TimelineCard({
       // Use brighter colors for dark theme particles for better visibility
       return 'bg-gradient-to-br from-blue-300 to-indigo-500';
     } else {
-      return 'bg-gradient-to-br from-blue-400 to-sky-600';
+      return 'bg-gradient-to-br from-blue-400 to-blue-600';
     }
   };
 

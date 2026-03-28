@@ -61,7 +61,7 @@ const Card: React.FC<CardProps> = ({
         case 'primary': hoverColorShadow = 'hover:shadow-[var(--primary)]/20'; break;
         case 'secondary': hoverColorShadow = 'hover:shadow-cyan-500/20'; break;
         case 'tertiary': hoverColorShadow = 'hover:shadow-violet-500/20'; break;
-        case 'muted': hoverColorShadow = 'hover:shadow-sky-400/20'; break;
+        case 'muted': hoverColorShadow = 'hover:shadow-blue-400/20'; break;
         default: hoverColorShadow = 'hover:shadow-[var(--primary)]/20'; break;
       }
       // Colorful theme: No base shadow, only hover shadow

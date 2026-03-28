@@ -46,31 +46,31 @@ export default function HealthcarePrioritizationClient() {
         borderColor: isColorful ? 'border-purple-500/30' : ''
       },
       green: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-400/30' : '',
+        cardBg: isColorful ? 'bg-gradient-to-br from-green-600/20 to-green-600/20 border border-green-400/30' : '',
         iconText: isColorful ? 'text-green-400' : isLight ? 'text-green-600' : 'text-green-400',
         titleText: isColorful ? 'text-green-300' : '',
-        iconBg: isColorful ? 'bg-green-500/20' : isLight ? 'bg-green-100' : 'bg-green-900/40',
+        iconBg: isColorful ? 'bg-green-600/20' : isLight ? 'bg-green-600/10' : 'bg-green-600/40',
         takeawayBg: isColorful ? 'bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-400/30' : '',
-        takeawayIconBg: isColorful ? 'bg-green-500/20 text-green-300' : '',
-        borderColor: isColorful ? 'border-green-500/30' : ''
+        takeawayIconBg: isColorful ? 'bg-green-600/20 text-green-300' : '',
+        borderColor: isColorful ? 'border-green-600/30' : ''
       },
       orange: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-400/30' : '',
-        iconText: isColorful ? 'text-orange-400' : isLight ? 'text-orange-600' : 'text-orange-400',
-        titleText: isColorful ? 'text-orange-300' : '',
-        iconBg: isColorful ? 'bg-orange-500/20' : isLight ? 'bg-orange-100' : 'bg-orange-900/40',
-        takeawayBg: isColorful ? 'bg-gradient-to-br from-orange-900/30 to-orange-800/30 border border-orange-400/30' : '',
-        takeawayIconBg: isColorful ? 'bg-orange-500/20 text-orange-300' : '',
-        borderColor: isColorful ? 'border-orange-500/30' : ''
+        cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : '',
+        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-[#ff8c42]' : 'text-[#ffb07a]',
+        titleText: isColorful ? 'text-[#ffb07a]' : '',
+        iconBg: isColorful ? 'bg-[#ff8c42]/50/20' : isLight ? 'bg-[#ff8c42]/10' : 'bg-[#ff8c42]/40',
+        takeawayBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/30 to-[#d96820]/30 border border-[#ffb07a]/30' : '',
+        takeawayIconBg: isColorful ? 'bg-[#ff8c42]/50/20 text-[#ffb07a]' : '',
+        borderColor: isColorful ? 'border-[#ff8c42]/30' : ''
       },
       red: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border border-red-400/30' : '',
+        cardBg: isColorful ? 'bg-gradient-to-br from-red-600/20 to-red-600/20 border border-red-400/30' : '',
         iconText: isColorful ? 'text-red-400' : isLight ? 'text-red-600' : 'text-red-400',
         titleText: isColorful ? 'text-red-300' : '',
-        iconBg: isColorful ? 'bg-red-500/20' : isLight ? 'bg-red-100' : 'bg-red-900/40',
+        iconBg: isColorful ? 'bg-red-600/20' : isLight ? 'bg-red-600/10' : 'bg-red-600/40',
         takeawayBg: isColorful ? 'bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-400/30' : '',
-        takeawayIconBg: isColorful ? 'bg-red-500/20 text-red-300' : '',
-        borderColor: isColorful ? 'border-red-500/30' : ''
+        takeawayIconBg: isColorful ? 'bg-red-600/20 text-red-300' : '',
+        borderColor: isColorful ? 'border-red-600/30' : ''
       },
       yellow: {
         cardBg: isColorful ? 'bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-400/30' : '',
@@ -82,13 +82,13 @@ export default function HealthcarePrioritizationClient() {
         borderColor: isColorful ? 'border-yellow-500/30' : ''
       },
       teal: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-teal-500/20 to-teal-600/20 border border-teal-400/30' : '',
-        iconText: isColorful ? 'text-teal-400' : isLight ? 'text-teal-600' : 'text-teal-400',
-        titleText: isColorful ? 'text-teal-300' : '',
-        iconBg: isColorful ? 'bg-teal-500/20' : isLight ? 'bg-teal-100' : 'bg-teal-900/40',
-        takeawayBg: isColorful ? 'bg-gradient-to-br from-teal-900/30 to-teal-800/30 border border-teal-400/30' : '',
-        takeawayIconBg: isColorful ? 'bg-teal-500/20 text-teal-300' : '',
-        borderColor: isColorful ? 'border-teal-500/30' : ''
+        cardBg: isColorful ? 'bg-gradient-to-br from-cyan-500/20 to-cyan-500/20 border border-cyan-400/30' : '',
+        iconText: isColorful ? 'text-cyan-400' : isLight ? 'text-cyan-500' : 'text-cyan-400',
+        titleText: isColorful ? 'text-cyan-400' : '',
+        iconBg: isColorful ? 'bg-cyan-400/50/20' : isLight ? 'bg-cyan-400/10' : 'bg-cyan-500/40',
+        takeawayBg: isColorful ? 'bg-gradient-to-br from-cyan-500/30 to-cyan-500/30 border border-cyan-400/30' : '',
+        takeawayIconBg: isColorful ? 'bg-cyan-400/50/20 text-cyan-400' : '',
+        borderColor: isColorful ? 'border-cyan-500/30' : ''
       },
       gray: {
         cardBg: isColorful ? 'bg-gradient-to-br from-gray-500/20 to-gray-600/20 border border-gray-400/30' : '',
@@ -319,7 +319,7 @@ export default function HealthcarePrioritizationClient() {
                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                   {[
                     { title: content.contextTitle, desc: content.contextDesc, colorful: 'bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white', extra: null },
-                    { title: content.conflictTitle, desc: content.conflictDesc, colorful: 'bg-gradient-to-br from-red-900/20 to-orange-900/20 border border-red-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white', extra: 'conflict' },
+                    { title: content.conflictTitle, desc: content.conflictDesc, colorful: 'bg-gradient-to-br from-red-900/20 to-[#ff8c42]/20 border border-red-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white', extra: 'conflict' },
                   ].map((card, i) => (
                     <motion.div
                       key={i}
@@ -333,7 +333,7 @@ export default function HealthcarePrioritizationClient() {
                       <h3 className={`text-xl font-semibold mb-3 ${card.titleColor}`}>{card.title}</h3>
                       {card.extra === 'conflict' && (
                         <div className="flex items-center gap-4 mb-4">
-                          <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-red-100 text-red-700' : 'bg-red-900/40 text-red-300'}`}>QA Team</div>
+                          <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-red-600/10 text-red-700' : 'bg-red-600/40 text-red-300'}`}>QA Team</div>
                           <span className="font-bold text-xl">VS</span>
                           <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-blue-100 text-blue-700' : 'bg-blue-900/40 text-blue-300'}`}>CTO</div>
                         </div>
@@ -351,7 +351,7 @@ export default function HealthcarePrioritizationClient() {
                   transition={{ ...t.enterSlow, delay: delaySeconds.md }}
                 >
                   <h2 className={`text-xl font-semibold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400'
+                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.prioritiesTitle}</h2>
 
@@ -408,14 +408,14 @@ export default function HealthcarePrioritizationClient() {
                       // A bit hacky but works given the consistent naming in getColorStyles if we look at iconText 'text-red-400' etc.
                       // Better to hardcode the border-l class based on color prop since dynamic literals don't work well
                       const borderLeftClass = {
-                        red: 'border-l-red-500',
-                        orange: 'border-l-orange-500',
+                        red: 'border-l-red-600',
+                        orange: 'border-l-[#ff8c42]',
                         yellow: 'border-l-yellow-500',
                         blue: 'border-l-blue-500',
                         gray: 'border-l-gray-500',
                         purple: 'border-l-purple-500',
-                        green: 'border-l-green-500',
-                        teal: 'border-l-teal-500'
+                        green: 'border-l-green-600',
+                        teal: 'border-l-cyan-500'
                       }[item.color] || 'border-l-gray-500';
 
                       return (
@@ -450,7 +450,7 @@ export default function HealthcarePrioritizationClient() {
                             <div className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${item.status === 'Rejected'
                                 ? (isLight ? 'bg-gray-100 text-gray-600' : 'bg-gray-700 text-gray-300')
                                 : item.status === 'Backlog'
-                                  ? (isLight ? 'bg-amber-50 text-amber-600' : 'bg-amber-900/20 text-amber-300')
+                                  ? (isLight ? 'bg-amber-600/5 text-amber-600' : 'bg-amber-600/20 text-amber-400')
                                   : (isLight ? 'bg-blue-50 text-blue-600' : 'bg-blue-900/20 text-blue-300')
                               }`}>
                               {item.status}
@@ -500,7 +500,7 @@ export default function HealthcarePrioritizationClient() {
 
                   <div className="grid md:grid-cols-2 gap-8 mb-10">
                     {[
-                      { icon: 'handshake', color: isColorful ? 'bg-green-500/15 text-green-400' : isLight ? 'bg-green-50 text-green-500' : 'bg-green-900/30 text-green-400', title: content.resolutionStep1, desc: content.resolutionStep1Desc },
+                      { icon: 'handshake', color: isColorful ? 'bg-green-600/50/15 text-green-400' : isLight ? 'bg-green-600/5 text-green-600' : 'bg-green-900/30 text-green-400', title: content.resolutionStep1, desc: content.resolutionStep1Desc },
                       { icon: 'lightbulb', color: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400', title: content.resolutionStep2, desc: content.resolutionStep2Desc },
                     ].map((step, i) => (
                       <motion.div
@@ -573,24 +573,24 @@ export default function HealthcarePrioritizationClient() {
                       transition={t.enter}
                       whileHover={{ y: -4 }}
                       className={`p-6 rounded-2xl relative border transition-shadow duration-300 ${isColorful
-                        ? 'bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border-indigo-400/20'
+                        ? 'bg-gradient-to-br from-indigo-600/20 to-purple-900/20 border-indigo-400/20'
                         : isLight ? 'bg-white shadow-sm hover:shadow-md border-gray-100' : 'bg-gray-800/60 border-gray-700/30'
                       }`}>
-                      <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 text-xl ${isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-50 text-indigo-600' : 'bg-indigo-900/40 text-indigo-300'
+                      <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 text-xl ${isColorful ? 'bg-indigo-400/50/20 text-indigo-400' : isLight ? 'bg-indigo-400/5 text-indigo-600' : 'bg-indigo-600/40 text-indigo-400'
                         }`}>
                         <span className="material-symbols">fact_check</span>
                       </div>
 
                       <div className="flex items-center gap-2 mb-2">
-                        <h4 className={`text-lg font-semibold ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                        <h4 className={`text-lg font-semibold ${isColorful ? 'text-indigo-400' : isLight ? 'text-gray-900' : 'text-white'}`}>
                           {content.preventionStep1}
                         </h4>
                         <div className="relative group/info">
-                          <span className={`material-symbols text-lg cursor-help transition-colors ${isColorful ? 'text-indigo-400 hover:text-indigo-300' : isLight ? 'text-indigo-400 hover:text-indigo-600' : 'text-indigo-400 hover:text-indigo-300'
+                          <span className={`material-symbols text-lg cursor-help transition-colors ${isColorful ? 'text-indigo-400 hover:text-indigo-400' : isLight ? 'text-indigo-400 hover:text-indigo-600' : 'text-indigo-400 hover:text-indigo-400'
                             }`}>info</span>
 
                           {/* Tooltip */}
-                          <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 p-3 rounded-lg text-xs shadow-xl opacity-0 group-hover/info:opacity-100 transition-opacity pointer-events-none z-50 ${isColorful ? 'bg-indigo-950 text-indigo-100 border border-indigo-500/30' : isLight ? 'bg-gray-900 text-white' : 'bg-gray-700 text-gray-100'
+                          <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 p-3 rounded-lg text-xs shadow-xl opacity-0 group-hover/info:opacity-100 transition-opacity pointer-events-none z-50 ${isColorful ? 'bg-indigo-600 text-indigo-400 border border-indigo-500/30' : isLight ? 'bg-gray-900 text-white' : 'bg-gray-700 text-gray-100'
                             }`}>
                             {content.shiftLeftInfo}
                             {/* Arrow */}
@@ -611,7 +611,7 @@ export default function HealthcarePrioritizationClient() {
                       transition={{ ...t.enter, delay: stagger.relaxed }}
                       whileHover={{ y: -4 }}
                       className={`p-6 rounded-2xl relative border transition-shadow duration-300 ${isColorful
-                        ? 'bg-gradient-to-br from-pink-900/20 to-rose-900/20 border-pink-400/20'
+                        ? 'bg-gradient-to-br from-pink-500/20 to-pink-500/20 border-pink-400/20'
                         : isLight ? 'bg-white shadow-sm hover:shadow-md border-gray-100' : 'bg-gray-800/60 border-gray-700/30'
                       }`}>
                       <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 text-xl ${isColorful ? 'bg-pink-500/20 text-pink-300' : isLight ? 'bg-pink-50 text-pink-600' : 'bg-pink-900/40 text-pink-300'
@@ -677,7 +677,7 @@ export default function HealthcarePrioritizationClient() {
                   >
                     <span className="material-symbols text-xl">star</span>
                   </motion.div>
-                  <h2 className={`text-xl font-semibold mb-3 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-teal-300' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.summaryTitle}</h2>
+                  <h2 className={`text-xl font-semibold mb-3 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-cyan-400' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.summaryTitle}</h2>
                   <p className={`text-lg leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>{content.summaryDesc}</p>
                 </motion.div>
               </CaseStudySection>

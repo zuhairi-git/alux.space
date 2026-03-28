@@ -10,7 +10,7 @@ const TitleSlide = () => (
   <div data-slide="1" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-y-auto overflow-x-hidden px-4 sm:px-8 py-32 sm:py-40">
     {/* Floating Orbs */}
     <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-200/40 to-purple-200/40 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-teal-200/40 to-cyan-200/40 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-cyan-400/20 to-cyan-200/40 rounded-full blur-3xl"></div>
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-100/20 to-pink-100/20 rounded-full blur-3xl"></div>
     
     <div className="text-center space-y-6 sm:space-y-8 lg:space-y-12 px-4 sm:px-8 lg:px-16 z-10 max-w-7xl mx-auto">
@@ -39,8 +39,8 @@ const TitleSlide = () => (
         <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
         <div className="w-24 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
         <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-        <div className="w-24 h-0.5 bg-gradient-to-r from-purple-500 to-teal-500 rounded-full"></div>
-        <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
+        <div className="w-24 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
+        <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
       </div>
       
       {/* Description Box */}
@@ -56,7 +56,7 @@ const AgendaSlide = () => (
   <div data-slide="2" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
     <div className="absolute top-32 right-20 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-blue-200/30 to-teal-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-blue-200/30 to-cyan-400/15 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Header */}
@@ -71,8 +71,8 @@ const AgendaSlide = () => (
       {/* Agenda Items */}
       <div className="space-y-4 sm:space-y-6 lg:space-y-8">
         {[
-          { number: '01', title: 'Backlog Prioritization', desc: 'Strategic approach to healthcare SaaS priorities', color: 'from-teal-500 to-cyan-600', icon: '/dt-icons/list-timeline.svg' },
-          { number: '02', title: 'QA vs. CTO Conflict', desc: 'Facilitating release readiness alignment', color: 'from-pink-500 to-rose-600', icon: '/dt-icons/users.svg' },
+          { number: '01', title: 'Backlog Prioritization', desc: 'Strategic approach to healthcare SaaS priorities', color: 'from-cyan-500 to-cyan-600', icon: '/dt-icons/list-timeline.svg' },
+          { number: '02', title: 'QA vs. CTO Conflict', desc: 'Facilitating release readiness alignment', color: 'from-pink-500 to-pink-500', icon: '/dt-icons/users.svg' },
           { number: '03', title: 'How to Avoid Conflicts', desc: 'Proactive prevention strategies', color: 'from-blue-500 to-cyan-600', icon: '/dt-icons/shield-check.svg' },
           { number: '04', title: 'Reflection', desc: 'Key insights and learnings', color: 'from-purple-500 to-pink-600', icon: '/dt-icons/lightbulb.svg' }
         ].map((item, idx) => (
@@ -101,7 +101,7 @@ const AgendaSlide = () => (
 );
 
 const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: () => void }) => (
-  <div data-slide="3" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-teal-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
+  <div data-slide="3" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
     {/* Floating Orbs */}
     <div className="absolute bottom-32 left-32 w-96 h-96 bg-gradient-to-tr from-blue-200/30 to-cyan-200/30 rounded-full blur-3xl"></div>
     
@@ -145,8 +145,8 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-3">
               {[
                 { icon: '/dt-icons/shield-heart.svg', label: 'Patient Safety', priority: 'Critical', badgeBg: 'bg-red-600' },
-                { icon: '/dt-icons/hdd.svg', label: 'Data Reliability', priority: 'High', badgeBg: 'bg-orange-600' },
-                { icon: '/dt-icons/wand-magic-sparkles.svg', label: 'Usability', priority: 'High', badgeBg: 'bg-orange-600' },
+                { icon: '/dt-icons/hdd.svg', label: 'Data Reliability', priority: 'High', badgeBg: 'bg-[#ff8c42]' },
+                { icon: '/dt-icons/wand-magic-sparkles.svg', label: 'Usability', priority: 'High', badgeBg: 'bg-[#ff8c42]' },
                 { icon: '/dt-icons/rocket.svg', label: 'Scalability', priority: 'Medium', badgeBg: 'bg-amber-600' }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2">
@@ -265,12 +265,12 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
     },
     orange: { 
       label: 'High',
-      iconBg: 'bg-orange-200',
-      priorityBadgeBg: 'from-orange-600 to-orange-700',
-      badge: 'bg-orange-100 text-orange-800 border-orange-300',
+      iconBg: 'bg-[#ffb07a]/20',
+      priorityBadgeBg: 'from-[#ff8c42] to-[#d96820]',
+      badge: 'bg-[#ff8c42]/10 text-[#d96820] border-[#ffb07a]',
       priorityIcon: '/dt-icons/arrow-up.svg',
       type: 'Story',
-      glowColor: 'from-orange-300/50 to-orange-400/50'
+      glowColor: 'from-[#ffb07a]/50 to-[#ffb07a]/50'
     },
     yellow: { 
       label: 'Medium',
@@ -348,7 +348,7 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
             Sprint {Math.ceil(rank / 2)}
           </span>
           {rank === 1 && (
-            <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">
+            <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-pink-400/5 text-pink-500 border border-pink-400/20">
               Critical
             </span>
           )}
@@ -362,7 +362,7 @@ const ConflictScenarioSlide = () => (
   <div data-slide="5" className="flex flex-col h-full bg-gradient-to-br from-slate-50 via-white to-pink-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
     <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-red-200/20 to-orange-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-red-200/20 to-[#ffb07a]/10 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10">
       {/* Title */}
@@ -461,9 +461,9 @@ const ConflictScenarioSlide = () => (
 );
 
 const ResolutionSlide = () => (
-  <div data-slide="6" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-teal-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
+  <div data-slide="6" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
     {/* Animated Background Elements */}
-    <div className="absolute top-20 right-20 w-[500px] h-[500px] bg-gradient-to-br from-teal-200/30 via-cyan-200/30 to-blue-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 right-20 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400/15 via-cyan-200/30 to-blue-200/30 rounded-full blur-3xl"></div>
     <div className="absolute bottom-20 left-20 w-[400px] h-[400px] bg-gradient-to-tr from-purple-200/20 via-pink-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10 relative">
@@ -481,17 +481,17 @@ const ResolutionSlide = () => (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 lg:gap-8 mb-8 sm:mb-9 lg:mb-10">
         {/* Left Column - Alignment */}
         <div className="group relative" style={{ animation: 'slideIn 0.5s ease-out 0.1s both' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-200/50 to-cyan-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-teal-200/50 hover:border-teal-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/25 to-cyan-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-cyan-400/25 hover:border-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
                 <Image src="/dt-icons/bullseye.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
               </div>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Alignment Reached</h3>
             </div>
             <div className="space-y-3 sm:space-y-4">
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                Regulatory compliance and product safety are <span className="font-bold text-teal-700 px-2 py-1 bg-teal-100 rounded">non-negotiable</span> priorities.
+                Regulatory compliance and product safety are <span className="font-bold text-cyan-500 px-2 py-1 bg-cyan-400/10 rounded">non-negotiable</span> priorities.
               </p>
               <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed">
                 We also acknowledged the critical importance of maintaining delivery predictability and development momentum.
@@ -515,7 +515,7 @@ const ResolutionSlide = () => (
                 This approach maintains <span className="font-bold text-blue-700">delivery discipline</span> while ensuring quality and regulatory standards are respected.
               </p>
               <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed">
-                It fosters <span className="font-bold text-teal-700 px-2 py-1 bg-teal-100 rounded">collaboration rather than compromise</span>.
+                It fosters <span className="font-bold text-cyan-500 px-2 py-1 bg-cyan-400/10 rounded">collaboration rather than compromise</span>.
               </p>
             </div>
           </div>
@@ -524,8 +524,8 @@ const ResolutionSlide = () => (
 
       {/* Agreed Actions - Full Width */}
       <div className="group relative" style={{ animation: 'slideIn 0.5s ease-out 0.3s both' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-200/50 to-blue-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-        <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/50 hover:border-teal-300/70 shadow-xl hover:shadow-2xl transition-all duration-300">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/25 to-blue-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+        <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/50 hover:border-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
           <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-7 lg:mb-8">
             <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
               <Image src="/dt-icons/list-check.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
@@ -538,20 +538,20 @@ const ResolutionSlide = () => (
               {
                 num: 1,
                 text: "QA will identify the minimum critical documentation required for release compliance.",
-                color: "from-teal-500 to-teal-600",
-                bgColor: "from-teal-50 to-teal-100/50"
+                color: "from-cyan-500 to-cyan-500",
+                bgColor: "from-cyan-400/5 to-cyan-400/10"
               },
               {
                 num: 2,
                 text: "Development continues in parallel to avoid blocking non-risk areas.",
-                color: "from-teal-500 to-teal-600",
-                bgColor: "from-teal-50 to-teal-100/50"
+                color: "from-cyan-500 to-cyan-500",
+                bgColor: "from-cyan-400/5 to-cyan-400/10"
               },
               {
                 num: 3,
                 text: "A final readiness checkpoint will occur before release for QA sign-off on key verification items.",
-                color: "from-teal-500 to-teal-600",
-                bgColor: "from-teal-50 to-teal-100/50"
+                color: "from-cyan-500 to-cyan-500",
+                bgColor: "from-cyan-400/5 to-cyan-400/10"
               }
             ].map((action) => (
               <div 
@@ -559,7 +559,7 @@ const ResolutionSlide = () => (
                 className="group/card relative"
                 style={{ animation: `slideIn 0.5s ease-out ${0.4 + action.num * 0.1}s both` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-200/30 to-cyan-200/30 rounded-2xl blur group-hover/card:blur-md transition-all"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 to-cyan-200/30 rounded-2xl blur group-hover/card:blur-md transition-all"></div>
                 <div className={`relative bg-gradient-to-br ${action.bgColor} backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 border border-white shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col`}>
                   <div className={`w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-gradient-to-br ${action.color} text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-lg sm:text-xl mb-3 sm:mb-4 shadow-md`}>
                     {action.num}
@@ -737,9 +737,9 @@ const ReflectionSlide = () => (
           <p className="text-slate-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Balance speed with compliance</p>
         </div>
 
-        <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-teal-50 to-teal-100/50 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.4s both' }}>
+        <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-cyan-400/5 to-cyan-400/10 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.4s both' }}>
           <div className="flex justify-center mb-4 sm:mb-5 lg:mb-6">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
               <Image src="/dt-icons/handshake.svg" alt="" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
             </div>
           </div>
@@ -749,7 +749,7 @@ const ReflectionSlide = () => (
       </div>
 
       {/* Bottom Summary */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-white" style={{ animation: 'slideIn 0.5s ease-out 0.5s both' }}>
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-white" style={{ animation: 'slideIn 0.5s ease-out 0.5s both' }}>
         <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 mb-3 sm:mb-4">
           <Image src="/dt-icons/star.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
           <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold">Product Owner Excellence</h4>

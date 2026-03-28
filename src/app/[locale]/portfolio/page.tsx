@@ -137,7 +137,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Suunnittelujärjestelmä, jossa tekoäly on osa perustaa, ei jälkiajatus.'
       },
       link: `/${locale}/portfolio/axiom`,
-      gradient: 'from-emerald-500 to-teal-400',
+      gradient: 'from-green-600 to-cyan-400',
       status: {
         en: 'In Progress',
         fi: 'Kehitteillä',
@@ -163,7 +163,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Mitä jos kehotteiden kirjoittaminen on seuraavan vuosikymmenen tärkein UX-taito?'
       },
       link: `/${locale}/portfolio/prompt-as-ux`,
-      gradient: 'from-pink-500 to-rose-400',
+      gradient: 'from-pink-500 to-pink-400',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -189,7 +189,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Luottamuksen, läpinäkyvyyden ja hallinnan suunnittelu agentti-tekoälytyönkuluille.'
       },
       link: `/${locale}/portfolio/delegate`,
-      gradient: 'from-amber-500 to-orange-400',
+      gradient: 'from-amber-600 to-[#ffb07a]',
       status: {
         en: 'In Progress',
         fi: 'Kehitteillä',
@@ -215,7 +215,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia — käyttäjäpersoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkäaikaiseen pysyvyyteen.'
       },
       link: `/${locale}/portfolio/game-strategy`,
-      gradient: 'from-red-500 to-orange-400',
+      gradient: 'from-red-600 to-[#ffb07a]',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -293,7 +293,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Teknisen velan, käyttäjätarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympäristössä—strateginen lähestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
       },
       link: `/${locale}/portfolio/healthcare-prioritization`,
-      gradient: 'from-blue-500 to-teal-400',
+      gradient: 'from-blue-500 to-cyan-400',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',

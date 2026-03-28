@@ -29,7 +29,7 @@ function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number;
 }
 
 // Pulse dot for live indicators
-function PulseDot({ color = 'bg-emerald-400' }: { color?: string }) {
+function PulseDot({ color = 'bg-green-400' }: { color?: string }) {
     return (
         <span className="relative flex h-2.5 w-2.5">
             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${color} opacity-75`} />
@@ -339,7 +339,7 @@ export default function MarketIntelligenceClient() {
                         <>
                             <div className="absolute top-1/4 -left-40 w-96 h-96 bg-indigo-600/8 rounded-full blur-[120px]" />
                             <div className="absolute bottom-1/3 -right-40 w-96 h-96 bg-purple-600/8 rounded-full blur-[120px]" />
-                            <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-cyan-600/5 rounded-full blur-[100px]" />
+                            <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-cyan-500/5 rounded-full blur-[100px]" />
                         </>
                     )}
                 </div>
@@ -394,10 +394,10 @@ export default function MarketIntelligenceClient() {
                             transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.8, delay: delaySeconds.lg }}
                         >
                             {[
-                                { icon: 'query_stats', value: 98, suffix: '%', label: locale === 'fi' ? 'Lähdetarkkuus' : 'Source Accuracy', color: 'from-emerald-500 to-teal-500', dotColor: 'bg-emerald-400' },
+                                { icon: 'query_stats', value: 98, suffix: '%', label: locale === 'fi' ? 'Lähdetarkkuus' : 'Source Accuracy', color: 'from-green-600 to-cyan-500', dotColor: 'bg-green-400' },
                                 { icon: 'speed', value: 200, suffix: 'ms', label: locale === 'fi' ? 'Keskimääräinen viive' : 'Avg Response', color: 'from-blue-500 to-indigo-500', dotColor: 'bg-blue-400' },
                                 { icon: 'trending_up', value: 15, suffix: 'K+', label: locale === 'fi' ? 'Päivittäiset kyselyt' : 'Daily Queries', color: 'from-purple-500 to-pink-500', dotColor: 'bg-purple-400' },
-                                { icon: 'shield', value: 99, suffix: '.9%', label: locale === 'fi' ? 'Käytettävyys' : 'Uptime', color: 'from-orange-500 to-amber-500', dotColor: 'bg-orange-400' },
+                                { icon: 'shield', value: 99, suffix: '.9%', label: locale === 'fi' ? 'Käytettävyys' : 'Uptime', color: 'from-[#ff8c42] to-amber-600', dotColor: 'bg-[#ffb07a]' },
                             ].map((metric, i) => (
                                 <motion.div
                                     key={i}
@@ -451,8 +451,8 @@ export default function MarketIntelligenceClient() {
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                                     {[
-                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-500 to-orange-500', iconBg: isColorful ? 'bg-red-500/15' : isLight ? 'bg-red-50' : 'bg-red-900/30', iconColor: 'text-red-500', borderColor: isColorful ? 'border-red-500/20' : isLight ? 'border-red-100' : 'border-red-900/40' },
-                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-emerald-500 to-teal-500', iconBg: isColorful ? 'bg-emerald-500/15' : isLight ? 'bg-emerald-50' : 'bg-emerald-900/30', iconColor: 'text-emerald-500', borderColor: isColorful ? 'border-emerald-500/20' : isLight ? 'border-emerald-100' : 'border-emerald-900/40' },
+                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-600 to-[#ff8c42]', iconBg: isColorful ? 'bg-red-600/15' : isLight ? 'bg-red-50' : 'bg-red-900/30', iconColor: 'text-red-600', borderColor: isColorful ? 'border-red-600/20' : isLight ? 'border-red-100' : 'border-red-900/40' },
+                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15' : isLight ? 'bg-green-600/5' : 'bg-green-600/30', iconColor: 'text-green-600', borderColor: isColorful ? 'border-green-600/20' : isLight ? 'border-green-600/10' : 'border-green-600/40' },
                                     ].map((card, i) => (
                                         <motion.div
                                             key={i}
@@ -507,8 +507,8 @@ export default function MarketIntelligenceClient() {
                                             <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${isColorful
                                                 ? 'bg-blue-500/10 text-blue-400 group-hover:bg-blue-500/20 group-hover:text-blue-300'
                                                 : isLight
-                                                    ? 'bg-indigo-50 text-indigo-400 group-hover:bg-indigo-100 group-hover:text-indigo-500'
-                                                    : 'bg-indigo-900/30 text-indigo-400 group-hover:bg-indigo-900/50 group-hover:text-indigo-300'
+                                                    ? 'bg-indigo-400/5 text-indigo-400 group-hover:bg-indigo-400/10 group-hover:text-indigo-500'
+                                                    : 'bg-indigo-600/30 text-indigo-400 group-hover:bg-indigo-600/50 group-hover:text-indigo-400'
                                                 }`}>
                                                 <span className="material-symbols text-lg">{objective.icon}</span>
                                             </div>
@@ -522,20 +522,20 @@ export default function MarketIntelligenceClient() {
                         {/* ═══ SECTION 2: STRATEGIC RATIONALE ═══ */}
                         <CaseStudySection title={content.rationaleTitle} icon="lightbulb" number={2} accent="purple">
                             <CaseStudyItem>
-                                <p className={`text-lg max-w-3xl mx-auto mb-12 ${isColorful ? 'text-purple-200/80' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                                <p className={`text-lg max-w-3xl mx-auto mb-12 ${isColorful ? 'text-purple-400/80' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>
                                     {content.rationaleSubtitle}
                                 </p>
 
                                 <div className="space-y-0 relative">
                                     {/* Vertical connector line */}
-                                    <div className={`absolute left-[22px] top-8 bottom-8 w-[2px] ${isColorful ? 'bg-gradient-to-b from-blue-500/30 via-purple-500/20 to-rose-500/30' : isLight ? 'bg-gradient-to-b from-gray-200 via-gray-200 to-gray-200' : 'bg-gradient-to-b from-gray-700/50 via-gray-800/50 to-gray-700/50'}`} />
+                                    <div className={`absolute left-[22px] top-8 bottom-8 w-[2px] ${isColorful ? 'bg-gradient-to-b from-blue-500/30 via-purple-500/20 to-pink-500/30' : isLight ? 'bg-gradient-to-b from-gray-200 via-gray-200 to-gray-200' : 'bg-gradient-to-b from-gray-700/50 via-gray-800/50 to-gray-700/50'}`} />
 
                                     {[
                                         { index: "01", title: content.rationaleItem1Title, desc: content.rationaleItem1Desc, color: "from-blue-500 to-cyan-500", dotColor: "bg-blue-500" },
-                                        { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc, color: "from-emerald-500 to-teal-500", dotColor: "bg-emerald-500" },
-                                        { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc, color: "from-orange-500 to-amber-500", dotColor: "bg-orange-500" },
-                                        { index: "04", title: content.rationaleItem4Title, desc: content.rationaleItem4Desc, color: "from-purple-500 to-violet-500", dotColor: "bg-purple-500" },
-                                        { index: "05", title: content.rationaleItem5Title, desc: content.rationaleItem5Desc, color: "from-rose-500 to-pink-500", dotColor: "bg-rose-500" }
+                                        { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc, color: "from-green-600 to-cyan-500", dotColor: "bg-green-600" },
+                                        { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc, color: "from-[#ff8c42] to-amber-600", dotColor: "bg-[#ff8c42]" },
+                                        { index: "04", title: content.rationaleItem4Title, desc: content.rationaleItem4Desc, color: "from-purple-500 to-violet-500", dotColor: "bg-purple-400/50" },
+                                        { index: "05", title: content.rationaleItem5Title, desc: content.rationaleItem5Desc, color: "from-pink-500 to-pink-500", dotColor: "bg-pink-500" }
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
@@ -565,7 +565,7 @@ export default function MarketIntelligenceClient() {
                         {/* ═══ SECTION 3: INTERACTIVE PROTOTYPES ═══ */}
                         <CaseStudySection title={locale === 'fi' ? 'Interaktiiviset prototyypit' : 'Interactive Prototypes'} icon="smartphone" number={3} accent="indigo" id="interactive-prototypes">
                             <CaseStudyItem>
-                                <p className={`text-lg max-w-2xl mx-auto mb-10 ${isColorful ? 'text-indigo-200' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+                                <p className={`text-lg max-w-2xl mx-auto mb-10 ${isColorful ? 'text-indigo-400' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
                                     {locale === 'fi' ? 'Tutustu tekoälypohjaisen käyttöliittymän interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.' : 'Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.'}
                                 </p>
 
@@ -579,17 +579,17 @@ export default function MarketIntelligenceClient() {
                                             gradient: "from-blue-500/20 to-indigo-500/20",
                                             borderColor: "border-blue-500/30",
                                             iconBg: "bg-blue-500/10 text-blue-400",
-                                            buttonBg: "bg-blue-600 hover:bg-blue-700",
+                                            buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                                         },
                                         {
                                             title: locale === 'fi' ? 'Android-prototyyppi' : 'Android Prototype',
                                             description: locale === 'fi' ? 'Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.' : 'Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.',
                                             href: "/mobile/market-intelligence/android",
                                             icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                                            gradient: "from-green-500/20 to-emerald-500/20",
-                                            borderColor: "border-green-500/30",
-                                            iconBg: "bg-green-500/10 text-green-400",
-                                            buttonBg: "bg-green-600 hover:bg-green-700",
+                                            gradient: "from-blue-500/20 to-purple-500/20",
+                                            borderColor: "border-blue-500/30",
+                                            iconBg: "bg-blue-500/10 text-blue-400",
+                                            buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                                         },
                                     ].map((proto, index) => (
                                         <motion.a
@@ -609,7 +609,7 @@ export default function MarketIntelligenceClient() {
                                             </div>
                                             <h3 className={`text-lg font-semibold mb-2 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{proto.title}</h3>
                                             <p className={`text-sm mb-6 flex-grow ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{proto.description}</p>
-                                            <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                                            <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
                                                 <span>{locale === 'fi' ? 'Avaa prototyyppi' : 'Open Prototype'}</span>
                                                 <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                                             </div>
@@ -631,7 +631,7 @@ export default function MarketIntelligenceClient() {
                                         <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400' : isLight ? 'text-gray-900' : 'text-white'}`}>
                                             {content.appFunctionalityTitle}
                                         </h3>
-                                        <p className={`text-lg max-w-2xl mx-auto ${isColorful ? 'text-indigo-200/80' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+                                        <p className={`text-lg max-w-2xl mx-auto ${isColorful ? 'text-indigo-400/80' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
                                             {content.appFunctionalityDesc}
                                         </p>
                                     </div>
@@ -642,8 +642,8 @@ export default function MarketIntelligenceClient() {
                                         <div className="lg:col-span-2 flex flex-col gap-3">
                                             {[
                                                 { icon: "search_insights", title: content.feat1Title, desc: content.feat1Desc, gradient: 'from-blue-500 to-indigo-500' },
-                                                { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-emerald-500 to-teal-500' },
-                                                { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-orange-500 to-amber-500' },
+                                                { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-green-600 to-cyan-500' },
+                                                { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-[#ff8c42] to-amber-600' },
                                                 { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc, gradient: 'from-purple-500 to-pink-500' }
                                             ].map((feature, index) => (
                                                 <motion.button
@@ -658,7 +658,7 @@ export default function MarketIntelligenceClient() {
                                                         ? isColorful
                                                             ? 'bg-white/[0.06] border border-white/[0.12] shadow-lg'
                                                             : isLight
-                                                                ? 'bg-white border border-indigo-200 shadow-md'
+                                                                ? 'bg-white border border-indigo-400/20 shadow-md'
                                                                 : 'bg-white/[0.05] border border-gray-700 shadow-lg'
                                                         : isColorful
                                                             ? 'bg-transparent border border-transparent hover:bg-white/[0.03] hover:border-white/[0.06]'
@@ -676,7 +676,7 @@ export default function MarketIntelligenceClient() {
                                                         />
                                                     )}
                                                     <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${activeFeature === index
-                                                        ? isColorful ? 'bg-indigo-500/20 text-indigo-300' : isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-900/50 text-indigo-400'
+                                                        ? isColorful ? 'bg-indigo-400/50/20 text-indigo-400' : isLight ? 'bg-indigo-400/10 text-indigo-500' : 'bg-indigo-600/50 text-indigo-400'
                                                         : isColorful ? 'bg-white/[0.05] text-gray-400' : isLight ? 'bg-gray-100 text-gray-400' : 'bg-gray-800/60 text-gray-500'
                                                         }`}>
                                                         <span className="material-symbols text-lg">{feature.icon}</span>
@@ -704,9 +704,9 @@ export default function MarketIntelligenceClient() {
                                                 {(() => {
                                                     const features = [
                                                         { icon: "search_insights", title: content.feat1Title, desc: content.feat1Desc, gradient: 'from-blue-500 to-indigo-500', iconBg: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400' },
-                                                        { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-emerald-500 to-teal-500', iconBg: isColorful ? 'bg-emerald-500/15 text-emerald-400' : isLight ? 'bg-emerald-50 text-emerald-500' : 'bg-emerald-900/30 text-emerald-400' },
-                                                        { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-orange-500 to-amber-500', iconBg: isColorful ? 'bg-orange-500/15 text-orange-400' : isLight ? 'bg-orange-50 text-orange-500' : 'bg-orange-900/30 text-orange-400' },
-                                                        { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc, gradient: 'from-purple-500 to-pink-500', iconBg: isColorful ? 'bg-purple-500/15 text-purple-400' : isLight ? 'bg-purple-50 text-purple-500' : 'bg-purple-900/30 text-purple-400' },
+                                                        { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-green-600' : 'bg-green-600/30 text-green-400' },
+                                                        { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-[#ff8c42] to-amber-600', iconBg: isColorful ? 'bg-[#ff8c42]/15 text-[#ffb07a]' : isLight ? 'bg-[#ff8c42]/5 text-[#ff8c42]' : 'bg-[#ff8c42]/30 text-[#ffb07a]' },
+                                                        { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc, gradient: 'from-purple-500 to-pink-500', iconBg: isColorful ? 'bg-purple-400/50/15 text-purple-400' : isLight ? 'bg-purple-400/5 text-purple-500' : 'bg-purple-600/30 text-purple-400' },
                                                     ];
                                                     const f = features[activeFeature];
                                                     return (
@@ -755,7 +755,7 @@ export default function MarketIntelligenceClient() {
                                 <div className="grid md:grid-cols-2 gap-6 mb-14">
                                     {[
                                         { icon: 'phone_iphone', title: content.iosPatternsTitle, desc: content.iosPatternsDesc, gradient: 'from-gray-500 to-gray-600', iconBg: isColorful ? 'bg-gray-700/50 text-gray-300' : isLight ? 'bg-gray-100 text-gray-500' : 'bg-gray-800 text-gray-400', borderColor: isColorful ? 'border-white/[0.08]' : isLight ? 'border-gray-200' : 'border-gray-800' },
-                                        { icon: 'android', title: content.androidPatternsTitle, desc: content.androidPatternsDesc, gradient: 'from-green-500 to-emerald-500', iconBg: isColorful ? 'bg-green-900/30 text-green-400' : isLight ? 'bg-green-50 text-green-500' : 'bg-green-900/30 text-green-400', borderColor: isColorful ? 'border-green-500/15' : isLight ? 'border-green-100' : 'border-green-900/30' },
+                                        { icon: 'android', title: content.androidPatternsTitle, desc: content.androidPatternsDesc, gradient: 'from-green-600 to-green-600', iconBg: isColorful ? 'bg-green-900/30 text-green-400' : isLight ? 'bg-green-50 text-green-500' : 'bg-green-900/30 text-green-400', borderColor: isColorful ? 'border-green-500/15' : isLight ? 'border-green-100' : 'border-green-900/30' },
                                     ].map((platform, i) => (
                                         <motion.div
                                             key={i}
@@ -784,17 +784,17 @@ export default function MarketIntelligenceClient() {
 
                             <CaseStudyItem>
                                 <h2 className={`text-xl font-semibold mb-8 ${isColorful
-                                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400'
+                                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400'
                                     : isLight ? 'text-gray-900' : 'text-white'
                                     }`}>{content.coreFlowsTitle}</h2>
 
                                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
                                     {[
                                         { icon: "forum", text: content.flow1, gradient: 'from-blue-500 to-indigo-500' },
-                                        { icon: "summarize", text: content.flow2, gradient: 'from-emerald-500 to-teal-500' },
+                                        { icon: "summarize", text: content.flow2, gradient: 'from-green-600 to-cyan-500' },
                                         { icon: "rss_feed", text: content.flow3, gradient: 'from-purple-500 to-pink-500' },
-                                        { icon: "dashboard", text: content.flow4, gradient: 'from-orange-500 to-amber-500' },
-                                        { icon: "notifications_active", text: content.flow5, gradient: 'from-rose-500 to-red-500' }
+                                        { icon: "dashboard", text: content.flow4, gradient: 'from-[#ff8c42] to-amber-600' },
+                                        { icon: "notifications_active", text: content.flow5, gradient: 'from-pink-500 to-red-500' }
                                     ].map((flow, index) => (
                                         <motion.div
                                             key={index}
@@ -811,7 +811,7 @@ export default function MarketIntelligenceClient() {
                                                 }`}
                                         >
                                             <div className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r ${flow.gradient} opacity-0 group-hover:opacity-60 transition-opacity duration-300`} />
-                                            <div className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${isColorful ? 'bg-indigo-500/12 text-indigo-300 group-hover:bg-indigo-500/20' : isLight ? 'bg-indigo-50 text-indigo-500 group-hover:bg-indigo-100' : 'bg-indigo-900/30 text-indigo-400 group-hover:bg-indigo-900/50'}`}>
+                                            <div className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${isColorful ? 'bg-indigo-400/50/12 text-indigo-400 group-hover:bg-indigo-400/50/20' : isLight ? 'bg-indigo-400/5 text-indigo-500 group-hover:bg-indigo-400/10' : 'bg-indigo-600/30 text-indigo-400 group-hover:bg-indigo-600/50'}`}>
                                                 <span className="material-symbols text-base">{flow.icon}</span>
                                             </div>
                                             <p className={`font-medium text-sm ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{flow.text}</p>
@@ -827,9 +827,9 @@ export default function MarketIntelligenceClient() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {[
                                         { icon: "construction", title: content.frameworkTitle, desc: content.frameworkDesc, gradient: 'from-blue-500 to-cyan-500', iconBg: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400' },
-                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-orange-500 to-amber-500', iconBg: isColorful ? 'bg-orange-500/15 text-orange-400' : isLight ? 'bg-orange-50 text-orange-500' : 'bg-orange-900/30 text-orange-400' },
-                                        { icon: "psychology", title: content.aiPatternsTitle, desc: content.aiPatternsDesc, gradient: 'from-purple-500 to-violet-500', iconBg: isColorful ? 'bg-purple-500/15 text-purple-400' : isLight ? 'bg-purple-50 text-purple-500' : 'bg-purple-900/30 text-purple-400' },
-                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-emerald-500 to-teal-500', iconBg: isColorful ? 'bg-emerald-500/15 text-emerald-400' : isLight ? 'bg-emerald-50 text-emerald-500' : 'bg-emerald-900/30 text-emerald-400' },
+                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-[#ff8c42] to-amber-600', iconBg: isColorful ? 'bg-[#ff8c42]/15 text-[#ffb07a]' : isLight ? 'bg-[#ff8c42]/5 text-[#ff8c42]' : 'bg-[#ff8c42]/30 text-[#ffb07a]' },
+                                        { icon: "psychology", title: content.aiPatternsTitle, desc: content.aiPatternsDesc, gradient: 'from-purple-500 to-violet-500', iconBg: isColorful ? 'bg-purple-400/50/15 text-purple-400' : isLight ? 'bg-purple-400/5 text-purple-500' : 'bg-purple-600/30 text-purple-400' },
+                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-green-600' : 'bg-green-600/30 text-green-400' },
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
@@ -863,9 +863,9 @@ export default function MarketIntelligenceClient() {
                                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
                                     {[
                                         { icon: "ads_click", text: content.captureMetric, value: 78, gradient: 'from-blue-500 to-indigo-500', barColor: 'bg-gradient-to-r from-blue-500 to-indigo-500' },
-                                        { icon: "check_circle", text: content.trustMetric, value: 92, gradient: 'from-emerald-500 to-teal-500', barColor: 'bg-gradient-to-r from-emerald-500 to-teal-500' },
+                                        { icon: "check_circle", text: content.trustMetric, value: 92, gradient: 'from-green-600 to-cyan-500', barColor: 'bg-gradient-to-r from-green-600 to-cyan-500' },
                                         { icon: "monitoring", text: content.engagementMetric, value: 65, gradient: 'from-purple-500 to-pink-500', barColor: 'bg-gradient-to-r from-purple-500 to-pink-500' },
-                                        { icon: "event", text: content.retentionMetric, value: 85, gradient: 'from-orange-500 to-amber-500', barColor: 'bg-gradient-to-r from-orange-500 to-amber-500' },
+                                        { icon: "event", text: content.retentionMetric, value: 85, gradient: 'from-[#ff8c42] to-amber-600', barColor: 'bg-gradient-to-r from-[#ff8c42] to-amber-600' },
                                     ].map((metric, index) => (
                                         <motion.div
                                             key={index}
@@ -882,7 +882,7 @@ export default function MarketIntelligenceClient() {
                                                 }`}
                                         >
                                             <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${metric.gradient} opacity-50 group-hover:opacity-100 transition-opacity`} />
-                                            <span className={`material-symbols text-2xl mb-4 block ${isColorful ? 'text-teal-400/80' : isLight ? 'text-teal-500' : 'text-teal-400/80'}`}>{metric.icon}</span>
+                                            <span className={`material-symbols text-2xl mb-4 block ${isColorful ? 'text-cyan-400/80' : isLight ? 'text-cyan-500' : 'text-cyan-400/80'}`}>{metric.icon}</span>
                                             <p className={`font-semibold mb-4 text-sm ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{metric.text}</p>
 
                                             {/* Animated progress bar */}

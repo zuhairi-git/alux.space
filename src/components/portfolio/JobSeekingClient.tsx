@@ -534,13 +534,13 @@ export default function JobSeekingClient() {
                           </div>
 
                           <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-500 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
+                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-amber-600 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
                             <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="border-l-2 border-emerald-500/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
+                            <div className="border-l-2 border-green-600/30 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-green-600 mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{need}</li>
@@ -548,8 +548,8 @@ export default function JobSeekingClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-rose-500/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-rose-500 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
+                            <div className="border-l-2 border-pink-500/30 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-pink-500 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.painPoints.map((point, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{point}</li>
@@ -651,17 +651,17 @@ export default function JobSeekingClient() {
                     gradient: "from-blue-500/20 to-indigo-500/20",
                     borderColor: "border-blue-500/30",
                     iconBg: "bg-blue-500/10 text-blue-400",
-                    buttonBg: "bg-blue-600 hover:bg-blue-700",
+                    buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                   {
                     title: content.androidPrototype,
                     description: content.androidPrototypeDesc,
                     href: "/mobile/jobseeking/android",
                     icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                    gradient: "from-green-500/20 to-emerald-500/20",
-                    borderColor: "border-green-500/30",
-                    iconBg: "bg-green-500/10 text-green-400",
-                    buttonBg: "bg-green-600 hover:bg-green-700",
+                    gradient: "from-blue-500/20 to-purple-500/20",
+                    borderColor: "border-blue-500/30",
+                    iconBg: "bg-blue-500/10 text-blue-400",
+                    buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                 ].map((proto, index) => (
                   <motion.a
@@ -680,7 +680,7 @@ export default function JobSeekingClient() {
                     </div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{proto.title}</h3>
                     <p className="text-opacity-80 text-sm mb-6 flex-grow">{proto.description}</p>
-                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
                       <span>{content.openPrototype}</span>
                       <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                     </div>

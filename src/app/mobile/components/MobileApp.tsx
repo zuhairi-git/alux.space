@@ -15,7 +15,7 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
     appName: 'Workflow Platform',
     tagline: 'Your AI-powered team collaboration hub — manage workspaces, projects, and insights all in one place.',
     appIcon: 'blur_on',
-    accentGradient: 'from-indigo-500 to-violet-600',
+    accentGradient: 'from-indigo-500 to-purple-600',
     aiTips: [
         {
             icon: 'query_stats',

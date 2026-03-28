@@ -106,10 +106,10 @@ export default function GameStrategyClient() {
   const getColorStyles = (color: string) => {
     const styles: Record<string, { cardBg: string; iconText: string; iconBg: string; borderColor: string }> = {
       purple: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-400/30' : isLight ? 'bg-purple-50 border border-purple-200' : 'bg-purple-900/20 border border-purple-500/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-400/30' : isLight ? 'bg-purple-400/5 border border-purple-400/20' : 'bg-purple-600/20 border border-purple-600/20',
         iconText: isColorful ? 'text-purple-400' : isLight ? 'text-purple-600' : 'text-purple-400',
-        iconBg: isColorful ? 'bg-purple-500/20' : isLight ? 'bg-purple-100' : 'bg-purple-900/40',
-        borderColor: isColorful ? 'border-purple-500/30' : isLight ? 'border-purple-200' : 'border-purple-500/20',
+        iconBg: isColorful ? 'bg-purple-400/50/20' : isLight ? 'bg-purple-400/10' : 'bg-purple-600/40',
+        borderColor: isColorful ? 'border-purple-500/30' : isLight ? 'border-purple-400/20' : 'border-purple-600/20',
       },
       blue: {
         cardBg: isColorful ? 'bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-400/30' : isLight ? 'bg-blue-50 border border-blue-200' : 'bg-blue-900/20 border border-blue-500/20',
@@ -118,22 +118,22 @@ export default function GameStrategyClient() {
         borderColor: isColorful ? 'border-blue-500/30' : isLight ? 'border-blue-200' : 'border-blue-500/20',
       },
       green: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-400/30' : isLight ? 'bg-green-50 border border-green-200' : 'bg-green-900/20 border border-green-500/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-green-600/20 to-green-600/20 border border-green-400/30' : isLight ? 'bg-green-600/5 border border-green-600/20' : 'bg-green-600/20 border border-green-600/20',
         iconText: isColorful ? 'text-green-400' : isLight ? 'text-green-600' : 'text-green-400',
-        iconBg: isColorful ? 'bg-green-500/20' : isLight ? 'bg-green-100' : 'bg-green-900/40',
-        borderColor: isColorful ? 'border-green-500/30' : isLight ? 'border-green-200' : 'border-green-500/20',
+        iconBg: isColorful ? 'bg-green-600/20' : isLight ? 'bg-green-600/10' : 'bg-green-600/40',
+        borderColor: isColorful ? 'border-green-600/30' : isLight ? 'border-green-600/20' : 'border-green-600/20',
       },
       orange: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-400/30' : isLight ? 'bg-orange-50 border border-orange-200' : 'bg-orange-900/20 border border-orange-500/20',
-        iconText: isColorful ? 'text-orange-400' : isLight ? 'text-orange-600' : 'text-orange-400',
-        iconBg: isColorful ? 'bg-orange-500/20' : isLight ? 'bg-orange-100' : 'bg-orange-900/40',
-        borderColor: isColorful ? 'border-orange-500/30' : isLight ? 'border-orange-200' : 'border-orange-500/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-[#ff8c42]/20 to-[#d96820]/20 border border-[#ffb07a]/30' : isLight ? 'bg-[#ff8c42]/5 border border-[#ff8c42]/20' : 'bg-[#ff8c42]/20 border border-[#ff8c42]/20',
+        iconText: isColorful ? 'text-[#ffb07a]' : isLight ? 'text-[#ff8c42]' : 'text-[#ffb07a]',
+        iconBg: isColorful ? 'bg-[#ff8c42]/50/20' : isLight ? 'bg-[#ff8c42]/10' : 'bg-[#ff8c42]/40',
+        borderColor: isColorful ? 'border-[#ff8c42]/30' : isLight ? 'border-[#ff8c42]/20' : 'border-[#ff8c42]/20',
       },
       teal: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-teal-500/20 to-teal-600/20 border border-teal-400/30' : isLight ? 'bg-teal-50 border border-teal-200' : 'bg-teal-900/20 border border-teal-500/20',
-        iconText: isColorful ? 'text-teal-400' : isLight ? 'text-teal-600' : 'text-teal-400',
-        iconBg: isColorful ? 'bg-teal-500/20' : isLight ? 'bg-teal-100' : 'bg-teal-900/40',
-        borderColor: isColorful ? 'border-teal-500/30' : isLight ? 'border-teal-200' : 'border-teal-500/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-cyan-500/20 to-cyan-500/20 border border-cyan-400/30' : isLight ? 'bg-cyan-400/5 border border-cyan-400/20' : 'bg-cyan-500/20 border border-cyan-500/20',
+        iconText: isColorful ? 'text-cyan-400' : isLight ? 'text-cyan-500' : 'text-cyan-400',
+        iconBg: isColorful ? 'bg-cyan-400/50/20' : isLight ? 'bg-cyan-400/10' : 'bg-cyan-500/40',
+        borderColor: isColorful ? 'border-cyan-500/30' : isLight ? 'border-cyan-400/20' : 'border-cyan-500/20',
       },
       pink: {
         cardBg: isColorful ? 'bg-gradient-to-br from-pink-500/20 to-pink-600/20 border border-pink-400/30' : isLight ? 'bg-pink-50 border border-pink-200' : 'bg-pink-900/20 border border-pink-500/20',
@@ -142,10 +142,10 @@ export default function GameStrategyClient() {
         borderColor: isColorful ? 'border-pink-500/30' : isLight ? 'border-pink-200' : 'border-pink-500/20',
       },
       red: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border border-red-400/30' : isLight ? 'bg-red-50 border border-red-200' : 'bg-red-900/20 border border-red-500/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-red-600/20 to-red-600/20 border border-red-400/30' : isLight ? 'bg-red-600/5 border border-red-600/20' : 'bg-red-600/20 border border-red-600/20',
         iconText: isColorful ? 'text-red-400' : isLight ? 'text-red-600' : 'text-red-400',
-        iconBg: isColorful ? 'bg-red-500/20' : isLight ? 'bg-red-100' : 'bg-red-900/40',
-        borderColor: isColorful ? 'border-red-500/30' : isLight ? 'border-red-200' : 'border-red-500/20',
+        iconBg: isColorful ? 'bg-red-600/20' : isLight ? 'bg-red-600/10' : 'bg-red-600/40',
+        borderColor: isColorful ? 'border-red-600/30' : isLight ? 'border-red-600/20' : 'border-red-600/20',
       },
       indigo: {
         cardBg: isColorful ? 'bg-gradient-to-br from-indigo-500/20 to-indigo-600/20 border border-indigo-400/30' : isLight ? 'bg-indigo-50 border border-indigo-200' : 'bg-indigo-900/20 border border-indigo-500/20',
@@ -665,17 +665,17 @@ export default function GameStrategyClient() {
                   {locale === 'fi' ? 'Tulojakauma (ennuste)' : 'Projected Revenue Split'}
                 </h5>
                 <div className="h-4 rounded-full overflow-hidden flex">
-                  <div className="bg-purple-500 h-full" style={{ width: '45%' }} title="Cosmetic Shop 45%" />
+                  <div className="bg-purple-400/50 h-full" style={{ width: '45%' }} title="Cosmetic Shop 45%" />
                   <div className="bg-blue-500 h-full" style={{ width: '30%' }} title="Battle Pass 30%" />
-                  <div className="bg-green-500 h-full" style={{ width: '15%' }} title="Ad Monetization 15%" />
-                  <div className="bg-orange-500 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
+                  <div className="bg-green-600/50 h-full" style={{ width: '15%' }} title="Ad Monetization 15%" />
+                  <div className="bg-[#ff8c42]/50 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
                 </div>
                 <div className="flex flex-wrap justify-center gap-4 mt-3">
                   {[
-                    { label: locale === 'fi' ? 'Kosmeettiset' : 'Cosmetics', color: 'bg-purple-500', pct: '45%' },
+                    { label: locale === 'fi' ? 'Kosmeettiset' : 'Cosmetics', color: 'bg-purple-400/50', pct: '45%' },
                     { label: 'Battle Pass', color: 'bg-blue-500', pct: '30%' },
-                    { label: locale === 'fi' ? 'Mainokset' : 'Ads', color: 'bg-green-500', pct: '15%' },
-                    { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-orange-500', pct: '10%' },
+                    { label: locale === 'fi' ? 'Mainokset' : 'Ads', color: 'bg-green-600/50', pct: '15%' },
+                    { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-[#ff8c42]/50', pct: '10%' },
                   ].map((leg, i) => (
                     <div key={i} className="flex items-center gap-1.5 text-xs">
                       <div className={`w-2.5 h-2.5 rounded-full ${leg.color}`} />

@@ -131,17 +131,17 @@ export const androidTheme: MobileTheme = {
     card: {
         dark: 'bg-[#1a1a24]/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#4b5563]/30',
         light: 'bg-[#f9fafb]/95 backdrop-blur-xl rounded-[28px] shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.06)] border border-[#e5e7eb]/60',
-        colorful: 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-orange-500/20',
+        colorful: 'bg-[#0a0600]/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-[#ff8c42]/20',
     },
     header: {
         dark: 'bg-[#12121a]/95 backdrop-blur-2xl border-b border-[#4b5563]/30',
         light: 'bg-[#f9fafb]/95 backdrop-blur-2xl border-b border-[#e5e7eb]/50 shadow-[0_1px_2px_rgba(0,0,0,0.05)]',
-        colorful: 'bg-[#0a0600]/80 backdrop-blur-2xl border-b border-orange-500/20',
+        colorful: 'bg-[#0a0600]/80 backdrop-blur-2xl border-b border-[#ff8c42]/20',
     },
     nav: {
         dark: 'bg-[#12121a] border-[#4b5563]/30',
         light: 'bg-[#f3f4f6] border-[#e5e7eb]/60',
-        colorful: 'bg-[#0a0600]/80 backdrop-blur-xl border-orange-500/20',
+        colorful: 'bg-[#0a0600]/80 backdrop-blur-xl border-[#ff8c42]/20',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-[#111827] font-variation-fill' : 'text-[#bfdbfe] font-variation-fill',
@@ -183,7 +183,7 @@ export const androidTheme: MobileTheme = {
         searchBar: (isLight) => isLight ? 'bg-[#e5e7eb]/60' : 'bg-[#4b5563]/40',
         searchText: () => 'opacity-40',
         sparklineHigh: '#16a34a', sparklineMid: '#ff8c42', sparklineLow: '#dc2626',
-        statusActive: 'bg-[#16a34a]/15 text-emerald-400',
+        statusActive: 'bg-[#16a34a]/15 text-green-400',
         sheetAccent: '#93c5fd',
         sheetBg: (isLight) => isLight ? 'bg-[#f9fafb]' : 'bg-[#12121a]',
         primaryButton: 'bg-[#3b82f6] text-white rounded-full',
@@ -199,7 +199,7 @@ export const androidTheme: MobileTheme = {
         statBadge: 'bg-[#16a34a]/10 text-[#4ade80]',
         donutPrimary: 'text-[#93c5fd]', donutLabel: 'text-[#93c5fd]',
         engagementActiveBg: 'bg-[#93c5fd]',
-        barGradients: ['from-purple-400 to-purple-600', 'from-fuchsia-400 to-fuchsia-600', 'from-pink-400 to-pink-600', 'from-rose-400 to-rose-600', 'from-orange-400 to-orange-600', 'from-amber-400 to-amber-600', 'from-indigo-400 to-indigo-600'],
+        barGradients: ['from-purple-400 to-purple-600', 'from-fuchsia-400 to-fuchsia-600', 'from-pink-400 to-pink-500', 'from-[#ffb07a] to-[#d96820]', 'from-cyan-400 to-cyan-500', 'from-amber-400 to-amber-600', 'from-indigo-400 to-indigo-600'],
         settingsBg: (isLight) => isLight ? 'bg-[#e5e7eb]/50' : 'bg-[#4b5563]/40',
         modalBg: (isLight) => isLight ? 'bg-[#f9fafb]' : 'bg-[#12121a] text-[#e5e7eb]',
         modalActiveItem: (isLight) => isLight ? 'bg-[#dbeafe] border-[#dbeafe]' : 'bg-[#1e40af] border-[#1e40af]',
@@ -212,7 +212,7 @@ export const androidTheme: MobileTheme = {
         seeAllColor: 'text-[#93c5fd]',
         quickActionBg: (isLight, g) => isLight ? 'bg-[#dbeafe] text-[#111827] rounded-[20px]' : `bg-gradient-to-br ${g} border border-white/5 rounded-[20px]`,
         quickActionIconColor: () => 'text-[#93c5fd]',
-        teamColorMap: { purple: 'bg-purple-500/12 text-purple-400', blue: 'bg-blue-500/12 text-blue-400', emerald: 'bg-emerald-500/12 text-emerald-400', amber: 'bg-amber-500/12 text-amber-400' },
+        teamColorMap: { purple: 'bg-purple-500/12 text-purple-400', blue: 'bg-blue-500/12 text-blue-400', emerald: 'bg-green-600/12 text-green-400', amber: 'bg-amber-600/12 text-amber-400' },
     },
     titles: {
         dashboard: { sub: 'Welcome Back', title: 'Ali Al-Zuhairi' }, workspaces: { sub: 'Collaborate', title: 'Workspaces' },
@@ -234,17 +234,17 @@ export const iosTheme: MobileTheme = {
     card: {
         dark: 'bg-[#12121a]/65 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
         light: 'bg-white/55 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/70 rounded-[22px] shadow-[0_2px_16px_rgba(0,0,0,0.04)]',
-        colorful: 'bg-[#0a0600]/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-orange-500/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
+        colorful: 'bg-[#0a0600]/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-[#ff8c42]/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
     },
     header: {
         dark: 'bg-[#12121a]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/[0.06]',
         light: 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/[0.04]',
-        colorful: 'bg-[#0a0600]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-orange-500/10',
+        colorful: 'bg-[#0a0600]/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-[#ff8c42]/10',
     },
     nav: {
         dark: 'bg-[#12121a]/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-white/[0.08]',
         light: 'bg-[#f3f4f6]/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-black/[0.04]',
-        colorful: 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-orange-500/10',
+        colorful: 'bg-[#0a0600]/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-[#ff8c42]/10',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-[#3b82f6]' : 'text-[#60a5fa]',
@@ -301,7 +301,7 @@ export const iosTheme: MobileTheme = {
         statBadge: 'bg-[#16a34a]/10 text-[#16a34a]',
         donutPrimary: 'text-[#3b82f6]', donutLabel: 'text-[#3b82f6]',
         engagementActiveBg: 'bg-[#3b82f6]',
-        barGradients: ['from-blue-400 to-blue-600', 'from-indigo-400 to-indigo-600', 'from-cyan-400 to-cyan-600', 'from-teal-400 to-teal-600', 'from-violet-400 to-violet-600', 'from-sky-400 to-sky-600', 'from-purple-400 to-purple-600'],
+        barGradients: ['from-blue-400 to-blue-600', 'from-indigo-400 to-indigo-600', 'from-cyan-400 to-cyan-500', 'from-[#ffb07a] to-[#d96820]', 'from-fuchsia-400 to-fuchsia-600', 'from-pink-400 to-pink-500', 'from-purple-400 to-purple-600'],
         settingsBg: (isLight) => isLight ? 'bg-black/[0.04] backdrop-blur-lg' : 'bg-white/[0.06] backdrop-blur-lg',
         modalBg: (isLight) => isLight ? 'bg-white/90 backdrop-blur-2xl' : 'bg-[#1a1a24]/95 backdrop-blur-2xl text-white',
         modalActiveItem: (isLight) => isLight ? 'bg-[#e5e7eb]/80' : 'bg-white/[0.08]',

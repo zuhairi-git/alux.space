@@ -23,10 +23,10 @@ export default function MobileAnimationDemo() {
           <div className={`p-3 rounded ${isMobile ? 'bg-blue-100 dark:bg-blue-900' : 'bg-gray-200 dark:bg-gray-700'}`}>
             <strong>Device Type:</strong> {isMobile ? 'Mobile' : 'Desktop'}
           </div>
-          <div className={`p-3 rounded ${AnimationConfig.ENABLE_MOBILE_ANIMATIONS ? 'bg-green-100 dark:bg-green-900' : 'bg-red-100 dark:bg-red-900'}`}>
+          <div className={`p-3 rounded ${AnimationConfig.ENABLE_MOBILE_ANIMATIONS ? 'bg-green-600/10 dark:bg-green-600/30' : 'bg-red-100 dark:bg-red-900'}`}>
             <strong>Mobile Animations:</strong> {AnimationConfig.ENABLE_MOBILE_ANIMATIONS ? 'Enabled' : 'Disabled'}
           </div>
-          <div className={`p-3 rounded ${animationsDisabled ? 'bg-orange-100 dark:bg-orange-900' : 'bg-green-100 dark:bg-green-900'}`}>
+          <div className={`p-3 rounded ${animationsDisabled ? 'bg-[#ff8c42]/10 dark:bg-[#ff8c42]/30' : 'bg-green-600/10 dark:bg-green-600/30'}`}>
             <strong>Current State:</strong> {animationsDisabled ? 'Disabled' : 'Enabled'}
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function MobileAnimationDemo() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: durationSeconds.slow, delay: index * delaySeconds.xs }}
-                className="bg-orange-500 text-white p-4 rounded w-16 h-16 flex items-center justify-center"
+                className="bg-[#ff8c42] text-white p-4 rounded w-16 h-16 flex items-center justify-center"
               >
                 {item}
               </MotionDiv>

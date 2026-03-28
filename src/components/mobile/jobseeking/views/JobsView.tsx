@@ -91,7 +91,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                     <div className="flex items-start justify-between gap-2">
                                         <h3 className="text-[16px] font-bold leading-tight">{job.title}</h3>
                                         {job.tag && (
-                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-emerald-500/15 text-emerald-500' : 'bg-blue-500/15 text-blue-500'}`}>
+                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-green-400/15 text-green-600' : 'bg-blue-500/15 text-blue-500'}`}>
                                                 {job.tag}
                                             </span>
                                         )}
@@ -118,10 +118,10 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
                             <div className="flex items-center gap-2">
                                 <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
-                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-emerald-500' : job.match >= 80 ? 'bg-blue-500' : 'bg-amber-400'}`}
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-green-600' : job.match >= 80 ? 'bg-blue-500' : 'bg-amber-400'}`}
                                         style={{ width: `${job.match}%` }} />
                                 </div>
-                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-emerald-500' : job.match >= 80 ? 'text-blue-400' : 'text-amber-400'}`}>{job.match}% match</span>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-green-600' : job.match >= 80 ? 'text-blue-400' : 'text-amber-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
                                 className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-blue-500 to-purple-500 text-white active:scale-95 transition-transform`}>
@@ -144,13 +144,13 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                             {/* SUCCESS */}
                             {sheetMode === 'success' && (
                                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-4">
-                                    <div className="w-20 h-20 rounded-full bg-emerald-500/15 flex items-center justify-center mb-4">
-                                        <Icon name="task_alt" className="text-5xl text-emerald-500" />
+                                    <div className="w-20 h-20 rounded-full bg-green-400/15 flex items-center justify-center mb-4">
+                                        <Icon name="task_alt" className="text-5xl text-green-600" />
                                     </div>
                                     <h3 className="text-xl font-bold mb-1">Application Sent!</h3>
                                     <p className={`text-[14px] text-center mb-6 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>Your application to <strong>{selectedJob.company}</strong> has been submitted.</p>
                                     <button onClick={() => { setSelectedJob(null); onNav?.('notifications'); }}
-                                        className="px-6 py-3 rounded-2xl bg-emerald-500 text-white font-semibold text-[14px] active:scale-95">
+                                        className="px-6 py-3 rounded-2xl bg-green-600 text-white font-semibold text-[14px] active:scale-95">
                                         View in Notifications
                                     </button>
                                 </motion.div>
