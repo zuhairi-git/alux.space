@@ -606,4 +606,12 @@
   --material-symbols-fill:         0;
   --material-symbols-grade:        0;
   --material-symbols-optical-size: 24;
+
+  /* Icon size + opsz pairs — use these with the Icon component size prop */
+  --icon-size-xs:  14px;  --icon-opsz-xs:  20;
+  --icon-size-sm:  16px;  --icon-opsz-sm:  20;
+  --icon-size-md:  20px;  --icon-opsz-md:  24;
+  --icon-size-lg:  24px;  --icon-opsz-lg:  24;
+  --icon-size-xl:  32px;  --icon-opsz-xl:  40;
+  --icon-size-2xl: 48px;  --icon-opsz-2xl: 48;
 }

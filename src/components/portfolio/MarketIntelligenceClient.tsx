@@ -319,12 +319,7 @@ export default function MarketIntelligenceClient() {
                 animate="animate"
                 exit="exit"
                 variants={pageVariants}
-                className={`min-h-screen transition-colors duration-300 relative ${isColorful
-                    ? 'bg-[var(--color-colorful-bg)]'
-                    : isLight
-                        ? 'bg-gradient-to-br from-slate-50 to-gray-100'
-                        : 'bg-gradient-to-br from-gray-900 to-black'
-                    }`}
+                className="min-h-screen bg-[var(--background)] transition-colors duration-300 relative"
             >
 
                 {/* Ambient background grid */}
@@ -405,28 +400,23 @@ export default function MarketIntelligenceClient() {
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     transition={{ type: "spring", stiffness: 340, damping: 26, mass: 0.8, delay: delaySeconds.xl + i * stagger.normal }}
                                     whileHover={{ y: -4, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                    className={`relative group p-5 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-300 ${isColorful
-                                        ? 'bg-white/[0.04] border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.06]'
-                                        : isLight
-                                            ? 'bg-white/80 border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md'
-                                            : 'bg-white/[0.03] border-gray-800 hover:border-gray-700 hover:bg-white/[0.05]'
-                                        }`}
+                                    className="relative group p-5 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] shadow-sm"
                                 >
                                     {/* Gradient glow on hover */}
                                     <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${metric.color} pointer-events-none`} style={{ opacity: 0 }} />
                                     <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 bg-gradient-to-br ${metric.color} pointer-events-none`} />
 
                                     <div className="relative z-10 flex items-start justify-between mb-3">
-                                        <span className={`material-symbols text-xl ${isColorful ? 'text-gray-400 group-hover:text-white/80' : isLight ? 'text-gray-400 group-hover:text-gray-600' : 'text-gray-500 group-hover:text-gray-300'} transition-colors`}>
+                                        <span className="material-symbols text-xl text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] transition-colors" aria-hidden="true">
                                             {metric.icon}
                                         </span>
                                         <PulseDot color={metric.dotColor} />
                                     </div>
                                     <div className="relative z-10">
-                                        <div className={`text-2xl font-bold tabular-nums mb-1 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                                        <div className="text-2xl font-bold tabular-nums mb-1 text-[var(--foreground)]">
                                             <AnimatedCounter target={metric.value} suffix={metric.suffix} />
                                         </div>
-                                        <div className={`text-xs font-medium uppercase tracking-wider ${isColorful ? 'text-gray-400' : isLight ? 'text-gray-500' : 'text-gray-500'}`}>
+                                        <div className="text-xs font-medium uppercase tracking-wider text-[var(--muted-foreground)]">
                                             {metric.label}
                                         </div>
                                     </div>
@@ -441,7 +431,7 @@ export default function MarketIntelligenceClient() {
                             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                             transition={{ type: "spring", stiffness: 260, damping: 28, delay: delaySeconds.xs }}
                         >
-                            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
+                            <p className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-[var(--muted-foreground)]">
                                 {content.intro}
                             </p>
                         </motion.div>
@@ -451,8 +441,8 @@ export default function MarketIntelligenceClient() {
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                                     {[
-                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-600 to-[var(--color-ember)]', iconBg: isColorful ? 'bg-red-600/15' : isLight ? 'bg-red-50' : 'bg-red-900/30', iconColor: 'text-ds-error', borderColor: isColorful ? 'border-red-600/20' : isLight ? 'border-red-100' : 'border-red-900/40' },
-                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15' : isLight ? 'bg-green-600/5' : 'bg-green-600/30', iconColor: 'text-ds-success', borderColor: isColorful ? 'border-green-600/20' : isLight ? 'border-green-600/10' : 'border-green-600/40' },
+                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-600 to-[var(--color-ember)]', iconBg: 'bg-red-500/10', iconColor: 'text-ds-error', borderColor: 'border-red-500/20' },
+                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-green-600 to-cyan-500', iconBg: 'bg-green-600/10', iconColor: 'text-ds-success', borderColor: 'border-green-600/20' },
                                     ].map((card, i) => (
                                         <motion.div
                                             key={i}
@@ -461,12 +451,7 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-40px' }}
                                             transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: i * 0.12 }}
                                             whileHover={{ y: -6, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 ${isColorful
-                                                ? `bg-gradient-to-br from-white/[0.03] to-white/[0.01] ${card.borderColor} hover:from-white/[0.06] hover:to-white/[0.02]`
-                                                : isLight
-                                                    ? `bg-white ${card.borderColor} shadow-sm hover:shadow-lg`
-                                                    : `bg-gray-900/60 ${card.borderColor} hover:bg-gray-900/80`
-                                                }`}
+                                            className={`relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 bg-[var(--card-from-bg)] ${card.borderColor} hover:shadow-lg`}
                                         >
                                             {/* Top gradient line */}
                                             <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${card.gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
@@ -474,18 +459,15 @@ export default function MarketIntelligenceClient() {
                                             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${card.iconBg} mb-5`}>
                                                 <span className={`material-symbols text-2xl ${card.iconColor}`}>{card.icon}</span>
                                             </div>
-                                            <h3 className={`text-xl font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{card.title}</h3>
-                                            <p className={`leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>{card.desc}</p>
+                                            <h3 className="text-xl font-bold mb-3 text-[var(--foreground)]">{card.title}</h3>
+                                            <p className="leading-relaxed text-[var(--muted-foreground)]">{card.desc}</p>
                                         </motion.div>
                                     ))}
                                 </div>
                             </CaseStudyItem>
 
                             <CaseStudyItem>
-                                <h2 className={`text-xl font-semibold mb-8 ${isColorful
-                                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-indigo-400)] to-[var(--color-indigo-400)]'
-                                    : isLight ? 'text-gray-900' : 'text-white'
-                                    }`}>{content.objectivesTitle}</h2>
+                                <h2 className="text-xl font-semibold mb-8 text-[var(--foreground)]">{content.objectivesTitle}</h2>
 
                                 <div className="space-y-1 max-w-3xl">
                                     {[
@@ -502,17 +484,12 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-20px' }}
                                             transition={{ type: 'spring', stiffness: 360, damping: 28, delay: index * 0.06 }}
                                             whileHover={{ x: 6, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`group flex items-center gap-4 py-4 px-4 rounded-xl transition-all duration-300 ${isColorful ? 'hover:bg-white/[0.03]' : isLight ? 'hover:bg-gray-50' : 'hover:bg-white/[0.03]'}`}
+                                            className="group flex items-center gap-4 py-4 px-4 rounded-xl transition-all duration-300 hover:bg-[var(--card-from-bg)]"
                                         >
-                                            <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${isColorful
-                                                ? 'bg-[var(--color-indigo-400)]/10 text-[var(--color-indigo-400)] group-hover:bg-[var(--color-indigo-400)]/20 group-hover:text-[var(--color-indigo-400)]'
-                                                : isLight
-                                                    ? 'bg-indigo-400/5 text-indigo-400 group-hover:bg-indigo-400/10 group-hover:text-indigo-500'
-                                                    : 'bg-indigo-600/30 text-indigo-400 group-hover:bg-indigo-600/50 group-hover:text-indigo-400'
-                                                }`}>
+                                            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 bg-[var(--primary)]/10 text-[var(--accent-text)] group-hover:bg-[var(--primary)]/20">
                                                 <span className="material-symbols text-lg">{objective.icon}</span>
                                             </div>
-                                            <p className={`leading-relaxed font-medium ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{objective.text}</p>
+                                            <p className="leading-relaxed font-medium text-[var(--foreground)]/80">{objective.text}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -522,13 +499,13 @@ export default function MarketIntelligenceClient() {
                         {/* ═══ SECTION 2: STRATEGIC RATIONALE ═══ */}
                         <CaseStudySection title={content.rationaleTitle} icon="lightbulb" number={2} accent="purple">
                             <CaseStudyItem>
-                                <p className={`text-lg max-w-3xl mx-auto mb-12 ${isColorful ? 'text-purple-400/80' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                                <p className="text-lg max-w-3xl mx-auto mb-12 text-[var(--muted-foreground)]">
                                     {content.rationaleSubtitle}
                                 </p>
 
                                 <div className="space-y-0 relative">
                                     {/* Vertical connector line */}
-                                    <div className={`absolute left-[22px] top-8 bottom-8 w-[2px] ${isColorful ? 'bg-gradient-to-b from-blue-500/30 via-purple-500/20 to-pink-500/30' : isLight ? 'bg-gradient-to-b from-gray-200 via-gray-200 to-gray-200' : 'bg-gradient-to-b from-gray-700/50 via-gray-800/50 to-gray-700/50'}`} />
+                                    <div className="absolute left-[22px] top-8 bottom-8 w-[2px] bg-[var(--card-border)]" />
 
                                     {[
                                         { index: "01", title: content.rationaleItem1Title, desc: content.rationaleItem1Desc, color: "from-[var(--color-blue-vivid)] to-cyan-500", dotColor: "bg-[var(--primary)]" },
@@ -544,7 +521,7 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: "-40px" }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 28, delay: i * 0.08 }}
                                             whileHover={{ x: 8, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`group relative flex gap-6 items-start py-6 pl-2 pr-4 rounded-xl transition-all duration-300 ${isLight ? 'hover:bg-gray-50/80' : 'hover:bg-white/[0.02]'}`}
+                                            className="group relative flex gap-6 items-start py-6 pl-2 pr-4 rounded-xl transition-all duration-300 hover:bg-[var(--card-from-bg)]/50"
                                         >
                                             {/* Timeline dot */}
                                             <div className="relative z-10 flex-shrink-0">
@@ -553,8 +530,8 @@ export default function MarketIntelligenceClient() {
                                                 </div>
                                             </div>
                                             <div className="flex-1 pt-1">
-                                                <h3 className={`text-lg font-bold mb-2 transition-colors duration-300 ${isColorful ? 'text-white group-hover:text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h3>
-                                                <p className={`leading-relaxed ${isColorful ? 'text-gray-400 group-hover:text-gray-300' : isLight ? 'text-gray-500 group-hover:text-gray-600' : 'text-gray-400 group-hover:text-gray-300'} transition-colors duration-300`}>{item.desc}</p>
+                                            <h3 className="text-lg font-bold mb-2 text-[var(--foreground)]">{item.title}</h3>
+                                            <p className="leading-relaxed text-[var(--muted-foreground)] group-hover:text-[var(--foreground)]/70 transition-colors duration-300">{item.desc}</p>
                                             </div>
                                         </motion.div>
                                     ))}
@@ -565,7 +542,7 @@ export default function MarketIntelligenceClient() {
                         {/* ═══ SECTION 3: INTERACTIVE PROTOTYPES ═══ */}
                         <CaseStudySection title={locale === 'fi' ? 'Interaktiiviset prototyypit' : 'Interactive Prototypes'} icon="smartphone" number={3} accent="indigo" id="interactive-prototypes">
                             <CaseStudyItem>
-                                <p className={`text-lg max-w-2xl mx-auto mb-10 ${isColorful ? 'text-indigo-400' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+                                <p className="text-lg max-w-2xl mx-auto mb-10 text-[var(--muted-foreground)]">
                                     {locale === 'fi' ? 'Tutustu tekoälypohjaisen käyttöliittymän interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.' : 'Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.'}
                                 </p>
 
@@ -597,7 +574,7 @@ export default function MarketIntelligenceClient() {
                                             href={proto.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className={`group p-6 rounded-2xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col ${isColorful ? 'hover:bg-white/[0.06]' : isLight ? 'hover:shadow-lg bg-white/80' : 'hover:bg-white/[0.05]'}`}
+                                            className={`group p-6 rounded-2xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col hover:shadow-lg`}
                                             initial={{ opacity: 0, y: 14 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
@@ -607,8 +584,8 @@ export default function MarketIntelligenceClient() {
                                             <div className={`h-10 w-10 flex items-center justify-center rounded-full mb-3 ${proto.iconBg}`}>
                                                 {proto.icon}
                                             </div>
-                                            <h3 className={`text-lg font-semibold mb-2 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{proto.title}</h3>
-                                            <p className={`text-sm mb-6 flex-grow ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>{proto.description}</p>
+                                            <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">{proto.title}</h3>
+                                            <p className="text-sm mb-6 flex-grow text-[var(--muted-foreground)]">{proto.description}</p>
                                             <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
                                                 <span>{locale === 'fi' ? 'Avaa prototyyppi' : 'Open Prototype'}</span>
                                                 <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
@@ -628,122 +605,182 @@ export default function MarketIntelligenceClient() {
                                     transition={{ type: 'spring', stiffness: 260, damping: 28 }}
                                 >
                                     <div className="text-center mb-14">
-                                        <h3 className={`text-2xl font-bold mb-4 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400' : isLight ? 'text-gray-900' : 'text-white'}`}>
+                                        <h3 className="text-2xl font-bold mb-4 text-[var(--foreground)]">
                                             {content.appFunctionalityTitle}
                                         </h3>
-                                        <p className={`text-lg max-w-2xl mx-auto ${isColorful ? 'text-indigo-400/80' : isLight ? 'text-gray-600' : 'text-gray-400'}`}>
+                                        <p className="text-lg max-w-2xl mx-auto text-[var(--muted-foreground)]">
                                             {content.appFunctionalityDesc}
                                         </p>
                                     </div>
 
-                                    {/* Feature spotlight: active feature + feature selectors */}
-                                    <div className="grid lg:grid-cols-5 gap-6">
-                                        {/* Feature selector pills */}
-                                        <div className="lg:col-span-2 flex flex-col gap-3">
-                                            {[
-                                                { icon: "search_insights", title: content.feat1Title, desc: content.feat1Desc, gradient: 'from-blue-500 to-indigo-500' },
-                                                { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-green-600 to-cyan-500' },
-                                                { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-[var(--color-ember)] to-amber-600' },
-                                                { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc, gradient: 'from-purple-500 to-pink-500' }
-                                            ].map((feature, index) => (
-                                                <motion.button
-                                                    key={index}
-                                                    onClick={() => setActiveFeature(index)}
-                                                    initial={{ opacity: 0, x: -12 }}
-                                                    whileInView={{ opacity: 1, x: 0 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ type: 'spring', stiffness: 380, damping: 28, delay: index * 0.06 }}
-                                                    whileTap={{ scale: 0.97 }}
-                                                    className={`group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 ${activeFeature === index
-                                                        ? isColorful
-                                                            ? 'bg-white/[0.06] border border-white/[0.12] shadow-lg'
-                                                            : isLight
-                                                                ? 'bg-white border border-indigo-400/20 shadow-md'
-                                                                : 'bg-white/[0.05] border border-gray-700 shadow-lg'
-                                                        : isColorful
-                                                            ? 'bg-transparent border border-transparent hover:bg-white/[0.03] hover:border-white/[0.06]'
-                                                            : isLight
-                                                                ? 'bg-transparent border border-transparent hover:bg-gray-50 hover:border-gray-200'
-                                                                : 'bg-transparent border border-transparent hover:bg-white/[0.02] hover:border-gray-800'
-                                                        }`}
-                                                >
-                                                    {/* Active indicator */}
-                                                    {activeFeature === index && (
-                                                        <motion.div
-                                                            layoutId="activeFeatureIndicator"
-                                                            className={`absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-gradient-to-b ${feature.gradient}`}
-                                                            transition={{ type: 'spring', stiffness: 420, damping: 26, mass: 0.8 }}
-                                                        />
-                                                    )}
-                                                    <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${activeFeature === index
-                                                        ? isColorful ? 'bg-indigo-400/50/20 text-indigo-400' : isLight ? 'bg-indigo-400/10 text-indigo-500' : 'bg-indigo-600/50 text-indigo-400'
-                                                        : isColorful ? 'bg-white/[0.05] text-gray-400' : isLight ? 'bg-gray-100 text-gray-400' : 'bg-gray-800/60 text-gray-500'
-                                                        }`}>
-                                                        <span className="material-symbols text-lg">{feature.icon}</span>
+                                    {/* 2×2 Bento Feature Grid */}
+                                    <div className="grid sm:grid-cols-2 gap-5">
+
+                                        {/* Feature 1 — Conversational AI Search */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0 }}
+                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                        >
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]" />
+                                            <div className="flex items-start gap-3 mb-5">
+                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 text-[var(--accent-text)] shrink-0">
+                                                    <span className="material-symbols text-xl" aria-hidden="true">search_insights</span>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-[var(--foreground)]">{content.feat1Title}</h4>
+                                                    <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat1Desc}</p>
+                                                </div>
+                                            </div>
+                                            {/* Mini chat mockup */}
+                                            <div className="space-y-2.5">
+                                                <div className="flex justify-end">
+                                                    <div className="bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--accent-text)] text-xs px-3 py-1.5 rounded-2xl rounded-tr-sm font-medium max-w-[85%]">
+                                                        {locale === 'fi' ? 'Näytä AAPL Q3 tulokset' : 'Show AAPL Q3 earnings highlights'}
                                                     </div>
-                                                    <div>
-                                                        <h4 className={`font-semibold text-sm transition-colors ${activeFeature === index
-                                                            ? isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'
-                                                            : isColorful ? 'text-gray-400' : isLight ? 'text-gray-600' : 'text-gray-400'
-                                                            }`}>{feature.title}</h4>
+                                                </div>
+                                                <div className="flex gap-2 items-start">
+                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center justify-center shrink-0 mt-0.5">
+                                                        <span className="material-symbols text-[10px] text-white" aria-hidden="true">smart_toy</span>
                                                     </div>
-                                                </motion.button>
-                                            ))}
-                                        </div>
+                                                    <div className="bg-[var(--card-to-bg)] border border-[var(--card-border)] text-[var(--foreground)] text-xs px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[85%]">
+                                                        <span className="opacity-80">{locale === 'fi' ? 'Liikevaihto kasvoi 8 % YoY...' : 'Revenue grew 8% YoY to $94.9B...'}</span>
+                                                        <span className="ml-1 text-[var(--accent-text)] font-semibold">[1]</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-1.5 pl-8">
+                                                    <span className="text-[10px] text-[var(--muted-foreground)] bg-[var(--card-to-bg)] border border-[var(--card-border)] px-2 py-0.5 rounded-full">Apple 10-Q ↗</span>
+                                                    <span className="text-[10px] text-[var(--muted-foreground)] bg-[var(--card-to-bg)] border border-[var(--card-border)] px-2 py-0.5 rounded-full">Earnings Call ↗</span>
+                                                </div>
+                                            </div>
+                                        </motion.div>
 
-                                        {/* Active feature detail card */}
-                                        <AnimatePresence mode="wait">
-                                            <motion.div
-                                                className="lg:col-span-3"
-                                                key={activeFeature}
-                                                initial={{ opacity: 0, x: 24, scale: 0.97, filter: 'blur(4px)' }}
-                                                animate={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
-                                                exit={{ opacity: 0, x: -16, scale: 0.97, filter: 'blur(4px)' }}
-                                                transition={{ type: 'spring', stiffness: 340, damping: 28, mass: 0.8 }}
-                                            >
-                                                {(() => {
-                                                    const features = [
-                                                        { icon: "search_insights", title: content.feat1Title, desc: content.feat1Desc, gradient: 'from-[var(--color-blue-vivid)] to-[var(--color-indigo-500)]', iconBg: isColorful ? 'bg-[var(--color-indigo-400)]/15 text-[var(--color-indigo-400)]' : isLight ? 'bg-primary/5 text-accent' : 'bg-primary/15 text-accent' },
-                                                        { icon: "query_stats", title: content.feat2Title, desc: content.feat2Desc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-ds-success' : 'bg-green-600/30 text-green-400' },
-                                                        { icon: "notifications_active", title: content.feat3Title, desc: content.feat3Desc, gradient: 'from-[var(--color-ember)] to-amber-600', iconBg: isColorful ? 'bg-ds-ember/15 text-[var(--color-ember-light)]' : isLight ? 'bg-ds-ember/5 text-ds-ember' : 'bg-ds-ember/30 text-[var(--color-ember-light)]' },
-                                                        { icon: "summarize", title: content.feat4Title, desc: content.feat4Desc, gradient: 'from-purple-500 to-pink-500', iconBg: isColorful ? 'bg-purple-400/50/15 text-purple-400' : isLight ? 'bg-purple-400/5 text-purple-500' : 'bg-purple-600/30 text-purple-400' },
-                                                    ];
-                                                    const f = features[activeFeature];
-                                                    return (
-                                                        <div className={`relative h-full p-8 rounded-2xl border overflow-hidden ${isColorful
-                                                            ? 'bg-gradient-to-br from-white/[0.04] to-white/[0.01] border-white/[0.08]'
-                                                            : isLight
-                                                                ? 'bg-white border-gray-200 shadow-lg'
-                                                                : 'bg-gray-900/70 border-gray-800'
-                                                            }`}>
-                                                            {/* Top gradient line */}
-                                                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${f.gradient}`} />
-
-                                                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${f.iconBg} mb-6`}>
-                                                                <span className="material-symbols text-2xl">{f.icon}</span>
-                                                            </div>
-                                                            <h4 className={`text-xl font-bold mb-4 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{f.title}</h4>
-                                                            <p className={`text-base leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>{f.desc}</p>
-
-                                                            {/* Feature progress indicator */}
-                                                            <div className="mt-8 flex gap-2">
-                                                                {[0, 1, 2, 3].map((dot) => (
-                                                                    <motion.div
-                                                                        key={dot}
-                                                                        animate={{ width: dot === activeFeature ? '2rem' : '1rem' }}
-                                                                        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                                                                        className={`h-1 rounded-full ${dot === activeFeature
-                                                                            ? `bg-gradient-to-r ${f.gradient}`
-                                                                            : `${isColorful ? 'bg-white/10' : isLight ? 'bg-gray-200' : 'bg-gray-700'}`
-                                                                            }`}
-                                                                    />
-                                                                ))}
-                                                            </div>
+                                        {/* Feature 2 — Real-Time Sentiment Analysis */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.08 }}
+                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                        >
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-cyan-500" />
+                                            <div className="flex items-start gap-3 mb-5">
+                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-green-500/10 text-green-500 shrink-0">
+                                                    <span className="material-symbols text-xl" aria-hidden="true">query_stats</span>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-[var(--foreground)]">{content.feat2Title}</h4>
+                                                    <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat2Desc}</p>
+                                                </div>
+                                            </div>
+                                            {/* Sentiment bars */}
+                                            <div className="space-y-2.5">
+                                                {[
+                                                    { label: locale === 'fi' ? 'Positiivinen' : 'Bullish', pct: 72, color: 'bg-green-500' },
+                                                    { label: locale === 'fi' ? 'Neutraali'    : 'Neutral',  pct: 18, color: 'bg-[var(--muted-foreground)]/40' },
+                                                    { label: locale === 'fi' ? 'Negatiivinen' : 'Bearish', pct: 10, color: 'bg-red-400' },
+                                                ].map((s) => (
+                                                    <div key={s.label} className="flex items-center gap-2">
+                                                        <span className="text-[11px] text-[var(--muted-foreground)] w-16 shrink-0">{s.label}</span>
+                                                        <div className="flex-1 h-1.5 rounded-full bg-[var(--card-border)] overflow-hidden">
+                                                            <motion.div
+                                                                className={`h-full rounded-full ${s.color}`}
+                                                                initial={{ width: 0 }}
+                                                                whileInView={{ width: `${s.pct}%` }}
+                                                                viewport={{ once: true }}
+                                                                transition={{ type: 'spring', stiffness: 80, damping: 18, delay: 0.3 }}
+                                                            />
                                                         </div>
-                                                    );
-                                                })()}
-                                            </motion.div>
-                                        </AnimatePresence>
+                                                        <span className="text-[11px] font-semibold text-[var(--foreground)] tabular-nums w-8 text-right">{s.pct}%</span>
+                                                    </div>
+                                                ))}
+                                                <p className="text-[10px] text-[var(--muted-foreground)] flex items-center gap-1.5 pt-1">
+                                                    <PulseDot color="bg-green-400" />
+                                                    <span>{locale === 'fi' ? 'Päivitetty juuri nyt' : 'Updated just now'}</span>
+                                                </p>
+                                            </div>
+                                        </motion.div>
+
+                                        {/* Feature 3 — Smart Event Alerts */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.14 }}
+                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                        >
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 to-orange-500" />
+                                            <div className="flex items-start gap-3 mb-5">
+                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 text-amber-500 shrink-0">
+                                                    <span className="material-symbols text-xl" aria-hidden="true">notifications_active</span>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-[var(--foreground)]">{content.feat3Title}</h4>
+                                                    <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat3Desc}</p>
+                                                </div>
+                                            </div>
+                                            {/* Mock notification cards */}
+                                            <div className="space-y-2">
+                                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                                                    <span className="material-symbols text-base text-amber-500 shrink-0" aria-hidden="true">trending_up</span>
+                                                    <div className="min-w-0">
+                                                        <p className="text-xs font-semibold text-[var(--foreground)] truncate">MSFT earnings beat — +4.2%</p>
+                                                        <p className="text-[10px] text-[var(--muted-foreground)]">2 min ago · {locale === 'fi' ? 'Korkea' : 'High priority'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[var(--card-to-bg)] border border-[var(--card-border)]">
+                                                    <span className="material-symbols text-base text-[var(--muted-foreground)] shrink-0" aria-hidden="true">article</span>
+                                                    <div className="min-w-0">
+                                                        <p className="text-xs font-medium text-[var(--muted-foreground)] truncate">Fed holds rates at 4.5%</p>
+                                                        <p className="text-[10px] text-[var(--muted-foreground)]/60">18 min ago</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+
+                                        {/* Feature 4 — Automated Briefings */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.20 }}
+                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                        >
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-pink-500" />
+                                            <div className="flex items-start gap-3 mb-5">
+                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-purple-500/10 text-purple-500 shrink-0">
+                                                    <span className="material-symbols text-xl" aria-hidden="true">summarize</span>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-[var(--foreground)]">{content.feat4Title}</h4>
+                                                    <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat4Desc}</p>
+                                                </div>
+                                            </div>
+                                            {/* Mini audio briefing card */}
+                                            <div className="px-3.5 py-3 rounded-xl bg-[var(--card-to-bg)] border border-[var(--card-border)] flex items-center gap-3">
+                                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/20">
+                                                    <span className="material-symbols text-sm text-white" aria-hidden="true">play_arrow</span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-xs font-semibold text-[var(--foreground)] truncate">
+                                                        {locale === 'fi' ? 'Aamu-katsaus — 29.3.2026' : 'Morning Briefing — Mar 29, 2026'}
+                                                    </p>
+                                                    <div className="flex items-end gap-[2px] mt-1.5 h-5">
+                                                        {[3,5,7,4,6,8,5,7,4,6,7,5,8,6,4,7,5,6,8,4,6,5,7,4].map((h, i) => (
+                                                            <div key={i} className="w-[2px] rounded-full bg-purple-400/60" style={{ height: `${h}px` }} />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                <span className="text-[10px] text-[var(--muted-foreground)] tabular-nums shrink-0">3:42</span>
+                                            </div>
+                                        </motion.div>
+
                                     </div>
                                 </motion.div>
                             </CaseStudyItem>
@@ -754,8 +791,8 @@ export default function MarketIntelligenceClient() {
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-6 mb-14">
                                     {[
-                                        { icon: 'phone_iphone', title: content.iosPatternsTitle, desc: content.iosPatternsDesc, gradient: 'from-gray-500 to-gray-600', iconBg: isColorful ? 'bg-gray-700/50 text-gray-300' : isLight ? 'bg-gray-100 text-gray-500' : 'bg-gray-800 text-gray-400', borderColor: isColorful ? 'border-white/[0.08]' : isLight ? 'border-gray-200' : 'border-gray-800' },
-                                        { icon: 'android', title: content.androidPatternsTitle, desc: content.androidPatternsDesc, gradient: 'from-green-600 to-green-600', iconBg: isColorful ? 'bg-green-900/30 text-green-400' : isLight ? 'bg-green-50 text-green-500' : 'bg-green-900/30 text-green-400', borderColor: isColorful ? 'border-green-500/15' : isLight ? 'border-green-100' : 'border-green-900/30' },
+                                        { icon: 'phone_iphone', title: content.iosPatternsTitle, desc: content.iosPatternsDesc, gradient: 'from-gray-500 to-gray-600', iconBg: 'bg-[var(--muted-foreground)]/10 text-[var(--muted-foreground)]', borderColor: 'border-[var(--card-border)]' },
+                                        { icon: 'android', title: content.androidPatternsTitle, desc: content.androidPatternsDesc, gradient: 'from-green-600 to-green-600', iconBg: 'bg-green-600/10 text-green-500', borderColor: 'border-green-600/20' },
                                     ].map((platform, i) => (
                                         <motion.div
                                             key={i}
@@ -764,29 +801,21 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-30px' }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.1 }}
                                             whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 ${isColorful
-                                                ? `bg-white/[0.03] ${platform.borderColor} hover:bg-white/[0.05]`
-                                                : isLight
-                                                    ? `bg-white ${platform.borderColor} shadow-sm hover:shadow-md`
-                                                    : `bg-gray-900/50 ${platform.borderColor} hover:bg-gray-900/70`
-                                                }`}
+                                            className={`relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] ${platform.borderColor} hover:shadow-md`}
                                         >
                                             <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${platform.gradient} opacity-50 group-hover:opacity-100 transition-opacity`} />
                                             <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${platform.iconBg} mb-5`}>
                                                 <span className="material-symbols text-2xl">{platform.icon}</span>
                                             </div>
-                                            <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{platform.title}</h3>
-                                            <p className={`leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>{platform.desc}</p>
+                                            <h3 className="text-lg font-bold mb-3 text-[var(--foreground)]">{platform.title}</h3>
+                                            <p className="leading-relaxed text-[var(--muted-foreground)]">{platform.desc}</p>
                                         </motion.div>
                                     ))}
                                 </div>
                             </CaseStudyItem>
 
                             <CaseStudyItem>
-                                <h2 className={`text-xl font-semibold mb-8 ${isColorful
-                                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400'
-                                    : isLight ? 'text-gray-900' : 'text-white'
-                                    }`}>{content.coreFlowsTitle}</h2>
+                                <h2 className="text-xl font-semibold mb-8 text-[var(--foreground)]">{content.coreFlowsTitle}</h2>
 
                                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
                                     {[
@@ -803,18 +832,13 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-20px' }}
                                             transition={{ type: 'spring', stiffness: 360, damping: 26, delay: index * 0.06 }}
                                             whileHover={{ y: -3, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 ${isColorful
-                                                ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1]'
-                                                : isLight
-                                                    ? 'bg-white border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md'
-                                                    : 'bg-gray-900/40 border-gray-800 hover:border-gray-700 hover:bg-gray-900/60'
-                                                }`}
+                                            className="group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] shadow-sm hover:shadow-md"
                                         >
                                             <div className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r ${flow.gradient} opacity-0 group-hover:opacity-60 transition-opacity duration-300`} />
-                                            <div className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${isColorful ? 'bg-indigo-400/50/12 text-indigo-400 group-hover:bg-indigo-400/50/20' : isLight ? 'bg-indigo-400/5 text-indigo-500 group-hover:bg-indigo-400/10' : 'bg-indigo-600/30 text-indigo-400 group-hover:bg-indigo-600/50'}`}>
+                                            <div className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg transition-colors bg-[var(--primary)]/10 text-[var(--accent-text)] group-hover:bg-[var(--primary)]/20">
                                                 <span className="material-symbols text-base">{flow.icon}</span>
                                             </div>
-                                            <p className={`font-medium text-sm ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{flow.text}</p>
+                                            <p className="font-medium text-sm text-[var(--foreground)]/80">{flow.text}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -826,10 +850,10 @@ export default function MarketIntelligenceClient() {
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {[
-                                        { icon: "construction", title: content.frameworkTitle, desc: content.frameworkDesc, gradient: 'from-[var(--color-blue-vivid)] to-cyan-500', iconBg: isColorful ? 'bg-[var(--color-indigo-400)]/15 text-[var(--color-indigo-400)]' : isLight ? 'bg-primary/5 text-accent' : 'bg-primary/15 text-accent' },
-                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-[var(--color-ember)] to-amber-600', iconBg: isColorful ? 'bg-ds-ember/15 text-[var(--color-ember-light)]' : isLight ? 'bg-ds-ember/5 text-ds-ember' : 'bg-ds-ember/30 text-[var(--color-ember-light)]' },
-                                        { icon: "psychology", title: content.aiPatternsTitle, desc: content.aiPatternsDesc, gradient: 'from-purple-500 to-violet-500', iconBg: isColorful ? 'bg-purple-400/50/15 text-purple-400' : isLight ? 'bg-purple-400/5 text-purple-500' : 'bg-purple-600/30 text-purple-400' },
-                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-green-600 to-cyan-500', iconBg: isColorful ? 'bg-green-600/15 text-green-400' : isLight ? 'bg-green-600/5 text-ds-success' : 'bg-green-600/30 text-green-400' },
+                                        { icon: "construction", title: content.frameworkTitle, desc: content.frameworkDesc, gradient: 'from-[var(--color-blue-vivid)] to-cyan-500', iconBg: 'bg-[var(--primary)]/10 text-[var(--accent-text)]' },
+                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-[var(--color-ember)] to-amber-600', iconBg: 'bg-amber-500/10 text-amber-500' },
+                                        { icon: "psychology", title: content.aiPatternsTitle, desc: content.aiPatternsDesc, gradient: 'from-purple-500 to-violet-500', iconBg: 'bg-purple-500/10 text-purple-500' },
+                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-green-600 to-cyan-500', iconBg: 'bg-green-600/10 text-green-500' },
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
@@ -838,19 +862,14 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-30px' }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.08 }}
                                             whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 ${isColorful
-                                                ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1]'
-                                                : isLight
-                                                    ? 'bg-white border-gray-200 shadow-sm hover:shadow-lg'
-                                                    : 'bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 hover:border-gray-700'
-                                                }`}
+                                            className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] hover:shadow-lg"
                                         >
                                             <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${item.gradient} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
                                             <motion.div whileHover={{ scale: 1.12, rotate: 3 }} transition={{ type: 'spring', stiffness: 400, damping: 18 }} className={`w-12 h-12 rounded-xl flex items-center justify-center ${item.iconBg} mb-5`}>
                                                 <span className="material-symbols text-2xl">{item.icon}</span>
                                             </motion.div>
-                                            <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'}`}>{item.title}</h3>
-                                            <p className={`leading-relaxed text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>{item.desc}</p>
+                                            <h3 className="text-lg font-bold mb-3 text-[var(--foreground)]">{item.title}</h3>
+                                            <p className="leading-relaxed text-sm text-[var(--muted-foreground)]">{item.desc}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -874,19 +893,14 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-30px' }}
                                             transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: index * 0.1 }}
                                             whileHover={{ y: -6, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 ${isColorful
-                                                ? 'bg-gradient-to-br from-white/[0.04] to-white/[0.01] border-white/[0.08] hover:border-white/[0.15]'
-                                                : isLight
-                                                    ? 'bg-white border-gray-200 shadow-sm hover:shadow-lg'
-                                                    : 'bg-gray-900/60 border-gray-800 hover:border-gray-700'
-                                                }`}
+                                            className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] hover:shadow-lg"
                                         >
                                             <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${metric.gradient} opacity-50 group-hover:opacity-100 transition-opacity`} />
-                                            <span className={`material-symbols text-2xl mb-4 block ${isColorful ? 'text-cyan-400/80' : isLight ? 'text-cyan-500' : 'text-cyan-400/80'}`}>{metric.icon}</span>
-                                            <p className={`font-semibold mb-4 text-sm ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{metric.text}</p>
+                                            <span className="material-symbols text-2xl mb-4 block text-[var(--accent-text)]" aria-hidden="true">{metric.icon}</span>
+                                            <p className="font-semibold mb-4 text-sm text-[var(--foreground)]/80">{metric.text}</p>
 
                                             {/* Animated progress bar */}
-                                            <div className={`h-1.5 rounded-full overflow-hidden ${isColorful ? 'bg-white/[0.06]' : isLight ? 'bg-gray-100' : 'bg-gray-800'}`}>
+                                            <div className="h-1.5 rounded-full overflow-hidden bg-[var(--card-border)]">
                                                 <motion.div
                                                     className={`h-full rounded-full ${metric.barColor}`}
                                                     initial={{ width: '0%' }}
@@ -895,7 +909,7 @@ export default function MarketIntelligenceClient() {
                                                     transition={{ type: "spring", stiffness: 60, damping: 18, mass: 1, delay: delaySeconds.md + index * stagger.relaxed }}
                                                 />
                                             </div>
-                                            <div className={`mt-2 text-right text-xs font-medium tabular-nums ${isColorful ? 'text-gray-500' : isLight ? 'text-gray-400' : 'text-gray-600'}`}>
+                                            <div className="mt-2 text-right text-xs font-medium tabular-nums text-[var(--muted-foreground)]">
                                                 <AnimatedCounter target={metric.value} suffix="%" />
                                             </div>
                                         </motion.div>

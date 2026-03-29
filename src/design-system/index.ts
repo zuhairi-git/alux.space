@@ -60,7 +60,6 @@ export { default as Divider }     from '@/components/ui/Divider';
 // ── Media & Identity ──────────────────────────────────────────────────────
 export { default as Avatar }         from '@/components/ui/Avatar';
 export { default as Icon }           from '@/components/ui/Icon';
-export { default as MaterialSymbol } from '@/components/ui/MaterialSymbol';
 
 // ── Accessibility ─────────────────────────────────────────────────────────
 export { default as FocusTrap }   from '@/components/ui/FocusTrap';

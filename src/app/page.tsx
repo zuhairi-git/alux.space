@@ -13,6 +13,7 @@ import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
+import Icon from '@/components/ui/Icon';
 
 // A clean, readable skill card component
 const InteractiveSkillCard = ({ 
@@ -70,7 +71,7 @@ const InteractiveSkillCard = ({
           : 'bg-blue-500/10 group-hover:bg-blue-500/20'
         }
       `}>
-          <span className={`material-symbols text-2xl text-[var(--accent-text)]`}>
+          <span className={`material-symbols text-2xl text-[var(--accent-text)]`} aria-hidden="true">
           {skill.title.toLowerCase().includes('leadership') ? 'groups' :
            skill.title.toLowerCase().includes('strategy') ? 'lightbulb' :
            skill.title.toLowerCase().includes('design') || skill.title.toLowerCase().includes('prototyp') ? 'palette' :
@@ -104,10 +105,6 @@ const InteractiveSkillCard = ({
   );
 };
 
-// Icon component to simplify icon usage
-const Icon = ({ name, className = "" }: { name: string, className?: string }) => {
-  return <span className={`material-symbols ${className}`}>{name}</span>;
-};
 
 export default function Home() {
   const { theme } = useTheme();
@@ -302,7 +299,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)]"
             >
-              <span className="material-symbols text-xl text-[var(--primary)]">auto_awesome</span>
+              <span className="material-symbols text-xl text-[var(--primary)]" aria-hidden="true">auto_awesome</span>
               <span className={`text-sm font-medium text-[var(--accent-text)]`}>
                 {locale === 'fi' ? 'PERUSTUKSEN RAKENTAMINEN' : 'FOUNDATION BUILDING'}
               </span>
@@ -339,7 +336,7 @@ export default function Home() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className={`p-3 rounded-xl bg-[var(--primary)]/15 text-[var(--accent-text)]`}>
-                  <span className="material-symbols text-2xl">psychology</span>
+                  <span className="material-symbols text-2xl" aria-hidden="true">psychology</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">
@@ -362,7 +359,7 @@ export default function Home() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className={`p-3 rounded-xl bg-[var(--gradient-mid)]/15 text-[var(--accent-text-2)]`}>
-                  <span className="material-symbols text-2xl">explore</span>
+                  <span className="material-symbols text-2xl" aria-hidden="true">explore</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">
@@ -407,7 +404,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center justify-center mb-6"
             >
-              <span className={`
+              <span aria-hidden="true" className={`
                 material-symbols text-4xl p-4 rounded-2xl
                 text-[var(--accent-text)] bg-[var(--primary)]/10 border border-[var(--card-border)]
               `}>
@@ -504,7 +501,7 @@ export default function Home() {
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <span className="material-symbols text-2xl md:text-3xl text-[var(--accent-text)]">
+                      <span aria-hidden="true" className="material-symbols text-2xl md:text-3xl text-[var(--accent-text)]">
                         {item.icon}
                       </span>
                     </motion.div>
@@ -577,9 +574,8 @@ export default function Home() {
               }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="material-symbols text-xl">work</span>
               {locale === 'fi' ? 'Tutustu portfolioon' : 'View Portfolio'}
-              <span className="material-symbols text-xl">arrow_forward</span>
+              <span className="material-symbols text-xl" aria-hidden="true">arrow_forward</span>
             </motion.a>
           </motion.div>
         </div>
@@ -597,6 +593,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
             <motion.span 
+              aria-hidden="true"
               className="material-symbols inline-block text-3xl p-4 mb-5 rounded-full text-primary bg-primary/10"
               initial={{ rotateY: 0 }}
               animate={{ rotateY: 360 }}

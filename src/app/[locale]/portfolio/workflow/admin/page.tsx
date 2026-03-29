@@ -6,10 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import { palette } from '@/design-system';
 import type { Theme } from '@/context/ThemeContext';
-
-const Icon = ({ name, className = "", style }: { name: string, className?: string, style?: React.CSSProperties }) => (
-    <span className={`material-symbols ${className}`} style={style}>{name}</span>
-);
+import Icon from '@/components/ui/Icon';
 
 type Section = 'start' | 'dashboard' | 'users' | 'workspaces' | 'copilot-logs' | 'alerts-config' | 'analytics' | 'settings';
 
@@ -206,7 +203,7 @@ export default function PortalPanel() {
                             <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]">Portal</span>
                         </div>
                     )}
-                    <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                    <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
                         <Icon name={sidebarCollapsed ? "menu" : "menu_open"} className="text-xl" />
                     </button>
                 </div>
@@ -265,7 +262,7 @@ export default function PortalPanel() {
                                     </div>
                                     <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]">Portal</span>
                                 </div>
-                                <button onClick={() => setMobileSidebarOpen(false)} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                                <button onClick={() => setMobileSidebarOpen(false)} aria-label="Close navigation" className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
                                     <Icon name="close" className="text-xl" />
                                 </button>
                             </div>
@@ -305,7 +302,7 @@ export default function PortalPanel() {
                 {/* Top Bar */}
                 <header className={`h-20 flex items-center justify-between px-5 md:px-10 fixed top-0 left-0 right-0 z-30 ${sidebarCollapsed ? 'md:left-[80px]' : 'md:left-[280px]'} ${headerBg}`}>
                     <div className="flex items-center">
-                        <button onClick={() => setMobileSidebarOpen(true)} className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <button onClick={() => setMobileSidebarOpen(true)} aria-label="Open navigation" className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="menu" className="text-xl" />
                         </button>
                         <h1 className="text-xl md:text-2xl font-black capitalize tracking-tight">{activeSection.replace('-', ' ')}</h1>
@@ -315,16 +312,16 @@ export default function PortalPanel() {
                             <Icon name="search" className="text-lg opacity-50" />
                             <span className="opacity-50">Search anything... (Ctrl/⌘K)</span>
                         </motion.button>
-                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <motion.button onClick={() => setShowSearch(true)} aria-label="Search" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
                         {/* AI Copilot — mobile only, replaces floating button */}
-                        <motion.button onClick={() => setShowCopilot(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
+                        <motion.button onClick={() => setShowCopilot(true)} aria-label="Open AI Copilot" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
                             <Icon name="auto_awesome" className="text-xl text-white" />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
-                            <motion.button onClick={toggleNotifications} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <motion.button onClick={toggleNotifications} aria-label="Notifications" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                                 <Icon name="notifications" className="text-xl opacity-70" />
                                 {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-[var(--color-ember)]' : 'bg-[var(--primary)]'}`} />}
                             </motion.button>

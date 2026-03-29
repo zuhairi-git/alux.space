@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { exportToWord, exportToPowerPoint, exportToPDF } from './exportUtils';
 
@@ -977,7 +976,7 @@ export default function Presentation() {
             disabled={currentSlide === 0}
             className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-gray-50 text-gray-800 border border-gray-200"
           >
-            <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+            <span className="material-symbols text-2xl" aria-hidden="true">chevron_left</span>
           </button>
 
           {/* Progress Indicator */}
@@ -1000,7 +999,7 @@ export default function Presentation() {
             disabled={currentSlide === slides.length - 1}
             className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-gray-50 text-gray-800 border border-gray-200"
           >
-            <ChevronRight className="w-6 h-6 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+            <span className="material-symbols text-2xl" aria-hidden="true">chevron_right</span>
           </button>
         </div>
       )}

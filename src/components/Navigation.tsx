@@ -272,7 +272,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
         <span className="relative z-10 flex items-center gap-2">
           {/* <span className="material-symbols text-[18px]">{item.icon}</span> */}
           {t(item.labelKey)}
-          {item.children && <span className="material-symbols text-[14px]">expand_more</span>}
+          {item.children && <span className="material-symbols text-[14px]" aria-hidden="true">expand_more</span>}
         </span>
       </Link>
 
@@ -307,7 +307,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 }`}
               >
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'}`}>
-                  <span className="material-symbols text-[15px]">{child.icon}</span>
+                  <span className="material-symbols text-[15px]" aria-hidden="true">{child.icon}</span>
                 </div>
                 <span className="flex-1 font-medium">{t(child.labelKey)}</span>
               </Link>
@@ -331,7 +331,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                     }`}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-violet-500/15">
-                      <span className="material-symbols text-[15px] text-violet-400">{child.icon}</span>
+                      <span className="material-symbols text-[15px] text-violet-400" aria-hidden="true">{child.icon}</span>
                     </div>
                     <span className="flex-1 font-medium">{t(child.labelKey)}</span>
                   </Link>
@@ -357,7 +357,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                     }`}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-cyan-500/15">
-                      <span className="material-symbols text-[15px] text-cyan-400">{child.icon}</span>
+                      <span className="material-symbols text-[15px] text-cyan-400" aria-hidden="true">{child.icon}</span>
                     </div>
                     <span className="flex-1 font-medium">{t(child.labelKey)}</span>
                   </Link>
@@ -440,7 +440,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             `}
             aria-label="Menu"
           >
-            <span className="material-symbols text-2xl">{isMenuOpen ? 'close' : 'grid_view'}</span>
+            <span className="material-symbols text-2xl" aria-hidden="true">{isMenuOpen ? 'close' : 'grid_view'}</span>
           </button>
 
           <MobileDockItem
@@ -505,7 +505,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                               ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
                               : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
                           }`}>
-                            <span className={`material-symbols text-xl ${
+                            <span aria-hidden="true" className={`material-symbols text-xl ${
                               itemIsActive
                                 ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
                                 : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
@@ -515,6 +515,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                           <motion.span
                             animate={{ rotate: isExpanded ? 180 : 0 }}
                             transition={{ duration: 0.2 }}
+                            aria-hidden="true"
                             className={`material-symbols text-[18px] shrink-0 ${
                               theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-400' : 'text-white/30'
                             }`}
@@ -558,7 +559,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                                         : child.category === 'prototype' ? 'bg-cyan-500/15'
                                         : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
                                       }`}>
-                                        <span className={`material-symbols text-[13px] ${
+                                        <span aria-hidden="true" className={`material-symbols text-[13px] ${
                                           child.category === 'case-study' ? 'text-violet-400'
                                           : child.category === 'prototype' ? 'text-cyan-400'
                                           : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
@@ -598,7 +599,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                           ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
                           : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
                       }`}>
-                        <span className={`material-symbols text-xl ${
+                        <span aria-hidden="true" className={`material-symbols text-xl ${
                           itemIsActive
                             ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
                             : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
@@ -634,10 +635,11 @@ interface MobileDockItemProps {
   localizedHref: (path: string) => string;
 }
 
-const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDockItemProps) => {
+const MobileDockItem = ({ href, icon, label, isActive, theme, localizedHref }: MobileDockItemProps) => {
   return (
     <Link
       href={localizedHref(href)}
+      aria-label={label}
       className={`
         flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors
         ${isActive
@@ -646,7 +648,7 @@ const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDo
         }
       `}
     >
-      <span className={`material-symbols text-2xl transition-transform ${isActive ? '-translate-y-1' : ''}`}>
+      <span aria-hidden="true" className={`material-symbols text-2xl transition-transform ${isActive ? '-translate-y-1' : ''}`}>
         {icon}
       </span>
       {/* <span className="text-[10px] font-medium">{label}</span> */}
