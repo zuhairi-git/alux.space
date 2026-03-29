@@ -1634,6 +1634,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                 : 'bg-[var(--color-dark-1)] text-white';
 
     const muted = selectedTheme === 'light' ? 'text-slate-500' : 'text-white/50';
+    const headingClass = selectedTheme === 'light' ? 'text-slate-900' : 'text-white';
 
     const cardClass =
         selectedTheme === 'light'
@@ -1697,7 +1698,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                         key={selectedTheme + '-name'}
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-[32px] font-extrabold tracking-tight text-center mb-3"
+                        className={`text-[32px] font-extrabold tracking-tight text-center mb-3 ${headingClass}`}
                     >
                         Workflow Portal
                     </motion.h1>
@@ -1755,7 +1756,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             <Icon name="waving_hand" className="text-[14px]" />
                                             Welcome to the Portal
                                         </span>
-                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                        <h2 className={`text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4 ${headingClass}`}>
                                             Your team&apos;s command <br />centre
                                         </h2>
                                         <p className={`text-[16px] leading-relaxed ${muted}`}>
@@ -1798,7 +1799,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             <Icon name="auto_awesome" className="text-[14px]" />
                                             AI Copilot
                                         </span>
-                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                        <h2 className={`text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4 ${headingClass}`}>
                                             Ask anything, <br />get answers instantly
                                         </h2>
                                         <p className={`text-[16px] leading-relaxed ${muted}`}>
@@ -1819,7 +1820,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                     <Icon name={tip.icon} className="text-white text-[18px]" />
                                                 </div>
                                                 <div>
-                                                    <h4 className="font-semibold text-[14px] mb-1">{tip.title}</h4>
+                                                    <h4 className={`font-semibold text-[14px] mb-1 ${headingClass}`}>{tip.title}</h4>
                                                     <p className={`text-[13px] leading-relaxed ${muted}`}>{tip.body}</p>
                                                 </div>
                                             </motion.div>
@@ -1836,7 +1837,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             <Icon name="grid_view" className="text-[14px]" />
                                             8 Sections
                                         </span>
-                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                        <h2 className={`text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4 ${headingClass}`}>
                                             Everything you <br />need to run your platform
                                         </h2>
                                     </motion.div>
@@ -1871,7 +1872,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             <Icon name="palette" className="text-[14px]" />
                                             Appearance
                                         </span>
-                                        <h2 className="text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4">
+                                        <h2 className={`text-4xl font-extrabold tracking-tight leading-tight mt-3 mb-4 ${headingClass}`}>
                                             Make it look <br />exactly right
                                         </h2>
                                         <p className={`text-[16px] leading-relaxed ${muted}`}>
@@ -2005,7 +2006,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     style={{ boxShadow: `0 20px 60px ${accentColor}50` }}>
                                     <Icon name="blur_on" className="text-white text-[40px]" />
                                 </motion.div>
-                                <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-[26px] font-extrabold tracking-tight mb-3">Workflow Portal</motion.h1>
+                                <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className={`text-[26px] font-extrabold tracking-tight mb-3 ${headingClass}`}>Workflow Portal</motion.h1>
                                 <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className={`text-[14px] leading-relaxed ${muted}`}>
                                     AI-powered team collaboration and platform management for admins who move fast.
                                 </motion.p>
@@ -2016,7 +2017,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
                                     <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="auto_awesome" className="text-white text-[16px]" /></div>
-                                    <h2 className="text-[20px] font-extrabold tracking-tight">AI Copilot</h2>
+                                    <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>AI Copilot</h2>
                                 </motion.div>
                                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Get the most from your AI assistant</motion.p>
                                 <div className="space-y-3">
@@ -2024,7 +2025,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                         <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 + 0.12, type: 'spring', stiffness: 300, damping: 24 }} className={`p-4 rounded-2xl flex gap-4 ${cardClass}`}>
                                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}><Icon name={tip.icon} className="text-white text-[18px]" /></div>
                                             <div className="min-w-0">
-                                                <h4 className="font-semibold text-[14px] mb-0.5">{tip.title}</h4>
+                                                <h4 className={`font-semibold text-[14px] mb-0.5 ${headingClass}`}>{tip.title}</h4>
                                                 <p className={`text-[12px] leading-relaxed ${muted}`}>{tip.body}</p>
                                             </div>
                                         </motion.div>
@@ -2037,7 +2038,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
                                     <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="apps" className="text-white text-[16px]" /></div>
-                                    <h2 className="text-[20px] font-extrabold tracking-tight">What&apos;s Inside</h2>
+                                    <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>What&apos;s Inside</h2>
                                 </motion.div>
                                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>8 fully interactive sections</motion.p>
                                 <div className="space-y-2.5">
@@ -2058,7 +2059,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
                                     <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="palette" className="text-white text-[16px]" /></div>
-                                    <h2 className="text-[20px] font-extrabold tracking-tight">Choose Your Look</h2>
+                                    <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>Choose Your Look</h2>
                                 </motion.div>
                                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>
                                 <div className="space-y-3">
