@@ -134,7 +134,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           aria-label={t('blog.aria.articleMeta')}
         >
           <div className="flex items-center gap-3">
-            <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(236,72,153,0.3)]">
+            <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden flex-shrink-0 shadow-[0_0_15px_var(--primary-glow)]">
               <Image 
                 src="/images/me/ali.png" 
                 alt={`${t('blog.aria.authorPhoto')} ${author}`}

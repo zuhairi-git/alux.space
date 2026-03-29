@@ -225,7 +225,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
               <h3 className="text-2xl font-bold mb-6 text-primary">{getAboutAuthorText(locale)}</h3>
               <SurfaceCard variant="primary">
                 <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                  <div className="w-24 h-24 relative rounded-full overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                  <div className="w-24 h-24 relative rounded-full overflow-hidden shadow-[0_0_20px_var(--primary-glow)]">
                     <Image
                       src="/images/me/ali.png"
                       alt={post.author}

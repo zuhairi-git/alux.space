@@ -141,18 +141,18 @@ export default function PortalPanel() {
     const sidebarBg = isLight
         ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60'
         : isColorful
-            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-ds-ember/30 shadow-[2px_0_8px_0_rgba(255,140,66,0.06)]'
-            : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[2px_0_8px_0_rgba(0,0,0,0.08)]';
+            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-ds-ember/30 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]'
+            : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]';
     const headerBg = isLight
         ? 'bg-white/40 backdrop-blur-2xl border-b border-white/60'
         : isColorful
             ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-2xl border-b border-ds-ember/30'
             : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
-        ? 'bg-white rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(15,23,42,0.06)] p-5 md:p-7'
+        ? 'bg-white rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)] p-5 md:p-7'
         : isColorful
-            ? 'bg-[var(--color-card-colorful-from)]/95 rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(255,140,66,0.10)] p-5 md:p-7'
-            : 'bg-[var(--color-gray-900)] rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(0,0,0,0.25)] p-5 md:p-7';
+            ? 'bg-[var(--color-card-colorful-from)]/95 rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)] p-5 md:p-7'
+            : 'bg-[var(--color-gray-900)] rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)] p-5 md:p-7';
     const aiGradientStrong = 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]';
     const aiGradientSoft = 'from-[var(--primary)] to-[var(--gradient-mid)]';
     const aiGradientGlow = 'from-[var(--primary)] to-[var(--gradient-mid)]';
@@ -479,7 +479,7 @@ export default function PortalPanel() {
                                     <AIStamp isLight={isLight} size="md" className="shadow-lg" />
                                     <div>
                                         <h3 className={`font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${aiGradientSoft}`}>Copilot</h3>
-                                        <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-green-400 mr-2 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" /> Online & Ready</p>
+                                        <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-ds-success mr-2 animate-pulse shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.8)]" /> Online & Ready</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
@@ -614,7 +614,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
     const [showInsight, setShowInsight] = useState(false);
 
     return (
-        <motion.div variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white hover:shadow-[0_4px_14px_rgba(15,23,42,0.06)]' : isColorful ? 'bg-[var(--color-card-colorful-from)]/95 hover:shadow-[0_4px_14px_rgba(255,140,66,0.10)]' : 'bg-[var(--color-gray-900)] hover:shadow-[0_4px_14px_rgba(0,0,0,0.25)]'} border border-[var(--card-border)] rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300`}>
+        <motion.div variants={itemVariants} whileHover={{ y: -4, scale: 1.02 }} onClick={() => setShowInsight(!showInsight)} className={`${isLight ? 'bg-white hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)]' : isColorful ? 'bg-[var(--color-card-colorful-from)]/95 hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)]' : 'bg-[var(--color-gray-900)] hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)]'} border border-[var(--card-border)] rounded-3xl p-6 flex flex-col cursor-pointer transition-all duration-300`}>
             <div className="flex items-center justify-between mb-4">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[var(--primary)]/15 to-[var(--gradient-mid)]/15`}>
                     <Icon name={icon} className="text-2xl text-[var(--primary)]" />
@@ -692,11 +692,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                                         transition={{ duration: 0.6, delay: i * 0.018, ease: [0.16, 1, 0.3, 1] }}
                                         className="w-full rounded-full cursor-pointer relative z-10 hover:opacity-90 transition-opacity"
                                         style={{
-                                            background: isLight
-                                                ? 'linear-gradient(to top, rgb(245, 158, 11), rgba(251,191,36,0.3))'
-                                                : isColorful
-                                                    ? 'linear-gradient(to top, rgba(255,140,66,0.95), rgba(255,140,66,0.22))'
-                                                    : 'linear-gradient(to top, rgba(34,211,238,0.88), rgba(34,211,238,0.15))'
+                                            background: 'var(--chart-bar-gradient)'
                                         }}
                                     />
                                     <div className={`absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap pointer-events-none ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
@@ -718,7 +714,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                         {recentActivity.map((a, i) => (
                             <motion.div
                                 key={i}
-                                whileHover={{ x: 6, backgroundColor: isLight ? 'rgba(255,255,255,0.5)' : isColorful ? 'rgba(147,51,234,0.12)' : 'rgba(255,255,255,0.05)' }}
+                                whileHover={{ x: 6, backgroundColor: 'var(--row-hover-bg)' }}
                                 className="flex items-start space-x-4 p-3 -mx-3 rounded-2xl cursor-pointer transition-all duration-300"
                             >
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${a.bg} ${a.color}`}>
@@ -812,7 +808,7 @@ function UsersSection({ card, isLight }: { card: string, isLight: boolean }) {
     ];
 
     const roleBadge = (r: string) => r === 'Admin' ? 'bg-[var(--primary)]/10 text-[var(--primary)] border-[var(--primary)]/20' : r === 'Editor' ? 'bg-[var(--color-purple-700)]/10 text-[var(--color-purple-700)] border-[var(--color-purple-700)]/20' : 'bg-slate-500/10 text-slate-500 border-slate-500/20';
-    const statusDot = (s: string) => s === 'Active' ? 'bg-green-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]' : s === 'Invited' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-slate-400';
+    const statusDot = (s: string) => s === 'Active' ? 'bg-ds-success shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.6)]' : s === 'Invited' ? 'bg-ds-warning shadow-[0_0_8px_rgb(var(--color-warning-rgb)_/_0.6)]' : 'bg-slate-400';
 
     const handleNext = () => setWizardStep(prev => Math.min(prev + 1, 3));
     const handleBack = () => setWizardStep(prev => Math.max(prev - 1, 1));
@@ -1987,7 +1983,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             animate={{ width: i === step ? '1.75rem' : '0.5rem' }}
                             transition={{ duration: 0.3 }}
                             className="h-1.5 rounded-full"
-                            style={{ backgroundColor: i <= step ? accentColor : (selectedTheme === 'light' ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.15)') }}
+                            style={{ backgroundColor: i <= step ? accentColor : 'var(--stepper-inactive-color)' }}
                         />
                     ))}
                 </div>

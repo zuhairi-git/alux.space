@@ -324,12 +324,7 @@ export default function MarketIntelligenceClient() {
 
                 {/* Ambient background grid */}
                 <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-                    <div className={`absolute inset-0 ${isColorful
-                        ? 'bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:60px_60px]'
-                        : isLight
-                            ? 'bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:60px_60px]'
-                            : 'bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]'
-                        }`} />
+                    <div className="absolute inset-0 bg-[linear-gradient(var(--grid-line-color)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line-color)_1px,transparent_1px)] bg-[size:60px_60px]" />
                     {isColorful && (
                         <>
                             <div className="absolute top-1/4 -left-40 w-96 h-96 bg-indigo-600/8 rounded-full blur-[120px]" />
