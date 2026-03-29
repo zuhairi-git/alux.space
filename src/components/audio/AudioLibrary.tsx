@@ -69,9 +69,9 @@ const AudioLibrary: React.FC = () => {
   const getButtonStyles = () => {
     if (isLight) {
       return {
-        primary: 'bg-blue-600 hover:bg-blue-700 text-white',
+        primary: 'bg-[var(--btn-primary-bg)] hover:bg-[var(--primary-hover)] text-white',
         secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-700',
-        active: 'bg-blue-600 text-white',
+        active: 'bg-[var(--btn-primary-bg)] text-white',
         inactive: 'bg-gray-100 text-gray-700'
       };
     } else if (isColorful) {
@@ -83,9 +83,9 @@ const AudioLibrary: React.FC = () => {
       };
     } else {
       return {
-        primary: 'bg-blue-600 hover:bg-blue-700 text-white',
+        primary: 'bg-[var(--btn-primary-bg)] hover:bg-[var(--primary-hover)] text-white',
         secondary: 'bg-gray-700 hover:bg-gray-600 text-gray-300',
-        active: 'bg-blue-600 text-white',
+        active: 'bg-[var(--btn-primary-bg)] text-white',
         inactive: 'bg-gray-700 text-gray-300'
       };
     }
@@ -257,7 +257,7 @@ const AudioLibrary: React.FC = () => {
                           isLight 
                             ? 'bg-white border-gray-300 text-gray-900' 
                             : 'bg-black/20 border-gray-600 text-white'
-                        } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                        } focus:ring-2 focus:ring-primary focus:border-transparent`}
                       />
                       <span className="absolute left-3 top-2.5 material-symbols text-gray-400">
                         search
@@ -278,7 +278,7 @@ const AudioLibrary: React.FC = () => {
                         isLight 
                           ? 'bg-white border-gray-300 text-gray-900' 
                           : 'bg-black/20 border-gray-600 text-white'
-                      } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                      } focus:ring-2 focus:ring-primary focus:border-transparent`}
                     >
                       <option value="all">All Categories</option>
                       {categories.map(category => (
@@ -302,7 +302,7 @@ const AudioLibrary: React.FC = () => {
                         isLight 
                           ? 'bg-white border-gray-300 text-gray-900' 
                           : 'bg-black/20 border-gray-600 text-white'
-                      } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                      } focus:ring-2 focus:ring-primary focus:border-transparent`}
                     >
                       <option value="newest">Newest First</option>
                       <option value="oldest">Oldest First</option>

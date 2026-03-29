@@ -419,7 +419,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     const statusStyle = item.status === 'Interview'
                         ? 'bg-ds-success/15 text-ds-success border-green-600/30'
                         : item.status === 'Applied'
-                        ? (isColorful ? 'bg-ds-ember/10 text-ds-ember border-ds-ember/30' : isLight ? 'bg-ds-blue-500/10 text-ds-blue-600 border-blue-200' : 'bg-ds-blue-500/15 text-ds-blue-400 border-blue-500/30')
+                        ? (isColorful ? 'bg-ds-ember/10 text-ds-ember border-ds-ember/30' : isLight ? 'bg-primary/10 text-accent border-[var(--primary)]/20' : 'bg-primary/15 text-accent border-[var(--primary)]/30')
                         : (isLight ? 'bg-gray-100 text-gray-500 border-gray-200' : 'bg-white/8 text-white/50 border-white/10');
                     const matchColor = item.match >= 90 ? 'text-ds-success' : item.match >= 80 ? (isColorful ? 'text-ds-ember' : 'text-ds-blue-400') : 'text-amber-400';
                     const matchBg = item.match >= 90 ? 'bg-ds-success/10' : item.match >= 80 ? (isColorful ? 'bg-ds-ember/10' : 'bg-ds-blue-500/10') : 'bg-amber-600/10';

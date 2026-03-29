@@ -43,7 +43,7 @@ export default function MobileAnimationDemo() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: durationSeconds.dramatic, delay: delaySeconds.md }}
-            className="bg-blue-500 text-white p-4 rounded"
+            className="bg-primary text-white p-4 rounded"
           >
             This box slides up from below. On mobile with animations disabled, it appears instantly.
           </MotionDiv>
@@ -102,7 +102,7 @@ export default function MobileAnimationDemo() {
       </div>
 
       {/* Instructions */}
-      <div className="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg">
+      <div className="bg-[var(--card-from-bg)] border border-[var(--card-border)] p-6 rounded-lg">
         <h3 className="text-xl font-semibold mb-4">How to Test</h3>
         <ol className="list-decimal list-inside space-y-2 text-sm">          <li>
             <strong>Change device type:</strong> Use browser DevTools to toggle between desktop and mobile view

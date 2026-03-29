@@ -25,6 +25,8 @@ export const palette = {
     700: '#1e40af',
     800: '#1e3a8a',
     900: '#1e2756',
+    vivid:     '#0057ff',  // modern electric blue — light theme primary
+    vividDark: '#0044cc',  // hover / darker variant
   },
   purple: {
     300: '#c4b5fd',

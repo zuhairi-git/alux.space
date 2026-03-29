@@ -174,8 +174,8 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
           ${theme === 'colorful'
             ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-cobalt-700)] text-white shadow-[var(--color-ember)]/25'
             : theme === 'light'
-              ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-blue-500/25'
-              : 'bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-blue-400/25'
+              ? 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white shadow-[var(--primary)]/25'
+              : 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white shadow-[var(--primary)]/25'
           }
         `}
         aria-label="Home"
@@ -302,8 +302,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
                   isChildActive(child.href)
-                    ? (theme === 'colorful' ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-medium' : theme === 'light' ? 'bg-blue-50 text-blue-600 font-medium' : 'bg-blue-900/30 text-blue-400 font-medium')
-                    : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]' : theme === 'light' ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' : 'text-gray-300 hover:bg-gray-800 hover:text-blue-400')
+                    ? (theme === 'colorful' ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-medium' : theme === 'light' ? 'bg-primary/10 text-accent font-medium' : 'bg-primary/15 text-accent font-medium')
+                    : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]' : theme === 'light' ? 'text-gray-700 hover:bg-gray-100 hover:text-accent' : 'text-gray-300 hover:bg-gray-800 hover:text-accent')
                 }`}
               >
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'}`}>
@@ -435,7 +435,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                 ? 'bg-red-500 text-white rotate-90'
                 : theme === 'colorful'
                   ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-cobalt-700)] text-white'
-                  : 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
+                  : 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white'
               }
             `}
             aria-label="Menu"
@@ -496,18 +496,18 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                           onClick={() => setExpandedItem(isExpanded ? null : item.href)}
                           className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-left ${
                             itemIsActive
-                              ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-blue-50 text-blue-700' : 'bg-blue-900/25 text-blue-300')
+                              ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-primary/10 text-accent' : 'bg-primary/15 text-accent')
                               : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-gray-800 hover:bg-gray-50' : 'text-gray-200 hover:bg-gray-800/50')
                           }`}
                         >
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                             itemIsActive
-                              ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-blue-100' : 'bg-blue-900/40')
+                              ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
                               : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
                           }`}>
                             <span className={`material-symbols text-xl ${
                               itemIsActive
-                                ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-blue-600' : 'text-blue-400')
+                                ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
                                 : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
                             }`}>{item.icon}</span>
                           </div>
@@ -549,7 +549,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                                               ? (theme === 'light' ? 'bg-violet-50 text-violet-700 font-medium' : 'bg-violet-900/20 text-violet-300 font-medium')
                                               : child.category === 'prototype'
                                                 ? (theme === 'light' ? 'bg-cyan-400/5 text-cyan-500 font-medium' : 'bg-cyan-500/20 text-cyan-400 font-medium')
-                                                : (theme === 'light' ? 'bg-blue-50 text-blue-700 font-medium' : 'bg-blue-900/20 text-blue-300 font-medium'))
+                                                : (theme === 'light' ? 'bg-primary/10 text-accent font-medium' : 'bg-primary/15 text-accent font-medium'))
                                           : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-gray-700 hover:bg-gray-50' : 'text-gray-300 hover:bg-gray-800/40')
                                       }`}
                                     >
@@ -589,18 +589,18 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                       onClick={() => setIsMenuOpen(false)}
                       className={`flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] ${
                         itemIsActive
-                          ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-blue-50 text-blue-700' : 'bg-blue-900/25 text-blue-300')
+                          ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-primary/10 text-accent' : 'bg-primary/15 text-accent')
                           : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-gray-800 hover:bg-gray-50' : 'text-gray-200 hover:bg-gray-800/50')
                       }`}
                     >
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                         itemIsActive
-                          ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-blue-100' : 'bg-blue-900/40')
+                          ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
                           : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
                       }`}>
                         <span className={`material-symbols text-xl ${
                           itemIsActive
-                            ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-blue-600' : 'text-blue-400')
+                            ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
                             : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
                         }`}>{item.icon}</span>
                       </div>
@@ -641,7 +641,7 @@ const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDo
       className={`
         flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors
         ${isActive
-          ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-blue-600' : 'text-blue-400')
+          ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
           : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
         }
       `}
@@ -653,7 +653,7 @@ const MobileDockItem = ({ href, icon, isActive, theme, localizedHref }: MobileDo
       {isActive && (
         <motion.div
           layoutId="dock-dot"
-          className={`w-1 h-1 rounded-full ${theme === 'colorful' ? 'bg-[var(--primary)]' : theme === 'light' ? 'bg-blue-600' : 'bg-blue-400'}`}
+          className={`w-1 h-1 rounded-full ${theme === 'colorful' ? 'bg-[var(--primary)]' : theme === 'light' ? 'bg-accent' : 'bg-accent'}`}
         />
       )}
     </Link>

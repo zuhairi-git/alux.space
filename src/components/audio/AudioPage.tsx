@@ -64,7 +64,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
         subtitle: 'text-gray-600',
         text: 'text-gray-700',
         muted: 'text-gray-500',
-        accent: 'text-blue-600'
+        accent: 'text-accent'
       };
     } else if (isColorful) {
       return {
@@ -80,7 +80,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
         subtitle: 'text-gray-300',
         text: 'text-gray-300',
         muted: 'text-gray-400',
-        accent: 'text-blue-400'
+        accent: 'text-accent'
       };
     }
   };
@@ -97,18 +97,18 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
 
   const getLinkStyles = () => {
     if (isLight) {
-      return 'no-underline hover:bg-blue-50 px-1 py-0.5 rounded transition-colors duration-150';
+      return 'no-underline hover:bg-primary/5 px-1 py-0.5 rounded transition-colors duration-150';
     } else if (isColorful) {
       return 'no-underline hover:bg-[var(--primary)]/10 px-1 py-0.5 rounded transition-colors duration-150';
     } else {
-      return 'no-underline hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors duration-150';
+      return 'no-underline hover:bg-primary/10 px-1 py-0.5 rounded transition-colors duration-150';
     }
   };
 
   const getLanguageButtonStyles = (isActive: boolean) => {
     if (isLight) {
       return isActive 
-        ? 'bg-blue-600 text-white border-blue-600' 
+        ? 'bg-[var(--btn-primary-bg)] text-white border-[var(--btn-primary-bg)]' 
         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50';
     } else if (isColorful) {
       return isActive 
@@ -116,7 +116,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
         : 'bg-[var(--primary)]/20 text-[var(--foreground)] border-[var(--primary)]/30 hover:bg-[var(--primary)]/30';
     } else {
       return isActive 
-        ? 'bg-blue-600 text-white border-blue-600' 
+        ? 'bg-[var(--btn-primary-bg)] text-white border-[var(--btn-primary-bg)]' 
         : 'bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600';
     }
   };

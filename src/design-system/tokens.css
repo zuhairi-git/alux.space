@@ -31,6 +31,8 @@
   --color-blue-700: #1e40af;
   --color-blue-800: #1e3a8a;
   --color-blue-900: #1e2756;
+  --color-blue-vivid:      #0057ff;          /* modern electric blue — light theme primary */
+  --color-blue-vivid-dark: #0044cc;          /* hover / darker variant */
 
   /* Purples */
   --color-purple-300: #c4b5fd;
@@ -115,22 +117,22 @@
 :root {
   --background:          var(--color-white);
   --foreground:          #171717;
-  --primary:             var(--color-blue-500);
-  --primary-hover:       var(--color-blue-600);
-  --gradient-start:      var(--color-blue-500);
+  --primary:             var(--color-blue-vivid);
+  --primary-hover:       var(--color-blue-vivid-dark);
+  --gradient-start:      var(--color-blue-vivid);
   --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--color-blue-500);
-  --primary-glow:        rgba(59, 130, 246, 0.2);
+  --gradient-end:        var(--color-blue-vivid-dark);
+  --primary-glow:        rgba(0, 87, 255, 0.2);
 
   /* Card surfaces */
   --card-from-bg:        rgba(249, 250, 251, 0.9);
   --card-to-bg:          rgba(243, 244, 246, 0.9);
   --card-border:         rgba(229, 231, 235, 0.5);
-  --card-border-hover:   rgba(96, 165, 250, 0.5);
-  --card-shadow-color:   rgba(59, 130, 246, 0.2);
+  --card-border-hover:   rgba(0, 87, 255, 0.4);
+  --card-shadow-color:   rgba(0, 87, 255, 0.18);
 
   /* Accent text — for labels, icons, tag text */
-  --accent-text:           var(--color-blue-500);
+  --accent-text:           var(--color-blue-vivid-dark);
   --accent-text-2:         var(--color-indigo-500);
 
   /* Overlay panels — dropdowns, menus */
@@ -143,12 +145,12 @@
   --nav-border:          rgba(255, 255, 255, 0.5);
 
   /* Scrollbar */
-  --scrollbar-thumb:       var(--color-blue-500);
-  --scrollbar-thumb-hover: var(--color-blue-600);
+  --scrollbar-thumb:       var(--color-blue-vivid);
+  --scrollbar-thumb-hover: var(--color-blue-vivid-dark);
 
   /* Button */
-  --btn-primary-bg:              var(--color-blue-600);
-  --btn-primary-hover:           var(--color-blue-700);
+  --btn-primary-bg:              var(--color-blue-vivid);
+  --btn-primary-hover:           var(--color-blue-vivid-dark);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
 
@@ -207,19 +209,19 @@
 .theme-light {
   --background:          var(--color-white);
   --foreground:          var(--color-gray-800);
-  --primary:             var(--color-blue-500);
-  --primary-hover:       var(--color-blue-600);
-  --gradient-start:      var(--color-blue-500);
+  --primary:             var(--color-blue-vivid);
+  --primary-hover:       var(--color-blue-vivid-dark);
+  --gradient-start:      var(--color-blue-vivid);
   --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--color-blue-500);
-  --primary-glow:        rgba(59, 130, 246, 0.2);
+  --gradient-end:        var(--color-blue-vivid-dark);
+  --primary-glow:        rgba(0, 87, 255, 0.2);
   --card-from-bg:        rgba(253, 253, 253, 0.9);
   --card-to-bg:          rgba(243, 244, 246, 0.9);
   --card-border:         rgba(229, 231, 235, 0.5);
-  --card-border-hover:   rgba(96, 165, 250, 0.5);
-  --card-shadow-color:   rgba(59, 130, 246, 0.2);
+  --card-border-hover:   rgba(0, 87, 255, 0.4);
+  --card-shadow-color:   rgba(0, 87, 255, 0.18);
   /* Accent text */
-  --accent-text:           var(--color-blue-600);
+  --accent-text:           var(--color-blue-vivid-dark);
   --accent-text-2:         var(--color-indigo-600);
   /* Overlay panels */
   --dropdown-bg:           var(--color-white);
@@ -227,10 +229,10 @@
   --dropdown-text:         var(--color-gray-700);
   --nav-bg:              rgba(255, 255, 255, 0.8);
   --nav-border:          rgba(255, 255, 255, 0.5);
-  --scrollbar-thumb:       var(--color-blue-500);
-  --scrollbar-thumb-hover: var(--color-blue-700);
-  --btn-primary-bg:              var(--color-blue-600);
-  --btn-primary-hover:           var(--color-blue-700);
+  --scrollbar-thumb:       var(--color-blue-vivid);
+  --scrollbar-thumb-hover: var(--color-blue-vivid-dark);
+  --btn-primary-bg:              var(--color-blue-vivid);
+  --btn-primary-hover:           var(--color-blue-vivid-dark);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
   --color-success:         #16a34a;
@@ -254,22 +256,22 @@
   --player-bg:              rgba(255, 255, 255, 0.9);
   --player-border:          rgba(229, 231, 235, 0.8);
   --player-shadow:          0 20px 60px rgba(0,0,0,0.08);
-  --player-waveform-from:   var(--color-blue-500);
+  --player-waveform-from:   var(--color-blue-vivid);
   --player-waveform-to:     var(--color-indigo-600);
   --player-waveform-off:    rgba(209, 213, 219, 0.5);
-  --player-progress-from:   var(--color-blue-500);
+  --player-progress-from:   var(--color-blue-vivid);
   --player-progress-via:    var(--color-indigo-500);
   --player-progress-to:     var(--color-purple-500);
-  --player-btn-from:        var(--color-blue-500);
+  --player-btn-from:        var(--color-blue-vivid);
   --player-btn-to:          var(--color-indigo-600);
-  --player-btn-glow:        rgba(59, 130, 246, 0.25);
+  --player-btn-glow:        rgba(0, 87, 255, 0.25);
   --player-ctrl-bg:         rgba(255, 255, 255, 0.8);
   --player-ctrl-border:     var(--color-gray-200);
   --player-ctrl-hover-bg:   var(--color-white);
   --player-ctrl-text:       var(--color-gray-700);
-  --player-ctrl-text-hover: var(--color-blue-600);
+  --player-ctrl-text-hover: var(--color-blue-vivid-dark);
   --player-glow-mid:        rgba(99, 102, 241, 0.05);
-  --player-accent:          var(--color-blue-600);
+  --player-accent:          var(--color-blue-vivid-dark);
   --player-tag-bg:          rgba(147, 51, 234, 0.08);
   --player-tag-text:        var(--color-purple-700);
   --player-tag-border:      rgba(147, 51, 234, 0.20);
@@ -279,36 +281,36 @@
   --mobile-border-rgb:   229 231 235;  /* gray-200 #e5e7eb — border */
   --mobile-header-rgb:   249 250 251;  /* gray-50  #f9fafb — header bg */
   --mobile-nav-rgb:      243 244 246;  /* gray-100 #f3f4f6 — nav bg */
-  --mobile-accent-rgb:   59 130 246;   /* blue-500 #3b82f6 — accent */
+  --mobile-accent-rgb:   0 87 255;     /* blue-vivid #0057ff — accent */
 }
 
 .theme-dark {
   --background:          var(--color-gray-950);
   --foreground:          #ededed;
-  --primary:             var(--color-blue-500);
-  --primary-hover:       var(--color-blue-600);
-  --gradient-start:      var(--color-blue-500);
+  --primary:             var(--color-indigo-400);
+  --primary-hover:       var(--color-indigo-500);
+  --gradient-start:      var(--color-indigo-400);
   --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--color-blue-500);
-  --primary-glow:        rgba(59, 130, 246, 0.2);
+  --gradient-end:        var(--color-purple-400);
+  --primary-glow:        rgba(129, 140, 248, 0.25);
   --card-from-bg:        rgba(31, 41, 55, 0.9);
   --card-to-bg:          rgba(17, 24, 39, 0.9);
   --card-border:         rgba(75, 85, 99, 0.5);
-  --card-border-hover:   rgba(96, 165, 250, 0.5);
-  --card-shadow-color:   rgba(59, 130, 246, 0.2);
+  --card-border-hover:   rgba(129, 140, 248, 0.5);
+  --card-shadow-color:   rgba(129, 140, 248, 0.2);
   /* Accent text */
-  --accent-text:           var(--color-blue-400);
-  --accent-text-2:         var(--color-indigo-400);
+  --accent-text:           var(--color-indigo-400);
+  --accent-text-2:         var(--color-purple-400);
   /* Overlay panels */
   --dropdown-bg:           var(--color-gray-900);
   --dropdown-border:       var(--color-gray-700);
   --dropdown-text:         var(--color-gray-300);
   --nav-bg:              rgba(17, 24, 39, 0.8);
   --nav-border:          rgba(255, 255, 255, 0.1);
-  --scrollbar-thumb:       var(--color-blue-600);
-  --scrollbar-thumb-hover: var(--color-blue-400);
-  --btn-primary-bg:              var(--color-blue-500);
-  --btn-primary-hover:           var(--color-blue-400);
+  --scrollbar-thumb:       var(--color-indigo-500);
+  --scrollbar-thumb-hover: var(--color-indigo-400);
+  --btn-primary-bg:              var(--color-indigo-500);
+  --btn-primary-hover:           var(--color-indigo-400);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
   --color-success:         #4ade80;
@@ -332,22 +334,22 @@
   --player-bg:              rgba(17, 24, 39, 0.9);
   --player-border:          rgba(55, 65, 81, 0.5);
   --player-shadow:          0 20px 60px rgba(0,0,0,0.4);
-  --player-waveform-from:   var(--color-blue-400);
+  --player-waveform-from:   var(--color-indigo-400);
   --player-waveform-to:     var(--color-purple-500);
   --player-waveform-off:    rgba(75, 85, 99, 0.3);
-  --player-progress-from:   var(--color-blue-400);
+  --player-progress-from:   var(--color-indigo-400);
   --player-progress-via:    var(--color-purple-500);
   --player-progress-to:     var(--color-pink-500);
-  --player-btn-from:        var(--color-blue-500);
+  --player-btn-from:        var(--color-indigo-500);
   --player-btn-to:          var(--color-purple-600);
-  --player-btn-glow:        rgba(168, 85, 247, 0.25);
+  --player-btn-glow:        rgba(129, 140, 248, 0.28);
   --player-ctrl-bg:         rgba(31, 41, 55, 0.8);
   --player-ctrl-border:     var(--color-gray-600);
   --player-ctrl-hover-bg:   var(--color-gray-700);
   --player-ctrl-text:       var(--color-gray-300);
   --player-ctrl-text-hover: var(--color-white);
-  --player-glow-mid:        rgba(168, 85, 247, 0.1);
-  --player-accent:          var(--color-purple-400);
+  --player-glow-mid:        rgba(129, 140, 248, 0.12);
+  --player-accent:          var(--color-indigo-400);
   --player-tag-bg:          rgba(76, 29, 149, 0.30);
   --player-tag-text:        var(--color-purple-300);
   --player-tag-border:      rgba(109, 40, 217, 0.45);
@@ -357,7 +359,7 @@
   --mobile-border-rgb:   75 85 99;     /* gray-600 #4b5563 — border */
   --mobile-header-rgb:   18 18 26;     /* dark-2 #12121a — header bg */
   --mobile-nav-rgb:      18 18 26;     /* dark-2 #12121a — nav bg */
-  --mobile-accent-rgb:   96 165 250;   /* blue-400 #60a5fa — accent */
+  --mobile-accent-rgb:   129 140 248;  /* indigo-400 #818cf8 — accent */
 }
 
 .theme-colorful {

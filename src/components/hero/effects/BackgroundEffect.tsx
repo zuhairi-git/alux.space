@@ -258,7 +258,7 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
       <div className="absolute top-0 left-3/4 text-purple-800 text-xs font-mono opacity-20 animate-matrix animation-delay-5000">[]</div>
       
       {/* Subtle pulsing nodes */}
-      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse-glow" />
+      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-[var(--primary)] rounded-full animate-pulse-glow" />
       <div className="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-indigo-600 rounded-full animate-pulse-glow animation-delay-2000" />
       <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-purple-600 rounded-full animate-pulse-glow animation-delay-4000" />
     </div>

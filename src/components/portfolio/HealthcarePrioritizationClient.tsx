@@ -28,13 +28,13 @@ export default function HealthcarePrioritizationClient() {
       borderColor: string;
     }> = {
       blue: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-400/30' : '',
-        iconText: isColorful ? 'text-blue-400' : isLight ? 'text-blue-600' : 'text-blue-400',
-        titleText: isColorful ? 'text-blue-300' : '',
-        iconBg: isColorful ? 'bg-blue-500/20' : isLight ? 'bg-blue-100' : 'bg-blue-900/40',
-        takeawayBg: isColorful ? 'bg-gradient-to-br from-blue-900/30 to-blue-800/30 border border-blue-400/30' : '',
-        takeawayIconBg: isColorful ? 'bg-blue-500/20 text-blue-300' : '',
-        borderColor: isColorful ? 'border-blue-500/30' : ''
+        cardBg: isColorful ? 'bg-gradient-to-br from-[var(--color-indigo-400)]/15 to-[var(--color-indigo-500)]/15 border border-[var(--color-indigo-400)]/25' : '',
+        iconText: isColorful ? 'text-[var(--color-indigo-400)]' : isLight ? 'text-accent' : 'text-accent',
+        titleText: isColorful ? 'text-[var(--color-indigo-400)]' : '',
+        iconBg: isColorful ? 'bg-[var(--color-indigo-400)]/15' : isLight ? 'bg-primary/10' : 'bg-primary/20',
+        takeawayBg: isColorful ? 'bg-gradient-to-br from-[var(--color-indigo-500)]/20 to-[var(--color-indigo-400)]/15 border border-[var(--color-indigo-400)]/25' : '',
+        takeawayIconBg: isColorful ? 'bg-[var(--color-indigo-400)]/15 text-[var(--color-indigo-400)]' : '',
+        borderColor: isColorful ? 'border-[var(--color-indigo-400)]/25' : ''
       },
       purple: {
         cardBg: isColorful ? 'bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-400/30' : '',
@@ -318,7 +318,7 @@ export default function HealthcarePrioritizationClient() {
                 {/* Context & Conflict Row */}
                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                   {[
-                    { title: content.contextTitle, desc: content.contextDesc, colorful: 'bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white', extra: null },
+                    { title: content.contextTitle, desc: content.contextDesc, colorful: 'bg-gradient-to-br from-[var(--color-indigo-400)]/15 to-cyan-900/20 border border-[var(--color-indigo-400)]/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-[var(--color-indigo-400)]' : isLight ? 'text-gray-900' : 'text-white', extra: null },
                     { title: content.conflictTitle, desc: content.conflictDesc, colorful: 'bg-gradient-to-br from-red-900/20 to-[var(--color-ember)]/20 border border-red-400/20', light: 'bg-white shadow-sm', dark: 'bg-gray-800/60 border border-gray-700/30', titleColor: isColorful ? 'text-red-300' : isLight ? 'text-gray-900' : 'text-white', extra: 'conflict' },
                   ].map((card, i) => (
                     <motion.div
@@ -335,7 +335,7 @@ export default function HealthcarePrioritizationClient() {
                         <div className="flex items-center gap-4 mb-4">
                           <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-red-600/10 text-red-700' : 'bg-red-600/40 text-red-300'}`}>QA Team</div>
                           <span className="font-bold text-xl">VS</span>
-                          <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-blue-100 text-blue-700' : 'bg-blue-900/40 text-blue-300'}`}>CTO</div>
+                          <div className={`px-4 py-2 rounded-lg font-bold ${isLight ? 'bg-primary/10 text-accent' : 'bg-primary/20 text-accent'}`}>CTO</div>
                         </div>
                       )}
                       <p className={`leading-relaxed ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'}`}>{card.desc}</p>
@@ -451,7 +451,7 @@ export default function HealthcarePrioritizationClient() {
                                 ? (isLight ? 'bg-gray-100 text-gray-600' : 'bg-gray-700 text-gray-300')
                                 : item.status === 'Backlog'
                                   ? (isLight ? 'bg-amber-600/5 text-ds-warning' : 'bg-amber-600/20 text-amber-400')
-                                  : (isLight ? 'bg-blue-50 text-blue-600' : 'bg-blue-900/20 text-blue-300')
+                                : (isLight ? 'bg-primary/5 text-accent' : 'bg-primary/15 text-accent')
                               }`}>
                               {item.status}
                             </div>
@@ -494,14 +494,14 @@ export default function HealthcarePrioritizationClient() {
                   transition={{ ...t.enterSlow, delay: delaySeconds.md }}
                 >
                   <h2 className={`text-xl font-semibold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400'
+                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-indigo-400)] to-cyan-400'
                       : isLight ? 'text-gray-900' : 'text-white'
                     }`}>{content.resolutionTitle}</h2>
 
                   <div className="grid md:grid-cols-2 gap-8 mb-10">
                     {[
                       { icon: 'handshake', color: isColorful ? 'bg-green-600/50/15 text-green-400' : isLight ? 'bg-green-600/5 text-ds-success' : 'bg-green-900/30 text-green-400', title: content.resolutionStep1, desc: content.resolutionStep1Desc },
-                      { icon: 'lightbulb', color: isColorful ? 'bg-blue-500/15 text-blue-400' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/30 text-blue-400', title: content.resolutionStep2, desc: content.resolutionStep2Desc },
+                      { icon: 'lightbulb', color: isColorful ? 'bg-[var(--color-indigo-400)]/15 text-[var(--color-indigo-400)]' : isLight ? 'bg-primary/5 text-accent' : 'bg-primary/15 text-accent', title: content.resolutionStep2, desc: content.resolutionStep2Desc },
                     ].map((step, i) => (
                       <motion.div
                         key={i}
@@ -523,8 +523,8 @@ export default function HealthcarePrioritizationClient() {
                   </div>
 
                   <div className={`p-6 rounded-2xl ${isColorful
-                      ? 'bg-gradient-to-br from-blue-900/10 to-purple-900/10 border border-blue-400/15'
-                      : isLight ? 'bg-blue-50/60' : 'bg-blue-900/8'
+                      ? 'bg-gradient-to-br from-primary/5 to-[var(--gradient-mid)]/5 border border-[var(--primary)]/12'
+                      : isLight ? 'bg-blue-50/60' : 'bg-primary/5'
                     }`}>
                     <h3 className={`text-lg font-semibold mb-4 ${isLight ? 'text-gray-900' : 'text-white'}`}>{content.actionsTitle}</h3>
                     <div className="space-y-4">
@@ -537,7 +537,7 @@ export default function HealthcarePrioritizationClient() {
                           transition={{ duration: durationSeconds.ease, delay: i * stagger.normal, ease: easing.out.array }}
                           className="flex items-start gap-3"
                         >
-                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">{i + 1}</span>
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-sm font-bold">{i + 1}</span>
                           <p className={`${isLight ? 'text-gray-700' : 'text-gray-300'}`}>{action}</p>
                         </motion.div>
                       ))}
@@ -673,11 +673,11 @@ export default function HealthcarePrioritizationClient() {
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ ...t.enter, delay: delaySeconds.sm }}
-                    className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-5 ${isColorful ? 'bg-purple-500/15 text-purple-300' : isLight ? 'bg-blue-50 text-blue-500' : 'bg-blue-900/20 text-blue-400'}`}
+                    className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-5 ${isColorful ? 'bg-purple-500/15 text-purple-300' : isLight ? 'bg-primary/5 text-accent' : 'bg-primary/15 text-accent'}`}
                   >
                     <span className="material-symbols text-xl">star</span>
                   </motion.div>
-                  <h2 className={`text-xl font-semibold mb-3 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-cyan-400' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.summaryTitle}</h2>
+                  <h2 className={`text-xl font-semibold mb-3 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-indigo-400)] via-purple-300 to-cyan-400' : isLight ? 'text-gray-900' : 'text-white'}`}>{content.summaryTitle}</h2>
                   <p className={`text-lg leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-500' : 'text-gray-400'}`}>{content.summaryDesc}</p>
                 </motion.div>
               </CaseStudySection>

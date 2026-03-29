@@ -65,27 +65,27 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
       };
     } else if (theme === 'dark') {
       return {
-        cardBg: 'bg-gradient-to-br from-gray-800/80 via-gray-900/70 to-blue-900/40',
-        cardBorder: 'border-blue-500/20',
-        cardGlow: 'shadow-2xl shadow-blue-500/10',
-        accentGradient: 'from-blue-400 via-cyan-400 to-indigo-400',
-        buttonBg: 'bg-blue-500/20 hover:bg-blue-500/30',
-        buttonActive: 'bg-gradient-to-r from-blue-500 to-cyan-500',
-        iconColor: 'text-blue-400',
-        progressBg: 'bg-blue-500/20',
-        progressFill: 'from-blue-500 via-cyan-500 to-indigo-500',
+        cardBg: 'bg-gradient-to-br from-gray-800/80 via-gray-900/70 to-[var(--primary)]/20',
+        cardBorder: 'border-primary/20',
+        cardGlow: 'shadow-2xl shadow-[var(--primary)]/10',
+        accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+        buttonBg: 'bg-primary/20 hover:bg-primary/30',
+        buttonActive: 'bg-gradient-to-r from-[var(--btn-primary-bg)] to-[var(--gradient-mid)]',
+        iconColor: 'text-accent',
+        progressBg: 'bg-primary/20',
+        progressFill: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
       };
     } else {
       return {
         cardBg: 'bg-white/90',
-        cardBorder: 'border-blue-200/50',
-        cardGlow: 'shadow-xl shadow-blue-200/20',
-        accentGradient: 'from-blue-500 via-indigo-500 to-purple-500',
-        buttonBg: 'bg-blue-100/50 hover:bg-blue-200/50',
-        buttonActive: 'bg-gradient-to-r from-blue-500 to-indigo-500',
-        iconColor: 'text-blue-500',
-        progressBg: 'bg-blue-200/30',
-        progressFill: 'from-blue-500 via-indigo-500 to-purple-500',
+        cardBorder: 'border-primary/20',
+        cardGlow: 'shadow-xl shadow-[var(--primary)]/10',
+        accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+        buttonBg: 'bg-primary/10 hover:bg-primary/20',
+        buttonActive: 'bg-gradient-to-r from-[var(--btn-primary-bg)] to-[var(--gradient-mid)]',
+        iconColor: 'text-accent',
+        progressBg: 'bg-primary/10',
+        progressFill: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
       };
     }
   };

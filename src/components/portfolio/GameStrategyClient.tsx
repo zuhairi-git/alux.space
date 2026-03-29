@@ -112,10 +112,10 @@ export default function GameStrategyClient() {
         borderColor: isColorful ? 'border-purple-500/30' : isLight ? 'border-purple-400/20' : 'border-purple-600/20',
       },
       blue: {
-        cardBg: isColorful ? 'bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-400/30' : isLight ? 'bg-blue-50 border border-blue-200' : 'bg-blue-900/20 border border-blue-500/20',
-        iconText: isColorful ? 'text-blue-400' : isLight ? 'text-blue-600' : 'text-blue-400',
-        iconBg: isColorful ? 'bg-blue-500/20' : isLight ? 'bg-blue-100' : 'bg-blue-900/40',
-        borderColor: isColorful ? 'border-blue-500/30' : isLight ? 'border-blue-200' : 'border-blue-500/20',
+        cardBg: isColorful ? 'bg-gradient-to-br from-[var(--color-indigo-400)]/15 to-[var(--color-indigo-500)]/15 border border-[var(--color-indigo-400)]/25' : isLight ? 'bg-primary/5 border border-primary/15' : 'bg-primary/10 border border-primary/15',
+        iconText: isColorful ? 'text-[var(--color-indigo-400)]' : isLight ? 'text-accent' : 'text-accent',
+        iconBg: isColorful ? 'bg-[var(--color-indigo-400)]/15' : isLight ? 'bg-primary/10' : 'bg-primary/20',
+        borderColor: isColorful ? 'border-[var(--color-indigo-400)]/25' : isLight ? 'border-primary/15' : 'border-primary/15',
       },
       green: {
         cardBg: isColorful ? 'bg-gradient-to-br from-green-600/20 to-green-600/20 border border-green-400/30' : isLight ? 'bg-green-600/5 border border-green-600/20' : 'bg-green-600/20 border border-green-600/20',
@@ -666,14 +666,14 @@ export default function GameStrategyClient() {
                 </h5>
                 <div className="h-4 rounded-full overflow-hidden flex">
                   <div className="bg-purple-400/50 h-full" style={{ width: '45%' }} title="Cosmetic Shop 45%" />
-                  <div className="bg-blue-500 h-full" style={{ width: '30%' }} title="Battle Pass 30%" />
+                  <div className="bg-[var(--primary)] h-full" style={{ width: '30%' }} title="Battle Pass 30%" />
                   <div className="bg-green-600/50 h-full" style={{ width: '15%' }} title="Ad Monetization 15%" />
                   <div className="bg-ds-ember/50 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
                 </div>
                 <div className="flex flex-wrap justify-center gap-4 mt-3">
                   {[
                     { label: locale === 'fi' ? 'Kosmeettiset' : 'Cosmetics', color: 'bg-purple-400/50', pct: '45%' },
-                    { label: 'Battle Pass', color: 'bg-blue-500', pct: '30%' },
+                    { label: 'Battle Pass', color: 'bg-[var(--primary)]', pct: '30%' },
                     { label: locale === 'fi' ? 'Mainokset' : 'Ads', color: 'bg-green-600/50', pct: '15%' },
                     { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-ds-ember/50', pct: '10%' },
                   ].map((leg, i) => (

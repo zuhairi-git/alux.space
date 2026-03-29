@@ -156,7 +156,7 @@ export default function IntelligenceByDesignClient() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {processSteps.map((item, index) => (
                                     <div key={index} className="theme-card-flex p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5">
-                                        <div className="h-11 w-11 flex items-center justify-center text-blue-400 bg-blue-400/10 rounded-full mb-4">
+                                        <div className="h-11 w-11 flex items-center justify-center text-accent bg-[var(--primary)]/10 rounded-full mb-4">
                                             <span className="material-symbols text-xl">{item.icon}</span>
                                         </div>
                                         <h3 className="text-lg font-semibold text-primary mb-2">{item.phase}</h3>
@@ -166,7 +166,7 @@ export default function IntelligenceByDesignClient() {
                                             <ul className="mt-4 pt-4 border-t border-current/[0.06] space-y-2 list-none">
                                                 {item.features.map((feature, i) => (
                                                     <li key={i} className="text-xs opacity-80 flex items-start gap-2">
-                                                        <span className="text-blue-400 mt-0.5">•</span>
+                                                        <span className="text-accent mt-0.5">•</span>
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}

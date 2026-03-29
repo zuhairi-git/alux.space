@@ -171,7 +171,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     {isColorful ? (
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
-                            <div className={`absolute top-1/3 -right-16 w-48 h-48 ${isColorful ? 'bg-ds-ember/8' : 'bg-blue-600/8'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '8s', animationDelay: '2s' }} />
+                            <div className={`absolute top-1/3 -right-16 w-48 h-48 ${isColorful ? 'bg-ds-ember/8' : 'bg-[var(--primary)]/8'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '8s', animationDelay: '2s' }} />
                             <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
                             <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
                         </>
@@ -183,7 +183,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     ) : (
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-                            <div className={`absolute bottom-20 -right-16 w-48 h-48 ${isColorful ? 'bg-ds-ember/[0.04]' : 'bg-blue-600/[0.04]'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '10s', animationDelay: '3s' }} />
+                            <div className={`absolute bottom-20 -right-16 w-48 h-48 ${isColorful ? 'bg-ds-ember/[0.04]' : 'bg-[var(--primary)]/[0.04]'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     )}
                 </div>

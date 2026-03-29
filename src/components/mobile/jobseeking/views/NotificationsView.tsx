@@ -60,7 +60,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
 
                     {/* AI Match */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-ds-ember/10 border-b border-ds-ember/20' : isLight ? 'bg-ds-blue-500/8 border-b border-blue-500/10' : 'bg-ds-blue-500/10 border-b border-blue-500/15'}`}>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-ds-ember/10 border-b border-ds-ember/20' : isLight ? 'bg-primary/8 border-b border-[var(--primary)]/10' : 'bg-primary/10 border-b border-[var(--primary)]/15'}`}>
                             <Icon name="auto_awesome" className={`text-[13px] ${isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400'}`} />
                             <span className={`text-[11px] font-bold uppercase tracking-wider ${isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>2h ago</span>

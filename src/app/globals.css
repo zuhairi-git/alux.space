@@ -76,7 +76,7 @@ body {
 }
 
 .theme-card-glow-secondary {
-  --card-shadow-color: rgba(59, 130, 246, 0.2);
+  --card-shadow-color: var(--primary-glow);
 }
 
 .theme-card-glow-tertiary {

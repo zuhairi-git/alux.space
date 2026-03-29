@@ -440,8 +440,8 @@ export default function CollaborationClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-blue-500/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-3">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
+                            <div className="border-l-2 border-[var(--primary)]/25 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent mb-3">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.goals.map((goal, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{goal}</li>
@@ -637,9 +637,9 @@ export default function CollaborationClient() {
                     description: content.iosPrototypeDesc,
                     href: "/mobile/workflow/ios",
                     icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
-                    gradient: "from-blue-500/20 to-indigo-500/20",
-                    borderColor: "border-blue-500/30",
-                    iconBg: "bg-blue-500/10 text-blue-400",
+                    gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
+                    borderColor: "border-[var(--primary)]/20",
+                    iconBg: "bg-[var(--primary)]/10 text-accent",
                     buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                   {
@@ -647,9 +647,9 @@ export default function CollaborationClient() {
                     description: content.androidPrototypeDesc,
                     href: "/mobile/workflow/android",
                     icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                    gradient: "from-blue-500/20 to-purple-500/20",
-                    borderColor: "border-blue-500/30",
-                    iconBg: "bg-blue-500/10 text-blue-400",
+                    gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
+                    borderColor: "border-[var(--primary)]/20",
+                    iconBg: "bg-[var(--primary)]/10 text-accent",
                     buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                   {

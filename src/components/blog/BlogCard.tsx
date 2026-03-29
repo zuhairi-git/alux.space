@@ -74,7 +74,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                 </motion.div>
                 {/* Category badge */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md">
+                  <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-md">
                     {post.tags[0] || 'Blog'}
                   </span>
                 </div>
@@ -175,7 +175,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
               {/* Badge */}
               <div className="absolute top-4 right-4">
                 <span 
-                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
+                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-md"
                   aria-label={`Category: ${post.tags[0] || 'Blog'}`}
                 >
                   {post.tags[0] || 'Blog'}
@@ -276,7 +276,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             {/* Category badge */}
             <div className="absolute top-3 right-3 z-10">
               <span 
-                className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
+                className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-md"
                 aria-label={`Category: ${post.tags[0] || 'Blog'}`}
               >
                 {post.tags[0] || 'Blog'}

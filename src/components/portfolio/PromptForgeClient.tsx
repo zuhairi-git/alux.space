@@ -162,7 +162,7 @@ export default function PromptForgeClient() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {processSteps.map((item, index) => (
                                     <div key={index} className="theme-card-flex p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5">
-                                        <div className="h-11 w-11 flex items-center justify-center text-blue-400 bg-blue-400/10 rounded-full mb-4">
+                                        <div className="h-11 w-11 flex items-center justify-center text-accent bg-[var(--primary)]/10 rounded-full mb-4">
                                             <span className="material-symbols text-xl">{item.icon}</span>
                                         </div>
                                         <h3 className="text-lg font-semibold text-primary mb-2">{item.phase}</h3>
@@ -170,9 +170,9 @@ export default function PromptForgeClient() {
 
                                         {index === 2 && (
                                             <div className="mt-4 pt-4 border-t border-current/[0.06] space-y-2">
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">• Input form:</span> brief, platform, design style, goal</p>
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">• AI output:</span> wireframe desc, component suggestions, tone, mood</p>
-                                                <p className="text-xs opacity-80"><span className="text-blue-400 font-semibold">• Iteration:</span> refine, regenerate, compare</p>
+                                                <p className="text-xs opacity-80"><span className="text-accent font-semibold">• Input form:</span> brief, platform, design style, goal</p>
+                                                <p className="text-xs opacity-80"><span className="text-accent font-semibold">• AI output:</span> wireframe desc, component suggestions, tone, mood</p>
+                                                <p className="text-xs opacity-80"><span className="text-accent font-semibold">• Iteration:</span> refine, regenerate, compare</p>
                                             </div>
                                         )}
                                     </div>

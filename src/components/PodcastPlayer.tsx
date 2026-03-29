@@ -74,11 +74,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   
   const getAccentColor = () => {
     if (isLight) {
-      return 'from-blue-600 via-purple-600 to-indigo-600';
+      return 'from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]';
     } else if (isColorful) {
       return 'from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]';
     } else {
-      return 'from-blue-500 via-purple-500 to-indigo-500';
+      return 'from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]';
     }
   };
 
@@ -608,9 +608,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div 
-                className={`absolute bottom-6 right-5 w-6 h-6 rounded-full ${
-                  isLight ? 'bg-blue-300/40' : 'bg-[var(--gradient-mid)]/20'
-                } blur-sm`}
+                className={`absolute bottom-6 right-5 w-6 h-6 rounded-full bg-[var(--primary)]/25 blur-sm`}
                 animate={{ 
                   scale: isPlaying ? [1, 1.4, 1] : 1,
                   opacity: isPlaying ? [0.3, 0.6, 0.3] : 0.3,
@@ -652,9 +650,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   transition={{ duration: 4, repeat: Infinity }}
                 />
                 <motion.div 
-                  className={`absolute -bottom-6 -left-6 w-20 h-20 rounded-full ${
-                    isLight ? 'bg-blue-200/30' : 'bg-blue-400/20'
-                  } blur-lg`}
+                  className={`absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-[var(--primary-glow)] blur-lg`}
                   animate={{ 
                     scale: isPlaying ? [1, 1.2, 1] : 1,
                     opacity: isPlaying ? [0.2, 0.4, 0.2] : 0.2 

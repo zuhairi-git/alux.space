@@ -443,7 +443,7 @@ export default function AccessibilityClient() {
       title: content.colorSystemTitle,
       description: content.colorSystemDesc,
       icon: "palette",
-      gradient: "from-blue-500 to-purple-500"
+      gradient: "from-[var(--gradient-start)] to-[var(--gradient-end)]"
     },
     {
       title: content.inclusiveTypographyTitle,
@@ -523,7 +523,7 @@ export default function AccessibilityClient() {
                           ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
                           : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-cyan-400' : isLight ? 'text-blue-500' : 'text-blue-400'
+                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-cyan-400' : 'text-accent'
                           }`}>{objective.icon}</span>
                         <p className={`font-medium ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
                           }`}>{objective.text}</p>
@@ -567,7 +567,7 @@ export default function AccessibilityClient() {
                               ? 'bg-white/5 border-white/10'
                               : isLight ? 'bg-white/80 border-gray-200/50 shadow-sm' : 'bg-gray-800/80 border-gray-700/50'
                             }`}>
-                            <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
+                            <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : 'text-accent'
                               }`}>Problem Discovery</span>
 
                             <div className={`w-px h-4 ${isColorful ? 'bg-gradient-to-b from-cyan-400 to-pink-400' : 'bg-gray-300'
@@ -586,7 +586,7 @@ export default function AccessibilityClient() {
                               icon: 'search',
                               color: isColorful ? 'cyan' : 'blue',
                               description: 'Research user needs, accessibility challenges, and current limitations in design systems.',
-                              gradient: isColorful ? 'from-cyan-400/20 to-blue-400/10' : isLight ? 'from-blue-100 to-blue-50' : 'from-blue-900/30 to-blue-800/20'
+                              gradient: isColorful ? 'from-cyan-400/20 to-blue-400/10' : isLight ? 'from-primary/8 to-primary/4' : 'from-primary/20 to-primary/12'
                             },
                             {
                               phase: content.definePhase,
@@ -624,14 +624,14 @@ export default function AccessibilityClient() {
                                     ? `bg-gradient-to-br from-${phase.color}-400/30 to-${phase.color}-500/20 backdrop-blur-sm`
                                     : isLight
                                       ? phase.color === 'blue'
-                                        ? 'bg-gradient-to-br from-blue-300 to-blue-400 shadow-lg'
+                                        ? 'bg-gradient-to-br from-[var(--color-blue-vivid)] to-[var(--color-blue-vivid-dark)] shadow-lg'
                                         : phase.color === 'indigo'
                                           ? 'bg-gradient-to-br from-indigo-300 to-indigo-400 shadow-lg'
                                           : phase.color === 'pink'
                                             ? 'bg-gradient-to-br from-pink-300 to-pink-400 shadow-lg'
                                             : 'bg-gradient-to-br from-green-300 to-green-400 shadow-lg'
                                       : phase.color === 'blue'
-                                        ? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg'
+                                        ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary-hover)] shadow-lg'
                                         : phase.color === 'indigo'
                                           ? 'bg-gradient-to-br from-indigo-400 to-indigo-400/50 shadow-lg'
                                           : phase.color === 'pink'
@@ -696,15 +696,15 @@ export default function AccessibilityClient() {
                                 : 'bg-gray-800/60 border border-gray-700/50'
                             }`}>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${isColorful ? 'bg-cyan-400' : 'bg-blue-500'
+                              <div className={`w-2 h-2 rounded-full ${isColorful ? 'bg-cyan-400' : 'bg-[var(--primary)]'
                                 }`}></div>
-                              <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : isLight ? 'text-blue-700' : 'text-blue-400'
+                              <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : 'text-accent'
                                 }`}>Divergent</span>
                             </div>
 
                             <div className={`w-6 h-px ${isColorful
                                 ? 'bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400'
-                                : 'bg-gradient-to-r from-blue-400 to-pink-400'
+                                : 'bg-gradient-to-r from-[var(--primary)] to-pink-400'
                               }`}></div>
 
                             <div className="flex items-center gap-2">
@@ -855,8 +855,8 @@ export default function AccessibilityClient() {
                                   </ul>
                                 </div>
 
-                                <div className="border-l-2 border-blue-500/30 pl-4">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-blue-500 mb-3">Goals</h4>
+                                <div className="border-l-2 border-[var(--primary)]/30 pl-4">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent mb-3">Goals</h4>
                                   <ul className="space-y-1.5">
                                     {persona.goals.map((goal, i) => (
                                       <li key={i} className="text-sm leading-relaxed opacity-70">{goal}</li>
@@ -889,7 +889,7 @@ export default function AccessibilityClient() {
                         icon: "group",
                         title: content.requirement1,
                         desc: content.requirement1Desc,
-                        gradient: "from-blue-500 to-cyan-500"
+                        gradient: "from-[var(--gradient-start)] to-[var(--color-cyan-500)]"
                       },
                       {
                         icon: "feedback",
@@ -1062,11 +1062,11 @@ export default function AccessibilityClient() {
                   </div>
 
                   <div className={`p-5 rounded-2xl ${isColorful
-                      ? 'bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border border-blue-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-blue-50 border border-blue-100' : 'bg-blue-900/20 border border-blue-800'
+                      ? 'bg-[var(--primary)]/15 border border-[var(--primary)]/25 backdrop-blur-lg'
+                      : isLight ? 'bg-primary/5 border border-primary/15' : 'bg-primary/20 border border-[var(--card-border)]'
                     }`}>
-                    <span className="material-symbols text-xl text-blue-400 mb-2 block">info</span>
-                    <p className={`${isColorful ? 'text-gray-200' : isLight ? 'text-blue-700' : 'text-blue-300'
+                    <span className="material-symbols text-xl text-accent mb-2 block">info</span>
+                    <p className={`${isColorful ? 'text-gray-200' : isLight ? 'text-[var(--accent-text)]' : 'text-[var(--accent-text)]'
                       }`}>{content.contrastInfo}</p>
                   </div>
             </CaseStudyItem>
@@ -1185,7 +1185,7 @@ export default function AccessibilityClient() {
                     </div>
 
                     <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-blue-900/30 to-indigo-600/30 border border-blue-400/30 backdrop-blur-lg'
+                        ? 'bg-gradient-to-br from-[var(--color-indigo-400)]/20 to-[var(--color-indigo-600)]/20 border border-[var(--color-indigo-400)]/25 backdrop-blur-lg'
                         : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                       }`}>
                       <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white'
@@ -1214,7 +1214,7 @@ export default function AccessibilityClient() {
                           ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
                           : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
                         }`}>
-                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-purple-400' : isLight ? 'text-blue-500' : 'text-blue-400'
+                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-purple-400' : 'text-accent'
                           }`}>{standard.icon}</span>
                         <h3 className={`font-bold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
                           }`}>{standard.title}</h3>

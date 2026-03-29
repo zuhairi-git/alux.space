@@ -143,8 +143,7 @@ export default function TimelineCard({
     <div className="group perspective-1000">      <article 
         className={`relative rounded-2xl overflow-hidden ${getCardStyles()} transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
           theme === 'colorful' ? 'focus:ring-orange-400' :
-          theme === 'dark' ? 'focus:ring-blue-400' :
-          'focus:ring-blue-500'
+          'focus:ring-[var(--primary)]'
         }`}
         style={cardCustomStyles}
         onMouseEnter={() => setIsHovered(true)}
