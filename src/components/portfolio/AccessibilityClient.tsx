@@ -423,7 +423,7 @@ export default function AccessibilityClient() {
     },
     {
       name: content.darkTheme,
-      preview: "bg-gradient-to-r from-gray-900 to-black",
+      preview: "bg-[var(--background)]",
       contrast: "AAA"
     },
     {
@@ -456,8 +456,7 @@ export default function AccessibilityClient() {
 
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${'bg-gradient-to-br from-gray-900 to-black'
-      }`}>
+    <div className="min-h-screen transition-colors duration-300 bg-[var(--background)] text-[var(--foreground)]">
       <Navigation />
       <CaseStudyProgress />
       <main className="pt-24 pb-16">
@@ -490,15 +489,13 @@ export default function AccessibilityClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...t.enterSlow, delay: delaySeconds.md }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${'opacity-80 text-[var(--foreground)]'
-              }`}>
+            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto opacity-80 text-[var(--foreground)]`}>
               {content.intro}
             </p>
           </motion.div>
 
           <CaseStudySection title={content.overviewTab} icon="visibility" number={1} accent="blue">            <CaseStudyItem>
-                  <h2 className={`text-3xl font-bold mt-16 mb-8 ${'text-[var(--foreground)]'
-                    }`}>{content.objectivesTitle}</h2>
+                  <h2 className={`text-3xl font-bold mt-16 mb-8 text-[var(--foreground)]`}>{content.objectivesTitle}</h2>
 
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {[{  text: content.objective1 },
@@ -507,47 +504,36 @@ export default function AccessibilityClient() {
                     {  text: content.objective4 },
                     {  text: content.objective5 }
                     ].map((objective, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                        }`}>
+                      <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
                         
-                        <p className={`font-medium ${'opacity-80 text-[var(--foreground)]'
-                          }`}>{objective.text}</p>
+                        <p className={`font-medium opacity-80 text-[var(--foreground)]`}>{objective.text}</p>
                       </div>
                     ))}
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
-                    }`}>{content.designProcess}</h2>
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.designProcess}</h2>
 
-                  <div className={`p-6 rounded-2xl mb-6 ${'bg-[var(--card-from-bg)]'
-                    }`}>                    <div className="flex items-center mb-6">
-                      <span className={`text-sm font-medium mr-3 ${'opacity-80 text-[var(--foreground)]'
-                        }`}>{content.designModel}</span>
-                      <span className={`text-lg font-bold ${'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent'
-                        }`}>
+                  <div className={`p-6 rounded-2xl mb-6 bg-[var(--card-from-bg)]`}>                    <div className="flex items-center mb-6">
+                      <span className={`text-sm font-medium mr-3 opacity-80 text-[var(--foreground)]`}>{content.designModel}</span>
+                      <span className={`text-lg font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent`}>
                         {content.doubleD}
                       </span>
                     </div>                      {/* Interactive Double Diamond */}
                     <div className="relative mb-10 overflow-hidden">
                       {/* Ambient background */}
-                      <div className={`absolute inset-0 ${'bg-gradient-to-br from-gray-900/50 to-[var(--gradient-end)]/30'
-                        } blur-3xl`}></div>
+                      <div className={`absolute inset-0 bg-gradient-to-br from-[var(--primary-glow)] to-transparent blur-3xl`}></div>
 
                       <div className="relative">
                         {/* Phase labels */}
                         <div className="text-center mb-8">
-                          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full border ${'bg-[var(--card-from-bg)] border-[var(--card-border)]'
-                            }`}>
-                            <span className={`text-xs font-medium ${'text-[var(--primary)]'
-                              }`}>Problem Discovery</span>
+                          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full border bg-[var(--card-from-bg)] border-[var(--card-border)]`}>
+                            <span className={`text-xs font-medium text-[var(--primary)]`}>Problem Discovery</span>
 
-                            <div className={`w-px h-4 ${'bg-gray-300'
-                              }`}></div>
+                            <div className={`w-px h-4 bg-[var(--card-border)]`}></div>
 
-                            <span className={`text-xs font-medium ${'text-[var(--primary)]'
-                              }`}>Solution Creation</span>
+                            <span className={`text-xs font-medium text-[var(--primary)]`}>Solution Creation</span>
                           </div>
                         </div>
 
@@ -556,28 +542,28 @@ export default function AccessibilityClient() {
                           {[
                             {
                               phase: content.discoverPhase,
-                              
+                              icon: 'search',
                               color: 'blue',
                               description: 'Research user needs, accessibility challenges, and current limitations in design systems.',
                               gradient: 'from-primary/20 to-primary/12'
                             },
                             {
                               phase: content.definePhase,
-                              
+                              icon: 'target',
                               color: 'indigo',
                               description: 'Synthesize insights into clear accessibility requirements and design principles.',
                               gradient: 'from-purple-600/30 to-indigo-800/20'
                             },
                             {
                               phase: content.developPhase,
-                              
+                              icon: 'build',
                               color: 'pink',
                               description: 'Create accessible components, test with users, and iterate based on feedback.',
                               gradient: 'from-pink-900/30 to-pink-500/20'
                             },
                             {
                               phase: content.deliverPhase,
-                              
+                              icon: 'rocket_launch',
                               color: 'green',
                               description: 'Launch the design system with comprehensive documentation and training.',
                               gradient: 'from-green-600/30 to-green-600/20'
@@ -597,29 +583,26 @@ export default function AccessibilityClient() {
                                             ? 'bg-gradient-to-br from-pink-400 to-pink-500 shadow-lg'
                                             : 'bg-gradient-to-br from-green-400 to-green-600 shadow-lg'
                                   } group-hover:scale-105 transition-transform duration-300`}>
-                                  <span className="material-symbols text-white">{phase.icon}</span>
+                                  <span className="material-symbols text-2xl text-white">{phase.icon}</span>
                                   
                                 </div>
                               </div>
 
                               {/* Phase title */}
-                              <h3 className={`text-lg font-bold mb-2 ${`text-${phase.color}-300`
+                              <h3 className={`text-lg font-bold mb-2 ${`text-[var(--foreground)]`
                                 }`}>
                                 {phase.phase}
                               </h3>
 
                               {/* Description */}
-                              <p className={`text-sm leading-relaxed ${'opacity-80 text-[var(--foreground)]'
-                                }`}>
+                              <p className={`text-sm leading-relaxed opacity-80 text-[var(--foreground)]`}>
                                 {phase.description}
                               </p>
 
                               {/* Connection indicator */}
                               {index < 3 && (
-                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 ${'bg-gradient-to-r from-gray-600 to-transparent'
-                                  }`}>
-                                  <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full ${'bg-gray-500'
-                                    }`}></div>
+                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-30`}>
+                                  <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]`}></div>
                                 </div>
                               )}
 
@@ -632,23 +615,17 @@ export default function AccessibilityClient() {
 
                         {/* Methodology indicator */}
                         <div className="text-center mt-8">
-                          <div className={`inline-flex items-center gap-4 px-6 py-3 rounded-full ${'bg-[var(--card-from-bg)] border border-[var(--card-border)]'
-                            }`}>
+                          <div className={`inline-flex items-center gap-4 px-6 py-3 rounded-full bg-[var(--card-from-bg)] border border-[var(--card-border)]`}>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${'bg-[var(--primary)]'
-                                }`}></div>
-                              <span className={`text-xs font-medium ${'text-[var(--primary)]'
-                                }`}>Divergent</span>
+                              <div className={`w-2 h-2 rounded-full bg-[var(--primary)]`}></div>
+                              <span className={`text-xs font-medium text-[var(--primary)]`}>Divergent</span>
                             </div>
 
-                            <div className={`w-6 h-px ${'bg-gradient-to-r from-[var(--primary)] to-pink-400'
-                              }`}></div>
+                            <div className={`w-6 h-px bg-gradient-to-r from-[var(--primary)] to-pink-400`}></div>
 
                             <div className="flex items-center gap-2">
-                              <span className={`text-xs font-medium ${'text-[var(--primary)]'
-                                }`}>Convergent</span>
-                              <div className={`w-2 h-2 rounded-full ${'bg-pink-500'
-                                }`}></div>
+                              <span className={`text-xs font-medium text-[var(--primary)]`}>Convergent</span>
+                              <div className={`w-2 h-2 rounded-full bg-pink-500`}></div>
                             </div>
                           </div>
                         </div>
@@ -659,10 +636,8 @@ export default function AccessibilityClient() {
 
           <CaseStudySection title={content.researchTitle} icon="science" number={2} accent="green">
             <CaseStudyItem>
-                  <div className={`p-6 rounded-2xl mb-6 ${'bg-[var(--card-from-bg)]'
-                    }`}>
-                    <h3 className={`text-lg font-bold mb-4 ${'text-[var(--foreground)]'
-                      }`}>{content.participantFeedback}</h3>
+                  <div className={`p-6 rounded-2xl mb-6 bg-[var(--card-from-bg)]`}>
+                    <h3 className={`text-lg font-bold mb-4 text-[var(--foreground)]`}>{content.participantFeedback}</h3>
 
                     <div className="grid md:grid-cols-4 gap-6 mb-6">
                       {[{ label: content.accessibilityValue, value: "92%",  },
@@ -672,18 +647,15 @@ export default function AccessibilityClient() {
                       ].map((metric, index) => (
                         <div key={index} className="text-center">
                           
-                          <div className={`text-2xl font-bold mb-1 ${'text-[var(--foreground)]'
-                            }`}>
+                          <div className={`text-2xl font-bold mb-1 text-[var(--foreground)]`}>
                             {metric.value}
                           </div>
-                          <p className={`text-sm ${'opacity-80 text-[var(--foreground)]'
-                            }`}>{metric.label}</p>
+                          <p className={`text-sm opacity-80 text-[var(--foreground)]`}>{metric.label}</p>
                         </div>
                       ))}
                     </div>
 
-                    <h3 className={`text-lg font-bold mb-4 ${'text-[var(--foreground)]'
-                      }`}>{content.keyRecommendations}</h3>
+                    <h3 className={`text-lg font-bold mb-4 text-[var(--foreground)]`}>{content.keyRecommendations}</h3>
 
                     <div className="grid md:grid-cols-3 gap-6">
                       {[
@@ -703,13 +675,10 @@ export default function AccessibilityClient() {
                           desc: content.colorContrastDesc
                         }
                       ].map((item, index) => (
-                        <div key={index} className={`p-4 rounded-2xl ${'bg-green-900/20 border border-green-800'
-                          }`}>
+                        <div key={index} className={`p-4 rounded-2xl bg-[var(--card-from-bg)] border border-[var(--card-border)]`}>
                           
-                          <h4 className={`font-semibold mb-2 ${'text-[var(--foreground)]'
-                            }`}>{item.title}</h4>
-                          <p className={`text-sm ${'opacity-80 text-[var(--foreground)]'
-                            }`}>{item.desc}</p>
+                          <h4 className={`font-semibold mb-2 text-[var(--foreground)]`}>{item.title}</h4>
+                          <p className={`text-sm opacity-80 text-[var(--foreground)]`}>{item.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -843,37 +812,28 @@ export default function AccessibilityClient() {
                         gradient: "from-[var(--color-ember)] to-red-600"
                       }
                     ].map((req, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                        }`}>
+                      <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
                         <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${req.gradient} flex items-center justify-center mb-3`}>
                             <span className="material-symbols text-white text-xl">{req.icon}</span>
                           </div>
-                        <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                          }`}>{req.title}</h3>
-                        <p className={`${'opacity-80 text-[var(--foreground)]'
-                          }`}>{req.desc}</p>
+                        <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{req.title}</h3>
+                        <p className={`opacity-80 text-[var(--foreground)]`}>{req.desc}</p>
                       </div>
                     ))}
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
-                    }`}>{content.userTestingTitle}</h2>
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.userTestingTitle}</h2>
 
-                  <div className={`p-6 rounded-2xl mb-6 ${'bg-[var(--card-from-bg)]'
-                    }`}>
-                    <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                      }`}>{content.testScenario}</h3>
+                  <div className={`p-6 rounded-2xl mb-6 bg-[var(--card-from-bg)]`}>
+                    <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.testScenario}</h3>
 
-                    <div className={`p-4 rounded-lg mb-5 ${'bg-indigo-600/20 border border-indigo-800'
-                      }`}>
-                      <p className={`${'opacity-80 text-[var(--foreground)]'
-                        }`}>{content.testScenarioDesc}</p>
+                    <div className={`p-4 rounded-lg mb-5 bg-[var(--card-from-bg)] border border-[var(--card-border)]`}>
+                      <p className={`opacity-80 text-[var(--foreground)]`}>{content.testScenarioDesc}</p>
                     </div>
 
-                    <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                      }`}>{content.focusAreas}</h3>
+                    <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.focusAreas}</h3>
 
                     <div className="flex flex-wrap gap-3">
                       {[
@@ -882,8 +842,7 @@ export default function AccessibilityClient() {
                         {  label: content.performanceFocus },
                         {  label: content.consistencyFocus }
                       ].map((area, index) => (
-                        <div key={index} className={`px-4 py-2 rounded-full flex items-center space-x-2 ${'bg-indigo-600/30 text-[var(--primary)]'
-                          }`}>
+                        <div key={index} className={`px-4 py-2 rounded-full flex items-center space-x-2 bg-[var(--primary-glow)] text-[var(--primary)]`}>
                           
                           <span className="text-sm font-medium">{area.label}</span>
                         </div>
@@ -895,40 +854,30 @@ export default function AccessibilityClient() {
           <CaseStudySection title={content.principlesTitle} icon="lightbulb" number={5} accent="purple">
             <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div className={`p-6 rounded-2xl ${'bg-gradient-to-r from-red-900/20 to-[var(--color-ember)]/20 border border-red-800'
-                      }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                        }`}>{content.problemTitle}</h3>
-                      <p className={`${'opacity-80 text-[var(--foreground)]'
-                        }`}>{content.problemDesc}</p>
+                    <div className={`p-6 rounded-2xl bg-red-500/10 border border-red-500/30`}>
+                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.problemTitle}</h3>
+                      <p className={`opacity-80 text-[var(--foreground)]`}>{content.problemDesc}</p>
                     </div>
 
-                    <div className={`p-6 rounded-2xl ${'bg-gradient-to-r from-green-600/20 to-green-600/20 border border-green-800'
-                      }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                        }`}>{content.solutionTitle}</h3>
-                      <p className={`${'opacity-80 text-[var(--foreground)]'
-                        }`}>{content.solutionDesc}</p>
+                    <div className={`p-6 rounded-2xl bg-green-500/10 border border-green-500/30`}>
+                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.solutionTitle}</h3>
+                      <p className={`opacity-80 text-[var(--foreground)]`}>{content.solutionDesc}</p>
                     </div>
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
-                    }`}>{content.principlesTitle}</h2>
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.principlesTitle}</h2>
                   <div className="grid md:grid-cols-3 gap-6">
                     {[
                       { title: content.principle1, desc: content.principle1Desc,  },
                       { title: content.principle2, desc: content.principle2Desc,  },
                       { title: content.principle3, desc: content.principle3Desc,  }
                     ].map((principle, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                        }`}>
+                      <div key={index} className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
                         
-                        <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                          }`}>{principle.title}</h3>
-                        <p className={`${'opacity-80 text-[var(--foreground)]'
-                          }`}>{principle.desc}</p>
+                        <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{principle.title}</h3>
+                        <p className={`opacity-80 text-[var(--foreground)]`}>{principle.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -937,107 +886,82 @@ export default function AccessibilityClient() {
 
           <CaseStudySection title={content.systemTab} icon="design_services" number={6} accent="cyan">
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
-                    }`}>{content.colorsTitle}</h2>
-                  <p className={`text-base mb-6 ${'opacity-80 text-[var(--foreground)]'
-                    }`}>{content.colorsDesc}</p>
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.colorsTitle}</h2>
+                  <p className={`text-base mb-6 opacity-80 text-[var(--foreground)]`}>{content.colorsDesc}</p>
 
                   <div className="grid md:grid-cols-3 gap-6 mb-6">
                     {colorThemes.map((colorTheme, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                        }`}>
+                      <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
                         <div className={`h-24 rounded-lg mb-3 ${colorTheme.preview}`}></div>
-                        <h3 className={`font-bold mb-2 ${'text-[var(--foreground)]'
-                          }`}>{colorTheme.name}</h3>
-                        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${'bg-green-900/30 text-green-400'
-                          }`}>
+                        <h3 className={`font-bold mb-2 text-[var(--foreground)]`}>{colorTheme.name}</h3>
+                        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium bg-[var(--card-border)] text-[var(--foreground)]`}>
                           WCAG {colorTheme.contrast}
                         </span>
                       </div>
                     ))}
                   </div>
 
-                  <div className={`p-5 rounded-2xl ${'bg-[var(--primary-glow)] border border-[var(--card-border)]'
-                    }`}>
+                  <div className={`p-5 rounded-2xl bg-[var(--primary-glow)] border border-[var(--card-border)]`}>
                     
-                    <p className={`${'text-[var(--accent-text)]'
-                      }`}>{content.contrastInfo}</p>
+                    <p className={`text-[var(--accent-text)]`}>{content.contrastInfo}</p>
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
-                    }`}>{content.inclusiveTypographyTitle}</h2>
-                  <p className={`text-base mb-6 ${'opacity-80 text-[var(--foreground)]'
-                    }`}>{content.inclusiveTypographyDesc}</p>
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.inclusiveTypographyTitle}</h2>
+                  <p className={`text-base mb-6 opacity-80 text-[var(--foreground)]`}>{content.inclusiveTypographyDesc}</p>
 
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                      }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                        }`}>{content.englishType}</h3>
+                    <div className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
+                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.englishType}</h3>
                       <div className="space-y-4">
                         <div>
-                          <h4 className={`text-3xl font-bold ${'text-[var(--foreground)]'
-                            }`}>Heading Large</h4>
+                          <h4 className={`text-3xl font-bold text-[var(--foreground)]`}>Heading Large</h4>
                           <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 48px, Line Height: 1.2</p>
                         </div>
                         <div>
-                          <h5 className={`text-xl font-semibold ${'text-[var(--foreground)]'
-                            }`}>Heading Medium</h5>
+                          <h5 className={`text-xl font-semibold text-[var(--foreground)]`}>Heading Medium</h5>
                           <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 24px, Line Height: 1.3</p>
                         </div>
                         <div>
-                          <p className={`text-base ${'opacity-80 text-[var(--foreground)]'
-                            }`}>Body text optimized for readability</p>
+                          <p className={`text-base opacity-80 text-[var(--foreground)]`}>Body text optimized for readability</p>
                           <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 16px, Line Height: 1.6</p>
                         </div>
                       </div>
                     </div>
-                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                      }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                        }`}>{content.arabicType}</h3>
+                    <div className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
+                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.arabicType}</h3>
                       <div className="space-y-4" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
                         <div>
-                          <h4 className={`text-3xl font-bold ${'text-[var(--foreground)]'
-                            }`}>عنوان كبير</h4>
+                          <h4 className={`text-3xl font-bold text-[var(--foreground)]`}>عنوان كبير</h4>
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 48px, Line Height: 1.4</p>
                         </div>
                         <div>
-                          <h5 className={`text-xl font-semibold ${'text-[var(--foreground)]'
-                            }`}>عنوان متوسط</h5>
+                          <h5 className={`text-xl font-semibold text-[var(--foreground)]`}>عنوان متوسط</h5>
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 24px, Line Height: 1.5</p>
                         </div>
                         <div>
-                          <p className={`text-base ${'opacity-80 text-[var(--foreground)]'
-                            }`}>نص محسن للقراءة والوضوح</p>
+                          <p className={`text-base opacity-80 text-[var(--foreground)]`}>نص محسن للقراءة والوضوح</p>
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
                         </div>
                       </div>
-                      <div className={`mt-6 p-4 rounded-lg ${'bg-ds-ember/30 border border-[var(--color-ember-dark)]'
-                        }`}>
+                      <div className={`mt-6 p-4 rounded-lg bg-ds-ember/30 border border-[var(--color-ember-dark)]`}>
                         
-                        <span className={`text-sm ${'text-[var(--color-ember-light)]'
-                          }`}>{content.rtlSupport}</span>
+                        <span className={`text-sm text-[var(--color-ember-light)]`}>{content.rtlSupport}</span>
                       </div>
                     </div>
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
-                    }`}>Core System Features</h2>
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>Core System Features</h2>
 
                   <div className="grid md:grid-cols-3 gap-6">
                     {designSystemFeatures.map((feature, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                        }`}>
+                      <div key={index} className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
                         
-                        <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                          }`}>{feature.title}</h3>
-                        <p className={`${'opacity-80 text-[var(--foreground)]'
-                          }`}>{feature.description}</p>
+                        <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{feature.title}</h3>
+                        <p className={`opacity-80 text-[var(--foreground)]`}>{feature.description}</p>
                       </div>
                     ))}
                   </div>
@@ -1047,30 +971,22 @@ export default function AccessibilityClient() {
           <CaseStudySection title={content.implementationTab} icon="code" number={7} accent="teal">
             <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6 mb-10">
-                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                      }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                        }`}>{content.headlessTitle}</h3>
-                      <p className={`mb-4 ${'opacity-80 text-[var(--foreground)]'
-                        }`}>{content.headlessDesc}</p>
+                    <div className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
+                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.headlessTitle}</h3>
+                      <p className={`mb-4 opacity-80 text-[var(--foreground)]`}>{content.headlessDesc}</p>
 
-                      <div className={`p-4 rounded-lg font-mono text-sm ${'bg-[var(--background)]'
-                        }`}>                        <div className={`text-[var(--foreground)]`}>
+                      <div className={`p-4 rounded-lg font-mono text-sm bg-[var(--background)]`}>                        <div className={`text-[var(--foreground)]`}>
                           <span className="text-purple-500">import</span> {`{ Menu }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@headlessui/react&apos;</span><br />
                           <span className="text-purple-500">import</span> {`{ ChevronDownIcon }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@heroicons/react/20/solid&apos;</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                      }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
-                        }`}>{content.testingTitle}</h3>
-                      <p className={`mb-4 ${'opacity-80 text-[var(--foreground)]'
-                        }`}>{content.testingDesc}</p>
+                    <div className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
+                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.testingTitle}</h3>
+                      <p className={`mb-4 opacity-80 text-[var(--foreground)]`}>{content.testingDesc}</p>
 
-                      <div className={`p-4 rounded-lg font-mono text-sm ${'bg-[var(--background)]'
-                        }`}>
+                      <div className={`p-4 rounded-lg font-mono text-sm bg-[var(--background)]`}>
                         <div className={`text-[var(--foreground)]`}>
                           <span className="text-[var(--primary)]">npm run</span> <span className="text-ds-success">test:a11y</span><br />
                           <span className="text-gray-500"># ✅ 0 accessibility violations found</span>
@@ -1086,13 +1002,10 @@ export default function AccessibilityClient() {
                       { title: content.ariaLabels,  desc: 'Complete ARIA implementation' },
                       { title: content.keyboardSupport,  desc: 'Full keyboard navigation' }
                     ].map((standard, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
-                        }`}>
+                      <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
                         
-                        <h3 className={`font-bold mb-2 ${'text-[var(--foreground)]'
-                          }`}>{standard.title}</h3>
-                        <p className={`text-sm ${'opacity-80 text-[var(--foreground)]'
-                          }`}>{standard.desc}</p>
+                        <h3 className={`font-bold mb-2 text-[var(--foreground)]`}>{standard.title}</h3>
+                        <p className={`text-sm opacity-80 text-[var(--foreground)]`}>{standard.desc}</p>
                       </div>
                     ))}
                   </div>
