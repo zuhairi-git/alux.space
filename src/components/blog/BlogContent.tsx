@@ -29,14 +29,29 @@ function formatStylizedContent(content: string) {
     const introContent = processIntroduction(intro);
     
     // Process remaining chapters/sections
-    const sections = parts.slice(1).map((section, index) => {
+    // First, parse all sections to check if we can give everyone an icon
+    const parsedSections = parts.slice(1).map((section, index) => {
       // Extract section title and content
       const titleMatch = section.match(/^(.*?)\n/);
-      const title = titleMatch ? titleMatch[1].trim() : `Section ${index + 1}`;
+      let title = titleMatch ? titleMatch[1].trim() : `Section ${index + 1}`;
       const sectionContent = section.replace(/^.*?\n/, '').trim();
       
-      // Process the section content
-      const formattedContent = processChapterContent(sectionContent);
+      // Check if title has an explicit number like "Zero - Title" or "1. Title"
+      let explicitNumber: number | undefined = undefined;
+      const numberWordMatch = title.match(/^(zero|one|two|tow|three|four|five|six|seven|eight|nine|ten|\d+)[\s\-:.]*(.*)$/i);
+      
+      if (numberWordMatch) {
+        const word = numberWordMatch[1].toLowerCase();
+        const map: Record<string, number> = {
+          'zero': 0, 'one': 1, 'two': 2, 'tow': 2, 'three': 3, 'four': 4,
+          'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10
+        };
+        explicitNumber = map[word] !== undefined ? map[word] : parseInt(word, 10);
+        // Clean the title to remove the "Zero - " part if there's actual text remaining
+        if (numberWordMatch[2].length > 0) {
+          title = numberWordMatch[2];
+        }
+      }
       
       // Determine a meaningful icon based on the title context
       let iconName = undefined;
@@ -60,13 +75,25 @@ function formatStylizedContent(content: string) {
       else if (lowerTitle.includes('bug') || lowerTitle.includes('fix') || lowerTitle.includes('issue')) iconName = 'healing';
       else if (lowerTitle.includes('tip') || lowerTitle.includes('trick') || lowerTitle.includes('best practice')) iconName = 'lightbulb';
       
-      // We pass the icon if we found a meaningful one, otherwise we pass a 1-based number
+      return { title, sectionContent, iconName, index, explicitNumber };
+    });
+
+    // If even one section doesn't have an icon, fallback to numbers strictly to avoid mixing 1, 2, icon, 4
+    const allSectionsHaveIcons = parsedSections.every(s => s.iconName !== undefined);
+
+    const sections = parsedSections.map(({ title, sectionContent, iconName, index, explicitNumber }) => {
+      // Process the section content
+      const formattedContent = processChapterContent(sectionContent);
+      
+      const finalNumber = explicitNumber !== undefined ? explicitNumber : index + 1;
+      
+      // We pass the icon only if all sections got successfully mapped to an icon, otherwise strict numbered sequence
       return (
         <React.Fragment key={`section-${index}`}>
           <ChapterDivider 
             title={title} 
-            number={iconName ? undefined : index + 1} 
-            icon={iconName}
+            number={allSectionsHaveIcons ? undefined : finalNumber} 
+            icon={allSectionsHaveIcons ? iconName : undefined}
             id={`section-${index}`} 
           />
           {formattedContent}

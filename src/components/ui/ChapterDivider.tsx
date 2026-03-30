@@ -4,7 +4,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import Link from 'next/link';
-import Icon from '@/components/ui/Icon';
 
 interface ChapterDividerProps {
   title: string;
