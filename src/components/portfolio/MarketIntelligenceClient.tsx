@@ -11,6 +11,7 @@ import AppArchitectureModal from './AppArchitectureModal';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import Icon from '@/components/ui/Icon';
 
 // Animated counter component for live metrics feel
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
@@ -497,13 +498,27 @@ export default function MarketIntelligenceClient() {
                                             title: locale === 'fi' ? 'iOS-prototyyppi' : 'iOS Prototype',
                                             description: locale === 'fi' ? 'Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.' : 'Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.',
                                             href: "/mobile/market-intelligence/ios",
-                                            icon: "phone_iphone",
+                                            badge: 'iOS 26',
+                                            icon: (<Icon name="phone_iphone" size="lg" variant="outline" />),
+                                            gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
+                                            borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
+                                            iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
+                                            badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
+                                            buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
+                                            buttonText: "text-[var(--primary)]",
                                         },
                                         {
                                             title: locale === 'fi' ? 'Android-prototyyppi' : 'Android Prototype',
                                             description: locale === 'fi' ? 'Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.' : 'Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.',
                                             href: "/mobile/market-intelligence/android",
-                                            icon: "phone_android",
+                                            badge: 'Android 16',
+                                            icon: (<Icon name="android" size="lg" variant="outline" />),
+                                            gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
+                                            borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
+                                            iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
+                                            badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
+                                            buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
+                                            buttonText: "text-[var(--primary)]",
                                         },
                                     ].map((proto, index) => (
                                         <motion.a
@@ -511,21 +526,24 @@ export default function MarketIntelligenceClient() {
                                             href={proto.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="group p-6 rounded-2xl transition-all duration-300 border border-[var(--card-border)] hover:border-[var(--primary)]/50 bg-[var(--card-from-bg)] flex flex-col hover:shadow-lg"
+                                            className={`group p-6 rounded-2xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col hover:shadow-lg`}
                                             initial={{ opacity: 0, y: 14 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: index * 0.15 }}
                                             whileHover={{ y: -2 }}
                                         >
-                                            <div className="h-10 w-10 flex items-center justify-center rounded-full mb-3 bg-[var(--primary)]/10 text-[var(--primary)]">
-                                                <span className="material-symbols text-xl">{proto.icon}</span>
+                                            <div className="flex items-start justify-between mb-3">
+                                                <div className={`h-10 w-10 flex items-center justify-center rounded-2xl ${proto.iconBg}`}>
+                                                    {proto.icon}
+                                                </div>
+                                                <span className={`text-[11px] font-bold px-2.5 py-1 rounded-lg ${proto.badgeClass}`}>{proto.badge}</span>
                                             </div>
                                             <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">{proto.title}</h3>
                                             <p className="text-sm mb-6 flex-grow text-[var(--muted-foreground)]">{proto.description}</p>
-                                            <div className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start bg-[var(--primary)]/10 border border-[var(--primary)]/20 hover:bg-[var(--primary)]/20">
+                                            <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors self-start ${proto.buttonBg} ${proto.buttonText}`}>
                                                 <span>{locale === 'fi' ? 'Avaa prototyyppi' : 'Open Prototype'}</span>
-                                                <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                                <Icon name="open_in_new" size="sm" variant="outline" className="group-hover:translate-x-0.5 transition-transform" />
                                             </div>
                                         </motion.a>
                                     ))}

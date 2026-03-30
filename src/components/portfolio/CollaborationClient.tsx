@@ -11,6 +11,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import Icon from '@/components/ui/Icon';
 
 export default function CollaborationClient() {
 
@@ -625,31 +626,40 @@ export default function CollaborationClient() {
                     title: content.iosPrototype,
                     description: content.iosPrototypeDesc,
                     href: "/mobile/workflow/ios",
-                    icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
-                    gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
-                    borderColor: "border-[var(--primary)]/20",
-                    iconBg: "bg-[var(--primary)]/10 text-accent",
-                    buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                    icon: (<Icon name="phone_iphone" size="lg" variant="outline" />),
+                    badge: 'iOS 26',
+                    gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
+                    borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
+                    iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
+                    badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
+                    buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
+                    buttonText: "text-[var(--primary)]",
                   },
                   {
                     title: content.androidPrototype,
                     description: content.androidPrototypeDesc,
                     href: "/mobile/workflow/android",
-                    icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                    gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
-                    borderColor: "border-[var(--primary)]/20",
-                    iconBg: "bg-[var(--primary)]/10 text-accent",
-                    buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                    icon: (<Icon name="android" size="lg" variant="outline" />),
+                    badge: 'Android 16',
+                    gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
+                    borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
+                    iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
+                    badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
+                    buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
+                    buttonText: "text-[var(--primary)]",
                   },
                   {
                     title: content.adminPortal,
                     description: content.adminPortalDesc,
                     href: "/portfolio/workflow/admin",
-                    icon: (<span className="material-symbols text-4xl">admin_panel_settings</span>),
+                    icon: (<Icon name="admin_panel_settings" size="lg" variant="outline" />),
+                    badge: 'Web Portal',
                     gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
-                    borderColor: "border-[var(--primary)]/20",
+                    borderColor: "border-[var(--primary)]/20 hover:border-[var(--primary)]/40",
                     iconBg: "bg-[var(--primary)]/10 text-accent",
+                    badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/25",
                     buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                    buttonText: "text-[var(--primary)]",
                   },
                 ].map((proto, index) => (
                   <motion.a
@@ -657,20 +667,23 @@ export default function CollaborationClient() {
                     href={proto.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group theme-card-flex p-5 rounded-xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col hover:border-primary/30`}
+                    className={`group theme-card-flex p-5 rounded-xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col`}
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.12 }}
                     whileHover={{ y: -3 }}
                   >
-                    <div className={`h-11 w-11 flex items-center justify-center rounded-full mb-4 ${proto.iconBg}`}>
-                      {proto.icon}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`h-11 w-11 flex items-center justify-center rounded-2xl ${proto.iconBg}`}>
+                        {proto.icon}
+                      </div>
+                      <span className={`text-[11px] font-bold px-2.5 py-1 rounded-lg ${proto.badgeClass}`}>{proto.badge}</span>
                     </div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{proto.title}</h3>
                     <p className="opacity-70 text-sm leading-relaxed mb-5 flex-grow">{proto.description}</p>
-                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors self-start ${proto.buttonBg} ${proto.buttonText}`}>
                       <span>{content.openPrototype}</span>
-                      <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                      <Icon name="open_in_new" size="sm" variant="outline" className="group-hover:translate-x-0.5 transition-transform" />
                     </div>
                   </motion.a>
                 ))}

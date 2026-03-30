@@ -11,6 +11,7 @@ import Navigation from '@/components/Navigation';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import Icon from '@/components/ui/Icon';
 
 export default function JobSeekingClient() {
 
@@ -641,21 +642,27 @@ export default function JobSeekingClient() {
                     title: content.iosPrototype,
                     description: content.iosPrototypeDesc,
                     href: "/mobile/jobseeking/ios",
-                    icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
-                    gradient: "from-[var(--primary)]/20 to-[var(--gradient-mid)]/20",
-                    borderColor: "border-[var(--primary)]/30",
+                    icon: (<Icon name="phone_iphone" size="lg" variant="outline" />),
+                    badge: 'iOS 26',
+                    gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
+                    borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
                     iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
-                    buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                    badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
+                    buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
+                    buttonText: "text-[var(--primary)]",
                   },
                   {
                     title: content.androidPrototype,
                     description: content.androidPrototypeDesc,
                     href: "/mobile/jobseeking/android",
-                    icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                    gradient: "from-[var(--primary)]/20 to-[var(--gradient-mid)]/20",
-                    borderColor: "border-[var(--primary)]/30",
+                    icon: (<Icon name="android" size="lg" variant="outline" />),
+                    badge: 'Android 16',
+                    gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
+                    borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
                     iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
-                    buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                    badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
+                    buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
+                    buttonText: "text-[var(--primary)]",
                   },
                 ].map((proto, index) => (
                   <motion.a
@@ -669,14 +676,17 @@ export default function JobSeekingClient() {
                     transition={{ delay: index * 0.15 }}
                     whileHover={{ y: -2 }}
                   >
-                    <div className={`h-10 w-10 flex items-center justify-center rounded-full mb-3 ${proto.iconBg}`}>
-                      {proto.icon}
+                    <div className="flex items-start justify-between mb-3">
+                      <div className={`h-10 w-10 flex items-center justify-center rounded-2xl ${proto.iconBg}`}>
+                        {proto.icon}
+                      </div>
+                      <span className={`text-[11px] font-bold px-2.5 py-1 rounded-lg ${proto.badgeClass}`}>{proto.badge}</span>
                     </div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{proto.title}</h3>
                     <p className="text-opacity-80 text-sm mb-6 flex-grow">{proto.description}</p>
-                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors self-start ${proto.buttonBg} ${proto.buttonText}`}>
                       <span>{content.openPrototype}</span>
-                      <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                      <Icon name="open_in_new" size="sm" variant="outline" className="group-hover:translate-x-0.5 transition-transform" />
                     </div>
                   </motion.a>
                 ))}

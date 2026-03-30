@@ -668,7 +668,7 @@
    ------------------------------------------------------- */
 :root {
   --material-symbols:              'Material Symbols Rounded';
-  --material-symbols-weight:       200;
+  --material-symbols-weight:       100;
   --material-symbols-fill:         0;
   --material-symbols-grade:        0;
   --material-symbols-optical-size: 24;

@@ -24,12 +24,12 @@ interface IconProps {
 
 /** Maps size tokens to font-size class, opsz optical size axis, and weight axis */
 const sizeMap: Record<IconSize, { cls: string; opsz: number; wght: number }> = {
-  xs:    { cls: 'text-[14px]', opsz: 20, wght: 300 },
-  sm:    { cls: 'text-[16px]', opsz: 20, wght: 300 },
-  md:    { cls: 'text-[20px]', opsz: 24, wght: 300 },
-  lg:    { cls: 'text-[24px]', opsz: 24, wght: 300 },
-  xl:    { cls: 'text-[32px]', opsz: 40, wght: 200 },
-  '2xl': { cls: 'text-[48px]', opsz: 48, wght: 200 },
+  xs:    { cls: 'text-[14px]', opsz: 20, wght: 100 },
+  sm:    { cls: 'text-[16px]', opsz: 20, wght: 100 },
+  md:    { cls: 'text-[20px]', opsz: 24, wght: 100 },
+  lg:    { cls: 'text-[24px]', opsz: 24, wght: 100 },
+  xl:    { cls: 'text-[32px]', opsz: 40, wght: 100 },
+  '2xl': { cls: 'text-[48px]', opsz: 48, wght: 100 },
 };
 
 export default function Icon({
