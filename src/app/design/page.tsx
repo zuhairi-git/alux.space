@@ -1303,11 +1303,12 @@ function ChapterDividerSection() {
   return (
     <DemoSection code={`import { ChapterDivider } from '@/design-system';
 
-<ChapterDivider title="Getting Started" number={1} />`}>
+<ChapterDivider title="Getting Started" number={1} />
+<ChapterDivider title="Architecture" icon="architecture" />`}>
       <div className="space-y-6">
         <ChapterDivider title="Getting Started" number={1} />
         <p className="text-sm opacity-60 pl-4">Section content would go here...</p>
-        <ChapterDivider title="Advanced Usage" number={2} />
+        <ChapterDivider title="Architecture" icon="architecture" />
         <p className="text-sm opacity-60 pl-4">More content...</p>
       </div>
     </DemoSection>

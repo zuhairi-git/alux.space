@@ -117,7 +117,8 @@ export const componentRegistry: ComponentEntry[] = [
     category: 'composite',
     props: [
       { name: 'title', type: 'string', default: 'required', description: 'Chapter title' },
-      { name: 'number', type: 'number', default: 'required', description: 'Chapter number' },
+      { name: 'number', type: 'number', default: 'undefined', description: 'Chapter number (optional if icon is provided)' },
+      { name: 'icon', type: 'string', default: 'undefined', description: 'Material Symbols icon name (optional if number is provided)' },
       { name: 'id', type: 'string', default: 'auto-generated', description: 'Section ID for linking' },
     ],
     tokens: [],

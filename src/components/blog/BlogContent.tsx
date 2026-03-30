@@ -38,9 +38,37 @@ function formatStylizedContent(content: string) {
       // Process the section content
       const formattedContent = processChapterContent(sectionContent);
       
+      // Determine a meaningful icon based on the title context
+      let iconName = undefined;
+      const lowerTitle = title.toLowerCase();
+      if (lowerTitle.includes('intro') || lowerTitle.includes('welcome')) iconName = 'emoji_people';
+      else if (lowerTitle.includes('conclusion') || lowerTitle.includes('summary') || lowerTitle.includes('wrap')) iconName = 'done_all';
+      else if (lowerTitle.includes('setup') || lowerTitle.includes('install') || lowerTitle.includes('start')) iconName = 'build';
+      else if (lowerTitle.includes('architecture') || lowerTitle.includes('design') || lowerTitle.includes('structure')) iconName = 'architecture';
+      else if (lowerTitle.includes('test') || lowerTitle.includes('qa')) iconName = 'bug_report';
+      else if (lowerTitle.includes('deploy') || lowerTitle.includes('ship') || lowerTitle.includes('release')) iconName = 'rocket_launch';
+      else if (lowerTitle.includes('why') || lowerTitle.includes('reason')) iconName = 'psychology';
+      else if (lowerTitle.includes('how') || lowerTitle.includes('guide') || lowerTitle.includes('action')) iconName = 'integration_instructions';
+      else if (lowerTitle.includes('future') || lowerTitle.includes('next') || lowerTitle.includes('what\'s next')) iconName = 'update';
+      else if (lowerTitle.includes('overview') || lowerTitle.includes('concept')) iconName = 'visibility';
+      else if (lowerTitle.includes('code') || lowerTitle.includes('implementation') || lowerTitle.includes('dev')) iconName = 'code';
+      else if (lowerTitle.includes('data') || lowerTitle.includes('database') || lowerTitle.includes('state')) iconName = 'database';
+      else if (lowerTitle.includes('perf') || lowerTitle.includes('optimiz') || lowerTitle.includes('speed')) iconName = 'speed';
+      else if (lowerTitle.includes('sec') || lowerTitle.includes('auth')) iconName = 'lock';
+      else if (lowerTitle.includes('api') || lowerTitle.includes('network') || lowerTitle.includes('fetch')) iconName = 'api';
+      else if (lowerTitle.includes('ui') || lowerTitle.includes('user interface') || lowerTitle.includes('visual')) iconName = 'palette';
+      else if (lowerTitle.includes('bug') || lowerTitle.includes('fix') || lowerTitle.includes('issue')) iconName = 'healing';
+      else if (lowerTitle.includes('tip') || lowerTitle.includes('trick') || lowerTitle.includes('best practice')) iconName = 'lightbulb';
+      
+      // We pass the icon if we found a meaningful one, otherwise we pass a 1-based number
       return (
         <React.Fragment key={`section-${index}`}>
-          <ChapterDivider title={title} number={index} id={`section-${index}`} />
+          <ChapterDivider 
+            title={title} 
+            number={iconName ? undefined : index + 1} 
+            icon={iconName}
+            id={`section-${index}`} 
+          />
           {formattedContent}
         </React.Fragment>
       );

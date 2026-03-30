@@ -5,18 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 
 export default function PromptAsUxClient() {
-    const { theme } = useTheme();
-    const { locale } = useLanguage();
-    const isLight = theme === 'light';
-
-    const getLocalizedContent = () => {
+        const { locale } = useLanguage();
+        const getLocalizedContent = () => {
         const content = {
             en: {
                 title: "Prompt as UX",
@@ -129,7 +125,7 @@ export default function PromptAsUxClient() {
                 animate="animate"
                 exit="exit"
                 variants={pageVariants}
-                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[var(--color-colorful-bg)]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
+                className="min-h-screen bg-[var(--background)] text-foreground transition-colors duration-300"
             >
                 <Navigation />
                 <CaseStudyProgress />
@@ -149,19 +145,17 @@ export default function PromptAsUxClient() {
                         />
 
                         <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.enterSlow, delay: delaySeconds.md }}>
-                            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
+                            <p className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-foreground/80">
                                 {content.intro}
                             </p>
                         </motion.div>
 
                         {/* Process */}
-                        <CaseStudySection title="Process" icon="account_tree" accent="blue" number={1}>
+                        <CaseStudySection title="Process"  accent="primary" number={1}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {processSteps.map((item, index) => (
                                     <div key={index} className="theme-card-flex p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5">
-                                        <div className="h-11 w-11 flex items-center justify-center text-accent bg-[var(--primary)]/10 rounded-full mb-4">
-                                            <span className="material-symbols text-xl">{item.icon}</span>
-                                        </div>
+                                        
                                         <h3 className="text-lg font-semibold text-primary mb-2">{item.phase}</h3>
                                         <p className="opacity-70 text-sm leading-relaxed">{item.desc}</p>
 
@@ -181,7 +175,7 @@ export default function PromptAsUxClient() {
                         </CaseStudySection>
 
                         {/* Key Insights */}
-                        <CaseStudySection title="Key Insights" icon="lightbulb" accent="purple" number={2}>
+                        <CaseStudySection title="Key Insights"  accent="primary" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
                                     "A poorly designed prompt is a poorly designed user flow — both produce confusion.",
@@ -189,7 +183,7 @@ export default function PromptAsUxClient() {
                                     "The best prompts are invisible — the user just gets what they needed."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
-                                        <span className="material-symbols text-4xl text-purple-400/20 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>
+                                        <span className="material-symbols text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>
                                         <p className="text-lg font-medium text-primary italic relative z-10">&quot;{insight}&quot;</p>
                                     </motion.div>
                                 ))}
@@ -197,11 +191,11 @@ export default function PromptAsUxClient() {
                         </CaseStudySection>
 
                         {/* Outcome */}
-                        <CaseStudySection title="Outcome" icon="task_alt" accent="green" number={3}>
+                        <CaseStudySection title="Outcome"  accent="primary" number={3}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {outcomes.map((outcome, index) => (
                                     <motion.div key={index} className="theme-card-flex p-6 rounded-2xl flex flex-col items-center justify-center text-center">
-                                        <span className="material-symbols text-4xl text-green-500 mb-4">{outcome.icon}</span>
+                                        
                                         <h4 className="text-4xl font-bold text-primary mb-2">{outcome.value}</h4>
                                         <p className="opacity-80 text-sm leading-relaxed">{outcome.label}</p>
                                     </motion.div>

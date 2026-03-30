@@ -4,14 +4,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 interface ChapterDividerProps {
   title: string;
-  number: number;
+  number?: number; // Optional since we can use icon
+  icon?: string; // Material Symbols icon name
   id?: string;
 }
 
-const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) => {
+const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id }) => {
   // Generate ID from title if not provided
   const chapterId = id || title.toLowerCase().replace(/\s+/g, '-');
 
@@ -61,14 +63,23 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, id }) =>
             transition={{ ...t.enterSlow, delay: delaySeconds.md }}
             className="relative"
           >
-            {/* Subtle glow behind number */}
+            {/* Subtle glow behind number/icon */}
             <div className="absolute inset-0 bg-gradient-to-r from-gradient-start to-gradient-mid opacity-10 blur-xl rounded-full"></div>
             
-            {/* Chapter number */}
+            {/* Chapter number or Icon */}
             <div className="relative z-10 flex items-center justify-center">
-              <span className="text-7xl font-bold bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-30">
-                {number}
-              </span>
+              {icon ? (
+                <span 
+                  className="material-symbols !text-[2rem] md:!text-[2.75rem] bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-40 leading-none" 
+                  style={{ fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40" }}
+                >
+                  {icon}
+                </span>
+              ) : (
+                <span className="text-[2rem] md:text-[2.75rem] font-bold bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-30 leading-none">
+                  {number}
+                </span>
+              )}
             </div>
           </motion.div>
         </div>

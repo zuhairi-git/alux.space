@@ -3,101 +3,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { delaySeconds, stagger, transition as t } from '@/design-system';
-import { useTheme } from '@/context/ThemeContext';
-
 interface CaseStudySectionProps {
   title: string;
   icon?: string;
   number?: number;
   id?: string;
   children: React.ReactNode;
-  accent?: 'primary' | 'purple' | 'blue' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'indigo' | 'cyan';
+  accent?: string;
   className?: string;
   showDivider?: boolean;
 }
 
 const accentMap: Record<string, { gradient: string; dot: string; line: string; glow: string; text: string; iconBg: string }> = {
   primary: {
-    gradient: 'from-[var(--primary)] to-[var(--gradient-mid)]',
+    gradient: 'from-[var(--primary)] to-[var(--gradient-start)]',
     dot: 'bg-[var(--primary)]',
-    line: 'from-[var(--primary)]/30 via-[var(--gradient-mid)]/20 to-transparent',
-    glow: 'from-[var(--primary)] to-[var(--gradient-mid)]',
-    text: 'from-[var(--primary)] to-[var(--gradient-mid)]',
-    iconBg: 'bg-[var(--primary)]/15 text-[var(--primary)]',
-  },
-  purple: {
-    gradient: 'from-purple-400 to-pink-400',
-    dot: 'bg-purple-400',
-    line: 'from-purple-400/30 via-pink-400/20 to-transparent',
-    glow: 'from-purple-500 to-pink-500',
-    text: 'from-purple-400 to-pink-400',
-    iconBg: 'bg-purple-500/15 text-purple-400',
-  },
-  blue: {
-    gradient: 'from-blue-400 to-cyan-400',
-    dot: 'bg-blue-400',
-    line: 'from-blue-400/30 via-cyan-400/20 to-transparent',
-    glow: 'from-blue-500 to-cyan-500',
-    text: 'from-blue-400 to-cyan-400',
-    iconBg: 'bg-blue-500/15 text-blue-400',
-  },
-  green: {
-    gradient: 'from-green-400 to-green-400',
-    dot: 'bg-green-400',
-    line: 'from-green-400/30 via-green-400/20 to-transparent',
-    glow: 'from-green-600 to-green-500',
-    text: 'from-green-400 to-green-400',
-    iconBg: 'bg-green-600/15 text-green-400',
-  },
-  orange: {
-    gradient: 'from-[var(--color-ember-light)] to-amber-400',
-    dot: 'bg-[var(--color-ember-light)]',
-    line: 'from-[var(--color-ember-light)]/30 via-amber-400/20 to-transparent',
-    glow: 'from-[var(--color-ember)] to-amber-600',
-    text: 'from-[var(--color-ember-light)] to-amber-400',
-    iconBg: 'bg-ds-ember/15 text-[var(--color-ember-light)]',
-  },
-  red: {
-    gradient: 'from-red-400 to-pink-400',
-    dot: 'bg-red-400',
-    line: 'from-red-400/30 via-pink-400/20 to-transparent',
-    glow: 'from-red-600 to-pink-500',
-    text: 'from-red-400 to-pink-400',
-    iconBg: 'bg-red-600/15 text-red-400',
-  },
-  teal: {
-    gradient: 'from-cyan-400 to-cyan-400',
-    dot: 'bg-cyan-400',
-    line: 'from-cyan-400/30 via-cyan-400/20 to-transparent',
-    glow: 'from-cyan-500 to-cyan-500',
-    text: 'from-cyan-400 to-cyan-400',
-    iconBg: 'bg-cyan-500/15 text-cyan-400',
-  },
-  pink: {
-    gradient: 'from-pink-400 to-pink-400',
-    dot: 'bg-pink-400',
-    line: 'from-pink-400/30 via-pink-400/20 to-transparent',
-    glow: 'from-pink-500 to-pink-500',
-    text: 'from-pink-400 to-pink-400',
-    iconBg: 'bg-pink-500/15 text-pink-400',
-  },
-  indigo: {
-    gradient: 'from-indigo-400 to-purple-400',
-    dot: 'bg-indigo-400',
-    line: 'from-indigo-400/30 via-purple-400/20 to-transparent',
-    glow: 'from-indigo-500 to-violet-500',
-    text: 'from-indigo-400 to-purple-400',
-    iconBg: 'bg-indigo-500/15 text-indigo-400',
-  },
-  cyan: {
-    gradient: 'from-cyan-400 to-blue-400',
-    dot: 'bg-cyan-400',
-    line: 'from-cyan-400/30 via-blue-400/20 to-transparent',
-    glow: 'from-cyan-500 to-blue-500',
-    text: 'from-cyan-400 to-blue-400',
-    iconBg: 'bg-cyan-500/15 text-cyan-400',
-  },
+    line: 'from-[var(--primary)]/30 via-[var(--primary)]/20 to-transparent',
+    glow: 'from-[var(--primary)] to-[var(--primary-glow)]',
+    text: 'text-[var(--foreground)]',
+    iconBg: 'bg-[var(--card-from-bg)] text-[var(--primary)] border border-[var(--card-border)]',
+  }
 };
+
 
 const CaseStudySection: React.FC<CaseStudySectionProps> = ({
   title,
@@ -109,8 +36,6 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
   className = '',
   showDivider = true,
 }) => {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
   const colors = accentMap[accent] || accentMap.primary;
   const sectionId = id || title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -154,8 +79,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
           </div>
 
           {/* Icon or step number */}
-          {(icon || number !== undefined) && (
-            <div className="relative mb-4">
+          <div className="relative mb-4">
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
@@ -167,19 +91,21 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
                 <div className={`absolute inset-0 bg-gradient-to-r ${colors.glow} opacity-10 blur-xl rounded-full`} />
 
                 <div className="relative z-10 flex items-center justify-center">
-                  {icon ? (
-                    <div className={`w-11 h-11 flex items-center justify-center rounded-full ${colors.iconBg} backdrop-blur-sm`}>
-                      <span className="material-symbols text-lg">{icon}</span>
-                    </div>
-                  ) : (
-                    <span className={`text-7xl font-bold bg-gradient-to-br ${colors.text} bg-clip-text text-transparent opacity-30`}>
+                  {number !== undefined ? (
+                    <span className={`text-[2rem] md:text-[2.75rem] leading-none font-bold bg-gradient-to-br ${colors.gradient} bg-clip-text text-transparent opacity-30`}>
                       {number}
+                    </span>
+                  ) : (
+                    <span 
+                      className={`material-symbols !text-[2rem] md:!text-[2.75rem] bg-gradient-to-br ${colors.gradient} bg-clip-text text-transparent opacity-40 leading-none`}
+                      style={{ fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40" }}
+                    >
+                      {icon || 'category'}
                     </span>
                   )}
                 </div>
               </motion.div>
             </div>
-          )}
 
           {/* Title with animated underline */}
           <motion.div
@@ -189,7 +115,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
             transition={{ ...t.enterSlow, delay: delaySeconds.lg }}
             className="text-center mb-14 relative"
           >
-            <h2 className={`text-2xl md:text-3xl font-bold ${isLight ? 'text-gray-900' : 'text-white'}`}>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
               {title}
             </h2>
           </motion.div>
@@ -223,6 +149,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
  */
 export const CaseStudyItem: React.FC<{
   children: React.ReactNode;
+  accent?: string;
   className?: string;
 }> = ({ children, className = '' }) => (
   <motion.div

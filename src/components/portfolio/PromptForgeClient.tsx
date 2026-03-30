@@ -5,18 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 
 export default function PromptForgeClient() {
-    const { theme } = useTheme();
-    const { locale } = useLanguage();
-    const isLight = theme === 'light';
-
-    // Content for PromptForge
+        const { locale } = useLanguage();
+        // Content for PromptForge
     const getLocalizedContent = () => {
         const content = {
             en: {
@@ -125,7 +121,7 @@ export default function PromptForgeClient() {
                 animate="animate"
                 exit="exit"
                 variants={pageVariants}
-                className={`min-h-screen transition-colors duration-300 ${theme === 'colorful' ? 'bg-[var(--color-colorful-bg)]' : isLight ? 'bg-gradient-to-br from-slate-50 to-gray-100' : 'bg-gradient-to-br from-gray-900 to-black'}`}
+                className="min-h-screen bg-[var(--background)] text-foreground transition-colors duration-300"
             >
                 <Navigation />
                 <CaseStudyProgress />
@@ -152,19 +148,17 @@ export default function PromptForgeClient() {
                         />
 
                         <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.enterSlow, delay: delaySeconds.md }}>
-                            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'}`}>
+                            <p className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-foreground/80">
                                 {content.intro}
                             </p>
                         </motion.div>
 
                         {/* Process */}
-                        <CaseStudySection title={content.processParams} icon="account_tree" accent="blue" number={1}>
+                        <CaseStudySection title={content.processParams}  accent="primary" number={1}>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {processSteps.map((item, index) => (
                                     <div key={index} className="theme-card-flex p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5">
-                                        <div className="h-11 w-11 flex items-center justify-center text-accent bg-[var(--primary)]/10 rounded-full mb-4">
-                                            <span className="material-symbols text-xl">{item.icon}</span>
-                                        </div>
+                                        
                                         <h3 className="text-lg font-semibold text-primary mb-2">{item.phase}</h3>
                                         <p className="opacity-70 text-sm leading-relaxed">{item.desc}</p>
 
@@ -181,7 +175,7 @@ export default function PromptForgeClient() {
                         </CaseStudySection>
 
                         {/* Key Insights */}
-                        <CaseStudySection title={content.keyInsights} icon="lightbulb" accent="purple" number={2}>
+                        <CaseStudySection title={content.keyInsights}  accent="primary" number={2}>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
                                     "A good prompt is a design brief in disguise.",
@@ -189,7 +183,7 @@ export default function PromptForgeClient() {
                                     "The real skill is knowing what to ask, not what to draw."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
-                                        <span className="material-symbols text-4xl text-purple-400/20 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>
+                                        <span className="material-symbols text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>
                                         <p className="text-lg font-medium text-primary italic relative z-10">&quot;{insight}&quot;</p>
                                     </motion.div>
                                 ))}
@@ -198,7 +192,7 @@ export default function PromptForgeClient() {
 
                         {/* Prototype Section Placeholder */}
                         {/* TODO: Embed Figma prototype */}
-                        <CaseStudySection title="Interactive Prototype" icon="smart_display" accent="pink" number={3} id="prototype-embed">
+                        <CaseStudySection title="Interactive Prototype"  accent="primary" number={3} id="prototype-embed">
                             <div className="w-full h-[600px] rounded-2xl border-2 border-dashed border-gray-500/30 flex flex-col items-center justify-center bg-black/5">
                                 <span className="material-symbols text-6xl text-gray-400 mb-4">design_services</span>
                                 <p className="text-lg text-primary font-medium">Figma Prototype Placeholder</p>
@@ -207,12 +201,10 @@ export default function PromptForgeClient() {
                         </CaseStudySection>
 
                         {/* Outcome */}
-                        <CaseStudySection title={content.outcome} icon="task_alt" accent="green" number={4}>
+                        <CaseStudySection title={content.outcome}  accent="primary" number={4}>
                             <div className="theme-card-flex p-8 rounded-2xl">
                                 <div className="flex items-center gap-4 mb-4">
-                                    <div className="h-12 w-12 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center">
-                                        <span className="material-symbols text-2xl">emoji_events</span>
-                                    </div>
+                                    
                                     <h3 className="text-2xl font-bold text-primary">Result</h3>
                                 </div>
                                 <p className="text-lg opacity-80 leading-relaxed max-w-4xl">{content.outcomeValue}</p>
