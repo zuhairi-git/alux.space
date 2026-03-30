@@ -42,15 +42,15 @@ export default function HealthcarePrioritizationClient() {
 
         // Priorities
         prioritiesTitle: "Strategic Prioritization",
-        priority1: "Patient Safety (Critical)",
+        priority1: "Patient Safety",
         priority1Desc: "Fixing data-sync failures impacting 2% of appointments. Non-negotiable.",
-        priority2: "Nurse UX (Critical)",
+        priority2: "Nurse UX",
         priority2Desc: "Improving alert visibility to ensure clinical awareness.",
-        priority3: "Strategic Growth (Medium)",
+        priority3: "Strategic Growth",
         priority3Desc: "HL7/FHIR export features—valuable but scoped for dedicated capacity.",
-        priority4: "Marketing Analytics (Low)",
+        priority4: "Marketing Analytics",
         priority4Desc: "Push notification stats—valuable for growth, but safe to defer.",
-        priority5: "Automated Urgent Messages (Rejected)",
+        priority5: "Automated Urgent Messages",
         priority5Desc: "High clinical risk and lack of medical oversight.",
 
         // Decision Making
@@ -270,7 +270,12 @@ export default function HealthcarePrioritizationClient() {
                           viewport={{ once: true, margin: '-20px' }}
                           transition={{ duration: durationSeconds.ease, delay: index * stagger.normal, ease: easing.out.array }}
                           whileHover={{ y: -3 }}
-                          className="p-4 rounded-lg flex flex-col gap-3 transition-shadow duration-300 hover:shadow-md bg-[var(--card-from-bg)] border border-[var(--card-border)] border-l-4 border-l-[var(--primary)]"
+                          className={`p-4 rounded-lg flex flex-col gap-3 transition-shadow duration-300 hover:shadow-md bg-[var(--card-from-bg)] border border-[var(--card-border)] border-l-4 ${
+                              item.priorityLevel === 'Critical' ? 'border-l-red-500' :
+                              item.priorityLevel === 'Medium' ? 'border-l-yellow-500' :
+                              item.priorityLevel === 'Low' ? 'border-l-green-500' :
+                              'border-l-gray-500'
+                            }`}
                         >
                           <div className="flex justify-between items-start">
                             <span className="text-xs font-mono font-medium opacity-60">{item.id}</span>
