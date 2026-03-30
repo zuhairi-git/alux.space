@@ -281,7 +281,7 @@ export default function JobSeekingClient() {
             </motion.div>
 
             {/* Objectives */}
-            <CaseStudySection title={content.objectives} icon="flag" accent="purple" number={1}>
+            <CaseStudySection title={content.objectives} icon="flag" accent="primary" number={1}>
               <ul className="list-none space-y-4 max-w-3xl mx-auto">
                 {objectives.map((objective: string, index: number) => (
                   <CaseStudyItem key={index}>
@@ -295,13 +295,13 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* Design Process */}
-            <CaseStudySection title={content.designProcess} icon="design_services" accent="blue" number={2}>
+            <CaseStudySection title={content.designProcess} icon="design_services" accent="primary" number={2}>
               <div className="mb-4 opacity-80">{content.designModel} <span className="font-semibold text-primary">{content.doubleD}</span></div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
-                    <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-purple-400">search</span>
+                    <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
+                      <span className="material-symbols text-2xl text-primary">search</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Löydä" : "Discover"}
                     </h3>
@@ -313,8 +313,8 @@ export default function JobSeekingClient() {
 
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
-                    <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-purple-400">notes</span>
+                    <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
+                      <span className="material-symbols text-2xl text-primary">notes</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Määrittele" : "Define"}
                     </h3>
@@ -326,8 +326,8 @@ export default function JobSeekingClient() {
 
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
-                    <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-purple-400">edit</span>
+                    <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
+                      <span className="material-symbols text-2xl text-primary">edit</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Kehitä" : "Develop"}
                     </h3>
@@ -339,8 +339,8 @@ export default function JobSeekingClient() {
 
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
-                    <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-purple-400">rocket_launch</span>
+                    <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
+                      <span className="material-symbols text-2xl text-primary">rocket_launch</span>
                     </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Toimita" : "Deliver"}
                     </h3>
@@ -353,14 +353,14 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* Discover Phase */}
-            <CaseStudySection title={content.discoverPhase} icon="search" accent="green" number={3}>
+            <CaseStudySection title={content.discoverPhase} icon="search" accent="primary" number={3}>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <motion.div
                   className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
                   whileHover={{ y: -2 }}
                 >
-                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
                     <span className="material-symbols text-2xl">warning</span>
                   </div>
                   <div>
@@ -373,7 +373,7 @@ export default function JobSeekingClient() {
                   className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
                   whileHover={{ y: -2 }}
                 >
-                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
                     <span className="material-symbols text-2xl">travel_explore</span>
                   </div>
                   <div>
@@ -386,7 +386,7 @@ export default function JobSeekingClient() {
                   className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
                   whileHover={{ y: -2 }}
                 >
-                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
                     <span className="material-symbols text-2xl">search_insights</span>
                   </div>
                   <div>
@@ -399,7 +399,7 @@ export default function JobSeekingClient() {
                   className="theme-card-flex p-6 hover:bg-theme/70 transition-all duration-300 flex items-start space-x-4 self-start"
                   whileHover={{ y: -2 }}
                 >
-                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
                     <span className="material-symbols text-2xl">lightbulb</span>
                   </div>
                   <div>
@@ -417,15 +417,15 @@ export default function JobSeekingClient() {
                       <div className="mb-4 font-bold text-lg text-primary">{content.objectivesLabel}</div>
                       <ul className="space-y-3">
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">target</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : 'Gauge app awareness and usage'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">psychology</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Tunnista käyttäjien kipupisteet' : 'Identify user pain points'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">tips_and_updates</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Kerää käyttökokemuksen parannusehdotuksia' : 'Gather UX improvement suggestions'}</span>
                         </li>
                       </ul>
@@ -435,27 +435,26 @@ export default function JobSeekingClient() {
                       <div className="mb-4 font-bold text-lg text-primary">{content.methods}</div>
                       <ul className="space-y-3 mb-6">
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">forum</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Haastattelut (puolistrukturoidut)' : 'Interviews (semi-structured)'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">checklist</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Kyselyt (sekalaiset kysymykset)' : 'Surveys (mixed questions)'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">monitoring</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Sovelluksen käytön seuranta' : 'App usage tracking'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="material-symbols text-purple-400 mr-3 mt-0.5">analytics</span>
+                          <span className="mr-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Temaattinen ja kvantitatiivinen data-analyysi' : 'Thematic and quantitative data analysis'}</span>
                         </li>
                       </ul>
 
-                      <div className="mt-6 pt-6 border-t border-purple-500/10">
+                      <div className="mt-6 pt-6 border-t border-primary/10">
                         <div className="mb-2 font-bold text-primary">{content.ethics}</div>
                         <p className="opacity-80 flex items-center text-sm">
-                          <span className="material-symbols text-purple-400 mr-2">verified_user</span>
                           {locale === 'fi' ? 'Tietoinen suostumus, anonymiteetti, vapaaehtoinen osallistuminen' : 'Informed consent, anonymity, voluntary participation'}
                         </p>
                       </div>
@@ -466,12 +465,12 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* Define Phase */}
-            <CaseStudySection title={content.definePhase} icon="notes" accent="orange" number={4}>
+            <CaseStudySection title={content.definePhase} icon="notes" accent="primary" number={4}>
               <div className="theme-card">
                 <div className="theme-card-content p-8">
                   <div className="flex items-center mb-4">
-                    <div className="h-12 w-12 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mr-4">
-                      <span className="material-symbols text-2xl text-purple-400">route</span>
+                    <div className="h-12 w-12 flex items-center justify-center text-primary bg-primary/10 rounded-full mr-4">
+                      <span className="material-symbols text-2xl text-primary">route</span>
                     </div>
                     <h3 className="text-2xl font-bold text-primary">{content.userFlow}</h3>
                   </div>
@@ -481,7 +480,7 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* User Personas */}
-            <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="pink" number={5}>
+            <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="primary" number={5}>
               <div className="space-y-10">
                 {[
                   {
@@ -566,7 +565,7 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* AI Capabilities Section */}
-            <CaseStudySection title={content.aiCapabilities} icon="auto_awesome" accent="purple" number={6}>
+            <CaseStudySection title={content.aiCapabilities} icon="auto_awesome" accent="primary" number={6}>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
@@ -596,7 +595,7 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* Develop & Deliver Phases */}
-            <CaseStudySection title={content.developPhase + ' & ' + content.deliverPhase} icon="rocket_launch" accent="teal" number={7}>
+            <CaseStudySection title={content.developPhase + ' & ' + content.deliverPhase} icon="rocket_launch" accent="primary" number={7}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="theme-card">
                   <div className="theme-card-content p-6">
@@ -605,18 +604,12 @@ export default function JobSeekingClient() {
                       <div>
                         <h3 className="text-lg font-semibold text-primary mb-2">{content.epicGoal}</h3>
                         <div className="flex items-center">
-                          <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mr-3">
-                            <span className="material-symbols text-2xl text-purple-400">flight_takeoff</span>
-                          </div>
                           <p className="opacity-80">{content.epicGoalDesc}</p>
                         </div>
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-primary mb-2">{content.userTesting}</h3>
                         <div className="flex items-center">
-                          <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mr-3">
-                            <span className="material-symbols text-2xl text-purple-400">checklist</span>
-                          </div>
                           <p className="opacity-80">{content.inProgress}</p>
                         </div>
                       </div>
@@ -639,7 +632,7 @@ export default function JobSeekingClient() {
             </CaseStudySection>
 
             {/* Live Prototypes */}
-            <CaseStudySection title={content.livePrototypes} icon="devices" accent="cyan" number={8} id="live-prototypes">
+            <CaseStudySection title={content.livePrototypes} icon="devices" accent="primary" number={8} id="live-prototypes">
               <p className="text-opacity-80 mb-8 max-w-2xl">{content.livePrototypesIntro}</p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {[
@@ -648,9 +641,9 @@ export default function JobSeekingClient() {
                     description: content.iosPrototypeDesc,
                     href: "/mobile/jobseeking/ios",
                     icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
-                    gradient: "from-blue-500/20 to-indigo-500/20",
-                    borderColor: "border-blue-500/30",
-                    iconBg: "bg-blue-500/10 text-blue-400",
+                    gradient: "from-[var(--primary)]/20 to-[var(--gradient-mid)]/20",
+                    borderColor: "border-[var(--primary)]/30",
+                    iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
                     buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                   {
@@ -658,9 +651,9 @@ export default function JobSeekingClient() {
                     description: content.androidPrototypeDesc,
                     href: "/mobile/jobseeking/android",
                     icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                    gradient: "from-blue-500/20 to-purple-500/20",
-                    borderColor: "border-blue-500/30",
-                    iconBg: "bg-blue-500/10 text-blue-400",
+                    gradient: "from-[var(--primary)]/20 to-[var(--gradient-mid)]/20",
+                    borderColor: "border-[var(--primary)]/30",
+                    iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
                     buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                 ].map((proto, index) => (

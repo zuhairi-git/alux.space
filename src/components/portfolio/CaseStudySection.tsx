@@ -11,12 +11,20 @@ interface CaseStudySectionProps {
   number?: number;
   id?: string;
   children: React.ReactNode;
-  accent?: 'purple' | 'blue' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'indigo' | 'cyan';
+  accent?: 'primary' | 'purple' | 'blue' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'indigo' | 'cyan';
   className?: string;
   showDivider?: boolean;
 }
 
 const accentMap: Record<string, { gradient: string; dot: string; line: string; glow: string; text: string; iconBg: string }> = {
+  primary: {
+    gradient: 'from-[var(--primary)] to-[var(--gradient-mid)]',
+    dot: 'bg-[var(--primary)]',
+    line: 'from-[var(--primary)]/30 via-[var(--gradient-mid)]/20 to-transparent',
+    glow: 'from-[var(--primary)] to-[var(--gradient-mid)]',
+    text: 'from-[var(--primary)] to-[var(--gradient-mid)]',
+    iconBg: 'bg-[var(--primary)]/15 text-[var(--primary)]',
+  },
   purple: {
     gradient: 'from-purple-400 to-pink-400',
     dot: 'bg-purple-400',
@@ -97,13 +105,13 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
   number,
   id,
   children,
-  accent = 'purple',
+  accent = 'primary',
   className = '',
   showDivider = true,
 }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const colors = accentMap[accent] || accentMap.purple;
+  const colors = accentMap[accent] || accentMap.primary;
   const sectionId = id || title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
   return (

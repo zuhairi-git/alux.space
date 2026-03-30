@@ -121,31 +121,19 @@ export default function CollaborationClient() {
   const designProcessSteps = [
     {
       phase: locale === 'fi' ? "Tutki" : "Discover",
-      desc: locale === 'fi' ? "Tutki tiimien yhteistyön kipupisteitä ja tekoälymahdollisuuksia" : "Research team collaboration pain points and AI opportunities",
-      icon: (
-        <span className="material-symbols text-4xl">search</span>
-      )
+      desc: locale === 'fi' ? "Tutki tiimien yhteistyön kipupisteitä ja tekoälymahdollisuuksia" : "Research team collaboration pain points and AI opportunities"
     },
     {
       phase: locale === 'fi' ? "Määrittele" : "Define",
-      desc: locale === 'fi' ? "Määrittele tekoälyavustajan laajuus ja työtila-arkkitehtuuri" : "Define AI copilot scope and workspace architecture",
-      icon: (
-        <span className="material-symbols text-4xl">notes</span>
-      )
+      desc: locale === 'fi' ? "Määrittele tekoälyavustajan laajuus ja työtila-arkkitehtuuri" : "Define AI copilot scope and workspace architecture"
     },
     {
       phase: locale === 'fi' ? "Kehitä" : "Develop",
-      desc: locale === 'fi' ? "Rakenna tekoälypohjaiset prototyypit mobiili- ja portaalialustoille" : "Build AI-powered prototypes across mobile and admin platforms",
-      icon: (
-        <span className="material-symbols text-4xl">edit</span>
-      )
+      desc: locale === 'fi' ? "Rakenna tekoälypohjaiset prototyypit mobiili- ja portaalialustoille" : "Build AI-powered prototypes across mobile and admin platforms"
     },
     {
       phase: locale === 'fi' ? "Toimita" : "Deliver",
-      desc: locale === 'fi' ? "Validoi käyttäjillä kaikilla alustoilla ja iteroi" : "Validate with users across all platforms and iterate",
-      icon: (
-        <span className="material-symbols text-4xl">rocket_launch</span>
-      )
+      desc: locale === 'fi' ? "Validoi käyttäjillä kaikilla alustoilla ja iteroi" : "Validate with users across all platforms and iterate"
     }
   ];
   // Translation for roles
@@ -278,7 +266,7 @@ export default function CollaborationClient() {
             </motion.div>
 
             {/* Objectives */}
-            <CaseStudySection title={content.objectives} icon="flag" accent="purple" number={1}>
+            <CaseStudySection title={content.objectives} number={1}>
               <ul className="list-none space-y-4 max-w-3xl mx-auto">
                 {objectives.map((objective: string, index: number) => (
                   <CaseStudyItem key={index}>
@@ -292,15 +280,15 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* Design Process */}
-            <CaseStudySection title={content.designProcess} icon="design_services" accent="blue" number={2}>
+            <CaseStudySection title={content.designProcess} number={2}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {designProcessSteps.map((item, index) => (
                   <div
                     key={index}
                     className="theme-card-flex p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5"
                   >
-                    <div className="h-11 w-11 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full mb-4">
-                      <span className="material-symbols text-xl">{item.icon.props.children}</span>
+                    <div className="text-primary/50 text-sm font-bold tracking-widest uppercase mb-4">
+                      {String(index + 1).padStart(2, '0')}
                     </div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{item.phase}</h3>
                     <p className="opacity-70 text-sm leading-relaxed">{item.desc}</p>
@@ -310,7 +298,7 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* Research Findings */}
-            <CaseStudySection title={content.researchInsights} icon="science" accent="green" number={3}>
+            <CaseStudySection title={content.researchInsights} number={3}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                   <h3 className="text-lg font-semibold text-primary mb-6">{content.participantFeedback}</h3>
@@ -327,12 +315,12 @@ export default function CollaborationClient() {
                           <span className="text-opacity-80">{metric.label}</span>
                           <span className="text-primary font-semibold">{metric.value}%</span>
                         </div>
-                        <div className="overflow-hidden h-2 text-xs flex rounded-full bg-purple-400/10">
+                        <div className="overflow-hidden h-2 text-xs flex rounded-full bg-primary/10">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${metric.value}%` }}
                             transition={{ duration: durationSeconds.glacial, ease: "easeOut" }}
-                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400 `}
+                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary `}
                             style={{
                               width: `${metric.value}%`
                             }}
@@ -366,7 +354,7 @@ export default function CollaborationClient() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full group-hover:bg-purple-400/15 transition-colors">
+                        <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full group-hover:bg-primary/15 transition-colors">
                           <span className="material-symbols text-xl">{item.icon}</span>
                         </div>
                         <div>
@@ -381,7 +369,7 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* User Personas */}
-            <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" accent="pink" number={4}>
+            <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} number={4}>
               <div className="space-y-10">
                 {[{
                   name: locale === 'fi' ? "Sara K." : "Sara K.",
@@ -426,13 +414,13 @@ export default function CollaborationClient() {
                           </div>
 
                           <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-warning flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
+                            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 flex-shrink-0">{locale === 'fi' ? "Piirteet" : "Traits"}</span>
                             <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                            <div className="border-l-2 border-green-600/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
+                            <div className="border-l-2 border-primary/20 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{need}</li>
@@ -440,8 +428,8 @@ export default function CollaborationClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-[var(--primary)]/25 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent mb-3">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
+                            <div className="border-l-2 border-primary/20 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 mb-3">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.goals.map((goal, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{goal}</li>
@@ -449,8 +437,8 @@ export default function CollaborationClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-pink-500/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-pink-500 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
+                            <div className="border-l-2 border-primary/20 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.painPoints.map((point, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{point}</li>
@@ -467,7 +455,7 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* Requirements & Testing */}
-            <CaseStudySection title={content.productRequirements} icon="checklist" accent="indigo" number={5} showDivider={true}>
+            <CaseStudySection title={content.productRequirements} number={5} showDivider={true}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                   <h3 className="text-lg font-semibold text-primary mb-5">{content.productRequirements}</h3>
@@ -500,7 +488,7 @@ export default function CollaborationClient() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.08 }}
                       >
-                        <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full group-hover:bg-purple-400/15 transition-colors">
+                        <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full group-hover:bg-primary/15 transition-colors">
                           <span className="material-symbols text-xl">{req.icon}</span>
                         </div>
                         <div>
@@ -543,7 +531,7 @@ export default function CollaborationClient() {
                           key={index}
                           className="theme-card-flex p-3 rounded-lg flex items-center gap-3 hover:border-primary/20 transition-colors"
                         >
-                          <div className="h-8 w-8 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full flex-shrink-0">
+                          <div className="h-8 w-8 flex items-center justify-center text-primary bg-primary/10 rounded-full flex-shrink-0">
                             <span className="material-symbols text-base">{focus.icon}</span>
                           </div>
                           <span className="opacity-80 text-sm">{focus.area}</span>
@@ -556,7 +544,7 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* Delivery Phase */}
-            <CaseStudySection title={content.deliveryPhase} icon="rocket_launch" accent="teal" number={6}>
+            <CaseStudySection title={content.deliveryPhase} number={6}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {[{
                   title: locale === 'fi' ? "Tekoälypohjaiset prototyypit" : "AI-Powered Prototypes",
@@ -592,7 +580,7 @@ export default function CollaborationClient() {
                     whileHover={{ y: -2 }}
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-full">
+                      <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
                         <span className="material-symbols text-xl">{item.icon}</span>
                       </div>
                       <div className="flex-grow">
@@ -611,12 +599,12 @@ export default function CollaborationClient() {
                               </span>
                             </div>
                           </div>
-                          <div className="overflow-hidden h-2 text-xs flex rounded-full bg-purple-400/10">
+                          <div className="overflow-hidden h-2 text-xs flex rounded-full bg-primary/10">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${item.progress}%` }}
                               transition={{ duration: durationSeconds.glacial, ease: "easeOut" }}
-                              className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-400"
+                              className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary"
                             />
                           </div>
                         </div>
@@ -628,7 +616,7 @@ export default function CollaborationClient() {
             </CaseStudySection>
 
             {/* Live Prototypes */}
-            <CaseStudySection title={content.livePrototypes} icon="devices" accent="cyan" number={7} id="live-prototypes">
+            <CaseStudySection title={content.livePrototypes} number={7} id="live-prototypes">
               <p className="text-opacity-80 mb-8 max-w-2xl">{content.livePrototypesIntro}</p>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {[
@@ -657,9 +645,9 @@ export default function CollaborationClient() {
                     description: content.adminPortalDesc,
                     href: "/portfolio/workflow/admin",
                     icon: (<span className="material-symbols text-4xl">admin_panel_settings</span>),
-                    gradient: "from-purple-500/20 to-fuchsia-500/20",
-                    borderColor: "border-purple-500/30",
-                    iconBg: "bg-purple-500/10 text-purple-400",
+                    gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
+                    borderColor: "border-[var(--primary)]/20",
+                    iconBg: "bg-[var(--primary)]/10 text-accent",
                     buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
                   },
                 ].map((proto, index) => (
