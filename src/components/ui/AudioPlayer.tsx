@@ -6,6 +6,7 @@ import { useTranslations } from '@/hooks/useTranslations';
 import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { durationSeconds, delaySeconds, Button } from '@/design-system';
+import Badge from '@/components/ui/Badge';
 
 interface AudioPlayerProps {
   src: string;
@@ -559,22 +560,19 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           </div>
           
           {/* Language indicator */}
-          <motion.div 
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${
-              availableLanguages.length > 1
-                ? 'bg-primary/10 text-primary border-primary/30'
-                : 'bg-foreground/10 text-foreground/70 border-foreground/20'
-            }`}
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: delaySeconds['2xl'] }}
             whileHover={{ scale: 1.05 }}
             title={availableLanguages.length > 1 ? `Available in ${availableLanguages.length} languages` : `Audio language: ${language.toUpperCase()}`}
           >
-            {availableLanguages.length > 1 
-              ? availableLanguages.map(lang => lang.toUpperCase()).join('+')
-              : language.toUpperCase()
-            }
+            <Badge variant={availableLanguages.length > 1 ? 'info' : 'outline'}>
+              {availableLanguages.length > 1
+                ? availableLanguages.map(lang => lang.toUpperCase()).join('+')
+                : language.toUpperCase()
+              }
+            </Badge>
           </motion.div>
         </div>
       </div>      {/* Dynamic waveform visualization */}

@@ -797,15 +797,22 @@ function BadgesSection() {
   return (
     <DemoSection code={`import { Badge } from '@/design-system';
 
+// Semantic state
 <Badge variant="default">Default</Badge>
 <Badge variant="success" dot>Active</Badge>
 <Badge variant="warning">Pending</Badge>
 <Badge variant="error">Critical</Badge>
 <Badge variant="info">New</Badge>
-<Badge variant="outline">v2.0.1</Badge>`}>
+<Badge variant="outline">v2.0.1</Badge>
+
+// Visual context
+<Badge variant="gradient">Category</Badge>
+<Badge variant="glass">On Image</Badge>
+<Badge variant="overlay">Attribution</Badge>
+<Badge variant="accent">Case Study</Badge>`}>
       <div className="space-y-6">
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Variants</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Semantic State</h4>
           <div className="flex flex-wrap gap-2">
             <Badge variant="default">Default</Badge>
             <Badge variant="success">Success</Badge>
@@ -813,6 +820,16 @@ function BadgesSection() {
             <Badge variant="error">Error</Badge>
             <Badge variant="info">Info</Badge>
             <Badge variant="outline">Outline</Badge>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Visual Context (on images / overlays)</h4>
+          <div className="flex flex-wrap gap-2 p-4 rounded-xl bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]">
+            <Badge variant="gradient">Category</Badge>
+            <Badge variant="glass">On Image</Badge>
+            <Badge variant="overlay">Attribution</Badge>
+            <Badge variant="accent">Case Study</Badge>
           </div>
         </div>
         <Divider />

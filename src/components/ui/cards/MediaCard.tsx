@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { durationSeconds } from '@/design-system';
+import Badge from '@/components/ui/Badge';
 import { useTheme } from '@/context/ThemeContext';
 
 interface MediaCardProps {
@@ -125,9 +126,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
               {tags && tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {tags.slice(0, 3).map((tag, idx) => (
-                    <span key={idx} className={`px-3 py-1 rounded-full text-xs ${styles.tag}`}>
-                      {tag}
-                    </span>
+                    <Badge key={idx} variant="glass">{tag}</Badge>
                   ))}
                 </div>
               )}
@@ -196,9 +195,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
               {tags && tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {tags.slice(0, 3).map((tag, idx) => (
-                    <span key={idx} className={`px-3 py-1 rounded-full text-xs ${styles.tag}`}>
-                      {tag}
-                    </span>
+                    <Badge key={idx} variant="default">{tag}</Badge>
                   ))}
                 </div>
               )}
@@ -267,9 +264,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
               {tags && tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {tags.slice(0, 3).map((tag, idx) => (
-                    <span key={idx} className={`px-3 py-1 rounded-full text-xs ${styles.tag}`}>
-                      {tag}
-                    </span>
+                    <Badge key={idx} variant="default">{tag}</Badge>
                   ))}
                 </div>
               )}

@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { transition as t } from '@/design-system';
+import Badge, { BadgeVariant } from '@/components/ui/Badge';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
@@ -64,24 +65,12 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
   
   const getStatus = (): string => {
     return item.status[locale as keyof typeof item.status] || item.status.en;
-  };  const getStatusClasses = (): string => {
-    const baseClasses = 'px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide whitespace-nowrap border transition-all duration-200';
+  };  const getStatusVariant = (): BadgeVariant => {
     switch (item.status.type) {
-      case 'in-progress':
-        return `${baseClasses} bg-[var(--color-warning-bg)] text-[var(--color-warning)] border-[var(--color-warning-border)]`;
-      case 'accomplished':
-        return `${baseClasses} bg-[var(--color-success-bg)] text-[var(--color-success)] border-[var(--color-success-border)]`;
-      default:
-        return `${baseClasses} bg-[var(--card-from-bg)] text-[var(--foreground)] opacity-60 border-[var(--card-border)]`;
+      case 'in-progress': return 'warning';
+      case 'accomplished': return 'success';
+      default: return 'outline';
     }
-  };
-  
-  const getTagClasses = (): string => {
-    return 'px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 bg-[var(--color-info-bg)] text-[var(--color-info)] border border-[var(--color-info-border)] hover:opacity-80';
-  };
-  
-  const getTypeBadgeClasses = (): string => {
-    return `px-3 py-1 rounded-full text-xs font-medium text-white shadow-md hover:shadow-lg transition-all duration-200 bg-gradient-to-r ${item.gradient || 'from-blue-500 to-purple-500'}`;
   };
   
   // Create localized URL
@@ -99,17 +88,17 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
     if (!item.category) return null;
     if (item.category === 'case-study') {
       return (
-        <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-violet-500/15 text-purple-400 border-violet-500/30">
+        <Badge variant="accent">
           <span className="material-symbols !text-[12px]">school</span>
           {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
-        </span>
+        </Badge>
       );
     }
     return (
-      <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border bg-cyan-500/15 text-cyan-400 border-cyan-500/30">
+      <Badge variant="info">
         <span className="material-symbols !text-[12px]">devices</span>
         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
-      </span>
+      </Badge>
     );
   };
 
@@ -159,17 +148,17 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 <div className="flex items-center gap-2">
                   {item.category && getCategoryBadge()}
                 </div>
-                <span className={getStatusClasses()}>
+                <Badge variant={getStatusVariant()} size="sm" className="uppercase tracking-wide">
                   {getStatus()}
-                </span>
+                </Badge>
               </div>
 
               {/* Bottom: Content */}
               <div>
                 <div className="mb-3">
-                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-semibold mb-3 bg-white/15 backdrop-blur-sm text-white/90 border border-white/10`}>
+                  <Badge variant="glass" className="mb-3">
                     {getType()}
-                  </span>
+                  </Badge>
                   <h3 className="text-2xl font-bold text-white leading-tight mb-2">{getTitle()}</h3>
                   <p className="text-white/70 text-sm line-clamp-2 leading-relaxed">{getDesc()}</p>
                 </div>
@@ -225,9 +214,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             
             {/* Status badge - top right */}
             <div className="absolute top-3 right-3 z-10">
-              <span className={getStatusClasses()}>
+              <Badge variant={getStatusVariant()} size="sm" className="uppercase tracking-wide">
                 {getStatus()}
-              </span>
+              </Badge>
             </div>
           </div>
           
@@ -235,9 +224,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
           <div className="p-6 flex-1 flex flex-col">
             {/* Type + Category */}
             <div className="flex items-center gap-2 mb-3 flex-wrap">
-              <span className={getTypeBadgeClasses()}>
+              <Badge variant="gradient" className="hover:shadow-lg transition-shadow">
                 {getType()}
-              </span>
+              </Badge>
               {item.category && getCategoryBadge()}
             </div>
             
@@ -250,9 +239,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
               {cardTags.length > 0 ? (
                 <div className="flex flex-wrap gap-1.5">
                   {cardTags.map((tag, idx) => (
-                    <span key={idx} className={getTagClasses()}>
-                      {tag}
-                    </span>
+                    <Badge key={idx} variant="info" size="sm">{tag}</Badge>
                   ))}
                 </div>
               ) : <div />}

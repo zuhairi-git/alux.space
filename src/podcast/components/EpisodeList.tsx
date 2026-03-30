@@ -7,6 +7,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { PodcastEpisode, SupportedLanguage } from '../types/podcast';
 import { filterEpisodesByLanguage, getEpisodeDisplayLanguage, shouldShowLanguageBadge } from '../utils/languageUtils';
 import LanguageBadge from './LanguageBadge';
+import Badge from '@/components/ui/Badge';
 
 interface EpisodeListProps {
   episodes: PodcastEpisode[];
@@ -118,13 +119,7 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
                 <div className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs ${getSecondaryTextStyle()}`}>
                   <span>{formatDate(episode.publishDate)}</span>
                   {episode.featured && (
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${
-                      isLight ? 'bg-yellow-100 text-yellow-800' :
-                      isColorful ? 'bg-yellow-500/20 text-yellow-300' :
-                      'bg-yellow-900/30 text-yellow-400'
-                    }`}>
-                      Featured
-                    </span>
+                    <Badge variant="warning" size="sm" dot>Featured</Badge>
                   )}
                 </div>
               </div>

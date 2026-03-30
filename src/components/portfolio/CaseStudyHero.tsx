@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t, Button, Icon } from '@/design-system';
+import Badge from '@/components/ui/Badge';
 import { useLanguage } from '@/context/LanguageContext';
 
 interface HeroAction {
@@ -87,12 +88,7 @@ export default function CaseStudyHero({
               className="flex flex-wrap gap-2 mb-4"
             >
               {tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1 bg-white/15 backdrop-blur-md text-white rounded-full text-xs font-medium border border-white/20"
-                >
-                  {tag}
-                </span>
+                <Badge key={i} variant="glass">{tag}</Badge>
               ))}
             </motion.div>
           )}

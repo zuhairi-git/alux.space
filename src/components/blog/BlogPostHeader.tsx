@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { delaySeconds } from '@/design-system';
+import Badge from '@/components/ui/Badge';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -210,9 +211,9 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
             transition={{ delay: delaySeconds.xl }}
             className="absolute top-4 left-4 z-10"
           >
-            <div className="bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs italic font-normal shadow-lg border border-white/20">
+            <Badge variant="overlay" className="italic font-normal">
               Image by Freepik
-            </div>
+            </Badge>
           </motion.div>
         )}
         

@@ -206,6 +206,16 @@
   --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
   --badge-overlay-border:  rgba(0, 0, 0, 0.1);
 
+  /* Badge — glass (frosted, placed on top of images) */
+  --badge-glass-bg:         rgba(255, 255, 255, 0.15);
+  --badge-glass-border:     rgba(255, 255, 255, 0.20);
+  --badge-glass-text:       #ffffff;
+
+  /* Badge — accent (violet/purple, e.g. case-study category) */
+  --badge-accent-bg:        rgba(168, 85, 247, 0.15);
+  --badge-accent-border:    rgba(168, 85, 247, 0.30);
+  --badge-accent-text:      var(--color-purple-400);
+
   /* Audio Player */
   --player-bg:              rgba(17, 24, 39, 0.9);
   --player-border:          rgba(55, 65, 81, 0.5);
@@ -279,6 +289,7 @@
   --muted-foreground:      var(--color-gray-600);
   --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
   --badge-overlay-border:  rgba(0, 0, 0, 0.1);
+  --badge-accent-text:      var(--color-purple-600);
 
   /* Audio Player */
   --player-bg:              rgba(255, 255, 255, 0.9);
@@ -467,6 +478,9 @@
   --muted-foreground:      rgba(255, 176, 122, 0.75);        /* warm amber-tinted muted */
   --badge-overlay-bg:      rgba(6, 4, 12, 0.88);
   --badge-overlay-border:  rgba(255, 140, 66, 0.25);
+  --badge-accent-bg:        rgba(124, 58, 237, 0.20);
+  --badge-accent-border:    rgba(124, 58, 237, 0.40);
+  --badge-accent-text:      var(--color-purple-300);
 
   /* Audio Player */
   --player-bg:              rgba(8, 5, 16, 0.92);

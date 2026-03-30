@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { durationSeconds, transition as t } from '@/design-system';
+import Badge from '@/components/ui/Badge';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
 import { formatDate, toISOString } from '@/utils/dateUtils';
@@ -74,9 +75,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                 </motion.div>
                 {/* Category badge */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-md">
+                  <Badge variant="gradient">
                     {post.tags[0] || 'Blog'}
-                  </span>
+                  </Badge>
                 </div>
               </div>
 
@@ -84,12 +85,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
               <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.slice(1, 4).map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 rounded-full text-xs bg-primary/10 text-primary font-medium"
-                    >
-                      {tag}
-                    </span>
+                    <Badge key={idx} variant="default">{tag}</Badge>
                   ))}
                 </div>
 
@@ -174,23 +170,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             <div className="relative h-full flex flex-col justify-end p-7 z-10">
               {/* Badge */}
               <div className="absolute top-4 right-4">
-                <span 
-                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-md"
-                  aria-label={`Category: ${post.tags[0] || 'Blog'}`}
-                >
+                <Badge variant="gradient" aria-label={`Category: ${post.tags[0] || 'Blog'}`}>
                   {post.tags[0] || 'Blog'}
-                </span>
+                </Badge>
               </div>
 
               <div className="flex flex-wrap gap-2 mb-3">
                 {post.tags.slice(1, 3).map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="px-3 py-1 rounded-full text-xs bg-white/15 backdrop-blur-sm text-white font-medium"
-                    aria-label={`Tag: ${tag}`}
-                  >
-                    {tag}
-                  </span>
+                  <Badge key={idx} variant="glass" aria-label={`Tag: ${tag}`}>{tag}</Badge>
                 ))}
               </div>
 
@@ -275,12 +262,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             
             {/* Category badge */}
             <div className="absolute top-3 right-3 z-10">
-              <span 
-                className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-md"
-                aria-label={`Category: ${post.tags[0] || 'Blog'}`}
-              >
+              <Badge variant="gradient" aria-label={`Category: ${post.tags[0] || 'Blog'}`}>
                 {post.tags[0] || 'Blog'}
-              </span>
+              </Badge>
             </div>
           </div>
           
@@ -303,13 +287,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             {post.tags.length > 1 && (
               <div className="flex flex-wrap gap-1.5 mb-4" role="list" aria-label="Article tags">
                 {post.tags.slice(1, 3).map((tag, idx) => (
-                  <span 
-                    key={idx} 
-                    className="px-2.5 py-1 rounded-full text-xs bg-primary/8 text-primary/80 font-medium"
-                    role="listitem"
-                  >
-                    {tag}
-                  </span>
+                  <Badge key={idx} variant="default" size="sm" role="listitem">{tag}</Badge>
                 ))}
               </div>
             )}

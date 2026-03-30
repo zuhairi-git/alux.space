@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
+import Badge from '@/components/ui/Badge';
 
 interface AudioCardProps {
   audio: AudioMetadata;
@@ -16,7 +17,6 @@ interface AudioCardProps {
 }
 
 const CARD_BASE = 'bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)] hover:shadow-lg transition-all duration-300';
-const TAG_CLS   = 'px-2 py-1 rounded-full text-xs font-medium transition-colors bg-[var(--card-from-bg)] border border-[var(--card-border)] text-[var(--foreground)] opacity-70 hover:opacity-100';
 const PLAY_CLS  = 'bg-[var(--btn-primary-bg)] hover:bg-[var(--btn-primary-hover)] text-white shadow-lg flex items-center justify-center transition-all duration-200';
 
 const AudioCard: React.FC<AudioCardProps> = ({
@@ -35,9 +35,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
     ? audio.versions.map(v => v.language.toUpperCase()).join('+')
     : audio.language.toUpperCase();
 
-  const langBadgeCls = audio.isMultiLanguage
-    ? 'bg-[var(--color-info-bg)] text-[var(--color-info)] border border-[var(--color-info-border)]'
-    : 'bg-[var(--card-from-bg)] border border-[var(--card-border)] text-[var(--foreground)] opacity-70';
+  const langBadgeVariant = audio.isMultiLanguage ? 'info' as const : 'outline' as const;
 
   if (variant === 'list') {
     return (
@@ -77,9 +75,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
                   </p>
                   <div className="flex items-center gap-4 text-sm flex-wrap">
                     <span className="text-[var(--primary)]">{audio.category}</span>
-                    <span className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${langBadgeCls}`}>
-                      {langBadgeText}
-                    </span>
+                    <Badge variant={langBadgeVariant} size="sm">{langBadgeText}</Badge>
                   </div>
                 </div>
 
@@ -124,13 +120,13 @@ const AudioCard: React.FC<AudioCardProps> = ({
             </div>
           )}
 
-          {/* Featured Badge */}
+          {/* Featured Badge — on image */}
           {audio.featured && (
             <div className="absolute top-3 right-3">
-              <div className="bg-yellow-400 text-yellow-900 px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                <span className="material-symbols text-sm">star</span>
+              <Badge variant="glass">
+                <span className="material-symbols text-sm leading-none">star</span>
                 Featured
-              </div>
+              </Badge>
             </div>
           )}
         </div>
@@ -154,10 +150,10 @@ const AudioCard: React.FC<AudioCardProps> = ({
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
             {audio.tags.slice(0, 3).map((tag, index) => (
-              <span key={index} className={TAG_CLS}>{tag}</span>
+              <Badge key={index} variant="outline" size="sm">{tag}</Badge>
             ))}
             {audio.tags.length > 3 && (
-              <span className="px-2 py-1 rounded-full text-xs font-medium text-[var(--foreground)] opacity-50">
+              <span className="px-2 py-1 text-xs font-medium text-[var(--foreground)] opacity-50">
                 +{audio.tags.length - 3} more
               </span>
             )}
@@ -169,9 +165,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
               <span className="material-symbols text-sm">calendar_today</span>
               {new Date(audio.publishedDate).toLocaleDateString()}
             </span>
-            <span className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${langBadgeCls}`}>
-              {langBadgeText}
-            </span>
+            <Badge variant={langBadgeVariant} size="sm">{langBadgeText}</Badge>
           </div>
         </div>
       </Link>
