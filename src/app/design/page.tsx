@@ -705,13 +705,13 @@ function ButtonsSection() {
 <Button variant="icon"><Icon name="more_vert" /></Button>
 <Button variant="icon" size="lg"><Icon name="settings" /></Button>
 
-// Sizes (all variants)
-<Button size="sm">Small</Button>
-<Button size="md">Medium</Button>
-<Button size="lg">Large</Button>
+// On-image — glass (primary-tinted frosted, white text) / overlay (dark frosted)
+<Button variant="glass" leftIcon={<Icon name="star" />}>Feature</Button>
+<Button variant="overlay" leftIcon={<Icon name="bookmark" />}>Save</Button>
 
-// States
+// States — loading is active (full opacity), disabled is inactive (dimmed)
 <Button loading>Saving…</Button>
+<Button variant="secondary" loading>Loading…</Button>
 <Button disabled>Disabled</Button>`}>
       <div className="space-y-6">
         {/* Primary */}
@@ -769,15 +769,47 @@ function ButtonsSection() {
           </div>
         </div>
         <Divider />
+        {/* On-image */}
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">On Image — Glass &amp; Overlay</h4>
+          <div className="relative overflow-hidden rounded-xl h-28">
+            <Image
+              src="/images/portfolio/collaboration/cover.jpg"
+              alt="Button on image demo"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="relative z-10 flex flex-wrap gap-2 p-4 h-full items-end">
+              <Button variant="glass" size="sm" leftIcon={<Icon name="star" />}>Feature</Button>
+              <Button variant="overlay" size="sm" leftIcon={<Icon name="bookmark" />}>Save</Button>
+              <Button variant="icon" size="sm" className="text-white hover:bg-white/20 hover:border-white/40 border border-white/25 backdrop-blur-sm"><Icon name="share" /></Button>
+            </div>
+          </div>
+          <p className="text-[11px] opacity-40 mt-2">Glass is primary-tinted frosted with white text — for primary actions on images. Overlay is dark frosted for secondary/quiet actions. Icon buttons can be layered on top with a manual white border + blur.</p>
+        </div>
+        <Divider />
         {/* States */}
         <div>
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">States</h4>
-          <div className="flex flex-wrap gap-3">
-            <Button loading>Saving…</Button>
-            <Button variant="secondary" loading>Loading…</Button>
-            <Button disabled>Disabled</Button>
-            <Button variant="secondary" disabled>Disabled</Button>
-            <Button variant="tertiary" disabled>Disabled</Button>
+          <div className="space-y-3">
+            <div>
+              <p className="text-[11px] opacity-40 mb-2">Loading — active state, full opacity</p>
+              <div className="flex flex-wrap gap-3">
+                <Button loading>Saving…</Button>
+                <Button variant="secondary" loading>Loading…</Button>
+                <Button variant="tertiary" loading>Processing…</Button>
+                <Button variant="icon" loading><Icon name="refresh" /></Button>
+              </div>
+            </div>
+            <div>
+              <p className="text-[11px] opacity-40 mb-2">Disabled — inactive state, dimmed</p>
+              <div className="flex flex-wrap gap-3">
+                <Button disabled>Disabled</Button>
+                <Button variant="secondary" disabled>Disabled</Button>
+                <Button variant="tertiary" disabled>Disabled</Button>
+              </div>
+            </div>
           </div>
         </div>
         <Divider />

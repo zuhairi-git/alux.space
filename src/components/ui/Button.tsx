@@ -9,7 +9,9 @@ type ButtonVariant =
   | 'icon'       // Square icon-only button
   | 'ghost'      // Alias for tertiary (backward compat)
   | 'outline'    // Alias for secondary (backward compat)
-  | 'cosmic';    // Special animated gradient
+  | 'cosmic'     // Special animated gradient
+  | 'glass'      // Frosted-glass — for on-image placement
+  | 'overlay';   // Dark frosted — for on-image placement
 
 type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -47,7 +49,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 
   // ── Secondary: gradient-tinted, primary-bordered — mirrors hero CTA style ──
   secondary: [
-    'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10',
+    'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 backdrop-blur-sm',
     'border border-[var(--card-border)]',
     'text-[var(--primary)] font-[500]',
     'hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50 hover:-translate-y-[1px]',
@@ -72,7 +74,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 
   // ── Backward-compat aliases ────────────────────────────────
   outline: [
-    'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10',
+    'bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 backdrop-blur-sm',
     'border border-[var(--card-border)]',
     'text-[var(--primary)] font-[500]',
     'hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50 hover:-translate-y-[1px]',
@@ -92,6 +94,24 @@ const variantClasses: Record<ButtonVariant, string> = {
     'text-white font-medium',
     'rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5',
     'active:translate-y-0',
+  ].join(' '),
+
+  // ── Glass: theme-primary frosted — primary-tinted, white text, on images ──
+  glass: [
+    'bg-[var(--primary)]/30 backdrop-blur-sm',
+    'border border-[var(--primary)]/40',
+    'text-white font-[500]',
+    'hover:bg-[var(--primary)]/45 hover:border-[var(--primary)]/55 hover:-translate-y-[1px]',
+    'active:translate-y-0 active:scale-[0.98]',
+  ].join(' '),
+
+  // ── Overlay: dark frosted — for buttons placed on images ──────
+  overlay: [
+    'bg-[var(--btn-overlay-bg)] backdrop-blur-sm',
+    'border border-[var(--btn-overlay-border)]',
+    'text-[var(--btn-overlay-text)] font-[500]',
+    'hover:bg-[var(--btn-overlay-bg-hover)] hover:border-[var(--btn-overlay-border)] hover:-translate-y-[1px]',
+    'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),
 };
 
@@ -129,14 +149,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const isDisabled = disabled || loading;
+    const isDisabled = disabled;
     const isIcon = variant === 'icon';
 
     return (
       <button
         ref={ref}
-        disabled={isDisabled}
-        aria-disabled={isDisabled}
+        disabled={isDisabled || loading}
+        aria-disabled={isDisabled || loading}
         aria-busy={loading}
         className={[
           'inline-flex items-center justify-center shrink-0',
@@ -146,6 +166,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           isIcon ? iconSizeClasses[size] : sizeClasses[size],
           variantClasses[variant],
           isDisabled && 'opacity-50 pointer-events-none',
+          loading && !isDisabled && 'pointer-events-none',
           className,
         ]
           .filter(Boolean)

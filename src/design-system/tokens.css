@@ -216,6 +216,13 @@
   --badge-accent-border:    rgba(168, 85, 247, 0.50);
   --badge-accent-text:      #ffffff;
 
+  /* Button — overlay (dark frosted, on-image buttons) */
+  /* glass variant uses var(--primary)/30 opacity directly via Tailwind */
+  --btn-overlay-bg:         rgba(0, 0, 0, 0.45);
+  --btn-overlay-bg-hover:   rgba(0, 0, 0, 0.60);
+  --btn-overlay-border:     rgba(255, 255, 255, 0.15);
+  --btn-overlay-text:       #ffffff;
+
   /* Audio Player */
   --player-bg:              rgba(17, 24, 39, 0.9);
   --player-border:          rgba(55, 65, 81, 0.5);

@@ -235,6 +235,7 @@ export default function CollaborationClient() {
                 {
                   label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
                   icon: 'play_circle',
+                  variant: 'cosmic',
                   onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
                 },
                 {

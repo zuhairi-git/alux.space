@@ -340,7 +340,7 @@ export default function MarketIntelligenceClient() {
                                 {
                                     label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
                                     icon: 'play_circle',
-                                    variant: 'primary',
+                                    variant: 'cosmic',
                                     onClick: () => {
                                         setTimeout(() => {
                                             document.getElementById('interactive-prototypes')?.scrollIntoView({ behavior: 'smooth' });
