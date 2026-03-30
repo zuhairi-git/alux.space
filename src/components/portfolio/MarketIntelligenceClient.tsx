@@ -29,7 +29,7 @@ function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number;
 }
 
 // Pulse dot for live indicators
-function PulseDot({ color = 'bg-green-400' }: { color?: string }) {
+function PulseDot({ color = 'bg-[var(--primary)]' }: { color?: string }) {
     return (
         <span className="relative flex h-2.5 w-2.5">
             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${color} opacity-75`} />
@@ -319,9 +319,9 @@ export default function MarketIntelligenceClient() {
                     <div className="absolute inset-0 bg-[linear-gradient(var(--grid-line-color)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line-color)_1px,transparent_1px)] bg-[size:60px_60px]" />
                     {isColorful && (
                         <>
-                            <div className="absolute top-1/4 -left-40 w-96 h-96 bg-indigo-600/8 rounded-full blur-[120px]" />
-                            <div className="absolute bottom-1/3 -right-40 w-96 h-96 bg-purple-600/8 rounded-full blur-[120px]" />
-                            <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-cyan-500/5 rounded-full blur-[100px]" />
+                            <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-[120px]" />
+                            <div className="absolute bottom-1/3 -right-40 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-[120px]" />
+                            <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-[var(--gradient-mid)]/10 rounded-full blur-[100px]" />
                         </>
                     )}
                 </div>
@@ -368,52 +368,9 @@ export default function MarketIntelligenceClient() {
                             ]}
                         />
 
-                        {/* ═══ LIVE INTELLIGENCE METRICS ═══ */}
-                        <motion.div
-                            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20"
-                            initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
-                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                            transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.8, delay: delaySeconds.lg }}
-                        >
-                            {[
-                                { icon: 'query_stats', value: 98, suffix: '%', label: locale === 'fi' ? 'Lähdetarkkuus' : 'Source Accuracy', color: 'from-green-600 to-cyan-500', dotColor: 'bg-green-400' },
-                                { icon: 'speed', value: 200, suffix: 'ms', label: locale === 'fi' ? 'Keskimääräinen viive' : 'Avg Response', color: 'from-blue-500 to-indigo-500', dotColor: 'bg-blue-400' },
-                                { icon: 'trending_up', value: 15, suffix: 'K+', label: locale === 'fi' ? 'Päivittäiset kyselyt' : 'Daily Queries', color: 'from-purple-500 to-pink-500', dotColor: 'bg-purple-400' },
-                                { icon: 'shield', value: 99, suffix: '.9%', label: locale === 'fi' ? 'Käytettävyys' : 'Uptime', color: 'from-[var(--color-ember)] to-amber-600', dotColor: 'bg-[var(--color-ember-light)]' },
-                            ].map((metric, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 16, scale: 0.94 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    transition={{ type: "spring", stiffness: 340, damping: 26, mass: 0.8, delay: delaySeconds.xl + i * stagger.normal }}
-                                    whileHover={{ y: -4, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                    className="relative group p-5 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] shadow-sm"
-                                >
-                                    {/* Gradient glow on hover */}
-                                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${metric.color} pointer-events-none`} style={{ opacity: 0 }} />
-                                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 bg-gradient-to-br ${metric.color} pointer-events-none`} />
-
-                                    <div className="relative z-10 flex items-start justify-between mb-3">
-                                        <span className="material-symbols text-xl text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] transition-colors" aria-hidden="true">
-                                            {metric.icon}
-                                        </span>
-                                        <PulseDot color={metric.dotColor} />
-                                    </div>
-                                    <div className="relative z-10">
-                                        <div className="text-2xl font-bold tabular-nums mb-1 text-[var(--foreground)]">
-                                            <AnimatedCounter target={metric.value} suffix={metric.suffix} />
-                                        </div>
-                                        <div className="text-xs font-medium uppercase tracking-wider text-[var(--muted-foreground)]">
-                                            {metric.label}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </motion.div>
-
                         {/* ═══ INTRO ═══ */}
                         <motion.div
-                            className="text-center mb-20 relative"
+                            className="text-center mb-20 relative pt-12"
                             initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
                             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                             transition={{ type: "spring", stiffness: 260, damping: 28, delay: delaySeconds.xs }}
@@ -424,12 +381,12 @@ export default function MarketIntelligenceClient() {
                         </motion.div>
 
                         {/* ═══ SECTION 1: OVERVIEW ═══ */}
-                        <CaseStudySection title={content.overviewTab} icon="visibility" number={1} accent="blue">
+                        <CaseStudySection title={content.overviewTab} number={1} accent="primary">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-8 mb-14">
                                     {[
-                                        { icon: 'warning', title: content.problemTitle, desc: content.problemDesc, gradient: 'from-red-600 to-[var(--color-ember)]', iconBg: 'bg-red-500/10', iconColor: 'text-ds-error', borderColor: 'border-red-500/20' },
-                                        { icon: 'lightbulb', title: content.solutionTitle, desc: content.solutionDesc, gradient: 'from-green-600 to-cyan-500', iconBg: 'bg-green-600/10', iconColor: 'text-ds-success', borderColor: 'border-green-600/20' },
+                                        { title: content.problemTitle, desc: content.problemDesc },
+                                        { title: content.solutionTitle, desc: content.solutionDesc },
                                     ].map((card, i) => (
                                         <motion.div
                                             key={i}
@@ -438,14 +395,10 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-40px' }}
                                             transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: i * 0.12 }}
                                             whileHover={{ y: -6, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 bg-[var(--card-from-bg)] ${card.borderColor} hover:shadow-lg`}
+                                            className="relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
-                                            {/* Top gradient line */}
-                                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${card.gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${card.iconBg} mb-5`}>
-                                                <span className={`material-symbols text-2xl ${card.iconColor}`}>{card.icon}</span>
-                                            </div>
                                             <h3 className="text-xl font-bold mb-3 text-[var(--foreground)]">{card.title}</h3>
                                             <p className="leading-relaxed text-[var(--muted-foreground)]">{card.desc}</p>
                                         </motion.div>
@@ -454,29 +407,36 @@ export default function MarketIntelligenceClient() {
                             </CaseStudyItem>
 
                             <CaseStudyItem>
-                                <h2 className="text-xl font-semibold mb-8 text-[var(--foreground)]">{content.objectivesTitle}</h2>
+                                <h2 className="text-2xl font-bold mb-8 text-[var(--foreground)]">{content.objectivesTitle}</h2>
 
-                                <div className="space-y-1 max-w-3xl">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                                     {[
-                                        { icon: "chat_bubble", text: content.objective1 },
-                                        { icon: "gavel", text: content.objective2 },
-                                        { icon: "feed", text: content.objective3 },
-                                        { icon: "finance", text: content.objective4 },
-                                        { icon: "security", text: content.objective5 }
-                                    ].map((objective, index) => (
+                                        content.objective1,
+                                        content.objective2,
+                                        content.objective3,
+                                        content.objective4,
+                                        content.objective5
+                                    ].map((text, index) => (
                                         <motion.div
                                             key={index}
-                                            initial={{ opacity: 0, x: -16 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
+                                            initial={{ opacity: 0, scale: 0.96, y: 15 }}
+                                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
                                             viewport={{ once: true, margin: '-20px' }}
-                                            transition={{ type: 'spring', stiffness: 360, damping: 28, delay: index * 0.06 }}
-                                            whileHover={{ x: 6, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className="group flex items-center gap-4 py-4 px-4 rounded-xl transition-all duration-300 hover:bg-[var(--card-from-bg)]"
+                                            transition={{ type: 'spring', stiffness: 300, damping: 26, delay: index * 0.06 }}
+                                            whileHover={{ y: -4 }}
+                                            className={`group p-6 rounded-3xl bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${index === 4 ? 'sm:col-span-2 lg:col-span-2' : ''}`}
                                         >
-                                            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 bg-[var(--primary)]/10 text-[var(--accent-text)] group-hover:bg-[var(--primary)]/20">
-                                                <span className="material-symbols text-lg">{objective.icon}</span>
+                                            {/* Large background number */}
+                                            <div className="absolute -bottom-4 -right-4 text-[var(--primary)]/5 text-[6rem] font-black pointer-events-none group-hover:text-[var(--primary)]/10 group-hover:scale-110 transition-all duration-500">
+                                                {index + 1}
                                             </div>
-                                            <p className="leading-relaxed font-medium text-[var(--foreground)]/80">{objective.text}</p>
+                                            
+                                            <div className="mb-4">
+                                                <div className="w-8 h-8 rounded-full bg-[var(--card-border)]/50 group-hover:bg-[var(--primary)]/20 text-[var(--muted-foreground)] group-hover:text-[var(--primary)] transition-colors flex items-center justify-center text-sm font-bold shadow-sm">
+                                                    {index + 1}
+                                                </div>
+                                            </div>
+                                            <p className="leading-snug font-medium text-[var(--foreground)]/90 relative z-10">{text}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -484,42 +444,40 @@ export default function MarketIntelligenceClient() {
                         </CaseStudySection>
 
                         {/* ═══ SECTION 2: STRATEGIC RATIONALE ═══ */}
-                        <CaseStudySection title={content.rationaleTitle} icon="lightbulb" number={2} accent="purple">
+                        <CaseStudySection title={content.rationaleTitle} number={2} accent="primary">
                             <CaseStudyItem>
-                                <p className="text-lg max-w-3xl mx-auto mb-12 text-[var(--muted-foreground)]">
-                                    {content.rationaleSubtitle}
-                                </p>
+                                <div className="mb-12 border-l-[3px] border-[var(--primary)]/40 pl-6 py-1">
+                                    <p className="text-lg max-w-3xl text-[var(--muted-foreground)] leading-relaxed">
+                                        {content.rationaleSubtitle}
+                                    </p>
+                                </div>
 
-                                <div className="space-y-0 relative">
-                                    {/* Vertical connector line */}
-                                    <div className="absolute left-[22px] top-8 bottom-8 w-[2px] bg-[var(--card-border)]" />
-
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     {[
-                                        { index: "01", title: content.rationaleItem1Title, desc: content.rationaleItem1Desc, color: "from-[var(--color-blue-vivid)] to-cyan-500", dotColor: "bg-[var(--primary)]" },
-                                        { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc, color: "from-green-600 to-cyan-500", dotColor: "bg-ds-success" },
-                                        { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc, color: "from-[var(--color-ember)] to-amber-600", dotColor: "bg-ds-ember" },
-                                        { index: "04", title: content.rationaleItem4Title, desc: content.rationaleItem4Desc, color: "from-purple-500 to-violet-500", dotColor: "bg-purple-400/50" },
-                                        { index: "05", title: content.rationaleItem5Title, desc: content.rationaleItem5Desc, color: "from-pink-500 to-pink-500", dotColor: "bg-pink-500" }
+                                        { index: "01", title: content.rationaleItem1Title, desc: content.rationaleItem1Desc },
+                                        { index: "02", title: content.rationaleItem2Title, desc: content.rationaleItem2Desc },
+                                        { index: "03", title: content.rationaleItem3Title, desc: content.rationaleItem3Desc },
+                                        { index: "04", title: content.rationaleItem4Title, desc: content.rationaleItem4Desc },
+                                        { index: "05", title: content.rationaleItem5Title, desc: content.rationaleItem5Desc }
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0, scale: 0.98, y: 15 }}
+                                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
                                             viewport={{ once: true, margin: "-40px" }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 28, delay: i * 0.08 }}
-                                            whileHover={{ x: 8, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className="group relative flex gap-6 items-start py-6 pl-2 pr-4 rounded-xl transition-all duration-300 hover:bg-[var(--card-from-bg)]/50"
+                                            whileHover={{ y: -4 }}
+                                            className={`group p-6 md:p-8 rounded-3xl bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col ${i === 4 ? 'md:col-span-2' : ''}`}
                                         >
-                                            {/* Timeline dot */}
-                                            <div className="relative z-10 flex-shrink-0">
-                                                <div className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-white bg-gradient-to-br ${item.color} shadow-lg transition-transform duration-300 group-hover:scale-110`}>
-                                                    {item.index}
-                                                </div>
+                                            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-full blur-3xl group-hover:bg-[var(--primary)]/10 transition-colors duration-500 pointer-events-none" />
+                                            
+                                            <div className="flex items-center gap-4 mb-5 relative z-10">
+                                                <span className="px-3.5 py-1.5 text-xs font-bold tracking-wider rounded-full bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 shadow-sm">
+                                                    PHASE {item.index}
+                                                </span>
+                                                <h3 className="text-xl font-bold text-[var(--foreground)]">{item.title}</h3>
                                             </div>
-                                            <div className="flex-1 pt-1">
-                                            <h3 className="text-lg font-bold mb-2 text-[var(--foreground)]">{item.title}</h3>
-                                            <p className="leading-relaxed text-[var(--muted-foreground)] group-hover:text-[var(--foreground)]/70 transition-colors duration-300">{item.desc}</p>
-                                            </div>
+                                            <p className="leading-relaxed text-[var(--muted-foreground)] flex-grow font-medium relative z-10">{item.desc}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -527,7 +485,7 @@ export default function MarketIntelligenceClient() {
                         </CaseStudySection>
 
                         {/* ═══ SECTION 3: INTERACTIVE PROTOTYPES ═══ */}
-                        <CaseStudySection title={locale === 'fi' ? 'Interaktiiviset prototyypit' : 'Interactive Prototypes'} icon="smartphone" number={3} accent="indigo" id="interactive-prototypes">
+                        <CaseStudySection title={locale === 'fi' ? 'Interaktiiviset prototyypit' : 'Interactive Prototypes'} number={3} accent="primary" id="interactive-prototypes">
                             <CaseStudyItem>
                                 <p className="text-lg max-w-2xl mx-auto mb-10 text-[var(--muted-foreground)]">
                                     {locale === 'fi' ? 'Tutustu tekoälypohjaisen käyttöliittymän interaktiivisiin prototyyppeihin — jokainen suunniteltu noudattamaan kohdealustan natiiveja suunnitteluohjeita.' : 'Explore the interactive prototypes built for this platform — each designed to follow native design guidelines for their target platform.'}
@@ -539,21 +497,13 @@ export default function MarketIntelligenceClient() {
                                             title: locale === 'fi' ? 'iOS-prototyyppi' : 'iOS Prototype',
                                             description: locale === 'fi' ? 'Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.' : 'Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.',
                                             href: "/mobile/market-intelligence/ios",
-                                            icon: (<span className="material-symbols text-4xl">phone_iphone</span>),
-                                            gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
-                                            borderColor: "border-[var(--primary)]/20",
-                                            iconBg: "bg-[var(--primary)]/10 text-accent",
-                                            buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                                            icon: "phone_iphone",
                                         },
                                         {
                                             title: locale === 'fi' ? 'Android-prototyyppi' : 'Android Prototype',
                                             description: locale === 'fi' ? 'Rakennettu Material You (Android 16) -standardin mukaan — dynaaminen väri, pillerinavigointi ja Material Symbols.' : 'Built with Material You (Android 16) — dynamic color, pill navigation, rounded containers, and Material Symbols.',
                                             href: "/mobile/market-intelligence/android",
-                                            icon: (<span className="material-symbols text-4xl">phone_android</span>),
-                                            gradient: "from-[var(--primary)]/15 to-[var(--gradient-mid)]/15",
-                                            borderColor: "border-[var(--primary)]/20",
-                                            iconBg: "bg-[var(--primary)]/10 text-accent",
-                                            buttonBg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 border border-[var(--card-border)] hover:from-[var(--primary)]/20 hover:to-[var(--gradient-mid)]/20 hover:border-[var(--primary)]/50",
+                                            icon: "phone_android",
                                         },
                                     ].map((proto, index) => (
                                         <motion.a
@@ -561,19 +511,19 @@ export default function MarketIntelligenceClient() {
                                             href={proto.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className={`group p-6 rounded-2xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col hover:shadow-lg`}
+                                            className="group p-6 rounded-2xl transition-all duration-300 border border-[var(--card-border)] hover:border-[var(--primary)]/50 bg-[var(--card-from-bg)] flex flex-col hover:shadow-lg"
                                             initial={{ opacity: 0, y: 14 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: index * 0.15 }}
                                             whileHover={{ y: -2 }}
                                         >
-                                            <div className={`h-10 w-10 flex items-center justify-center rounded-full mb-3 ${proto.iconBg}`}>
-                                                {proto.icon}
+                                            <div className="h-10 w-10 flex items-center justify-center rounded-full mb-3 bg-[var(--primary)]/10 text-[var(--primary)]">
+                                                <span className="material-symbols text-xl">{proto.icon}</span>
                                             </div>
                                             <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">{proto.title}</h3>
                                             <p className="text-sm mb-6 flex-grow text-[var(--muted-foreground)]">{proto.description}</p>
-                                            <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start ${proto.buttonBg}`}>
+                                            <div className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-[var(--primary)] text-sm font-semibold transition-colors self-start bg-[var(--primary)]/10 border border-[var(--primary)]/20 hover:bg-[var(--primary)]/20">
                                                 <span>{locale === 'fi' ? 'Avaa prototyyppi' : 'Open Prototype'}</span>
                                                 <span className="material-symbols text-base group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                                             </div>
@@ -610,13 +560,10 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0 }}
                                             whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
-                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]" />
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
-                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[var(--primary)]/10 text-[var(--accent-text)] shrink-0">
-                                                    <span className="material-symbols text-xl" aria-hidden="true">search_insights</span>
-                                                </div>
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat1Title}</h4>
                                                     <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat1Desc}</p>
@@ -625,22 +572,18 @@ export default function MarketIntelligenceClient() {
                                             {/* Mini chat mockup */}
                                             <div className="space-y-2.5">
                                                 <div className="flex justify-end">
-                                                    <div className="bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--accent-text)] text-xs px-3 py-1.5 rounded-2xl rounded-tr-sm font-medium max-w-[85%]">
+                                                    <div className="bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary)] text-xs px-3 py-1.5 rounded-2xl rounded-tr-sm font-medium max-w-[85%]">
                                                         {locale === 'fi' ? 'Näytä AAPL Q3 tulokset' : 'Show AAPL Q3 earnings highlights'}
                                                     </div>
                                                 </div>
                                                 <div className="flex gap-2 items-start">
-                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center justify-center shrink-0 mt-0.5">
-                                                        <span className="material-symbols text-[10px] text-white" aria-hidden="true">smart_toy</span>
-                                                    </div>
                                                     <div className="bg-[var(--card-to-bg)] border border-[var(--card-border)] text-[var(--foreground)] text-xs px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[85%]">
                                                         <span className="opacity-80">{locale === 'fi' ? 'Liikevaihto kasvoi 8 % YoY...' : 'Revenue grew 8% YoY to $94.9B...'}</span>
-                                                        <span className="ml-1 text-[var(--accent-text)] font-semibold">[1]</span>
+                                                        <span className="ml-1 text-[var(--primary)] font-semibold">[1]</span>
                                                     </div>
                                                 </div>
-                                                <div className="flex gap-1.5 pl-8">
-                                                    <span className="text-[10px] text-[var(--muted-foreground)] bg-[var(--card-to-bg)] border border-[var(--card-border)] px-2 py-0.5 rounded-full">Apple 10-Q ↗</span>
-                                                    <span className="text-[10px] text-[var(--muted-foreground)] bg-[var(--card-to-bg)] border border-[var(--card-border)] px-2 py-0.5 rounded-full">Earnings Call ↗</span>
+                                                <div className="flex gap-1.5 pl-2">
+                                                    <span className="text-[10px] text-[var(--muted-foreground)] border border-[var(--card-border)] px-2 py-0.5 rounded-full">Apple 10-Q ↗</span>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -652,13 +595,10 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.08 }}
                                             whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
-                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-cyan-500" />
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
-                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-green-500/10 text-green-500 shrink-0">
-                                                    <span className="material-symbols text-xl" aria-hidden="true">query_stats</span>
-                                                </div>
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat2Title}</h4>
                                                     <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat2Desc}</p>
@@ -667,9 +607,9 @@ export default function MarketIntelligenceClient() {
                                             {/* Sentiment bars */}
                                             <div className="space-y-2.5">
                                                 {[
-                                                    { label: locale === 'fi' ? 'Positiivinen' : 'Bullish', pct: 72, color: 'bg-green-500' },
+                                                    { label: locale === 'fi' ? 'Positiivinen' : 'Bullish', pct: 72, color: 'bg-[var(--primary)]' },
                                                     { label: locale === 'fi' ? 'Neutraali'    : 'Neutral',  pct: 18, color: 'bg-[var(--muted-foreground)]/40' },
-                                                    { label: locale === 'fi' ? 'Negatiivinen' : 'Bearish', pct: 10, color: 'bg-red-400' },
+                                                    { label: locale === 'fi' ? 'Negatiivinen' : 'Bearish', pct: 10, color: 'bg-[var(--foreground)]/20' },
                                                 ].map((s) => (
                                                     <div key={s.label} className="flex items-center gap-2">
                                                         <span className="text-[11px] text-[var(--muted-foreground)] w-16 shrink-0">{s.label}</span>
@@ -686,7 +626,7 @@ export default function MarketIntelligenceClient() {
                                                     </div>
                                                 ))}
                                                 <p className="text-[10px] text-[var(--muted-foreground)] flex items-center gap-1.5 pt-1">
-                                                    <PulseDot color="bg-green-400" />
+                                                    <PulseDot color="bg-[var(--primary)]" />
                                                     <span>{locale === 'fi' ? 'Päivitetty juuri nyt' : 'Updated just now'}</span>
                                                 </p>
                                             </div>
@@ -699,13 +639,10 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.14 }}
                                             whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
-                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 to-orange-500" />
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
-                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 text-amber-500 shrink-0">
-                                                    <span className="material-symbols text-xl" aria-hidden="true">notifications_active</span>
-                                                </div>
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat3Title}</h4>
                                                     <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat3Desc}</p>
@@ -713,15 +650,13 @@ export default function MarketIntelligenceClient() {
                                             </div>
                                             {/* Mock notification cards */}
                                             <div className="space-y-2">
-                                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
-                                                    <span className="material-symbols text-base text-amber-500 shrink-0" aria-hidden="true">trending_up</span>
+                                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20">
                                                     <div className="min-w-0">
                                                         <p className="text-xs font-semibold text-[var(--foreground)] truncate">MSFT earnings beat — +4.2%</p>
-                                                        <p className="text-[10px] text-[var(--muted-foreground)]">2 min ago · {locale === 'fi' ? 'Korkea' : 'High priority'}</p>
+                                                        <p className="text-[10px] text-[var(--primary)] font-medium">2 min ago · {locale === 'fi' ? 'Korkea' : 'High priority'}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[var(--card-to-bg)] border border-[var(--card-border)]">
-                                                    <span className="material-symbols text-base text-[var(--muted-foreground)] shrink-0" aria-hidden="true">article</span>
                                                     <div className="min-w-0">
                                                         <p className="text-xs font-medium text-[var(--muted-foreground)] truncate">Fed holds rates at 4.5%</p>
                                                         <p className="text-[10px] text-[var(--muted-foreground)]/60">18 min ago</p>
@@ -737,13 +672,10 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.20 }}
                                             whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
-                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] transition-all duration-300"
+                                            className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-pink-500" />
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
-                                                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-purple-500/10 text-purple-500 shrink-0">
-                                                    <span className="material-symbols text-xl" aria-hidden="true">summarize</span>
-                                                </div>
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat4Title}</h4>
                                                     <p className="text-sm text-[var(--muted-foreground)] mt-1 leading-relaxed">{content.feat4Desc}</p>
@@ -751,8 +683,8 @@ export default function MarketIntelligenceClient() {
                                             </div>
                                             {/* Mini audio briefing card */}
                                             <div className="px-3.5 py-3 rounded-xl bg-[var(--card-to-bg)] border border-[var(--card-border)] flex items-center gap-3">
-                                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/20">
-                                                    <span className="material-symbols text-sm text-white" aria-hidden="true">play_arrow</span>
+                                                <div className="w-9 h-9 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 flex items-center justify-center shrink-0">
+                                                    <span className="material-symbols text-sm" aria-hidden="true">play_arrow</span>
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <p className="text-xs font-semibold text-[var(--foreground)] truncate">
@@ -760,7 +692,7 @@ export default function MarketIntelligenceClient() {
                                                     </p>
                                                     <div className="flex items-end gap-[2px] mt-1.5 h-5">
                                                         {[3,5,7,4,6,8,5,7,4,6,7,5,8,6,4,7,5,6,8,4,6,5,7,4].map((h, i) => (
-                                                            <div key={i} className="w-[2px] rounded-full bg-purple-400/60" style={{ height: `${h}px` }} />
+                                                            <div key={i} className="w-[2px] rounded-full bg-[var(--primary)]/40" style={{ height: `${h}px` }} />
                                                         ))}
                                                     </div>
                                                 </div>
@@ -774,12 +706,12 @@ export default function MarketIntelligenceClient() {
                         </CaseStudySection>
 
                         {/* ═══ SECTION 4: UX & PLATFORM PATTERNS ═══ */}
-                        <CaseStudySection title={content.uxTab} icon="devices" number={4} accent="green">
+                        <CaseStudySection title={content.uxTab} number={4} accent="primary">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-6 mb-14">
                                     {[
-                                        { icon: 'phone_iphone', title: content.iosPatternsTitle, desc: content.iosPatternsDesc, gradient: 'from-gray-500 to-gray-600', iconBg: 'bg-[var(--muted-foreground)]/10 text-[var(--muted-foreground)]', borderColor: 'border-[var(--card-border)]' },
-                                        { icon: 'android', title: content.androidPatternsTitle, desc: content.androidPatternsDesc, gradient: 'from-green-600 to-green-600', iconBg: 'bg-green-600/10 text-green-500', borderColor: 'border-green-600/20' },
+                                        { title: content.iosPatternsTitle, desc: content.iosPatternsDesc },
+                                        { title: content.androidPatternsTitle, desc: content.androidPatternsDesc },
                                     ].map((platform, i) => (
                                         <motion.div
                                             key={i}
@@ -788,12 +720,9 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-30px' }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.1 }}
                                             whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className={`relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] ${platform.borderColor} hover:shadow-md`}
+                                            className="relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-md"
                                         >
-                                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${platform.gradient} opacity-50 group-hover:opacity-100 transition-opacity`} />
-                                            <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${platform.iconBg} mb-5`}>
-                                                <span className="material-symbols text-2xl">{platform.icon}</span>
-                                            </div>
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <h3 className="text-lg font-bold mb-3 text-[var(--foreground)]">{platform.title}</h3>
                                             <p className="leading-relaxed text-[var(--muted-foreground)]">{platform.desc}</p>
                                         </motion.div>
@@ -806,11 +735,11 @@ export default function MarketIntelligenceClient() {
 
                                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
                                     {[
-                                        { icon: "forum", text: content.flow1, gradient: 'from-[var(--color-blue-vivid)] to-[var(--color-indigo-500)]' },
-                                        { icon: "summarize", text: content.flow2, gradient: 'from-green-600 to-cyan-500' },
-                                        { icon: "rss_feed", text: content.flow3, gradient: 'from-purple-500 to-pink-500' },
-                                        { icon: "dashboard", text: content.flow4, gradient: 'from-[var(--color-ember)] to-amber-600' },
-                                        { icon: "notifications_active", text: content.flow5, gradient: 'from-pink-500 to-red-500' }
+                                        content.flow1,
+                                        content.flow2,
+                                        content.flow3,
+                                        content.flow4,
+                                        content.flow5
                                     ].map((flow, index) => (
                                         <motion.div
                                             key={index}
@@ -819,13 +748,10 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-20px' }}
                                             transition={{ type: 'spring', stiffness: 360, damping: 26, delay: index * 0.06 }}
                                             whileHover={{ y: -3, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className="group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] shadow-sm hover:shadow-md"
+                                            className="group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 shadow-sm hover:shadow-md"
                                         >
-                                            <div className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r ${flow.gradient} opacity-0 group-hover:opacity-60 transition-opacity duration-300`} />
-                                            <div className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg transition-colors bg-[var(--primary)]/10 text-[var(--accent-text)] group-hover:bg-[var(--primary)]/20">
-                                                <span className="material-symbols text-base">{flow.icon}</span>
-                                            </div>
-                                            <p className="font-medium text-sm text-[var(--foreground)]/80">{flow.text}</p>
+                                            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                                            <p className="font-medium text-sm text-[var(--foreground)]/80">{flow}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -833,14 +759,14 @@ export default function MarketIntelligenceClient() {
                         </CaseStudySection>
 
                         {/* ═══ SECTION 5: DESIGN SYSTEM & TRUST ═══ */}
-                        <CaseStudySection title={content.systemTab} icon="shield" number={5} accent="orange">
+                        <CaseStudySection title={content.systemTab} number={5} accent="primary">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {[
-                                        { icon: "construction", title: content.frameworkTitle, desc: content.frameworkDesc, gradient: 'from-[var(--color-blue-vivid)] to-cyan-500', iconBg: 'bg-[var(--primary)]/10 text-[var(--accent-text)]' },
-                                        { icon: "hourglass_top", title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc, gradient: 'from-[var(--color-ember)] to-amber-600', iconBg: 'bg-amber-500/10 text-amber-500' },
-                                        { icon: "psychology", title: content.aiPatternsTitle, desc: content.aiPatternsDesc, gradient: 'from-purple-500 to-violet-500', iconBg: 'bg-purple-500/10 text-purple-500' },
-                                        { icon: "policy", title: content.trustTitle, desc: content.trustDesc, gradient: 'from-green-600 to-cyan-500', iconBg: 'bg-green-600/10 text-green-500' },
+                                        { title: content.frameworkTitle, desc: content.frameworkDesc },
+                                        { title: content.latencyStrategyTitle, desc: content.latencyStrategyDesc },
+                                        { title: content.aiPatternsTitle, desc: content.aiPatternsDesc },
+                                        { title: content.trustTitle, desc: content.trustDesc },
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
@@ -849,12 +775,9 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-30px' }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.08 }}
                                             whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] hover:shadow-lg"
+                                            className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
-                                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${item.gradient} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
-                                            <motion.div whileHover={{ scale: 1.12, rotate: 3 }} transition={{ type: 'spring', stiffness: 400, damping: 18 }} className={`w-12 h-12 rounded-xl flex items-center justify-center ${item.iconBg} mb-5`}>
-                                                <span className="material-symbols text-2xl">{item.icon}</span>
-                                            </motion.div>
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                             <h3 className="text-lg font-bold mb-3 text-[var(--foreground)]">{item.title}</h3>
                                             <p className="leading-relaxed text-sm text-[var(--muted-foreground)]">{item.desc}</p>
                                         </motion.div>
@@ -864,14 +787,14 @@ export default function MarketIntelligenceClient() {
                         </CaseStudySection>
 
                         {/* ═══ SECTION 6: IMPLEMENTATION PLAN — LIVE METRICS ═══ */}
-                        <CaseStudySection title={content.impactTab} icon="account_tree" number={6} accent="teal">
+                        <CaseStudySection title={content.impactTab} number={6} accent="primary">
                             <CaseStudyItem>
                                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
                                     {[
-                                        { icon: "ads_click", text: content.captureMetric, value: 78, gradient: 'from-[var(--color-blue-vivid)] to-[var(--color-indigo-500)]', barColor: 'bg-gradient-to-r from-[var(--color-blue-vivid)] to-[var(--color-indigo-500)]' },
-                                        { icon: "check_circle", text: content.trustMetric, value: 92, gradient: 'from-green-600 to-cyan-500', barColor: 'bg-gradient-to-r from-green-600 to-cyan-500' },
-                                        { icon: "monitoring", text: content.engagementMetric, value: 65, gradient: 'from-purple-500 to-pink-500', barColor: 'bg-gradient-to-r from-purple-500 to-pink-500' },
-                                        { icon: "event", text: content.retentionMetric, value: 85, gradient: 'from-[var(--color-ember)] to-amber-600', barColor: 'bg-gradient-to-r from-[var(--color-ember)] to-amber-600' },
+                                        { text: content.captureMetric, value: 78 },
+                                        { text: content.trustMetric, value: 92 },
+                                        { text: content.engagementMetric, value: 65 },
+                                        { text: content.retentionMetric, value: 85 },
                                     ].map((metric, index) => (
                                         <motion.div
                                             key={index}
@@ -880,16 +803,15 @@ export default function MarketIntelligenceClient() {
                                             viewport={{ once: true, margin: '-30px' }}
                                             transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: index * 0.1 }}
                                             whileHover={{ y: -6, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-                                            className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--card-border-hover)] hover:shadow-lg"
+                                            className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
-                                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${metric.gradient} opacity-50 group-hover:opacity-100 transition-opacity`} />
-                                            <span className="material-symbols text-2xl mb-4 block text-[var(--accent-text)]" aria-hidden="true">{metric.icon}</span>
+                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <p className="font-semibold mb-4 text-sm text-[var(--foreground)]/80">{metric.text}</p>
 
                                             {/* Animated progress bar */}
                                             <div className="h-1.5 rounded-full overflow-hidden bg-[var(--card-border)]">
                                                 <motion.div
-                                                    className={`h-full rounded-full ${metric.barColor}`}
+                                                    className="h-full rounded-full bg-[var(--primary)]"
                                                     initial={{ width: '0%' }}
                                                     whileInView={{ width: `${metric.value}%` }}
                                                     viewport={{ once: true }}

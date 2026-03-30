@@ -269,31 +269,29 @@ export default function HealthcarePrioritizationClient() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true, margin: '-20px' }}
                           transition={{ duration: durationSeconds.ease, delay: index * stagger.normal, ease: easing.out.array }}
-                          whileHover={{ y: -3 }}
-                          className={`p-4 rounded-lg flex flex-col gap-3 transition-shadow duration-300 hover:shadow-md bg-[var(--card-from-bg)] border border-[var(--card-border)] border-l-4 ${
-                              item.priorityLevel === 'Critical' ? 'border-l-red-500' :
-                              item.priorityLevel === 'Medium' ? 'border-l-yellow-500' :
-                              item.priorityLevel === 'Low' ? 'border-l-green-500' :
-                              'border-l-gray-500'
-                            }`}
+                          whileHover={{ y: -3, scale: 1.01 }}
+                          className="p-5 rounded-xl flex flex-col gap-3 transition-all duration-300 hover:shadow-lg bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30"
                         >
-                          <div className="flex justify-between items-start">
-                            <span className="text-xs font-mono font-medium opacity-60">{item.id}</span>
-                            <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${
-                                item.priorityLevel === 'Critical' ? 'bg-red-500/20 text-red-500' : 
-                                item.priorityLevel === 'Medium' ? 'bg-yellow-500/20 text-yellow-500' : 
-                                item.priorityLevel === 'Low' ? 'bg-green-500/20 text-green-500' : 
-                                'bg-[var(--card-border)] text-gray-400'
+                          <div className="flex justify-between items-center mb-1">
+                            <div className="flex items-center gap-2">
+                                <span className="material-symbols text-[14px] opacity-60">sell</span>
+                                <span className="text-xs font-mono font-medium opacity-60">{item.id}</span>
+                            </div>
+                            <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full ${
+                                item.priorityLevel === 'Critical' ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 
+                                item.priorityLevel === 'Medium' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' : 
+                                item.priorityLevel === 'Low' ? 'bg-green-500/10 text-green-500 border border-green-500/20' : 
+                                'bg-[var(--card-border)]/50 text-[var(--muted-foreground)] border border-[var(--card-border)]'
                             }`}>{item.priorityLevel}</span>
                           </div>
 
                           <div>
-                            <h4 className="text-sm font-bold mb-1 leading-tight">{item.title}</h4>
-                            <p className="text-xs opacity-70">{item.desc}</p>
+                            <h4 className="text-base font-bold mb-2 leading-tight text-[var(--foreground)]">{item.title}</h4>
+                            <p className="text-sm opacity-70 leading-relaxed text-[var(--muted-foreground)]">{item.desc}</p>
                           </div>
 
-                          <div className="mt-auto pt-2 flex items-center justify-between border-t border-[var(--card-border)]">
-                            <div className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-[var(--primary-glow)] text-[var(--primary)]">
+                          <div className="mt-auto pt-3 flex items-center justify-between border-t border-[var(--card-border)]/50">
+                            <div className="px-2.5 py-1 rounded-md text-[10px] uppercase font-bold tracking-wider bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20">
                               {item.status}
                             </div>
                           </div>
