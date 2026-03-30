@@ -40,7 +40,6 @@ function PulseDot({ color = 'bg-green-400' }: { color?: string }) {
 
 export default function MarketIntelligenceClient() {
     const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false);
-    const [activeFeature, setActiveFeature] = useState(0);
 
     useEffect(() => {
         const link = document.createElement('link');
@@ -51,15 +50,8 @@ export default function MarketIntelligenceClient() {
         }
     }, []);
 
-    // Auto-rotate features
-    useEffect(() => {
-        const interval = setInterval(() => setActiveFeature((p) => (p + 1) % 4), 4000);
-        return () => clearInterval(interval);
-    }, []);
-
     const { theme } = useTheme();
     const { locale } = useLanguage();
-    const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
 
     // Get localized text content

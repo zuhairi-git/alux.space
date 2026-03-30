@@ -538,7 +538,7 @@ export default function JobSeekingClient() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="border-l-2 border-green-600/30 pl-4">
+                            <div className="border-l-2 border-ds-success/30 pl-4">
                               <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
@@ -547,8 +547,8 @@ export default function JobSeekingClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-pink-500/30 pl-4">
-                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-pink-500 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
+                            <div className="border-l-2 border-ds-error/30 pl-4">
+                              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-error mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.painPoints.map((point, i) => (
                                   <li key={i} className="text-sm leading-relaxed opacity-70">{point}</li>

@@ -469,16 +469,16 @@ export default function AccessibilityClient() {
             actions={[
               {
                 label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
-                
+                icon: 'design_services',
                 variant: 'primary',
                 href: 'https://ds.alux.space/',
               },
             ]}
             meta={[
-              { label: content.projectType, value: content.projectTypeValues,  },
-              { label: content.timeline, value: content.timelineValue,  },
-              { label: content.standards, value: content.standardsValue,  },
-              { label: content.roles, value: content.rolesValue,  },
+              { label: content.projectType, value: content.projectTypeValues, icon: 'category' },
+              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
+              { label: content.standards, value: content.standardsValue, icon: 'rule' },
+              { label: content.roles, value: content.rolesValue, icon: 'badge' },
             ]}
           />
 

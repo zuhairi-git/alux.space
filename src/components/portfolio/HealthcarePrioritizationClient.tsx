@@ -196,10 +196,10 @@ export default function HealthcarePrioritizationClient() {
               },
             ]}
             meta={[
-              { label: content.projectType, value: content.projectTypeValues },
-              { label: content.timeline, value: content.timelineValue },
-              { label: content.tools, value: content.toolsValue },
-              { label: content.standards, value: content.standardsValue },
+              { label: content.projectType, value: content.projectTypeValues, icon: 'category' },
+              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
+              { label: content.tools, value: content.toolsValue, icon: 'build' },
+              { label: content.standards, value: content.standardsValue, icon: 'rule' },
             ]}
           />
 
