@@ -1,6 +1,7 @@
 ﻿'use client';
 
 import React, { useState, Suspense } from 'react';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import {
   Card,
@@ -825,11 +826,20 @@ function BadgesSection() {
         <Divider />
         <div>
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Visual Context (on images / overlays)</h4>
-          <div className="flex flex-wrap gap-2 p-4 rounded-xl bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]">
-            <Badge variant="gradient">Category</Badge>
-            <Badge variant="glass">On Image</Badge>
-            <Badge variant="overlay">Attribution</Badge>
-            <Badge variant="accent">Case Study</Badge>
+          <div className="relative overflow-hidden rounded-xl h-28">
+            <Image
+              src="/images/portfolio/collaboration/cover.jpg"
+              alt="Badge on image demo"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="relative z-10 flex flex-wrap gap-2 p-4 h-full items-end">
+              <Badge variant="gradient">Category</Badge>
+              <Badge variant="glass">On Image</Badge>
+              <Badge variant="overlay">Attribution</Badge>
+              <Badge variant="accent">Case Study</Badge>
+            </div>
           </div>
         </div>
         <Divider />

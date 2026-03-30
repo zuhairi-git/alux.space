@@ -55,7 +55,7 @@ const variantClasses: Record<BadgeVariant, string> = {
   gradient: 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white border-0 shadow-md',
   glass:    'bg-[var(--badge-glass-bg)] backdrop-blur-sm text-[var(--badge-glass-text)] border border-[var(--badge-glass-border)]',
   overlay:  'bg-[var(--badge-overlay-bg)] backdrop-blur-sm text-white border border-[var(--badge-overlay-border)]',
-  accent:   'bg-[var(--badge-accent-bg)] text-[var(--badge-accent-text)] border border-[var(--badge-accent-border)]',
+  accent:   'bg-[var(--badge-accent-bg)] backdrop-blur-sm text-[var(--badge-accent-text)] border border-[var(--badge-accent-border)]',
 };
 
 const dotColors: Record<BadgeVariant, string> = {
