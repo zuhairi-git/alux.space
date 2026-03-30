@@ -60,6 +60,10 @@
   --color-cyan-500: #06b6d4;
   --color-cyan:     #00ffff;
 
+  /* Slates (blue-tinted gray) */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+
   /* Grays (neutral) */
   --color-gray-50:  #f9fafb;
   --color-gray-100: #f3f4f6;
@@ -115,7 +119,7 @@
    2. SEMANTIC COLORS — resolved per theme
    ------------------------------------------------------- */
 :root {
-  --background:          var(--color-white);
+  --background:          var(--color-slate-50);
   --foreground:          #171717;
   --primary:             var(--color-blue-vivid);
   --primary-hover:       var(--color-blue-vivid-dark);
@@ -125,9 +129,9 @@
   --primary-glow:        rgba(0, 87, 255, 0.2);
 
   /* Card surfaces */
-  --card-from-bg:        rgba(249, 250, 251, 0.9);
-  --card-to-bg:          rgba(243, 244, 246, 0.9);
-  --card-border:         rgba(229, 231, 235, 0.5);
+  --card-from-bg:        rgba(255, 255, 255, 1);
+  --card-to-bg:          rgba(255, 255, 255, 1);
+  --card-border:         rgba(0, 0, 0, 0.08);
   --card-border-hover:   rgba(0, 87, 255, 0.4);
   --card-shadow-color:   rgba(0, 87, 255, 0.18);
 
@@ -225,7 +229,7 @@
 }
 
 .theme-light {
-  --background:          var(--color-white);
+  --background:          var(--color-slate-50);
   --foreground:          var(--color-gray-800);
   --primary:             var(--color-blue-vivid);
   --primary-hover:       var(--color-blue-vivid-dark);
@@ -233,9 +237,9 @@
   --gradient-mid:        var(--color-purple-500);
   --gradient-end:        var(--color-blue-vivid-dark);
   --primary-glow:        rgba(0, 87, 255, 0.2);
-  --card-from-bg:        rgba(253, 253, 253, 0.9);
-  --card-to-bg:          rgba(243, 244, 246, 0.9);
-  --card-border:         rgba(229, 231, 235, 0.5);
+  --card-from-bg:        rgba(255, 255, 255, 1);
+  --card-to-bg:          rgba(255, 255, 255, 1);
+  --card-border:         rgba(0, 0, 0, 0.08);
   --card-border-hover:   rgba(0, 87, 255, 0.4);
   --card-shadow-color:   rgba(0, 87, 255, 0.18);
   --card-hover-shadow-color: rgba(15, 23, 42, 0.06);

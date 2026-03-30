@@ -91,19 +91,15 @@ const personas: Persona[] = [
 // iconBg / iconText use Tailwind opacity modifiers so they auto-adapt.
 // For blue we reference --primary (semantic) so it follows primary color changes.
 
-const colorConfig: Record<string, { iconBg: string; iconText: string; accentBar: string }> = {
-  purple: { iconBg: 'bg-purple-500/15', iconText: 'text-purple-400',  accentBar: 'bg-purple-400'  },
-  blue:   { iconBg: 'bg-primary/10',    iconText: 'text-accent',       accentBar: 'bg-primary'     },
-  green:  { iconBg: 'bg-green-600/15',  iconText: 'text-green-400',    accentBar: 'bg-green-400'   },
-  orange: { iconBg: 'bg-ds-ember/15',   iconText: 'text-ds-ember',     accentBar: 'bg-ds-ember'    },
-  teal:   { iconBg: 'bg-cyan-500/15',   iconText: 'text-cyan-400',     accentBar: 'bg-cyan-400'    },
-  pink:   { iconBg: 'bg-pink-500/15',   iconText: 'text-pink-400',     accentBar: 'bg-pink-400'    },
-  red:    { iconBg: 'bg-red-600/15',    iconText: 'text-red-400',      accentBar: 'bg-red-400'     },
-  indigo: { iconBg: 'bg-indigo-500/15', iconText: 'text-indigo-400',   accentBar: 'bg-indigo-400'  },
-  cyan:   { iconBg: 'bg-cyan-500/15',   iconText: 'text-cyan-400',     accentBar: 'bg-cyan-400'    },
+const getColor = (color?: string) => {
+  // Ignore the passed color to force all accents to use primary theme mapping
+  void color;
+  return {
+    iconBg: 'bg-primary/10',
+    iconText: 'text-primary',
+    accentBar: 'bg-primary'
+  };
 };
-
-const getColor = (color: string) => colorConfig[color] ?? colorConfig.blue;
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
@@ -454,7 +450,6 @@ export default function GameStrategyClient() {
             <CaseStudyItem>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {gameplayMechanics.map((mech, i) => {
-                  const c = getColor(mech.color);
                   return (
                     <motion.div
                       key={i}
@@ -465,9 +460,6 @@ export default function GameStrategyClient() {
                       transition={{ delay: i * 0.06 }}
                     >
                       <div className="theme-card-content p-6">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${c.iconBg}`}>
-                          <span className={`material-symbols text-lg ${c.iconText}`}>{mech.icon}</span>
-                        </div>
                         <h4 className="text-base font-bold mb-2 text-foreground">{mech.title}</h4>
                         <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{mech.desc}</p>
                       </div>
@@ -487,17 +479,12 @@ export default function GameStrategyClient() {
                   return (
                     <div key={i} className="theme-card hover:-translate-y-1 transition-transform duration-200">
                       <div className="theme-card-content p-6">
-                        <div className="flex items-start gap-4">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${c.iconBg}`}>
-                            <span className={`material-symbols text-lg ${c.iconText}`}>{ux.icon}</span>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h4 className="text-base font-bold text-foreground">{ux.title}</h4>
+                            <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg ${c.iconBg} ${c.iconText}`}>{ux.metric}</span>
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="text-base font-bold text-foreground">{ux.title}</h4>
-                              <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg ${c.iconBg} ${c.iconText}`}>{ux.metric}</span>
-                            </div>
-                            <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{ux.desc}</p>
-                          </div>
+                          <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{ux.desc}</p>
                         </div>
                       </div>
                     </div>
@@ -526,9 +513,9 @@ export default function GameStrategyClient() {
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.08 }}
                       >
-                        {/* Timeline dot */}
-                        <div className={`absolute -left-[3.25rem] top-6 w-5 h-5 rounded-full hidden md:flex items-center justify-center ${c.iconBg} ring-4 ring-background`}>
-                          <span className={`material-symbols text-[10px] ${c.iconText}`}>{phase.icon}</span>
+                        {/* Timeline dot / Number for Desktop */}
+                        <div className={`absolute -left-[3.4rem] top-4 w-8 h-8 rounded-full hidden md:flex items-center justify-center text-xs font-bold bg-primary text-white ring-4 ring-background`}>
+                          {String(i + 1).padStart(2, '0')}
                         </div>
 
                         <div className="theme-card">
@@ -536,8 +523,9 @@ export default function GameStrategyClient() {
                             <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                               <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-3">
-                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center md:hidden ${c.iconBg}`}>
-                                    <span className={`material-symbols text-sm ${c.iconText}`}>{phase.icon}</span>
+                                  {/* Number for Mobile */}
+                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center md:hidden text-xs font-bold bg-primary text-white`}>
+                                    {String(i + 1).padStart(2, '0')}
                                   </div>
                                   <div>
                                     <h4 className="text-base font-bold text-foreground">{phase.phase}</h4>
@@ -579,17 +567,12 @@ export default function GameStrategyClient() {
                   return (
                     <div key={i} className="theme-card hover:-translate-y-1 transition-transform duration-200">
                       <div className="theme-card-content p-6">
-                        <div className="flex items-start gap-4">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${c.iconBg}`}>
-                            <span className={`material-symbols text-xl ${c.iconText}`}>{item.icon}</span>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-1">
+                            <h4 className="text-base font-bold text-foreground">{item.model}</h4>
+                            <span className={`text-lg font-extrabold ${c.iconText}`}>{item.revenue}</span>
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between mb-1">
-                              <h4 className="text-base font-bold text-foreground">{item.model}</h4>
-                              <span className={`text-lg font-extrabold ${c.iconText}`}>{item.revenue}</span>
-                            </div>
-                            <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{item.desc}</p>
-                          </div>
+                          <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{item.desc}</p>
                         </div>
                       </div>
                     </div>
@@ -604,17 +587,17 @@ export default function GameStrategyClient() {
                     {locale === 'fi' ? 'Tulojakauma (ennuste)' : 'Projected Revenue Split'}
                   </h5>
                   <div className="h-4 rounded-full overflow-hidden flex">
-                    <div className="bg-purple-400/60 h-full" style={{ width: '45%' }} title="Cosmetic Shop 45%" />
-                    <div className="bg-primary/80 h-full" style={{ width: '30%' }} title="Battle Pass 30%" />
-                    <div className="bg-green-600/60 h-full" style={{ width: '15%' }} title="Ad Monetization 15%" />
-                    <div className="bg-ds-ember/60 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
+                    <div className="bg-primary h-full" style={{ width: '45%' }} title="Cosmetic Shop 45%" />
+                    <div className="bg-foreground/60 h-full" style={{ width: '30%' }} title="Battle Pass 30%" />
+                    <div className="bg-foreground/40 h-full" style={{ width: '15%' }} title="Ad Monetization 15%" />
+                    <div className="bg-foreground/20 h-full" style={{ width: '10%' }} title="Starter Packs 10%" />
                   </div>
                   <div className="flex flex-wrap justify-center gap-4 mt-3">
                     {[
-                      { label: locale === 'fi' ? 'Kosmeettiset' : 'Cosmetics', color: 'bg-purple-400/60', pct: '45%' },
-                      { label: 'Battle Pass', color: 'bg-primary/80', pct: '30%' },
-                      { label: locale === 'fi' ? 'Mainokset' : 'Ads', color: 'bg-green-600/60', pct: '15%' },
-                      { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-ds-ember/60', pct: '10%' },
+                      { label: locale === 'fi' ? 'Kosmeettiset' : 'Cosmetics', color: 'bg-primary', pct: '45%' },
+                      { label: 'Battle Pass', color: 'bg-foreground/60', pct: '30%' },
+                      { label: locale === 'fi' ? 'Mainokset' : 'Ads', color: 'bg-foreground/40', pct: '15%' },
+                      { label: locale === 'fi' ? 'Aloituspaketit' : 'Starter Packs', color: 'bg-foreground/20', pct: '10%' },
                     ].map((leg, i) => (
                       <div key={i} className="flex items-center gap-1.5 text-xs">
                         <div className={`w-2.5 h-2.5 rounded-full ${leg.color}`} />
@@ -670,9 +653,6 @@ export default function GameStrategyClient() {
                       transition={{ delay: i * 0.06 }}
                     >
                       <div className="theme-card-content p-6">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${c.iconBg}`}>
-                          <span className={`material-symbols text-lg ${c.iconText}`}>{ch.icon}</span>
-                        </div>
                         <h4 className="text-base font-bold mb-2 text-foreground">{ch.channel}</h4>
                         <p className="text-sm leading-relaxed mb-3 text-[var(--muted-foreground)]">{ch.desc}</p>
                         <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg ${c.iconBg} ${c.iconText}`}>{ch.kpi}</span>
@@ -724,7 +704,6 @@ export default function GameStrategyClient() {
             <CaseStudyItem>
               <div className="space-y-4">
                 {retentionTactics.map((rt, i) => {
-                  const c = getColor('indigo');
                   const g = getColor('green');
                   return (
                     <motion.div
@@ -736,17 +715,12 @@ export default function GameStrategyClient() {
                       transition={{ delay: i * 0.07 }}
                     >
                       <div className="theme-card-content p-6">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${c.iconBg}`}>
-                            <span className={`material-symbols text-xl ${c.iconText}`}>{rt.icon}</span>
+                        <div className="flex-1">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
+                            <h4 className="text-base font-bold text-foreground">{rt.tactic}</h4>
+                            <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg self-start ${g.iconBg} ${g.iconText}`}>{rt.impact}</span>
                           </div>
-                          <div className="flex-1">
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
-                              <h4 className="text-base font-bold text-foreground">{rt.tactic}</h4>
-                              <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg self-start ${g.iconBg} ${g.iconText}`}>{rt.impact}</span>
-                            </div>
-                            <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{rt.desc}</p>
-                          </div>
+                          <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{rt.desc}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -767,9 +741,6 @@ export default function GameStrategyClient() {
                   return (
                     <div key={i} className="theme-card hover:-translate-y-1 transition-transform duration-200">
                       <div className="theme-card-content p-6 text-center">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 ${c.iconBg}`}>
-                          <span className={`material-symbols text-xl ${c.iconText}`}>{pillar.icon}</span>
-                        </div>
                         <h4 className="text-base font-bold mb-2 text-foreground">{pillar.title}</h4>
                         <p className="text-sm leading-relaxed mb-3 text-[var(--muted-foreground)]">{pillar.desc}</p>
                         <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg ${c.iconBg} ${c.iconText}`}>{pillar.metric}</span>
