@@ -1,10 +1,8 @@
-'use client';
-
+'use client';;
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { delaySeconds, stagger, transition as t } from '@/design-system';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 import CaseStudyHero from './CaseStudyHero';
@@ -12,7 +10,6 @@ import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 
 export default function AccessibilityClient() {
-
   useEffect(() => {
     // Ensure Tajawal font is loaded
     const link = document.createElement('link');
@@ -23,10 +20,8 @@ export default function AccessibilityClient() {
     }
   }, []);
 
-  const { theme } = useTheme();
+  
   const { locale } = useLanguage();
-  const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
 
   // Get localized text content
   const getLocalizedContent = () => {
@@ -423,7 +418,7 @@ export default function AccessibilityClient() {
   const colorThemes = [
     {
       name: content.lightTheme,
-      preview: "bg-gradient-to-r from-blue-50 to-indigo-400/5",
+      preview: "bg-gradient-to-r from-blue-50 to-[var(--gradient-end)]/5",
       contrast: "AAA"
     },
     {
@@ -442,34 +437,29 @@ export default function AccessibilityClient() {
     {
       title: content.colorSystemTitle,
       description: content.colorSystemDesc,
-      icon: "palette",
+      
       gradient: "from-[var(--gradient-start)] to-[var(--gradient-end)]"
     },
     {
       title: content.inclusiveTypographyTitle,
       description: content.inclusiveTypographyDesc,
-      icon: "text_fields",
+      
       gradient: "from-green-600 to-cyan-500"
     },
     {
       title: content.spacingTitle,
       description: content.spacingDesc,
-      icon: "space_bar",
+      
       gradient: "from-[var(--color-ember)] to-red-600"
     }
   ];
 
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${isColorful
-        ? 'bg-[var(--background)]'
-        : isLight
-          ? 'bg-gradient-to-br from-slate-50 to-gray-100'
-          : 'bg-gradient-to-br from-gray-900 to-black'
+    <div className={`min-h-screen transition-colors duration-300 ${'bg-gradient-to-br from-gray-900 to-black'
       }`}>
       <Navigation />
       <CaseStudyProgress />
-
       <main className="pt-24 pb-16">
         <div className="max-w-6xl mx-auto px-6">
           <CaseStudyHero
@@ -480,16 +470,16 @@ export default function AccessibilityClient() {
             actions={[
               {
                 label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
-                icon: 'design_services',
+                
                 variant: 'primary',
                 href: 'https://ds.alux.space/',
               },
             ]}
             meta={[
-              { label: content.projectType, value: content.projectTypeValues, icon: 'rocket_launch' },
-              { label: content.timeline, value: content.timelineValue, icon: 'schedule' },
-              { label: content.standards, value: content.standardsValue, icon: 'verified' },
-              { label: content.roles, value: content.rolesValue, icon: 'person' },
+              { label: content.projectType, value: content.projectTypeValues,  },
+              { label: content.timeline, value: content.timelineValue,  },
+              { label: content.standards, value: content.standardsValue,  },
+              { label: content.roles, value: content.rolesValue,  },
             ]}
           />
 
@@ -500,32 +490,27 @@ export default function AccessibilityClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...t.enterSlow, delay: delaySeconds.md }}
           >
-            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+            <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${'opacity-80 text-[var(--foreground)]'
               }`}>
               {content.intro}
             </p>
           </motion.div>
 
           <CaseStudySection title={content.overviewTab} icon="visibility" number={1} accent="blue">            <CaseStudyItem>
-                  <h2 className={`text-3xl font-bold mb-8 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-3xl font-bold mt-16 mb-8 ${'text-[var(--foreground)]'
                     }`}>{content.objectivesTitle}</h2>
 
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[{ icon: "home_repair_service", text: content.objective1 },
-                    { icon: "accessibility", text: content.objective2 },
-                    { icon: "verified", text: content.objective3 },
-                    { icon: "integration_instructions", text: content.objective4 },
-                    { icon: "language", text: content.objective5 }
+                    {[{  text: content.objective1 },
+                    {  text: content.objective2 },
+                    {  text: content.objective3 },
+                    {  text: content.objective4 },
+                    {  text: content.objective5 }
                     ].map((objective, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
                         }`}>
-                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-cyan-400' : 'text-accent'
-                          }`}>{objective.icon}</span>
-                        <p className={`font-medium ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
+                        
+                        <p className={`font-medium ${'opacity-80 text-[var(--foreground)]'
                           }`}>{objective.text}</p>
                       </div>
                     ))}
@@ -533,47 +518,35 @@ export default function AccessibilityClient() {
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
                     }`}>{content.designProcess}</h2>
 
-                  <div className={`p-6 rounded-2xl mb-6 ${isColorful
-                      ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                  <div className={`p-6 rounded-2xl mb-6 ${'bg-[var(--card-from-bg)]'
                     }`}>                    <div className="flex items-center mb-6">
-                      <span className={`text-sm font-medium mr-3 ${isColorful
-                          ? 'text-cyan-300'
-                          : isLight ? 'text-gray-700' : 'text-gray-300'
+                      <span className={`text-sm font-medium mr-3 ${'opacity-80 text-[var(--foreground)]'
                         }`}>{content.designModel}</span>
-                      <span className={`text-lg font-bold ${isColorful
-                          ? 'bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent'
-                          : 'bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent'
+                      <span className={`text-lg font-bold ${'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent'
                         }`}>
                         {content.doubleD}
                       </span>
                     </div>                      {/* Interactive Double Diamond */}
                     <div className="relative mb-10 overflow-hidden">
                       {/* Ambient background */}
-                      <div className={`absolute inset-0 ${isColorful
-                          ? 'bg-gradient-to-br from-indigo-600/20 via-purple-900/10 to-pink-900/20'
-                          : isLight ? 'bg-gradient-to-br from-blue-50/50 to-purple-400/5' : 'bg-gradient-to-br from-gray-900/50 to-indigo-600/30'
+                      <div className={`absolute inset-0 ${'bg-gradient-to-br from-gray-900/50 to-[var(--gradient-end)]/30'
                         } blur-3xl`}></div>
 
                       <div className="relative">
                         {/* Phase labels */}
                         <div className="text-center mb-8">
-                          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full border ${isColorful
-                              ? 'bg-white/5 border-white/10'
-                              : isLight ? 'bg-white/80 border-gray-200/50 shadow-sm' : 'bg-gray-800/80 border-gray-700/50'
+                          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full border ${'bg-[var(--card-from-bg)] border-[var(--card-border)]'
                             }`}>
-                            <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : 'text-accent'
+                            <span className={`text-xs font-medium ${'text-[var(--primary)]'
                               }`}>Problem Discovery</span>
 
-                            <div className={`w-px h-4 ${isColorful ? 'bg-gradient-to-b from-cyan-400 to-pink-400' : 'bg-gray-300'
+                            <div className={`w-px h-4 ${'bg-gray-300'
                               }`}></div>
 
-                            <span className={`text-xs font-medium ${isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
+                            <span className={`text-xs font-medium ${'text-[var(--primary)]'
                               }`}>Solution Creation</span>
                           </div>
                         </div>
@@ -583,105 +556,75 @@ export default function AccessibilityClient() {
                           {[
                             {
                               phase: content.discoverPhase,
-                              icon: 'search',
-                              color: isColorful ? 'cyan' : 'blue',
+                              
+                              color: 'blue',
                               description: 'Research user needs, accessibility challenges, and current limitations in design systems.',
-                              gradient: isColorful ? 'from-cyan-400/20 to-blue-400/10' : isLight ? 'from-primary/8 to-primary/4' : 'from-primary/20 to-primary/12'
+                              gradient: 'from-primary/20 to-primary/12'
                             },
                             {
                               phase: content.definePhase,
-                              icon: 'target',
-                              color: isColorful ? 'purple' : 'indigo',
+                              
+                              color: 'indigo',
                               description: 'Synthesize insights into clear accessibility requirements and design principles.',
-                              gradient: isColorful ? 'from-purple-400/20 to-indigo-400/10' : isLight ? 'from-purple-400/10 to-indigo-400/5' : 'from-purple-600/30 to-indigo-800/20'
+                              gradient: 'from-purple-600/30 to-indigo-800/20'
                             },
                             {
                               phase: content.developPhase,
-                              icon: 'build',
-                              color: isColorful ? 'fuchsia' : 'pink',
+                              
+                              color: 'pink',
                               description: 'Create accessible components, test with users, and iterate based on feedback.',
-                              gradient: isColorful ? 'from-fuchsia-400/20 to-pink-400/10' : isLight ? 'from-pink-100 to-pink-400/5' : 'from-pink-900/30 to-pink-500/20'
+                              gradient: 'from-pink-900/30 to-pink-500/20'
                             },
                             {
                               phase: content.deliverPhase,
-                              icon: 'rocket_launch',
-                              color: isColorful ? 'emerald' : 'green',
+                              
+                              color: 'green',
                               description: 'Launch the design system with comprehensive documentation and training.',
-                              gradient: isColorful ? 'from-green-400/20 to-green-400/10' : isLight ? 'from-green-600/10 to-green-600/5' : 'from-green-600/30 to-green-600/20'
+                              gradient: 'from-green-600/30 to-green-600/20'
                             }
                           ].map((phase, index) => (
                             <div
                               key={index}
-                              className={`group relative p-5 rounded-2xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-0.5 cursor-pointer ${isColorful
-                                  ? `bg-gradient-to-br ${phase.gradient} border-white/10 hover:border-white/20`
-                                  : isLight
-                                    ? `bg-gradient-to-br ${phase.gradient} border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-md`
-                                    : `bg-gradient-to-br ${phase.gradient} border-gray-700/30 hover:border-gray-600/50`
+                              className={`group relative p-5 rounded-2xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-0.5 cursor-pointer ${`bg-gradient-to-br ${phase.gradient} border-[var(--card-border)] hover:border-[var(--card-border)]/50`
                                 }`}
                             >                              {/* Floating icon */}
                               <div className={`relative mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'
-                                }`}>                                <div className={`inline-flex w-11 h-11 items-center justify-center rounded-full ${isColorful
-                                    ? `bg-gradient-to-br from-${phase.color}-400/30 to-${phase.color}-500/20 backdrop-blur-sm`
-                                    : isLight
-                                      ? phase.color === 'blue'
-                                        ? 'bg-gradient-to-br from-[var(--color-blue-vivid)] to-[var(--color-blue-vivid-dark)] shadow-lg'
-                                        : phase.color === 'indigo'
-                                          ? 'bg-gradient-to-br from-indigo-300 to-indigo-400 shadow-lg'
-                                          : phase.color === 'pink'
-                                            ? 'bg-gradient-to-br from-pink-300 to-pink-400 shadow-lg'
-                                            : 'bg-gradient-to-br from-green-300 to-green-400 shadow-lg'
-                                      : phase.color === 'blue'
+                                }`}>                                <div className={`inline-flex w-11 h-11 items-center justify-center rounded-full ${phase.color === 'blue'
                                         ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary-hover)] shadow-lg'
                                         : phase.color === 'indigo'
-                                          ? 'bg-gradient-to-br from-indigo-400 to-indigo-400/50 shadow-lg'
+                                          ? 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)]/50 shadow-lg'
                                           : phase.color === 'pink'
                                             ? 'bg-gradient-to-br from-pink-400 to-pink-500 shadow-lg'
                                             : 'bg-gradient-to-br from-green-400 to-green-600 shadow-lg'
                                   } group-hover:scale-105 transition-transform duration-300`}>
-                                  <span className={`material-symbols text-lg font-bold ${isColorful
-                                      ? `text-${phase.color}-300`
-                                      : isLight
-                                        ? 'text-white'
-                                        : 'text-white'
-                                    }`}>{phase.icon}</span>
+                                  <span className="material-symbols text-white">{phase.icon}</span>
+                                  
                                 </div>
                               </div>
 
                               {/* Phase title */}
-                              <h3 className={`text-lg font-bold mb-2 ${isColorful
-                                  ? `text-${phase.color}-200`
-                                  : isLight
-                                    ? `text-${phase.color}-800`
-                                    : `text-${phase.color}-300`
+                              <h3 className={`text-lg font-bold mb-2 ${`text-${phase.color}-300`
                                 }`}>
                                 {phase.phase}
                               </h3>
 
                               {/* Description */}
-                              <p className={`text-sm leading-relaxed ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-400'
+                              <p className={`text-sm leading-relaxed ${'opacity-80 text-[var(--foreground)]'
                                 }`}>
                                 {phase.description}
                               </p>
 
                               {/* Connection indicator */}
                               {index < 3 && (
-                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 ${isColorful
-                                    ? 'bg-gradient-to-r from-white/30 to-transparent'
-                                    : isLight
-                                      ? 'bg-gradient-to-r from-gray-300 to-transparent'
-                                      : 'bg-gradient-to-r from-gray-600 to-transparent'
+                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 ${'bg-gradient-to-r from-gray-600 to-transparent'
                                   }`}>
-                                  <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full ${isColorful ? 'bg-white/50' : isLight ? 'bg-gray-400' : 'bg-gray-500'
+                                  <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full ${'bg-gray-500'
                                     }`}></div>
                                 </div>
                               )}
 
                               {/* Hover glow effect */}
-                              <div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isColorful
-                                  ? `bg-gradient-to-br from-${phase.color}-400/5 to-transparent`
-                                  : isLight
-                                    ? `bg-gradient-to-br from-${phase.color}-200/20 to-transparent`
-                                    : `bg-gradient-to-br from-${phase.color}-400/10 to-transparent`
+                              <div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${`bg-gradient-to-br from-${phase.color}-400/10 to-transparent`
                                 }`}></div>
                             </div>
                           ))}
@@ -689,28 +632,22 @@ export default function AccessibilityClient() {
 
                         {/* Methodology indicator */}
                         <div className="text-center mt-8">
-                          <div className={`inline-flex items-center gap-4 px-6 py-3 rounded-full ${isColorful
-                              ? 'bg-white/5 border border-white/10'
-                              : isLight
-                                ? 'bg-white/60 border border-gray-200/50 shadow-sm'
-                                : 'bg-gray-800/60 border border-gray-700/50'
+                          <div className={`inline-flex items-center gap-4 px-6 py-3 rounded-full ${'bg-[var(--card-from-bg)] border border-[var(--card-border)]'
                             }`}>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${isColorful ? 'bg-cyan-400' : 'bg-[var(--primary)]'
+                              <div className={`w-2 h-2 rounded-full ${'bg-[var(--primary)]'
                                 }`}></div>
-                              <span className={`text-xs font-medium ${isColorful ? 'text-cyan-300' : 'text-accent'
+                              <span className={`text-xs font-medium ${'text-[var(--primary)]'
                                 }`}>Divergent</span>
                             </div>
 
-                            <div className={`w-6 h-px ${isColorful
-                                ? 'bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400'
-                                : 'bg-gradient-to-r from-[var(--primary)] to-pink-400'
+                            <div className={`w-6 h-px ${'bg-gradient-to-r from-[var(--primary)] to-pink-400'
                               }`}></div>
 
                             <div className="flex items-center gap-2">
-                              <span className={`text-xs font-medium ${isColorful ? 'text-pink-300' : isLight ? 'text-pink-700' : 'text-pink-400'
+                              <span className={`text-xs font-medium ${'text-[var(--primary)]'
                                 }`}>Convergent</span>
-                              <div className={`w-2 h-2 rounded-full ${isColorful ? 'bg-pink-400' : 'bg-pink-500'
+                              <div className={`w-2 h-2 rounded-full ${'bg-pink-500'
                                 }`}></div>
                             </div>
                           </div>
@@ -722,64 +659,56 @@ export default function AccessibilityClient() {
 
           <CaseStudySection title={content.researchTitle} icon="science" number={2} accent="green">
             <CaseStudyItem>
-                  <div className={`p-6 rounded-2xl mb-6 ${isColorful
-                      ? 'bg-gradient-to-br from-green-600/30 to-green-600/30 border border-green-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                  <div className={`p-6 rounded-2xl mb-6 ${'bg-[var(--card-from-bg)]'
                     }`}>
-                    <h3 className={`text-lg font-bold mb-4 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-4 ${'text-[var(--foreground)]'
                       }`}>{content.participantFeedback}</h3>
 
                     <div className="grid md:grid-cols-4 gap-6 mb-6">
-                      {[{ label: content.accessibilityValue, value: "92%", icon: "accessibility" },
-                      { label: content.usabilityScore, value: "88%", icon: "thumb_up" },
-                      { label: content.inclusionApproval, value: "95%", icon: "groups" },
-                      { label: content.complianceRating, value: "100%", icon: "verified" }
+                      {[{ label: content.accessibilityValue, value: "92%",  },
+                      { label: content.usabilityScore, value: "88%",  },
+                      { label: content.inclusionApproval, value: "95%",  },
+                      { label: content.complianceRating, value: "100%",  }
                       ].map((metric, index) => (
                         <div key={index} className="text-center">
-                          <span className={`material-symbols text-3xl mb-2 block ${isColorful ? 'text-green-400' : isLight ? 'text-ds-success' : 'text-green-400'
-                            }`}>{metric.icon}</span>
-                          <div className={`text-2xl font-bold mb-1 ${isColorful
-                              ? 'bg-gradient-to-r from-green-400 to-green-400 bg-clip-text text-transparent'
-                              : isLight ? 'text-gray-900' : 'text-white'
+                          
+                          <div className={`text-2xl font-bold mb-1 ${'text-[var(--foreground)]'
                             }`}>
                             {metric.value}
                           </div>
-                          <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
+                          <p className={`text-sm ${'opacity-80 text-[var(--foreground)]'
                             }`}>{metric.label}</p>
                         </div>
                       ))}
                     </div>
 
-                    <h3 className={`text-lg font-bold mb-4 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-4 ${'text-[var(--foreground)]'
                       }`}>{content.keyRecommendations}</h3>
 
                     <div className="grid md:grid-cols-3 gap-6">
                       {[
                         {
-                          icon: "person",
+                          
                           title: content.enhancedAccessibility,
                           desc: content.enhancedAccessibilityDesc
                         },
                         {
-                          icon: "keyboard",
+                          
                           title: content.keyboardNavigation,
                           desc: content.keyboardNavigationDesc
                         },
                         {
-                          icon: "palette",
+                          
                           title: content.colorContrast,
                           desc: content.colorContrastDesc
                         }
                       ].map((item, index) => (
-                        <div key={index} className={`p-4 rounded-2xl ${isColorful
-                            ? 'bg-green-900/20 border border-green-400/20'
-                            : isLight ? 'bg-green-50 border border-green-100' : 'bg-green-900/20 border border-green-800'
+                        <div key={index} className={`p-4 rounded-2xl ${'bg-green-900/20 border border-green-800'
                           }`}>
-                          <span className={`material-symbols text-xl mb-2 block ${isColorful ? 'text-green-400' : isLight ? 'text-ds-success' : 'text-green-400'
-                            }`}>{item.icon}</span>
-                          <h4 className={`font-semibold mb-2 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                          
+                          <h4 className={`font-semibold mb-2 ${'text-[var(--foreground)]'
                             }`}>{item.title}</h4>
-                          <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
+                          <p className={`text-sm ${'opacity-80 text-[var(--foreground)]'
                             }`}>{item.desc}</p>
                         </div>
                       ))}
@@ -834,7 +763,7 @@ export default function AccessibilityClient() {
                             <div className="flex-1 p-6 md:p-8">
                               {/* Name & Role */}
                               <div className="mb-5">
-                                <h3 className="text-2xl font-bold text-primary tracking-tight leading-tight">{persona.name}</h3>
+                                <h3 className="text-2xl font-bold text-[var(--primary)] tracking-tight leading-tight">{persona.name}</h3>
                                 <p className="text-xs font-mono uppercase tracking-widest opacity-40 mt-1">{persona.role}</p>
                               </div>
 
@@ -856,7 +785,7 @@ export default function AccessibilityClient() {
                                 </div>
 
                                 <div className="border-l-2 border-[var(--primary)]/30 pl-4">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent mb-3">Goals</h4>
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--primary)] mb-3">Goals</h4>
                                   <ul className="space-y-1.5">
                                     {persona.goals.map((goal, i) => (
                                       <li key={i} className="text-sm leading-relaxed opacity-70">{goal}</li>
@@ -886,40 +815,42 @@ export default function AccessibilityClient() {
                   <div className="grid md:grid-cols-2 gap-6">
                     {[
                       {
-                        icon: "group",
+                        
+                        icon: "public",
                         title: content.requirement1,
                         desc: content.requirement1Desc,
                         gradient: "from-[var(--gradient-start)] to-[var(--color-cyan-500)]"
                       },
                       {
-                        icon: "feedback",
+                        
+                        icon: "code",
                         title: content.requirement2,
                         desc: content.requirement2Desc,
                         gradient: "from-purple-500 to-pink-500"
                       },
                       {
-                        icon: "school",
+                        
+                        icon: "bug_report",
                         title: content.requirement3,
                         desc: content.requirement3Desc,
                         gradient: "from-green-600 to-green-600/50"
                       },
                       {
-                        icon: "description",
+                        
+                        icon: "translate",
                         title: content.requirement4,
                         desc: content.requirement4Desc,
                         gradient: "from-[var(--color-ember)] to-red-600"
                       }
                     ].map((req, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
                         }`}>
                         <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${req.gradient} flex items-center justify-center mb-3`}>
-                          <span className="material-symbols text-white text-lg">{req.icon}</span>
-                        </div>
-                        <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-white' : isLight ? 'text-gray-900' : 'text-white'
+                            <span className="material-symbols text-white text-xl">{req.icon}</span>
+                          </div>
+                        <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                           }`}>{req.title}</h3>
-                        <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
+                        <p className={`${'opacity-80 text-[var(--foreground)]'
                           }`}>{req.desc}</p>
                       </div>
                     ))}
@@ -927,41 +858,33 @@ export default function AccessibilityClient() {
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
                     }`}>{content.userTestingTitle}</h2>
 
-                  <div className={`p-6 rounded-2xl mb-6 ${isColorful
-                      ? 'bg-gradient-to-br from-indigo-600/30 to-purple-600/30 border border-indigo-400/30 backdrop-blur-lg'
-                      : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                  <div className={`p-6 rounded-2xl mb-6 ${'bg-[var(--card-from-bg)]'
                     }`}>
-                    <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-indigo-400' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                       }`}>{content.testScenario}</h3>
 
-                    <div className={`p-4 rounded-lg mb-5 ${isColorful
-                        ? 'bg-indigo-600/20 border border-indigo-400/20'
-                        : isLight ? 'bg-indigo-400/5 border border-indigo-100' : 'bg-indigo-600/20 border border-indigo-800'
+                    <div className={`p-4 rounded-lg mb-5 ${'bg-indigo-600/20 border border-indigo-800'
                       }`}>
-                      <p className={`${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
+                      <p className={`${'opacity-80 text-[var(--foreground)]'
                         }`}>{content.testScenarioDesc}</p>
                     </div>
 
-                    <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-indigo-400' : isLight ? 'text-gray-900' : 'text-white'
+                    <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                       }`}>{content.focusAreas}</h3>
 
                     <div className="flex flex-wrap gap-3">
                       {[
-                        { icon: "touch_app", label: content.usabilityFocus },
-                        { icon: "accessibility", label: content.accessibilityFocus },
-                        { icon: "speed", label: content.performanceFocus },
-                        { icon: "check_circle", label: content.consistencyFocus }
+                        {  label: content.usabilityFocus },
+                        {  label: content.accessibilityFocus },
+                        {  label: content.performanceFocus },
+                        {  label: content.consistencyFocus }
                       ].map((area, index) => (
-                        <div key={index} className={`px-4 py-2 rounded-full flex items-center space-x-2 ${isColorful
-                            ? 'bg-indigo-400/50/20 text-indigo-400 border border-indigo-400/30'
-                            : isLight ? 'bg-indigo-400/10 text-indigo-600' : 'bg-indigo-600/30 text-indigo-400'
+                        <div key={index} className={`px-4 py-2 rounded-full flex items-center space-x-2 ${'bg-indigo-600/30 text-[var(--primary)]'
                           }`}>
-                          <span className="material-symbols text-sm">{area.icon}</span>
+                          
                           <span className="text-sm font-medium">{area.label}</span>
                         </div>
                       ))}                    </div>
@@ -972,60 +895,39 @@ export default function AccessibilityClient() {
           <CaseStudySection title={content.principlesTitle} icon="lightbulb" number={5} accent="purple">
             <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-red-600/30 to-[var(--color-ember)]/30 border border-red-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-gradient-to-r from-red-50 to-[var(--color-ember)]/5 border border-red-100' : 'bg-gradient-to-r from-red-900/20 to-[var(--color-ember)]/20 border border-red-800'
+                    <div className={`p-6 rounded-2xl ${'bg-gradient-to-r from-red-900/20 to-[var(--color-ember)]/20 border border-red-800'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful
-                          ? 'text-red-300'
-                          : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                         }`}>{content.problemTitle}</h3>
-                      <p className={`${isColorful
-                          ? 'text-gray-200'
-                          : isLight ? 'text-gray-700' : 'text-gray-300'
+                      <p className={`${'opacity-80 text-[var(--foreground)]'
                         }`}>{content.problemDesc}</p>
                     </div>
 
-                    <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-green-600/30 to-green-600/30 border border-green-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-gradient-to-r from-green-600/5 to-green-600/5 border border-green-100' : 'bg-gradient-to-r from-green-600/20 to-green-600/20 border border-green-800'
+                    <div className={`p-6 rounded-2xl ${'bg-gradient-to-r from-green-600/20 to-green-600/20 border border-green-800'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful
-                          ? 'text-green-300'
-                          : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                         }`}>{content.solutionTitle}</h3>
-                      <p className={`${isColorful
-                          ? 'text-gray-200'
-                          : isLight ? 'text-gray-700' : 'text-gray-300'
+                      <p className={`${'opacity-80 text-[var(--foreground)]'
                         }`}>{content.solutionDesc}</p>
                     </div>
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
                     }`}>{content.principlesTitle}</h2>
                   <div className="grid md:grid-cols-3 gap-6">
                     {[
-                      { title: content.principle1, desc: content.principle1Desc, icon: 'accessibility' },
-                      { title: content.principle2, desc: content.principle2Desc, icon: 'integration_instructions' },
-                      { title: content.principle3, desc: content.principle3Desc, icon: 'developer_mode' }
+                      { title: content.principle1, desc: content.principle1Desc,  },
+                      { title: content.principle2, desc: content.principle2Desc,  },
+                      { title: content.principle3, desc: content.principle3Desc,  }
                     ].map((principle, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                      <div key={index} className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
                         }`}>
-                        <span className={`material-symbols text-2xl mb-3 block ${isColorful ? 'text-purple-400' : isLight ? 'text-purple-500' : 'text-purple-400'
-                          }`}>{principle.icon}</span>
-                        <h3 className={`text-lg font-bold mb-3 ${isColorful
-                            ? 'text-purple-300'
-                            : isLight ? 'text-gray-900' : 'text-white'
+                        
+                        <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                           }`}>{principle.title}</h3>
-                        <p className={`${isColorful
-                            ? 'text-gray-200'
-                            : isLight ? 'text-gray-600' : 'text-gray-300'
+                        <p className={`${'opacity-80 text-[var(--foreground)]'
                           }`}>{principle.desc}</p>
                       </div>
                     ))}
@@ -1035,25 +937,19 @@ export default function AccessibilityClient() {
 
           <CaseStudySection title={content.systemTab} icon="design_services" number={6} accent="cyan">
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
                     }`}>{content.colorsTitle}</h2>
-                  <p className={`text-base mb-6 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                  <p className={`text-base mb-6 ${'opacity-80 text-[var(--foreground)]'
                     }`}>{content.colorsDesc}</p>
 
                   <div className="grid md:grid-cols-3 gap-6 mb-6">
                     {colorThemes.map((colorTheme, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
                         }`}>
                         <div className={`h-24 rounded-lg mb-3 ${colorTheme.preview}`}></div>
-                        <h3 className={`font-bold mb-2 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                        <h3 className={`font-bold mb-2 ${'text-[var(--foreground)]'
                           }`}>{colorTheme.name}</h3>
-                        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${isColorful
-                            ? 'bg-green-600/20 text-green-300 border border-green-400/30'
-                            : isLight ? 'bg-green-100 text-green-700' : 'bg-green-900/30 text-green-400'
+                        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${'bg-green-900/30 text-green-400'
                           }`}>
                           WCAG {colorTheme.contrast}
                         </span>
@@ -1061,78 +957,68 @@ export default function AccessibilityClient() {
                     ))}
                   </div>
 
-                  <div className={`p-5 rounded-2xl ${isColorful
-                      ? 'bg-[var(--primary)]/15 border border-[var(--primary)]/25 backdrop-blur-lg'
-                      : isLight ? 'bg-primary/5 border border-primary/15' : 'bg-primary/20 border border-[var(--card-border)]'
+                  <div className={`p-5 rounded-2xl ${'bg-[var(--primary-glow)] border border-[var(--card-border)]'
                     }`}>
-                    <span className="material-symbols text-xl text-accent mb-2 block">info</span>
-                    <p className={`${isColorful ? 'text-gray-200' : isLight ? 'text-[var(--accent-text)]' : 'text-[var(--accent-text)]'
+                    
+                    <p className={`${'text-[var(--accent-text)]'
                       }`}>{content.contrastInfo}</p>
                   </div>
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
                     }`}>{content.inclusiveTypographyTitle}</h2>
-                  <p className={`text-base mb-6 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                  <p className={`text-base mb-6 ${'opacity-80 text-[var(--foreground)]'
                     }`}>{content.inclusiveTypographyDesc}</p>
 
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-green-600/30 to-cyan-500/30 border border-green-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-lg' : 'bg-gray-800'
+                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                         }`}>{content.englishType}</h3>
                       <div className="space-y-4">
                         <div>
-                          <h4 className={`text-3xl font-bold ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                          <h4 className={`text-3xl font-bold ${'text-[var(--foreground)]'
                             }`}>Heading Large</h4>
-                          <p className="text-sm text-gray-400">Font Size: 48px, Line Height: 1.2</p>
+                          <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 48px, Line Height: 1.2</p>
                         </div>
                         <div>
-                          <h5 className={`text-xl font-semibold ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                          <h5 className={`text-xl font-semibold ${'text-[var(--foreground)]'
                             }`}>Heading Medium</h5>
-                          <p className="text-sm text-gray-400">Font Size: 24px, Line Height: 1.3</p>
+                          <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 24px, Line Height: 1.3</p>
                         </div>
                         <div>
-                          <p className={`text-base ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
+                          <p className={`text-base ${'opacity-80 text-[var(--foreground)]'
                             }`}>Body text optimized for readability</p>
-                          <p className="text-sm text-gray-400">Font Size: 16px, Line Height: 1.6</p>
+                          <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 16px, Line Height: 1.6</p>
                         </div>
                       </div>
                     </div>
-                    <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-[var(--color-ember)]/30 to-red-600/30 border border-[var(--color-ember-light)]/30 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-[var(--color-ember-light)]' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                         }`}>{content.arabicType}</h3>
                       <div className="space-y-4" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
                         <div>
-                          <h4 className={`text-3xl font-bold ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                          <h4 className={`text-3xl font-bold ${'text-[var(--foreground)]'
                             }`}>عنوان كبير</h4>
-                          <p className="text-sm text-gray-400" dir="ltr">Font: Tajawal, Size: 48px, Line Height: 1.4</p>
+                          <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 48px, Line Height: 1.4</p>
                         </div>
                         <div>
-                          <h5 className={`text-xl font-semibold ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                          <h5 className={`text-xl font-semibold ${'text-[var(--foreground)]'
                             }`}>عنوان متوسط</h5>
-                          <p className="text-sm text-gray-400" dir="ltr">Font: Tajawal, Size: 24px, Line Height: 1.5</p>
+                          <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 24px, Line Height: 1.5</p>
                         </div>
                         <div>
-                          <p className={`text-base ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-700' : 'text-gray-300'
+                          <p className={`text-base ${'opacity-80 text-[var(--foreground)]'
                             }`}>نص محسن للقراءة والوضوح</p>
-                          <p className="text-sm text-gray-400" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
+                          <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
                         </div>
                       </div>
-                      <div className={`mt-6 p-4 rounded-lg ${isColorful
-                          ? 'bg-ds-ember/20 border border-[var(--color-ember-light)]/30'
-                          : isLight ? 'bg-ds-ember/5 border border-ds-ember/20' : 'bg-ds-ember/30 border border-[var(--color-ember-dark)]'
+                      <div className={`mt-6 p-4 rounded-lg ${'bg-ds-ember/30 border border-[var(--color-ember-dark)]'
                         }`}>
-                        <span className="material-symbols text-[var(--color-ember-light)] mr-2">language</span>
-                        <span className={`text-sm ${isColorful ? 'text-[var(--color-ember-light)]' : isLight ? 'text-[var(--color-ember-dark)]' : 'text-[var(--color-ember-light)]'
+                        
+                        <span className={`text-sm ${'text-[var(--color-ember-light)]'
                           }`}>{content.rtlSupport}</span>
                       </div>
                     </div>
@@ -1140,23 +1026,17 @@ export default function AccessibilityClient() {
             </CaseStudyItem>
 
             <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mb-6 ${isColorful
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-ember-light)] to-red-400'
-                      : isLight ? 'text-gray-900' : 'text-white'
+                  <h2 className={`text-2xl font-bold mt-16 mb-6 ${'text-[var(--foreground)]'
                     }`}>Core System Features</h2>
 
                   <div className="grid md:grid-cols-3 gap-6">
                     {designSystemFeatures.map((feature, index) => (
-                      <div key={index} className={`p-6 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-600/30 to-pink-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                      <div key={index} className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
                         }`}>
-                        <span className={`material-symbols text-2xl mb-3 block bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
-                          {feature.icon}
-                        </span>
-                        <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-900' : 'text-white'
+                        
+                        <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                           }`}>{feature.title}</h3>
-                        <p className={`${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
+                        <p className={`${'opacity-80 text-[var(--foreground)]'
                           }`}>{feature.description}</p>
                       </div>
                     ))}
@@ -1167,36 +1047,32 @@ export default function AccessibilityClient() {
           <CaseStudySection title={content.implementationTab} icon="code" number={7} accent="teal">
             <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6 mb-10">
-                    <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-green-600/30 to-cyan-500/30 border border-green-400/30 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-green-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                         }`}>{content.headlessTitle}</h3>
-                      <p className={`mb-4 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                      <p className={`mb-4 ${'opacity-80 text-[var(--foreground)]'
                         }`}>{content.headlessDesc}</p>
 
-                      <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-100' : 'bg-gray-900'
-                        }`}>                        <div className={`${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
+                      <div className={`p-4 rounded-lg font-mono text-sm ${'bg-[var(--background)]'
+                        }`}>                        <div className={`text-[var(--foreground)]`}>
                           <span className="text-purple-500">import</span> {`{ Menu }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@headlessui/react&apos;</span><br />
                           <span className="text-purple-500">import</span> {`{ ChevronDownIcon }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@heroicons/react/20/solid&apos;</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className={`p-6 rounded-2xl ${isColorful
-                        ? 'bg-gradient-to-br from-[var(--color-indigo-400)]/20 to-[var(--color-indigo-600)]/20 border border-[var(--color-indigo-400)]/25 backdrop-blur-lg'
-                        : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                    <div className={`p-6 rounded-2xl ${'bg-[var(--card-from-bg)]'
                       }`}>
-                      <h3 className={`text-lg font-bold mb-3 ${isColorful ? 'text-blue-300' : isLight ? 'text-gray-900' : 'text-white'
+                      <h3 className={`text-lg font-bold mb-3 ${'text-[var(--foreground)]'
                         }`}>{content.testingTitle}</h3>
-                      <p className={`mb-4 ${isColorful ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+                      <p className={`mb-4 ${'opacity-80 text-[var(--foreground)]'
                         }`}>{content.testingDesc}</p>
 
-                      <div className={`p-4 rounded-lg font-mono text-sm ${isLight ? 'bg-gray-100' : 'bg-gray-900'
+                      <div className={`p-4 rounded-lg font-mono text-sm ${'bg-[var(--background)]'
                         }`}>
-                        <div className={`${isLight ? 'text-gray-800' : 'text-gray-200'}`}>
-                          <span className="text-blue-400">npm run</span> <span className="text-ds-success">test:a11y</span><br />
+                        <div className={`text-[var(--foreground)]`}>
+                          <span className="text-[var(--primary)]">npm run</span> <span className="text-ds-success">test:a11y</span><br />
                           <span className="text-gray-500"># ✅ 0 accessibility violations found</span>
                         </div>
                       </div>
@@ -1206,19 +1082,16 @@ export default function AccessibilityClient() {
                   {/* Technical Standards */}
                   <div className="grid md:grid-cols-3 gap-6">
                     {[
-                      { title: content.semanticHtml, icon: 'code', desc: 'Proper HTML5 semantic structure' },
-                      { title: content.ariaLabels, icon: 'accessibility', desc: 'Complete ARIA implementation' },
-                      { title: content.keyboardSupport, icon: 'keyboard', desc: 'Full keyboard navigation' }
+                      { title: content.semanticHtml,  desc: 'Proper HTML5 semantic structure' },
+                      { title: content.ariaLabels,  desc: 'Complete ARIA implementation' },
+                      { title: content.keyboardSupport,  desc: 'Full keyboard navigation' }
                     ].map((standard, index) => (
-                      <div key={index} className={`p-5 rounded-2xl ${isColorful
-                          ? 'bg-gradient-to-br from-purple-600/30 to-blue-900/30 border border-purple-400/30 backdrop-blur-lg'
-                          : isLight ? 'bg-white shadow-md' : 'bg-gray-800'
+                      <div key={index} className={`p-5 rounded-2xl ${'bg-[var(--card-from-bg)]'
                         }`}>
-                        <span className={`material-symbols text-xl mb-3 block ${isColorful ? 'text-purple-400' : 'text-accent'
-                          }`}>{standard.icon}</span>
-                        <h3 className={`font-bold mb-2 ${isColorful ? 'text-purple-300' : isLight ? 'text-gray-900' : 'text-white'
+                        
+                        <h3 className={`font-bold mb-2 ${'text-[var(--foreground)]'
                           }`}>{standard.title}</h3>
-                        <p className={`text-sm ${isColorful ? 'text-gray-300' : isLight ? 'text-gray-600' : 'text-gray-300'
+                        <p className={`text-sm ${'opacity-80 text-[var(--foreground)]'
                           }`}>{standard.desc}</p>
                       </div>
                     ))}
