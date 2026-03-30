@@ -287,7 +287,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             {post.tags.length > 1 && (
               <div className="flex flex-wrap gap-1.5 mb-4" role="list" aria-label="Article tags">
                 {post.tags.slice(1, 3).map((tag, idx) => (
-                  <Badge key={idx} variant="default" size="sm" role="listitem">{tag}</Badge>
+                  <span key={idx} role="listitem">
+                    <Badge variant="default" size="sm">{tag}</Badge>
+                  </span>
                 ))}
               </div>
             )}
