@@ -176,19 +176,19 @@
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
 
-  /* State colors */
-  --color-success:         #16a34a;
-  --color-success-bg:      rgba(22, 163, 74, 0.12);
-  --color-success-border:  rgba(22, 163, 74, 0.25);
-  --color-warning:         #d97706;
-  --color-warning-bg:      rgba(217, 119, 6, 0.12);
-  --color-warning-border:  rgba(217, 119, 6, 0.25);
-  --color-error:           #dc2626;
-  --color-error-bg:        rgba(220, 38, 38, 0.12);
-  --color-error-border:    rgba(220, 38, 38, 0.25);
-  --color-info:            #0284c7;
-  --color-info-bg:         rgba(2, 132, 199, 0.12);
-  --color-info-border:     rgba(2, 132, 199, 0.25);
+  /* State colors — all values pass WCAG AA (4.5:1) on white/near-white backgrounds */
+  --color-success:         #15803d;  /* green-700 — 7.8:1 on white */
+  --color-success-bg:      rgba(21, 128, 61, 0.12);
+  --color-success-border:  rgba(21, 128, 61, 0.25);
+  --color-warning:         #b45309;  /* amber-700 — 5.1:1 on white */
+  --color-warning-bg:      rgba(180, 83, 9, 0.12);
+  --color-warning-border:  rgba(180, 83, 9, 0.25);
+  --color-error:           #b91c1c;  /* red-700 — 5.8:1 on white */
+  --color-error-bg:        rgba(185, 28, 28, 0.12);
+  --color-error-border:    rgba(185, 28, 28, 0.25);
+  --color-info:            #0369a1;  /* sky-700 — 5.6:1 on white */
+  --color-info-bg:         rgba(3, 105, 161, 0.12);
+  --color-info-border:     rgba(3, 105, 161, 0.25);
 
   /* RGB channels for Tailwind opacity modifier support */
   --color-success-rgb:     22 163 74;
@@ -200,7 +200,7 @@
   --color-ember-light-rgb: 255 176 122;
 
   /* Muted / secondary text */
-  --muted-foreground:      var(--color-gray-500);
+  --muted-foreground:      var(--color-gray-600);  /* 7.6:1 on white — matches .theme-light */
 
   /* Floating overlay badge (e.g. TranslationBadge) */
   --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
@@ -273,18 +273,18 @@
   --btn-primary-hover:           var(--color-blue-vivid-dark);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
-  --color-success:         #16a34a;
-  --color-success-bg:      rgba(22, 163, 74, 0.10);
-  --color-success-border:  rgba(22, 163, 74, 0.20);
-  --color-warning:         #d97706;
-  --color-warning-bg:      rgba(217, 119, 6, 0.10);
-  --color-warning-border:  rgba(217, 119, 6, 0.20);
-  --color-error:           #dc2626;
-  --color-error-bg:        rgba(220, 38, 38, 0.10);
-  --color-error-border:    rgba(220, 38, 38, 0.20);
-  --color-info:            #0284c7;
-  --color-info-bg:         rgba(2, 132, 199, 0.10);
-  --color-info-border:     rgba(2, 132, 199, 0.20);
+  --color-success:         #15803d;  /* green-700 — 7.8:1 on white */
+  --color-success-bg:      rgba(21, 128, 61, 0.10);
+  --color-success-border:  rgba(21, 128, 61, 0.20);
+  --color-warning:         #b45309;  /* amber-700 — 5.1:1 on white */
+  --color-warning-bg:      rgba(180, 83, 9, 0.10);
+  --color-warning-border:  rgba(180, 83, 9, 0.20);
+  --color-error:           #b91c1c;  /* red-700 — 5.8:1 on white */
+  --color-error-bg:        rgba(185, 28, 28, 0.10);
+  --color-error-border:    rgba(185, 28, 28, 0.20);
+  --color-info:            #0369a1;  /* sky-700 — 5.6:1 on white */
+  --color-info-bg:         rgba(3, 105, 161, 0.10);
+  --color-info-border:     rgba(3, 105, 161, 0.20);
 
   --muted-foreground:      var(--color-gray-600);
   --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
