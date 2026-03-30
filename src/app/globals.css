@@ -56,7 +56,7 @@ body {
 /* Card component styling */
 .theme-card {
   position: relative;
-  border-radius: 1.25rem;
+  border-radius: var(--card-radius);
   padding: 2px;
   transform-style: preserve-3d;
 }
@@ -64,7 +64,7 @@ body {
 .theme-card-glow {
   position: absolute;
   inset: -1px;
-  border-radius: 1.25rem;
+  border-radius: var(--card-radius);
   filter: blur(1.25rem);
   transition: all 0.4s ease;
   opacity: 0.5;
@@ -94,7 +94,7 @@ body {
   overflow: hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
-  border-radius: inherit;
+  border-radius: var(--card-radius);
   z-index: 1;
   height: 100%;
   display: flex;
@@ -103,7 +103,7 @@ body {
 
 .theme-card-flex {
   position: relative;
-  border-radius: 1.25rem;
+  border-radius: var(--card-radius);
   backdrop-filter: blur(0.25rem);
   transition: all 0.4s ease;
   overflow: hidden;
@@ -121,11 +121,27 @@ body {
 
 /* Light theme specific card styling */
 .theme-light .theme-card-content {
+  border-radius: var(--card-radius);
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02);
 }
 
 .theme-light .theme-card-content:hover {
   box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark theme specific card styling */
+.theme-dark .theme-card-content {
+  border-radius: var(--card-radius);
+}
+
+.theme-light .theme-card-flex,
+.theme-dark .theme-card-flex {
+  border-radius: var(--card-radius);
+}
+
+.theme-light .theme-card,
+.theme-dark .theme-card {
+  border-radius: var(--card-radius);
 }
 
 .theme-light .theme-card-glow {
@@ -221,14 +237,14 @@ body {
 /* Colorful theme specific card styling */
 .theme-colorful .theme-card {
   position: relative;
-  border-radius: 2rem;
+  border-radius: var(--card-radius);
   padding: 2px;
   transform-style: preserve-3d;
 }
 
 .theme-colorful .theme-card-content {
   position: relative;
-  border-radius: 2rem;
+  border-radius: var(--card-radius);
   backdrop-filter: blur(0.75rem);
   transition: all 0.4s ease;
   overflow: hidden;
@@ -239,7 +255,7 @@ body {
 
 .theme-colorful .theme-card-flex {
   position: relative;
-  border-radius: 2rem;
+  border-radius: var(--card-radius);
   backdrop-filter: blur(0.75rem);
   transition: all 0.4s ease;
   overflow: hidden;

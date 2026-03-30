@@ -390,6 +390,7 @@ module.exports = {
           backdropFilter: 'blur(4px)',
           transition: 'all 0.3s',
           overflow: 'hidden',
+          borderRadius: 'var(--card-radius)',
           background: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))',
           border: '1px solid var(--card-border)',
           zIndex: '1',

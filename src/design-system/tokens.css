@@ -572,9 +572,12 @@
   --radius-md:   0.5rem;    /* 8px  */
   --radius-lg:   0.75rem;   /* 12px */
   --radius-xl:   1rem;      /* 16px — "theme" */
-  --radius-2xl:  1.25rem;   /* 20px — cards  */
-  --radius-3xl:  2rem;      /* 32px — colorful cards */
+  --radius-2xl:  1.25rem;   /* 20px — form controls, inputs */
+  --radius-3xl:  2rem;      /* 32px — cards (unified across all themes) */
   --radius-full: 9999px;
+
+  /* Semantic card radius — used by .theme-card, .theme-card-content, .theme-card-flex */
+  --card-radius: var(--radius-3xl);
 }
 
 /* -------------------------------------------------------
