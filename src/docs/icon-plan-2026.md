@@ -9,7 +9,7 @@
 
 | Source | Library | How used | Files |
 |--------|---------|----------|-------|
-| **Primary** | Material Symbols Rounded (variable font) | `<span className="material-symbols">name</span>` | ~every TSX file |
+| **Primary** | Material Symbols Outlined (variable font, weight 100) | `<Icon name="name" />` | Platform-wide |
 | **Secondary** | lucide-react | `<ChevronLeft />` JSX | `src/task/app/presentation/page.tsx` only |
 | **Tertiary** | SVG files from `/dt-icons/` | `<Image src="/dt-icons/x.svg" />` | `src/task/app/` subtree |
 
@@ -366,8 +366,8 @@ These are the concrete icons to remove or reconsider, ordered by impact:
 ## 8. Icon Library Policy — Final Decision
 
 ```
-PRIMARY LIBRARY:    Material Symbols Rounded (variable font, already in DS)
-                    → All UI icons, navigation, prototypes
+PRIMARY LIBRARY:    Material Symbols Outlined (variable font, weight 100)
+                    → All UI icons, navigation, prototypes (Standardized 2026)
 
 SECONDARY LIBRARY:  None
 

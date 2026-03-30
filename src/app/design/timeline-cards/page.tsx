@@ -3,7 +3,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import CodeSnippet from "@/components/CodeSnippet";
 import TimelineCard from "@/components/TimelineCard";
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import Icon from "@/components/ui/Icon";
 import { useTheme } from '@/context/ThemeContext';
 
 export default function TimelineCardsSection() {
@@ -13,7 +13,7 @@ export default function TimelineCardsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
           <div className="inline-flex items-center px-3 py-1.5 mb-4 text-sm font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 rounded-full shadow-sm">
-            <RocketLaunchIcon className="mr-2" fontSize="small" /> Timeline Cards
+            <Icon name="rocket_launch" size="sm" className="mr-2" /> Timeline Cards
           </div>
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-neutral-950 dark:text-white mb-4" style={{ textShadow: 'none' }}>Timeline Cards</h2>
           <p className="font-body text-lg text-neutral-700 dark:text-neutral-300 max-w-3xl">
@@ -25,7 +25,7 @@ export default function TimelineCardsSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <TimelineCard
               theme={theme}
-              materialIcon={RocketLaunchIcon}
+              iconName="rocket_launch"
               title="Product Designer | Product Owner"
               date="2023 – Present"
               location="Webropol, Helsinki, Finland"
@@ -39,7 +39,7 @@ export default function TimelineCardsSection() {
           <CodeSnippet 
             code={`<TimelineCard
   theme="light" // Options: 'light', 'dark', 'colorful'
-  materialIcon={RocketLaunchIcon} // Material UI icon (when using this, the icon prop becomes optional)
+  iconName="rocket_launch" // Material Symbol name
   title="Product Designer | Product Owner"
   date="2023 – Present"
   location="Webropol, Helsinki, Finland"

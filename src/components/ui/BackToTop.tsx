@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { LiveRegion } from './LiveRegion';
+import Icon from './Icon';
 
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -81,7 +82,7 @@ const BackToTop: React.FC = () => {
             type="button"
           >
             <div className="relative">
-              <span className="material-symbols text-2xl" aria-hidden="true">arrow_upward</span>
+              <Icon name="arrow_upward" size="lg" />
               
               {/* Pulse effect */}
               <motion.div

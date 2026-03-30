@@ -303,8 +303,9 @@ export default function JobSeekingClient() {
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
                     <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-primary">search</span>
-                    </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
+                      <Icon name="search" size="lg" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Löydä" : "Discover"}
                     </h3>
                     <p className="opacity-80 text-sm">
@@ -316,8 +317,9 @@ export default function JobSeekingClient() {
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
                     <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-primary">notes</span>
-                    </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
+                      <Icon name="notes" size="lg" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Määrittele" : "Define"}
                     </h3>
                     <p className="opacity-80 text-sm">
@@ -329,8 +331,9 @@ export default function JobSeekingClient() {
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
                     <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-primary">edit</span>
-                    </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
+                      <Icon name="edit" size="lg" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Kehitä" : "Develop"}
                     </h3>
                     <p className="opacity-80 text-sm">
@@ -342,8 +345,9 @@ export default function JobSeekingClient() {
                 <div className="theme-card">
                   <div className="theme-card-content p-6 hover:bg-theme/70 transition-all duration-300">
                     <div className="h-11 w-11 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-3">
-                      <span className="material-symbols text-2xl text-primary">rocket_launch</span>
-                    </div>                    <h3 className="text-lg font-semibold text-primary mb-2">
+                      <Icon name="rocket_launch" size="lg" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-primary mb-2">
                       {locale === 'fi' ? "Toimita" : "Deliver"}
                     </h3>
                     <p className="opacity-80 text-sm">
@@ -363,7 +367,7 @@ export default function JobSeekingClient() {
                   whileHover={{ y: -2 }}
                 >
                   <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
-                    <span className="material-symbols text-2xl">warning</span>
+                    <Icon name="warning" size="lg" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">{content.challenge}</h3>
@@ -376,7 +380,7 @@ export default function JobSeekingClient() {
                   whileHover={{ y: -2 }}
                 >
                   <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
-                    <span className="material-symbols text-2xl">travel_explore</span>
+                    <Icon name="travel_explore" size="lg" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{content.discoveryInsights}</h3>
@@ -389,7 +393,7 @@ export default function JobSeekingClient() {
                   whileHover={{ y: -2 }}
                 >
                   <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
-                    <span className="material-symbols text-2xl">search_insights</span>
+                    <Icon name="search_insights" size="lg" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{content.initialResearch}</h3>
@@ -402,7 +406,7 @@ export default function JobSeekingClient() {
                   whileHover={{ y: -2 }}
                 >
                   <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
-                    <span className="material-symbols text-2xl">lightbulb</span>
+                    <Icon name="lightbulb" size="lg" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{content.hypothesis}</h3>
@@ -472,7 +476,7 @@ export default function JobSeekingClient() {
                 <div className="theme-card-content p-8">
                   <div className="flex items-center mb-4">
                     <div className="h-12 w-12 flex items-center justify-center text-primary bg-primary/10 rounded-full mr-4">
-                      <span className="material-symbols text-2xl text-primary">route</span>
+                      <Icon name="route" size="lg" />
                     </div>
                     <h3 className="text-2xl font-bold text-primary">{content.userFlow}</h3>
                   </div>
@@ -584,7 +588,7 @@ export default function JobSeekingClient() {
                   >
                     <div className="theme-card-content p-6 hover:bg-theme/80 transition-all duration-300 flex flex-col items-center text-center h-full">
                       <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center text-primary bg-primary/10 rounded-full mb-5 group-hover:scale-105 transition-transform duration-300">
-                        <span className="material-symbols text-2xl">{feature.icon}</span>
+                        <Icon name={feature.icon} size="lg" />
                       </div>
                       <div className="flex-grow flex flex-col">
                         <h3 className="text-lg font-bold mb-3 text-primary">{feature.title}</h3>

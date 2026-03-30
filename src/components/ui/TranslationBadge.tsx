@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/context/LanguageContext';
 import { useState, useRef, useEffect } from 'react';
+import Icon from '@/components/ui/Icon';
 
 export default function TranslationBadge() {
   const { locale } = useLanguage();
@@ -81,11 +82,11 @@ export default function TranslationBadge() {
       >
         {isExpanded ? (
           <span className="whitespace-nowrap flex items-center gap-2">
-            <span className="material-symbols-rounded text-lg">auto_awesome</span>
+            <Icon name="auto_awesome" size="sm" />
             Translated with AI
           </span>
         ) : (
-          <span className="material-symbols-rounded text-lg">auto_awesome</span>
+          <Icon name="auto_awesome" size="sm" />
         )}
       </div>
     </div>

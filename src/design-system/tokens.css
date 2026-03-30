@@ -667,7 +667,7 @@
    9. MATERIAL SYMBOLS (icon font)
    ------------------------------------------------------- */
 :root {
-  --material-symbols:              'Material Symbols Rounded';
+  --material-symbols:              'Material Symbols Outlined';
   --material-symbols-weight:       100;
   --material-symbols-fill:         0;
   --material-symbols-grade:        0;

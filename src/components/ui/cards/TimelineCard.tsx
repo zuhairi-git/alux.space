@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Icon from '@/components/ui/Icon';
 
 // Timeline Card component with theme support
 interface TimelineCardProps {
-  icon?: React.ReactNode; // Optional icon when materialIcon is provided
-  materialIcon?: React.ElementType; // Material UI icon component
+  iconName?: string; // Material Symbol name
+  icon?: React.ReactNode; // Optional custom icon
   title: string;
   date: string;
   location: string;
@@ -15,8 +15,8 @@ interface TimelineCardProps {
 }
 
 export default function TimelineCard({ 
+  iconName,
   icon, 
-  materialIcon: MaterialIcon, 
   title, 
   date, 
   location, 
@@ -186,8 +186,9 @@ export default function TimelineCard({
         <div className="px-6 pt-5 pb-6">
           {/* Icon with fixed positioning to prevent cutoff */}
           <div className="mb-4 flex justify-center mt-2">
-            <div className={`relative flex items-center justify-center p-4 rounded-full w-16 h-16 ${getIconBgStyles()} transition-all duration-300`}>              {MaterialIcon ? (
-                <MaterialIcon className={`h-6 w-6 ${getIconColorStyles()} transition-all duration-300`} />
+            <div className={`relative flex items-center justify-center p-4 rounded-full w-16 h-16 ${getIconBgStyles()} transition-all duration-300`}>
+              {iconName ? (
+                <Icon name={iconName} size="lg" className={getIconColorStyles()} />
               ) : icon ? (
                 icon
               ) : null}
@@ -206,7 +207,7 @@ export default function TimelineCard({
           </div>
           
           <div className="flex items-center justify-center mb-4 text-center">
-            <LocationOnIcon className={`h-4 w-4 mr-1 flex-shrink-0 ${getMetaStyles()}`} />
+            <Icon name="location_on" size="xs" className={`mr-1 flex-shrink-0 ${getMetaStyles()}`} />
             <span className={getMetaStyles()}>{location}</span>
           </div>
           

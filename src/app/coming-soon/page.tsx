@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ThemeSwitch from '@/components/ThemeSwitch';
+import Icon from '@/components/ui/Icon';
 
 export default function ComingSoonPage() {
   const [typedText, setTypedText] = useState('');
@@ -37,7 +38,7 @@ export default function ComingSoonPage() {
         transition={{ delay: 1.2, duration: 0.8 }}
         whileHover={{ x: -5 }}
       >
-        <span className="material-symbols material-symbols-rounded">arrow_back</span>
+        <Icon name="arrow_back" size="sm" />
         <span>Back to Home</span>
       </motion.a>
       
@@ -60,7 +61,7 @@ export default function ComingSoonPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <span className="material-symbols material-symbols-rounded icon-rocket">rocket_launch</span>
+          <Icon name="rocket_launch" className="icon-rocket" />
           <span className="typing-text">{typedText}</span>
           {!typingComplete && <span className="cursor">|</span>}
         </motion.h1>        <motion.p 

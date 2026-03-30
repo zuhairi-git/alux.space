@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, Suspense } from 'react';
 import Image from 'next/image';
@@ -30,7 +30,6 @@ import {
   getByCategory,
 } from '@/design-system';
 import type { ComponentEntry } from '@/design-system';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import AnimatedSection from '@/components/AnimatedSection';
 import CodeSnippet from '@/components/CodeSnippet';
 import PodcastPlayer from '@/components/PodcastPlayer';
@@ -1119,11 +1118,10 @@ function CardsTimelineSection() {
         Animated entry cards with floating particles — designed for experience and education timelines.
       </p>
       <DemoSection code={`import { TimelineCard } from '@/design-system';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 <TimelineCard
   theme="${theme}"
-  materialIcon={RocketLaunchIcon}
+  iconName="rocket_launch"
   title="Product Designer"
   date="2023 – Present"
   location="Helsinki, Finland"
@@ -1132,7 +1130,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
         <div className="max-w-xs mx-auto">
           <TimelineCard
             theme={theme}
-            materialIcon={RocketLaunchIcon}
+            iconName="rocket_launch"
             title="Product Designer"
             date="2023 – Present"
             location="Helsinki, Finland"

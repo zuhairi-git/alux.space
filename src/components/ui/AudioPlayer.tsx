@@ -7,6 +7,7 @@ import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { durationSeconds, delaySeconds, Button } from '@/design-system';
 import Badge from '@/components/ui/Badge';
+import Icon from '@/components/ui/Icon';
 
 interface AudioPlayerProps {
   src: string;
@@ -35,6 +36,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
   const [showPreview, setShowPreview] = useState(false);
   const [previewTime, setPreviewTime] = useState(0);
   const [bufferedRanges, setBufferedRanges] = useState<{start: number, end: number}[]>([]);
+  const [isMuted, setIsMuted] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState<{
     position: 'top' | 'bottom' | 'left' | 'right';
     alignment: 'start' | 'center' | 'end';
@@ -212,6 +214,14 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
     console.log(`AudioPlayer: Changing playback rate from ${playbackRate}x to ${newRate}x`);
     audioRef.current.playbackRate = newRate;
     setPlaybackRate(newRate);
+  };
+
+  const toggleMute = () => {
+    if (!audioRef.current || loadError) return;
+    const newMuted = !isMuted;
+    audioRef.current.muted = newMuted;
+    setIsMuted(newMuted);
+    console.log(`AudioPlayer: ${newMuted ? 'Muted' : 'Unmuted'}`);
   };
 
   // Expose audio control functions via ref
@@ -765,28 +775,27 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               transition={{ duration: 2, repeat: Infinity }}
             />
             
-            <AnimatePresence mode="wait">              {isPlaying ? (                <motion.svg 
+            <AnimatePresence mode="wait">
+              {isPlaying ? (
+                <motion.div
                   key="pause"
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
                   exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-10 h-10' : 'w-7 h-7'} text-white relative z-20 drop-shadow-sm podcast-icon-enhance`} 
-                  fill="currentColor" 
-                  viewBox="0 0 20 20"
+                  className="relative z-20"
                 >
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                </motion.svg>
-              ) : (                <motion.svg 
+                  <Icon name="pause" size="lg" className="text-white" />
+                </motion.div>
+              ) : (
+                <motion.div
                   key="play"
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
                   exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-10 h-10' : 'w-7 h-7'} text-white relative z-20 drop-shadow-sm podcast-icon-enhance`} 
-                  fill="currentColor" 
-                  viewBox="0 0 20 20"
+                  className="relative z-20"
                 >
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                </motion.svg>
+                  <Icon name="play_arrow" size="lg" className="text-white" />
+                </motion.div>
               )}
             </AnimatePresence>
             
@@ -816,15 +825,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               onTouchStart={() => setIsTouching(true)}
               onTouchEnd={() => setIsTouching(false)}
             >
-              <motion.svg 
-                className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5'} drop-shadow-sm`} 
-                fill="currentColor" 
-                viewBox="0 0 20 20"
-                whileHover={!isMobile && !animationsDisabled ? { rotate: 90 } : {}}
-                transition={{ duration: durationSeconds.normal }}
-              >
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
-              </motion.svg>
+              <Icon name="stop" size="sm" />
             </motion.button>
             
             {/* Playback rate - Enhanced for mobile */}            <motion.button
@@ -860,17 +861,9 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 aria-label={t('blog.aria.shareAudio')}
                 data-share-menu
                 onTouchStart={() => setIsTouching(true)}
-                onTouchEnd={() => setIsTouching(false)}              ><motion.svg 
-                  className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5'} drop-shadow-sm`} 
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  animate={animationsDisabled ? {} : { rotate: showShareMenu ? 15 : 0 }}
-                  transition={{ duration: durationSeconds.normal }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                </motion.svg>
-              </motion.button>              {/* Enhanced share menu with screen-aware positioning */}              <AnimatePresence>
+                onTouchEnd={() => setIsTouching(false)}              >
+                 <Icon name="share" size="sm" />
+               </motion.button>              {/* Enhanced share menu with screen-aware positioning */}              <AnimatePresence>
                 {showShareMenu && (
                   <>
                     {/* Invisible backdrop for better layering */}
@@ -1056,7 +1049,21 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                     </motion.div>
                   </>
                 )}
-              </AnimatePresence>            </div>
+               </AnimatePresence>            </div>
+
+            {/* Volume control button - Matching image */}
+            <motion.button
+              onClick={toggleMute}
+              whileTap={animationsDisabled ? {} : { scale: 0.9 }}
+              whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
+              className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-12 h-12'} flex items-center justify-center rounded-full bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] border border-[var(--player-ctrl-border)] text-[var(--player-ctrl-text)] hover:text-[var(--player-ctrl-text-hover)] shadow-sm hover:shadow-md backdrop-blur-md transition-all duration-200 relative z-10`}
+              disabled={loadError}
+              aria-label={isMuted ? "Unmute" : "Mute"}
+              onTouchStart={() => setIsTouching(true)}
+              onTouchEnd={() => setIsTouching(false)}
+            >
+              <Icon name={isMuted ? 'volume_off' : 'volume_up'} size="sm" />
+            </motion.button>
           </div>
         </div>        {/* Enhanced time display with duration counter - Desktop only */}
         {!isMobile && (

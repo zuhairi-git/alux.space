@@ -1003,13 +1003,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <svg className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5 md:w-6 md:h-6'} text-[var(--player-accent)] drop-shadow-sm podcast-icon-enhance`} fill="currentColor" viewBox="0 0 20 20" style={{ 
-              filter: 'contrast(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
-              stroke: isMobile ? 'var(--player-accent)' : 'none',
-              strokeWidth: isMobile ? '0.3' : '0'
-            }}>
-              <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
-            </svg>
+            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--player-accent)]`}>skip_previous</span>
           </motion.button>
 
           {/* Play/Pause - Central button - Enhanced for mobile */}
@@ -1042,39 +1036,28 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             }}
           >
             <AnimatePresence mode="wait">
-              {isPlaying ? (                <motion.svg 
+              {isPlaying ? (
+                <motion.span
                   key="pause"
+                  className="material-symbols text-white"
+                  style={{ fontSize: isMobile ? '40px' : '32px' }}
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
                   exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-12 h-12' : 'w-8 h-8 md:w-10 md:h-10'} text-white drop-shadow-md podcast-icon-enhance`} 
-                  fill="currentColor" 
-                  viewBox="0 0 24 24"
-                  style={{ 
-                    filter: 'contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
-                    stroke: isMobile ? 'rgba(255,255,255,0.8)' : 'none',
-                    strokeWidth: isMobile ? '0.5' : '0'
-                  }}
                 >
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-                </motion.svg>
+                  pause
+                </motion.span>
               ) : (
-                <motion.svg 
+                <motion.span
                   key="play"
+                  className="material-symbols text-white"
+                  style={{ fontSize: isMobile ? '40px' : '64px' }}
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
                   exit={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
-                  className={`${isMobile ? 'w-12 h-12' : 'w-8 h-8 md:w-10 md:h-10'} text-white drop-shadow-md podcast-icon-enhance`} 
-                  fill="currentColor" 
-                  viewBox="0 0 24 24"
-                  style={{ 
-                    filter: 'contrast(1.3) brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
-                    stroke: isMobile ? 'rgba(255,255,255,0.8)' : 'none',
-                    strokeWidth: isMobile ? '0.5' : '0'
-                  }}
                 >
-                  <path d="M8 5v14l11-7z"/>
-                </motion.svg>
+                  play_arrow
+                </motion.span>
               )}
             </AnimatePresence>
           </motion.button>          {/* Next - Enhanced for mobile */}
@@ -1092,13 +1075,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <svg className={`${isMobile ? 'w-7 h-7' : 'w-5 h-5 md:w-6 md:h-6'} text-[var(--player-accent)] drop-shadow-sm podcast-icon-enhance`} fill="currentColor" viewBox="0 0 20 20" style={{ 
-              filter: 'contrast(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
-              stroke: isMobile ? 'var(--player-accent)' : 'none',
-              strokeWidth: isMobile ? '0.3' : '0'
-            }}>
-              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
-            </svg>
+            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--player-accent)]`}>skip_next</span>
           </motion.button>
         </div>        {/* Secondary controls row - Enhanced for mobile */}
         <div className={`flex items-center justify-center ${isMobile ? 'gap-4' : 'gap-3'}`}>
@@ -1145,20 +1122,13 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <motion.svg 
-              className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} drop-shadow-sm`}
-              fill="currentColor"
-              viewBox="0 0 20 20"
+            <motion.span
+              className={`material-symbols ${isMobile ? 'text-xl' : 'text-lg'}`}
               animate={animationsDisabled ? {} : { rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.2 }}
-              style={{ 
-                filter: 'contrast(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.2))',
-                stroke: isMobile ? 'rgba(0,0,0,0.1)' : 'none',
-                strokeWidth: isMobile ? '0.2' : '0'
-              }}
             >
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-            </motion.svg>
+              expand_more
+            </motion.span>
           </motion.button>
 
           {/* Stop - Enhanced for mobile */}
@@ -1174,13 +1144,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <svg className={`${isMobile ? 'w-4 h-4' : 'w-3 h-3'} drop-shadow-sm`} fill="currentColor" viewBox="0 0 20 20" style={{ 
-              filter: 'contrast(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.2))',
-              stroke: isMobile ? 'rgba(0,0,0,0.1)' : 'none',
-              strokeWidth: isMobile ? '0.2' : '0'
-            }}>
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
-            </svg>
+            <span className={`material-symbols ${isMobile ? 'text-xl' : 'text-lg'}`}>stop</span>
           </motion.button>
 
           {/* Mute - Enhanced for mobile */}
@@ -1206,8 +1170,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`${isMobile ? 'text-sm' : 'text-xs'} font-semibold drop-shadow-sm`} style={{ filter: 'contrast(1.1)' }}>
-              {audioRef.current?.muted ? '🔇' : '🔊'}
+            <span className={`material-symbols ${isMobile ? 'text-xl' : 'text-lg'} drop-shadow-sm`}>
+              {audioRef.current?.muted ? 'volume_off' : 'volume_up'}
             </span>
           </motion.button>
         </div>

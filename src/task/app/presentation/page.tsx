@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Icon from '@/components/ui/Icon';
 import { exportToWord, exportToPowerPoint, exportToPDF } from './exportUtils';
 
 // Slide Components
@@ -976,7 +977,7 @@ export default function Presentation() {
             disabled={currentSlide === 0}
             className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-gray-50 text-gray-800 border border-gray-200"
           >
-            <span className="material-symbols text-2xl" aria-hidden="true">chevron_left</span>
+            <Icon name="chevron_left" size="lg" />
           </button>
 
           {/* Progress Indicator */}
@@ -999,7 +1000,7 @@ export default function Presentation() {
             disabled={currentSlide === slides.length - 1}
             className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-gray-50 text-gray-800 border border-gray-200"
           >
-            <span className="material-symbols text-2xl" aria-hidden="true">chevron_right</span>
+            <Icon name="chevron_right" size="lg" />
           </button>
         </div>
       )}

@@ -4,7 +4,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
-import { palette } from '@/design-system';
 import type { Theme } from '@/context/ThemeContext';
 import Icon from '@/components/ui/Icon';
 
@@ -1321,7 +1320,7 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
                             return (
                                 <div key={day} className="flex-1 flex flex-col items-center group relative">
                                     <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.06, ease: "easeOut" }}
-                                        whileHover={{ backgroundColor: isLight ? palette.ember.DEFAULT : palette.ember.dark }}
+                                        whileHover={{ backgroundColor: isLight ? 'var(--color-ember)' : 'var(--color-ember-dark)' }}
                                         className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-ember)]/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
                                     <span className="text-xs font-bold mt-3 opacity-50">{day}</span>
 
@@ -1617,23 +1616,14 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                 ? 'bg-[var(--color-colorful-bg)] text-white'
                 : 'bg-[var(--color-dark-1)] text-white';
 
-    const muted = selectedTheme === 'light' ? 'text-slate-500' : 'text-white/50';
-    const headingClass = selectedTheme === 'light' ? 'text-slate-900' : 'text-white';
+    const muted = 'text-[var(--muted-foreground)]';
+    const headingClass = 'text-[var(--foreground)]';
 
-    const cardClass =
-        selectedTheme === 'light'
-            ? 'bg-white border border-slate-200/80 shadow-sm'
-            : selectedTheme === 'colorful'
-                ? 'bg-white/[0.06] border border-[var(--color-ember)]/15'
-                : 'bg-white/[0.05] border border-white/[0.07]';
+    const cardClass = selectedTheme === 'light'
+        ? 'bg-white border border-[var(--card-border)] shadow-sm'
+        : 'bg-[var(--primary)]/[0.05] border border-[var(--card-border)]';
 
-    const accentGradient = selectedTheme === 'colorful'
-        ? 'from-[var(--color-ember)] to-[var(--color-purple-700)]'
-        : selectedTheme === 'light'
-            ? 'from-[var(--color-blue-vivid)] to-[var(--color-indigo-600)]'
-            : 'from-[var(--color-indigo-400)] to-[var(--color-indigo-600)]';
-
-    const accentColor = selectedTheme === 'colorful' ? palette.ember.DEFAULT : selectedTheme === 'light' ? palette.blue.vivid : palette.indigo[400];
+    const accentGradient = 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]';
 
     const handleNext = () => {
         if (isLast) {
@@ -1659,14 +1649,13 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
             {/* ── DESKTOP SPLIT LAYOUT ── */}
             <div className="hidden md:flex flex-1 min-h-0">
                 {/* Left panel — fixed hero */}
-                <div className={`w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative ${selectedTheme === 'light' ? 'border-r border-slate-200/60' : selectedTheme === 'colorful' ? 'border-r border-[var(--color-ember)]/20' : 'border-r border-white/[0.06]'}`}>
+                <div className="w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative border-r border-[var(--card-border)]">
                     <motion.div
                         key={selectedTheme + '-icon'}
                         initial={{ scale: 0.7, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                         className={`w-24 h-24 rounded-[30px] bg-gradient-to-br ${accentGradient} flex items-center justify-center mb-8 shadow-2xl`}
-                        style={{ boxShadow: `0 24px 72px ${accentColor}50` }}
                     >
                         <Icon name="blur_on" className="text-white text-[48px]" />
                     </motion.div>
@@ -1696,7 +1685,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 animate={{ width: i === step ? '2rem' : '0.5rem', opacity: i <= step ? 1 : 0.3 }}
                                 transition={{ duration: 0.3 }}
                                 className="h-1.5 rounded-full"
-                                style={{ backgroundColor: accentColor }}
+                                style={{ backgroundColor: 'var(--primary)' }}
                             />
                         ))}
                     </div>
@@ -1708,13 +1697,13 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 key={s.id}
                                 onClick={() => { setDirection(i > step ? 1 : -1); setStep(i); }}
                                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-sm font-medium transition-all ${i === step
-                                    ? (selectedTheme === 'light' ? 'bg-white shadow-sm border border-slate-200' : selectedTheme === 'colorful' ? 'bg-white/10 border border-ds-ember/30' : 'bg-white/10 border border-white/10')
-                                    : (selectedTheme === 'light' ? 'text-slate-400 hover:bg-white/60' : 'text-white/40 hover:bg-white/5')
+                                    ? 'bg-[var(--primary)]/15 border border-[var(--primary)]/25 text-[var(--primary)]'
+                                    : 'text-[var(--muted-foreground)] hover:bg-[var(--primary)]/8'
                                 }`}
                             >
-                                <Icon name={s.icon} className={`text-[18px] ${i === step ? '' : 'opacity-40'}`} style={i === step ? { color: accentColor } as React.CSSProperties : {}} />
+                                <Icon name={s.icon} className={`text-[18px] ${i === step ? 'text-[var(--primary)]' : 'opacity-40'}`} />
                                 <span className={i === step ? 'font-bold' : ''}>{s.title}</span>
-                                {i < step && <Icon name="check" className="ml-auto text-[16px]" style={{ color: accentColor } as React.CSSProperties} />}
+                                {i < step && <Icon name="check" className="ml-auto text-[16px] text-[var(--primary)]" />}
                             </button>
                         ))}
                     </div>
@@ -1728,7 +1717,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             {step === 0 && (
                                 <motion.div key="portal-step0" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
-                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-[var(--color-blue-vivid)]/8 text-[var(--color-blue-vivid)]' : selectedTheme === 'colorful' ? 'bg-[var(--color-ember)]/15 text-[var(--color-ember-light)]' : 'bg-[var(--color-indigo-400)]/15 text-[var(--color-indigo-400)]'}`}>
+                                        <span className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
                                             <Icon name="waving_hand" className="text-[14px]" />
                                             Welcome to the Portal
                                         </span>
@@ -1771,7 +1760,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             {step === 1 && (
                                 <motion.div key="portal-step1" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-violet-50 text-violet-600' : selectedTheme === 'colorful' ? 'bg-[var(--color-ember)]/15 text-[var(--color-ember-light)]' : 'bg-violet-500/15 text-violet-300'}`}>
+                                        <span className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
                                             <Icon name="auto_awesome" className="text-[14px]" />
                                             AI Copilot
                                         </span>
@@ -1809,7 +1798,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             {step === 2 && (
                                 <motion.div key="portal-step2" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-green-600/5 text-ds-success' : selectedTheme === 'colorful' ? 'bg-[var(--color-ember)]/15 text-[var(--color-ember-light)]' : 'bg-green-500/15 text-green-400'}`}>
+                                        <span className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
                                             <Icon name="grid_view" className="text-[14px]" />
                                             8 Sections
                                         </span>
@@ -1844,7 +1833,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             {step === 3 && (
                                 <motion.div key="portal-step3" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-                                        <span className={`inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full ${selectedTheme === 'light' ? 'bg-pink-50 text-pink-600' : selectedTheme === 'colorful' ? 'bg-[var(--color-ember)]/15 text-[var(--color-ember-light)]' : 'bg-pink-500/15 text-pink-300'}`}>
+                                        <span className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest mb-4 px-3 py-1.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
                                             <Icon name="palette" className="text-[14px]" />
                                             Appearance
                                         </span>
@@ -1866,28 +1855,15 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: i * 0.1 + 0.1 }}
                                                     onClick={() => setSelectedTheme(t.v)}
-                                                    className={`w-full flex items-center gap-5 p-5 rounded-2xl border-2 transition-all duration-200 text-left ${selected
-                                                        ? (selectedTheme === 'light' ? 'border-[var(--color-blue-vivid)] bg-[var(--color-blue-vivid)]/5' : selectedTheme === 'colorful' ? 'border-[var(--color-ember)] bg-[var(--color-ember)]/10' : 'border-[var(--color-indigo-400)] bg-[var(--color-indigo-400)]/10')
-                                                        : (selectedTheme === 'light' ? 'border-slate-200 bg-white hover:border-slate-300' : selectedTheme === 'colorful' ? 'border-white/10 bg-white/5 hover:border-white/20' : 'border-white/8 bg-white/[0.03] hover:border-white/15')
+                                                    className={`w-full flex items-center gap-5 p-5 rounded-2xl border-2 transition-all duration-200 text-left ${
+                                                        selected
+                                                            ? 'border-[var(--primary)] bg-[var(--primary)]/10'
+                                                            : 'border-[var(--card-border)] bg-[var(--primary)]/[0.02] hover:border-[var(--primary)]/40'
                                                     }`}
                                                 >
-                                                    {/* Swatch */}
-                                                    <div className={`w-[80px] h-[52px] rounded-xl ${t.bg} shrink-0 flex flex-col justify-between p-2.5 shadow-md overflow-hidden relative`}>
-                                                        <div className="flex items-center gap-1.5">
-                                                            <div className="w-4 h-4 rounded-md bg-white/20" />
-                                                            <div className="flex-1 h-1.5 rounded-full bg-white/15" />
-                                                        </div>
-                                                        <div className="space-y-1">
-                                                            <div className="h-1.5 rounded-full bg-white/25 w-full" />
-                                                            <div className="h-1.5 rounded-full bg-white/15 w-2/3" />
-                                                        </div>
-                                                        {t.v === 'colorful' && <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-ember)]/30 to-[var(--color-purple-700)]/20 rounded-xl" />}
-                                                        {t.v === 'light' && <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-xl" />}
-                                                    </div>
-
                                                     <div className="flex-1">
                                                         <div className="flex items-center gap-2 mb-1">
-                                                            <Icon name={t.icon} className="text-[18px]" style={selected ? { color: accentColor } as React.CSSProperties : {}} />
+                                                            <Icon name={t.icon} className={`text-[18px] ${selected ? 'text-[var(--primary)]' : ''}`} />
                                                             <span className="font-bold text-[16px]">{t.label}</span>
                                                         </div>
                                                         <p className={`text-[13px] ${muted}`}>{t.desc}</p>
@@ -1897,7 +1873,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                         animate={{ scale: selected ? 1 : 0, opacity: selected ? 1 : 0 }}
                                                         transition={{ type: 'spring', stiffness: 400, damping: 22 }}
                                                     >
-                                                        <Icon name="check_circle" className="text-[28px]" style={{ color: accentColor } as React.CSSProperties} />
+                                                        <Icon name="check_circle" className="text-[28px] text-[var(--primary)]" />
                                                     </motion.div>
                                                 </motion.button>
                                             );
@@ -1918,7 +1894,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                     </div>
 
                     {/* Desktop bottom bar */}
-                    <div className={`px-10 xl:px-16 py-6 flex items-center justify-between border-t ${selectedTheme === 'light' ? 'border-slate-200/60' : selectedTheme === 'colorful' ? 'border-[var(--color-ember)]/20' : 'border-white/[0.06]'}`}>
+                    <div className="px-10 xl:px-16 py-6 flex items-center justify-between border-t border-[var(--card-border)]">
                         <div className={`text-sm ${muted}`}>
                             Step {step + 1} of {TOTAL}
                         </div>
@@ -1928,7 +1904,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     onClick={handleBack}
-                                    className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all ${selectedTheme === 'light' ? 'bg-slate-100 text-slate-700 hover:bg-slate-200' : 'bg-white/10 text-white hover:bg-white/15'}`}
+                                    className="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[var(--primary)]/8 text-[var(--primary)] hover:bg-[var(--primary)]/12"
                                 >
                                     Back
                                 </motion.button>
@@ -1937,7 +1913,6 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 onClick={handleNext}
                                 whileTap={{ scale: 0.97 }}
                                 className={`px-8 py-3 rounded-2xl font-bold text-sm text-white flex items-center gap-2 bg-gradient-to-r ${accentGradient} shadow-lg transition-all`}
-                                style={{ boxShadow: `0 8px 28px ${accentColor}40` }}
                             >
                                 {isLast ? (
                                     <>
@@ -1966,7 +1941,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             animate={{ width: i === step ? '1.75rem' : '0.5rem' }}
                             transition={{ duration: 0.3 }}
                             className="h-1.5 rounded-full"
-                            style={{ backgroundColor: i <= step ? accentColor : 'var(--stepper-inactive-color)' }}
+                            style={{ backgroundColor: i <= step ? 'var(--primary)' : 'var(--stepper-inactive-color)' }}
                         />
                     ))}
                 </div>
@@ -1978,8 +1953,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             <motion.div key="m-step0" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
                                 className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
                                 <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, type: 'spring', stiffness: 260, damping: 18 }}
-                                    className={`w-20 h-20 rounded-[26px] bg-gradient-to-br ${accentGradient} flex items-center justify-center mb-7 shadow-2xl`}
-                                    style={{ boxShadow: `0 20px 60px ${accentColor}50` }}>
+                                    className={`w-20 h-20 rounded-[26px] bg-gradient-to-br ${accentGradient} flex items-center justify-center mb-7 shadow-2xl`}>
                                     <Icon name="blur_on" className="text-white text-[40px]" />
                                 </motion.div>
                                 <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className={`text-[26px] font-extrabold tracking-tight mb-3 ${headingClass}`}>Workflow Portal</motion.h1>
@@ -2020,7 +1994,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 <div className="space-y-2.5">
                                     {PORTAL_FEATURES.map((f, i) => (
                                         <motion.div key={i} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 + 0.1, type: 'spring', stiffness: 340, damping: 26 }} className={`flex items-center gap-4 p-4 rounded-2xl ${cardClass}`}>
-                                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`} style={{ boxShadow: `0 4px 12px ${accentColor}35` }}><Icon name={f.icon} className="text-white text-[16px]" /></div>
+                                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}><Icon name={f.icon} className="text-white text-[16px]" /></div>
                                             <div>
                                                 <div className="font-bold text-[14px]">{f.label}</div>
                                                 <div className={`text-[12px] ${muted}`}>{f.desc}</div>
@@ -2043,22 +2017,20 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                         const selected = selectedTheme === t.v;
                                         return (
                                             <motion.button key={t.v} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 + 0.1 }} onClick={() => setSelectedTheme(t.v)}
-                                                className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all active:scale-[0.98] ${selected ? '' : (selectedTheme === 'light' ? 'border-gray-100 bg-white' : 'border-white/8 bg-white/[0.05]')}`}
-                                                style={selected ? { borderColor: accentColor, backgroundColor: `${accentColor}12` } : {}}>
-                                                <div className={`w-12 h-12 rounded-xl ${t.bg} flex flex-col justify-between p-2 shadow shrink-0 overflow-hidden relative`}>
-                                                    <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-white/20" /><div className="flex-1 h-1.5 rounded-full bg-white/15" /></div>
-                                                    <div className="space-y-1"><div className="h-1.5 rounded-full bg-white/25 w-full" /><div className="h-1.5 rounded-full bg-white/15 w-3/4" /></div>
-                                                    {t.v === 'colorful' && <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-ember)]/30 to-[var(--color-purple-700)]/20 rounded-xl" />}
-                                                </div>
+                                                className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all active:scale-[0.98] ${
+                                                    selected
+                                                        ? 'border-[var(--primary)] bg-[var(--primary)]/10'
+                                                        : 'border-[var(--card-border)] bg-[var(--primary)]/[0.02] hover:border-[var(--primary)]/40'
+                                                }`}>
                                                 <div className="flex-1 text-left">
                                                     <div className="flex items-center gap-2 mb-0.5">
-                                                        <Icon name={t.icon} className="text-[18px]" style={selected ? { color: accentColor } as React.CSSProperties : {}} />
+                                                        <Icon name={t.icon} className={`text-[18px] ${selected ? 'text-[var(--primary)]' : ''}`} />
                                                         <span className="font-bold text-[15px]">{t.label}</span>
                                                     </div>
                                                     <p className={`text-[12px] ${muted}`}>{t.desc}</p>
                                                 </div>
                                                 <motion.div animate={{ scale: selected ? 1 : 0, opacity: selected ? 1 : 0 }} transition={{ type: 'spring', stiffness: 400, damping: 22 }}>
-                                                    <Icon name="check_circle" className="text-[26px]" style={{ color: accentColor } as React.CSSProperties} />
+                                                    <Icon name="check_circle" className="text-[26px] text-[var(--primary)]" />
                                                 </motion.div>
                                             </motion.button>
                                         );
@@ -2073,13 +2045,12 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                 <div className="px-5 pb-10 pt-3 flex gap-3">
                     {step > 0 && (
                         <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} onClick={handleBack}
-                            className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedTheme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-white/10 text-white'}`}>
+                            className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--foreground)]/8 text-[var(--foreground)]">
                             <Icon name="arrow_back" className="text-[20px]" />
                         </motion.button>
                     )}
                     <motion.button layout onClick={handleNext} whileTap={{ scale: 0.97 }}
-                        className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white bg-gradient-to-r ${accentGradient} shadow-lg`}
-                        style={{ boxShadow: `0 8px 28px ${accentColor}45` }}>
+                        className={`flex-1 h-12 rounded-full flex items-center justify-center gap-2 font-bold text-[15px] text-white bg-gradient-to-r ${accentGradient} shadow-lg`}>
                         {isLast ? <><Icon name="rocket_launch" className="text-[18px]" />Launch Portal</> : <>Continue<Icon name="arrow_forward" className="text-[18px]" /></>}
                     </motion.button>
                 </div>

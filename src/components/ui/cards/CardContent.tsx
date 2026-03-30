@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Icon from '@/components/ui/Icon';
 
 interface CardContentProps {
   icon?: React.ReactNode;
@@ -27,17 +28,21 @@ const CardContent: React.FC<CardContentProps> = ({
 }) => {
   return (
     <div className="flex flex-col md:flex-row gap-6 items-start">
-      {icon && (
+      {icon && typeof icon === 'string' ? (
+        <div className={`p-3 rounded-lg ${iconClassName}`}>
+          <Icon name={icon} size="xl" />
+        </div>
+      ) : icon ? (
         <span className={`material-symbols text-3xl p-3 rounded-lg ${iconClassName}`}>
           {icon}
         </span>
-      )}
+      ) : null}
       
       <div className="flex-1">        <div className="flex flex-col md:flex-row justify-between mb-4">
           <h4 className={titleClassName}>{title}</h4>
           {date && (
             <span className="text-theme opacity-80 flex items-center gap-1 bg-primary/10 px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">
-              <span className="material-symbols text-sm">schedule</span>
+              <Icon name="schedule" size="xs" />
               {date}
             </span>
           )}
@@ -45,7 +50,7 @@ const CardContent: React.FC<CardContentProps> = ({
         
         {location && (
           <h5 className={subtitleClassName}>
-            <span className="material-symbols text-sm">location_on</span>
+            <Icon name="location_on" size="xs" />
             {location}
           </h5>
         )}

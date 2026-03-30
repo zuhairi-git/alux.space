@@ -71,14 +71,16 @@ const InteractiveSkillCard = ({
           : 'bg-blue-500/10 group-hover:bg-blue-500/20'
         }
       `}>
-          <span className={`material-symbols text-2xl text-[var(--accent-text)]`} aria-hidden="true">
-          {skill.title.toLowerCase().includes('leadership') ? 'groups' :
-           skill.title.toLowerCase().includes('strategy') ? 'lightbulb' :
-           skill.title.toLowerCase().includes('design') || skill.title.toLowerCase().includes('prototyp') ? 'palette' :
-           skill.title.toLowerCase().includes('research') || skill.title.toLowerCase().includes('tutkimus') ? 'science' :
-           skill.title.toLowerCase().includes('development') || skill.title.toLowerCase().includes('kehitys') ? 'code' :
-           'settings'}
-        </span>
+        <Icon 
+          name={skill.title.toLowerCase().includes('leadership') ? 'groups' :
+                skill.title.toLowerCase().includes('strategy') ? 'lightbulb' :
+                skill.title.toLowerCase().includes('design') || skill.title.toLowerCase().includes('prototyp') ? 'palette' :
+                skill.title.toLowerCase().includes('research') || skill.title.toLowerCase().includes('tutkimus') ? 'science' :
+                skill.title.toLowerCase().includes('development') || skill.title.toLowerCase().includes('kehitys') ? 'code' :
+                'settings'} 
+          size="lg"
+          className="text-[var(--accent-text)]"
+        />
       </div>
 
       {/* Content */}
@@ -299,7 +301,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)]"
             >
-              <span className="material-symbols text-xl text-[var(--primary)]" aria-hidden="true">auto_awesome</span>
+              <Icon name="auto_awesome" size="sm" className="text-[var(--primary)]" />
               <span className={`text-sm font-medium text-[var(--accent-text)]`}>
                 {locale === 'fi' ? 'PERUSTUKSEN RAKENTAMINEN' : 'FOUNDATION BUILDING'}
               </span>
@@ -336,7 +338,7 @@ export default function Home() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className={`p-3 rounded-xl bg-[var(--primary)]/15 text-[var(--accent-text)]`}>
-                  <span className="material-symbols text-2xl" aria-hidden="true">psychology</span>
+                  <Icon name="psychology" size="lg" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">
@@ -358,8 +360,8 @@ export default function Home() {
               className={`p-8 rounded-3xl border bg-[var(--card-from-bg)] border-[var(--card-border)]`}
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-xl bg-[var(--gradient-mid)]/15 text-[var(--accent-text-2)]`}>
-                  <span className="material-symbols text-2xl" aria-hidden="true">explore</span>
+                <div className={`p-3 rounded-xl bg-[var(--primary)]/15 text-[var(--accent-text)]`}>
+                  <Icon name="explore" size="lg" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">
@@ -404,12 +406,12 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center justify-center mb-6"
             >
-              <span aria-hidden="true" className={`
-                material-symbols text-4xl p-4 rounded-2xl
+              <div className={`
+                p-4 rounded-2xl
                 text-[var(--accent-text)] bg-[var(--primary)]/10 border border-[var(--card-border)]
               `}>
-                psychology
-              </span>
+                <Icon name="psychology" size="xl" />
+              </div>
             </motion.div>
             
             <motion.h3 
@@ -488,8 +490,7 @@ export default function Home() {
                     }`} />
 
                     {/* Icon */}
-                    <motion.div 
-                      className={`
+                      <div className={`
                         inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl mb-4 transition-all duration-300
                         ${theme === 'colorful'
                           ? 'bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20 group-hover:from-[var(--primary)]/30 group-hover:to-[var(--gradient-mid)]/30'
@@ -497,14 +498,9 @@ export default function Home() {
                           ? 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 group-hover:from-blue-500/30 group-hover:to-cyan-500/30'
                           : 'bg-gradient-to-br from-blue-100 to-indigo-100 group-hover:from-blue-200 group-hover:to-indigo-200'
                         }
-                      `}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <span aria-hidden="true" className="material-symbols text-2xl md:text-3xl text-[var(--accent-text)]">
-                        {item.icon}
-                      </span>
-                    </motion.div>
+                      `}>
+                        <Icon name={item.icon} size="lg" className="text-[var(--accent-text)]" />
+                      </div>
 
                     {/* Years */}
                     <div className="relative mb-2">
@@ -575,7 +571,7 @@ export default function Home() {
               whileTap={{ scale: 0.98 }}
             >
               {locale === 'fi' ? 'Tutustu portfolioon' : 'View Portfolio'}
-              <span className="material-symbols text-xl" aria-hidden="true">arrow_forward</span>
+              <Icon name="arrow_forward" size="sm" />
             </motion.a>
           </motion.div>
         </div>
@@ -592,15 +588,9 @@ export default function Home() {
 
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
-            <motion.span 
-              aria-hidden="true"
-              className="material-symbols inline-block text-3xl p-4 mb-5 rounded-full text-primary bg-primary/10"
-              initial={{ rotateY: 0 }}
-              animate={{ rotateY: 360 }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 8 }}
-            >
-              format_quote
-            </motion.span>
+            <div className="bg-primary/10 p-4 mb-5 rounded-full inline-block">
+              <Icon name="format_quote" size="lg" />
+            </div>
             <motion.h3 
               className="text-3xl text-center md:text-4xl font-bold"
               animate={{}}
