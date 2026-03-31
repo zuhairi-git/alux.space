@@ -655,7 +655,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     const colorMap: Record<string, string> = {
         green: isColorful ? 'bg-ds-success/20 text-ds-success border-ds-success/20' : isLight ? 'bg-ds-success/10 text-ds-success border-ds-success/20' : 'bg-ds-success/20 text-ds-success border-ds-success/20',
         blue: isColorful ? 'bg-ds-blue-500/20 text-ds-blue-400 border-ds-blue-500/20' : isLight ? 'bg-ds-blue-100 text-ds-blue-500 border-ds-blue-200' : 'bg-ds-blue-500/15 text-ds-blue-400 border-ds-blue-500/20',
-        purple: isColorful ? 'bg-primary/20 text-primary border-primary/20' : isLight ? 'bg-primary/10 text-ds-purple-500 border-primary/20' : 'bg-primary/15 text-primary border-primary/20',
+        purple: isColorful ? 'bg-primary/20 text-primary border-primary/20' : isLight ? 'bg-primary/10 text-primary border-primary/20' : 'bg-primary/15 text-primary border-primary/20',
     };
 
     return (

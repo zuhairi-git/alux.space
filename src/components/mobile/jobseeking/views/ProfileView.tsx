@@ -51,7 +51,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
     const analyticsStats = [
         { label: 'Profile Views', value: '142', icon: 'visibility', color: 'text-ds-cyan-400', bg: 'bg-ds-cyan-500/15' },
         { label: 'Applications', value: '7', icon: 'send', color: isColorful ? 'text-primary' : 'text-ds-blue-400', bg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
-        { label: 'Avg Match', value: '88%', icon: 'target', color: 'text-primary', bg: 'bg-ds-purple-500/15' },
+        { label: 'Avg Match', value: '88%', icon: 'target', color: 'text-primary', bg: 'bg-primary/15' },
     ];
 
     return (
@@ -103,7 +103,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 {[
                     { key: 'cv' as ActivePanel, icon: 'description', label: 'Update CV', grad: 'from-gradient-start to-gradient-mid', bg: isColorful ? 'from-primary/20 to-primary-dark/20' : 'from-ds-cyan-500/15 to-ds-blue-500/15' },
                     { key: 'shifts' as ActivePanel, icon: 'event', label: 'Shifts', grad: 'from-amber-500 to-amber-600', bg: 'from-amber-500/15 to-amber-600/15' },
-                    { key: 'analytics' as ActivePanel, icon: 'insights', label: 'Stats', grad: 'from-ds-purple-500 to-ds-fuchsia-500', bg: 'from-ds-purple-500/15 to-ds-fuchsia-500/15' },
+                    { key: 'analytics' as ActivePanel, icon: 'insights', label: 'Stats', grad: 'from-primary to-ds-fuchsia-500', bg: 'from-primary/15 to-ds-fuchsia-500/15' },
                 ].map((a, i) => (
                     <motion.button key={i} whileTap={{ scale: 0.94 }} onClick={() => setActivePanel(a.key)}
                         className={`flex flex-col items-center p-4 rounded-[20px] bg-gradient-to-br ${a.bg} border ${isLight ? 'border-black/5' : 'border-white/8'} active:brightness-110`}>
@@ -162,7 +162,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-5">
                 <div className="flex items-center justify-between mb-3 px-1">
                     <h3 className="text-[15px] font-bold">Analytics</h3>
-                    <button onClick={() => setActivePanel('analytics')} className={`text-[12px] font-bold ${isColorful ? 'text-ds-fuchsia-400' : isLight ? 'text-ds-purple-500' : 'text-primary'}`}>Details</button>
+                    <button onClick={() => setActivePanel('analytics')} className={`text-[12px] font-bold ${isColorful ? 'text-ds-fuchsia-400' : 'text-primary'}`}>Details</button>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                     {analyticsStats.map((s, i) => (
@@ -195,7 +195,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                 </div>
                                 <span className={`text-[16px] font-medium ${isLight ? 'text-gray-800' : 'text-gray-100'}`}>{t.label}</span>
                             </div>
-                            {themeMode === t.value && <Icon name="check" className={`text-[20px] ${theme.platform === 'ios' ? 'text-ds-blue-500' : 'text-ds-purple-500'}`} />}
+                            {themeMode === t.value && <Icon name="check" className={`text-[20px] ${theme.platform === 'ios' ? 'text-ds-blue-500' : 'text-primary'}`} />}
                         </button>
                     ))}
                 </div>
@@ -282,7 +282,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             {activePanel === 'analytics' && (
                                 <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
                                     <div className="flex items-center mb-5">
-                                        <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/15' : 'bg-ds-purple-500/20'}`}>
+                                        <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 bg-primary/15`}>
                                             <Icon name="insights" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-primary'}`} />
                                         </div>
                                         <h3 className="text-[18px] font-bold">My Analytics</h3>
@@ -292,7 +292,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                             { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', colorText: isColorful ? 'text-primary' : 'text-ds-cyan-400', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/15' },
                                             { label: 'Applications', value: '7', change: '+3 this week', icon: 'send', colorText: isColorful ? 'text-primary' : 'text-ds-blue-400', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
                                             { label: 'Interviews', value: '2', change: 'Active', icon: 'record_voice_over', colorText: 'text-green-400', colorBg: 'bg-ds-success/15' },
-                                            { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', colorText: isColorful ? 'text-primary' : 'text-primary', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-purple-500/15' },
+                                            { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', colorText: 'text-primary', colorBg: 'bg-primary/15' },
                                         ].map((s, i) => (
                                             <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
                                                 className={`p-3.5 rounded-2xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.05]'}`}>

@@ -87,7 +87,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
 
                     {/* Weekly Insights */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-ds-purple-500/5 border-b border-ds-purple-500/10' : 'bg-ds-purple-500/10 border-b border-ds-purple-500/15'}`}>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-primary/5 border-b border-primary/10' : 'bg-primary/10 border-b border-primary/15'}`}>
                             <Icon name="insights" className="text-[13px] text-primary" />
                             <span className={`text-[11px] font-bold uppercase tracking-wider text-primary`}>Weekly Insights</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>1d ago</span>

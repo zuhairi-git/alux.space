@@ -191,7 +191,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
         { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', color: isColorful ? 'text-primary' : 'text-ds-cyan-400', bg: isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/15' },
         { label: 'Applications', value: '7', change: '+3', icon: 'send', color: isColorful ? 'text-primary' : 'text-ds-blue-400', bg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
         { label: 'Interviews', value: '2', change: 'Ã¢â€ â€˜ new', icon: 'record_voice_over', color: 'text-green-400', bg: 'bg-ds-success/15' },
-        { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: isColorful ? 'text-primary' : 'text-primary', bg: isColorful ? 'bg-primary/15' : 'bg-ds-purple-500/15' },
+        { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: 'text-primary', bg: 'bg-primary/15' },
     ];
     const barData = [25, 50, 40, 66, 80, 72, 90];
     const barLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
@@ -326,7 +326,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
 
             {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Profile Score Hero Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-                className={`relative overflow-hidden rounded-[28px] p-5 mb-5 ${isColorful ? 'bg-gradient-to-br from-primary/20 to-primary-dark/20 border border-primary/20' : isLight ? 'bg-gradient-to-br from-ds-cyan-400/5 to-blue-50 border border-ds-cyan-400/15' : 'bg-gradient-to-br from-ds-cyan-400/50/15 via-ds-blue-500/10 to-ds-purple-500/10 border border-ds-cyan-500/15'}`}
+                className={`relative overflow-hidden rounded-[28px] p-5 mb-5 ${isColorful ? 'bg-gradient-to-br from-primary/20 to-primary-dark/20 border border-primary/20' : isLight ? 'bg-gradient-to-br from-ds-cyan-400/5 to-blue-50 border border-ds-cyan-400/15' : 'bg-gradient-to-br from-ds-cyan-400/50/15 via-ds-blue-500/10 to-primary/10 border border-ds-cyan-500/15'}`}
             >
                 {/* Decorative blobs */}
                 <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-ds-cyan-400/20 to-transparent rounded-bl-full pointer-events-none" />
