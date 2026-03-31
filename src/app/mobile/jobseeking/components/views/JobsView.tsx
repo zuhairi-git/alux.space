@@ -20,11 +20,11 @@ const JOB_ICONS: Record<string, string> = {
 };
 
 const JOBS = [
-    { title: 'Weekend Bartender', company: 'The Local Pub', location: '1.2 km away', wage: 'Ã¢â€šÂ¬14-16/h', match: 95, tag: 'High Match', type: 'Weekend' },
-    { title: 'Retail Assistant', company: 'Tech Store M', location: 'City Center', wage: 'Ã¢â€šÂ¬12.5/h', match: 88, tag: 'New', type: 'Retail' },
-    { title: 'Event Security', company: 'SafeGuard Co.', location: 'Stadium', wage: 'Ã¢â€šÂ¬16/h', match: 82, tag: '', type: 'Evening' },
-    { title: 'Tutor (Math)', company: 'Freelance', location: 'Remote', wage: 'Ã¢â€šÂ¬20/h', match: 75, tag: '', type: 'Remote' },
-    { title: 'Cafe Barista', company: 'Morning Brew', location: '0.8 km away', wage: 'Ã¢â€šÂ¬13/h', match: 91, tag: 'High Match', type: 'Weekend' },
+    { title: 'Weekend Bartender', company: 'The Local Pub', location: '1.2 km away', wage: '€14-16/h', match: 95, tag: 'High Match', type: 'Weekend' },
+    { title: 'Retail Assistant', company: 'Tech Store M', location: 'City Center', wage: '€12.5/h', match: 88, tag: 'New', type: 'Retail' },
+    { title: 'Event Security', company: 'SafeGuard Co.', location: 'Stadium', wage: '€16/h', match: 82, tag: '', type: 'Evening' },
+    { title: 'Tutor (Math)', company: 'Freelance', location: 'Remote', wage: '€20/h', match: 75, tag: '', type: 'Remote' },
+    { title: 'Cafe Barista', company: 'Morning Brew', location: '0.8 km away', wage: '€13/h', match: 91, tag: 'High Match', type: 'Weekend' },
 ];
 
 const FILTERS = ['All', 'Weekend', 'Evening', 'Remote', 'Retail'];
@@ -137,7 +137,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
             <AnimatePresence>
                 {selectedJob && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-50">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedJob(null)} />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setSelectedJob(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} p-6 pb-10 ${sheetBgClass}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
@@ -171,7 +171,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                         {[
                                             { label: 'Full Name', value: 'Ali Al-Zuhairi', icon: 'person' },
                                             { label: 'Phone', value: '+358 40 123 4567', icon: 'phone' },
-                                            { label: 'Available From', value: `${selectedJob.type} shifts Ã‚Â· Immediate`, icon: 'event_available' },
+                                            { label: 'Available From', value: `${selectedJob.type} shifts · Immediate`, icon: 'event_available' },
                                         ].map((f) => (
                                             <div key={f.label} className={`flex items-center px-4 py-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                                 <Icon name={f.icon} className="text-[16px] opacity-40 mr-3" />
@@ -216,7 +216,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <div className="flex items-center space-x-2"><Icon name="location_on" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.location}</span></div>
                                             <div className="flex items-center space-x-2"><Icon name="payments" className="text-[16px] opacity-50" /><span className="text-[13px] font-semibold">{selectedJob.wage}</span></div>
                                         </div>
-                                        <div className="flex items-center space-x-2"><Icon name="category" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.type} Ã‚Â· Part-time flexible</span></div>
+                                        <div className="flex items-center space-x-2"><Icon name="category" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.type} · Part-time flexible</span></div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-3">
                                         <button onClick={() => { onNav?.('copilot'); setSelectedJob(null); }}

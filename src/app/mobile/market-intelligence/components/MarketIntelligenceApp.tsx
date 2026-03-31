@@ -6,7 +6,7 @@ import { MobileIntroScreen, type MobileIntroConfig, iosTheme, androidTheme, getT
 
 const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
     appName: 'Market Intelligence',
-    tagline: 'Real-time market insights, AI-powered summaries, and personalised alerts Ã¢â‚¬â€ all in your pocket.',
+    tagline: 'Real-time market insights, AI-powered summaries, and personalised alerts — all in your pocket.',
     appIcon: 'candlestick_chart',
     accentGradient: 'from-primary to-primary-dark',
     aiTips: [
@@ -23,13 +23,13 @@ const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
         {
             icon: 'notifications_active',
             title: 'Set smart AI alerts',
-            body: 'Ask Copilot to monitor a ticker or theme Ã¢â‚¬â€ it will proactively surface breaking news and notable price moves just for you.',
+            body: 'Ask Copilot to monitor a ticker or theme — it will proactively surface breaking news and notable price moves just for you.',
         },
     ],
     features: [
         { icon: 'space_dashboard', label: 'Dashboard', desc: 'Live watchlist, AI briefing, and top market movers at a glance.' },
         { icon: 'show_chart', label: 'Markets', desc: 'Deep-dive into stocks, sectors, and macro trends with interactive charts.' },
-        { icon: 'auto_awesome', label: 'Copilot', desc: 'Conversational AI for research Ã¢â‚¬â€ ask follow-ups, compare companies, and more.' },
+        { icon: 'auto_awesome', label: 'Copilot', desc: 'Conversational AI for research — ask follow-ups, compare companies, and more.' },
         { icon: 'notifications', label: 'Alerts', desc: 'Customisable real-time alerts for price, volatility, and news events.' },
         { icon: 'person', label: 'My Space', desc: 'Manage your watchlist, app theme, and account preferences.' },
     ],
@@ -148,10 +148,10 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
     const isColorful = theme === 'colorful';
 
     const bgClass = isLight
-        ? (isIOS ? 'bg-ds-gray-100 text-black' : 'bg-ds-gray-50 text-ds-gray-900')
+        ? (isIOS ? 'bg-ds-gray-100 text-ds-gray-900' : 'bg-ds-gray-50 text-ds-gray-900')
         : isColorful
-            ? 'bg-ds-colorful-bg text-white'
-            : (isIOS ? 'bg-black text-white' : 'bg-ds-dark-1 text-ds-gray-200');
+            ? 'bg-ds-colorful-bg text-ds-gray-100'
+            : (isIOS ? 'bg-ds-dark-1 text-ds-gray-100' : 'bg-ds-dark-1 text-ds-gray-200');
 
     const headerTitles: Record<TabType, { sub: string, title: string }> = {
         dashboard: { sub: 'Welcome Back', title: 'Ali Al-Zuhairi' },
@@ -224,19 +224,19 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                         </motion.button>
                         <div className="flex flex-col justify-center">
                             <AnimatePresence mode="wait">
-                                <motion.span key={activeTab + "-sub"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? 'text-black/40' : 'text-white/40'}`}>
+                                <motion.span key={activeTab + "-sub"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>
                                     {headerTitles[activeTab].sub}
                                 </motion.span>
                             </AnimatePresence>
                             <AnimatePresence mode="wait">
-                                <motion.h1 key={activeTab + "-title"} variants={headerTitleVariants} initial="initial" animate="animate" exit="exit" className={`text-[18px] font-extrabold tracking-tight leading-none ${isLight ? 'text-black' : 'text-white'}`}>
+                                <motion.h1 key={activeTab + "-title"} variants={headerTitleVariants} initial="initial" animate="animate" exit="exit" className={`text-[18px] font-extrabold tracking-tight leading-none ${isLight ? 'text-ds-gray-900' : 'text-ds-gray-100'}`}>
                                     {headerTitles[activeTab].title}
                                 </motion.h1>
                             </AnimatePresence>
                         </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-primary/20 text-accent' : isIOS ? (isLight ? 'bg-black/5 text-black' : 'bg-white/10 text-white') : (isLight ? 'bg-primary-100/50 text-primary-900' : 'bg-primary-800/50 text-primary-200')}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
+                        <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-primary/20 text-accent' : isIOS ? (isLight ? 'bg-black/5 text-ds-gray-900' : 'bg-white/10 text-ds-gray-100') : (isLight ? 'bg-primary-100/50 text-primary-900' : 'bg-primary-800/50 text-primary-200')}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                             <Icon name="auto_awesome" className="text-[20px]" />
                             <span className="absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse shadow-sm" />
                         </motion.button>
@@ -260,11 +260,11 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
     );
 }
 
-// Views follow below Ã¢â‚¬â€ exported from same file for colocation
+// Views follow below — exported from same file for colocation
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 // DASHBOARD VIEW
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, onNavigate: (t: TabType) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
@@ -291,7 +291,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
 
     return (
         <motion.div initial="hidden" animate="show" variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-5">
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Portfolio Value Hero Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Portfolio Value Hero ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient accent line */}
                 <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r opacity-70 ${isColorful ? 'from-primary to-primary-dark' : isIOS ? 'from-primary to-primary-dark' : 'from-primary-500 to-primary-300'}`} />
@@ -336,7 +336,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ AI Morning Briefing Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── AI Morning Briefing ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient side accent */}
                 <div className={`absolute top-4 bottom-4 left-0 w-[3px] rounded-full ${isIOS ? 'bg-gradient-to-b from-primary to-primary-dark' : 'bg-gradient-to-b from-primary-500 to-primary-300'}`} />
@@ -354,7 +354,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Watchlist Carousel Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Watchlist Carousel ── */}
             <motion.div variants={fadeUp}>
                 <div className="flex justify-between items-center mb-3 px-1">
                     <h3 className={`font-bold text-base ${isIOS ? 'tracking-tight' : ''}`}>Watchlist</h3>
@@ -379,7 +379,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Market Movers Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Market Movers ── */}
             <motion.div variants={fadeUp} className={`p-5 ${card}`}>
                 <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-[15px]">Market Movers</h3>
@@ -405,7 +405,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Quick Actions Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Quick Actions ── */}
             <motion.div variants={fadeUp}>
                 <h3 className="font-bold text-base mb-3 px-1">Quick Actions</h3>
                 <div className="grid grid-cols-2 gap-3">
@@ -433,9 +433,9 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 // MARKETS VIEW
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onNavigate?: (t: TabType) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
@@ -479,7 +479,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
 
     return (
         <motion.div initial="hidden" animate="show" variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-5">
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Index Strip Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Index Strip ── */}
             <motion.div variants={fadeUp} className="flex space-x-3 overflow-x-auto scrollbar-none pb-1">
                 {indices.map((idx, i) => (
                     <motion.div key={idx.name} initial={{ opacity: 0, y: 20, scale: 0.85 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.1 + i * 0.1, type: 'spring', stiffness: 300, damping: 22 }}
@@ -496,7 +496,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                 ))}
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Featured Stock Chart Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Featured Stock Chart ── */}
             <motion.div variants={fadeUp} className={`p-5 ${card} relative overflow-hidden`}>
                 <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r opacity-50 ${isColorful ? 'from-primary to-primary-dark' : 'from-primary to-primary-dark'}`} />
                 <div className="flex items-center justify-between mb-4">
@@ -535,7 +535,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Sector Heatmap Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Sector Heatmap ── */}
             <motion.div variants={fadeUp}>
                 <h3 className="font-bold text-base mb-3 px-1">Sector Heatmap</h3>
                 <div className="grid grid-cols-3 gap-2">
@@ -556,7 +556,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬ Trending Tickers Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ── Trending Tickers ── */}
             <motion.div variants={fadeUp}>
                 <h3 className="font-bold text-base mb-3 px-1">Trending</h3>
                 <div className="space-y-2">
@@ -596,10 +596,10 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                     ];
                     return (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-50">
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} className="absolute inset-0 bg-black/50 backdrop-blur-md" onClick={() => setSelectedTicker(null)} />
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} className="absolute inset-0 bg-ds-dark-1/50 backdrop-blur-md" onClick={() => setSelectedTicker(null)} />
                             <motion.div initial={{ y: '100%', scale: 0.95, opacity: 0 }} animate={{ y: 0, scale: 1, opacity: 1 }} exit={{ y: '100%', scale: 0.95, opacity: 0 }} transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 1 }}
                                 className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-2') : (isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-3')}`}>
-                                {/* Drag handle Ã¢â‚¬â€ tap to expand */}
+                                {/* Drag handle — tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
                                     <div className="w-10 h-1 rounded-full bg-ds-gray-400/30" />
                                     <Icon name={tickerExpanded ? 'expand_more' : 'expand_less'} className="text-[14px] opacity-30 mt-1" />
@@ -624,7 +624,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                                 </div>
                                                 <div className={`p-3 rounded-2xl mb-3 flex items-center space-x-3 ${isLight ? 'bg-ds-success/10 border border-ds-success/10' : 'bg-ds-success/20 border border-ds-success/15'}`}>
                                                     <Icon name="bar_chart" className="text-ds-success text-[20px] shrink-0" />
-                                                    <div><span className="text-[11px] opacity-50 block">Analyst Consensus</span><span className="text-[14px] font-bold text-ds-success">{t.up ? 'Buy' : 'Hold'} Ã‚Â· {t.up ? '72%' : '54%'} bullish</span></div>
+                                                    <div><span className="text-[11px] opacity-50 block">Analyst Consensus</span><span className="text-[14px] font-bold text-ds-success">{t.up ? 'Buy' : 'Hold'} · {t.up ? '72%' : '54%'} bullish</span></div>
                                                 </div>
                                                 <div className={`p-3 rounded-2xl mb-4 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                                     <div className="flex items-center space-x-1.5 mb-1"><Icon name="auto_awesome" className="text-[14px] text-primary" /><span className="text-[11px] font-bold opacity-50">AI Insight</span></div>
@@ -639,7 +639,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                                 if (label === 'Ask AI') { setSelectedTicker(null); onNavigate?.('copilot'); }
                                                 if (label === 'Add Alert') { setAlertSet(t.ticker); setTimeout(() => setAlertSet(null), 2500); }
                                             }} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? 'bg-primary text-white' : label === 'Add Alert' && alertSet === t.ticker ? 'bg-ds-success text-white' : (isLight ? 'bg-ds-gray-100 text-ds-gray-800' : isColorful ? 'bg-white/10 text-white' : 'bg-white/10 text-white')}`}>
-                                                {label === 'Add Alert' && alertSet === t.ticker ? 'Ã¢Å“â€œ Alert Set' : label}
+                                                {label === 'Add Alert' && alertSet === t.ticker ? '✓ Alert Set' : label}
                                             </button>
                                         ))}
                                     </div>
@@ -653,9 +653,9 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 // COPILOT VIEW
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 function CopilotView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
@@ -704,7 +704,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
             ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg'
             : 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg';
     const botBubble = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
+        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-ds-gray-900 rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
         : isColorful ? (isLight ? 'bg-ds-violet-100/90 backdrop-blur-xl border border-primary/20 text-primary-dark rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-card-colorful-from/60 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm') : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl border border-primary-100/50 text-primary-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/40 text-primary-200 rounded-[22px] rounded-tl-sm shadow-sm');
     const inputArea = isIOS
         ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-primary/20' : 'bg-ds-dark-2/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
@@ -802,9 +802,9 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 // ALERTS VIEW
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
@@ -902,9 +902,9 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 // PROFILE VIEW
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTheme: (t: string) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
@@ -1051,9 +1051,9 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 // NAVIGATION
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════
 function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, setActiveTab: (t: TabType) => void, os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';

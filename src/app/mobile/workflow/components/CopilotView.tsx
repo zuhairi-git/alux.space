@@ -47,7 +47,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
                         <h3 className="font-bold text-xl mb-2">Collaboration Copilot</h3><p className={`text-[15px] text-center max-w-[260px] leading-relaxed ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>Ask about workspaces, team activity, sprint status, or design reviews.</p>
                     </motion.div>
                     <div className="w-full mt-auto pb-5 shrink-0">
-                        <label className={`text-[11px] font-bold uppercase tracking-widest mb-4 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
+                        <label className={`text-[11px] font-bold uppercase tracking-widest mb-4 block px-1 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>Suggested</label>
                         <div className="grid grid-cols-2 gap-3">
                             {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-left p-4 ${promptCardClass}`}><Icon name={p.icon} className={`mb-2 text-xl ${promptIconColor}`} /><span className="font-semibold text-[14px]">{p.label}</span></motion.button>))}
                         </div>

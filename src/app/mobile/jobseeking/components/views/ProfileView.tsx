@@ -57,7 +57,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
     return (
         <div className={`h-full w-full overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Profile Card Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── Profile Card ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible"
                 className={`${card} p-6 flex flex-col items-center mb-5 relative overflow-hidden`}>
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-ds-cyan-500/10 to-transparent pointer-events-none" />
@@ -98,7 +98,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Action Cards Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── Action Cards ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="grid grid-cols-3 gap-2.5 mb-5">
                 {[
                     { key: 'cv' as ActivePanel, icon: 'description', label: 'Update CV', grad: 'from-gradient-start to-gradient-mid', bg: 'from-primary/20 to-primary-dark/20' },
@@ -115,7 +115,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 ))}
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CV Preview Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── CV Preview ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-5">
                 <div className="flex items-center justify-between mb-3 px-1">
                     <h3 className="text-[15px] font-bold">CV Summary</h3>
@@ -131,7 +131,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Availability Preview Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── Availability Preview ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-5">
                 <div className="flex items-center justify-between mb-3 px-1">
                     <h3 className="text-[15px] font-bold">Availability</h3>
@@ -146,7 +146,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                     <span className={`w-8 text-[12px] font-bold ${isLight ? 'text-ds-gray-400' : 'text-white/30'}`}>{day}</span>
                                     <div className="flex gap-1.5 flex-1">
                                         {slots_.length === 0 ? (
-                                            <span className={`text-[11px] ${isLight ? 'text-ds-gray-300' : 'text-white/20'}`}>Ã¢â‚¬â€</span>
+                                            <span className={`text-[11px] ${isLight ? 'text-ds-gray-300' : 'text-white/20'}`}>—</span>
                                         ) : slots_.map((s, j) => (
                                             <span key={j} className={`px-2 py-0.5 rounded-lg text-[10px] font-bold text-white ${slotColors[s] ?? 'bg-ds-gray-500'}`}>{slotFull[s] ?? s}</span>
                                         ))}
@@ -158,7 +158,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Analytics Preview Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── Analytics Preview ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-5">
                 <div className="flex items-center justify-between mb-3 px-1">
                     <h3 className="text-[15px] font-bold">Analytics</h3>
@@ -177,7 +177,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ App Settings Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── App Settings ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-8">
                 <h3 className="text-[15px] font-bold tracking-wider uppercase opacity-60 mb-3 px-2">App Appearance</h3>
                 <div className={`${card} overflow-hidden`}>
@@ -201,11 +201,11 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                 </div>
             </motion.div>
 
-            {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Panel Sheets Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
+            {/* ─── Panel Sheets ─── */}
             <AnimatePresence>
                 {activePanel && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50">
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setActivePanel(null)} />
+                        <div className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setActivePanel(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 max-h-[88vh] overflow-y-auto no-scrollbar ${sheetBg}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />

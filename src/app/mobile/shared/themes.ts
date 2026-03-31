@@ -2,7 +2,7 @@
 
 import type { TabType } from './mobile-utils';
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Theme Interface Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// --- Theme Interface ---
 export interface MobileTheme {
     platform: 'android' | 'ios';
 
@@ -120,7 +120,7 @@ export interface MobileTheme {
     contentPaddingTop: string;
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Android Material Design 3 Expressive Theme (Android 16/17) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// --- Android Material Design 3 Expressive Theme ---
 export const androidTheme: MobileTheme = {
     platform: 'android',
     bg: {
@@ -223,12 +223,12 @@ export const androidTheme: MobileTheme = {
     contentPaddingTop: 'pt-[100px]',
 };
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ iOS 27 Liquid Glass Theme Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// --- iOS 27 Liquid Glass Theme ---
 export const iosTheme: MobileTheme = {
     platform: 'ios',
     bg: {
-        dark: 'bg-black text-white',
-        light: 'bg-ds-gray-100 text-black',
+        dark: 'bg-ds-dark-1 text-ds-gray-100',
+        light: 'bg-ds-gray-100 text-ds-gray-900',
         colorful: 'bg-[var(--color-colorful-bg)] text-white',
     },
     card: {
@@ -238,7 +238,7 @@ export const iosTheme: MobileTheme = {
     },
     header: {
         dark: 'bg-ds-dark-2/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/[0.06]',
-        light: 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/[0.04]',
+        light: 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-gray-900/[0.04]',
         colorful: 'bg-ds-card-colorful-from/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-primary/10',
     },
     nav: {
@@ -259,8 +259,8 @@ export const iosTheme: MobileTheme = {
         successLight: 'var(--color-success)',
         avatarGradient: 'bg-gradient-to-tr from-primary-500 to-primary-400',
         avatarBorder: (isLight) => isLight ? 'border-white/80 shadow-sm' : 'border-white/[0.08] shadow-md',
-        statusDot: (isLight) => isLight ? 'border-white bg-ds-success' : 'border-black bg-ds-success',
-        aiButton: (isLight) => isLight ? 'bg-black/[0.04] backdrop-blur-xl text-black' : 'bg-white/[0.08] backdrop-blur-xl text-white',
+        statusDot: (isLight) => isLight ? 'border-white bg-ds-success' : 'border-ds-dark-1 bg-ds-success',
+        aiButton: (isLight) => isLight ? 'bg-ds-gray-900/[0.04] backdrop-blur-xl text-ds-gray-900' : 'bg-white/[0.08] backdrop-blur-xl text-ds-gray-100',
         fallbackAvatar: '3b82f6',
     },
     radii: {
@@ -269,9 +269,9 @@ export const iosTheme: MobileTheme = {
     },
     copilot: {
         userBubble: 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg',
-        botBubble: (isLight) => isLight ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 text-black rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-2/60 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] text-white rounded-[22px] rounded-tl-sm shadow-sm',
+        botBubble: (isLight) => isLight ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 text-ds-gray-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-2/60 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] text-ds-gray-100 rounded-[22px] rounded-tl-sm shadow-sm',
         inputBar: (isLight) => isLight ? 'bg-ds-gray-100/80 backdrop-blur-xl rounded-t-[28px]' : 'bg-ds-dark-2/80 backdrop-blur-xl rounded-t-[28px]',
-        inputField: (isLight) => isLight ? 'bg-ds-gray-200/80 rounded-[18px] px-5 py-3 text-black' : 'bg-ds-dark-3/80 rounded-[18px] px-5 py-3 text-white',
+        inputField: (isLight) => isLight ? 'bg-ds-gray-200/80 rounded-[18px] px-5 py-3 text-ds-gray-900' : 'bg-ds-dark-3/80 rounded-[18px] px-5 py-3 text-ds-gray-100',
         promptCard: (isLight) => isLight ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 rounded-[16px]' : 'bg-ds-dark-2/60 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[16px]',
         promptIconColor: 'text-primary-500',
         citationCard: (isLight) => isLight ? 'bg-primary-500/8 backdrop-blur-xl border border-primary-500/10 rounded-[14px]' : 'bg-primary-500/15 backdrop-blur-xl border border-primary-500/10 rounded-[14px]',
@@ -303,7 +303,7 @@ export const iosTheme: MobileTheme = {
         engagementActiveBg: 'bg-primary-500',
         barGradients: ['from-primary-400 to-primary-600', 'from-primary-300 to-primary-500', 'from-ds-cyan-400 to-ds-cyan-500', 'from-ds-fuchsia-300 to-ds-fuchsia-700', 'from-ds-fuchsia-400 to-ds-fuchsia-600', 'from-ds-pink-400 to-ds-pink-500', 'from-ds-purple-400 to-ds-purple-600'],
         settingsBg: (isLight) => isLight ? 'bg-black/[0.04] backdrop-blur-lg' : 'bg-white/[0.06] backdrop-blur-lg',
-        modalBg: (isLight) => isLight ? 'bg-white/90 backdrop-blur-2xl' : 'bg-ds-dark-3/95 backdrop-blur-2xl text-white',
+        modalBg: (isLight) => isLight ? 'bg-white/90 backdrop-blur-2xl' : 'bg-ds-dark-3/95 backdrop-blur-2xl text-ds-gray-100',
         modalActiveItem: (isLight) => isLight ? 'bg-ds-gray-200/80' : 'bg-white/[0.08]',
         checkColor: 'text-primary-500',
     },

@@ -15,7 +15,7 @@ interface DashboardViewProps {
 
 type QuickActionKey = 'new-doc' | 'join-room' | 'schedule' | 'analytics' | null;
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ New Doc Sheet Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── New Doc Sheet ────────────────────────────────────────────────────────────
 function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean; isColorful: boolean; theme: MobileTheme; onClose: () => void }) {
     const [title, setTitle] = useState('');
     const [type, setType] = useState('Document');
@@ -69,12 +69,12 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
     void sheetBg;
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Join Room Sheet Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Join Room Sheet ──────────────────────────────────────────────────────────
 function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean; isColorful: boolean; theme: MobileTheme; onClose: () => void }) {
     const [code, setCode] = useState('');
     const [joined, setJoined] = useState(false);
     const liveRooms = [
-        { name: 'Design Review Ã¢â‚¬â€ DS v3', host: 'Sara K.', participants: 4, tag: 'Live', color: 'green' },
+        { name: 'Design Review — DS v3', host: 'Sara K.', participants: 4, tag: 'Live', color: 'green' },
         { name: 'Sprint Planning Q2', host: 'James L.', participants: 7, tag: 'Starting soon', color: 'amber' },
         { name: 'UX Research Debrief', host: 'Mia R.', participants: 3, tag: 'Live', color: 'blue' },
     ];
@@ -110,7 +110,7 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
                         </div>
                         <div className="flex-1 min-w-0">
                             <p className="text-[14px] font-semibold truncate">{room.name}</p>
-                            <p className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-white/40'}`}>{room.host} Ã‚Â· {room.participants} participants</p>
+                            <p className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-white/40'}`}>{room.host} · {room.participants} participants</p>
                         </div>
                         <span className={`text-[10px] font-bold px-2 py-1 rounded-lg shrink-0 ${colorMap[room.color]}`}>{room.tag}</span>
                     </motion.button>
@@ -128,7 +128,7 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
     void theme; void onClose;
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Schedule Sheet Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Schedule Sheet ───────────────────────────────────────────────────────────
 function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean; isColorful: boolean; theme: MobileTheme; onClose: () => void }) {
     const [step, setStep] = useState<'form' | 'success'>('form');
     const [title, setTitle] = useState('');
@@ -193,7 +193,7 @@ function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
     void theme; void onClose;
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Analytics Sheet Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Analytics Sheet ──────────────────────────────────────────────────────────
 function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isColorful: boolean; theme: MobileTheme }) {
     const stats = [
         { label: 'Active Workspaces', value: '12', change: '+2', positive: true, icon: 'workspaces' },
@@ -208,7 +208,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
             <div className="flex items-center mb-5">
                 <div>
                     <h3 className="text-[18px] font-bold">Platform Analytics</h3>
-                    <p className={`text-[11px] ${isLight ? 'text-ds-gray-400' : 'text-white/40'}`}>This week Ã‚Â· Updated just now</p>
+                    <p className={`text-[11px] ${isLight ? 'text-ds-gray-400' : 'text-white/40'}`}>This week · Updated just now</p>
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-2.5 mb-5">
@@ -249,7 +249,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
     void theme;
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Layout Mode Types Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Layout Mode Types ────────────────────────────────────────────────────────
 type LayoutMode = 'bento' | 'feed' | 'cards' | 'pulse';
 
 const layoutMeta: { key: LayoutMode; icon: string; label: string }[] = [
@@ -259,7 +259,7 @@ const layoutMeta: { key: LayoutMode; icon: string; label: string }[] = [
     { key: 'pulse', icon: 'blur_circular', label: 'Pulse' },
 ];
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Layout Picker Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Layout Picker ────────────────────────────────────────────────────────────
 function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
     active: LayoutMode; onChange: (m: LayoutMode) => void; isLight: boolean; isColorful: boolean; theme: MobileTheme;
 }) {
@@ -286,7 +286,7 @@ function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
     );
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Shared layout props Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Shared layout props ──────────────────────────────────────────────────────
 interface LayoutProps {
     card: string; isLight: boolean; isColorful: boolean; theme: MobileTheme;
     onNav: (t: TabType) => void; onAction: (a: QuickActionKey) => void;
@@ -299,9 +299,9 @@ const quickActionDefs = (theme: MobileTheme): { key: QuickActionKey; icon: strin
     { key: 'analytics', icon: 'analytics', label: 'Analytics', desc: 'View stats', color: theme.platform === 'android' ? 'from-ds-warning/20 to-primary/20' : 'from-primary/10 to-ds-warning/10 border-primary/20' },
 ];
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-// BENTO LAYOUT Ã¢â‚¬â€ Asymmetric grid with varied-size tiles
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════════════════════════
+// BENTO LAYOUT — Asymmetric grid with varied-size tiles
+// ═══════════════════════════════════════════════════════════════════════════════
 function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const d = theme.dashboard;
     const accent = isColorful ? 'text-primary' : d.briefingAccent(isLight);
@@ -310,7 +310,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
 
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, scale: 0.97 }} variants={stagger} className="space-y-3">
-            {/* AI Hero Ã¢â‚¬â€ full width */}
+            {/* AI Hero — full width */}
             <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-left p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
                 <div className={`absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-primary-500/10 to-primary/10 blur-2xl group-active:scale-110 transition-transform`} />
                 <div className="flex items-center space-x-2.5 mb-3 relative z-10">
@@ -319,22 +319,22 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                     <span className="ml-auto text-[10px] font-medium opacity-30">Just now</span>
                 </div>
                 <p className={`text-[14px] leading-[1.7] relative z-10 ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>
-                    Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> Ã¢â‚¬â€ 14 docs updated, 3 design reviews completed. <span className="font-semibold">2 pending approvals</span> await.
+                    Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 docs updated, 3 design reviews completed. <span className="font-semibold">2 pending approvals</span> await.
                 </p>
                 <span className={`mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold ${isColorful ? 'text-primary' : d.followUpColor}`}>
                     Ask follow-up <Icon name="arrow_forward" className="text-[12px]" />
                 </span>
             </motion.button>
 
-            {/* Bento Grid Ã¢â‚¬â€ 4 columns, asymmetric tiles */}
+            {/* Bento Grid — 4 columns, asymmetric tiles */}
             <div className="grid grid-cols-4 gap-2.5">
-                {/* Workspace 1 Ã¢â‚¬â€ 2 cols, tall */}
+                {/* Workspace 1 — 2 cols, tall */}
                 <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 row-span-2 text-left p-4 ${card} active:scale-[0.97] transition-transform`}>
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
                         <Icon name={workspaces[0].icon} className={`text-xl ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
                     </div>
                     <span className="font-bold text-[14px] block mb-1">{workspaces[0].name.split(' ').slice(0, 2).join(' ')}</span>
-                    <span className={`text-[11px] block mb-3 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{workspaces[0].members} members Ã‚Â· {workspaces[0].docs} docs</span>
+                    <span className={`text-[11px] block mb-3 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{workspaces[0].members} members · {workspaces[0].docs} docs</span>
                     <Sparkline data={workspaces[0].data} color={theme.workspace.sparklineHigh} width={130} height={36} />
                     <div className="flex items-center justify-between mt-3">
                         <span className="text-[16px] font-bold">{workspaces[0].activity}%</span>
@@ -342,7 +342,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                     </div>
                 </motion.button>
 
-                {/* Workspace 2 Ã¢â‚¬â€ 2 cols, short */}
+                {/* Workspace 2 — 2 cols, short */}
                 <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
                     <div className="flex items-center gap-2.5 mb-2">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
@@ -356,7 +356,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                     <Sparkline data={workspaces[1].data} color={theme.workspace.sparklineMid} width={120} height={24} />
                 </motion.button>
 
-                {/* Workspace 3 Ã¢â‚¬â€ 2 cols, short */}
+                {/* Workspace 3 — 2 cols, short */}
                 <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
                     <div className="flex items-center gap-2.5 mb-2">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
@@ -371,7 +371,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 </motion.button>
             </div>
 
-            {/* Quick Action Capsules Ã¢â‚¬â€ horizontal scroll */}
+            {/* Quick Action Capsules — horizontal scroll */}
             <motion.div variants={fadeUp}>
                 <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {actions.map((a, i) => (
@@ -406,9 +406,9 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-// FEED LAYOUT Ã¢â‚¬â€ Classic vertical stream with rich cards
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════════════════════════
+// FEED LAYOUT — Classic vertical stream with rich cards
+// ═══════════════════════════════════════════════════════════════════════════════
 function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const d = theme.dashboard;
     const accent = isColorful ? 'text-primary' : d.briefingAccent(isLight);
@@ -424,7 +424,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
                     <span className={`text-[11px] font-bold uppercase tracking-widest ${accent}`}>AI Collaboration Briefing</span>
                 </div>
                 <p className={`text-[15px] leading-[1.75] ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>
-                    Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> Ã¢â‚¬â€ 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
+                    Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
                 </p>
                 <button onClick={() => onNav('copilot')} className={`mt-4 flex items-center space-x-2 text-[13px] font-semibold ${isColorful ? 'text-primary' : d.followUpColor}`}>
                     <span>Ask follow-up</span><Icon name="arrow_forward" className="text-sm" />
@@ -487,9 +487,9 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-// CARDS LAYOUT Ã¢â‚¬â€ Full-screen focus cards, one at a time
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════════════════════════
+// CARDS LAYOUT — Full-screen focus cards, one at a time
+// ═══════════════════════════════════════════════════════════════════════════════
 function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const [idx, setIdx] = useState(0);
     const d = theme.dashboard;
@@ -512,7 +512,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                             </div>
                         </div>
                         <p className={`text-[16px] leading-[1.8] ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>
-                            Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> Ã¢â‚¬â€ 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
+                            Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 documents updated, 3 design reviews completed. Sara&apos;s design system update needs your review. <span className="font-semibold">2 pending approvals</span> in the content pipeline.
                         </p>
                     </div>
                     <button onClick={() => onNav('copilot')} className={`mt-6 w-full py-4 rounded-2xl text-[15px] font-bold active:scale-[0.97] transition-transform ${isColorful ? 'bg-gradient-to-r from-primary to-primary-dark text-white' : theme.workspace.primaryButton}`}>
@@ -540,7 +540,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                                     </div>
                                     <div className="text-left">
                                         <span className="font-semibold text-[14px] block">{ws.name}</span>
-                                        <span className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{ws.members} members Ã‚Â· {ws.docs} docs</span>
+                                        <span className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{ws.members} members · {ws.docs} docs</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">
@@ -639,9 +639,9 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-// PULSE LAYOUT Ã¢â‚¬â€ Radial hub with concentric data rings
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════════════════════════
+// PULSE LAYOUT — Radial hub with concentric data rings
+// ═══════════════════════════════════════════════════════════════════════════════
 function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: LayoutProps) {
     const d = theme.dashboard;
     const actions = quickActionDefs(theme);
@@ -739,9 +739,9 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     );
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-// MAIN DASHBOARD VIEW Ã¢â‚¬â€ Configurable layout orchestrator
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// ═══════════════════════════════════════════════════════════════════════════════
+// MAIN DASHBOARD VIEW — Configurable layout orchestrator
+// ═══════════════════════════════════════════════════════════════════════════════
 export function DashboardView({ card, isLight, isColorful = false, onNav, theme }: DashboardViewProps) {
     const [layout, setLayout] = useState<LayoutMode>('bento');
     const [activeAction, setActiveAction] = useState<QuickActionKey>(null);
@@ -768,7 +768,7 @@ export function DashboardView({ card, isLight, isColorful = false, onNav, theme 
             <AnimatePresence>
                 {activeAction && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-50">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setActiveAction(null)} />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setActiveAction(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 overflow-y-auto max-h-[85%] ${sheetBg}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />

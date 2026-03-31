@@ -75,7 +75,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                                         <h3 className="font-bold text-[15px]">Retail Assistant</h3>
                                         <span className="text-[12px] font-bold text-ds-success bg-ds-success/10 px-2 py-0.5 rounded-lg">95% match</span>
                                     </div>
-                                    <p className={`text-[13px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>City Center Ã‚Â· Ã¢â€šÂ¬12.5/h Ã‚Â· Weekend shifts</p>
+                                    <p className={`text-[13px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>City Center · €12.5/h · Weekend shifts</p>
                                 </div>
                             </div>
                             <button onClick={() => onNav?.('jobs')}

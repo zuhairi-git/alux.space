@@ -111,7 +111,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             : selectedTheme === 'colorful'
                 ? 'bg-ds-colorful-bg text-white'
                 : isIOS
-                    ? 'bg-black text-white'
+                    ? 'bg-ds-dark-1 text-ds-gray-100'
                     : 'bg-ds-dark-1 text-ds-gray-200';
 
     const muted = selectedTheme === 'light' ? 'text-ds-gray-500' : 'text-white/50';
@@ -213,7 +213,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         transition={{ type: 'spring', stiffness: 350, damping: 24 }}
                         className={`h-1.5 rounded-full relative overflow-hidden ${i <= step
                             ? `bg-[${accentColor}]`
-                            : selectedTheme === 'light' ? 'bg-black/10' : 'bg-white/15'
+                            : selectedTheme === 'light' ? 'bg-ds-gray-900/10' : 'bg-white/15'
                         }`}
                         style={{ backgroundColor: i <= step ? accentColor : undefined }}
                     >
@@ -237,7 +237,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             >
                 <AnimatePresence custom={direction} mode="wait">
 
-                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 0: Welcome Ã¢â€â‚¬Ã¢â€â‚¬ */}
+                    {/* ── Step 0: Welcome ── */}
                     {step === 0 && (
                         <motion.div
                             key="intro-step0"
@@ -312,7 +312,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         </motion.div>
                     )}
 
-                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 1: AI Tips Ã¢â€â‚¬Ã¢â€â‚¬ */}
+                    {/* ── Step 1: AI Tips ── */}
                     {step === 1 && (
                         <motion.div
                             key="intro-step1"
@@ -375,13 +375,13 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                             >
                                 <Icon name="lightbulb" className="text-[20px] text-ds-warning shrink-0" />
                                 <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-ds-gray-700' : 'text-ds-warning'}`}>
-                                    Tap the <span className="font-bold">Ã¢Å“Â¦ sparkle button</span> in the top-right corner anytime to open Copilot.
+                                    Tap the <span className="font-bold">✦ sparkle button</span> in the top-right corner anytime to open Copilot.
                                 </p>
                             </motion.div>
                         </motion.div>
                     )}
 
-                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 2: What's Inside Ã¢â€â‚¬Ã¢â€â‚¬ */}
+                    {/* ── Step 2: What's Inside ── */}
                     {step === 2 && (
                         <motion.div
                             key="intro-step2"
@@ -438,7 +438,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         </motion.div>
                     )}
 
-                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 3: Theme Picker Ã¢â€â‚¬Ã¢â€â‚¬ */}
+                    {/* ── Step 3: Theme Picker ── */}
                     {step === 3 && (
                         <motion.div
                             key="intro-step3"
@@ -467,7 +467,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 transition={{ delay: 0.08 }}
                                 className={`text-[13px] mb-6 pl-1 ${muted}`}
                             >
-                                Pick a theme Ã¢â‚¬â€ you can always change it in your Profile
+                                Pick a theme — you can always change it in your Profile
                             </motion.p>
 
                             <div className="space-y-3">
@@ -484,7 +484,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                             className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-200 ${selected
                                                 ? ''
                                                 : selectedTheme === 'light'
-                                                    ? 'border-ds-gray-150 bg-white'
+                                                    ? 'border-ds-gray-150 bg-ds-gray-50'
                                                     : 'border-white/8 bg-white/[0.05]'
                                             }`}
                                             style={selected ? { borderColor: accentColor, backgroundColor: `${accentColor}12` } : {}}

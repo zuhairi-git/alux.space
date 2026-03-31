@@ -25,7 +25,7 @@ export const Sparkline = ({ data, color, width = 80, height = 32 }: { data: numb
     );
 };
 
-// ─── Platform-Aware Spring Configs ───────────────────────────────────────────
+// --- Platform-Aware Spring Configs ---
 // iOS: Higher damping for controlled, precise feel (Apple HIG)
 // Android: Slightly bouncier, expressive motion (Material 3 Expressive)
 export const springPresets = {
@@ -43,7 +43,7 @@ export const springPresets = {
     },
 } as const;
 
-// ─── Directional Tab Transition Variants ─────────────────────────────────────
+// --- Directional Tab Transition Variants ---
 // Creates dramatic cross-dissolve with perspective-like axis motion
 export const getTabTransitionVariants = (direction: number): Variants => ({
     initial: {
@@ -78,7 +78,7 @@ export const getTabTransitionVariants = (direction: number): Variants => ({
     },
 });
 
-// ─── Enhanced Stagger & Fade Variants ────────────────────────────────────────
+// --- Enhanced Stagger & Fade Variants ---
 export const stagger: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } },
@@ -113,7 +113,7 @@ export const slideInRight: Variants = {
     },
 };
 
-// ─── Bottom Sheet Spring ─────────────────────────────────────────────────────
+// --- Bottom Sheet Spring ---
 export const sheetSpring: Transition = {
     type: 'spring',
     stiffness: 340,
@@ -121,7 +121,7 @@ export const sheetSpring: Transition = {
     mass: 1,
 };
 
-// ─── Header Title Transition ─────────────────────────────────────────────────
+// --- Header Title Transition ---
 export const headerSubVariants: Variants = {
     initial: { opacity: 0, y: -12, scale: 0.9 },
     animate: {

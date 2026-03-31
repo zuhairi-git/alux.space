@@ -15,14 +15,14 @@ const JOB_TAB_ORDER: readonly JobTabType[] = ['dashboard', 'jobs', 'copilot', 'n
 
 const JOB_SEEKING_INTRO: MobileIntroConfig = {
     appName: 'Job Seeker',
-    tagline: 'Find trusted local, part-time, and weekend work Ã¢â‚¬â€ with an AI career coach that knows your skills.',
+    tagline: 'Find trusted local, part-time, and weekend work — with an AI career coach that knows your skills.',
     appIcon: 'work_history',
     accentGradient: 'from-primary to-primary-dark',
     aiTips: [
         {
             icon: 'psychology',
             title: 'Your personal career coach',
-            body: 'Ask Copilot "What jobs match my profile?" or "Help me write a cover letter for this barista role" Ã¢â‚¬â€ it tailors advice to you.',
+            body: 'Ask Copilot "What jobs match my profile?" or "Help me write a cover letter for this barista role" — it tailors advice to you.',
         },
         {
             icon: 'manage_search',
@@ -40,7 +40,7 @@ const JOB_SEEKING_INTRO: MobileIntroConfig = {
         { icon: 'work', label: 'Local Jobs', desc: 'Browse gigs and positions near you, filtered by availability and pay.' },
         { icon: 'auto_awesome', label: 'Copilot', desc: 'AI career coach for applications, CVs, interview prep, and job advice.' },
         { icon: 'notifications', label: 'Alerts & Matches', desc: 'Instant notifications when a new job matches your profile.' },
-        { icon: 'person', label: 'My Profile / CV', desc: 'Manage skills, availability, and your digital CV Ã¢â‚¬â€ all in one place.' },
+        { icon: 'person', label: 'My Profile / CV', desc: 'Manage skills, availability, and your digital CV — all in one place.' },
     ],
 };
 
@@ -122,7 +122,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                         </motion.button>
                         <div className="flex flex-col">
                             <AnimatePresence mode="wait">
-                                <motion.span key={activeTab + "-s"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/40' : 'text-ds-gray-500') : 'text-white/40'}`}>{jobTitles[activeTab].sub}</motion.span>
+                                <motion.span key={activeTab + "-s"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-ds-gray-400' : 'text-ds-gray-500') : 'text-ds-gray-500'}`}>{jobTitles[activeTab].sub}</motion.span>
                             </AnimatePresence>
                             <AnimatePresence mode="wait">
                                 <motion.h1 key={activeTab + "-t"} variants={headerTitleVariants} initial="initial" animate="animate" exit="exit" className="text-[18px] font-extrabold tracking-tight leading-none">{jobTitles[activeTab].title}</motion.h1>

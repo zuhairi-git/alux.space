@@ -12,7 +12,7 @@ import { ProfileView } from './ProfileView';
 
 const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
     appName: 'Workflow Platform',
-    tagline: 'Your AI-powered team collaboration hub Ã¢â‚¬â€ manage workspaces, projects, and insights all in one place.',
+    tagline: 'Your AI-powered team collaboration hub — manage workspaces, projects, and insights all in one place.',
     appIcon: 'blur_on',
     accentGradient: 'from-gradient-start to-gradient-mid',
     aiTips: [
@@ -24,7 +24,7 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
         {
             icon: 'edit_document',
             title: 'Surface key decisions fast',
-            body: 'Copilot reads your workspace docs and highlights open items, blockers, and decisions Ã¢â‚¬â€ no more digging through threads.',
+            body: 'Copilot reads your workspace docs and highlights open items, blockers, and decisions — no more digging through threads.',
         },
         {
             icon: 'schedule',
@@ -36,7 +36,7 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
         { icon: 'space_dashboard', label: 'Dashboard', desc: 'Team activity feed, AI morning briefing, and your most urgent workspaces at a glance.' },
         { icon: 'workspaces', label: 'Workspaces', desc: 'Browse and manage all project workspaces, docs, timelines, and team members.' },
         { icon: 'auto_awesome', label: 'Copilot', desc: 'Conversational AI with full workspace context for smart recommendations and summaries.' },
-        { icon: 'notifications', label: 'Notifications', desc: 'Critical alerts, sprint reminders, and team activity Ã¢â‚¬â€ automatically prioritised by AI.' },
+        { icon: 'notifications', label: 'Notifications', desc: 'Critical alerts, sprint reminders, and team activity — automatically prioritised by AI.' },
         { icon: 'person', label: 'My Profile', desc: 'Your contributions, engagement stats, and app appearance settings.' },
     ],
 };
@@ -91,7 +91,7 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                 )}
             </AnimatePresence>
 
-            {/* Header Ã¢â‚¬â€ Liquid Glass (iOS 27) / M3 Expressive (Android 16/17) */}
+            {/* Header — Liquid Glass (iOS 27) / M3 Expressive (Android 16/17) */}
             <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-4 px-6 z-40 transition-all duration-300 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-4">
@@ -115,7 +115,7 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                                     initial="initial"
                                     animate="animate"
                                     exit="exit"
-                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/35' : 'text-ds-gray-600') : 'text-white/35'}`}
+                                    className={`text-[10px] font-semibold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-ds-gray-400' : 'text-ds-gray-600') : 'text-ds-gray-500'}`}
                                 >
                                     {theme.titles[activeTab].sub}
                                 </motion.span>
@@ -157,7 +157,7 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                 </AnimatePresence>
             </main>
 
-            {/* Bottom Navigation Ã¢â‚¬â€ iOS 27 Liquid Glass floating / Android 16/17 M3 Expressive */}
+            {/* Bottom Navigation — iOS 27 Liquid Glass floating / Android 16/17 M3 Expressive */}
             <nav className={`absolute bottom-0 w-full z-40 ${theme.platform === 'ios'
                 ? `flex justify-around items-start px-3 h-[80px] pt-1.5 border-t ${theme.nav[themeMode]}`
                 : `flex justify-around items-center px-2 h-[80px] pb-1 border-t ${theme.nav[themeMode]}`

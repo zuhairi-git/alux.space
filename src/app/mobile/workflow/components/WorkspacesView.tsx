@@ -56,7 +56,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
             <AnimatePresence>{sel && (() => {
                 const w = workspaces.find(x => x.id === sel)!; return (
                     <motion.div key="ws-sheet" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-[60]">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => { setSel(null); setExpanded(false); }} />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => { setSel(null); setExpanded(false); }} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} pt-5 pb-10 ${sheetBgClass}`}>
                             {/* Drag handle — tap to expand */}
