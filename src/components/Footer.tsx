@@ -138,7 +138,7 @@ const Footer = () => {
         </div>
         {/* Navigation Links */}
         <div>
-          <h4 className="font-semibold mb-4">{t('footer.quickLinks')}</h4>
+          <h4 className="font-semibold mb-4 text-primary">{t('footer.quickLinks')}</h4>
           <nav role="navigation" aria-label={t('footer.aria.quickLinks')}>
             <ul className="space-y-2" role="list">
               {quickLinks.map((link) => (
@@ -157,7 +157,7 @@ const Footer = () => {
         </div>
         {/* Portfolio section */}
         <div>
-          <h4 className="font-semibold mb-4">{t('footer.portfolio')}</h4>
+          <h4 className="font-semibold mb-4 text-primary">{t('footer.portfolio')}</h4>
           <nav role="navigation" aria-label={t('footer.aria.portfolioLinks')}>
             <ul className="space-y-2" role="list">
               {portfolioLinks.map((link) => (
