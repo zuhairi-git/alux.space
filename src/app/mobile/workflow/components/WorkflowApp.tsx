@@ -2,14 +2,13 @@
 
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon, type TabType, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../shared';
-import type { MobileTheme } from '../themes';
+import { Icon, type TabType, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants, MobileIntroScreen, type MobileIntroConfig } from '../../shared';
+import type { MobileTheme } from '../../shared';
 import { DashboardView } from './DashboardView';
 import { WorkspacesView } from './WorkspacesView';
 import { CopilotView } from './CopilotView';
 import { NotificationsView } from './NotificationsView';
 import { ProfileView } from './ProfileView';
-import { MobileIntroScreen, type MobileIntroConfig } from './MobileIntroScreen';
 
 const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
     appName: 'Workflow Platform',
@@ -42,13 +41,13 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
     ],
 };
 
-interface MobileAppProps {
+interface WorkflowAppProps {
     theme: MobileTheme;
 }
 
 const TAB_ORDER: readonly TabType[] = ['dashboard', 'workspaces', 'copilot', 'notifications', 'profile'] as const;
 
-export function MobileApp({ theme }: MobileAppProps) {
+export function WorkflowApp({ theme }: WorkflowAppProps) {
     const [showIntro, setShowIntro] = useState(true);
     const [themeMode, setThemeMode] = useState<'dark' | 'light' | 'colorful'>('colorful');
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');

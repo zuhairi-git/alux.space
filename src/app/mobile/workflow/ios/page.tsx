@@ -1,8 +1,8 @@
 'use client';
 
-import { MobileApp } from '../../components';
-import { iosTheme } from '../../themes';
+import { WorkflowApp } from '../components';
+import { iosTheme } from '../../shared';
 
 export default function IOSApp() {
-    return <MobileApp theme={iosTheme} />;
+    return <WorkflowApp theme={iosTheme} />;
 }

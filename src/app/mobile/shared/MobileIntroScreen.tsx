@@ -2,8 +2,8 @@
 
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon } from '@/app/mobile/shared';
-import type { MobileTheme } from '@/app/mobile/themes';
+import { Icon } from './mobile-utils';
+import type { MobileTheme } from './themes';
 
 export interface IntroAITip {
     icon: string;

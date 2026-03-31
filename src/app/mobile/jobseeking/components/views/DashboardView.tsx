@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon } from '@/app/mobile/shared';
-import type { MobileTheme } from '@/app/mobile/themes';
+import { Icon } from '../../../shared';
+import type { MobileTheme } from '../../../shared';
 
 interface ViewProps {
     card?: string;

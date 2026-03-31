@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon, stagger, fadeUp, alerts } from '../shared';
-import type { MobileTheme } from '../themes';
+import { Icon, stagger, fadeUp, alerts } from '../../shared';
+import type { MobileTheme } from '../../shared';
 
 interface NotificationsViewProps {
     card: string;

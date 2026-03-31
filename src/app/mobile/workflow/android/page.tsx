@@ -1,8 +1,8 @@
 'use client';
 
-import { MobileApp } from '../../components';
-import { androidTheme } from '../../themes';
+import { WorkflowApp } from '../components';
+import { androidTheme } from '../../shared';
 
 export default function AndroidApp() {
-    return <MobileApp theme={androidTheme} />;
+    return <WorkflowApp theme={androidTheme} />;
 }

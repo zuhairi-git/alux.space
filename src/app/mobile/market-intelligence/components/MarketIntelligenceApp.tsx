@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
-import { MobileIntroScreen, type MobileIntroConfig } from './MobileIntroScreen';
-import { iosTheme, androidTheme } from '../themes';
-import { getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../shared';
+import { MobileIntroScreen, type MobileIntroConfig, iosTheme, androidTheme, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../../shared';
 
 const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
     appName: 'Market Intelligence',

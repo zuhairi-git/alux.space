@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -997,7 +997,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--primary)]`}>skip_previous</span>
+            <span className={`material-symbols-rounded ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--primary)]`}>skip_previous</span>
           </motion.button>
 
           {/* Play/Pause - Central button - Enhanced for mobile */}
@@ -1033,7 +1033,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               {isPlaying ? (
                 <motion.span
                   key="pause"
-                  className="material-symbols text-white"
+                  className="material-symbols-rounded text-white"
                   style={{ fontSize: isMobile ? '40px' : '32px' }}
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
@@ -1044,7 +1044,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               ) : (
                 <motion.span
                   key="play"
-                  className="material-symbols text-white"
+                  className="material-symbols-rounded text-white"
                   style={{ fontSize: isMobile ? '40px' : '64px' }}
                   initial={animationsDisabled ? {} : { scale: 0.8, opacity: 0 }}
                   animate={animationsDisabled ? {} : { scale: 1, opacity: 1 }}
@@ -1069,7 +1069,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--primary)]`}>skip_next</span>
+            <span className={`material-symbols-rounded ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--primary)]`}>skip_next</span>
           </motion.button>
         </div>        {/* Secondary controls row - Enhanced for mobile */}
         <div className={`flex items-center justify-center ${isMobile ? 'gap-4' : 'gap-3'}`}>
@@ -1117,7 +1117,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchEnd={() => setIsTouching(false)}
           >
             <motion.span
-              className={`material-symbols ${isMobile ? 'text-xl' : 'text-lg'}`}
+              className={`material-symbols-rounded ${isMobile ? 'text-xl' : 'text-lg'}`}
               animate={animationsDisabled ? {} : { rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
@@ -1138,7 +1138,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`material-symbols ${isMobile ? 'text-xl' : 'text-lg'}`}>stop</span>
+            <span className={`material-symbols-rounded ${isMobile ? 'text-xl' : 'text-lg'}`}>stop</span>
           </motion.button>
 
           {/* Mute - Enhanced for mobile */}
@@ -1164,7 +1164,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`material-symbols ${isMobile ? 'text-xl' : 'text-lg'} drop-shadow-sm`}>
+            <span className={`material-symbols-rounded ${isMobile ? 'text-xl' : 'text-lg'} drop-shadow-sm`}>
               {audioRef.current?.muted ? 'volume_off' : 'volume_up'}
             </span>
           </motion.button>

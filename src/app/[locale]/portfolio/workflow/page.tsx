@@ -1,4 +1,4 @@
-import CollaborationClient from '@/components/portfolio/CollaborationClient';
+import WorkflowClient from '@/components/portfolio/WorkflowClient';
 import { Metadata } from 'next';
 import { i18n } from '@/i18n';
 
@@ -63,5 +63,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function WorkflowPage({ params }: { params: Promise<{ locale: string }> }) {
     await params; // locale is provided by root layout context
-    return <CollaborationClient />;
+    return <WorkflowClient />;
 }

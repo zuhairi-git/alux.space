@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { Icon, stagger, fadeUp } from '../shared';
-import type { MobileTheme } from '../themes';
+import { Icon, stagger, fadeUp } from '../../shared';
+import type { MobileTheme } from '../../shared';
 
 interface ProfileViewProps {
     card: string;

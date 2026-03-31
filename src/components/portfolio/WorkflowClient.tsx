@@ -13,7 +13,7 @@ import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 import Icon from '@/components/ui/Icon';
 
-export default function CollaborationClient() {
+export default function WorkflowClient() {
 
   const { theme } = useTheme();
   const { locale } = useLanguage();

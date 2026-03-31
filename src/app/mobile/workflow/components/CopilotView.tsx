@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Icon, mockResponses, suggestedPrompts } from '../shared';
-import type { MobileTheme } from '../themes';
+import { Icon, mockResponses, suggestedPrompts } from '../../shared';
+import type { MobileTheme } from '../../shared';
 
 interface CopilotViewProps {
     isLight: boolean;

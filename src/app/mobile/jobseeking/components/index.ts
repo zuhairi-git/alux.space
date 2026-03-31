@@ -1,3 +1,4 @@
+// Career Development (Job Seeking) prototype components
 export { JobSeekingApp } from './JobSeekingApp';
 export { DashboardView } from './views/DashboardView';
 export { JobsView } from './views/JobsView';

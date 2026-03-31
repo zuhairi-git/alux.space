@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon, Sparkline, stagger, fadeUp, workspaces } from '../shared';
-import type { MobileTheme } from '../themes';
+import { Icon, Sparkline, stagger, fadeUp, workspaces } from '../../shared';
+import type { MobileTheme } from '../../shared';
 
 interface WorkspacesViewProps {
     card: string;

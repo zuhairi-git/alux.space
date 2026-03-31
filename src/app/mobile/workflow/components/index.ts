@@ -1,6 +1,5 @@
-export { MobileApp } from './MobileApp';
-export { MobileIntroScreen } from './MobileIntroScreen';
-export type { MobileIntroConfig, IntroAITip, IntroFeature } from './MobileIntroScreen';
+// Workflow Platform prototype components
+export { WorkflowApp } from './WorkflowApp';
 export { DashboardView } from './DashboardView';
 export { WorkspacesView } from './WorkspacesView';
 export { CopilotView } from './CopilotView';

@@ -2,9 +2,8 @@
 
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Icon, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '@/app/mobile/shared';
-import type { MobileTheme } from '@/app/mobile/themes';
-import { MobileIntroScreen, type MobileIntroConfig } from '@/app/mobile/components/MobileIntroScreen';
+import { Icon, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants, MobileIntroScreen, type MobileIntroConfig } from '../../shared';
+import type { MobileTheme } from '../../shared';
 import { DashboardView } from './views/DashboardView';
 import { JobsView } from './views/JobsView';
 import { CopilotView } from './views/CopilotView';

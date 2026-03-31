@@ -1,7 +1,7 @@
 'use client';
 
-import { JobSeekingApp } from '@/components/mobile/jobseeking';
-import { androidTheme } from '@/app/mobile/themes';
+import { JobSeekingApp } from '../components';
+import { androidTheme } from '../../shared';
 
 export default function JobSeekingAndroidApp() {
     return <JobSeekingApp theme={androidTheme} />;
