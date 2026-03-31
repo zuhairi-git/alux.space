@@ -34,9 +34,9 @@ const InteractiveSkillCard = ({
     if (theme === 'colorful') {
       return 'bg-gradient-to-br from-[var(--primary)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--primary)]/10 hover:via-[var(--gradient-mid)]/10 hover:to-[var(--gradient-end)]/10';
     } else if (theme === 'dark') {
-      return 'bg-gradient-to-br from-ds-gray-800/40 via-ds-gray-700/40 to-ds-gray-800/40 border-ds-gray-600/30 hover:border-ds-blue-400/40 hover:from-ds-gray-800/60 hover:via-ds-gray-700/60 hover:to-ds-gray-800/60';
+      return 'bg-gradient-to-br from-[var(--card-from-bg)] via-[var(--card-to-bg)] to-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--card-from-bg)] hover:via-[var(--card-to-bg)] hover:to-[var(--card-from-bg)]';
     } else {
-      return 'bg-white/80 border-ds-gray-200/60 hover:border-ds-blue-300/60 hover:bg-white hover:shadow-lg hover:shadow-ds-blue-100/50';
+      return 'bg-[var(--card-from-bg)]/80 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:bg-[var(--card-from-bg)] hover:shadow-lg hover:shadow-[var(--card-shadow-color)]';
     }
   };
 
@@ -58,7 +58,7 @@ const InteractiveSkillCard = ({
         absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
         ${theme === 'colorful' 
           ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5' 
-          : 'bg-gradient-to-br from-ds-blue-500/5 to-ds-indigo-500/5'
+          : 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5'
         }
       `} />
 
@@ -68,7 +68,7 @@ const InteractiveSkillCard = ({
         transition-all duration-300 group-hover:scale-110
         ${theme === 'colorful'
           ? 'bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20'
-          : 'bg-ds-blue-500/10 group-hover:bg-ds-blue-500/20'
+          : 'bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20'
         }
       `}>
         <Icon 
@@ -100,7 +100,7 @@ const InteractiveSkillCard = ({
         group-hover:scale-x-100 transition-transform duration-300
         ${theme === 'colorful' 
           ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]' 
-          : 'bg-gradient-to-r from-ds-blue-500 to-ds-indigo-500'
+          : 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]'
         }
       `} />
     </motion.div>
@@ -474,30 +474,17 @@ export default function Home() {
                       group relative p-6 rounded-2xl backdrop-blur-sm transition-all duration-300
                       ${theme === 'colorful'
                         ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5 hover:from-[var(--primary)]/10 hover:to-[var(--gradient-mid)]/10 border border-[var(--card-border)]'
-                        : theme === 'dark'
-                        ? 'bg-gradient-to-br from-ds-blue-500/10 to-ds-cyan-500/10 hover:from-ds-blue-500/20 hover:to-ds-cyan-500/20 border border-ds-blue-500/20'
-                        : 'bg-gradient-to-br from-ds-blue-50 to-ds-indigo-50 hover:from-ds-blue-100 hover:to-ds-indigo-100 border border-ds-blue-200/50'
+                        : 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5 hover:from-[var(--primary)]/10 hover:to-[var(--gradient-mid)]/10 border border-[var(--card-border)]'
                       }
                     `}
                   >
                     {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                      theme === 'colorful'
-                        ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5'
-                        : theme === 'dark'
-                        ? 'bg-gradient-to-br from-ds-blue-500/5 to-ds-cyan-500/5'
-                        : 'bg-gradient-to-br from-ds-blue-100/50 to-ds-indigo-100/50'
-                    }`} />
+                    <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5`} />
 
                     {/* Icon */}
                       <div className={`
                         inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl mb-4 transition-all duration-300
-                        ${theme === 'colorful'
-                          ? 'bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20 group-hover:from-[var(--primary)]/30 group-hover:to-[var(--gradient-mid)]/30'
-                          : theme === 'dark'
-                          ? 'bg-gradient-to-br from-ds-blue-500/20 to-ds-cyan-500/20 group-hover:from-ds-blue-500/30 group-hover:to-ds-cyan-500/30'
-                          : 'bg-gradient-to-br from-ds-blue-100 to-ds-indigo-100 group-hover:from-ds-blue-200 group-hover:to-ds-indigo-200'
-                        }
+                        bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20 group-hover:from-[var(--primary)]/30 group-hover:to-[var(--gradient-mid)]/30
                       `}>
                         <Icon name={item.icon} size="lg" className="text-[var(--accent-text)]" />
                       </div>
@@ -506,12 +493,7 @@ export default function Home() {
                     <div className="relative mb-2">
                       <div className={`
                         text-4xl md:text-5xl font-bold leading-none bg-gradient-to-r bg-clip-text text-transparent
-                        ${theme === 'colorful'
-                          ? 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
-                          : theme === 'dark'
-                          ? 'from-ds-blue-400 via-ds-cyan-400 to-ds-indigo-400'
-                          : 'from-ds-blue-600 via-ds-indigo-600 to-primary-600'
-                        }
+                        from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]
                       `}>
                         {item.years}
                         <span className="text-lg md:text-xl ml-1 text-[var(--muted-foreground)]">
@@ -526,11 +508,7 @@ export default function Home() {
                     </div>
 
                     {/* Decorative element */}
-                    <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl ${
-                      theme === 'colorful'
-                        ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
-                        : 'bg-gradient-to-r from-ds-blue-500 via-ds-indigo-500 to-primary-500'
-                    }`} />
+                    <div className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]" />
                   </motion.div>
                 ))}
               </div>

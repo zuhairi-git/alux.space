@@ -231,6 +231,11 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
 
   // Helper to check if a dropdown child item is active
   const isChildActive = (childHref: string): boolean => {
+    // Hash-anchor links (e.g., /#section) can't be determined active from pathname alone
+    if (childHref.includes('#')) {
+      return false;
+    }
+
     const cleanPathname = pathname.split('#')[0];
     const cleanChildPath = localizedHref(childHref).split('#')[0];
 
@@ -286,12 +291,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
             transition={{ duration: 0.2 }}
             className={`
               absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
-              ${theme === 'colorful'
-                ? 'bg-[var(--background)]/90 border-[var(--card-border)]'
-                : theme === 'light'
-                  ? 'bg-white/90 border-ds-gray-200'
-                  : 'bg-ds-gray-900/90 border-ds-gray-700'
-              }
+              bg-[var(--background)]/90 border-[var(--card-border)]
             `}
           >
             {/* Overview items Ã¢â‚¬â€ no category */}
@@ -302,11 +302,11 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
                   isChildActive(child.href)
-                    ? (theme === 'colorful' ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-medium' : theme === 'light' ? 'bg-primary/10 text-accent font-medium' : 'bg-primary/15 text-accent font-medium')
-                    : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]' : theme === 'light' ? 'text-ds-gray-700 hover:bg-ds-gray-100 hover:text-accent' : 'text-ds-gray-300 hover:bg-ds-gray-800 hover:text-accent')
+                    ? 'bg-[var(--primary)]/15 text-[var(--accent-text)] font-medium'
+                    : 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10 hover:text-[var(--accent-text)]'
                 }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800'}`}>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-[var(--card-from-bg)]`}>
                   <span className="material-symbols text-[15px]" aria-hidden="true">{child.icon}</span>
                 </div>
                 <span className="flex-1 font-medium">{t(child.labelKey)}</span>
@@ -315,7 +315,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
 
             {/* Case Studies section */}
             {item.children.some((c) => c.category === 'case-study') && (
-              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-ds-gray-100' : 'border-ds-gray-800'}`}>
+              <div className="mt-1 pt-2 border-t border-[var(--card-border)]">
                 <div className="px-2 pb-1.5">
                   <span className="text-[9px] font-bold uppercase tracking-widest text-ds-violet-400">Case Studies</span>
                 </div>
@@ -341,7 +341,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
 
             {/* Prototypes section */}
             {item.children.some((c) => c.category === 'prototype') && (
-              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-ds-gray-100' : 'border-ds-gray-800'}`}>
+              <div className="mt-1 pt-2 border-t border-[var(--card-border)]">
                 <div className="px-2 pb-1.5">
                   <span className="text-[9px] font-bold uppercase tracking-widest text-ds-cyan-400">Prototypes</span>
                 </div>

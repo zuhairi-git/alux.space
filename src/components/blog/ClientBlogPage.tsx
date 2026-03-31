@@ -181,7 +181,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
           
           {/* Category Dropdown */}
           <div className="flex items-center gap-3">
-            <span className="material-symbols-rounded text-lg opacity-40" aria-hidden="true">filter_list</span>
+            <span className="material-symbols text-lg opacity-40" aria-hidden="true">filter_list</span>
             {/* eslint-disable-next-line design-system/no-raw-html-elements -- native select with option children and custom appearance styling */}
             <select
               value={filter || ''}
@@ -223,7 +223,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
               aria-checked={viewMode === 'standard'}
               aria-label={`${t('blog.aria.switchToViewMode')} ${getViewModeText('standard')}`}
             >
-              <span className="material-symbols-rounded text-base" aria-hidden="true">grid_view</span>
+              <span className="material-symbols text-base" aria-hidden="true">grid_view</span>
               <span>{getViewModeText('standard')}</span>
             </button>
             {/* eslint-disable-next-line design-system/no-raw-html-elements -- radio group view mode toggle with custom active/inactive styling */}
@@ -238,7 +238,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
               aria-checked={viewMode === 'overlay'}
               aria-label={`${t('blog.aria.switchToViewMode')} ${getViewModeText('overlay')}`}
             >
-              <span className="material-symbols-rounded text-base" aria-hidden="true">layers</span>
+              <span className="material-symbols text-base" aria-hidden="true">layers</span>
               <span>{getViewModeText('overlay')}</span>
             </button>
           </div>
@@ -317,7 +317,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
             role="status"
             aria-live="polite"
           >
-            <span className="material-symbols-rounded text-5xl opacity-15 mb-4 block" aria-hidden="true">search_off</span>
+            <span className="material-symbols text-5xl opacity-15 mb-4 block" aria-hidden="true">search_off</span>
             <p className="text-lg opacity-50">{getNoPostsText()}</p>
           </motion.div>
         )}
