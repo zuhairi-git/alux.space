@@ -28,7 +28,7 @@ export default function LanguageSwitcher() {
             relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 font-bold text-sm
             focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
             ${theme === 'colorful' 
-              ? 'bg-purple-900/20 text-purple-200 hover:bg-purple-900/40 hover:text-white' 
+              ? 'bg-primary/20 text-accent hover:bg-primary/40 hover:text-foreground' 
               : theme === 'light'
                 ? 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
