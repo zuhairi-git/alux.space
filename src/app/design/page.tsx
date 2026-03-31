@@ -115,32 +115,40 @@ const stateColorGroups: { group: string; tokens: { name: string; label: string }
     group: 'Success',
     tokens: [
       { name: '--color-success',        label: 'Text' },
-      { name: '--color-success-bg',     label: 'Bg' },
+      { name: '--color-success-bg',     label: 'Filled Bg' },
       { name: '--color-success-border', label: 'Border' },
+      { name: '--color-success-soft',   label: 'Soft Text' },
+      { name: '--color-success-soft-bg',label: 'Soft Bg' },
     ],
   },
   {
     group: 'Warning',
     tokens: [
       { name: '--color-warning',        label: 'Text' },
-      { name: '--color-warning-bg',     label: 'Bg' },
+      { name: '--color-warning-bg',     label: 'Filled Bg' },
       { name: '--color-warning-border', label: 'Border' },
+      { name: '--color-warning-soft',   label: 'Soft Text' },
+      { name: '--color-warning-soft-bg',label: 'Soft Bg' },
     ],
   },
   {
-    group: 'Error (wired to --palette-error-40)',
+    group: 'Error',
     tokens: [
       { name: '--color-error',          label: 'Text' },
-      { name: '--color-error-bg',       label: 'Bg' },
+      { name: '--color-error-bg',       label: 'Filled Bg' },
       { name: '--color-error-border',   label: 'Border' },
+      { name: '--color-error-soft',     label: 'Soft Text' },
+      { name: '--color-error-soft-bg',  label: 'Soft Bg' },
     ],
   },
   {
     group: 'Info',
     tokens: [
       { name: '--color-info',           label: 'Text' },
-      { name: '--color-info-bg',        label: 'Bg' },
+      { name: '--color-info-bg',        label: 'Filled Bg' },
       { name: '--color-info-border',    label: 'Border' },
+      { name: '--color-info-soft',      label: 'Soft Text' },
+      { name: '--color-info-soft-bg',   label: 'Soft Bg' },
     ],
   },
 ];
@@ -168,9 +176,17 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
   {
     group: 'Indigos',
     tokens: [
-      { name: '--color-indigo-600', label: '600' },
-      { name: '--color-indigo-500', label: '500' },
+      { name: '--color-indigo-50',  label: '50' },
+      { name: '--color-indigo-100', label: '100' },
+      { name: '--color-indigo-200', label: '200' },
+      { name: '--color-indigo-300', label: '300' },
       { name: '--color-indigo-400', label: '400' },
+      { name: '--color-indigo-500', label: '500' },
+      { name: '--color-indigo-600', label: '600' },
+      { name: '--color-indigo-700', label: '700' },
+      { name: '--color-indigo-800', label: '800' },
+      { name: '--color-indigo-900', label: '900' },
+      { name: '--color-indigo-950', label: '950' },
     ],
   },
   {
@@ -190,13 +206,35 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
     ],
   },
   {
-    group: 'Pinks / Fuchsia',
+    group: 'Pinks',
     tokens: [
-      { name: '--color-fuchsia-600', label: 'Fuchsia 600' },
-      { name: '--color-fuchsia-500', label: 'Fuchsia 500' },
-      { name: '--color-fuchsia-400', label: 'Fuchsia 400' },
-      { name: '--color-pink-500',    label: 'Pink 500' },
-      { name: '--color-pink-400',    label: 'Pink 400' },
+      { name: '--color-pink-50',  label: '50' },
+      { name: '--color-pink-100', label: '100' },
+      { name: '--color-pink-200', label: '200' },
+      { name: '--color-pink-300', label: '300' },
+      { name: '--color-pink-400', label: '400' },
+      { name: '--color-pink-500', label: '500' },
+      { name: '--color-pink-600', label: '600' },
+      { name: '--color-pink-700', label: '700' },
+      { name: '--color-pink-800', label: '800' },
+      { name: '--color-pink-900', label: '900' },
+      { name: '--color-pink-950', label: '950' },
+    ],
+  },
+  {
+    group: 'Fuchsias',
+    tokens: [
+      { name: '--color-fuchsia-50',  label: '50' },
+      { name: '--color-fuchsia-100', label: '100' },
+      { name: '--color-fuchsia-200', label: '200' },
+      { name: '--color-fuchsia-300', label: '300' },
+      { name: '--color-fuchsia-400', label: '400' },
+      { name: '--color-fuchsia-500', label: '500' },
+      { name: '--color-fuchsia-600', label: '600' },
+      { name: '--color-fuchsia-700', label: '700' },
+      { name: '--color-fuchsia-800', label: '800' },
+      { name: '--color-fuchsia-900', label: '900' },
+      { name: '--color-fuchsia-950', label: '950' },
     ],
   },
   {
@@ -218,9 +256,17 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
   {
     group: 'Ember',
     tokens: [
-      { name: '--color-ember-dark',  label: 'Dark' },
-      { name: '--color-ember',       label: 'Base' },
-      { name: '--color-ember-light', label: 'Light' },
+      { name: '--color-ember-50',  label: '50' },
+      { name: '--color-ember-100', label: '100' },
+      { name: '--color-ember-200', label: '200' },
+      { name: '--color-ember-300', label: '300' },
+      { name: '--color-ember-400', label: '400' },
+      { name: '--color-ember-500', label: '500' },
+      { name: '--color-ember-600', label: '600' },
+      { name: '--color-ember-700', label: '700' },
+      { name: '--color-ember-800', label: '800' },
+      { name: '--color-ember-900', label: '900' },
+      { name: '--color-ember-950', label: '950' },
     ],
   },
   {
@@ -475,6 +521,74 @@ const registryCategories: { key: ComponentEntry['category']; label: string }[] =
 
 /* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Individual section renderers ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
 
+function StateBadgesShowcase() {
+  const states = [
+    { key: 'success', label: 'Success' },
+    { key: 'warning', label: 'Warning' },
+    { key: 'error',   label: 'Error'   },
+    { key: 'info',    label: 'Info'    },
+  ];
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-xs border-collapse">
+        <thead>
+          <tr>
+            <th className="text-left font-mono font-normal opacity-40 pb-3 pr-4 w-20" />
+            <th className="font-mono font-normal opacity-40 pb-3 px-4 text-center">Filled</th>
+            <th className="font-mono font-normal opacity-40 pb-3 px-4 text-center">Outline</th>
+            <th className="font-mono font-normal opacity-40 pb-3 px-4 text-center">Soft</th>
+            <th className="text-left font-mono font-normal opacity-40 pb-3 pl-4">Token stem</th>
+          </tr>
+        </thead>
+        <tbody>
+          {states.map(s => (
+            <tr key={s.key} className="border-t border-[var(--card-border)]">
+              <td className="py-3 pr-4 opacity-60 font-medium">{s.label}</td>
+              <td className="py-3 px-4 text-center">
+                <span
+                  className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
+                  style={{
+                    color: `var(--color-${s.key})`,
+                    backgroundColor: `var(--color-${s.key}-bg)`,
+                    borderColor: `var(--color-${s.key}-border)`,
+                  }}
+                >
+                  {s.label}
+                </span>
+              </td>
+              <td className="py-3 px-4 text-center">
+                <span
+                  className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
+                  style={{
+                    color: `var(--color-${s.key})`,
+                    backgroundColor: `var(--background)`,
+                    borderColor: `var(--color-${s.key}-border)`,
+                  }}
+                >
+                  {s.label}
+                </span>
+              </td>
+              <td className="py-3 px-4 text-center">
+                <span
+                  className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
+                  style={{
+                    color: `var(--color-${s.key}-soft)`,
+                    backgroundColor: `var(--color-${s.key}-soft-bg)`,
+                    borderColor: `var(--color-${s.key}-border)`,
+                  }}
+                >
+                  {s.label}
+                </span>
+              </td>
+              <td className="py-3 pl-4 opacity-35 font-mono text-[10px]">--color-{s.key}-*</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function ColorGroupBlock({ group, tokens }: { group: string; tokens: { name: string; label: string }[] }) {
   return (
     <div>
@@ -508,8 +622,9 @@ function ColorsSection() {
       {/* 2 — State colors */}
       <section>
         <h4 className="text-sm font-semibold mb-1">State Colors</h4>
-        <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens. Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens in three variants: <strong>filled</strong> (coloured bg), <strong>outline</strong> (theme bg, coloured border), <strong>soft</strong> (tinted bg, high-contrast text). Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
+        <StateBadgesShowcase />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
           {stateColorGroups.map(g => (
             <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
           ))}

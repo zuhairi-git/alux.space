@@ -63,15 +63,43 @@
   --color-purple-800: #6d28d9;
 
   /* Indigos */
+  --color-indigo-50:  #eef2ff;
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
   --color-indigo-400: #818cf8;
   --color-indigo-500: #6366f1;
   --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  --color-indigo-800: #3730a3;
+  --color-indigo-900: #312e81;
+  --color-indigo-950: #1e1b4b;
 
-  /* Pinks / Fuchsia */
-  --color-pink-400:    #f472b6;
-  --color-pink-500:    #ec4899;
+  /* Pinks */
+  --color-pink-50:  #fdf2f8;
+  --color-pink-100: #fce7f3;
+  --color-pink-200: #fbcfe8;
+  --color-pink-300: #f9a8d4;
+  --color-pink-400: #f472b6;
+  --color-pink-500: #ec4899;
+  --color-pink-600: #db2777;
+  --color-pink-700: #be185d;
+  --color-pink-800: #9d174d;
+  --color-pink-900: #831843;
+  --color-pink-950: #500724;
+
+  /* Fuchsias */
+  --color-fuchsia-50:  #fdf4ff;
+  --color-fuchsia-100: #fae8ff;
+  --color-fuchsia-200: #f5d0fe;
+  --color-fuchsia-300: #f0abfc;
   --color-fuchsia-400: #e879f9;
   --color-fuchsia-500: #d946ef;
+  --color-fuchsia-600: #c026d3;
+  --color-fuchsia-700: #a21caf;
+  --color-fuchsia-800: #86198f;
+  --color-fuchsia-900: #701a75;
+  --color-fuchsia-950: #4a044e;
   --color-magenta:     #ff00cc;
   --color-magenta-dark:#d100ff;
 
@@ -104,13 +132,23 @@
   --color-orange-500: #ff9500;
   --color-colorful-bg: #09091C;         /* Midnight Aurora: deep midnight blue-indigo */
   --color-colorful-bg-rgb: 9 9 28;       /* RGB triplet — for Tailwind /alpha modifier */
-  --color-ember:      #ff8c42;          /* electric amber — colorful primary */
-  --color-ember-dark: #d96820;          /* ember hover/darker */
+  /* Ember scale (50–950) anchored to the three named stops */
+  --color-ember-50:  #fff7f0;
+  --color-ember-100: #ffead3;
+  --color-ember-200: #fdd0a7;
+  --color-ember-300: #fbb87a;
+  --color-ember-400: #ffb07a;           /* = ember-light */
+  --color-ember-500: #ff8c42;           /* = ember base */
+  --color-ember-600: #d96820;           /* = ember-dark */
+  --color-ember-700: #b04c10;
+  --color-ember-800: #8a360c;
+  --color-ember-900: #6b2808;
+  --color-ember-950: #431504;
+  /* Named aliases (backwards-compat) */
+  --color-ember:       #ff8c42;         /* electric amber — colorful primary */
+  --color-ember-dark:  #d96820;         /* ember hover/darker */
   --color-ember-light: #ffb07a;         /* ember lighter shade */
   --color-cobalt-700: #4338ca;          /* gradient end for colorful */
-
-  /* Fuchsia extended */
-  --color-fuchsia-600: #c026d3;         /* fuchsia hover state */
 
   /* Dark UI surface spectrum (blue-tinted near-blacks) */
   --color-dark-1: #0b0b13;             /* deepest dark surface — panels, sidebars */
@@ -339,6 +377,16 @@
   --color-info-bg:         rgba(3, 105, 161, 0.12);
   --color-info-border:     rgba(3, 105, 161, 0.25);
 
+  /* State — soft variant (tinted bg + high-contrast text) */
+  --color-success-soft:    #166534;   /* green-800 — 11.5:1 on white ✓ AAA */
+  --color-success-soft-bg: #f0fdf4;   /* green-50 */
+  --color-warning-soft:    #92400e;   /* amber-800 — 7.5:1 on white ✓ AA  */
+  --color-warning-soft-bg: #fffbeb;   /* amber-50 */
+  --color-error-soft:      #991b1b;   /* red-800  — 9.0:1 on white ✓ AAA */
+  --color-error-soft-bg:   #fef2f2;   /* red-50   */
+  --color-info-soft:       #075985;   /* sky-800  — 9.5:1 on white ✓ AAA */
+  --color-info-soft-bg:    #f0f9ff;   /* sky-50   */
+
   /* RGB channels for Tailwind opacity modifier support */
   --color-success-rgb:     22 163 74;
   --color-warning-rgb:     217 119 6;
@@ -444,6 +492,16 @@
   --color-info-bg:         rgba(3, 105, 161, 0.10);
   --color-info-border:     rgba(3, 105, 161, 0.20);
 
+  /* Soft variant */
+  --color-success-soft:    #166534;   /* green-800 */
+  --color-success-soft-bg: #f0fdf4;   /* green-50  */
+  --color-warning-soft:    #92400e;   /* amber-800 */
+  --color-warning-soft-bg: #fffbeb;   /* amber-50  */
+  --color-error-soft:      #991b1b;   /* red-800   */
+  --color-error-soft-bg:   #fef2f2;   /* red-50    */
+  --color-info-soft:       #075985;   /* sky-800   */
+  --color-info-soft-bg:    #f0f9ff;   /* sky-50    */
+
   --muted-foreground:      var(--color-gray-600);
   --badge-overlay-bg:      rgba(0, 0, 0, 0.6);
   --badge-overlay-border:  rgba(0, 0, 0, 0.1);
@@ -534,6 +592,16 @@
   --color-info:            #38bdf8;
   --color-info-bg:         rgba(56, 189, 248, 0.15);
   --color-info-border:     rgba(56, 189, 248, 0.30);
+
+  /* Soft variant */
+  --color-success-soft:    #86efac;                       /* green-300 — on dark bg */
+  --color-success-soft-bg: rgba(74, 222, 128, 0.10);
+  --color-warning-soft:    #fde68a;                       /* amber-200 — on dark bg */
+  --color-warning-soft-bg: rgba(251, 191, 36, 0.10);
+  --color-error-soft:      #fca5a5;                       /* red-300   — on dark bg */
+  --color-error-soft-bg:   rgba(248, 113, 113, 0.10);
+  --color-info-soft:       #7dd3fc;                       /* sky-300   — on dark bg */
+  --color-info-soft-bg:    rgba(56, 189, 248, 0.10);
 
   --muted-foreground:      var(--color-gray-400);
   --badge-overlay-bg:      rgba(255, 255, 255, 0.2);
@@ -646,6 +714,16 @@
   --color-info:            #38bdf8;   /* sky-400 — 9.0:1 ✓ AAA */
   --color-info-bg:         rgba(56, 189, 248, 0.14);
   --color-info-border:     rgba(56, 189, 248, 0.28);
+
+  /* Soft variant */
+  --color-success-soft:    #86efac;                       /* green-300 */
+  --color-success-soft-bg: rgba(74, 222, 128, 0.12);
+  --color-warning-soft:    #fde68a;                       /* amber-200 */
+  --color-warning-soft-bg: rgba(251, 191, 36, 0.12);
+  --color-error-soft:      #fca5a5;                       /* red-300   */
+  --color-error-soft-bg:   rgba(248, 113, 113, 0.12);
+  --color-info-soft:       #7dd3fc;                       /* sky-300   */
+  --color-info-soft-bg:    rgba(56, 189, 248, 0.12);
 
   --muted-foreground:      #9B97C0;                          /* blue-purple muted — 6.3:1 on bg ✓ AA */
   --badge-overlay-bg:      rgba(9, 9, 28, 0.92);
