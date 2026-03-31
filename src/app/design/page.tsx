@@ -666,19 +666,7 @@ function ColorsSection() {
         </div>
       </section>
 
-      {/* 2 — State colors */}
-      <section>
-        <h4 className="text-sm font-semibold mb-1">State Colors</h4>
-        <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens in three variants: <strong>filled</strong> (coloured bg), <strong>outline</strong> (theme bg, coloured border), <strong>soft</strong> (tinted bg, high-contrast text). Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
-        <StateBadgesShowcase />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
-          {stateColorGroups.map(g => (
-            <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
-          ))}
-        </div>
-      </section>
-
-      {/* 3 — Raw palette */}
+      {/* 2 — Raw palette */}
       <section>
         <h4 className="text-sm font-semibold mb-1">Raw Palette</h4>
         <p className="text-xs opacity-50 mb-4">Fixed <code className="font-mono">--color-*</code> tokens — prefer semantic tokens unless you need a specific shade.</p>
@@ -1262,6 +1250,7 @@ function ButtonsSection() {
 
 function BadgesSection() {
   return (
+    <>
     <DemoSection code={`import { Badge } from '@/design-system';
 
 // Semantic state
@@ -1328,6 +1317,19 @@ function BadgesSection() {
         </div>
       </div>
     </DemoSection>
+
+    {/* State Colors */}
+    <div className="mt-8">
+      <h4 className="text-sm font-semibold mb-1">State Colors</h4>
+      <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens in three variants: <strong>filled</strong> (coloured bg), <strong>outline</strong> (theme bg, coloured border), <strong>soft</strong> (tinted bg, high-contrast text). Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
+      <StateBadgesShowcase />
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
+        {stateColorGroups.map(g => (
+          <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
+        ))}
+      </div>
+    </div>
+    </>
   );
 }
 
