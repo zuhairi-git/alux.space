@@ -5,8 +5,9 @@
    these CSS custom properties exclusively.
    
    Categories:
-     1. Color Palette (raw values)
-     2. Semantic Colors (theme-switched via .theme-* classes)
+     1.  Color Palette (raw values)
+     1b. Tonal Palettes (M3-compatible — --palette-{role}-{tone})
+     2.  Semantic Colors (theme-switched via .theme-* classes)
      3. Typography
      4. Spacing Scale
      5. Radius
@@ -142,12 +143,121 @@
 }
 
 /* -------------------------------------------------------
+   1b. TONAL PALETTES — Material Design 3 compatible
+   -------------------------------------------------------
+   5 roles × 13 tones: 0 / 10 / 20 / 30 / 40 / 50 / 60 /
+                        70 / 80 / 90 / 95 / 99 / 100
+   Token name: --palette-{role}-{tone}
+   Source: Figma "Design System - Ali" → node 1307-2340
+           ".Tonal palettes" component.
+
+   Role guide (light theme on-surface tone in brackets):
+     primary   [40] — violet-purple spectrum
+     secondary [40] — muted violet-grey spectrum
+     tertiary  [40] — rose-pink spectrum
+     error     [40] — red spectrum
+     neutral   [40] — warm-grey spectrum
+
+   These are raw, theme-independent colour values.
+   Semantic tokens (--primary, --background, etc.) are
+   resolved per theme in Section 2 and do NOT need to
+   change — this layer only provides the shared Figma ↔
+   code vocabulary.
+   ------------------------------------------------------- */
+:root {
+  /* ── Primary ─────────────────────────────────────────── */
+  --palette-primary-0:    #000000;
+  --palette-primary-10:   #21005D;
+  --palette-primary-20:   #381E72;
+  --palette-primary-30:   #4F378B;
+  --palette-primary-40:   #6750A4;  /* on-surface default */
+  --palette-primary-50:   #7F67BE;
+  --palette-primary-60:   #9A82DB;
+  --palette-primary-70:   #B69DF8;
+  --palette-primary-80:   #D0BCFF;  /* dark-theme on-primary */
+  --palette-primary-90:   #EADDFF;
+  --palette-primary-95:   #F6EDFF;
+  --palette-primary-99:   #FFFBFE;
+  --palette-primary-100:  #FFFFFF;
+
+  /* ── Secondary ───────────────────────────────────────── */
+  --palette-secondary-0:   #000000;
+  --palette-secondary-10:  #1D192B;
+  --palette-secondary-20:  #332D41;
+  --palette-secondary-30:  #4A4458;
+  --palette-secondary-40:  #625B71;  /* on-surface default */
+  --palette-secondary-50:  #7A7289;
+  --palette-secondary-60:  #958DA5;
+  --palette-secondary-70:  #B0A7C0;
+  --palette-secondary-80:  #CCC2DC;  /* dark-theme on-secondary */
+  --palette-secondary-90:  #E8DEF8;
+  --palette-secondary-95:  #F6EDFF;
+  --palette-secondary-99:  #FFFBFE;
+  --palette-secondary-100: #FFFFFF;
+
+  /* ── Tertiary ────────────────────────────────────────── */
+  --palette-tertiary-0:   #000000;
+  --palette-tertiary-10:  #31111D;
+  --palette-tertiary-20:  #492532;
+  --palette-tertiary-30:  #633B48;
+  --palette-tertiary-40:  #7D5260;  /* on-surface default */
+  --palette-tertiary-50:  #986977;
+  --palette-tertiary-60:  #B58392;
+  --palette-tertiary-70:  #D29DAC;
+  --palette-tertiary-80:  #EFB8C8;  /* dark-theme on-tertiary */
+  --palette-tertiary-90:  #FFD8E4;
+  --palette-tertiary-95:  #FFECF1;
+  --palette-tertiary-99:  #FFFBFA;
+  --palette-tertiary-100: #FFFFFF;
+
+  /* ── Error ───────────────────────────────────────────── */
+  --palette-error-0:   #000000;
+  --palette-error-10:  #410E0B;
+  --palette-error-20:  #601410;
+  --palette-error-30:  #8C1D18;
+  --palette-error-40:  #B3261E;    /* on-surface default */
+  --palette-error-50:  #DC362E;
+  --palette-error-60:  #E46962;
+  --palette-error-70:  #EC928E;
+  --palette-error-80:  #F2B8B5;   /* dark-theme on-error */
+  --palette-error-90:  #F9DEDC;
+  --palette-error-95:  #FCEEEE;
+  --palette-error-99:  #FFFBF9;
+  --palette-error-100: #FFFFFF;
+
+  /* ── Neutral ─────────────────────────────────────────── */
+  --palette-neutral-0:   #000000;
+  --palette-neutral-10:  #1D1B20;
+  --palette-neutral-20:  #322F35;
+  --palette-neutral-30:  #48464C;
+  --palette-neutral-40:  #605D64;  /* on-surface default */
+  --palette-neutral-50:  #79767D;
+  --palette-neutral-60:  #938F96;
+  --palette-neutral-70:  #AEA9B1;
+  --palette-neutral-80:  #CAC5CD;  /* dark-theme surface */
+  --palette-neutral-90:  #E6E0E9;
+  --palette-neutral-95:  #F5EFF7;
+  --palette-neutral-99:  #FFFBFF;
+  --palette-neutral-100: #FFFFFF;
+}
+
+/* -------------------------------------------------------
    2. SEMANTIC COLORS — resolved per theme
    ------------------------------------------------------- */
 :root {
   --background:          var(--color-slate-50);
   --foreground:          #171717;
-  --primary:             var(--color-blue-vivid);  --primary-50: var(--color-blue-50);
+  /* ── Palette primary overrides → blue family (default / light theme) ──── */
+  --palette-primary-10:  var(--color-blue-950);        /* #172554 */
+  --palette-primary-20:  var(--color-blue-700);        /* #1e40af */
+  --palette-primary-30:  var(--color-blue-vivid-dark); /* #0044cc */
+  --palette-primary-40:  var(--color-blue-vivid);      /* #0057ff — tone 40: interactive primary */
+  --palette-primary-60:  var(--color-blue-500);        /* #3b82f6 */
+  --palette-primary-70:  var(--color-blue-400);        /* #60a5fa */
+  --palette-primary-80:  var(--color-blue-300);        /* #93c5fd */
+  --palette-primary-90:  var(--color-blue-100);        /* #dbeafe */
+  --palette-primary-95:  var(--color-blue-50);         /* #eff6ff */
+  --primary:             var(--palette-primary-40);  --primary-50: var(--color-blue-50);
   --primary-100: var(--color-blue-100);
   --primary-200: var(--color-blue-200);
   --primary-300: var(--color-blue-300);
@@ -159,11 +269,11 @@
   --primary-900: var(--color-blue-900);
   --primary-950: var(--color-blue-950);
 
-  --primary-hover:       var(--color-blue-vivid-dark);
-  --primary-dark:        var(--color-blue-700);              /* #1d4ed8 — darker primary for gradients/text */
-  --gradient-start:      var(--color-blue-vivid);
+  --primary-hover:       var(--palette-primary-30);
+  --primary-dark:        var(--palette-primary-20);          /* tone 20 — darker primary for gradients/text */
+  --gradient-start:      var(--palette-primary-40);
   --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--color-blue-vivid-dark);
+  --gradient-end:        var(--palette-primary-30);
   --primary-glow:        rgba(0, 87, 255, 0.2);
 
   /* Card surfaces */
@@ -192,7 +302,7 @@
   --stepper-inactive-color: rgba(0, 0, 0, 0.1);
 
   /* Accent text — for labels, icons, tag text */
-  --accent-text:           var(--color-blue-vivid-dark);
+  --accent-text:           var(--palette-primary-30);
   --accent-text-2:         var(--color-indigo-500);
 
   /* Overlay panels — dropdowns, menus */
@@ -205,12 +315,12 @@
   --nav-border:          rgba(255, 255, 255, 0.5);
 
   /* Scrollbar */
-  --scrollbar-thumb:       var(--color-blue-vivid);
-  --scrollbar-thumb-hover: var(--color-blue-vivid-dark);
+  --scrollbar-thumb:       var(--palette-primary-40);
+  --scrollbar-thumb-hover: var(--palette-primary-30);
 
   /* Button */
-  --btn-primary-bg:              var(--color-blue-vivid);
-  --btn-primary-hover:           var(--color-blue-vivid-dark);
+  --btn-primary-bg:              var(--palette-primary-40);
+  --btn-primary-hover:           var(--palette-primary-30);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
 
@@ -286,7 +396,17 @@
 .theme-light {
   --background:          var(--color-slate-50);
   --foreground:          var(--color-gray-800);
-  --primary:             var(--color-blue-vivid);  --primary-50: var(--color-blue-50);
+  /* ── Palette primary overrides → blue family ─────────────────────────── */
+  --palette-primary-10:  var(--color-blue-950);        /* #172554 */
+  --palette-primary-20:  var(--color-blue-700);        /* #1e40af */
+  --palette-primary-30:  var(--color-blue-vivid-dark); /* #0044cc */
+  --palette-primary-40:  var(--color-blue-vivid);      /* #0057ff — tone 40: interactive primary */
+  --palette-primary-60:  var(--color-blue-500);        /* #3b82f6 */
+  --palette-primary-70:  var(--color-blue-400);        /* #60a5fa */
+  --palette-primary-80:  var(--color-blue-300);        /* #93c5fd */
+  --palette-primary-90:  var(--color-blue-100);        /* #dbeafe */
+  --palette-primary-95:  var(--color-blue-50);         /* #eff6ff */
+  --primary:             var(--palette-primary-40);  --primary-50: var(--color-blue-50);
   --primary-100: var(--color-blue-100);
   --primary-200: var(--color-blue-200);
   --primary-300: var(--color-blue-300);
@@ -298,11 +418,11 @@
   --primary-900: var(--color-blue-900);
   --primary-950: var(--color-blue-950);
 
-  --primary-hover:       var(--color-blue-vivid-dark);
-  --primary-dark:        var(--color-blue-700);              /* #1d4ed8 — darker primary for gradients/text */
-  --gradient-start:      var(--color-blue-vivid);
+  --primary-hover:       var(--palette-primary-30);
+  --primary-dark:        var(--palette-primary-20);          /* tone 20 — darker primary for gradients/text */
+  --gradient-start:      var(--palette-primary-40);
   --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--color-blue-vivid-dark);
+  --gradient-end:        var(--palette-primary-30);
   --primary-glow:        rgba(0, 87, 255, 0.2);
   --card-from-bg:        rgba(255, 255, 255, 1);
   --card-to-bg:          rgba(255, 255, 255, 1);
@@ -316,7 +436,7 @@
   --row-hover-bg:        rgba(255, 255, 255, 0.5);
   --stepper-inactive-color: rgba(0, 0, 0, 0.1);
   /* Accent text */
-  --accent-text:           var(--color-blue-vivid-dark);
+  --accent-text:           var(--palette-primary-30);
   --accent-text-2:         var(--color-indigo-600);
   /* Overlay panels */
   --dropdown-bg:           var(--color-white);
@@ -324,10 +444,10 @@
   --dropdown-text:         var(--color-gray-700);
   --nav-bg:              rgba(255, 255, 255, 0.8);
   --nav-border:          rgba(255, 255, 255, 0.5);
-  --scrollbar-thumb:       var(--color-blue-vivid);
-  --scrollbar-thumb-hover: var(--color-blue-vivid-dark);
-  --btn-primary-bg:              var(--color-blue-vivid);
-  --btn-primary-hover:           var(--color-blue-vivid-dark);
+  --scrollbar-thumb:       var(--palette-primary-40);
+  --scrollbar-thumb-hover: var(--palette-primary-30);
+  --btn-primary-bg:              var(--palette-primary-40);
+  --btn-primary-hover:           var(--palette-primary-30);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
   --color-success:         #15803d;  /* green-700 — 7.8:1 on white */
@@ -336,9 +456,9 @@
   --color-warning:         #b45309;  /* amber-700 — 5.1:1 on white */
   --color-warning-bg:      rgba(180, 83, 9, 0.10);
   --color-warning-border:  rgba(180, 83, 9, 0.20);
-  --color-error:           #b91c1c;  /* red-700 — 5.8:1 on white */
-  --color-error-bg:        rgba(185, 28, 28, 0.10);
-  --color-error-border:    rgba(185, 28, 28, 0.20);
+  --color-error:           var(--palette-error-40);  /* #B3261E — 5.8:1 on white ✓ AA */
+  --color-error-bg:        rgba(179, 38, 30, 0.10);
+  --color-error-border:    rgba(179, 38, 30, 0.20);
   --color-info:            #0369a1;  /* sky-700 — 5.6:1 on white */
   --color-info-bg:         rgba(3, 105, 161, 0.10);
   --color-info-border:     rgba(3, 105, 161, 0.20);
@@ -354,22 +474,22 @@
   --player-bg:              rgba(255, 255, 255, 0.9);
   --player-border:          rgba(229, 231, 235, 0.8);
   --player-shadow:          0 20px 60px rgba(0,0,0,0.08);
-  --player-waveform-from:   var(--color-blue-vivid);
+  --player-waveform-from:   var(--palette-primary-40);
   --player-waveform-to:     var(--color-indigo-600);
   --player-waveform-off:    rgba(209, 213, 219, 0.5);
-  --player-progress-from:   var(--color-blue-vivid);
+  --player-progress-from:   var(--palette-primary-40);
   --player-progress-via:    var(--color-indigo-500);
   --player-progress-to:     var(--color-purple-500);
-  --player-btn-from:        var(--color-blue-vivid);
+  --player-btn-from:        var(--palette-primary-40);
   --player-btn-to:          var(--color-indigo-600);
   --player-btn-glow:        rgba(0, 87, 255, 0.25);
   --player-ctrl-bg:         rgba(255, 255, 255, 0.8);
   --player-ctrl-border:     var(--color-gray-200);
   --player-ctrl-hover-bg:   var(--color-white);
   --player-ctrl-text:       var(--color-gray-700);
-  --player-ctrl-text-hover: var(--color-blue-vivid-dark);
+  --player-ctrl-text-hover: var(--palette-primary-30);
   --player-glow-mid:        rgba(99, 102, 241, 0.05);
-  --player-accent:          var(--color-blue-vivid-dark);
+  --player-accent:          var(--palette-primary-30);
   --player-tag-bg:          rgba(147, 51, 234, 0.08);
   --player-tag-text:        var(--color-purple-700);
   --player-tag-border:      rgba(147, 51, 234, 0.20);
@@ -390,7 +510,14 @@
 .theme-dark {
   --background:          var(--color-gray-950);
   --foreground:          #ededed;
-  --primary:             var(--color-indigo-400);  --primary-50: var(--color-blue-50);
+  /* ── Palette primary overrides → indigo family ──────────────────────── */
+  --palette-primary-20:  var(--color-indigo-600);      /* #4f46e5 */
+  --palette-primary-30:  var(--color-indigo-500);      /* #6366f1 */
+  --palette-primary-40:  var(--color-indigo-400);      /* #818cf8 — tone 40: interactive primary */
+  --palette-primary-70:  var(--color-indigo-400);      /* #818cf8 */
+  --palette-primary-80:  var(--color-purple-300);      /* #c4b5fd */
+  --palette-primary-90:  var(--color-purple-100);      /* #f3e8ff */
+  --primary:             var(--palette-primary-40);  --primary-50: var(--color-blue-50);
   --primary-100: var(--color-blue-100);
   --primary-200: var(--color-blue-200);
   --primary-300: var(--color-blue-300);
@@ -402,9 +529,9 @@
   --primary-900: var(--color-blue-900);
   --primary-950: var(--color-blue-950);
 
-  --primary-hover:       var(--color-indigo-500);
-  --primary-dark:        var(--color-indigo-600);             /* #4f46e5 — darker primary for gradients/text */
-  --gradient-start:      var(--color-indigo-400);
+  --primary-hover:       var(--palette-primary-30);
+  --primary-dark:        var(--palette-primary-20);           /* tone 20 — darker primary for gradients/text */
+  --gradient-start:      var(--palette-primary-40);
   --gradient-mid:        var(--color-purple-500);
   --gradient-end:        var(--color-purple-400);
   --primary-glow:        rgba(129, 140, 248, 0.25);
@@ -420,7 +547,7 @@
   --row-hover-bg:        rgba(255, 255, 255, 0.05);
   --stepper-inactive-color: rgba(255, 255, 255, 0.15);
   /* Accent text */
-  --accent-text:           var(--color-indigo-400);
+  --accent-text:           var(--palette-primary-40);
   --accent-text-2:         var(--color-purple-400);
   /* Overlay panels */
   --dropdown-bg:           var(--color-gray-900);
@@ -428,10 +555,10 @@
   --dropdown-text:         var(--color-gray-300);
   --nav-bg:              rgba(17, 24, 39, 0.8);
   --nav-border:          rgba(255, 255, 255, 0.1);
-  --scrollbar-thumb:       var(--color-indigo-500);
-  --scrollbar-thumb-hover: var(--color-indigo-400);
-  --btn-primary-bg:              var(--color-indigo-500);
-  --btn-primary-hover:           var(--color-indigo-400);
+  --scrollbar-thumb:       var(--palette-primary-30);
+  --scrollbar-thumb-hover: var(--palette-primary-40);
+  --btn-primary-bg:              var(--palette-primary-30);
+  --btn-primary-hover:           var(--palette-primary-40);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
   --color-success:         #4ade80;
@@ -455,13 +582,13 @@
   --player-bg:              rgba(17, 24, 39, 0.9);
   --player-border:          rgba(55, 65, 81, 0.5);
   --player-shadow:          0 20px 60px rgba(0,0,0,0.4);
-  --player-waveform-from:   var(--color-indigo-400);
+  --player-waveform-from:   var(--palette-primary-40);
   --player-waveform-to:     var(--color-purple-500);
   --player-waveform-off:    rgba(75, 85, 99, 0.3);
-  --player-progress-from:   var(--color-indigo-400);
+  --player-progress-from:   var(--palette-primary-40);
   --player-progress-via:    var(--color-purple-500);
   --player-progress-to:     var(--color-pink-500);
-  --player-btn-from:        var(--color-indigo-500);
+  --player-btn-from:        var(--palette-primary-30);
   --player-btn-to:          var(--color-purple-600);
   --player-btn-glow:        rgba(129, 140, 248, 0.28);
   --player-ctrl-bg:         rgba(31, 41, 55, 0.8);
@@ -470,7 +597,7 @@
   --player-ctrl-text:       var(--color-gray-300);
   --player-ctrl-text-hover: var(--color-white);
   --player-glow-mid:        rgba(129, 140, 248, 0.12);
-  --player-accent:          var(--color-indigo-400);
+  --player-accent:          var(--palette-primary-40);
   --player-tag-bg:          rgba(76, 29, 149, 0.30);
   --player-tag-text:        var(--color-purple-300);
   --player-tag-border:      rgba(109, 40, 217, 0.45);
@@ -504,7 +631,16 @@
      ──────────────────────────────────────────────────────── */
   --background:          var(--color-colorful-bg);           /* #09091C — deep midnight blue-indigo */
   --foreground:          #F0EEFF;                            /* lavender-white — 15.2:1 ✓ AAA */
-  --primary:             var(--color-purple-400);  --primary-50: var(--color-purple-50);
+  /* ── Palette primary overrides → purple/aurora family ──────────────── */
+  --palette-primary-10:  var(--color-purple-950);      /* #3b0764 */
+  --palette-primary-20:  var(--color-purple-800);      /* #6d28d9 */
+  --palette-primary-30:  var(--color-purple-700);      /* #7c3aed — gradient start */
+  --palette-primary-40:  var(--color-purple-400);      /* #a78bfa — tone 40: interactive primary */
+  --palette-primary-50:  var(--color-purple-500);      /* #a855f7 — hover */
+  --palette-primary-60:  var(--color-purple-300);      /* #c4b5fd */
+  --palette-primary-80:  var(--color-purple-200);      /* #e9d5ff */
+  --palette-primary-90:  var(--color-purple-100);      /* #f3e8ff */
+  --primary:             var(--palette-primary-40);  --primary-50: var(--color-purple-50);
   --primary-100: var(--color-purple-100);
   --primary-200: var(--color-purple-200);
   --primary-300: var(--color-purple-300);
@@ -516,11 +652,11 @@
   --primary-900: var(--color-purple-900);
   --primary-950: var(--color-purple-950);
             /* #a78bfa — vibrant purple */
-  --primary-hover:       var(--color-purple-500);            /* #a855f7 */
-  --primary-dark:        var(--color-purple-700);            /* #7c3aed — darker primary for gradients/text */
+  --primary-hover:       var(--palette-primary-50);          /* #a855f7 */
+  --primary-dark:        var(--palette-primary-30);          /* tone 30 — darker primary for gradients/text */
   --primary-400:         var(--color-purple-300);            /* #c4b5fd — lighter purple */
   --primary-600:         var(--color-purple-600);            /* #9333ea — deeper purple */
-  --gradient-start:      var(--color-purple-700);            /* #7c3aed — deep purple */
+  --gradient-start:      var(--palette-primary-30);          /* #7c3aed — deep purple */
   --gradient-mid:        var(--color-pink-500);              /* #ec4899 — rich rose */
   --gradient-end:        var(--color-blue-600);              /* #2563eb — sapphire blue */
   --primary-glow:        rgba(167, 139, 250, 0.35);
@@ -538,7 +674,7 @@
   --row-hover-bg:        rgba(167, 139, 250, 0.08);
   --stepper-inactive-color: rgba(196, 181, 253, 0.20);
   /* Accent text */
-  --accent-text:           var(--color-purple-300);          /* #c4b5fd — 9.6:1 ✓ AAA */
+  --accent-text:           var(--palette-primary-60);        /* #c4b5fd — 9.6:1 ✓ AAA */
   --accent-text-2:         var(--color-pink-400);            /* #f472b6 — 6.6:1 ✓ AA */
   /* Overlay panels */
   --dropdown-bg:           rgba(12, 10, 30, 0.97);
@@ -550,8 +686,8 @@
   --nav-border:          rgba(167, 139, 250, 0.20);
 
   /* Scrollbar */
-  --scrollbar-thumb:       var(--color-purple-500);
-  --scrollbar-thumb-hover: var(--color-purple-400);
+  --scrollbar-thumb:       var(--palette-primary-50);
+  --scrollbar-thumb-hover: var(--palette-primary-40);
 
   /* Buttons */
   --btn-primary-bg:             var(--color-purple-600);     /* #9333ea — white text 7.5:1 ✓ AAA */

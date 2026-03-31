@@ -37,80 +37,150 @@ import { useTheme } from '@/context/ThemeContext';
 
 /* Ã¢â€â‚¬Ã¢â€â‚¬ Token swatch data Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 
-const colorTokenSections = [
+/* -- 1. Semantic tokens -- theme-resolved, use these first ------------------- */
+const semanticColorGroups: { group: string; tokens: { name: string; label: string }[] }[] = [
   {
-    title: 'Semantic (theme-resolved)',
+    group: 'Surface & Text',
     tokens: [
       { name: '--background',        label: 'Background' },
       { name: '--foreground',        label: 'Foreground' },
-      { name: '--primary',           label: 'Primary' },
-      { name: '--primary-hover',     label: 'Primary Hover' },
-      { name: '--primary-glow',      label: 'Primary Glow' },
-      { name: '--btn-primary-bg',    label: 'Button Primary Bg' },
       { name: '--muted-foreground',  label: 'Muted Text' },
-      { name: '--gradient-start',    label: 'Gradient Start' },
-      { name: '--gradient-mid',      label: 'Gradient Mid' },
-      { name: '--gradient-end',      label: 'Gradient End' },
       { name: '--card-from-bg',      label: 'Card From' },
       { name: '--card-to-bg',        label: 'Card To' },
-      { name: '--card-border',       label: 'Card Border' },
-      { name: '--card-border-hover', label: 'Card Border Hover' },
-      { name: '--nav-bg',            label: 'Nav Background' },
-      { name: '--nav-border',        label: 'Nav Border' },
     ],
   },
   {
-    title: 'State Colors (theme-resolved)',
+    group: 'Primary (wired to --palette-primary-{tone})',
     tokens: [
-      { name: '--color-success',        label: 'Success' },
-      { name: '--color-success-bg',     label: 'Success Bg' },
-      { name: '--color-success-border', label: 'Success Border' },
-      { name: '--color-warning',        label: 'Warning' },
-      { name: '--color-warning-bg',     label: 'Warning Bg' },
-      { name: '--color-warning-border', label: 'Warning Border' },
-      { name: '--color-error',          label: 'Error' },
-      { name: '--color-error-bg',       label: 'Error Bg' },
-      { name: '--color-error-border',   label: 'Error Border' },
-      { name: '--color-info',           label: 'Info' },
-      { name: '--color-info-bg',        label: 'Info Bg' },
-      { name: '--color-info-border',    label: 'Info Border' },
+      { name: '--primary',           label: 'Primary (tone 40)' },
+      { name: '--primary-hover',     label: 'Hover (tone 30)' },
+      { name: '--primary-dark',      label: 'Dark (tone 20)' },
+      { name: '--primary-glow',      label: 'Glow' },
+      { name: '--accent-text',       label: 'Accent Text' },
+      { name: '--accent-text-2',     label: 'Accent Text 2' },
     ],
   },
   {
-    title: 'Palette Ã¢â‚¬â€ Colorful / Ember',
+    group: 'Gradient',
     tokens: [
-      { name: '--color-primary-400',       label: 'Ember (primary)' },
-      { name: '--color-primary-700',  label: 'Ember Dark' },
-      { name: '--color-primary-300', label: 'Ember Light' },
-      { name: '--color-colorful-bg', label: 'Colorful Bg' },
-      { name: '--color-cobalt-700',  label: 'Cobalt 700' },
+      { name: '--gradient-start', label: 'Start' },
+      { name: '--gradient-mid',   label: 'Mid' },
+      { name: '--gradient-end',   label: 'End' },
     ],
   },
   {
-    title: 'Palette Ã¢â‚¬â€ Blues',
+    group: 'Borders & Shadows',
     tokens: [
-      { name: '--color-blue-50',  label: '50' },
-      { name: '--color-blue-100', label: '100' },
-      { name: '--color-blue-200', label: '200' },
-      { name: '--color-blue-300', label: '300' },
-      { name: '--color-blue-400', label: '400' },
-      { name: '--color-blue-500', label: '500' },
-      { name: '--color-blue-600', label: '600' },
-      { name: '--color-blue-700', label: '700' },
+      { name: '--card-border',         label: 'Card Border' },
+      { name: '--card-border-hover',   label: 'Card Border Hover' },
+      { name: '--card-shadow-color',   label: 'Card Shadow' },
     ],
   },
   {
-    title: 'Palette Ã¢â‚¬â€ Purples',
+    group: 'Navigation',
     tokens: [
-      { name: '--color-primary-300', label: '300' },
-      { name: '--color-primary-400', label: '400' },
-      { name: '--color-primary-500', label: '500' },
-      { name: '--color-primary-600', label: '600' },
-      { name: '--color-primary-700', label: '700' },
+      { name: '--nav-bg',     label: 'Nav Bg' },
+      { name: '--nav-border', label: 'Nav Border' },
     ],
   },
   {
-    title: 'Palette Ã¢â‚¬â€ Grays',
+    group: 'Buttons',
+    tokens: [
+      { name: '--btn-primary-bg',    label: 'Primary Bg' },
+      { name: '--btn-primary-hover', label: 'Primary Hover' },
+    ],
+  },
+  {
+    group: 'Overlay & Badge',
+    tokens: [
+      { name: '--dropdown-bg',       label: 'Dropdown Bg' },
+      { name: '--dropdown-border',   label: 'Dropdown Border' },
+      { name: '--badge-overlay-bg',  label: 'Badge Overlay' },
+      { name: '--badge-accent-bg',   label: 'Badge Accent' },
+      { name: '--badge-glass-bg',    label: 'Badge Glass' },
+    ],
+  },
+];
+
+/* -- 2. State colors --------------------------------------------------------- */
+const stateColorGroups: { group: string; tokens: { name: string; label: string }[] }[] = [
+  {
+    group: 'Success',
+    tokens: [
+      { name: '--color-success',        label: 'Text' },
+      { name: '--color-success-bg',     label: 'Bg' },
+      { name: '--color-success-border', label: 'Border' },
+    ],
+  },
+  {
+    group: 'Warning',
+    tokens: [
+      { name: '--color-warning',        label: 'Text' },
+      { name: '--color-warning-bg',     label: 'Bg' },
+      { name: '--color-warning-border', label: 'Border' },
+    ],
+  },
+  {
+    group: 'Error (wired to --palette-error-40)',
+    tokens: [
+      { name: '--color-error',          label: 'Text' },
+      { name: '--color-error-bg',       label: 'Bg' },
+      { name: '--color-error-border',   label: 'Border' },
+    ],
+  },
+  {
+    group: 'Info',
+    tokens: [
+      { name: '--color-info',           label: 'Text' },
+      { name: '--color-info-bg',        label: 'Bg' },
+      { name: '--color-info-border',    label: 'Border' },
+    ],
+  },
+];
+
+/* -- 3. Raw palette (--color-*) -- use only when semantic tokens don't cover - */
+const rawPaletteGroups: { group: string; tokens: { name: string; label: string }[] }[] = [
+  {
+    group: 'Blues',
+    tokens: [
+      { name: '--color-blue-vivid',      label: 'vivid' },
+      { name: '--color-blue-vivid-dark', label: 'vivid-dark' },
+      { name: '--color-blue-400',        label: '400' },
+      { name: '--color-blue-500',        label: '500' },
+      { name: '--color-blue-600',        label: '600' },
+      { name: '--color-blue-700',        label: '700' },
+      { name: '--color-blue-900',        label: '900' },
+    ],
+  },
+  {
+    group: 'Indigos',
+    tokens: [
+      { name: '--color-indigo-400', label: '400' },
+      { name: '--color-indigo-500', label: '500' },
+      { name: '--color-indigo-600', label: '600' },
+    ],
+  },
+  {
+    group: 'Purples',
+    tokens: [
+      { name: '--color-purple-300', label: '300' },
+      { name: '--color-purple-400', label: '400' },
+      { name: '--color-purple-500', label: '500' },
+      { name: '--color-purple-600', label: '600' },
+      { name: '--color-purple-700', label: '700' },
+    ],
+  },
+  {
+    group: 'Pinks / Fuchsia',
+    tokens: [
+      { name: '--color-pink-400',    label: 'Pink 400' },
+      { name: '--color-pink-500',    label: 'Pink 500' },
+      { name: '--color-fuchsia-400', label: 'Fuchsia 400' },
+      { name: '--color-fuchsia-500', label: 'Fuchsia 500' },
+    ],
+  },
+  {
+    group: 'Neutrals',
     tokens: [
       { name: '--color-gray-50',  label: '50' },
       { name: '--color-gray-100', label: '100' },
@@ -122,41 +192,57 @@ const colorTokenSections = [
     ],
   },
   {
-    title: 'Palette Ã¢â‚¬â€ Accents',
+    group: 'Accents',
     tokens: [
-      { name: '--color-indigo-400', label: 'Indigo 400' },
-      { name: '--color-indigo-500', label: 'Indigo 500' },
-      { name: '--color-pink-400',   label: 'Pink 400' },
-      { name: '--color-pink-500',   label: 'Pink 500' },
-      { name: '--color-fuchsia-400',label: 'Fuchsia 400' },
-      { name: '--color-fuchsia-500',label: 'Fuchsia 500' },
-      { name: '--color-cyan-400',   label: 'Cyan 400' },
-      { name: '--color-cyan-500',   label: 'Cyan 500' },
-      { name: '--color-magenta',    label: 'Magenta' },
-      { name: '--color-yellow-500', label: 'Yellow 500' },
-      { name: '--color-orange-500', label: 'Orange 500' },
+      { name: '--color-cyan-400',    label: 'Cyan 400' },
+      { name: '--color-cyan-500',    label: 'Cyan 500' },
+      { name: '--color-magenta',     label: 'Magenta' },
+      { name: '--color-yellow-500',  label: 'Yellow 500' },
+      { name: '--color-orange-500',  label: 'Orange 500' },
+      { name: '--color-ember',       label: 'Ember' },
+      { name: '--color-ember-dark',  label: 'Ember Dark' },
+      { name: '--color-ember-light', label: 'Ember Light' },
     ],
   },
   {
-    title: 'Audio Player Tokens',
+    group: 'Colorful Theme',
     tokens: [
-      { name: '--player-bg',            label: 'Player Bg' },
-      { name: '--player-border',        label: 'Player Border' },
-      { name: '--player-accent',        label: 'Player Accent' },
-      { name: '--player-progress-from', label: 'Progress Start' },
-      { name: '--player-progress-via',  label: 'Progress Mid' },
-      { name: '--player-progress-to',   label: 'Progress End' },
-      { name: '--player-btn-from',      label: 'Button Start' },
-      { name: '--player-btn-to',        label: 'Button End' },
-      { name: '--player-btn-glow',      label: 'Button Glow' },
-      { name: '--player-ctrl-bg',       label: 'Control Bg' },
-      { name: '--player-ctrl-border',   label: 'Control Border' },
-      { name: '--player-ctrl-text',     label: 'Control Text' },
-      { name: '--player-tag-bg',        label: 'Tag Bg' },
-      { name: '--player-tag-text',      label: 'Tag Text' },
-      { name: '--player-tag-border',    label: 'Tag Border' },
+      { name: '--color-colorful-bg',  label: 'BG' },
+      { name: '--color-neon-void-bg', label: 'Neon Void BG' },
+      { name: '--color-neon-fg',      label: 'Neon FG' },
+      { name: '--color-cobalt-700',   label: 'Cobalt 700' },
     ],
   },
+];
+
+/* -- 4. Audio Player tokens -------------------------------------------------- */
+const playerTokens = [
+  { name: '--player-bg',            label: 'Player Bg' },
+  { name: '--player-border',        label: 'Player Border' },
+  { name: '--player-accent',        label: 'Player Accent' },
+  { name: '--player-progress-from', label: 'Progress Start' },
+  { name: '--player-progress-via',  label: 'Progress Mid' },
+  { name: '--player-progress-to',   label: 'Progress End' },
+  { name: '--player-btn-from',      label: 'Button Start' },
+  { name: '--player-btn-to',        label: 'Button End' },
+  { name: '--player-btn-glow',      label: 'Button Glow' },
+  { name: '--player-ctrl-bg',       label: 'Control Bg' },
+  { name: '--player-ctrl-border',   label: 'Control Border' },
+  { name: '--player-ctrl-text',     label: 'Control Text' },
+  { name: '--player-tag-bg',        label: 'Tag Bg' },
+  { name: '--player-tag-text',      label: 'Tag Text' },
+  { name: '--player-tag-border',    label: 'Tag Border' },
+];
+
+/* ── Tonal Palette data (mirrors tokens.css Section 1b) ────────────────── */
+const TONAL_TONES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100] as const;
+
+const tonalPaletteRoles: { name: string; label: string; description: string }[] = [
+  { name: 'primary',   label: 'Primary',   description: 'Violet-purple · tone 40 → light default · tone 80 → dark default' },
+  { name: 'secondary', label: 'Secondary', description: 'Muted violet-grey · supporting / secondary actions' },
+  { name: 'tertiary',  label: 'Tertiary',  description: 'Rose-pink · complementary accent role' },
+  { name: 'error',     label: 'Error',     description: 'Red spectrum · danger, destructive, error states' },
+  { name: 'neutral',   label: 'Neutral',   description: 'Warm-grey · backgrounds, borders, surfaces' },
 ];
 
 const spacingTokens = [
@@ -387,19 +473,215 @@ const registryCategories: { key: ComponentEntry['category']; label: string }[] =
 
 /* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Individual section renderers ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
 
+function ColorGroupBlock({ group, tokens }: { group: string; tokens: { name: string; label: string }[] }) {
+  return (
+    <div>
+      <h5 className="text-xs font-mono mb-2 opacity-50">{group}</h5>
+      <div className="flex flex-wrap gap-3">
+        {tokens.map(t => (
+          <Swatch key={t.name} cssVar={t.name} label={t.label} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ColorsSection() {
   return (
-    <div className="space-y-6">
-      {colorTokenSections.map(section => (
-        <div key={section.title}>
-          <h4 className="text-sm font-medium mb-2 opacity-60">{section.title}</h4>
-          <div className="flex flex-wrap gap-3">
-            {section.tokens.map(t => (
-              <Swatch key={t.name} cssVar={t.name} label={t.label} />
-            ))}
-          </div>
+    <div className="space-y-10">
+
+      {/* 1 — Semantic tokens */}
+      <section>
+        <div className="mb-4 p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card-from-bg)] text-xs opacity-70">
+          <strong>Semantic tokens</strong> are theme-resolved — they automatically switch value across light / dark / colorful themes.
+          Primary tokens reference <code className="font-mono">--palette-primary-{'{tone}'}</code> and update with the active tonal palette.
         </div>
-      ))}
+        <div className="space-y-6">
+          {semanticColorGroups.map(g => (
+            <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
+          ))}
+        </div>
+      </section>
+
+      {/* 2 — State colors */}
+      <section>
+        <h4 className="text-sm font-semibold mb-1">State Colors</h4>
+        <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens. Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          {stateColorGroups.map(g => (
+            <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
+          ))}
+        </div>
+      </section>
+
+      {/* 3 — Raw palette */}
+      <section>
+        <h4 className="text-sm font-semibold mb-1">Raw Palette</h4>
+        <p className="text-xs opacity-50 mb-4">Fixed <code className="font-mono">--color-*</code> tokens — prefer semantic tokens unless you need a specific shade.</p>
+        <div className="space-y-6">
+          {rawPaletteGroups.map(g => (
+            <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
+          ))}
+        </div>
+      </section>
+
+      {/* 4 — Audio Player tokens */}
+      <section>
+        <h4 className="text-sm font-semibold mb-1">Audio Player</h4>
+        <p className="text-xs opacity-50 mb-4">Scoped <code className="font-mono">--player-*</code> tokens for the podcast / blog audio player component.</p>
+        <div className="flex flex-wrap gap-3">
+          {playerTokens.map(t => (
+            <Swatch key={t.name} cssVar={t.name} label={t.label} />
+          ))}
+        </div>
+      </section>
+
+    </div>
+  );
+}
+
+function TonalPaletteStrip({ role, label, description }: { role: string; label: string; description: string }) {
+  return (
+    <div className="space-y-2">
+      <div className="flex items-baseline justify-between gap-2 flex-wrap">
+        <span className="text-sm font-semibold capitalize">{label}</span>
+        <span className="text-xs opacity-50">{description}</span>
+      </div>
+      {/* Colour strip */}
+      <div className="flex rounded-xl overflow-hidden border border-[var(--card-border)] h-16">
+        {TONAL_TONES.map(tone => (
+          <div
+            key={tone}
+            className="flex-1 relative group flex items-end justify-center pb-1"
+            style={{ backgroundColor: `var(--palette-${role}-${tone})` }}
+          >
+            {/* Tone number — always shown */}
+            <span
+              className="text-[8px] font-mono leading-none select-none"
+              style={{ color: tone <= 50 ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)' }}
+            >
+              {tone}
+            </span>
+            {/* "40" default marker */}
+            {tone === 40 && (
+              <span
+                className="absolute top-1 left-0 right-0 text-center text-[7px] font-bold uppercase tracking-widest leading-none select-none"
+                style={{ color: 'rgba(255,255,255,0.55)' }}
+              >
+                default
+              </span>
+            )}
+            {/* Copyable token on hover */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span
+                className="text-[9px] font-mono px-1 py-0.5 rounded"
+                style={{
+                  background: tone <= 50 ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)',
+                  color: tone <= 50 ? '#ffffff' : '#000000',
+                }}
+              >
+                --palette-{role}-{tone}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Token name hint */}
+      <p className="text-[10px] font-mono text-[var(--primary)] opacity-60">
+        --palette-{role}-40 (per-theme overridden in tokens.css)
+      </p>
+    </div>
+  );
+}
+
+function TonalPalettesSection() {
+  return (
+    <div className="space-y-8">
+      {/* Intro card */}
+      <div className="theme-card-flex p-5 rounded-xl">
+        <p className="text-sm opacity-70 leading-relaxed">
+          Material Design 3‑compatible tonal palettes sourced from{' '}
+          <span className="font-semibold">Figma — Design System Ali</span> (node 1307‑2340).
+          Each palette has <strong>13 tone steps</strong> from 0 (black) to 100 (white).
+          {' '}
+          <span className="font-medium text-[var(--primary)]">Tone 40</span> is the light‑theme interactive default;
+          {' '}
+          <span className="font-medium text-[var(--primary)]">tone 80</span> is the dark‑theme default.
+          Per‑theme overrides in <code className="text-xs">tokens.css</code> remap the roles to each theme’s actual color family (blue / indigo / purple) so visual appearance is unchanged.
+        </p>
+      </div>
+
+      {/* Palette strips */}
+      <div className="space-y-6">
+        {tonalPaletteRoles.map(role => (
+          <TonalPaletteStrip key={role.name} role={role.name} label={role.label} description={role.description} />
+        ))}
+      </div>
+
+      {/* Usage snippet */}
+      <div className="theme-card-flex p-4 rounded-xl">
+        <p className="text-xs font-mono opacity-50 mb-2">Token usage examples</p>
+        <pre className="text-xs opacity-70 whitespace-pre-wrap">{`/* Primary — light theme interactive default */
+var(--palette-primary-40)
+
+/* Error — on-dark background (high contrast) */
+var(--palette-error-80)
+
+/* Neutral — light surface tint */
+var(--palette-neutral-90)
+
+/* Secondary — muted border */
+var(--palette-secondary-70)`}</pre>
+      </div>
+
+      {/* Role reference table */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-3">Role Reference</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left border-b border-[var(--card-border)]">
+                <th className="py-1.5 pr-4 font-medium">Role</th>
+                <th className="py-1.5 pr-4 font-medium">Token prefix</th>
+                <th className="py-1.5 pr-4 font-medium">Light default (tone)</th>
+                <th className="py-1.5 font-medium">Dark default (tone)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { role: 'primary',   prefix: '--palette-primary-{tone}',   light: '40', dark: '80' },
+                { role: 'secondary', prefix: '--palette-secondary-{tone}', light: '40', dark: '80' },
+                { role: 'tertiary',  prefix: '--palette-tertiary-{tone}',  light: '40', dark: '80' },
+                { role: 'error',     prefix: '--palette-error-{tone}',     light: '40', dark: '80' },
+                { role: 'neutral',   prefix: '--palette-neutral-{tone}',   light: '40', dark: '80' },
+              ].map(r => (
+                <tr key={r.role} className="border-b border-[var(--card-border)]/60">
+                  <td className="py-1.5 pr-4 font-medium capitalize">{r.role}</td>
+                  <td className="py-1.5 pr-4 font-mono text-xs text-[var(--primary)]">{r.prefix}</td>
+                  <td className="py-1.5 pr-4 text-xs">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span
+                        className="w-3 h-3 rounded-sm border border-[var(--card-border)] inline-block"
+                        style={{ background: `var(--palette-${r.role}-40)` }}
+                      />
+                      {r.light}
+                    </span>
+                  </td>
+                  <td className="py-1.5 text-xs">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span
+                        className="w-3 h-3 rounded-sm border border-[var(--card-border)] inline-block"
+                        style={{ background: `var(--palette-${r.role}-80)` }}
+                      />
+                      {r.dark}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1839,8 +2121,9 @@ interface SectionDef {
 
 const allSections: SectionDef[] = [
   // Foundations
-  { key: 'colors',     title: 'Color Tokens',             render: () => <ColorsSection /> },
-  { key: 'typography', title: 'Typography Scale',          render: () => <TypographySection /> },
+  { key: 'colors',          title: 'Color Tokens',             render: () => <ColorsSection /> },
+  { key: 'tonal-palettes',  title: 'Tonal Palettes (Figma)',   render: () => <TonalPalettesSection /> },
+  { key: 'typography',      title: 'Typography Scale',          render: () => <TypographySection /> },
   { key: 'spacing',    title: 'Spacing Scale',             render: () => <SpacingSection /> },
   { key: 'radius',     title: 'Border Radius',             render: () => <RadiusSection /> },
   { key: 'shadows',    title: 'Shadows & Elevation',       render: () => <ShadowsSection /> },
@@ -1894,9 +2177,10 @@ function OverviewGrid() {
     {
       title: 'Foundations',
       items: [
-        { key: 'backgrounds', icon: 'wallpaper',      label: 'Backgrounds' },
-        { key: 'colors',      icon: 'palette',        label: 'Colors' },
-        { key: 'gradients',   icon: 'gradient',       label: 'Gradients' },
+        { key: 'backgrounds',     icon: 'wallpaper',      label: 'Backgrounds' },
+        { key: 'colors',           icon: 'palette',        label: 'Colors' },
+        { key: 'tonal-palettes',   icon: 'color_lens',     label: 'Tonal Palettes' },
+        { key: 'gradients',        icon: 'gradient',       label: 'Gradients' },
         { key: 'motion',      icon: 'animation',      label: 'Motion' },
         { key: 'radius',      icon: 'rounded_corner', label: 'Radius' },
         { key: 'shadows',     icon: 'layers',         label: 'Shadows' },

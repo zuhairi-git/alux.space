@@ -45,6 +45,24 @@ Some contexts can't resolve `var()` at runtime (e.g. canvas `fillStyle`, SVG com
 
 Use semantic tokens (`--primary`, `--background`, `--card-border`) over palette tokens (`--color-blue-500`). Semantic tokens auto-switch across themes.
 
+### Tonal palette convention
+
+The design system includes Material Design 3-compatible tonal palettes sourced from Figma ("Design System - Ali" → node `1307-2340`). These are **raw, theme-independent** tokens and mirror the vocabulary used in Figma for a shared design ↔ code language:
+
+| Token pattern | Example | Role |
+|---------------|---------|------|
+| `--palette-primary-{tone}` | `--palette-primary-40` | Violet-purple |
+| `--palette-secondary-{tone}` | `--palette-secondary-80` | Muted violet-grey |
+| `--palette-tertiary-{tone}` | `--palette-tertiary-70` | Rose-pink |
+| `--palette-error-{tone}` | `--palette-error-40` | Red |
+| `--palette-neutral-{tone}` | `--palette-neutral-90` | Warm-grey |
+
+Tones available: **0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100**.
+
+Lower tones are darker (0 = black), higher tones are lighter (100 = white). Light-theme on-surface defaults sit at tone **40**; dark-theme on-surface defaults sit at tone **80**.
+
+> These do **not** replace semantic tokens — they are a vocabulary bridge between Figma and code. Semantic tokens (Section 2 of `tokens.css`) continue to drive theming.
+
 ### Theme compatibility
 
 Every new color must work across all three themes: **light**, **dark**, **colorful**. Add overrides in each `.theme-*` block in `tokens.css`.
