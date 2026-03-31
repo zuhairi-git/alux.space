@@ -147,9 +147,6 @@ export const palette = {
     colorfulFrom: '#0C0A20',
     colorfulTo:   '#060618',
   },
-  violet: {
-    500: '#8b5cf6',
-  },
   yellow: { 500: '#eab308' },
   orange: { 500: '#ff9500' },
   colorfulBg: '#09091C',

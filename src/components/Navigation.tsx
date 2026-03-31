@@ -497,7 +497,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                           className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-left ${
                             itemIsActive
                               ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-primary/10 text-accent' : 'bg-primary/15 text-accent')
-                              ? (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-ds-gray-800 hover:bg-ds-gray-50' : 'text-ds-gray-200 hover:bg-ds-gray-800/50')
+                              : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-ds-gray-800 hover:bg-ds-gray-50' : 'text-ds-gray-200 hover:bg-ds-gray-800/50')
                           }`}
                         >
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${

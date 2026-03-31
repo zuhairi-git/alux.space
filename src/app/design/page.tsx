@@ -730,7 +730,7 @@ function TonalPaletteStrip({ role, label, description }: { role: string; label: 
                 className="text-[9px] font-mono px-1 py-0.5 rounded"
                 style={{
                   background: tone <= 50 ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)',
-                  color: tone <= 50 ? '#ffffff' : '#000000',
+                  color: tone <= 50 ? '#ffffff' : '#000000', // eslint-disable-line design-system/no-hardcoded-colors -- swatch contrast
                 }}
               >
                 --palette-{role}-{tone}
@@ -760,7 +760,7 @@ function TonalPalettesSection() {
           <span className="font-medium text-[var(--primary)]">Tone 40</span> is the light-theme interactive default;
           {' '}
           <span className="font-medium text-[var(--primary)]">tone 80</span> is the dark-theme default.
-          Per-theme overrides in <code className="text-xs">tokens.css</code> remap the roles to each theme's actual color family (blue / indigo / purple) so visual appearance is unchanged.
+          Per-theme overrides in <code className="text-xs">tokens.css</code> remap the roles to each theme&apos;s actual color family (blue / indigo / purple) so visual appearance is unchanged.
         </p>
       </div>
 
