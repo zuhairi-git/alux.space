@@ -29,10 +29,10 @@ export const palette = {
     vividDark: '#0044cc',  // hover / darker variant
   },
   /**
-   * Violet — single-source primary color family.
-   * All themes use this scale; only the active step changes per theme:
-   *   light:    --primary = violet-600 (#7c3aed)
-   *   dark:     --primary = violet-400 (#a78bfa)
+   * Violet — colorful theme primary color family.
+   * Each theme uses a different primary scale:
+   *   light:    --primary = indigo-600 (#4f46e5)
+   *   dark:     --primary = emerald-400 (#34d399)
    *   colorful: --primary = violet-400 (#a78bfa)
    */
   violet: {
@@ -57,9 +57,17 @@ export const palette = {
     800: '#6d28d9',
   },
   indigo: {
+    50:  '#eef2ff',
+    100: '#e0e7ff',
+    200: '#c7d2fe',
+    300: '#a5b4fc',
     400: '#818cf8',
     500: '#6366f1',
-    600: '#4f46e5',
+    600: '#4f46e5',  // light interactive  — 5.9:1 on white ✓ AA
+    700: '#4338ca',  // light hover        — 7.5:1 on white ✓ AA
+    800: '#3730a3',
+    900: '#312e81',
+    950: '#1e1b4b',
   },
   pink: {
     400: '#f472b6',
@@ -160,22 +168,22 @@ export const palette = {
  */
 export const themeRgb = {
   light: {
-    glowPrimary:   '124, 58, 237',     // violet-600 #7c3aed — matches --primary
-    glowSecondary: '168, 85, 247',     // purple-500 — hero orb/gradient accent
-    glowTertiary:  '139, 92, 246',     // violet-500 — hero CTA accent
-    dotGrid:       '167, 139, 250',    // violet-400
-    particlePrimary:   '124, 58, 237', // violet-600
-    particleSecondary: '139, 92, 246', // violet-500
+    glowPrimary:   '79, 70, 229',      // indigo-600 #4f46e5 — matches --primary
+    glowSecondary: '99, 102, 241',     // indigo-500 — hero orb/gradient accent
+    glowTertiary:  '129, 140, 248',    // indigo-400 — hero CTA accent
+    dotGrid:       '129, 140, 248',    // indigo-400
+    particlePrimary:   '79, 70, 229',  // indigo-600
+    particleSecondary: '99, 102, 241', // indigo-500
     particleTertiary:  '236, 72, 153', // pink-500
   },
   dark: {
-    glowPrimary:   '167, 139, 250',    // violet-400 #a78bfa — matches --primary
-    glowSecondary: '168, 85, 247',     // purple-500 — hero orb/gradient accent
-    glowTertiary:  '139, 92, 246',     // violet-500 — CTA accent
-    dotGrid:       '167, 139, 250',    // violet-400
-    particlePrimary:   '167, 139, 250', // violet-400
-    particleSecondary: '139, 92, 246', // violet-500
-    particleTertiary:  '109, 40, 217', // violet-700
+    glowPrimary:   '52, 211, 153',     // emerald-400 #34d399 — matches --primary
+    glowSecondary: '16, 185, 129',     // emerald-500 — hero orb/gradient accent
+    glowTertiary:  '110, 231, 183',    // emerald-300 — CTA accent
+    dotGrid:       '52, 211, 153',     // emerald-400
+    particlePrimary:   '52, 211, 153', // emerald-400
+    particleSecondary: '16, 185, 129', // emerald-500
+    particleTertiary:  '4, 120, 87',   // emerald-700
   },
   colorful: {
     glowPrimary:   '167, 139, 250',    // violet-400 #a78bfa — matches --primary

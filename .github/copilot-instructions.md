@@ -25,4 +25,4 @@ This project maintains a single source of truth for all colors and design tokens
 - **Adding a new color** requires updating all four files above in the same change: `tokens.css` (CSS vars), `tokens.ts` (hex palette), `tailwind.config.js` (`ds-*` entry), and `design/page.tsx` (palette display group).
 - **Semantic tokens first.** Prefer `--primary`, `--background`, `--card-border`, etc. over raw `--color-violet-600`. Only reach for raw palette tokens when a specific shade is genuinely required and no semantic token covers it.
 - **Theme consistency.** The three themes (`.theme-light`, `.theme-dark`, `.theme-colorful`) all resolve through the same semantic token names. Never add a hardcoded color that only works in one theme.
-- **Violet is the primary family.** All primary-role colors derive from the `--color-violet-*` scale. Do not introduce a new blue/indigo/purple split for primary roles.
+- **Per-theme primary families.** Light uses indigo (`--color-indigo-*`), dark uses emerald (`--color-emerald-*`), colorful uses violet (`--color-violet-*`). All resolve through the same `--primary-*` semantic tokens.
