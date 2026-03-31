@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -123,7 +123,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                         </motion.button>
                         <div className="flex flex-col">
                             <AnimatePresence mode="wait">
-                                <motion.span key={activeTab + "-s"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/40' : 'text-[#49454F]') : 'text-white/40'}`}>{jobTitles[activeTab].sub}</motion.span>
+                                <motion.span key={activeTab + "-s"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? (theme.platform === 'ios' ? 'text-black/40' : 'text-ds-gray-500') : 'text-white/40'}`}>{jobTitles[activeTab].sub}</motion.span>
                             </AnimatePresence>
                             <AnimatePresence mode="wait">
                                 <motion.h1 key={activeTab + "-t"} variants={headerTitleVariants} initial="initial" animate="animate" exit="exit" className="text-[18px] font-extrabold tracking-tight leading-none">{jobTitles[activeTab].title}</motion.h1>
@@ -132,7 +132,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                     </div>
                     <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${theme.accent.aiButton(isLight)}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                         <Icon name="auto_awesome" className="text-[20px]" />
-                        <span className={`absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-[#FF9500] rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_8px_rgba(255,149,0,0.8)]' : ''}`} />
+                        <span className={`absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_8px_var(--color-warning)]' : ''}`} />
                     </motion.button>
                 </div>
             </header>
@@ -172,7 +172,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                     <motion.span
                                         animate={{ scale: a ? 1.1 : 1 }}
                                         transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                        className={`relative material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                        className={`relative material-symbols-rounded ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                     >
                                         {ic}
                                     </motion.span>
@@ -181,7 +181,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.15 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols-rounded ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>

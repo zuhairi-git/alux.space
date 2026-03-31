@@ -28,7 +28,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const slots = ['Morn', 'Aft', 'Eve', 'All'];
     const slotFull: Record<string, string> = { Morn: 'Morning', Aft: 'Afternoon', Eve: 'Evening', All: 'All Day' };
-    const slotColors: Record<string, string> = { Morn: 'bg-primary', Aft: 'bg-ds-blue-500', Eve: 'bg-primary-500', All: 'bg-ds-cyan-500' };
+    const slotColors: Record<string, string> = { Morn: 'bg-primary', Aft: 'bg-primary', Eve: 'bg-primary-500', All: 'bg-ds-cyan-500' };
     const [availability, setAvailability] = useState<Record<string, string[]>>({
         Mon: [], Tue: [], Wed: ['Eve'], Thu: [], Fri: ['Eve'], Sat: ['All'], Sun: ['All']
     });
@@ -50,7 +50,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
     // Analytics data
     const analyticsStats = [
         { label: 'Profile Views', value: '142', icon: 'visibility', color: 'text-ds-cyan-400', bg: 'bg-ds-cyan-500/15' },
-        { label: 'Applications', value: '7', icon: 'send', color: isColorful ? 'text-primary' : 'text-ds-blue-400', bg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
+        { label: 'Applications', value: '7', icon: 'send', color: 'text-primary', bg: 'bg-primary/15' },
         { label: 'Avg Match', value: '88%', icon: 'target', color: 'text-primary', bg: 'bg-primary/15' },
     ];
 
@@ -101,7 +101,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
             {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Action Cards Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="grid grid-cols-3 gap-2.5 mb-5">
                 {[
-                    { key: 'cv' as ActivePanel, icon: 'description', label: 'Update CV', grad: 'from-gradient-start to-gradient-mid', bg: isColorful ? 'from-primary/20 to-primary-dark/20' : 'from-ds-cyan-500/15 to-ds-blue-500/15' },
+                    { key: 'cv' as ActivePanel, icon: 'description', label: 'Update CV', grad: 'from-gradient-start to-gradient-mid', bg: 'from-primary/20 to-primary-dark/20' },
                     { key: 'shifts' as ActivePanel, icon: 'event', label: 'Shifts', grad: 'from-ds-gold-500 to-ds-gold-600', bg: 'from-ds-gold-500/15 to-ds-gold-600/15' },
                     { key: 'analytics' as ActivePanel, icon: 'insights', label: 'Stats', grad: 'from-primary to-ds-fuchsia-500', bg: 'from-primary/15 to-ds-fuchsia-500/15' },
                 ].map((a, i) => (
@@ -195,7 +195,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                 </div>
                                 <span className={`text-[16px] font-medium ${isLight ? 'text-ds-gray-800' : 'text-ds-gray-100'}`}>{t.label}</span>
                             </div>
-                            {themeMode === t.value && <Icon name="check" className={`text-[20px] ${theme.platform === 'ios' ? 'text-ds-blue-500' : 'text-primary'}`} />}
+                            {themeMode === t.value && <Icon name="check" className={`text-[20px] text-primary`} />}
                         </button>
                     ))}
                 </div>
@@ -290,7 +290,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                     <div className="grid grid-cols-2 gap-2.5 mb-5">
                                         {[
                                             { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', colorText: isColorful ? 'text-primary' : 'text-ds-cyan-400', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/15' },
-                                            { label: 'Applications', value: '7', change: '+3 this week', icon: 'send', colorText: isColorful ? 'text-primary' : 'text-ds-blue-400', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
+                                            { label: 'Applications', value: '7', change: '+3 this week', icon: 'send', colorText: 'text-primary', colorBg: 'bg-primary/15' },
                                             { label: 'Interviews', value: '2', change: 'Active', icon: 'record_voice_over', colorText: 'text-ds-emerald-400', colorBg: 'bg-ds-success/15' },
                                             { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', colorText: 'text-primary', colorBg: 'bg-primary/15' },
                                         ].map((s, i) => (

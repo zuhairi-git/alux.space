@@ -92,7 +92,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                     <div className="flex items-start justify-between gap-2">
                                         <h3 className="text-[16px] font-bold leading-tight">{job.title}</h3>
                                         {job.tag && (
-                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>
+                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : 'bg-primary/15 text-primary'}`}>
                                                 {job.tag}
                                             </span>
                                         )}
@@ -119,10 +119,10 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
                             <div className="flex items-center gap-2">
                                 <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-ds-gray-200' : 'bg-white/10'}`}>
-                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? (isColorful ? 'bg-primary' : 'bg-ds-blue-500') : 'bg-ds-gold-400'}`}
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? 'bg-primary' : 'bg-ds-gold-400'}`}
                                         style={{ width: `${job.match}%` }} />
                                 </div>
-                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? (isColorful ? 'text-primary' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400') : 'text-ds-gold-400'}`}>{job.match}% match</span>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? 'text-primary' : 'text-ds-gold-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
                                 className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-gradient-start to-gradient-mid text-white active:scale-95 transition-transform`}>
@@ -165,7 +165,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <Icon name="arrow_back" className="text-[20px]" />
                                         </button>
                                         <h3 className="text-[18px] font-bold">Quick Apply</h3>
-                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full ${isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
+                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full bg-primary/15 text-primary`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className="space-y-3 mb-5">
                                         {[
@@ -209,7 +209,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <h3 className="text-xl font-bold mb-0.5">{selectedJob.title}</h3>
                                             <p className={`text-[14px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.company}</p>
                                         </div>
-                                        <span className={`px-3 py-1 rounded-full font-bold text-[13px] ${isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
+                                        <span className={`px-3 py-1 rounded-full font-bold text-[13px] bg-primary/15 text-primary`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className={`p-4 rounded-2xl mb-5 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                         <div className="flex items-center justify-between mb-3">

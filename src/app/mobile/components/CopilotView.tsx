@@ -43,7 +43,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
             {msgs.length === 0 ? (
                 <div className="flex-1 flex flex-col p-7 items-center overflow-y-auto scrollbar-none">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center pt-[5vh] pb-10 shrink-0">
-                        <div className="relative w-16 h-16 flex items-center justify-center mb-7"><div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${isColorful ? 'bg-primary' : theme.copilot.pingBg}`} style={{ animationDuration: '2s', animationIterationCount: 2 }} /><Icon name="auto_awesome" className={`text-[42px] ${isColorful ? 'text-primary' : 'text-ds-blue-500'}`} /></div>
+                        <div className="relative w-16 h-16 flex items-center justify-center mb-7"><div className={`absolute inset-0 rounded-full animate-ping opacity-15 ${isColorful ? 'bg-primary' : theme.copilot.pingBg}`} style={{ animationDuration: '2s', animationIterationCount: 2 }} /><Icon name="auto_awesome" className={`text-[42px] ${isColorful ? 'text-primary' : 'text-primary-500'}`} /></div>
                         <h3 className="font-bold text-xl mb-2">Collaboration Copilot</h3><p className={`text-[15px] text-center max-w-[260px] leading-relaxed ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>Ask about workspaces, team activity, sprint status, or design reviews.</p>
                     </motion.div>
                     <div className="w-full mt-auto pb-5 shrink-0">

@@ -69,7 +69,7 @@ export function MobileApp({ theme }: MobileAppProps) {
     const tabVariants = getTabTransitionVariants(directionRef.current);
 
     return (
-        <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans`}>
+        <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans theme-${themeMode}`}>
             {/* Intro screen overlay */}
             <AnimatePresence>
                 {showIntro && (
