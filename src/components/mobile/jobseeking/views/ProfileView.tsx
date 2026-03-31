@@ -102,7 +102,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="grid grid-cols-3 gap-2.5 mb-5">
                 {[
                     { key: 'cv' as ActivePanel, icon: 'description', label: 'Update CV', grad: 'from-gradient-start to-gradient-mid', bg: isColorful ? 'from-primary/20 to-primary-dark/20' : 'from-ds-cyan-500/15 to-ds-blue-500/15' },
-                    { key: 'shifts' as ActivePanel, icon: 'event', label: 'Shifts', grad: 'from-amber-500 to-amber-600', bg: 'from-amber-500/15 to-amber-600/15' },
+                    { key: 'shifts' as ActivePanel, icon: 'event', label: 'Shifts', grad: 'from-ds-gold-500 to-ds-gold-600', bg: 'from-ds-gold-500/15 to-ds-gold-600/15' },
                     { key: 'analytics' as ActivePanel, icon: 'insights', label: 'Stats', grad: 'from-primary to-ds-fuchsia-500', bg: 'from-primary/15 to-ds-fuchsia-500/15' },
                 ].map((a, i) => (
                     <motion.button key={i} whileTap={{ scale: 0.94 }} onClick={() => setActivePanel(a.key)}
@@ -122,7 +122,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                     <button onClick={() => setActivePanel('cv')} className={`text-[12px] font-bold ${isColorful ? 'text-ds-fuchsia-400' : isLight ? 'text-ds-cyan-500' : 'text-ds-cyan-400'}`}>Edit</button>
                 </div>
                 <div className={`${card} p-4`}>
-                    <p className={`text-[13px] leading-relaxed mb-3 ${isLight ? 'text-gray-600' : 'text-gray-300'}`}>{bio}</p>
+                    <p className={`text-[13px] leading-relaxed mb-3 ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-300'}`}>{bio}</p>
                     <div className="flex flex-wrap gap-1.5">
                         {skills.map((s, i) => (
                             <span key={i} className={`px-2.5 py-1 rounded-full text-[11px] font-semibold ${isColorful ? 'bg-ds-cyan-500/20 text-ds-cyan-400' : isLight ? 'bg-ds-cyan-400/15 text-ds-cyan-500' : 'bg-ds-cyan-500/15 text-ds-cyan-400'}`}>{s}</span>
@@ -135,7 +135,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
             <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-5">
                 <div className="flex items-center justify-between mb-3 px-1">
                     <h3 className="text-[15px] font-bold">Availability</h3>
-                    <button onClick={() => setActivePanel('shifts')} className={`text-[12px] font-bold ${isColorful ? 'text-ds-fuchsia-400' : isLight ? 'text-ds-warning-border' : 'text-amber-400'}`}>Edit</button>
+                    <button onClick={() => setActivePanel('shifts')} className={`text-[12px] font-bold ${isColorful ? 'text-ds-fuchsia-400' : isLight ? 'text-ds-warning-border' : 'text-ds-gold-400'}`}>Edit</button>
                 </div>
                 <div className={`${card} overflow-hidden p-4`}>
                     <div className="space-y-2">
@@ -143,12 +143,12 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             const slots_ = availability[day] ?? [];
                             return (
                                 <div key={i} className="flex items-center gap-2">
-                                    <span className={`w-8 text-[12px] font-bold ${isLight ? 'text-gray-400' : 'text-white/30'}`}>{day}</span>
+                                    <span className={`w-8 text-[12px] font-bold ${isLight ? 'text-ds-gray-400' : 'text-white/30'}`}>{day}</span>
                                     <div className="flex gap-1.5 flex-1">
                                         {slots_.length === 0 ? (
-                                            <span className={`text-[11px] ${isLight ? 'text-gray-300' : 'text-white/20'}`}>Ã¢â‚¬â€</span>
+                                            <span className={`text-[11px] ${isLight ? 'text-ds-gray-300' : 'text-white/20'}`}>Ã¢â‚¬â€</span>
                                         ) : slots_.map((s, j) => (
-                                            <span key={j} className={`px-2 py-0.5 rounded-lg text-[10px] font-bold text-white ${slotColors[s] ?? 'bg-gray-500'}`}>{slotFull[s] ?? s}</span>
+                                            <span key={j} className={`px-2 py-0.5 rounded-lg text-[10px] font-bold text-white ${slotColors[s] ?? 'bg-ds-gray-500'}`}>{slotFull[s] ?? s}</span>
                                         ))}
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                 <Icon name={s.icon} className={`text-[14px] ${s.color}`} />
                             </div>
                             <span className="font-black text-[18px] leading-tight">{s.value}</span>
-                            <span className={`text-[10px] leading-tight ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{s.label}</span>
+                            <span className={`text-[10px] leading-tight ${isLight ? 'text-ds-gray-500' : 'text-white/40'}`}>{s.label}</span>
                         </div>
                     ))}
                 </div>
@@ -193,7 +193,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 ${themeMode === t.value ? theme.profile.engagementActiveBg : theme.profile.settingsBg(isLight)}`}>
                                     <Icon name={t.icon} className={`text-[18px] ${themeMode === t.value ? 'text-white' : ''}`} />
                                 </div>
-                                <span className={`text-[16px] font-medium ${isLight ? 'text-gray-800' : 'text-gray-100'}`}>{t.label}</span>
+                                <span className={`text-[16px] font-medium ${isLight ? 'text-ds-gray-800' : 'text-ds-gray-100'}`}>{t.label}</span>
                             </div>
                             {themeMode === t.value && <Icon name="check" className={`text-[20px] ${theme.platform === 'ios' ? 'text-ds-blue-500' : 'text-primary'}`} />}
                         </button>
@@ -208,8 +208,8 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setActivePanel(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 max-h-[88vh] overflow-y-auto no-scrollbar ${sheetBg}`}>
-                            <div className="w-10 h-1 rounded-full bg-gray-400/30 mx-auto mb-5" />
-                            <button onClick={() => setActivePanel(null)} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-500/20 flex items-center justify-center active:scale-95">
+                            <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
+                            <button onClick={() => setActivePanel(null)} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95">
                                 <Icon name="close" className="text-[16px] opacity-60" />
                             </button>
 
@@ -222,7 +222,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                         </div>
                                         <div>
                                             <h3 className="text-[18px] font-bold">Update CV</h3>
-                                            <p className={`text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>Profile score: <span className={`font-bold ${isColorful ? 'text-primary' : 'text-ds-cyan-400'}`}>{profileScore}%</span></p>
+                                            <p className={`text-[11px] ${isLight ? 'text-ds-gray-400' : 'text-white/40'}`}>Profile score: <span className={`font-bold ${isColorful ? 'text-primary' : 'text-ds-cyan-400'}`}>{profileScore}%</span></p>
                                         </div>
                                     </div>
                                     <div className="space-y-3 mb-5">
@@ -235,7 +235,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                             <div className="flex flex-wrap gap-2">
                                                 {allSkills.map(s => (
                                                     <button key={s} onClick={() => setSkills(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s])}
-                                                        className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${skills.includes(s) ? `${isColorful ? 'bg-primary' : 'bg-ds-cyan-500'} text-white` : (isLight ? 'bg-black/5 text-gray-600' : 'bg-white/8 text-gray-300')}`}>{s}</button>
+                                                        className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${skills.includes(s) ? `${isColorful ? 'bg-primary' : 'bg-ds-cyan-500'} text-white` : (isLight ? 'bg-black/5 text-ds-gray-600' : 'bg-white/8 text-ds-gray-300')}`}>{s}</button>
                                                 ))}
                                             </div>
                                         </div>
@@ -249,23 +249,23 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                 <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
                                     <div className="flex items-center mb-4">
                                         <div className="w-9 h-9 rounded-2xl bg-primary/20 flex items-center justify-center mr-3">
-                                            <Icon name="schedule" className="text-[18px] text-amber-400" />
+                                            <Icon name="schedule" className="text-[18px] text-ds-gold-400" />
                                         </div>
                                         <h3 className="text-[18px] font-bold">Manage Shifts</h3>
                                     </div>
                                     <div className="flex flex-wrap gap-2 mb-4">
-                                        {slots.map(s => <div key={s} className="flex items-center gap-1.5"><div className={`w-2.5 h-2.5 rounded-full ${slotColors[s]}`} /><span className={`text-[11px] font-medium ${isLight ? 'text-gray-500' : 'text-white/50'}`}>{slotFull[s]}</span></div>)}
+                                        {slots.map(s => <div key={s} className="flex items-center gap-1.5"><div className={`w-2.5 h-2.5 rounded-full ${slotColors[s]}`} /><span className={`text-[11px] font-medium ${isLight ? 'text-ds-gray-500' : 'text-white/50'}`}>{slotFull[s]}</span></div>)}
                                     </div>
                                     <div className="space-y-2 mb-5">
                                         {days.map(day => (
                                             <div key={day} className={`flex items-center gap-2 px-3 py-2.5 rounded-2xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>
-                                                <span className={`w-8 text-[13px] font-bold ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{day}</span>
+                                                <span className={`w-8 text-[13px] font-bold ${isLight ? 'text-ds-gray-500' : 'text-white/40'}`}>{day}</span>
                                                 <div className="flex gap-1.5 flex-1">
                                                     {slots.map(slot => {
                                                         const active = (availability[day] ?? []).includes(slot);
                                                         return (
                                                             <button key={slot} onClick={() => toggleSlot(day, slot)}
-                                                                className={`flex-1 py-1.5 rounded-xl text-[10px] font-bold transition-all active:scale-95 ${active ? `${slotColors[slot]} text-white` : `${isLight ? 'bg-black/5 text-gray-400' : 'bg-white/8 text-white/30'}`}`}>
+                                                                className={`flex-1 py-1.5 rounded-xl text-[10px] font-bold transition-all active:scale-95 ${active ? `${slotColors[slot]} text-white` : `${isLight ? 'bg-black/5 text-ds-gray-400' : 'bg-white/8 text-white/30'}`}`}>
                                                                 {slot}
                                                             </button>
                                                         );
@@ -274,7 +274,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                             </div>
                                         ))}
                                     </div>
-                                    <button onClick={() => setActivePanel(null)} className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[15px] font-bold active:scale-95">Save Availability</button>
+                                    <button onClick={() => setActivePanel(null)} className="w-full py-4 rounded-2xl bg-gradient-to-r from-ds-gold-500 to-ds-gold-600 text-white text-[15px] font-bold active:scale-95">Save Availability</button>
                                 </motion.div>
                             )}
 
@@ -291,7 +291,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                         {[
                                             { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', colorText: isColorful ? 'text-primary' : 'text-ds-cyan-400', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/15' },
                                             { label: 'Applications', value: '7', change: '+3 this week', icon: 'send', colorText: isColorful ? 'text-primary' : 'text-ds-blue-400', colorBg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
-                                            { label: 'Interviews', value: '2', change: 'Active', icon: 'record_voice_over', colorText: 'text-green-400', colorBg: 'bg-ds-success/15' },
+                                            { label: 'Interviews', value: '2', change: 'Active', icon: 'record_voice_over', colorText: 'text-ds-emerald-400', colorBg: 'bg-ds-success/15' },
                                             { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', colorText: 'text-primary', colorBg: 'bg-primary/15' },
                                         ].map((s, i) => (
                                             <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
@@ -301,8 +301,8 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                                                 </div>
                                                 <p className="text-[22px] font-black leading-none mb-1">{s.value}</p>
                                                 <div className="flex items-center justify-between">
-                                                    <p className={`text-[11px] ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{s.label}</p>
-                                                    <span className="text-[10px] font-bold text-green-400">{s.change}</span>
+                                                    <p className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-white/40'}`}>{s.label}</p>
+                                                    <span className="text-[10px] font-bold text-ds-emerald-400">{s.change}</span>
                                                 </div>
                                             </motion.div>
                                         ))}

@@ -1,4 +1,4 @@
-/* eslint-disable design-system/no-raw-html-elements -- Admin portal prototype; full DS migration tracked separately */
+﻿/* eslint-disable design-system/no-raw-html-elements -- Admin portal prototype; full DS migration tracked separately */
 'use client';
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
@@ -133,10 +133,10 @@ export default function PortalPanel() {
     const isColorful = theme === 'colorful';
 
     const bg = isLight
-        ? 'bg-gradient-to-br from-slate-50 to-gray-100 text-[var(--foreground)]'
+        ? 'bg-gradient-to-br from-ds-gray-50 to-ds-gray-100 text-[var(--foreground)]'
         : isColorful
             ? 'bg-[var(--color-colorful-bg)] text-[var(--foreground)]'
-            : 'bg-gradient-to-br from-gray-900 to-black text-[var(--foreground)]';
+            : 'bg-gradient-to-br from-ds-gray-900 to-black text-[var(--foreground)]';
     const sidebarBg = isLight
         ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60'
         : isColorful
@@ -193,7 +193,7 @@ export default function PortalPanel() {
                             <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]">Portal</span>
                         </div>
                     )}
-                    <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                    <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-ds-gray-600' : 'hover:bg-white/10 text-ds-gray-300'}`}>
                         <Icon name={sidebarCollapsed ? "menu" : "menu_open"} className="text-xl" />
                     </button>
                 </div>
@@ -209,7 +209,7 @@ export default function PortalPanel() {
                             <button key={s.key} onClick={() => setActiveSection(s.key)}
                                 className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
                                     ? (isColorful ? 'text-accent shadow-lg shadow-primary/10' : isLight ? 'text-accent shadow-sm' : 'text-accent shadow-lg shadow-[var(--primary)]/10')
-                                    : (isColorful ? 'text-accent/80 hover:bg-primary/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
+                                    : (isColorful ? 'text-accent/80 hover:bg-primary/10' : isLight ? 'text-ds-gray-600 hover:bg-white/50' : 'text-ds-gray-400 hover:bg-ds-gray-800/70')}`}>
                                 {active && (
                                     <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-primary/20 border border-primary/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
                                 )}
@@ -219,8 +219,8 @@ export default function PortalPanel() {
                         );
                     })}
                 </nav>
-                <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-primary/20' : 'border-white/5'}`}>
-                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-accent/70 hover:bg-primary/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                <div className={`px-3 py-4 border-t ${isLight ? 'border-ds-gray-200/60' : isColorful ? 'border-primary/20' : 'border-white/5'}`}>
+                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-accent/70 hover:bg-primary/10' : isLight ? 'text-ds-gray-500 hover:bg-white/50' : 'text-ds-gray-500 hover:bg-white/5'}`}>
                         <Icon name="arrow_back" className={`text-[20px] ${sidebarCollapsed ? '' : 'mr-3'} opacity-60 group-hover:opacity-100 transition-opacity`} />
                         {!sidebarCollapsed && <span>Back to Case Study</span>}
                     </a>
@@ -235,7 +235,7 @@ export default function PortalPanel() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm md:hidden"
+                            className="fixed inset-0 z-40 bg-ds-gray-900/40 backdrop-blur-sm md:hidden"
                             onClick={() => setMobileSidebarOpen(false)}
                         />
                         <motion.aside
@@ -252,7 +252,7 @@ export default function PortalPanel() {
                                     </div>
                                     <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]">Portal</span>
                                 </div>
-                                <button onClick={() => setMobileSidebarOpen(false)} aria-label="Close navigation" className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-slate-600' : 'hover:bg-white/10 text-slate-300'}`}>
+                                <button onClick={() => setMobileSidebarOpen(false)} aria-label="Close navigation" className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-white/60 text-ds-gray-600' : 'hover:bg-white/10 text-ds-gray-300'}`}>
                                     <Icon name="close" className="text-xl" />
                                 </button>
                             </div>
@@ -266,7 +266,7 @@ export default function PortalPanel() {
                                         <button key={s.key} onClick={() => { setActiveSection(s.key); setMobileSidebarOpen(false); }}
                                             className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
                                                 ? (isColorful ? 'text-accent shadow-lg shadow-primary/10' : isLight ? 'text-accent shadow-sm' : 'text-accent shadow-lg shadow-[var(--primary)]/10')
-                                                : (isColorful ? 'text-accent/80 hover:bg-primary/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
+                                                : (isColorful ? 'text-accent/80 hover:bg-primary/10' : isLight ? 'text-ds-gray-600 hover:bg-white/50' : 'text-ds-gray-400 hover:bg-ds-gray-800/70')}`}>
                                             {active && (
                                                 <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-primary/20 border border-primary/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
                                             )}
@@ -276,8 +276,8 @@ export default function PortalPanel() {
                                     );
                                 })}
                             </nav>
-                            <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-primary/20' : 'border-white/5'}`}>
-                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-accent/70 hover:bg-primary/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                            <div className={`px-3 py-4 border-t ${isLight ? 'border-ds-gray-200/60' : isColorful ? 'border-primary/20' : 'border-white/5'}`}>
+                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-accent/70 hover:bg-primary/10' : isLight ? 'text-ds-gray-500 hover:bg-white/50' : 'text-ds-gray-500 hover:bg-white/5'}`}>
                                     <Icon name="arrow_back" className="text-[20px] mr-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                                     <span>Back to Case Study</span>
                                 </a>
@@ -308,7 +308,7 @@ export default function PortalPanel() {
                         {/* AI Copilot â€” mobile only, replaces floating button */}
                         <motion.button onClick={() => setShowCopilot(true)} aria-label="Open AI Copilot" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
                             <Icon name="auto_awesome" className="text-xl text-white" />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                            <span className="absolute top-2 right-2 w-2 h-2 bg-ds-gold-400 rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
                             <motion.button onClick={toggleNotifications} aria-label="Notifications" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30 text-accent' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
@@ -317,14 +317,14 @@ export default function PortalPanel() {
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
-                                        <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-ds-gray-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                        <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-ds-gray-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
                                         </div>
                                         <div className="max-h-80 overflow-y-auto p-2 space-y-1">
                                             {notifications.map(item => (
-                                                <button key={item.id} onClick={() => markNotificationAsRead(item.id)} className={`w-full text-left p-3 rounded-2xl transition-all ${item.read ? (isLight ? 'hover:bg-slate-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5') : (isLight ? 'bg-primary/5 hover:bg-primary/10' : isColorful ? 'bg-primary/15 hover:bg-primary/20' : 'bg-primary/10 hover:bg-primary/15')}`}>
+                                                <button key={item.id} onClick={() => markNotificationAsRead(item.id)} className={`w-full text-left p-3 rounded-2xl transition-all ${item.read ? (isLight ? 'hover:bg-ds-gray-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5') : (isLight ? 'bg-primary/5 hover:bg-primary/10' : isColorful ? 'bg-primary/15 hover:bg-primary/20' : 'bg-primary/10 hover:bg-primary/15')}`}>
                                                     <div className="flex items-start justify-between gap-3">
                                                         <div>
                                                             <p className="text-sm font-bold">{item.title}</p>
@@ -347,17 +347,17 @@ export default function PortalPanel() {
                             </motion.button>
                             <AnimatePresence>
                                 {showProfileMenu && (
-                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
-                                            <div className={`p-5 border-b ${isLight ? 'border-slate-100' : isColorful ? 'border-primary/30' : 'border-white/5'}`}>
+                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-ds-gray-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                            <div className={`p-5 border-b ${isLight ? 'border-ds-gray-100' : isColorful ? 'border-primary/30' : 'border-white/5'}`}>
                                                 <p className="font-bold text-base">Ali Al-Zuhairi</p>
                                                 <p className="text-xs font-medium opacity-60 mt-1">admin@alux.space</p>
                                             </div>
                                             <div className="p-3 space-y-1">
-                                                <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-slate-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5'}`}>
-                                                    <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-slate-400' : isColorful ? 'text-accent/70' : 'text-slate-400'}`} />
+                                                <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-ds-gray-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5'}`}>
+                                                    <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-ds-gray-400' : isColorful ? 'text-accent/70' : 'text-ds-gray-400'}`} />
                                                     Settings
                                                 </button>
-                                                <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-slate-50' : isColorful ? 'bg-primary/5 border border-primary/30' : 'bg-white/5'}`}>
+                                                <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-primary/5 border border-primary/30' : 'bg-white/5'}`}>
                                                     <span className="text-xs font-bold uppercase tracking-wider opacity-60 mb-2 block">Theme</span>
                                                     <div className={`flex rounded-2xl p-1 ${isLight ? 'bg-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80' : 'bg-black/20'}`}>
                                                         {([
@@ -365,7 +365,7 @@ export default function PortalPanel() {
                                                             { value: 'dark', label: 'Dark', icon: 'dark_mode' },
                                                             { value: 'colorful', label: 'Colorful', icon: 'palette' }
                                                         ] as { value: Theme, label: string, icon: string }[]).map(mode => (
-                                                                <button key={mode.value} aria-label={`Switch to ${mode.label} theme`} title={mode.label} onClick={() => { setTheme(mode.value); setShowProfileMenu(false); }} className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${theme === mode.value ? (isLight ? 'bg-slate-900 text-white' : isColorful ? 'bg-[var(--primary)]/20 text-white border border-[var(--primary)]/40' : 'bg-white/10 text-white border border-white/20') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-accent/70 hover:text-white' : 'text-slate-300 hover:text-white')}`}>
+                                                                <button key={mode.value} aria-label={`Switch to ${mode.label} theme`} title={mode.label} onClick={() => { setTheme(mode.value); setShowProfileMenu(false); }} className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${theme === mode.value ? (isLight ? 'bg-ds-gray-900 text-white' : isColorful ? 'bg-[var(--primary)]/20 text-white border border-[var(--primary)]/40' : 'bg-white/10 text-white border border-white/20') : (isLight ? 'text-ds-gray-500 hover:text-ds-gray-900' : isColorful ? 'text-accent/70 hover:text-white' : 'text-ds-gray-300 hover:text-white')}`}>
                                                                 <Icon name={mode.icon} className="text-sm" />
                                                             </button>
                                                         ))}
@@ -397,9 +397,9 @@ export default function PortalPanel() {
             <AnimatePresence>
                 {showSearch && (
                     <div className="fixed inset-0 z-[70] p-4 sm:p-8 flex items-start justify-center">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={() => setShowSearch(false)} />
-                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border-primary/30 shadow-2xl shadow-primary/30 text-accent' : 'bg-[var(--color-dark-2)]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
-                            <div className={`px-5 py-4 border-b flex items-center gap-3 ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-ds-gray-900/50 backdrop-blur-sm" onClick={() => setShowSearch(false)} />
+                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-ds-gray-300/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border-primary/30 shadow-2xl shadow-primary/30 text-accent' : 'bg-[var(--color-dark-2)]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
+                            <div className={`px-5 py-4 border-b flex items-center gap-3 ${isLight ? 'border-ds-gray-100' : 'border-white/10'}`}>
                                 <Icon name="search" className="text-xl opacity-60" />
                                 <input
                                     autoFocus
@@ -419,7 +419,7 @@ export default function PortalPanel() {
                                             setShowSearch(false);
                                             setSearchQuery('');
                                         }}
-                                        className={`w-full text-left p-3 rounded-2xl flex items-center justify-between transition-colors ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-primary-900/40' : 'hover:bg-white/10'}`}
+                                        className={`w-full text-left p-3 rounded-2xl flex items-center justify-between transition-colors ${isLight ? 'hover:bg-ds-gray-100' : isColorful ? 'hover:bg-primary-900/40' : 'hover:bg-white/10'}`}
                                     >
                                         <div className="flex items-center gap-3">
                                             <Icon name={section.icon} className="text-lg opacity-70" />
@@ -452,7 +452,7 @@ export default function PortalPanel() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex justify-end bg-slate-900/20 backdrop-blur-sm"
+                        className="fixed inset-0 z-50 flex justify-end bg-ds-gray-900/20 backdrop-blur-sm"
                         onClick={() => setShowCopilot(false)}
                     >
                         <motion.div
@@ -463,7 +463,7 @@ export default function PortalPanel() {
                             onClick={(e) => e.stopPropagation()}
                             className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-l border-primary/30 text-accent' : 'bg-[var(--color-dark-1)]/80 border-l border-white/10'}`}
                         >
-                            <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
+                            <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-ds-gray-200/50' : 'border-white/10'}`}>
                                 <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
                                 <div className="flex items-center space-x-4">
                                     <AIStamp isLight={isLight} size="md" className="shadow-lg" />
@@ -473,17 +473,17 @@ export default function PortalPanel() {
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <button className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'}`} title="History">
+                                    <button className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-ds-gray-100' : 'hover:bg-white/10'}`} title="History">
                                         <Icon name="history" className="text-xl opacity-60" />
                                     </button>
-                                    <button onClick={() => setShowCopilot(false)} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'}`}>
+                                    <button onClick={() => setShowCopilot(false)} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-ds-gray-100' : 'hover:bg-white/10'}`}>
                                         <Icon name="close" className="text-xl opacity-60" />
                                     </button>
                                 </div>
                             </div>
 
                             <div className="flex-1 overflow-y-auto p-6 space-y-6 z-0 relative no-scrollbar">
-                                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-fuchsia-500/10 blur-[80px] rounded-full pointer-events-none" />
+                                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-ds-fuchsia-500/10 blur-[80px] rounded-full pointer-events-none" />
 
                                 {copilotHistory.map((h, i) => (
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} key={i} className={`flex flex-col ${h.role === 'user' ? 'items-end' : 'items-start'} relative z-10`}>
@@ -493,7 +493,7 @@ export default function PortalPanel() {
                                             )}
                                             <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
                                                 {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ml-1 tracking-wider uppercase">Portal AI</span>}
-                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-br-sm shadow-[var(--primary)]/20` : isLight ? 'bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-slate-200/50' : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
+                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-br-sm shadow-[var(--primary)]/20` : isLight ? 'bg-white border border-ds-gray-100 text-ds-gray-800 rounded-bl-sm shadow-ds-gray-200/50' : 'bg-white/5 border border-white/10 text-ds-gray-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
                                                     {h.msg}
                                                     {h.role === 'ai' && i === copilotHistory.length - 1 && (
                                                         <div className="flex items-center space-x-3 mt-4 pt-3 border-t border-current/10">
@@ -514,7 +514,7 @@ export default function PortalPanel() {
                                         {[
                                             { icon: 'analytics', label: 'Analyze weekly engagement', color: 'text-primary', bg: 'bg-primary/10' },
                                             { icon: 'security', label: 'Audit recent admin actions', color: 'text-[var(--color-cobalt-700)]', bg: 'bg-[var(--color-cobalt-700)]/10' },
-                                            { icon: 'speed', label: 'Optimize query performance', color: 'text-ds-warning', bg: 'bg-amber-600/10' }
+                                            { icon: 'speed', label: 'Optimize query performance', color: 'text-ds-warning', bg: 'bg-ds-gold-600/10' }
                                         ].map(opt => (
                                             <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? `bg-white/60 border border-white ${aiHoverBorder} hover:shadow-lg` : `bg-white/5 border border-white/5 ${isColorful ? 'hover:border-primary/50' : 'hover:border-[var(--primary)]/50'} hover:bg-white/10`} text-[14px] font-medium backdrop-blur-xl`}>
                                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${opt.bg} ${opt.color}`}>
@@ -527,9 +527,9 @@ export default function PortalPanel() {
                                 )}
                             </div>
 
-                            <div className={`p-5 border-t relative z-10 ${isLight ? 'border-slate-200/50 bg-white/80 backdrop-blur-2xl' : 'border-white/10 bg-[var(--color-dark-1)]/80 backdrop-blur-2xl'}`}>
+                            <div className={`p-5 border-t relative z-10 ${isLight ? 'border-ds-gray-200/50 bg-white/80 backdrop-blur-2xl' : 'border-white/10 bg-[var(--color-dark-1)]/80 backdrop-blur-2xl'}`}>
                                 <form onSubmit={handleCopilotSubmit} className="flex items-center space-x-2 px-2 py-2 rounded-3xl border border-[var(--card-border)] shadow-sm transition-all duration-300 bg-[var(--background)] focus-within:border-[var(--btn-primary-bg)] focus-within:shadow-[0_0_0_4px_var(--primary-glow)]">
-                                    <button type="button" className={`w-10 h-10 flex shrink-0 items-center justify-center rounded-2xl transition-colors ${isLight ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-white/10 text-slate-400'}`}>
+                                    <button type="button" className={`w-10 h-10 flex shrink-0 items-center justify-center rounded-2xl transition-colors ${isLight ? 'hover:bg-ds-gray-100 text-ds-gray-500' : 'hover:bg-white/10 text-ds-gray-400'}`}>
                                         <Icon name="attach_file" className="text-xl" />
                                     </button>
                                     <input
@@ -539,7 +539,7 @@ export default function PortalPanel() {
                                         placeholder="Ask Copilot anything..."
                                         className="flex-1 bg-transparent border-none outline-none text-[14px] font-medium py-2 w-full min-w-0"
                                     />
-                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? `bg-gradient-to-r ${aiGradientSoft} text-white shadow-lg shadow-[var(--primary)]/30` : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/10 text-slate-500'}`}>
+                                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={!copilotMsg.trim()} className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-2xl transition-all ${copilotMsg.trim() ? `bg-gradient-to-r ${aiGradientSoft} text-white shadow-lg shadow-[var(--primary)]/30` : isLight ? 'bg-ds-gray-100 text-ds-gray-400' : 'bg-white/10 text-ds-gray-500'}`}>
                                         <Icon name="arrow_upward" className="text-lg font-bold" />
                                     </motion.button>
                                 </form>
@@ -609,13 +609,13 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[var(--primary)]/15 to-[var(--gradient-mid)]/15`}>
                     <Icon name={icon} className="text-2xl text-[var(--primary)]" />
                 </div>
-                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1 ${trendUp ? 'bg-green-600/10 text-ds-success' : 'bg-pink-500/10 text-pink-500'}`}>
+                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1 ${trendUp ? 'bg-ds-emerald-600/10 text-ds-success' : 'bg-ds-pink-500/10 text-ds-pink-500'}`}>
                     <Icon name={trendUp ? "trending_up" : "trending_down"} className="text-[14px]" />
                     <span>{trend}</span>
                 </span>
             </div>
             <span className="text-3xl font-black tracking-tight">{value}</span>
-            <span className={`text-sm font-medium mt-1 flex justify-between items-center ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+            <span className={`text-sm font-medium mt-1 flex justify-between items-center ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>
                 {label}
                 <Icon name="info" className="text-[16px] opacity-40 hover:opacity-100 transition-opacity" />
             </span>
@@ -641,9 +641,9 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
     const recentActivity = [
         { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette', color: 'text-primary', bg: 'bg-primary/10' },
         { user: 'James L.', action: 'Added 3 comments to Sprint Review', time: '12 min ago', icon: 'chat', color: 'text-[var(--color-cobalt-700)]', bg: 'bg-[var(--color-cobalt-700)]/10' },
-        { user: 'Mia C.', action: 'Completed UX research report', time: '28 min ago', icon: 'description', color: 'text-ds-warning', bg: 'bg-amber-600/10' },
-        { user: 'Alex R.', action: 'Created Q1 Planning workspace', time: '1h ago', icon: 'add_circle', color: 'text-ds-success', bg: 'bg-green-600/10' },
-        { user: 'Lena T.', action: 'Asked Copilot about metrics', time: '2h ago', icon: 'auto_awesome', color: 'text-indigo-500', bg: 'bg-indigo-500/10' },
+        { user: 'Mia C.', action: 'Completed UX research report', time: '28 min ago', icon: 'description', color: 'text-ds-warning', bg: 'bg-ds-gold-600/10' },
+        { user: 'Alex R.', action: 'Created Q1 Planning workspace', time: '1h ago', icon: 'add_circle', color: 'text-ds-success', bg: 'bg-ds-emerald-600/10' },
+        { user: 'Lena T.', action: 'Asked Copilot about metrics', time: '2h ago', icon: 'auto_awesome', color: 'text-ds-indigo-500', bg: 'bg-ds-indigo-500/10' },
     ];
 
     const activityChartTops = useMemo(() => Array.from({ length: 30 }, (_, i) => 20 + Math.sin(i * 0.5) * 30 + Math.random() * 30), []);
@@ -663,13 +663,13 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                 {/* Activity Chart */}
                 <motion.div variants={itemVariants} className={`${card} xl:col-span-2`}>
                     <h3 className="font-bold text-xl mb-1">User Activity (30 Days)</h3>
-                    <p className={`text-[12px] font-medium mb-5 ${isLight ? 'text-slate-400' : 'text-white/35'}`}>Daily interactions across the platform</p>
+                    <p className={`text-[12px] font-medium mb-5 ${isLight ? 'text-ds-gray-400' : 'text-white/35'}`}>Daily interactions across the platform</p>
                     <div className="relative h-52">
                         {/* Horizontal grid lines */}
                         {[25, 50, 75].map(pct => (
                             <div key={pct} className="absolute left-0 right-0 flex items-center" style={{ bottom: `${pct}%` }}>
-                                <div className={`w-full h-px ${isLight ? 'bg-slate-100' : isColorful ? 'bg-orange-500/[0.07]' : 'bg-white/[0.05]'}`} />
-                                <span className={`absolute right-0 text-[10px] font-medium -translate-y-3 ${isLight ? 'text-slate-300' : 'text-white/20'}`}>{pct}%</span>
+                                <div className={`w-full h-px ${isLight ? 'bg-ds-gray-100' : isColorful ? 'bg-orange-500/[0.07]' : 'bg-white/[0.05]'}`} />
+                                <span className={`absolute right-0 text-[10px] font-medium -translate-y-3 ${isLight ? 'text-ds-gray-300' : 'text-white/20'}`}>{pct}%</span>
                             </div>
                         ))}
                         {/* Bars */}
@@ -685,7 +685,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                                             background: 'var(--chart-bar-gradient)'
                                         }}
                                     />
-                                    <div className={`absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap pointer-events-none ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
+                                    <div className={`absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap pointer-events-none ${isLight ? 'bg-ds-gray-800 text-white' : 'bg-white text-ds-gray-900'}`}>
                                         {Math.round(h * 15)}
                                     </div>
                                 </motion.div>
@@ -727,11 +727,11 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                     <div className="flex flex-col sm:flex-row items-center sm:space-x-10 space-y-8 sm:space-y-0">
                         <motion.div whileHover={{ scale: 1.05 }} className="relative w-40 h-40 flex items-center justify-center shrink-0 cursor-pointer">
                             <svg className="w-full h-full transform -rotate-90 drop-shadow-xl" viewBox="0 0 36 36">
-                                <path className={isLight ? "text-slate-100" : "text-white/5"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path className={isLight ? "text-ds-gray-100" : "text-white/5"} stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                 <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "35, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeLinecap="round" className="text-[var(--primary)] hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                 <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "25, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-35" strokeLinecap="round" className="text-primary-dark hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-60" strokeLinecap="round" className="text-amber-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-80" strokeLinecap="round" className="text-pink-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-60" strokeLinecap="round" className="text-ds-gold-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ duration: 1.5, ease: "easeOut" }} strokeDashoffset="-80" strokeLinecap="round" className="text-ds-pink-400 hover:opacity-80 transition-opacity" stroke="currentColor" strokeWidth="4" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             </svg>
                             <div className="absolute flex flex-col items-center">
                                 <span className="text-2xl font-black">2,891</span>
@@ -739,7 +739,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                             </div>
                         </motion.div>
                         <div className="flex-1 w-full space-y-3">
-                            {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-[var(--primary)]' }, { label: 'Design Reviews', pct: '25%', color: 'bg-primary-dark' }, { label: 'Analytics', pct: '20%', color: 'bg-amber-400' }, { label: 'General', pct: '20%', color: 'bg-pink-400' }].map(s => (
+                            {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-[var(--primary)]' }, { label: 'Design Reviews', pct: '25%', color: 'bg-primary-dark' }, { label: 'Analytics', pct: '20%', color: 'bg-ds-gold-400' }, { label: 'General', pct: '20%', color: 'bg-ds-pink-400' }].map(s => (
                                 <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : isColorful ? 'bg-primary/5 hover:bg-primary/10' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
                                     <span className="flex items-center"><span className={`w-3 h-3 rounded-full mr-3 shadow-sm ${s.color}`} />{s.label}</span>
                                     <span className="font-bold">{s.pct}</span>
@@ -753,10 +753,10 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                     <h3 className="font-bold text-xl mb-6">Workspace Activity Heatmap</h3>
                     <div className="grid grid-cols-7 gap-2">
                         {heatmapData.map((intensity: number, i: number) => {
-                            const bg = intensity > 0.7 ? (isLight ? 'bg-ds-warning' : isColorful ? 'bg-primary' : 'bg-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-amber-400/60' : isColorful ? 'bg-primary/60' : 'bg-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-amber-300/30' : isColorful ? 'bg-primary/25' : 'bg-cyan-400/20') : (isLight ? 'bg-slate-100' : isColorful ? 'bg-primary/10' : 'bg-white/5');
+                            const bg = intensity > 0.7 ? (isLight ? 'bg-ds-warning' : isColorful ? 'bg-primary' : 'bg-ds-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-ds-gold-400/60' : isColorful ? 'bg-primary/60' : 'bg-ds-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-ds-gold-300/30' : isColorful ? 'bg-primary/25' : 'bg-ds-cyan-400/20') : (isLight ? 'bg-ds-gray-100' : isColorful ? 'bg-primary/10' : 'bg-white/5');
                             return <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.01 }} whileHover={{ scale: 1.2, zIndex: 10 }} className={`aspect-square rounded-lg ${bg} cursor-pointer hover:shadow-lg transition-shadow relative group`}>
                                 {/* Tooltip */}
-                                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
+                                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-ds-gray-800 text-white' : 'bg-white text-ds-gray-900'}`}>
                                     Score: {Math.round(intensity * 100)}
                                 </div>
                             </motion.div>;
@@ -765,7 +765,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                     <div className="flex justify-between items-center mt-5 text-xs font-medium opacity-50">
                         <span>Less active</span>
                         <div className="flex space-x-1.5">
-                            {[isLight ? 'bg-slate-100' : isColorful ? 'bg-primary/10' : 'bg-white/5', isLight ? 'bg-amber-300/30' : isColorful ? 'bg-primary/25' : 'bg-cyan-400/20', isLight ? 'bg-amber-400/60' : isColorful ? 'bg-primary/60' : 'bg-cyan-400/60', isLight ? 'bg-ds-warning' : isColorful ? 'bg-primary' : 'bg-cyan-400'].map((c, i) => (
+                            {[isLight ? 'bg-ds-gray-100' : isColorful ? 'bg-primary/10' : 'bg-white/5', isLight ? 'bg-ds-gold-300/30' : isColorful ? 'bg-primary/25' : 'bg-ds-cyan-400/20', isLight ? 'bg-ds-gold-400/60' : isColorful ? 'bg-primary/60' : 'bg-ds-cyan-400/60', isLight ? 'bg-ds-warning' : isColorful ? 'bg-primary' : 'bg-ds-cyan-400'].map((c, i) => (
                                 <div key={i} className={`w-4 h-4 rounded-md ${c}`} />
                             ))}
                         </div>
@@ -797,8 +797,8 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
         { name: 'Ethan Patel', email: 'ethan@company.com', role: 'Editor', status: 'Invited', lastActive: 'Never' },
     ];
 
-    const roleBadge = (r: string) => r === 'Admin' ? 'bg-[var(--primary)]/10 text-[var(--primary)] border-[var(--primary)]/20' : r === 'Editor' ? 'bg-primary-dark/10 text-primary-dark border-primary-dark/20' : 'bg-slate-500/10 text-slate-500 border-slate-500/20';
-    const statusDot = (s: string) => s === 'Active' ? 'bg-ds-success shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.6)]' : s === 'Invited' ? 'bg-ds-warning shadow-[0_0_8px_rgb(var(--color-warning-rgb)_/_0.6)]' : 'bg-slate-400';
+    const roleBadge = (r: string) => r === 'Admin' ? 'bg-[var(--primary)]/10 text-[var(--primary)] border-[var(--primary)]/20' : r === 'Editor' ? 'bg-primary-dark/10 text-primary-dark border-primary-dark/20' : 'bg-ds-gray-500/10 text-ds-gray-500 border-ds-gray-500/20';
+    const statusDot = (s: string) => s === 'Active' ? 'bg-ds-success shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.6)]' : s === 'Invited' ? 'bg-ds-warning shadow-[0_0_8px_rgb(var(--color-warning-rgb)_/_0.6)]' : 'bg-ds-gray-400';
 
     const handleNext = () => setWizardStep(prev => Math.min(prev + 1, 3));
     const handleBack = () => setWizardStep(prev => Math.max(prev - 1, 1));
@@ -809,7 +809,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <div>
                     <h2 className="text-2xl font-black tracking-tight">Portal User Management</h2>
-                    <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : isColorful ? 'text-accent/60' : 'text-slate-400'}`}>{users.length} total users</p>
+                    <p className={`text-sm font-medium mt-1 ${isLight ? 'text-ds-gray-500' : isColorful ? 'text-accent/60' : 'text-ds-gray-400'}`}>{users.length} total users</p>
                 </div>
                 <motion.button onClick={() => setShowWizard(true)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[var(--primary)]/20">
                     <Icon name="person_add" className="text-lg" /><span>Add User</span>
@@ -820,7 +820,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                 {/* Mobile Card List â€” visible on small screens only */}
                 <div className="sm:hidden space-y-3">
                     {users.map((u, i) => (
-                        <div key={i} className={`rounded-2xl border transition-all ${isLight ? 'bg-white/70 border-slate-200' : isColorful ? 'bg-primary/5 border-primary/20' : 'bg-white/[0.03] border-white/10'}`}>
+                        <div key={i} className={`rounded-2xl border transition-all ${isLight ? 'bg-white/70 border-ds-gray-200' : isColorful ? 'bg-primary/5 border-primary/20' : 'bg-white/[0.03] border-white/10'}`}>
                             <div
                                 onClick={() => setExpandedCard(expandedCard === i ? null : i)}
                                 className="flex items-center gap-3 p-4 cursor-pointer"
@@ -835,7 +835,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                     </div>
                                     <div className="flex items-center gap-2 mt-1">
                                         <span className={`w-2 h-2 rounded-full shrink-0 ${statusDot(u.status)}`} />
-                                        <span className={`text-[12px] font-medium ${isLight ? 'text-slate-500' : isColorful ? 'text-accent/60' : 'text-slate-400'}`}>{u.status}</span>
+                                        <span className={`text-[12px] font-medium ${isLight ? 'text-ds-gray-500' : isColorful ? 'text-accent/60' : 'text-ds-gray-400'}`}>{u.status}</span>
                                         <span className={`text-[11px] opacity-50 ml-auto`}>{u.lastActive}</span>
                                     </div>
                                 </div>
@@ -844,13 +844,13 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                             <AnimatePresence>
                                 {expandedCard === i && (
                                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                                        <div className={`mx-3 mb-3 p-4 rounded-2xl flex items-start gap-3 ${isLight ? 'bg-slate-50 border border-slate-100' : isColorful ? 'bg-primary/5 border border-primary/15' : 'bg-white/[0.03] border border-white/5'}`}>
+                                        <div className={`mx-3 mb-3 p-4 rounded-2xl flex items-start gap-3 ${isLight ? 'bg-ds-gray-50 border border-ds-gray-100' : isColorful ? 'bg-primary/5 border border-primary/15' : 'bg-white/[0.03] border border-white/5'}`}>
                                             <AIStamp isLight={isLight} size="sm" variant="secondary" />
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="text-[13px] font-bold mb-1">AI Portal Summary</h4>
-                                                <p className={`text-[12px] leading-relaxed ${isLight ? 'text-slate-600' : isColorful ? 'text-accent/70' : 'text-slate-400'}`}>{u.name} is highly engaged with design system components. Consider offering them early access to the new Design Tokens beta.</p>
+                                                <p className={`text-[12px] leading-relaxed ${isLight ? 'text-ds-gray-600' : isColorful ? 'text-accent/70' : 'text-ds-gray-400'}`}>{u.name} is highly engaged with design system components. Consider offering them early access to the new Design Tokens beta.</p>
                                                 <div className="flex gap-2 mt-3">
-                                                    <button className={`text-[11px] font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white border border-slate-200' : isColorful ? 'bg-primary/10 border border-primary/20' : 'bg-white/5 border border-white/10'}`}>View Profile</button>
+                                                    <button className={`text-[11px] font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white border border-ds-gray-200' : isColorful ? 'bg-primary/10 border border-primary/20' : 'bg-white/5 border border-white/10'}`}>View Profile</button>
                                                     <button className="text-[11px] font-bold px-3 py-1.5 rounded-xl text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center gap-1">
                                                         <Icon name="mail" className="text-[13px]" /> Message
                                                     </button>
@@ -868,7 +868,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                 <div className="hidden sm:block overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
                     <table className="w-full min-w-[700px]">
                         <thead>
-                            <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : isColorful ? 'text-accent/50' : 'text-slate-500'}`}>
+                            <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-ds-gray-400' : isColorful ? 'text-accent/50' : 'text-ds-gray-500'}`}>
                                 <th className="pb-5">User</th>
                                 <th className="pb-5">Role</th>
                                 <th className="pb-5">Status</th>
@@ -884,7 +884,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                     <React.Fragment key={i}>
                                         <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
                                             onClick={() => setExpanded(!expanded)}
-                                            className={`${isLight ? 'hover:bg-white/50 divide-slate-100' : isColorful ? 'hover:bg-primary/5' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
+                                            className={`${isLight ? 'hover:bg-white/50 divide-ds-gray-100' : isColorful ? 'hover:bg-primary/5' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
                                             <td className="py-4">
                                                 <div className="flex items-center space-x-4">
                                                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black bg-[var(--primary)]/10 text-[var(--primary)] group-hover:bg-[var(--primary)]/20 transition-colors`}>
@@ -900,7 +900,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                             <td className="py-4"><span className="flex items-center text-sm font-medium"><span className={`w-2.5 h-2.5 rounded-full mr-3 ${statusDot(u.status)}`} />{u.status}</span></td>
                                             <td className="py-4 text-sm font-medium opacity-60">{u.lastActive}</td>
                                             <td className="py-4 text-right">
-                                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-9 h-9 rounded-xl inline-flex items-center justify-center ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/10'} transition-colors`}>
+                                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-9 h-9 rounded-xl inline-flex items-center justify-center ${isLight ? 'hover:bg-ds-gray-100' : 'hover:bg-white/10'} transition-colors`}>
                                                     <Icon name={expanded ? "expand_less" : "expand_more"} className="text-xl opacity-60" />
                                                 </motion.button>
                                             </td>
@@ -916,7 +916,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                                                     <h4 className="text-[15px] font-bold mb-1.5">AI Portal Summary</h4>
                                                                     <p className="text-[13px] font-medium opacity-70 leading-relaxed max-w-3xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
                                                                     <div className="flex space-x-3 mt-4">
-                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl ${isLight ? 'bg-white border border-slate-200 hover:bg-slate-50' : isColorful ? 'bg-primary/10 border border-primary/20 hover:bg-primary/20' : 'bg-white/5 border border-white/10 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
+                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl ${isLight ? 'bg-white border border-ds-gray-200 hover:bg-ds-gray-50' : isColorful ? 'bg-primary/10 border border-primary/20 hover:bg-primary/20' : 'bg-white/5 border border-white/10 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
                                                                         <button className={`text-xs font-bold px-4 py-2 rounded-xl text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] hover:shadow-lg hover:shadow-[var(--primary)]/20 transition-all flex items-center`}><Icon name="mail" className="text-[16px] mr-2" /> Message</button>
                                                                     </div>
                                                                 </div>
@@ -938,15 +938,15 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
             <AnimatePresence>
                 {showWizard && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={handleClose} />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-ds-gray-900/40 backdrop-blur-sm" onClick={handleClose} />
                         <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border border-primary/25' : 'bg-[var(--color-dark-1)]/90 border border-white/10'}`}>
                             {/* Header */}
-                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : isColorful ? 'border-primary/20' : 'border-white/10'}`}>
+                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-ds-gray-200/50' : isColorful ? 'border-primary/20' : 'border-white/10'}`}>
                                 <div>
                                     <h3 className="text-xl font-black tracking-tight">Add New User</h3>
                                     <p className="text-xs font-medium opacity-60 mt-1">Step {wizardStep} of 3</p>
                                 </div>
-                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-primary/15' : 'hover:bg-white/10'}`}>
+                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-ds-gray-100' : isColorful ? 'hover:bg-primary/15' : 'hover:bg-white/10'}`}>
                                     <Icon name="close" className="text-xl opacity-60" />
                                 </button>
                             </div>
@@ -974,8 +974,8 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                                 { role: 'Editor', desc: 'Can create and edit workspaces', icon: 'edit' },
                                                 { role: 'Viewer', desc: 'Read-only access to assigned workspaces', icon: 'visibility' }
                                             ].map(r => (
-                                                <div key={r.role} onClick={() => setNewUser({...newUser, role: r.role})} className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center space-x-4 ${newUser.role === r.role ? 'border-[var(--primary)] bg-[var(--primary)]/5' : (isLight ? 'border-slate-200 hover:border-[var(--primary)]/50' : 'border-white/10 hover:border-[var(--primary)]/50')}`}>
-                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${newUser.role === r.role ? 'bg-[var(--primary)] text-white' : (isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-slate-400')}`}>
+                                                <div key={r.role} onClick={() => setNewUser({...newUser, role: r.role})} className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center space-x-4 ${newUser.role === r.role ? 'border-[var(--primary)] bg-[var(--primary)]/5' : (isLight ? 'border-ds-gray-200 hover:border-[var(--primary)]/50' : 'border-white/10 hover:border-[var(--primary)]/50')}`}>
+                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${newUser.role === r.role ? 'bg-[var(--primary)] text-white' : (isLight ? 'bg-ds-gray-100 text-ds-gray-500' : 'bg-white/10 text-ds-gray-400')}`}>
                                                         <Icon name={r.icon} className="text-xl" />
                                                     </div>
                                                     <div>
@@ -1003,11 +1003,11 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                             </div>
 
                             {/* Footer */}
-                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : isColorful ? 'border-primary/20 bg-primary/5' : 'border-white/10 bg-black/20'}`}>
-                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : isColorful ? 'hover:bg-primary/15 text-accent/80' : 'hover:bg-white/10 text-slate-300'}`}>
+                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-ds-gray-200/50 bg-ds-gray-50/50' : isColorful ? 'border-primary/20 bg-primary/5' : 'border-white/10 bg-black/20'}`}>
+                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-ds-gray-200 text-ds-gray-600' : isColorful ? 'hover:bg-primary/15 text-accent/80' : 'hover:bg-white/10 text-ds-gray-300'}`}>
                                     {wizardStep === 1 ? 'Cancel' : 'Back'}
                                 </button>
-                                <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && (!newUser.name || !newUser.email)} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && (!newUser.name || !newUser.email) ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white' : 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white hover:shadow-[var(--primary)]/30 hover:scale-105'}`}>
+                                <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && (!newUser.name || !newUser.email)} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && (!newUser.name || !newUser.email) ? 'opacity-50 cursor-not-allowed bg-ds-gray-400 text-white' : 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white hover:shadow-[var(--primary)]/30 hover:scale-105'}`}>
                                     {wizardStep === 3 ? 'Send Invitation' : 'Continue'}
                                 </button>
                             </div>
@@ -1057,7 +1057,7 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                         <motion.div key={i} variants={itemVariants} whileHover={{ y: -6, scale: 1.02 }} onClick={() => setShowDetails(!showDetails)} className={`${card} cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-[var(--primary)]/5`}>
                             <div className="flex justify-between items-start mb-5">
                                 <h3 className="font-bold text-lg">{ws.name}</h3>
-                                <span className={`text-xs font-bold px-3 py-1 rounded-xl ${ws.status === 'Active' ? 'bg-green-600/10 text-ds-success' : ws.status === 'Review' ? 'bg-amber-600/10 text-ds-warning' : 'bg-slate-500/10 text-slate-500'}`}>{ws.status}</span>
+                                <span className={`text-xs font-bold px-3 py-1 rounded-xl ${ws.status === 'Active' ? 'bg-ds-emerald-600/10 text-ds-success' : ws.status === 'Review' ? 'bg-ds-gold-600/10 text-ds-warning' : 'bg-ds-gray-500/10 text-ds-gray-500'}`}>{ws.status}</span>
                             </div>
                             <div className="grid grid-cols-3 gap-4 text-center mb-2">
                                 {[{ v: ws.members, l: 'Members' }, { v: ws.docs, l: 'Docs' }, { v: ws.queries, l: 'AI Queries' }].map(s => (
@@ -1075,7 +1075,7 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                                             <span className="text-sm font-bold">Workspace Health: Excellent</span>
                                         </div>
                                         <p className="text-[13px] font-medium opacity-70 mb-4 leading-relaxed">Participation is up 12% this week. Most activity is centered around the new requirements document.</p>
-                                        <button className={`w-full py-2.5 rounded-xl text-sm font-bold ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : isColorful ? 'bg-primary/10 hover:bg-primary/20 border border-primary/20' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-colors`}>View Dashboard</button>
+                                        <button className={`w-full py-2.5 rounded-xl text-sm font-bold ${isLight ? 'bg-white hover:bg-ds-gray-50 shadow-sm border border-ds-gray-100' : isColorful ? 'bg-primary/10 hover:bg-primary/20 border border-primary/20' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-colors`}>View Dashboard</button>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -1088,15 +1088,15 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
             <AnimatePresence>
                 {showWizard && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={handleClose} />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-ds-gray-900/40 backdrop-blur-sm" onClick={handleClose} />
                         <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border border-primary/25' : 'bg-[var(--color-dark-1)]/90 border border-white/10'}`}>
                             {/* Header */}
-                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : isColorful ? 'border-primary/20' : 'border-white/10'}`}>
+                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-ds-gray-200/50' : isColorful ? 'border-primary/20' : 'border-white/10'}`}>
                                 <div>
                                     <h3 className="text-xl font-black tracking-tight">Create Workspace</h3>
                                     <p className="text-xs font-medium opacity-60 mt-1">Step {wizardStep} of 3</p>
                                 </div>
-                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-primary/15' : 'hover:bg-white/10'}`}>
+                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-ds-gray-100' : isColorful ? 'hover:bg-primary/15' : 'hover:bg-white/10'}`}>
                                     <Icon name="close" className="text-xl opacity-60" />
                                 </button>
                             </div>
@@ -1124,8 +1124,8 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                                                 { name: 'Design System', desc: 'Pre-configured for UI/UX teams', icon: 'palette' },
                                                 { name: 'Sprint Planning', desc: 'Agile boards and task tracking', icon: 'view_kanban' }
                                             ].map(t => (
-                                                <div key={t.name} onClick={() => setNewWorkspace({...newWorkspace, template: t.name})} className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center space-x-4 ${newWorkspace.template === t.name ? 'border-[var(--primary)] bg-[var(--primary)]/5' : (isLight ? 'border-slate-200 hover:border-[var(--primary)]/50' : 'border-white/10 hover:border-[var(--primary)]/50')}`}>
-                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${newWorkspace.template === t.name ? 'bg-[var(--primary)] text-white' : (isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-slate-400')}`}>
+                                                <div key={t.name} onClick={() => setNewWorkspace({...newWorkspace, template: t.name})} className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center space-x-4 ${newWorkspace.template === t.name ? 'border-[var(--primary)] bg-[var(--primary)]/5' : (isLight ? 'border-ds-gray-200 hover:border-[var(--primary)]/50' : 'border-white/10 hover:border-[var(--primary)]/50')}`}>
+                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${newWorkspace.template === t.name ? 'bg-[var(--primary)] text-white' : (isLight ? 'bg-ds-gray-100 text-ds-gray-500' : 'bg-white/10 text-ds-gray-400')}`}>
                                                         <Icon name={t.icon} className="text-xl" />
                                                     </div>
                                                     <div>
@@ -1153,11 +1153,11 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                             </div>
 
                             {/* Footer */}
-                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : isColorful ? 'border-primary/20 bg-primary/5' : 'border-white/10 bg-black/20'}`}>
-                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : isColorful ? 'hover:bg-primary/15 text-accent/80' : 'hover:bg-white/10 text-slate-300'}`}>
+                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-ds-gray-200/50 bg-ds-gray-50/50' : isColorful ? 'border-primary/20 bg-primary/5' : 'border-white/10 bg-black/20'}`}>
+                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-ds-gray-200 text-ds-gray-600' : isColorful ? 'hover:bg-primary/15 text-accent/80' : 'hover:bg-white/10 text-ds-gray-300'}`}>
                                     {wizardStep === 1 ? 'Cancel' : 'Back'}
                                 </button>
-                                <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && !newWorkspace.name} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && !newWorkspace.name ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white' : 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white hover:shadow-[var(--primary)]/30 hover:scale-105'}`}>
+                                <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && !newWorkspace.name} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && !newWorkspace.name ? 'opacity-50 cursor-not-allowed bg-ds-gray-400 text-white' : 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white hover:shadow-[var(--primary)]/30 hover:scale-105'}`}>
                                     {wizardStep === 3 ? 'Create Workspace' : 'Continue'}
                                 </button>
                             </div>
@@ -1200,15 +1200,15 @@ function PortalLogsSection({ card, isLight, isColorful = false }: { card: string
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${log.confidence >= 90 ? 'bg-green-600/10 text-ds-success' : 'bg-amber-600/10 text-ds-warning'}`}>{log.confidence}% conf.</span>
-                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white/80 border border-slate-100' : isColorful ? 'bg-primary/10 border border-primary/20 text-accent/80' : 'bg-white/5 border border-white/5'}`}>{log.citations} sources</span>
+                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${log.confidence >= 90 ? 'bg-ds-emerald-600/10 text-ds-success' : 'bg-ds-gold-600/10 text-ds-warning'}`}>{log.confidence}% conf.</span>
+                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white/80 border border-ds-gray-100' : isColorful ? 'bg-primary/10 border border-primary/20 text-accent/80' : 'bg-white/5 border border-white/5'}`}>{log.citations} sources</span>
                             </div>
                         </div>
                         <p className={`mt-4 text-[15px] font-bold text-[var(--primary)]`}>&ldquo;{log.query}&rdquo;</p>
                         <AnimatePresence>
                             {expanded === log.id && (
                                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
-                                    <p className={`mt-4 pt-4 text-[14px] font-medium leading-relaxed border-t ${isLight ? 'text-slate-600 border-slate-200/50' : isColorful ? 'text-accent/70 border-primary/15' : 'text-slate-300 border-white/10'}`}>{log.response}</p>
+                                    <p className={`mt-4 pt-4 text-[14px] font-medium leading-relaxed border-t ${isLight ? 'text-ds-gray-600 border-ds-gray-200/50' : isColorful ? 'text-accent/70 border-primary/15' : 'text-ds-gray-300 border-white/10'}`}>{log.response}</p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -1233,7 +1233,7 @@ function AlertsConfigSection({ card, isLight, isColorful = false }: { card: stri
         { id: 'system', name: 'System Health', desc: 'Monitor uptime and performance', trigger: '< 99.5% uptime', channel: 'Email + Webhook', priority: 'Critical' },
     ];
 
-    const priorityColor = (p: string) => p === 'Critical' ? 'text-pink-500 bg-pink-500/10' : p === 'Warning' ? 'text-ds-warning bg-amber-600/10' : 'text-cyan-500 bg-cyan-500/10';
+    const priorityColor = (p: string) => p === 'Critical' ? 'text-ds-pink-500 bg-ds-pink-500/10' : p === 'Warning' ? 'text-ds-warning bg-ds-gold-600/10' : 'text-ds-cyan-500 bg-ds-cyan-500/10';
 
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
@@ -1255,7 +1255,7 @@ function AlertsConfigSection({ card, isLight, isColorful = false }: { card: stri
                                 </div>
                             </div>
                             <button onClick={() => setToggles(prev => ({ ...prev, [r.id]: !prev[r.id] }))}
-                                className={`w-14 h-8 rounded-full transition-colors relative ${toggles[r.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-slate-200' : isColorful ? 'bg-primary/20' : 'bg-white/10')}`}>
+                                className={`w-14 h-8 rounded-full transition-colors relative ${toggles[r.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-ds-gray-200' : isColorful ? 'bg-primary/20' : 'bg-white/10')}`}>
                                 <motion.div animate={{ x: toggles[r.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                                     className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                             </button>
@@ -1275,7 +1275,7 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <h2 className="text-2xl font-black tracking-tight">Usage Analytics</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-5 py-3 rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : isColorful ? 'bg-primary/10 hover:bg-primary/20 border border-primary/20 text-accent' : 'bg-white/5 hover:bg-white/10 border border-white/5'}`}>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-5 py-3 rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 ${isLight ? 'bg-white hover:bg-ds-gray-50 shadow-sm border border-ds-gray-100' : isColorful ? 'bg-primary/10 hover:bg-primary/20 border border-primary/20 text-accent' : 'bg-white/5 hover:bg-white/10 border border-white/5'}`}>
                     <Icon name="download" className="text-lg" /><span>Export Data</span>
                 </motion.button>
             </div>
@@ -1303,7 +1303,7 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
                                     <span>{f.feature}</span>
                                     <span className="text-[var(--primary)]">{f.usage}%</span>
                                 </div>
-                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : isColorful ? 'bg-primary/20' : 'bg-white/5'}`}>
+                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-ds-gray-100' : isColorful ? 'bg-primary/20' : 'bg-white/5'}`}>
                                     <motion.div initial={{ width: 0 }} animate={{ width: `${f.usage}%` }} transition={{ duration: 1, delay: i * 0.1, ease: "easeOut" }}
                                         className="h-full rounded-full bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]" />
                                 </div>
@@ -1321,11 +1321,11 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
                                 <div key={day} className="flex-1 flex flex-col items-center group relative">
                                     <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.06, ease: "easeOut" }}
                                         whileHover={{ backgroundColor: isLight ? 'var(--primary)' : 'var(--primary-dark)' }}
-                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-amber-400/60' : isColorful ? 'bg-primary/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
+                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-ds-gold-400/60' : isColorful ? 'bg-primary/50' : 'bg-ds-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
                                     <span className="text-xs font-bold mt-3 opacity-50">{day}</span>
 
                                     {/* Tooltip */}
-                                    <div className={`absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
+                                    <div className={`absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-ds-gray-800 text-white' : 'bg-white text-ds-gray-900'}`}>
                                         {Math.round(h * 123)} Active
                                     </div>
                                 </div>
@@ -1373,10 +1373,10 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                     <AIStamp isLight={isLight} size="xl" className="relative shadow-2xl" />
                 </motion.div>
 
-                <h1 className={`text-5xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                <h1 className={`text-5xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? 'text-ds-gray-900' : 'text-white'}`}>
                     {greeting()}, <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">Ali</span>
                 </h1>
-                <p className={`text-lg font-bold ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+                <p className={`text-lg font-bold ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>
                     Today is {currentTime ? currentTime.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) : 'loading...'}
                 </p>
             </motion.div>
@@ -1389,11 +1389,11 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                     <AIStamp isLight={isLight} size="md" variant="secondary" />
                     <div>
                         <h2 className="text-xl font-black tracking-tight">Your Daily Briefing</h2>
-                        <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : 'opacity-60'}`}>AI-generated summary of your workspace</p>
+                        <p className={`text-sm font-medium mt-1 ${isLight ? 'text-ds-gray-500' : 'opacity-60'}`}>AI-generated summary of your workspace</p>
                     </div>
                 </div>
 
-                <div className={`space-y-4 text-[15px] font-medium leading-relaxed relative z-10 ${isLight ? 'text-slate-700' : isColorful ? 'text-accent/80' : 'text-slate-300'}`}>
+                <div className={`space-y-4 text-[15px] font-medium leading-relaxed relative z-10 ${isLight ? 'text-ds-gray-700' : isColorful ? 'text-accent/80' : 'text-ds-gray-300'}`}>
                     <p>Good morning! You have <strong className={isLight ? 'text-[var(--primary)]' : 'text-accent'}>3 overdue sprint reviews</strong> waiting for your approval. In the <span className="underline decoration-[var(--primary)]/50 underline-offset-4 cursor-pointer hover:text-[var(--primary)] transition-colors">Design System v3</span> workspace, 5 new comments were left regarding the new elevation tokens.</p>
                     <p>Also, I noticed a <strong>12% drop in workflow completion</strong> yesterday. Would you like me to analyze the bottleneck?</p>
                 </div>
@@ -1412,7 +1412,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                         <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-[14px] leading-tight">{action.title}</h3>
-                            <p className={`text-xs font-medium truncate mt-0.5 ${isLight ? 'text-slate-500' : isColorful ? 'text-accent/60' : 'opacity-60'}`}>{action.desc}</p>
+                            <p className={`text-xs font-medium truncate mt-0.5 ${isLight ? 'text-ds-gray-500' : isColorful ? 'text-accent/60' : 'opacity-60'}`}>{action.desc}</p>
                         </div>
                         <Icon name="arrow_forward" className={`text-sm shrink-0 opacity-0 group-hover:opacity-60 transition-opacity`} />
                     </motion.div>
@@ -1475,7 +1475,7 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
             {settingGroups.map((group) => (
                 <motion.div key={group.title} variants={itemVariants} className={card}>
                     <h3 className="font-bold text-lg mb-6">{group.title}</h3>
-                    <div className={`space-y-0 divide-y ${isLight ? 'divide-slate-100' : isColorful ? 'divide-primary/15' : 'divide-white/10'}`}>
+                    <div className={`space-y-0 divide-y ${isLight ? 'divide-ds-gray-100' : isColorful ? 'divide-primary/15' : 'divide-white/10'}`}>
                         {group.items.map((item) => (
                             <div key={item.id} className="flex items-center justify-between py-5 first:pt-0 last:pb-0">
                                 {item.custom && item.id === 'theme-toggle' ? (
@@ -1484,14 +1484,14 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
                                             <span className="font-bold text-[15px] block">Theme Preference</span>
                                             <span className="text-[13px] font-medium opacity-60 mt-1 block">Choose between light, dark, and colorful mode</span>
                                         </div>
-                                        <div className={`flex rounded-2xl p-1.5 ${isLight ? 'bg-slate-100' : isColorful ? 'bg-primary/10' : 'bg-white/10'}`}>
-                                            <button aria-label="Switch to light theme" title="Light" onClick={() => setTheme('light')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'light' ? (isLight ? 'bg-white shadow-sm text-slate-900' : 'bg-white/20 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-accent/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
+                                        <div className={`flex rounded-2xl p-1.5 ${isLight ? 'bg-ds-gray-100' : isColorful ? 'bg-primary/10' : 'bg-white/10'}`}>
+                                            <button aria-label="Switch to light theme" title="Light" onClick={() => setTheme('light')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'light' ? (isLight ? 'bg-white shadow-sm text-ds-gray-900' : 'bg-white/20 text-white') : (isLight ? 'text-ds-gray-500 hover:text-ds-gray-900' : isColorful ? 'text-accent/60 hover:text-white' : 'text-ds-gray-400 hover:text-white')}`}>
                                                 <Icon name="light_mode" className="text-lg" />
                                             </button>
-                                            <button aria-label="Switch to dark theme" title="Dark" onClick={() => setTheme('dark')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'dark' ? 'bg-[var(--color-dark-3)] shadow-sm text-white' : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-accent/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
+                                            <button aria-label="Switch to dark theme" title="Dark" onClick={() => setTheme('dark')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'dark' ? 'bg-[var(--color-dark-3)] shadow-sm text-white' : (isLight ? 'text-ds-gray-500 hover:text-ds-gray-900' : isColorful ? 'text-accent/60 hover:text-white' : 'text-ds-gray-400 hover:text-white')}`}>
                                                 <Icon name="dark_mode" className="text-lg" />
                                             </button>
-                                            <button aria-label="Switch to colorful theme" title="Colorful" onClick={() => setTheme('colorful')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'colorful' ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-sm' : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-accent/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
+                                            <button aria-label="Switch to colorful theme" title="Colorful" onClick={() => setTheme('colorful')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'colorful' ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-sm' : (isLight ? 'text-ds-gray-500 hover:text-ds-gray-900' : isColorful ? 'text-accent/60 hover:text-white' : 'text-ds-gray-400 hover:text-white')}`}>
                                                 <Icon name="palette" className="text-lg" />
                                             </button>
                                         </div>
@@ -1503,7 +1503,7 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
                                             <span className="text-[13px] font-medium opacity-60 mt-1 block">{item.desc}</span>
                                         </div>
                                         <button onClick={() => setToggles(prev => ({ ...prev, [item.id]: !prev[item.id] }))}
-                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ml-6 ${toggles[item.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-slate-200' : isColorful ? 'bg-primary/20' : 'bg-white/10')}`}>
+                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ml-6 ${toggles[item.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-ds-gray-200' : isColorful ? 'bg-primary/20' : 'bg-white/10')}`}>
                                             <motion.div animate={{ x: toggles[item.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                                                 className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                                         </button>
@@ -1586,8 +1586,8 @@ const PORTAL_FEATURES = [
 ];
 
 const PORTAL_THEMES = [
-    { v: 'dark' as Theme, label: 'Dark', icon: 'dark_mode', desc: 'Low-glare, great for long sessions', bg: 'bg-gray-900', border: 'border-blue-500' },
-    { v: 'light' as Theme, label: 'Light', icon: 'light_mode', desc: 'Clean and presentation-ready', bg: 'bg-white', border: 'border-amber-400' },
+    { v: 'dark' as Theme, label: 'Dark', icon: 'dark_mode', desc: 'Low-glare, great for long sessions', bg: 'bg-ds-gray-900', border: 'border-ds-blue-500' },
+    { v: 'light' as Theme, label: 'Light', icon: 'light_mode', desc: 'Clean and presentation-ready', bg: 'bg-white', border: 'border-ds-gold-400' },
     { v: 'colorful' as Theme, label: 'Colorful', icon: 'palette', desc: 'Vivid cosmic gradient look', bg: 'bg-[var(--color-colorful-bg)]', border: 'border-primary' },
 ];
 
@@ -1611,7 +1611,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
 
     const overlayBg =
         selectedTheme === 'light'
-            ? 'bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900'
+            ? 'bg-gradient-to-br from-ds-gray-50 to-ds-blue-50 text-ds-gray-900'
             : selectedTheme === 'colorful'
                 ? 'bg-[var(--color-colorful-bg)] text-white'
                 : 'bg-[var(--color-dark-1)] text-white';

@@ -14,7 +14,7 @@ export default function MobileLayout({
     // This layout restricts the max-width to simulate a mobile device on desktop monitors
     return (
         <div className="bg-transparent min-h-screen w-full flex items-center justify-center font-sans">
-            <div className="mobile-frame w-full h-[100dvh] sm:h-[844px] sm:w-[390px] sm:rounded-[3rem] sm:border-[8px] sm:border-neutral-800 bg-black overflow-hidden relative shadow-2xl sm:shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div className="mobile-frame w-full h-[100dvh] sm:h-[844px] sm:w-[390px] sm:rounded-[3rem] sm:border-[8px] sm:border-ds-gray-800 bg-black overflow-hidden relative shadow-2xl sm:shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                 {/* Dynamic Island / Notch Simulation (only visible on desktop wrapper) */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-3xl z-50 hidden sm:block"></div>
 

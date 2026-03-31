@@ -48,7 +48,7 @@ export default function ThemeSwitch() {
                       ? 'bg-[var(--btn-primary-bg)]' 
                       : theme === 'light'
                         ? 'bg-white'
-                        : 'bg-gray-700'
+                        : 'bg-ds-gray-700'
                     }
                   `}
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}

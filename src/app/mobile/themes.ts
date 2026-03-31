@@ -313,7 +313,7 @@ export const iosTheme: MobileTheme = {
         followUpColor: 'text-ds-blue-500',
         seeAllColor: 'text-ds-blue-500',
         quickActionBg: (isLight, g) => isLight ? `bg-gradient-to-br ${g} border rounded-[16px]` : `bg-gradient-to-br ${g.replace('/10', '/20').replace('/20', '/30')} border rounded-[16px]`,
-        quickActionIconColor: (isLight) => isLight ? 'text-gray-700' : 'text-gray-300',
+        quickActionIconColor: (isLight) => isLight ? 'text-ds-gray-700' : 'text-ds-gray-300',
         teamColorMap: { purple: 'bg-primary-500/12 text-primary-400', blue: 'bg-ds-blue-500/12 text-ds-blue-500', emerald: 'bg-ds-success/12 text-ds-success', amber: 'bg-ds-warning/12 text-ds-warning' },
     },
     titles: {

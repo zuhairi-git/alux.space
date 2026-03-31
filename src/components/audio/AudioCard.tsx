@@ -58,7 +58,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
               />
               {audio.featured && (
                 <div className="absolute top-1 right-1">
-                  <span className="material-symbols text-yellow-400 text-sm">star</span>
+                  <span className="material-symbols text-ds-gold-400 text-sm">star</span>
                 </div>
               )}
             </div>

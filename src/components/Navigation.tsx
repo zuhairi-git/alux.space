@@ -289,8 +289,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
               ${theme === 'colorful'
                 ? 'bg-[var(--background)]/90 border-[var(--card-border)]'
                 : theme === 'light'
-                  ? 'bg-white/90 border-gray-200'
-                  : 'bg-gray-900/90 border-gray-700'
+                  ? 'bg-white/90 border-ds-gray-200'
+                  : 'bg-ds-gray-900/90 border-ds-gray-700'
               }
             `}
           >
@@ -303,10 +303,10 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
                   isChildActive(child.href)
                     ? (theme === 'colorful' ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-medium' : theme === 'light' ? 'bg-primary/10 text-accent font-medium' : 'bg-primary/15 text-accent font-medium')
-                    : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]' : theme === 'light' ? 'text-gray-700 hover:bg-gray-100 hover:text-accent' : 'text-gray-300 hover:bg-gray-800 hover:text-accent')
+                    : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]' : theme === 'light' ? 'text-ds-gray-700 hover:bg-ds-gray-100 hover:text-accent' : 'text-ds-gray-300 hover:bg-ds-gray-800 hover:text-accent')
                 }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'}`}>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800'}`}>
                   <span className="material-symbols text-[15px]" aria-hidden="true">{child.icon}</span>
                 </div>
                 <span className="flex-1 font-medium">{t(child.labelKey)}</span>
@@ -315,9 +315,9 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
 
             {/* Case Studies section */}
             {item.children.some((c) => c.category === 'case-study') && (
-              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'}`}>
+              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-ds-gray-100' : 'border-ds-gray-800'}`}>
                 <div className="px-2 pb-1.5">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-violet-400">Case Studies</span>
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-ds-violet-400">Case Studies</span>
                 </div>
                 {item.children.filter((c) => c.category === 'case-study').map((child, idx) => (
                   <Link
@@ -326,12 +326,12 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
                       isChildActive(child.href)
-                        ? (theme === 'colorful' ? 'bg-violet-500/15 text-violet-300 font-medium' : theme === 'light' ? 'bg-violet-50 text-violet-700 font-medium' : 'bg-violet-900/30 text-violet-300 font-medium')
-                        : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-violet-900/30 hover:text-violet-300' : theme === 'light' ? 'text-gray-700 hover:bg-violet-50 hover:text-violet-700' : 'text-gray-300 hover:bg-violet-900/20 hover:text-violet-300')
+                        ? (theme === 'colorful' ? 'bg-ds-violet-500/15 text-ds-violet-300 font-medium' : theme === 'light' ? 'bg-ds-violet-50 text-ds-violet-700 font-medium' : 'bg-ds-violet-900/30 text-ds-violet-300 font-medium')
+                        : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-ds-violet-900/30 hover:text-ds-violet-300' : theme === 'light' ? 'text-ds-gray-700 hover:bg-ds-violet-50 hover:text-ds-violet-700' : 'text-ds-gray-300 hover:bg-ds-violet-900/20 hover:text-ds-violet-300')
                     }`}
                   >
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-violet-500/15">
-                      <span className="material-symbols text-[15px] text-violet-400" aria-hidden="true">{child.icon}</span>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-ds-violet-500/15">
+                      <span className="material-symbols text-[15px] text-ds-violet-400" aria-hidden="true">{child.icon}</span>
                     </div>
                     <span className="flex-1 font-medium">{t(child.labelKey)}</span>
                   </Link>
@@ -341,9 +341,9 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
 
             {/* Prototypes section */}
             {item.children.some((c) => c.category === 'prototype') && (
-              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'}`}>
+              <div className={`mt-1 pt-2 border-t ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-ds-gray-100' : 'border-ds-gray-800'}`}>
                 <div className="px-2 pb-1.5">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-cyan-400">Prototypes</span>
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-ds-cyan-400">Prototypes</span>
                 </div>
                 {item.children.filter((c) => c.category === 'prototype').map((child, idx) => (
                   <Link
@@ -352,12 +352,12 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
                       isChildActive(child.href)
-                        ? (theme === 'colorful' ? 'bg-cyan-500/15 text-cyan-400 font-medium' : theme === 'light' ? 'bg-cyan-400/5 text-cyan-500 font-medium' : 'bg-cyan-500/30 text-cyan-400 font-medium')
-                        : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-cyan-500/30 hover:text-cyan-400' : theme === 'light' ? 'text-gray-700 hover:bg-cyan-400/5 hover:text-cyan-500' : 'text-gray-300 hover:bg-cyan-500/20 hover:text-cyan-400')
+                        ? (theme === 'colorful' ? 'bg-ds-cyan-500/15 text-ds-cyan-400 font-medium' : theme === 'light' ? 'bg-ds-cyan-400/5 text-ds-cyan-500 font-medium' : 'bg-ds-cyan-500/30 text-ds-cyan-400 font-medium')
+                        : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-ds-cyan-500/30 hover:text-ds-cyan-400' : theme === 'light' ? 'text-ds-gray-700 hover:bg-ds-cyan-400/5 hover:text-ds-cyan-500' : 'text-ds-gray-300 hover:bg-ds-cyan-500/20 hover:text-ds-cyan-400')
                     }`}
                   >
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-cyan-500/15">
-                      <span className="material-symbols text-[15px] text-cyan-400" aria-hidden="true">{child.icon}</span>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-ds-cyan-500/15">
+                      <span className="material-symbols text-[15px] text-ds-cyan-400" aria-hidden="true">{child.icon}</span>
                     </div>
                     <span className="flex-1 font-medium">{t(child.labelKey)}</span>
                   </Link>
@@ -402,7 +402,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             ? 'bg-[var(--background)]/80 border-[var(--card-border)]'
             : theme === 'light'
               ? 'bg-white/80 border-white/50'
-              : 'bg-gray-900/80 border-gray-800/50'
+              : 'bg-ds-gray-900/80 border-ds-gray-800/50'
           }
         `}
       >
@@ -432,7 +432,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             className={`
               relative -top-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-95
               ${isMenuOpen
-                ? 'bg-red-500 text-white rotate-90'
+                ? 'bg-ds-error text-white rotate-90'
                 : theme === 'colorful'
                   ? 'bg-gradient-to-br from-primary to-[var(--color-cobalt-700)] text-white'
                   : 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white'
@@ -472,14 +472,14 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className={`
               fixed inset-0 z-40 flex flex-col pt-20 pb-28 px-6 overflow-y-auto
-              ${theme === 'colorful' ? 'bg-[var(--background)]/95' : theme === 'light' ? 'bg-white/95' : 'bg-gray-900/95'}
+              ${theme === 'colorful' ? 'bg-[var(--background)]/95' : theme === 'light' ? 'bg-white/95' : 'bg-ds-gray-900/95'}
               backdrop-blur-xl
             `}
           >
             <div className="flex flex-col h-full">
               {/* Header */}
-              <div className={`flex items-center mb-5 pb-4 border-b ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'}`}>
-                <span className={`text-xs font-bold uppercase tracking-widest ${theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-400' : 'text-white/30'}`}>Navigation</span>
+              <div className={`flex items-center mb-5 pb-4 border-b ${theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-ds-gray-100' : 'border-ds-gray-800'}`}>
+                <span className={`text-xs font-bold uppercase tracking-widest ${theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-400' : 'text-white/30'}`}>Navigation</span>
               </div>
 
               {/* Nav List */}
@@ -497,18 +497,18 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                           className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-left ${
                             itemIsActive
                               ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-primary/10 text-accent' : 'bg-primary/15 text-accent')
-                              : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-gray-800 hover:bg-gray-50' : 'text-gray-200 hover:bg-gray-800/50')
+                              ? (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-ds-gray-800 hover:bg-ds-gray-50' : 'text-ds-gray-200 hover:bg-ds-gray-800/50')
                           }`}
                         >
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                             itemIsActive
                               ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
-                              : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
+                              : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800')
                           }`}>
                             <span aria-hidden="true" className={`material-symbols text-xl ${
                               itemIsActive
                                 ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
-                                : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
+                                : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-600' : 'text-ds-gray-400')
                             }`}>{item.icon}</span>
                           </div>
                           <span className="flex-1 font-semibold text-[15px]">{t(item.labelKey)}</span>
@@ -517,7 +517,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                             transition={{ duration: 0.2 }}
                             aria-hidden="true"
                             className={`material-symbols text-[18px] shrink-0 ${
-                              theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-400' : 'text-white/30'
+                              theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-400' : 'text-white/30'
                             }`}
                           >expand_more</motion.span>
                         </button>
@@ -542,35 +542,35 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                                         childIsActive
                                           ? (theme === 'colorful'
                                             ? (child.category === 'case-study'
-                                              ? 'bg-violet-500/15 text-violet-300 font-medium'
+                                              ? 'bg-ds-violet-500/15 text-ds-violet-300 font-medium'
                                               : child.category === 'prototype'
-                                                ? 'bg-cyan-500/15 text-cyan-400 font-medium'
+                                                ? 'bg-ds-cyan-500/15 text-ds-cyan-400 font-medium'
                                                 : 'bg-[var(--primary)]/10 text-[var(--primary)] font-medium')
                                             : child.category === 'case-study'
-                                              ? (theme === 'light' ? 'bg-violet-50 text-violet-700 font-medium' : 'bg-violet-900/20 text-violet-300 font-medium')
+                                              ? (theme === 'light' ? 'bg-ds-violet-50 text-ds-violet-700 font-medium' : 'bg-ds-violet-900/20 text-ds-violet-300 font-medium')
                                               : child.category === 'prototype'
-                                                ? (theme === 'light' ? 'bg-cyan-400/5 text-cyan-500 font-medium' : 'bg-cyan-500/20 text-cyan-400 font-medium')
+                                                ? (theme === 'light' ? 'bg-ds-cyan-400/5 text-ds-cyan-500 font-medium' : 'bg-ds-cyan-500/20 text-ds-cyan-400 font-medium')
                                                 : (theme === 'light' ? 'bg-primary/10 text-accent font-medium' : 'bg-primary/15 text-accent font-medium'))
-                                          : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-gray-700 hover:bg-gray-50' : 'text-gray-300 hover:bg-gray-800/40')
+                                          : (theme === 'colorful' ? 'text-[var(--foreground)]/70 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-ds-gray-700 hover:bg-ds-gray-50' : 'text-ds-gray-300 hover:bg-ds-gray-800/40')
                                       }`}
                                     >
                                       <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                                        child.category === 'case-study' ? 'bg-violet-500/15'
-                                        : child.category === 'prototype' ? 'bg-cyan-500/15'
-                                        : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
+                                        child.category === 'case-study' ? 'bg-ds-violet-500/15'
+                                        : child.category === 'prototype' ? 'bg-ds-cyan-500/15'
+                                        : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800')
                                       }`}>
                                         <span aria-hidden="true" className={`material-symbols text-[13px] ${
-                                          child.category === 'case-study' ? 'text-violet-400'
-                                          : child.category === 'prototype' ? 'text-cyan-400'
-                                          : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
+                                          child.category === 'case-study' ? 'text-ds-violet-400'
+                                          : child.category === 'prototype' ? 'text-ds-cyan-400'
+                                          : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-500' : 'text-ds-gray-400')
                                         }`}>{child.icon}</span>
                                       </div>
                                       <span className="flex-1">{t(child.labelKey)}</span>
                                       {child.category === 'case-study' && (
-                                        <span className="text-[9px] font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-1.5 py-0.5 rounded-full shrink-0">Study</span>
+                                        <span className="text-[9px] font-semibold text-ds-violet-400 bg-ds-violet-500/10 border border-ds-violet-500/20 px-1.5 py-0.5 rounded-full shrink-0">Study</span>
                                       )}
                                       {child.category === 'prototype' && (
-                                        <span className="text-[9px] font-semibold text-cyan-400 bg-cyan-400/50/10 border border-cyan-500/20 px-1.5 py-0.5 rounded-full shrink-0">Proto</span>
+                                        <span className="text-[9px] font-semibold text-ds-cyan-400 bg-ds-cyan-400/50/10 border border-ds-cyan-500/20 px-1.5 py-0.5 rounded-full shrink-0">Proto</span>
                                       )}
                                     </Link>
                                   );
@@ -591,18 +591,18 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                       className={`flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] ${
                         itemIsActive
                           ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-primary/10 text-accent' : 'bg-primary/15 text-accent')
-                          : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-gray-800 hover:bg-gray-50' : 'text-gray-200 hover:bg-gray-800/50')
+                          : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-ds-gray-800 hover:bg-ds-gray-50' : 'text-ds-gray-200 hover:bg-ds-gray-800/50')
                       }`}
                     >
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                         itemIsActive
                           ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
-                          : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-gray-100' : 'bg-gray-800')
+                          : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800')
                       }`}>
                         <span aria-hidden="true" className={`material-symbols text-xl ${
                           itemIsActive
                             ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
-                            : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-600' : 'text-gray-400')
+                            : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-600' : 'text-ds-gray-400')
                         }`}>{item.icon}</span>
                       </div>
                       <span className="flex-1 font-semibold text-[15px]">{t(item.labelKey)}</span>
@@ -613,7 +613,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
 
               {/* Settings */}
               <div className={`mt-auto pt-4 border-t flex items-center justify-between ${
-                theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-gray-100' : 'border-gray-800'
+                theme === 'colorful' ? 'border-[var(--card-border)]' : theme === 'light' ? 'border-ds-gray-100' : 'border-ds-gray-800'
               }`}>
                 <LanguageSwitcher />
                 <ThemeSwitch />
@@ -644,7 +644,7 @@ const MobileDockItem = ({ href, icon, label, isActive, theme, localizedHref }: M
         flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors
         ${isActive
           ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
-          : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-gray-500' : 'text-gray-400')
+          : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-500' : 'text-ds-gray-400')
         }
       `}
     >

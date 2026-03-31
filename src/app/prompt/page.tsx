@@ -369,21 +369,21 @@ export default function PromptPage() {
 
     if (isSelected) {
       if (theme === 'light')
-        return `${baseClasses} bg-gradient-to-r from-blue-500/20 to-primary-500/20 text-blue-700 font-medium border-l-2 border-blue-500`;
+        return `${baseClasses} bg-gradient-to-r from-ds-blue-500/20 to-primary-500/20 text-ds-blue-700 font-medium border-l-2 border-ds-blue-500`;
       if (theme === 'colorful')
-        return `${baseClasses} bg-gradient-to-r from-cyan-500/30 to-primary-500/30 text-white font-medium`;
-      return `${baseClasses} bg-gradient-to-r from-primary-500/30 to-blue-500/30 text-white font-medium`;
+        return `${baseClasses} bg-gradient-to-r from-ds-cyan-500/30 to-primary-500/30 text-white font-medium`;
+      return `${baseClasses} bg-gradient-to-r from-primary-500/30 to-ds-blue-500/30 text-white font-medium`;
     }
 
     if (theme === 'light')
-      return `${baseClasses} hover:bg-gray-50 text-[var(--dropdown-text)]`;
+      return `${baseClasses} hover:bg-ds-gray-50 text-[var(--dropdown-text)]`;
     if (theme === 'colorful')
       return `${baseClasses} hover:bg-[var(--primary)]/20 text-[var(--dropdown-text)]`;
     return `${baseClasses} hover:bg-white/10 text-[var(--dropdown-text)]`;
   };
   // Dropdown button styles — light uses opaque white+shadow, dark/colorful use glass
   const getDropdownButtonStyles = () => {
-    if (theme === 'light') return 'bg-white/80 hover:bg-white border border-gray-200 text-gray-700 shadow-sm';
+    if (theme === 'light') return 'bg-white/80 hover:bg-white border border-ds-gray-200 text-ds-gray-700 shadow-sm';
     return 'bg-white/10 hover:bg-white/20 backdrop-blur-sm text-[var(--dropdown-text)]';
   };
 
@@ -405,12 +405,12 @@ export default function PromptPage() {
 
     if (isSelected) {
       if (theme === 'light')
-        return `${baseClasses} bg-gradient-to-r from-green-600/20 to-cyan-500/20 text-green-700 font-medium border-l-2 border-green-500`;
-      return `${baseClasses} bg-gradient-to-r from-green-600/30 to-cyan-500/30 text-white font-medium`;
+        return `${baseClasses} bg-gradient-to-r from-ds-emerald-600/20 to-ds-cyan-500/20 text-ds-emerald-700 font-medium border-l-2 border-ds-emerald-500`;
+      return `${baseClasses} bg-gradient-to-r from-ds-emerald-600/30 to-ds-cyan-500/30 text-white font-medium`;
     }
 
     if (theme === 'light')
-      return `${baseClasses} hover:bg-gray-50 text-[var(--dropdown-text)]`;
+      return `${baseClasses} hover:bg-ds-gray-50 text-[var(--dropdown-text)]`;
     if (theme === 'colorful')
       return `${baseClasses} hover:bg-[var(--primary)]/20 text-[var(--dropdown-text)]`;
     return `${baseClasses} hover:bg-white/10 text-[var(--dropdown-text)]`;
@@ -517,15 +517,15 @@ export default function PromptPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
           >
             <div className="theme-card-content p-6 rounded-2xl text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-blue-500 mb-2">{stats.total}</div>
+              <div className="text-3xl font-bold text-ds-blue-500 mb-2">{stats.total}</div>
               <div className="text-sm opacity-70">Total Projects</div>
             </div>
             <div className="theme-card-content p-6 rounded-2xl text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-green-500 mb-2">{stats.completed}</div>
+              <div className="text-3xl font-bold text-ds-success mb-2">{stats.completed}</div>
               <div className="text-sm opacity-70">Completed</div>
             </div>
             <div className="theme-card-content p-6 rounded-2xl text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-red-500 mb-2">{stats.failed}</div>
+              <div className="text-3xl font-bold text-ds-error mb-2">{stats.failed}</div>
               <div className="text-sm opacity-70">Failed</div>
             </div>
             <div className="theme-card-content p-6 rounded-2xl text-center backdrop-blur-sm">
@@ -636,7 +636,7 @@ export default function PromptPage() {
                     onClick={() => setViewMode('grid')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
                       viewMode === 'grid'
-                        ? 'bg-gradient-to-r from-indigo-500 to-primary-500 text-white'
+                        ? 'bg-gradient-to-r from-ds-indigo-500 to-primary-500 text-white'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
@@ -650,7 +650,7 @@ export default function PromptPage() {
                     onClick={() => setViewMode('list')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
                       viewMode === 'list'
-                        ? 'bg-gradient-to-r from-indigo-500 to-primary-500 text-white'
+                        ? 'bg-gradient-to-r from-ds-indigo-500 to-primary-500 text-white'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
@@ -729,8 +729,8 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const getStatusColor = (status: string) => {
     return status === 'Done' 
-      ? 'from-green-600 to-green-600' 
-      : 'from-red-600 to-pink-500';
+      ? 'from-ds-emerald-600 to-ds-emerald-600' 
+      : 'from-ds-error to-ds-pink-500';
   };
   return (
     <div
@@ -752,7 +752,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
         <div className="mb-4">
           <div className="flex items-start justify-between mb-3">
             <div className="flex-1">
-              <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
+              <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary-400 group-hover:to-ds-pink-400 group-hover:bg-clip-text transition-all duration-300">
                 {prompt.title}
               </h3>
               <p className="text-sm opacity-70 line-clamp-2 mb-3">
@@ -763,7 +763,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
           {/* Technology Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
             {prompt.technologies.slice(0, 3).map((tech, index) => (
-              <span key={index} className="px-2 py-1 text-xs rounded-lg bg-gradient-to-r from-blue-500/20 to-primary-500/20 backdrop-blur-sm border border-white/10">
+              <span key={index} className="px-2 py-1 text-xs rounded-lg bg-gradient-to-r from-ds-blue-500/20 to-primary-500/20 backdrop-blur-sm border border-white/10">
                 {tech}
               </span>
             ))}
@@ -777,7 +777,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
         <div className="grid grid-cols-1 gap-4 mb-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm">
           {prompt.bugsFixed > 0 && (
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400 mb-1">{prompt.bugsFixed}</div>
+              <div className="text-2xl font-bold text-ds-error mb-1">{prompt.bugsFixed}</div>
               <div className="text-xs opacity-70">Bugs Fixed</div>
             </div>
           )}
@@ -820,8 +820,8 @@ function ListPromptCard({ prompt }: { prompt: Prompt }) {
 
   const getStatusColor = (status: string) => {
     return status === 'Done' 
-      ? 'from-green-600 to-green-600' 
-      : 'from-red-600 to-pink-500';
+      ? 'from-ds-emerald-600 to-ds-emerald-600' 
+      : 'from-ds-error to-ds-pink-500';
   };
   return (
     <div

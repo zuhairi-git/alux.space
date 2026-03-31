@@ -121,7 +121,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, className = '', id })
           id={tooltipId}
           role="tooltip"
           aria-hidden={!isVisible}
-          className={`absolute ${getPositionClasses()} px-3 py-2 bg-gray-900 text-white text-sm rounded-md pointer-events-none transition-all duration-200 z-50 max-w-xs ${
+          className={`absolute ${getPositionClasses()} px-3 py-2 bg-ds-gray-900 text-white text-sm rounded-md pointer-events-none transition-all duration-200 z-50 max-w-xs ${
             isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
           style={{
@@ -132,7 +132,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, className = '', id })
           {text}
           {/* Add arrow indicator */}
           <div 
-            className={`absolute w-2 h-2 bg-gray-900 transform rotate-45 ${getArrowPositionClasses(position)}`}
+            className={`absolute w-2 h-2 bg-ds-gray-900 transform rotate-45 ${getArrowPositionClasses(position)}`}
             aria-hidden="true"
           />
         </div>

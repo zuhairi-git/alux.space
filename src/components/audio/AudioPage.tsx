@@ -39,31 +39,31 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
   // Get theme-specific styles
   const getContainerStyles = () => {
     if (isLight) {
-      return 'bg-gray-50 min-h-screen pt-16';
+      return 'bg-ds-gray-50 min-h-screen pt-16';
     } else if (isColorful) {
       return 'bg-[var(--background)] min-h-screen pt-16';
     } else {
-      return 'bg-gray-900 min-h-screen pt-16';
+      return 'bg-ds-gray-900 min-h-screen pt-16';
     }
   };
 
   const getHeroStyles = () => {
     if (isLight) {
-      return 'bg-white border-b border-gray-200';
+      return 'bg-white border-b border-ds-gray-200';
     } else if (isColorful) {
       return 'bg-[var(--card-from-bg)] border-b border-[var(--card-border)] backdrop-blur-lg';
     } else {
-      return 'bg-gray-800 border-b border-gray-700';
+      return 'bg-ds-gray-800 border-b border-ds-gray-700';
     }
   };
 
   const getTextStyles = () => {
     if (isLight) {
       return {
-        title: 'text-gray-900',
-        subtitle: 'text-gray-600',
-        text: 'text-gray-700',
-        muted: 'text-gray-500',
+        title: 'text-ds-gray-900',
+        subtitle: 'text-ds-gray-600',
+        text: 'text-ds-gray-700',
+        muted: 'text-ds-gray-500',
         accent: 'text-accent'
       };
     } else if (isColorful) {
@@ -77,9 +77,9 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     } else {
       return {
         title: 'text-white',
-        subtitle: 'text-gray-300',
-        text: 'text-gray-300',
-        muted: 'text-gray-400',
+        subtitle: 'text-ds-gray-300',
+        text: 'text-ds-gray-300',
+        muted: 'text-ds-gray-400',
         accent: 'text-accent'
       };
     }
@@ -87,11 +87,11 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
 
   const getCardStyles = () => {
     if (isLight) {
-      return 'bg-white border border-gray-200 rounded-xl';
+      return 'bg-white border border-ds-gray-200 rounded-xl';
     } else if (isColorful) {
       return 'bg-[var(--card-from-bg)] border border-[var(--card-border)] rounded-xl backdrop-blur-sm';
     } else {
-      return 'bg-gray-800 border border-gray-700 rounded-xl';
+      return 'bg-ds-gray-800 border border-ds-gray-700 rounded-xl';
     }
   };
 
@@ -109,7 +109,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     if (isLight) {
       return isActive 
         ? 'bg-[var(--btn-primary-bg)] text-white border-[var(--btn-primary-bg)]' 
-        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50';
+        : 'bg-white text-ds-gray-700 border-ds-gray-300 hover:bg-ds-gray-50';
     } else if (isColorful) {
       return isActive 
         ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white border-transparent' 
@@ -117,7 +117,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
     } else {
       return isActive 
         ? 'bg-[var(--btn-primary-bg)] text-white border-[var(--btn-primary-bg)]' 
-        : 'bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600';
+        : 'bg-ds-gray-700 text-ds-gray-300 border-ds-gray-600 hover:bg-ds-gray-600';
     }
   };
 
@@ -219,7 +219,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
               
               {audio.featured && (
                 <div className="absolute top-4 right-4">
-                  <div className="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                  <div className="bg-ds-gold-400 text-ds-gold-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
                     <span className="material-symbols text-sm">star</span>
                     Featured
                   </div>
@@ -292,10 +292,10 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                     key={index}
                     className={`px-3 py-1 rounded-full text-sm ${
                       isLight 
-                        ? 'bg-gray-100 text-gray-700' 
+                        ? 'bg-ds-gray-100 text-ds-gray-700' 
                         : isColorful 
                         ? 'bg-[var(--primary)]/20 text-[var(--foreground)]' 
-                        : 'bg-gray-700 text-gray-300'
+                        : 'bg-ds-gray-700 text-ds-gray-300'
                     }`}
                   >
                     {tag}

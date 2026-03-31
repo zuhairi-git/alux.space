@@ -235,7 +235,7 @@ export default function HealthcarePrioritizationClient() {
                       <h3 className="text-xl font-semibold mb-3 text-[var(--primary)]">{card.title}</h3>
                       {card.extra === 'conflict' && (
                         <div className="flex items-center gap-4 mb-4">
-                          <div className="px-4 py-2 rounded-lg font-bold bg-red-500/10 text-red-600 dark:text-red-400">QA Team</div>
+                          <div className="px-4 py-2 rounded-lg font-bold bg-ds-error/10 text-ds-error">QA Team</div>
                           <span className="font-bold text-xl opacity-50">VS</span>
                           <div className="px-4 py-2 rounded-lg font-bold bg-[var(--primary-glow)] text-[var(--primary)]">CTO</div>
                         </div>
@@ -278,9 +278,9 @@ export default function HealthcarePrioritizationClient() {
                                 <span className="text-xs font-mono font-medium opacity-60">{item.id}</span>
                             </div>
                             <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full ${
-                                item.priorityLevel === 'Critical' ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 
-                                item.priorityLevel === 'Medium' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' : 
-                                item.priorityLevel === 'Low' ? 'bg-green-500/10 text-green-500 border border-green-500/20' : 
+                                item.priorityLevel === 'Critical' ? 'bg-ds-error/10 text-ds-error border border-ds-error/20' : 
+                                item.priorityLevel === 'Medium' ? 'bg-ds-warning/10 text-ds-warning border border-ds-warning/20' : 
+                                item.priorityLevel === 'Low' ? 'bg-ds-success/10 text-ds-success border border-ds-success/20' : 
                                 'bg-[var(--card-border)]/50 text-[var(--muted-foreground)] border border-[var(--card-border)]'
                             }`}>{item.priorityLevel}</span>
                           </div>

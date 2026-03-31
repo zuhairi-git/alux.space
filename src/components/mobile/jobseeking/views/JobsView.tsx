@@ -77,7 +77,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                 {filteredJobs.length === 0 ? (
                     <motion.div variants={itemVariants} className={`${card} p-8 text-center`}>
                         <Icon name="search_off" className="text-4xl opacity-30 mb-2" />
-                        <p className={`text-[14px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>No jobs found for &quot;{activeFilter}&quot;</p>
+                        <p className={`text-[14px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>No jobs found for &quot;{activeFilter}&quot;</p>
                     </motion.div>
                 ) : filteredJobs.map((job, i) => (
                     <motion.div key={i} variants={itemVariants} onClick={() => openSheet(job)}
@@ -97,32 +97,32 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             </span>
                                         )}
                                     </div>
-                                    <p className={`text-[13px] mt-0.5 ${isLight ? 'text-gray-500' : 'text-white/50'}`}>{job.company}</p>
+                                    <p className={`text-[13px] mt-0.5 ${isLight ? 'text-ds-gray-500' : 'text-white/50'}`}>{job.company}</p>
                                 </div>
                             </div>
 
                             {/* Meta row */}
                             <div className={`flex items-center gap-4 mt-3 pt-3 border-t ${isLight ? 'border-black/5' : 'border-white/8'}`}>
                                 <div className="flex items-center gap-1">
-                                    <Icon name="location_on" className={`text-[14px] ${isLight ? 'text-gray-400' : 'text-white/30'}`} />
-                                    <span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-white/50'}`}>{job.location}</span>
+                                    <Icon name="location_on" className={`text-[14px] ${isLight ? 'text-ds-gray-400' : 'text-white/30'}`} />
+                                    <span className={`text-[12px] ${isLight ? 'text-ds-gray-500' : 'text-white/50'}`}>{job.location}</span>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <Icon name="payments" className={`text-[14px] ${isLight ? 'text-gray-400' : 'text-white/30'}`} />
-                                    <span className={`text-[12px] font-semibold ${isLight ? 'text-gray-700' : 'text-white/70'}`}>{job.wage}</span>
+                                    <Icon name="payments" className={`text-[14px] ${isLight ? 'text-ds-gray-400' : 'text-white/30'}`} />
+                                    <span className={`text-[12px] font-semibold ${isLight ? 'text-ds-gray-700' : 'text-white/70'}`}>{job.wage}</span>
                                 </div>
-                                <span className={`ml-auto text-[11px] font-medium px-2 py-0.5 rounded-full ${isLight ? 'bg-gray-100 text-gray-500' : 'bg-white/8 text-white/40'}`}>{job.type}</span>
+                                <span className={`ml-auto text-[11px] font-medium px-2 py-0.5 rounded-full ${isLight ? 'bg-ds-gray-100 text-ds-gray-500' : 'bg-white/8 text-white/40'}`}>{job.type}</span>
                             </div>
                         </div>
 
                         {/* Footer action row */}
                         <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
                             <div className="flex items-center gap-2">
-                                <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
-                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? (isColorful ? 'bg-primary' : 'bg-ds-blue-500') : 'bg-amber-400'}`}
+                                <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-ds-gray-200' : 'bg-white/10'}`}>
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? (isColorful ? 'bg-primary' : 'bg-ds-blue-500') : 'bg-ds-gold-400'}`}
                                         style={{ width: `${job.match}%` }} />
                                 </div>
-                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? (isColorful ? 'text-primary' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400') : 'text-amber-400'}`}>{job.match}% match</span>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? (isColorful ? 'text-primary' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400') : 'text-ds-gold-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
                                 className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-gradient-start to-gradient-mid text-white active:scale-95 transition-transform`}>
@@ -140,7 +140,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedJob(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
                             className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} p-6 pb-10 ${sheetBgClass}`}>
-                            <div className="w-10 h-1 rounded-full bg-gray-400/30 mx-auto mb-5" />
+                            <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
 
                             {/* SUCCESS */}
                             {sheetMode === 'success' && (
@@ -149,7 +149,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                         <Icon name="task_alt" className="text-5xl text-ds-success" />
                                     </div>
                                     <h3 className="text-xl font-bold mb-1">Application Sent!</h3>
-                                    <p className={`text-[14px] text-center mb-6 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>Your application to <strong>{selectedJob.company}</strong> has been submitted.</p>
+                                    <p className={`text-[14px] text-center mb-6 ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>Your application to <strong>{selectedJob.company}</strong> has been submitted.</p>
                                     <button onClick={() => { setSelectedJob(null); onNav?.('notifications'); }}
                                         className="px-6 py-3 rounded-2xl bg-ds-success text-white font-semibold text-[14px] active:scale-95">
                                         View in Notifications
@@ -207,16 +207,16 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-xl font-bold mb-0.5">{selectedJob.title}</h3>
-                                            <p className={`text-[14px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{selectedJob.company}</p>
+                                            <p className={`text-[14px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.company}</p>
                                         </div>
                                         <span className={`px-3 py-1 rounded-full font-bold text-[13px] ${isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className={`p-4 rounded-2xl mb-5 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                         <div className="flex items-center justify-between mb-3">
-                                            <div className="flex items-center space-x-2"><Icon name="location_on" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{selectedJob.location}</span></div>
+                                            <div className="flex items-center space-x-2"><Icon name="location_on" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.location}</span></div>
                                             <div className="flex items-center space-x-2"><Icon name="payments" className="text-[16px] opacity-50" /><span className="text-[13px] font-semibold">{selectedJob.wage}</span></div>
                                         </div>
-                                        <div className="flex items-center space-x-2"><Icon name="category" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{selectedJob.type} Ã‚Â· Part-time flexible</span></div>
+                                        <div className="flex items-center space-x-2"><Icon name="category" className="text-[16px] opacity-50" /><span className={`text-[13px] ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{selectedJob.type} Ã‚Â· Part-time flexible</span></div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-3">
                                         <button onClick={() => { onNav?.('copilot'); setSelectedJob(null); }}

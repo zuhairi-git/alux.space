@@ -37,7 +37,7 @@ export default function CaseStudyProgress() {
       aria-valuenow={Math.round(scrollProgress * 100)}
     >
       <motion.div
-        className="h-full bg-gradient-to-r from-primary via-primary-500 to-pink-500"
+        className="h-full bg-gradient-to-r from-primary via-primary-500 to-ds-pink-500"
         style={{ scaleX: scrollProgress, transformOrigin: '0%' }}
         transition={{ duration: durationSeconds.instant }}
       />

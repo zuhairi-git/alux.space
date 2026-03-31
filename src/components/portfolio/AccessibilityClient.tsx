@@ -418,7 +418,7 @@ export default function AccessibilityClient() {
   const colorThemes = [
     {
       name: content.lightTheme,
-      preview: "bg-gradient-to-r from-blue-50 to-[var(--gradient-end)]/5",
+      preview: "bg-gradient-to-r from-ds-blue-50 to-[var(--gradient-end)]/5",
       contrast: "AAA"
     },
     {
@@ -428,7 +428,7 @@ export default function AccessibilityClient() {
     },
     {
       name: content.colorfulTheme,
-      preview: "bg-gradient-to-r from-primary-500 to-pink-500",
+      preview: "bg-gradient-to-r from-primary-500 to-ds-pink-500",
       contrast: "AAA"
     }
   ];
@@ -444,13 +444,13 @@ export default function AccessibilityClient() {
       title: content.inclusiveTypographyTitle,
       description: content.inclusiveTypographyDesc,
       
-      gradient: "from-green-600 to-cyan-500"
+      gradient: "from-ds-emerald-600 to-ds-cyan-500"
     },
     {
       title: content.spacingTitle,
       description: content.spacingDesc,
       
-      gradient: "from-primary to-red-600"
+      gradient: "from-primary to-ds-error"
     }
   ];
 
@@ -552,21 +552,21 @@ export default function AccessibilityClient() {
                               icon: 'target',
                               color: 'indigo',
                               description: 'Synthesize insights into clear accessibility requirements and design principles.',
-                              gradient: 'from-primary-600/30 to-indigo-800/20'
+                              gradient: 'from-primary-600/30 to-ds-indigo-800/20'
                             },
                             {
                               phase: content.developPhase,
                               icon: 'build',
                               color: 'pink',
                               description: 'Create accessible components, test with users, and iterate based on feedback.',
-                              gradient: 'from-pink-900/30 to-pink-500/20'
+                              gradient: 'from-ds-pink-900/30 to-ds-pink-500/20'
                             },
                             {
                               phase: content.deliverPhase,
                               icon: 'rocket_launch',
                               color: 'green',
                               description: 'Launch the design system with comprehensive documentation and training.',
-                              gradient: 'from-green-600/30 to-green-600/20'
+                              gradient: 'from-ds-emerald-600/30 to-ds-emerald-600/20'
                             }
                           ].map((phase, index) => (
                             <div
@@ -580,8 +580,8 @@ export default function AccessibilityClient() {
                                         : phase.color === 'indigo'
                                           ? 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)]/50 shadow-lg'
                                           : phase.color === 'pink'
-                                            ? 'bg-gradient-to-br from-pink-400 to-pink-500 shadow-lg'
-                                            : 'bg-gradient-to-br from-green-400 to-green-600 shadow-lg'
+                                            ? 'bg-gradient-to-br from-ds-pink-400 to-ds-pink-500 shadow-lg'
+                                            : 'bg-gradient-to-br from-ds-emerald-400 to-ds-emerald-600 shadow-lg'
                                   } group-hover:scale-105 transition-transform duration-300`}>
                                   <span className="material-symbols text-2xl text-white">{phase.icon}</span>
                                   
@@ -621,11 +621,11 @@ export default function AccessibilityClient() {
                               <span className={`text-xs font-medium text-[var(--primary)]`}>Divergent</span>
                             </div>
 
-                            <div className={`w-6 h-px bg-gradient-to-r from-[var(--primary)] to-pink-400`}></div>
+                            <div className={`w-6 h-px bg-gradient-to-r from-[var(--primary)] to-ds-pink-400`}></div>
 
                             <div className="flex items-center gap-2">
                               <span className={`text-xs font-medium text-[var(--primary)]`}>Convergent</span>
-                              <div className={`w-2 h-2 rounded-full bg-pink-500`}></div>
+                              <div className={`w-2 h-2 rounded-full bg-ds-pink-500`}></div>
                             </div>
                           </div>
                         </div>
@@ -744,7 +744,7 @@ export default function AccessibilityClient() {
 
                               {/* Detail columns Ã¢â‚¬â€ left-border accent, no boxes */}
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                                <div className="border-l-2 border-green-600/30 pl-4">
+                                <div className="border-l-2 border-ds-emerald-600/30 pl-4">
                                   <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">Needs</h4>
                                   <ul className="space-y-1.5">
                                     {persona.needs.map((need, i) => (
@@ -762,8 +762,8 @@ export default function AccessibilityClient() {
                                   </ul>
                                 </div>
 
-                                <div className="border-l-2 border-pink-500/30 pl-4">
-                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-pink-500 mb-3">Pain Points</h4>
+                                <div className="border-l-2 border-ds-pink-500/30 pl-4">
+                                  <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-pink-500 mb-3">Pain Points</h4>
                                   <ul className="space-y-1.5">
                                     {persona.pains.map((pain, i) => (
                                       <li key={i} className="text-sm leading-relaxed opacity-70">{pain}</li>
@@ -795,21 +795,21 @@ export default function AccessibilityClient() {
                         icon: "code",
                         title: content.requirement2,
                         desc: content.requirement2Desc,
-                        gradient: "from-primary-500 to-pink-500"
+                        gradient: "from-primary-500 to-ds-pink-500"
                       },
                       {
                         
                         icon: "bug_report",
                         title: content.requirement3,
                         desc: content.requirement3Desc,
-                        gradient: "from-green-600 to-green-600/50"
+                        gradient: "from-ds-emerald-600 to-ds-emerald-600/50"
                       },
                       {
                         
                         icon: "translate",
                         title: content.requirement4,
                         desc: content.requirement4Desc,
-                        gradient: "from-primary to-red-600"
+                        gradient: "from-primary to-ds-error"
                       }
                     ].map((req, index) => (
                       <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
@@ -854,12 +854,12 @@ export default function AccessibilityClient() {
           <CaseStudySection title={content.principlesTitle} icon="lightbulb" number={5} accent="purple">
             <CaseStudyItem>
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div className={`p-6 rounded-2xl bg-red-500/10 border border-red-500/30`}>
+                    <div className={`p-6 rounded-2xl bg-ds-error/10 border border-ds-error/30`}>
                       <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.problemTitle}</h3>
                       <p className={`opacity-80 text-[var(--foreground)]`}>{content.problemDesc}</p>
                     </div>
 
-                    <div className={`p-6 rounded-2xl bg-green-500/10 border border-green-500/30`}>
+                    <div className={`p-6 rounded-2xl bg-ds-success/10 border border-ds-success/30`}>
                       <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.solutionTitle}</h3>
                       <p className={`opacity-80 text-[var(--foreground)]`}>{content.solutionDesc}</p>
                     </div>
@@ -989,7 +989,7 @@ export default function AccessibilityClient() {
                       <div className={`p-4 rounded-lg font-mono text-sm bg-[var(--background)]`}>
                         <div className={`text-[var(--foreground)]`}>
                           <span className="text-[var(--primary)]">npm run</span> <span className="text-ds-success">test:a11y</span><br />
-                          <span className="text-gray-500"># Ã¢Å“â€¦ 0 accessibility violations found</span>
+                          <span className="text-ds-gray-500"># Ã¢Å“â€¦ 0 accessibility violations found</span>
                         </div>
                       </div>
                     </div>

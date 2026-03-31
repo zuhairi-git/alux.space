@@ -232,8 +232,8 @@ export default function JobSeekingClient() {
         className={`min-h-screen transition-colors duration-300 ${theme === 'colorful'
           ? 'bg-[var(--color-colorful-bg)]'
           : isLight
-            ? 'bg-gradient-to-br from-slate-50 to-gray-100'
-            : 'bg-gradient-to-br from-gray-900 to-black'
+            ? 'bg-gradient-to-br from-ds-gray-50 to-ds-gray-100'
+            : 'bg-gradient-to-br from-ds-gray-900 to-black'
           }`}
       >
         <Navigation />
@@ -276,7 +276,7 @@ export default function JobSeekingClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...t.enterSlow, delay: delaySeconds.md }}
             >
-              <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-gray-200' : isLight ? 'text-gray-600' : 'text-gray-300'
+              <p className={`text-lg md:text-xl leading-relaxed max-w-3xl mx-auto ${theme === 'colorful' ? 'text-ds-gray-200' : isLight ? 'text-ds-gray-600' : 'text-ds-gray-300'
                 }`}>
                 {content.intro}
               </p>

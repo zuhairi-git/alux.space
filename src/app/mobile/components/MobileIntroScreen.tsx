@@ -21,7 +21,7 @@ export interface MobileIntroConfig {
     appName: string;
     tagline: string;
     appIcon: string;
-    accentGradient: string;    // e.g. 'from-blue-500 to-indigo-600'
+    accentGradient: string;    // e.g. 'from-ds-blue-500 to-ds-indigo-600'
     aiTips: IntroAITip[];
     features: IntroFeature[];
 }
@@ -47,7 +47,7 @@ const THEME_OPTIONS = [
         desc: 'Clean & minimal',
         icon: 'light_mode',
         swatchBg: 'bg-ds-gray-100',
-        swatchText: 'text-gray-900',
+        swatchText: 'text-ds-gray-900',
     },
     {
         v: 'colorful',
@@ -112,7 +112,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const bgClass =
         selectedTheme === 'light'
             ? isIOS
-                ? 'bg-ds-gray-100 text-gray-900'
+                ? 'bg-ds-gray-100 text-ds-gray-900'
                 : 'bg-ds-gray-50 text-ds-gray-900'
             : selectedTheme === 'colorful'
                 ? 'bg-ds-colorful-bg text-white'
@@ -120,7 +120,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                     ? 'bg-black text-white'
                     : 'bg-ds-dark-1 text-ds-gray-200';
 
-    const muted = selectedTheme === 'light' ? 'text-gray-500' : 'text-white/50';
+    const muted = selectedTheme === 'light' ? 'text-ds-gray-500' : 'text-white/50';
 
     const cardClass =
         selectedTheme === 'light'
@@ -197,7 +197,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             {/* Colorful ambient mesh - enhanced */}
             {selectedTheme === 'colorful' && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-fuchsia-600/25 blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
+                    <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-ds-fuchsia-600/25 blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
                     <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-primary-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
                     <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
                 </div>
@@ -490,7 +490,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                             className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-200 ${selected
                                                 ? ''
                                                 : selectedTheme === 'light'
-                                                    ? 'border-gray-150 bg-white'
+                                                    ? 'border-ds-gray-150 bg-white'
                                                     : 'border-white/8 bg-white/[0.05]'
                                             }`}
                                             style={selected ? { borderColor: accentColor, backgroundColor: `${accentColor}12` } : {}}
@@ -499,13 +499,13 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                             <div className={`w-14 h-14 rounded-xl ${t.swatchBg} flex flex-col justify-between p-2 overflow-hidden shadow-md shrink-0 relative`}>
                                                 {/* Tiny mockup header */}
                                                 <div className="flex items-center gap-1">
-                                                    <div className={`w-3 h-3 rounded-full ${t.v === 'light' ? 'bg-gray-400/60' : 'bg-white/20'}`} />
-                                                    <div className={`flex-1 h-1.5 rounded-full ${t.v === 'light' ? 'bg-gray-300/80' : 'bg-white/15'}`} />
+                                                    <div className={`w-3 h-3 rounded-full ${t.v === 'light' ? 'bg-ds-gray-400/60' : 'bg-white/20'}`} />
+                                                    <div className={`flex-1 h-1.5 rounded-full ${t.v === 'light' ? 'bg-ds-gray-300/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {/* Tiny mockup cards */}
                                                 <div className="space-y-1">
-                                                    <div className={`h-1.5 rounded-full w-full ${t.v === 'light' ? 'bg-gray-300/80' : 'bg-white/25'}`} />
-                                                    <div className={`h-1.5 rounded-full w-3/4 ${t.v === 'light' ? 'bg-gray-200/80' : 'bg-white/15'}`} />
+                                                    <div className={`h-1.5 rounded-full w-full ${t.v === 'light' ? 'bg-ds-gray-300/80' : 'bg-white/25'}`} />
+                                                    <div className={`h-1.5 rounded-full w-3/4 ${t.v === 'light' ? 'bg-ds-gray-200/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {t.v === 'colorful' && (
                                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-primary-dark/20 rounded-xl" />
@@ -519,7 +519,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                                             name={t.icon}
                                                             className={`text-[18px] ${selected
                                                                 ? ''
-                                                                : selectedTheme === 'light' ? 'text-gray-500' : 'text-white/50'
+                                                                : selectedTheme === 'light' ? 'text-ds-gray-500' : 'text-white/50'
                                                             }`}
                                                         />
                                                     </span>
@@ -566,7 +566,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         transition={{ type: 'spring', stiffness: 400, damping: 24 }}
                         onClick={handleBack}
                         whileTap={{ scale: 0.88 }}
-                        className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedTheme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-white/10 text-white'}`}
+                        className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedTheme === 'light' ? 'bg-ds-gray-100 text-ds-gray-700' : 'bg-white/10 text-white'}`}
                     >
                         <Icon name="arrow_back" className="text-[20px]" />
                     </motion.button>

@@ -128,14 +128,14 @@ export default function PortfolioClient({ items }: Props) {
   };
 
   const getToggleBgClass = (): string => {
-    if (theme === 'light') return 'bg-gray-100';
+    if (theme === 'light') return 'bg-ds-gray-100';
     if (theme === 'colorful') return 'bg-white/[0.06] border border-white/[0.06]';
     return 'bg-white/[0.06]';
   };
 
   const getToggleInactiveText = (): string => {
-    if (theme === 'light') return 'text-gray-500 hover:text-gray-700';
-    return 'text-gray-400 hover:text-gray-200';
+    if (theme === 'light') return 'text-ds-gray-500 hover:text-ds-gray-700';
+    return 'text-ds-gray-400 hover:text-ds-gray-200';
   };
 
 
@@ -199,11 +199,11 @@ export default function PortfolioClient({ items }: Props) {
                       onClick={() => handleFilterChange(tab.value)}
                       className={`relative px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap rounded-lg ${isActive
                           ? theme === 'light'
-                            ? 'text-gray-900'
+                            ? 'text-ds-gray-900'
                             : 'text-white'
                           : theme === 'light'
-                            ? 'text-gray-400 hover:text-gray-600'
-                            : 'text-gray-500 hover:text-gray-300'
+                            ? 'text-ds-gray-400 hover:text-ds-gray-600'
+                            : 'text-ds-gray-500 hover:text-ds-gray-300'
                         }`}
                     >
                       <span className="flex items-center gap-2">
@@ -217,7 +217,7 @@ export default function PortfolioClient({ items }: Props) {
                         <motion.div
                           layoutId="activeFilterIndicator"
                           className={`absolute inset-0 rounded-lg -z-10 ${theme === 'light'
-                              ? 'bg-gray-100'
+                              ? 'bg-ds-gray-100'
                               : theme === 'colorful'
                                 ? 'bg-white/[0.08]'
                                 : 'bg-white/[0.08]'
@@ -241,7 +241,7 @@ export default function PortfolioClient({ items }: Props) {
                     key={mode}
                     onClick={() => setViewMode(mode)}
                     className={`relative flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-sm font-medium transition-colors ${isActive
-                        ? theme === 'light' ? 'text-gray-900' : 'text-white'
+                        ? theme === 'light' ? 'text-ds-gray-900' : 'text-white'
                         : getToggleInactiveText()
                       }`}
                   >

@@ -185,7 +185,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
       viewport={{ once: true }}
       className="h-full w-full group"
     >
-      <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:shadow-xl border border-gray-200/20 dark:border-neutral-700/20 group-hover:border-primary/20">
+      <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:shadow-xl border border-ds-gray-200/20 dark:border-ds-gray-700/20 group-hover:border-primary/20">
         <Link 
           href={cardLink} 
           className="h-full flex flex-col"

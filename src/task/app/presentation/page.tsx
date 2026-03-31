@@ -7,63 +7,63 @@ import { exportToWord, exportToPowerPoint, exportToPDF } from './exportUtils';
 
 // Slide Components
 const TitleSlide = () => (
-  <div data-slide="1" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-y-auto overflow-x-hidden px-4 sm:px-8 py-32 sm:py-40">
+  <div data-slide="1" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-ds-gray-50 via-white to-ds-blue-50 relative overflow-y-auto overflow-x-hidden px-4 sm:px-8 py-32 sm:py-40">
     {/* Floating Orbs */}
-    <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-200/40 to-primary-200/40 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-cyan-400/20 to-cyan-200/40 rounded-full blur-3xl"></div>
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary-100/20 to-pink-100/20 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-ds-blue-200/40 to-primary-200/40 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-ds-cyan-400/20 to-ds-cyan-200/40 rounded-full blur-3xl"></div>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary-100/20 to-ds-pink-100/20 rounded-full blur-3xl"></div>
     
     <div className="text-center space-y-6 sm:space-y-8 lg:space-y-12 px-4 sm:px-8 lg:px-16 z-10 max-w-7xl mx-auto">
       {/* Logo */}
-      <div className="inline-flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-500 rounded-2xl sm:rounded-3xl shadow-2xl mb-4 sm:mb-6 lg:mb-8 transform hover:scale-105 transition-transform">
+      <div className="inline-flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 bg-gradient-to-br from-ds-blue-600 via-ds-blue-500 to-ds-cyan-500 rounded-2xl sm:rounded-3xl shadow-2xl mb-4 sm:mb-6 lg:mb-8 transform hover:scale-105 transition-transform">
         <Image src="/logo/bh--logo.svg" alt="Buddy Healthcare" width={96} height={96} className="filter brightness-0 invert w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32" />
       </div>
       
       {/* Title */}
-      <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black bg-gradient-to-r from-slate-900 via-blue-800 to-primary-800 bg-clip-text text-transparent tracking-tight leading-tight">
+      <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black bg-gradient-to-r from-ds-gray-900 via-ds-blue-800 to-primary-800 bg-clip-text text-transparent tracking-tight leading-tight">
         Buddy Healthcare
       </h1>
       
       {/* Subtitle */}
-      <h2 className="text-2xl sm:text-3xl lg:text-5xl font-extralight text-slate-600 tracking-wide max-w-4xl mx-auto">
+      <h2 className="text-2xl sm:text-3xl lg:text-5xl font-extralight text-ds-gray-600 tracking-wide max-w-4xl mx-auto">
         Product Owner Assignment
       </h2>
       
       {/* Presenter Name */}
-      <p className="text-lg sm:text-xl lg:text-2xl text-slate-500 mt-4 sm:mt-6">
-        Presented by <span className="font-semibold text-slate-700">Ali Al Zuhairi</span>
+      <p className="text-lg sm:text-xl lg:text-2xl text-ds-gray-500 mt-4 sm:mt-6">
+        Presented by <span className="font-semibold text-ds-gray-700">Ali Al Zuhairi</span>
       </p>
       
       {/* Divider with dots */}
       <div className="flex items-center justify-center gap-3 my-8">
-        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-        <div className="w-24 h-0.5 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+        <div className="w-2 h-2 bg-ds-blue-500 rounded-full"></div>
+        <div className="w-24 h-0.5 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
         <div className="w-3 h-3 bg-primary-500 rounded-full"></div>
-        <div className="w-24 h-0.5 bg-gradient-to-r from-primary-500 to-cyan-500 rounded-full"></div>
-        <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+        <div className="w-24 h-0.5 bg-gradient-to-r from-primary-500 to-ds-cyan-500 rounded-full"></div>
+        <div className="w-2 h-2 bg-ds-cyan-500 rounded-full"></div>
       </div>
       
       {/* Description Box */}
-      <div className="inline-block px-16 py-10 bg-white/80 backdrop-blur-sm rounded-3xl border border-slate-200 shadow-2xl max-w-3xl">
-        <p className="text-3xl font-semibold text-slate-800 mb-3">Prioritization & Conflict Resolution</p>
-        <p className="text-xl text-slate-500">Healthcare SaaS Excellence</p>
+      <div className="inline-block px-16 py-10 bg-white/80 backdrop-blur-sm rounded-3xl border border-ds-gray-200 shadow-2xl max-w-3xl">
+        <p className="text-3xl font-semibold text-ds-gray-800 mb-3">Prioritization & Conflict Resolution</p>
+        <p className="text-xl text-ds-gray-500">Healthcare SaaS Excellence</p>
       </div>
     </div>
   </div>
 );
 
 const AgendaSlide = () => (
-  <div data-slide="2" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
+  <div data-slide="2" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute top-32 right-20 w-72 h-72 bg-gradient-to-br from-primary-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-blue-200/30 to-cyan-400/15 rounded-full blur-3xl"></div>
+    <div className="absolute top-32 right-20 w-72 h-72 bg-gradient-to-br from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-ds-blue-200/30 to-ds-cyan-400/15 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Header */}
       <div className="mb-10 sm:mb-16 lg:mb-20">
-        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 mb-4 sm:mb-6">Agenda</h2>
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-ds-gray-900 mb-4 sm:mb-6">Agenda</h2>
         <div className="flex items-center gap-2">
-          <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+          <div className="h-1 w-16 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
           <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
         </div>
       </div>
@@ -71,14 +71,14 @@ const AgendaSlide = () => (
       {/* Agenda Items */}
       <div className="space-y-4 sm:space-y-6 lg:space-y-8">
         {[
-          { number: '01', title: 'Backlog Prioritization', desc: 'Strategic approach to healthcare SaaS priorities', color: 'from-cyan-500 to-cyan-600', icon: '/dt-icons/list-timeline.svg' },
-          { number: '02', title: 'QA vs. CTO Conflict', desc: 'Facilitating release readiness alignment', color: 'from-pink-500 to-pink-500', icon: '/dt-icons/users.svg' },
-          { number: '03', title: 'How to Avoid Conflicts', desc: 'Proactive prevention strategies', color: 'from-blue-500 to-cyan-600', icon: '/dt-icons/shield-check.svg' },
-          { number: '04', title: 'Reflection', desc: 'Key insights and learnings', color: 'from-primary-500 to-pink-600', icon: '/dt-icons/lightbulb.svg' }
+          { number: '01', title: 'Backlog Prioritization', desc: 'Strategic approach to healthcare SaaS priorities', color: 'from-ds-cyan-500 to-ds-cyan-600', icon: '/dt-icons/list-timeline.svg' },
+          { number: '02', title: 'QA vs. CTO Conflict', desc: 'Facilitating release readiness alignment', color: 'from-ds-pink-500 to-ds-pink-500', icon: '/dt-icons/users.svg' },
+          { number: '03', title: 'How to Avoid Conflicts', desc: 'Proactive prevention strategies', color: 'from-ds-blue-500 to-ds-cyan-600', icon: '/dt-icons/shield-check.svg' },
+          { number: '04', title: 'Reflection', desc: 'Key insights and learnings', color: 'from-primary-500 to-ds-pink-600', icon: '/dt-icons/lightbulb.svg' }
         ].map((item, idx) => (
           <div 
             key={idx} 
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-slate-200 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-ds-gray-200 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
             style={{
               animation: `slideIn 0.5s ease-out ${idx * 0.1}s both`
             }}
@@ -89,9 +89,9 @@ const AgendaSlide = () => (
             <div className="flex-1">
               <div className="flex items-baseline gap-3 sm:gap-4 lg:gap-5 mb-2 sm:mb-3">
                 <span className={`text-2xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>{item.number}</span>
-                <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold text-slate-900">{item.title}</h3>
+                <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold text-ds-gray-900">{item.title}</h3>
               </div>
-              <p className="text-slate-600 text-sm sm:text-base lg:text-xl leading-relaxed sm:pl-12 lg:pl-16">{item.desc}</p>
+              <p className="text-ds-gray-600 text-sm sm:text-base lg:text-xl leading-relaxed sm:pl-12 lg:pl-16">{item.desc}</p>
             </div>
           </div>
         ))}
@@ -101,46 +101,46 @@ const AgendaSlide = () => (
 );
 
 const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: () => void }) => (
-  <div data-slide="3" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
+  <div data-slide="3" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
     {/* Floating Orbs */}
-    <div className="absolute bottom-32 left-32 w-96 h-96 bg-gradient-to-tr from-blue-200/30 to-cyan-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 left-32 w-96 h-96 bg-gradient-to-tr from-ds-blue-200/30 to-ds-cyan-200/30 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10">
       {/* Header */}
       <div className="mb-8 sm:mb-10 lg:mb-12">
-        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-slate-900 mb-4 sm:mb-5 lg:mb-6">Backlog Prioritization</h2>
+        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-ds-gray-900 mb-4 sm:mb-5 lg:mb-6">Backlog Prioritization</h2>
         <div className="flex items-center gap-2 mb-4">
-          <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+          <div className="h-1 w-16 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
           <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
         </div>
-        <p className="text-base sm:text-lg lg:text-xl text-slate-600">Strategic approach to healthcare SaaS priorities</p>
+        <p className="text-base sm:text-lg lg:text-xl text-ds-gray-600">Strategic approach to healthcare SaaS priorities</p>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-5 lg:gap-6 mb-8 sm:mb-10 lg:mb-12">
         {/* Context Card */}
         <div className="col-span-1 lg:col-span-2 group relative" style={{ animation: 'slideIn 0.5s ease-out 0.1s both' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-200/40 to-cyan-200/40 rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:p-8 border border-blue-200/50 hover:border-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-ds-blue-200/40 to-ds-cyan-200/40 rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:p-8 border border-ds-blue-200/50 hover:border-ds-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-blue-100 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-ds-blue-100 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
                 <Image src="/dt-icons/hospital-user.svg" alt="Healthcare" width={32} height={32} className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Context</h3>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900">Context</h3>
             </div>
-            <p className="text-lg text-slate-700 leading-relaxed">
-              Buddy Healthcare is a <span className="font-bold text-blue-600">healthcare SaaS platform</span> supporting nurses and doctors with digital care pathways.
+            <p className="text-lg text-ds-gray-700 leading-relaxed">
+              Buddy Healthcare is a <span className="font-bold text-ds-blue-600">healthcare SaaS platform</span> supporting nurses and doctors with digital care pathways.
             </p>
           </div>
         </div>
 
         {/* Key Priorities Card */}
         <div className="col-span-1 lg:col-span-3" style={{ animation: 'slideIn 0.5s ease-out 0.2s both' }}>
-          <div className="relative h-full bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:p-8 border border-slate-200 shadow-sm">
+          <div className="relative h-full bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:p-8 border border-ds-gray-200 shadow-sm">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-amber-200 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-ds-gold-200 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
                 <Image src="/dt-icons/star.svg" alt="Priority" width={32} height={32} className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Key Priorities</h3>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900">Key Priorities</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-3">
               {[
@@ -153,7 +153,7 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
                   <div className="w-6 h-6 flex items-center justify-center">
                     <Image src={item.icon} alt={item.label} width={16} height={16} />
                   </div>
-                  <span className="font-medium text-slate-900 text-sm">{item.label}</span>
+                  <span className="font-medium text-ds-gray-900 text-sm">{item.label}</span>
                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${item.badgeBg} text-white ml-auto`}>
                     {item.priority}
                   </span>
@@ -166,7 +166,7 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
 
       {/* Priority Items */}
       <div>
-        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">Priority Ranking</h3>
+        <h3 className="text-xl sm:text-2xl font-bold text-ds-gray-900 mb-3 sm:mb-4">Priority Ranking</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <PriorityItem
             rank={1}
@@ -199,32 +199,32 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
         </div>
         
         {/* Rejected Items */}
-        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 mt-6">Rejected Items</h3>
+        <h3 className="text-xl sm:text-2xl font-bold text-ds-gray-900 mb-3 sm:mb-4 mt-6">Rejected Items</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <div className="group relative opacity-60">
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-200/40 to-gray-300/40 rounded-3xl blur-xl"></div>
-            <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-red-300 shadow-xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-ds-gray-200/40 to-ds-gray-300/40 rounded-3xl blur-xl"></div>
+            <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-ds-error/30 shadow-xl">
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 bg-ds-gray-100 rounded-xl flex items-center justify-center shadow-lg">
                     <Image src="/dt-icons/siren.svg" alt="Rejected" width={20} height={20} />
                   </div>
-                  <span className="text-sm font-medium text-slate-500">BHC-200</span>
+                  <span className="text-sm font-medium text-ds-gray-500">BHC-200</span>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
-                  <span className="px-3 py-1 rounded-lg text-xs font-bold bg-red-100 text-red-700 border border-red-300">REJECTED</span>
+                  <span className="px-3 py-1 rounded-lg text-xs font-bold bg-ds-error/10 text-ds-error border border-ds-error/30">REJECTED</span>
                 </div>
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-3 leading-snug line-through">
+              <h3 className="text-base font-bold text-ds-gray-900 mb-3 leading-snug line-through">
                 Customer request: automated urgent message to patients based on form answers
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              <p className="text-sm text-ds-gray-600 leading-relaxed mb-4">
                 Safety-critical with legal/regulatory implications. <strong>REJECTED</strong> due to high risk and insufficient guardrails for automated urgent medical messaging. Requires extensive regulatory review and liability assessment before consideration.
               </p>
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-lg text-xs font-medium border bg-gray-50 text-gray-700 border-gray-200">Story</span>
-                  <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-red-50 text-red-700 border border-red-200">N/A</span>
+                  <span className="px-2.5 py-1 rounded-lg text-xs font-medium border bg-ds-gray-50 text-ds-gray-700 border-ds-gray-200">Story</span>
+                  <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-ds-error/5 text-ds-error border border-ds-error/20">N/A</span>
                 </div>
                 {onShowRejectionModal && (
                   <button
@@ -233,10 +233,10 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
                       e.stopPropagation();
                       onShowRejectionModal();
                     }}
-                    className="w-6 h-6 bg-blue-100 hover:bg-blue-200 rounded-full flex items-center justify-center transition-colors"
+                    className="w-6 h-6 bg-ds-blue-100 hover:bg-ds-blue-200 rounded-full flex items-center justify-center transition-colors"
                     title="View rejection reasons"
                   >
-                    <Image src="/dt-icons/circle-info.svg" alt="Info" width={14} height={14} className="text-blue-600" />
+                    <Image src="/dt-icons/circle-info.svg" alt="Info" width={14} height={14} className="text-ds-blue-600" />
                   </button>
                 )}
               </div>
@@ -256,12 +256,12 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
   const priorityConfig: any = {
     red: { 
       label: 'Highest',
-      iconBg: 'bg-red-200',
-      priorityBadgeBg: 'from-red-600 to-red-700',
-      badge: 'bg-red-100 text-red-800 border-red-300',
+      iconBg: 'bg-ds-error/20',
+      priorityBadgeBg: 'from-ds-error to-ds-error',
+      badge: 'bg-ds-error/10 text-ds-error border-ds-error/30',
       priorityIcon: '/dt-icons/angles-up.svg',
       type: 'Bug',
-      glowColor: 'from-red-300/50 to-red-400/50'
+      glowColor: 'from-ds-error/30 to-ds-error/30'
     },
     orange: { 
       label: 'High',
@@ -274,21 +274,21 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
     },
     yellow: { 
       label: 'Medium',
-      iconBg: 'bg-amber-200',
-      priorityBadgeBg: 'from-amber-600 to-amber-700',
-      badge: 'bg-amber-100 text-amber-800 border-amber-300',
+      iconBg: 'bg-ds-gold-200',
+      priorityBadgeBg: 'from-ds-gold-600 to-ds-gold-700',
+      badge: 'bg-ds-gold-100 text-ds-gold-800 border-ds-gold-300',
       priorityIcon: '/dt-icons/minus.svg',
       type: 'Task',
-      glowColor: 'from-amber-300/50 to-amber-400/50'
+      glowColor: 'from-ds-gold-300/50 to-ds-gold-400/50'
     },
     blue: { 
       label: 'Low',
-      iconBg: 'bg-blue-200',
-      priorityBadgeBg: 'from-blue-600 to-blue-700',
-      badge: 'bg-blue-100 text-blue-800 border-blue-300',
+      iconBg: 'bg-ds-blue-200',
+      priorityBadgeBg: 'from-ds-blue-600 to-ds-blue-700',
+      badge: 'bg-ds-blue-100 text-ds-blue-800 border-ds-blue-300',
       priorityIcon: '/dt-icons/arrow-down.svg',
       type: 'Story',
-      glowColor: 'from-blue-300/50 to-blue-400/50'
+      glowColor: 'from-ds-blue-300/50 to-ds-blue-400/50'
     },
     purple: { 
       label: 'Lowest',
@@ -307,7 +307,7 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
   return (
     <div className="group relative">
       <div className={`absolute inset-0 bg-gradient-to-br ${config.glowColor} rounded-3xl blur-xl group-hover:blur-2xl transition-all`}></div>
-      <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-slate-200/50 hover:border-slate-400/70 shadow-xl hover:shadow-2xl transition-all cursor-pointer">
+      <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-ds-gray-200/50 hover:border-ds-gray-400/70 shadow-xl hover:shadow-2xl transition-all cursor-pointer">
         {/* Issue Header */}
         <div className="flex items-start justify-between gap-4 mb-3">
           <div className="flex items-center gap-3">
@@ -316,7 +316,7 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
               <Image src={iconPath} alt="Issue type" width={24} height={24} />
             </div>
             {/* Issue Key */}
-            <span className="text-sm font-medium text-slate-500">
+            <span className="text-sm font-medium text-ds-gray-500">
               {issueKey}
             </span>
           </div>
@@ -325,17 +325,17 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
             <div className={`w-7 h-7 bg-gradient-to-br ${config.priorityBadgeBg} rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-md`}>
               <Image src={config.priorityIcon} alt={config.label} width={16} height={16} className="filter brightness-0 invert" />
             </div>
-            <span className="text-sm font-semibold text-slate-700">{config.label}</span>
+            <span className="text-sm font-semibold text-ds-gray-700">{config.label}</span>
           </div>
         </div>
         
         {/* Issue Title */}
-        <h3 className="text-base font-bold text-slate-900 mb-3 leading-snug">
+        <h3 className="text-base font-bold text-ds-gray-900 mb-3 leading-snug">
           {title}
         </h3>
         
         {/* Issue Description */}
-        <p className="text-sm text-slate-600 leading-relaxed mb-4">
+        <p className="text-sm text-ds-gray-600 leading-relaxed mb-4">
           {reasoning}
         </p>
         
@@ -344,11 +344,11 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
           <span className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${config.badge}`}>
             {config.type}
           </span>
-          <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+          <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-ds-gray-100 text-ds-gray-700 border border-ds-gray-200">
             Sprint {Math.ceil(rank / 2)}
           </span>
           {rank === 1 && (
-            <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-pink-400/5 text-pink-500 border border-pink-400/20">
+            <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-ds-pink-400/5 text-ds-pink-500 border border-ds-pink-400/20">
               Critical
             </span>
           )}
@@ -359,20 +359,20 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
 };
 
 const ConflictScenarioSlide = () => (
-  <div data-slide="5" className="flex flex-col h-full bg-gradient-to-br from-slate-50 via-white to-pink-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
+  <div data-slide="5" className="flex flex-col h-full bg-gradient-to-br from-ds-gray-50 via-white to-ds-pink-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-primary-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-red-200/20 to-[#ffb07a]/10 rounded-full blur-3xl"></div>
+    <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-ds-error/10 to-[#ffb07a]/10 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10">
       {/* Title */}
       <div className="mb-6 sm:mb-10 lg:mb-16">
-        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 mb-4 sm:mb-6">Conflict Scenario</h2>
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-ds-gray-900 mb-4 sm:mb-6">Conflict Scenario</h2>
         <div className="flex items-center gap-2 mb-4">
-          <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+          <div className="h-1 w-16 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
           <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
         </div>
-        <p className="text-lg sm:text-xl lg:text-2xl text-slate-600">QA vs. CTO Release Decision</p>
+        <p className="text-lg sm:text-xl lg:text-2xl text-ds-gray-600">QA vs. CTO Release Decision</p>
       </div>
 
       {/* VS Layout */}
@@ -380,38 +380,38 @@ const ConflictScenarioSlide = () => (
         {/* QA Side */}
         <div className="space-y-4 sm:space-y-6 lg:space-y-8">
           <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-ds-error to-ds-error rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
               <Image src="/dt-icons/clipboard-check.svg" alt="QA" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
             </div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">QA Team</h3>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ds-gray-900">QA Team</h3>
           </div>
           
-          <div className="bg-gradient-to-br from-red-50 to-red-100/50 border-l-4 border-red-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
-            <p className="text-base sm:text-lg lg:text-xl font-semibold text-slate-900 mb-2 sm:mb-3">Position:</p>
-            <p className="text-slate-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+          <div className="bg-gradient-to-br from-ds-error/5 to-ds-error/5 border-l-4 border-ds-error rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
+            <p className="text-base sm:text-lg lg:text-xl font-semibold text-ds-gray-900 mb-2 sm:mb-3">Position:</p>
+            <p className="text-ds-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
               &quot;Delay the release due to incomplete verification documentation&quot;
             </p>
           </div>
 
           <div className="space-y-3 sm:space-y-4">
-            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-red-200 shadow-md">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg sm:rounded-xl flex items-center justify-center">
+            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-ds-error/20 shadow-md">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-ds-error/10 rounded-lg sm:rounded-xl flex items-center justify-center">
                 <Image src="/dt-icons/exclamation-triangle.svg" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="text-slate-700 font-semibold text-sm sm:text-base lg:text-lg">Compliance risk</span>
+              <span className="text-ds-gray-700 font-semibold text-sm sm:text-base lg:text-lg">Compliance risk</span>
             </div>
-            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-red-200 shadow-md">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg sm:rounded-xl flex items-center justify-center">
+            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-ds-error/20 shadow-md">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-ds-error/10 rounded-lg sm:rounded-xl flex items-center justify-center">
                 <Image src="/dt-icons/file-exclamation.svg" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="text-slate-700 font-semibold text-sm sm:text-base lg:text-lg">Documentation gaps</span>
+              <span className="text-ds-gray-700 font-semibold text-sm sm:text-base lg:text-lg">Documentation gaps</span>
             </div>
           </div>
         </div>
 
         {/* VS Badge */}
         <div className="flex justify-center my-4 lg:my-0">
-          <div className="bg-gradient-to-br from-primary-600 via-pink-600 to-red-600 text-white rounded-2xl sm:rounded-3xl w-24 h-24 sm:w-32 sm:h-32 lg:w-36 lg:h-36 flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform">
+          <div className="bg-gradient-to-br from-primary-600 via-ds-pink-600 to-ds-error text-white rounded-2xl sm:rounded-3xl w-24 h-24 sm:w-32 sm:h-32 lg:w-36 lg:h-36 flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform">
             <span className="text-3xl sm:text-4xl lg:text-5xl font-black">VS</span>
           </div>
         </div>
@@ -419,31 +419,31 @@ const ConflictScenarioSlide = () => (
         {/* CTO Side */}
         <div className="space-y-4 sm:space-y-6 lg:space-y-8">
           <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-ds-blue-500 to-ds-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
               <Image src="/dt-icons/rocket.svg" alt="CTO" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
             </div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">CTO</h3>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ds-gray-900">CTO</h3>
           </div>
           
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 border-l-4 border-blue-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
-            <p className="text-base sm:text-lg lg:text-xl font-semibold text-slate-900 mb-2 sm:mb-3">Position:</p>
-            <p className="text-slate-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+          <div className="bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 border-l-4 border-ds-blue-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
+            <p className="text-base sm:text-lg lg:text-xl font-semibold text-ds-gray-900 mb-2 sm:mb-3">Position:</p>
+            <p className="text-ds-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
               &quot;Release on schedule to maintain momentum and commitments&quot;
             </p>
           </div>
 
           <div className="space-y-3 sm:space-y-4">
-            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-blue-200 shadow-md">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center">
+            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-ds-blue-200 shadow-md">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-ds-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center">
                 <Image src="/dt-icons/calendar-clock.svg" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="text-slate-700 font-semibold text-sm sm:text-base lg:text-lg">Timeline pressure</span>
+              <span className="text-ds-gray-700 font-semibold text-sm sm:text-base lg:text-lg">Timeline pressure</span>
             </div>
-            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-blue-200 shadow-md">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center">
+            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-ds-blue-200 shadow-md">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-ds-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center">
                 <Image src="/dt-icons/users-gear.svg" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="text-slate-700 font-semibold text-sm sm:text-base lg:text-lg">Stakeholder expectations</span>
+              <span className="text-ds-gray-700 font-semibold text-sm sm:text-base lg:text-lg">Stakeholder expectations</span>
             </div>
           </div>
         </div>
@@ -451,7 +451,7 @@ const ConflictScenarioSlide = () => (
 
       {/* Question */}
       <div className="text-center">
-        <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-6 bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-full text-base sm:text-lg lg:text-xl font-bold shadow-2xl">
+        <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-6 bg-gradient-to-r from-ds-gray-800 to-ds-gray-900 text-white rounded-full text-base sm:text-lg lg:text-xl font-bold shadow-2xl">
           <Image src="/dt-icons/question-circle.svg" alt="Question" width={28} height={28} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7" />
           <span>How should we resolve this conflict?</span>
         </div>
@@ -461,39 +461,39 @@ const ConflictScenarioSlide = () => (
 );
 
 const ResolutionSlide = () => (
-  <div data-slide="6" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
+  <div data-slide="6" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
     {/* Animated Background Elements */}
-    <div className="absolute top-20 right-20 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400/15 via-cyan-200/30 to-blue-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-200/20 via-pink-200/20 to-blue-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 right-20 w-[500px] h-[500px] bg-gradient-to-br from-ds-cyan-400/15 via-ds-cyan-200/30 to-ds-blue-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-200/20 via-ds-pink-200/20 to-ds-blue-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10 relative">
       {/* Header Section */}
       <div className="mb-8 sm:mb-12 lg:mb-16">
-        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 mb-4 sm:mb-6">Resolution</h2>
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-ds-gray-900 mb-4 sm:mb-6">Resolution</h2>
         <div className="flex items-center gap-2 mb-3 sm:mb-4">
-          <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+          <div className="h-1 w-16 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
           <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
         </div>
-        <p className="text-lg sm:text-xl lg:text-2xl text-slate-600">Finding Common Ground Through Structured Facilitation</p>
+        <p className="text-lg sm:text-xl lg:text-2xl text-ds-gray-600">Finding Common Ground Through Structured Facilitation</p>
       </div>
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 lg:gap-8 mb-8 sm:mb-9 lg:mb-10">
         {/* Left Column - Alignment */}
         <div className="group relative" style={{ animation: 'slideIn 0.5s ease-out 0.1s both' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/25 to-cyan-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-cyan-400/25 hover:border-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-ds-cyan-400/25 to-ds-cyan-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-ds-cyan-400/25 hover:border-ds-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-ds-cyan-500 to-ds-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
                 <Image src="/dt-icons/bullseye.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Alignment Reached</h3>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900">Alignment Reached</h3>
             </div>
             <div className="space-y-3 sm:space-y-4">
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                Regulatory compliance and product safety are <span className="font-bold text-cyan-500 px-2 py-1 bg-cyan-400/10 rounded">non-negotiable</span> priorities.
+              <p className="text-base sm:text-lg text-ds-gray-700 leading-relaxed">
+                Regulatory compliance and product safety are <span className="font-bold text-ds-cyan-500 px-2 py-1 bg-ds-cyan-400/10 rounded">non-negotiable</span> priorities.
               </p>
-              <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-ds-gray-600 leading-relaxed">
                 We also acknowledged the critical importance of maintaining delivery predictability and development momentum.
               </p>
             </div>
@@ -502,20 +502,20 @@ const ResolutionSlide = () => (
 
         {/* Right Column - Key Outcome */}
         <div className="group relative" style={{ animation: 'slideIn 0.5s ease-out 0.2s both' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-200/50 to-primary-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-blue-200/50 hover:border-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-ds-blue-200/50 to-primary-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+          <div className="relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-ds-blue-200/50 hover:border-ds-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-500 to-primary-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-ds-blue-500 to-primary-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
                 <Image src="/dt-icons/lightbulb.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Key Outcome</h3>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900">Key Outcome</h3>
             </div>
             <div className="space-y-3 sm:space-y-4">
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                This approach maintains <span className="font-bold text-blue-700">delivery discipline</span> while ensuring quality and regulatory standards are respected.
+              <p className="text-base sm:text-lg text-ds-gray-700 leading-relaxed">
+                This approach maintains <span className="font-bold text-ds-blue-700">delivery discipline</span> while ensuring quality and regulatory standards are respected.
               </p>
-              <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed">
-                It fosters <span className="font-bold text-cyan-500 px-2 py-1 bg-cyan-400/10 rounded">collaboration rather than compromise</span>.
+              <p className="text-sm sm:text-base lg:text-lg text-ds-gray-600 leading-relaxed">
+                It fosters <span className="font-bold text-ds-cyan-500 px-2 py-1 bg-ds-cyan-400/10 rounded">collaboration rather than compromise</span>.
               </p>
             </div>
           </div>
@@ -524,13 +524,13 @@ const ResolutionSlide = () => (
 
       {/* Agreed Actions - Full Width */}
       <div className="group relative" style={{ animation: 'slideIn 0.5s ease-out 0.3s both' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/25 to-blue-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-        <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/50 hover:border-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
+        <div className="absolute inset-0 bg-gradient-to-br from-ds-cyan-400/25 to-ds-blue-200/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+        <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-ds-gray-200/50 hover:border-ds-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-300">
           <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-7 lg:mb-8">
             <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
               <Image src="/dt-icons/list-check.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
             </div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">Agreed Actions</h3>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ds-gray-900">Agreed Actions</h3>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
@@ -538,20 +538,20 @@ const ResolutionSlide = () => (
               {
                 num: 1,
                 text: "QA will identify the minimum critical documentation required for release compliance.",
-                color: "from-cyan-500 to-cyan-500",
-                bgColor: "from-cyan-400/5 to-cyan-400/10"
+                color: "from-ds-cyan-500 to-ds-cyan-500",
+                bgColor: "from-ds-cyan-400/5 to-ds-cyan-400/10"
               },
               {
                 num: 2,
                 text: "Development continues in parallel to avoid blocking non-risk areas.",
-                color: "from-cyan-500 to-cyan-500",
-                bgColor: "from-cyan-400/5 to-cyan-400/10"
+                color: "from-ds-cyan-500 to-ds-cyan-500",
+                bgColor: "from-ds-cyan-400/5 to-ds-cyan-400/10"
               },
               {
                 num: 3,
                 text: "A final readiness checkpoint will occur before release for QA sign-off on key verification items.",
-                color: "from-cyan-500 to-cyan-500",
-                bgColor: "from-cyan-400/5 to-cyan-400/10"
+                color: "from-ds-cyan-500 to-ds-cyan-500",
+                bgColor: "from-ds-cyan-400/5 to-ds-cyan-400/10"
               }
             ].map((action) => (
               <div 
@@ -559,12 +559,12 @@ const ResolutionSlide = () => (
                 className="group/card relative"
                 style={{ animation: `slideIn 0.5s ease-out ${0.4 + action.num * 0.1}s both` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 to-cyan-200/30 rounded-2xl blur group-hover/card:blur-md transition-all"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-ds-cyan-400/15 to-ds-cyan-200/30 rounded-2xl blur group-hover/card:blur-md transition-all"></div>
                 <div className={`relative bg-gradient-to-br ${action.bgColor} backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 border border-white shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col`}>
                   <div className={`w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-gradient-to-br ${action.color} text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-lg sm:text-xl mb-3 sm:mb-4 shadow-md`}>
                     {action.num}
                   </div>
-                  <p className="text-slate-700 leading-relaxed text-sm sm:text-base flex-1">
+                  <p className="text-ds-gray-700 leading-relaxed text-sm sm:text-base flex-1">
                     {action.text}
                   </p>
                 </div>
@@ -578,34 +578,34 @@ const ResolutionSlide = () => (
 );
 
 const PreventionSlide = () => (
-  <div data-slide="7" className="flex flex-col h-full bg-gradient-to-br from-white via-slate-50 to-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
+  <div data-slide="7" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-blue-200/30 to-cyan-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-primary-200/20 to-pink-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-ds-blue-200/30 to-ds-cyan-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-primary-200/20 to-ds-pink-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Title */}
       <div className="mb-8 sm:mb-12 lg:mb-16">
-        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-slate-900 mb-4 sm:mb-6">To Avoid Such Conflicts</h2>
+        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-ds-gray-900 mb-4 sm:mb-6">To Avoid Such Conflicts</h2>
         <div className="flex items-center gap-2 mb-3 sm:mb-4">
-          <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+          <div className="h-1 w-16 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
           <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
         </div>
-        <p className="text-lg sm:text-xl lg:text-2xl text-slate-600">Proactive Conflict Prevention Strategy</p>
+        <p className="text-lg sm:text-xl lg:text-2xl text-ds-gray-600">Proactive Conflict Prevention Strategy</p>
       </div>
 
       {/* Main Content */}
       <div className="space-y-6 sm:space-y-8 lg:space-y-12">
         {/* Introduction */}
         <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 lg:gap-8">
-          <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
+          <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-ds-blue-500 to-ds-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
             <Image src="/dt-icons/shield-heart.svg" alt="" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
           </div>
           <div className="flex-1">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 mb-3 sm:mb-4 lg:mb-5">Proactive Coordination Approach</h3>
-            <p className="text-base sm:text-lg lg:text-xl text-slate-700 leading-relaxed">
-              A <span className="font-bold text-blue-700">mini-team meeting</span> first allows QA, Dev, and Product to identify risks, blockers, and documentation gaps early. 
-              Then, an <span className="font-bold text-blue-700">advance alignment meeting</span> with leadership ensures everyone sees the same information before a formal release decision.
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900 mb-3 sm:mb-4 lg:mb-5">Proactive Coordination Approach</h3>
+            <p className="text-base sm:text-lg lg:text-xl text-ds-gray-700 leading-relaxed">
+              A <span className="font-bold text-ds-blue-700">mini-team meeting</span> first allows QA, Dev, and Product to identify risks, blockers, and documentation gaps early. 
+              Then, an <span className="font-bold text-ds-blue-700">advance alignment meeting</span> with leadership ensures everyone sees the same information before a formal release decision.
             </p>
           </div>
         </div>
@@ -613,34 +613,34 @@ const PreventionSlide = () => (
         {/* Two-Phase Approach */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mt-8 sm:mt-12 lg:mt-16">
           {/* Phase 1 */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 border-l-4 border-blue-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 border-l-4 border-ds-blue-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 shadow-xl">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-xl sm:text-2xl shadow-lg">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-ds-blue-500 to-ds-blue-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-xl sm:text-2xl shadow-lg">
                 1
               </div>
-              <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Mini-Team Meeting</h4>
+              <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900">Mini-Team Meeting</h4>
             </div>
-            <p className="text-slate-700 leading-relaxed mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg">
+            <p className="text-ds-gray-700 leading-relaxed mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg">
               QA, Development, and Product teams collaborate to identify potential issues early.
             </p>
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 bg-ds-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">Identify risks & blockers</span>
+                <span className="text-sm sm:text-base text-ds-gray-700 font-medium">Identify risks & blockers</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 bg-ds-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">Surface documentation gaps</span>
+                <span className="text-sm sm:text-base text-ds-gray-700 font-medium">Surface documentation gaps</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 bg-ds-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">Align on technical readiness</span>
+                <span className="text-sm sm:text-base text-ds-gray-700 font-medium">Align on technical readiness</span>
               </div>
             </div>
           </div>
@@ -651,9 +651,9 @@ const PreventionSlide = () => (
               <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-xl sm:text-2xl shadow-lg">
                 2
               </div>
-              <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">Leadership Alignment</h4>
+              <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900">Leadership Alignment</h4>
             </div>
-            <p className="text-slate-700 leading-relaxed mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg">
+            <p className="text-ds-gray-700 leading-relaxed mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg">
               Present unified information to leadership before formal release decisions.
             </p>
             <div className="space-y-2 sm:space-y-3">
@@ -661,19 +661,19 @@ const PreventionSlide = () => (
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">Shared context for all stakeholders</span>
+                <span className="text-sm sm:text-base text-ds-gray-700 font-medium">Shared context for all stakeholders</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">Informed decision-making</span>
+                <span className="text-sm sm:text-base text-ds-gray-700 font-medium">Informed decision-making</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">Clear accountability</span>
+                <span className="text-sm sm:text-base text-ds-gray-700 font-medium">Clear accountability</span>
               </div>
             </div>
           </div>
@@ -684,20 +684,20 @@ const PreventionSlide = () => (
 );
 
 const ReflectionSlide = () => (
-  <div data-slide="8" className="flex flex-col h-full bg-gradient-to-br from-slate-50 via-white to-primary-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
+  <div data-slide="8" className="flex flex-col h-full bg-gradient-to-br from-ds-gray-50 via-white to-primary-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute bottom-32 right-32 w-96 h-96 bg-gradient-to-tl from-primary-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-br from-blue-200/20 to-cyan-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 right-32 w-96 h-96 bg-gradient-to-tl from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-br from-ds-blue-200/20 to-ds-cyan-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Title */}
       <div className="mb-8 sm:mb-12 lg:mb-16">
-        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 mb-4 sm:mb-6">Key Takeaways</h2>
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-ds-gray-900 mb-4 sm:mb-6">Key Takeaways</h2>
         <div className="flex items-center gap-2 mb-3 sm:mb-4">
-          <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-primary-500 rounded-full"></div>
+          <div className="h-1 w-16 bg-gradient-to-r from-ds-blue-500 to-primary-500 rounded-full"></div>
           <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
         </div>
-        <p className="text-lg sm:text-xl lg:text-2xl text-slate-600">Product Owner Excellence in Action</p>
+        <p className="text-lg sm:text-xl lg:text-2xl text-ds-gray-600">Product Owner Excellence in Action</p>
       </div>
 
       {/* Main Insight */}
@@ -706,8 +706,8 @@ const ReflectionSlide = () => (
           <Image src="/dt-icons/lightbulb.svg" alt="" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 mb-3 sm:mb-4">Core Approach</h3>
-          <p className="text-base sm:text-lg lg:text-xl text-slate-700 leading-relaxed">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-ds-gray-900 mb-3 sm:mb-4">Core Approach</h3>
+          <p className="text-base sm:text-lg lg:text-xl text-ds-gray-700 leading-relaxed">
             This approach demonstrates <span className="font-bold text-primary-700">prioritization based on impact, risk, and value</span>, 
             while facilitating team alignment through structured reasoning and transparent communication Ã¢â‚¬â€ 
             key traits of an effective Product Owner.
@@ -717,14 +717,14 @@ const ReflectionSlide = () => (
 
       {/* Three Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mb-8 sm:mb-12 lg:mb-16">
-        <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.2s both' }}>
+        <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.2s both' }}>
           <div className="flex justify-center mb-4 sm:mb-5 lg:mb-6">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-ds-blue-500 to-ds-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
               <Image src="/dt-icons/bullseye.svg" alt="" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
             </div>
           </div>
-          <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 text-center">Impact-Driven</h4>
-          <p className="text-slate-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Patient safety and data reliability first</p>
+          <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-ds-gray-900 mb-3 sm:mb-4 text-center">Impact-Driven</h4>
+          <p className="text-ds-gray-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Patient safety and data reliability first</p>
         </div>
 
         <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.3s both' }}>
@@ -733,23 +733,23 @@ const ReflectionSlide = () => (
               <Image src="/dt-icons/balance-scale.svg" alt="" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
             </div>
           </div>
-          <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 text-center">Risk-Aware</h4>
-          <p className="text-slate-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Balance speed with compliance</p>
+          <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-ds-gray-900 mb-3 sm:mb-4 text-center">Risk-Aware</h4>
+          <p className="text-ds-gray-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Balance speed with compliance</p>
         </div>
 
-        <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-cyan-400/5 to-cyan-400/10 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.4s both' }}>
+        <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-ds-cyan-400/5 to-ds-cyan-400/10 rounded-2xl sm:rounded-3xl border border-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300" style={{ animation: 'slideIn 0.5s ease-out 0.4s both' }}>
           <div className="flex justify-center mb-4 sm:mb-5 lg:mb-6">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-ds-cyan-500 to-ds-cyan-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
               <Image src="/dt-icons/handshake.svg" alt="" width={36} height={36} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
             </div>
           </div>
-          <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 text-center">Collaborative</h4>
-          <p className="text-slate-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Foster alignment over authority</p>
+          <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-ds-gray-900 mb-3 sm:mb-4 text-center">Collaborative</h4>
+          <p className="text-ds-gray-700 leading-relaxed text-center text-sm sm:text-base lg:text-lg">Foster alignment over authority</p>
         </div>
       </div>
 
       {/* Bottom Summary */}
-      <div className="bg-gradient-to-r from-blue-600 via-primary-600 to-cyan-500 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-white" style={{ animation: 'slideIn 0.5s ease-out 0.5s both' }}>
+      <div className="bg-gradient-to-r from-ds-blue-600 via-primary-600 to-ds-cyan-500 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-white" style={{ animation: 'slideIn 0.5s ease-out 0.5s both' }}>
         <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 mb-3 sm:mb-4">
           <Image src="/dt-icons/star.svg" alt="" width={32} height={32} className="filter brightness-0 invert w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
           <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold">Product Owner Excellence</h4>
@@ -763,38 +763,38 @@ const ReflectionSlide = () => (
 );
 
 const ThankYouSlide = () => (
-  <div data-slide="9" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-primary-100 via-pink-50 to-blue-100 relative overflow-y-auto overflow-x-hidden pb-40 sm:pb-24">
+  <div data-slide="9" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-primary-100 via-ds-pink-50 to-ds-blue-100 relative overflow-y-auto overflow-x-hidden pb-40 sm:pb-24">
     {/* Floating Orbs */}
-    <div className="absolute top-20 right-32 w-96 h-96 bg-gradient-to-br from-primary-300/40 to-pink-300/40 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-blue-300/40 to-cyan-300/40 rounded-full blur-3xl"></div>
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-pink-200/30 to-primary-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 right-32 w-96 h-96 bg-gradient-to-br from-primary-300/40 to-ds-pink-300/40 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-ds-blue-300/40 to-ds-cyan-300/40 rounded-full blur-3xl"></div>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-ds-pink-200/30 to-primary-200/30 rounded-full blur-3xl"></div>
     
     <div className="text-center space-y-8 sm:space-y-12 lg:space-y-16 z-10 max-w-5xl mx-auto px-6 sm:px-12 lg:px-16">
       {/* Icon */}
-      <div className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-primary-600 via-pink-600 to-red-600 rounded-full shadow-2xl mb-4 sm:mb-6 lg:mb-8 animate-pulse">
+      <div className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-primary-600 via-ds-pink-600 to-ds-error rounded-full shadow-2xl mb-4 sm:mb-6 lg:mb-8 animate-pulse">
         <Image src="/dt-icons/heart.svg" alt="Thank You" width={80} height={80} className="filter brightness-0 invert w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20" />
       </div>
       
       {/* Title */}
-      <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black bg-gradient-to-r from-slate-900 via-primary-800 to-pink-800 bg-clip-text text-transparent">
+      <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black bg-gradient-to-r from-ds-gray-900 via-primary-800 to-ds-pink-800 bg-clip-text text-transparent">
         Thank You!
       </h1>
       
       {/* Subtitle */}
-      <p className="text-2xl sm:text-3xl lg:text-5xl font-extralight text-slate-700 tracking-wide">Questions & Discussion</p>
+      <p className="text-2xl sm:text-3xl lg:text-5xl font-extralight text-ds-gray-700 tracking-wide">Questions & Discussion</p>
       
       {/* Divider with dots */}
       <div className="flex items-center justify-center gap-2 sm:gap-3 my-6 sm:my-8 lg:my-12">
         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary-500 rounded-full"></div>
-        <div className="w-16 sm:w-20 lg:w-24 h-0.5 bg-gradient-to-r from-primary-500 to-pink-500 rounded-full"></div>
-        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 bg-pink-500 rounded-full"></div>
-        <div className="w-16 sm:w-20 lg:w-24 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full"></div>
-        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full"></div>
+        <div className="w-16 sm:w-20 lg:w-24 h-0.5 bg-gradient-to-r from-primary-500 to-ds-pink-500 rounded-full"></div>
+        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 bg-ds-pink-500 rounded-full"></div>
+        <div className="w-16 sm:w-20 lg:w-24 h-0.5 bg-gradient-to-r from-ds-pink-500 to-ds-blue-500 rounded-full"></div>
+        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-ds-blue-500 rounded-full"></div>
       </div>
       
       {/* Meta Info */}
       <div className="mt-10 sm:mt-14 lg:mt-20 space-y-4 sm:space-y-6 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-base sm:text-lg lg:text-2xl text-slate-700">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-base sm:text-lg lg:text-2xl text-ds-gray-700">
           <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
             <Image src="/dt-icons/presentation.svg" alt="Presentation" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
@@ -941,7 +941,7 @@ export default function Presentation() {
 
   return (
     <>
-    <div id="presentation-root" className={printMode ? 'relative w-screen min-h-screen bg-white' : 'fixed inset-0 w-screen h-screen overflow-hidden bg-gray-100'}>
+    <div id="presentation-root" className={printMode ? 'relative w-screen min-h-screen bg-white' : 'fixed inset-0 w-screen h-screen overflow-hidden bg-ds-gray-100'}>
       {printMode && (
         <style>{`
           @page { size: A4 landscape; margin: 0; }
@@ -971,11 +971,11 @@ export default function Presentation() {
 
       {/* Navigation Controls */}
       {!printMode && (
-        <div className="fixed bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-3 sm:gap-3 lg:gap-4 z-50 bg-white/95 backdrop-blur-sm px-4 sm:px-4 py-3 sm:py-3 rounded-full shadow-xl border border-gray-200">
+        <div className="fixed bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-3 sm:gap-3 lg:gap-4 z-50 bg-white/95 backdrop-blur-sm px-4 sm:px-4 py-3 sm:py-3 rounded-full shadow-xl border border-ds-gray-200">
           <button
             onClick={prevSlide}
             disabled={currentSlide === 0}
-            className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-gray-50 text-gray-800 border border-gray-200"
+            className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-ds-gray-50 text-ds-gray-800 border border-ds-gray-200"
           >
             <Icon name="chevron_left" size="lg" />
           </button>
@@ -988,8 +988,8 @@ export default function Presentation() {
                 onClick={() => setCurrentSlide(idx)}
                 className={`h-2 sm:h-2.5 rounded-full transition-all ${
                   idx === currentSlide 
-                    ? 'w-8 sm:w-10 bg-gradient-to-r from-blue-500 to-primary-500' 
-                    : 'w-2 sm:w-2.5 bg-gray-300 hover:bg-gray-400'
+                    ? 'w-8 sm:w-10 bg-gradient-to-r from-ds-blue-500 to-primary-500' 
+                    : 'w-2 sm:w-2.5 bg-ds-gray-300 hover:bg-ds-gray-400'
                 }`}
               />
             ))}
@@ -998,7 +998,7 @@ export default function Presentation() {
           <button
             onClick={nextSlide}
             disabled={currentSlide === slides.length - 1}
-            className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-gray-50 text-gray-800 border border-gray-200"
+            className="p-3 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl shadow-md transition-all hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed bg-white hover:bg-ds-gray-50 text-ds-gray-800 border border-ds-gray-200"
           >
             <Icon name="chevron_right" size="lg" />
           </button>
@@ -1007,21 +1007,21 @@ export default function Presentation() {
 
       {/* Slide Counter */}
       {!printMode && (
-        <div className="fixed top-6 sm:top-6 lg:top-8 right-6 sm:right-6 lg:right-8 bg-white/95 backdrop-blur-sm border border-gray-200 text-gray-800 px-4 sm:px-4 lg:px-5 py-2 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl text-sm sm:text-sm font-semibold shadow-lg z-50">
+        <div className="fixed top-6 sm:top-6 lg:top-8 right-6 sm:right-6 lg:right-8 bg-white/95 backdrop-blur-sm border border-ds-gray-200 text-ds-gray-800 px-4 sm:px-4 lg:px-5 py-2 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl text-sm sm:text-sm font-semibold shadow-lg z-50">
           {currentSlide + 1} / {slides.length}
         </div>
       )}
 
       {/* Keyboard Hints - Hidden on mobile, shown on larger screens */}
       {!printMode && (
-        <div className="hidden lg:flex fixed bottom-8 lg:bottom-10 left-6 lg:left-8 bg-white/95 backdrop-blur-sm border border-gray-200 text-gray-700 px-4 lg:px-4 py-2 rounded-lg lg:rounded-xl text-xs items-center gap-3 lg:gap-3 shadow-lg z-50">
-          <span className="text-gray-500">Navigation:</span>
-          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">Ã¢â€ Â</span>
-          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">Ã¢â€ â€™</span>
-          <span className="bg-gray-100 px-2 lg:px-3 py-1 rounded border border-gray-300">Space</span>
-          <span className="text-gray-300">|</span>
-          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">F</span>
-          <span className="text-gray-500 text-[10px]">Fullscreen</span>
+        <div className="hidden lg:flex fixed bottom-8 lg:bottom-10 left-6 lg:left-8 bg-white/95 backdrop-blur-sm border border-ds-gray-200 text-ds-gray-700 px-4 lg:px-4 py-2 rounded-lg lg:rounded-xl text-xs items-center gap-3 lg:gap-3 shadow-lg z-50">
+          <span className="text-ds-gray-500">Navigation:</span>
+          <span className="bg-ds-gray-100 px-2 py-1 rounded border border-ds-gray-300">Ã¢â€ Â</span>
+          <span className="bg-ds-gray-100 px-2 py-1 rounded border border-ds-gray-300">Ã¢â€ â€™</span>
+          <span className="bg-ds-gray-100 px-2 lg:px-3 py-1 rounded border border-ds-gray-300">Space</span>
+          <span className="text-ds-gray-300">|</span>
+          <span className="bg-ds-gray-100 px-2 py-1 rounded border border-ds-gray-300">F</span>
+          <span className="text-ds-gray-500 text-[10px]">Fullscreen</span>
         </div>
       )}
 
@@ -1039,20 +1039,20 @@ export default function Presentation() {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Modal Header */}
-          <div className="p-6 border-b border-slate-200 bg-white">
+          <div className="p-6 border-b border-ds-gray-200 bg-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-200">
+                <div className="w-10 h-10 bg-ds-gray-100 rounded-xl flex items-center justify-center border border-ds-gray-200">
                   <Image src="/dt-icons/circle-info.svg" alt="Info" width={20} height={20} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-slate-900">Rejection Reasons</h3>
-                  <p className="text-sm text-slate-500">BHC-200: Automated urgent message to patients</p>
+                  <h3 className="text-2xl font-bold text-ds-gray-900">Rejection Reasons</h3>
+                  <p className="text-sm text-ds-gray-500">BHC-200: Automated urgent message to patients</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowRejectionModal(false)}
-                className="w-8 h-8 bg-white hover:bg-slate-50 rounded-lg flex items-center justify-center transition-colors border border-slate-200 text-slate-500"
+                className="w-8 h-8 bg-white hover:bg-ds-gray-50 rounded-lg flex items-center justify-center transition-colors border border-ds-gray-200 text-ds-gray-500"
               >
                 <span className="text-2xl font-light">Ãƒâ€”</span>
               </button>
@@ -1108,15 +1108,15 @@ export default function Presentation() {
               ].map((reason, idx) => (
                 <div 
                   key={idx}
-                  className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-4 border border-slate-200 hover:shadow-md transition-shadow"
+                  className="bg-gradient-to-br from-ds-gray-50 to-white rounded-xl p-4 border border-ds-gray-200 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start gap-3">
                     <div className={`w-10 h-10 bg-${reason.color}-100 rounded-lg flex items-center justify-center flex-shrink-0`}>
                       <Image src={reason.icon} alt={reason.title} width={20} height={20} />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-lg font-bold text-slate-900 mb-2">{reason.title}</h4>
-                      <p className="text-sm text-slate-600 leading-relaxed">{reason.description}</p>
+                      <h4 className="text-lg font-bold text-ds-gray-900 mb-2">{reason.title}</h4>
+                      <p className="text-sm text-ds-gray-600 leading-relaxed">{reason.description}</p>
                     </div>
                   </div>
                 </div>
@@ -1124,9 +1124,9 @@ export default function Presentation() {
             </div>
 
             {/* Summary */}
-            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                <strong className="text-red-700">Summary:</strong> This feature requires extensive regulatory review, legal assessment, clinical validation, and infrastructure for medical oversight before it can be safely considered for implementation.
+            <div className="mt-6 p-4 bg-ds-error/5 border border-ds-error/20 rounded-xl">
+              <p className="text-sm text-ds-gray-700 leading-relaxed">
+                <strong className="text-ds-error">Summary:</strong> This feature requires extensive regulatory review, legal assessment, clinical validation, and infrastructure for medical oversight before it can be safely considered for implementation.
               </p>
             </div>
           </div>

@@ -35,40 +35,40 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
     
     if (isSelected) {
       if (isLight) {
-        return `${baseStyle} bg-blue-50 border-blue-200 shadow-md`;
+        return `${baseStyle} bg-ds-blue-50 border-ds-blue-200 shadow-md`;
       } else if (isColorful) {
         return `${baseStyle} bg-primary-500/20 border-primary-500/40 shadow-lg`;
       } else {
-        return `${baseStyle} bg-gray-700/50 border-gray-600 shadow-lg`;
+        return `${baseStyle} bg-ds-gray-700/50 border-ds-gray-600 shadow-lg`;
       }
     } else {
       if (isLight) {
-        return `${baseStyle} bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300`;
+        return `${baseStyle} bg-white border-ds-gray-200 hover:bg-ds-gray-50 hover:border-ds-gray-300`;
       } else if (isColorful) {
         return `${baseStyle} bg-black/20 border-primary-500/20 hover:bg-primary-500/10 hover:border-primary-500/30`;
       } else {
-        return `${baseStyle} bg-gray-800/50 border-gray-700 hover:bg-gray-700/50 hover:border-gray-600`;
+        return `${baseStyle} bg-ds-gray-800/50 border-ds-gray-700 hover:bg-ds-gray-700/50 hover:border-ds-gray-600`;
       }
     }
   };
 
   const getTextStyle = () => {
     if (isLight) {
-      return 'text-gray-800';
+      return 'text-ds-gray-800';
     } else if (isColorful) {
       return 'text-white';
     } else {
-      return 'text-gray-100';
+      return 'text-ds-gray-100';
     }
   };
 
   const getSecondaryTextStyle = () => {
     if (isLight) {
-      return 'text-gray-600';
+      return 'text-ds-gray-600';
     } else if (isColorful) {
       return 'text-primary-200';
     } else {
-      return 'text-gray-400';
+      return 'text-ds-gray-400';
     }
   };
 

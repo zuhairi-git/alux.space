@@ -34,9 +34,9 @@ const InteractiveSkillCard = ({
     if (theme === 'colorful') {
       return 'bg-gradient-to-br from-[var(--primary)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--primary)]/10 hover:via-[var(--gradient-mid)]/10 hover:to-[var(--gradient-end)]/10';
     } else if (theme === 'dark') {
-      return 'bg-gradient-to-br from-slate-800/40 via-slate-700/40 to-slate-800/40 border-slate-600/30 hover:border-blue-400/40 hover:from-slate-800/60 hover:via-slate-700/60 hover:to-slate-800/60';
+      return 'bg-gradient-to-br from-ds-gray-800/40 via-ds-gray-700/40 to-ds-gray-800/40 border-ds-gray-600/30 hover:border-ds-blue-400/40 hover:from-ds-gray-800/60 hover:via-ds-gray-700/60 hover:to-ds-gray-800/60';
     } else {
-      return 'bg-white/80 border-slate-200/60 hover:border-blue-300/60 hover:bg-white hover:shadow-lg hover:shadow-blue-100/50';
+      return 'bg-white/80 border-ds-gray-200/60 hover:border-ds-blue-300/60 hover:bg-white hover:shadow-lg hover:shadow-ds-blue-100/50';
     }
   };
 
@@ -58,7 +58,7 @@ const InteractiveSkillCard = ({
         absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
         ${theme === 'colorful' 
           ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5' 
-          : 'bg-gradient-to-br from-blue-500/5 to-indigo-500/5'
+          : 'bg-gradient-to-br from-ds-blue-500/5 to-ds-indigo-500/5'
         }
       `} />
 
@@ -68,7 +68,7 @@ const InteractiveSkillCard = ({
         transition-all duration-300 group-hover:scale-110
         ${theme === 'colorful'
           ? 'bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20'
-          : 'bg-blue-500/10 group-hover:bg-blue-500/20'
+          : 'bg-ds-blue-500/10 group-hover:bg-ds-blue-500/20'
         }
       `}>
         <Icon 
@@ -100,7 +100,7 @@ const InteractiveSkillCard = ({
         group-hover:scale-x-100 transition-transform duration-300
         ${theme === 'colorful' 
           ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]' 
-          : 'bg-gradient-to-r from-blue-500 to-indigo-500'
+          : 'bg-gradient-to-r from-ds-blue-500 to-ds-indigo-500'
         }
       `} />
     </motion.div>
@@ -475,8 +475,8 @@ export default function Home() {
                       ${theme === 'colorful'
                         ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5 hover:from-[var(--primary)]/10 hover:to-[var(--gradient-mid)]/10 border border-[var(--card-border)]'
                         : theme === 'dark'
-                        ? 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10 hover:from-blue-500/20 hover:to-cyan-500/20 border border-blue-500/20'
-                        : 'bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200/50'
+                        ? 'bg-gradient-to-br from-ds-blue-500/10 to-ds-cyan-500/10 hover:from-ds-blue-500/20 hover:to-ds-cyan-500/20 border border-ds-blue-500/20'
+                        : 'bg-gradient-to-br from-ds-blue-50 to-ds-indigo-50 hover:from-ds-blue-100 hover:to-ds-indigo-100 border border-ds-blue-200/50'
                       }
                     `}
                   >
@@ -485,8 +485,8 @@ export default function Home() {
                       theme === 'colorful'
                         ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5'
                         : theme === 'dark'
-                        ? 'bg-gradient-to-br from-blue-500/5 to-cyan-500/5'
-                        : 'bg-gradient-to-br from-blue-100/50 to-indigo-100/50'
+                        ? 'bg-gradient-to-br from-ds-blue-500/5 to-ds-cyan-500/5'
+                        : 'bg-gradient-to-br from-ds-blue-100/50 to-ds-indigo-100/50'
                     }`} />
 
                     {/* Icon */}
@@ -495,8 +495,8 @@ export default function Home() {
                         ${theme === 'colorful'
                           ? 'bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20 group-hover:from-[var(--primary)]/30 group-hover:to-[var(--gradient-mid)]/30'
                           : theme === 'dark'
-                          ? 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 group-hover:from-blue-500/30 group-hover:to-cyan-500/30'
-                          : 'bg-gradient-to-br from-blue-100 to-indigo-100 group-hover:from-blue-200 group-hover:to-indigo-200'
+                          ? 'bg-gradient-to-br from-ds-blue-500/20 to-ds-cyan-500/20 group-hover:from-ds-blue-500/30 group-hover:to-ds-cyan-500/30'
+                          : 'bg-gradient-to-br from-ds-blue-100 to-ds-indigo-100 group-hover:from-ds-blue-200 group-hover:to-ds-indigo-200'
                         }
                       `}>
                         <Icon name={item.icon} size="lg" className="text-[var(--accent-text)]" />
@@ -509,8 +509,8 @@ export default function Home() {
                         ${theme === 'colorful'
                           ? 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
                           : theme === 'dark'
-                          ? 'from-blue-400 via-cyan-400 to-indigo-400'
-                          : 'from-blue-600 via-indigo-600 to-primary-600'
+                          ? 'from-ds-blue-400 via-ds-cyan-400 to-ds-indigo-400'
+                          : 'from-ds-blue-600 via-ds-indigo-600 to-primary-600'
                         }
                       `}>
                         {item.years}
@@ -529,7 +529,7 @@ export default function Home() {
                     <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl ${
                       theme === 'colorful'
                         ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
-                        : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-500'
+                        : 'bg-gradient-to-r from-ds-blue-500 via-ds-indigo-500 to-primary-500'
                     }`} />
                   </motion.div>
                 ))}

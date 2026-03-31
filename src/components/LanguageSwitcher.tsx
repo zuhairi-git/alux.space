@@ -30,8 +30,8 @@ export default function LanguageSwitcher() {
             ${theme === 'colorful' 
               ? 'bg-primary/20 text-accent hover:bg-primary/40 hover:text-foreground' 
               : theme === 'light'
-                ? 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
+                ? 'bg-ds-gray-100 text-ds-gray-700 hover:bg-ds-gray-200 hover:text-ds-gray-900'
+                : 'bg-ds-gray-800 text-ds-gray-300 hover:bg-ds-gray-700 hover:text-white'
             }
           `}
           aria-label={locale === 'en' ? 'Switch to Finnish' : 'Switch to English'}

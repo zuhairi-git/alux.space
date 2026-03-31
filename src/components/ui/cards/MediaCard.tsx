@@ -47,23 +47,23 @@ const MediaCard: React.FC<MediaCardProps> = ({
     switch (theme) {
       case 'light':
         return {
-          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-primary-500/10 hover:shadow-blue-300/30',
-          text: 'text-neutral-800',
-          primaryText: 'text-blue-500',
-          tag: 'bg-blue-500/10 text-blue-600',
-          date: 'text-neutral-500',
-          iconBg: 'bg-blue-500/10',
-          iconText: 'text-blue-500',
+          card: 'bg-white/90 border border-ds-gray-200/50 hover:border-ds-blue-300/50 shadow-primary-500/10 hover:shadow-ds-blue-300/30',
+          text: 'text-ds-gray-800',
+          primaryText: 'text-ds-blue-500',
+          tag: 'bg-ds-blue-500/10 text-ds-blue-600',
+          date: 'text-ds-gray-500',
+          iconBg: 'bg-ds-blue-500/10',
+          iconText: 'text-ds-blue-500',
         };
       case 'dark':
         return {
-          card: 'bg-neutral-800/90 border border-neutral-700/50 hover:border-blue-300/50 shadow-blue-500/20 hover:shadow-blue-500/30',
-          text: 'text-neutral-100',
-          primaryText: 'text-blue-400',
-          tag: 'bg-blue-500/20 text-blue-400',
-          date: 'text-neutral-400',
-          iconBg: 'bg-blue-500/20',
-          iconText: 'text-blue-400',
+          card: 'bg-ds-gray-800/90 border border-ds-gray-700/50 hover:border-ds-blue-300/50 shadow-ds-blue-500/20 hover:shadow-ds-blue-500/30',
+          text: 'text-ds-gray-100',
+          primaryText: 'text-ds-blue-400',
+          tag: 'bg-ds-blue-500/20 text-ds-blue-400',
+          date: 'text-ds-gray-400',
+          iconBg: 'bg-ds-blue-500/20',
+          iconText: 'text-ds-blue-400',
         };
       case 'colorful':
         return {
@@ -77,13 +77,13 @@ const MediaCard: React.FC<MediaCardProps> = ({
         };
       default:
         return {
-          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-primary-500/10 hover:shadow-blue-300/30',
-          text: 'text-neutral-800',
-          primaryText: 'text-blue-500',
-          tag: 'bg-blue-500/10 text-blue-600',
-          date: 'text-neutral-500',
-          iconBg: 'bg-blue-500/10',
-          iconText: 'text-blue-500',
+          card: 'bg-white/90 border border-ds-gray-200/50 hover:border-ds-blue-300/50 shadow-primary-500/10 hover:shadow-ds-blue-300/30',
+          text: 'text-ds-gray-800',
+          primaryText: 'text-ds-blue-500',
+          tag: 'bg-ds-blue-500/10 text-ds-blue-600',
+          date: 'text-ds-gray-500',
+          iconBg: 'bg-ds-blue-500/10',
+          iconText: 'text-ds-blue-500',
         };
     }
   };

@@ -203,7 +203,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
           <BlogPostClient shareUrl={shareUrl} title={title}>
             {/* Translation notice - only show if using fallback */}
             {isUsingFallback && locale !== 'en' && (
-              <div className="mb-8 p-4 rounded-lg bg-yellow-50 border border-yellow-100 text-yellow-800">
+              <div className="mb-8 p-4 rounded-lg bg-ds-gold-50 border border-ds-gold-100 text-ds-gold-800">
                 <p>{getTranslationNoticeText()}</p>
               </div>
             )}

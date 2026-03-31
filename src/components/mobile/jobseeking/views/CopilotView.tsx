@@ -99,7 +99,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                             <Icon name="auto_awesome" className="text-white text-[32px]" />
                         </div>
                         <h2 className="text-center font-bold text-[28px] mb-2">Job Copilot</h2>
-                        <p className={`text-center text-[15px] mb-8 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Smart AI matchmaking & CV tailoring</p>
+                        <p className={`text-center text-[15px] mb-8 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>Smart AI matchmaking & CV tailoring</p>
 
                         <div className="grid grid-cols-2 gap-3">
                             {suggestedPrompts.map((p, i) => (
@@ -146,7 +146,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                             <div className={`px-5 py-3.5 flex items-center space-x-1.5 w-[72px] h-[48px] ${bb}`}>
                                 {[0, 1, 2].map((i) => (
                                     <motion.div key={i} animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
-                                        className={`w-2 h-2 rounded-full ${isLight ? 'bg-gray-400' : 'bg-gray-500'}`}
+                                        className={`w-2 h-2 rounded-full ${isLight ? 'bg-ds-gray-400' : 'bg-ds-gray-500'}`}
                                     />
                                 ))}
                             </div>
@@ -159,7 +159,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
             {/* Input Bar */}
             <div className={`w-full p-4 pb-[100px] border-t border-black/5 border-white/5 ${inputBarClass}`}>
                 <div className={`flex items-center p-1.5 w-full ${theme.radii.search} ${inputFieldClass}`}>
-                    <button className={`w-10 h-10 rounded-full flex items-center justify-center ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                    <button className={`w-10 h-10 rounded-full flex items-center justify-center ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>
                         <Icon name="add" className="text-[24px]" />
                     </button>
                     <input
@@ -168,10 +168,10 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSend(inputValue)}
                         placeholder="Ask Copilot..."
-                        className="flex-1 bg-transparent border-none outline-none px-2 text-[16px] placeholder:text-gray-500 min-w-0"
+                        className="flex-1 bg-transparent border-none outline-none px-2 text-[16px] placeholder:text-ds-gray-500 min-w-0"
                     />
                     <button onClick={() => handleSend(inputValue)} disabled={!inputValue.trim()}
-                        className={`w-10 h-10 ${theme.radii.sendButton} flex items-center justify-center transition-all ${inputValue.trim() ? `${pingBgClass} text-white shadow-md active:scale-90` : 'text-gray-400 bg-transparent'}`}
+                        className={`w-10 h-10 ${theme.radii.sendButton} flex items-center justify-center transition-all ${inputValue.trim() ? `${pingBgClass} text-white shadow-md active:scale-90` : 'text-ds-gray-400 bg-transparent'}`}
                     >
                         <Icon name="arrow_upward" className="text-[20px]" />
                     </button>

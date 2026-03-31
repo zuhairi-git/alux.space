@@ -49,9 +49,9 @@ const Card: React.FC<CardProps> = ({
       // Light theme shadows (Subtle)
       switch (variant) {
         case 'primary': colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
-        case 'secondary': colorShadow = 'shadow-blue-500/5'; hoverColorShadow = 'hover:shadow-blue-500/10'; break;
+        case 'secondary': colorShadow = 'shadow-ds-blue-500/5'; hoverColorShadow = 'hover:shadow-ds-blue-500/10'; break;
         case 'tertiary': colorShadow = 'shadow-primary-500/5'; hoverColorShadow = 'hover:shadow-primary-500/10'; break;
-        case 'muted': colorShadow = 'shadow-gray-400/10'; hoverColorShadow = 'hover:shadow-gray-400/15'; break;
+        case 'muted': colorShadow = 'shadow-ds-gray-400/10'; hoverColorShadow = 'hover:shadow-ds-gray-400/15'; break;
         default: colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
       }
       return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
@@ -59,9 +59,9 @@ const Card: React.FC<CardProps> = ({
       // Colorful theme: No shadow by default, only on hover
       switch (variant) {
         case 'primary': hoverColorShadow = 'hover:shadow-[var(--primary)]/20'; break;
-        case 'secondary': hoverColorShadow = 'hover:shadow-cyan-500/20'; break;
-        case 'tertiary': hoverColorShadow = 'hover:shadow-violet-500/20'; break;
-        case 'muted': hoverColorShadow = 'hover:shadow-blue-400/20'; break;
+        case 'secondary': hoverColorShadow = 'hover:shadow-ds-cyan-500/20'; break;
+        case 'tertiary': hoverColorShadow = 'hover:shadow-ds-violet-500/20'; break;
+        case 'muted': hoverColorShadow = 'hover:shadow-ds-blue-400/20'; break;
         default: hoverColorShadow = 'hover:shadow-[var(--primary)]/20'; break;
       }
       // Colorful theme: No base shadow, only hover shadow
@@ -70,9 +70,9 @@ const Card: React.FC<CardProps> = ({
       // Dark theme shadows (Standard)
       switch (variant) {
         case 'primary': colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
-        case 'secondary': colorShadow = 'shadow-blue-500/10'; hoverColorShadow = 'hover:shadow-blue-500/20'; break;
+        case 'secondary': colorShadow = 'shadow-ds-blue-500/10'; hoverColorShadow = 'hover:shadow-ds-blue-500/20'; break;
         case 'tertiary': colorShadow = 'shadow-primary-500/10'; hoverColorShadow = 'hover:shadow-primary-500/20'; break;
-        case 'muted': colorShadow = 'shadow-gray-500/10'; hoverColorShadow = 'hover:shadow-gray-500/20'; break;
+        case 'muted': colorShadow = 'shadow-ds-gray-500/10'; hoverColorShadow = 'hover:shadow-ds-gray-500/20'; break;
         default: colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
       }
       return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;

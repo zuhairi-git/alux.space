@@ -172,12 +172,12 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
                             <div className={`absolute top-1/3 -right-16 w-48 h-48 ${isColorful ? 'bg-primary/8' : 'bg-[var(--primary)]/8'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '8s', animationDelay: '2s' }} />
-                            <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
-                            <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
+                            <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-ds-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
+                            <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-ds-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
                         </>
                     ) : isLight ? (
                         <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-indigo-400/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-ds-indigo-400/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
                             <div className="absolute bottom-20 -right-16 w-48 h-48 bg-primary-400/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     ) : (
@@ -218,7 +218,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
                         <motion.button onClick={() => handleTabChange('profile')} className="relative group" whileTap={{ scale: 0.92 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
-                            <div className={`w-11 h-11 rounded-[16px] flex items-center justify-center overflow-hidden border-2 mb-0.5 ${isLight ? 'border-white shadow-sm' : 'border-ds-dark-3 shadow-md'} bg-gradient-to-tr from-gray-50 to-gray-200 dark:from-white/10 dark:to-white/20`}>
+                            <div className={`w-11 h-11 rounded-[16px] flex items-center justify-center overflow-hidden border-2 mb-0.5 ${isLight ? 'border-white shadow-sm' : 'border-ds-dark-3 shadow-md'} bg-gradient-to-tr from-ds-gray-50 to-ds-gray-200 dark:from-white/10 dark:to-white/20`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=f3f4f6" }} />
                             </div>
@@ -313,14 +313,14 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                     <div className="flex space-x-1">
                         {['1D', '1W', '1M'].map(t => (
                             <button key={t} onClick={() => setSelectedTimeRange(t)}
-                                className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all ${selectedTimeRange === t ? (isIOS ? 'bg-ds-blue-500 text-white' : isColorful ? 'bg-primary text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5 text-gray-500' : 'bg-white/8 text-gray-400')}`}>
+                                className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all ${selectedTimeRange === t ? (isIOS ? 'bg-ds-blue-500 text-white' : isColorful ? 'bg-primary text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5 text-ds-gray-500' : 'bg-white/8 text-ds-gray-400')}`}>
                                 {t}
                             </button>
                         ))}
                     </div>
                 </div>
                 <div className="mt-2">
-                    <span className={`text-[11px] block mb-1 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Total Portfolio Value</span>
+                    <span className={`text-[11px] block mb-1 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>Total Portfolio Value</span>
                     <div className="flex items-baseline space-x-3">
                         <AnimatedCounter value={47832.94} prefix="$" suffix="" decimals={2} className="text-[28px] font-extrabold tracking-tight" />
                         <span className="flex items-center space-x-1 text-ds-success">
@@ -328,7 +328,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                             <AnimatedCounter value={3.14} prefix="+" suffix="%" decimals={2} className="text-[13px] font-bold" />
                         </span>
                     </div>
-                    <span className={`text-[11px] mt-1 block ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                    <span className={`text-[11px] mt-1 block ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>
                         +$1,452.18 today
                     </span>
                 </div>
@@ -347,7 +347,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                         <Icon name="auto_awesome" className={`text-xl ${isColorful ? 'text-primary' : 'text-ds-blue-500'}`} />
                         <span className={`text-xs font-bold uppercase tracking-widest ${isColorful ? 'text-accent' : isLight ? 'text-ds-blue-500' : isIOS ? 'text-ds-blue-400' : 'text-ds-blue-300'}`}>AI Morning Briefing</span>
                     </div>
-                    <p className={`text-[14px] leading-[1.65] ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>
+                    <p className={`text-[14px] leading-[1.65] ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>
                         Markets are poised for a <span className="font-semibold text-ds-success">bullish open</span>. NVIDIA earnings beat estimates by 22%, driving AI sector momentum. Fed minutes suggest a <span className="font-semibold">rate pause</span> in Q2. Your watchlist is up 3.1% pre-market.
                     </p>
                     <button onClick={() => onNavigate('copilot')} className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isColorful ? 'text-accent' : 'text-ds-blue-500'}`}>
@@ -373,9 +373,9 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                                 <span className="font-bold text-[15px]">{s.ticker}</span>
                                 <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${s.up ? 'bg-ds-success/15 text-ds-success' : 'bg-ds-error/15 text-ds-error'}`}>{s.change}</span>
                             </div>
-                            <span className={`text-[11px] block mb-2 ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{s.name}</span>
+                            <span className={`text-[11px] block mb-2 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{s.name}</span>
                             <Sparkline data={s.data} color={s.up ? '#16a34a' : '#dc2626'} width={120} height={28} />
-                            <span className={`text-[15px] font-semibold mt-2 block ${isLight ? 'text-gray-900' : 'text-white'}`}>{s.price}</span>
+                            <span className={`text-[15px] font-semibold mt-2 block ${isLight ? 'text-ds-gray-900' : 'text-white'}`}>{s.price}</span>
                         </motion.div>
                     ))}
                 </div>
@@ -422,7 +422,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                             {/* Subtle gradient overlay on dark themes */}
                             {!isLight && <div className={`absolute inset-0 bg-gradient-to-br ${a.gradient} opacity-[0.06] rounded-[20px]`} />}
                             <div className="relative z-10">
-                                <Icon name={a.icon} className={`mb-2 text-xl ${isLight ? 'text-gray-700' : 'text-gray-300'}`} />
+                                <Icon name={a.icon} className={`mb-2 text-xl ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`} />
                                 <span className="font-semibold text-[14px] mb-0.5 block">{a.label}</span>
                                 <span className="text-[11px] opacity-60">{a.desc}</span>
                             </div>
@@ -487,7 +487,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                     <motion.div key={idx.name} initial={{ opacity: 0, y: 20, scale: 0.85 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.1 + i * 0.1, type: 'spring', stiffness: 300, damping: 22 }}
                         className={`shrink-0 flex items-center space-x-3 px-4 py-3 ${card}`}>
                         <div>
-                            <span className={`text-[11px] font-semibold block ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{idx.name}</span>
+                            <span className={`text-[11px] font-semibold block ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{idx.name}</span>
                             <span className="font-bold text-[14px]">{idx.value}</span>
                         </div>
                         <div className="flex flex-col items-end">
@@ -507,7 +507,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                             <span className="font-bold text-[18px]">{featured.ticker}</span>
                             <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${featured.up ? 'bg-ds-success/15 text-ds-success' : 'bg-ds-error/15 text-ds-error'}`}>{featured.change}</span>
                         </div>
-                        <span className={`text-[12px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{featured.name}</span>
+                        <span className={`text-[12px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{featured.name}</span>
                     </div>
                     <span className="text-[22px] font-extrabold">{featured.price}</span>
                 </div>
@@ -520,7 +520,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                     <div className="flex space-x-1.5">
                         {['1D', '1W', '1M', '3M', '1Y'].map(r => (
                             <button key={r} onClick={() => setChartRange(r)}
-                                className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${chartRange === r ? (isColorful ? 'bg-primary text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5 text-gray-500' : 'bg-white/8 text-gray-400')}`}>
+                                className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${chartRange === r ? (isColorful ? 'bg-primary text-white' : 'bg-ds-blue-500 text-white') : (isLight ? 'bg-black/5 text-ds-gray-500' : 'bg-white/8 text-ds-gray-400')}`}>
                                 {r}
                             </button>
                         ))}
@@ -529,7 +529,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                     <div className="flex space-x-1.5">
                         {trending.slice(0, 4).map((t, i) => (
                             <button key={t.ticker} onClick={() => setFeaturedIdx(i)}
-                                className={`w-6 h-6 rounded-full text-[8px] font-bold flex items-center justify-center transition-all ${featuredIdx === i ? (isColorful ? 'bg-primary text-white scale-110' : 'bg-ds-blue-500 text-white scale-110') : (isLight ? 'bg-black/5 text-gray-500' : 'bg-white/8 text-gray-400')}`}>
+                                className={`w-6 h-6 rounded-full text-[8px] font-bold flex items-center justify-center transition-all ${featuredIdx === i ? (isColorful ? 'bg-primary text-white scale-110' : 'bg-ds-blue-500 text-white scale-110') : (isLight ? 'bg-black/5 text-ds-gray-500' : 'bg-white/8 text-ds-gray-400')}`}>
                                 {t.ticker.slice(0, 2)}
                             </button>
                         ))}
@@ -552,7 +552,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                             <div className={`absolute bottom-0 left-0 h-1 rounded-full transition-all ${s.up ? 'bg-ds-success/30' : 'bg-ds-error/30'}`} style={{ width: `${s.weight * 3}%` }} />
                             <span className="font-bold text-[13px] block">{i === 0 ? s.name : s.short}</span>
                             <span className={`text-[12px] font-semibold ${s.up ? 'text-ds-success' : 'text-ds-error'}`}>{s.change}</span>
-                            {i === 0 && <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>{s.weight}% of market</span>}
+                            {i === 0 && <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>{s.weight}% of market</span>}
                         </motion.div>
                     ))}
                 </div>
@@ -571,7 +571,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-[11px] ${isIOS ? (t.up ? 'bg-ds-blue-500/10 text-ds-blue-500' : 'bg-ds-error/10 text-ds-error') : (t.up ? 'bg-ds-blue-300 text-ds-blue-900' : 'bg-ds-error/25 text-ds-error')}`}>{t.ticker.slice(0, 3)}</div>
                                 <div className="text-left">
                                     <span className="font-semibold text-[14px] block">{t.ticker}</span>
-                                    <span className={`text-[11px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{t.name}</span>
+                                    <span className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{t.name}</span>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
@@ -603,12 +603,12 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                 className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-2') : (isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-3')}`}>
                                 {/* Drag handle Ã¢â‚¬â€ tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
-                                    <div className="w-10 h-1 rounded-full bg-gray-400/30" />
+                                    <div className="w-10 h-1 rounded-full bg-ds-gray-400/30" />
                                     <Icon name={tickerExpanded ? 'expand_more' : 'expand_less'} className="text-[14px] opacity-30 mt-1" />
                                 </button>
                                 <div className="px-6">
                                     <div className="flex justify-between items-start mb-4">
-                                        <div><h3 className="text-2xl font-bold">{t.ticker}</h3><p className={`text-sm ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{t.name}</p></div>
+                                        <div><h3 className="text-2xl font-bold">{t.ticker}</h3><p className={`text-sm ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{t.name}</p></div>
                                         <div className="text-right"><span className="text-2xl font-bold">{t.price}</span><span className={`block text-sm font-bold ${t.up ? 'text-ds-success' : 'text-ds-error'}`}>{t.change}</span></div>
                                     </div>
                                     <Sparkline data={t.data} color={t.up ? '#16a34a' : '#dc2626'} width={340} height={80} />
@@ -630,7 +630,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                                 </div>
                                                 <div className={`p-3 rounded-2xl mb-4 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                                     <div className="flex items-center space-x-1.5 mb-1"><Icon name="auto_awesome" className={`text-[14px] ${isColorful ? 'text-primary' : 'text-ds-blue-500'}`} /><span className="text-[11px] font-bold opacity-50">AI Insight</span></div>
-                                                    <p className={`text-[12px] leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{t.up ? `${t.ticker} shows strong momentum with institutional buying pressure. Watch for resistance near ${metrics[2].value}.` : `${t.ticker} faces near-term headwinds. Support levels at ${metrics[3].value} remain key.`}</p>
+                                                    <p className={`text-[12px] leading-relaxed ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{t.up ? `${t.ticker} shows strong momentum with institutional buying pressure. Watch for resistance near ${metrics[2].value}.` : `${t.ticker} faces near-term headwinds. Support levels at ${metrics[3].value} remain key.`}</p>
                                                 </div>
                                             </motion.div>
                                         )}
@@ -640,7 +640,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                             <button key={label} onClick={() => {
                                                 if (label === 'Ask AI') { setSelectedTicker(null); onNavigate?.('copilot'); }
                                                 if (label === 'Add Alert') { setAlertSet(t.ticker); setTimeout(() => setAlertSet(null), 2500); }
-                                            }} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? (isColorful ? 'bg-primary text-white' : 'bg-ds-blue-500 text-white') : label === 'Add Alert' && alertSet === t.ticker ? 'bg-ds-success text-white' : (isLight ? 'bg-gray-100 text-gray-800' : isColorful ? 'bg-white/10 text-white' : 'bg-white/10 text-white')}`}>
+                                            }} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? (isColorful ? 'bg-primary text-white' : 'bg-ds-blue-500 text-white') : label === 'Add Alert' && alertSet === t.ticker ? 'bg-ds-success text-white' : (isLight ? 'bg-ds-gray-100 text-ds-gray-800' : isColorful ? 'bg-white/10 text-white' : 'bg-white/10 text-white')}`}>
                                                 {label === 'Add Alert' && alertSet === t.ticker ? 'Ã¢Å“â€œ Alert Set' : label}
                                             </button>
                                         ))}
@@ -734,7 +734,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             <Icon name="auto_awesome" className={`text-[36px] ${isColorful ? 'text-primary' : 'text-ds-blue-500'}`} />
                         </div>
                         <h3 className="font-bold text-lg mb-1">Market Copilot</h3>
-                        <p className={`text-sm text-center max-w-[240px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>Ask anything about markets, earnings, filings, or macro trends.</p>
+                        <p className={`text-sm text-center max-w-[240px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>Ask anything about markets, earnings, filings, or macro trends.</p>
                     </motion.div>
                     <div className="w-full mt-auto pb-4 shrink-0">
                         <label className={`text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
@@ -762,7 +762,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                                             <motion.div key={i} initial={{ opacity: 0, x: -20, scale: 0.9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.15 + i * 0.12, type: 'spring', stiffness: 280, damping: 22 }}
                                                 className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${isLight ? 'bg-ds-blue-400/8 border border-ds-blue-400/10' : isColorful ? 'bg-primary/8 border border-primary/15' : 'bg-ds-indigo-600/20 border border-ds-indigo-500/15'}`}>
                                                 <Icon name="verified" className={`text-sm shrink-0 mt-0.5 ${isColorful ? 'text-primary' : 'text-ds-blue-500'}`} />
-                                                <div><span className="font-semibold block">{c.source}</span><span className={`${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{c.snippet}</span></div>
+                                                <div><span className="font-semibold block">{c.source}</span><span className={`${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{c.snippet}</span></div>
                                             </motion.div>
                                         ))}
                                     </div>
@@ -832,7 +832,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
 
     const dotColor = (c: string) => {
         const map: Record<string, string> = { red: 'bg-ds-error', amber: 'bg-ds-warning', green: 'bg-ds-success', blue: 'bg-ds-blue-500', purple: 'bg-primary' };
-        return map[c] || 'bg-gray-400';
+        return map[c] || 'bg-ds-gray-400';
     };
 
     const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
@@ -852,7 +852,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
             {/* Timeline Alert Cards */}
             <div className="relative">
                 {/* Vertical timeline line */}
-                <div className={`absolute left-[21px] top-4 bottom-4 w-[2px] ${isLight ? 'bg-gray-200' : 'bg-white/8'}`} />
+                <div className={`absolute left-[21px] top-4 bottom-4 w-[2px] ${isLight ? 'bg-ds-gray-200' : 'bg-white/8'}`} />
 
                 {alerts.map((a) => (
                     <motion.div key={a.id} variants={fadeUp} className="relative pl-12 pb-4">
@@ -865,7 +865,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                             </div>
                         </div>
                         {/* Time label */}
-                        <span className={`text-[10px] font-semibold block mb-1.5 ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>{a.time}</span>
+                        <span className={`text-[10px] font-semibold block mb-1.5 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>{a.time}</span>
                         {/* Alert card */}
                         <motion.div onClick={() => setExpanded(expanded === a.id ? null : a.id)}
                             whileTap={{ scale: 0.98 }}
@@ -882,11 +882,11 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                                             <h3 className="font-semibold text-[14px] truncate pr-2">{a.title}</h3>
                                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${priorityBadge(a.priority)}`}>{a.priority}</span>
                                         </div>
-                                        <p className={`text-[13px] leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{a.desc}</p>
+                                        <p className={`text-[13px] leading-relaxed ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{a.desc}</p>
                                         <AnimatePresence>
                                             {expanded === a.id && (
                                                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ type: 'spring', stiffness: 340, damping: 30, mass: 0.9 }}>
-                                                    <p className={`text-[13px] leading-relaxed mt-2 pt-2 border-t ${isLight ? 'text-gray-700 border-gray-200' : 'text-gray-300 border-white/5'}`}>{a.detail}</p>
+                                                    <p className={`text-[13px] leading-relaxed mt-2 pt-2 border-t ${isLight ? 'text-ds-gray-700 border-ds-gray-200' : 'text-ds-gray-300 border-white/5'}`}>{a.detail}</p>
                                                     <button className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isColorful ? 'text-accent' : 'text-ds-blue-500'}`}>
                                                         <Icon name="auto_awesome" className="text-sm" /><span>Ask AI about this</span>
                                                     </button>
@@ -954,7 +954,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                     <div key={stat.label} className={`p-3 text-center ${card}`}>
                         <Icon name={stat.icon} className={`text-[18px] mb-1 ${isColorful ? 'text-primary' : 'text-ds-blue-500'}`} />
                         <AnimatedCounter value={stat.value} className="text-[18px] font-extrabold block" />
-                        <span className={`text-[10px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>{stat.label}</span>
+                        <span className={`text-[10px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{stat.label}</span>
                     </div>
                 ))}
             </motion.div>
@@ -981,7 +981,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                 {/* Day labels */}
                 <div className="flex justify-between mt-2 px-1">
                     {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => (
-                        <span key={d} className={`text-[9px] font-medium ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>{d}</span>
+                        <span key={d} className={`text-[9px] font-medium ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>{d}</span>
                     ))}
                 </div>
             </motion.div>
@@ -992,7 +992,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                 <div className="flex items-center space-x-5">
                     <div className="relative w-18 h-18 flex items-center justify-center shrink-0">
                         <svg className="w-[72px] h-[72px] transform -rotate-90" viewBox="0 0 36 36">
-                            <path className={isLight ? "text-gray-200" : "text-white/10"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path className={isLight ? "text-ds-gray-200" : "text-white/10"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "15, 100" }} transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.2 }} strokeDashoffset={"-85"} strokeLinecap="round" className="text-ds-warning" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.2 }} strokeDashoffset={"-65"} strokeLinecap="round" className="text-ds-pink-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "65, 100" }} transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.2 }} strokeLinecap="round" className="text-ds-blue-300" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -1004,7 +1004,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                             <div key={s.label} className={`flex justify-between text-[11px] items-center p-1.5 rounded-lg ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>
                                 <span className="opacity-70 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 ${s.color}`} />{s.label}</span>
                                 <div className="flex items-center space-x-2">
-                                    <div className={`w-12 h-1.5 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
+                                    <div className={`w-12 h-1.5 rounded-full overflow-hidden ${isLight ? 'bg-ds-gray-200' : 'bg-white/10'}`}>
                                         <motion.div initial={{ width: 0 }} animate={{ width: `${s.pct}%` }} transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.9 }} className={`h-full rounded-full ${s.color}`} />
                                     </div>
                                     <span className="font-bold">{s.pctStr}</span>

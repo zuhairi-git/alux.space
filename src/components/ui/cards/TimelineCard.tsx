@@ -45,9 +45,9 @@ export default function TimelineCard({
       return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-primary-400/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.4)]';
     } else if (theme === 'dark') {
       // Lightened the dark theme colors slightly to make animations more visible
-      return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.35)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-ds-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.35)]';
     } else {
-      return 'bg-gradient-to-br from-white to-slate-100 border border-blue-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.3)]';
+      return 'bg-gradient-to-br from-white to-ds-gray-100 border border-ds-blue-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.3)]';
     }
   };
 
@@ -59,12 +59,12 @@ export default function TimelineCard({
         : 'bg-gradient-to-br from-primary-500/30 to-primary-800/30 backdrop-blur-lg backdrop-filter border border-primary-400/30';
     } else if (theme === 'dark') {
       return isHovered
-        ? 'bg-gradient-to-br from-blue-400/60 to-indigo-700/60 backdrop-blur-lg backdrop-filter border border-blue-300/70'
-        : 'bg-gradient-to-br from-blue-500/20 to-indigo-900/20 backdrop-blur-lg backdrop-filter border border-blue-400/30';
+        ? 'bg-gradient-to-br from-ds-blue-400/60 to-ds-indigo-700/60 backdrop-blur-lg backdrop-filter border border-ds-blue-300/70'
+        : 'bg-gradient-to-br from-ds-blue-500/20 to-ds-indigo-900/20 backdrop-blur-lg backdrop-filter border border-ds-blue-400/30';
     } else {
       return isHovered
-        ? 'bg-gradient-to-br from-blue-400/50 to-blue-400/50 backdrop-blur-lg backdrop-filter border border-blue-400/70'
-        : 'bg-gradient-to-br from-blue-500/15 to-blue-500/15 backdrop-blur-lg backdrop-filter border border-blue-300/30';
+        ? 'bg-gradient-to-br from-ds-blue-400/50 to-ds-blue-400/50 backdrop-blur-lg backdrop-filter border border-ds-blue-400/70'
+        : 'bg-gradient-to-br from-ds-blue-500/15 to-ds-blue-500/15 backdrop-blur-lg backdrop-filter border border-ds-blue-300/30';
     }
   };
   // Get icon color styles based on theme (no glow effect)
@@ -76,21 +76,21 @@ export default function TimelineCard({
     } else if (theme === 'dark') {
       return isHovered
         ? 'text-white'
-        : 'text-blue-300';
+        : 'text-ds-blue-300';
     } else {
       return isHovered
-        ? 'text-blue-600'
-        : 'text-blue-500';
+        ? 'text-ds-blue-600'
+        : 'text-ds-blue-500';
     }
   };
   // Get title style based on theme - with dimensional aesthetics (no glow)
   const getTitleStyles = () => {
     if (theme === 'colorful') {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-primary-200 via-pink-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-primary-200 group-hover:to-pink-200 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-primary-200 via-ds-pink-200 to-ds-blue-200 group-hover:bg-gradient-to-r group-hover:from-ds-blue-200 group-hover:via-primary-200 group-hover:to-ds-pink-200 transition-all duration-700';
     } else if (theme === 'dark') {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-blue-200 group-hover:to-indigo-200 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-ds-blue-200 via-ds-indigo-200 to-ds-blue-200 group-hover:bg-gradient-to-r group-hover:from-ds-blue-200 group-hover:via-ds-blue-200 group-hover:to-ds-indigo-200 transition-all duration-700';
     } else {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-slate-700 via-blue-600 to-indigo-700 group-hover:bg-gradient-to-r group-hover:from-indigo-700 group-hover:via-blue-600 group-hover:to-slate-700 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-ds-gray-700 via-ds-blue-600 to-ds-indigo-700 group-hover:bg-gradient-to-r group-hover:from-ds-indigo-700 group-hover:via-ds-blue-600 group-hover:to-ds-gray-700 transition-all duration-700';
     }
   };
 
@@ -99,32 +99,31 @@ export default function TimelineCard({
     if (theme === 'colorful') {
       return 'text-primary-300 group-hover:text-primary-200 transition-all duration-300 tracking-wide';
     } else if (theme === 'dark') {
-      return 'text-blue-300 group-hover:text-blue-200 transition-all duration-300 tracking-wide';
+      return 'text-ds-blue-300 group-hover:text-ds-blue-200 transition-all duration-300 tracking-wide';
     } else {
-      return 'text-blue-500 group-hover:text-blue-600 transition-all duration-300 tracking-wide';
+      return 'text-ds-blue-500 group-hover:text-ds-blue-600 transition-all duration-300 tracking-wide';
     }
   };
 
   // Get description styles based on theme - with dimensionally improved readability
   const getDescriptionStyles = () => {
     if (theme === 'colorful') {
-      return 'text-slate-200/90 group-hover:text-white/95 transition-all duration-500 tracking-wide leading-relaxed';
+      return 'text-ds-gray-200/90 group-hover:text-white/95 transition-all duration-500 tracking-wide leading-relaxed';
     } else if (theme === 'dark') {
-      return 'text-slate-300/90 group-hover:text-slate-200 transition-all duration-500 tracking-wide leading-relaxed';
+      return 'text-ds-gray-300/90 group-hover:text-ds-gray-200 transition-all duration-500 tracking-wide leading-relaxed';
     } else {
-      return 'text-slate-600/90 group-hover:text-slate-800 transition-all duration-500 tracking-wide leading-relaxed';
+      return 'text-ds-gray-600/90 group-hover:text-ds-gray-800 transition-all duration-500 tracking-wide leading-relaxed';
     }
   };
 
   // Get orbital particle color based on theme - enhanced visibility for dark theme
   const getParticleColor = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-primary-400 to-pink-500';
+      return 'bg-gradient-to-br from-primary-400 to-ds-pink-500';
     } else if (theme === 'dark') {
-      // Use brighter colors for dark theme particles for better visibility
-      return 'bg-gradient-to-br from-blue-300 to-indigo-500';
+      return 'bg-gradient-to-br from-ds-blue-300 to-ds-indigo-500';
     } else {
-      return 'bg-gradient-to-br from-blue-400 to-blue-600';
+      return 'bg-gradient-to-br from-ds-blue-400 to-ds-blue-600';
     }
   };
 
@@ -199,8 +198,8 @@ export default function TimelineCard({
             </h3>
             <div className={`inline-flex items-center justify-center px-3 py-1.5 my-2 text-sm font-medium rounded-full ${
               theme === 'colorful' ? 'bg-primary/15' : 
-              theme === 'dark' ? 'bg-blue-900/30' : 
-              'bg-blue-100'
+              theme === 'dark' ? 'bg-ds-blue-900/30' : 
+              'bg-ds-blue-100'
             } transition-all duration-300`}>
               <span className={getMetaStyles()}>{date}</span>
             </div>
@@ -213,8 +212,8 @@ export default function TimelineCard({
           
           <div className={`relative px-4 py-3.5 rounded-lg backdrop-blur-md mx-1 ${
             theme === 'colorful' ? 'bg-gradient-to-br from-primary/10 to-[var(--color-cobalt-700)]/10 border border-primary/10' : 
-            theme === 'dark' ? 'bg-gradient-to-br from-blue-900/10 to-indigo-900/10 border border-blue-500/10' : 
-            'bg-gradient-to-br from-blue-50/60 to-white/60 border border-blue-200/20'
+            theme === 'dark' ? 'bg-gradient-to-br from-ds-blue-900/10 to-ds-indigo-900/10 border border-ds-blue-500/10' : 
+            'bg-gradient-to-br from-ds-blue-50/60 to-white/60 border border-ds-blue-200/20'
           } transition-all duration-300`}>
             <p className={getDescriptionStyles()}>
               {description}

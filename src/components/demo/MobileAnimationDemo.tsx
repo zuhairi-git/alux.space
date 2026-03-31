@@ -17,16 +17,16 @@ export default function MobileAnimationDemo() {
   return (
     <div className="max-w-4xl mx-auto p-8 space-y-8">
       {/* Status Display */}
-      <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+      <div className="bg-ds-gray-100 dark:bg-ds-gray-800 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Animation Status</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-          <div className={`p-3 rounded ${isMobile ? 'bg-blue-100 dark:bg-blue-900' : 'bg-gray-200 dark:bg-gray-700'}`}>
+          <div className={`p-3 rounded ${isMobile ? 'bg-ds-blue-100 dark:bg-ds-blue-900' : 'bg-ds-gray-200 dark:bg-ds-gray-700'}`}>
             <strong>Device Type:</strong> {isMobile ? 'Mobile' : 'Desktop'}
           </div>
-          <div className={`p-3 rounded ${AnimationConfig.ENABLE_MOBILE_ANIMATIONS ? 'bg-green-600/10 dark:bg-green-600/30' : 'bg-red-100 dark:bg-red-900'}`}>
+          <div className={`p-3 rounded ${AnimationConfig.ENABLE_MOBILE_ANIMATIONS ? 'bg-ds-emerald-600/10 dark:bg-ds-emerald-600/30' : 'bg-ds-error/10 dark:bg-ds-error/20'}`}>
             <strong>Mobile Animations:</strong> {AnimationConfig.ENABLE_MOBILE_ANIMATIONS ? 'Enabled' : 'Disabled'}
           </div>
-          <div className={`p-3 rounded ${animationsDisabled ? 'bg-primary/10 dark:bg-primary/30' : 'bg-green-600/10 dark:bg-green-600/30'}`}>
+          <div className={`p-3 rounded ${animationsDisabled ? 'bg-primary/10 dark:bg-primary/30' : 'bg-ds-emerald-600/10 dark:bg-ds-emerald-600/30'}`}>
             <strong>Current State:</strong> {animationsDisabled ? 'Disabled' : 'Enabled'}
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function MobileAnimationDemo() {
         <h3 className="text-xl font-semibold">Animation Examples</h3>
 
         {/* Slide Up Animation */}
-        <div className="border border-gray-200 dark:border-gray-700 p-6 rounded-lg">
+        <div className="border border-ds-gray-200 dark:border-ds-gray-700 p-6 rounded-lg">
           <h4 className="font-semibold mb-4">Slide Up Animation (using MotionDiv)</h4>
           <MotionDiv
             initial={{ opacity: 0, y: 50 }}
@@ -50,7 +50,7 @@ export default function MobileAnimationDemo() {
         </div>
 
         {/* Hover Animation */}
-        <div className="border border-gray-200 dark:border-gray-700 p-6 rounded-lg">
+        <div className="border border-ds-gray-200 dark:border-ds-gray-700 p-6 rounded-lg">
           <h4 className="font-semibold mb-4">Hover Animation (using MotionButton)</h4>
           <MotionButton
             whileHover={{ scale: 1.05 }}
@@ -62,20 +62,20 @@ export default function MobileAnimationDemo() {
         </div>
 
         {/* Scale Animation */}
-        <div className="border border-gray-200 dark:border-gray-700 p-6 rounded-lg">
+        <div className="border border-ds-gray-200 dark:border-ds-gray-700 p-6 rounded-lg">
           <h4 className="font-semibold mb-4">Scale Animation (using regular motion with conditional props)</h4>
           <motion.div
             initial={animationsDisabled ? { opacity: 1 } : { opacity: 0, scale: 0.5 }}
             animate={animationsDisabled ? { opacity: 1 } : { opacity: 1, scale: 1 }}
             transition={animationsDisabled ? { duration: 0 } : { duration: durationSeconds.slower }}
-            className="bg-green-500 text-white p-4 rounded w-32 h-32 flex items-center justify-center"
+            className="bg-ds-success text-white p-4 rounded w-32 h-32 flex items-center justify-center"
           >
             Scale Effect
           </motion.div>
         </div>
 
         {/* Stagger Animation */}
-        <div className="border border-gray-200 dark:border-gray-700 p-6 rounded-lg">
+        <div className="border border-ds-gray-200 dark:border-ds-gray-700 p-6 rounded-lg">
           <h4 className="font-semibold mb-4">Stagger Animation</h4>
           <div className="flex gap-4">
             {[1, 2, 3, 4].map((item, index) => (
@@ -94,9 +94,9 @@ export default function MobileAnimationDemo() {
       </div>
 
       {/* Configuration Display */}
-      <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg">
+      <div className="bg-ds-gray-50 dark:bg-ds-gray-900 p-6 rounded-lg">
         <h3 className="text-xl font-semibold mb-4">Current Configuration</h3>
-        <pre className="text-sm bg-white dark:bg-gray-800 p-4 rounded overflow-x-auto">
+        <pre className="text-sm bg-white dark:bg-ds-gray-800 p-4 rounded overflow-x-auto">
           {JSON.stringify(AnimationConfig, null, 2)}
         </pre>
       </div>

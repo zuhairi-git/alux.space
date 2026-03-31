@@ -105,7 +105,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           />
         </motion.h1>
           <motion.p 
-          className="text-xl md:text-2xl text-gray-300 mb-8 text-center relative"
+          className="text-xl md:text-2xl text-ds-gray-300 mb-8 text-center relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: durationSeconds.ease, delay: delaySeconds.sm }}
@@ -186,7 +186,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             }}
           />
           
-          <p className="italic text-gray-300 relative">
+          <p className="italic text-ds-gray-300 relative">
             <span className="absolute -left-4 top-0 text-[var(--accent-text)] text-4xl opacity-80">&ldquo;</span>
             {quote.text}
             <span className="absolute -bottom-4 right-0 text-[var(--accent-text)] text-4xl opacity-80">&rdquo;</span>

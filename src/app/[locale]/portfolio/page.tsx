@@ -85,7 +85,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TekoÃ¤lypohjainen suunnittelutyÃ¶kalu, joka muuttaa kehotteet UI-konsepteiksi.'
       },
       link: `/${locale}/portfolio/promptforge`,
-      gradient: 'from-primary-500 to-indigo-500',
+      gradient: 'from-primary-500 to-ds-indigo-500',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -111,7 +111,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TekoÃ¤lyintegraation todellisen vaikutuksen dokumentointi elÃ¤vÃ¤ssÃ¤ tuotteessa.'
       },
       link: `/${locale}/portfolio/intelligence-by-design`,
-      gradient: 'from-blue-600 to-cyan-500',
+      gradient: 'from-ds-blue-600 to-ds-cyan-500',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -137,7 +137,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'SuunnittelujÃ¤rjestelmÃ¤, jossa tekoÃ¤ly on osa perustaa, ei jÃ¤lkiajatus.'
       },
       link: `/${locale}/portfolio/axiom`,
-      gradient: 'from-green-600 to-cyan-400',
+      gradient: 'from-ds-emerald-600 to-ds-cyan-400',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -163,7 +163,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'MitÃ¤ jos kehotteiden kirjoittaminen on seuraavan vuosikymmenen tÃ¤rkein UX-taito?'
       },
       link: `/${locale}/portfolio/prompt-as-ux`,
-      gradient: 'from-pink-500 to-pink-400',
+      gradient: 'from-ds-pink-500 to-ds-pink-400',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -189,7 +189,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Luottamuksen, lÃ¤pinÃ¤kyvyyden ja hallinnan suunnittelu agentti-tekoÃ¤lytyÃ¶nkuluille.'
       },
       link: `/${locale}/portfolio/delegate`,
-      gradient: 'from-amber-600 to-accent',
+      gradient: 'from-ds-gold-600 to-accent',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -215,7 +215,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia â€” kÃ¤yttÃ¤jÃ¤persoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkÃ¤aikaiseen pysyvyyteen.'
       },
       link: `/${locale}/portfolio/game-strategy`,
-      gradient: 'from-red-600 to-accent',
+      gradient: 'from-ds-error to-accent',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -241,7 +241,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TekoÃ¤lypohjainen alusta Ã¤lykkÃ¤illÃ¤ tyÃ¶tiloilla, tekoÃ¤lyavustajalla ja monialustaisilla prototyypeillÃ¤ iOS:lle, Androidille ja hallintaportaalille.'
       },
       link: `/${locale}/portfolio/workflow`,
-      gradient: 'from-blue-400 to-primary-500',
+      gradient: 'from-ds-blue-400 to-primary-500',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -267,7 +267,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'MobiililÃ¤htÃ¶isen, tekoÃ¤lypohjaisen markkinatietosovelluksen suunnittelu yrityskÃ¤yttÃ¤jille, jotka luottavat luotettavaan taloudelliseen sisÃ¤ltÃ¶Ã¶n.'
       },
       link: `/${locale}/portfolio/market-intelligence`,
-      gradient: 'from-blue-600 to-indigo-500',
+      gradient: 'from-ds-blue-600 to-ds-indigo-500',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -293,7 +293,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Teknisen velan, kÃ¤yttÃ¤jÃ¤tarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympÃ¤ristÃ¶ssÃ¤â€”strateginen lÃ¤hestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
       },
       link: `/${locale}/portfolio/healthcare-prioritization`,
-      gradient: 'from-blue-500 to-cyan-400',
+      gradient: 'from-ds-blue-500 to-ds-cyan-400',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -318,7 +318,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         en: 'Building accessible design systems from the ground upâ€”research-driven approach to creating inclusive digital products that work for everyone.',
         fi: 'Saavutettavien suunnittelujÃ¤rjestelmien rakentaminen alusta alkaenâ€”tutkimuspohjainen lÃ¤hestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
       }, link: `/${locale}/portfolio/accessibility`,
-      gradient: 'from-indigo-400 to-primary-500',
+      gradient: 'from-ds-indigo-400 to-primary-500',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -344,7 +344,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TyÃ¶nhakusovellus tehokkaaseen tyÃ¶nhakuun'
       },
       link: `/${locale}/portfolio/jobseeking`,
-      gradient: 'from-primary-400 to-pink-500',
+      gradient: 'from-primary-400 to-ds-pink-500',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',

@@ -42,7 +42,7 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
             <Link 
               key={lang} 
               href={`/${lang}/blog`} 
-              className={`text-white px-3 py-1 rounded ${locale === lang ? 'bg-[var(--btn-primary-bg)]' : 'bg-gray-700'}`}
+              className={`text-white px-3 py-1 rounded ${locale === lang ? 'bg-[var(--btn-primary-bg)]' : 'bg-ds-gray-700'}`}
             >
               {lang.toUpperCase()} Blog
             </Link>        ))}

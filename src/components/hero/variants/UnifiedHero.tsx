@@ -54,7 +54,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               animate={{ opacity: 1, scale: 1 }}
               transition={{ ...t.snap, delay: delaySeconds.xs }}
             >
-              <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-cyan-400/30' : 'border-[var(--primary)]/30'} rounded-tl-lg`} />
+              <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-ds-cyan-400/30' : 'border-[var(--primary)]/30'} rounded-tl-lg`} />
             </MotionDiv>
             
             <MotionDiv
@@ -73,7 +73,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               transition={{ duration: durationSeconds.glacial, delay: delaySeconds['2xl'] }}
             >
               <div className="flex flex-col items-center gap-3">
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-[var(--primary)]/30 to-transparent'}`}></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-ds-cyan-400/30 to-transparent' : 'from-transparent via-[var(--primary)]/30 to-transparent'}`}></div>
                 <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-[var(--primary)]/30 to-transparent' : 'from-transparent via-primary-400/30 to-transparent'}`}></div>
               </div>
             </MotionDiv>
@@ -85,7 +85,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               transition={{ duration: durationSeconds.glacial, delay: delaySeconds['2xl'] }}
             >
               <div className="flex flex-col items-center gap-3">
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-cyan-400/30 to-transparent' : 'from-transparent via-[var(--primary)]/30 to-transparent'}`}></div>
+                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-ds-cyan-400/30 to-transparent' : 'from-transparent via-[var(--primary)]/30 to-transparent'}`}></div>
                 <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-[var(--primary)]/30 to-transparent' : 'from-transparent via-primary-400/30 to-transparent'}`}></div>
               </div>
             </MotionDiv>
@@ -282,7 +282,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               }}
               className={`absolute -top-4 -left-4 w-2 h-2 rounded-full ${
                 isColorful
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500'
+                  ? 'bg-gradient-to-r from-ds-cyan-400 to-ds-blue-500'
                   : 'bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]'
               } shadow-lg`}
             />
@@ -302,7 +302,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className={`absolute -bottom-4 -right-4 w-2 h-2 rounded-full ${
                 isColorful
                   ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]'
-                  : 'bg-gradient-to-r from-primary-400 to-pink-400'
+                  : 'bg-gradient-to-r from-primary-400 to-ds-pink-400'
               } shadow-lg`}
             />
           </MotionDiv>
@@ -353,7 +353,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   }}
                 />
                 
-                <p className="italic text-gray-300 relative text-center">
+                <p className="italic text-ds-gray-300 relative text-center">
                   <span className="absolute -left-4 top-0 text-[var(--accent-text)] text-4xl opacity-80">&ldquo;</span>
                   {quote.text}
                   <span className="absolute -bottom-4 right-0 text-[var(--accent-text)] text-4xl opacity-80">&rdquo;</span>
@@ -405,7 +405,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="inline-block relative"
             >
               <MotionDiv 
-                className={`absolute -inset-1 rounded-lg bg-gradient-to-r ${isColorful ? 'from-primary-500/40 via-pink-500/40 to-blue-500/40' : 'from-[var(--primary)]/40 via-[var(--gradient-mid)]/40 to-[var(--gradient-end)]/40'} blur-md opacity-70`}
+                className={`absolute -inset-1 rounded-lg bg-gradient-to-r ${isColorful ? 'from-primary-500/40 via-ds-pink-500/40 to-ds-blue-500/40' : 'from-[var(--primary)]/40 via-[var(--gradient-mid)]/40 to-[var(--gradient-end)]/40'} blur-md opacity-70`}
                 animate={{
                   background: isColorful 
                     ? [

@@ -55,7 +55,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
           aria-label={getArticleAriaLabel()}
           onClick={() => trackEvent('blog_card_click', 'blog', `featured_${post.slug}_${post.tags[0] || 'uncategorized'}`)}
         >
-          <div className="theme-card-flex p-0 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30">
+          <div className="theme-card-flex p-0 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl border border-ds-gray-200/30 dark:border-ds-gray-700/30 hover:border-primary/30">
             <div className="flex flex-col md:flex-row">
               {/* Image */}
               <div className="relative w-full md:w-[55%] h-64 md:h-[360px] overflow-hidden bg-black shrink-0">
@@ -135,7 +135,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
         aria-labelledby={`blog-title-${post.slug}`}
         aria-describedby={`blog-desc-${post.slug}`}
       >
-        <div className="relative h-full w-full overflow-hidden rounded-2xl border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
+        <div className="relative h-full w-full overflow-hidden rounded-2xl border border-ds-gray-200/30 dark:border-ds-gray-700/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
           {/* Background Image */}
           <div className="absolute inset-0">
             <motion.div
@@ -232,7 +232,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
       aria-labelledby={`blog-title-${post.slug}`}
       aria-describedby={`blog-desc-${post.slug}`}
     >
-      <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-theme/70 border border-gray-200/30 dark:border-neutral-700/30 hover:border-primary/30 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
+        <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-theme/70 border border-ds-gray-200/30 dark:border-ds-gray-700/30 hover:border-primary/30 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
         <Link 
           href={localizedPostUrl} 
           className="group h-full flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-2xl"

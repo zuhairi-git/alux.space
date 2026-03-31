@@ -65,7 +65,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
       };
     } else if (theme === 'dark') {
       return {
-        cardBg: 'bg-gradient-to-br from-gray-800/80 via-gray-900/70 to-[var(--primary)]/20',
+        cardBg: 'bg-gradient-to-br from-ds-gray-800/80 via-ds-gray-900/70 to-[var(--primary)]/20',
         cardBorder: 'border-primary/20',
         cardGlow: 'shadow-2xl shadow-[var(--primary)]/10',
         accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',

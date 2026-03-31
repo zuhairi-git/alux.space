@@ -17,7 +17,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
   const determinedVariant = variant || determineVariant(quote);
 
   // Highlight 'thinking' with underline decoration
-  const quoteHtml = quote.replace(/\bthinking\b/gi, '<span class="underline decoration-4 decoration-yellow-400/100">$&</span>');
+  const quoteHtml = quote.replace(/\bthinking\b/gi, '<span class="underline decoration-4 decoration-ds-gold-400/100">$&</span>');
   // For minimal style, just render the text with minimal formatting
   if (determinedVariant === 'minimal') {
     return (

@@ -2250,6 +2250,83 @@ interface SectionDef {
   render: () => React.ReactNode;
 }
 
+type PreviewBackgroundMode = 'theme' | 'image';
+
+const backgroundPreviewSections = new Set([
+  'colors',
+  'gradients',
+  'buttons',
+  'avatars',
+  'badges',
+  'icons',
+]);
+
+function BackgroundPreviewToggle({
+  mode,
+  onModeChange,
+}: {
+  mode: PreviewBackgroundMode;
+  onModeChange: (mode: PreviewBackgroundMode) => void;
+}) {
+  return (
+    <div className="inline-flex items-center gap-1 rounded-full border border-[var(--card-border)] bg-[var(--card-from-bg)] p-1">
+      <button
+        onClick={() => onModeChange('theme')}
+        className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+          mode === 'theme'
+            ? 'bg-primary text-white'
+            : 'text-[var(--muted-foreground)] hover:bg-foreground/10'
+        }`}
+        aria-pressed={mode === 'theme'}
+      >
+        <span className="material-symbols text-sm">palette</span>
+        Theme BG
+      </button>
+      <button
+        onClick={() => onModeChange('image')}
+        className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+          mode === 'image'
+            ? 'bg-primary text-white'
+            : 'text-[var(--muted-foreground)] hover:bg-foreground/10'
+        }`}
+        aria-pressed={mode === 'image'}
+      >
+        <span className="material-symbols text-sm">image</span>
+        Image BG
+      </button>
+    </div>
+  );
+}
+
+function BackgroundPreviewFrame({
+  mode,
+  children,
+}: {
+  mode: PreviewBackgroundMode;
+  children: React.ReactNode;
+}) {
+  if (mode === 'theme') {
+    return (
+      <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--background)] p-4 sm:p-6">
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-[var(--card-border)] p-4 sm:p-6">
+      <Image
+        src="/images/bgs/ds-bg.jpg"
+        alt="Image background preview"
+        fill
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-black/45" />
+      <div className="relative z-10">{children}</div>
+    </div>
+  );
+}
+
 const allSections: SectionDef[] = [
   // Foundations
   { key: 'colors',          title: 'Color Tokens',             render: () => <ColorsSection /> },
@@ -2408,6 +2485,9 @@ function DesignPageContent() {
   const searchParams = useSearchParams();
   const activeKey = searchParams.get('s') ?? '';
   const activeDef = allSections.find(s => s.key === activeKey);
+  const [previewBackgroundMode, setPreviewBackgroundMode] = useState<PreviewBackgroundMode>('theme');
+
+  const canTogglePreviewBackground = Boolean(activeDef && backgroundPreviewSections.has(activeDef.key));
 
   if (!activeDef) {
     return (
@@ -2426,10 +2506,22 @@ function DesignPageContent() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6" style={{ textShadow: 'none' }}>
-        {activeDef.title}
-      </h2>
-      {activeDef.render()}
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-2xl font-bold" style={{ textShadow: 'none' }}>
+          {activeDef.title}
+        </h2>
+        {canTogglePreviewBackground && (
+          <BackgroundPreviewToggle mode={previewBackgroundMode} onModeChange={setPreviewBackgroundMode} />
+        )}
+      </div>
+
+      {canTogglePreviewBackground ? (
+        <BackgroundPreviewFrame mode={previewBackgroundMode}>
+          {activeDef.render()}
+        </BackgroundPreviewFrame>
+      ) : (
+        activeDef.render()
+      )}
     </div>
   );
 }

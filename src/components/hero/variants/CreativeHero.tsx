@@ -53,7 +53,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               repeat: Infinity,
               repeatType: "reverse"
             }}
-            className="absolute -top-20 -left-10 md:-left-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-cyan-500/30 to-primary-500/30 blur-sm"
+            className="absolute -top-20 -left-10 md:-left-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-ds-cyan-500/30 to-primary-500/30 blur-sm"
           />
           
           {/* Rotating square decoration */}
@@ -66,7 +66,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute top-10 -right-10 md:-right-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 blur-sm"
+            className="absolute top-10 -right-10 md:-right-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-ds-fuchsia-500/20 to-ds-cyan-500/20 blur-sm"
           />
           
           {/* Main Title with 3D Effect */}
@@ -85,7 +85,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
                     duration: durationSeconds.ease,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
+                  className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-ds-cyan-500 to-ds-fuchsia-600 relative"
                 >
                   {word}
                 </motion.span>
@@ -96,7 +96,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 0.7 }}
               transition={{ delay: delaySeconds.md, duration: durationSeconds.slow }}
-              className="absolute -z-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500/10 to-fuchsia-600/10 blur-3xl"
+              className="absolute -z-10 w-64 h-64 rounded-full bg-gradient-to-r from-ds-cyan-500/10 to-ds-fuchsia-600/10 blur-3xl"
               style={{
                 left: '50%',
                 top: '50%',

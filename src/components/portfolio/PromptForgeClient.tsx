@@ -193,8 +193,8 @@ export default function PromptForgeClient() {
                         {/* Prototype Section Placeholder */}
                         {/* TODO: Embed Figma prototype */}
                         <CaseStudySection title="Interactive Prototype"  accent="primary" number={3} id="prototype-embed">
-                            <div className="w-full h-[600px] rounded-2xl border-2 border-dashed border-gray-500/30 flex flex-col items-center justify-center bg-black/5">
-                                <span className="material-symbols text-6xl text-gray-400 mb-4">design_services</span>
+                            <div className="w-full h-[600px] rounded-2xl border-2 border-dashed border-ds-gray-500/30 flex flex-col items-center justify-center bg-black/5">
+                                <span className="material-symbols text-6xl text-ds-gray-400 mb-4">design_services</span>
                                 <p className="text-lg text-primary font-medium">Figma Prototype Placeholder</p>
                                 <p className="text-sm opacity-60 mt-2">Replace with actual Figma embed iframe</p>
                             </div>

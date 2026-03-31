@@ -106,7 +106,7 @@ export default function CaseStudyHero({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...t.enter, delay: delaySeconds.lg }}
-            className="text-lg md:text-xl text-gray-200 max-w-2xl mb-6"
+            className="text-lg md:text-xl text-ds-gray-200 max-w-2xl mb-6"
           >
             {subtitle}
           </motion.p>

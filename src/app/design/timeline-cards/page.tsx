@@ -9,14 +9,14 @@ import { useTheme } from '@/context/ThemeContext';
 export default function TimelineCardsSection() {
   const { theme } = useTheme();
   return (
-    <AnimatedSection id="timeline-cards" className="px-5 sm:px-8 py-16 sm:py-20 md:px-12 lg:px-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-950/60 dark:to-neutral-900" animation="slide-up">
+    <AnimatedSection id="timeline-cards" className="px-5 sm:px-8 py-16 sm:py-20 md:px-12 lg:px-20 bg-gradient-to-b from-ds-gray-50 to-white dark:from-ds-gray-950/60 dark:to-ds-gray-900" animation="slide-up">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
           <div className="inline-flex items-center px-3 py-1.5 mb-4 text-sm font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 rounded-full shadow-sm">
             <Icon name="rocket_launch" size="sm" className="mr-2" /> Timeline Cards
           </div>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl text-neutral-950 dark:text-white mb-4" style={{ textShadow: 'none' }}>Timeline Cards</h2>
-          <p className="font-body text-lg text-neutral-700 dark:text-neutral-300 max-w-3xl">
+          <h2 className="font-heading font-bold text-3xl md:text-4xl text-ds-gray-950 dark:text-white mb-4" style={{ textShadow: 'none' }}>Timeline Cards</h2>
+          <p className="font-body text-lg text-ds-gray-700 dark:text-ds-gray-300 max-w-3xl">
             Cards designed for showing professional experience, career timelines, or event histories. The card adapts to the active theme.
           </p>
         </div>
@@ -34,8 +34,8 @@ export default function TimelineCardsSection() {
           </div>
         </div>
 
-        <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg border border-neutral-200/50 dark:border-neutral-800/50">
-          <h3 className="font-heading text-xl font-semibold text-neutral-900 dark:text-white mb-4" style={{ textShadow: 'none' }}>Code Example</h3>
+        <div className="bg-white/90 dark:bg-ds-gray-900/90 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg border border-ds-gray-200/50 dark:border-ds-gray-800/50">
+          <h3 className="font-heading text-xl font-semibold text-ds-gray-900 dark:text-white mb-4" style={{ textShadow: 'none' }}>Code Example</h3>
           <CodeSnippet 
             code={`<TimelineCard
   theme="light" // Options: 'light', 'dark', 'colorful'

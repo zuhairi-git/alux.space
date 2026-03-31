@@ -6,28 +6,28 @@ import { exportToWord, exportToPowerPoint, exportToPDF, exportToGoogleSlides } f
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-primary-50 p-4 sm:p-6">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-ds-blue-50 via-ds-indigo-50 to-primary-50 p-4 sm:p-6">
       <main className="w-full max-w-3xl">
-        <div className="relative rounded-2xl sm:rounded-3xl bg-white shadow-2xl ring-1 ring-gray-200 p-6 sm:p-8 lg:p-10 text-gray-900">
+        <div className="relative rounded-2xl sm:rounded-3xl bg-white shadow-2xl ring-1 ring-ds-gray-200 p-6 sm:p-8 lg:p-10 text-ds-gray-900">
           {/* Icon */}
           <div className="flex justify-center mb-6 sm:mb-8">
-            <div className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-xl sm:rounded-2xl bg-blue-600/10 shadow-xl flex items-center justify-center">
+            <div className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-xl sm:rounded-2xl bg-ds-blue-600/10 shadow-xl flex items-center justify-center">
               <Image src="/logo/bh--logo.svg" alt="Buddy Healthcare" width={80} height={80} className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24" />
             </div>
           </div>
 
           {/* Title / Subtitle */}
-          <h1 className="text-center text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-2 sm:mb-3 text-gray-900">Buddy Healthcare</h1>
-          <p className="text-center text-lg sm:text-xl lg:text-2xl font-light mb-6 sm:mb-8 text-gray-600">Product Owner Assignment</p>
+          <h1 className="text-center text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-2 sm:mb-3 text-ds-gray-900">Buddy Healthcare</h1>
+          <p className="text-center text-lg sm:text-xl lg:text-2xl font-light mb-6 sm:mb-8 text-ds-gray-600">Product Owner Assignment</p>
 
           {/* Presenter Name */}
-          <p className="text-center text-sm sm:text-base lg:text-lg text-gray-500 mb-6 sm:mb-8">Presented by <span className="font-semibold text-gray-700">Ali Al Zuhairi</span></p>
+          <p className="text-center text-sm sm:text-base lg:text-lg text-ds-gray-500 mb-6 sm:mb-8">Presented by <span className="font-semibold text-ds-gray-700">Ali Al Zuhairi</span></p>
 
           {/* Pill */}
           <div className="mx-auto max-w-xl">
-            <div className="rounded-xl sm:rounded-2xl bg-gray-50 border border-gray-200 px-4 sm:px-6 py-4 sm:py-5 text-center shadow-sm">
-              <p className="text-base sm:text-lg font-semibold text-gray-800">Prioritization & Conflict Resolution</p>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">Healthcare SaaS Excellence</p>
+            <div className="rounded-xl sm:rounded-2xl bg-ds-gray-50 border border-ds-gray-200 px-4 sm:px-6 py-4 sm:py-5 text-center shadow-sm">
+              <p className="text-base sm:text-lg font-semibold text-ds-gray-800">Prioritization & Conflict Resolution</p>
+              <p className="text-xs sm:text-sm text-ds-gray-500 mt-1">Healthcare SaaS Excellence</p>
             </div>
           </div>
 
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/presentation"
-              className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-blue-600 text-white px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all w-full sm:w-auto justify-center"
+              className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-ds-blue-600 text-white px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all w-full sm:w-auto justify-center"
             >
               <Image src="/dt-icons/play.svg" alt="View" width={18} height={18} className="filter brightness-0 invert w-4 h-4 sm:w-[18px] sm:h-[18px]" />
               <span>View Presentation</span>
@@ -54,7 +54,7 @@ export default function Home() {
           </div>
           
           <div className="mt-4 text-center">
-            <p className="text-xs text-gray-500">Export options: <button onClick={exportToPowerPoint} className="text-blue-600 hover:underline">PowerPoint</button> • <button onClick={exportToPDF} className="text-blue-600 hover:underline">PDF</button> • <button onClick={exportToWord} className="text-blue-600 hover:underline">Word</button></p>
+            <p className="text-xs text-ds-gray-500">Export options: <button onClick={exportToPowerPoint} className="text-ds-blue-600 hover:underline">PowerPoint</button> • <button onClick={exportToPDF} className="text-ds-blue-600 hover:underline">PDF</button> • <button onClick={exportToWord} className="text-ds-blue-600 hover:underline">Word</button></p>
           </div>
         </div>
       </main>

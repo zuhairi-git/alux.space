@@ -182,15 +182,15 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
         
         {/* Code blocks falling */}
         <div className="absolute top-0 left-1/4 text-primary-300 text-xs font-mono opacity-30 animate-matrix">const</div>
-        <div className="absolute top-0 left-1/3 text-yellow-300 text-xs font-mono opacity-30 animate-matrix animation-delay-2000">func</div>
-        <div className="absolute top-0 left-1/2 text-pink-300 text-xs font-mono opacity-30 animate-matrix animation-delay-4000">{'=>'}</div>
-        <div className="absolute top-0 left-2/3 text-blue-300 text-xs font-mono opacity-30 animate-matrix animation-delay-1000">return</div>
+        <div className="absolute top-0 left-1/3 text-ds-gold-300 text-xs font-mono opacity-30 animate-matrix animation-delay-2000">func</div>
+        <div className="absolute top-0 left-1/2 text-ds-pink-300 text-xs font-mono opacity-30 animate-matrix animation-delay-4000">{'=>'}</div>
+        <div className="absolute top-0 left-2/3 text-ds-blue-300 text-xs font-mono opacity-30 animate-matrix animation-delay-1000">return</div>
         <div className="absolute top-0 right-1/4 text-primary-300 text-xs font-mono opacity-30 animate-matrix animation-delay-3000">async</div>
         
         {/* Pulsing nodes */}
         <div className="absolute top-20 right-20 w-2 h-2 bg-primary-400 rounded-full animate-pulse-glow" />
-        <div className="absolute bottom-20 left-20 w-2 h-2 bg-yellow-400 rounded-full animate-pulse-glow animation-delay-1000" />
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-pink-400 rounded-full animate-pulse-glow animation-delay-2000" />
+        <div className="absolute bottom-20 left-20 w-2 h-2 bg-ds-gold-400 rounded-full animate-pulse-glow animation-delay-1000" />
+        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-ds-pink-400 rounded-full animate-pulse-glow animation-delay-2000" />
       </div>
     );
   }
@@ -206,28 +206,28 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
         />
         
         {/* Matrix code rain - Left side */}
-        <div className="absolute top-0 left-[5%] text-cyan-400 text-sm font-mono opacity-40 animate-matrix">01</div>
+        <div className="absolute top-0 left-[5%] text-ds-cyan-400 text-sm font-mono opacity-40 animate-matrix">01</div>
         <div className="absolute top-0 left-[12%] text-primary-400 text-sm font-mono opacity-40 animate-matrix animation-delay-1000">10</div>
-        <div className="absolute top-0 left-[18%] text-pink-400 text-sm font-mono opacity-40 animate-matrix animation-delay-2000">11</div>
-        <div className="absolute top-0 left-[25%] text-cyan-400 text-sm font-mono opacity-40 animate-matrix animation-delay-3000">00</div>
+        <div className="absolute top-0 left-[18%] text-ds-pink-400 text-sm font-mono opacity-40 animate-matrix animation-delay-2000">11</div>
+        <div className="absolute top-0 left-[25%] text-ds-cyan-400 text-sm font-mono opacity-40 animate-matrix animation-delay-3000">00</div>
         
         {/* Matrix code rain - Right side */}
         <div className="absolute top-0 right-[5%] text-primary-400 text-sm font-mono opacity-40 animate-matrix animation-delay-4000">01</div>
-        <div className="absolute top-0 right-[12%] text-pink-400 text-sm font-mono opacity-40 animate-matrix animation-delay-5000">10</div>
-        <div className="absolute top-0 right-[18%] text-cyan-400 text-sm font-mono opacity-40 animate-matrix animation-delay-6000">11</div>
+        <div className="absolute top-0 right-[12%] text-ds-pink-400 text-sm font-mono opacity-40 animate-matrix animation-delay-5000">10</div>
+        <div className="absolute top-0 right-[18%] text-ds-cyan-400 text-sm font-mono opacity-40 animate-matrix animation-delay-6000">11</div>
         <div className="absolute top-0 right-[25%] text-primary-400 text-sm font-mono opacity-40 animate-matrix animation-delay-2000">00</div>
         
         {/* Glowing data nodes */}
-        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-cyan-400 rounded-full animate-pulse-glow" />
+        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-ds-cyan-400 rounded-full animate-pulse-glow" />
         <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-primary-400 rounded-full animate-pulse-glow animation-delay-2000" />
-        <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-pink-400 rounded-full animate-pulse-glow animation-delay-4000" />
+        <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-ds-pink-400 rounded-full animate-pulse-glow animation-delay-4000" />
       </div>
     );
   }
 
   // Dark theme (default)
   return (
-    <div className="absolute inset-0 overflow-hidden bg-gray-950">
+    <div className="absolute inset-0 overflow-hidden bg-ds-gray-950">
       {/* Quantum Canvas Layer */}
       <canvas
         ref={canvasRef}
@@ -253,13 +253,13 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
       </svg>
       
       {/* Code symbols falling gently */}
-      <div className="absolute top-0 left-1/4 text-blue-800 text-xs font-mono opacity-20 animate-matrix">{'<>'}</div>
-      <div className="absolute top-0 left-1/2 text-indigo-800 text-xs font-mono opacity-20 animate-matrix animation-delay-3000">{'{}'}</div>
+      <div className="absolute top-0 left-1/4 text-ds-blue-800 text-xs font-mono opacity-20 animate-matrix">{'<>'}</div>
+      <div className="absolute top-0 left-1/2 text-ds-indigo-800 text-xs font-mono opacity-20 animate-matrix animation-delay-3000">{'{}'}</div>
       <div className="absolute top-0 left-3/4 text-primary-800 text-xs font-mono opacity-20 animate-matrix animation-delay-5000">[]</div>
       
       {/* Subtle pulsing nodes */}
       <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-[var(--primary)] rounded-full animate-pulse-glow" />
-      <div className="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-indigo-600 rounded-full animate-pulse-glow animation-delay-2000" />
+      <div className="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-ds-indigo-600 rounded-full animate-pulse-glow animation-delay-2000" />
       <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse-glow animation-delay-4000" />
     </div>
   );

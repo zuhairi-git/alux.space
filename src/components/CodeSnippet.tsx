@@ -24,16 +24,16 @@ export default function CodeSnippet({ code, language = 'jsx' }: CodeSnippetProps
   };
 
   return (
-    <div className="relative font-mono text-sm rounded-xl overflow-hidden bg-neutral-950 dark:bg-black">
-      <div className="flex items-center justify-between bg-neutral-900 dark:bg-neutral-950 px-4 py-2 border-b border-neutral-800">
-        <div className="text-neutral-400 font-medium">{language}</div>
+    <div className="relative font-mono text-sm rounded-xl overflow-hidden bg-ds-gray-950">
+      <div className="flex items-center justify-between bg-ds-gray-900 px-4 py-2 border-b border-ds-gray-800">
+        <div className="text-ds-gray-400 font-medium">{language}</div>
         {/* eslint-disable-next-line design-system/no-raw-html-elements -- specialized code block toolbar button with context-specific dark theme styling */}
         <button
           onClick={copyToClipboard}
           className={`copy-btn flex items-center space-x-1 px-2 py-1 rounded-md transition-all ${
             copied 
-              ? 'bg-primary-500 dark:bg-primary-600 text-white' 
-              : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white'
+              ? 'bg-primary-500 text-white' 
+              : 'bg-ds-gray-800 hover:bg-ds-gray-700 text-ds-gray-300 hover:text-white'
           }`}
         >
           <span className="copy-icon">
@@ -50,7 +50,7 @@ export default function CodeSnippet({ code, language = 'jsx' }: CodeSnippetProps
         </button>
       </div>
       
-      <pre ref={codeRef} className="p-4 overflow-x-auto text-neutral-200 leading-relaxed">
+      <pre ref={codeRef} className="p-4 overflow-x-auto text-ds-gray-200 leading-relaxed">
         <code>{code}</code>
       </pre>
     </div>

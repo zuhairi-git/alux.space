@@ -46,7 +46,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
             </span>
           </h2>
           {subtitle && (
-            <p className="text-xl text-gray-300 mb-8">{subtitle}</p>
+            <p className="text-xl text-ds-gray-300 mb-8">{subtitle}</p>
           )}
 
           {cta && (
@@ -68,8 +68,8 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           className="relative"
         >
           {quote && (
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50">
-              <p className="text-lg text-gray-300 italic relative">
+            <div className="bg-ds-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-ds-gray-700/50">
+              <p className="text-lg text-ds-gray-300 italic relative">
                 <span className="absolute -left-4 top-0 text-[var(--accent-text)] text-3xl">&ldquo;</span>
                 {quote.text}
                 <span className="absolute -bottom-4 right-0 text-[var(--accent-text)] text-3xl">&rdquo;</span>

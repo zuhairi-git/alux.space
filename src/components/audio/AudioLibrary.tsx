@@ -23,45 +23,45 @@ const AudioLibrary: React.FC = () => {
   // Get theme-specific styles
   const getContainerStyles = () => {
     if (isLight) {
-      return 'bg-gray-50 min-h-screen pt-16';
+      return 'bg-ds-gray-50 min-h-screen pt-16';
     } else if (isColorful) {
       return 'bg-[var(--background)] min-h-screen pt-16';
     } else {
-      return 'bg-gray-900 min-h-screen pt-16';
+      return 'bg-ds-gray-900 min-h-screen pt-16';
     }
   };
 
   const getHeaderStyles = () => {
     if (isLight) {
-      return 'bg-white/80 backdrop-blur-sm border-b border-gray-200';
+      return 'bg-white/80 backdrop-blur-sm border-b border-ds-gray-200';
     } else if (isColorful) {
       return 'bg-[var(--nav-bg)] backdrop-blur-sm border-b border-[var(--nav-border)]';
     } else {
-      return 'bg-gray-800/80 backdrop-blur-sm border-b border-gray-700';
+      return 'bg-ds-gray-800/80 backdrop-blur-sm border-b border-ds-gray-700';
     }
   };
 
   const getTextStyles = () => {
     if (isLight) {
       return {
-        title: 'text-gray-900',
-        subtitle: 'text-gray-600',
-        text: 'text-gray-700',
-        muted: 'text-gray-500'
+        title: 'text-ds-gray-900',
+        subtitle: 'text-ds-gray-600',
+        text: 'text-ds-gray-700',
+        muted: 'text-ds-gray-500'
       };
     } else if (isColorful) {
       return {
         title: 'text-white',
-        subtitle: 'text-gray-200',
-        text: 'text-gray-300',
-        muted: 'text-gray-400'
+        subtitle: 'text-ds-gray-200',
+        text: 'text-ds-gray-300',
+        muted: 'text-ds-gray-400'
       };
     } else {
       return {
         title: 'text-white',
-        subtitle: 'text-gray-300',
-        text: 'text-gray-300',
-        muted: 'text-gray-400'
+        subtitle: 'text-ds-gray-300',
+        text: 'text-ds-gray-300',
+        muted: 'text-ds-gray-400'
       };
     }
   };
@@ -70,9 +70,9 @@ const AudioLibrary: React.FC = () => {
     if (isLight) {
       return {
         primary: 'bg-[var(--btn-primary-bg)] hover:bg-[var(--primary-hover)] text-white',
-        secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-700',
+        secondary: 'bg-ds-gray-100 hover:bg-ds-gray-200 text-ds-gray-700',
         active: 'bg-[var(--btn-primary-bg)] text-white',
-        inactive: 'bg-gray-100 text-gray-700'
+        inactive: 'bg-ds-gray-100 text-ds-gray-700'
       };
     } else if (isColorful) {
       return {
@@ -84,20 +84,20 @@ const AudioLibrary: React.FC = () => {
     } else {
       return {
         primary: 'bg-[var(--btn-primary-bg)] hover:bg-[var(--primary-hover)] text-white',
-        secondary: 'bg-gray-700 hover:bg-gray-600 text-gray-300',
+        secondary: 'bg-ds-gray-700 hover:bg-ds-gray-600 text-ds-gray-300',
         active: 'bg-[var(--btn-primary-bg)] text-white',
-        inactive: 'bg-gray-700 text-gray-300'
+        inactive: 'bg-ds-gray-700 text-ds-gray-300'
       };
     }
   };
 
   const getFilterStyles = () => {
     if (isLight) {
-      return 'bg-white border border-gray-200 rounded-lg p-4';
+      return 'bg-white border border-ds-gray-200 rounded-lg p-4';
     } else if (isColorful) {
       return 'bg-[var(--card-from-bg)] border border-[var(--card-border)] rounded-lg p-4 backdrop-blur-sm';
     } else {
-      return 'bg-gray-800 border border-gray-700 rounded-lg p-4';
+      return 'bg-ds-gray-800 border border-ds-gray-700 rounded-lg p-4';
     }
   };
 
@@ -221,7 +221,7 @@ const AudioLibrary: React.FC = () => {
                 <span className="material-symbols text-lg">filter_list</span>
                 <span className="hidden sm:inline">Filters</span>
                 {hasActiveFilters && (
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-ds-error rounded-full"></div>
                 )}
               </Button>
             </div>
@@ -255,11 +255,11 @@ const AudioLibrary: React.FC = () => {
                         placeholder="Search audio files..."
                         className={`w-full px-4 py-2 pl-10 rounded-lg border ${
                           isLight 
-                            ? 'bg-white border-gray-300 text-gray-900' 
-                            : 'bg-black/20 border-gray-600 text-white'
+                            ? 'bg-white border-ds-gray-300 text-ds-gray-900' 
+                            : 'bg-black/20 border-ds-gray-600 text-white'
                         } focus:ring-2 focus:ring-primary focus:border-transparent`}
                       />
-                      <span className="absolute left-3 top-2.5 material-symbols text-gray-400">
+                      <span className="absolute left-3 top-2.5 material-symbols text-ds-gray-400">
                         search
                       </span>
                     </div>
@@ -276,8 +276,8 @@ const AudioLibrary: React.FC = () => {
                       onChange={(e) => setSelectedCategory(e.target.value)}
                       className={`w-full px-4 py-2 rounded-lg border ${
                         isLight 
-                          ? 'bg-white border-gray-300 text-gray-900' 
-                          : 'bg-black/20 border-gray-600 text-white'
+                          ? 'bg-white border-ds-gray-300 text-ds-gray-900' 
+                          : 'bg-black/20 border-ds-gray-600 text-white'
                       } focus:ring-2 focus:ring-primary focus:border-transparent`}
                     >
                       <option value="all">All Categories</option>
@@ -300,8 +300,8 @@ const AudioLibrary: React.FC = () => {
                       onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'title')}
                       className={`w-full px-4 py-2 rounded-lg border ${
                         isLight 
-                          ? 'bg-white border-gray-300 text-gray-900' 
-                          : 'bg-black/20 border-gray-600 text-white'
+                          ? 'bg-white border-ds-gray-300 text-ds-gray-900' 
+                          : 'bg-black/20 border-ds-gray-600 text-white'
                       } focus:ring-2 focus:ring-primary focus:border-transparent`}
                     >
                       <option value="newest">Newest First</option>
@@ -371,7 +371,7 @@ const AudioLibrary: React.FC = () => {
               className="text-center py-12"
             >
               <div className="w-16 h-16 mx-auto mb-4 opacity-50">
-                <span className="material-symbols text-6xl text-gray-400">audio_file</span>
+                <span className="material-symbols text-6xl text-ds-gray-400">audio_file</span>
               </div>
               <h3 className={`text-xl font-semibold mb-2 ${textStyles.title}`}>
                 No audio files found

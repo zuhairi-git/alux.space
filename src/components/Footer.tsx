@@ -77,7 +77,7 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="bg-theme border-t border-gray-200/10 pt-12 pb-32 md:pb-4"
+      className="bg-theme border-t border-ds-gray-200/10 pt-12 pb-32 md:pb-4"
       role="contentinfo"
       aria-label={t('footer.aria.siteFooter')}
     >
@@ -113,7 +113,7 @@ const Footer = () => {
             href="https://www.linkedin.com/in/ali-zuhairi/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
+            className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-ds-gray-900 rounded-sm p-1"
             whileHover={{ scale: 1.1 }}
             aria-label={`${t('footer.aria.socialPlatform')} LinkedIn`}
             onClick={() => handleSocialClick('LinkedIn', 'https://www.linkedin.com/in/ali-zuhairi/')}
@@ -126,7 +126,7 @@ const Footer = () => {
                 href="https://github.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-1"
+                className="text-primary hover:text-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-ds-gray-900 rounded-sm p-1"
                 whileHover={{ scale: 1.1 }}
                 aria-label={`${t('footer.aria.socialPlatform')} GitHub`}
                 onClick={() => handleSocialClick('GitHub', 'https://github.com/')}
@@ -145,7 +145,7 @@ const Footer = () => {
                 <li key={link.href} role="listitem">
                   <Link
                     href={localizedHref(link.href)}
-                    className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                    className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-ds-gray-900 rounded-sm py-1"
                     onClick={() => handleFooterLinkClick(t(link.textKey), link.href)}
                   >
                     {t(link.textKey)}
@@ -163,7 +163,7 @@ const Footer = () => {
               {portfolioLinks.map((link) => (
                 <li key={link.href} role="listitem">                    <Link
                   href={localizedHref(link.href)}
-                  className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm py-1"
+                  className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-colors block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-ds-gray-900 rounded-sm py-1"
                   onClick={() => handleFooterLinkClick(t(link.textKey), link.href)}
                 >
                   {t(link.textKey)}
@@ -173,7 +173,7 @@ const Footer = () => {
             </ul>            </nav>
         </div>
       </div>        {/* Bottom section with copyright */}
-        <div className="pt-6 border-t border-gray-200/10">
+        <div className="pt-6 border-t border-ds-gray-200/10">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="text-sm opacity-60">
               &copy; {currentYear} Ali Al-Zuhairi. {t('footer.copyright')}

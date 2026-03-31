@@ -29,9 +29,9 @@ export function NotificationsView({ card, isLight, isColorful = false, theme }: 
                     <div className={`w-1 self-stretch rounded-full shrink-0 ${a.priority === 'critical' ? (isLight ? 'bg-ds-error' : 'bg-ds-error/80') : a.priority === 'warning' ? (isLight ? 'bg-ds-warning' : 'bg-ds-warning/80') : (isLight ? 'bg-ds-info' : 'bg-ds-info/60')}`} />
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1.5"><h3 className="font-semibold text-[15px] truncate pr-2">{a.title}</h3><span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${badge(a.priority)}`}>{a.priority}</span></div>
-                        <p className={`text-[14px] leading-relaxed ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{a.desc}</p>
-                        <AnimatePresence>{exp === a.id && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}><p className={`text-[14px] leading-relaxed mt-3 pt-3 border-t ${isLight ? 'text-gray-700 border-gray-200' : 'text-gray-300 border-white/5'}`}>{a.detail}</p><button className={`mt-3.5 flex items-center space-x-2 text-[13px] font-semibold ${askAiColor}`}><Icon name="auto_awesome" className="text-sm" /><span>Ask AI about this</span></button></motion.div>}</AnimatePresence>
-                        <span className={`text-[12px] mt-2.5 block font-medium ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>{a.time}</span>
+                        <p className={`text-[14px] leading-relaxed ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{a.desc}</p>
+                        <AnimatePresence>{exp === a.id && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}><p className={`text-[14px] leading-relaxed mt-3 pt-3 border-t ${isLight ? 'text-ds-gray-700 border-ds-gray-200' : 'text-ds-gray-300 border-white/5'}`}>{a.detail}</p><button className={`mt-3.5 flex items-center space-x-2 text-[13px] font-semibold ${askAiColor}`}><Icon name="auto_awesome" className="text-sm" /><span>Ask AI about this</span></button></motion.div>}</AnimatePresence>
+                        <span className={`text-[12px] mt-2.5 block font-medium ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>{a.time}</span>
                     </div>
                 </div>
             </motion.div>))}

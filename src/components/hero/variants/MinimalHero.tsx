@@ -48,7 +48,7 @@ const MinimalHero: React.FC<HeroConfig> = ({ title, subtitle, cta, showPodcastPl
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ ...t.snap, delay: delaySeconds.xs }}
-            className="text-xl text-gray-300 mb-8"
+            className="text-xl text-ds-gray-300 mb-8"
           >
             {subtitle}
           </motion.p>
