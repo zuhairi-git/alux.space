@@ -2,7 +2,7 @@
 
 import type { TabType } from './shared';
 
-// ─── Theme Interface ────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Theme Interface Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 export interface MobileTheme {
     platform: 'android' | 'ios';
 
@@ -120,7 +120,7 @@ export interface MobileTheme {
     contentPaddingTop: string;
 }
 
-// ─── Android Material Design 3 Expressive Theme (Android 16/17) ────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Android Material Design 3 Expressive Theme (Android 16/17) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 export const androidTheme: MobileTheme = {
     platform: 'android',
     bg: {
@@ -131,17 +131,17 @@ export const androidTheme: MobileTheme = {
     card: {
         dark: 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/30',
         light: 'bg-ds-gray-50/95 backdrop-blur-xl rounded-[28px] shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.06)] border border-ds-gray-200/60',
-        colorful: 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-ember/20',
+        colorful: 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-purple-400/20',
     },
     header: {
         dark: 'bg-ds-dark-2/95 backdrop-blur-2xl border-b border-ds-gray-600/30',
         light: 'bg-ds-gray-50/95 backdrop-blur-2xl border-b border-ds-gray-200/50 shadow-[0_1px_2px_rgba(0,0,0,0.05)]',
-        colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-2xl border-b border-ds-ember/20',
+        colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-2xl border-b border-ds-purple-400/20',
     },
     nav: {
         dark: 'bg-ds-dark-2 border-ds-gray-600/30',
         light: 'bg-ds-gray-100 border-ds-gray-200/60',
-        colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-xl border-ds-ember/20',
+        colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-xl border-ds-purple-400/20',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-ds-gray-900 font-variation-fill' : 'text-ds-blue-200 font-variation-fill',
@@ -182,7 +182,7 @@ export const androidTheme: MobileTheme = {
         iconColor: () => 'text-ds-blue-300',
         searchBar: (isLight) => isLight ? 'bg-ds-gray-200/60' : 'bg-ds-gray-600/40',
         searchText: () => 'opacity-40',
-        sparklineHigh: '#16a34a', sparklineMid: 'var(--color-ember)', sparklineLow: '#dc2626',
+        sparklineHigh: '#16a34a', sparklineMid: 'var(--color-purple-400)', sparklineLow: '#dc2626',
         statusActive: 'bg-ds-success/15 text-ds-success',
         sheetAccent: '#93c5fd',
         sheetBg: (isLight) => isLight ? 'bg-ds-gray-50' : 'bg-ds-dark-2',
@@ -223,7 +223,7 @@ export const androidTheme: MobileTheme = {
     contentPaddingTop: 'pt-[100px]',
 };
 
-// ─── iOS 27 Liquid Glass Theme ──────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ iOS 27 Liquid Glass Theme Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 export const iosTheme: MobileTheme = {
     platform: 'ios',
     bg: {
@@ -234,17 +234,17 @@ export const iosTheme: MobileTheme = {
     card: {
         dark: 'bg-ds-dark-2/65 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
         light: 'bg-white/55 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/70 rounded-[22px] shadow-[0_2px_16px_rgba(0,0,0,0.04)]',
-        colorful: 'bg-ds-card-colorful-from/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-ds-ember/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
+        colorful: 'bg-ds-card-colorful-from/35 backdrop-blur-[24px] backdrop-saturate-[200%] border border-ds-purple-400/15 rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
     },
     header: {
         dark: 'bg-ds-dark-2/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/[0.06]',
         light: 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/[0.04]',
-        colorful: 'bg-ds-card-colorful-from/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-ember/10',
+        colorful: 'bg-ds-card-colorful-from/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-ds-purple-400/10',
     },
     nav: {
         dark: 'bg-ds-dark-2/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-white/[0.08]',
         light: 'bg-ds-gray-100/60 backdrop-blur-[30px] backdrop-saturate-[200%] border-black/[0.04]',
-        colorful: 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-ds-ember/10',
+        colorful: 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-ds-purple-400/10',
     },
     navTab: {
         active: (isLight) => isLight ? 'text-ds-blue-500' : 'text-ds-blue-400',
@@ -301,7 +301,7 @@ export const iosTheme: MobileTheme = {
         statBadge: 'bg-ds-success/10 text-ds-success',
         donutPrimary: 'text-ds-blue-500', donutLabel: 'text-ds-blue-500',
         engagementActiveBg: 'bg-ds-blue-500',
-        barGradients: ['from-ds-blue-400 to-ds-blue-600', 'from-ds-indigo-400 to-ds-indigo-600', 'from-ds-cyan-400 to-ds-cyan-500', 'from-ds-ember-light to-ds-ember-dark', 'from-ds-fuchsia-400 to-ds-fuchsia-600', 'from-ds-pink-400 to-ds-pink-500', 'from-ds-purple-400 to-ds-purple-600'],
+        barGradients: ['from-ds-blue-400 to-ds-blue-600', 'from-ds-indigo-400 to-ds-indigo-600', 'from-ds-cyan-400 to-ds-cyan-500', 'from-ds-purple-300 to-ds-purple-700', 'from-ds-fuchsia-400 to-ds-fuchsia-600', 'from-ds-pink-400 to-ds-pink-500', 'from-ds-purple-400 to-ds-purple-600'],
         settingsBg: (isLight) => isLight ? 'bg-black/[0.04] backdrop-blur-lg' : 'bg-white/[0.06] backdrop-blur-lg',
         modalBg: (isLight) => isLight ? 'bg-white/90 backdrop-blur-2xl' : 'bg-ds-dark-3/95 backdrop-blur-2xl text-white',
         modalActiveItem: (isLight) => isLight ? 'bg-ds-gray-200/80' : 'bg-white/[0.08]',

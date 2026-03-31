@@ -60,9 +60,9 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
 
                     {/* AI Match */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-ds-ember/10 border-b border-ds-ember/20' : isLight ? 'bg-primary/8 border-b border-[var(--primary)]/10' : 'bg-primary/10 border-b border-[var(--primary)]/15'}`}>
-                            <Icon name="auto_awesome" className={`text-[13px] ${isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400'}`} />
-                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-ds-purple-400/10 border-b border-ds-purple-400/20' : isLight ? 'bg-primary/8 border-b border-[var(--primary)]/10' : 'bg-primary/10 border-b border-[var(--primary)]/15'}`}>
+                            <Icon name="auto_awesome" className={`text-[13px] ${isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400'}`} />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>2h ago</span>
                         </div>
                         <div className="p-4">
@@ -75,7 +75,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                                         <h3 className="font-bold text-[15px]">Retail Assistant</h3>
                                         <span className="text-[12px] font-bold text-ds-success bg-ds-success/10 px-2 py-0.5 rounded-lg">95% match</span>
                                     </div>
-                                    <p className={`text-[13px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>City Center · €12.5/h · Weekend shifts</p>
+                                    <p className={`text-[13px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>City Center Ã‚Â· Ã¢â€šÂ¬12.5/h Ã‚Â· Weekend shifts</p>
                                 </div>
                             </div>
                             <button onClick={() => onNav?.('jobs')}
@@ -96,7 +96,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                             <div className="grid grid-cols-3 gap-2 mb-3">
                                 {[
                                     { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-ds-purple-400' },
-                                    { label: 'Applications', value: '4', icon: 'send', color: isColorful ? 'text-ds-ember' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400' },
+                                    { label: 'Applications', value: '4', icon: 'send', color: isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400' },
                                     { label: 'Avg Match', value: '88%', icon: 'stars', color: 'text-amber-400' },
                                 ].map(stat => (
                                     <div key={stat.label} className={`flex flex-col items-center py-2.5 rounded-xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>

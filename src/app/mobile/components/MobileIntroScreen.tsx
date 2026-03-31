@@ -106,8 +106,8 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
 
-    const accentColor = selectedTheme === 'colorful' ? 'var(--color-ember)' : '#3b82f6';
-    const accentGradient = selectedTheme === 'colorful' ? 'from-ds-ember to-ds-ember-dark' : config.accentGradient;
+    const accentColor = selectedTheme === 'colorful' ? 'var(--color-purple-400)' : '#3b82f6';
+    const accentGradient = selectedTheme === 'colorful' ? 'from-ds-purple-400 to-ds-purple-700' : config.accentGradient;
 
     const bgClass =
         selectedTheme === 'light'
@@ -128,7 +128,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
                 : 'bg-ds-gray-50/95 border border-ds-gray-200/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : selectedTheme === 'colorful'
-                ? 'bg-white/[0.06] border border-ds-ember/12'
+                ? 'bg-white/[0.06] border border-ds-purple-400/12'
                 : isIOS
                     ? 'bg-white/[0.06] backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.05]'
                     : 'bg-ds-dark-3/80 border border-ds-gray-600/30';
@@ -188,10 +188,10 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
 
             {/* Floating ambient orbs - visible on all themes */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <FloatingOrb size={200} color={selectedTheme === 'colorful' ? 'rgba(168,85,247,0.2)' : selectedTheme === 'light' ? 'rgba(99,102,241,0.08)' : 'rgba(168,85,247,0.12)'} startX="-10%" startY="10%" delay={0} />
+                <FloatingOrb size={200} color={selectedTheme === 'colorful' ? 'rgba(167,139,250,0.2)' : selectedTheme === 'light' ? 'rgba(99,102,241,0.08)' : 'rgba(168,85,247,0.12)'} startX="-10%" startY="10%" delay={0} />
                 <FloatingOrb size={160} color={selectedTheme === 'colorful' ? 'rgba(236,72,153,0.18)' : selectedTheme === 'light' ? 'rgba(168,85,247,0.06)' : 'rgba(59,130,246,0.1)'} startX="60%" startY="50%" delay={1.5} />
-                <FloatingOrb size={120} color={selectedTheme === 'colorful' ? 'rgba(59,130,246,0.15)' : selectedTheme === 'light' ? 'rgba(236,72,153,0.05)' : 'rgba(236,72,153,0.08)'} startX="30%" startY="70%" delay={3} />
-                <FloatingOrb size={100} color={selectedTheme === 'colorful' ? 'rgba(34,197,94,0.1)' : selectedTheme === 'light' ? 'rgba(59,130,246,0.05)' : 'rgba(99,102,241,0.08)'} startX="80%" startY="20%" delay={2} />
+                <FloatingOrb size={120} color={selectedTheme === 'colorful' ? 'rgba(37,99,235,0.15)' : selectedTheme === 'light' ? 'rgba(236,72,153,0.05)' : 'rgba(236,72,153,0.08)'} startX="30%" startY="70%" delay={3} />
+                <FloatingOrb size={100} color={selectedTheme === 'colorful' ? 'rgba(196,181,253,0.1)' : selectedTheme === 'light' ? 'rgba(59,130,246,0.05)' : 'rgba(99,102,241,0.08)'} startX="80%" startY="20%" delay={2} />
             </div>
 
             {/* Colorful ambient mesh - enhanced */}
@@ -199,7 +199,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-fuchsia-600/25 blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
                     <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-purple-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
-                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-ds-ember/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
+                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-ds-purple-400/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
                 </div>
             )}
 
@@ -243,7 +243,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             >
                 <AnimatePresence custom={direction} mode="wait">
 
-                    {/* ── Step 0: Welcome ── */}
+                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 0: Welcome Ã¢â€â‚¬Ã¢â€â‚¬ */}
                     {step === 0 && (
                         <motion.div
                             key="intro-step0"
@@ -318,7 +318,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         </motion.div>
                     )}
 
-                    {/* ── Step 1: AI Tips ── */}
+                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 1: AI Tips Ã¢â€â‚¬Ã¢â€â‚¬ */}
                     {step === 1 && (
                         <motion.div
                             key="intro-step1"
@@ -380,14 +380,14 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 className={`mt-4 p-3.5 rounded-2xl flex items-center gap-3 ${selectedTheme === 'light' ? 'bg-ds-warning/5 border border-ds-warning/10' : 'bg-ds-warning/10 border border-ds-warning/20'}`}
                             >
                                 <Icon name="lightbulb" className="text-[20px] text-ds-warning shrink-0" />
-                                <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-ds-ember-dark' : 'text-ds-warning'}`}>
-                                    Tap the <span className="font-bold">✦ sparkle button</span> in the top-right corner anytime to open Copilot.
+                                <p className={`text-[12px] leading-relaxed ${selectedTheme === 'light' ? 'text-ds-gray-700' : 'text-ds-warning'}`}>
+                                    Tap the <span className="font-bold">Ã¢Å“Â¦ sparkle button</span> in the top-right corner anytime to open Copilot.
                                 </p>
                             </motion.div>
                         </motion.div>
                     )}
 
-                    {/* ── Step 2: What's Inside ── */}
+                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 2: What's Inside Ã¢â€â‚¬Ã¢â€â‚¬ */}
                     {step === 2 && (
                         <motion.div
                             key="intro-step2"
@@ -444,7 +444,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                         </motion.div>
                     )}
 
-                    {/* ── Step 3: Theme Picker ── */}
+                    {/* Ã¢â€â‚¬Ã¢â€â‚¬ Step 3: Theme Picker Ã¢â€â‚¬Ã¢â€â‚¬ */}
                     {step === 3 && (
                         <motion.div
                             key="intro-step3"
@@ -473,7 +473,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 transition={{ delay: 0.08 }}
                                 className={`text-[13px] mb-6 pl-1 ${muted}`}
                             >
-                                Pick a theme — you can always change it in your Profile
+                                Pick a theme Ã¢â‚¬â€ you can always change it in your Profile
                             </motion.p>
 
                             <div className="space-y-3">
@@ -508,7 +508,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                                     <div className={`h-1.5 rounded-full w-3/4 ${t.v === 'light' ? 'bg-gray-200/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {t.v === 'colorful' && (
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-ds-ember/30 to-ds-ember-dark/20 rounded-xl" />
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-ds-purple-400/30 to-ds-purple-700/20 rounded-xl" />
                                                 )}
                                             </div>
 

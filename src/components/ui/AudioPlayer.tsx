@@ -767,9 +767,9 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
               className="absolute inset-0 rounded-full"
               animate={isPlaying && !animationsDisabled ? {
                 boxShadow: [
-                  '0 0 20px rgba(59, 130, 246, 0.3)',
-                  '0 0 40px rgba(59, 130, 246, 0.6)',
-                  '0 0 20px rgba(59, 130, 246, 0.3)'
+                  '0 0 20px var(--player-btn-glow)',
+                  '0 0 40px var(--player-btn-glow)',
+                  '0 0 20px var(--player-btn-glow)'
                 ]
               } : {}}
               transition={{ duration: 2, repeat: Infinity }}

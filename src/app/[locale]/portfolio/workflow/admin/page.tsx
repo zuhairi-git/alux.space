@@ -28,9 +28,9 @@ type NotificationItem = {
     read: boolean;
 };
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MAIN
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 export default function PortalPanel() {
     const [activeSection, setActiveSection] = useState<Section>('start');
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -140,12 +140,12 @@ export default function PortalPanel() {
     const sidebarBg = isLight
         ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60'
         : isColorful
-            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-ds-ember/30 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]'
+            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-ds-purple-400/30 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]'
             : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]';
     const headerBg = isLight
         ? 'bg-white/40 backdrop-blur-2xl border-b border-white/60'
         : isColorful
-            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-2xl border-b border-ds-ember/30'
+            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-2xl border-b border-ds-purple-400/30'
             : 'bg-white/[0.02] backdrop-blur-2xl border-b border-white/10';
     const cardClass = isLight
         ? 'bg-white rounded-3xl border border-[var(--card-border)] transition-shadow duration-300 hover:shadow-[0_4px_14px_var(--card-hover-shadow-color)] p-5 md:p-7'
@@ -208,19 +208,19 @@ export default function PortalPanel() {
                         return (
                             <button key={s.key} onClick={() => setActiveSection(s.key)}
                                 className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
-                                    ? (isColorful ? 'text-[var(--color-ember-light)] shadow-lg shadow-[var(--color-ember)]/10' : isLight ? 'text-accent shadow-sm' : 'text-accent shadow-lg shadow-[var(--primary)]/10')
-                                    : (isColorful ? 'text-[var(--color-ember-light)]/80 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
+                                    ? (isColorful ? 'text-[var(--color-purple-300)] shadow-lg shadow-[var(--color-purple-400)]/10' : isLight ? 'text-accent shadow-sm' : 'text-accent shadow-lg shadow-[var(--primary)]/10')
+                                    : (isColorful ? 'text-[var(--color-purple-300)]/80 hover:bg-[var(--color-purple-400)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
                                 {active && (
-                                    <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-[var(--color-ember)]/20 border border-ds-ember/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
+                                    <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-[var(--color-purple-400)]/20 border border-ds-purple-400/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
                                 )}
-                                <Icon name={s.icon} className={`text-[22px] ${sidebarCollapsed ? '' : 'mr-3'} ${active ? (isColorful ? 'text-[var(--color-ember)]' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
+                                <Icon name={s.icon} className={`text-[22px] ${sidebarCollapsed ? '' : 'mr-3'} ${active ? (isColorful ? 'text-[var(--color-purple-400)]' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
                                 {!sidebarCollapsed && <span className="relative z-10">{s.label}</span>}
                             </button>
                         );
                     })}
                 </nav>
-                <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-ds-ember/20' : 'border-white/5'}`}>
-                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[var(--color-ember-light)]/70 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-ds-purple-400/20' : 'border-white/5'}`}>
+                    <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[var(--color-purple-300)]/70 hover:bg-[var(--color-purple-400)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
                         <Icon name="arrow_back" className={`text-[20px] ${sidebarCollapsed ? '' : 'mr-3'} opacity-60 group-hover:opacity-100 transition-opacity`} />
                         {!sidebarCollapsed && <span>Back to Case Study</span>}
                     </a>
@@ -265,19 +265,19 @@ export default function PortalPanel() {
                                     return (
                                         <button key={s.key} onClick={() => { setActiveSection(s.key); setMobileSidebarOpen(false); }}
                                             className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[14px] font-medium relative group overflow-hidden ${active
-                                                ? (isColorful ? 'text-[var(--color-ember-light)] shadow-lg shadow-[var(--color-ember)]/10' : isLight ? 'text-accent shadow-sm' : 'text-accent shadow-lg shadow-[var(--primary)]/10')
-                                                : (isColorful ? 'text-[var(--color-ember-light)]/80 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
+                                                ? (isColorful ? 'text-[var(--color-purple-300)] shadow-lg shadow-[var(--color-purple-400)]/10' : isLight ? 'text-accent shadow-sm' : 'text-accent shadow-lg shadow-[var(--primary)]/10')
+                                                : (isColorful ? 'text-[var(--color-purple-300)]/80 hover:bg-[var(--color-purple-400)]/10' : isLight ? 'text-slate-600 hover:bg-white/50' : 'text-slate-400 hover:bg-gray-800/70')}`}>
                                             {active && (
-                                                <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-[var(--color-ember)]/20 border border-ds-ember/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
+                                                <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-[var(--color-purple-400)]/20 border border-ds-purple-400/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
                                             )}
-                                            <Icon name={s.icon} className={`text-[22px] mr-3 ${active ? (isColorful ? 'text-[var(--color-ember)]' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
+                                            <Icon name={s.icon} className={`text-[22px] mr-3 ${active ? (isColorful ? 'text-[var(--color-purple-400)]' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
                                             <span className="relative z-10">{s.label}</span>
                                         </button>
                                     );
                                 })}
                             </nav>
-                            <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-ds-ember/20' : 'border-white/5'}`}>
-                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[var(--color-ember-light)]/70 hover:bg-[var(--color-ember)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
+                            <div className={`px-3 py-4 border-t ${isLight ? 'border-slate-200/60' : isColorful ? 'border-ds-purple-400/20' : 'border-white/5'}`}>
+                                <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-[var(--color-purple-300)]/70 hover:bg-[var(--color-purple-400)]/10' : isLight ? 'text-slate-500 hover:bg-white/50' : 'text-slate-500 hover:bg-white/5'}`}>
                                     <Icon name="arrow_back" className="text-[20px] mr-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                                     <span>Back to Case Study</span>
                                 </a>
@@ -292,39 +292,39 @@ export default function PortalPanel() {
                 {/* Top Bar */}
                 <header className={`h-20 flex items-center justify-between px-5 md:px-10 fixed top-0 left-0 right-0 z-30 ${sidebarCollapsed ? 'md:left-[80px]' : 'md:left-[280px]'} ${headerBg}`}>
                     <div className="flex items-center">
-                        <button onClick={() => setMobileSidebarOpen(true)} aria-label="Open navigation" className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <button onClick={() => setMobileSidebarOpen(true)} aria-label="Open navigation" className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-purple-400/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="menu" className="text-xl" />
                         </button>
                         <h1 className="text-xl md:text-2xl font-black capitalize tracking-tight">{activeSection.replace('-', ' ')}</h1>
                     </div>
                     <div className="flex items-center space-x-3 md:space-x-4 shrink-0">
-                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
+                        <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-purple-400/30 text-[var(--color-purple-300)]' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
                             <Icon name="search" className="text-lg opacity-50" />
-                            <span className="opacity-50">Search anything... (Ctrl/⌘K)</span>
+                            <span className="opacity-50">Search anything... (Ctrl/âŒ˜K)</span>
                         </motion.button>
-                        <motion.button onClick={() => setShowSearch(true)} aria-label="Search" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <motion.button onClick={() => setShowSearch(true)} aria-label="Search" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-purple-400/30 text-[var(--color-purple-300)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
-                        {/* AI Copilot — mobile only, replaces floating button */}
+                        {/* AI Copilot â€” mobile only, replaces floating button */}
                         <motion.button onClick={() => setShowCopilot(true)} aria-label="Open AI Copilot" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
                             <Icon name="auto_awesome" className="text-xl text-white" />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
-                            <motion.button onClick={toggleNotifications} aria-label="Notifications" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                            <motion.button onClick={toggleNotifications} aria-label="Notifications" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-ds-purple-400/30 text-[var(--color-purple-300)]' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                                 <Icon name="notifications" className="text-xl opacity-70" />
-                                {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-[var(--color-ember)]' : 'bg-[var(--primary)]'}`} />}
+                                {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-[var(--color-purple-400)]' : 'bg-[var(--primary)]'}`} />}
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-ember/30 shadow-[var(--color-ember)]/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-purple-400/30 shadow-[var(--color-purple-400)]/30 text-[var(--color-purple-300)]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
                                         </div>
                                         <div className="max-h-80 overflow-y-auto p-2 space-y-1">
                                             {notifications.map(item => (
-                                                <button key={item.id} onClick={() => markNotificationAsRead(item.id)} className={`w-full text-left p-3 rounded-2xl transition-all ${item.read ? (isLight ? 'hover:bg-slate-50' : isColorful ? 'hover:bg-[var(--color-ember)]/10' : 'hover:bg-white/5') : (isLight ? 'bg-primary/5 hover:bg-primary/10' : isColorful ? 'bg-[var(--color-ember)]/15 hover:bg-[var(--color-ember)]/20' : 'bg-primary/10 hover:bg-primary/15')}`}>
+                                                <button key={item.id} onClick={() => markNotificationAsRead(item.id)} className={`w-full text-left p-3 rounded-2xl transition-all ${item.read ? (isLight ? 'hover:bg-slate-50' : isColorful ? 'hover:bg-[var(--color-purple-400)]/10' : 'hover:bg-white/5') : (isLight ? 'bg-primary/5 hover:bg-primary/10' : isColorful ? 'bg-[var(--color-purple-400)]/15 hover:bg-[var(--color-purple-400)]/20' : 'bg-primary/10 hover:bg-primary/15')}`}>
                                                     <div className="flex items-start justify-between gap-3">
                                                         <div>
                                                             <p className="text-sm font-bold">{item.title}</p>
@@ -341,23 +341,23 @@ export default function PortalPanel() {
                             </AnimatePresence>
                         </div>
                         <div className="relative translate-y-[2px]">
-                            <motion.button onClick={toggleProfileMenu} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-[var(--primary)]' : isColorful ? 'border-ds-ember/30 hover:border-[var(--color-ember)]' : 'border-white/10 hover:border-[var(--primary)]'}`}>
+                            <motion.button onClick={toggleProfileMenu} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`w-10 h-10 rounded-2xl overflow-hidden border-2 transition-all shadow-md ${isLight ? 'border-white hover:border-[var(--primary)]' : isColorful ? 'border-ds-purple-400/30 hover:border-[var(--color-purple-400)]' : 'border-white/10 hover:border-[var(--primary)]'}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover" alt="Portal" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Portal&background=d946ef&color=fff" }} />
                             </motion.button>
                             <AnimatePresence>
                                 {showProfileMenu && (
-                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-ember/30 shadow-[var(--color-ember)]/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
-                                            <div className={`p-5 border-b ${isLight ? 'border-slate-100' : isColorful ? 'border-ds-ember/30' : 'border-white/5'}`}>
+                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-slate-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-ds-purple-400/30 shadow-[var(--color-purple-400)]/30 text-[var(--color-purple-300)]' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                            <div className={`p-5 border-b ${isLight ? 'border-slate-100' : isColorful ? 'border-ds-purple-400/30' : 'border-white/5'}`}>
                                                 <p className="font-bold text-base">Ali Al-Zuhairi</p>
                                                 <p className="text-xs font-medium opacity-60 mt-1">admin@alux.space</p>
                                             </div>
                                             <div className="p-3 space-y-1">
-                                                <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-slate-50' : isColorful ? 'hover:bg-[var(--color-ember)]/10' : 'hover:bg-white/5'}`}>
-                                                    <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-slate-400' : isColorful ? 'text-[var(--color-ember-light)]/70' : 'text-slate-400'}`} />
+                                                <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-slate-50' : isColorful ? 'hover:bg-[var(--color-purple-400)]/10' : 'hover:bg-white/5'}`}>
+                                                    <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-slate-400' : isColorful ? 'text-[var(--color-purple-300)]/70' : 'text-slate-400'}`} />
                                                     Settings
                                                 </button>
-                                                <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-slate-50' : isColorful ? 'bg-[var(--color-ember)]/5 border border-ds-ember/30' : 'bg-white/5'}`}>
+                                                <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-slate-50' : isColorful ? 'bg-[var(--color-purple-400)]/5 border border-ds-purple-400/30' : 'bg-white/5'}`}>
                                                     <span className="text-xs font-bold uppercase tracking-wider opacity-60 mb-2 block">Theme</span>
                                                     <div className={`flex rounded-2xl p-1 ${isLight ? 'bg-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80' : 'bg-black/20'}`}>
                                                         {([
@@ -365,7 +365,7 @@ export default function PortalPanel() {
                                                             { value: 'dark', label: 'Dark', icon: 'dark_mode' },
                                                             { value: 'colorful', label: 'Colorful', icon: 'palette' }
                                                         ] as { value: Theme, label: string, icon: string }[]).map(mode => (
-                                                                <button key={mode.value} aria-label={`Switch to ${mode.label} theme`} title={mode.label} onClick={() => { setTheme(mode.value); setShowProfileMenu(false); }} className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${theme === mode.value ? (isLight ? 'bg-slate-900 text-white' : isColorful ? 'bg-[var(--primary)]/20 text-white border border-[var(--primary)]/40' : 'bg-white/10 text-white border border-white/20') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-ember-light)]/70 hover:text-white' : 'text-slate-300 hover:text-white')}`}>
+                                                                <button key={mode.value} aria-label={`Switch to ${mode.label} theme`} title={mode.label} onClick={() => { setTheme(mode.value); setShowProfileMenu(false); }} className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${theme === mode.value ? (isLight ? 'bg-slate-900 text-white' : isColorful ? 'bg-[var(--primary)]/20 text-white border border-[var(--primary)]/40' : 'bg-white/10 text-white border border-white/20') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-purple-300)]/70 hover:text-white' : 'text-slate-300 hover:text-white')}`}>
                                                                 <Icon name={mode.icon} className="text-sm" />
                                                             </button>
                                                         ))}
@@ -398,7 +398,7 @@ export default function PortalPanel() {
                 {showSearch && (
                     <div className="fixed inset-0 z-[70] p-4 sm:p-8 flex items-start justify-center">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={() => setShowSearch(false)} />
-                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border-ds-ember/30 shadow-2xl shadow-[var(--color-ember)]/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-2)]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
+                        <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }} className={`relative mt-10 w-full max-w-2xl rounded-3xl overflow-hidden border backdrop-blur-3xl ${isLight ? 'bg-white/95 border-white shadow-2xl shadow-slate-300/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border-ds-purple-400/30 shadow-2xl shadow-[var(--color-purple-400)]/30 text-[var(--color-purple-300)]' : 'bg-[var(--color-dark-2)]/95 border-white/10 shadow-2xl shadow-black/50'}`}>
                             <div className={`px-5 py-4 border-b flex items-center gap-3 ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
                                 <Icon name="search" className="text-xl opacity-60" />
                                 <input
@@ -434,7 +434,7 @@ export default function PortalPanel() {
                 )}
             </AnimatePresence>
 
-            {/* Global AI Copilot Floating Button — hidden on mobile (use topbar button instead) */}
+            {/* Global AI Copilot Floating Button â€” hidden on mobile (use topbar button instead) */}
             <motion.button
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
@@ -461,7 +461,7 @@ export default function PortalPanel() {
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-l border-ds-ember/30 text-[var(--color-ember-light)]' : 'bg-[var(--color-dark-1)]/80 border-l border-white/10'}`}
+                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-l border-ds-purple-400/30 text-[var(--color-purple-300)]' : 'bg-[var(--color-dark-1)]/80 border-l border-white/10'}`}
                         >
                             <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-slate-200/50' : 'border-white/10'}`}>
                                 <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
@@ -512,11 +512,11 @@ export default function PortalPanel() {
                                 {copilotHistory.length === 1 && (
                                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="pt-6 grid grid-cols-1 gap-3">
                                         {[
-                                            { icon: 'analytics', label: 'Analyze weekly engagement', color: 'text-[var(--color-ember)]', bg: 'bg-[var(--color-ember)]/10' },
+                                            { icon: 'analytics', label: 'Analyze weekly engagement', color: 'text-[var(--color-purple-400)]', bg: 'bg-[var(--color-purple-400)]/10' },
                                             { icon: 'security', label: 'Audit recent admin actions', color: 'text-[var(--color-cobalt-700)]', bg: 'bg-[var(--color-cobalt-700)]/10' },
                                             { icon: 'speed', label: 'Optimize query performance', color: 'text-ds-warning', bg: 'bg-amber-600/10' }
                                         ].map(opt => (
-                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? `bg-white/60 border border-white ${aiHoverBorder} hover:shadow-lg` : `bg-white/5 border border-white/5 ${isColorful ? 'hover:border-[var(--color-ember)]/50' : 'hover:border-[var(--primary)]/50'} hover:bg-white/10`} text-[14px] font-medium backdrop-blur-xl`}>
+                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? `bg-white/60 border border-white ${aiHoverBorder} hover:shadow-lg` : `bg-white/5 border border-white/5 ${isColorful ? 'hover:border-[var(--color-purple-400)]/50' : 'hover:border-[var(--primary)]/50'} hover:bg-white/10`} text-[14px] font-medium backdrop-blur-xl`}>
                                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${opt.bg} ${opt.color}`}>
                                                     <Icon name={opt.icon} className="text-xl" />
                                                 </div>
@@ -555,9 +555,9 @@ export default function PortalPanel() {
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SHARED
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 type AIStampSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type AIStampVariant = 'primary' | 'secondary';
 
@@ -623,7 +623,7 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
             <AnimatePresence>
                 {showInsight && (
                     <motion.div initial={{ height: 0, opacity: 0, marginTop: 0 }} animate={{ height: 'auto', opacity: 1, marginTop: 16 }} exit={{ height: 0, opacity: 0, marginTop: 0 }} className="overflow-hidden">
-                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-primary/5 text-accent' : isColorful ? 'bg-[var(--color-ember)]/10 text-[var(--color-ember-light)]' : 'bg-primary/10 text-accent'}`}>
+                        <div className={`p-4 rounded-2xl text-xs font-medium flex items-start space-x-3 ${isLight ? 'bg-primary/5 text-accent' : isColorful ? 'bg-[var(--color-purple-400)]/10 text-[var(--color-purple-300)]' : 'bg-primary/10 text-accent'}`}>
                             <AIStamp isLight={isLight} size="xs" variant="secondary" className="mt-0.5" />
                             <span className="leading-relaxed">AI predicts this will increase by another 2% in the coming week based on current marketing campaigns.</span>
                         </div>
@@ -634,12 +634,12 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // DASHBOARD
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function DashboardSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const recentActivity = [
-        { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette', color: 'text-[var(--color-ember)]', bg: 'bg-[var(--color-ember)]/10' },
+        { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette', color: 'text-[var(--color-purple-400)]', bg: 'bg-[var(--color-purple-400)]/10' },
         { user: 'James L.', action: 'Added 3 comments to Sprint Review', time: '12 min ago', icon: 'chat', color: 'text-[var(--color-cobalt-700)]', bg: 'bg-[var(--color-cobalt-700)]/10' },
         { user: 'Mia C.', action: 'Completed UX research report', time: '28 min ago', icon: 'description', color: 'text-ds-warning', bg: 'bg-amber-600/10' },
         { user: 'Alex R.', action: 'Created Q1 Planning workspace', time: '1h ago', icon: 'add_circle', color: 'text-ds-success', bg: 'bg-green-600/10' },
@@ -740,7 +740,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                         </motion.div>
                         <div className="flex-1 w-full space-y-3">
                             {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-[var(--primary)]' }, { label: 'Design Reviews', pct: '25%', color: 'bg-[var(--color-purple-700)]' }, { label: 'Analytics', pct: '20%', color: 'bg-amber-400' }, { label: 'General', pct: '20%', color: 'bg-pink-400' }].map(s => (
-                                <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-ember)]/5 hover:bg-[var(--color-ember)]/10' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
+                                <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-purple-400)]/5 hover:bg-[var(--color-purple-400)]/10' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
                                     <span className="flex items-center"><span className={`w-3 h-3 rounded-full mr-3 shadow-sm ${s.color}`} />{s.label}</span>
                                     <span className="font-bold">{s.pct}</span>
                                 </motion.div>
@@ -753,7 +753,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                     <h3 className="font-bold text-xl mb-6">Workspace Activity Heatmap</h3>
                     <div className="grid grid-cols-7 gap-2">
                         {heatmapData.map((intensity: number, i: number) => {
-                            const bg = intensity > 0.7 ? (isLight ? 'bg-ds-warning' : isColorful ? 'bg-[var(--color-ember)]' : 'bg-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-ember)]/60' : 'bg-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-amber-300/30' : isColorful ? 'bg-[var(--color-ember)]/25' : 'bg-cyan-400/20') : (isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-ember)]/10' : 'bg-white/5');
+                            const bg = intensity > 0.7 ? (isLight ? 'bg-ds-warning' : isColorful ? 'bg-[var(--color-purple-400)]' : 'bg-cyan-400') : intensity > 0.4 ? (isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-purple-400)]/60' : 'bg-cyan-400/60') : intensity > 0.1 ? (isLight ? 'bg-amber-300/30' : isColorful ? 'bg-[var(--color-purple-400)]/25' : 'bg-cyan-400/20') : (isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/10' : 'bg-white/5');
                             return <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.01 }} whileHover={{ scale: 1.2, zIndex: 10 }} className={`aspect-square rounded-lg ${bg} cursor-pointer hover:shadow-lg transition-shadow relative group`}>
                                 {/* Tooltip */}
                                 <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity z-20 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap pointer-events-none shadow-xl ${isLight ? 'bg-slate-800 text-white' : 'bg-white text-slate-900'}`}>
@@ -765,7 +765,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                     <div className="flex justify-between items-center mt-5 text-xs font-medium opacity-50">
                         <span>Less active</span>
                         <div className="flex space-x-1.5">
-                            {[isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-ember)]/10' : 'bg-white/5', isLight ? 'bg-amber-300/30' : isColorful ? 'bg-[var(--color-ember)]/25' : 'bg-cyan-400/20', isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-ember)]/60' : 'bg-cyan-400/60', isLight ? 'bg-ds-warning' : isColorful ? 'bg-[var(--color-ember)]' : 'bg-cyan-400'].map((c, i) => (
+                            {[isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/10' : 'bg-white/5', isLight ? 'bg-amber-300/30' : isColorful ? 'bg-[var(--color-purple-400)]/25' : 'bg-cyan-400/20', isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-purple-400)]/60' : 'bg-cyan-400/60', isLight ? 'bg-ds-warning' : isColorful ? 'bg-[var(--color-purple-400)]' : 'bg-cyan-400'].map((c, i) => (
                                 <div key={i} className={`w-4 h-4 rounded-md ${c}`} />
                             ))}
                         </div>
@@ -777,9 +777,9 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // USERS
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function UsersSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [showWizard, setShowWizard] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
@@ -809,7 +809,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <div>
                     <h2 className="text-2xl font-black tracking-tight">Portal User Management</h2>
-                    <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : isColorful ? 'text-[var(--color-ember-light)]/60' : 'text-slate-400'}`}>{users.length} total users</p>
+                    <p className={`text-sm font-medium mt-1 ${isLight ? 'text-slate-500' : isColorful ? 'text-[var(--color-purple-300)]/60' : 'text-slate-400'}`}>{users.length} total users</p>
                 </div>
                 <motion.button onClick={() => setShowWizard(true)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto justify-center px-5 py-3 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[var(--primary)]/20">
                     <Icon name="person_add" className="text-lg" /><span>Add User</span>
@@ -817,10 +817,10 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
             </div>
 
             <motion.div variants={itemVariants} className={card}>
-                {/* Mobile Card List — visible on small screens only */}
+                {/* Mobile Card List â€” visible on small screens only */}
                 <div className="sm:hidden space-y-3">
                     {users.map((u, i) => (
-                        <div key={i} className={`rounded-2xl border transition-all ${isLight ? 'bg-white/70 border-slate-200' : isColorful ? 'bg-[var(--color-ember)]/5 border-[var(--color-ember)]/20' : 'bg-white/[0.03] border-white/10'}`}>
+                        <div key={i} className={`rounded-2xl border transition-all ${isLight ? 'bg-white/70 border-slate-200' : isColorful ? 'bg-[var(--color-purple-400)]/5 border-[var(--color-purple-400)]/20' : 'bg-white/[0.03] border-white/10'}`}>
                             <div
                                 onClick={() => setExpandedCard(expandedCard === i ? null : i)}
                                 className="flex items-center gap-3 p-4 cursor-pointer"
@@ -835,7 +835,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                     </div>
                                     <div className="flex items-center gap-2 mt-1">
                                         <span className={`w-2 h-2 rounded-full shrink-0 ${statusDot(u.status)}`} />
-                                        <span className={`text-[12px] font-medium ${isLight ? 'text-slate-500' : isColorful ? 'text-[var(--color-ember-light)]/60' : 'text-slate-400'}`}>{u.status}</span>
+                                        <span className={`text-[12px] font-medium ${isLight ? 'text-slate-500' : isColorful ? 'text-[var(--color-purple-300)]/60' : 'text-slate-400'}`}>{u.status}</span>
                                         <span className={`text-[11px] opacity-50 ml-auto`}>{u.lastActive}</span>
                                     </div>
                                 </div>
@@ -844,13 +844,13 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                             <AnimatePresence>
                                 {expandedCard === i && (
                                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                                        <div className={`mx-3 mb-3 p-4 rounded-2xl flex items-start gap-3 ${isLight ? 'bg-slate-50 border border-slate-100' : isColorful ? 'bg-[var(--color-ember)]/5 border border-[var(--color-ember)]/15' : 'bg-white/[0.03] border border-white/5'}`}>
+                                        <div className={`mx-3 mb-3 p-4 rounded-2xl flex items-start gap-3 ${isLight ? 'bg-slate-50 border border-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/5 border border-[var(--color-purple-400)]/15' : 'bg-white/[0.03] border border-white/5'}`}>
                                             <AIStamp isLight={isLight} size="sm" variant="secondary" />
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="text-[13px] font-bold mb-1">AI Portal Summary</h4>
-                                                <p className={`text-[12px] leading-relaxed ${isLight ? 'text-slate-600' : isColorful ? 'text-[var(--color-ember-light)]/70' : 'text-slate-400'}`}>{u.name} is highly engaged with design system components. Consider offering them early access to the new Design Tokens beta.</p>
+                                                <p className={`text-[12px] leading-relaxed ${isLight ? 'text-slate-600' : isColorful ? 'text-[var(--color-purple-300)]/70' : 'text-slate-400'}`}>{u.name} is highly engaged with design system components. Consider offering them early access to the new Design Tokens beta.</p>
                                                 <div className="flex gap-2 mt-3">
-                                                    <button className={`text-[11px] font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white border border-slate-200' : isColorful ? 'bg-[var(--color-ember)]/10 border border-[var(--color-ember)]/20' : 'bg-white/5 border border-white/10'}`}>View Profile</button>
+                                                    <button className={`text-[11px] font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white border border-slate-200' : isColorful ? 'bg-[var(--color-purple-400)]/10 border border-[var(--color-purple-400)]/20' : 'bg-white/5 border border-white/10'}`}>View Profile</button>
                                                     <button className="text-[11px] font-bold px-3 py-1.5 rounded-xl text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center gap-1">
                                                         <Icon name="mail" className="text-[13px]" /> Message
                                                     </button>
@@ -864,11 +864,11 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                     ))}
                 </div>
 
-                {/* Desktop Table — hidden on small screens */}
+                {/* Desktop Table â€” hidden on small screens */}
                 <div className="hidden sm:block overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
                     <table className="w-full min-w-[700px]">
                         <thead>
-                            <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : isColorful ? 'text-[var(--color-ember-light)]/50' : 'text-slate-500'}`}>
+                            <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : isColorful ? 'text-[var(--color-purple-300)]/50' : 'text-slate-500'}`}>
                                 <th className="pb-5">User</th>
                                 <th className="pb-5">Role</th>
                                 <th className="pb-5">Status</th>
@@ -884,7 +884,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                     <React.Fragment key={i}>
                                         <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
                                             onClick={() => setExpanded(!expanded)}
-                                            className={`${isLight ? 'hover:bg-white/50 divide-slate-100' : isColorful ? 'hover:bg-[var(--color-ember)]/5' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
+                                            className={`${isLight ? 'hover:bg-white/50 divide-slate-100' : isColorful ? 'hover:bg-[var(--color-purple-400)]/5' : 'hover:bg-white/[0.02]'} transition-colors cursor-pointer group`}>
                                             <td className="py-4">
                                                 <div className="flex items-center space-x-4">
                                                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black bg-[var(--primary)]/10 text-[var(--primary)] group-hover:bg-[var(--primary)]/20 transition-colors`}>
@@ -910,13 +910,13 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                                 <tr>
                                                     <td colSpan={5} className="p-0 border-0">
                                                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                                                            <div className={`m-3 p-5 rounded-2xl flex items-start space-x-5 ${isLight ? 'bg-white/80 shadow-sm border border-white' : isColorful ? 'bg-[var(--color-ember)]/5 border border-[var(--color-ember)]/15' : 'bg-white/[0.03] border border-white/5'}`}>
+                                                            <div className={`m-3 p-5 rounded-2xl flex items-start space-x-5 ${isLight ? 'bg-white/80 shadow-sm border border-white' : isColorful ? 'bg-[var(--color-purple-400)]/5 border border-[var(--color-purple-400)]/15' : 'bg-white/[0.03] border border-white/5'}`}>
                                                                 <AIStamp isLight={isLight} size="md" variant="secondary" />
                                                                 <div>
                                                                     <h4 className="text-[15px] font-bold mb-1.5">AI Portal Summary</h4>
                                                                     <p className="text-[13px] font-medium opacity-70 leading-relaxed max-w-3xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
                                                                     <div className="flex space-x-3 mt-4">
-                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl ${isLight ? 'bg-white border border-slate-200 hover:bg-slate-50' : isColorful ? 'bg-[var(--color-ember)]/10 border border-[var(--color-ember)]/20 hover:bg-[var(--color-ember)]/20' : 'bg-white/5 border border-white/10 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
+                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl ${isLight ? 'bg-white border border-slate-200 hover:bg-slate-50' : isColorful ? 'bg-[var(--color-purple-400)]/10 border border-[var(--color-purple-400)]/20 hover:bg-[var(--color-purple-400)]/20' : 'bg-white/5 border border-white/10 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
                                                                         <button className={`text-xs font-bold px-4 py-2 rounded-xl text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] hover:shadow-lg hover:shadow-[var(--primary)]/20 transition-all flex items-center`}><Icon name="mail" className="text-[16px] mr-2" /> Message</button>
                                                                     </div>
                                                                 </div>
@@ -939,14 +939,14 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                 {showWizard && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={handleClose} />
-                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border border-[var(--color-ember)]/25' : 'bg-[var(--color-dark-1)]/90 border border-white/10'}`}>
+                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border border-[var(--color-purple-400)]/25' : 'bg-[var(--color-dark-1)]/90 border border-white/10'}`}>
                             {/* Header */}
-                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : isColorful ? 'border-[var(--color-ember)]/20' : 'border-white/10'}`}>
+                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : isColorful ? 'border-[var(--color-purple-400)]/20' : 'border-white/10'}`}>
                                 <div>
                                     <h3 className="text-xl font-black tracking-tight">Add New User</h3>
                                     <p className="text-xs font-medium opacity-60 mt-1">Step {wizardStep} of 3</p>
                                 </div>
-                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-[var(--color-ember)]/15' : 'hover:bg-white/10'}`}>
+                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-[var(--color-purple-400)]/15' : 'hover:bg-white/10'}`}>
                                     <Icon name="close" className="text-xl opacity-60" />
                                 </button>
                             </div>
@@ -1003,8 +1003,8 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                             </div>
 
                             {/* Footer */}
-                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : isColorful ? 'border-[var(--color-ember)]/20 bg-[var(--color-ember)]/5' : 'border-white/10 bg-black/20'}`}>
-                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : isColorful ? 'hover:bg-[var(--color-ember)]/15 text-[var(--color-ember-light)]/80' : 'hover:bg-white/10 text-slate-300'}`}>
+                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : isColorful ? 'border-[var(--color-purple-400)]/20 bg-[var(--color-purple-400)]/5' : 'border-white/10 bg-black/20'}`}>
+                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : isColorful ? 'hover:bg-[var(--color-purple-400)]/15 text-[var(--color-purple-300)]/80' : 'hover:bg-white/10 text-slate-300'}`}>
                                     {wizardStep === 1 ? 'Cancel' : 'Back'}
                                 </button>
                                 <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && (!newUser.name || !newUser.email)} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && (!newUser.name || !newUser.email) ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white' : 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white hover:shadow-[var(--primary)]/30 hover:scale-105'}`}>
@@ -1019,9 +1019,9 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // WORKSPACES
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function WorkspacesSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [showWizard, setShowWizard] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
@@ -1061,7 +1061,7 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                             </div>
                             <div className="grid grid-cols-3 gap-4 text-center mb-2">
                                 {[{ v: ws.members, l: 'Members' }, { v: ws.docs, l: 'Docs' }, { v: ws.queries, l: 'AI Queries' }].map(s => (
-                                    <div key={s.l} className={`p-3 rounded-2xl ${isLight ? 'bg-white/50 border border-white' : isColorful ? 'bg-[var(--color-ember)]/5 border border-[var(--color-ember)]/15' : 'bg-white/[0.03] border border-white/5'}`}>
+                                    <div key={s.l} className={`p-3 rounded-2xl ${isLight ? 'bg-white/50 border border-white' : isColorful ? 'bg-[var(--color-purple-400)]/5 border border-[var(--color-purple-400)]/15' : 'bg-white/[0.03] border border-white/5'}`}>
                                         <span className="text-xl font-black block">{s.v}</span>
                                         <span className="text-[11px] font-bold uppercase tracking-wider opacity-50 mt-1 block">{s.l}</span>
                                     </div>
@@ -1069,13 +1069,13 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                             </div>
                             <AnimatePresence>
                                 {showDetails && (
-                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className={`overflow-hidden mt-5 pt-5 border-t ${isColorful ? 'border-[var(--color-ember)]/15' : 'border-white/10'}`}>
+                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className={`overflow-hidden mt-5 pt-5 border-t ${isColorful ? 'border-[var(--color-purple-400)]/15' : 'border-white/10'}`}>
                                         <div className="flex items-center space-x-2 mb-3">
                                             <Icon name="insights" className={`text-lg text-[var(--primary)]`} />
                                             <span className="text-sm font-bold">Workspace Health: Excellent</span>
                                         </div>
                                         <p className="text-[13px] font-medium opacity-70 mb-4 leading-relaxed">Participation is up 12% this week. Most activity is centered around the new requirements document.</p>
-                                        <button className={`w-full py-2.5 rounded-xl text-sm font-bold ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : isColorful ? 'bg-[var(--color-ember)]/10 hover:bg-[var(--color-ember)]/20 border border-[var(--color-ember)]/20' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-colors`}>View Dashboard</button>
+                                        <button className={`w-full py-2.5 rounded-xl text-sm font-bold ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/10 hover:bg-[var(--color-purple-400)]/20 border border-[var(--color-purple-400)]/20' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-colors`}>View Dashboard</button>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -1089,14 +1089,14 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                 {showWizard && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={handleClose} />
-                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border border-[var(--color-ember)]/25' : 'bg-[var(--color-dark-1)]/90 border border-white/10'}`}>
+                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-lg rounded-[2rem] shadow-2xl overflow-hidden backdrop-blur-3xl flex flex-col ${isLight ? 'bg-white/90 border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/95 border border-[var(--color-purple-400)]/25' : 'bg-[var(--color-dark-1)]/90 border border-white/10'}`}>
                             {/* Header */}
-                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : isColorful ? 'border-[var(--color-ember)]/20' : 'border-white/10'}`}>
+                            <div className={`px-6 py-5 border-b flex items-center justify-between ${isLight ? 'border-slate-200/50' : isColorful ? 'border-[var(--color-purple-400)]/20' : 'border-white/10'}`}>
                                 <div>
                                     <h3 className="text-xl font-black tracking-tight">Create Workspace</h3>
                                     <p className="text-xs font-medium opacity-60 mt-1">Step {wizardStep} of 3</p>
                                 </div>
-                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-[var(--color-ember)]/15' : 'hover:bg-white/10'}`}>
+                                <button onClick={handleClose} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-[var(--color-purple-400)]/15' : 'hover:bg-white/10'}`}>
                                     <Icon name="close" className="text-xl opacity-60" />
                                 </button>
                             </div>
@@ -1153,8 +1153,8 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
                             </div>
 
                             {/* Footer */}
-                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : isColorful ? 'border-[var(--color-ember)]/20 bg-[var(--color-ember)]/5' : 'border-white/10 bg-black/20'}`}>
-                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : isColorful ? 'hover:bg-[var(--color-ember)]/15 text-[var(--color-ember-light)]/80' : 'hover:bg-white/10 text-slate-300'}`}>
+                            <div className={`px-6 py-5 border-t flex items-center justify-between ${isLight ? 'border-slate-200/50 bg-slate-50/50' : isColorful ? 'border-[var(--color-purple-400)]/20 bg-[var(--color-purple-400)]/5' : 'border-white/10 bg-black/20'}`}>
+                                <button onClick={wizardStep === 1 ? handleClose : handleBack} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isLight ? 'hover:bg-slate-200 text-slate-600' : isColorful ? 'hover:bg-[var(--color-purple-400)]/15 text-[var(--color-purple-300)]/80' : 'hover:bg-white/10 text-slate-300'}`}>
                                     {wizardStep === 1 ? 'Cancel' : 'Back'}
                                 </button>
                                 <button onClick={wizardStep === 3 ? handleClose : handleNext} disabled={wizardStep === 1 && !newWorkspace.name} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg ${wizardStep === 1 && !newWorkspace.name ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white' : 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white hover:shadow-[var(--primary)]/30 hover:scale-105'}`}>
@@ -1169,9 +1169,9 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // COPILOT LOGS
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function PortalLogsSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [expanded, setExpanded] = useState<number | null>(null);
     const logs = [
@@ -1201,14 +1201,14 @@ function PortalLogsSection({ card, isLight, isColorful = false }: { card: string
                             </div>
                             <div className="flex items-center space-x-3">
                                 <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${log.confidence >= 90 ? 'bg-green-600/10 text-ds-success' : 'bg-amber-600/10 text-ds-warning'}`}>{log.confidence}% conf.</span>
-                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white/80 border border-slate-100' : isColorful ? 'bg-[var(--color-ember)]/10 border border-[var(--color-ember)]/20 text-[var(--color-ember-light)]/80' : 'bg-white/5 border border-white/5'}`}>{log.citations} sources</span>
+                                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl ${isLight ? 'bg-white/80 border border-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/10 border border-[var(--color-purple-400)]/20 text-[var(--color-purple-300)]/80' : 'bg-white/5 border border-white/5'}`}>{log.citations} sources</span>
                             </div>
                         </div>
                         <p className={`mt-4 text-[15px] font-bold text-[var(--primary)]`}>&ldquo;{log.query}&rdquo;</p>
                         <AnimatePresence>
                             {expanded === log.id && (
                                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
-                                    <p className={`mt-4 pt-4 text-[14px] font-medium leading-relaxed border-t ${isLight ? 'text-slate-600 border-slate-200/50' : isColorful ? 'text-[var(--color-ember-light)]/70 border-[var(--color-ember)]/15' : 'text-slate-300 border-white/10'}`}>{log.response}</p>
+                                    <p className={`mt-4 pt-4 text-[14px] font-medium leading-relaxed border-t ${isLight ? 'text-slate-600 border-slate-200/50' : isColorful ? 'text-[var(--color-purple-300)]/70 border-[var(--color-purple-400)]/15' : 'text-slate-300 border-white/10'}`}>{log.response}</p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -1219,9 +1219,9 @@ function PortalLogsSection({ card, isLight, isColorful = false }: { card: string
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // ALERTS CONFIG
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function AlertsConfigSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [toggles, setToggles] = useState<Record<string, boolean>>({ overdue: true, sprint: true, workspace: false, copilot: true, system: true });
 
@@ -1255,7 +1255,7 @@ function AlertsConfigSection({ card, isLight, isColorful = false }: { card: stri
                                 </div>
                             </div>
                             <button onClick={() => setToggles(prev => ({ ...prev, [r.id]: !prev[r.id] }))}
-                                className={`w-14 h-8 rounded-full transition-colors relative ${toggles[r.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-slate-200' : isColorful ? 'bg-[var(--color-ember)]/20' : 'bg-white/10')}`}>
+                                className={`w-14 h-8 rounded-full transition-colors relative ${toggles[r.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-slate-200' : isColorful ? 'bg-[var(--color-purple-400)]/20' : 'bg-white/10')}`}>
                                 <motion.div animate={{ x: toggles[r.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                                     className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                             </button>
@@ -1267,15 +1267,15 @@ function AlertsConfigSection({ card, isLight, isColorful = false }: { card: stri
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // ANALYTICS
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function AnalyticsSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <h2 className="text-2xl font-black tracking-tight">Usage Analytics</h2>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-5 py-3 rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : isColorful ? 'bg-[var(--color-ember)]/10 hover:bg-[var(--color-ember)]/20 border border-[var(--color-ember)]/20 text-[var(--color-ember-light)]' : 'bg-white/5 hover:bg-white/10 border border-white/5'}`}>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full sm:w-auto justify-center px-5 py-3 rounded-2xl text-sm font-bold transition-all flex items-center space-x-2 ${isLight ? 'bg-white hover:bg-slate-50 shadow-sm border border-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/10 hover:bg-[var(--color-purple-400)]/20 border border-[var(--color-purple-400)]/20 text-[var(--color-purple-300)]' : 'bg-white/5 hover:bg-white/10 border border-white/5'}`}>
                     <Icon name="download" className="text-lg" /><span>Export Data</span>
                 </motion.button>
             </div>
@@ -1303,7 +1303,7 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
                                     <span>{f.feature}</span>
                                     <span className="text-[var(--primary)]">{f.usage}%</span>
                                 </div>
-                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-ember)]/20' : 'bg-white/5'}`}>
+                                <div className={`h-3 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/20' : 'bg-white/5'}`}>
                                     <motion.div initial={{ width: 0 }} animate={{ width: `${f.usage}%` }} transition={{ duration: 1, delay: i * 0.1, ease: "easeOut" }}
                                         className="h-full rounded-full bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]" />
                                 </div>
@@ -1320,8 +1320,8 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
                             return (
                                 <div key={day} className="flex-1 flex flex-col items-center group relative">
                                     <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 0.8, delay: i * 0.06, ease: "easeOut" }}
-                                        whileHover={{ backgroundColor: isLight ? 'var(--color-ember)' : 'var(--color-ember-dark)' }}
-                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-ember)]/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
+                                        whileHover={{ backgroundColor: isLight ? 'var(--color-purple-400)' : 'var(--color-purple-700)' }}
+                                        className={`w-full max-w-[40px] rounded-t-xl ${isLight ? 'bg-amber-400/60' : isColorful ? 'bg-[var(--color-purple-400)]/50' : 'bg-cyan-400/40'} transition-colors cursor-pointer relative z-10`} />
                                     <span className="text-xs font-bold mt-3 opacity-50">{day}</span>
 
                                     {/* Tooltip */}
@@ -1338,9 +1338,9 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // START SECTION (OVERVIEW)
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function StartSection({ card, isLight, isColorful = false, setActiveSection }: { card: string, isLight: boolean, isColorful?: boolean, setActiveSection: (s: Section) => void }) {
     const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
@@ -1393,8 +1393,8 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                     </div>
                 </div>
 
-                <div className={`space-y-4 text-[15px] font-medium leading-relaxed relative z-10 ${isLight ? 'text-slate-700' : isColorful ? 'text-[var(--color-ember-light)]/80' : 'text-slate-300'}`}>
-                    <p>Good morning! You have <strong className={isLight ? 'text-[var(--primary)]' : 'text-[var(--color-ember-light)]'}>3 overdue sprint reviews</strong> waiting for your approval. In the <span className="underline decoration-[var(--primary)]/50 underline-offset-4 cursor-pointer hover:text-[var(--primary)] transition-colors">Design System v3</span> workspace, 5 new comments were left regarding the new elevation tokens.</p>
+                <div className={`space-y-4 text-[15px] font-medium leading-relaxed relative z-10 ${isLight ? 'text-slate-700' : isColorful ? 'text-[var(--color-purple-300)]/80' : 'text-slate-300'}`}>
+                    <p>Good morning! You have <strong className={isLight ? 'text-[var(--primary)]' : 'text-[var(--color-purple-300)]'}>3 overdue sprint reviews</strong> waiting for your approval. In the <span className="underline decoration-[var(--primary)]/50 underline-offset-4 cursor-pointer hover:text-[var(--primary)] transition-colors">Design System v3</span> workspace, 5 new comments were left regarding the new elevation tokens.</p>
                     <p>Also, I noticed a <strong>12% drop in workflow completion</strong> yesterday. Would you like me to analyze the bottleneck?</p>
                 </div>
             </motion.div>
@@ -1412,7 +1412,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                         <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-[14px] leading-tight">{action.title}</h3>
-                            <p className={`text-xs font-medium truncate mt-0.5 ${isLight ? 'text-slate-500' : isColorful ? 'text-[var(--color-ember-light)]/60' : 'opacity-60'}`}>{action.desc}</p>
+                            <p className={`text-xs font-medium truncate mt-0.5 ${isLight ? 'text-slate-500' : isColorful ? 'text-[var(--color-purple-300)]/60' : 'opacity-60'}`}>{action.desc}</p>
                         </div>
                         <Icon name="arrow_forward" className={`text-sm shrink-0 opacity-0 group-hover:opacity-60 transition-opacity`} />
                     </motion.div>
@@ -1443,7 +1443,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
     );
 }
 // SETTINGS
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }: { card: string, isLight: boolean, isColorful?: boolean, theme: Theme, setTheme: (val: Theme) => void }) {
     const [toggles, setToggles] = useState<Record<string, boolean>>({ sso: true, '2fa': true, copilot: true, analytics: true, beta: false });
 
@@ -1475,7 +1475,7 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
             {settingGroups.map((group) => (
                 <motion.div key={group.title} variants={itemVariants} className={card}>
                     <h3 className="font-bold text-lg mb-6">{group.title}</h3>
-                    <div className={`space-y-0 divide-y ${isLight ? 'divide-slate-100' : isColorful ? 'divide-[var(--color-ember)]/15' : 'divide-white/10'}`}>
+                    <div className={`space-y-0 divide-y ${isLight ? 'divide-slate-100' : isColorful ? 'divide-[var(--color-purple-400)]/15' : 'divide-white/10'}`}>
                         {group.items.map((item) => (
                             <div key={item.id} className="flex items-center justify-between py-5 first:pt-0 last:pb-0">
                                 {item.custom && item.id === 'theme-toggle' ? (
@@ -1484,14 +1484,14 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
                                             <span className="font-bold text-[15px] block">Theme Preference</span>
                                             <span className="text-[13px] font-medium opacity-60 mt-1 block">Choose between light, dark, and colorful mode</span>
                                         </div>
-                                        <div className={`flex rounded-2xl p-1.5 ${isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-ember)]/10' : 'bg-white/10'}`}>
-                                            <button aria-label="Switch to light theme" title="Light" onClick={() => setTheme('light')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'light' ? (isLight ? 'bg-white shadow-sm text-slate-900' : 'bg-white/20 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-ember-light)]/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
+                                        <div className={`flex rounded-2xl p-1.5 ${isLight ? 'bg-slate-100' : isColorful ? 'bg-[var(--color-purple-400)]/10' : 'bg-white/10'}`}>
+                                            <button aria-label="Switch to light theme" title="Light" onClick={() => setTheme('light')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'light' ? (isLight ? 'bg-white shadow-sm text-slate-900' : 'bg-white/20 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-purple-300)]/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
                                                 <Icon name="light_mode" className="text-lg" />
                                             </button>
-                                            <button aria-label="Switch to dark theme" title="Dark" onClick={() => setTheme('dark')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'dark' ? 'bg-[var(--color-dark-3)] shadow-sm text-white' : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-ember-light)]/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
+                                            <button aria-label="Switch to dark theme" title="Dark" onClick={() => setTheme('dark')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'dark' ? 'bg-[var(--color-dark-3)] shadow-sm text-white' : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-purple-300)]/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
                                                 <Icon name="dark_mode" className="text-lg" />
                                             </button>
-                                            <button aria-label="Switch to colorful theme" title="Colorful" onClick={() => setTheme('colorful')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'colorful' ? 'bg-gradient-to-r from-[var(--color-ember)] to-[var(--color-purple-700)] text-white shadow-sm' : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-ember-light)]/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
+                                            <button aria-label="Switch to colorful theme" title="Colorful" onClick={() => setTheme('colorful')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${theme === 'colorful' ? 'bg-gradient-to-r from-[var(--color-purple-400)] to-[var(--color-purple-700)] text-white shadow-sm' : (isLight ? 'text-slate-500 hover:text-slate-900' : isColorful ? 'text-[var(--color-purple-300)]/60 hover:text-white' : 'text-slate-400 hover:text-white')}`}>
                                                 <Icon name="palette" className="text-lg" />
                                             </button>
                                         </div>
@@ -1503,7 +1503,7 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
                                             <span className="text-[13px] font-medium opacity-60 mt-1 block">{item.desc}</span>
                                         </div>
                                         <button onClick={() => setToggles(prev => ({ ...prev, [item.id]: !prev[item.id] }))}
-                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ml-6 ${toggles[item.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-slate-200' : isColorful ? 'bg-[var(--color-ember)]/20' : 'bg-white/10')}`}>
+                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ml-6 ${toggles[item.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-slate-200' : isColorful ? 'bg-[var(--color-purple-400)]/20' : 'bg-white/10')}`}>
                                             <motion.div animate={{ x: toggles[item.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                                                 className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                                         </button>
@@ -1533,16 +1533,16 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
     );
 }
 
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // PORTAL INTRO OVERLAY
-// ═══════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 const PORTAL_STEPS = [
     {
         id: 'welcome',
         icon: 'blur_on',
         title: 'Workflow Portal',
         subtitle: 'Your AI-powered collaboration hub',
-        body: 'Manage your entire team, workspaces, and platform health from a single intelligent dashboard — designed for platform admins and power users.',
+        body: 'Manage your entire team, workspaces, and platform health from a single intelligent dashboard â€” designed for platform admins and power users.',
     },
     {
         id: 'ai',
@@ -1568,15 +1568,15 @@ const PORTAL_STEPS = [
 ];
 
 const AI_TIPS = [
-    { icon: 'query_stats', title: 'Ask about metrics', body: '"Which workspaces are declining in engagement this week?" — get instant, data-backed answers.' },
+    { icon: 'query_stats', title: 'Ask about metrics', body: '"Which workspaces are declining in engagement this week?" â€” get instant, data-backed answers.' },
     { icon: 'group', title: 'Analyse your team', body: '"Who hasn\'t been active in Design System v3?" surfaces team health issues before they become blockers.' },
-    { icon: 'notifications_active', title: 'Configure smart alerts', body: '"Notify me when sprint reviews are overdue by more than 24 hours" — set it once, rely on it always.' },
+    { icon: 'notifications_active', title: 'Configure smart alerts', body: '"Notify me when sprint reviews are overdue by more than 24 hours" â€” set it once, rely on it always.' },
     { icon: 'trending_up', title: 'Forecast & compare', body: '"Compare workspace activity in Q3 vs Q4" for trend analysis and executive reporting.' },
 ];
 
 const PORTAL_FEATURES = [
     { icon: 'home', label: 'Start', desc: 'Quick-access launchpad with KPIs, recent activity, and AI highlights.' },
-    { icon: 'dashboard', label: 'Dashboard', desc: 'Live platform metrics — workspace health, team velocity, and AI-driven insights.' },
+    { icon: 'dashboard', label: 'Dashboard', desc: 'Live platform metrics â€” workspace health, team velocity, and AI-driven insights.' },
     { icon: 'group', label: 'Users', desc: 'Manage members, roles, permissions, and team engagement at scale.' },
     { icon: 'workspaces', label: 'Workspaces', desc: 'Monitor all project workspaces, docs, and collaboration activity.' },
     { icon: 'smart_toy', label: 'Copilot Logs', desc: 'Audit all AI interactions across the platform with full transparency.' },
@@ -1588,7 +1588,7 @@ const PORTAL_FEATURES = [
 const PORTAL_THEMES = [
     { v: 'dark' as Theme, label: 'Dark', icon: 'dark_mode', desc: 'Low-glare, great for long sessions', bg: 'bg-gray-900', border: 'border-blue-500' },
     { v: 'light' as Theme, label: 'Light', icon: 'light_mode', desc: 'Clean and presentation-ready', bg: 'bg-white', border: 'border-amber-400' },
-    { v: 'colorful' as Theme, label: 'Colorful', icon: 'palette', desc: 'Vivid cosmic gradient look', bg: 'bg-[var(--color-colorful-bg)]', border: 'border-[var(--color-ember)]' },
+    { v: 'colorful' as Theme, label: 'Colorful', icon: 'palette', desc: 'Vivid cosmic gradient look', bg: 'bg-[var(--color-colorful-bg)]', border: 'border-[var(--color-purple-400)]' },
 ];
 
 const portalPageVariants = {
@@ -1646,9 +1646,9 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
             transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
             className={`fixed inset-0 z-[200] flex flex-col ${overlayBg} transition-colors duration-500 overflow-hidden`}
         >
-            {/* ── DESKTOP SPLIT LAYOUT ── */}
+            {/* â”€â”€ DESKTOP SPLIT LAYOUT â”€â”€ */}
             <div className="hidden md:flex flex-1 min-h-0">
-                {/* Left panel — fixed hero */}
+                {/* Left panel â€” fixed hero */}
                 <div className="w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative border-r border-[var(--card-border)]">
                     <motion.div
                         key={selectedTheme + '-icon'}
@@ -1674,7 +1674,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                         transition={{ delay: 0.08 }}
                         className={`text-[15px] text-center leading-relaxed ${muted}`}
                     >
-                        AI-powered team collaboration and platform management — designed for admins who move fast.
+                        AI-powered team collaboration and platform management â€” designed for admins who move fast.
                     </motion.p>
 
                     {/* Step indicators */}
@@ -1709,11 +1709,11 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                     </div>
                 </div>
 
-                {/* Right panel — dynamic content */}
+                {/* Right panel â€” dynamic content */}
                 <div className="flex-1 flex flex-col min-h-0">
                     <div className="flex-1 overflow-y-auto px-10 xl:px-16 py-14 no-scrollbar relative">
                         <AnimatePresence custom={direction} mode="wait">
-                            {/* ── Step 0: Welcome ── */}
+                            {/* â”€â”€ Step 0: Welcome â”€â”€ */}
                             {step === 0 && (
                                 <motion.div key="portal-step0" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
@@ -1725,7 +1725,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             Your team&apos;s command <br />centre
                                         </h2>
                                         <p className={`text-[16px] leading-relaxed ${muted}`}>
-                                            This portal gives you full visibility and control over your platform — from workspace health to individual team performance. Everything is interactive: click, explore, and drill down.
+                                            This portal gives you full visibility and control over your platform â€” from workspace health to individual team performance. Everything is interactive: click, explore, and drill down.
                                         </p>
                                     </motion.div>
 
@@ -1756,7 +1756,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 </motion.div>
                             )}
 
-                            {/* ── Step 1: AI Tips ── */}
+                            {/* â”€â”€ Step 1: AI Tips â”€â”€ */}
                             {step === 1 && (
                                 <motion.div key="portal-step1" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -1768,7 +1768,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             Ask anything, <br />get answers instantly
                                         </h2>
                                         <p className={`text-[16px] leading-relaxed ${muted}`}>
-                                            Click the <strong>✦ sparkle button</strong> in the top-right header to open Copilot at any time. It has full context of your platform data.
+                                            Click the <strong>âœ¦ sparkle button</strong> in the top-right header to open Copilot at any time. It has full context of your platform data.
                                         </p>
                                     </motion.div>
 
@@ -1794,7 +1794,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 </motion.div>
                             )}
 
-                            {/* ── Step 2: Features ── */}
+                            {/* â”€â”€ Step 2: Features â”€â”€ */}
                             {step === 2 && (
                                 <motion.div key="portal-step2" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -1829,7 +1829,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                 </motion.div>
                             )}
 
-                            {/* ── Step 3: Theme ── */}
+                            {/* â”€â”€ Step 3: Theme â”€â”€ */}
                             {step === 3 && (
                                 <motion.div key="portal-step3" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit" className="max-w-2xl">
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -1931,7 +1931,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                 </div>
             </div>
 
-            {/* ── MOBILE STACKED LAYOUT ── */}
+            {/* â”€â”€ MOBILE STACKED LAYOUT â”€â”€ */}
             <div className="flex md:hidden flex-col flex-1 min-h-0">
                 {/* Progress */}
                 <div className="flex justify-center gap-2 px-6 pt-14 pb-4">
@@ -2011,7 +2011,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="palette" className="text-white text-[16px]" /></div>
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>Choose Your Look</h2>
                                 </motion.div>
-                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme â€” changeable anytime from the profile menu</motion.p>
                                 <div className="space-y-3">
                                     {PORTAL_THEMES.map((t, i) => {
                                         const selected = selectedTheme === t.v;

@@ -9,7 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
-import { durationSeconds, delaySeconds, transition as t, palette, Button, Icon, QuoteBlock, MotionDiv, MotionH1, MotionH2, MotionP, MotionSpan } from '@/design-system';
+import { durationSeconds, delaySeconds, transition as t, palette, themeRgb, Button, Icon, QuoteBlock, MotionDiv, MotionH1, MotionH2, MotionP, MotionSpan } from '@/design-system';
 
 const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
   const { theme } = useTheme();
@@ -112,7 +112,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute inset-0 -z-10 opacity-20 overflow-hidden"
             >
               <div className="absolute top-0 left-[20%] w-3/5 h-full" 
-                   style={{ backgroundImage: `radial-gradient(circle, ${isColorful ? 'rgba(236, 72, 153, 0.2)' : 'rgba(96, 165, 250, 0.2)'} 1px, transparent 1px)`, backgroundSize: '30px 30px' }}>
+                   style={{ backgroundImage: `radial-gradient(circle, rgba(${isColorful ? themeRgb.colorful.dotGrid : themeRgb.dark.dotGrid}, 0.2) 1px, transparent 1px)`, backgroundSize: '30px 30px' }}>
               </div>
             </MotionDiv>
           </AnimatePresence>
@@ -223,7 +223,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 backgroundSize: '200% 200%',
-                filter: 'drop-shadow(0 2px 8px rgba(59, 130, 246, 0.15))'
+                filter: `drop-shadow(0 2px 8px rgba(${isColorful ? themeRgb.colorful.glowPrimary : isLight ? themeRgb.light.glowPrimary : themeRgb.dark.glowPrimary}, 0.15))`
               }}
             >
               {/* Split subtitle into parts for better visual hierarchy */}
@@ -261,10 +261,10 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute inset-0 -z-10 blur-2xl"
               style={{
                 background: isColorful
-                  ? 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.08) 0%, rgba(236, 72, 153, 0.08) 50%, rgba(59, 130, 246, 0.08) 100%)'
+                  ? `radial-gradient(ellipse at center, rgba(${themeRgb.colorful.glowPrimary}, 0.08) 0%, rgba(${themeRgb.colorful.glowSecondary}, 0.08) 50%, rgba(${themeRgb.colorful.glowTertiary}, 0.08) 100%)`
                   : isLight
-                  ? 'radial-gradient(ellipse at center, rgba(30, 64, 175, 0.06) 0%, rgba(124, 58, 237, 0.06) 100%)'
-                  : 'radial-gradient(ellipse at center, rgba(96, 165, 250, 0.08) 0%, rgba(167, 139, 250, 0.08) 100%)',
+                  ? `radial-gradient(ellipse at center, rgba(${themeRgb.light.glowPrimary}, 0.06) 0%, rgba(${themeRgb.light.glowSecondary}, 0.06) 100%)`
+                  : `radial-gradient(ellipse at center, rgba(${themeRgb.dark.dotGrid}, 0.08) 0%, rgba(${themeRgb.dark.glowSecondary}, 0.08) 100%)`,
               }}
             />
             
@@ -371,9 +371,9 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   className="absolute inset-0 -z-10 opacity-20"
                   animate={{
                     background: [
-                      'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%, rgba(168, 85, 247, 0.1) 100%)',
-                      'linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, transparent 50%, rgba(59, 130, 246, 0.1) 100%)',
-                      'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%, rgba(168, 85, 247, 0.1) 100%)'
+                      `linear-gradient(135deg, rgba(${themeRgb.dark.glowPrimary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowSecondary}, 0.1) 100%)`,
+                      `linear-gradient(135deg, rgba(${themeRgb.dark.glowSecondary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowPrimary}, 0.1) 100%)`,
+                      `linear-gradient(135deg, rgba(${themeRgb.dark.glowPrimary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowSecondary}, 0.1) 100%)`
                     ]
                   }}
                   transition={{
@@ -405,20 +405,20 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="inline-block relative"
             >
               <MotionDiv 
-                className={`absolute -inset-1 rounded-lg bg-gradient-to-r ${isColorful ? 'from-cyan-500/40 via-fuchsia-500/40 to-blue-500/40' : 'from-[var(--primary)]/40 via-[var(--gradient-mid)]/40 to-[var(--gradient-end)]/40'} blur-md opacity-70`}
+                className={`absolute -inset-1 rounded-lg bg-gradient-to-r ${isColorful ? 'from-purple-500/40 via-pink-500/40 to-blue-500/40' : 'from-[var(--primary)]/40 via-[var(--gradient-mid)]/40 to-[var(--gradient-end)]/40'} blur-md opacity-70`}
                 animate={{
                   background: isColorful 
                     ? [
-                      'linear-gradient(to right, rgba(6, 182, 212, 0.4), rgba(236, 72, 153, 0.4), rgba(59, 130, 246, 0.4))',
-                      'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4), rgba(236, 72, 153, 0.4))',
-                      'linear-gradient(to right, rgba(236, 72, 153, 0.4), rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4))',
-                      'linear-gradient(to right, rgba(6, 182, 212, 0.4), rgba(236, 72, 153, 0.4), rgba(59, 130, 246, 0.4))'
+                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowPrimary}, 0.4), rgba(${themeRgb.colorful.glowSecondary}, 0.4), rgba(${themeRgb.colorful.glowTertiary}, 0.4))`,
+                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowTertiary}, 0.4), rgba(${themeRgb.colorful.glowPrimary}, 0.4), rgba(${themeRgb.colorful.glowSecondary}, 0.4))`,
+                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowSecondary}, 0.4), rgba(${themeRgb.colorful.glowTertiary}, 0.4), rgba(${themeRgb.colorful.glowPrimary}, 0.4))`,
+                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowPrimary}, 0.4), rgba(${themeRgb.colorful.glowSecondary}, 0.4), rgba(${themeRgb.colorful.glowTertiary}, 0.4))`
                     ]
                     : [
-                      'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))',
-                      'linear-gradient(to right, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4))',
-                      'linear-gradient(to right, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4))',
-                      'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))'
+                      `linear-gradient(to right, rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4))`,
+                      `linear-gradient(to right, rgba(${themeRgb.dark.glowTertiary}, 0.4), rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4))`,
+                      `linear-gradient(to right, rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4), rgba(${themeRgb.dark.glowPrimary}, 0.4))`,
+                      `linear-gradient(to right, rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4))`
                     ]
                 }}
                 transition={{

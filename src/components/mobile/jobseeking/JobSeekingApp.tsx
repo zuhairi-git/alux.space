@@ -16,14 +16,14 @@ const JOB_TAB_ORDER: readonly JobTabType[] = ['dashboard', 'jobs', 'copilot', 'n
 
 const JOB_SEEKING_INTRO: MobileIntroConfig = {
     appName: 'Job Seeker',
-    tagline: 'Find trusted local, part-time, and weekend work — with an AI career coach that knows your skills.',
+    tagline: 'Find trusted local, part-time, and weekend work Ã¢â‚¬â€ with an AI career coach that knows your skills.',
     appIcon: 'work_history',
-    accentGradient: 'from-ds-ember to-ds-ember-dark',
+    accentGradient: 'from-ds-purple-400 to-ds-purple-700',
     aiTips: [
         {
             icon: 'psychology',
             title: 'Your personal career coach',
-            body: 'Ask Copilot "What jobs match my profile?" or "Help me write a cover letter for this barista role" — it tailors advice to you.',
+            body: 'Ask Copilot "What jobs match my profile?" or "Help me write a cover letter for this barista role" Ã¢â‚¬â€ it tailors advice to you.',
         },
         {
             icon: 'manage_search',
@@ -41,7 +41,7 @@ const JOB_SEEKING_INTRO: MobileIntroConfig = {
         { icon: 'work', label: 'Local Jobs', desc: 'Browse gigs and positions near you, filtered by availability and pay.' },
         { icon: 'auto_awesome', label: 'Copilot', desc: 'AI career coach for applications, CVs, interview prep, and job advice.' },
         { icon: 'notifications', label: 'Alerts & Matches', desc: 'Instant notifications when a new job matches your profile.' },
-        { icon: 'person', label: 'My Profile / CV', desc: 'Manage skills, availability, and your digital CV — all in one place.' },
+        { icon: 'person', label: 'My Profile / CV', desc: 'Manage skills, availability, and your digital CV Ã¢â‚¬â€ all in one place.' },
     ],
 };
 
@@ -115,7 +115,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
                         <motion.button onClick={() => handleTabChange('profile')} className="relative" whileTap={{ scale: 0.92 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
-                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${isColorful ? 'border-ds-ember' : theme.accent.avatarBorder(isLight)} bg-gradient-to-tr from-gradient-start to-gradient-mid`}>
+                            <div className={`w-11 h-11 ${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-full'} overflow-hidden border-2 ${isColorful ? 'border-ds-purple-400' : theme.accent.avatarBorder(isLight)} bg-gradient-to-tr from-gradient-start to-gradient-mid`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${isColorful ? 'f59e0b' : theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>
@@ -165,14 +165,14 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                     {a && (
                                         <motion.div
                                             layoutId="job-nav-pill"
-                                            className={`absolute inset-0 rounded-full ${isColorful ? 'bg-ds-ember/25' : theme.navTab.pill(isLight)}`}
+                                            className={`absolute inset-0 rounded-full ${isColorful ? 'bg-ds-purple-400/25' : theme.navTab.pill(isLight)}`}
                                             transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
                                         />
                                     )}
                                     <motion.span
                                         animate={{ scale: a ? 1.1 : 1 }}
                                         transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                        className={`relative material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember-light' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                        className={`relative material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-purple-300' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                     >
                                         {ic}
                                     </motion.span>
@@ -181,14 +181,14 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.15 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-purple-400' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>
                             )}
                             <motion.span
                                 animate={{ opacity: a ? 1 : 0.6 }}
-                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-ember' : 'text-ds-ember-light') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-purple-400' : 'text-ds-purple-300') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                             >
                                 {lb}
                             </motion.span>

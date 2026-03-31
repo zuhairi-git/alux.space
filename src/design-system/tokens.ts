@@ -90,23 +90,59 @@ export const palette = {
     dark:  '#1c1730',
     light: '#eae6f8',
   },
-  /** Colorful-theme card solid background (warm amber-void) */
-  cardColorfulFrom: '#0a0600',
+  /** Colorful-theme card solid background (dark slate-violet) */
+  cardColorfulFrom: '#0E0C24',
   /** Dark/colorful select option background */
   selectDark: '#1a1a2e',
   /** Timeline card gradient stops */
   timeline: {
     darkFrom:     '#0a1425',
     darkTo:       '#040a20',
-    colorfulFrom: '#0e0600',
-    colorfulTo:   '#040402',
+    colorfulFrom: '#0C0A20',
+    colorfulTo:   '#060618',
   },
   violet: {
     500: '#8b5cf6',
   },
   yellow: { 500: '#eab308' },
   orange: { 500: '#ff9500' },
-  colorfulBg: '#06040c',
+  colorfulBg: '#09091C',
+} as const;
+
+/**
+ * Theme-keyed RGB triplets for JS contexts that can't use CSS vars
+ * (canvas, Framer Motion animate arrays, SVG fills computed in JS).
+ *
+ * Usage:  `rgba(${themeRgb.dark.glowPrimary}, 0.4)`
+ */
+export const themeRgb = {
+  light: {
+    glowPrimary:   '0, 87, 255',      // blue-vivid — matches --primary
+    glowSecondary: '168, 85, 247',     // purple-500
+    glowTertiary:  '99, 102, 241',     // indigo-500
+    dotGrid:       '96, 165, 250',     // blue-400
+    particlePrimary:   '168, 85, 247', // purple-500
+    particleSecondary: '59, 130, 246', // blue-500
+    particleTertiary:  '236, 72, 153', // pink-500
+  },
+  dark: {
+    glowPrimary:   '59, 130, 246',     // blue-500
+    glowSecondary: '168, 85, 247',     // purple-500
+    glowTertiary:  '99, 102, 241',     // indigo-500
+    dotGrid:       '96, 165, 250',     // blue-400
+    particlePrimary:   '59, 130, 246', // blue-500
+    particleSecondary: '99, 102, 241', // indigo-500
+    particleTertiary:  '139, 92, 246', // violet-500
+  },
+  colorful: {
+    glowPrimary:   '167, 139, 250',    // purple-400 — matches --primary
+    glowSecondary: '236, 72, 153',     // pink-500 — matches --gradient-mid
+    glowTertiary:  '37, 99, 235',      // blue-600 — matches --gradient-end
+    dotGrid:       '236, 72, 153',     // pink-500
+    particlePrimary:   '167, 139, 250', // purple-400
+    particleSecondary: '196, 181, 253', // purple-300
+    particleTertiary:  '236, 72, 153',  // pink-500
+  },
 } as const;
 
 // ─── Semantic CSS-variable references ───────────────────────

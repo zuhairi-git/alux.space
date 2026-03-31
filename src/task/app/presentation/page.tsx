@@ -145,8 +145,8 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-3">
               {[
                 { icon: '/dt-icons/shield-heart.svg', label: 'Patient Safety', priority: 'Critical', badgeBg: 'bg-ds-error' },
-                { icon: '/dt-icons/hdd.svg', label: 'Data Reliability', priority: 'High', badgeBg: 'bg-ds-ember' },
-                { icon: '/dt-icons/wand-magic-sparkles.svg', label: 'Usability', priority: 'High', badgeBg: 'bg-ds-ember' },
+                { icon: '/dt-icons/hdd.svg', label: 'Data Reliability', priority: 'High', badgeBg: 'bg-ds-purple-400' },
+                { icon: '/dt-icons/wand-magic-sparkles.svg', label: 'Usability', priority: 'High', badgeBg: 'bg-ds-purple-400' },
                 { icon: '/dt-icons/rocket.svg', label: 'Scalability', priority: 'Medium', badgeBg: 'bg-ds-warning' }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2">
@@ -187,7 +187,7 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
             iconPath="/dt-icons/plug-circle-check.svg"
             color="yellow"
             title="New hospital requests: HL7/FHIR export"
-            reasoning="Strategic for sales and integrations but larger scope. Include only with dedicated capacity—otherwise break into discovery tasks."
+            reasoning="Strategic for sales and integrations but larger scope. Include only with dedicated capacityÃ¢â‚¬â€otherwise break into discovery tasks."
           />
           <PriorityItem
             rank={4}
@@ -267,7 +267,7 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
       label: 'High',
       iconBg: 'bg-[#ffb07a]/20',
       priorityBadgeBg: 'from-[#ff8c42] to-[#d96820]',
-      badge: 'bg-ds-ember/10 text-[#d96820] border-[#ffb07a]',
+      badge: 'bg-ds-purple-400/10 text-[#d96820] border-[#ffb07a]',
       priorityIcon: '/dt-icons/arrow-up.svg',
       type: 'Story',
       glowColor: 'from-[#ffb07a]/50 to-[#ffb07a]/50'
@@ -626,19 +626,19 @@ const PreventionSlide = () => (
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">✓</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
                 <span className="text-sm sm:text-base text-slate-700 font-medium">Identify risks & blockers</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">✓</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
                 <span className="text-sm sm:text-base text-slate-700 font-medium">Surface documentation gaps</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">✓</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
                 <span className="text-sm sm:text-base text-slate-700 font-medium">Align on technical readiness</span>
               </div>
@@ -659,19 +659,19 @@ const PreventionSlide = () => (
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">✓</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
                 <span className="text-sm sm:text-base text-slate-700 font-medium">Shared context for all stakeholders</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">✓</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
                 <span className="text-sm sm:text-base text-slate-700 font-medium">Informed decision-making</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">✓</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Ã¢Å“â€œ</span>
                 </div>
                 <span className="text-sm sm:text-base text-slate-700 font-medium">Clear accountability</span>
               </div>
@@ -709,7 +709,7 @@ const ReflectionSlide = () => (
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 mb-3 sm:mb-4">Core Approach</h3>
           <p className="text-base sm:text-lg lg:text-xl text-slate-700 leading-relaxed">
             This approach demonstrates <span className="font-bold text-purple-700">prioritization based on impact, risk, and value</span>, 
-            while facilitating team alignment through structured reasoning and transparent communication — 
+            while facilitating team alignment through structured reasoning and transparent communication Ã¢â‚¬â€ 
             key traits of an effective Product Owner.
           </p>
         </div>
@@ -1016,8 +1016,8 @@ export default function Presentation() {
       {!printMode && (
         <div className="hidden lg:flex fixed bottom-8 lg:bottom-10 left-6 lg:left-8 bg-white/95 backdrop-blur-sm border border-gray-200 text-gray-700 px-4 lg:px-4 py-2 rounded-lg lg:rounded-xl text-xs items-center gap-3 lg:gap-3 shadow-lg z-50">
           <span className="text-gray-500">Navigation:</span>
-          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">←</span>
-          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">→</span>
+          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">Ã¢â€ Â</span>
+          <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">Ã¢â€ â€™</span>
           <span className="bg-gray-100 px-2 lg:px-3 py-1 rounded border border-gray-300">Space</span>
           <span className="text-gray-300">|</span>
           <span className="bg-gray-100 px-2 py-1 rounded border border-gray-300">F</span>
@@ -1054,7 +1054,7 @@ export default function Presentation() {
                 onClick={() => setShowRejectionModal(false)}
                 className="w-8 h-8 bg-white hover:bg-slate-50 rounded-lg flex items-center justify-center transition-colors border border-slate-200 text-slate-500"
               >
-                <span className="text-2xl font-light">×</span>
+                <span className="text-2xl font-light">Ãƒâ€”</span>
               </button>
             </div>
           </div>

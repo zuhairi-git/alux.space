@@ -22,7 +22,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
         ? `${theme.radii.modal} p-6 shadow-2xl bg-ds-card-colorful-from text-white`
         : `${theme.radii.modal} p-6 shadow-2xl ${p.modalBg(isLight)}`;
     const modalActiveItemClass = isColorful
-        ? 'bg-ds-ember/20 border border-ds-ember/30'
+        ? 'bg-ds-purple-400/20 border border-ds-purple-400/30'
         : p.modalActiveItem(isLight);
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-6`}>
@@ -32,7 +32,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
             {/* Avatar */}
             <motion.div variants={fadeUp} className="flex flex-col items-center py-6">
                 <div className="relative mb-4">
-                    <div className={`w-28 h-28 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${isColorful ? 'from-ds-ember to-ds-ember-dark' : theme.platform === 'android' ? 'from-ds-blue-500 to-ds-blue-300' : 'from-ds-blue-500 to-ds-indigo-500'} shadow-lg`}>
+                    <div className={`w-28 h-28 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr ${isColorful ? 'from-ds-purple-400 to-ds-purple-700' : theme.platform === 'android' ? 'from-ds-blue-500 to-ds-blue-300' : 'from-ds-blue-500 to-ds-indigo-500'} shadow-lg`}>
                         <div className={`w-full h-full rounded-full overflow-hidden relative ${isLight ? 'bg-white' : 'bg-black/80'}`}>
                             <Image
                                 src="/images/me/ali.png"
@@ -69,7 +69,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
             {/* Theme Picker Modal */}
             <AnimatePresence>{modal && <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-auto"><motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setModal(false)} className="absolute inset-0 bg-black/40 backdrop-blur-sm" /><motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-[85%] max-w-sm ${modalBgClass}`}>
                 <div className="flex justify-between items-center mb-5"><h3 className="text-xl font-bold">App Theme</h3><button onClick={() => setModal(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10"><Icon name="close" className="text-sm" /></button></div>
-                <div className="space-y-2.5">{[{ v: 'light' as const, l: 'Light', i: 'light_mode', c: `text-ds-ember` }, { v: 'dark' as const, l: 'Dark', i: 'dark_mode', c: isColorful ? 'text-ds-ember' : 'text-ds-blue-400' }, { v: 'colorful' as const, l: 'Colorful', i: 'palette', c: 'text-ds-ember' }].map(t => { const a = themeMode === t.v; return (<button key={t.v} onClick={() => { setThemeMode(t.v); setModal(false); }} className={`w-full flex items-center justify-between p-3.5 ${theme.platform === 'android' ? 'rounded-2xl border' : 'rounded-[14px] transition-all'} ${a ? modalActiveItemClass : (theme.platform === 'android' ? 'bg-transparent border-transparent' : '')}`}><div className="flex items-center space-x-3"><Icon name={t.i} className={a ? t.c : 'opacity-50'} /><span className={a ? 'font-bold' : 'font-medium'}>{t.l}</span></div>{a && <Icon name="check_circle" className={p.checkColor || t.c} />}</button>); })}</div>
+                <div className="space-y-2.5">{[{ v: 'light' as const, l: 'Light', i: 'light_mode', c: `text-ds-purple-400` }, { v: 'dark' as const, l: 'Dark', i: 'dark_mode', c: isColorful ? 'text-ds-purple-400' : 'text-ds-blue-400' }, { v: 'colorful' as const, l: 'Colorful', i: 'palette', c: 'text-ds-purple-400' }].map(t => { const a = themeMode === t.v; return (<button key={t.v} onClick={() => { setThemeMode(t.v); setModal(false); }} className={`w-full flex items-center justify-between p-3.5 ${theme.platform === 'android' ? 'rounded-2xl border' : 'rounded-[14px] transition-all'} ${a ? modalActiveItemClass : (theme.platform === 'android' ? 'bg-transparent border-transparent' : '')}`}><div className="flex items-center space-x-3"><Icon name={t.i} className={a ? t.c : 'opacity-50'} /><span className={a ? 'font-bold' : 'font-medium'}>{t.l}</span></div>{a && <Icon name="check_circle" className={p.checkColor || t.c} />}</button>); })}</div>
             </motion.div></div>}</AnimatePresence>
         </motion.div>
     );

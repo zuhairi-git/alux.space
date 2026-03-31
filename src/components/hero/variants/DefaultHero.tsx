@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
-import { durationSeconds, delaySeconds, transition as t, Button } from '@/design-system';
+import { durationSeconds, delaySeconds, transition as t, Button, themeRgb } from '@/design-system';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
@@ -78,7 +78,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         {/* Subtle dot grid behind the title */}
         <div className="absolute inset-0 -z-10 opacity-20 overflow-hidden">
           <div className="absolute top-0 left-[20%] w-3/5 h-full" 
-               style={{ backgroundImage: 'radial-gradient(circle, rgba(96, 165, 250, 0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+               style={{ backgroundImage: `radial-gradient(circle, rgba(${themeRgb.dark.dotGrid}, 0.2) 1px, transparent 1px)`, backgroundSize: '30px 30px' }}>
           </div>
         </div>
           <motion.h1 
@@ -124,9 +124,9 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
               className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[var(--primary)]/40 via-[var(--gradient-mid)]/40 to-[var(--gradient-end)]/40 blur-md opacity-70"
               animate={{
                 background: [
-                  'linear-gradient(to right, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))',
-                  'linear-gradient(to right, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4))',
-                  'linear-gradient(to right, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.4))',
+                  `linear-gradient(to right, rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4))`,
+                  `linear-gradient(to right, rgba(${themeRgb.dark.glowTertiary}, 0.4), rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4))`,
+                  `linear-gradient(to right, rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4), rgba(${themeRgb.dark.glowPrimary}, 0.4))`,
                 ]
               }}
               transition={{
@@ -204,9 +204,9 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
             className="absolute inset-0 -z-10 opacity-20"
             animate={{
               background: [
-                'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%, rgba(168, 85, 247, 0.1) 100%)',
-                'linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, transparent 50%, rgba(59, 130, 246, 0.1) 100%)',
-                'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%, rgba(168, 85, 247, 0.1) 100%)'
+                `linear-gradient(135deg, rgba(${themeRgb.dark.glowPrimary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowSecondary}, 0.1) 100%)`,
+                `linear-gradient(135deg, rgba(${themeRgb.dark.glowSecondary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowPrimary}, 0.1) 100%)`,
+                `linear-gradient(135deg, rgba(${themeRgb.dark.glowPrimary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowSecondary}, 0.1) 100%)`
               ]
             }}
             transition={{

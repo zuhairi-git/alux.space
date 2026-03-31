@@ -8,6 +8,7 @@
 export {
   palette,
   semantic,
+  themeRgb,
   fontFamily,
   fontSize,
   space,

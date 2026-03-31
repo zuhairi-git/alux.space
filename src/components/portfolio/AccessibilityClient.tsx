@@ -29,7 +29,7 @@ export default function AccessibilityClient() {
       en: {
         title: "Inclusive Design System",
         subtitle: "Accessibility-First Design Philosophy",
-        intro: "Building the future of inclusive digital products—from research to implementation. This system powers applications used by millions while ensuring no one is left behind.",
+        intro: "Building the future of inclusive digital productsÃ¢â‚¬â€from research to implementation. This system powers applications used by millions while ensuring no one is left behind.",
         projectType: "Project Type",
         projectTypeValues: "Scalable Design System",
         timeline: "Timeline",
@@ -219,121 +219,121 @@ export default function AccessibilityClient() {
         learnMore: "Learn More",
         nextSection: "Next Section"
       }, fi: {
-        title: "Inklusiivinen suunnittelujärjestelmä",
+        title: "Inklusiivinen suunnittelujÃƒÂ¤rjestelmÃƒÂ¤",
         subtitle: "Saavutettavuus-ensin filosofia",
-        intro: "Rakennamme inklusiivisten digitaalisten tuotteiden tulevaisuutta—tutkimuksesta toteutukseen. Tämä järjestelmä voimistaa miljoonien käyttäjien sovelluksia varmistaen, että ketään ei jätetä jälkeen.",
+        intro: "Rakennamme inklusiivisten digitaalisten tuotteiden tulevaisuuttaÃ¢â‚¬â€tutkimuksesta toteutukseen. TÃƒÂ¤mÃƒÂ¤ jÃƒÂ¤rjestelmÃƒÂ¤ voimistaa miljoonien kÃƒÂ¤yttÃƒÂ¤jien sovelluksia varmistaen, ettÃƒÂ¤ ketÃƒÂ¤ÃƒÂ¤n ei jÃƒÂ¤tetÃƒÂ¤ jÃƒÂ¤lkeen.",
         projectType: "Projektityyppi",
-        projectTypeValues: "Skaalautuva suunnittelujärjestelmä",
+        projectTypeValues: "Skaalautuva suunnittelujÃƒÂ¤rjestelmÃƒÂ¤",
         timeline: "Aikataulu",
         timelineValue: "6 kuukautta (jatkuva)",
-        tools: "Työkalut & Teknologiat",
+        tools: "TyÃƒÂ¶kalut & Teknologiat",
         toolsValue: "Figma, React, Tailwind CSS, Headless UI, axe DevTools",
         standards: "Vaatimustenmukaisuus",
         standardsValue: "WCAG 2.2 AAA, ARIA 1.2",
         roles: "Roolini",
-        rolesValue: "Suunnittelujärjestelmän johtaja & Saavutettavuusasiantuntija",
+        rolesValue: "SuunnittelujÃƒÂ¤rjestelmÃƒÂ¤n johtaja & Saavutettavuusasiantuntija",
 
         // Navigation tabs
         overviewTab: "Yleiskatsaus",
-        systemTab: "Suunnittelujärjestelmä",
+        systemTab: "SuunnittelujÃƒÂ¤rjestelmÃƒÂ¤",
         componentsTab: "Komponentit",
         implementationTab: "Toteutus",
         impactTab: "Vaikutus",
         // Overview section
         problemTitle: "Ongelma",
-        problemDesc: "Useimmat suunnittelujärjestelmät käsittelevät saavutettavuutta jälkikäteen. Halusimme rakentaa sellaisen, jossa inkluusio on perusta.",
+        problemDesc: "Useimmat suunnittelujÃƒÂ¤rjestelmÃƒÂ¤t kÃƒÂ¤sittelevÃƒÂ¤t saavutettavuutta jÃƒÂ¤lkikÃƒÂ¤teen. Halusimme rakentaa sellaisen, jossa inkluusio on perusta.",
         solutionTitle: "Ratkaisumme",
-        solutionDesc: "Saavutettavuus-ensin suunnittelujärjestelmä, joka tekee inklusiivisten tuotteiden luomisesta vaivatonta mille tahansa tiimille.",
+        solutionDesc: "Saavutettavuus-ensin suunnittelujÃƒÂ¤rjestelmÃƒÂ¤, joka tekee inklusiivisten tuotteiden luomisesta vaivatonta mille tahansa tiimille.",
 
         // Objectives
         objectivesTitle: "Tavoitteet",
         objective1: "Rakentaa saavutettavuus perustaan",
-        objective2: "Luoda intuitiivisia, inklusiivisia käyttöliittymiä",
+        objective2: "Luoda intuitiivisia, inklusiivisia kÃƒÂ¤yttÃƒÂ¶liittymiÃƒÂ¤",
         objective3: "Varmistaa WCAG 2.2 AAA -vaatimustenmukaisuus",
-        objective4: "Mahdollistaa saumaton kehittäjien käyttöönotto",
-        objective5: "Tukea monikielisiä kokemuksia",
+        objective4: "Mahdollistaa saumaton kehittÃƒÂ¤jien kÃƒÂ¤yttÃƒÂ¶ÃƒÂ¶notto",
+        objective5: "Tukea monikielisiÃƒÂ¤ kokemuksia",
 
         // Research Insights
         researchTitle: "Tutkimustulokset",
         participantFeedback: "Osallistujien palaute",
         accessibilityValue: "Saavutettavuuden arvo",
-        usabilityScore: "Käytettävyyspisteet",
-        inclusionApproval: "Inkluusion hyväksyntä",
+        usabilityScore: "KÃƒÂ¤ytettÃƒÂ¤vyyspisteet",
+        inclusionApproval: "Inkluusion hyvÃƒÂ¤ksyntÃƒÂ¤",
         complianceRating: "Vaatimustenmukaisuusarvio",
         keyRecommendations: "Keskeiset suositukset",
         enhancedAccessibility: "Parannettu saavutettavuus",
-        enhancedAccessibilityDesc: "Kattava ARIA-merkintä ja semanttinen rakenne",
-        keyboardNavigation: "Näppäimistönavigaatio",
-        keyboardNavigationDesc: "Täysi näppäimistötuki näkyvillä fokusindikaattoreilla",
-        colorContrast: "Värikontrasti",
+        enhancedAccessibilityDesc: "Kattava ARIA-merkintÃƒÂ¤ ja semanttinen rakenne",
+        keyboardNavigation: "NÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶navigaatio",
+        keyboardNavigationDesc: "TÃƒÂ¤ysi nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶tuki nÃƒÂ¤kyvillÃƒÂ¤ fokusindikaattoreilla",
+        colorContrast: "VÃƒÂ¤rikontrasti",
         colorContrastDesc: "AAA-tason kontrastisuhteet kaikissa teemoissa",
 
         // User Personas 
-        userPersonasTitle: "Käyttäjäpersoonat",
+        userPersonasTitle: "KÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤persoonat",
         persona1Name: "Sarah M.",
-        persona1Role: "Frontend-kehittäjä",
-        persona1Traits: ["Saavutettavuus-keskittynyt", "Yksityiskohtiin keskittyvä"],
-        persona1Needs: ["Selkeät toteutusoppaat", "Automatisoituja testaustyökaluja"],
-        persona1Goals: ["Rakentaa inklusiivisia käyttöliittymiä", "Täyttää vaatimustenmukaisuusstandardit"],
-        persona1Pains: ["Monimutkaiset saavutettavuussäännöt", "Selkeiden ohjeiden puute"],
+        persona1Role: "Frontend-kehittÃƒÂ¤jÃƒÂ¤",
+        persona1Traits: ["Saavutettavuus-keskittynyt", "Yksityiskohtiin keskittyvÃƒÂ¤"],
+        persona1Needs: ["SelkeÃƒÂ¤t toteutusoppaat", "Automatisoituja testaustyÃƒÂ¶kaluja"],
+        persona1Goals: ["Rakentaa inklusiivisia kÃƒÂ¤yttÃƒÂ¶liittymiÃƒÂ¤", "TÃƒÂ¤yttÃƒÂ¤ÃƒÂ¤ vaatimustenmukaisuusstandardit"],
+        persona1Pains: ["Monimutkaiset saavutettavuussÃƒÂ¤ÃƒÂ¤nnÃƒÂ¶t", "Selkeiden ohjeiden puute"],
 
         persona2Name: "Alex Chen",
         persona2Role: "Tuotesuunnittelija",
-        persona2Traits: ["Käyttäjäkeskeinen", "Laatuorientoitunut"],
-        persona2Needs: ["Saavutettavia suunnittelumalleja", "Alustojen välistä yhtenäisyyttä"],
+        persona2Traits: ["KÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤keskeinen", "Laatuorientoitunut"],
+        persona2Needs: ["Saavutettavia suunnittelumalleja", "Alustojen vÃƒÂ¤listÃƒÂ¤ yhtenÃƒÂ¤isyyttÃƒÂ¤"],
         persona2Goals: ["Luoda universaaleja suunnitelmia", "Sujuvoittaa suunnitteluprosessia"],
         persona2Pains: ["Saavutettavuustiedon puutteet", "Aikarajoitteet"],
 
         // Requirements
-        requirementsTitle: "Järjestelmävaatimukset",
+        requirementsTitle: "JÃƒÂ¤rjestelmÃƒÂ¤vaatimukset",
         requirement1: "Universaalit suunnitteluperiaatteet",
-        requirement1Desc: "Jokainen komponentti toimii kaikille käyttäjille kyvystä riippumatta",
-        requirement2: "Kehittäjäkokemus",
+        requirement1Desc: "Jokainen komponentti toimii kaikille kÃƒÂ¤yttÃƒÂ¤jille kyvystÃƒÂ¤ riippumatta",
+        requirement2: "KehittÃƒÂ¤jÃƒÂ¤kokemus",
         requirement2Desc: "Yksinkertainen integraatio kattavalla dokumentaatiolla",
         requirement3: "Testaus ja validointi",
-        requirement3Desc: "Automaattinen saavutettavuustestaus ja validointityökalut",
+        requirement3Desc: "Automaattinen saavutettavuustestaus ja validointityÃƒÂ¶kalut",
         requirement4: "Monikielituki",
-        requirement4Desc: "RTL-tuki ja kansainvälistämismahdollisuudet",
+        requirement4Desc: "RTL-tuki ja kansainvÃƒÂ¤listÃƒÂ¤mismahdollisuudet",
 
         // User Testing
-        userTestingTitle: "Käyttäjätestaus",
+        userTestingTitle: "KÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤testaus",
         testScenario: "Testiskenaario",
-        testScenarioDesc: "Navigoi ja käytä komponentteja käyttäen vain näppäimistöä ja näytönlukijaa",
+        testScenarioDesc: "Navigoi ja kÃƒÂ¤ytÃƒÂ¤ komponentteja kÃƒÂ¤yttÃƒÂ¤en vain nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶ÃƒÂ¤ ja nÃƒÂ¤ytÃƒÂ¶nlukijaa",
         focusAreas: "Keskittymisalueet",
-        usabilityFocus: "Käytettävyys",
+        usabilityFocus: "KÃƒÂ¤ytettÃƒÂ¤vyys",
         accessibilityFocus: "Saavutettavuus",
         performanceFocus: "Suorituskyky",
         consistencyFocus: "Johdonmukaisuus",
 
         // Key principles
         principlesTitle: "Ydinperiaatteet",
-        principle1: "Universaali pääsy",
+        principle1: "Universaali pÃƒÂ¤ÃƒÂ¤sy",
         principle1Desc: "Jokainen komponentti toimii kaikille",
         principle2: "Saumaton integraatio",
-        principle2Desc: "Saavutettavuus rakennettu järjestelmään, ei kiinnitetty päälle",
-        principle3: "Kehittäjäystävällinen",
+        principle2Desc: "Saavutettavuus rakennettu jÃƒÂ¤rjestelmÃƒÂ¤ÃƒÂ¤n, ei kiinnitetty pÃƒÂ¤ÃƒÂ¤lle",
+        principle3: "KehittÃƒÂ¤jÃƒÂ¤ystÃƒÂ¤vÃƒÂ¤llinen",
         principle3Desc: "Helppo toteuttaa, vaikea rikkoa",
 
         // Design system features
-        colorSystemTitle: "Mukautuva värijärjestelmä",
+        colorSystemTitle: "Mukautuva vÃƒÂ¤rijÃƒÂ¤rjestelmÃƒÂ¤",
         colorSystemDesc: "Kolme huolellisesti suunniteltua teemaa WCAG AAA -kontrastisuhteilla",
         typographyTitle: "Typografia-erinomaisuus",
-        typographyDesc: "Kaksikielinen tuki täydellisellä luettavuudella eri kielillä",
-        spacingTitle: "Harmoninen välistys",
-        spacingDesc: "4px ruudukkojärjestelmä saavutettavuus-yhteensopivilla kosketustavoitteilla",
+        typographyDesc: "Kaksikielinen tuki tÃƒÂ¤ydellisellÃƒÂ¤ luettavuudella eri kielillÃƒÂ¤",
+        spacingTitle: "Harmoninen vÃƒÂ¤listys",
+        spacingDesc: "4px ruudukkojÃƒÂ¤rjestelmÃƒÂ¤ saavutettavuus-yhteensopivilla kosketustavoitteilla",
 
         // Components showcase
         componentsTitle: "Saavutettavuus-ensin komponentit",
-        buttonsTitle: "Älykkäät painikkeet",
-        buttonsDesc: "Automaattisesti säätyvä kontrasti, oikeat fokustilat, näppäimistönavigaatio",
-        tabsTitle: "Älykäs navigaatio",
-        tabsDesc: "ARIA-yhteensopivat välilehdet näppäimistötuella ja näytönlukijan optimoinnilla",
+        buttonsTitle: "Ãƒâ€žlykkÃƒÂ¤ÃƒÂ¤t painikkeet",
+        buttonsDesc: "Automaattisesti sÃƒÂ¤ÃƒÂ¤tyvÃƒÂ¤ kontrasti, oikeat fokustilat, nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶navigaatio",
+        tabsTitle: "Ãƒâ€žlykÃƒÂ¤s navigaatio",
+        tabsDesc: "ARIA-yhteensopivat vÃƒÂ¤lilehdet nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶tuella ja nÃƒÂ¤ytÃƒÂ¶nlukijan optimoinnilla",
         accordionsTitle: "Inklusiiviset haitarit",
-        accordionsDesc: "Progressiivinen paljastaminen oikealla semanttisella merkinnällä",
+        accordionsDesc: "Progressiivinen paljastaminen oikealla semanttisella merkinnÃƒÂ¤llÃƒÂ¤",
 
         // Implementation
         headlessTitle: "Headless UI -integraatio",
-        headlessDesc: "Rakennettu Headless UI:n päälle luotettavien saavutettavuusmallien varassa",
+        headlessDesc: "Rakennettu Headless UI:n pÃƒÂ¤ÃƒÂ¤lle luotettavien saavutettavuusmallien varassa",
         testingTitle: "Automaattinen testaus",
         testingDesc: "CI/CD-integraatio axe-core:n kanssa jatkuvaa saavutettavuusseurantaa varten",
 
@@ -342,73 +342,73 @@ export default function AccessibilityClient() {
         complianceMetric: "100% WCAG-vaatimustenmukaisuus",
         adoptionMetric: "50+ komponenttia",
         performanceMetric: "Nolla saavutettavuusbugia",
-        usageMetric: "10M+ käyttäjän käyttämä",
+        usageMetric: "10M+ kÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤n kÃƒÂ¤yttÃƒÂ¤mÃƒÂ¤",
 
         // Call to action
-        exploreSystem: "Tutustu järjestelmään",
+        exploreSystem: "Tutustu jÃƒÂ¤rjestelmÃƒÂ¤ÃƒÂ¤n",
         viewDocs: "Katso dokumentaatio",
 
         // Design system sections
-        colorsTitle: "Värit jotka toimivat kaikille",
-        colorsDesc: "Mukautuva värijärjestelmämme varmistaa täydelliset kontrastisuhteet kaikissa teemoissa",
+        colorsTitle: "VÃƒÂ¤rit jotka toimivat kaikille",
+        colorsDesc: "Mukautuva vÃƒÂ¤rijÃƒÂ¤rjestelmÃƒÂ¤mme varmistaa tÃƒÂ¤ydelliset kontrastisuhteet kaikissa teemoissa",
         lightTheme: "Vaalea teema",
         darkTheme: "Tumma teema",
-        colorfulTheme: "Värikäs teema",
-        contrastInfo: "Kaikki väriyhdistelmät täyttävät WCAG AAA -standardit (7:1 kontrastisuhde)",
+        colorfulTheme: "VÃƒÂ¤rikÃƒÂ¤s teema",
+        contrastInfo: "Kaikki vÃƒÂ¤riyhdistelmÃƒÂ¤t tÃƒÂ¤yttÃƒÂ¤vÃƒÂ¤t WCAG AAA -standardit (7:1 kontrastisuhde)",
         // Typography section
         inclusiveTypographyTitle: "Inklusiivinen typografia",
-        inclusiveTypographyDesc: "Suunniteltu luettavuutta varten eri kulttuureissa ja kyvyissä",
+        inclusiveTypographyDesc: "Suunniteltu luettavuutta varten eri kulttuureissa ja kyvyissÃƒÂ¤",
         englishType: "Englannin typografia",
         arabicType: "Arabian typografia",
-        rtlSupport: "Täysi RTL-tuki oikealla tekstin tasauksella",
+        rtlSupport: "TÃƒÂ¤ysi RTL-tuki oikealla tekstin tasauksella",
 
         // Components deep dive
         interactiveTitle: "Interaktiiviset komponentit",
-        keyboardNav: "Täysi näppäimistönavigaatio",
-        screenReader: "Näytönlukijan optimoitu",
-        focusManagement: "Älykäs fokuksen hallinta",
+        keyboardNav: "TÃƒÂ¤ysi nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶navigaatio",
+        screenReader: "NÃƒÂ¤ytÃƒÂ¶nlukijan optimoitu",
+        focusManagement: "Ãƒâ€žlykÃƒÂ¤s fokuksen hallinta",
         // Technical implementation
         technicalTitle: "Tekninen erinomaisuus",
         semanticHtml: "Semanttinen HTML-rakenne",
-        ariaLabels: "Kattava ARIA-merkintä",
-        keyboardSupport: "Täydellinen näppäimistövuorovaikutus",
+        ariaLabels: "Kattava ARIA-merkintÃƒÂ¤",
+        keyboardSupport: "TÃƒÂ¤ydellinen nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶vuorovaikutus",
         // Design process
         designProcess: "Suunnitteluprosessini",
         designModel: "Suunnittelumalli:",
         doubleD: "Kaksinkertainen timantti",
-        discoverPhase: "Löytää",
-        definePhase: "Määritellä",
-        developPhase: "Kehittää",
+        discoverPhase: "LÃƒÂ¶ytÃƒÂ¤ÃƒÂ¤",
+        definePhase: "MÃƒÂ¤ÃƒÂ¤ritellÃƒÂ¤",
+        developPhase: "KehittÃƒÂ¤ÃƒÂ¤",
         deliverPhase: "Toimittaa",
 
         // Challenge and hypothesis
         challenge: "Haaste",
-        challengeDesc: "Suunnittelujärjestelmän luominen, jossa saavutettavuus ei ole jälkiajatus vaan jokaisen päätöksen perusta.",
+        challengeDesc: "SuunnittelujÃƒÂ¤rjestelmÃƒÂ¤n luominen, jossa saavutettavuus ei ole jÃƒÂ¤lkiajatus vaan jokaisen pÃƒÂ¤ÃƒÂ¤tÃƒÂ¶ksen perusta.",
         hypothesis: "Hypoteesimme",
-        hypothesisDesc: "Jos rakennamme saavutettavuuden suunnittelujärjestelmämme ytimeen, tiimit luovat luonnollisesti inklusiivisempia tuotteita.",
+        hypothesisDesc: "Jos rakennamme saavutettavuuden suunnittelujÃƒÂ¤rjestelmÃƒÂ¤mme ytimeen, tiimit luovat luonnollisesti inklusiivisempia tuotteita.",
 
         // Discovery and research
-        discoveryInsights: "Löytöjen oivallukset",
-        discoveryDesc: "Laajan käyttäjätutkimuksen kautta tunnistimme nykyisten saavutettavuustoteutusten keskeiset kipupisteet.",
+        discoveryInsights: "LÃƒÂ¶ytÃƒÂ¶jen oivallukset",
+        discoveryDesc: "Laajan kÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤tutkimuksen kautta tunnistimme nykyisten saavutettavuustoteutusten keskeiset kipupisteet.",
         initialResearch: "Alkututkimus",
-        initialResearchDesc: "Nykyisten suunnittelujärjestelmien kattava analyysi paljasti kriittiset puutteet saavutettavuustuessa.",
+        initialResearchDesc: "Nykyisten suunnittelujÃƒÂ¤rjestelmien kattava analyysi paljasti kriittiset puutteet saavutettavuustuessa.",
 
         // Testing and implementation
         userTesting: "Toteutus ja testaus",
         hifiProto: "Korkealaatuiset prototyypit",
-        hifiProtoDesc: "Loimme interaktiivisia prototyyppejä täydellä saavutettavuustoteutuksella käyttäjätestausta varten.",
+        hifiProtoDesc: "Loimme interaktiivisia prototyyppejÃƒÂ¤ tÃƒÂ¤ydellÃƒÂ¤ saavutettavuustoteutuksella kÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤testausta varten.",
         designReviews: "Suunnittelukatselmukset",
-        designReviewsDesc: "Teimme perusteelliset saavutettavuusauditoinnit vammaisten käyttäjien ja näytönlukijan testauksen kanssa.",
+        designReviewsDesc: "Teimme perusteelliset saavutettavuusauditoinnit vammaisten kÃƒÂ¤yttÃƒÂ¤jien ja nÃƒÂ¤ytÃƒÂ¶nlukijan testauksen kanssa.",
         qa: "Laadunvarmistus",
         qaDesc: "Toteutimme automaattisen testausputken axe-coren kanssa jatkuvaa saavutettavuusseurantaa varten.",
         designDocs: "Suunnitteludokumentaatio",
-        designDocsDesc: "Kattava dokumentaatio sisältäen saavutettavuusohjeet ja toteutusmallit.",
+        designDocsDesc: "Kattava dokumentaatio sisÃƒÂ¤ltÃƒÂ¤en saavutettavuusohjeet ja toteutusmallit.",
 
         // Impact and results
         impact: "Muuttava vaikutus",
-        impactDesc: "Saavutettavuus-ensin lähestymistapamme on muuttanut perusteellisesti tapaa, jolla tiimit ajattelevat inklusiivista suunnittelua, tuloksena tuotteita jotka toimivat kaikille.",
+        impactDesc: "Saavutettavuus-ensin lÃƒÂ¤hestymistapamme on muuttanut perusteellisesti tapaa, jolla tiimit ajattelevat inklusiivista suunnittelua, tuloksena tuotteita jotka toimivat kaikille.",
 
-        learnMore: "Lue lisää",
+        learnMore: "Lue lisÃƒÂ¤ÃƒÂ¤",
         nextSection: "Seuraava osio"
       }
     };
@@ -450,7 +450,7 @@ export default function AccessibilityClient() {
       title: content.spacingTitle,
       description: content.spacingDesc,
       
-      gradient: "from-[var(--color-ember)] to-red-600"
+      gradient: "from-[var(--color-purple-400)] to-red-600"
     }
   ];
 
@@ -468,7 +468,7 @@ export default function AccessibilityClient() {
             tags={[content.projectTypeValues, content.standardsValue]}
             actions={[
               {
-                label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
+                label: locale === 'fi' ? 'Tarkastele suunnittelujÃƒÂ¤rjestelmÃƒÂ¤ÃƒÂ¤' : 'Design System',
                 icon: 'design_services',
                 variant: 'primary',
                 href: 'https://ds.alux.space/',
@@ -687,7 +687,7 @@ export default function AccessibilityClient() {
           </CaseStudySection>
 
           {/* User Personas */}
-          <CaseStudySection title={locale === 'fi' ? "Käyttäjäpersoonat" : "User Personas"} icon="groups" number={3} accent="pink">
+          <CaseStudySection title={locale === 'fi' ? "KÃƒÂ¤yttÃƒÂ¤jÃƒÂ¤persoonat" : "User Personas"} icon="groups" number={3} accent="pink">
             <div className="space-y-10">
                     {[
                       {
@@ -736,13 +736,13 @@ export default function AccessibilityClient() {
                                 <p className="text-xs font-mono uppercase tracking-widest opacity-40 mt-1">{persona.role}</p>
                               </div>
 
-                              {/* Traits — inline text, not pills */}
+                              {/* Traits Ã¢â‚¬â€ inline text, not pills */}
                               <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
                                 <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-warning flex-shrink-0">Traits</span>
-                                <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
+                                <span className="text-sm opacity-60">{persona.traits.join(' Ã‚Â· ')}</span>
                               </div>
 
-                              {/* Detail columns — left-border accent, no boxes */}
+                              {/* Detail columns Ã¢â‚¬â€ left-border accent, no boxes */}
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 <div className="border-l-2 border-green-600/30 pl-4">
                                   <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">Needs</h4>
@@ -809,7 +809,7 @@ export default function AccessibilityClient() {
                         icon: "translate",
                         title: content.requirement4,
                         desc: content.requirement4Desc,
-                        gradient: "from-[var(--color-ember)] to-red-600"
+                        gradient: "from-[var(--color-purple-400)] to-red-600"
                       }
                     ].map((req, index) => (
                       <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
@@ -933,21 +933,21 @@ export default function AccessibilityClient() {
                       <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.arabicType}</h3>
                       <div className="space-y-4" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
                         <div>
-                          <h4 className={`text-3xl font-bold text-[var(--foreground)]`}>عنوان كبير</h4>
+                          <h4 className={`text-3xl font-bold text-[var(--foreground)]`}>Ã˜Â¹Ã™â€ Ã™Ë†Ã˜Â§Ã™â€  Ã™Æ’Ã˜Â¨Ã™Å Ã˜Â±</h4>
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 48px, Line Height: 1.4</p>
                         </div>
                         <div>
-                          <h5 className={`text-xl font-semibold text-[var(--foreground)]`}>عنوان متوسط</h5>
+                          <h5 className={`text-xl font-semibold text-[var(--foreground)]`}>Ã˜Â¹Ã™â€ Ã™Ë†Ã˜Â§Ã™â€  Ã™â€¦Ã˜ÂªÃ™Ë†Ã˜Â³Ã˜Â·</h5>
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 24px, Line Height: 1.5</p>
                         </div>
                         <div>
-                          <p className={`text-base opacity-80 text-[var(--foreground)]`}>نص محسن للقراءة والوضوح</p>
+                          <p className={`text-base opacity-80 text-[var(--foreground)]`}>Ã™â€ Ã˜Âµ Ã™â€¦Ã˜Â­Ã˜Â³Ã™â€  Ã™â€žÃ™â€žÃ™â€šÃ˜Â±Ã˜Â§Ã˜Â¡Ã˜Â© Ã™Ë†Ã˜Â§Ã™â€žÃ™Ë†Ã˜Â¶Ã™Ë†Ã˜Â­</p>
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
                         </div>
                       </div>
-                      <div className={`mt-6 p-4 rounded-lg bg-ds-ember/30 border border-[var(--color-ember-dark)]`}>
+                      <div className={`mt-6 p-4 rounded-lg bg-ds-purple-400/30 border border-[var(--color-purple-700)]`}>
                         
-                        <span className={`text-sm text-[var(--color-ember-light)]`}>{content.rtlSupport}</span>
+                        <span className={`text-sm text-[var(--color-purple-300)]`}>{content.rtlSupport}</span>
                       </div>
                     </div>
                   </div>
@@ -989,7 +989,7 @@ export default function AccessibilityClient() {
                       <div className={`p-4 rounded-lg font-mono text-sm bg-[var(--background)]`}>
                         <div className={`text-[var(--foreground)]`}>
                           <span className="text-[var(--primary)]">npm run</span> <span className="text-ds-success">test:a11y</span><br />
-                          <span className="text-gray-500"># ✅ 0 accessibility violations found</span>
+                          <span className="text-gray-500"># Ã¢Å“â€¦ 0 accessibility violations found</span>
                         </div>
                       </div>
                     </div>

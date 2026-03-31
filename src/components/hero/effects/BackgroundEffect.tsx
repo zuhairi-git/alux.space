@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Theme } from '@/context/ThemeContext';
-import { palette } from '@/design-system';
+import { palette, themeRgb } from '@/design-system';
 
 interface Props {
   type: 'particles' | 'design-code' | 'gradient' | 'none' | 'abstract-modern' | 'modern-flow';
@@ -80,11 +80,11 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, 3, 0, Math.PI * 2);
         if (isColorful) {
-          ctx.fillStyle = `rgba(0, 255, 255, ${0.6 + particle.superpositionState * 0.4})`;
+          ctx.fillStyle = `rgba(${themeRgb.colorful.particlePrimary}, ${0.6 + particle.superpositionState * 0.4})`; // purple-400
         } else if (isLight) {
-          ctx.fillStyle = `rgba(168, 85, 247, ${0.5 + particle.superpositionState * 0.5})`;
+          ctx.fillStyle = `rgba(${themeRgb.light.particlePrimary}, ${0.5 + particle.superpositionState * 0.5})`; // purple-500
         } else {
-          ctx.fillStyle = `rgba(59, 130, 246, ${0.5 + particle.superpositionState * 0.5})`;
+          ctx.fillStyle = `rgba(${themeRgb.dark.particlePrimary}, ${0.5 + particle.superpositionState * 0.5})`; // blue-500
         }
         ctx.fill();
 
@@ -120,17 +120,17 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
             );
             
             if (isColorful) {
-              lineGradient.addColorStop(0, `rgba(0, 255, 255, ${0.4 * particle.superpositionState})`);
-              lineGradient.addColorStop(0.5, `rgba(168, 85, 247, ${0.6 * (particle.superpositionState + entangled.superpositionState) / 2})`);
-              lineGradient.addColorStop(1, `rgba(236, 72, 153, ${0.4 * entangled.superpositionState})`);
+              lineGradient.addColorStop(0, `rgba(${themeRgb.colorful.particlePrimary}, ${0.4 * particle.superpositionState})`); // purple-400
+              lineGradient.addColorStop(0.5, `rgba(${themeRgb.colorful.particleSecondary}, ${0.6 * (particle.superpositionState + entangled.superpositionState) / 2})`); // purple-300
+              lineGradient.addColorStop(1, `rgba(${themeRgb.colorful.particleTertiary}, ${0.4 * entangled.superpositionState})`); // pink-500
             } else if (isLight) {
-              lineGradient.addColorStop(0, `rgba(168, 85, 247, ${0.3 * particle.superpositionState})`);
-              lineGradient.addColorStop(0.5, `rgba(59, 130, 246, ${0.5 * (particle.superpositionState + entangled.superpositionState) / 2})`);
-              lineGradient.addColorStop(1, `rgba(236, 72, 153, ${0.3 * entangled.superpositionState})`);
+              lineGradient.addColorStop(0, `rgba(${themeRgb.light.particlePrimary}, ${0.3 * particle.superpositionState})`); // purple-500
+              lineGradient.addColorStop(0.5, `rgba(${themeRgb.light.particleSecondary}, ${0.5 * (particle.superpositionState + entangled.superpositionState) / 2})`); // blue-500
+              lineGradient.addColorStop(1, `rgba(${themeRgb.light.particleTertiary}, ${0.3 * entangled.superpositionState})`); // pink-500
             } else {
-              lineGradient.addColorStop(0, `rgba(59, 130, 246, ${0.3 * particle.superpositionState})`);
-              lineGradient.addColorStop(0.5, `rgba(99, 102, 241, ${0.5 * (particle.superpositionState + entangled.superpositionState) / 2})`);
-              lineGradient.addColorStop(1, `rgba(139, 92, 246, ${0.3 * entangled.superpositionState})`);
+              lineGradient.addColorStop(0, `rgba(${themeRgb.dark.particlePrimary}, ${0.3 * particle.superpositionState})`); // blue-500
+              lineGradient.addColorStop(0.5, `rgba(${themeRgb.dark.particleSecondary}, ${0.5 * (particle.superpositionState + entangled.superpositionState) / 2})`); // indigo-500
+              lineGradient.addColorStop(1, `rgba(${themeRgb.dark.particleTertiary}, ${0.3 * entangled.superpositionState})`); // violet-500
             }
             
             ctx.strokeStyle = lineGradient;

@@ -172,7 +172,7 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
         className={`
           flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg ml-1 mr-2 shadow-md transition-all duration-300
           ${theme === 'colorful'
-            ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-cobalt-700)] text-white shadow-[var(--color-ember)]/25'
+            ? 'bg-gradient-to-br from-[var(--color-purple-400)] to-[var(--color-cobalt-700)] text-white shadow-[var(--color-purple-400)]/25'
             : theme === 'light'
               ? 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white shadow-[var(--primary)]/25'
               : 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white shadow-[var(--primary)]/25'
@@ -294,7 +294,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
               }
             `}
           >
-            {/* Overview items — no category */}
+            {/* Overview items Ã¢â‚¬â€ no category */}
             {item.children.filter((c) => !c.category).map((child, idx) => (
               <Link
                 key={`ov-${idx}`}
@@ -434,7 +434,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
               ${isMenuOpen
                 ? 'bg-red-500 text-white rotate-90'
                 : theme === 'colorful'
-                  ? 'bg-gradient-to-br from-[var(--color-ember)] to-[var(--color-cobalt-700)] text-white'
+                  ? 'bg-gradient-to-br from-[var(--color-purple-400)] to-[var(--color-cobalt-700)] text-white'
                   : 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] text-white'
               }
             `}

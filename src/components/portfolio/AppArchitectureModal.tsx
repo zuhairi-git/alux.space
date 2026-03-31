@@ -116,11 +116,11 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <div className={`absolute top-0 left-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-0 left-1/2 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-0 right-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
 
             {/* 2. Core Engine */}
@@ -138,21 +138,21 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <div className={`absolute top-1/2 right-[37.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-1/2 right-[12.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
 
             {/* 3. Features */}
             <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 relative z-10">
                 <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bgLight="bg-cyan-400/5" bgDark="bg-cyan-500/30" colorLight="bg-cyan-400/10 text-cyan-500" colorDark="bg-cyan-500 text-cyan-400" />
                 <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bgLight="bg-green-600/5" bgDark="bg-green-600/30" colorLight="bg-green-600/10 text-ds-success" colorDark="bg-ds-success text-green-400" />
-                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-ds-ember/5" bgDark="bg-ds-ember/30" colorLight="bg-ds-ember/10 text-ds-ember" colorDark="bg-[var(--color-ember-dark)] text-[var(--color-ember-light)]" />
+                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-ds-purple-400/5" bgDark="bg-ds-purple-400/30" colorLight="bg-ds-purple-400/10 text-ds-purple-400" colorDark="bg-[var(--color-purple-700)] text-[var(--color-purple-300)]" />
                 <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bgLight="bg-pink-400/5" bgDark="bg-pink-500/30" colorLight="bg-pink-400/10 text-pink-500" colorDark="bg-pink-500 text-pink-400" />
             </div>
 
@@ -167,16 +167,16 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
                 <div className={`absolute top-1/2 left-1/2 h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-solid ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
             </div>
 
             {/* 4. End User App */}
             <div className="relative z-10 w-full flex justify-center pb-8">
-                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile — corporate-grade iOS & Android experience." bgLight="bg-slate-100" bgDark="bg-zinc-800/90" colorLight="bg-white text-slate-700 shadow-md" colorDark="bg-zinc-700 text-slate-200 shadow-md" />
+                <FlowNode isLarge delay={0.9} icon="smartphone" title="Mobile Client (5-Tab Architecture)" desc="Dashboard, Markets, Copilot, Alerts & Profile Ã¢â‚¬â€ corporate-grade iOS & Android experience." bgLight="bg-slate-100" bgDark="bg-zinc-800/90" colorLight="bg-white text-slate-700 shadow-md" colorDark="bg-zinc-700 text-slate-200 shadow-md" />
             </div>
 
         </div>

@@ -13,7 +13,7 @@ import { MobileIntroScreen, type MobileIntroConfig } from './MobileIntroScreen';
 
 const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
     appName: 'Workflow Platform',
-    tagline: 'Your AI-powered team collaboration hub — manage workspaces, projects, and insights all in one place.',
+    tagline: 'Your AI-powered team collaboration hub Ã¢â‚¬â€ manage workspaces, projects, and insights all in one place.',
     appIcon: 'blur_on',
     accentGradient: 'from-ds-indigo-500 to-ds-purple-500',
     aiTips: [
@@ -25,7 +25,7 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
         {
             icon: 'edit_document',
             title: 'Surface key decisions fast',
-            body: 'Copilot reads your workspace docs and highlights open items, blockers, and decisions — no more digging through threads.',
+            body: 'Copilot reads your workspace docs and highlights open items, blockers, and decisions Ã¢â‚¬â€ no more digging through threads.',
         },
         {
             icon: 'schedule',
@@ -37,7 +37,7 @@ const WORKFLOW_PLATFORM_INTRO: MobileIntroConfig = {
         { icon: 'space_dashboard', label: 'Dashboard', desc: 'Team activity feed, AI morning briefing, and your most urgent workspaces at a glance.' },
         { icon: 'workspaces', label: 'Workspaces', desc: 'Browse and manage all project workspaces, docs, timelines, and team members.' },
         { icon: 'auto_awesome', label: 'Copilot', desc: 'Conversational AI with full workspace context for smart recommendations and summaries.' },
-        { icon: 'notifications', label: 'Notifications', desc: 'Critical alerts, sprint reminders, and team activity — automatically prioritised by AI.' },
+        { icon: 'notifications', label: 'Notifications', desc: 'Critical alerts, sprint reminders, and team activity Ã¢â‚¬â€ automatically prioritised by AI.' },
         { icon: 'person', label: 'My Profile', desc: 'Your contributions, engagement stats, and app appearance settings.' },
     ],
 };
@@ -92,7 +92,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                 )}
             </AnimatePresence>
 
-            {/* Header — Liquid Glass (iOS 27) / M3 Expressive (Android 16/17) */}
+            {/* Header Ã¢â‚¬â€ Liquid Glass (iOS 27) / M3 Expressive (Android 16/17) */}
             <header className={`absolute top-0 w-full ${theme.headerPaddingTop} pb-4 px-6 z-40 transition-all duration-300 ${headerStyle}`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-4">
@@ -137,7 +137,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                     </div>
                     <motion.button
                         onClick={() => handleTabChange('copilot')}
-                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-ds-ember/20 text-ds-ember' : theme.accent.aiButton(isLight)}`}
+                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-ds-purple-400/20 text-ds-purple-400' : theme.accent.aiButton(isLight)}`}
                         whileTap={{ scale: 0.9 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >
@@ -158,7 +158,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                 </AnimatePresence>
             </main>
 
-            {/* Bottom Navigation — iOS 27 Liquid Glass floating / Android 16/17 M3 Expressive */}
+            {/* Bottom Navigation Ã¢â‚¬â€ iOS 27 Liquid Glass floating / Android 16/17 M3 Expressive */}
             <nav className={`absolute bottom-0 w-full z-40 ${theme.platform === 'ios'
                 ? `flex justify-around items-start px-3 h-[80px] pt-1.5 border-t ${theme.nav[themeMode]}`
                 : `flex justify-around items-center px-2 h-[80px] pb-1 border-t ${theme.nav[themeMode]}`
@@ -179,7 +179,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                     {a && (
                                         <motion.div
                                             layoutId="nav-pill"
-                                            className={`absolute inset-0 w-16 h-8 rounded-full ${isColorful ? 'bg-ds-ember/25' : theme.navTab.pill!(isLight)}`}
+                                            className={`absolute inset-0 w-16 h-8 rounded-full ${isColorful ? 'bg-ds-purple-400/25' : theme.navTab.pill!(isLight)}`}
                                             transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
                                         />
                                     )}
@@ -187,7 +187,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                         <motion.span
                                             animate={{ scale: a ? 1.1 : 1 }}
                                             transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember-light' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-purple-300' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                         >
                                             {ic}
                                         </motion.span>
@@ -198,14 +198,14 @@ export function MobileApp({ theme }: MobileAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.12 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-ember' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-purple-400' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>
                             )}
                             <motion.span
                                 animate={{ opacity: a ? 1 : 0.6 }}
-                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-ember' : 'text-ds-ember-light') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-purple-400' : 'text-ds-purple-300') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                             >
                                 {lb}
                             </motion.span>

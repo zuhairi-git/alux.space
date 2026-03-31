@@ -42,12 +42,12 @@ export default function TimelineCard({
   // Get card styles based on theme with improved visibility for dark theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-ds-ember/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(255,140,66,0.4)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-purple-400/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.4)]';
     } else if (theme === 'dark') {
       // Lightened the dark theme colors slightly to make animations more visible
-      return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.35)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.35)]';
     } else {
-      return 'bg-gradient-to-br from-white to-slate-100 border border-blue-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgba(59,130,246,0.3)]';
+      return 'bg-gradient-to-br from-white to-slate-100 border border-blue-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.3)]';
     }
   };
 
@@ -55,8 +55,8 @@ export default function TimelineCard({
   const getIconBgStyles = () => {
     if (theme === 'colorful') {
       return isHovered 
-        ? 'bg-gradient-to-br from-[var(--color-ember-light)]/70 to-purple-700/70 backdrop-blur-lg backdrop-filter border border-[var(--color-ember-light)]/70'
-        : 'bg-gradient-to-br from-[var(--color-ember)]/30 to-purple-800/30 backdrop-blur-lg backdrop-filter border border-[var(--color-ember-light)]/30';
+        ? 'bg-gradient-to-br from-purple-400/70 to-purple-700/70 backdrop-blur-lg backdrop-filter border border-purple-300/70'
+        : 'bg-gradient-to-br from-purple-500/30 to-purple-800/30 backdrop-blur-lg backdrop-filter border border-purple-400/30';
     } else if (theme === 'dark') {
       return isHovered
         ? 'bg-gradient-to-br from-blue-400/60 to-indigo-700/60 backdrop-blur-lg backdrop-filter border border-blue-300/70'
@@ -72,7 +72,7 @@ export default function TimelineCard({
     if (theme === 'colorful') {
       return isHovered
         ? 'text-white'
-        : 'text-amber-300';
+        : 'text-purple-300';
     } else if (theme === 'dark') {
       return isHovered
         ? 'text-white'
@@ -86,7 +86,7 @@ export default function TimelineCard({
   // Get title style based on theme - with dimensional aesthetics (no glow)
   const getTitleStyles = () => {
     if (theme === 'colorful') {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-violet-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-amber-200 group-hover:to-violet-200 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-purple-200 group-hover:to-pink-200 transition-all duration-700';
     } else if (theme === 'dark') {
       return 'text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-blue-200 group-hover:to-indigo-200 transition-all duration-700';
     } else {
@@ -97,7 +97,7 @@ export default function TimelineCard({
   // Get date and location style based on theme - with enhanced dimensional contrast
   const getMetaStyles = () => {
     if (theme === 'colorful') {
-      return 'text-amber-300 group-hover:text-amber-200 transition-all duration-300 tracking-wide';
+      return 'text-purple-300 group-hover:text-purple-200 transition-all duration-300 tracking-wide';
     } else if (theme === 'dark') {
       return 'text-blue-300 group-hover:text-blue-200 transition-all duration-300 tracking-wide';
     } else {
@@ -119,7 +119,7 @@ export default function TimelineCard({
   // Get orbital particle color based on theme - enhanced visibility for dark theme
   const getParticleColor = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-amber-400 to-violet-600';
+      return 'bg-gradient-to-br from-purple-400 to-pink-500';
     } else if (theme === 'dark') {
       // Use brighter colors for dark theme particles for better visibility
       return 'bg-gradient-to-br from-blue-300 to-indigo-500';
@@ -132,7 +132,7 @@ export default function TimelineCard({
   const cardCustomStyles = {
     boxShadow: isHovered ? (
       theme === 'colorful' 
-        ? '0 15px 35px -10px rgba(255,140,66,0.5), 0 0 0 1px rgba(124, 58, 237, 0.2), inset 0 0 25px rgba(124, 58, 237, 0.05)'
+        ? '0 15px 35px -10px rgba(167,139,250,0.5), 0 0 0 1px rgba(167, 139, 250, 0.2), inset 0 0 25px rgba(167, 139, 250, 0.05)'
         : theme === 'dark'
           ? '0 15px 35px -10px rgba(59,130,246,0.4), 0 0 0 1px rgba(59,130,246, 0.2), inset 0 0 25px rgba(59,130,246, 0.05)'
           : '0 15px 35px -10px rgba(59,130,246,0.3), 0 0 0 1px rgba(59,130,246, 0.15), inset 0 0 25px rgba(59,130,246, 0.04)'
@@ -142,7 +142,7 @@ export default function TimelineCard({
   return (
     <div className="group perspective-1000">      <article 
         className={`relative rounded-2xl overflow-hidden ${getCardStyles()} transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-          theme === 'colorful' ? 'focus:ring-orange-400' :
+          theme === 'colorful' ? 'focus:ring-purple-400' :
           'focus:ring-[var(--primary)]'
         }`}
         style={cardCustomStyles}
@@ -174,7 +174,7 @@ export default function TimelineCard({
                 animation: `particle-float ${5 + particle.delay}s forwards cubic-bezier(0.165, 0.84, 0.44, 1)`, // Longer animation with easing
                 animationDelay: `${particle.delay * 0.8}s`, // Slightly reduced delay for more dynamic feel
                 boxShadow: theme === 'colorful' 
-                  ? '0 0 14px rgba(217, 70, 239, 0.95)'
+                  ? '0 0 14px rgba(167, 139, 250, 0.95)'
                   : theme === 'dark'
                     ? '0 0 20px rgba(147, 197, 253, 0.95), 0 0 30px rgba(59, 130, 246, 0.4)' // Much enhanced glow for dark theme
                     : '0 0 14px rgba(59, 130, 246, 0.85)'
@@ -198,7 +198,7 @@ export default function TimelineCard({
               {title}
             </h3>
             <div className={`inline-flex items-center justify-center px-3 py-1.5 my-2 text-sm font-medium rounded-full ${
-              theme === 'colorful' ? 'bg-[var(--color-ember)]/15' : 
+              theme === 'colorful' ? 'bg-[var(--color-purple-400)]/15' : 
               theme === 'dark' ? 'bg-blue-900/30' : 
               'bg-blue-100'
             } transition-all duration-300`}>
@@ -212,7 +212,7 @@ export default function TimelineCard({
           </div>
           
           <div className={`relative px-4 py-3.5 rounded-lg backdrop-blur-md mx-1 ${
-            theme === 'colorful' ? 'bg-gradient-to-br from-[var(--color-ember)]/10 to-[var(--color-cobalt-700)]/10 border border-[var(--color-ember)]/10' : 
+            theme === 'colorful' ? 'bg-gradient-to-br from-[var(--color-purple-400)]/10 to-[var(--color-cobalt-700)]/10 border border-[var(--color-purple-400)]/10' : 
             theme === 'dark' ? 'bg-gradient-to-br from-blue-900/10 to-indigo-900/10 border border-blue-500/10' : 
             'bg-gradient-to-br from-blue-50/60 to-white/60 border border-blue-200/20'
           } transition-all duration-300`}>
