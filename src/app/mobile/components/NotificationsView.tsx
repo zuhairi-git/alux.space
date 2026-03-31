@@ -14,12 +14,12 @@ interface NotificationsViewProps {
 
 export function NotificationsView({ card, isLight, isColorful = false, theme }: NotificationsViewProps) {
     const [exp, setExp] = useState<number | null>(null);
-    const badge = (p: string) => p === 'critical' ? (isLight ? 'bg-ds-error/10 text-ds-error border-ds-error/25' : 'bg-ds-error/15 text-ds-error border-ds-error/20') : p === 'warning' ? (isLight ? 'bg-ds-warning/10 text-ds-warning border-ds-warning/25' : 'bg-ds-warning/15 text-ds-warning border-ds-warning/20') : isColorful ? (isLight ? 'bg-ds-purple-400/20 text-ds-purple-700 border-ds-purple-400/30' : 'bg-ds-purple-400/15 text-ds-purple-400 border-ds-purple-400/30') : (isLight ? 'bg-ds-blue-100 text-ds-blue-500 border-ds-blue-200' : 'bg-ds-blue-500/10 text-ds-blue-400 border-ds-blue-500/15');
+    const badge = (p: string) => p === 'critical' ? (isLight ? 'bg-ds-error/10 text-ds-error border-ds-error/25' : 'bg-ds-error/15 text-ds-error border-ds-error/20') : p === 'warning' ? (isLight ? 'bg-ds-warning/10 text-ds-warning border-ds-warning/25' : 'bg-ds-warning/15 text-ds-warning border-ds-warning/20') : isColorful ? (isLight ? 'bg-primary/20 text-primary-dark border-primary/30' : 'bg-primary/15 text-primary border-primary/30') : (isLight ? 'bg-ds-blue-100 text-ds-blue-500 border-ds-blue-200' : 'bg-ds-blue-500/10 text-ds-blue-400 border-ds-blue-500/15');
     const nt = theme.notification;
     const headerAccentClass = isColorful
-        ? (theme.platform === 'ios' ? 'text-xl font-bold tracking-tight text-ds-purple-400' : 'text-xl font-medium text-ds-purple-400')
+        ? (theme.platform === 'ios' ? 'text-xl font-bold tracking-tight text-primary' : 'text-xl font-medium text-primary')
         : nt.headerAccent(isLight);
-    const askAiColor = isColorful ? 'text-ds-purple-400' : nt.askAiColor;
+    const askAiColor = isColorful ? 'text-primary' : nt.askAiColor;
 
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-3.5`}>

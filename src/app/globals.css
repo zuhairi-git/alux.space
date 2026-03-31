@@ -430,12 +430,12 @@ body {
 }
 
 .scrollbar-colorful::-webkit-scrollbar-thumb {
-  background: var(--color-purple-700);
+  background: var(--primary-dark);
   border-radius: 10px;
 }
 
 .scrollbar-colorful::-webkit-scrollbar-thumb:hover {
-  background: var(--color-purple-400);
+  background: var(--primary);
 }
 
 /* Hide scrollbars inside mobile prototype frames */

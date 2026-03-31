@@ -35,7 +35,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
 
     if (step === 'done') return (
         <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6 text-center">
-            <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${isColorful ? 'from-ds-purple-400/15 to-ds-purple-700/20' : 'from-ds-cyan-400/20 to-ds-blue-500/20'} flex items-center justify-center mb-4 shadow-lg`}>
+            <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${isColorful ? 'from-primary/15 to-primary-dark/20' : 'from-ds-cyan-400/20 to-ds-blue-500/20'} flex items-center justify-center mb-4 shadow-lg`}>
                 <Icon name="verified" className="text-5xl text-ds-cyan-400" />
             </div>
             <h3 className="text-xl font-bold mb-1">Profile Updated!</h3>
@@ -74,8 +74,8 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-purple-400/15' : isLight ? 'bg-cyan-400/15' : 'bg-ds-cyan-500/15'}`}>
-                    <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-ds-purple-400' : 'text-ds-cyan-400'}`} />
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/15' : isLight ? 'bg-cyan-400/15' : 'bg-ds-cyan-500/15'}`}>
+                    <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-ds-cyan-400'}`} />
                 </div>
                 <div>
                     <h3 className="text-[18px] font-bold">Update CV</h3>
@@ -92,7 +92,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
                     <div className="flex flex-wrap gap-2">
                         {skills.map(s => (
                             <button key={s} onClick={() => setSelectedSkills(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s])}
-                                className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${selectedSkills.includes(s) ? `${isColorful ? 'bg-ds-purple-400' : 'bg-ds-cyan-500'} text-white` : (isLight ? 'bg-black/5 text-gray-600' : 'bg-white/8 text-gray-300')}`}>{s}</button>
+                                className={`px-3 py-1.5 rounded-xl text-[12px] font-semibold transition-colors active:scale-95 ${selectedSkills.includes(s) ? `${isColorful ? 'bg-primary' : 'bg-ds-cyan-500'} text-white` : (isLight ? 'bg-black/5 text-gray-600' : 'bg-white/8 text-gray-300')}`}>{s}</button>
                         ))}
                     </div>
                 </div>
@@ -146,7 +146,7 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-4">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-purple-400/20' : isLight ? 'bg-ds-purple-400/10' : 'bg-ds-purple-400/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary/10' : 'bg-primary/15'}`}>
                     <Icon name="schedule" className="text-[18px] text-amber-400" />
                 </div>
                 <div>
@@ -188,10 +188,10 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
 // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Analytics Sheet Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isColorful: boolean; theme: MobileTheme }) {
     const stats = [
-        { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', color: isColorful ? 'text-ds-purple-400' : 'text-ds-cyan-400', bg: isColorful ? 'bg-ds-purple-400/15' : 'bg-ds-cyan-500/15' },
-        { label: 'Applications', value: '7', change: '+3', icon: 'send', color: isColorful ? 'text-ds-purple-400' : 'text-ds-blue-400', bg: isColorful ? 'bg-ds-purple-400/15' : 'bg-ds-blue-500/15' },
+        { label: 'Profile Views', value: '142', change: '+28%', icon: 'visibility', color: isColorful ? 'text-primary' : 'text-ds-cyan-400', bg: isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/15' },
+        { label: 'Applications', value: '7', change: '+3', icon: 'send', color: isColorful ? 'text-primary' : 'text-ds-blue-400', bg: isColorful ? 'bg-primary/15' : 'bg-ds-blue-500/15' },
         { label: 'Interviews', value: '2', change: 'Ã¢â€ â€˜ new', icon: 'record_voice_over', color: 'text-green-400', bg: 'bg-ds-success/15' },
-        { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: isColorful ? 'text-ds-purple-400' : 'text-ds-purple-400', bg: isColorful ? 'bg-ds-purple-400/15' : 'bg-ds-purple-500/15' },
+        { label: 'Avg Match', value: '88%', change: '+4%', icon: 'target', color: isColorful ? 'text-primary' : 'text-primary', bg: isColorful ? 'bg-primary/15' : 'bg-ds-purple-500/15' },
     ];
     const barData = [25, 50, 40, 66, 80, 72, 90];
     const barLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
@@ -282,9 +282,9 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             label: 'Update CV',
             desc: 'Improve profile',
             gradient: 'from-gradient-start to-gradient-mid',
-            bg: isColorful ? 'from-ds-purple-400/20 to-ds-purple-700/20' : isLight ? 'from-ds-cyan-400/50/15 to-ds-blue-500/15' : 'from-ds-cyan-400/50/20 to-ds-blue-500/20',
-            iconColor: isColorful ? 'text-ds-purple-300' : 'text-ds-cyan-400',
-            glow: isColorful ? 'shadow-ds-purple-400/20' : '',
+            bg: isColorful ? 'from-primary/20 to-primary-dark/20' : isLight ? 'from-ds-cyan-400/50/15 to-ds-blue-500/15' : 'from-ds-cyan-400/50/20 to-ds-blue-500/20',
+            iconColor: isColorful ? 'text-accent' : 'text-ds-cyan-400',
+            glow: isColorful ? 'shadow-primary/20' : '',
         },
         {
             key: 'shifts' as ActiveSheet,
@@ -313,7 +313,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             desc: 'Find local gigs',
             gradient: 'from-ds-purple-500 to-ds-fuchsia-500',
             bg: isColorful ? 'from-ds-purple-500/25 to-ds-fuchsia-500/25' : isLight ? 'from-ds-purple-500/15 to-ds-fuchsia-500/15' : 'from-ds-purple-500/20 to-ds-fuchsia-500/20',
-            iconColor: 'text-ds-purple-400',
+            iconColor: 'text-primary',
             glow: isColorful ? 'shadow-purple-500/20' : '',
             navTo: 'jobs',
         },
@@ -326,11 +326,11 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
 
             {/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Profile Score Hero Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-                className={`relative overflow-hidden rounded-[28px] p-5 mb-5 ${isColorful ? 'bg-gradient-to-br from-ds-purple-400/20 to-ds-purple-700/20 border border-ds-purple-400/20' : isLight ? 'bg-gradient-to-br from-ds-cyan-400/5 to-blue-50 border border-ds-cyan-400/15' : 'bg-gradient-to-br from-ds-cyan-400/50/15 via-ds-blue-500/10 to-ds-purple-500/10 border border-ds-cyan-500/15'}`}
+                className={`relative overflow-hidden rounded-[28px] p-5 mb-5 ${isColorful ? 'bg-gradient-to-br from-primary/20 to-primary-dark/20 border border-primary/20' : isLight ? 'bg-gradient-to-br from-ds-cyan-400/5 to-blue-50 border border-ds-cyan-400/15' : 'bg-gradient-to-br from-ds-cyan-400/50/15 via-ds-blue-500/10 to-ds-purple-500/10 border border-ds-cyan-500/15'}`}
             >
                 {/* Decorative blobs */}
                 <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-ds-cyan-400/20 to-transparent rounded-bl-full pointer-events-none" />
-                <div className={`absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr ${isColorful ? 'from-ds-purple-400/10' : 'from-ds-blue-400/15'} to-transparent pointer-events-none`} />
+                <div className={`absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr ${isColorful ? 'from-primary/10' : 'from-ds-blue-400/15'} to-transparent pointer-events-none`} />
                 <div className="flex items-center gap-4 relative z-10">
                     {/* Circular score ring */}
                     <div className="relative w-[68px] h-[68px] shrink-0">
@@ -419,10 +419,10 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     const statusStyle = item.status === 'Interview'
                         ? 'bg-ds-success/15 text-ds-success border-green-600/30'
                         : item.status === 'Applied'
-                        ? (isColorful ? 'bg-ds-purple-400/10 text-ds-purple-400 border-ds-purple-400/30' : isLight ? 'bg-primary/10 text-accent border-[var(--primary)]/20' : 'bg-primary/15 text-accent border-[var(--primary)]/30')
+                        ? (isColorful ? 'bg-primary/10 text-primary border-primary/30' : isLight ? 'bg-primary/10 text-accent border-[var(--primary)]/20' : 'bg-primary/15 text-accent border-[var(--primary)]/30')
                         : (isLight ? 'bg-gray-100 text-gray-500 border-gray-200' : 'bg-white/8 text-white/50 border-white/10');
-                    const matchColor = item.match >= 90 ? 'text-ds-success' : item.match >= 80 ? (isColorful ? 'text-ds-purple-400' : 'text-ds-blue-400') : 'text-amber-400';
-                    const matchBg = item.match >= 90 ? 'bg-ds-success/10' : item.match >= 80 ? (isColorful ? 'bg-ds-purple-400/10' : 'bg-ds-blue-500/10') : 'bg-amber-600/10';
+                    const matchColor = item.match >= 90 ? 'text-ds-success' : item.match >= 80 ? (isColorful ? 'text-primary' : 'text-ds-blue-400') : 'text-amber-400';
+                    const matchBg = item.match >= 90 ? 'bg-ds-success/10' : item.match >= 80 ? (isColorful ? 'bg-primary/10' : 'bg-ds-blue-500/10') : 'bg-amber-600/10';
                     const iconBg = theme.dashboard.teamColorMap[item.color] ?? 'bg-gray-500/15 text-gray-400';
                     return (
                         <motion.div key={i} variants={itemVariants} onClick={() => onNav?.('jobs')}

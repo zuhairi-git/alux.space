@@ -20,20 +20,20 @@ interface ViewProps {
 
 export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     const promptCardClass = isColorful
-        ? 'rounded-2xl bg-ds-purple-400/10 text-white backdrop-blur-xl border border-ds-purple-400/20'
+        ? 'rounded-2xl bg-primary/10 text-white backdrop-blur-xl border border-primary/20'
         : theme.copilot.promptCard(isLight);
-    const promptIconColor = isColorful ? 'text-ds-purple-400' : theme.copilot.promptIconColor;
+    const promptIconColor = isColorful ? 'text-primary' : theme.copilot.promptIconColor;
     const inputBarClass = isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
         ? 'bg-white/10 text-white border border-white/10'
         : theme.copilot.inputField(isLight);
     const bb = isColorful
-        ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-ds-purple-400/20 text-white rounded-2xl'
+        ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-primary/20 text-white rounded-2xl'
         : theme.copilot.botBubble(isLight);
-    const pingBgClass = isColorful ? 'bg-ds-purple-400' : theme.copilot.pingBg;
-    const heroGradientClass = isColorful ? 'bg-gradient-to-br from-ds-purple-400 to-ds-purple-700' : theme.copilot.heroGradient;
+    const pingBgClass = isColorful ? 'bg-primary' : theme.copilot.pingBg;
+    const heroGradientClass = isColorful ? 'bg-gradient-to-br from-primary to-primary-dark' : theme.copilot.heroGradient;
     const userBubbleClass = isColorful
-        ? `bg-gradient-to-br from-ds-purple-400 to-ds-purple-700 text-white ${theme.platform === 'ios' ? 'rounded-[22px] rounded-tr-md' : 'rounded-[24px] rounded-tr-md'} shadow-[0_2px_8px_rgba(255,140,66,0.25)]`
+        ? `bg-gradient-to-br from-primary to-primary-dark text-white ${theme.platform === 'ios' ? 'rounded-[22px] rounded-tr-md' : 'rounded-[24px] rounded-tr-md'} shadow-[0_2px_8px_rgba(255,140,66,0.25)]`
         : theme.copilot.userBubble;
     const defaultMessages: Message[] = [
         {

@@ -152,7 +152,7 @@ function WorkflowDiagram({ theme }: { theme: string }) {
             <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 relative z-10">
                 <FlowNode delay={0.5} icon="space_dashboard" title="Dashboard & Watchlist" desc="AI morning briefing, sparkline charts, market movers." bgLight="bg-cyan-400/5" bgDark="bg-cyan-500/30" colorLight="bg-cyan-400/10 text-cyan-500" colorDark="bg-cyan-500 text-cyan-400" />
                 <FlowNode delay={0.6} icon="candlestick_chart" title="Live Markets" desc="Index tracking, sector heatmap, trending tickers." bgLight="bg-green-600/5" bgDark="bg-green-600/30" colorLight="bg-green-600/10 text-ds-success" colorDark="bg-ds-success text-green-400" />
-                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-ds-purple-400/5" bgDark="bg-ds-purple-400/30" colorLight="bg-ds-purple-400/10 text-ds-purple-400" colorDark="bg-[var(--color-purple-700)] text-[var(--color-purple-300)]" />
+                <FlowNode delay={0.7} icon="auto_awesome" title="AI Copilot" desc="Streaming responses with verified citation cards." bgLight="bg-primary/5" bgDark="bg-primary/30" colorLight="bg-primary/10 text-primary" colorDark="bg-primary-dark text-accent" />
                 <FlowNode delay={0.8} icon="notifications_active" title="Smart Alerts" desc="Priority-coded, expandable, with AI follow-up." bgLight="bg-pink-400/5" bgDark="bg-pink-500/30" colorLight="bg-pink-400/10 text-pink-500" colorDark="bg-pink-500 text-pink-400" />
             </div>
 

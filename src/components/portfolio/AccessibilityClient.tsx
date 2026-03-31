@@ -450,7 +450,7 @@ export default function AccessibilityClient() {
       title: content.spacingTitle,
       description: content.spacingDesc,
       
-      gradient: "from-[var(--color-purple-400)] to-red-600"
+      gradient: "from-primary to-red-600"
     }
   ];
 
@@ -809,7 +809,7 @@ export default function AccessibilityClient() {
                         icon: "translate",
                         title: content.requirement4,
                         desc: content.requirement4Desc,
-                        gradient: "from-[var(--color-purple-400)] to-red-600"
+                        gradient: "from-primary to-red-600"
                       }
                     ].map((req, index) => (
                       <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
@@ -945,9 +945,9 @@ export default function AccessibilityClient() {
                           <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
                         </div>
                       </div>
-                      <div className={`mt-6 p-4 rounded-lg bg-ds-purple-400/30 border border-[var(--color-purple-700)]`}>
+                      <div className={`mt-6 p-4 rounded-lg bg-primary/30 border border-primary-dark`}>
                         
-                        <span className={`text-sm text-[var(--color-purple-300)]`}>{content.rtlSupport}</span>
+                        <span className={`text-sm text-accent`}>{content.rtlSupport}</span>
                       </div>
                     </div>
                   </div>

@@ -137,7 +137,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                     </div>
                     <motion.button
                         onClick={() => handleTabChange('copilot')}
-                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-ds-purple-400/20 text-ds-purple-400' : theme.accent.aiButton(isLight)}`}
+                        className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-primary/20 text-primary' : theme.accent.aiButton(isLight)}`}
                         whileTap={{ scale: 0.9 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >
@@ -179,7 +179,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                     {a && (
                                         <motion.div
                                             layoutId="nav-pill"
-                                            className={`absolute inset-0 w-16 h-8 rounded-full ${isColorful ? 'bg-ds-purple-400/25' : theme.navTab.pill!(isLight)}`}
+                                            className={`absolute inset-0 w-16 h-8 rounded-full ${isColorful ? 'bg-primary/25' : theme.navTab.pill!(isLight)}`}
                                             transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.8 }}
                                         />
                                     )}
@@ -187,7 +187,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                                         <motion.span
                                             animate={{ scale: a ? 1.1 : 1 }}
                                             transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-purple-300' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                         >
                                             {ic}
                                         </motion.span>
@@ -198,14 +198,14 @@ export function MobileApp({ theme }: MobileAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.12 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-ds-purple-400' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>
                             )}
                             <motion.span
                                 animate={{ opacity: a ? 1 : 0.6 }}
-                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-ds-purple-400' : 'text-ds-purple-300') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                className={`${theme.navTab.labelSize} mt-0.5 font-medium transition-colors duration-200 ${a ? (isColorful ? (theme.platform === 'ios' ? 'text-primary' : 'text-accent') : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                             >
                                 {lb}
                             </motion.span>

@@ -34,7 +34,7 @@ type SheetMode = 'detail' | 'form' | 'success';
 export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
     const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : theme.workspace.searchBar(isLight);
     const sheetBgClass = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
-    const primaryBtnClass = isColorful ? 'bg-ds-purple-400 text-white rounded-full' : theme.workspace.primaryButton;
+    const primaryBtnClass = isColorful ? 'bg-primary text-white rounded-full' : theme.workspace.primaryButton;
     const [activeFilter, setActiveFilter] = useState('All');
     const [selectedJob, setSelectedJob] = useState<typeof JOBS[0] | null>(null);
     const [sheetMode, setSheetMode] = useState<SheetMode>('detail');
@@ -85,14 +85,14 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         {/* Top row */}
                         <div className="p-4 pb-3">
                             <div className="flex items-start gap-3">
-                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isColorful ? 'bg-ds-purple-400/15' : theme.workspace.iconBg(isLight)}`}>
-                                    <Icon name={JOB_ICONS[job.title] || 'work'} className={`text-[22px] ${isColorful ? 'text-ds-purple-400' : theme.workspace.iconColor(isLight)}`} />
+                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isColorful ? 'bg-primary/15' : theme.workspace.iconBg(isLight)}`}>
+                                    <Icon name={JOB_ICONS[job.title] || 'work'} className={`text-[22px] ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-start justify-between gap-2">
                                         <h3 className="text-[16px] font-bold leading-tight">{job.title}</h3>
                                         {job.tag && (
-                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : isColorful ? 'bg-ds-purple-400/15 text-ds-purple-400' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>
+                                            <span className={`shrink-0 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide ${job.tag === 'High Match' ? 'bg-ds-success/15 text-ds-success' : isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>
                                                 {job.tag}
                                             </span>
                                         )}
@@ -119,10 +119,10 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                         <div className={`flex items-center justify-between px-4 py-3 ${isLight ? 'bg-black/[0.025]' : 'bg-white/[0.03]'}`}>
                             <div className="flex items-center gap-2">
                                 <div className={`h-1.5 w-20 rounded-full overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
-                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? (isColorful ? 'bg-ds-purple-400' : 'bg-ds-blue-500') : 'bg-amber-400'}`}
+                                    <div className={`h-full rounded-full ${job.match >= 90 ? 'bg-ds-success' : job.match >= 80 ? (isColorful ? 'bg-primary' : 'bg-ds-blue-500') : 'bg-amber-400'}`}
                                         style={{ width: `${job.match}%` }} />
                                 </div>
-                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? (isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400') : 'text-amber-400'}`}>{job.match}% match</span>
+                                <span className={`text-[12px] font-semibold ${job.match >= 90 ? 'text-ds-success' : job.match >= 80 ? (isColorful ? 'text-primary' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400') : 'text-amber-400'}`}>{job.match}% match</span>
                             </div>
                             <button onClick={e => { e.stopPropagation(); openSheet(job); }}
                                 className={`px-4 py-1.5 ${theme.radii.sendButton} font-semibold text-[13px] bg-gradient-to-r from-gradient-start to-gradient-mid text-white active:scale-95 transition-transform`}>
@@ -165,7 +165,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             <Icon name="arrow_back" className="text-[20px]" />
                                         </button>
                                         <h3 className="text-[18px] font-bold">Quick Apply</h3>
-                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full ${isColorful ? 'bg-ds-purple-400/15 text-ds-purple-400' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
+                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full ${isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className="space-y-3 mb-5">
                                         {[
@@ -202,14 +202,14 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                             {sheetMode === 'detail' && (
                                 <>
                                     <div className="flex items-start mb-5">
-                                        <div className={`w-14 h-14 rounded-[18px] flex items-center justify-center mr-4 ${isColorful ? 'bg-ds-purple-400/15' : theme.workspace.iconBg(isLight)}`}>
-                                            <Icon name="work" className={`text-2xl ${isColorful ? 'text-ds-purple-400' : theme.workspace.iconColor(isLight)}`} />
+                                        <div className={`w-14 h-14 rounded-[18px] flex items-center justify-center mr-4 ${isColorful ? 'bg-primary/15' : theme.workspace.iconBg(isLight)}`}>
+                                            <Icon name="work" className={`text-2xl ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-xl font-bold mb-0.5">{selectedJob.title}</h3>
                                             <p className={`text-[14px] ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>{selectedJob.company}</p>
                                         </div>
-                                        <span className={`px-3 py-1 rounded-full font-bold text-[13px] ${isColorful ? 'bg-ds-purple-400/15 text-ds-purple-400' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
+                                        <span className={`px-3 py-1 rounded-full font-bold text-[13px] ${isColorful ? 'bg-primary/15 text-primary' : isLight ? 'bg-ds-blue-500/15 text-ds-blue-600' : 'bg-ds-blue-500/15 text-ds-blue-400'}`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className={`p-4 rounded-2xl mb-5 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
                                         <div className="flex items-center justify-between mb-3">

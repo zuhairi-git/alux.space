@@ -106,8 +106,8 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
 
-    const accentColor = selectedTheme === 'colorful' ? 'var(--color-purple-400)' : '#3b82f6';
-    const accentGradient = selectedTheme === 'colorful' ? 'from-ds-purple-400 to-ds-purple-700' : config.accentGradient;
+    const accentColor = selectedTheme === 'colorful' ? 'var(--primary)' : '#3b82f6';
+    const accentGradient = selectedTheme === 'colorful' ? 'from-primary to-primary-dark' : config.accentGradient;
 
     const bgClass =
         selectedTheme === 'light'
@@ -128,7 +128,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
                 : 'bg-ds-gray-50/95 border border-ds-gray-200/60 shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : selectedTheme === 'colorful'
-                ? 'bg-white/[0.06] border border-ds-purple-400/12'
+                ? 'bg-white/[0.06] border border-primary/12'
                 : isIOS
                     ? 'bg-white/[0.06] backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.05]'
                     : 'bg-ds-dark-3/80 border border-ds-gray-600/30';
@@ -199,7 +199,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-fuchsia-600/25 blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
                     <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-purple-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
-                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-ds-purple-400/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
+                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
                 </div>
             )}
 
@@ -508,7 +508,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                                     <div className={`h-1.5 rounded-full w-3/4 ${t.v === 'light' ? 'bg-gray-200/80' : 'bg-white/15'}`} />
                                                 </div>
                                                 {t.v === 'colorful' && (
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-ds-purple-400/30 to-ds-purple-700/20 rounded-xl" />
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-primary-dark/20 rounded-xl" />
                                                 )}
                                             </div>
 

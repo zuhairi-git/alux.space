@@ -60,9 +60,9 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
 
                     {/* AI Match */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
-                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-ds-purple-400/10 border-b border-ds-purple-400/20' : isLight ? 'bg-primary/8 border-b border-[var(--primary)]/10' : 'bg-primary/10 border-b border-[var(--primary)]/15'}`}>
-                            <Icon name="auto_awesome" className={`text-[13px] ${isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400'}`} />
-                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
+                        <div className={`px-4 py-2 flex items-center gap-2 ${isColorful ? 'bg-primary/10 border-b border-primary/20' : isLight ? 'bg-primary/8 border-b border-[var(--primary)]/10' : 'bg-primary/10 border-b border-[var(--primary)]/15'}`}>
+                            <Icon name="auto_awesome" className={`text-[13px] ${isColorful ? 'text-primary' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400'}`} />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider ${isColorful ? 'text-primary' : isLight ? 'text-ds-blue-600' : 'text-ds-blue-400'}`}>New AI Match</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>2h ago</span>
                         </div>
                         <div className="p-4">
@@ -88,15 +88,15 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                     {/* Weekly Insights */}
                     <motion.div variants={itemVariants} className={`${card} overflow-hidden`}>
                         <div className={`px-4 py-2 flex items-center gap-2 ${isLight ? 'bg-ds-purple-500/5 border-b border-ds-purple-500/10' : 'bg-ds-purple-500/10 border-b border-ds-purple-500/15'}`}>
-                            <Icon name="insights" className="text-[13px] text-ds-purple-400" />
-                            <span className={`text-[11px] font-bold uppercase tracking-wider text-ds-purple-400`}>Weekly Insights</span>
+                            <Icon name="insights" className="text-[13px] text-primary" />
+                            <span className={`text-[11px] font-bold uppercase tracking-wider text-primary`}>Weekly Insights</span>
                             <span className={`ml-auto text-[11px] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>1d ago</span>
                         </div>
                         <div className="p-4">
                             <div className="grid grid-cols-3 gap-2 mb-3">
                                 {[
-                                    { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-ds-purple-400' },
-                                    { label: 'Applications', value: '4', icon: 'send', color: isColorful ? 'text-ds-purple-400' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400' },
+                                    { label: 'Profile Views', value: '+20%', icon: 'visibility', color: 'text-primary' },
+                                    { label: 'Applications', value: '4', icon: 'send', color: isColorful ? 'text-primary' : isLight ? 'text-ds-blue-500' : 'text-ds-blue-400' },
                                     { label: 'Avg Match', value: '88%', icon: 'stars', color: 'text-amber-400' },
                                 ].map(stat => (
                                     <div key={stat.label} className={`flex flex-col items-center py-2.5 rounded-xl ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>
