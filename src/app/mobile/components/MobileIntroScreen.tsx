@@ -106,7 +106,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const isIOS = theme.platform === 'ios';
     const isLast = step === TOTAL_STEPS - 1;
 
-    const accentColor = selectedTheme === 'colorful' ? 'var(--primary)' : '#3b82f6';
+    const accentColor = selectedTheme === 'colorful' ? 'var(--primary)' : 'var(--color-blue-500)';
     const accentGradient = selectedTheme === 'colorful' ? 'from-primary to-primary-dark' : config.accentGradient;
 
     const bgClass =
@@ -188,17 +188,17 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
 
             {/* Floating ambient orbs - visible on all themes */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <FloatingOrb size={200} color={selectedTheme === 'colorful' ? 'rgba(167,139,250,0.2)' : selectedTheme === 'light' ? 'rgba(99,102,241,0.08)' : 'rgba(168,85,247,0.12)'} startX="-10%" startY="10%" delay={0} />
-                <FloatingOrb size={160} color={selectedTheme === 'colorful' ? 'rgba(236,72,153,0.18)' : selectedTheme === 'light' ? 'rgba(168,85,247,0.06)' : 'rgba(59,130,246,0.1)'} startX="60%" startY="50%" delay={1.5} />
-                <FloatingOrb size={120} color={selectedTheme === 'colorful' ? 'rgba(37,99,235,0.15)' : selectedTheme === 'light' ? 'rgba(236,72,153,0.05)' : 'rgba(236,72,153,0.08)'} startX="30%" startY="70%" delay={3} />
-                <FloatingOrb size={100} color={selectedTheme === 'colorful' ? 'rgba(196,181,253,0.1)' : selectedTheme === 'light' ? 'rgba(59,130,246,0.05)' : 'rgba(99,102,241,0.08)'} startX="80%" startY="20%" delay={2} />
+                <FloatingOrb size={200} color={selectedTheme === 'colorful' ? 'rgba(var(--color-violet-400-rgb, 167,139,250),0.2)' : selectedTheme === 'light' ? 'rgba(var(--color-indigo-500-rgb, 99,102,241),0.08)' : 'rgba(var(--color-purple-500-rgb, 168,85,247),0.12)'} startX="-10%" startY="10%" delay={0} />
+                <FloatingOrb size={160} color={selectedTheme === 'colorful' ? 'rgba(var(--color-pink-500-rgb, 236,72,153),0.18)' : selectedTheme === 'light' ? 'rgba(var(--color-purple-500-rgb, 168,85,247),0.06)' : 'rgba(var(--color-blue-500-rgb, 59,130,246),0.1)'} startX="60%" startY="50%" delay={1.5} />
+                <FloatingOrb size={120} color={selectedTheme === 'colorful' ? 'rgba(var(--color-blue-600-rgb, 37,99,235),0.15)' : selectedTheme === 'light' ? 'rgba(var(--color-pink-500-rgb, 236,72,153),0.05)' : 'rgba(var(--color-pink-500-rgb, 236,72,153),0.08)'} startX="30%" startY="70%" delay={3} />
+                <FloatingOrb size={100} color={selectedTheme === 'colorful' ? 'rgba(var(--color-violet-300-rgb, 196,181,253),0.1)' : selectedTheme === 'light' ? 'rgba(var(--color-blue-500-rgb, 59,130,246),0.05)' : 'rgba(var(--color-indigo-500-rgb, 99,102,241),0.08)'} startX="80%" startY="20%" delay={2} />
             </div>
 
             {/* Colorful ambient mesh - enhanced */}
             {selectedTheme === 'colorful' && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-ds-fuchsia-600/25 blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
-                    <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-primary-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
+                    <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-ds-violet-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
                     <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
                 </div>
             )}

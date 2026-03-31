@@ -120,7 +120,7 @@ function AreaChart({ data, color, width = 300, height = 100, className = '' }: {
                 <>
                     <line x1={points[hoverIdx].x} y1={0} x2={points[hoverIdx].x} y2={height} stroke={color} strokeWidth="1" strokeDasharray="3,3" opacity="0.5" />
                     <circle cx={points[hoverIdx].x} cy={points[hoverIdx].y} r="4" fill={color} stroke="white" strokeWidth="2" />
-                    <rect x={points[hoverIdx].x - 25} y={Math.max(0, points[hoverIdx].y - 24)} width="50" height="18" rx="6" fill="rgba(0,0,0,0.75)" />
+                    <rect x={points[hoverIdx].x - 25} y={Math.max(0, points[hoverIdx].y - 24)} width="50" height="18" rx="6" fill="var(--color-gray-900)" fillOpacity="0.85" />
                     <text x={points[hoverIdx].x} y={Math.max(0, points[hoverIdx].y - 24) + 13} fill="white" fontSize="10" fontWeight="600" textAnchor="middle">{data[hoverIdx].toLocaleString()}</text>
                 </>
             )}
@@ -170,7 +170,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     {isColorful ? (
                         <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-ds-violet-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
                             <div className={`absolute top-1/3 -right-16 w-48 h-48 ${isColorful ? 'bg-primary/8' : 'bg-[var(--primary)]/8'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '8s', animationDelay: '2s' }} />
                             <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-ds-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
                             <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-ds-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
@@ -178,11 +178,11 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     ) : isLight ? (
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-ds-indigo-400/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-primary-400/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
+                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-ds-indigo-400/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     ) : (
                         <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-ds-emerald-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
                             <div className={`absolute bottom-20 -right-16 w-48 h-48 ${isColorful ? 'bg-primary/[0.04]' : 'bg-[var(--primary)]/[0.04]'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     )}
@@ -240,7 +240,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     <div className="flex items-center space-x-2">
                         <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-primary/20 text-accent' : isIOS ? (isLight ? 'bg-black/5 text-black' : 'bg-white/10 text-white') : (isLight ? 'bg-ds-blue-100/50 text-ds-blue-900' : 'bg-ds-blue-800/50 text-ds-blue-200')}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                             <Icon name="auto_awesome" className="text-[20px]" />
-                            <span className="absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse shadow-[0_0_8px_rgba(255,149,0,0.8)]" />
+                            <span className="absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse shadow-sm" />
                         </motion.button>
                     </div>
                 </div>
@@ -334,7 +334,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 </div>
                 {/* Mini portfolio chart */}
                 <div className="mt-3 -mx-1">
-                    <Sparkline data={[44200, 44800, 45100, 44900, 45500, 46200, 46800, 47100, 46900, 47400, 47600, 47832]} color="#16a34a" width={320} height={48} />
+                    <Sparkline data={[44200, 44800, 45100, 44900, 45500, 46200, 46800, 47100, 46900, 47400, 47600, 47832]} color="var(--color-success)" width={320} height={48} />
                 </div>
             </motion.div>
 
@@ -374,7 +374,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                                 <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${s.up ? 'bg-ds-success/15 text-ds-success' : 'bg-ds-error/15 text-ds-error'}`}>{s.change}</span>
                             </div>
                             <span className={`text-[11px] block mb-2 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{s.name}</span>
-                            <Sparkline data={s.data} color={s.up ? '#16a34a' : '#dc2626'} width={120} height={28} />
+                            <Sparkline data={s.data} color={s.up ? 'var(--color-success)' : 'var(--color-error)'} width={120} height={28} />
                             <span className={`text-[15px] font-semibold mt-2 block ${isLight ? 'text-ds-gray-900' : 'text-white'}`}>{s.price}</span>
                         </motion.div>
                     ))}
@@ -491,7 +491,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                             <span className="font-bold text-[14px]">{idx.value}</span>
                         </div>
                         <div className="flex flex-col items-end">
-                            <Sparkline data={idx.data} color={idx.up ? '#16a34a' : '#dc2626'} width={50} height={20} />
+                            <Sparkline data={idx.data} color={idx.up ? 'var(--color-success)' : 'var(--color-error)'} width={50} height={20} />
                             <span className={`text-[11px] font-bold mt-1 ${idx.up ? 'text-ds-success' : 'text-ds-error'}`}>{idx.change}</span>
                         </div>
                     </motion.div>
@@ -513,7 +513,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                 </div>
                 {/* Interactive Chart */}
                 <div className="mb-3">
-                    <AreaChart data={featured.extData} color={featured.up ? '#16a34a' : '#dc2626'} width={320} height={100} />
+                    <AreaChart data={featured.extData} color={featured.up ? 'var(--color-success)' : 'var(--color-error)'} width={320} height={100} />
                 </div>
                 {/* Time Range Selector */}
                 <div className="flex justify-between items-center">
@@ -575,7 +575,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <Sparkline data={t.data} color={t.up ? '#16a34a' : '#dc2626'} width={60} height={24} />
+                                <Sparkline data={t.data} color={t.up ? 'var(--color-success)' : 'var(--color-error)'} width={60} height={24} />
                                 <div className="text-right">
                                     <span className="font-semibold text-[14px] block">{t.price}</span>
                                     <span className={`text-[11px] font-bold ${t.up ? 'text-ds-success' : 'text-ds-error'}`}>{t.change}</span>
@@ -611,7 +611,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                         <div><h3 className="text-2xl font-bold">{t.ticker}</h3><p className={`text-sm ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{t.name}</p></div>
                                         <div className="text-right"><span className="text-2xl font-bold">{t.price}</span><span className={`block text-sm font-bold ${t.up ? 'text-ds-success' : 'text-ds-error'}`}>{t.change}</span></div>
                                     </div>
-                                    <Sparkline data={t.data} color={t.up ? '#16a34a' : '#dc2626'} width={340} height={80} />
+                                    <Sparkline data={t.data} color={t.up ? 'var(--color-success)' : 'var(--color-error)'} width={340} height={80} />
                                     {/* Expandable metrics */}
                                     <AnimatePresence>
                                         {tickerExpanded && (
@@ -701,13 +701,13 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
     };
 
     const userBubble = isColorful
-        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-[0_6px_20px_rgb(var(--glow-primary-rgb),0.3)]'
+        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg'
         : isIOS
-            ? 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500 text-white rounded-[22px] rounded-tr-md shadow-[0_6px_20px_rgba(0,122,255,0.3)]'
-            : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-400 text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgba(103,80,164,0.3)]';
+            ? 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-500 text-white rounded-[22px] rounded-tr-md shadow-lg'
+            : 'bg-gradient-to-br from-ds-blue-500 to-ds-indigo-400 text-white rounded-[22px] rounded-tr-md shadow-lg';
     const botBubble = isIOS
         ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-black rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : isColorful ? (isLight ? 'bg-[#ede9fe]/90 backdrop-blur-xl border border-primary/20 text-primary-dark rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-card-colorful-from/60 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm') : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl border border-ds-blue-100/50 text-ds-blue-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/40 text-ds-blue-200 rounded-[22px] rounded-tl-sm shadow-sm');
+        : isColorful ? (isLight ? 'bg-ds-violet-100/90 backdrop-blur-xl border border-primary/20 text-primary-dark rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-card-colorful-from/60 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm') : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl border border-ds-blue-100/50 text-ds-blue-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/40 text-ds-blue-200 rounded-[22px] rounded-tl-sm shadow-sm');
     const inputArea = isIOS
         ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-primary/20' : 'bg-ds-dark-2/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
         : (isLight ? 'bg-ds-gray-100 rounded-t-[28px]' : isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : 'bg-ds-dark-3 rounded-t-[28px]');

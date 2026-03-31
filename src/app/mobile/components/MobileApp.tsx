@@ -142,7 +142,7 @@ export function MobileApp({ theme }: MobileAppProps) {
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >
                         <Icon name="auto_awesome" className="text-[20px]" />
-                        <span className={`absolute top-[8px] right-[8px] w-[5px] h-[5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_6px_rgba(255,149,0,0.7)]' : ''}`} />
+                        <span className={`absolute top-[8px] right-[8px] w-[5px] h-[5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-sm' : ''}`} />
                     </motion.button>
                 </div>
             </header>

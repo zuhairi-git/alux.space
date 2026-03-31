@@ -16,7 +16,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
     const [msgs, setMsgs] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState(""); const [typing, setTyping] = useState(false); const [stream, setStream] = useState("");
     const ub = isColorful
-        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-[0_4px_16px_rgb(var(--glow-primary-rgb)/0.3)]'
+        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg'
         : theme.copilot.userBubble;
     const bb = isColorful
         ? `${theme.platform === 'ios' ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-1/40 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
