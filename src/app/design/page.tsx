@@ -35,10 +35,10 @@ import CodeSnippet from '@/components/CodeSnippet';
 import PodcastPlayer from '@/components/PodcastPlayer';
 import { useTheme } from '@/context/ThemeContext';
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ Token swatch data Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+/* -- Token swatch data ---------------------------------- */
 
 /* -- 1. Semantic tokens -- theme-resolved, use these first ------------------- */
-const semanticColorGroups: { group: string; tokens: { name: string; label: string }[] }[] = [
+const semanticColorGroups: { group: string; tokens: { name: string; label: string; description?: string }[] }[] = [
   {
     group: 'Surface & Text',
     tokens: [
@@ -52,19 +52,19 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
     ],
   },
   {
-    group: 'Primary Scale  (--primary-950 → --primary-50)',
+    group: 'Primary Scale  (--primary-50 — --primary-950)',
     tokens: [
-      { name: '--primary-950', label: '950' },
-      { name: '--primary-900', label: '900' },
-      { name: '--primary-800', label: '800' },
-      { name: '--primary-700', label: '700' },
-      { name: '--primary-600', label: '600' },
-      { name: '--primary-500', label: '500  ← interactive' },
-      { name: '--primary-400', label: '400' },
-      { name: '--primary-300', label: '300' },
-      { name: '--primary-200', label: '200' },
+      { name: '--primary-50',  label: '50',  description: 'palest tint' },
       { name: '--primary-100', label: '100' },
-      { name: '--primary-50',  label: '50' },
+      { name: '--primary-200', label: '200' },
+      { name: '--primary-300', label: '300' },
+      { name: '--primary-400', label: '400', description: 'dark/colorful interactive' },
+      { name: '--primary-500', label: '500' },
+      { name: '--primary-600', label: '600', description: 'light interactive' },
+      { name: '--primary-700', label: '700', description: 'light hover' },
+      { name: '--primary-800', label: '800' },
+      { name: '--primary-900', label: '900' },
+      { name: '--primary-950', label: '950', description: 'deepest' },
     ],
   },
   {
@@ -154,7 +154,7 @@ const stateColorGroups: { group: string; tokens: { name: string; label: string }
 ];
 
 /* -- 3. Raw palette (--color-*) -- use only when semantic tokens don't cover - */
-const rawPaletteGroups: { group: string; tokens: { name: string; label: string }[] }[] = [
+const rawPaletteGroups: { group: string; tokens: { name: string; label: string; description?: string }[] }[] = [
   {
     group: 'Blues',
     tokens: [
@@ -169,6 +169,38 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
       { name: '--color-blue-800',        label: '800' },
       { name: '--color-blue-900',        label: '900' },
       { name: '--color-blue-950',        label: '950' },
+    ],
+  },
+  {
+    group: 'Emeralds',
+    tokens: [
+      { name: '--color-emerald-50',  label: '50' },
+      { name: '--color-emerald-100', label: '100' },
+      { name: '--color-emerald-200', label: '200' },
+      { name: '--color-emerald-300', label: '300' },
+      { name: '--color-emerald-400', label: '400' },
+      { name: '--color-emerald-500', label: '500' },
+      { name: '--color-emerald-600', label: '600' },
+      { name: '--color-emerald-700', label: '700' },
+      { name: '--color-emerald-800', label: '800' },
+      { name: '--color-emerald-900', label: '900' },
+      { name: '--color-emerald-950', label: '950' },
+    ],
+  },
+  {
+    group: 'Violets — primary color family',
+    tokens: [
+      { name: '--color-violet-50',  label: '50',  description: 'palest lavender' },
+      { name: '--color-violet-100', label: '100' },
+      { name: '--color-violet-200', label: '200' },
+      { name: '--color-violet-300', label: '300' },
+      { name: '--color-violet-400', label: '400', description: 'dark/colorful primary' },
+      { name: '--color-violet-500', label: '500' },
+      { name: '--color-violet-600', label: '600', description: 'light primary' },
+      { name: '--color-violet-700', label: '700', description: 'light hover' },
+      { name: '--color-violet-800', label: '800' },
+      { name: '--color-violet-900', label: '900' },
+      { name: '--color-violet-950', label: '950', description: 'deepest' },
     ],
   },
   {
@@ -190,17 +222,17 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
   {
     group: 'Purples',
     tokens: [
-      { name: '--color-purple-950', label: '950' },
-      { name: '--color-purple-900', label: '900' },
-      { name: '--color-purple-800', label: '800' },
-      { name: '--color-purple-700', label: '700' },
-      { name: '--color-purple-600', label: '600' },
-      { name: '--color-purple-500', label: '500' },
-      { name: '--color-purple-400', label: '400' },
-      { name: '--color-purple-300', label: '300' },
-      { name: '--color-purple-200', label: '200' },
-      { name: '--color-purple-100', label: '100' },
       { name: '--color-purple-50',  label: '50' },
+      { name: '--color-purple-100', label: '100' },
+      { name: '--color-purple-200', label: '200' },
+      { name: '--color-purple-300', label: '300' },
+      { name: '--color-purple-400', label: '400' },
+      { name: '--color-purple-500', label: '500' },
+      { name: '--color-purple-600', label: '600' },
+      { name: '--color-purple-700', label: '700' },
+      { name: '--color-purple-800', label: '800' },
+      { name: '--color-purple-900', label: '900' },
+      { name: '--color-purple-950', label: '950' },
     ],
   },
   {
@@ -238,17 +270,17 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
   {
     group: 'Grays',
     tokens: [
-      { name: '--color-gray-950', label: '950' },
-      { name: '--color-gray-900', label: '900' },
-      { name: '--color-gray-800', label: '800' },
-      { name: '--color-gray-700', label: '700' },
-      { name: '--color-gray-600', label: '600' },
-      { name: '--color-gray-500', label: '500' },
-      { name: '--color-gray-400', label: '400' },
-      { name: '--color-gray-300', label: '300' },
-      { name: '--color-gray-200', label: '200' },
-      { name: '--color-gray-100', label: '100' },
       { name: '--color-gray-50',  label: '50' },
+      { name: '--color-gray-100', label: '100' },
+      { name: '--color-gray-200', label: '200' },
+      { name: '--color-gray-300', label: '300' },
+      { name: '--color-gray-400', label: '400' },
+      { name: '--color-gray-500', label: '500' },
+      { name: '--color-gray-600', label: '600' },
+      { name: '--color-gray-700', label: '700' },
+      { name: '--color-gray-800', label: '800' },
+      { name: '--color-gray-900', label: '900' },
+      { name: '--color-gray-950', label: '950' },
     ],
   },
   {
@@ -268,6 +300,22 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
     ],
   },
   {
+    group: 'Golds',
+    tokens: [
+      { name: '--color-gold-50',  label: '50' },
+      { name: '--color-gold-100', label: '100' },
+      { name: '--color-gold-200', label: '200' },
+      { name: '--color-gold-300', label: '300' },
+      { name: '--color-gold-400', label: '400' },
+      { name: '--color-gold-500', label: '500', description: 'metallic gold' },
+      { name: '--color-gold-600', label: '600' },
+      { name: '--color-gold-700', label: '700' },
+      { name: '--color-gold-800', label: '800' },
+      { name: '--color-gold-900', label: '900' },
+      { name: '--color-gold-950', label: '950' },
+    ],
+  },
+  {
     group: 'Accents',
     tokens: [
       { name: '--color-cyan-500',   label: 'Cyan 500' },
@@ -280,15 +328,15 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
   },
 ];
 
-/* ── Tonal Palette data (mirrors tokens.css Section 1b) ────────────────── */
+/* -- Tonal Palette data (mirrors tokens.css Section 1b) ------------------ */
 const TONAL_TONES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100] as const;
 
 const tonalPaletteRoles: { name: string; label: string; description: string }[] = [
-  { name: 'primary',   label: 'Primary',   description: 'Violet-purple · tone 40 → light default · tone 80 → dark default' },
-  { name: 'secondary', label: 'Secondary', description: 'Muted violet-grey · supporting / secondary actions' },
-  { name: 'tertiary',  label: 'Tertiary',  description: 'Rose-pink · complementary accent role' },
-  { name: 'error',     label: 'Error',     description: 'Red spectrum · danger, destructive, error states' },
-  { name: 'neutral',   label: 'Neutral',   description: 'Warm-grey · backgrounds, borders, surfaces' },
+  { name: 'primary',   label: 'Primary',   description: 'Violet — unified primary across all themes. Tone 40 (violet-700) — light default; tone 70 (violet-400) — dark/colorful default' },
+  { name: 'secondary', label: 'Secondary', description: 'Muted violet-grey — supporting / secondary actions' },
+  { name: 'tertiary',  label: 'Tertiary',  description: 'Rose-pink — complementary accent role' },
+  { name: 'error',     label: 'Error',     description: 'Red spectrum — danger, destructive, error states' },
+  { name: 'neutral',   label: 'Neutral',   description: 'Warm-grey — backgrounds, borders, surfaces' },
 ];
 
 const spacingTokens = [
@@ -323,7 +371,7 @@ const shadowTokens = [
   { name: '--shadow-glow-purple',label: 'glow-purple' },
 ];
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Helper: copy-to-clipboard ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Helper: copy-to-clipboard --------------------------- */
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -338,14 +386,14 @@ function CopyButton({ text }: { text: string }) {
       className="text-[10px] opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity font-mono cursor-pointer"
       title={`Copy ${text}`}
     >
-      {copied ? 'ÃƒÂ¢Ã…â€œÃ¢â‚¬Å“' : 'copy'}
+      {copied ? '?' : 'copy'}
     </button>
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Small sub-components ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Small sub-components -------------------------------- */
 
-function Swatch({ cssVar, label }: { cssVar: string; label: string }) {
+function Swatch({ cssVar, label, description }: { cssVar: string; label: string; description?: string }) {
   return (
     <div className="flex flex-col items-center gap-1 group">
       <div
@@ -353,6 +401,7 @@ function Swatch({ cssVar, label }: { cssVar: string; label: string }) {
         style={{ backgroundColor: `var(${cssVar})` }}
       />
       <span className="text-[10px] text-center opacity-70 leading-tight">{label}</span>
+      {description && <span className="text-[9px] text-center opacity-40 leading-tight -mt-0.5">{description}</span>}
       <CopyButton text={cssVar} />
     </div>
   );
@@ -483,7 +532,7 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Code-toggle wrapper ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Code-toggle wrapper -------------------------------- */
 
 function DemoSection({ children, code, language = 'tsx' }: { children: React.ReactNode; code: string; language?: string }) {
   const [showCode, setShowCode] = useState(false);
@@ -507,7 +556,7 @@ function DemoSection({ children, code, language = 'tsx' }: { children: React.Rea
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main Page ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Main Page ------------------------------------------- */
 
 const registryCategories: { key: ComponentEntry['category']; label: string }[] = [
   { key: 'primitive', label: 'Primitives' },
@@ -517,7 +566,7 @@ const registryCategories: { key: ComponentEntry['category']; label: string }[] =
   { key: 'layout',    label: 'Layout & Providers' },
 ];
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Individual section renderers ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Individual section renderers ----------------------- */
 
 function StateBadgesShowcase() {
   const states = [
@@ -587,13 +636,13 @@ function StateBadgesShowcase() {
   );
 }
 
-function ColorGroupBlock({ group, tokens }: { group: string; tokens: { name: string; label: string }[] }) {
+function ColorGroupBlock({ group, tokens }: { group: string; tokens: { name: string; label: string; description?: string }[] }) {
   return (
     <div>
       <h5 className="text-xs font-mono mb-2 opacity-50">{group}</h5>
       <div className="flex flex-wrap gap-3">
         {tokens.map(t => (
-          <Swatch key={t.name} cssVar={t.name} label={t.label} />
+          <Swatch key={t.name} cssVar={t.name} label={t.label} description={t.description} />
         ))}
       </div>
     </div>
@@ -704,14 +753,14 @@ function TonalPalettesSection() {
       {/* Intro card */}
       <div className="theme-card-flex p-5 rounded-xl">
         <p className="text-sm opacity-70 leading-relaxed">
-          Material Design 3‑compatible tonal palettes sourced from{' '}
-          <span className="font-semibold">Figma — Design System Ali</span> (node 1307‑2340).
-          Each palette has <strong>13 tone steps</strong> from 0 (black) to 100 (white).
+          Material Design 3-compatible tonal palettes sourced from{' '}
+          <span className="font-semibold">Figma — Design System Ali</span> (node 1307-2340).
+          Each palette has <strong>13 tone steps</strong> from 0 (black) to 100 (white).
           {' '}
-          <span className="font-medium text-[var(--primary)]">Tone 40</span> is the light‑theme interactive default;
+          <span className="font-medium text-[var(--primary)]">Tone 40</span> is the light-theme interactive default;
           {' '}
-          <span className="font-medium text-[var(--primary)]">tone 80</span> is the dark‑theme default.
-          Per‑theme overrides in <code className="text-xs">tokens.css</code> remap the roles to each theme’s actual color family (blue / indigo / purple) so visual appearance is unchanged.
+          <span className="font-medium text-[var(--primary)]">tone 80</span> is the dark-theme default.
+          Per-theme overrides in <code className="text-xs">tokens.css</code> remap the roles to each theme's actual color family (blue / indigo / purple) so visual appearance is unchanged.
         </p>
       </div>
 
@@ -860,13 +909,13 @@ function TextSection() {
     sample: string;
   }> = [
     { variant: 'hero',     label: 'hero',     sample: 'Hero Display Heading' },
-    { variant: 'h1',      label: 'h1',       sample: 'Heading 1 Ã¢â‚¬â€ Page Title' },
-    { variant: 'h2',      label: 'h2',       sample: 'Heading 2 Ã¢â‚¬â€ Section Title' },
-    { variant: 'h3',      label: 'h3',       sample: 'Heading 3 Ã¢â‚¬â€ Sub-section' },
-    { variant: 'h4',      label: 'h4',       sample: 'Heading 4 Ã¢â‚¬â€ Card Title' },
-    { variant: 'body',    label: 'body',     sample: 'Body text Ã¢â‚¬â€ the main reading size used for paragraphs and content.' },
-    { variant: 'body-sm', label: 'body-sm',  sample: 'Body small Ã¢â‚¬â€ slightly reduced for dense layouts and captions.' },
-    { variant: 'caption', label: 'caption',  sample: 'Caption text Ã¢â‚¬â€ muted supplemental information.' },
+    { variant: 'h1',      label: 'h1',       sample: 'Heading 1 — Page Title' },
+    { variant: 'h2',      label: 'h2',       sample: 'Heading 2 — Section Title' },
+    { variant: 'h3',      label: 'h3',       sample: 'Heading 3 — Sub-section' },
+    { variant: 'h4',      label: 'h4',       sample: 'Heading 4 — Card Title' },
+    { variant: 'body',    label: 'body',     sample: 'Body text — the main reading size used for paragraphs and content.' },
+    { variant: 'body-sm', label: 'body-sm',  sample: 'Body small — slightly reduced for dense layouts and captions.' },
+    { variant: 'caption', label: 'caption',  sample: 'Caption text — muted supplemental information.' },
     { variant: 'label',   label: 'label',    sample: 'Label / Form Field' },
     { variant: 'overline',label: 'overline', sample: 'Overline Category Tag' },
   ];
@@ -1067,41 +1116,41 @@ function BackgroundsSection() {
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Component demo sections ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Component demo sections --------------------------- */
 
 function ButtonsSection() {
   return (
     <DemoSection code={`import { Button, Icon } from '@/design-system';
 
-// Primary Ã¢â‚¬â€ filled, highest emphasis
+// Primary — filled, highest emphasis
 <Button variant="primary">Save changes</Button>
 <Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
 
-// Secondary Ã¢â‚¬â€ outlined, medium emphasis
+// Secondary — outlined, medium emphasis
 <Button variant="secondary">Cancel</Button>
 <Button variant="secondary" rightIcon={<Icon name="arrow_forward" />}>View all</Button>
 
-// Tertiary Ã¢â‚¬â€ text-only, low emphasis
+// Tertiary — text-only, low emphasis
 <Button variant="tertiary">Learn more</Button>
 <Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
 
-// Icon Ã¢â‚¬â€ square, icon-only
+// Icon — square, icon-only
 <Button variant="icon" size="sm"><Icon name="close" /></Button>
 <Button variant="icon"><Icon name="more_vert" /></Button>
 <Button variant="icon" size="lg"><Icon name="settings" /></Button>
 
-// On-image Ã¢â‚¬â€ glass (primary-tinted frosted, white text) / overlay (dark frosted)
+// On-image — glass (primary-tinted frosted, white text) / overlay (dark frosted)
 <Button variant="glass" leftIcon={<Icon name="star" />}>Feature</Button>
 <Button variant="overlay" leftIcon={<Icon name="bookmark" />}>Save</Button>
 
-// States Ã¢â‚¬â€ loading is active (full opacity), disabled is inactive (dimmed)
-<Button loading>SavingÃ¢â‚¬Â¦</Button>
-<Button variant="secondary" loading>LoadingÃ¢â‚¬Â¦</Button>
+// States — loading is active (full opacity), disabled is inactive (dimmed)
+<Button loading>Saving…</Button>
+<Button variant="secondary" loading>Loading…</Button>
 <Button disabled>Disabled</Button>`}>
       <div className="space-y-6">
         {/* Primary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Primary Ã¢â‚¬â€ Filled</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Primary — Filled</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="primary">Save changes</Button>
             <Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
@@ -1111,7 +1160,7 @@ function ButtonsSection() {
         <Divider />
         {/* Secondary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Secondary Ã¢â‚¬â€ Outlined</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Secondary — Outlined</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary">Cancel</Button>
             <Button variant="secondary" leftIcon={<Icon name="download" />}>Export</Button>
@@ -1121,7 +1170,7 @@ function ButtonsSection() {
         <Divider />
         {/* Tertiary */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Tertiary Ã¢â‚¬â€ Text only</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Tertiary — Text only</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="tertiary">Learn more</Button>
             <Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
@@ -1131,7 +1180,7 @@ function ButtonsSection() {
         <Divider />
         {/* Icon */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon Ã¢â‚¬â€ Square</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon — Square</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="icon" size="sm"><Icon name="close" /></Button>
             <Button variant="icon"><Icon name="more_vert" /></Button>
@@ -1156,7 +1205,7 @@ function ButtonsSection() {
         <Divider />
         {/* On-image */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">On Image Ã¢â‚¬â€ Glass &amp; Overlay</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">On Image — Glass &amp; Overlay</h4>
           <div className="relative overflow-hidden rounded-xl h-28">
             <Image
               src="/images/portfolio/collaboration/cover.jpg"
@@ -1171,7 +1220,7 @@ function ButtonsSection() {
               <Button variant="icon" size="sm" className="text-white hover:bg-white/20 hover:border-white/40 border border-white/25 backdrop-blur-sm"><Icon name="share" /></Button>
             </div>
           </div>
-          <p className="text-[11px] opacity-40 mt-2">Glass is primary-tinted frosted with white text Ã¢â‚¬â€ for primary actions on images. Overlay is dark frosted for secondary/quiet actions. Icon buttons can be layered on top with a manual white border + blur.</p>
+          <p className="text-[11px] opacity-40 mt-2">Glass is primary-tinted frosted with white text — for primary actions on images. Overlay is dark frosted for secondary/quiet actions. Icon buttons can be layered on top with a manual white border + blur.</p>
         </div>
         <Divider />
         {/* States */}
@@ -1179,16 +1228,16 @@ function ButtonsSection() {
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">States</h4>
           <div className="space-y-3">
             <div>
-              <p className="text-[11px] opacity-40 mb-2">Loading Ã¢â‚¬â€ active state, full opacity</p>
+              <p className="text-[11px] opacity-40 mb-2">Loading — active state, full opacity</p>
               <div className="flex flex-wrap gap-3">
-                <Button loading>SavingÃ¢â‚¬Â¦</Button>
-                <Button variant="secondary" loading>LoadingÃ¢â‚¬Â¦</Button>
-                <Button variant="tertiary" loading>ProcessingÃ¢â‚¬Â¦</Button>
+                <Button loading>Saving…</Button>
+                <Button variant="secondary" loading>Loading…</Button>
+                <Button variant="tertiary" loading>Processing…</Button>
                 <Button variant="icon" loading><Icon name="refresh" /></Button>
               </div>
             </div>
             <div>
-              <p className="text-[11px] opacity-40 mb-2">Disabled Ã¢â‚¬â€ inactive state, dimmed</p>
+              <p className="text-[11px] opacity-40 mb-2">Disabled — inactive state, dimmed</p>
               <div className="flex flex-wrap gap-3">
                 <Button disabled>Disabled</Button>
                 <Button variant="secondary" disabled>Disabled</Button>
@@ -1200,7 +1249,7 @@ function ButtonsSection() {
         <Divider />
         {/* Special */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Special Ã¢â‚¬â€ Cosmic</h4>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Special — Cosmic</h4>
           <div className="flex flex-wrap gap-3">
             <Button variant="cosmic">Cosmic</Button>
             <Button variant="cosmic" leftIcon={<Icon name="auto_awesome" />}>Magic</Button>
@@ -1448,7 +1497,7 @@ function TooltipsSection() {
 function CardsSurfaceSection() {
   return (
     <DemoSection code={`import { Card, SurfaceCard, CardContent } from '@/design-system';
-// DS shell Ã¢â‚¬â€ elevation levels: flat | raised (default) | floating
+// DS shell — elevation levels: flat | raised (default) | floating
 
 <Card elevation="raised">
   <p className="p-4">Standard raised card</p>
@@ -1458,13 +1507,13 @@ function CardsSurfaceSection() {
   <p className="p-4">Floating card with primary glow</p>
 </Card>
 
-// SurfaceCard Ã¢â‚¬â€ motion wrapper with theme variants
+// SurfaceCard — motion wrapper with theme variants
 import { SurfaceCard } from '@/design-system';
 <SurfaceCard variant="primary">...</SurfaceCard>`}>
       <div className="space-y-6">
-        {/* DS shell Ã¢â‚¬â€ elevation levels */}
+        {/* DS shell — elevation levels */}
         <div>
-          <p className="text-xs font-mono opacity-50 mb-3">Card (DS shell) Ã¢â‚¬â€ elevation</p>
+          <p className="text-xs font-mono opacity-50 mb-3">Card (DS shell) — elevation</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {(['flat', 'raised', 'floating'] as const).map(elevation => (
               <Card key={elevation} elevation={elevation} glow="primary">
@@ -1476,9 +1525,9 @@ import { SurfaceCard } from '@/design-system';
             ))}
           </div>
         </div>
-        {/* SurfaceCard Ã¢â‚¬â€ theme variant colours */}
+        {/* SurfaceCard — theme variant colours */}
         <div>
-          <p className="text-xs font-mono opacity-50 mb-3">SurfaceCard Ã¢â‚¬â€ variant colours</p>
+          <p className="text-xs font-mono opacity-50 mb-3">SurfaceCard — variant colours</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {(['primary', 'secondary', 'tertiary', 'muted'] as const).map(variant => (
               <SurfaceCard key={variant} variant={variant}>
@@ -1501,7 +1550,7 @@ function CardsTimelineSection() {
   return (
     <div className="space-y-4">
       <p className="text-sm opacity-60">
-        Animated entry cards with floating particles Ã¢â‚¬â€ designed for experience and education timelines.
+        Animated entry cards with floating particles — designed for experience and education timelines.
       </p>
       <DemoSection code={`import { TimelineCard } from '@/design-system';
 
@@ -1509,7 +1558,7 @@ function CardsTimelineSection() {
   theme="${theme}"
   iconName="rocket_launch"
   title="Product Designer"
-  date="2023 Ã¢â‚¬â€œ Present"
+  date="2023 — Present"
   location="Helsinki, Finland"
   description="Product vision and design system ownership."
 />`}>
@@ -1518,7 +1567,7 @@ function CardsTimelineSection() {
             theme={theme}
             iconName="rocket_launch"
             title="Product Designer"
-            date="2023 Ã¢â‚¬â€œ Present"
+            date="2023 — Present"
             location="Helsinki, Finland"
             description="Product vision, design system ownership, and developer handoff."
           />
@@ -1543,8 +1592,8 @@ function CardsMediaSection() {
   imagePath="/images/blog/ai-brain.jpg"
   tags={['Design', 'AI']}
 />
-// variant="overlay"  Ã¢â‚¬â€ text overlaid on image
-// variant="horizontal" Ã¢â‚¬â€ image left, content right`}>
+// variant="overlay"  — text overlaid on image
+// variant="horizontal" — image left, content right`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {(['basic', 'overlay', 'horizontal'] as const).map(v => (
             <MediaCard
@@ -1987,7 +2036,7 @@ function RegistrySection({ categoryKey }: { categoryKey: ComponentEntry['categor
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Governance sections ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Governance sections -------------------------------- */
 
 function PodcastPlayerSection() {
   return (
@@ -2049,7 +2098,7 @@ function ConventionsSection() {
         <h4 className="text-sm font-semibold">Token Files</h4>
         <ul className="space-y-2 text-sm">
           {[
-            ['tokens.css', 'Single source of truth Ã¢â‚¬â€ CSS custom properties'],
+            ['tokens.css', 'Single source of truth — CSS custom properties'],
             ['tokens.ts', 'Typed JS mirror for Framer Motion / canvas'],
             ['components.ts', 'Component registry (props, tokens, a11y)'],
           ].map(([file, desc]) => (
@@ -2078,10 +2127,10 @@ function ConventionsSection() {
       <div className="theme-card-flex p-5 rounded-xl space-y-3">
         <h4 className="text-sm font-semibold">Naming Conventions</h4>
         <ul className="space-y-1 text-sm opacity-70">
-          <li><strong>Components:</strong> PascalCase Ã¢â‚¬â€ <code className="text-xs">CardContent.tsx</code></li>
-          <li><strong>Hooks/utils:</strong> camelCase Ã¢â‚¬â€ <code className="text-xs">useTheme.ts</code></li>
-          <li><strong>Routes:</strong> kebab-case Ã¢â‚¬â€ <code className="text-xs">timeline-cards/page.tsx</code></li>
-          <li><strong>Tokens:</strong> --category-name Ã¢â‚¬â€ <code className="text-xs">--color-blue-500</code>, <code className="text-xs">--space-4</code></li>
+          <li><strong>Components:</strong> PascalCase — <code className="text-xs">CardContent.tsx</code></li>
+          <li><strong>Hooks/utils:</strong> camelCase — <code className="text-xs">useTheme.ts</code></li>
+          <li><strong>Routes:</strong> kebab-case — <code className="text-xs">timeline-cards/page.tsx</code></li>
+          <li><strong>Tokens:</strong> --category-name — <code className="text-xs">--color-blue-500</code>, <code className="text-xs">--space-4</code></li>
         </ul>
       </div>
     </div>
@@ -2193,7 +2242,7 @@ function LintRulesSection() {
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Section map ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Section map ---------------------------------------- */
 
 interface SectionDef {
   key: string;
@@ -2220,11 +2269,11 @@ const allSections: SectionDef[] = [
   { key: 'avatars',    title: 'Avatars',                   render: () => <AvatarsSection /> },
   { key: 'dividers',   title: 'Dividers',                  render: () => <DividersSection /> },
   { key: 'tooltips',        title: 'Tooltips',                  render: () => <TooltipsSection /> },
-  // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Cards (per category) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
-  { key: 'cards-surface',  title: 'Cards Ã¢â‚¬â€ Surface',           render: () => <CardsSurfaceSection /> },
-  { key: 'cards-timeline', title: 'Cards Ã¢â‚¬â€ Timeline',          render: () => <CardsTimelineSection /> },
-  { key: 'cards-media',    title: 'Cards Ã¢â‚¬â€ Media',             render: () => <CardsMediaSection /> },
-  { key: 'cards-domain',   title: 'Cards Ã¢â‚¬â€ Domain',            render: () => <CardsDomainSection /> },
+  // -- Cards (per category) ----------------------------
+  { key: 'cards-surface',  title: 'Cards — Surface',           render: () => <CardsSurfaceSection /> },
+  { key: 'cards-timeline', title: 'Cards — Timeline',          render: () => <CardsTimelineSection /> },
+  { key: 'cards-media',    title: 'Cards — Media',             render: () => <CardsMediaSection /> },
+  { key: 'cards-domain',   title: 'Cards — Domain',            render: () => <CardsDomainSection /> },
   { key: 'quotes',         title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
   { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
@@ -2252,7 +2301,7 @@ const allSections: SectionDef[] = [
   { key: 'lint-rules',   title: 'Lint Rules',    render: () => <LintRulesSection /> },
 ];
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Overview (landing when no section selected) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Overview (landing when no section selected) ------- */
 
 function OverviewGrid() {
   const groups = [
@@ -2353,7 +2402,7 @@ function OverviewGrid() {
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Page content (reads ?s= param) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Page content (reads ?s= param) --------------------- */
 
 function DesignPageContent() {
   const searchParams = useSearchParams();
@@ -2385,7 +2434,7 @@ function DesignPageContent() {
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Exported page (Suspense boundary) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* -- Exported page (Suspense boundary) ------------------ */
 
 export default function DesignSystemPage() {
   return (

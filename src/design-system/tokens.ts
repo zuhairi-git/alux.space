@@ -25,8 +25,28 @@ export const palette = {
     700: '#1e40af',
     800: '#1e3a8a',
     900: '#1e2756',
-    vivid:     '#0057ff',  // modern electric blue — light theme primary
+    vivid:     '#0057ff',  // modern electric blue — legacy alias
     vividDark: '#0044cc',  // hover / darker variant
+  },
+  /**
+   * Violet — single-source primary color family.
+   * All themes use this scale; only the active step changes per theme:
+   *   light:    --primary = violet-600 (#7c3aed)
+   *   dark:     --primary = violet-400 (#a78bfa)
+   *   colorful: --primary = violet-400 (#a78bfa)
+   */
+  violet: {
+    50:  '#f5f3ff',
+    100: '#ede9fe',
+    200: '#ddd6fe',
+    300: '#c4b5fd',
+    400: '#a78bfa',  // dark / colorful interactive
+    500: '#8b5cf6',
+    600: '#7c3aed',  // light interactive  — 5.3:1 on white ✓ AA
+    700: '#6d28d9',  // light hover        — 7.4:1 on white ✓ AA
+    800: '#5b21b6',
+    900: '#4c1d95',
+    950: '#2e1065',
   },
   purple: {
     300: '#c4b5fd',
@@ -63,6 +83,32 @@ export const palette = {
     DEFAULT: '#ff8c42',
     dark:    '#d96820',
     light:   '#ffb07a',
+  },
+  emerald: {
+    50:  '#ecfdf5',
+    100: '#d1fae5',
+    200: '#a7f3d0',
+    300: '#6ee7b7',
+    400: '#34d399',
+    500: '#10b981',
+    600: '#059669',
+    700: '#047857',
+    800: '#065f46',
+    900: '#064e3b',
+    950: '#022c22',
+  },
+  gold: {
+    50:  '#fffcf0',
+    100: '#fff5d6',
+    200: '#fde89b',
+    300: '#fbd564',
+    400: '#f7c12b',
+    500: '#e9a912',  // metallic gold — core gold tone
+    600: '#c98a0a',
+    700: '#a26c08',
+    800: '#7d5107',
+    900: '#5e3b05',
+    950: '#3a2002',
   },
   gray: {
     50:  '#f9fafb',
@@ -117,30 +163,30 @@ export const palette = {
  */
 export const themeRgb = {
   light: {
-    glowPrimary:   '37, 99, 235',      // blue-600 #2563eb — matches --primary
-    glowSecondary: '168, 85, 247',     // primary-500
-    glowTertiary:  '99, 102, 241',     // indigo-500
-    dotGrid:       '96, 165, 250',     // blue-400
-    particlePrimary:   '168, 85, 247', // primary-500
-    particleSecondary: '59, 130, 246', // blue-500
+    glowPrimary:   '124, 58, 237',     // violet-600 #7c3aed — matches --primary
+    glowSecondary: '168, 85, 247',     // purple-500 — hero orb/gradient accent
+    glowTertiary:  '139, 92, 246',     // violet-500 — hero CTA accent
+    dotGrid:       '167, 139, 250',    // violet-400
+    particlePrimary:   '124, 58, 237', // violet-600
+    particleSecondary: '139, 92, 246', // violet-500
     particleTertiary:  '236, 72, 153', // pink-500
   },
   dark: {
-    glowPrimary:   '59, 130, 246',     // blue-500
-    glowSecondary: '168, 85, 247',     // primary-500
-    glowTertiary:  '99, 102, 241',     // indigo-500
-    dotGrid:       '96, 165, 250',     // blue-400
-    particlePrimary:   '59, 130, 246', // blue-500
-    particleSecondary: '99, 102, 241', // indigo-500
-    particleTertiary:  '139, 92, 246', // violet-500
+    glowPrimary:   '167, 139, 250',    // violet-400 #a78bfa — matches --primary
+    glowSecondary: '168, 85, 247',     // purple-500 — hero orb/gradient accent
+    glowTertiary:  '139, 92, 246',     // violet-500 — CTA accent
+    dotGrid:       '167, 139, 250',    // violet-400
+    particlePrimary:   '167, 139, 250', // violet-400
+    particleSecondary: '139, 92, 246', // violet-500
+    particleTertiary:  '109, 40, 217', // violet-700
   },
   colorful: {
-    glowPrimary:   '167, 139, 250',    // primary-400 — matches --primary
+    glowPrimary:   '167, 139, 250',    // violet-400 #a78bfa — matches --primary
     glowSecondary: '236, 72, 153',     // pink-500 — matches --gradient-mid
     glowTertiary:  '37, 99, 235',      // blue-600 — matches --gradient-end
     dotGrid:       '236, 72, 153',     // pink-500
-    particlePrimary:   '167, 139, 250', // primary-400
-    particleSecondary: '196, 181, 253', // primary-300
+    particlePrimary:   '167, 139, 250', // violet-400
+    particleSecondary: '196, 181, 253', // violet-300
     particleTertiary:  '236, 72, 153',  // pink-500
   },
 } as const;

@@ -7,24 +7,13 @@ module.exports = {
     extend: {
       // Custom CSS variables integration
       colors: {
-        // Primary theme colors
-                        primary: {
+        // Primary theme colors — all shades from the violet family
+        primary: {
           DEFAULT: 'var(--primary)',
           hover: 'var(--primary-hover)',
           dark: 'var(--primary-dark)',
           glow: 'var(--primary-glow)',
-          50: 'var(--primary-50)',
-          100: 'var(--primary-100)',
-          200: 'var(--primary-200)',
-          300: 'var(--primary-300)',
-          400: 'var(--primary-400)',
-          500: 'var(--primary-500)',
-          600: 'var(--primary-600)',
-          700: 'var(--primary-700)',
-          800: 'var(--primary-800)',
-          900: 'var(--primary-900)',
-          950: 'var(--primary-950)',
-          50: 'var(--primary-50)',
+          50:  'var(--primary-50)',
           100: 'var(--primary-100)',
           200: 'var(--primary-200)',
           300: 'var(--primary-300)',
@@ -105,13 +94,46 @@ module.exports = {
           900: 'var(--color-blue-900)',
           950: 'var(--color-blue-950)',
         },
+        // ── Emerald — green family ─────────────────────────────────────────────────────
+        'ds-emerald': {
+          50:  'var(--color-emerald-50)',
+          100: 'var(--color-emerald-100)',
+          200: 'var(--color-emerald-200)',
+          300: 'var(--color-emerald-300)',
+          400: 'var(--color-emerald-400)',
+          500: 'var(--color-emerald-500)',
+          600: 'var(--color-emerald-600)',
+          700: 'var(--color-emerald-700)',
+          800: 'var(--color-emerald-800)',
+          900: 'var(--color-emerald-900)',
+          950: 'var(--color-emerald-950)',
+        },
+        // ── Violet — primary color family (single source for all themes) ──────────────
+        'ds-violet': {
+          50:  'var(--color-violet-50)',
+          100: 'var(--color-violet-100)',
+          200: 'var(--color-violet-200)',
+          300: 'var(--color-violet-300)',
+          400: 'var(--color-violet-400)',
+          500: 'var(--color-violet-500)',
+          600: 'var(--color-violet-600)',
+          700: 'var(--color-violet-700)',
+          800: 'var(--color-violet-800)',
+          900: 'var(--color-violet-900)',
+          950: 'var(--color-violet-950)',
+        },
         'ds-purple': {
+          50:  'var(--color-purple-50)',
+          100: 'var(--color-purple-100)',
+          200: 'var(--color-purple-200)',
           300: 'var(--color-purple-300)',
           400: 'var(--color-purple-400)',
           500: 'var(--color-purple-500)',
           600: 'var(--color-purple-600)',
           700: 'var(--color-purple-700)',
           800: 'var(--color-purple-800)',
+          900: 'var(--color-purple-900)',
+          950: 'var(--color-purple-950)',
         },
         'ds-indigo': {
           50:  'var(--color-indigo-50)',
@@ -164,6 +186,20 @@ module.exports = {
           800: 'var(--color-ember-800)',
           900: 'var(--color-ember-900)',
           950: 'var(--color-ember-950)',
+        },
+        // ── Gold — warm metallic gold family ──────────────────────────────────────────
+        'ds-gold': {
+          50:  'var(--color-gold-50)',
+          100: 'var(--color-gold-100)',
+          200: 'var(--color-gold-200)',
+          300: 'var(--color-gold-300)',
+          400: 'var(--color-gold-400)',
+          500: 'var(--color-gold-500)',
+          600: 'var(--color-gold-600)',
+          700: 'var(--color-gold-700)',
+          800: 'var(--color-gold-800)',
+          900: 'var(--color-gold-900)',
+          950: 'var(--color-gold-950)',
         },
         'ds-cyan': {
           400: 'var(--color-cyan-400)',

@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 @import "../design-system/tokens.css";
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+/* -------------------------------------------------------
    All design tokens (colors, typography, spacing, motion,
    z-index, shadows, radius) are defined in:
      src/design-system/tokens.css
-   Do NOT add raw hex / rgba values here Ã¢â‚¬â€ update the
+   Do NOT add raw hex / rgba values here — update the
    tokens file instead.
-   Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+   ------------------------------------------------------- */
 
 body {
   background: var(--background);
@@ -20,7 +20,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Base heading element styles Ã¢â‚¬â€ sit in @layer base so Tailwind utilities still win */
+/* Base heading element styles — sit in @layer base so Tailwind utilities still win */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-poppins);
@@ -1313,7 +1313,7 @@ body {
 .podcast-player button[aria-label*="Play" i] svg,
 .podcast-player button[aria-label*="Pause" i] svg,
 .podcast-player button[aria-label*="Toista" i] svg,
-.podcast-player button[aria-label*="PysÃƒÂ¤ytÃƒÂ¤" i] svg {
+.podcast-player button[aria-label*="Pysäytä" i] svg {
   display: block !important;
   margin: 0 auto !important;
 }
@@ -1337,7 +1337,7 @@ body {
 }
 
 /* Secondary control buttons alignment */
-.podcast-player button:not([aria-label*="Play" i]):not([aria-label*="Pause" i]):not([aria-label*="Toista" i]):not([aria-label*="PysÃƒÂ¤ytÃƒÂ¤" i]) {
+.podcast-player button:not([aria-label*="Play" i]):not([aria-label*="Pause" i]):not([aria-label*="Toista" i]):not([aria-label*="Pysäytä" i]) {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1480,7 +1480,7 @@ body {
 /*
  * When the OS prefers reduced motion OR the blocking script in
  * layout.tsx detected a mobile device, ensure content is always
- * immediately visible Ã¢â‚¬â€ no hidden initial states from framer-motion.
+ * immediately visible — no hidden initial states from framer-motion.
  *
  * This CSS acts as a safety net for the brief window between the
  * browser painting the SSR HTML and React hydrating. Once
