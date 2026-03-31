@@ -258,23 +258,24 @@
   --palette-primary-80:  var(--color-blue-300);        /* #93c5fd */
   --palette-primary-90:  var(--color-blue-100);        /* #dbeafe */
   --palette-primary-100: #ffffff;
-  --primary-10:  var(--palette-primary-10);
-  --primary-20:  var(--palette-primary-20);
-  --primary-30:  var(--palette-primary-30);
-  --primary-40:  var(--palette-primary-40);
-  --primary-50:  var(--palette-primary-50);
-  --primary-60:  var(--palette-primary-60);
-  --primary-70:  var(--palette-primary-70);
-  --primary-80:  var(--palette-primary-80);
-  --primary-90:  var(--palette-primary-90);
-  --primary-100: var(--palette-primary-100);
-  --primary:     var(--primary-40);
-  --primary-hover:       var(--primary-30);
-  --primary-dark:        var(--primary-20);
-  --gradient-start:      var(--primary-40);
-  --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--primary-30);
-  --primary-glow:        rgba(0, 87, 255, 0.2);
+  --primary-50:  var(--color-blue-50);         /* #eff6ff */
+  --primary-100: var(--color-blue-100);        /* #dbeafe */
+  --primary-200: var(--color-blue-200);        /* #bfdbfe */
+  --primary-300: var(--color-blue-300);        /* #93c5fd */
+  --primary-400: var(--color-blue-400);        /* #60a5fa */
+  --primary-500: var(--color-blue-vivid);      /* #0057ff — interactive */
+  --primary-600: var(--color-blue-600);        /* #2563eb — hover */
+  --primary-700: var(--color-blue-700);        /* #1e40af */
+  --primary-800: var(--color-blue-800);        /* #1e3a8a */
+  --primary-900: var(--color-blue-900);        /* #1e2756 */
+  --primary-950: var(--color-blue-950);        /* #172554 */
+  --primary:          var(--primary-500);
+  --primary-hover:    var(--primary-600);
+  --primary-dark:     var(--primary-700);
+  --gradient-start:   var(--primary-500);
+  --gradient-mid:     var(--color-purple-500);
+  --gradient-end:     var(--primary-700);
+  --primary-glow:     rgba(0, 87, 255, 0.2);
 
   /* Card surfaces */
   --card-from-bg:        rgba(255, 255, 255, 1);
@@ -302,7 +303,7 @@
   --stepper-inactive-color: rgba(0, 0, 0, 0.1);
 
   /* Accent text — for labels, icons, tag text */
-  --accent-text:           var(--palette-primary-30);
+  --accent-text:           var(--primary-700);
   --accent-text-2:         var(--color-indigo-500);
 
   /* Overlay panels — dropdowns, menus */
@@ -315,12 +316,12 @@
   --nav-border:          rgba(255, 255, 255, 0.5);
 
   /* Scrollbar */
-  --scrollbar-thumb:       var(--palette-primary-40);
-  --scrollbar-thumb-hover: var(--palette-primary-30);
+  --scrollbar-thumb:       var(--primary-500);
+  --scrollbar-thumb-hover: var(--primary-600);
 
   /* Button */
-  --btn-primary-bg:              var(--palette-primary-40);
-  --btn-primary-hover:           var(--palette-primary-30);
+  --btn-primary-bg:              var(--primary-500);
+  --btn-primary-hover:           var(--primary-600);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
 
@@ -370,27 +371,6 @@
   --btn-overlay-bg-hover:   rgba(0, 0, 0, 0.60);
   --btn-overlay-border:     rgba(255, 255, 255, 0.15);
   --btn-overlay-text:       #ffffff;
-
-  /* Audio Player */
-  --player-bg:              rgba(17, 24, 39, 0.9);
-  --player-border:          rgba(55, 65, 81, 0.5);
-  --player-shadow:          0 20px 60px rgba(0,0,0,0.4);
-  --player-waveform-from:   var(--color-blue-400);
-  --player-waveform-to:     var(--color-purple-500);
-  --player-waveform-off:    rgba(75, 85, 99, 0.3);
-  --player-progress-from:   var(--color-blue-400);
-  --player-progress-via:    var(--color-purple-500);
-  --player-progress-to:     var(--color-pink-500);
-  --player-btn-from:        var(--color-blue-500);
-  --player-btn-to:          var(--color-purple-600);
-  --player-btn-glow:        rgba(168, 85, 247, 0.25);
-  --player-ctrl-bg:         rgba(31, 41, 55, 0.8);
-  --player-ctrl-border:     var(--color-gray-600);
-  --player-ctrl-hover-bg:   var(--color-gray-700);
-  --player-ctrl-text:       var(--color-gray-300);
-  --player-ctrl-text-hover: var(--color-white);
-  --player-glow-mid:        rgba(168, 85, 247, 0.1);
-  --player-accent:          var(--color-purple-400);
 }
 
 .theme-light {
@@ -407,23 +387,24 @@
   --palette-primary-80:  var(--color-blue-300);        /* #93c5fd */
   --palette-primary-90:  var(--color-blue-100);        /* #dbeafe */
   --palette-primary-100: #ffffff;
-  --primary-10:  var(--palette-primary-10);
-  --primary-20:  var(--palette-primary-20);
-  --primary-30:  var(--palette-primary-30);
-  --primary-40:  var(--palette-primary-40);
-  --primary-50:  var(--palette-primary-50);
-  --primary-60:  var(--palette-primary-60);
-  --primary-70:  var(--palette-primary-70);
-  --primary-80:  var(--palette-primary-80);
-  --primary-90:  var(--palette-primary-90);
-  --primary-100: var(--palette-primary-100);
-  --primary:     var(--primary-40);
-  --primary-hover:       var(--primary-30);
-  --primary-dark:        var(--primary-20);
-  --gradient-start:      var(--primary-40);
-  --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--primary-30);
-  --primary-glow:        rgba(0, 87, 255, 0.2);
+  --primary-50:  var(--color-blue-50);         /* #eff6ff */
+  --primary-100: var(--color-blue-100);        /* #dbeafe */
+  --primary-200: var(--color-blue-200);        /* #bfdbfe */
+  --primary-300: var(--color-blue-300);        /* #93c5fd */
+  --primary-400: var(--color-blue-400);        /* #60a5fa */
+  --primary-500: var(--color-blue-vivid);      /* #0057ff — interactive */
+  --primary-600: var(--color-blue-600);        /* #2563eb — hover */
+  --primary-700: var(--color-blue-700);        /* #1e40af */
+  --primary-800: var(--color-blue-800);        /* #1e3a8a */
+  --primary-900: var(--color-blue-900);        /* #1e2756 */
+  --primary-950: var(--color-blue-950);        /* #172554 */
+  --primary:          var(--primary-500);
+  --primary-hover:    var(--primary-600);
+  --primary-dark:     var(--primary-700);
+  --gradient-start:   var(--primary-500);
+  --gradient-mid:     var(--color-purple-500);
+  --gradient-end:     var(--primary-700);
+  --primary-glow:     rgba(0, 87, 255, 0.2);
   --card-from-bg:        rgba(255, 255, 255, 1);
   --card-to-bg:          rgba(255, 255, 255, 1);
   --card-border:         rgba(0, 0, 0, 0.08);
@@ -436,7 +417,7 @@
   --row-hover-bg:        rgba(255, 255, 255, 0.5);
   --stepper-inactive-color: rgba(0, 0, 0, 0.1);
   /* Accent text */
-  --accent-text:           var(--palette-primary-30);
+  --accent-text:           var(--primary-700);
   --accent-text-2:         var(--color-indigo-600);
   /* Overlay panels */
   --dropdown-bg:           var(--color-white);
@@ -444,10 +425,10 @@
   --dropdown-text:         var(--color-gray-700);
   --nav-bg:              rgba(255, 255, 255, 0.8);
   --nav-border:          rgba(255, 255, 255, 0.5);
-  --scrollbar-thumb:       var(--palette-primary-40);
-  --scrollbar-thumb-hover: var(--palette-primary-30);
-  --btn-primary-bg:              var(--palette-primary-40);
-  --btn-primary-hover:           var(--palette-primary-30);
+  --scrollbar-thumb:       var(--primary-500);
+  --scrollbar-thumb-hover: var(--primary-600);
+  --btn-primary-bg:              var(--primary-500);
+  --btn-primary-hover:           var(--primary-600);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
   --color-success:         #15803d;  /* green-700 — 7.8:1 on white */
@@ -469,30 +450,6 @@
   --badge-accent-bg:        rgba(109, 40, 217, 0.85);
   --badge-accent-border:    rgba(139, 92, 246, 0.60);
   --badge-accent-text:      #ffffff;
-
-  /* Audio Player */
-  --player-bg:              rgba(255, 255, 255, 0.9);
-  --player-border:          rgba(229, 231, 235, 0.8);
-  --player-shadow:          0 20px 60px rgba(0,0,0,0.08);
-  --player-waveform-from:   var(--palette-primary-40);
-  --player-waveform-to:     var(--color-indigo-600);
-  --player-waveform-off:    rgba(209, 213, 219, 0.5);
-  --player-progress-from:   var(--palette-primary-40);
-  --player-progress-via:    var(--color-indigo-500);
-  --player-progress-to:     var(--color-purple-500);
-  --player-btn-from:        var(--palette-primary-40);
-  --player-btn-to:          var(--color-indigo-600);
-  --player-btn-glow:        rgba(0, 87, 255, 0.25);
-  --player-ctrl-bg:         rgba(255, 255, 255, 0.8);
-  --player-ctrl-border:     var(--color-gray-200);
-  --player-ctrl-hover-bg:   var(--color-white);
-  --player-ctrl-text:       var(--color-gray-700);
-  --player-ctrl-text-hover: var(--palette-primary-30);
-  --player-glow-mid:        rgba(99, 102, 241, 0.05);
-  --player-accent:          var(--palette-primary-30);
-  --player-tag-bg:          rgba(147, 51, 234, 0.08);
-  --player-tag-text:        var(--color-purple-700);
-  --player-tag-border:      rgba(147, 51, 234, 0.20);
 
   /* RGB triplets for dynamic glow/shadow/particle effects — use with rgb(var(--x) / alpha) */
   --glow-primary-rgb:      0 87 255;      /* blue-vivid — matches --primary */
@@ -521,23 +478,24 @@
   --palette-primary-80:  #e0e7ff;                      /* indigo-100 */
   --palette-primary-90:  #eef2ff;                      /* indigo-50 */
   --palette-primary-100: #ffffff;
-  --primary-10:  var(--palette-primary-10);
-  --primary-20:  var(--palette-primary-20);
-  --primary-30:  var(--palette-primary-30);
-  --primary-40:  var(--palette-primary-40);
-  --primary-50:  var(--palette-primary-50);
-  --primary-60:  var(--palette-primary-60);
-  --primary-70:  var(--palette-primary-70);
-  --primary-80:  var(--palette-primary-80);
-  --primary-90:  var(--palette-primary-90);
-  --primary-100: var(--palette-primary-100);
-  --primary:     var(--primary-40);
-  --primary-hover:       var(--primary-30);
-  --primary-dark:        var(--primary-20);
-  --gradient-start:      var(--primary-40);
-  --gradient-mid:        var(--color-purple-500);
-  --gradient-end:        var(--color-purple-400);
-  --primary-glow:        rgba(99, 102, 241, 0.28);  /* indigo-500 */
+  --primary-50:  #eef2ff;                      /* indigo-50 */
+  --primary-100: #e0e7ff;                      /* indigo-100 */
+  --primary-200: #c7d2fe;                      /* indigo-200 */
+  --primary-300: #a5b4fc;                      /* indigo-300 */
+  --primary-400: var(--color-indigo-400);      /* #818cf8 */
+  --primary-500: var(--color-indigo-500);      /* #6366f1 — interactive */
+  --primary-600: var(--color-indigo-600);      /* #4f46e5 — hover */
+  --primary-700: #312e81;                      /* indigo-900 */
+  --primary-800: #1e1b4b;                      /* indigo-950 */
+  --primary-900: #13104a;
+  --primary-950: #0c0a30;
+  --primary:          var(--primary-500);
+  --primary-hover:    var(--primary-600);
+  --primary-dark:     var(--primary-700);
+  --gradient-start:   var(--primary-500);
+  --gradient-mid:     var(--color-purple-500);
+  --gradient-end:     var(--color-purple-400);
+  --primary-glow:     rgba(99, 102, 241, 0.28);  /* indigo-500 */
   --card-from-bg:        rgba(31, 41, 55, 0.9);
   --card-to-bg:          rgba(17, 24, 39, 0.9);
   --card-border:         rgba(75, 85, 99, 0.5);
@@ -550,7 +508,7 @@
   --row-hover-bg:        rgba(255, 255, 255, 0.05);
   --stepper-inactive-color: rgba(255, 255, 255, 0.15);
   /* Accent text */
-  --accent-text:           var(--palette-primary-40);
+  --accent-text:           var(--primary-400);
   --accent-text-2:         var(--color-purple-400);
   /* Overlay panels */
   --dropdown-bg:           var(--color-gray-900);
@@ -558,10 +516,10 @@
   --dropdown-text:         var(--color-gray-300);
   --nav-bg:              rgba(17, 24, 39, 0.8);
   --nav-border:          rgba(255, 255, 255, 0.1);
-  --scrollbar-thumb:       var(--palette-primary-30);
-  --scrollbar-thumb-hover: var(--palette-primary-40);
-  --btn-primary-bg:              var(--palette-primary-30);
-  --btn-primary-hover:           var(--palette-primary-40);
+  --scrollbar-thumb:       var(--primary-600);
+  --scrollbar-thumb-hover: var(--primary-500);
+  --btn-primary-bg:              var(--primary-600);
+  --btn-primary-hover:           var(--primary-500);
   --btn-primary-gradient:        var(--btn-primary-bg);
   --btn-primary-gradient-hover:  var(--btn-primary-hover);
   --color-success:         #4ade80;
@@ -580,30 +538,6 @@
   --muted-foreground:      var(--color-gray-400);
   --badge-overlay-bg:      rgba(255, 255, 255, 0.2);
   --badge-overlay-border:  rgba(255, 255, 255, 0.1);
-
-  /* Audio Player */
-  --player-bg:              rgba(17, 24, 39, 0.9);
-  --player-border:          rgba(55, 65, 81, 0.5);
-  --player-shadow:          0 20px 60px rgba(0,0,0,0.4);
-  --player-waveform-from:   var(--palette-primary-40);
-  --player-waveform-to:     var(--color-purple-500);
-  --player-waveform-off:    rgba(75, 85, 99, 0.3);
-  --player-progress-from:   var(--palette-primary-40);
-  --player-progress-via:    var(--color-purple-500);
-  --player-progress-to:     var(--color-pink-500);
-  --player-btn-from:        var(--palette-primary-30);
-  --player-btn-to:          var(--color-purple-600);
-  --player-btn-glow:        rgba(129, 140, 248, 0.28);
-  --player-ctrl-bg:         rgba(31, 41, 55, 0.8);
-  --player-ctrl-border:     var(--color-gray-600);
-  --player-ctrl-hover-bg:   var(--color-gray-700);
-  --player-ctrl-text:       var(--color-gray-300);
-  --player-ctrl-text-hover: var(--color-white);
-  --player-glow-mid:        rgba(129, 140, 248, 0.12);
-  --player-accent:          var(--palette-primary-40);
-  --player-tag-bg:          rgba(76, 29, 149, 0.30);
-  --player-tag-text:        var(--color-purple-300);
-  --player-tag-border:      rgba(109, 40, 217, 0.45);
 
   /* RGB triplets for dynamic glow/shadow/particle effects */
   --glow-primary-rgb:      59 130 246;    /* blue-500 — common dark glow */
@@ -645,20 +579,21 @@
   --palette-primary-80:  var(--color-purple-200);      /* #e9d5ff */
   --palette-primary-90:  var(--color-purple-100);      /* #f3e8ff */
   --palette-primary-100: #ffffff;
-  --primary-10:  var(--palette-primary-10);
-  --primary-20:  var(--palette-primary-20);
-  --primary-30:  var(--palette-primary-30);
-  --primary-40:  var(--palette-primary-40);
-  --primary-50:  var(--palette-primary-50);
-  --primary-60:  var(--palette-primary-60);
-  --primary-70:  var(--palette-primary-70);
-  --primary-80:  var(--palette-primary-80);
-  --primary-90:  var(--palette-primary-90);
-  --primary-100: var(--palette-primary-100);
-  --primary:     var(--primary-40);
-  --primary-hover:       var(--primary-50);          /* #a855f7 */
-  --primary-dark:        var(--primary-30);          /* tone 30 */
-  --gradient-start:      var(--palette-primary-30);          /* #7c3aed — deep purple */
+  --primary-50:  var(--color-purple-50);       /* #faf5ff */
+  --primary-100: var(--color-purple-100);      /* #f3e8ff */
+  --primary-200: var(--color-purple-200);      /* #e9d5ff */
+  --primary-300: var(--color-purple-300);      /* #c4b5fd */
+  --primary-400: var(--color-purple-400);      /* #a78bfa */
+  --primary-500: var(--color-purple-500);      /* #a855f7 — interactive */
+  --primary-600: var(--color-purple-600);      /* #9333ea — hover */
+  --primary-700: var(--color-purple-700);      /* #7c3aed */
+  --primary-800: var(--color-purple-800);      /* #6d28d9 */
+  --primary-900: var(--color-purple-900);      /* #581c87 */
+  --primary-950: var(--color-purple-950);      /* #3b0764 */
+  --primary:          var(--primary-500);
+  --primary-hover:    var(--primary-600);
+  --primary-dark:     var(--primary-700);
+  --gradient-start:   var(--primary-700);              /* #7c3aed — deep purple */
   --gradient-mid:        var(--color-pink-500);              /* #ec4899 — rich rose */
   --gradient-end:        var(--color-blue-600);              /* #2563eb — sapphire blue */
   --primary-glow:        rgba(147, 51, 234, 0.35);  /* purple-600 */
@@ -676,7 +611,7 @@
   --row-hover-bg:        rgba(167, 139, 250, 0.08);
   --stepper-inactive-color: rgba(196, 181, 253, 0.20);
   /* Accent text */
-  --accent-text:           var(--palette-primary-60);        /* #c4b5fd — 9.6:1 ✓ AAA */
+  --accent-text:           var(--primary-300);               /* #c4b5fd — 9.6:1 ✓ AAA */
   --accent-text-2:         var(--color-pink-400);            /* #f472b6 — 6.6:1 ✓ AA */
   /* Overlay panels */
   --dropdown-bg:           rgba(12, 10, 30, 0.97);
@@ -688,8 +623,8 @@
   --nav-border:          rgba(167, 139, 250, 0.20);
 
   /* Scrollbar */
-  --scrollbar-thumb:       var(--palette-primary-50);
-  --scrollbar-thumb-hover: var(--palette-primary-40);
+  --scrollbar-thumb:       var(--primary-500);
+  --scrollbar-thumb-hover: var(--primary-600);
 
   /* Buttons */
   --btn-primary-bg:             var(--color-purple-600);     /* #9333ea — white text 7.5:1 ✓ AAA */
@@ -718,30 +653,6 @@
   --badge-accent-bg:        rgba(167, 139, 250, 0.18);
   --badge-accent-border:    rgba(196, 181, 253, 0.40);
   --badge-accent-text:      #ffffff;
-
-  /* Audio Player */
-  --player-bg:              rgba(10, 8, 28, 0.94);
-  --player-border:          rgba(167, 139, 250, 0.25);
-  --player-shadow:          0 20px 60px rgba(167, 139, 250, 0.15);
-  --player-waveform-from:   var(--color-purple-700);
-  --player-waveform-to:     var(--color-pink-500);
-  --player-waveform-off:    rgba(167, 139, 250, 0.18);
-  --player-progress-from:   var(--color-purple-700);
-  --player-progress-via:    var(--color-pink-500);
-  --player-progress-to:     var(--color-blue-600);
-  --player-btn-from:        var(--color-purple-600);
-  --player-btn-to:          var(--color-pink-500);
-  --player-btn-glow:        rgba(167, 139, 250, 0.35);
-  --player-ctrl-bg:         rgba(14, 12, 36, 0.70);
-  --player-ctrl-border:     rgba(167, 139, 250, 0.28);
-  --player-ctrl-hover-bg:   rgba(20, 16, 48, 0.80);
-  --player-ctrl-text:       #9B97C0;                         /* muted — 6.3:1 ✓ AA */
-  --player-ctrl-text-hover: #F0EEFF;                         /* fg — 15.2:1 ✓ AAA */
-  --player-glow-mid:        rgba(244, 114, 182, 0.10);
-  --player-accent:          var(--color-purple-400);
-  --player-tag-bg:          rgba(167, 139, 250, 0.12);
-  --player-tag-text:        var(--color-purple-300);          /* 9.6:1 ✓ AAA */
-  --player-tag-border:      rgba(167, 139, 250, 0.25);
 
   /* RGB triplets for dynamic glow/shadow/particle effects */
   --glow-primary-rgb:      167 139 250;   /* purple-400 — matches --primary */

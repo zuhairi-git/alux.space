@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, Suspense } from 'react';
 import Image from 'next/image';
@@ -52,18 +52,19 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
     ],
   },
   {
-    group: 'Primary Scale  (--primary-10 → --primary-100)',
+    group: 'Primary Scale  (--primary-950 → --primary-50)',
     tokens: [
-      { name: '--primary-10',  label: '10' },
-      { name: '--primary-20',  label: '20' },
-      { name: '--primary-30',  label: '30' },
-      { name: '--primary-40',  label: '40  ← interactive' },
-      { name: '--primary-50',  label: '50' },
-      { name: '--primary-60',  label: '60' },
-      { name: '--primary-70',  label: '70' },
-      { name: '--primary-80',  label: '80' },
-      { name: '--primary-90',  label: '90' },
+      { name: '--primary-950', label: '950' },
+      { name: '--primary-900', label: '900' },
+      { name: '--primary-800', label: '800' },
+      { name: '--primary-700', label: '700' },
+      { name: '--primary-600', label: '600' },
+      { name: '--primary-500', label: '500  ← interactive' },
+      { name: '--primary-400', label: '400' },
+      { name: '--primary-300', label: '300' },
+      { name: '--primary-200', label: '200' },
       { name: '--primary-100', label: '100' },
+      { name: '--primary-50',  label: '50' },
     ],
   },
   {
@@ -233,25 +234,6 @@ const rawPaletteGroups: { group: string; tokens: { name: string; label: string }
       { name: '--color-cobalt-700', label: 'Cobalt 700' },
     ],
   },
-];
-
-/* -- 4. Audio Player tokens -------------------------------------------------- */
-const playerTokens = [
-  { name: '--player-bg',            label: 'Player Bg' },
-  { name: '--player-border',        label: 'Player Border' },
-  { name: '--player-accent',        label: 'Player Accent' },
-  { name: '--player-progress-from', label: 'Progress Start' },
-  { name: '--player-progress-via',  label: 'Progress Mid' },
-  { name: '--player-progress-to',   label: 'Progress End' },
-  { name: '--player-btn-from',      label: 'Button Start' },
-  { name: '--player-btn-to',        label: 'Button End' },
-  { name: '--player-btn-glow',      label: 'Button Glow' },
-  { name: '--player-ctrl-bg',       label: 'Control Bg' },
-  { name: '--player-ctrl-border',   label: 'Control Border' },
-  { name: '--player-ctrl-text',     label: 'Control Text' },
-  { name: '--player-tag-bg',        label: 'Tag Bg' },
-  { name: '--player-tag-text',      label: 'Tag Text' },
-  { name: '--player-tag-border',    label: 'Tag Border' },
 ];
 
 /* ── Tonal Palette data (mirrors tokens.css Section 1b) ────────────────── */
@@ -541,17 +523,6 @@ function ColorsSection() {
         <div className="space-y-6">
           {rawPaletteGroups.map(g => (
             <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
-          ))}
-        </div>
-      </section>
-
-      {/* 4 — Audio Player tokens */}
-      <section>
-        <h4 className="text-sm font-semibold mb-1">Audio Player</h4>
-        <p className="text-xs opacity-50 mb-4">Scoped <code className="font-mono">--player-*</code> tokens for the podcast / blog audio player component.</p>
-        <div className="flex flex-wrap gap-3">
-          {playerTokens.map(t => (
-            <Swatch key={t.name} cssVar={t.name} label={t.label} />
           ))}
         </div>
       </section>
@@ -1912,38 +1883,16 @@ function PodcastPlayerSection() {
         <h4 className="text-sm font-medium mb-3 opacity-60">Live Demo</h4>
         <p className="text-sm opacity-70 mb-4">
           Full-featured podcast player used in the hero section. All colors adapt via{' '}
-          <code className="font-mono text-xs bg-[var(--card-from-bg)] px-1.5 py-0.5 rounded">--player-*</code>{' '}
-          CSS tokens Ã¢â‚¬â€ switch the theme to see the colorful ember palette.
+          <code className="font-mono text-xs bg-[var(--card-from-bg)] px-1.5 py-0.5 rounded">--primary</code>{' '}
+          and{' '}
+          <code className="font-mono text-xs bg-[var(--card-from-bg)] px-1.5 py-0.5 rounded">--gradient-*</code>{' '}
+          semantic tokens — switch the theme to see the palette adapt automatically.
         </p>
         <DemoSection code={`<PodcastPlayer />`}>
           <div className="max-w-sm mx-auto">
             <PodcastPlayer />
           </div>
         </DemoSection>
-      </div>
-      <div>
-        <h4 className="text-sm font-medium mb-3 opacity-60">Theme Tokens</h4>
-        <div className="flex flex-wrap gap-3">
-          {[
-            { name: '--player-bg',            label: 'Player Bg' },
-            { name: '--player-border',        label: 'Player Border' },
-            { name: '--player-accent',        label: 'Player Accent' },
-            { name: '--player-progress-from', label: 'Progress Start' },
-            { name: '--player-progress-via',  label: 'Progress Mid' },
-            { name: '--player-progress-to',   label: 'Progress End' },
-            { name: '--player-btn-from',      label: 'Button Start' },
-            { name: '--player-btn-to',        label: 'Button End' },
-            { name: '--player-btn-glow',      label: 'Button Glow' },
-            { name: '--player-ctrl-bg',       label: 'Control Bg' },
-            { name: '--player-ctrl-border',   label: 'Control Border' },
-            { name: '--player-ctrl-text',     label: 'Control Text' },
-            { name: '--player-tag-bg',        label: 'Tag Bg' },
-            { name: '--player-tag-text',      label: 'Tag Text' },
-            { name: '--player-tag-border',    label: 'Tag Border' },
-          ].map(t => (
-            <Swatch key={t.name} cssVar={t.name} label={t.label} />
-          ))}
-        </div>
       </div>
     </div>
   );

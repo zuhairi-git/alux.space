@@ -56,7 +56,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
     if (isLight) {
       return 'bg-gradient-to-b from-white/95 via-white/90 to-gray-50/95 backdrop-blur-xl border border-white/30 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)]';
     } else if (isColorful) {
-      return 'bg-[var(--player-bg)] backdrop-blur-xl border border-[var(--player-border)] shadow-[var(--player-shadow)]';
+      return 'bg-[var(--card-from-bg)] backdrop-blur-xl border border-[var(--card-border)] shadow-2xl';
     } else {
       return 'bg-gradient-to-b from-gray-900/95 via-gray-800/90 to-gray-900/95 backdrop-blur-xl border border-gray-700/50 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.6)]';
     }
@@ -73,13 +73,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   };
   
   const getAccentColor = () => {
-    if (isLight) {
-      return 'from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]';
-    } else if (isColorful) {
-      return 'from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]';
-    } else {
-      return 'from-[var(--player-progress-from)] via-[var(--player-progress-via)] to-[var(--player-progress-to)]';
-    }
+    return 'from-[var(--primary-500)] via-[var(--gradient-mid)] to-[var(--gradient-end)]';
   };
 
   const getGlassButtonStyle = (variant: 'primary' | 'secondary' = 'secondary') => {
@@ -87,7 +81,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
       if (isLight) {
         return 'bg-gradient-to-br from-primary-500 to-indigo-600 hover:from-primary-600 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl border border-primary-300/30';
       } else if (isColorful) {
-        return 'bg-gradient-to-br from-[var(--player-btn-from)] to-[var(--player-btn-to)] text-white shadow-lg hover:shadow-xl border border-[var(--player-border)] backdrop-blur-sm';
+        return 'bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] text-white shadow-lg hover:shadow-xl border border-[var(--card-border)] backdrop-blur-sm';
       } else {
         return 'bg-gradient-to-br from-primary-600/90 to-indigo-600/90 hover:from-primary-700/95 hover:to-indigo-700/95 text-white shadow-lg hover:shadow-xl border border-primary-500/30 backdrop-blur-sm';
       }
@@ -95,7 +89,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
       if (isLight) {
         return 'bg-white/60 hover:bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-sm hover:shadow-md text-gray-700';
       } else if (isColorful) {
-        return 'bg-[var(--player-ctrl-bg)] hover:bg-[var(--player-ctrl-hover-bg)] backdrop-blur-md border border-[var(--player-ctrl-border)] shadow-sm hover:shadow-md text-[var(--player-ctrl-text)]';
+        return 'bg-[var(--card-from-bg)] hover:bg-[var(--card-to-bg)] backdrop-blur-md border border-[var(--card-border)] shadow-sm hover:shadow-md text-[var(--muted-foreground)]';
       } else {
         return 'bg-white/5 hover:bg-white/10 backdrop-blur-md border border-gray-600/50 shadow-sm hover:shadow-md text-gray-300';
       }
@@ -635,7 +629,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 <div className={`absolute inset-0 ${
                   isLight 
                     ? 'bg-gradient-to-br from-primary-50/60 via-blue-50/40 to-pink-50/60' 
-                    : 'bg-[var(--player-bg)]'
+                    : 'bg-[var(--card-from-bg)]'
                 } backdrop-blur-sm`} />
                 
                 {/* Subtle geometric shapes */}
@@ -680,7 +674,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   className={`relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 ${
                     isLight 
                       ? 'border-white/95 shadow-2xl shadow-primary-200/50' 
-                      : 'border-[var(--player-border)] shadow-2xl shadow-[var(--primary)]/20'
+                      : 'border-[var(--card-border)] shadow-2xl shadow-[var(--primary)]/20'
                   } backdrop-blur-sm ring-2 ${
                     isLight 
                       ? 'ring-primary-100/50' 
@@ -693,7 +687,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 <div className={`absolute inset-0 rounded-full ${
                   isLight 
                     ? 'shadow-lg shadow-primary-300/30' 
-                    : 'shadow-lg shadow-[var(--player-btn-glow)]'
+                    : 'shadow-lg shadow-[var(--primary-glow)]'
                 } pointer-events-none`} />
               </motion.div>
 
@@ -818,11 +812,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   className={`px-2 py-1 text-xs rounded-full ${
                     isLight 
                       ? 'bg-primary-100 text-primary-700' 
-                      : 'bg-[var(--player-tag-bg)] text-[var(--player-tag-text)]'
+                      : 'bg-[var(--card-border)] text-[var(--accent-text)]'
                   } border ${
                     isLight 
                       ? 'border-primary-200' 
-                      : 'border-[var(--player-tag-border)]'
+                      : 'border-[var(--card-border)]'
                   }`}
                 >
                   {tag}
@@ -940,7 +934,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             <motion.div
               className={`absolute top-1/2 ${
                 isMobile ? 'w-5 h-5' : 'w-4 h-4'
-              } rounded-full bg-white shadow-lg border-2 border-[var(--player-accent)] ${
+              } rounded-full bg-white shadow-lg border-2 border-[var(--primary)] ${
                 isMobile ? 'opacity-100 shadow-xl' : 'opacity-0 group-hover:opacity-100'
               } transition-opacity ${
                 isTouching ? 'scale-125 shadow-xl' : ''
@@ -955,7 +949,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
 
             {/* Hover preview */}
             <motion.div 
-              className="absolute top-0 h-full w-0.5 bg-[var(--player-accent)]/70 pointer-events-none rounded-full" 
+              className="absolute top-0 h-full w-0.5 bg-[var(--primary)]/70 pointer-events-none rounded-full" 
               style={{ left: `${mousePosition}%` }}
               animate={{ opacity: isHovering ? 1 : 0 }}
               transition={{ duration: 0.2 }}
@@ -1003,7 +997,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--player-accent)]`}>skip_previous</span>
+            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--primary)]`}>skip_previous</span>
           </motion.button>
 
           {/* Play/Pause - Central button - Enhanced for mobile */}
@@ -1016,7 +1010,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               isLight 
                 ? 'bg-gradient-to-br from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700' 
                 : isColorful
-                  ? 'bg-gradient-to-br from-[var(--player-btn-from)] to-[var(--player-btn-to)]'
+                  ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)]'
                   : 'bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800'
             } shadow-xl transition-all duration-200 focus:outline-none ${
               isMobile ? 'focus:ring-4 focus:ring-[var(--primary)]/50 active:shadow-2xl' : 'focus:ring-4 focus:ring-[var(--primary)]/50'
@@ -1075,7 +1069,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             onTouchStart={() => setIsTouching(true)}
             onTouchEnd={() => setIsTouching(false)}
           >
-            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--player-accent)]`}>skip_next</span>
+            <span className={`material-symbols ${isMobile ? 'text-3xl' : 'text-2xl'} text-[var(--primary)]`}>skip_next</span>
           </motion.button>
         </div>        {/* Secondary controls row - Enhanced for mobile */}
         <div className={`flex items-center justify-center ${isMobile ? 'gap-4' : 'gap-3'}`}>
