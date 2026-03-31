@@ -171,7 +171,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                     <motion.span
                                         animate={{ scale: a ? 1.1 : 1 }}
                                         transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                        className={`relative material-symbols-rounded ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                        className={`relative material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                     >
                                         {ic}
                                     </motion.span>
@@ -180,7 +180,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.15 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols-rounded ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
                                 >
                                     {ic}
                                 </motion.span>

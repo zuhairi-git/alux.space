@@ -27,7 +27,7 @@ export function ProfileView({ card, isLight, isColorful = false, themeMode, setT
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 overflow-y-auto scrollbar-none pb-28 ${theme.contentPaddingTop} px-5 space-y-6`}>
             {/* Header */}
-            <motion.div variants={fadeUp} className="flex justify-between items-center px-1"><h2 className={`text-xl font-bold ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>{theme.titles.profile.title}</h2><button onClick={() => setModal(true)} className={`w-10 h-10 rounded-full flex items-center justify-center ${p.settingsBg(isLight)}`}><Icon name="settings" className="opacity-70 text-[20px]" /></button></motion.div>
+            <motion.div variants={fadeUp} className="flex justify-between items-center px-1"><h2 className={`text-xl font-bold ${theme.platform === 'ios' ? 'tracking-tight' : ''}`}>{theme.titles.profile.title}</h2><button onClick={() => setModal(true)} className={`w-10 h-10 rounded-full flex items-center justify-center ${p.settingsBg(isLight)}`}><Icon name="settings" className={`text-[20px] ${isColorful ? 'text-primary' : isLight ? 'text-ds-gray-600' : 'text-ds-gray-300'}`} /></button></motion.div>
 
             {/* Avatar */}
             <motion.div variants={fadeUp} className="flex flex-col items-center py-6">
