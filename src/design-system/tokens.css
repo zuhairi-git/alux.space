@@ -35,7 +35,6 @@
   --color-emerald-950: #022c22;
 
   /* Blues */
-  --color-blue-950: #172554;
   --color-blue-50:  #eff6ff;
   --color-blue-100: #dbeafe;
   --color-blue-200: #bfdbfe;
@@ -46,8 +45,7 @@
   --color-blue-700: #1e40af;
   --color-blue-800: #1e3a8a;
   --color-blue-900: #1e2756;
-  --color-blue-vivid:      #0057ff;          /* modern electric blue — light theme primary */
-  --color-blue-vivid-dark: #0044cc;          /* hover / darker variant */
+  --color-blue-950: #172554;
 
   /* Purples */
   --color-purple-50: #faf5ff;
@@ -289,11 +287,11 @@
   --palette-primary-10:  var(--color-blue-950);        /* #172554 */
   --palette-primary-20:  var(--color-blue-800);        /* #1e3a8a */
   --palette-primary-30:  var(--color-blue-700);        /* #1e40af */
-  --palette-primary-40:  var(--color-blue-vivid);      /* #0057ff — interactive */
-  --palette-primary-50:  var(--color-blue-600);        /* #2563eb */
-  --palette-primary-60:  var(--color-blue-500);        /* #3b82f6 */
-  --palette-primary-70:  var(--color-blue-400);        /* #60a5fa */
-  --palette-primary-80:  var(--color-blue-300);        /* #93c5fd */
+  --palette-primary-40:  var(--color-blue-600);        /* #2563eb — interactive */
+  --palette-primary-50:  var(--color-blue-500);        /* #3b82f6 */
+  --palette-primary-60:  var(--color-blue-400);        /* #60a5fa */
+  --palette-primary-70:  var(--color-blue-300);        /* #93c5fd */
+  --palette-primary-80:  var(--color-blue-200);        /* #bfdbfe */
   --palette-primary-90:  var(--color-blue-100);        /* #dbeafe */
   --palette-primary-100: #ffffff;
   --primary-50:  var(--color-blue-50);         /* #eff6ff */
@@ -301,11 +299,11 @@
   --primary-200: var(--color-blue-200);        /* #bfdbfe */
   --primary-300: var(--color-blue-300);        /* #93c5fd */
   --primary-400: var(--color-blue-400);        /* #60a5fa */
-  --primary-500: var(--color-blue-vivid);      /* #0057ff — interactive */
-  --primary-600: var(--color-blue-600);        /* #2563eb — hover */
-  --primary-700: var(--color-blue-700);        /* #1e40af */
-  --primary-800: var(--color-blue-800);        /* #1e3a8a */
-  --primary-900: var(--color-blue-900);        /* #1e2756 */
+  --primary-500: var(--color-blue-600);        /* #2563eb — interactive */
+  --primary-600: var(--color-blue-700);        /* #1e40af — hover */
+  --primary-700: var(--color-blue-800);        /* #1e3a8a */
+  --primary-800: var(--color-blue-900);        /* #1e2756 */
+  --primary-900: var(--color-blue-950);        /* #172554 */
   --primary-950: var(--color-blue-950);        /* #172554 */
   --primary:          var(--primary-500);
   --primary-hover:    var(--primary-600);
@@ -313,14 +311,14 @@
   --gradient-start:   var(--primary-500);
   --gradient-mid:     var(--color-purple-500);
   --gradient-end:     var(--primary-700);
-  --primary-glow:     rgba(0, 87, 255, 0.2);
+  --primary-glow:     rgba(37, 99, 235, 0.2);
 
   /* Card surfaces */
   --card-from-bg:        rgba(255, 255, 255, 1);
   --card-to-bg:          rgba(255, 255, 255, 1);
   --card-border:         rgba(0, 0, 0, 0.08);
-  --card-border-hover:   rgba(0, 87, 255, 0.4);
-  --card-shadow-color:   rgba(0, 87, 255, 0.18);
+  --card-border-hover:   rgba(37, 99, 235, 0.4);
+  --card-shadow-color:   rgba(37, 99, 235, 0.18);
 
   /* Card hover shadow — theme-switched glow for interactive cards */
   --card-hover-shadow-color: rgba(15, 23, 42, 0.06);
@@ -428,11 +426,11 @@
   --palette-primary-10:  var(--color-blue-950);        /* #172554 */
   --palette-primary-20:  var(--color-blue-800);        /* #1e3a8a */
   --palette-primary-30:  var(--color-blue-700);        /* #1e40af */
-  --palette-primary-40:  var(--color-blue-vivid);      /* #0057ff — interactive */
-  --palette-primary-50:  var(--color-blue-600);        /* #2563eb */
-  --palette-primary-60:  var(--color-blue-500);        /* #3b82f6 */
-  --palette-primary-70:  var(--color-blue-400);        /* #60a5fa */
-  --palette-primary-80:  var(--color-blue-300);        /* #93c5fd */
+  --palette-primary-40:  var(--color-blue-600);        /* #2563eb — interactive */
+  --palette-primary-50:  var(--color-blue-500);        /* #3b82f6 */
+  --palette-primary-60:  var(--color-blue-400);        /* #60a5fa */
+  --palette-primary-70:  var(--color-blue-300);        /* #93c5fd */
+  --palette-primary-80:  var(--color-blue-200);        /* #bfdbfe */
   --palette-primary-90:  var(--color-blue-100);        /* #dbeafe */
   --palette-primary-100: #ffffff;
   --primary-50:  var(--color-blue-50);         /* #eff6ff */
@@ -440,11 +438,11 @@
   --primary-200: var(--color-blue-200);        /* #bfdbfe */
   --primary-300: var(--color-blue-300);        /* #93c5fd */
   --primary-400: var(--color-blue-400);        /* #60a5fa */
-  --primary-500: var(--color-blue-vivid);      /* #0057ff — interactive */
-  --primary-600: var(--color-blue-600);        /* #2563eb — hover */
-  --primary-700: var(--color-blue-700);        /* #1e40af */
-  --primary-800: var(--color-blue-800);        /* #1e3a8a */
-  --primary-900: var(--color-blue-900);        /* #1e2756 */
+  --primary-500: var(--color-blue-600);        /* #2563eb — interactive */
+  --primary-600: var(--color-blue-700);        /* #1e40af — hover */
+  --primary-700: var(--color-blue-800);        /* #1e3a8a */
+  --primary-800: var(--color-blue-900);        /* #1e2756 */
+  --primary-900: var(--color-blue-950);        /* #172554 */
   --primary-950: var(--color-blue-950);        /* #172554 */
   --primary:          var(--primary-500);
   --primary-hover:    var(--primary-600);
@@ -452,11 +450,11 @@
   --gradient-start:   var(--primary-500);
   --gradient-mid:     var(--color-purple-500);
   --gradient-end:     var(--primary-700);
-  --primary-glow:     rgba(0, 87, 255, 0.2);
+  --primary-glow:     rgba(37, 99, 235, 0.2);
   --card-from-bg:        rgba(255, 255, 255, 1);
   --card-to-bg:          rgba(255, 255, 255, 1);
   --card-border:         rgba(0, 0, 0, 0.08);
-  --card-border-hover:   rgba(0, 87, 255, 0.4);
+  --card-border-hover:   rgba(37, 99, 235, 0.4);
   --card-shadow-color:   rgba(0, 87, 255, 0.18);
   --card-hover-shadow-color: rgba(15, 23, 42, 0.06);
   --sidebar-edge-shadow-color: rgba(0, 0, 0, 0.08);
@@ -510,7 +508,7 @@
   --badge-accent-text:      #ffffff;
 
   /* RGB triplets for dynamic glow/shadow/particle effects — use with rgb(var(--x) / alpha) */
-  --glow-primary-rgb:      0 87 255;      /* blue-vivid — matches --primary */
+  --glow-primary-rgb:      37 99 235;      /* blue-600 #2563eb — matches --primary */
   --glow-secondary-rgb:    168 85 247;    /* purple-500 — hero orb/gradient accent */
   --glow-tertiary-rgb:     99 102 241;    /* indigo-500 — hero CTA accent */
 
@@ -519,7 +517,7 @@
   --mobile-border-rgb:   229 231 235;  /* gray-200 #e5e7eb — border */
   --mobile-header-rgb:   249 250 251;  /* gray-50  #f9fafb — header bg */
   --mobile-nav-rgb:      243 244 246;  /* gray-100 #f3f4f6 — nav bg */
-  --mobile-accent-rgb:   0 87 255;     /* blue-vivid #0057ff — accent */
+  --mobile-accent-rgb:   37 99 235;    /* blue-600 #2563eb — accent */
 }
 
 .theme-dark {

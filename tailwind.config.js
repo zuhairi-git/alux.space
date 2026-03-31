@@ -103,6 +103,7 @@ module.exports = {
           700: 'var(--color-blue-700)',
           800: 'var(--color-blue-800)',
           900: 'var(--color-blue-900)',
+          950: 'var(--color-blue-950)',
         },
         'ds-purple': {
           300: 'var(--color-purple-300)',

@@ -117,7 +117,7 @@ export const palette = {
  */
 export const themeRgb = {
   light: {
-    glowPrimary:   '0, 87, 255',      // blue-vivid — matches --primary
+    glowPrimary:   '37, 99, 235',      // blue-600 #2563eb — matches --primary
     glowSecondary: '168, 85, 247',     // primary-500
     glowTertiary:  '99, 102, 241',     // indigo-500
     dotGrid:       '96, 165, 250',     // blue-400
