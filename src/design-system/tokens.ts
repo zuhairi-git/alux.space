@@ -118,16 +118,16 @@ export const palette = {
 export const themeRgb = {
   light: {
     glowPrimary:   '0, 87, 255',      // blue-vivid — matches --primary
-    glowSecondary: '168, 85, 247',     // purple-500
+    glowSecondary: '168, 85, 247',     // primary-500
     glowTertiary:  '99, 102, 241',     // indigo-500
     dotGrid:       '96, 165, 250',     // blue-400
-    particlePrimary:   '168, 85, 247', // purple-500
+    particlePrimary:   '168, 85, 247', // primary-500
     particleSecondary: '59, 130, 246', // blue-500
     particleTertiary:  '236, 72, 153', // pink-500
   },
   dark: {
     glowPrimary:   '59, 130, 246',     // blue-500
-    glowSecondary: '168, 85, 247',     // purple-500
+    glowSecondary: '168, 85, 247',     // primary-500
     glowTertiary:  '99, 102, 241',     // indigo-500
     dotGrid:       '96, 165, 250',     // blue-400
     particlePrimary:   '59, 130, 246', // blue-500
@@ -135,12 +135,12 @@ export const themeRgb = {
     particleTertiary:  '139, 92, 246', // violet-500
   },
   colorful: {
-    glowPrimary:   '167, 139, 250',    // purple-400 — matches --primary
+    glowPrimary:   '167, 139, 250',    // primary-400 — matches --primary
     glowSecondary: '236, 72, 153',     // pink-500 — matches --gradient-mid
     glowTertiary:  '37, 99, 235',      // blue-600 — matches --gradient-end
     dotGrid:       '236, 72, 153',     // pink-500
-    particlePrimary:   '167, 139, 250', // purple-400
-    particleSecondary: '196, 181, 253', // purple-300
+    particlePrimary:   '167, 139, 250', // primary-400
+    particleSecondary: '196, 181, 253', // primary-300
     particleTertiary:  '236, 72, 153',  // pink-500
   },
 } as const;

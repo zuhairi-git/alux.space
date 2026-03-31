@@ -48,7 +48,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
         animate={{ opacity: 1, scale: 1 }}
         transition={{ ...t.snap, delay: delaySeconds.xs }}
       >
-        <div className="w-full h-full border-b-2 border-r-2 border-purple-400/30 rounded-br-lg" />
+        <div className="w-full h-full border-b-2 border-r-2 border-primary-400/30 rounded-br-lg" />
       </motion.div>
         <motion.div 
         className="absolute -left-20 top-[40%] hidden md:block" 
@@ -58,7 +58,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-[var(--primary)]/30 to-transparent"></div>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent"></div>
+          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-primary-400/30 to-transparent"></div>
         </div>
       </motion.div>
       
@@ -70,7 +70,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-[var(--primary)]/30 to-transparent"></div>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent"></div>
+          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-primary-400/30 to-transparent"></div>
         </div>
       </motion.div>
 
@@ -173,7 +173,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           />
           
           <motion.div 
-            className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-purple-400/20 to-[var(--primary)]/20"
+            className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-primary-400/20 to-[var(--primary)]/20"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5]

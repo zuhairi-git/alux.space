@@ -510,7 +510,7 @@ export default function Home() {
                           ? 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
                           : theme === 'dark'
                           ? 'from-blue-400 via-cyan-400 to-indigo-400'
-                          : 'from-blue-600 via-indigo-600 to-purple-600'
+                          : 'from-blue-600 via-indigo-600 to-primary-600'
                         }
                       `}>
                         {item.years}
@@ -529,7 +529,7 @@ export default function Home() {
                     <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl ${
                       theme === 'colorful'
                         ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
-                        : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500'
+                        : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-500'
                     }`} />
                   </motion.div>
                 ))}

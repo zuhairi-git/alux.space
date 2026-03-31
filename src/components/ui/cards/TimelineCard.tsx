@@ -42,7 +42,7 @@ export default function TimelineCard({
   // Get card styles based on theme with improved visibility for dark theme
   const getCardStyles = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-purple-400/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.4)]';
+      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-primary-400/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.4)]';
     } else if (theme === 'dark') {
       // Lightened the dark theme colors slightly to make animations more visible
       return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.35)]';
@@ -55,8 +55,8 @@ export default function TimelineCard({
   const getIconBgStyles = () => {
     if (theme === 'colorful') {
       return isHovered 
-        ? 'bg-gradient-to-br from-purple-400/70 to-purple-700/70 backdrop-blur-lg backdrop-filter border border-purple-300/70'
-        : 'bg-gradient-to-br from-purple-500/30 to-purple-800/30 backdrop-blur-lg backdrop-filter border border-purple-400/30';
+        ? 'bg-gradient-to-br from-primary-400/70 to-primary-700/70 backdrop-blur-lg backdrop-filter border border-primary-300/70'
+        : 'bg-gradient-to-br from-primary-500/30 to-primary-800/30 backdrop-blur-lg backdrop-filter border border-primary-400/30';
     } else if (theme === 'dark') {
       return isHovered
         ? 'bg-gradient-to-br from-blue-400/60 to-indigo-700/60 backdrop-blur-lg backdrop-filter border border-blue-300/70'
@@ -72,7 +72,7 @@ export default function TimelineCard({
     if (theme === 'colorful') {
       return isHovered
         ? 'text-white'
-        : 'text-purple-300';
+        : 'text-primary-300';
     } else if (theme === 'dark') {
       return isHovered
         ? 'text-white'
@@ -86,7 +86,7 @@ export default function TimelineCard({
   // Get title style based on theme - with dimensional aesthetics (no glow)
   const getTitleStyles = () => {
     if (theme === 'colorful') {
-      return 'text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-purple-200 group-hover:to-pink-200 transition-all duration-700';
+      return 'text-transparent bg-clip-text bg-gradient-to-r from-primary-200 via-pink-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-primary-200 group-hover:to-pink-200 transition-all duration-700';
     } else if (theme === 'dark') {
       return 'text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-blue-200 group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:via-blue-200 group-hover:to-indigo-200 transition-all duration-700';
     } else {
@@ -97,7 +97,7 @@ export default function TimelineCard({
   // Get date and location style based on theme - with enhanced dimensional contrast
   const getMetaStyles = () => {
     if (theme === 'colorful') {
-      return 'text-purple-300 group-hover:text-purple-200 transition-all duration-300 tracking-wide';
+      return 'text-primary-300 group-hover:text-primary-200 transition-all duration-300 tracking-wide';
     } else if (theme === 'dark') {
       return 'text-blue-300 group-hover:text-blue-200 transition-all duration-300 tracking-wide';
     } else {
@@ -119,7 +119,7 @@ export default function TimelineCard({
   // Get orbital particle color based on theme - enhanced visibility for dark theme
   const getParticleColor = () => {
     if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-purple-400 to-pink-500';
+      return 'bg-gradient-to-br from-primary-400 to-pink-500';
     } else if (theme === 'dark') {
       // Use brighter colors for dark theme particles for better visibility
       return 'bg-gradient-to-br from-blue-300 to-indigo-500';
@@ -142,7 +142,7 @@ export default function TimelineCard({
   return (
     <div className="group perspective-1000">      <article 
         className={`relative rounded-2xl overflow-hidden ${getCardStyles()} transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-          theme === 'colorful' ? 'focus:ring-purple-400' :
+          theme === 'colorful' ? 'focus:ring-primary-400' :
           'focus:ring-[var(--primary)]'
         }`}
         style={cardCustomStyles}

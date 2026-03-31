@@ -428,7 +428,7 @@ export default function AccessibilityClient() {
     },
     {
       name: content.colorfulTheme,
-      preview: "bg-gradient-to-r from-purple-500 to-pink-500",
+      preview: "bg-gradient-to-r from-primary-500 to-pink-500",
       contrast: "AAA"
     }
   ];
@@ -552,7 +552,7 @@ export default function AccessibilityClient() {
                               icon: 'target',
                               color: 'indigo',
                               description: 'Synthesize insights into clear accessibility requirements and design principles.',
-                              gradient: 'from-purple-600/30 to-indigo-800/20'
+                              gradient: 'from-primary-600/30 to-indigo-800/20'
                             },
                             {
                               phase: content.developPhase,
@@ -795,7 +795,7 @@ export default function AccessibilityClient() {
                         icon: "code",
                         title: content.requirement2,
                         desc: content.requirement2Desc,
-                        gradient: "from-purple-500 to-pink-500"
+                        gradient: "from-primary-500 to-pink-500"
                       },
                       {
                         
@@ -976,8 +976,8 @@ export default function AccessibilityClient() {
                       <p className={`mb-4 opacity-80 text-[var(--foreground)]`}>{content.headlessDesc}</p>
 
                       <div className={`p-4 rounded-lg font-mono text-sm bg-[var(--background)]`}>                        <div className={`text-[var(--foreground)]`}>
-                          <span className="text-purple-500">import</span> {`{ Menu }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@headlessui/react&apos;</span><br />
-                          <span className="text-purple-500">import</span> {`{ ChevronDownIcon }`} <span className="text-purple-500">from</span> <span className="text-ds-success">&apos;@heroicons/react/20/solid&apos;</span>
+                          <span className="text-primary-500">import</span> {`{ Menu }`} <span className="text-primary-500">from</span> <span className="text-ds-success">&apos;@headlessui/react&apos;</span><br />
+                          <span className="text-primary-500">import</span> {`{ ChevronDownIcon }`} <span className="text-primary-500">from</span> <span className="text-ds-success">&apos;@heroicons/react/20/solid&apos;</span>
                         </div>
                       </div>
                     </div>

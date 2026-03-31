@@ -369,10 +369,10 @@ export default function PromptPage() {
 
     if (isSelected) {
       if (theme === 'light')
-        return `${baseClasses} bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 font-medium border-l-2 border-blue-500`;
+        return `${baseClasses} bg-gradient-to-r from-blue-500/20 to-primary-500/20 text-blue-700 font-medium border-l-2 border-blue-500`;
       if (theme === 'colorful')
-        return `${baseClasses} bg-gradient-to-r from-cyan-500/30 to-purple-500/30 text-white font-medium`;
-      return `${baseClasses} bg-gradient-to-r from-purple-500/30 to-blue-500/30 text-white font-medium`;
+        return `${baseClasses} bg-gradient-to-r from-cyan-500/30 to-primary-500/30 text-white font-medium`;
+      return `${baseClasses} bg-gradient-to-r from-primary-500/30 to-blue-500/30 text-white font-medium`;
     }
 
     if (theme === 'light')
@@ -395,7 +395,7 @@ export default function PromptPage() {
       case 'dark':
         return { backgroundColor: 'rgba(255, 255, 255, 0.1)' };
       case 'colorful':
-        return { backgroundColor: 'rgba(147, 51, 234, 0.2)' }; // purple-500/20
+        return { backgroundColor: 'rgba(147, 51, 234, 0.2)' }; // primary-500/20
       default:
         return { backgroundColor: 'rgba(255, 255, 255, 0.1)' };
     }
@@ -529,7 +529,7 @@ export default function PromptPage() {
               <div className="text-sm opacity-70">Failed</div>
             </div>
             <div className="theme-card-content p-6 rounded-2xl text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-purple-500 mb-2">{stats.totalBugsFixed}</div>
+              <div className="text-3xl font-bold text-primary-500 mb-2">{stats.totalBugsFixed}</div>
               <div className="text-sm opacity-70">Bugs Fixed</div>
             </div>
           </motion.div>          {/* Filter Controls */}
@@ -636,7 +636,7 @@ export default function PromptPage() {
                     onClick={() => setViewMode('grid')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
                       viewMode === 'grid'
-                        ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
+                        ? 'bg-gradient-to-r from-indigo-500 to-primary-500 text-white'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
@@ -650,7 +650,7 @@ export default function PromptPage() {
                     onClick={() => setViewMode('list')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
                       viewMode === 'list'
-                        ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
+                        ? 'bg-gradient-to-r from-indigo-500 to-primary-500 text-white'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
@@ -752,7 +752,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
         <div className="mb-4">
           <div className="flex items-start justify-between mb-3">
             <div className="flex-1">
-              <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
+              <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
                 {prompt.title}
               </h3>
               <p className="text-sm opacity-70 line-clamp-2 mb-3">
@@ -763,7 +763,7 @@ function EnhancedPromptCard({ prompt }: { prompt: Prompt }) {
           {/* Technology Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
             {prompt.technologies.slice(0, 3).map((tech, index) => (
-              <span key={index} className="px-2 py-1 text-xs rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10">
+              <span key={index} className="px-2 py-1 text-xs rounded-lg bg-gradient-to-r from-blue-500/20 to-primary-500/20 backdrop-blur-sm border border-white/10">
                 {tech}
               </span>
             ))}

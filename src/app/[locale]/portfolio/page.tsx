@@ -85,7 +85,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TekoÃ¤lypohjainen suunnittelutyÃ¶kalu, joka muuttaa kehotteet UI-konsepteiksi.'
       },
       link: `/${locale}/portfolio/promptforge`,
-      gradient: 'from-purple-500 to-indigo-500',
+      gradient: 'from-primary-500 to-indigo-500',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -241,7 +241,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TekoÃ¤lypohjainen alusta Ã¤lykkÃ¤illÃ¤ tyÃ¶tiloilla, tekoÃ¤lyavustajalla ja monialustaisilla prototyypeillÃ¤ iOS:lle, Androidille ja hallintaportaalille.'
       },
       link: `/${locale}/portfolio/workflow`,
-      gradient: 'from-blue-400 to-purple-500',
+      gradient: 'from-blue-400 to-primary-500',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',
@@ -318,7 +318,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         en: 'Building accessible design systems from the ground upâ€”research-driven approach to creating inclusive digital products that work for everyone.',
         fi: 'Saavutettavien suunnittelujÃ¤rjestelmien rakentaminen alusta alkaenâ€”tutkimuspohjainen lÃ¤hestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
       }, link: `/${locale}/portfolio/accessibility`,
-      gradient: 'from-indigo-400 to-purple-500',
+      gradient: 'from-indigo-400 to-primary-500',
       status: {
         en: 'In Progress',
         fi: 'KehitteillÃ¤',
@@ -344,7 +344,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'TyÃ¶nhakusovellus tehokkaaseen tyÃ¶nhakuun'
       },
       link: `/${locale}/portfolio/jobseeking`,
-      gradient: 'from-purple-400 to-pink-500',
+      gradient: 'from-primary-400 to-pink-500',
       status: {
         en: 'Accomplished',
         fi: 'Saavutettu',

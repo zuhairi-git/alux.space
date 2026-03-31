@@ -212,7 +212,7 @@ export const androidTheme: MobileTheme = {
         seeAllColor: 'text-ds-blue-300',
         quickActionBg: (isLight, g) => isLight ? 'bg-ds-blue-100 text-ds-gray-900 rounded-[20px]' : `bg-gradient-to-br ${g} border border-white/5 rounded-[20px]`,
         quickActionIconColor: () => 'text-ds-blue-300',
-        teamColorMap: { purple: 'bg-ds-purple-500/12 text-ds-purple-400', blue: 'bg-ds-blue-500/12 text-ds-blue-400', emerald: 'bg-ds-success/12 text-ds-success', amber: 'bg-ds-warning/12 text-ds-warning' },
+        teamColorMap: { purple: 'bg-primary-500/12 text-primary-400', blue: 'bg-ds-blue-500/12 text-ds-blue-400', emerald: 'bg-ds-success/12 text-ds-success', amber: 'bg-ds-warning/12 text-ds-warning' },
     },
     titles: {
         dashboard: { sub: 'Welcome Back', title: 'Ali Al-Zuhairi' }, workspaces: { sub: 'Collaborate', title: 'Workspaces' },
@@ -301,7 +301,7 @@ export const iosTheme: MobileTheme = {
         statBadge: 'bg-ds-success/10 text-ds-success',
         donutPrimary: 'text-ds-blue-500', donutLabel: 'text-ds-blue-500',
         engagementActiveBg: 'bg-ds-blue-500',
-        barGradients: ['from-ds-blue-400 to-ds-blue-600', 'from-ds-indigo-400 to-ds-indigo-600', 'from-ds-cyan-400 to-ds-cyan-500', 'from-ds-purple-300 to-ds-purple-700', 'from-ds-fuchsia-400 to-ds-fuchsia-600', 'from-ds-pink-400 to-ds-pink-500', 'from-ds-purple-400 to-ds-purple-600'],
+        barGradients: ['from-ds-blue-400 to-ds-blue-600', 'from-ds-indigo-400 to-ds-indigo-600', 'from-ds-cyan-400 to-ds-cyan-500', 'from-primary-300 to-primary-700', 'from-ds-fuchsia-400 to-ds-fuchsia-600', 'from-ds-pink-400 to-ds-pink-500', 'from-primary-400 to-primary-600'],
         settingsBg: (isLight) => isLight ? 'bg-black/[0.04] backdrop-blur-lg' : 'bg-white/[0.06] backdrop-blur-lg',
         modalBg: (isLight) => isLight ? 'bg-white/90 backdrop-blur-2xl' : 'bg-ds-dark-3/95 backdrop-blur-2xl text-white',
         modalActiveItem: (isLight) => isLight ? 'bg-ds-gray-200/80' : 'bg-white/[0.08]',
@@ -314,7 +314,7 @@ export const iosTheme: MobileTheme = {
         seeAllColor: 'text-ds-blue-500',
         quickActionBg: (isLight, g) => isLight ? `bg-gradient-to-br ${g} border rounded-[16px]` : `bg-gradient-to-br ${g.replace('/10', '/20').replace('/20', '/30')} border rounded-[16px]`,
         quickActionIconColor: (isLight) => isLight ? 'text-gray-700' : 'text-gray-300',
-        teamColorMap: { purple: 'bg-ds-purple-500/12 text-ds-purple-400', blue: 'bg-ds-blue-500/12 text-ds-blue-500', emerald: 'bg-ds-success/12 text-ds-success', amber: 'bg-ds-warning/12 text-ds-warning' },
+        teamColorMap: { purple: 'bg-primary-500/12 text-primary-400', blue: 'bg-ds-blue-500/12 text-ds-blue-500', emerald: 'bg-ds-success/12 text-ds-success', amber: 'bg-ds-warning/12 text-ds-warning' },
     },
     titles: {
         dashboard: { sub: 'Welcome Back', title: 'Ali Al-Zuhairi' }, workspaces: { sub: 'Collaborate', title: 'Spaces' },

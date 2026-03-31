@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({
       switch (variant) {
         case 'primary': colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
         case 'secondary': colorShadow = 'shadow-blue-500/5'; hoverColorShadow = 'hover:shadow-blue-500/10'; break;
-        case 'tertiary': colorShadow = 'shadow-purple-500/5'; hoverColorShadow = 'hover:shadow-purple-500/10'; break;
+        case 'tertiary': colorShadow = 'shadow-primary-500/5'; hoverColorShadow = 'hover:shadow-primary-500/10'; break;
         case 'muted': colorShadow = 'shadow-gray-400/10'; hoverColorShadow = 'hover:shadow-gray-400/15'; break;
         default: colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
       }
@@ -71,7 +71,7 @@ const Card: React.FC<CardProps> = ({
       switch (variant) {
         case 'primary': colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
         case 'secondary': colorShadow = 'shadow-blue-500/10'; hoverColorShadow = 'hover:shadow-blue-500/20'; break;
-        case 'tertiary': colorShadow = 'shadow-purple-500/10'; hoverColorShadow = 'hover:shadow-purple-500/20'; break;
+        case 'tertiary': colorShadow = 'shadow-primary-500/10'; hoverColorShadow = 'hover:shadow-primary-500/20'; break;
         case 'muted': colorShadow = 'shadow-gray-500/10'; hoverColorShadow = 'hover:shadow-gray-500/20'; break;
         default: colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
       }

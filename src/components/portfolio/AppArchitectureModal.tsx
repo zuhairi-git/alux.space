@@ -35,7 +35,7 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                         {/* Modal Header */}
                         <div className={`flex justify-between items-center p-4 sm:p-6 border-b shrink-0 ${isLight ? 'bg-white/80 border-gray-200' : 'bg-black/40 border-gray-800'} backdrop-blur-md z-20 relative`}>
                             <div className="flex items-center space-x-3">
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isColorful ? 'bg-purple-500/20 text-purple-400' : isLight ? 'bg-purple-100 text-purple-600' : 'bg-purple-900/50 text-purple-400'}`}>
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isColorful ? 'bg-primary-500/20 text-primary-400' : isLight ? 'bg-primary-100 text-primary-600' : 'bg-primary-900/50 text-primary-400'}`}>
                                     <span className="material-symbols text-2xl">account_tree</span>
                                 </div>
                                 <div>
@@ -59,7 +59,7 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                         <div className="flex-1 overflow-auto relative custom-scrollbar">
                             {/* Ambient Background Glows */}
                             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                                <div className={`absolute top-0 -left-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-purple-600' : 'bg-indigo-600'}`}></div>
+                                <div className={`absolute top-0 -left-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-primary-600' : 'bg-indigo-600'}`}></div>
                                 <div className={`absolute bottom-0 -right-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-ds-success' : 'bg-cyan-500'}`}></div>
                             </div>
 
@@ -107,7 +107,7 @@ function WorkflowDiagram({ theme }: { theme: string }) {
             <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
                 <FlowNode delay={0.1} icon="article" title="News & Media" desc="Real-time global financial news streams via APIs." bgLight="bg-blue-50" bgDark="bg-blue-900/30" colorLight="bg-blue-100 text-blue-600" colorDark="bg-blue-800 text-blue-200" />
                 <FlowNode delay={0.2} icon="account_balance" title="SEC Filings" desc="Automated parsing of 10-K, 10-Q & 8-K reports." bgLight="bg-indigo-50" bgDark="bg-indigo-900/30" colorLight="bg-indigo-100 text-indigo-600" colorDark="bg-indigo-800 text-indigo-200" />
-                <FlowNode delay={0.3} icon="record_voice_over" title="Earnings Calls" desc="Live audio transcriptions & NLP semantic extraction." bgLight="bg-purple-50" bgDark="bg-purple-900/30" colorLight="bg-purple-100 text-purple-600" colorDark="bg-purple-800 text-purple-200" />
+                <FlowNode delay={0.3} icon="record_voice_over" title="Earnings Calls" desc="Live audio transcriptions & NLP semantic extraction." bgLight="bg-primary-50" bgDark="bg-primary-900/30" colorLight="bg-primary-100 text-primary-600" colorDark="bg-primary-800 text-primary-200" />
             </div>
 
             {/* Connector 1 */}

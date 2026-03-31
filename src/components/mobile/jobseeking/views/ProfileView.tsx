@@ -28,7 +28,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const slots = ['Morn', 'Aft', 'Eve', 'All'];
     const slotFull: Record<string, string> = { Morn: 'Morning', Aft: 'Afternoon', Eve: 'Evening', All: 'All Day' };
-    const slotColors: Record<string, string> = { Morn: 'bg-primary', Aft: 'bg-ds-blue-500', Eve: 'bg-ds-purple-500', All: 'bg-ds-cyan-500' };
+    const slotColors: Record<string, string> = { Morn: 'bg-primary', Aft: 'bg-ds-blue-500', Eve: 'bg-primary-500', All: 'bg-ds-cyan-500' };
     const [availability, setAvailability] = useState<Record<string, string[]>>({
         Mon: [], Tue: [], Wed: ['Eve'], Thu: [], Fri: ['Eve'], Sat: ['All'], Sun: ['All']
     });

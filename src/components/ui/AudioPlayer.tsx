@@ -705,7 +705,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           {/* Touch-friendly playhead indicator for mobile */}
           {isMobile && (
             <motion.div
-              className="absolute top-2/2 transform -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg border-2 border-purple-500 opacity-100"
+              className="absolute top-2/2 transform -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg border-2 border-primary-500 opacity-100"
               style={{ left: `${progressPercentage}%`, transform: 'translate(-50%, -50%)' }}
               animate={isTouching && !animationsDisabled ? { scale: 1.3 } : {}}
               transition={{ duration: durationSeconds.brisk }}

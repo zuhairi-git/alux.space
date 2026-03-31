@@ -6,7 +6,7 @@ import { exportToWord, exportToPowerPoint, exportToPDF, exportToGoogleSlides } f
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 sm:p-6">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-primary-50 p-4 sm:p-6">
       <main className="w-full max-w-3xl">
         <div className="relative rounded-2xl sm:rounded-3xl bg-white shadow-2xl ring-1 ring-gray-200 p-6 sm:p-8 lg:p-10 text-gray-900">
           {/* Icon */}

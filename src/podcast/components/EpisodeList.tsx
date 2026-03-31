@@ -37,7 +37,7 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
       if (isLight) {
         return `${baseStyle} bg-blue-50 border-blue-200 shadow-md`;
       } else if (isColorful) {
-        return `${baseStyle} bg-purple-500/20 border-purple-500/40 shadow-lg`;
+        return `${baseStyle} bg-primary-500/20 border-primary-500/40 shadow-lg`;
       } else {
         return `${baseStyle} bg-gray-700/50 border-gray-600 shadow-lg`;
       }
@@ -45,7 +45,7 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
       if (isLight) {
         return `${baseStyle} bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300`;
       } else if (isColorful) {
-        return `${baseStyle} bg-black/20 border-purple-500/20 hover:bg-purple-500/10 hover:border-purple-500/30`;
+        return `${baseStyle} bg-black/20 border-primary-500/20 hover:bg-primary-500/10 hover:border-primary-500/30`;
       } else {
         return `${baseStyle} bg-gray-800/50 border-gray-700 hover:bg-gray-700/50 hover:border-gray-600`;
       }
@@ -66,7 +66,7 @@ const EpisodeList: React.FC<EpisodeListProps> = ({
     if (isLight) {
       return 'text-gray-600';
     } else if (isColorful) {
-      return 'text-purple-200';
+      return 'text-primary-200';
     } else {
       return 'text-gray-400';
     }

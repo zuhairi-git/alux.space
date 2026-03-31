@@ -55,7 +55,7 @@ export default function MobileAnimationDemo() {
           <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg"
+            className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg"
           >
             Hover/tap me to see animation
           </MotionButton>

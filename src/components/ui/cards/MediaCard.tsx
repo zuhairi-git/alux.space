@@ -47,7 +47,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
     switch (theme) {
       case 'light':
         return {
-          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-purple-500/10 hover:shadow-blue-300/30',
+          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-primary-500/10 hover:shadow-blue-300/30',
           text: 'text-neutral-800',
           primaryText: 'text-blue-500',
           tag: 'bg-blue-500/10 text-blue-600',
@@ -77,7 +77,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         };
       default:
         return {
-          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-purple-500/10 hover:shadow-blue-300/30',
+          card: 'bg-white/90 border border-gray-200/50 hover:border-blue-300/50 shadow-primary-500/10 hover:shadow-blue-300/30',
           text: 'text-neutral-800',
           primaryText: 'text-blue-500',
           tag: 'bg-blue-500/10 text-blue-600',

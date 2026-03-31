@@ -419,7 +419,7 @@ export default function PortalPanel() {
                                             setShowSearch(false);
                                             setSearchQuery('');
                                         }}
-                                        className={`w-full text-left p-3 rounded-2xl flex items-center justify-between transition-colors ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-purple-900/40' : 'hover:bg-white/10'}`}
+                                        className={`w-full text-left p-3 rounded-2xl flex items-center justify-between transition-colors ${isLight ? 'hover:bg-slate-100' : isColorful ? 'hover:bg-primary-900/40' : 'hover:bg-white/10'}`}
                                     >
                                         <div className="flex items-center gap-3">
                                             <Icon name={section.icon} className="text-lg opacity-70" />

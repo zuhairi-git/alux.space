@@ -311,10 +311,10 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             icon: 'search',
             label: 'Browse Jobs',
             desc: 'Find local gigs',
-            gradient: 'from-ds-purple-500 to-ds-fuchsia-500',
-            bg: isColorful ? 'from-ds-purple-500/25 to-ds-fuchsia-500/25' : isLight ? 'from-ds-purple-500/15 to-ds-fuchsia-500/15' : 'from-ds-purple-500/20 to-ds-fuchsia-500/20',
+            gradient: 'from-primary-500 to-ds-fuchsia-500',
+            bg: isColorful ? 'from-primary-500/25 to-ds-fuchsia-500/25' : isLight ? 'from-primary-500/15 to-ds-fuchsia-500/15' : 'from-primary-500/20 to-ds-fuchsia-500/20',
             iconColor: 'text-primary',
-            glow: isColorful ? 'shadow-purple-500/20' : '',
+            glow: isColorful ? 'shadow-primary-500/20' : '',
             navTo: 'jobs',
         },
     ];

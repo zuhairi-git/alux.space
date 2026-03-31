@@ -20,7 +20,21 @@
    1. COLOR PALETTE — raw values (not theme-dependent)
    ------------------------------------------------------- */
 :root {
+  /* Emeralds */
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-emerald-950: #022c22;
+
   /* Blues */
+  --color-blue-950: #172554;
   --color-blue-50:  #eff6ff;
   --color-blue-100: #dbeafe;
   --color-blue-200: #bfdbfe;
@@ -35,6 +49,11 @@
   --color-blue-vivid-dark: #0044cc;          /* hover / darker variant */
 
   /* Purples */
+  --color-purple-50: #faf5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-200: #e9d5ff;
+  --color-purple-900: #581c87;
+  --color-purple-950: #3b0764;
   --color-purple-300: #c4b5fd;
   --color-purple-400: #a78bfa;
   --color-purple-500: #a855f7;
@@ -128,7 +147,18 @@
 :root {
   --background:          var(--color-slate-50);
   --foreground:          #171717;
-  --primary:             var(--color-blue-vivid);
+  --primary:             var(--color-blue-vivid);  --primary-50: var(--color-blue-50);
+  --primary-100: var(--color-blue-100);
+  --primary-200: var(--color-blue-200);
+  --primary-300: var(--color-blue-300);
+  --primary-400: var(--color-blue-400);
+  --primary-500: var(--color-blue-500);
+  --primary-600: var(--color-blue-600);
+  --primary-700: var(--color-blue-700);
+  --primary-800: var(--color-blue-800);
+  --primary-900: var(--color-blue-900);
+  --primary-950: var(--color-blue-950);
+
   --primary-hover:       var(--color-blue-vivid-dark);
   --primary-dark:        var(--color-blue-700);              /* #1d4ed8 — darker primary for gradients/text */
   --gradient-start:      var(--color-blue-vivid);
@@ -256,7 +286,18 @@
 .theme-light {
   --background:          var(--color-slate-50);
   --foreground:          var(--color-gray-800);
-  --primary:             var(--color-blue-vivid);
+  --primary:             var(--color-blue-vivid);  --primary-50: var(--color-blue-50);
+  --primary-100: var(--color-blue-100);
+  --primary-200: var(--color-blue-200);
+  --primary-300: var(--color-blue-300);
+  --primary-400: var(--color-blue-400);
+  --primary-500: var(--color-blue-500);
+  --primary-600: var(--color-blue-600);
+  --primary-700: var(--color-blue-700);
+  --primary-800: var(--color-blue-800);
+  --primary-900: var(--color-blue-900);
+  --primary-950: var(--color-blue-950);
+
   --primary-hover:       var(--color-blue-vivid-dark);
   --primary-dark:        var(--color-blue-700);              /* #1d4ed8 — darker primary for gradients/text */
   --gradient-start:      var(--color-blue-vivid);
@@ -349,7 +390,18 @@
 .theme-dark {
   --background:          var(--color-gray-950);
   --foreground:          #ededed;
-  --primary:             var(--color-indigo-400);
+  --primary:             var(--color-indigo-400);  --primary-50: var(--color-blue-50);
+  --primary-100: var(--color-blue-100);
+  --primary-200: var(--color-blue-200);
+  --primary-300: var(--color-blue-300);
+  --primary-400: var(--color-blue-400);
+  --primary-500: var(--color-blue-500);
+  --primary-600: var(--color-blue-600);
+  --primary-700: var(--color-blue-700);
+  --primary-800: var(--color-blue-800);
+  --primary-900: var(--color-blue-900);
+  --primary-950: var(--color-blue-950);
+
   --primary-hover:       var(--color-indigo-500);
   --primary-dark:        var(--color-indigo-600);             /* #4f46e5 — darker primary for gradients/text */
   --gradient-start:      var(--color-indigo-400);
@@ -452,7 +504,18 @@
      ──────────────────────────────────────────────────────── */
   --background:          var(--color-colorful-bg);           /* #09091C — deep midnight blue-indigo */
   --foreground:          #F0EEFF;                            /* lavender-white — 15.2:1 ✓ AAA */
-  --primary:             var(--color-purple-400);            /* #a78bfa — vibrant purple */
+  --primary:             var(--color-purple-400);  --primary-50: var(--color-purple-50);
+  --primary-100: var(--color-purple-100);
+  --primary-200: var(--color-purple-200);
+  --primary-300: var(--color-purple-300);
+  --primary-400: var(--color-purple-400);
+  --primary-500: var(--color-purple-500);
+  --primary-600: var(--color-purple-600);
+  --primary-700: var(--color-purple-700);
+  --primary-800: var(--color-purple-800);
+  --primary-900: var(--color-purple-900);
+  --primary-950: var(--color-purple-950);
+            /* #a78bfa — vibrant purple */
   --primary-hover:       var(--color-purple-500);            /* #a855f7 */
   --primary-dark:        var(--color-purple-700);            /* #7c3aed — darker primary for gradients/text */
   --primary-400:         var(--color-purple-300);            /* #c4b5fd — lighter purple */

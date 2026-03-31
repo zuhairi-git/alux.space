@@ -85,11 +85,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
   const getGlassButtonStyle = (variant: 'primary' | 'secondary' = 'secondary') => {
     if (variant === 'primary') {
       if (isLight) {
-        return 'bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl border border-purple-300/30';
+        return 'bg-gradient-to-br from-primary-500 to-indigo-600 hover:from-primary-600 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl border border-primary-300/30';
       } else if (isColorful) {
         return 'bg-gradient-to-br from-[var(--player-btn-from)] to-[var(--player-btn-to)] text-white shadow-lg hover:shadow-xl border border-[var(--player-border)] backdrop-blur-sm';
       } else {
-        return 'bg-gradient-to-br from-purple-600/90 to-indigo-600/90 hover:from-purple-700/95 hover:to-indigo-700/95 text-white shadow-lg hover:shadow-xl border border-purple-500/30 backdrop-blur-sm';
+        return 'bg-gradient-to-br from-primary-600/90 to-indigo-600/90 hover:from-primary-700/95 hover:to-indigo-700/95 text-white shadow-lg hover:shadow-xl border border-primary-500/30 backdrop-blur-sm';
       }
     } else {
       if (isLight) {
@@ -581,13 +581,13 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           <motion.div 
             className={`w-full h-full rounded-xl md:rounded-2xl ${
               isLight 
-                ? 'bg-gradient-to-br from-white via-purple-50/50 to-blue-50/70' 
+                ? 'bg-gradient-to-br from-white via-primary-50/50 to-blue-50/70' 
                 : isColorful
                   ? 'bg-[var(--card-from-bg)] border-[var(--card-border)]'
                   : 'bg-gradient-to-br from-gray-800/90 via-gray-700/80 to-gray-800/90'
             } shadow-2xl overflow-hidden relative border ${
               isLight 
-                ? 'border-white/60 shadow-purple-200/30' 
+                ? 'border-white/60 shadow-primary-200/30' 
                 : isColorful
                   ? 'border-[var(--card-border)] shadow-[var(--primary)]/10'
                   : 'border-white/10 shadow-black/20'
@@ -598,7 +598,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-2xl">
               <motion.div 
                 className={`absolute top-4 left-4 w-8 h-8 rounded-full ${
-                  isLight ? 'bg-purple-300/40' : 'bg-[var(--primary)]/25'
+                  isLight ? 'bg-primary-300/40' : 'bg-[var(--primary)]/25'
                 } blur-sm`}
                 animate={{ 
                   scale: isPlaying ? [1, 1.3, 1] : 1,
@@ -634,14 +634,14 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-2xl">
                 <div className={`absolute inset-0 ${
                   isLight 
-                    ? 'bg-gradient-to-br from-purple-50/60 via-blue-50/40 to-pink-50/60' 
+                    ? 'bg-gradient-to-br from-primary-50/60 via-blue-50/40 to-pink-50/60' 
                     : 'bg-[var(--player-bg)]'
                 } backdrop-blur-sm`} />
                 
                 {/* Subtle geometric shapes */}
                 <motion.div 
                   className={`absolute -top-8 -right-8 w-24 h-24 rounded-full ${
-                    isLight ? 'bg-purple-200/30' : 'bg-purple-400/20'
+                    isLight ? 'bg-primary-200/30' : 'bg-primary-400/20'
                   } blur-xl`}
                   animate={{ 
                     scale: isPlaying ? [1, 1.1, 1] : 1,
@@ -668,7 +668,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               >
                 <div className={`absolute inset-0 rounded-full ${
                   isLight 
-                    ? 'bg-gradient-to-br from-purple-200 to-blue-200' 
+                    ? 'bg-gradient-to-br from-primary-200 to-blue-200' 
                     : 'bg-gradient-to-br from-[var(--primary)]/30 to-[var(--gradient-mid)]/30'
                 } blur-md scale-110`} />
                 
@@ -679,11 +679,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   height={96}
                   className={`relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 ${
                     isLight 
-                      ? 'border-white/95 shadow-2xl shadow-purple-200/50' 
+                      ? 'border-white/95 shadow-2xl shadow-primary-200/50' 
                       : 'border-[var(--player-border)] shadow-2xl shadow-[var(--primary)]/20'
                   } backdrop-blur-sm ring-2 ${
                     isLight 
-                      ? 'ring-purple-100/50' 
+                      ? 'ring-primary-100/50' 
                       : 'ring-[var(--primary)]/20'
                   }`}
                   priority
@@ -692,7 +692,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 {/* Subtle glow effect */}
                 <div className={`absolute inset-0 rounded-full ${
                   isLight 
-                    ? 'shadow-lg shadow-purple-300/30' 
+                    ? 'shadow-lg shadow-primary-300/30' 
                     : 'shadow-lg shadow-[var(--player-btn-glow)]'
                 } pointer-events-none`} />
               </motion.div>
@@ -701,11 +701,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               <motion.div 
                 className={`mb-3 px-4 py-2 rounded-full text-sm font-bold ${
                   isLight 
-                    ? 'bg-gradient-to-r from-white/95 to-gray-50/95 text-purple-700 shadow-lg shadow-purple-200/30' 
+                    ? 'bg-gradient-to-r from-white/95 to-gray-50/95 text-primary-700 shadow-lg shadow-primary-200/30' 
                     : 'bg-gradient-to-r from-black/50 to-gray-900/50 text-white backdrop-blur-lg shadow-lg shadow-black/20'
                 } border ${
                   isLight 
-                    ? 'border-purple-200/50' 
+                    ? 'border-primary-200/50' 
                     : 'border-white/20'
                 } relative overflow-hidden`}
                 initial={{ opacity: 0, y: 10 }}
@@ -714,8 +714,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
               >
                 <div className={`absolute inset-0 ${
                   isLight 
-                    ? 'bg-gradient-to-r from-purple-50/50 to-blue-50/50' 
-                    : 'bg-gradient-to-r from-purple-900/20 to-blue-900/20'
+                    ? 'bg-gradient-to-r from-primary-50/50 to-blue-50/50' 
+                    : 'bg-gradient-to-r from-primary-900/20 to-blue-900/20'
                 } opacity-50`} />
                 <span className="relative z-10">
                   EPISODE {availableEpisodes.findIndex(ep => ep.id === currentEpisodeId) + 1}
@@ -741,7 +741,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                         >
                           <motion.div
                             className={`${isMobile ? 'w-1.5' : 'w-1'} rounded-full ${
-                              isLight ? 'bg-gradient-to-t from-purple-500 to-purple-400' : 'bg-gradient-to-t from-white to-gray-200'
+                              isLight ? 'bg-gradient-to-t from-primary-500 to-primary-400' : 'bg-gradient-to-t from-white to-gray-200'
                             } shadow-sm origin-bottom`}
                             style={{ 
                               height: isMobile ? '8px' : '6px',
@@ -765,7 +765,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                     <motion.div 
                       key="ready"
                       className={`${isMobile ? 'text-sm' : 'text-xs'} font-medium ${
-                        isLight ? 'text-purple-600/60' : 'text-white/50'
+                        isLight ? 'text-primary-600/60' : 'text-white/50'
                       } h-full flex items-center justify-center`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -817,11 +817,11 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   key={index}
                   className={`px-2 py-1 text-xs rounded-full ${
                     isLight 
-                      ? 'bg-purple-100 text-purple-700' 
+                      ? 'bg-primary-100 text-primary-700' 
                       : 'bg-[var(--player-tag-bg)] text-[var(--player-tag-text)]'
                   } border ${
                     isLight 
-                      ? 'border-purple-200' 
+                      ? 'border-primary-200' 
                       : 'border-[var(--player-tag-border)]'
                   }`}
                 >
@@ -1014,10 +1014,10 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             whileHover={animationsDisabled || isMobile ? {} : { scale: 1.05 }}
             className={`${isMobile ? 'w-16 h-16 min-w-[64px] min-h-[64px]' : 'w-14 h-14 md:w-16 md:h-16'} flex items-center justify-center rounded-full ${
               isLight 
-                ? 'bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' 
+                ? 'bg-gradient-to-br from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700' 
                 : isColorful
                   ? 'bg-gradient-to-br from-[var(--player-btn-from)] to-[var(--player-btn-to)]'
-                  : 'bg-gradient-to-br from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800'
+                  : 'bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800'
             } shadow-xl transition-all duration-200 focus:outline-none ${
               isMobile ? 'focus:ring-4 focus:ring-[var(--primary)]/50 active:shadow-2xl' : 'focus:ring-4 focus:ring-[var(--primary)]/50'
             } relative z-20`}
@@ -1114,8 +1114,8 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
             }}
             whileTap={animationsDisabled ? {} : { scale: 0.9 }}
             whileHover={animationsDisabled || isMobile ? {} : { scale: 1.1 }}
-            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-8 h-8'} flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-              isMobile ? 'active:bg-purple-500/20' : ''
+            className={`${isMobile ? 'w-12 h-12 min-w-[48px] min-h-[48px]' : 'w-8 h-8'} flex items-center justify-center rounded-full ${getGlassButtonStyle('secondary')} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              isMobile ? 'active:bg-primary-500/20' : ''
             }`}
             aria-expanded={isExpanded}
             aria-label={isExpanded ? (locale === 'fi' ? 'Piilota jaksot' : 'Hide episodes') : (locale === 'fi' ? 'Näytä jaksot' : 'Show episodes')}

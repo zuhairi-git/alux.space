@@ -170,7 +170,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     {isColorful ? (
                         <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
                             <div className={`absolute top-1/3 -right-16 w-48 h-48 ${isColorful ? 'bg-primary/8' : 'bg-[var(--primary)]/8'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '8s', animationDelay: '2s' }} />
                             <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-fuchsia-600/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
                             <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-indigo-600/6 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
@@ -178,11 +178,11 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     ) : isLight ? (
                         <>
                             <div className="absolute -top-20 -left-20 w-60 h-60 bg-indigo-400/[0.04] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-purple-400/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
+                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-primary-400/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     ) : (
                         <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
                             <div className={`absolute bottom-20 -right-16 w-48 h-48 ${isColorful ? 'bg-primary/[0.04]' : 'bg-[var(--primary)]/[0.04]'} rounded-full blur-3xl animate-pulse`} style={{ animationDuration: '10s', animationDelay: '3s' }} />
                         </>
                     )}

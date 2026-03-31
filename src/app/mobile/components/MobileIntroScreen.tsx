@@ -198,7 +198,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             {selectedTheme === 'colorful' && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-fuchsia-600/25 blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
-                    <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-purple-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
+                    <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-primary-600/20 blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
                     <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/10 blur-3xl animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
                 </div>
             )}

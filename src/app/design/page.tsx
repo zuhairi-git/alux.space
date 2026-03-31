@@ -79,9 +79,9 @@ const colorTokenSections = [
   {
     title: 'Palette Ã¢â‚¬â€ Colorful / Ember',
     tokens: [
-      { name: '--color-purple-400',       label: 'Ember (primary)' },
-      { name: '--color-purple-700',  label: 'Ember Dark' },
-      { name: '--color-purple-300', label: 'Ember Light' },
+      { name: '--color-primary-400',       label: 'Ember (primary)' },
+      { name: '--color-primary-700',  label: 'Ember Dark' },
+      { name: '--color-primary-300', label: 'Ember Light' },
       { name: '--color-colorful-bg', label: 'Colorful Bg' },
       { name: '--color-cobalt-700',  label: 'Cobalt 700' },
     ],
@@ -102,11 +102,11 @@ const colorTokenSections = [
   {
     title: 'Palette Ã¢â‚¬â€ Purples',
     tokens: [
-      { name: '--color-purple-300', label: '300' },
-      { name: '--color-purple-400', label: '400' },
-      { name: '--color-purple-500', label: '500' },
-      { name: '--color-purple-600', label: '600' },
-      { name: '--color-purple-700', label: '700' },
+      { name: '--color-primary-300', label: '300' },
+      { name: '--color-primary-400', label: '400' },
+      { name: '--color-primary-500', label: '500' },
+      { name: '--color-primary-600', label: '600' },
+      { name: '--color-primary-700', label: '700' },
     ],
   },
   {
@@ -577,7 +577,7 @@ function GradientsSection() {
     { label: 'Card', css: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))' },
     // eslint-disable-next-line design-system/no-hardcoded-colors
     { label: 'Cosmic', css: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)' },
-    { label: 'Ember (Colorful)', css: 'linear-gradient(135deg, var(--color-purple-400) 0%, var(--color-purple-700) 55%, var(--color-cobalt-700) 100%)' },
+    { label: 'Ember (Colorful)', css: 'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-700) 55%, var(--color-cobalt-700) 100%)' },
   ];
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
