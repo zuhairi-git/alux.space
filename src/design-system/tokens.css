@@ -602,9 +602,9 @@
   /* Accent text */
   --accent-text:           var(--primary-400);
   --accent-text-2:         var(--color-emerald-300);
-  /* Section backgrounds */
-  --section-alt:           rgba(17, 24, 39, 1);          /* gray-900 — elevated dark stripe */
-  --section-alt-2:         rgba(31, 41, 55, 0.6);        /* gray-800/60 — deeper stripe */
+  /* Section backgrounds — emerald-tinted dark surfaces */
+  --section-alt:           color-mix(in srgb, var(--color-gray-950) 85%, var(--color-emerald-950));   /* near-black + faint emerald */
+  --section-alt-2:         color-mix(in srgb, var(--color-gray-950) 78%, var(--color-emerald-950));   /* slightly deeper emerald stripe */
   /* Overlay panels */
   --dropdown-bg:           rgba(17, 24, 39, 0.18);       /* very low alpha — backdrop-filter blur shows through */
   --dropdown-border:       var(--color-gray-700);
