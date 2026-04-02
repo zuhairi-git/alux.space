@@ -63,7 +63,8 @@ const Footer = () => {
     { href: '/', textKey: 'nav.home' },
     { href: '/portfolio', textKey: 'nav.portfolio' },
     { href: '/blog', textKey: 'nav.blog' },
-    { href: '/prompt', textKey: 'nav.prompts' }
+    { href: '/prompt', textKey: 'nav.prompts' },
+    { href: '/design', textKey: 'nav.designSystem' }
   ];
   const portfolioLinks = [
     { href: '/portfolio/healthcare-prioritization', textKey: 'portfolio.cases.healthcare' },

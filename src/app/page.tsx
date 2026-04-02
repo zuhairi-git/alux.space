@@ -12,6 +12,9 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
 import PodcastPlayer from '@/components/PodcastPlayer';
+import SectionAccents from '@/components/SectionAccents';
+import { podcastEpisodes } from '@/data/podcasts';
+import { filterEpisodesByLanguage } from '@/podcast/utils/languageUtils';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 import Icon from '@/components/ui/Icon';
@@ -273,12 +276,7 @@ export default function Home() {
         className="py-20 relative overflow-hidden bg-ds-section-alt"
         id="digital-dreams"
       >
-        {/* Static geometric section accent — no animation */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <div className="absolute -top-28 -right-28 w-96 h-96 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.08]" />
-          <div className="absolute top-1/2 -translate-y-1/2 -right-12 w-40 h-40 rounded-full border border-[var(--primary)] opacity-[0.05]" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full border border-[var(--primary)] opacity-[0.06]" />
-        </div>
+        <SectionAccents />
         <div id="about"></div>
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
           {/* Section Header */}
@@ -377,17 +375,14 @@ export default function Home() {
             />
           </motion.div>
         </div>
-      </section>        {/* Skills Section */}
+      </section>
+
+        {/* Skills Section */}
       <section 
         className="relative overflow-hidden py-24 bg-background"
         id="strengths-skills"
       >
-        {/* Static geometric section accent — no animation */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.08]" />
-          <div className="absolute -bottom-20 -right-20 w-56 h-56 rounded-full border border-[var(--primary)] opacity-[0.05]" />
-          <div className="absolute top-1/2 -translate-y-1/2 -left-10 w-36 h-36 rounded-full border border-[var(--primary)] opacity-[0.04]" />
-        </div>
+        <SectionAccents />
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           {/* Section header with enhanced typography */}
           <div className="text-center mb-16">
@@ -546,11 +541,8 @@ export default function Home() {
         className="py-24 bg-ds-section-alt relative overflow-hidden"
         id="podcast"
       >
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.07]" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full border border-[var(--primary)] opacity-[0.05]" />
-        </div>
-        <div className="container mx-auto px-4 max-w-4xl relative z-10">
+        <SectionAccents />
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -582,14 +574,95 @@ export default function Home() {
                 : 'Thoughts on product design, UX leadership, and the creative process.'}
             </motion.p>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <PodcastPlayer />
-          </motion.div>
+
+          {/* Three-column layout: episodes | player | about */}
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,15rem)_1fr_minmax(0,15rem)] gap-6 lg:gap-8 items-start">
+
+            {/* Left: episode list — hidden on mobile */}
+            <motion.aside
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="hidden lg:block"
+              aria-label={locale === 'fi' ? 'Jaksot' : 'Episodes'}
+            >
+              <div className="rounded-2xl border bg-[var(--card-from-bg)] border-[var(--card-border)] p-5">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)] mb-4 flex items-center gap-2">
+                  <Icon name="queue_music" size="sm" className="text-[var(--primary)]" />
+                  {locale === 'fi' ? 'Jaksot' : 'Episodes'}
+                </h3>
+                <ul className="space-y-2">
+                  {filterEpisodesByLanguage(podcastEpisodes, locale as 'en' | 'fi').map((ep, i) => (
+                    <li key={ep.id}>
+                      <a
+                        href="#podcast"
+                        className="group flex items-start gap-3 rounded-xl px-2.5 py-2 -mx-1 transition-colors hover:bg-[var(--primary)]/5"
+                      >
+                        <span className="flex-shrink-0 w-6 h-6 rounded-md bg-[var(--primary)]/10 flex items-center justify-center text-xs font-bold text-[var(--accent-text)]">
+                          {i + 1}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="text-sm font-medium leading-snug line-clamp-2 group-hover:text-[var(--primary)] transition-colors">
+                            {ep.title}
+                          </p>
+                          <p className="text-xs text-[var(--muted-foreground)] mt-0.5">
+                            {ep.duration}
+                          </p>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.aside>
+
+            {/* Center: Main player */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex justify-center"
+            >
+              <PodcastPlayer />
+            </motion.div>
+
+            {/* Right: About — hidden on mobile */}
+            <motion.aside
+              initial={{ opacity: 0, x: 16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="hidden lg:flex flex-col gap-5"
+              aria-label={locale === 'fi' ? 'Tietoa podcastista' : 'About the podcast'}
+            >
+              <div className="rounded-2xl border bg-[var(--card-from-bg)] border-[var(--card-border)] p-5">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)] mb-3 flex items-center gap-2">
+                  <Icon name="info" size="sm" className="text-[var(--primary)]" />
+                  {locale === 'fi' ? 'Tietoa podcastista' : 'About the Podcast'}
+                </h3>
+                <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
+                  {locale === 'fi'
+                    ? 'Näkemyksiä suunnittelujohtajuudesta, tuotehallinnasta sekä luovuuden ja teknologian kohtaamisesta.'
+                    : 'Insights on design leadership, product management, and the intersection of creativity and technology.'}
+                </p>
+              </div>
+              <div className="rounded-2xl border bg-[var(--card-from-bg)] border-[var(--card-border)] p-5">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)] mb-3 flex items-center gap-2">
+                  <Icon name="tips_and_updates" size="sm" className="text-[var(--primary)]" />
+                  {locale === 'fi' ? 'Aiheet' : 'Topics'}
+                </h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {['Design Leadership', 'UX Research', 'Product Strategy', 'AI & Tech', 'Creative Process'].map(tag => (
+                    <span key={tag} className="px-2.5 py-1 rounded-full text-xs bg-[var(--primary)]/10 text-[var(--accent-text)] border border-[var(--card-border)]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.aside>
+          </div>
         </div>
       </section>
 
@@ -598,12 +671,7 @@ export default function Home() {
         className="py-24 bg-ds-section-alt-2 relative overflow-hidden"
         id="testimonials"
       >
-        {/* Static geometric section accent — no animation */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.08]" />
-          <div className="absolute -bottom-28 -left-28 w-96 h-96 rounded-full border border-[var(--primary)] opacity-[0.06]" />
-          <div className="absolute top-1/3 -right-8 w-24 h-24 rounded-full border border-[var(--primary)] opacity-[0.05]" />
-        </div>
+        <SectionAccents />
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="text-center mb-16">
             <div className="bg-primary/10 p-4 mb-5 rounded-full inline-block">

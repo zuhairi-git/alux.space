@@ -33,6 +33,7 @@ import type { ComponentEntry } from '@/design-system';
 import AnimatedSection from '@/components/AnimatedSection';
 import CodeSnippet from '@/components/CodeSnippet';
 import PodcastPlayer from '@/components/PodcastPlayer';
+import SectionAccents from '@/components/SectionAccents';
 import { useTheme } from '@/context/ThemeContext';
 
 /* -- Token swatch data ---------------------------------- */
@@ -1110,18 +1111,16 @@ function BackgroundsSection() {
       {/* Section backgrounds preview */}
       <div>
         <h4 className="text-sm font-medium opacity-60 mb-4">Section Background Preview</h4>
-        <p className="text-xs opacity-50 mb-4">Alternating section backgrounds with the shared geometric ring accent pattern.</p>
+        <p className="text-xs opacity-50 mb-4">Alternating section backgrounds with the shared <code className="font-mono text-[var(--primary)]">SectionAccents</code> decoration layer.</p>
         <div className="rounded-xl overflow-hidden border border-[var(--card-border)] divide-y divide-[var(--card-border)]">
           {[
-            { cssVar: '--background', label: 'Base page background', token: '--background', desc: 'Between alternating sections — the default surface.' },
-            { cssVar: '--section-alt', label: 'First alternate section', token: '--section-alt · bg-ds-section-alt', desc: 'Used for About, prominent content sections.' },
-            { cssVar: '--background', label: 'Base (repeat)', token: '--background', desc: 'Alternating rhythm continues.' },
-            { cssVar: '--section-alt-2', label: 'Second alternate section', token: '--section-alt-2 · bg-ds-section-alt-2', desc: 'Used for Testimonials, closing sections.' },
+            { cssVar: '--background',   label: 'Base page background',     token: '--background',                        desc: 'Between alternating sections — the default surface.' },
+            { cssVar: '--section-alt',  label: 'First alternate section',  token: '--section-alt · bg-ds-section-alt',   desc: 'Used for About, Podcast, prominent content sections.' },
+            { cssVar: '--background',   label: 'Base (repeat)',             token: '--background',                        desc: 'Alternating rhythm continues.' },
+            { cssVar: '--section-alt-2',label: 'Second alternate section', token: '--section-alt-2 · bg-ds-section-alt-2', desc: 'Used for Testimonials, closing sections.' },
           ].map(({ cssVar, label, token, desc }) => (
             <div key={label} className="relative overflow-hidden px-6 py-8" style={{ background: `var(${cssVar})` }}>
-              {/* Geometric ring accents — same as homepage sections */}
-              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full border border-[var(--primary)] opacity-[0.10] pointer-events-none" />
-              <div className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full border border-[var(--primary)] opacity-[0.07] pointer-events-none" />
+              <SectionAccents />
               <div className="relative z-10">
                 <div className="text-xs font-mono text-[var(--primary)] mb-1">{token}</div>
                 <div className="text-sm font-semibold mb-1">{label}</div>
@@ -1129,6 +1128,27 @@ function BackgroundsSection() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* SectionAccents component doc */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">SectionAccents Component</h4>
+        <p className="text-xs opacity-50 mb-4">
+          Drop <code className="font-mono text-[var(--primary)]">{'<SectionAccents />'}</code> as the first child of any{' '}
+          <code className="font-mono text-[var(--primary)]">relative overflow-hidden</code> section. It renders tiny
+          scattered shapes — dots, rings, diamonds, squares, crosses — using design tokens exclusively.
+        </p>
+        <div className="relative h-36 rounded-xl overflow-hidden border border-[var(--card-border)] bg-[var(--section-alt)]">
+          <SectionAccents />
+          <div className="relative z-10 flex items-center justify-center h-full">
+            <code className="text-xs font-mono text-[var(--muted-foreground)] bg-[var(--card-from-bg)] px-3 py-1.5 rounded-lg border border-[var(--card-border)]">
+              {'<SectionAccents />'}
+            </code>
+          </div>
+        </div>
+        <div className="mt-3 text-xs font-mono opacity-50">
+          import SectionAccents from &apos;@/components/SectionAccents&apos;
         </div>
       </div>
     </div>
