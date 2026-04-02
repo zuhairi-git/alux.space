@@ -55,7 +55,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
           aria-label={getArticleAriaLabel()}
           onClick={() => trackEvent('blog_card_click', 'blog', `featured_${post.slug}_${post.tags[0] || 'uncategorized'}`)}
         >
-          <div className="theme-card-flex p-0 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl border border-ds-gray-200/30 dark:border-ds-gray-700/30 hover:border-primary/30">
+          <div className="theme-card-flex p-0 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30">
             <div className="flex flex-col md:flex-row">
               {/* Image */}
               <div className="relative w-full md:w-[55%] h-64 md:h-[360px] overflow-hidden bg-black shrink-0">
@@ -98,12 +98,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
 
                 <p
                   id={`blog-desc-${post.slug}`}
-                  className="opacity-70 text-base leading-relaxed mb-6 line-clamp-3"
+                  className="text-[var(--muted-foreground)] text-base leading-relaxed mb-6 line-clamp-3"
                 >
                   {post.description}
                 </p>
 
-                <div className="flex items-center gap-5 text-sm opacity-60 mt-auto">
+                <div className="flex items-center gap-5 text-sm text-[var(--muted-foreground)] mt-auto">
                   <div className="flex items-center gap-1.5">
                     <span className="material-symbols-rounded text-sm" aria-hidden="true">calendar_today</span>
                     <time dateTime={isoDate}>{displayDate}</time>
@@ -232,7 +232,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
       aria-labelledby={`blog-title-${post.slug}`}
       aria-describedby={`blog-desc-${post.slug}`}
     >
-        <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-theme/70 border border-ds-gray-200/30 dark:border-ds-gray-700/30 hover:border-primary/30 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
+        <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-theme/70 hover:border-primary/30 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
         <Link 
           href={localizedPostUrl} 
           className="group h-full flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-2xl"
@@ -278,7 +278,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             </h3>
             <p 
               id={`blog-desc-${post.slug}`}
-              className="opacity-65 text-sm leading-relaxed line-clamp-3 mb-4"
+              className="text-[var(--muted-foreground)] text-sm leading-relaxed line-clamp-3 mb-4"
             >
               {post.description}
             </p>
@@ -300,14 +300,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                 <span className="material-symbols-rounded text-sm opacity-40" aria-hidden="true">calendar_today</span>
                 <time 
                   dateTime={isoDate}
-                  className="opacity-60"
+                  className="text-[var(--muted-foreground)]"
                 >
                   {displayDate}
                 </time>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="material-symbols-rounded text-sm opacity-40" aria-hidden="true">schedule</span>
-                <span className="opacity-60">
+                <span className="text-[var(--muted-foreground)]">
                   {post.readTime}
                 </span>
               </div>

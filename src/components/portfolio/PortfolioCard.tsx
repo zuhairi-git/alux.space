@@ -195,7 +195,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
       viewport={{ once: true }}
       className="h-full w-full group"
     >
-      <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:shadow-xl border border-ds-gray-200/20 dark:border-ds-gray-700/20 group-hover:border-primary/20">
+      <div className="theme-card-flex p-0 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:shadow-xl">
         <Link 
           href={cardLink} 
           className="h-full flex flex-col"
@@ -233,8 +233,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
               {item.category && getCategoryBadge()}
             </div>
             
-            <h3 className="text-lg font-bold text-primary mb-2 leading-snug group-hover:opacity-80 transition-opacity">{getTitle()}</h3>
-            <p className="opacity-60 text-sm line-clamp-2 leading-relaxed mb-4">{getDesc()}</p>
+            <h3 className="text-lg font-bold mb-2 leading-snug group-hover:text-primary transition-colors duration-200">{getTitle()}</h3>
+            <p className="text-[var(--muted-foreground)] text-sm line-clamp-2 leading-relaxed mb-4">{getDesc()}</p>
 
             {/* Footer */}
             <div className="flex items-center justify-between mt-auto pt-4 border-t border-[var(--card-border)]">
