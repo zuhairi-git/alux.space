@@ -78,17 +78,17 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       type: {
         en: 'AI Design Workflow Tool',
-        fi: 'AI-pohjainen suunnittelutyÃ¶kalu'
+        fi: 'AI-pohjainen suunnittelutyökalu'
       },
       desc: {
         en: 'An AI-powered design workflow tool that turns prompts into UI concepts.',
-        fi: 'TekoÃ¤lypohjainen suunnittelutyÃ¶kalu, joka muuttaa kehotteet UI-konsepteiksi.'
+        fi: 'Tekoälypohjainen suunnittelutyökalu, joka muuttaa kehotteet UI-konsepteiksi.'
       },
       link: `/${locale}/portfolio/promptforge`,
       gradient: 'from-primary-500 to-ds-indigo-500',
       status: {
         en: 'In Progress',
-        fi: 'KehitteillÃ¤',
+        fi: 'Kehitteillä',
         type: 'in-progress'
       },
       category: 'prototype',
@@ -104,11 +104,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       type: {
         en: 'Product & AI UX Case Study',
-        fi: 'Tuote- ja tekoÃ¤ly-UX:n tapaustutkimus'
+        fi: 'Tuote- ja tekoäly-UX:n tapaustutkimus'
       },
       desc: {
         en: 'Documenting the real impact of AI integration in a live product.',
-        fi: 'TekoÃ¤lyintegraation todellisen vaikutuksen dokumentointi elÃ¤vÃ¤ssÃ¤ tuotteessa.'
+        fi: 'Tekoälyintegraation todellisen vaikutuksen dokumentointi elävässä tuotteessa.'
       },
       link: `/${locale}/portfolio/intelligence-by-design`,
       gradient: 'from-ds-blue-600 to-ds-cyan-500',
@@ -130,17 +130,17 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       type: {
         en: 'AI-Driven Design System',
-        fi: 'TekoÃ¤lyohjattu suunnittelujÃ¤rjestelmÃ¤'
+        fi: 'Tekoälyohjattu suunnittelujärjestelmä'
       },
       desc: {
         en: 'A design system where AI is part of the foundation, not an afterthought.',
-        fi: 'SuunnittelujÃ¤rjestelmÃ¤, jossa tekoÃ¤ly on osa perustaa, ei jÃ¤lkiajatus.'
+        fi: 'Suunnittelujärjestelmä, jossa tekoäly on osa perustaa, ei jälkiajatus.'
       },
       link: `/${locale}/portfolio/axiom`,
       gradient: 'from-ds-emerald-600 to-ds-cyan-400',
       status: {
         en: 'In Progress',
-        fi: 'KehitteillÃ¤',
+        fi: 'Kehitteillä',
         type: 'in-progress'
       },
       category: 'case-study',
@@ -160,7 +160,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       desc: {
         en: 'What if writing prompts is the most important UX skill of the next decade?',
-        fi: 'MitÃ¤ jos kehotteiden kirjoittaminen on seuraavan vuosikymmenen tÃ¤rkein UX-taito?'
+        fi: 'Mitä jos kehotteiden kirjoittaminen on seuraavan vuosikymmenen tärkein UX-taito?'
       },
       link: `/${locale}/portfolio/prompt-as-ux`,
       gradient: 'from-ds-pink-500 to-ds-pink-400',
@@ -182,17 +182,17 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       type: {
         en: 'Agentic AI Workflows',
-        fi: 'Agentti-tekoÃ¤lyn tyÃ¶nkulut'
+        fi: 'Agentti-tekoälyn työnkulut'
       },
       desc: {
         en: 'Designing trust, transparency, and control for agentic AI workflows.',
-        fi: 'Luottamuksen, lÃ¤pinÃ¤kyvyyden ja hallinnan suunnittelu agentti-tekoÃ¤lytyÃ¶nkuluille.'
+        fi: 'Luottamuksen, läpinäkyvyyden ja hallinnan suunnittelu agentti-tekoälytyönkuluille.'
       },
       link: `/${locale}/portfolio/delegate`,
       gradient: 'from-ds-gold-600 to-accent',
       status: {
         en: 'In Progress',
-        fi: 'KehitteillÃ¤',
+        fi: 'Kehitteillä',
         type: 'in-progress'
       },
       category: 'case-study',
@@ -211,8 +211,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Strateginen tapaustutkimus'
       },
       desc: {
-        en: 'A data-driven game development and marketing strategy â€” from user personas and gameplay mechanics to launch planning and long-term retention.',
-        fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia â€” kÃ¤yttÃ¤jÃ¤persoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkÃ¤aikaiseen pysyvyyteen.'
+        en: 'A data-driven game development and marketing strategy — from user personas and gameplay mechanics to launch planning and long-term retention.',
+        fi: 'Dataohjattu pelinkehitys- ja markkinointistrategia — käyttäjäpersoonista ja pelimekaniikasta julkaisusuunnitelmiin ja pitkäaikaiseen pysyvyyteen.'
       },
       link: `/${locale}/portfolio/game-strategy`,
       gradient: 'from-ds-error to-accent',
@@ -230,15 +230,15 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
     {
       title: {
         en: 'Workflow Platform',
-        fi: 'TyÃ¶nkulkualusta'
+        fi: 'Työnkulkualusta'
       },
       type: {
         en: 'AI-Powered Collaboration',
-        fi: 'TekoÃ¤lypohjainen yhteistyÃ¶'
+        fi: 'Tekoälypohjainen yhteistyö'
       },
       desc: {
         en: 'An AI-powered platform with intelligent workspaces, AI copilot, and cross-platform prototypes for iOS, Android, and collaboration portal.',
-        fi: 'TekoÃ¤lypohjainen alusta Ã¤lykkÃ¤illÃ¤ tyÃ¶tiloilla, tekoÃ¤lyavustajalla ja monialustaisilla prototyypeillÃ¤ iOS:lle, Androidille ja hallintaportaalille.'
+        fi: 'Tekoälypohjainen alusta älykkäillä työtiloilla, tekoälyavustajalla ja monialustaisilla prototyypeillä iOS:lle, Androidille ja hallintaportaalille.'
       },
       link: `/${locale}/portfolio/workflow`,
       gradient: 'from-ds-blue-400 to-primary-500',
@@ -256,7 +256,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
     {
       title: {
         en: 'AI-Powered Market Intelligence',
-        fi: 'TekoÃ¤lypohjainen markkinatieto'
+        fi: 'Tekoälypohjainen markkinatieto'
       },
       type: {
         en: 'Mobile UX/UI Design',
@@ -264,13 +264,13 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       desc: {
         en: 'Designing a mobile-first, AI-powered market intelligence application for enterprise users relying on trusted financial content.',
-        fi: 'MobiililÃ¤htÃ¶isen, tekoÃ¤lypohjaisen markkinatietosovelluksen suunnittelu yrityskÃ¤yttÃ¤jille, jotka luottavat luotettavaan taloudelliseen sisÃ¤ltÃ¶Ã¶n.'
+        fi: 'Mobiililähtöisen, tekoälypohjaisen markkinatietosovelluksen suunnittelu yrityskäyttäjille, jotka luottavat luotettavaan taloudelliseen sisältöön.'
       },
       link: `/${locale}/portfolio/market-intelligence`,
       gradient: 'from-ds-blue-600 to-ds-indigo-500',
       status: {
         en: 'In Progress',
-        fi: 'KehitteillÃ¤',
+        fi: 'Kehitteillä',
         type: 'in-progress'
       },
       category: 'prototype',
@@ -289,8 +289,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         fi: 'Tuotehallinnan tapaustutkimus'
       },
       desc: {
-        en: 'Balancing technical debt, user needs, and strict compliance in a healthcare SaaS environmentâ€”a strategic approach to backlog prioritization and conflict resolution.',
-        fi: 'Teknisen velan, kÃ¤yttÃ¤jÃ¤tarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympÃ¤ristÃ¶ssÃ¤â€”strateginen lÃ¤hestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
+        en: 'Balancing technical debt, user needs, and strict compliance in a healthcare SaaS environment—a strategic approach to backlog prioritization and conflict resolution.',
+        fi: 'Teknisen velan, käyttäjätarpeiden ja tiukan vaatimustenmukaisuuden tasapainottaminen terveydenhuollon SaaS-ympäristössä—strateginen lähestymistapa kehitysjonon priorisointiin ja konfliktien ratkaisuun.'
       },
       link: `/${locale}/portfolio/healthcare-prioritization`,
       gradient: 'from-ds-blue-500 to-ds-cyan-400',
@@ -308,20 +308,20 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
     {
       title: {
         en: 'Inclusive Design System',
-        fi: 'Inklusiivinen suunnittelujÃ¤rjestelmÃ¤'
+        fi: 'Inklusiivinen suunnittelujärjestelmä'
       },
       type: {
         en: 'Design System Case Study',
-        fi: 'SuunnittelujÃ¤rjestelmÃ¤ tapaustutkimus'
+        fi: 'Suunnittelujärjestelmä tapaustutkimus'
       },
       desc: {
-        en: 'Building accessible design systems from the ground upâ€”research-driven approach to creating inclusive digital products that work for everyone.',
-        fi: 'Saavutettavien suunnittelujÃ¤rjestelmien rakentaminen alusta alkaenâ€”tutkimuspohjainen lÃ¤hestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
+        en: 'Building accessible design systems from the ground up—research-driven approach to creating inclusive digital products that work for everyone.',
+        fi: 'Saavutettavien suunnittelujärjestelmien rakentaminen alusta alkaen—tutkimuspohjainen lähestymistapa inklusiivisten digitaalisten tuotteiden luomiseen, jotka toimivat kaikille.'
       }, link: `/${locale}/portfolio/accessibility`,
       gradient: 'from-ds-indigo-400 to-primary-500',
       status: {
         en: 'In Progress',
-        fi: 'KehitteillÃ¤',
+        fi: 'Kehitteillä',
         type: 'in-progress'
       },
       category: 'case-study',
@@ -337,11 +337,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       },
       type: {
         en: 'Job Seeking Application',
-        fi: 'TyÃ¶nhakusovellus'
+        fi: 'Työnhakusovellus'
       },
       desc: {
         en: 'Job seeking app for efficient job searching',
-        fi: 'TyÃ¶nhakusovellus tehokkaaseen tyÃ¶nhakuun'
+        fi: 'Työnhakusovellus tehokkaaseen työnhakuun'
       },
       link: `/${locale}/portfolio/jobseeking`,
       gradient: 'from-primary-400 to-ds-pink-500',
