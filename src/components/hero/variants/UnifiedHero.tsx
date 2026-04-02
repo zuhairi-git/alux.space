@@ -116,7 +116,7 @@ const STACK_CONFIG = [
 interface PortfolioFanProps { locale: string }
 
 const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
-  const [activeIndex, setActiveIndex] = useState(2); // start with centre card active
+  const [activeIndex, setActiveIndex] = useState(1); // start with Workflow card active
   const [showCloud, setShowCloud] = useState(true);
   const wasDragging = React.useRef(false);
   const activeItem = SHOWCASE_ITEMS[activeIndex];
