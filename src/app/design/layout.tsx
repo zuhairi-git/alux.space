@@ -52,6 +52,7 @@ const sidebarNav: NavGroup[] = [
       { label: 'Podcast Player',  section: 'podcast-player',  icon: 'podcasts' },
       { label: 'Progress',        section: 'progress',        icon: 'donut_large' },
       { label: 'Quotes',          section: 'quotes',          icon: 'format_quote' },
+      { label: 'Testimonials',     section: 'testimonials',    icon: 'chat_bubble' },
       { label: 'Selects',         section: 'selects',         icon: 'arrow_drop_down_circle' },
       { label: 'Skeletons',       section: 'skeletons',       icon: 'hourglass_empty' },
       { label: 'Tabs',            section: 'tabs',            icon: 'tab' },

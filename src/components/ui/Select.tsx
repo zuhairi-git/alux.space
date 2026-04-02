@@ -134,15 +134,15 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             className={[
               'w-full h-10 flex items-center justify-between',
               'px-3.5 text-[14px] rounded-md',
-              'border shadow-sm transition-all duration-150 ease-out',
+              'border transition-all duration-150 ease-out',
               'bg-[var(--background)] text-[var(--foreground)]',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--btn-primary-bg)]/25 focus-visible:ring-offset-1',
+              'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)]/30 focus-visible:ring-offset-0',
               'cursor-pointer',
               hasError
                 ? 'border-[var(--color-error)]'
                 : open
-                  ? 'border-[var(--btn-primary-bg)] ring-2 ring-[var(--btn-primary-bg)]/25'
-                  : 'border-[var(--card-border)] hover:border-[var(--btn-primary-bg)]/40',
+                  ? 'border-[var(--primary)]'
+                  : 'border-[var(--card-border)] hover:border-[var(--primary)]/50',
               disabled && 'opacity-50 cursor-not-allowed',
             ]
               .filter(Boolean)

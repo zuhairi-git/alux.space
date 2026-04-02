@@ -31,15 +31,15 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         aria-label="Quote"
       >
         <blockquote 
-          className="text-xl md:text-2xl leading-relaxed italic text-theme" 
+          className="text-xl md:text-2xl leading-relaxed italic text-[var(--foreground)]" 
           dangerouslySetInnerHTML={{ __html: quoteHtml }}
           lang={lang}
           cite={cite}
         />
-        
-        {author && (
+          
+          {author && (
           <footer className="text-right mt-2">
-            <cite className="font-medium text-primary">— {author}</cite>
+            <cite className="font-medium text-[var(--primary)]">— {author}</cite>
           </footer>
         )}
       </motion.div>
@@ -57,9 +57,9 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         role="region"
         aria-label="Quote"
       >
-        <div className="py-6 px-6 border-l-4 border-primary/50 bg-[var(--card-from-bg)] rounded-r-md">
+        <div className="py-6 px-6 border-l-4 border-[var(--primary)]/50 bg-[var(--card-from-bg)] rounded-r-md">
           <blockquote 
-            className="text-xl md:text-2xl leading-relaxed mb-3 text-theme" 
+            className="text-xl md:text-2xl leading-relaxed mb-3 text-[var(--foreground)]" 
             dangerouslySetInnerHTML={{ __html: quoteHtml }}
             lang={lang}
             cite={cite}
@@ -67,7 +67,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
           
           {author && (
             <footer className="text-right">
-              <cite className="font-medium text-primary">— {author}</cite>
+              <cite className="font-medium text-[var(--primary)]">— {author}</cite>
             </footer>
           )}
         </div>
@@ -81,12 +81,12 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: durationSeconds.slow }}
-      className="my-12 max-w-4xl mx-auto relative text-foreground"
+      className="my-6 max-w-4xl mx-auto relative text-foreground overflow-hidden"
       role="region"
       aria-label="Quote"
     >
-      {/* Decorative elements */}
-      <div className="absolute -top-6 -left-2 md:-left-8" aria-hidden="true">
+      {/* Decorative elements — clipped inside the wrapper */}
+      <div className="absolute top-0 left-0" aria-hidden="true">
         <svg 
           className="w-12 h-12 md:w-16 md:h-16 text-primary opacity-20" 
           fill="currentColor" 
@@ -121,17 +121,6 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
             </cite>
           </footer>
         )}
-      </div>
-      
-      {/* Bottom decorative elements */}
-      <div className="absolute -bottom-6 -right-2 md:-right-8 transform rotate-180">
-        <svg 
-          className="w-12 h-12 md:w-16 md:h-16 text-primary opacity-20" 
-          fill="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-        </svg>
       </div>
     </motion.div>
   );

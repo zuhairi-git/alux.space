@@ -18,7 +18,7 @@ import { filterEpisodesByLanguage } from '@/podcast/utils/languageUtils';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 import Icon from '@/components/ui/Icon';
-import TestimonialCarousel from '@/components/TestimonialCarousel';
+import { TestimonialCarousel } from '@/design-system';
 
 // A clean, readable skill card component
 const InteractiveSkillCard = ({ 

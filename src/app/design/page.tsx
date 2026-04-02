@@ -10,6 +10,7 @@ import {
   TimelineCard,
   MediaCard,
   QuoteBlock,
+  TestimonialCarousel,
   Icon,
   Tooltip,
   Button,
@@ -1858,6 +1859,36 @@ function QuotesSection() {
   );
 }
 
+function TestimonialsSection() {
+  const samples = [
+    {
+      text: "Ali is a creative product designer. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression.",
+      name: "Fahad M",
+      position: "IT Contractor | Travelodge Hotels Limited",
+      initials: "FM",
+      highlights: ["creative product designer", "solve complex problem with simple solutions", "long lasting impression"],
+    },
+    {
+      text: "Ali is an exceptional and experienced UI/UX designer with more than ten years of professional experience. He always delivers on time and on budget.",
+      name: "Constantin Buda",
+      position: "CMO at Vidalico Digital",
+      initials: "CB",
+      highlights: ["exceptional and experienced", "more than ten years", "delivers on time and on budget"],
+    },
+  ];
+  return (
+    <DemoSection code={`import { TestimonialCarousel } from '@/design-system';
+
+<TestimonialCarousel testimonials={[
+  { text: "...", name: "Fahad M", position: "IT Contractor", highlights: ["creative"] }
+]} />`}>
+      <div className="py-4">
+        <TestimonialCarousel testimonials={samples} autoPlayInterval={5000} />
+      </div>
+    </DemoSection>
+  );
+}
+
 function IconsSection() {
   const iconGroups = [
     {
@@ -2518,6 +2549,7 @@ const allSections: SectionDef[] = [
   { key: 'cards-media',    title: 'Cards — Media',             render: () => <CardsMediaSection /> },
   { key: 'cards-content',  title: 'Cards — Content',           render: () => <CardsContentSection /> },
   { key: 'quotes',         title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
+  { key: 'testimonials',   title: 'Testimonial Carousel',      render: () => <TestimonialsSection /> },
   { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
   { key: 'code-snippet', title: 'Code Snippet',            render: () => <CodeSnippetSection /> },
@@ -2580,6 +2612,7 @@ function OverviewGrid() {
         { key: 'podcast-player',  icon: 'podcasts',               label: 'Podcast Player' },
         { key: 'progress',        icon: 'donut_large',            label: 'Progress' },
         { key: 'quotes',          icon: 'format_quote',           label: 'Quotes' },
+        { key: 'testimonials',    icon: 'chat_bubble',            label: 'Testimonials' },
         { key: 'selects',         icon: 'arrow_drop_down_circle', label: 'Selects' },
         { key: 'skeletons',       icon: 'hourglass_empty',        label: 'Skeletons' },
         { key: 'tabs',            icon: 'tab',                    label: 'Tabs' },

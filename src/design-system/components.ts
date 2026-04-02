@@ -112,6 +112,18 @@ export const componentRegistry: ComponentEntry[] = [
     variants: ['default', 'simple', 'minimal'],
   },
   {
+    name: 'TestimonialCarousel',
+    path: 'src/components/TestimonialCarousel.tsx',
+    category: 'composite',
+    props: [
+      { name: 'testimonials', type: 'Testimonial[]', default: 'required', description: 'Array of testimonial objects' },
+      { name: 'autoPlayInterval', type: 'number', default: '8000', description: 'Ms between auto-advances' },
+    ],
+    tokens: ['--primary', '--card-from-bg', '--card-to-bg', '--card-border', '--muted-foreground', '--gradient-start', '--gradient-end'],
+    a11y: ['aria-label on each avatar button'],
+    variants: [],
+  },
+  {
     name: 'ChapterDivider',
     path: 'src/components/ui/ChapterDivider.tsx',
     category: 'composite',

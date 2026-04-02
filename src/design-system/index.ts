@@ -91,6 +91,9 @@ export type { TextVariant }          from '@/components/ui/Text';
 export { default as QuoteBlock }     from '@/components/ui/QuoteBlock';
 export { default as ChapterDivider } from '@/components/ui/ChapterDivider';
 export { default as ImageSection }   from '@/components/ui/ImageSection';
+export { default as TestimonialCarousel } from '@/components/TestimonialCarousel';
+export type { Testimonial }              from '@/components/TestimonialCarousel';
+export { default as TestimonialWordCloud } from '@/components/TestimonialWordCloud';
 
 // ── Cards ─────────────────────────────────────────────────────────────────
 // Surface (structural shells)
