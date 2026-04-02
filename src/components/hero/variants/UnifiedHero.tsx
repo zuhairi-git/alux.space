@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
@@ -116,10 +117,17 @@ const STACK_CONFIG = [
 interface PortfolioFanProps { locale: string }
 
 const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
+  const router = useRouter();
+  const { trackEvent } = useAnalyticsTracking();
   const [activeIndex, setActiveIndex] = useState(1); // start with Workflow card active
   const [showCloud, setShowCloud] = useState(true);
   const wasDragging = React.useRef(false);
   const activeItem = SHOWCASE_ITEMS[activeIndex];
+
+  const navigateToActiveItem = () => {
+    trackEvent('hero_portfolio_card_click', 'hero', `${activeItem.title}_${activeItem.type}`);
+    router.push(`/${locale}${activeItem.slug}`);
+  };
 
   // Shared dot navigation — used in both mobile and desktop layouts
   const dotNav = (
@@ -158,47 +166,54 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.15}
+              role="link"
+              tabIndex={0}
+              aria-label={`Open ${activeItem.title}`}
               onDragStart={() => { wasDragging.current = false; }}
               onDrag={(_, info) => { if (Math.abs(info.offset.x) > 5) wasDragging.current = true; }}
               onDragEnd={(_, info) => {
                 if (info.offset.x < -50) setActiveIndex(i => Math.min(i + 1, SHOWCASE_ITEMS.length - 1));
                 if (info.offset.x > 50) setActiveIndex(i => Math.max(i - 1, 0));
               }}
+              onTap={() => {
+                if (!wasDragging.current) navigateToActiveItem();
+              }}
+              onKeyDown={(event: React.KeyboardEvent<HTMLDivElement>) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  navigateToActiveItem();
+                }
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               style={{ position: 'absolute', inset: 0 }}
+              className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-2xl"
             >
-              <Link
-                href={`/${locale}${activeItem.slug}`}
-                className="block w-full h-full"
-                onClick={(e) => { if (wasDragging.current) e.preventDefault(); }}
+              <div
+                className="relative w-full h-full rounded-2xl overflow-hidden"
+                style={{ boxShadow: `0 20px 50px -10px rgba(0,0,0,0.55), 0 0 0 1px ${activeItem.accent}55` }}
               >
-                <div
-                  className="relative w-full h-full rounded-2xl overflow-hidden"
-                  style={{ boxShadow: `0 20px 50px -10px rgba(0,0,0,0.55), 0 0 0 1px ${activeItem.accent}55` }}
-                >
-                  <Image src={activeItem.src} alt={activeItem.title} fill className="object-cover object-top" sizes="(max-width: 400px) 100vw, 380px" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }} />
-                  <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl" style={{ background: activeItem.accent }} />
-                  <div className="absolute top-3 right-3">
-                    <span className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${activeItem.accent}33`, color: activeItem.accent, border: `1px solid ${activeItem.accent}55` }}>
-                      {activeItem.num}
-                    </span>
-                  </div>
-                  <div className="absolute top-3 left-3">
-                    <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
-                      {activeItem.type}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-0 inset-x-0 px-4 pb-4 pt-8">
-                    <p className="text-[10px] uppercase tracking-widest text-white/50 mb-0.5">{activeItem.tag}</p>
-                    <p className="text-white font-bold text-base leading-tight">{activeItem.title}</p>
-                    <div className="mt-2 h-0.5 rounded-full" style={{ width: '48px', background: activeItem.accent }} />
-                  </div>
+                <Image src={activeItem.src} alt={activeItem.title} fill className="object-cover object-top" sizes="(max-width: 400px) 100vw, 380px" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }} />
+                <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl" style={{ background: activeItem.accent }} />
+                <div className="absolute top-3 right-3">
+                  <span className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${activeItem.accent}33`, color: activeItem.accent, border: `1px solid ${activeItem.accent}55` }}>
+                    {activeItem.num}
+                  </span>
                 </div>
-              </Link>
+                <div className="absolute top-3 left-3">
+                  <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
+                    {activeItem.type}
+                  </span>
+                </div>
+                <div className="absolute bottom-0 inset-x-0 px-4 pb-4 pt-8">
+                  <p className="text-[10px] uppercase tracking-widest text-white/50 mb-0.5">{activeItem.tag}</p>
+                  <p className="text-white font-bold text-base leading-tight">{activeItem.title}</p>
+                  <div className="mt-2 h-0.5 rounded-full" style={{ width: '48px', background: activeItem.accent }} />
+                </div>
+              </div>
             </MotionDiv>
           </AnimatePresence>
         </div>
