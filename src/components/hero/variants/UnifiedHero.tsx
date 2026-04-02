@@ -174,6 +174,10 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
               onDragEnd={(_, info) => {
                 if (info.offset.x < -50) setActiveIndex(i => Math.min(i + 1, SHOWCASE_ITEMS.length - 1));
                 if (info.offset.x > 50) setActiveIndex(i => Math.max(i - 1, 0));
+                // Reset so the next tap on the newly-mounted card isn't blocked.
+                // wasDragging is only reset in onDragStart otherwise, which doesn't
+                // fire until the user begins a fresh drag — causing taps to fail.
+                wasDragging.current = false;
               }}
               onTap={() => {
                 if (!wasDragging.current) navigateToActiveItem();
