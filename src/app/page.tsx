@@ -291,8 +291,14 @@ export default function Home() {
         className="py-20 relative overflow-hidden bg-ds-section-alt"
         id="digital-dreams"
       >
+        {/* Static geometric section accent — no animation */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute -top-28 -right-28 w-96 h-96 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.08]" />
+          <div className="absolute top-1/2 -translate-y-1/2 -right-12 w-40 h-40 rounded-full border border-[var(--primary)] opacity-[0.05]" />
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full border border-[var(--primary)] opacity-[0.06]" />
+        </div>
         <div id="about"></div>
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
           {/* Section Header */}
           <div className="text-center mb-16">
             <motion.div
@@ -394,8 +400,12 @@ export default function Home() {
         className="relative overflow-hidden py-24 bg-background"
         id="strengths-skills"
       >
-        {/* Enhanced background decorative elements - REMOVED */}
-      
+        {/* Static geometric section accent — no animation */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.08]" />
+          <div className="absolute -bottom-20 -right-20 w-56 h-56 rounded-full border border-[var(--primary)] opacity-[0.05]" />
+          <div className="absolute top-1/2 -translate-y-1/2 -left-10 w-36 h-36 rounded-full border border-[var(--primary)] opacity-[0.04]" />
+        </div>
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           {/* Section header with enhanced typography */}
           <div className="text-center mb-16">
@@ -558,8 +568,13 @@ export default function Home() {
         className="py-24 bg-ds-section-alt-2 relative overflow-hidden"
         id="testimonials"
       >
-
-        <div className="container mx-auto px-4 max-w-6xl">
+        {/* Static geometric section accent — no animation */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.08]" />
+          <div className="absolute -bottom-28 -left-28 w-96 h-96 rounded-full border border-[var(--primary)] opacity-[0.06]" />
+          <div className="absolute top-1/3 -right-8 w-24 h-24 rounded-full border border-[var(--primary)] opacity-[0.05]" />
+        </div>
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="text-center mb-16">
             <div className="bg-primary/10 p-4 mb-5 rounded-full inline-block">
               <Icon name="format_quote" size="lg" />

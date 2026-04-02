@@ -117,31 +117,6 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
 
   return (
     <div ref={containerRef} className="py-20 relative overflow-hidden">
-      {/* Animated background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-start)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5" />
-      
-      {/* Floating orbs */}
-      <motion.div 
-        className="absolute w-96 h-96 rounded-full bg-gradient-to-br from-[var(--gradient-mid)]/10 to-[var(--gradient-end)]/10 blur-3xl"
-        animate={{ 
-          x: [0, 100, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        style={{ left: '10%', top: '20%' }}
-      />
-      <motion.div 
-        className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 blur-3xl"
-        animate={{ 
-          x: [0, -100, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        style={{ right: '10%', bottom: '20%' }}
-      />
-      
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">

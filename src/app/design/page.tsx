@@ -578,21 +578,21 @@ function StateBadgesShowcase() {
     { key: 'info',    label: 'Info'    },
   ];
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto rounded-xl border border-[var(--card-border)] overflow-hidden">
       <table className="w-full text-xs border-collapse">
         <thead>
-          <tr>
-            <th className="text-left font-mono font-normal opacity-40 pb-3 pr-4 w-20" />
-            <th className="font-mono font-normal opacity-40 pb-3 px-4 text-center">Filled</th>
-            <th className="font-mono font-normal opacity-40 pb-3 px-4 text-center">Outline</th>
-            <th className="font-mono font-normal opacity-40 pb-3 px-4 text-center">Soft</th>
-            <th className="text-left font-mono font-normal opacity-40 pb-3 pl-4">Token stem</th>
+          <tr className="border-b border-[var(--card-border)] bg-[var(--card-from-bg)]">
+            <th className="text-left font-mono font-normal opacity-40 py-3 pr-4 pl-4 w-20" />
+            <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Filled</th>
+            <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Outline</th>
+            <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Soft</th>
+            <th className="text-left font-mono font-normal opacity-40 py-3 pl-4 pr-4">Token stem</th>
           </tr>
         </thead>
         <tbody>
           {states.map(s => (
             <tr key={s.key} className="border-t border-[var(--card-border)]">
-              <td className="py-3 pr-4 opacity-60 font-medium">{s.label}</td>
+              <td className="py-3 pr-4 pl-4 opacity-60 font-medium">{s.label}</td>
               <td className="py-3 px-4 text-center">
                 <span
                   className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
@@ -1167,28 +1167,25 @@ function BackgroundsSection() {
       {/* Section backgrounds preview */}
       <div>
         <h4 className="text-sm font-medium opacity-60 mb-4">Section Background Preview</h4>
-        <p className="text-xs opacity-50 mb-4">How alternating section backgrounds look in context — mirrors the homepage layout pattern.</p>
+        <p className="text-xs opacity-50 mb-4">Alternating section backgrounds with the shared geometric ring accent pattern.</p>
         <div className="rounded-xl overflow-hidden border border-[var(--card-border)] divide-y divide-[var(--card-border)]">
-          <div className="px-6 py-8" style={{ background: 'var(--background)' }}>
-            <div className="text-xs font-mono text-[var(--primary)] mb-1">--background</div>
-            <div className="text-sm font-semibold mb-1">Base page background</div>
-            <div className="text-xs opacity-50">Used between alternating sections — the default surface.</div>
-          </div>
-          <div className="px-6 py-8" style={{ background: 'var(--section-alt)' }}>
-            <div className="text-xs font-mono text-[var(--primary)] mb-1">--section-alt · bg-ds-section-alt</div>
-            <div className="text-sm font-semibold mb-1">First alternate section</div>
-            <div className="text-xs opacity-50">Slightly offset from the base — used for About, prominent content sections.</div>
-          </div>
-          <div className="px-6 py-8" style={{ background: 'var(--background)' }}>
-            <div className="text-xs font-mono opacity-40 mb-1">--background (repeat)</div>
-            <div className="text-sm font-semibold mb-1">Base again</div>
-            <div className="text-xs opacity-50">Alternating rhythm continues.</div>
-          </div>
-          <div className="px-6 py-8" style={{ background: 'var(--section-alt-2)' }}>
-            <div className="text-xs font-mono text-[var(--primary)] mb-1">--section-alt-2 · bg-ds-section-alt-2</div>
-            <div className="text-sm font-semibold mb-1">Second alternate section</div>
-            <div className="text-xs opacity-50">Slightly deeper offset — used for Testimonials, closing content sections.</div>
-          </div>
+          {[
+            { cssVar: '--background', label: 'Base page background', token: '--background', desc: 'Between alternating sections — the default surface.' },
+            { cssVar: '--section-alt', label: 'First alternate section', token: '--section-alt · bg-ds-section-alt', desc: 'Used for About, prominent content sections.' },
+            { cssVar: '--background', label: 'Base (repeat)', token: '--background', desc: 'Alternating rhythm continues.' },
+            { cssVar: '--section-alt-2', label: 'Second alternate section', token: '--section-alt-2 · bg-ds-section-alt-2', desc: 'Used for Testimonials, closing sections.' },
+          ].map(({ cssVar, label, token, desc }) => (
+            <div key={label} className="relative overflow-hidden px-6 py-8" style={{ background: `var(${cssVar})` }}>
+              {/* Geometric ring accents — same as homepage sections */}
+              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full border border-[var(--primary)] opacity-[0.10] pointer-events-none" />
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full border border-[var(--primary)] opacity-[0.07] pointer-events-none" />
+              <div className="relative z-10">
+                <div className="text-xs font-mono text-[var(--primary)] mb-1">{token}</div>
+                <div className="text-sm font-semibold mb-1">{label}</div>
+                <div className="text-xs opacity-50">{desc}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
