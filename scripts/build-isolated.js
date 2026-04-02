@@ -30,7 +30,7 @@ if (!fs.existsSync(BUILD_DIR)) {
   run(`git reset --hard HEAD`, BUILD_DIR);
   // Pull latest committed changes
   run('git pull --ff-only', BUILD_DIR);
-  // Sync uncommitted changes via a temporary patch
+  // Sync uncommitted changes to tracked files (staged + unstaged) via a temporary patch
   try {
     const diff = execSync('git diff HEAD', { cwd: ROOT });
     if (diff.length > 0) {
@@ -42,6 +42,21 @@ if (!fs.existsSync(BUILD_DIR)) {
     }
   } catch {
     console.warn('⚠  Could not apply uncommitted diff — building from last commit.');
+  }
+
+  // Copy new untracked files not yet committed (new components, pages, etc.)
+  try {
+    const newFiles = execSync('git ls-files --others --exclude-standard', { cwd: ROOT })
+      .toString().trim().split('\n').filter(Boolean);
+    for (const file of newFiles) {
+      const src = path.join(ROOT, file);
+      const dest = path.join(BUILD_DIR, file);
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(src, dest);
+    }
+    if (newFiles.length > 0) console.log(`Copied ${newFiles.length} new untracked file(s).`);
+  } catch {
+    console.warn('⚠  Could not copy new untracked files.');
   }
 }
 

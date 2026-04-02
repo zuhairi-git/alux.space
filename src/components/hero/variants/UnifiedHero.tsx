@@ -118,179 +118,252 @@ interface PortfolioFanProps { locale: string }
 const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
   const [activeIndex, setActiveIndex] = useState(2); // start with centre card active
   const [showCloud, setShowCloud] = useState(true);
+  const wasDragging = React.useRef(false);
+  const activeItem = SHOWCASE_ITEMS[activeIndex];
+
+  // Shared dot navigation — used in both mobile and desktop layouts
+  const dotNav = (
+    <div className="flex items-center gap-2">
+      {SHOWCASE_ITEMS.map((item, index) => (
+        <Button
+          key={index}
+          variant="tertiary"
+          onClick={() => setActiveIndex(index)}
+          aria-label={`View ${item.title}`}
+          className="!p-0 !border-0 !rounded-full shrink-0 transition-all duration-300"
+          style={{
+            width:      activeIndex === index ? 24 : 6,
+            height:     6,
+            minHeight:  0,
+            background: activeIndex === index ? item.accent : 'var(--muted-foreground)',
+            opacity:    activeIndex === index ? 1 : 0.35,
+          }}
+        />
+      ))}
+    </div>
+  );
 
   return (
-    <div className="relative w-full flex flex-col items-center justify-center select-none gap-6">
-      {/* Card stack */}
-      <div className="relative flex items-center justify-center overflow-visible" style={{ width: 640, height: 430 }}>
-        {SHOWCASE_ITEMS.map((item, index) => {
-          const cfg = STACK_CONFIG[index];
-          const isActive = activeIndex === index;
-          const distance = Math.abs(index - activeIndex);
+    <div className="relative w-full flex flex-col items-center justify-center select-none gap-5">
 
-          return (
+      {/* ── MOBILE: single swipeable card (< lg) ──────────────── */}
+      <div className="lg:hidden w-full flex flex-col items-center gap-4 px-2">
+        <div
+          className="relative w-full rounded-2xl overflow-hidden"
+          style={{ maxWidth: 380, aspectRatio: '380 / 270' }}
+        >
+          <AnimatePresence mode="wait" initial={false}>
             <MotionDiv
-              key={item.slug}
-              initial={{ opacity: 0, y: 60, scale: 0.8 }}
-              animate={{
-                opacity: distance > 2 ? 0.4 : 1,
-                x: cfg.x,
-                y: isActive ? cfg.y - 22 : cfg.y,
-                rotate: isActive ? 0 : cfg.rotate,
-                scale: isActive ? 1.06 : cfg.scale,
-                zIndex: isActive ? 10 : cfg.zIndex,
+              key={activeIndex}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.15}
+              onDragStart={() => { wasDragging.current = false; }}
+              onDrag={(_, info) => { if (Math.abs(info.offset.x) > 5) wasDragging.current = true; }}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -50) setActiveIndex(i => Math.min(i + 1, SHOWCASE_ITEMS.length - 1));
+                if (info.offset.x > 50) setActiveIndex(i => Math.max(i - 1, 0));
               }}
-              transition={{
-                delay: 0.2 + index * 0.08,
-                duration: 0.55,
-                ease: [0.19, 1, 0.22, 1],
-              }}
-              style={{ position: 'absolute', width: 380, height: 270 }}
-              onHoverStart={() => setActiveIndex(index)}
-              className="cursor-pointer origin-bottom"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ position: 'absolute', inset: 0 }}
             >
-              <Link href={`/${locale}${item.slug}`} className="block w-full h-full">
-                {/* Card shell */}
+              <Link
+                href={`/${locale}${activeItem.slug}`}
+                className="block w-full h-full"
+                onClick={(e) => { if (wasDragging.current) e.preventDefault(); }}
+              >
                 <div
                   className="relative w-full h-full rounded-2xl overflow-hidden"
-                  style={{
-                    boxShadow: isActive
-                      ? `0 30px 60px -10px rgba(0,0,0,0.55), 0 0 0 1px ${item.accent}55`
-                      : `0 10px 30px -8px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)`,
-                  }}
+                  style={{ boxShadow: `0 20px 50px -10px rgba(0,0,0,0.55), 0 0 0 1px ${activeItem.accent}55` }}
                 >
-                  {/* Full-bleed photo */}
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    fill
-                    className="object-cover object-top"
-                    sizes="380px"
-                  />
-
-                  {/* Always-on dark scrim at bottom */}
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }}
-                  />
-
-                  {/* Accent colour glow at top edge (active only) */}
-                  {isActive && (
-                    <div
-                      className="absolute inset-x-0 top-0 h-1 rounded-t-2xl"
-                      style={{ background: item.accent }}
-                    />
-                  )}
-
-                  {/* Index number — top-right */}
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5">
-                    <span
-                      className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full"
-                      style={{ background: `${item.accent}33`, color: item.accent, border: `1px solid ${item.accent}55` }}
-                    >
-                      {item.num}
+                  <Image src={activeItem.src} alt={activeItem.title} fill className="object-cover object-top" sizes="(max-width: 400px) 100vw, 380px" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }} />
+                  <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl" style={{ background: activeItem.accent }} />
+                  <div className="absolute top-3 right-3">
+                    <span className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${activeItem.accent}33`, color: activeItem.accent, border: `1px solid ${activeItem.accent}55` }}>
+                      {activeItem.num}
                     </span>
                   </div>
-
-                  {/* Type pill — top-left */}
                   <div className="absolute top-3 left-3">
                     <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
-                      {item.type}
+                      {activeItem.type}
                     </span>
                   </div>
-
-                  {/* Bottom info */}
                   <div className="absolute bottom-0 inset-x-0 px-4 pb-4 pt-8">
-                    <p className="text-[10px] uppercase tracking-widest text-white/50 mb-0.5">{item.tag}</p>
-                    <p className="text-white font-bold text-base leading-tight">{item.title}</p>
-                    {/* Animated underline on active */}
-                    <div
-                      className="mt-2 h-0.5 rounded-full transition-all duration-500"
-                      style={{
-                        width: isActive ? '48px' : '0px',
-                        background: item.accent,
-                      }}
-                    />
+                    <p className="text-[10px] uppercase tracking-widest text-white/50 mb-0.5">{activeItem.tag}</p>
+                    <p className="text-white font-bold text-base leading-tight">{activeItem.title}</p>
+                    <div className="mt-2 h-0.5 rounded-full" style={{ width: '48px', background: activeItem.accent }} />
                   </div>
                 </div>
               </Link>
             </MotionDiv>
-          );
-        })}
+          </AnimatePresence>
+        </div>
+        <p className="text-[11px] text-[var(--muted-foreground)] opacity-50 tracking-wide select-none">
+          swipe or tap dots to explore
+        </p>
+        {dotNav}
+      </div>
 
-        {/* Word cloud — keywords float around the card stack, each selects the relevant card */}
-        {WORD_CLOUD.map((w, wIdx) => {
-          const isActive = activeIndex === w.cardIndex;
-          return (
-            <MotionDiv
-              key={`w-${wIdx}`}
-              initial={{ opacity: 0, scale: 0.75 }}
-              animate={{
-                opacity: showCloud ? (isActive ? 0.95 : 0.28) : 0,
-                scale:   showCloud ? 1 : 0.75,
-              }}
-              transition={{ duration: 0.3, delay: showCloud ? wIdx * 0.025 : 0 }}
-              style={{
-                position: 'absolute',
-                left: w.x,
-                top: w.y,
-                zIndex: 20,
-                pointerEvents: showCloud ? 'auto' : 'none',
-              }}
-              className="hidden lg:block"
-            >
-              <Button
-                variant="tertiary"
-                onClick={() => setActiveIndex(w.cardIndex)}
-                className="!h-auto !min-h-0 !rounded-full !text-[10px] !font-medium !px-2.5 !py-1 !border whitespace-nowrap"
-                style={{
-                  color:       isActive ? w.accent : 'var(--foreground)',
-                  borderColor: isActive ? `${w.accent}66` : 'var(--card-border)',
-                  background:  isActive ? `${w.accent}1a` : 'var(--card-from-bg)',
+      {/* ── DESKTOP: fan stack (lg+) ──────────────────────────── */}
+      <div className="hidden lg:flex flex-col items-center gap-6">
+        <div className="relative flex items-center justify-center overflow-visible" style={{ width: 640, height: 430 }}>
+          {SHOWCASE_ITEMS.map((item, index) => {
+            const cfg = STACK_CONFIG[index];
+            const isActive = activeIndex === index;
+            const distance = Math.abs(index - activeIndex);
+
+            return (
+              <MotionDiv
+                key={item.slug}
+                initial={{ opacity: 0, y: 60, scale: 0.8 }}
+                animate={{
+                  opacity: distance > 2 ? 0.4 : 1,
+                  x: cfg.x,
+                  y: isActive ? cfg.y - 22 : cfg.y,
+                  rotate: isActive ? 0 : cfg.rotate,
+                  scale: isActive ? 1.06 : cfg.scale,
+                  zIndex: isActive ? 10 : cfg.zIndex,
                 }}
+                transition={{
+                  delay: 0.2 + index * 0.08,
+                  duration: 0.55,
+                  ease: [0.19, 1, 0.22, 1],
+                }}
+                style={{ position: 'absolute', width: 380, height: 270 }}
+                onHoverStart={() => setActiveIndex(index)}
+                className="cursor-pointer origin-bottom"
               >
-                {w.word}
-              </Button>
-            </MotionDiv>
-          );
-        })}
-      </div>
+                <Link href={`/${locale}${item.slug}`} className="block w-full h-full">
+                  {/* Card shell */}
+                  <div
+                    className="relative w-full h-full rounded-2xl overflow-hidden"
+                    style={{
+                      boxShadow: isActive
+                        ? `0 30px 60px -10px rgba(0,0,0,0.55), 0 0 0 1px ${item.accent}55`
+                        : `0 10px 30px -8px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)`,
+                    }}
+                  >
+                    {/* Full-bleed photo */}
+                    <Image
+                      src={item.src}
+                      alt={item.title}
+                      fill
+                      className="object-cover object-top"
+                      sizes="380px"
+                    />
 
-      {/* Dot navigation — theme-compatible colours */}
-      <div className="flex items-center gap-2">
-        {SHOWCASE_ITEMS.map((item, index) => (
-          <Button
-            key={index}
-            variant="tertiary"
-            onClick={() => setActiveIndex(index)}
-            aria-label={`View ${item.title}`}
-            className="!h-auto !min-h-0 !p-0 !border-0 !rounded-full shrink-0 transition-all duration-300"
-            style={{
-              width:      activeIndex === index ? 24 : 6,
-              height:     6,
-              background: activeIndex === index ? item.accent : 'var(--muted-foreground)',
-              opacity:    activeIndex === index ? 1 : 0.35,
-            }}
-          />
-        ))}
-      </div>
+                    {/* Always-on dark scrim at bottom */}
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }}
+                    />
 
-      {/* Word cloud toggle — desktop only */}
-      <Button
-        variant="tertiary"
-        onClick={() => setShowCloud(v => !v)}
-        className="hidden lg:inline-flex !h-auto !min-h-0 !rounded-full !text-[10px] uppercase tracking-widest !px-2.5 !py-1 !border gap-1.5"
-        style={{
-          color:       'var(--muted-foreground)',
-          borderColor: 'var(--card-border)',
-          background:  showCloud ? 'var(--card-from-bg)' : 'transparent',
-        }}
-      >
-        <span className="material-symbols text-[13px]" aria-hidden="true">
-          {showCloud ? 'label_off' : 'label'}
-        </span>
-        {showCloud ? 'Hide keywords' : 'Show keywords'}
-      </Button>
+                    {/* Accent colour glow at top edge (active only) */}
+                    {isActive && (
+                      <div
+                        className="absolute inset-x-0 top-0 h-1 rounded-t-2xl"
+                        style={{ background: item.accent }}
+                      />
+                    )}
+
+                    {/* Index number — top-right */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                      <span
+                        className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full"
+                        style={{ background: `${item.accent}33`, color: item.accent, border: `1px solid ${item.accent}55` }}
+                      >
+                        {item.num}
+                      </span>
+                    </div>
+
+                    {/* Type pill — top-left */}
+                    <div className="absolute top-3 left-3">
+                      <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
+                        {item.type}
+                      </span>
+                    </div>
+
+                    {/* Bottom info */}
+                    <div className="absolute bottom-0 inset-x-0 px-4 pb-4 pt-8">
+                      <p className="text-[10px] uppercase tracking-widest text-white/50 mb-0.5">{item.tag}</p>
+                      <p className="text-white font-bold text-base leading-tight">{item.title}</p>
+                      {/* Animated underline on active */}
+                      <div
+                        className="mt-2 h-0.5 rounded-full transition-all duration-500"
+                        style={{
+                          width: isActive ? '48px' : '0px',
+                          background: item.accent,
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Link>
+              </MotionDiv>
+            );
+          })}
+
+          {/* Word cloud — keywords float around the card stack, each selects the relevant card */}
+          {WORD_CLOUD.map((w, wIdx) => {
+            const isActive = activeIndex === w.cardIndex;
+            return (
+              <MotionDiv
+                key={`w-${wIdx}`}
+                initial={{ opacity: 0, scale: 0.75 }}
+                animate={{
+                  opacity: showCloud ? (isActive ? 0.95 : 0.28) : 0,
+                  scale:   showCloud ? 1 : 0.75,
+                }}
+                transition={{ duration: 0.3, delay: showCloud ? wIdx * 0.025 : 0 }}
+                style={{
+                  position: 'absolute',
+                  left: w.x,
+                  top: w.y,
+                  zIndex: 20,
+                  pointerEvents: showCloud ? 'auto' : 'none',
+                }}
+                className="hidden lg:block"
+              >
+                <Button
+                  variant="tertiary"
+                  onClick={() => setActiveIndex(w.cardIndex)}
+                  className="!h-auto !min-h-0 !rounded-full !text-[10px] !font-medium !px-2.5 !py-1 !border whitespace-nowrap"
+                  style={{
+                    color:       isActive ? w.accent : 'var(--foreground)',
+                    borderColor: isActive ? `${w.accent}66` : 'var(--card-border)',
+                    background:  isActive ? `${w.accent}1a` : 'var(--card-from-bg)',
+                  }}
+                >
+                  {w.word}
+                </Button>
+              </MotionDiv>
+            );
+          })}
+        </div>
+
+        {/* Dot navigation */}
+        {dotNav}
+
+        {/* Word cloud toggle */}
+        <Button
+          variant="tertiary"
+          onClick={() => setShowCloud(v => !v)}
+          className="!h-auto !min-h-0 !rounded-full !text-[10px] uppercase tracking-widest !px-2.5 !py-1 !border gap-1.5"
+          style={{
+            color:       'var(--muted-foreground)',
+            borderColor: 'var(--card-border)',
+            background:  showCloud ? 'var(--card-from-bg)' : 'transparent',
+          }}
+        >
+          <span className="material-symbols text-[13px]" aria-hidden="true">
+            {showCloud ? 'label_off' : 'label'}
+          </span>
+          {showCloud ? 'Hide keywords' : 'Show keywords'}
+        </Button>
+      </div>
     </div>
   );
 };
