@@ -170,14 +170,17 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
               tabIndex={0}
               aria-label={`Open ${activeItem.title}`}
               onDragStart={() => { wasDragging.current = false; }}
-              onDrag={(_, info) => { if (Math.abs(info.offset.x) > 5) wasDragging.current = true; }}
+              onDrag={(_, info) => { if (Math.abs(info.offset.x) > 8) wasDragging.current = true; }}
               onDragEnd={(_, info) => {
-                if (info.offset.x < -50) setActiveIndex(i => Math.min(i + 1, SHOWCASE_ITEMS.length - 1));
-                if (info.offset.x > 50) setActiveIndex(i => Math.max(i - 1, 0));
-                // Reset so the next tap on the newly-mounted card isn't blocked.
-                // wasDragging is only reset in onDragStart otherwise, which doesn't
-                // fire until the user begins a fresh drag — causing taps to fail.
-                wasDragging.current = false;
+                // Also accept quick velocity flicks (< 300px/s threshold)
+                const swipedLeft  = info.offset.x < -50 || info.velocity.x < -300;
+                const swipedRight = info.offset.x >  50 || info.velocity.x >  300;
+                if (swipedLeft)  setActiveIndex(i => Math.min(i + 1, SHOWCASE_ITEMS.length - 1));
+                if (swipedRight) setActiveIndex(i => Math.max(i - 1, 0));
+                // Delay the reset: on mobile, Framer Motion fires onTap synchronously
+                // after onDragEnd in the same gesture. Keeping wasDragging=true for 50 ms
+                // blocks that spurious tap, while still allowing the next tap to navigate.
+                setTimeout(() => { wasDragging.current = false; }, 50);
               }}
               onTap={() => {
                 if (!wasDragging.current) navigateToActiveItem();

@@ -241,14 +241,18 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 relative overflow-hidden w-full z-10" style={{ perspective: '1200px' }}>
-                <AnimatePresence mode="wait" custom={directionRef.current}>
-                    {activeTab === 'dashboard' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="dash" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><DashboardView os={os} theme={theme} onNavigate={handleTabChange} /></motion.div>; })()}
-                    {activeTab === 'markets' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="markets" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><MarketsView os={os} theme={theme} onNavigate={handleTabChange} /></motion.div>; })()}
-                    {activeTab === 'copilot' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="copilot" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><CopilotView os={os} theme={theme} /></motion.div>; })()}
-                    {activeTab === 'alerts' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="alerts" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><AlertsView os={os} theme={theme} /></motion.div>; })()}
-                    {activeTab === 'profile' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="profile" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><ProfileView os={os} theme={theme} setTheme={setTheme} /></motion.div>; })()}
-                </AnimatePresence>
+            <main className="flex-1 relative w-full z-10">
+                {/* Separate overflow-hidden from perspective to avoid iOS Safari compositing bug
+                    where perspective + overflow-hidden on the same element hides 3D-transformed children */}
+                <div className="absolute inset-0 overflow-hidden" style={{ perspective: '1200px' }}>
+                    <AnimatePresence mode="wait" custom={directionRef.current}>
+                        {activeTab === 'dashboard' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="dash" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><DashboardView os={os} theme={theme} onNavigate={handleTabChange} /></motion.div>; })()}
+                        {activeTab === 'markets' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="markets" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><MarketsView os={os} theme={theme} onNavigate={handleTabChange} /></motion.div>; })()}
+                        {activeTab === 'copilot' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="copilot" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><CopilotView os={os} theme={theme} /></motion.div>; })()}
+                        {activeTab === 'alerts' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="alerts" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><AlertsView os={os} theme={theme} /></motion.div>; })()}
+                        {activeTab === 'profile' && (() => { const v = getTabTransitionVariants(directionRef.current); return <motion.div key="profile" variants={v} initial="initial" animate="animate" exit="exit" className="absolute inset-0"><ProfileView os={os} theme={theme} setTheme={setTheme} /></motion.div>; })()}
+                    </AnimatePresence>
+                </div>
             </main>
 
             <BottomNav activeTab={activeTab} setActiveTab={handleTabChange} os={os} theme={theme} />
