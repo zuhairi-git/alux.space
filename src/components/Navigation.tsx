@@ -291,8 +291,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className={`
-              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-2xl shadow-black/20 backdrop-blur-2xl overflow-hidden
-              bg-[var(--background)]/95 border-[var(--card-border)]
+              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-2xl shadow-black/30 backdrop-blur-2xl overflow-hidden isolate
+              bg-[var(--dropdown-bg)] border-[var(--card-border)]
             `}
           >
             {/* Overview items Ã¢â‚¬â€ no category */}

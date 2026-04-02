@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useState, useCallback, Suspense } from 'react';
+import { useState, useCallback, Suspense, useMemo, useRef } from 'react';
 import ThemeSwitch from '@/components/ThemeSwitch';
 
 /* ── Sidebar nav structure ──────────────────────────────── */
@@ -96,6 +96,22 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
   const activeSection = searchParams.get('s') ?? '';
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  // Filtered groups when searching
+  const filteredGroups = useMemo(() => {
+    if (!searchQuery.trim()) return sidebarNav;
+    const q = searchQuery.toLowerCase();
+    return sidebarNav
+      .map(group => ({
+        ...group,
+        items: group.items.filter(item => item.label.toLowerCase().includes(q)),
+      }))
+      .filter(group => group.items.length > 0);
+  }, [searchQuery]);
+
+  const totalMatches = filteredGroups.reduce((n, g) => n + g.items.length, 0);
 
   const normalizedPathname = pathname.replace(/\/$/, '');
 
@@ -145,7 +161,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
           `}
         >
           {/* Desktop header */}
-          <div className="hidden lg:block shrink-0 px-5 pt-6 pb-4">
+          <div className="hidden lg:block shrink-0 px-5 pt-6 pb-3">
             <Link href="/design" className="block" onClick={handleNavClick}>
               <h1 className="font-heading text-xl font-bold" style={{ textShadow: 'none' }}>
                 Design System
@@ -154,9 +170,39 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
 
+          {/* Search input */}
+          <div className="shrink-0 px-3 pb-3">
+            <div className="relative">
+              <span className="material-symbols absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] opacity-40 pointer-events-none">search</span>
+              <input
+                ref={searchRef}
+                type="search"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search components…"
+                className="w-full pl-8 pr-8 py-1.5 text-sm rounded-lg bg-foreground/[0.06] border border-[var(--card-border)] placeholder:opacity-40 focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                aria-label="Search design system sections"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-[14px] opacity-40 hover:opacity-80 transition-opacity"
+                  aria-label="Clear search"
+                >
+                  <span className="material-symbols text-[16px]">close</span>
+                </button>
+              )}
+            </div>
+            {searchQuery && (
+              <p className="text-[10px] opacity-40 mt-1 px-1">
+                {totalMatches} result{totalMatches !== 1 ? 's' : ''}
+              </p>
+            )}
+          </div>
+
           {/* Nav groups — scrollable independently */}
-          <nav className="flex-1 min-h-0 overflow-y-auto px-3 py-4 lg:py-0 space-y-5">
-            {sidebarNav.map((group) => (
+          <nav className="flex-1 min-h-0 overflow-y-auto px-3 py-1 space-y-5">
+            {filteredGroups.map((group) => (
               <div key={group.title}>
                 <span className="px-2 text-[11px] font-semibold uppercase tracking-wider opacity-40">
                   {group.title}

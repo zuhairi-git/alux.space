@@ -373,7 +373,7 @@
   --section-alt-2:         rgba(226, 232, 240, 0.6); /* slate-200/60 — deeper stripe for emphasis */
 
   /* Overlay panels — dropdowns, menus */
-  --dropdown-bg:           var(--color-gray-900);
+  --dropdown-bg:           rgba(17, 24, 39, 0.70);   /* frosted-glass: semi-transparent so backdrop-blur shows */
   --dropdown-border:       var(--color-gray-700);
   --dropdown-text:         var(--color-gray-300);
 
@@ -499,7 +499,7 @@
   --section-alt:           rgba(241, 245, 249, 1);   /* slate-100 */
   --section-alt-2:         rgba(226, 232, 240, 0.6); /* slate-200/60 */
   /* Overlay panels */
-  --dropdown-bg:           var(--color-white);
+  --dropdown-bg:           rgba(255, 255, 255, 0.82); /* frosted-glass: semi-transparent so backdrop-blur shows */
   --dropdown-border:       var(--color-gray-200);
   --dropdown-text:         var(--color-gray-700);
   --nav-bg:              rgba(255, 255, 255, 0.8);
@@ -603,7 +603,7 @@
   --section-alt:           rgba(17, 24, 39, 1);          /* gray-900 — elevated dark stripe */
   --section-alt-2:         rgba(31, 41, 55, 0.6);        /* gray-800/60 — deeper stripe */
   /* Overlay panels */
-  --dropdown-bg:           var(--color-gray-900);
+  --dropdown-bg:           rgba(17, 24, 39, 0.70);       /* frosted-glass: semi-transparent so backdrop-blur shows */
   --dropdown-border:       var(--color-gray-700);
   --dropdown-text:         var(--color-gray-300);
   --nav-bg:              rgba(17, 24, 39, 0.8);
@@ -722,7 +722,7 @@
   --section-alt:           rgba(14, 12, 36, 1);              /* #0E0C24 — slate-violet elevation */
   --section-alt-2:         rgba(20, 17, 48, 0.8);            /* deeper violet stripe */
   /* Overlay panels */
-  --dropdown-bg:           rgba(12, 10, 30, 0.97);
+  --dropdown-bg:           rgba(9, 9, 28, 0.72);         /* frosted-glass: semi-transparent so backdrop-blur shows */
   --dropdown-border:       rgba(167, 139, 250, 0.40);
   --dropdown-text:         var(--color-gray-200);            /* #e5e7eb — 14.2:1 ✓ AAA */
 

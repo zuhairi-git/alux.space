@@ -148,7 +148,16 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                 <div className="flex items-center gap-2">
                   {item.category && getCategoryBadge()}
                 </div>
-                <Badge variant={getStatusVariant()} size="sm" className="uppercase tracking-wide">
+                <Badge
+                  variant={getStatusVariant()}
+                  size="sm"
+                  dot={item.status.type === 'in-progress'}
+                  animateDot={item.status.type === 'in-progress'}
+                  className="uppercase tracking-widest shadow-sm"
+                >
+                  {item.status.type === 'accomplished' && (
+                    <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
+                  )}
                   {getStatus()}
                 </Badge>
               </div>
@@ -214,7 +223,16 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             
             {/* Status badge - top right */}
             <div className="absolute top-3 right-3 z-10">
-              <Badge variant={getStatusVariant()} size="sm" className="uppercase tracking-wide">
+              <Badge
+                variant={getStatusVariant()}
+                size="sm"
+                dot={item.status.type === 'in-progress'}
+                animateDot={item.status.type === 'in-progress'}
+                className="uppercase tracking-widest shadow-sm"
+              >
+                {item.status.type === 'accomplished' && (
+                  <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
+                )}
                 {getStatus()}
               </Badge>
             </div>

@@ -21,6 +21,7 @@ const SHOWCASE_ITEMS = [
     accent: '#3b82f6',         // blue
     tag: 'Product Management',
     num: '01',
+    words: ['RICE Framework', 'Prioritization', 'Healthcare'],
   },
   {
     title: 'Workflow Platform',
@@ -30,6 +31,7 @@ const SHOWCASE_ITEMS = [
     accent: '#8b5cf6',         // violet
     tag: 'AI-Powered',
     num: '02',
+    words: ['AI Copilot', 'SaaS', 'Collaboration'],
   },
   {
     title: 'Market Intelligence',
@@ -39,6 +41,7 @@ const SHOWCASE_ITEMS = [
     accent: '#06b6d4',         // cyan
     tag: 'Mobile UX',
     num: '03',
+    words: ['Mobile UX', 'Enterprise', 'Analytics'],
   },
   {
     title: 'Inclusive Design',
@@ -48,6 +51,7 @@ const SHOWCASE_ITEMS = [
     accent: '#10b981',         // emerald
     tag: 'Design System',
     num: '04',
+    words: ['WCAG 2.1', 'Design Tokens', 'Accessibility'],
   },
   {
     title: 'Game Strategy',
@@ -57,27 +61,53 @@ const SHOWCASE_ITEMS = [
     accent: '#f43f5e',         // rose
     tag: 'Strategy',
     num: '05',
+    words: ['GTM Strategy', 'Gaming', 'Personas'],
   },
 ];
 
+// Word cloud: 3 keywords per card, positioned (left/top px) around the 640×430 container
+const WORD_CLOUD = SHOWCASE_ITEMS.flatMap((item, cardIndex) =>
+  item.words.map((word, wordIdx) => ({
+    word,
+    cardIndex,
+    accent: item.accent,
+    // Positions keyed by [cardIndex][wordIdx]
+    x: [
+      [-162, -175, -160],   // card 0 — left column
+      [  55,  205,  345],   // card 1 — top band
+      [ 656,  664,  650],   // card 2 — right column
+      [  82,  245,  418],   // card 3 — bottom band
+      [ 495,  662,  540],   // card 4 — scattered corners
+    ][cardIndex][wordIdx],
+    y: [
+      [  55,  132,  210],   // card 0
+      [ -62,  -72,  -64],   // card 1
+      [  60,  148,  235],   // card 2
+      [ 445,  457,  447],   // card 3
+      [ -62,  318,  445],   // card 4
+    ][cardIndex][wordIdx],
+  }))
+);
+
 // Layered-stack config: cards sit in an overlapping pile, offset left↗ as index increases
 const STACK_CONFIG = [
-  { x:  60, y: -30, rotate:  6, scale: 0.92, zIndex: 1 },
-  { x:  30, y: -16, rotate:  3, scale: 0.96, zIndex: 2 },
-  { x:   0, y:   0, rotate:  0, scale: 1.00, zIndex: 3 }, // front card
-  { x: -30, y: -16, rotate: -3, scale: 0.96, zIndex: 2 },
-  { x: -60, y: -30, rotate: -6, scale: 0.92, zIndex: 1 },
+  { x:  90, y: -44, rotate:  7, scale: 0.88, zIndex: 1 },
+  { x:  45, y: -22, rotate:  3.5, scale: 0.94, zIndex: 2 },
+  { x:   0, y:   0, rotate:  0,   scale: 1.00, zIndex: 3 }, // front card
+  { x: -45, y: -22, rotate: -3.5, scale: 0.94, zIndex: 2 },
+  { x: -90, y: -44, rotate: -7, scale: 0.88, zIndex: 1 },
 ];
 
 interface PortfolioFanProps { locale: string }
 
 const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
   const [activeIndex, setActiveIndex] = useState(2); // start with centre card active
+  const [showCloud, setShowCloud] = useState(true);
 
   return (
     <div className="relative w-full flex flex-col items-center justify-center select-none gap-6">
       {/* Card stack */}
-      <div className="relative flex items-center justify-center" style={{ width: 520, height: 340 }}>
+      <div className="relative flex items-center justify-center overflow-visible" style={{ width: 640, height: 430 }}>
         {SHOWCASE_ITEMS.map((item, index) => {
           const cfg = STACK_CONFIG[index];
           const isActive = activeIndex === index;
@@ -90,7 +120,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
               animate={{
                 opacity: distance > 2 ? 0.4 : 1,
                 x: cfg.x,
-                y: isActive ? cfg.y - 20 : cfg.y,
+                y: isActive ? cfg.y - 22 : cfg.y,
                 rotate: isActive ? 0 : cfg.rotate,
                 scale: isActive ? 1.06 : cfg.scale,
                 zIndex: isActive ? 10 : cfg.zIndex,
@@ -100,7 +130,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                 duration: 0.55,
                 ease: [0.19, 1, 0.22, 1],
               }}
-              style={{ position: 'absolute', width: 300, height: 210 }}
+              style={{ position: 'absolute', width: 380, height: 270 }}
               onHoverStart={() => setActiveIndex(index)}
               className="cursor-pointer origin-bottom"
             >
@@ -120,7 +150,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                     alt={item.title}
                     fill
                     className="object-cover object-top"
-                    sizes="300px"
+                    sizes="380px"
                   />
 
                   {/* Always-on dark scrim at bottom */}
@@ -172,9 +202,45 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
             </MotionDiv>
           );
         })}
+
+        {/* Word cloud — keywords float around the card stack, each selects the relevant card */}
+        {WORD_CLOUD.map((w, wIdx) => {
+          const isActive = activeIndex === w.cardIndex;
+          return (
+            <MotionDiv
+              key={`w-${wIdx}`}
+              initial={{ opacity: 0, scale: 0.75 }}
+              animate={{
+                opacity: showCloud ? (isActive ? 0.95 : 0.28) : 0,
+                scale:   showCloud ? 1 : 0.75,
+              }}
+              transition={{ duration: 0.3, delay: showCloud ? wIdx * 0.025 : 0 }}
+              style={{
+                position: 'absolute',
+                left: w.x,
+                top: w.y,
+                zIndex: 20,
+                pointerEvents: showCloud ? 'auto' : 'none',
+              }}
+              className="hidden lg:block"
+            >
+              <button
+                onClick={() => setActiveIndex(w.cardIndex)}
+                className="text-[10px] font-medium px-2.5 py-1 rounded-full border whitespace-nowrap transition-colors duration-200"
+                style={{
+                  color:       isActive ? w.accent : 'var(--foreground)',
+                  borderColor: isActive ? `${w.accent}66` : 'var(--card-border)',
+                  background:  isActive ? `${w.accent}1a` : 'var(--card-from-bg)',
+                }}
+              >
+                {w.word}
+              </button>
+            </MotionDiv>
+          );
+        })}
       </div>
 
-      {/* Dot navigation */}
+      {/* Dot navigation — theme-compatible colours */}
       <div className="flex items-center gap-2">
         {SHOWCASE_ITEMS.map((item, index) => (
           <button
@@ -183,13 +249,30 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
             aria-label={`View ${item.title}`}
             className="transition-all duration-300 rounded-full"
             style={{
-              width: activeIndex === index ? 24 : 6,
-              height: 6,
-              background: activeIndex === index ? item.accent : 'rgba(255,255,255,0.2)',
+              width:      activeIndex === index ? 24 : 6,
+              height:     6,
+              background: activeIndex === index ? item.accent : 'var(--muted-foreground)',
+              opacity:    activeIndex === index ? 1 : 0.35,
             }}
           />
         ))}
       </div>
+
+      {/* Word cloud toggle — desktop only */}
+      <button
+        onClick={() => setShowCloud(v => !v)}
+        className="hidden lg:flex items-center gap-1.5 text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full border transition-all duration-200"
+        style={{
+          color:       'var(--muted-foreground)',
+          borderColor: 'var(--card-border)',
+          background:  showCloud ? 'var(--card-from-bg)' : 'transparent',
+        }}
+      >
+        <span className="material-symbols text-[13px]" aria-hidden="true">
+          {showCloud ? 'label_off' : 'label'}
+        </span>
+        {showCloud ? 'Hide keywords' : 'Show keywords'}
+      </button>
     </div>
   );
 };

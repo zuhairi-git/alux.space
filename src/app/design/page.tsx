@@ -1412,6 +1412,58 @@ function BadgesSection() {
       <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens in three variants: <strong>filled</strong> (coloured bg), <strong>outline</strong> (theme bg, coloured border), <strong>soft</strong> (tinted bg, high-contrast text). Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
       <StateBadgesShowcase />
     </div>
+
+    {/* Project Status Badges */}
+    <div className="mt-8">
+      <h4 className="text-sm font-semibold mb-1">Project Status</h4>
+      <p className="text-xs opacity-50 mb-4">
+        Used on portfolio cards to signal work completion. <strong>Accomplished</strong> adds a verified checkmark icon;{' '}
+        <strong>In Progress</strong> uses a pulsing dot; <strong>Coming Soon</strong> uses the info variant.
+        All colours resolve through <code className="font-mono">--color-success/warning/info-*</code> tokens.
+      </p>
+      <div className="flex flex-wrap gap-3 p-5 rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)]">
+        {/* Accomplished */}
+        <span
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest border"
+          style={{
+            color: 'var(--color-success)',
+            backgroundColor: 'var(--color-success-bg)',
+            borderColor: 'var(--color-success-border)',
+            boxShadow: '0 0 14px var(--color-success-bg)',
+          }}
+        >
+          <span className="material-symbols !text-[11px]" aria-hidden="true">verified</span>
+          Accomplished
+        </span>
+        {/* In Progress */}
+        <span
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest border"
+          style={{
+            color: 'var(--color-warning)',
+            backgroundColor: 'var(--color-warning-bg)',
+            borderColor: 'var(--color-warning-border)',
+          }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full inline-block animate-pulse shrink-0"
+            style={{ background: 'var(--color-warning)' }}
+          />
+          In Progress
+        </span>
+        {/* Coming Soon */}
+        <span
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest border"
+          style={{
+            color: 'var(--color-info)',
+            backgroundColor: 'var(--color-info-bg)',
+            borderColor: 'var(--color-info-border)',
+          }}
+        >
+          <span className="material-symbols !text-[11px]" aria-hidden="true">schedule</span>
+          Coming Soon
+        </span>
+      </div>
+    </div>
     </>
   );
 }

@@ -36,6 +36,8 @@ interface BadgeProps {
   size?: BadgeSize;
   /** Show a small status dot before the label */
   dot?: boolean;
+  /** Animate the status dot with a pulse (e.g. "in-progress" states) */
+  animateDot?: boolean;
   children: React.ReactNode;
   className?: string;
 }
@@ -75,6 +77,7 @@ export default function Badge({
   variant = 'default',
   size = 'md',
   dot = false,
+  animateDot = false,
   children,
   className = '',
 }: BadgeProps) {
@@ -90,7 +93,7 @@ export default function Badge({
     >
       {dot && (
         <span
-          className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColors[variant]}`}
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColors[variant]}${animateDot ? ' animate-pulse' : ''}`}
           aria-hidden="true"
         />
       )}
