@@ -11,6 +11,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { WorkExperienceWizard } from '@/components/WorkExperienceWizard';
+import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 import Icon from '@/components/ui/Icon';
@@ -143,7 +144,7 @@ export default function Home() {
       text: t('home.hero.cta'),
       href: "/portfolio"
     },
-    showPodcastPlayer: true
+    showPodcastPlayer: false
   };
   // Skills data with translations
   const getSkills = () => {
@@ -538,7 +539,61 @@ export default function Home() {
             </motion.a>
           </motion.div>
         </div>
-      </section>{/* Testimonials Section */}
+      </section>
+
+      {/* Podcast Section */}
+      <section
+        className="py-24 bg-ds-section-alt relative overflow-hidden"
+        id="podcast"
+      >
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full border-[1.5px] border-[var(--primary)] opacity-[0.07]" />
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full border border-[var(--primary)] opacity-[0.05]" />
+        </div>
+        <div className="container mx-auto px-4 max-w-4xl relative z-10">
+          <div className="text-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)]"
+            >
+              <Icon name="podcasts" size="sm" className="text-[var(--primary)]" />
+              <span className="text-sm font-medium text-[var(--accent-text)]">
+                {locale === 'fi' ? 'PODCAST' : 'PODCAST'}
+              </span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-bold mb-4"
+            >
+              {locale === 'fi' ? 'Kuuntele podcastia' : 'Listen to the Podcast'}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-lg opacity-70 max-w-2xl mx-auto"
+            >
+              {locale === 'fi'
+                ? 'Ajatuksia tuotesuunnittelusta, UX-johtajuudesta ja luovasta prosessista.'
+                : 'Thoughts on product design, UX leadership, and the creative process.'}
+            </motion.p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <PodcastPlayer />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
       <section 
         className="py-24 bg-ds-section-alt-2 relative overflow-hidden"
         id="testimonials"

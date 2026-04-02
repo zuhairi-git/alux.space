@@ -1,46 +1,225 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
-import PodcastPlayer from '@/components/PodcastPlayer';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
-import { durationSeconds, delaySeconds, transition as t, palette, themeRgb, Button, Icon, QuoteBlock, MotionDiv, MotionH1, MotionH2, MotionP, MotionSpan } from '@/design-system';
+import { durationSeconds, delaySeconds, transition as t, Button, Icon, MotionDiv, MotionH1, MotionH2, MotionSpan } from '@/design-system';
 
-const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPodcastPlayer }) => {
+// Published portfolio items to showcase in the hero stack
+const SHOWCASE_ITEMS = [
+  {
+    title: 'Healthcare UX',
+    type: 'Case Study',
+    src: '/images/portfolio/healthcare/healthcare.jpg',
+    slug: '/portfolio/healthcare-prioritization',
+    accent: '#3b82f6',         // blue
+    tag: 'Product Management',
+    num: '01',
+  },
+  {
+    title: 'Workflow Platform',
+    type: 'Prototype',
+    src: '/images/portfolio/workflow/cover.jpg',
+    slug: '/portfolio/workflow',
+    accent: '#8b5cf6',         // violet
+    tag: 'AI-Powered',
+    num: '02',
+  },
+  {
+    title: 'Market Intelligence',
+    type: 'Prototype',
+    src: '/images/portfolio/market/market-intellegence.jpg',
+    slug: '/portfolio/market-intelligence',
+    accent: '#06b6d4',         // cyan
+    tag: 'Mobile UX',
+    num: '03',
+  },
+  {
+    title: 'Inclusive Design',
+    type: 'Case Study',
+    src: '/images/portfolio/accessibility/accessiblity-showcase.jpg',
+    slug: '/portfolio/accessibility',
+    accent: '#10b981',         // emerald
+    tag: 'Design System',
+    num: '04',
+  },
+  {
+    title: 'Game Strategy',
+    type: 'Case Study',
+    src: '/images/portfolio/game-dev/cover.jpg',
+    slug: '/portfolio/game-strategy',
+    accent: '#f43f5e',         // rose
+    tag: 'Strategy',
+    num: '05',
+  },
+];
+
+// Layered-stack config: cards sit in an overlapping pile, offset left↗ as index increases
+const STACK_CONFIG = [
+  { x:  60, y: -30, rotate:  6, scale: 0.92, zIndex: 1 },
+  { x:  30, y: -16, rotate:  3, scale: 0.96, zIndex: 2 },
+  { x:   0, y:   0, rotate:  0, scale: 1.00, zIndex: 3 }, // front card
+  { x: -30, y: -16, rotate: -3, scale: 0.96, zIndex: 2 },
+  { x: -60, y: -30, rotate: -6, scale: 0.92, zIndex: 1 },
+];
+
+interface PortfolioFanProps { locale: string }
+
+const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
+  const [activeIndex, setActiveIndex] = useState(2); // start with centre card active
+
+  return (
+    <div className="relative w-full flex flex-col items-center justify-center select-none gap-6">
+      {/* Card stack */}
+      <div className="relative flex items-center justify-center" style={{ width: 520, height: 340 }}>
+        {SHOWCASE_ITEMS.map((item, index) => {
+          const cfg = STACK_CONFIG[index];
+          const isActive = activeIndex === index;
+          const distance = Math.abs(index - activeIndex);
+
+          return (
+            <MotionDiv
+              key={item.slug}
+              initial={{ opacity: 0, y: 60, scale: 0.8 }}
+              animate={{
+                opacity: distance > 2 ? 0.4 : 1,
+                x: cfg.x,
+                y: isActive ? cfg.y - 20 : cfg.y,
+                rotate: isActive ? 0 : cfg.rotate,
+                scale: isActive ? 1.06 : cfg.scale,
+                zIndex: isActive ? 10 : cfg.zIndex,
+              }}
+              transition={{
+                delay: 0.2 + index * 0.08,
+                duration: 0.55,
+                ease: [0.19, 1, 0.22, 1],
+              }}
+              style={{ position: 'absolute', width: 300, height: 210 }}
+              onHoverStart={() => setActiveIndex(index)}
+              className="cursor-pointer origin-bottom"
+            >
+              <Link href={`/${locale}${item.slug}`} className="block w-full h-full">
+                {/* Card shell */}
+                <div
+                  className="relative w-full h-full rounded-2xl overflow-hidden"
+                  style={{
+                    boxShadow: isActive
+                      ? `0 30px 60px -10px rgba(0,0,0,0.55), 0 0 0 1px ${item.accent}55`
+                      : `0 10px 30px -8px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)`,
+                  }}
+                >
+                  {/* Full-bleed photo */}
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    fill
+                    className="object-cover object-top"
+                    sizes="300px"
+                  />
+
+                  {/* Always-on dark scrim at bottom */}
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }}
+                  />
+
+                  {/* Accent colour glow at top edge (active only) */}
+                  {isActive && (
+                    <div
+                      className="absolute inset-x-0 top-0 h-1 rounded-t-2xl"
+                      style={{ background: item.accent }}
+                    />
+                  )}
+
+                  {/* Index number — top-right */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                    <span
+                      className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full"
+                      style={{ background: `${item.accent}33`, color: item.accent, border: `1px solid ${item.accent}55` }}
+                    >
+                      {item.num}
+                    </span>
+                  </div>
+
+                  {/* Type pill — top-left */}
+                  <div className="absolute top-3 left-3">
+                    <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
+                      {item.type}
+                    </span>
+                  </div>
+
+                  {/* Bottom info */}
+                  <div className="absolute bottom-0 inset-x-0 px-4 pb-4 pt-8">
+                    <p className="text-[10px] uppercase tracking-widest text-white/50 mb-0.5">{item.tag}</p>
+                    <p className="text-white font-bold text-base leading-tight">{item.title}</p>
+                    {/* Animated underline on active */}
+                    <div
+                      className="mt-2 h-0.5 rounded-full transition-all duration-500"
+                      style={{
+                        width: isActive ? '48px' : '0px',
+                        background: item.accent,
+                      }}
+                    />
+                  </div>
+                </div>
+              </Link>
+            </MotionDiv>
+          );
+        })}
+      </div>
+
+      {/* Dot navigation */}
+      <div className="flex items-center gap-2">
+        {SHOWCASE_ITEMS.map((item, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`View ${item.title}`}
+            className="transition-all duration-300 rounded-full"
+            style={{
+              width: activeIndex === index ? 24 : 6,
+              height: 6,
+              background: activeIndex === index ? item.accent : 'rgba(255,255,255,0.2)',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
   const { theme } = useTheme();
   const { locale } = useLanguage();
   const { trackEvent } = useAnalyticsTracking();
-  const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
   
   // Helper function to add locale to paths
   const localizedHref = (path: string) => {
-    // Check if the path already contains the locale
     if (path.startsWith('/') && i18n.locales.some(loc => path.startsWith(`/${loc}/`))) {
-      return path; // Path already has locale, don't add it again
+      return path;
     }
-    
     if (path.startsWith('#') || path.startsWith('/#')) {
-      // For hash links, add locale to the base path
       return path.startsWith('/#') ? `/${locale}${path}` : `/${locale}/${path}`;
     }
-    
     return `/${locale}${path}`;
   };
-  
+
   // Split title into words for colorful theme staggered animation
   const words = title ? title.split(' ') : [];
-    return (
-    <MotionDiv 
+
+  return (
+    <MotionDiv
       layout
       className="container mx-auto px-4 relative z-10"
     >
-      {/* Decorative elements - show/hide based on theme */}
+      {/* Corner decorative accents */}
       <AnimatePresence mode="wait">
         <MotionDiv
           key="decorative-elements"
@@ -48,82 +227,50 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={t.snap}
-        >            {/* Corner decorative accents */}            <MotionDiv
-              className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ ...t.snap, delay: delaySeconds.xs }}
-            >
-              <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-ds-cyan-400/30' : 'border-[var(--primary)]/30'} rounded-tl-lg`} />
-            </MotionDiv>
-            
-            <MotionDiv
-              className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ ...t.snap, delay: delaySeconds.xs }}
-            >
-              <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-[var(--primary)]/30' : 'border-primary-400/30'} rounded-br-lg`} />
-            </MotionDiv>
-              {/* Side line decorations */}
-            <MotionDiv 
-              className="absolute -left-20 top-[40%] hidden md:block" 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: durationSeconds.glacial, delay: delaySeconds['2xl'] }}
-            >
-              <div className="flex flex-col items-center gap-3">
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-ds-cyan-400/30 to-transparent' : 'from-transparent via-[var(--primary)]/30 to-transparent'}`}></div>
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-[var(--primary)]/30 to-transparent' : 'from-transparent via-primary-400/30 to-transparent'}`}></div>
-              </div>
-            </MotionDiv>
-            
-            <MotionDiv 
-              className="absolute -right-20 top-[40%] hidden md:block" 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: durationSeconds.glacial, delay: delaySeconds['2xl'] }}
-            >
-              <div className="flex flex-col items-center gap-3">
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-ds-cyan-400/30 to-transparent' : 'from-transparent via-[var(--primary)]/30 to-transparent'}`}></div>
-                <div className={`w-[1px] h-16 bg-gradient-to-b ${isColorful ? 'from-transparent via-[var(--primary)]/30 to-transparent' : 'from-transparent via-primary-400/30 to-transparent'}`}></div>
-              </div>
-            </MotionDiv>
+        >
+          <MotionDiv
+            className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ...t.snap, delay: delaySeconds.xs }}
+          >
+            <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-ds-cyan-400/30' : 'border-[var(--primary)]/30'} rounded-tl-lg`} />
           </MotionDiv>
+          <MotionDiv
+            className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ...t.snap, delay: delaySeconds.xs }}
+          >
+            <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-[var(--primary)]/30' : 'border-primary-400/30'} rounded-br-lg`} />
+          </MotionDiv>
+        </MotionDiv>
       </AnimatePresence>
 
-      {/* Colorful theme geometric decorations - REMOVED */}
+      {/* Main content: two-column split on desktop */}
+      <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 min-h-[calc(100vh-8rem)] py-16 lg:py-0">
 
-      {/* Main content container */}
-      <div className="flex flex-col items-center justify-center my-8 relative">
-        {/* Title Section with theme-aware rendering */}
-        <MotionDiv 
-          layout
-          className={`relative z-10 mx-auto mb-12 ${isColorful ? 'text-center' : 'text-center max-w-4xl'}`}
-        >
-          {/* Subtle dot grid behind the title */}
-          <AnimatePresence mode="wait">
-            <MotionDiv
-              key="dot-grid"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={t.snap}
-              className="absolute inset-0 -z-10 opacity-20 overflow-hidden"
-            >
-              <div className="absolute top-0 left-[20%] w-3/5 h-full" 
-                   style={{ backgroundImage: `radial-gradient(circle, rgba(${isColorful ? themeRgb.colorful.dotGrid : themeRgb.dark.dotGrid}, 0.2) 1px, transparent 1px)`, backgroundSize: '30px 30px' }}>
-              </div>
-            </MotionDiv>
-          </AnimatePresence>
-          
-          {/* Dynamic title rendering based on theme */}
+        {/* ── LEFT: Text content ─────────────────────────────── */}
+        <div className="flex-1 lg:max-w-[48%] flex flex-col items-center lg:items-start justify-center text-center lg:text-left space-y-6">
+
+          {/* Role badge */}
+          <MotionDiv
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: durationSeconds.dramatic, delay: 0.1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)] text-[var(--accent-text)] text-sm font-medium"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse" />
+            {locale === 'fi' ? 'Tuoteomistaja & Suunnittelija' : 'Product Owner & Designer'}
+          </MotionDiv>
+
+          {/* Title */}
           <AnimatePresence mode="wait">
             {isColorful ? (
-              <MotionH2 
+              <MotionH2
                 key="colorful-title"
                 layout
-                className="text-6xl md:text-7xl font-bold leading-tight tracking-tight relative z-20"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -134,246 +281,101 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      delay: i * delaySeconds.md, 
-                      duration: durationSeconds.dramatic,
-                      ease: [0.19, 1, 0.22, 1]
-                    }}
-                    className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] relative"
+                    transition={{ delay: i * delaySeconds.md, duration: durationSeconds.dramatic, ease: [0.19, 1, 0.22, 1] }}
+                    className="inline-block mr-3 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]"
                   >
                     {word}
                   </MotionSpan>
                 ))}
-                
-                {/* Decorative glow effect for colorful theme - REMOVED */}
               </MotionH2>
             ) : (
-              <MotionH1 
+              <MotionH1
                 key="default-title"
                 layout
-                className="text-5xl md:text-6xl font-bold mb-6 text-center relative"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: durationSeconds.slow }}
+                transition={{ duration: durationSeconds.slow, delay: 0.15 }}
               >
-                {/* Decorative line above title */}
-                <MotionSpan 
-                  className="block mx-auto w-12 h-1 bg-gradient-to-r from-[var(--primary)]/50 to-[var(--gradient-mid)]/50 mb-6"
-                  initial={{ width: 0 }}
-                  animate={{ width: 48 }}
-                  transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
-                />
-                
                 {title}
-                
-                {/* Decorative underline highlight */}
-                <MotionDiv
-                  className="absolute -z-10 h-4 rounded-full bg-[var(--primary)]/10 bottom-1"
-                  initial={{ width: 0, x: '50%' }}
-                  animate={{ width: '70%', x: '15%' }}
-                  transition={{ duration: durationSeconds.dramatic, delay: 1.2 }}
-                />
               </MotionH1>
             )}
           </AnimatePresence>
-        </MotionDiv>        {/* Enhanced Subtitle */}
-        {subtitle && (
-          <MotionDiv
-            layout
-            key={`subtitle-${theme}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: durationSeconds.dramatic, delay: delaySeconds.lg }}
-            className={`relative z-20 ${
-              isColorful 
-                ? 'mb-16 max-w-5xl mx-auto' 
-                : 'mb-12 max-w-4xl mx-auto'
-            }`}
-          >
-            {/* Decorative accent line above subtitle */}
+
+          {/* Subtitle */}
+          {subtitle && (
             <MotionDiv
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
-              className={`w-24 h-0.5 mx-auto mb-6 ${
-                isColorful
-                  ? 'bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]'
-                  : 'bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]'
-              } rounded-full`}
-            />
-              {/* Main subtitle text with enhanced typography */}
-            <MotionP
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['3xl'] }}
-              className={`${
-                isColorful 
-                  ? 'text-2xl md:text-3xl lg:text-4xl leading-relaxed' 
-                  : 'text-xl md:text-2xl lg:text-3xl leading-relaxed'
-              } font-medium text-center relative text-foreground`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: durationSeconds.dramatic, delay: 0.35 }}
+              className="max-w-lg"
             >
-              <span className="block">
+              <p className="text-lg md:text-xl leading-relaxed text-[var(--muted-foreground)]">
                 {subtitle.split('—')[0]?.trim()}
-              </span>
+              </p>
               {subtitle.includes('—') && (
-                <MotionSpan 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: durationSeconds.dramatic, delay: 0.9 }}
-                  className={`block mt-4 opacity-70 ${
-                    isColorful ? 'text-lg md:text-xl lg:text-2xl' : 'text-lg md:text-xl'
-                  }`}
-                >
+                <p className="mt-2 text-base opacity-60 text-[var(--muted-foreground)]">
                   — {subtitle.split('—')[1]?.trim()}
-                </MotionSpan>
-              )}
-            </MotionP>
-          </MotionDiv>
-        )}
-
-        {/* Quote Section */}
-        {quote && (
-          <MotionDiv
-            layout
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: isColorful ? delaySeconds['4xl'] : delaySeconds['3xl'], duration: durationSeconds.dramatic }}
-            className={`relative ${isColorful ? 'max-w-4xl mx-auto mb-12' : 'max-w-2xl mx-auto mt-16 p-8 rounded-lg bg-white/5 backdrop-blur-sm border-t border-l border-white/10'}`}
-          >
-            {isColorful ? (
-              <QuoteBlock 
-                quote={quote.text}
-                author={quote.author}
-                variant="default"
-              />
-            ) : (
-              <>
-                {/* Decorative elements for default theme */}
-                <MotionDiv 
-                  className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 0.8, 0.5]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-                
-                <MotionDiv 
-                  className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--gradient-mid)]/20 to-[var(--primary)]/20"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 0.8, 0.5]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: 1
-                  }}
-                />
-                
-                <p className="italic text-ds-gray-300 relative text-center">
-                  <span className="absolute -left-4 top-0 text-[var(--accent-text)] text-4xl opacity-80">&ldquo;</span>
-                  {quote.text}
-                  <span className="absolute -bottom-4 right-0 text-[var(--accent-text)] text-4xl opacity-80">&rdquo;</span>
-                  <MotionSpan 
-                    className="block text-[var(--accent-text)] mt-6 text-center"
-                    initial={{ x: -10, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: delaySeconds['5xl'] }}
-                  >
-                    — {quote.author}
-                  </MotionSpan>
                 </p>
-                
-                <MotionDiv 
-                  className="absolute inset-0 -z-10 opacity-20"
-                  animate={{
-                    background: [
-                      `linear-gradient(135deg, rgba(${themeRgb.dark.glowPrimary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowSecondary}, 0.1) 100%)`,
-                      `linear-gradient(135deg, rgba(${themeRgb.dark.glowSecondary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowPrimary}, 0.1) 100%)`,
-                      `linear-gradient(135deg, rgba(${themeRgb.dark.glowPrimary}, 0.1) 0%, transparent 50%, rgba(${themeRgb.dark.glowSecondary}, 0.1) 100%)`
-                    ]
-                  }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </>
-            )}
-          </MotionDiv>
-        )}
+              )}
+            </MotionDiv>
+          )}
 
-        {/* CTA Button */}
-        {cta && (
+          {/* CTA buttons */}
           <MotionDiv
-            layout
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: delaySeconds['4xl'], duration: durationSeconds.dramatic }}
-            className="text-center relative"
+            transition={{ duration: durationSeconds.dramatic, delay: 0.5 }}
+            className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
-            <MotionDiv
-              key="default-cta"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={t.snap}
-              className="inline-block relative"
-            >
-              <MotionDiv 
-                className={`absolute -inset-1 rounded-lg bg-gradient-to-r ${isColorful ? 'from-primary-500/40 via-ds-pink-500/40 to-ds-blue-500/40' : 'from-[var(--primary)]/40 via-[var(--gradient-mid)]/40 to-[var(--gradient-end)]/40'} blur-md opacity-70`}
-                animate={{
-                  background: isColorful 
-                    ? [
-                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowPrimary}, 0.4), rgba(${themeRgb.colorful.glowSecondary}, 0.4), rgba(${themeRgb.colorful.glowTertiary}, 0.4))`,
-                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowTertiary}, 0.4), rgba(${themeRgb.colorful.glowPrimary}, 0.4), rgba(${themeRgb.colorful.glowSecondary}, 0.4))`,
-                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowSecondary}, 0.4), rgba(${themeRgb.colorful.glowTertiary}, 0.4), rgba(${themeRgb.colorful.glowPrimary}, 0.4))`,
-                      `linear-gradient(to right, rgba(${themeRgb.colorful.glowPrimary}, 0.4), rgba(${themeRgb.colorful.glowSecondary}, 0.4), rgba(${themeRgb.colorful.glowTertiary}, 0.4))`
-                    ]
-                    : [
-                      `linear-gradient(to right, rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4))`,
-                      `linear-gradient(to right, rgba(${themeRgb.dark.glowTertiary}, 0.4), rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4))`,
-                      `linear-gradient(to right, rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4), rgba(${themeRgb.dark.glowPrimary}, 0.4))`,
-                      `linear-gradient(to right, rgba(${themeRgb.dark.glowPrimary}, 0.4), rgba(${themeRgb.dark.glowSecondary}, 0.4), rgba(${themeRgb.dark.glowTertiary}, 0.4))`
-                    ]
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              />
-              <Link 
-                href={localizedHref(cta.href)} 
-                onClick={() => trackEvent('hero_cta_click', 'hero', `${isColorful ? 'colorful' : 'default'}_theme_${cta.text}`)}
+            {cta && (
+              <Link
+                href={localizedHref(cta.href)}
+                onClick={() => trackEvent('hero_cta_click', 'hero', `portfolio_cta_${cta.text}`)}
               >
                 <Button variant="primary" size="lg" rightIcon={<Icon name="arrow_forward" />}>
                   {cta.text}
                 </Button>
               </Link>
-            </MotionDiv>
+            )}
+            <Link href={localizedHref('/#work-experience')}>
+              <Button variant="outline" size="lg">
+                {locale === 'fi' ? 'Katso kokemus' : 'View Experience'}
+              </Button>
+            </Link>
           </MotionDiv>
-        )}
-          {/* Podcast Player */}
-        {showPodcastPlayer && (
-          <MotionDiv 
-            layout
-            initial={{ opacity: 0, y: 20 }}
+
+          {/* Stats row */}
+          <MotionDiv
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: isColorful ? 1.6 : 0.8 }}
-            className={`mt-16 ${isColorful ? 'max-w-3xl mx-auto' : ''}`}
-          ><PodcastPlayer />
+            transition={{ duration: durationSeconds.dramatic, delay: 0.65 }}
+            className="flex gap-8 pt-2"
+          >
+            {[
+              { value: '10+', label: locale === 'fi' ? 'vuotta' : 'yrs exp' },
+              { value: '20+', label: locale === 'fi' ? 'projektia' : 'projects' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center lg:text-left">
+                <div className="text-2xl font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-[var(--muted-foreground)] mt-0.5">{stat.label}</div>
+              </div>
+            ))}
           </MotionDiv>
-        )}
+        </div>
+
+        {/* ── RIGHT: Portfolio fan showcase ──────────────────── */}
+        <MotionDiv
+          className="flex-1 lg:max-w-[52%] flex items-center justify-center w-full overflow-visible"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: durationSeconds.dramatic, delay: 0.2 }}
+        >
+          <PortfolioFan locale={locale} />
+        </MotionDiv>
       </div>
     </MotionDiv>
   );

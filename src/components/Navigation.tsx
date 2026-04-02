@@ -36,6 +36,7 @@ const navItems: NavItem[] = [
       { href: '/#work-experience', labelKey: 'nav.workExperience', icon: 'work' },
       { href: '/#digital-dreams', labelKey: 'nav.digitalDreams', icon: 'auto_awesome' },
       { href: '/#strengths-skills', labelKey: 'nav.strengthsSkills', icon: 'psychology' },
+      { href: '/#podcast', labelKey: 'nav.podcast', icon: 'podcasts' },
       { href: '/#testimonials', labelKey: 'nav.testimonials', icon: 'format_quote' },
     ]
   },
@@ -290,8 +291,8 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className={`
-              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-xl backdrop-blur-xl overflow-hidden
-              bg-[var(--background)]/90 border-[var(--card-border)]
+              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-2xl shadow-black/20 backdrop-blur-2xl overflow-hidden
+              bg-[var(--background)]/95 border-[var(--card-border)]
             `}
           >
             {/* Overview items Ã¢â‚¬â€ no category */}
