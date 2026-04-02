@@ -322,7 +322,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
     const profileScore = 68;
 
     return (
-        <div className={`h-full w-full overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
+        <div className={`absolute inset-0 overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
 
             {/* ─── Profile Score Hero ─── */}
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 300, damping: 26 }}

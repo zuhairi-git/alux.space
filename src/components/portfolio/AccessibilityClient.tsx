@@ -163,13 +163,6 @@ export default function AccessibilityClient() {
         darkTheme: "Dark Theme",
         colorfulTheme: "Colorful Theme",
         contrastInfo: "All color combinations meet WCAG AAA standards (7:1 contrast ratio)",
-        // Typography section
-        inclusiveTypographyTitle: "Inclusive Typography",
-        inclusiveTypographyDesc: "Designed for readability across cultures and abilities",
-        englishType: "English Typography",
-        arabicType: "Arabic Typography",
-        rtlSupport: "Full RTL support with proper text alignment",
-
         // Components deep dive
         interactiveTitle: "Interactive Components",
         keyboardNav: "Full keyboard navigation",
@@ -355,13 +348,6 @@ export default function AccessibilityClient() {
         darkTheme: "Tumma teema",
         colorfulTheme: "VÃƒÂ¤rikÃƒÂ¤s teema",
         contrastInfo: "Kaikki vÃƒÂ¤riyhdistelmÃƒÂ¤t tÃƒÂ¤yttÃƒÂ¤vÃƒÂ¤t WCAG AAA -standardit (7:1 kontrastisuhde)",
-        // Typography section
-        inclusiveTypographyTitle: "Inklusiivinen typografia",
-        inclusiveTypographyDesc: "Suunniteltu luettavuutta varten eri kulttuureissa ja kyvyissÃƒÂ¤",
-        englishType: "Englannin typografia",
-        arabicType: "Arabian typografia",
-        rtlSupport: "TÃƒÂ¤ysi RTL-tuki oikealla tekstin tasauksella",
-
         // Components deep dive
         interactiveTitle: "Interaktiiviset komponentit",
         keyboardNav: "TÃƒÂ¤ysi nÃƒÂ¤ppÃƒÂ¤imistÃƒÂ¶navigaatio",
@@ -439,12 +425,6 @@ export default function AccessibilityClient() {
       description: content.colorSystemDesc,
       
       gradient: "from-[var(--gradient-start)] to-[var(--gradient-end)]"
-    },
-    {
-      title: content.inclusiveTypographyTitle,
-      description: content.inclusiveTypographyDesc,
-      
-      gradient: "from-ds-emerald-600 to-ds-cyan-500"
     },
     {
       title: content.spacingTitle,
@@ -906,53 +886,6 @@ export default function AccessibilityClient() {
                     <p className={`text-[var(--accent-text)]`}>{content.contrastInfo}</p>
                   </div>
             </CaseStudyItem>
-
-            <CaseStudyItem>
-                  <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.inclusiveTypographyTitle}</h2>
-                  <p className={`text-base mb-6 opacity-80 text-[var(--foreground)]`}>{content.inclusiveTypographyDesc}</p>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
-                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.englishType}</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className={`text-3xl font-bold text-[var(--foreground)]`}>Heading Large</h4>
-                          <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 48px, Line Height: 1.2</p>
-                        </div>
-                        <div>
-                          <h5 className={`text-xl font-semibold text-[var(--foreground)]`}>Heading Medium</h5>
-                          <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 24px, Line Height: 1.3</p>
-                        </div>
-                        <div>
-                          <p className={`text-base opacity-80 text-[var(--foreground)]`}>Body text optimized for readability</p>
-                          <p className="text-sm opacity-80 text-[var(--foreground)]">Font Size: 16px, Line Height: 1.6</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={`p-6 rounded-2xl bg-[var(--card-from-bg)]`}>
-                      <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{content.arabicType}</h3>
-                      <div className="space-y-4" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
-                        <div>
-                          <h4 className={`text-3xl font-bold text-[var(--foreground)]`}>Ã˜Â¹Ã™â€ Ã™Ë†Ã˜Â§Ã™â€  Ã™Æ’Ã˜Â¨Ã™Å Ã˜Â±</h4>
-                          <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 48px, Line Height: 1.4</p>
-                        </div>
-                        <div>
-                          <h5 className={`text-xl font-semibold text-[var(--foreground)]`}>Ã˜Â¹Ã™â€ Ã™Ë†Ã˜Â§Ã™â€  Ã™â€¦Ã˜ÂªÃ™Ë†Ã˜Â³Ã˜Â·</h5>
-                          <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 24px, Line Height: 1.5</p>
-                        </div>
-                        <div>
-                          <p className={`text-base opacity-80 text-[var(--foreground)]`}>Ã™â€ Ã˜Âµ Ã™â€¦Ã˜Â­Ã˜Â³Ã™â€  Ã™â€žÃ™â€žÃ™â€šÃ˜Â±Ã˜Â§Ã˜Â¡Ã˜Â© Ã™Ë†Ã˜Â§Ã™â€žÃ™Ë†Ã˜Â¶Ã™Ë†Ã˜Â­</p>
-                          <p className="text-sm opacity-80 text-[var(--foreground)]" dir="ltr">Font: Tajawal, Size: 16px, Line Height: 1.7</p>
-                        </div>
-                      </div>
-                      <div className={`mt-6 p-4 rounded-lg bg-primary/30 border border-primary-dark`}>
-                        
-                        <span className={`text-sm text-accent`}>{content.rtlSupport}</span>
-                      </div>
-                    </div>
-                  </div>
-            </CaseStudyItem>
-
             <CaseStudyItem>
                   <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>Core System Features</h2>
 

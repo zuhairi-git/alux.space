@@ -23,7 +23,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
     };
 
     return (
-        <div className={`h-full w-full overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
+        <div className={`absolute inset-0 overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
             <AnimatePresence>
                 <motion.div variants={listVariants} initial="hidden" animate="visible" className="space-y-3">
 

@@ -90,7 +90,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     ];
 
     return (
-        <div className={`h-full w-full flex flex-col ${theme.contentPaddingTop}`}>
+        <div className={`absolute inset-0 flex flex-col ${theme.contentPaddingTop}`}>
             {/* Scrollable Chat Area */}
             <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-5 pb-8 pt-4 no-scrollbar">
                 {messages.length === 1 && (

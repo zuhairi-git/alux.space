@@ -55,7 +55,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
     ];
 
     return (
-        <div className={`h-full w-full overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
+        <div className={`absolute inset-0 overflow-y-auto ${theme.contentPaddingTop} pb-28 px-5 no-scrollbar`}>
 
             {/* ─── Profile Card ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible"
