@@ -683,10 +683,48 @@ function ColorsSection() {
       <section>
         <h4 className="text-sm font-semibold mb-1">State Colors</h4>
         <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens. Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
-        <div className="space-y-6">
-          {stateColorGroups.map(g => (
-            <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
-          ))}
+        <div className="overflow-x-auto">
+          <div className="min-w-[520px]">
+            {/* Column headers */}
+            <div className="grid grid-cols-[88px_1fr_1fr_1fr] gap-x-4 mb-2 px-2">
+              <div />
+              {['Filled', 'Outline', 'Soft'].map(v => (
+                <div key={v} className="text-xs font-semibold uppercase tracking-wider opacity-50">{v}</div>
+              ))}
+            </div>
+            {/* Rows */}
+            <div className="divide-y divide-[var(--card-border)]">
+              {['success', 'warning', 'error', 'info'].map(state => (
+                <div key={state} className="grid grid-cols-[88px_1fr_1fr_1fr] gap-x-4 items-center py-3 px-2">
+                  <div className="text-xs font-semibold capitalize opacity-70">{state}</div>
+                  {/* Filled */}
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-7 h-7 shrink-0 rounded-md" style={{ background: `var(--color-${state}-bg)` }} />
+                    <div className="min-w-0">
+                      <div className="font-mono text-[10px] opacity-50 truncate">--color-{state}-bg</div>
+                      <div className="font-mono text-[10px] truncate" style={{ color: `var(--color-${state})` }}>--color-{state}</div>
+                    </div>
+                  </div>
+                  {/* Outline */}
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-7 h-7 shrink-0 rounded-md" style={{ border: `2px solid var(--color-${state}-border)` }} />
+                    <div className="min-w-0">
+                      <div className="font-mono text-[10px] opacity-50 truncate">--color-{state}-border</div>
+                      <div className="font-mono text-[10px] truncate" style={{ color: `var(--color-${state})` }}>--color-{state}</div>
+                    </div>
+                  </div>
+                  {/* Soft */}
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-7 h-7 shrink-0 rounded-md" style={{ background: `var(--color-${state}-soft-bg)` }} />
+                    <div className="min-w-0">
+                      <div className="font-mono text-[10px] opacity-50 truncate">--color-{state}-soft-bg</div>
+                      <div className="font-mono text-[10px] truncate" style={{ color: `var(--color-${state}-soft)` }}>--color-{state}-soft</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

@@ -558,11 +558,6 @@ export default function Home() {
         className="py-24 bg-ds-section-alt-2 relative overflow-hidden"
         id="testimonials"
       >
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--gradient-mid)]/10 to-[var(--gradient-end)]/10 blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--primary)]/10 to-[var(--gradient-mid)]/10 blur-3xl"></div>
-        </div>
 
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
