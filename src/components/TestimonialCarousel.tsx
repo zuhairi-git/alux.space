@@ -125,6 +125,7 @@ export default function TestimonialCarousel({
             const isActive = i === active;
             const initials = t.initials ?? t.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
             return (
+              // eslint-disable-next-line design-system/no-raw-html-elements -- avatar selector uses Framer Motion child, can't wrap in Button component
               <button
                 key={i}
                 onClick={() => goTo(i)}
