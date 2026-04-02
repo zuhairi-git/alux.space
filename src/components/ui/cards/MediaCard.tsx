@@ -47,7 +47,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
     switch (theme) {
       case 'light':
         return {
-          card: 'bg-white/90 border border-ds-gray-200/50 hover:border-ds-blue-300/50 shadow-primary-500/10 hover:shadow-ds-blue-300/30',
+          card: 'bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--card-border-hover)]',
           text: 'text-ds-gray-800',
           primaryText: 'text-ds-blue-500',
           tag: 'bg-ds-blue-500/10 text-ds-blue-600',
@@ -57,7 +57,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         };
       case 'dark':
         return {
-          card: 'bg-ds-gray-800/90 border border-ds-gray-700/50 hover:border-ds-blue-300/50 shadow-ds-blue-500/20 hover:shadow-ds-blue-500/30',
+          card: 'bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--card-border-hover)]',
           text: 'text-ds-gray-100',
           primaryText: 'text-ds-blue-400',
           tag: 'bg-ds-blue-500/20 text-ds-blue-400',
@@ -67,7 +67,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         };
       case 'colorful':
         return {
-          card: 'bg-[var(--color-colorful-bg)]/80 border border-[var(--card-border)] hover:border-[var(--primary)]/60 shadow-[var(--primary)]/30 hover:shadow-[var(--primary)]/50',
+          card: 'bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--card-border-hover)]',
           text: 'text-[var(--foreground)]',
           primaryText: 'text-[var(--primary)]',
           tag: 'bg-[var(--primary)]/15 text-[var(--primary)]',
@@ -77,7 +77,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         };
       default:
         return {
-          card: 'bg-white/90 border border-ds-gray-200/50 hover:border-ds-blue-300/50 shadow-primary-500/10 hover:shadow-ds-blue-300/30',
+          card: 'bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--card-border-hover)]',
           text: 'text-ds-gray-800',
           primaryText: 'text-ds-blue-500',
           tag: 'bg-ds-blue-500/10 text-ds-blue-600',
@@ -317,7 +317,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
   );
     return (
     <motion.div
-      className={`rounded-xl overflow-hidden shadow-md h-full ${styles.card} ${className}`}
+      className={`rounded-xl overflow-hidden h-full ${styles.card} ${className}`}
       whileHover={cardAnimation.hover}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}

@@ -51,12 +51,16 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
   };
 
   const getThemeColors = () => {
+    // All themes share the same card token surface — same appearance across homepage and design page
+    const shared = {
+      cardBg: 'bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)]',
+      cardBorder: 'border-[var(--card-border)] hover:border-[var(--card-border-hover)]',
+      cardGlow: '',
+      accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+    };
     if (theme === 'colorful') {
       return {
-        cardBg: 'bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)]',
-        cardBorder: 'border-[var(--card-border)]',
-        cardGlow: 'shadow-2xl shadow-[var(--primary)]/20',
-        accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+        ...shared,
         buttonBg: 'bg-[var(--primary)]/10 hover:bg-[var(--primary)]/20',
         buttonActive: 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]',
         iconColor: 'text-[var(--primary)]',
@@ -65,10 +69,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
       };
     } else if (theme === 'dark') {
       return {
-        cardBg: 'bg-gradient-to-br from-ds-gray-800/80 via-ds-gray-900/70 to-[var(--primary)]/20',
-        cardBorder: 'border-primary/20',
-        cardGlow: 'shadow-2xl shadow-[var(--primary)]/10',
-        accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+        ...shared,
         buttonBg: 'bg-primary/20 hover:bg-primary/30',
         buttonActive: 'bg-gradient-to-r from-[var(--btn-primary-bg)] to-[var(--gradient-mid)]',
         iconColor: 'text-accent',
@@ -77,10 +78,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
       };
     } else {
       return {
-        cardBg: 'bg-white/90',
-        cardBorder: 'border-primary/20',
-        cardGlow: 'shadow-xl shadow-[var(--primary)]/10',
-        accentGradient: 'from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]',
+        ...shared,
         buttonBg: 'bg-primary/10 hover:bg-primary/20',
         buttonActive: 'bg-gradient-to-r from-[var(--btn-primary-bg)] to-[var(--gradient-mid)]',
         iconColor: 'text-accent',

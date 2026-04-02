@@ -39,16 +39,9 @@ export default function TimelineCard({
     setParticles(newParticles);
   }, [particleCount]);
 
-  // Get card styles based on theme with improved visibility for dark theme
+  // Get card styles — uses shared card tokens (same as homepage timeline cards)
   const getCardStyles = () => {
-    if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[var(--color-timeline-colorful-from)] to-[var(--color-timeline-colorful-to)] border border-primary-400/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.4)]';
-    } else if (theme === 'dark') {
-      // Lightened the dark theme colors slightly to make animations more visible
-      return 'bg-gradient-to-br from-[var(--color-timeline-dark-from)] to-[var(--color-timeline-dark-to)] border border-ds-blue-500/30 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.35)]';
-    } else {
-      return 'bg-gradient-to-br from-white to-ds-gray-100 border border-ds-blue-500/20 backdrop-blur-xl shadow-[0_12px_28px_-5px_rgb(var(--glow-primary-rgb)/0.3)]';
-    }
+    return 'bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)] border border-[var(--card-border)] hover:border-[var(--card-border-hover)] backdrop-blur-xl';
   };
 
   // Get icon background styles based on theme - holographic design with even brighter hover effect
@@ -127,15 +120,8 @@ export default function TimelineCard({
     }
   };
 
-  // Enhanced custom styles for the card with more visible hover effect
+  // Custom transition for the card
   const cardCustomStyles = {
-    boxShadow: isHovered ? (
-      theme === 'colorful' 
-        ? '0 15px 35px -10px rgba(167,139,250,0.5), 0 0 0 1px rgba(167, 139, 250, 0.2), inset 0 0 25px rgba(167, 139, 250, 0.05)'
-        : theme === 'dark'
-          ? '0 15px 35px -10px rgba(59,130,246,0.4), 0 0 0 1px rgba(59,130,246, 0.2), inset 0 0 25px rgba(59,130,246, 0.05)'
-          : '0 15px 35px -10px rgba(59,130,246,0.3), 0 0 0 1px rgba(59,130,246, 0.15), inset 0 0 25px rgba(59,130,246, 0.04)'
-    ) : '',
     transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)'
   };
   return (

@@ -343,8 +343,8 @@
   --primary-glow:     rgba(79, 70, 229, 0.20);  /* indigo-600 */
 
   /* Card surfaces */
-  --card-from-bg:        rgba(255, 255, 255, 1);
-  --card-to-bg:          rgba(255, 255, 255, 1);
+  --card-from-bg:        rgba(255, 255, 255, 0.82);
+  --card-to-bg:          rgba(248, 250, 252, 0.78);
   --card-border:         rgba(0, 0, 0, 0.08);
   --card-border-hover:   rgba(79, 70, 229, 0.4);     /* indigo-600 */
   --card-shadow-color:   rgba(79, 70, 229, 0.18);    /* indigo-600 */
@@ -484,8 +484,8 @@
   --gradient-mid:     var(--color-pink-500);
   --gradient-end:     var(--color-blue-600);
   --primary-glow:     rgba(79, 70, 229, 0.20);  /* indigo-600 */
-  --card-from-bg:        rgba(255, 255, 255, 1);
-  --card-to-bg:          rgba(255, 255, 255, 1);
+  --card-from-bg:        rgba(255, 255, 255, 0.82);
+  --card-to-bg:          rgba(248, 250, 252, 0.78);
   --card-border:         rgba(0, 0, 0, 0.08);
   --card-border-hover:   rgba(79, 70, 229, 0.4);     /* indigo-600 */
   --card-shadow-color:   rgba(79, 70, 229, 0.18);    /* indigo-600 */
@@ -588,8 +588,8 @@
   --gradient-mid:     var(--color-emerald-300);
   --gradient-end:     var(--color-emerald-400);
   --primary-glow:     rgba(52, 211, 153, 0.28);  /* emerald-400 */
-  --card-from-bg:        rgba(31, 41, 55, 0.9);
-  --card-to-bg:          rgba(17, 24, 39, 0.9);
+  --card-from-bg:        rgba(31, 41, 55, 0.78);
+  --card-to-bg:          rgba(17, 24, 39, 0.75);
   --card-border:         rgba(75, 85, 99, 0.5);
   --card-border-hover:   rgba(52, 211, 153, 0.5);    /* emerald-400 */
   --card-shadow-color:   rgba(52, 211, 153, 0.2);    /* emerald-400 */
@@ -707,8 +707,8 @@
   --primary-glow:        rgba(139, 92, 246, 0.35);  /* violet-500 */
 
   /* Card surfaces */
-  --card-from-bg:        rgba(14, 12, 36, 0.95);             /* dark slate-violet */
-  --card-to-bg:          rgba(8, 8, 28, 0.98);               /* near-background */
+  --card-from-bg:        rgba(14, 12, 36, 0.82);             /* dark slate-violet */
+  --card-to-bg:          rgba(8, 8, 28, 0.85);               /* near-background */
   --card-border:         rgba(167, 139, 250, 0.18);
   --card-border-hover:   rgba(244, 114, 182, 0.50);          /* pink hover glow */
   --card-shadow-color:   rgba(167, 139, 250, 0.22);
