@@ -161,7 +161,7 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-2 p-2 rounded-full border backdrop-blur-xl shadow-lg shadow-black/5"
+      className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-2 p-2 rounded-full border shadow-lg shadow-black/5"
       style={{
         backgroundColor: 'var(--nav-bg)',
         borderColor: 'var(--nav-border)',

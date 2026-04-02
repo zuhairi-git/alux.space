@@ -65,26 +65,41 @@ const SHOWCASE_ITEMS = [
   },
 ];
 
-// Word cloud: 3 keywords per card, positioned (left/top px) around the 640×430 container
+// Word cloud — 15 labels in 4 zones, no overlaps.
+// Container: 640×430. Card stack bounds: left≈40, right≈600, top≈36, bottom≈350.
+// Label heights ~26px. Widths estimated per text (10px font + px-2.5 py-1 padding).
+//
+// TOP ROW  y=-65  (5 items spread 640px wide, min 45px gap between any two):
+//   Personas(-90)  AI Copilot(30)  SaaS(190)  Collaboration(340)  GTM Strategy(510)
+//   right edges:  -15            110          245                  445               605
+//
+// LEFT COLUMN  x=-95…-57  (3 items, vertical gap ~74px, clear of leftmost card edge 40px):
+//   RICE Framework(-95,90)  Prioritization(-62,195)  Healthcare(-57,295)
+//
+// RIGHT COLUMN  x=612  (3 items at same x, vertical gap ~74px, clear of right card edge 600px):
+//   Mobile UX(90)  Enterprise(195)  Analytics(295)
+//
+// BOTTOM ROW  y=385  (4 items, min 30px gap, 35px below front-card bottom 350px):
+//   WCAG 2.1(30)  Design Tokens(200)  Accessibility(380)  Gaming(510)
+//   right edges:  105              305                    480               580
 const WORD_CLOUD = SHOWCASE_ITEMS.flatMap((item, cardIndex) =>
   item.words.map((word, wordIdx) => ({
     word,
     cardIndex,
     accent: item.accent,
-    // Positions keyed by [cardIndex][wordIdx]
     x: [
-      [-162, -175, -160],   // card 0 — left column
-      [  55,  205,  345],   // card 1 — top band
-      [ 656,  664,  650],   // card 2 — right column
-      [  82,  245,  418],   // card 3 — bottom band
-      [ 495,  662,  540],   // card 4 — scattered corners
+      [ -95,  -62,  -57],  // card 0 (Healthcare) — LEFT COLUMN
+      [  30,  190,  340],  // card 1 (Workflow)   — TOP ROW
+      [ 612,  612,  612],  // card 2 (Market)     — RIGHT COLUMN
+      [  30,  200,  380],  // card 3 (Inclusive)  — BOTTOM ROW
+      [ 510,  510,  -90],  // card 4 (Game)       — TOP ROW right + BOTTOM ROW right + TOP ROW left
     ][cardIndex][wordIdx],
     y: [
-      [  55,  132,  210],   // card 0
-      [ -62,  -72,  -64],   // card 1
-      [  60,  148,  235],   // card 2
-      [ 445,  457,  447],   // card 3
-      [ -62,  318,  445],   // card 4
+      [  90,  195,  295],  // card 0 — left column, vertically spread
+      [ -65,  -65,  -65],  // card 1 — top row
+      [  90,  195,  295],  // card 2 — right column, vertically spread
+      [ 385,  385,  385],  // card 3 — bottom row
+      [ -65,  385,  -65],  // card 4 — top-right, bottom-right, top-left
     ][cardIndex][wordIdx],
   }))
 );
