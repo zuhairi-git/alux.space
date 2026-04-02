@@ -232,6 +232,13 @@ export const semantic = {
   info:             'var(--color-info)',
   infoBg:           'var(--color-info-bg)',
   infoBorder:       'var(--color-info-border)',
+  // Text-colour roles
+  mutedForeground:  'var(--muted-foreground)',
+  accentText:       'var(--accent-text)',
+  accentText2:      'var(--accent-text-2)',
+  textOnPrimary:    'var(--text-on-primary)',   // text ON primary-fill buttons/badges
+  textOnDark:       'var(--text-on-dark)',      // text ON dark/gradient surfaces
+  textSubtle:       'var(--text-subtle)',       // decorative low-emphasis text
 } as const;
 
 // ─── Typography ─────────────────────────────────────────────

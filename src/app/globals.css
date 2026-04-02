@@ -826,7 +826,7 @@ body {
   background: linear-gradient(135deg,
       var(--gradient-start),
       var(--gradient-mid));
-  color: white;
+  color: var(--text-on-dark);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -1074,7 +1074,7 @@ body {
   background: linear-gradient(135deg,
       var(--gradient-start),
       var(--gradient-mid));
-  color: white;
+  color: var(--text-on-dark);
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

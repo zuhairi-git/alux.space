@@ -26,6 +26,7 @@ const sidebarNav: NavGroup[] = [
     items: [
       { label: 'Backgrounds', section: 'backgrounds', icon: 'wallpaper' },
       { label: 'Colors',      section: 'colors',      icon: 'palette' },
+      { label: 'Text Colors', section: 'text-colors', icon: 'format_color_text' },
       { label: 'Gradients',   section: 'gradients',   icon: 'gradient' },
       { label: 'Motion',      section: 'motion',      icon: 'animation' },
       { label: 'Radius',      section: 'radius',      icon: 'rounded_corner' },

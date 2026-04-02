@@ -40,7 +40,7 @@ const iconSizeClasses: Record<ButtonSize, string> = {
 const variantClasses: Record<ButtonVariant, string> = {
   // ── Primary: uses gradient token (solid in light/dark, vivid gradient in colorful) ──
   primary: [
-    'relative [background:var(--btn-primary-gradient)] text-white font-[500]',
+    'relative [background:var(--btn-primary-gradient)] text-[var(--text-on-primary)] font-[500]',
     'shadow-[0_1px_2px_rgba(0,0,0,0.1),0_4px_16px_var(--btn-primary-bg)]/20',
     'overflow-hidden',
     'hover:[background:var(--btn-primary-gradient-hover)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.15),0_6px_20px_var(--btn-primary-bg)]/30 hover:-translate-y-[1px]',
@@ -91,7 +91,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   cosmic: [
     'bg-gradient-to-r from-[#00ffff] via-[#ff00cc] to-[#3b82f6]', // eslint-disable-line design-system/no-hardcoded-colors -- gradient art-direction literals; var() not usable inside Tailwind arbitrary value strings
     'bg-[length:200%_200%] animate-gradient-shift',
-    'text-white font-medium',
+    'text-[var(--text-on-dark)] font-medium',
     'rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5',
     'active:translate-y-0',
   ].join(' '),
@@ -100,7 +100,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   glass: [
     'bg-[var(--primary)]/30 backdrop-blur-sm',
     'border border-[var(--primary)]/40',
-    'text-white font-[500]',
+    'text-[var(--text-on-dark)] font-[500]',
     'hover:bg-[var(--primary)]/45 hover:border-[var(--primary)]/55 hover:-translate-y-[1px]',
     'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),

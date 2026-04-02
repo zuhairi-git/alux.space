@@ -437,19 +437,32 @@
   /* Badge — glass (frosted, placed on top of images) */
   --badge-glass-bg:         rgba(255, 255, 255, 0.15);
   --badge-glass-border:     rgba(255, 255, 255, 0.20);
-  --badge-glass-text:       #ffffff;
+  --badge-glass-text:       var(--text-on-dark);
 
   /* Badge — accent (indigo, e.g. case-study category) */
   --badge-accent-bg:        rgba(79, 70, 229, 0.80);     /* indigo-600 */
   --badge-accent-border:    rgba(99, 102, 241, 0.50);    /* indigo-500 */
-  --badge-accent-text:      #ffffff;
+  --badge-accent-text:      var(--text-on-primary);
 
   /* Button — overlay (dark frosted, on-image buttons) */
   /* glass variant uses var(--primary)/30 opacity directly via Tailwind */
   --btn-overlay-bg:         rgba(0, 0, 0, 0.45);
   --btn-overlay-bg-hover:   rgba(0, 0, 0, 0.60);
   --btn-overlay-border:     rgba(255, 255, 255, 0.15);
-  --btn-overlay-text:       #ffffff;
+  --btn-overlay-text:       var(--text-on-dark);
+
+  /* ── Text-colour semantic tokens ──────────────────────────────────────────
+     Use these instead of raw hex or opacity hacks for colouring text.
+     On-surface text:
+       --text-on-primary   text placed ON a primary-coloured fill (buttons, filled badges)
+       --text-on-dark      text placed ON a dark or gradient surface
+     Low-emphasis text:
+       --text-subtle       decorative / hint text — intentionally below WCAG AA for body text.
+                           Do NOT use for essential information; use --muted-foreground instead.
+     ─────────────────────────────────────────────────────────────────────── */
+  --text-on-primary:    var(--color-white);         /* text ON primary-bg buttons/badges */
+  --text-on-dark:       var(--color-white);         /* text ON dark / gradient surfaces  */
+  --text-subtle:        var(--color-gray-400);      /* decorative low-emphasis (light theme: 3.0:1 — decorative only) */
 }
 
 .theme-light {
@@ -541,7 +554,7 @@
   --badge-overlay-border:  rgba(0, 0, 0, 0.1);
   --badge-accent-bg:        rgba(79, 70, 229, 0.85);     /* indigo-600 */
   --badge-accent-border:    rgba(99, 102, 241, 0.60);    /* indigo-500 */
-  --badge-accent-text:      #ffffff;
+  --badge-accent-text:      var(--text-on-primary);
 
   /* RGB triplets for dynamic glow/shadow/particle effects — use with rgb(var(--x) / alpha) */
   --glow-primary-rgb:      79 70 229;       /* indigo-600 #4f46e5 — matches --primary */
@@ -641,11 +654,12 @@
   --color-info-soft-bg:    rgba(56, 189, 248, 0.10);
 
   --muted-foreground:      var(--color-gray-400);
+  --text-subtle:           var(--color-gray-400);      /* gray-400 on #0a0a0a = 5.8:1 ✓ AA */
   --badge-overlay-bg:      rgba(255, 255, 255, 0.2);
   --badge-overlay-border:  rgba(255, 255, 255, 0.1);
   --badge-accent-bg:        rgba(52, 211, 153, 0.80);    /* emerald-400 */
   --badge-accent-border:    rgba(110, 231, 183, 0.50);   /* emerald-300 */
-  --badge-accent-text:      #ffffff;
+  --badge-accent-text:      var(--text-on-primary);
 
   /* RGB triplets for dynamic glow/shadow/particle effects */
   --glow-primary-rgb:      52 211 153;    /* emerald-400 #34d399 — matches --primary */
@@ -769,11 +783,12 @@
   --color-info-soft-bg:    rgba(56, 189, 248, 0.12);
 
   --muted-foreground:      #9B97C0;                          /* blue-purple muted — 6.3:1 on bg ✓ AA */
+  --text-subtle:           #6A668F;                         /* muted aurora lavender — 3.8:1 on midnight bg — decorative only */
   --badge-overlay-bg:      rgba(9, 9, 28, 0.92);
   --badge-overlay-border:  rgba(167, 139, 250, 0.22);
   --badge-accent-bg:        rgba(167, 139, 250, 0.18);
   --badge-accent-border:    rgba(196, 181, 253, 0.40);
-  --badge-accent-text:      #ffffff;
+  --badge-accent-text:      var(--text-on-primary);
 
   /* RGB triplets for dynamic glow/shadow/particle effects */
   --glow-primary-rgb:      167 139 250;   /* violet-400 #a78bfa — matches --primary */

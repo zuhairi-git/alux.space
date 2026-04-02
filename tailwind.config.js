@@ -79,9 +79,14 @@ module.exports = {
         // ── Semantic theme-switched tokens ────────────────────────────────────────────
         'accent':                  'var(--accent-text)',
         'accent-2':                'var(--accent-text-2)',
+        'muted-foreground':        'var(--muted-foreground)',
         'dropdown':                'var(--dropdown-bg)',
         'dropdown-border-color':   'var(--dropdown-border)',
         'dropdown-text':           'var(--dropdown-text)',
+        // ── Text-colour semantic tokens ───────────────────────────────────────────────
+        'on-primary':              'var(--text-on-primary)',   // text-on-primary
+        'on-dark':                 'var(--text-on-dark)',      // text-on-dark
+        'ds-text-subtle':          'var(--text-subtle)',       // text-ds-text-subtle
         // ── Section backgrounds ───────────────────────────────────────────────────────
         'ds-section-alt':          'var(--section-alt)',
         'ds-section-alt-2':        'var(--section-alt-2)',

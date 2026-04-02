@@ -823,6 +823,230 @@ var(--palette-secondary-70)`}</pre>
   );
 }
 
+/* ── Text Colors Section ─────────────────────────────────── */
+
+const textColorTokens: {
+  token: string;
+  label: string;
+  tailwind: string;
+  description: string;
+  bgToken: string;
+  bgLabel: string;
+  sample: string;
+}[] = [
+  {
+    token: '--foreground',
+    label: 'Foreground',
+    tailwind: 'text-foreground',
+    description: 'Primary body / paragraph text. Theme-resolved main text colour.',
+    bgToken: '--background',
+    bgLabel: 'page bg',
+    sample: 'The quick brown fox jumps over the lazy dog.',
+  },
+  {
+    token: '--muted-foreground',
+    label: 'Muted Foreground',
+    tailwind: 'text-muted-foreground',
+    description: 'Secondary / supplemental text. Labels, captions, helper strings.',
+    bgToken: '--background',
+    bgLabel: 'page bg',
+    sample: 'Secondary text — labels, captions, helper copy.',
+  },
+  {
+    token: '--accent-text',
+    label: 'Accent Text',
+    tailwind: 'text-accent',
+    description: 'Accent/interactive inline text. Resolves to the primary scale.',
+    bgToken: '--background',
+    bgLabel: 'page bg',
+    sample: 'Accent label or interactive text link.',
+  },
+  {
+    token: '--accent-text-2',
+    label: 'Accent Text 2',
+    tailwind: 'text-accent-2',
+    description: 'Second accent tone — used for secondary interactive labels.',
+    bgToken: '--background',
+    bgLabel: 'page bg',
+    sample: 'Second accent — sub-labels and variant text.',
+  },
+  {
+    token: '--text-subtle',
+    label: 'Text Subtle',
+    tailwind: 'text-ds-text-subtle',
+    description: 'Decorative low-emphasis text. Intentionally below WCAG AA — do NOT use for essential content.',
+    bgToken: '--background',
+    bgLabel: 'page bg',
+    sample: 'Decorative hint · timestamp · overline divider',
+  },
+  {
+    token: '--dropdown-text',
+    label: 'Dropdown Text',
+    tailwind: 'text-dropdown-text',
+    description: 'Text inside overlay panels (dropdowns, menus, popovers).',
+    bgToken: '--dropdown-bg',
+    bgLabel: 'dropdown bg',
+    sample: 'Menu item · Dropdown option · Popover content',
+  },
+  {
+    token: '--text-on-primary',
+    label: 'Text on Primary',
+    tailwind: 'text-on-primary',
+    description: 'Text placed ON a primary-coloured fill (filled buttons, accent badges).',
+    bgToken: '--btn-primary-bg',
+    bgLabel: 'primary btn bg',
+    sample: 'Save changes  ·  Confirm  ·  Get started',
+  },
+  {
+    token: '--text-on-dark',
+    label: 'Text on Dark',
+    tailwind: 'text-on-dark',
+    description: 'Text placed ON a dark or gradient surface (gradient buttons, image overlays, social icons).',
+    bgToken: '--gradient-start',
+    bgLabel: 'gradient bg',
+    sample: 'Subscribe  ·  On image  ·  Glass badge',
+  },
+  {
+    token: '--badge-glass-text',
+    label: 'Badge Glass Text',
+    tailwind: 'text-[var(--badge-glass-text)]',
+    description: 'Text inside frosted-glass badges placed on dark images or overlays. References --text-on-dark.',
+    bgToken: '--badge-glass-bg',
+    bgLabel: 'glass badge bg',
+    sample: 'Design  ·  On Image  ·  Category',
+  },
+  {
+    token: '--badge-accent-text',
+    label: 'Badge Accent Text',
+    tailwind: 'text-[var(--badge-accent-text)]',
+    description: 'Text inside solid accent badges. References --text-on-primary.',
+    bgToken: '--badge-accent-bg',
+    bgLabel: 'accent badge bg',
+    sample: 'Case Study  ·  Featured  ·  New',
+  },
+  {
+    token: '--btn-overlay-text',
+    label: 'Button Overlay Text',
+    tailwind: 'text-[var(--btn-overlay-text)]',
+    description: 'Text inside dark-frosted overlay buttons placed on images. References --text-on-dark.',
+    bgToken: '--btn-overlay-bg',
+    bgLabel: 'overlay btn bg',
+    sample: 'Bookmark  ·  Share  ·  Watch',
+  },
+];
+
+function TextColorsSection() {
+  return (
+    <div className="space-y-10">
+      {/* Intro */}
+      <div className="p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] text-sm opacity-70 leading-relaxed">
+        Semantic text-colour tokens — use these instead of raw hex or opacity hacks.
+        Three token families:
+        <strong className="opacity-100 ml-1">on-surface</strong> (foreground, muted, accent),
+        <strong className="opacity-100 ml-1">on-coloured</strong> (on-primary, on-dark), and
+        <strong className="opacity-100 ml-1">low-emphasis</strong> (subtle).
+        All resolve correctly across all three themes.
+      </div>
+
+      {/* Token table */}
+      <div className="overflow-x-auto rounded-xl border border-[var(--card-border)] overflow-hidden">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="border-b border-[var(--card-border)] bg-[var(--card-from-bg)]">
+              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 w-44">Preview</th>
+              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50">Token</th>
+              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 hidden md:table-cell">Tailwind utility</th>
+              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 hidden lg:table-cell">Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            {textColorTokens.map(t => (
+              <tr key={t.token} className="border-t border-[var(--card-border)] hover:bg-[var(--row-hover-bg)] transition-colors">
+                {/* Preview cell — text on its intended background */}
+                <td className="py-3 px-4">
+                  <div
+                    className="rounded-lg px-3 py-2 text-xs font-medium leading-snug"
+                    style={{
+                      backgroundColor: `var(${t.bgToken})`,
+                      color: `var(${t.token})`,
+                      border: '1px solid var(--card-border)',
+                      minHeight: '2.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {t.sample.split(' · ')[0]}
+                  </div>
+                </td>
+                {/* Token name */}
+                <td className="py-3 px-4">
+                  <code className="text-xs font-mono text-[var(--primary)] block">{t.token}</code>
+                  <span className="text-xs opacity-50 block mt-0.5">{t.label}</span>
+                  <span className="text-xs opacity-40 block mt-0.5">bg: {t.bgLabel}</span>
+                </td>
+                {/* Tailwind */}
+                <td className="py-3 px-4 hidden md:table-cell">
+                  <code className="text-xs font-mono opacity-60">{t.tailwind}</code>
+                </td>
+                {/* Description */}
+                <td className="py-3 px-4 hidden lg:table-cell">
+                  <span className="text-xs opacity-60 leading-relaxed">{t.description}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Live demo grid */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">Live Preview — text on intended background</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {textColorTokens.map(t => (
+            <div key={t.token} className="rounded-xl border border-[var(--card-border)] overflow-hidden">
+              {/* Colour preview strip */}
+              <div
+                className="px-4 py-5 text-sm font-medium leading-relaxed"
+                style={{
+                  backgroundColor: `var(${t.bgToken})`,
+                  color: `var(${t.token})`,
+                }}
+              >
+                {t.sample}
+              </div>
+              {/* Token info strip */}
+              <div className="px-4 py-3 bg-[var(--card-from-bg)] border-t border-[var(--card-border)]">
+                <code className="text-[11px] font-mono text-[var(--primary)] opacity-80 block">{t.token}</code>
+                <span className="text-[10px] opacity-40 font-mono block mt-0.5">{t.tailwind}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Usage snippet */}
+      <div className="theme-card-flex p-4 rounded-xl">
+        <p className="text-xs font-mono opacity-50 mb-3">Usage examples</p>
+        <pre className="text-xs opacity-70 whitespace-pre-wrap leading-relaxed">{`/* CSS / inline styles */
+color: var(--foreground);           /* body text */
+color: var(--muted-foreground);     /* secondary text */
+color: var(--text-on-primary);      /* text on primary-bg buttons */
+color: var(--text-on-dark);         /* text on dark/gradient surfaces */
+color: var(--text-subtle);          /* decorative hint text */
+
+/* Tailwind utilities */
+className="text-foreground"          /* body text */
+className="text-muted-foreground"    /* secondary text */
+className="text-on-primary"          /* text on primary bg */
+className="text-on-dark"             /* text on dark bg */
+className="text-ds-text-subtle"      /* decorative hint */
+className="text-accent"              /* accent text */
+className="text-accent-2"            /* second accent */`}</pre>
+      </div>
+    </div>
+  );
+}
+
 function TypographySection() {
   return (
     <div className="space-y-8">
@@ -2527,6 +2751,7 @@ function BackgroundPreviewFrame({
 const allSections: SectionDef[] = [
   // Foundations
   { key: 'colors',          title: 'Color Tokens',             render: () => <ColorsSection /> },
+  { key: 'text-colors',     title: 'Text Colors',              render: () => <TextColorsSection /> },
   { key: 'tonal-palettes',  title: 'Tonal Palettes (Figma)',   render: () => <TonalPalettesSection /> },
   { key: 'typography',      title: 'Typography Scale',          render: () => <TypographySection /> },
   { key: 'spacing',    title: 'Spacing Scale',             render: () => <SpacingSection /> },
@@ -2585,6 +2810,7 @@ function OverviewGrid() {
       items: [
         { key: 'backgrounds',     icon: 'wallpaper',      label: 'Backgrounds' },
         { key: 'colors',           icon: 'palette',        label: 'Colors' },
+        { key: 'text-colors',      icon: 'format_color_text', label: 'Text Colors' },
         { key: 'tonal-palettes',   icon: 'color_lens',     label: 'Tonal Palettes' },
         { key: 'gradients',        icon: 'gradient',       label: 'Gradients' },
         { key: 'motion',      icon: 'animation',      label: 'Motion' },
