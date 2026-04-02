@@ -27,6 +27,8 @@ module.exports = {
         },
         // Background colors
         background: 'var(--background)',
+        // Alias for bg-background — used widely across components
+        theme: 'var(--background)',
         foreground: 'var(--foreground)',
         // Gradient colors used throughout the site
         gradient: {

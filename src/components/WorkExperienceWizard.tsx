@@ -116,7 +116,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
   };
 
   return (
-    <div ref={containerRef} className="py-20 relative overflow-hidden">
+    <div ref={containerRef} className="py-20 relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">

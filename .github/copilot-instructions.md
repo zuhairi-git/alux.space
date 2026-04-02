@@ -26,3 +26,15 @@ This project maintains a single source of truth for all colors and design tokens
 - **Semantic tokens first.** Prefer `--primary`, `--background`, `--card-border`, etc. over raw `--color-violet-600`. Only reach for raw palette tokens when a specific shade is genuinely required and no semantic token covers it.
 - **Theme consistency.** The three themes (`.theme-light`, `.theme-dark`, `.theme-colorful`) all resolve through the same semantic token names. Never add a hardcoded color that only works in one theme.
 - **Per-theme primary families.** Light uses indigo (`--color-indigo-*`), dark uses emerald (`--color-emerald-*`), colorful uses violet (`--color-violet-*`). All resolve through the same `--primary-*` semantic tokens.
+
+## Build & Type Checking
+
+A `next dev` server is typically running during development. **Never run `npm run build` in the main workspace** — it conflicts with the dev server's `.next` cache and file watchers.
+
+| Goal | Command |
+|------|---------|
+| Type-check only (fast, safe) | `npx tsc --noEmit` |
+| Full isolated production build | `node scripts/build-isolated.js` |
+
+- **Always use `npx tsc --noEmit`** to validate TypeScript after edits.
+- **Use `node scripts/build-isolated.js`** only when a production build output must be verified — it clones the repo to `../build-runner` and builds there, leaving the main workspace untouched.
