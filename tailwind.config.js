@@ -84,8 +84,8 @@ module.exports = {
         'dropdown-border-color':   'var(--dropdown-border)',
         'dropdown-text':           'var(--dropdown-text)',
         // ── Text-colour semantic tokens ───────────────────────────────────────────────
-        'on-primary':              'var(--text-on-primary)',   // text-on-primary
-        'on-dark':                 'var(--text-on-dark)',      // text-on-dark
+        'on-primary':              'rgb(var(--text-on-primary-rgb) / <alpha-value>)', // text-on-primary
+        'on-dark':                 'rgb(var(--text-on-dark-rgb) / <alpha-value>)',    // text-on-dark
         'ds-text-subtle':          'var(--text-subtle)',       // text-ds-text-subtle
         // ── Section backgrounds ───────────────────────────────────────────────────────
         'ds-section-alt':          'var(--section-alt)',

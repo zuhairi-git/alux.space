@@ -145,7 +145,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
           />
           
           <motion.p 
-            className="text-center mt-6 text-theme-text/70 max-w-2xl mx-auto text-lg"
+            className="text-center mt-6 text-muted-foreground max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -198,7 +198,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                       <div className="relative z-10">
                         {/* Title */}
                         <motion.h4 
-                          className="text-2xl md:text-3xl font-bold text-theme-text mb-3"
+                          className="text-2xl md:text-3xl font-bold text-foreground mb-3"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
@@ -216,12 +216,12 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                           {position.company && (
                             <div className="flex items-center gap-2">
                               <span className={`material-symbols text-xl ${colors.iconColor}`}>business</span>
-                              <span className="text-theme-text/80 font-medium">{position.company}</span>
+                              <span className="text-foreground font-medium">{position.company}</span>
                             </div>
                           )}
                           <div className="flex items-center gap-2">
                             <span className={`material-symbols text-xl ${colors.iconColor}`}>schedule</span>
-                            <span className="text-theme-text/70">{position.period}</span>
+                            <span className="text-muted-foreground">{position.period}</span>
                           </div>
                         </motion.div>
 
@@ -232,7 +232,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                           transition={{ delay: 0.4 }}
                         >
                           {!position.positions ? (
-                            <p className="text-theme-text/80 text-lg leading-relaxed">
+                            <p className="text-foreground text-lg leading-relaxed">
                               {position.description}
                             </p>
                           ) : (
@@ -246,10 +246,10 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                                   transition={{ delay: 0.5 + idx * 0.1 }}
                                   whileHover={{ x: 5, transition: { duration: 0.2 } }}
                                 >
-                                  <div className="font-semibold text-theme-text mb-1">{subPosition.title}</div>
-                                  <div className="text-sm text-theme-text/70">{subPosition.company}</div>
+                                  <div className="font-semibold text-foreground mb-1">{subPosition.title}</div>
+                                  <div className="text-sm text-muted-foreground">{subPosition.company}</div>
                                   {subPosition.period && (
-                                    <div className="text-xs text-theme-text/60 mt-1">{subPosition.period}</div>
+                                    <div className="text-xs text-muted-foreground mt-1">{subPosition.period}</div>
                                   )}
                                 </motion.div>
                               ))}
@@ -313,7 +313,7 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                         {getStepIcon(index)}
                       </span>
                     </div>
-                    <div className="text-xs text-center text-theme-text/60 max-w-[80px] group-hover:text-theme-text/80 transition-colors">
+                    <div className="text-xs text-center text-muted-foreground max-w-[80px] group-hover:text-foreground transition-colors">
                       {pos.period.split(' - ')[0]}
                     </div>
                   </motion.div>

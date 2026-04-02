@@ -66,7 +66,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
               title={title}
               aria-label={`${t('blog.aria.shareOn')} Twitter`}
             >
-              <div className={`p-2 ${isLight ? 'bg-white/60' : 'bg-theme/30'} backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900`}>
+              <div className={`p-2 bg-[var(--card-from-bg)] backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}>
                 <TwitterIcon size={24} round />
               </div>
             </TwitterShareButton>
@@ -76,7 +76,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
               title={title}
               aria-label={`${t('blog.aria.shareOn')} LinkedIn`}
             >
-              <div className={`p-2 ${isLight ? 'bg-white/60' : 'bg-theme/30'} backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900`}>
+              <div className={`p-2 bg-[var(--card-from-bg)] backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}>
                 <LinkedinIcon size={24} round />
               </div>
             </LinkedinShareButton>
@@ -86,7 +86,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
               quote={title}
               aria-label={`${t('blog.aria.shareOn')} Facebook`}
             >
-              <div className={`p-2 ${isLight ? 'bg-white/60' : 'bg-theme/30'} backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900`}>
+              <div className={`p-2 bg-[var(--card-from-bg)] backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}>
                 <FacebookIcon size={24} round />
               </div>
             </FacebookShareButton>
@@ -106,7 +106,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
           title={title}
           aria-label={`${t('blog.aria.shareOn')} Twitter`}
         >
-          <div className={`p-2 ${isLight ? 'bg-white/60' : 'bg-theme/30'} backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900`}>
+          <div className={`p-2 bg-[var(--card-from-bg)] backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}>
             <TwitterIcon size={28} round />
           </div>
         </TwitterShareButton>
@@ -116,7 +116,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
           title={title}
           aria-label={`${t('blog.aria.shareOn')} LinkedIn`}
         >
-          <div className={`p-2 ${isLight ? 'bg-white/60' : 'bg-theme/30'} backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900`}>
+          <div className={`p-2 bg-[var(--card-from-bg)] backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}>
             <LinkedinIcon size={28} round />
           </div>
         </LinkedinShareButton>
@@ -126,7 +126,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
           quote={title}
           aria-label={`${t('blog.aria.shareOn')} Facebook`}
         >
-          <div className={`p-2 ${isLight ? 'bg-white/60' : 'bg-theme/30'} backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900`}>
+          <div className={`p-2 bg-[var(--card-from-bg)] backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}>
             <FacebookIcon size={28} round />
           </div>
         </FacebookShareButton>

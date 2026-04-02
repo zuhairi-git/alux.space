@@ -76,11 +76,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
       >
         <Link 
           href={`/${locale}/blog`} 
-          className={`group inline-flex items-center gap-2 ${
-            isLight 
-              ? 'text-ds-gray-600 hover:text-primary' 
-              : 'text-ds-gray-400 hover:text-primary'
-          } transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm px-1 py-1`}
+          className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-sm px-1 py-1"
           aria-label={t('blog.aria.backToBlog')}
         >
           <svg 
@@ -116,21 +112,21 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         
         <h1 
           id="blog-title"
-          className={`text-4xl md:text-5xl font-bold mb-4 ${isLight ? 'text-ds-gray-900' : 'text-white'} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm`}
+          className="text-4xl md:text-5xl font-bold mb-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-sm"
           tabIndex={-1}
         >
           {title}
         </h1>
         
         <p 
-          className={`text-xl ${isLight ? 'text-ds-gray-700' : 'text-theme opacity-80'} mb-6`}
+          className="text-xl text-muted-foreground mb-6"
           role="doc-subtitle"
         >
           {description}
         </p>
         
         <div 
-          className={`flex flex-wrap items-center gap-6 ${isLight ? 'text-ds-gray-600' : 'text-theme opacity-70'} mb-8 border-b ${isLight ? 'border-ds-gray-200' : 'border-primary/10'} pb-8`}
+          className="flex flex-wrap items-center gap-6 text-muted-foreground mb-8 border-b border-card-border pb-8"
           role="group"
           aria-label={t('blog.aria.articleMeta')}
         >

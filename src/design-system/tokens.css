@@ -460,8 +460,10 @@
        --text-subtle       decorative / hint text — intentionally below WCAG AA for body text.
                            Do NOT use for essential information; use --muted-foreground instead.
      ─────────────────────────────────────────────────────────────────────── */
-  --text-on-primary:    var(--color-white);         /* text ON primary-bg buttons/badges */
-  --text-on-dark:       var(--color-white);         /* text ON dark / gradient surfaces  */
+  --text-on-primary:        var(--color-white);     /* text ON primary-bg buttons/badges */
+  --text-on-primary-rgb:    255 255 255;            /* Tailwind opacity-modifier channels  */
+  --text-on-dark:           var(--color-white);     /* text ON dark / gradient surfaces    */
+  --text-on-dark-rgb:       255 255 255;            /* Tailwind opacity-modifier channels  */
   --text-subtle:        var(--color-gray-400);      /* decorative low-emphasis (light theme: 3.0:1 — decorative only) */
 }
 

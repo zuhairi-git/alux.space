@@ -131,22 +131,22 @@ const MediaCard: React.FC<MediaCardProps> = ({
                 </div>
               )}
               
-              <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-              <p className="text-white/80 text-sm mb-4">{description}</p>
+              <h3 className="text-xl font-bold text-on-dark mb-2">{title}</h3>
+              <p className="text-on-dark/80 text-sm mb-4">{description}</p>
               
               {date && (
-                <div className="text-xs text-white/60 mt-2">{date}</div>
+                <div className="text-xs text-on-dark/60 mt-2">{date}</div>
               )}
               
               {/* Attribution */}
               {imageAttribution && (
-                <div className="absolute bottom-2 left-4 text-xs text-white/70">
+                <div className="absolute bottom-2 left-4 text-xs text-on-dark/70">
                   Photo by{' '}
                   <a
                     href={imageAttribution.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white"
+                    className="hover:text-on-dark"
                   >
                     {imageAttribution.name}
                   </a>
@@ -155,7 +155,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
                     href="https://unsplash.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white"
+                    className="hover:text-on-dark"
                   >
                     Unsplash
                   </a>

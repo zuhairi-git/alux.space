@@ -3,7 +3,6 @@ import Navigation from '@/components/Navigation';
 import BlogPostHeader from '@/components/blog/BlogPostHeader';
 import BlogPostClient from '@/components/blog/BlogPostClient';
 import BlogContent from '@/components/blog/BlogContent';
-import { SurfaceCard } from '@/design-system';
 import { posts } from '../../../blog/posts/data';
 import BlogPostBackground from '@/components/blog/BlogPostBackground';
 import Image from 'next/image';
@@ -120,7 +119,7 @@ export default async function BlogPost({
     console.error(`Post ${slug} is missing content property`);
   // Fallback to prevent rendering errors
     return (
-      <main className="min-h-screen bg-theme text-theme">
+      <main className="min-h-screen bg-background text-foreground">
         <Navigation />
         <div className="pt-32 pb-16 container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-4">Content Not Available</h1>
@@ -193,7 +192,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
   const content = localeContent.content || '';
 
   return (
-    <main className="min-h-screen bg-theme text-theme overflow-hidden">
+    <main className="min-h-screen bg-background text-foreground overflow-hidden">
       <Navigation />
 
       <BlogPostBackground />
@@ -221,28 +220,82 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
 
             <BlogContent content={content} />
 
-            <div className="mt-16">
-              <h3 className="text-2xl font-bold mb-6 text-primary">{getAboutAuthorText(locale)}</h3>
-              <SurfaceCard variant="primary">
-                <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                  <div className="w-24 h-24 relative rounded-full overflow-hidden shadow-[0_0_20px_var(--primary-glow)]">
-                    <Image
-                      src="/images/me/ali.png"
-                      alt={post.author}
-                      fill
-                      className="object-cover"
-                      sizes="96px"
-                    />
+            {/* ── About the Author ─────────────────────────────────── */}
+            <section className="mt-16 pt-10 border-t border-[var(--card-border)]" aria-labelledby="author-heading">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                {getAboutAuthorText(locale)}
+              </p>
+
+              <div className="relative rounded-2xl overflow-hidden border border-[var(--card-border)] bg-[var(--card-from-bg)] p-6 md:p-8">
+                {/* Decorative gradient accent */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)] to-transparent opacity-60" aria-hidden="true" />
+                <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-[var(--primary-glow)] blur-3xl opacity-10 pointer-events-none" aria-hidden="true" />
+
+                <div className="relative flex flex-col sm:flex-row gap-6 items-start">
+                  {/* Avatar */}
+                  <div className="shrink-0">
+                    <div className="w-20 h-20 md:w-24 md:h-24 relative rounded-2xl overflow-hidden ring-2 ring-[var(--primary)]/20 shadow-[0_0_24px_var(--primary-glow)]">
+                      <Image
+                        src="/images/me/ali.png"
+                        alt={post.author}
+                        fill
+                        className="object-cover"
+                        sizes="96px"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xl font-semibold mb-2">{post.author}</h4>
-                    <p className="opacity-80">
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <h2 id="author-heading" className="text-xl font-bold text-foreground mb-0.5">
+                      {post.author}
+                    </h2>
+                    <p className="text-sm text-primary font-medium mb-3">
+                      {locale === 'fi' ? 'Tuoteomistaja & Design-johtaja' : 'Product Owner & Design Leader'}
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed mb-5">
                       {getAuthorDescription(locale)}
                     </p>
+
+                    {/* Skill tags */}
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {['UX Design', 'Agile', 'Product Strategy', 'Creative Innovation'].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 rounded-full text-xs font-medium bg-[var(--primary)]/10 text-primary border border-[var(--primary)]/15"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Social links */}
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="https://www.linkedin.com/in/ali-zuhairi/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold border border-[var(--card-border)] text-muted-foreground hover:text-primary hover:border-[var(--primary)]/40 transition-colors duration-200"
+                        aria-label="LinkedIn profile"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                      </a>
+                      <a
+                        href="https://github.com/alux444"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold border border-[var(--card-border)] text-muted-foreground hover:text-primary hover:border-[var(--primary)]/40 transition-colors duration-200"
+                        aria-label="GitHub profile"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        GitHub
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </SurfaceCard>
-            </div>
+              </div>
+            </section>
           </BlogPostClient>
         </div>
       </article>

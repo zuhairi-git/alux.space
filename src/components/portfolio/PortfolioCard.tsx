@@ -156,11 +156,11 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   <Badge variant="glass" className="mb-3">
                     {getType()}
                   </Badge>
-                  <h3 className="text-2xl font-bold text-white leading-tight mb-2">{getTitle()}</h3>
-                  <p className="text-white/70 text-sm line-clamp-2 leading-relaxed">{getDesc()}</p>
+                  <h3 className="text-2xl font-bold text-on-dark leading-tight mb-2">{getTitle()}</h3>
+                  <p className="text-on-dark/70 text-sm line-clamp-2 leading-relaxed">{getDesc()}</p>
                 </div>
                 {/* Footer row: status + explore */}
-                <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                <div className="flex items-center justify-between pt-3 border-t border-on-dark/10">
                   <Badge
                     variant={getStatusVariant()}
                     size="sm"
@@ -173,7 +173,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                     )}
                     {getStatus()}
                   </Badge>
-                  <div className="flex items-center gap-2 text-white/60 text-xs font-medium group-hover:text-white transition-colors duration-200">
+                  <div className="flex items-center gap-2 text-on-dark/60 text-xs font-medium group-hover:text-on-dark transition-colors duration-200">
                     <span>{locale === 'fi' ? 'Tutustu' : 'Explore project'}</span>
                     <span className="material-symbols text-sm transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
                   </div>

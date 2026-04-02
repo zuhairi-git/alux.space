@@ -183,27 +183,27 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
 
               <h3 
                 id={`blog-title-${post.slug}`}
-                className="text-xl md:text-2xl font-bold text-white mb-3 leading-snug"
+                className="text-xl md:text-2xl font-bold text-on-dark mb-3 leading-snug"
               >
                 {post.title}
               </h3>
               <p 
                 id={`blog-desc-${post.slug}`}
-                className="text-white/75 text-sm leading-relaxed line-clamp-3"
+                className="text-on-dark/75 text-sm leading-relaxed line-clamp-3"
               >
                 {post.description}
               </p>
 
-              <div className="flex justify-between items-center text-sm mt-5 pt-4 border-t border-white/15">
+              <div className="flex justify-between items-center text-sm mt-5 pt-4 border-t border-on-dark/15">
                 <time 
                   dateTime={isoDate}
-                  className="text-white/60"
+                  className="text-on-dark/60"
                   aria-label={`Published on ${displayDate}`}
                 >
                   {displayDate}
                 </time>
                 <span 
-                  className="flex items-center text-white/60"
+                  className="flex items-center text-on-dark/60"
                   aria-label={`Reading time: ${post.readTime}`}
                 >
                   <svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">

@@ -39,8 +39,8 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                                     <span className="material-symbols text-2xl">account_tree</span>
                                 </div>
                                 <div>
-                                    <h3 className={`text-lg sm:text-xl font-bold ${isLight ? 'text-ds-gray-900' : 'text-white'}`}>App Architecture</h3>
-                                    <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>System Workflow Diagram</p>
+                                    <h3 className="text-lg sm:text-xl font-bold text-foreground">App Architecture</h3>
+                                    <p className="text-xs sm:text-sm font-medium text-muted-foreground">System Workflow Diagram</p>
                                 </div>
                             </div>
                             <div className="flex items-center">
@@ -91,8 +91,8 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <span className="material-symbols text-2xl">{icon}</span>
             </div>
             <div>
-                <h3 className={`font-bold text-[15px] mb-1.5 ${isLight ? 'text-ds-gray-900' : 'text-white'}`}>{title}</h3>
-                <p className={`text-[13px] leading-relaxed ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>{desc}</p>
+                <h3 className="font-bold text-[15px] mb-1.5 text-foreground">{title}</h3>
+                <p className="text-[13px] leading-relaxed text-muted-foreground">{desc}</p>
             </div>
         </motion.div>
     );

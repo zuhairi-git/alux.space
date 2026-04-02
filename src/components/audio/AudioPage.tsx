@@ -60,10 +60,10 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
   const getTextStyles = () => {
     if (isLight) {
       return {
-        title: 'text-ds-gray-900',
-        subtitle: 'text-ds-gray-600',
-        text: 'text-ds-gray-700',
-        muted: 'text-ds-gray-500',
+        title: 'text-foreground',
+        subtitle: 'text-muted-foreground',
+        text: 'text-foreground',
+        muted: 'text-muted-foreground',
         accent: 'text-accent'
       };
     } else if (isColorful) {
@@ -76,10 +76,10 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
       };
     } else {
       return {
-        title: 'text-white',
-        subtitle: 'text-ds-gray-300',
-        text: 'text-ds-gray-300',
-        muted: 'text-ds-gray-400',
+        title: 'text-foreground',
+        subtitle: 'text-muted-foreground',
+        text: 'text-foreground',
+        muted: 'text-muted-foreground',
         accent: 'text-accent'
       };
     }

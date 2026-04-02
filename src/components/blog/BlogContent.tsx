@@ -137,7 +137,7 @@ function formatRegularContent(content: string) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delaySeconds.xs }}
-            className="text-3xl font-bold mt-12 mb-6 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            className="text-3xl font-bold mt-12 mb-6 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-sm"
             tabIndex={-1}
           >
             {headingText}
@@ -156,7 +156,7 @@ function formatRegularContent(content: string) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delaySeconds.xs }}
-            className="text-2xl font-bold mt-10 mb-5 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            className="text-2xl font-bold mt-10 mb-5 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-sm"
             tabIndex={-1}
           >
             {headingText}
@@ -175,7 +175,7 @@ function formatRegularContent(content: string) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delaySeconds.xs }}
-            className="text-xl font-semibold mt-8 mb-4 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            className="text-xl font-semibold mt-8 mb-4 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-sm"
             tabIndex={-1}
           >
             {headingText}
@@ -194,7 +194,7 @@ function formatRegularContent(content: string) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delaySeconds.xs }}
-            className="text-lg font-semibold mt-6 mb-3 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm"
+            className="text-lg font-semibold mt-6 mb-3 text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-sm"
             tabIndex={-1}
           >
             {headingText}
@@ -216,7 +216,7 @@ function formatRegularContent(content: string) {
           className="list-disc pl-6 mb-6 space-y-2"
         >
           {items.map((item, i) => (
-            <li key={i} className="text-theme">
+            <li key={i} className="text-foreground">
               {item.replace(/^[*\-] /, '')}
             </li>
           ))}
@@ -237,7 +237,7 @@ function formatRegularContent(content: string) {
           className="list-decimal pl-6 mb-6 space-y-2"
         >
           {items.map((item, i) => (
-            <li key={i} className="text-theme">
+            <li key={i} className="text-foreground">
               {item.replace(/^\d+\. /, '')}
             </li>
           ))}
@@ -256,7 +256,7 @@ function formatRegularContent(content: string) {
           className="mb-6"
         >
           <strong className="text-primary">{trimmedBlock.split('\n')[0]}</strong>
-          <p className="text-theme mt-2">{trimmedBlock.split('\n')[1]}</p>
+          <p className="text-foreground mt-2">{trimmedBlock.split('\n')[1]}</p>
         </motion.div>
       );
     }
@@ -276,7 +276,7 @@ function formatRegularContent(content: string) {
           aria-label={`Code block in ${language}`}
         >
           <pre 
-            className="bg-theme/30 backdrop-blur-sm p-4 rounded-lg overflow-x-auto text-sm text-theme border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900"
+            className="bg-[var(--card-from-bg)] backdrop-blur-sm p-4 rounded-lg overflow-x-auto text-sm text-foreground border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             tabIndex={0}
             aria-label={`Code snippet in ${language}`}
           >
@@ -329,7 +329,7 @@ function formatRegularContent(content: string) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delaySeconds.xs }}
-          className="mb-6 text-lg text-theme leading-relaxed"
+          className="mb-6 text-lg text-foreground leading-relaxed"
         >
           {parts.map((part, i) => {
             if (part.startsWith('*') && part.endsWith('*')) {
@@ -350,7 +350,7 @@ function formatRegularContent(content: string) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delaySeconds.xs }}
-          className="mb-6 text-lg text-theme leading-relaxed"
+          className="mb-6 text-lg text-foreground leading-relaxed"
         >
           {parts.map((part, i) => {
             if (part.startsWith('**') && part.endsWith('**')) {
@@ -369,7 +369,7 @@ function formatRegularContent(content: string) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: delaySeconds.xs }}
-        className="mb-6 text-lg text-theme leading-relaxed"
+        className="mb-6 text-lg text-foreground leading-relaxed"
       >
         {trimmedBlock}
       </motion.p>
@@ -415,7 +415,7 @@ function processIntroduction(intro: string) {
             transition={{ delay: delaySeconds.md }}
             className="max-w-3xl mx-auto mb-8 text-center"
           >
-            <p className="text-xl text-theme leading-relaxed italic">
+            <p className="text-xl text-muted-foreground leading-relaxed italic">
               {quoteLine}
             </p>
           </motion.div>

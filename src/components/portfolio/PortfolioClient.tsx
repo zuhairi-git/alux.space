@@ -141,7 +141,7 @@ export default function PortfolioClient({ items }: Props) {
 
 
   return (
-    <main className="min-h-screen bg-theme text-theme">
+    <main className="min-h-screen bg-background text-foreground">
       <Navigation />
 
       {/* Hero Section */}
