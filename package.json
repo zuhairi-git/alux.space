@@ -9,7 +9,7 @@
     "dev": "next dev --turbopack",
     "build": "next build && node scripts/seo-build.js",
     "postbuild": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"" ,
-    "build:clean": "Remove-Item -Recurse -Force .next-prod -ErrorAction SilentlyContinue; echo done",
+    "build:clean": "Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue; echo done",
     "clean:out-cache": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"",
     "start": "next start",
     "lint": "next lint",
