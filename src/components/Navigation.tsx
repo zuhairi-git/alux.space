@@ -290,10 +290,11 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className={`
-              absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-2xl shadow-black/30 backdrop-blur-2xl overflow-hidden isolate
-              bg-[var(--dropdown-bg)] border-[var(--card-border)]
-            `}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2 rounded-2xl border shadow-2xl shadow-black/40 bg-[var(--dropdown-bg)] border-[var(--dropdown-border)]"
+            style={{
+              backdropFilter: 'blur(80px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(80px) saturate(180%)',
+            }}
           >
             {/* Overview items Ã¢â‚¬â€ no category */}
             {item.children.filter((c) => !c.category).map((child, idx) => (

@@ -571,11 +571,11 @@ const registryCategories: { key: ComponentEntry['category']; label: string }[] =
 /* -- Individual section renderers ----------------------- */
 
 function StateBadgesShowcase() {
-  const states = [
-    { key: 'success', label: 'Success' },
-    { key: 'warning', label: 'Warning' },
-    { key: 'error',   label: 'Error'   },
-    { key: 'info',    label: 'Info'    },
+  const states: { key: 'success' | 'warning' | 'error' | 'info'; label: string; dotLabel: string }[] = [
+    { key: 'success', label: 'Success', dotLabel: 'Active'   },
+    { key: 'warning', label: 'Warning', dotLabel: 'Pending'  },
+    { key: 'error',   label: 'Error',   dotLabel: 'Critical' },
+    { key: 'info',    label: 'Info',    dotLabel: 'New'      },
   ];
   return (
     <div className="overflow-x-auto rounded-xl border border-[var(--card-border)] overflow-hidden">
@@ -585,7 +585,7 @@ function StateBadgesShowcase() {
             <th className="text-left font-mono font-normal opacity-40 py-3 pr-4 pl-4 w-20" />
             <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Filled</th>
             <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Outline</th>
-            <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Soft</th>
+            <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">With dot</th>
             <th className="text-left font-mono font-normal opacity-40 py-3 pl-4 pr-4">Token stem</th>
           </tr>
         </thead>
@@ -593,41 +593,26 @@ function StateBadgesShowcase() {
           {states.map(s => (
             <tr key={s.key} className="border-t border-[var(--card-border)]">
               <td className="py-3 pr-4 pl-4 opacity-60 font-medium">{s.label}</td>
+              {/* Filled — uses exact Badge component, identical to real usage */}
+              <td className="py-3 px-4 text-center">
+                <Badge variant={s.key}>{s.label}</Badge>
+              </td>
+              {/* Outline — border-only, transparent bg */}
               <td className="py-3 px-4 text-center">
                 <span
-                  className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
+                  className="inline-flex items-center px-2.5 py-1 rounded-full font-medium border text-xs"
                   style={{
-                    color: `var(--color-${s.key})`,
-                    backgroundColor: `var(--color-${s.key}-bg)`,
-                    borderColor: `var(--color-${s.key}-border)`,
+                    color:           `var(--color-${s.key})`,
+                    backgroundColor: `transparent`,
+                    borderColor:     `var(--color-${s.key}-border)`,
                   }}
                 >
                   {s.label}
                 </span>
               </td>
+              {/* With animated dot — uses Badge component with dot prop */}
               <td className="py-3 px-4 text-center">
-                <span
-                  className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
-                  style={{
-                    color: `var(--color-${s.key})`,
-                    backgroundColor: `var(--background)`,
-                    borderColor: `var(--color-${s.key}-border)`,
-                  }}
-                >
-                  {s.label}
-                </span>
-              </td>
-              <td className="py-3 px-4 text-center">
-                <span
-                  className="inline-flex items-center px-3 py-1 rounded-full font-medium border"
-                  style={{
-                    color: `var(--color-${s.key}-soft)`,
-                    backgroundColor: `var(--color-${s.key}-soft-bg)`,
-                    borderColor: `var(--color-${s.key}-border)`,
-                  }}
-                >
-                  {s.label}
-                </span>
+                <Badge variant={s.key} dot>{s.dotLabel}</Badge>
               </td>
               <td className="py-3 pl-4 opacity-35 font-mono text-[10px]">--color-{s.key}-*</td>
             </tr>

@@ -143,26 +143,14 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             onClick={() => trackEvent('portfolio_card_click', 'portfolio', `overlay_${getTitle()}_${getType()}`)}
           >
             <div className="relative h-full flex flex-col justify-between p-6 z-10">
-              {/* Top: Badges */}
-              <div className="flex items-start justify-between">
+              {/* Top: Category badge */}
+              <div className="flex items-start">
                 <div className="flex items-center gap-2">
                   {item.category && getCategoryBadge()}
                 </div>
-                <Badge
-                  variant={getStatusVariant()}
-                  size="sm"
-                  dot={item.status.type === 'in-progress'}
-                  animateDot={item.status.type === 'in-progress'}
-                  className="uppercase tracking-widest shadow-sm"
-                >
-                  {item.status.type === 'accomplished' && (
-                    <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
-                  )}
-                  {getStatus()}
-                </Badge>
               </div>
 
-              {/* Bottom: Content */}
+              {/* Bottom: Content + Status */}
               <div>
                 <div className="mb-3">
                   <Badge variant="glass" className="mb-3">
@@ -171,11 +159,24 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   <h3 className="text-2xl font-bold text-white leading-tight mb-2">{getTitle()}</h3>
                   <p className="text-white/70 text-sm line-clamp-2 leading-relaxed">{getDesc()}</p>
                 </div>
-                
-                {/* Explore indicator */}
-                <div className="flex items-center gap-2 text-white/50 text-xs font-medium group-hover:text-white/80 transition-colors">
-                  <span>{locale === 'fi' ? 'Tutustu' : 'Explore project'}</span>
-                  <span className="material-symbols text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                {/* Footer row: status + explore */}
+                <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                  <Badge
+                    variant={getStatusVariant()}
+                    size="sm"
+                    dot={item.status.type === 'in-progress'}
+                    animateDot={item.status.type === 'in-progress'}
+                    className="uppercase tracking-widest"
+                  >
+                    {item.status.type === 'accomplished' && (
+                      <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
+                    )}
+                    {getStatus()}
+                  </Badge>
+                  <div className="flex items-center gap-2 text-white/50 text-xs font-medium group-hover:text-white/80 transition-colors">
+                    <span>{locale === 'fi' ? 'Tutustu' : 'Explore project'}</span>
+                    <span className="material-symbols text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -220,22 +221,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             
             {/* Gradient overlay on image */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            
-            {/* Status badge - top right */}
-            <div className="absolute top-3 right-3 z-10">
-              <Badge
-                variant={getStatusVariant()}
-                size="sm"
-                dot={item.status.type === 'in-progress'}
-                animateDot={item.status.type === 'in-progress'}
-                className="uppercase tracking-widest shadow-sm"
-              >
-                {item.status.type === 'accomplished' && (
-                  <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
-                )}
-                {getStatus()}
-              </Badge>
-            </div>
           </div>
           
           {/* Content Section */}
@@ -252,18 +237,30 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
             <p className="opacity-60 text-sm line-clamp-2 leading-relaxed mb-4">{getDesc()}</p>
 
             {/* Footer */}
-            <div className="flex items-center justify-between mt-auto pt-4 border-t border-current/5">
-              {/* Tags */}
-              {cardTags.length > 0 ? (
-                <div className="flex flex-wrap gap-1.5">
-                  {cardTags.map((tag, idx) => (
+            <div className="flex items-center justify-between mt-auto pt-4 border-t border-[var(--card-border)]">
+              {/* Tags or status badge */}
+              <div className="flex flex-wrap items-center gap-1.5">
+                {cardTags.length > 0 ? (
+                  cardTags.map((tag, idx) => (
                     <Badge key={idx} variant="info" size="sm">{tag}</Badge>
-                  ))}
-                </div>
-              ) : <div />}
-              
-              {/* Arrow */}
-              <span className="material-symbols text-lg opacity-30 group-hover:opacity-70 transition-all group-hover:translate-x-0.5">arrow_forward</span>
+                  ))
+                ) : null}
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge
+                  variant={getStatusVariant()}
+                  size="sm"
+                  dot={item.status.type === 'in-progress'}
+                  animateDot={item.status.type === 'in-progress'}
+                  className="uppercase tracking-widest"
+                >
+                  {item.status.type === 'accomplished' && (
+                    <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
+                  )}
+                  {getStatus()}
+                </Badge>
+                <span className="material-symbols text-lg opacity-30 group-hover:opacity-70 transition-all group-hover:translate-x-0.5">arrow_forward</span>
+              </div>
             </div>
           </div>
         </Link>
