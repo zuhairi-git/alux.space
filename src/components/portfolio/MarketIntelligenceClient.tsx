@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
-import AppArchitectureModal from './AppArchitectureModal';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
@@ -40,8 +39,6 @@ function PulseDot({ color = 'bg-[var(--primary)]' }: { color?: string }) {
 }
 
 export default function MarketIntelligenceClient() {
-    const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false);
-
     useEffect(() => {
         const link = document.createElement('link');
         link.href = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap';
@@ -282,8 +279,8 @@ export default function MarketIntelligenceClient() {
     const pageVariants = {
         initial: (dir: number) => ({
             opacity: 0,
-            x: dir * 60,
-            scale: 0.98
+            x: dir * 30,
+            scale: 0.99
         }),
         animate: {
             opacity: 1,
@@ -297,8 +294,8 @@ export default function MarketIntelligenceClient() {
         },
         exit: (dir: number) => ({
             opacity: 0,
-            x: dir * -40,
-            scale: 0.98,
+            x: dir * -20,
+            scale: 0.99,
             transition: t.snap
         })
     };
@@ -349,12 +346,6 @@ export default function MarketIntelligenceClient() {
                                     },
                                 },
                                 {
-                                    label: locale === 'fi' ? 'Sovelluksen arkkitehtuuri & työnkulku' : 'Architect & Workflow',
-                                    icon: 'account_tree',
-                                    variant: 'secondary',
-                                    onClick: () => setIsWorkflowModalOpen(true),
-                                },
-                                {
                                     label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                                     icon: 'design_services',
                                     variant: 'secondary',
@@ -372,8 +363,8 @@ export default function MarketIntelligenceClient() {
                         {/* ═══ INTRO ═══ */}
                         <motion.div
                             className="text-center mb-20 relative pt-12"
-                            initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
-                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ type: "spring", stiffness: 260, damping: 28, delay: delaySeconds.xs }}
                         >
                             <p className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-[var(--muted-foreground)]">
@@ -391,11 +382,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((card, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, y: 28, scale: 0.96, filter: 'blur(4px)' }}
-                                            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                                            initial={{ opacity: 0, y: 14, scale: 0.98 }}
+                                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                             viewport={{ once: true, margin: '-40px' }}
-                                            transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: i * 0.12 }}
-                                            whileHover={{ y: -6, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
+                                            transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: i * 0.06 }}
+                                            whileHover={{ y: -3, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -420,11 +411,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((text, index) => (
                                         <motion.div
                                             key={index}
-                                            initial={{ opacity: 0, scale: 0.96, y: 15 }}
+                                            initial={{ opacity: 0, scale: 0.98, y: 8 }}
                                             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                            viewport={{ once: true, margin: '-20px' }}
-                                            transition={{ type: 'spring', stiffness: 300, damping: 26, delay: index * 0.06 }}
-                                            whileHover={{ y: -4 }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 300, damping: 26, delay: index * 0.04 }}
+                                            whileHover={{ y: -2 }}
                                             className={`group p-6 rounded-3xl bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${index === 4 ? 'sm:col-span-2 lg:col-span-2' : ''}`}
                                         >
                                             {/* Large background number */}
@@ -463,11 +454,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, scale: 0.98, y: 15 }}
+                                            initial={{ opacity: 0, scale: 0.99, y: 8 }}
                                             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                            viewport={{ once: true, margin: "-40px" }}
-                                            transition={{ type: 'spring', stiffness: 320, damping: 28, delay: i * 0.08 }}
-                                            whileHover={{ y: -4 }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 28, delay: i * 0.04 }}
+                                            whileHover={{ y: -2 }}
                                             className={`group p-6 md:p-8 rounded-3xl bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col ${i === 4 ? 'md:col-span-2' : ''}`}
                                         >
                                             <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-full blur-3xl group-hover:bg-[var(--primary)]/10 transition-colors duration-500 pointer-events-none" />
@@ -527,11 +518,11 @@ export default function MarketIntelligenceClient() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={`group p-6 rounded-2xl transition-all duration-300 border ${proto.borderColor} bg-gradient-to-br ${proto.gradient} flex flex-col hover:shadow-lg`}
-                                            initial={{ opacity: 0, y: 14 }}
+                                            initial={{ opacity: 0, y: 8 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
-                                            transition={{ delay: index * 0.15 }}
-                                            whileHover={{ y: -2 }}
+                                            transition={{ delay: index * 0.07 }}
+                                            whileHover={{ y: -1 }}
                                         >
                                             <div className="flex items-start justify-between mb-3">
                                                 <div className={`h-10 w-10 flex items-center justify-center rounded-2xl ${proto.iconBg}`}>
@@ -554,8 +545,8 @@ export default function MarketIntelligenceClient() {
                             <CaseStudyItem>
                                 <motion.div
                                     className="mt-20"
-                                    initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
-                                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                    initial={{ opacity: 0, y: 14 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ type: 'spring', stiffness: 260, damping: 28 }}
                                 >
@@ -573,11 +564,11 @@ export default function MarketIntelligenceClient() {
 
                                         {/* Feature 1 — Conversational AI Search */}
                                         <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
+                                            initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0 }}
-                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -608,11 +599,11 @@ export default function MarketIntelligenceClient() {
 
                                         {/* Feature 2 — Real-Time Sentiment Analysis */}
                                         <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
+                                            initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
-                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.08 }}
-                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.04 }}
+                                            whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -652,11 +643,11 @@ export default function MarketIntelligenceClient() {
 
                                         {/* Feature 3 — Smart Event Alerts */}
                                         <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
+                                            initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
-                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.14 }}
-                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.07 }}
+                                            whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -685,11 +676,11 @@ export default function MarketIntelligenceClient() {
 
                                         {/* Feature 4 — Automated Briefings */}
                                         <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
+                                            initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
-                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.20 }}
-                                            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: 0.10 }}
+                                            whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -733,11 +724,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((platform, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                                            initial={{ opacity: 0, y: 10, scale: 0.99 }}
                                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                            viewport={{ once: true, margin: '-30px' }}
-                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.1 }}
-                                            whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.05 }}
+                                            whileHover={{ y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-md"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -761,11 +752,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((flow, index) => (
                                         <motion.div
                                             key={index}
-                                            initial={{ opacity: 0, scale: 0.94 }}
+                                            initial={{ opacity: 0, scale: 0.97 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true, margin: '-20px' }}
-                                            transition={{ type: 'spring', stiffness: 360, damping: 26, delay: index * 0.06 }}
-                                            whileHover={{ y: -3, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 360, damping: 26, delay: index * 0.03 }}
+                                            whileHover={{ y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 shadow-sm hover:shadow-md"
                                         >
                                             <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
@@ -788,11 +779,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((item, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                                            initial={{ opacity: 0, y: 10, scale: 0.99 }}
                                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                            viewport={{ once: true, margin: '-30px' }}
-                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.08 }}
-                                            whileHover={{ y: -4, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 26, delay: i * 0.04 }}
+                                            whileHover={{ y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -816,11 +807,11 @@ export default function MarketIntelligenceClient() {
                                     ].map((metric, index) => (
                                         <motion.div
                                             key={index}
-                                            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                                            initial={{ opacity: 0, y: 12, scale: 0.98 }}
                                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                            viewport={{ once: true, margin: '-30px' }}
-                                            transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: index * 0.1 }}
-                                            whileHover={{ y: -6, scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
+                                            viewport={{ once: true }}
+                                            transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.8, delay: index * 0.05 }}
+                                            whileHover={{ y: -3, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
                                             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -847,12 +838,6 @@ export default function MarketIntelligenceClient() {
                     </div>
                 </main>
 
-                {/* Workflow Diagram Modal */}
-                <AppArchitectureModal
-                    isOpen={isWorkflowModalOpen}
-                    onClose={() => setIsWorkflowModalOpen(false)}
-                    theme={theme}
-                />
             </motion.div>
         </AnimatePresence>
     );
