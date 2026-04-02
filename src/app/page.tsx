@@ -18,6 +18,7 @@ import { filterEpisodesByLanguage } from '@/podcast/utils/languageUtils';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 import Icon from '@/components/ui/Icon';
+import TestimonialCarousel from '@/components/TestimonialCarousel';
 
 // A clean, readable skill card component
 const InteractiveSkillCard = ({ 
@@ -230,24 +231,32 @@ export default function Home() {
         {
           text: "Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I've worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.",
           name: "Fahad M",
-          position: "IT Contractor | Travelodge Hotels Limited"
+          position: "IT Contractor | Travelodge Hotels Limited",
+          initials: "FM",
+          highlights: ["creative product designer", "impressive yet simple", "solve complex problem with simple solutions", "long lasting impression"]
         },
         {
           text: "Ali is an exceptional and experienced UI/UX designer with more than ten years of professional experience specialising in product design for technology companies. Ali believes that design is not about deliverables and beautiful pixels but about solving problems and achieving business and user goals. As a product designer, Ali focuses on usability, user experience, and user research in his designs. He has worked with small and large teams as well as a freelancer and enjoys the challenge of solving user problems. He always delivers on time and on budget.",
           name: "Constantin Buda",
-          position: "CMO at Vidalico Digital | Hubspot Agency Partner | SicTic Member"
+          position: "CMO at Vidalico Digital | Hubspot Agency Partner | SicTic Member",
+          initials: "CB",
+          highlights: ["exceptional and experienced", "more than ten years", "solving problems and achieving business and user goals", "delivers on time and on budget"]
         }
       ],
       fi: [
         {
           text: "Ali on luova tuotesuunnittelija. Löydät paljon taiteilijoita, joilla on liian kiireisiä taiteen muotoja. Mutta Ali on edelläkävijä vaikuttavissa mutta yksinkertaisissa ja merkityksellisissä tuotesuunnitteluissa. Hänellä on tämä ovela kyky ratkaista monimutkaisia ongelmia yksinkertaisilla ratkaisuilla käyttäen suunnittelutaitojaan. Hänen taiteensa puhuu visuaalisesti, tekee työn täydellisesti ja jättää pitkäaikaisen vaikutelman. Olen työskennellyt Alin kanssa aiemmin ja se oli todella hauska kokemus. Haluaisin tehdä sen uudestaan ja suosittelen myös Alia.",
           name: "Fahad M",
-          position: "IT-urakoitsija | Travelodge Hotels Limited"
+          position: "IT-urakoitsija | Travelodge Hotels Limited",
+          initials: "FM",
+          highlights: ["luova tuotesuunnittelija", "vaikuttavissa mutta yksinkertaisissa", "ratkaista monimutkaisia ongelmia yksinkertaisilla ratkaisuilla", "pitkäaikaisen vaikutelman"]
         },
         {
           text: "Ali on poikkeuksellinen ja kokenut UI/UX-suunnittelija, jolla on yli kymmenen vuoden ammattikokemus erikoistuen tuotesuunnitteluun teknologiayrityksissä. Ali uskoo, että suunnittelu ei ole kyse toimitettavista ja kauniista pikseleistä, vaan ongelmien ratkaisemisesta ja liiketoiminnan ja käyttäjien tavoitteiden saavuttamisesta. Tuotesuunnittelijana Ali keskittyy käytettävyyteen, käyttäjäkokemukseen ja käyttäjätutkimukseen suunnittelussaan. Hän on työskennellyt pienissä ja suurissa tiimeissä sekä freelancerina ja nauttii käyttäjäongelmien ratkaisun haasteesta. Hän toimittaa aina ajallaan ja budjetissa.",
           name: "Constantin Buda",
-          position: "CMO Vidalico Digitalissa | Hubspot Agency Partner | SicTic-jäsen"
+          position: "CMO Vidalico Digitalissa | Hubspot Agency Partner | SicTic-jäsen",
+          initials: "CB",
+          highlights: ["poikkeuksellinen ja kokenut", "yli kymmenen vuoden ammattikokemus", "ongelmien ratkaisemisesta ja liiketoiminnan ja käyttäjien tavoitteiden saavuttamisesta", "toimittaa aina ajallaan ja budjetissa"]
         }
       ]
     };
@@ -672,83 +681,47 @@ export default function Home() {
         id="testimonials"
       >
         <SectionAccents />
-        <div className="container mx-auto px-4 max-w-6xl relative z-10">
+        <div className="container mx-auto px-4 max-w-5xl relative z-10">
+          {/* Section header */}
           <div className="text-center mb-16">
-            <div className="bg-primary/10 p-4 mb-5 rounded-full inline-block">
-              <Icon name="format_quote" size="lg" />
-            </div>
-            <motion.h3 
-              className="text-3xl text-center md:text-4xl font-bold"
-              animate={{}}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--card-border)]"
+            >
+              <Icon name="format_quote" size="xl" className="text-[var(--primary)]" />
+              <span className="text-sm font-medium text-[var(--accent-text)]">
+                {locale === 'fi' ? 'SUOSITTELUT' : 'TESTIMONIALS'}
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-bold"
             >
               {t('home.testimonials.title')}
-            </motion.h3>
-            
+            </motion.h2>
+
             <motion.div
               className="h-1 w-0 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] mx-auto mt-6"
-              initial={{ width: "0%" }}
-              whileInView={{ width: "80px" }}
+              initial={{ width: '0%' }}
+              whileInView={{ width: '80px' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             />
           </div>
-          
-          <div className="space-y-16 max-w-5xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="theme-card relative overflow-hidden"
-              >                <div className="theme-card-content p-8 md:p-10">                  {/* Quote icon */}
-                  <div className="absolute -top-16 -left-16 text-8xl opacity-20 text-primary">
-                    <Icon name="format_quote" className="" />
-                  </div>
-                    {/* Main testimonial content */}
-                  <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
-                    {/* Avatar */}
-                    <div className="flex-shrink-0 md:ml-0 md:mr-8">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-[var(--gradient-start)]/20 to-[var(--gradient-end)]/20 flex items-center justify-center p-1">
-                        <div className="w-full h-full rounded-full bg-theme flex items-center justify-center">
-                          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]">
-                            {index === 0 ? 'FM' : 'CB'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Testimonial text content */}
-                    <div className="flex-grow">
-                      {/* Testimonial text */}
-                      <div className="mb-6">
-                        <p className="text-theme-text/80 text-lg leading-relaxed">
-                          {testimonial.text}
-                        </p>
-                      </div>
-                      
-                      {/* Author information */}
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-medium text-primary text-xl">{testimonial.name}</div>
-                          <div className="text-sm text-theme-text/60 mt-1">{testimonial.position}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>                  <motion.div 
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]"
-                    initial={{ scaleX: 0, transformOrigin: "left" }}
-                    whileInView={{ scaleX: 1 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <TestimonialCarousel testimonials={testimonials} />
+          </motion.div>
         </div>
       </section>
       
