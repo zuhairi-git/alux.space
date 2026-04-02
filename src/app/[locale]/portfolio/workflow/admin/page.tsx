@@ -132,11 +132,7 @@ export default function PortalPanel() {
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
 
-    const bg = isLight
-        ? 'bg-gradient-to-br from-ds-gray-50 to-ds-gray-100 text-[var(--foreground)]'
-        : isColorful
-            ? 'bg-[var(--color-colorful-bg)] text-[var(--foreground)]'
-            : 'bg-gradient-to-br from-ds-gray-900 to-black text-[var(--foreground)]';
+    const bg = 'bg-background text-foreground';
     const sidebarBg = isLight
         ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60'
         : isColorful
@@ -1609,12 +1605,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
     const TOTAL = PORTAL_STEPS.length;
     const isLast = step === TOTAL - 1;
 
-    const overlayBg =
-        selectedTheme === 'light'
-            ? 'bg-gradient-to-br from-ds-gray-50 to-ds-blue-50 text-ds-gray-900'
-            : selectedTheme === 'colorful'
-                ? 'bg-[var(--color-colorful-bg)] text-white'
-                : 'bg-[var(--color-dark-1)] text-white';
+    const overlayBg = 'bg-background text-foreground';
 
     const muted = 'text-[var(--muted-foreground)]';
     const headingClass = 'text-[var(--foreground)]';
@@ -1644,7 +1635,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.02 }}
             transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-            className={`fixed inset-0 z-[200] flex flex-col ${overlayBg} transition-colors duration-500 overflow-hidden`}
+            className={`fixed inset-0 z-[200] flex flex-col ${overlayBg} transition-colors duration-500 overflow-hidden theme-${selectedTheme}`}
         >
             {/* â”€â”€ DESKTOP SPLIT LAYOUT â”€â”€ */}
             <div className="hidden md:flex flex-1 min-h-0">

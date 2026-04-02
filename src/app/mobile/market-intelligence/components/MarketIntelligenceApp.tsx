@@ -147,11 +147,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
 
-    const bgClass = isLight
-        ? (isIOS ? 'bg-ds-gray-100 text-ds-gray-900' : 'bg-ds-gray-50 text-ds-gray-900')
-        : isColorful
-            ? 'bg-ds-colorful-bg text-ds-gray-100'
-            : (isIOS ? 'bg-ds-dark-1 text-ds-gray-100' : 'bg-ds-dark-1 text-ds-gray-200');
+    const bgClass = 'bg-background text-foreground';
 
     const headerTitles: Record<TabType, { sub: string, title: string }> = {
         dashboard: { sub: 'Welcome Back', title: 'Ali Al-Zuhairi' },

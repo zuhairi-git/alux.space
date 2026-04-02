@@ -19,7 +19,7 @@ export default function MobileLayout({
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-ds-dark-1 rounded-b-3xl z-50 hidden sm:block"></div>
 
                 {/* App Content */}
-                <div className="h-full w-full overflow-hidden text-ds-gray-100 relative bg-transparent">
+                <div className="h-full w-full overflow-hidden text-foreground relative bg-transparent">
                     <style>{`
                         footer, #back-to-top, .translation-badge-container { display: none !important; }
                         .mobile-frame * { scrollbar-width: none !important; -ms-overflow-style: none !important; }

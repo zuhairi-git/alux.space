@@ -80,6 +80,9 @@ module.exports = {
         'dropdown':                'var(--dropdown-bg)',
         'dropdown-border-color':   'var(--dropdown-border)',
         'dropdown-text':           'var(--dropdown-text)',
+        // ── Section backgrounds ───────────────────────────────────────────────────────
+        'ds-section-alt':          'var(--section-alt)',
+        'ds-section-alt-2':        'var(--section-alt-2)',
         // ── Design System Palette ─────────────────────────────────────
         'ds-blue': {
           50:  'var(--color-blue-50)',

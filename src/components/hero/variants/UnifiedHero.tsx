@@ -212,21 +212,8 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                 isColorful 
                   ? 'text-2xl md:text-3xl lg:text-4xl leading-relaxed' 
                   : 'text-xl md:text-2xl lg:text-3xl leading-relaxed'
-              } font-medium text-center relative subtitle-gradient-animated`}
-              style={{
-                background: isColorful
-                  ? `linear-gradient(135deg, ${palette.cyan[500]} 0%, ${palette.pink[500]} 50%, ${palette.blue[500]} 100%)`
-                  : isLight
-                  ? `linear-gradient(135deg, ${palette.blue[700]} 0%, ${palette.purple[700]} 100%)`
-                  : `linear-gradient(135deg, ${palette.blue[400]} 0%, ${palette.purple[400]} 100%)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                backgroundSize: '200% 200%',
-                filter: `drop-shadow(0 2px 8px rgba(${isColorful ? themeRgb.colorful.glowPrimary : isLight ? themeRgb.light.glowPrimary : themeRgb.dark.glowPrimary}, 0.15))`
-              }}
+              } font-medium text-center relative text-foreground`}
             >
-              {/* Split subtitle into parts for better visual hierarchy */}
               <span className="block">
                 {subtitle.split('—')[0]?.trim()}
               </span>
@@ -235,76 +222,14 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: durationSeconds.dramatic, delay: 0.9 }}
-                  className={`block mt-4 ${
+                  className={`block mt-4 opacity-70 ${
                     isColorful ? 'text-lg md:text-xl lg:text-2xl' : 'text-lg md:text-xl'
                   }`}
-                  style={{
-                    background: isLight
-                      ? `linear-gradient(135deg, ${palette.gray[700]} 0%, ${palette.gray[500]} 100%)`
-                      : `linear-gradient(135deg, ${palette.gray[300]} 0%, ${palette.gray[400]} 100%)`,
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    opacity: 0.85
-                  }}
                 >
                   — {subtitle.split('—')[1]?.trim()}
                 </MotionSpan>
               )}
             </MotionP>
-            
-            {/* Subtle glow effect behind text */}
-            <MotionDiv
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: delaySeconds['4xl'] }}
-              className="absolute inset-0 -z-10 blur-2xl"
-              style={{
-                background: isColorful
-                  ? `radial-gradient(ellipse at center, rgba(${themeRgb.colorful.glowPrimary}, 0.08) 0%, rgba(${themeRgb.colorful.glowSecondary}, 0.08) 50%, rgba(${themeRgb.colorful.glowTertiary}, 0.08) 100%)`
-                  : isLight
-                  ? `radial-gradient(ellipse at center, rgba(${themeRgb.light.glowPrimary}, 0.06) 0%, rgba(${themeRgb.light.glowSecondary}, 0.06) 100%)`
-                  : `radial-gradient(ellipse at center, rgba(${themeRgb.dark.dotGrid}, 0.08) 0%, rgba(${themeRgb.dark.glowSecondary}, 0.08) 100%)`,
-              }}
-            />
-            
-            {/* Floating accent elements */}
-            <MotionDiv
-              animate={{
-                y: [0, -8, 0],
-                rotate: [0, 2, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut"
-              }}
-              className={`absolute -top-4 -left-4 w-2 h-2 rounded-full ${
-                isColorful
-                  ? 'bg-gradient-to-r from-ds-cyan-400 to-ds-blue-500'
-                  : 'bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]'
-              } shadow-lg`}
-            />
-            
-            <MotionDiv
-              animate={{
-                y: [0, -6, 0],
-                rotate: [0, -2, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-                delay: 1
-              }}
-              className={`absolute -bottom-4 -right-4 w-2 h-2 rounded-full ${
-                isColorful
-                  ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]'
-                  : 'bg-gradient-to-r from-primary-400 to-ds-pink-400'
-              } shadow-lg`}
-            />
           </MotionDiv>
         )}
 

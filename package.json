@@ -16,6 +16,7 @@
     "seo:monitor": "node scripts/seo-dev.js monitor",
     "seo:watch": "node scripts/seo-dev.js watch",
     "sitemap": "node -e \"require('./seo/sitemap.ts').generateSitemap()\"",
+    "build:isolated": "node scripts/build-isolated.js",
     "precommit": "npm run lint && npm run seo:audit"
   },
   "dependencies": {

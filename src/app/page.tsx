@@ -288,7 +288,7 @@ export default function Home() {
       {/* About Section with Digital Dreams anchor */}
       <section
         ref={aboutRef}
-        className="py-20 relative overflow-hidden"
+        className="py-20 relative overflow-hidden bg-ds-section-alt"
         id="digital-dreams"
       >
         <div id="about"></div>
@@ -391,7 +391,7 @@ export default function Home() {
         </div>
       </section>        {/* Skills Section */}
       <section 
-        className="relative overflow-hidden py-24 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent"
+        className="relative overflow-hidden py-24 bg-background"
         id="strengths-skills"
       >
         {/* Enhanced background decorative elements - REMOVED */}
@@ -555,7 +555,7 @@ export default function Home() {
         </div>
       </section>{/* Testimonials Section */}
       <section 
-        className="py-24 bg-black/5 relative overflow-hidden"
+        className="py-24 bg-ds-section-alt-2 relative overflow-hidden"
         id="testimonials"
       >
         {/* Background decorative elements */}

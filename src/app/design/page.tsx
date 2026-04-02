@@ -49,6 +49,8 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
       { name: '--accent-text-2',     label: 'Accent Text 2' },
       { name: '--card-from-bg',      label: 'Card From' },
       { name: '--card-to-bg',        label: 'Card To' },
+      { name: '--section-alt',      label: 'Section Alt' },
+      { name: '--section-alt-2',    label: 'Section Alt 2' },
     ],
   },
   {
@@ -677,6 +679,17 @@ function ColorsSection() {
         </div>
       </section>
 
+      {/* 3 — State colors */}
+      <section>
+        <h4 className="text-sm font-semibold mb-1">State Colors</h4>
+        <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens. Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
+        <div className="space-y-6">
+          {stateColorGroups.map(g => (
+            <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 }
@@ -1043,6 +1056,18 @@ function BackgroundsSection() {
       description: 'Navigation bar / header backdrop.',
       usage: 'bg-[var(--nav-bg)]',
     },
+    {
+      label: 'Section Alt',
+      cssVar: '--section-alt',
+      description: 'Alternate section background — used on About, second content sections, etc.',
+      usage: 'bg-ds-section-alt',
+    },
+    {
+      label: 'Section Alt 2',
+      cssVar: '--section-alt-2',
+      description: 'Second alternate — creates visual rhythm between page content sections.',
+      usage: 'bg-ds-section-alt-2',
+    },
   ];
 
   return (
@@ -1095,8 +1120,36 @@ function BackgroundsSection() {
         >
           <div className="w-2 h-2 rounded-full bg-[var(--primary)]" />
           <div className="text-sm font-medium opacity-70">
-            Navigation surface \u2014{' '}
+            Navigation surface —{' '}
             <span className="font-mono text-[var(--primary)] text-xs">var(--nav-bg)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Section backgrounds preview */}
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">Section Background Preview</h4>
+        <p className="text-xs opacity-50 mb-4">How alternating section backgrounds look in context — mirrors the homepage layout pattern.</p>
+        <div className="rounded-xl overflow-hidden border border-[var(--card-border)] divide-y divide-[var(--card-border)]">
+          <div className="px-6 py-8" style={{ background: 'var(--background)' }}>
+            <div className="text-xs font-mono text-[var(--primary)] mb-1">--background</div>
+            <div className="text-sm font-semibold mb-1">Base page background</div>
+            <div className="text-xs opacity-50">Used between alternating sections — the default surface.</div>
+          </div>
+          <div className="px-6 py-8" style={{ background: 'var(--section-alt)' }}>
+            <div className="text-xs font-mono text-[var(--primary)] mb-1">--section-alt · bg-ds-section-alt</div>
+            <div className="text-sm font-semibold mb-1">First alternate section</div>
+            <div className="text-xs opacity-50">Slightly offset from the base — used for About, prominent content sections.</div>
+          </div>
+          <div className="px-6 py-8" style={{ background: 'var(--background)' }}>
+            <div className="text-xs font-mono opacity-40 mb-1">--background (repeat)</div>
+            <div className="text-sm font-semibold mb-1">Base again</div>
+            <div className="text-xs opacity-50">Alternating rhythm continues.</div>
+          </div>
+          <div className="px-6 py-8" style={{ background: 'var(--section-alt-2)' }}>
+            <div className="text-xs font-mono text-[var(--primary)] mb-1">--section-alt-2 · bg-ds-section-alt-2</div>
+            <div className="text-sm font-semibold mb-1">Second alternate section</div>
+            <div className="text-xs opacity-50">Slightly deeper offset — used for Testimonials, closing content sections.</div>
           </div>
         </div>
       </div>
@@ -1323,11 +1376,6 @@ function BadgesSection() {
       <h4 className="text-sm font-semibold mb-1">State Colors</h4>
       <p className="text-xs opacity-50 mb-4">Theme-resolved status feedback tokens in three variants: <strong>filled</strong> (coloured bg), <strong>outline</strong> (theme bg, coloured border), <strong>soft</strong> (tinted bg, high-contrast text). Error is wired to <code className="font-mono">--palette-error-40</code>.</p>
       <StateBadgesShowcase />
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
-        {stateColorGroups.map(g => (
-          <ColorGroupBlock key={g.group} group={g.group} tokens={g.tokens} />
-        ))}
-      </div>
     </div>
     </>
   );

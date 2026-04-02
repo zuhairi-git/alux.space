@@ -103,16 +103,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     const accentColor = 'var(--primary)';
     const accentGradient = 'from-primary to-primary-dark';
 
-    const bgClass =
-        selectedTheme === 'light'
-            ? isIOS
-                ? 'bg-ds-gray-100 text-ds-gray-900'
-                : 'bg-ds-gray-50 text-ds-gray-900'
-            : selectedTheme === 'colorful'
-                ? 'bg-ds-colorful-bg text-white'
-                : isIOS
-                    ? 'bg-ds-dark-1 text-ds-gray-100'
-                    : 'bg-ds-dark-1 text-ds-gray-200';
+    const bgClass = 'bg-background text-foreground';
 
     const muted = selectedTheme === 'light' ? 'text-ds-gray-500' : 'text-white/50';
 
@@ -178,7 +169,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
     };
 
     return (
-        <div className={`absolute inset-0 z-50 flex flex-col ${bgClass} transition-colors duration-500 overflow-hidden`}>
+        <div className={`absolute inset-0 z-50 flex flex-col ${bgClass} transition-colors duration-500 overflow-hidden theme-${selectedTheme}`}>
 
             {/* Floating ambient orbs - visible on all themes */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">

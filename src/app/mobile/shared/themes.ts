@@ -124,9 +124,9 @@ export interface MobileTheme {
 export const androidTheme: MobileTheme = {
     platform: 'android',
     bg: {
-        dark: 'bg-ds-dark-1 text-ds-gray-200',
-        light: 'bg-ds-gray-50 text-ds-gray-900',
-        colorful: 'bg-[var(--color-colorful-bg)] text-white',
+        dark: 'bg-background text-foreground',
+        light: 'bg-background text-foreground',
+        colorful: 'bg-background text-foreground',
     },
     card: {
         dark: 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/30',
@@ -227,9 +227,9 @@ export const androidTheme: MobileTheme = {
 export const iosTheme: MobileTheme = {
     platform: 'ios',
     bg: {
-        dark: 'bg-ds-dark-1 text-ds-gray-100',
-        light: 'bg-ds-gray-100 text-ds-gray-900',
-        colorful: 'bg-[var(--color-colorful-bg)] text-white',
+        dark: 'bg-background text-foreground',
+        light: 'bg-background text-foreground',
+        colorful: 'bg-background text-foreground',
     },
     card: {
         dark: 'bg-ds-dark-2/65 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[22px] shadow-[0_4px_24px_rgba(0,0,0,0.25)]',
