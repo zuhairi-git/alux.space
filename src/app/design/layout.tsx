@@ -63,7 +63,7 @@ const sidebarNav: NavGroup[] = [
   {
     title: 'Cards',
     items: [
-      { label: 'Domain',   section: 'cards-domain',    icon: 'apps' },
+      { label: 'Content',  section: 'cards-content',   icon: 'apps' },
       { label: 'Media',    section: 'cards-media',     icon: 'perm_media' },
       { label: 'Surface',  section: 'cards-surface',   icon: 'dashboard' },
       { label: 'Timeline', section: 'cards-timeline',  icon: 'view_timeline' },

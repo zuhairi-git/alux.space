@@ -1696,8 +1696,24 @@ function CardsMediaSection() {
   );
 }
 
-function CardsDomainSection() {
-  const items = [
+function CardsContentSection() {
+  const statItems = [
+    { years: '10', title: 'Product Design',      icon: 'palette' },
+    { years: '8',  title: 'Product Management',  icon: 'group' },
+    { years: '8',  title: 'UX Research',         icon: 'psychology' },
+    { years: '5',  title: 'Frontend Dev',        icon: 'code' },
+  ];
+
+  const skillItems = [
+    { title: 'Team Leadership',      desc: 'Leading cross-functional teams',                icon: 'groups' },
+    { title: 'Product Strategy',     desc: 'Strategic planning and roadmapping',            icon: 'lightbulb' },
+    { title: 'Design & Prototyping', desc: 'Figma, Adobe CC, Design Systems',              icon: 'palette' },
+    { title: 'User Research',        desc: 'Research and test management',                 icon: 'science' },
+    { title: 'Development',          desc: 'React, WordPress, HubSpot',                   icon: 'code' },
+    { title: 'Agile Management',     desc: 'Scrum, Jira, Confluence, GitHub Copilot, GCP', icon: 'settings' },
+  ];
+
+  const domainItems = [
     {
       label: 'BlogCard',
       icon: 'article',
@@ -1725,35 +1741,85 @@ function CardsDomainSection() {
   ];
 
   return (
-    <div className="space-y-4">
-      <p className="text-sm opacity-60">
-        Page-specific cards with rich localized data schemas. All available from{' '}
-        <code className="text-xs bg-foreground/8 px-1 rounded">@/design-system</code>.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {items.map(item => (
-          <a
-            key={item.label}
-            href={item.href}
-            className="theme-card-flex p-5 rounded-xl hover:border-primary/40 transition-colors group"
-          >
-            <span className="material-symbols text-2xl text-primary/60 group-hover:text-primary mb-3 block">
-              {item.icon}
-            </span>
-            <h4 className="font-semibold text-sm font-mono mb-1">{item.label}</h4>
-            <p className="text-xs opacity-60 leading-relaxed mb-3">{item.desc}</p>
-            <code className="text-[10px] px-1.5 py-0.5 rounded bg-foreground/8 font-mono block truncate opacity-70 mb-1">
-              {item.importLine}
-            </code>
-            <code className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono block truncate">
-              {item.prop}
-            </code>
-            <span className="text-xs text-primary mt-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              View live examples{' '}
-              <span className="material-symbols text-sm">arrow_forward</span>
-            </span>
-          </a>
-        ))}
+    <div className="space-y-10">
+      {/* Stat cards */}
+      <div>
+        <p className="text-xs font-mono opacity-50 mb-3">Stat Cards — years of experience with hover accent line</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {statItems.map((item, index) => (
+            <div
+              key={index}
+              className="group relative p-6 rounded-2xl border bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/40 overflow-hidden transition-all duration-300"
+            >
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[var(--primary)]/5" />
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-[var(--primary)]/20">
+                <Icon name={item.icon} size="lg" className="text-[var(--accent-text)]" />
+              </div>
+              <div className="text-4xl font-bold leading-none bg-gradient-to-r bg-clip-text text-transparent from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] mb-2">
+                {item.years}
+                <span className="text-base ml-1 text-[var(--muted-foreground)]">yrs</span>
+              </div>
+              <div className="text-sm font-semibold leading-tight text-foreground">{item.title}</div>
+              <div className="absolute bottom-0 left-[15%] right-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Skill cards */}
+      <div>
+        <p className="text-xs font-mono opacity-50 mb-3">Skill Cards — feature grid with icon badge and hover accent</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillItems.map((item, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden p-6 rounded-xl border bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/40 transition-all duration-300"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-[var(--primary)]/5" />
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20 transition-colors duration-300">
+                <Icon name={item.icon} size="lg" className="text-[var(--accent-text)]" />
+              </div>
+              <div className="relative z-10">
+                <h4 className="text-base font-semibold mb-1 leading-tight text-foreground">{item.title}</h4>
+                <p className="text-xs leading-relaxed text-[var(--muted-foreground)]">{item.desc}</p>
+              </div>
+              <div className="absolute bottom-0 left-[15%] right-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Page-specific domain cards */}
+      <div>
+        <p className="text-xs font-mono opacity-50 mb-3">
+          Page-Specific Domain Cards — rich localized schemas from{' '}
+          <code className="bg-foreground/8 px-1 rounded">@/design-system</code>
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {domainItems.map(item => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="theme-card-flex p-5 rounded-xl hover:border-primary/40 transition-colors group"
+            >
+              <span className="material-symbols text-2xl text-primary/60 group-hover:text-primary mb-3 block">
+                {item.icon}
+              </span>
+              <h4 className="font-semibold text-sm font-mono mb-1">{item.label}</h4>
+              <p className="text-xs opacity-60 leading-relaxed mb-3">{item.desc}</p>
+              <code className="text-[10px] px-1.5 py-0.5 rounded bg-foreground/8 font-mono block truncate opacity-70 mb-1">
+                {item.importLine}
+              </code>
+              <code className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono block truncate">
+                {item.prop}
+              </code>
+              <span className="text-xs text-primary mt-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                View live examples{' '}
+                <span className="material-symbols text-sm">arrow_forward</span>
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -2435,7 +2501,7 @@ const allSections: SectionDef[] = [
   { key: 'cards-surface',  title: 'Cards — Surface',           render: () => <CardsSurfaceSection /> },
   { key: 'cards-timeline', title: 'Cards — Timeline',          render: () => <CardsTimelineSection /> },
   { key: 'cards-media',    title: 'Cards — Media',             render: () => <CardsMediaSection /> },
-  { key: 'cards-domain',   title: 'Cards — Domain',            render: () => <CardsDomainSection /> },
+  { key: 'cards-content',  title: 'Cards — Content',           render: () => <CardsContentSection /> },
   { key: 'quotes',         title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
   { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
@@ -2510,7 +2576,7 @@ function OverviewGrid() {
     {
       title: 'Cards',
       items: [
-        { key: 'cards-domain',   icon: 'apps',          label: 'Domain' },
+        { key: 'cards-content',  icon: 'apps',          label: 'Content' },
         { key: 'cards-media',    icon: 'perm_media',    label: 'Media' },
         { key: 'cards-surface',  icon: 'dashboard',     label: 'Surface' },
         { key: 'cards-timeline', icon: 'view_timeline', label: 'Timeline' },

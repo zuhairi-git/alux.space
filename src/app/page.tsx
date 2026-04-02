@@ -29,15 +29,9 @@ const InteractiveSkillCard = ({
     trackEvent('skill_hover', 'homepage', skill.title);
   };
 
-  // Card styles — colorful via CSS vars, dark/light via card-from-bg token
+  // Card styles — flat surface, no gradient
   const getCardStyles = () => {
-    if (theme === 'colorful') {
-      return 'bg-gradient-to-br from-[var(--primary)]/5 via-[var(--gradient-mid)]/5 to-[var(--gradient-end)]/5 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--primary)]/10 hover:via-[var(--gradient-mid)]/10 hover:to-[var(--gradient-end)]/10';
-    } else if (theme === 'dark') {
-      return 'bg-gradient-to-br from-[var(--card-from-bg)] via-[var(--card-to-bg)] to-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:from-[var(--card-from-bg)] hover:via-[var(--card-to-bg)] hover:to-[var(--card-from-bg)]';
-    } else {
-      return 'bg-[var(--card-from-bg)]/80 border-[var(--card-border)] hover:border-[var(--primary)]/40 hover:bg-[var(--card-from-bg)] hover:shadow-lg hover:shadow-[var(--card-shadow-color)]';
-    }
+    return 'bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/40';
   };
 
   return (
@@ -53,14 +47,8 @@ const InteractiveSkillCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
-      {/* Decorative gradient overlay on hover */}
-      <div className={`
-        absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
-        ${theme === 'colorful' 
-          ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5' 
-          : 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5'
-        }
-      `} />
+      {/* Subtle hover tint */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-[var(--primary)]/5" />
 
       {/* Icon badge */}
       <div className={`
@@ -94,15 +82,8 @@ const InteractiveSkillCard = ({
         </p>
       </div>
 
-      {/* Bottom accent line - appears on hover */}
-      <div className={`
-        absolute bottom-0 left-0 right-0 h-0.5 transform origin-left scale-x-0 
-        group-hover:scale-x-100 transition-transform duration-300
-        ${theme === 'colorful' 
-          ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]' 
-          : 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)]'
-        }
-      `} />
+      {/* Bottom accent line — thin, centered, 70% width */}
+      <div className="absolute bottom-0 left-[15%] right-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
     </motion.div>
   );
 };
@@ -480,16 +461,10 @@ export default function Home() {
                       y: -5,
                       transition: { duration: 0.2 } 
                     }}
-                    className={`
-                      group relative p-6 rounded-2xl backdrop-blur-sm transition-all duration-300
-                      ${theme === 'colorful'
-                        ? 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5 hover:from-[var(--primary)]/10 hover:to-[var(--gradient-mid)]/10 border border-[var(--card-border)]'
-                        : 'bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5 hover:from-[var(--primary)]/10 hover:to-[var(--gradient-mid)]/10 border border-[var(--card-border)]'
-                      }
-                    `}
+                    className="group relative p-6 rounded-2xl backdrop-blur-sm transition-all duration-300 bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/40"
                   >
-                    {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[var(--primary)]/5 to-[var(--gradient-mid)]/5`} />
+                    {/* Subtle hover tint */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[var(--primary)]/5" />
 
                     {/* Icon */}
                       <div className={`
@@ -517,8 +492,8 @@ export default function Home() {
                       {item.title}
                     </div>
 
-                    {/* Decorative element */}
-                    <div className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]" />
+                    {/* Bottom accent line — thin, centered, 70% width */}
+                    <div className="absolute bottom-0 left-[15%] right-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
                   </motion.div>
                 ))}
               </div>
