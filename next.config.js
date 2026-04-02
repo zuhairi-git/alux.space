@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 
+// Use a separate output folder for production builds so `npm run build`
+// never clobbers the `.next` dev cache that `npm run dev` is using.
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   output: 'export',
+  distDir: isProd ? '.next-prod' : '.next',
   images: {
     unoptimized: true,
     remotePatterns: [
