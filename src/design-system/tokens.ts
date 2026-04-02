@@ -105,6 +105,9 @@ export const palette = {
     900: '#064e3b',
     950: '#022c22',
   },
+  rose: {
+    500: '#f43f5e',  // rose-500 — hero game-strategy accent
+  },
   gold: {
     50:  '#fffcf0',
     100: '#fff5d6',

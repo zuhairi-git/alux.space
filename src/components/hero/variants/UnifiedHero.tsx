@@ -9,7 +9,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
-import { durationSeconds, delaySeconds, transition as t, Button, Icon, MotionDiv, MotionH1, MotionH2, MotionSpan } from '@/design-system';
+import { durationSeconds, delaySeconds, transition as t, Button, Icon, MotionDiv, MotionH1, MotionH2, MotionSpan, palette } from '@/design-system';
 
 // Published portfolio items to showcase in the hero stack
 const SHOWCASE_ITEMS = [
@@ -18,7 +18,7 @@ const SHOWCASE_ITEMS = [
     type: 'Case Study',
     src: '/images/portfolio/healthcare/healthcare.jpg',
     slug: '/portfolio/healthcare-prioritization',
-    accent: '#3b82f6',         // blue
+    accent: palette.blue[500],
     tag: 'Product Management',
     num: '01',
     words: ['RICE Framework', 'Prioritization', 'Healthcare'],
@@ -28,7 +28,7 @@ const SHOWCASE_ITEMS = [
     type: 'Prototype',
     src: '/images/portfolio/workflow/cover.jpg',
     slug: '/portfolio/workflow',
-    accent: '#8b5cf6',         // violet
+    accent: palette.violet[500],
     tag: 'AI-Powered',
     num: '02',
     words: ['AI Copilot', 'SaaS', 'Collaboration'],
@@ -38,7 +38,7 @@ const SHOWCASE_ITEMS = [
     type: 'Prototype',
     src: '/images/portfolio/market/market-intellegence.jpg',
     slug: '/portfolio/market-intelligence',
-    accent: '#06b6d4',         // cyan
+    accent: palette.cyan[500],
     tag: 'Mobile UX',
     num: '03',
     words: ['Mobile UX', 'Enterprise', 'Analytics'],
@@ -48,7 +48,7 @@ const SHOWCASE_ITEMS = [
     type: 'Case Study',
     src: '/images/portfolio/accessibility/accessiblity-showcase.jpg',
     slug: '/portfolio/accessibility',
-    accent: '#10b981',         // emerald
+    accent: palette.emerald[500],
     tag: 'Design System',
     num: '04',
     words: ['WCAG 2.1', 'Design Tokens', 'Accessibility'],
@@ -58,7 +58,7 @@ const SHOWCASE_ITEMS = [
     type: 'Case Study',
     src: '/images/portfolio/game-dev/cover.jpg',
     slug: '/portfolio/game-strategy',
-    accent: '#f43f5e',         // rose
+    accent: palette.rose[500],
     tag: 'Strategy',
     num: '05',
     words: ['GTM Strategy', 'Gaming', 'Personas'],
@@ -239,9 +239,10 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
               }}
               className="hidden lg:block"
             >
-              <button
+              <Button
+                variant="tertiary"
                 onClick={() => setActiveIndex(w.cardIndex)}
-                className="text-[10px] font-medium px-2.5 py-1 rounded-full border whitespace-nowrap transition-colors duration-200"
+                className="!h-auto !min-h-0 !rounded-full !text-[10px] !font-medium !px-2.5 !py-1 !border whitespace-nowrap"
                 style={{
                   color:       isActive ? w.accent : 'var(--foreground)',
                   borderColor: isActive ? `${w.accent}66` : 'var(--card-border)',
@@ -249,7 +250,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                 }}
               >
                 {w.word}
-              </button>
+              </Button>
             </MotionDiv>
           );
         })}
@@ -258,11 +259,12 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
       {/* Dot navigation — theme-compatible colours */}
       <div className="flex items-center gap-2">
         {SHOWCASE_ITEMS.map((item, index) => (
-          <button
+          <Button
             key={index}
+            variant="tertiary"
             onClick={() => setActiveIndex(index)}
             aria-label={`View ${item.title}`}
-            className="transition-all duration-300 rounded-full"
+            className="!h-auto !min-h-0 !p-0 !border-0 !rounded-full shrink-0 transition-all duration-300"
             style={{
               width:      activeIndex === index ? 24 : 6,
               height:     6,
@@ -274,9 +276,10 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
       </div>
 
       {/* Word cloud toggle — desktop only */}
-      <button
+      <Button
+        variant="tertiary"
         onClick={() => setShowCloud(v => !v)}
-        className="hidden lg:flex items-center gap-1.5 text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full border transition-all duration-200"
+        className="hidden lg:inline-flex !h-auto !min-h-0 !rounded-full !text-[10px] uppercase tracking-widest !px-2.5 !py-1 !border gap-1.5"
         style={{
           color:       'var(--muted-foreground)',
           borderColor: 'var(--card-border)',
@@ -287,7 +290,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
           {showCloud ? 'label_off' : 'label'}
         </span>
         {showCloud ? 'Hide keywords' : 'Show keywords'}
-      </button>
+      </Button>
     </div>
   );
 };

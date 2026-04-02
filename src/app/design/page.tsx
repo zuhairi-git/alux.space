@@ -112,48 +112,6 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
 ];
 
 /* -- 2. State colors --------------------------------------------------------- */
-const stateColorGroups: { group: string; tokens: { name: string; label: string }[] }[] = [
-  {
-    group: 'Success',
-    tokens: [
-      { name: '--color-success',        label: 'Text' },
-      { name: '--color-success-bg',     label: 'Filled Bg' },
-      { name: '--color-success-border', label: 'Border' },
-      { name: '--color-success-soft',   label: 'Soft Text' },
-      { name: '--color-success-soft-bg',label: 'Soft Bg' },
-    ],
-  },
-  {
-    group: 'Warning',
-    tokens: [
-      { name: '--color-warning',        label: 'Text' },
-      { name: '--color-warning-bg',     label: 'Filled Bg' },
-      { name: '--color-warning-border', label: 'Border' },
-      { name: '--color-warning-soft',   label: 'Soft Text' },
-      { name: '--color-warning-soft-bg',label: 'Soft Bg' },
-    ],
-  },
-  {
-    group: 'Error',
-    tokens: [
-      { name: '--color-error',          label: 'Text' },
-      { name: '--color-error-bg',       label: 'Filled Bg' },
-      { name: '--color-error-border',   label: 'Border' },
-      { name: '--color-error-soft',     label: 'Soft Text' },
-      { name: '--color-error-soft-bg',  label: 'Soft Bg' },
-    ],
-  },
-  {
-    group: 'Info',
-    tokens: [
-      { name: '--color-info',           label: 'Text' },
-      { name: '--color-info-bg',        label: 'Filled Bg' },
-      { name: '--color-info-border',    label: 'Border' },
-      { name: '--color-info-soft',      label: 'Soft Text' },
-      { name: '--color-info-soft-bg',   label: 'Soft Bg' },
-    ],
-  },
-];
 
 /* -- 3. Raw palette (--color-*) -- use only when semantic tokens don't cover - */
 const rawPaletteGroups: { group: string; tokens: { name: string; label: string; description?: string }[] }[] = [
