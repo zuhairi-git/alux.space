@@ -173,9 +173,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                     )}
                     {getStatus()}
                   </Badge>
-                  <div className="flex items-center gap-2 text-white/50 text-xs font-medium group-hover:text-white/80 transition-colors">
+                  <div className="flex items-center gap-2 text-white/60 text-xs font-medium group-hover:text-white transition-colors duration-200">
                     <span>{locale === 'fi' ? 'Tutustu' : 'Explore project'}</span>
-                    <span className="material-symbols text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    <span className="material-symbols text-sm transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
                   </div>
                 </div>
               </div>
@@ -259,7 +259,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   )}
                   {getStatus()}
                 </Badge>
-                <span className="material-symbols text-lg opacity-30 group-hover:opacity-70 transition-all group-hover:translate-x-0.5">arrow_forward</span>
+                <span className="material-symbols text-lg text-[var(--muted-foreground)] group-hover:text-primary transition-all duration-200 group-hover:translate-x-0.5">arrow_forward</span>
               </div>
             </div>
           </div>
