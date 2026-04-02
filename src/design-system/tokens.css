@@ -602,9 +602,9 @@
   /* Accent text */
   --accent-text:           var(--primary-400);
   --accent-text-2:         var(--color-emerald-300);
-  /* Section backgrounds — emerald-tinted dark surfaces */
-  --section-alt:           color-mix(in srgb, var(--color-gray-950) 85%, var(--color-emerald-950));   /* near-black + faint emerald */
-  --section-alt-2:         color-mix(in srgb, var(--color-gray-950) 78%, var(--color-emerald-950));   /* slightly deeper emerald stripe */
+  /* Section backgrounds — between background and card surface, same gray family */
+  --section-alt:           var(--color-gray-900);          /* gray-900 — one step above bg, matches card-to-bg base */
+  --section-alt-2:         var(--color-gray-800);          /* gray-800 — slightly elevated, matches card-from-bg base */
   /* Overlay panels */
   --dropdown-bg:           rgba(17, 24, 39, 0.18);       /* very low alpha — backdrop-filter blur shows through */
   --dropdown-border:       var(--color-gray-700);
