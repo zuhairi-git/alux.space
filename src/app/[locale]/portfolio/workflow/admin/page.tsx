@@ -301,7 +301,7 @@ export default function PortalPanel() {
                         <motion.button onClick={() => setShowSearch(true)} aria-label="Search" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30 text-accent' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
                         </motion.button>
-                        {/* AI Copilot â€” mobile only, replaces floating button */}
+                        {/* AI Copilot — mobile only, replaces floating button */}
                         <motion.button onClick={() => setShowCopilot(true)} aria-label="Open AI Copilot" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
                             <Icon name="auto_awesome" className="text-xl text-white" />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-ds-gold-400 rounded-full animate-pulse" />
@@ -430,7 +430,7 @@ export default function PortalPanel() {
                 )}
             </AnimatePresence>
 
-            {/* Global AI Copilot Floating Button â€” hidden on mobile (use topbar button instead) */}
+            {/* Global AI Copilot Floating Button — hidden on mobile (use topbar button instead) */}
             <motion.button
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
@@ -813,7 +813,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
             </div>
 
             <motion.div variants={itemVariants} className={card}>
-                {/* Mobile Card List â€” visible on small screens only */}
+                {/* Mobile Card List — visible on small screens only */}
                 <div className="sm:hidden space-y-3">
                     {users.map((u, i) => (
                         <div key={i} className={`rounded-2xl border transition-all ${isLight ? 'bg-white/70 border-ds-gray-200' : isColorful ? 'bg-primary/5 border-primary/20' : 'bg-white/[0.03] border-white/10'}`}>
@@ -860,7 +860,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                     ))}
                 </div>
 
-                {/* Desktop Table â€” hidden on small screens */}
+                {/* Desktop Table — hidden on small screens */}
                 <div className="hidden sm:block overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
                     <table className="w-full min-w-[700px]">
                         <thead>
@@ -1538,7 +1538,7 @@ const PORTAL_STEPS = [
         icon: 'blur_on',
         title: 'Workflow Portal',
         subtitle: 'Your AI-powered collaboration hub',
-        body: 'Manage your entire team, workspaces, and platform health from a single intelligent dashboard â€” designed for platform admins and power users.',
+        body: 'Manage your entire team, workspaces, and platform health from a single intelligent dashboard — designed for platform admins and power users.',
     },
     {
         id: 'ai',
@@ -1564,15 +1564,15 @@ const PORTAL_STEPS = [
 ];
 
 const AI_TIPS = [
-    { icon: 'query_stats', title: 'Ask about metrics', body: '"Which workspaces are declining in engagement this week?" â€” get instant, data-backed answers.' },
+    { icon: 'query_stats', title: 'Ask about metrics', body: '"Which workspaces are declining in engagement this week?" — get instant, data-backed answers.' },
     { icon: 'group', title: 'Analyse your team', body: '"Who hasn\'t been active in Design System v3?" surfaces team health issues before they become blockers.' },
-    { icon: 'notifications_active', title: 'Configure smart alerts', body: '"Notify me when sprint reviews are overdue by more than 24 hours" â€” set it once, rely on it always.' },
+    { icon: 'notifications_active', title: 'Configure smart alerts', body: '"Notify me when sprint reviews are overdue by more than 24 hours" — set it once, rely on it always.' },
     { icon: 'trending_up', title: 'Forecast & compare', body: '"Compare workspace activity in Q3 vs Q4" for trend analysis and executive reporting.' },
 ];
 
 const PORTAL_FEATURES = [
     { icon: 'home', label: 'Start', desc: 'Quick-access launchpad with KPIs, recent activity, and AI highlights.' },
-    { icon: 'dashboard', label: 'Dashboard', desc: 'Live platform metrics â€” workspace health, team velocity, and AI-driven insights.' },
+    { icon: 'dashboard', label: 'Dashboard', desc: 'Live platform metrics — workspace health, team velocity, and AI-driven insights.' },
     { icon: 'group', label: 'Users', desc: 'Manage members, roles, permissions, and team engagement at scale.' },
     { icon: 'workspaces', label: 'Workspaces', desc: 'Monitor all project workspaces, docs, and collaboration activity.' },
     { icon: 'smart_toy', label: 'Copilot Logs', desc: 'Audit all AI interactions across the platform with full transparency.' },
@@ -1639,7 +1639,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
         >
             {/* â”€â”€ DESKTOP SPLIT LAYOUT â”€â”€ */}
             <div className="hidden md:flex flex-1 min-h-0">
-                {/* Left panel â€” fixed hero */}
+                {/* Left panel — fixed hero */}
                 <div className="w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative border-r border-[var(--card-border)]">
                     <motion.div
                         key={selectedTheme + '-icon'}
@@ -1665,7 +1665,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                         transition={{ delay: 0.08 }}
                         className={`text-[15px] text-center leading-relaxed ${muted}`}
                     >
-                        AI-powered team collaboration and platform management â€” designed for admins who move fast.
+                        AI-powered team collaboration and platform management — designed for admins who move fast.
                     </motion.p>
 
                     {/* Step indicators */}
@@ -1700,7 +1700,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                     </div>
                 </div>
 
-                {/* Right panel â€” dynamic content */}
+                {/* Right panel — dynamic content */}
                 <div className="flex-1 flex flex-col min-h-0">
                     <div className="flex-1 overflow-y-auto px-10 xl:px-16 py-14 no-scrollbar relative">
                         <AnimatePresence custom={direction} mode="wait">
@@ -1716,7 +1716,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                             Your team&apos;s command <br />centre
                                         </h2>
                                         <p className={`text-[16px] leading-relaxed ${muted}`}>
-                                            This portal gives you full visibility and control over your platform â€” from workspace health to individual team performance. Everything is interactive: click, explore, and drill down.
+                                            This portal gives you full visibility and control over your platform — from workspace health to individual team performance. Everything is interactive: click, explore, and drill down.
                                         </p>
                                     </motion.div>
 
@@ -2002,7 +2002,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="palette" className="text-white text-[16px]" /></div>
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>Choose Your Look</h2>
                                 </motion.div>
-                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme â€” changeable anytime from the profile menu</motion.p>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>
                                 <div className="space-y-3">
                                     {PORTAL_THEMES.map((t, i) => {
                                         const selected = selectedTheme === t.v;

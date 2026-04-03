@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { delaySeconds, stagger, transition as t } from '@/design-system';
+import { delaySeconds, Icon, stagger, transition as t } from '@/design-system';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 import CaseStudyHero from './CaseStudyHero';
@@ -501,12 +501,8 @@ export default function AccessibilityClient() {
                         {content.doubleD}
                       </span>
                     </div>                      {/* Interactive Double Diamond */}
-                    <div className="relative mb-10 overflow-hidden">
-                      {/* Ambient background */}
-                      <div className={`absolute inset-0 bg-gradient-to-br from-[var(--primary-glow)] to-transparent blur-3xl`}></div>
-
-                      <div className="relative">
-                        {/* Phase labels */}
+                    <div className="mb-8">
+                      <div className="relative rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--background)]/30 px-4 py-5 sm:px-5">
                         <div className="text-center mb-8">
                           <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full border bg-[var(--card-from-bg)] border-[var(--card-border)]`}>
                             <span className={`text-xs font-medium text-[var(--primary)]`}>Problem Discovery</span>
@@ -517,54 +513,48 @@ export default function AccessibilityClient() {
                           </div>
                         </div>
 
-                        {/* Interactive Phase Cards */}
-                        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mx-auto px-4">
+                        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-5 mx-auto">
                           {[
                             {
                               phase: content.discoverPhase,
                               icon: 'search',
-                              color: 'blue',
                               description: 'Research user needs, accessibility challenges, and current limitations in design systems.',
-                              gradient: 'from-primary/20 to-primary/12'
+                              surface: 'linear-gradient(180deg, color-mix(in srgb, var(--primary) 12%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+                              iconSurface: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-500) 100%)',
                             },
                             {
                               phase: content.definePhase,
                               icon: 'target',
-                              color: 'indigo',
                               description: 'Synthesize insights into clear accessibility requirements and design principles.',
-                              gradient: 'from-primary-600/30 to-ds-indigo-800/20'
+                              surface: 'linear-gradient(180deg, color-mix(in srgb, var(--gradient-start) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+                              iconSurface: 'linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%)',
                             },
                             {
                               phase: content.developPhase,
                               icon: 'build',
-                              color: 'pink',
                               description: 'Create accessible components, test with users, and iterate based on feedback.',
-                              gradient: 'from-ds-pink-900/30 to-ds-pink-500/20'
+                              surface: 'linear-gradient(180deg, color-mix(in srgb, var(--gradient-mid) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+                              iconSurface: 'linear-gradient(135deg, var(--gradient-mid) 0%, var(--gradient-end) 100%)',
                             },
                             {
                               phase: content.deliverPhase,
                               icon: 'rocket_launch',
-                              color: 'green',
                               description: 'Launch the design system with comprehensive documentation and training.',
-                              gradient: 'from-ds-emerald-600/30 to-ds-emerald-600/20'
+                              surface: 'linear-gradient(180deg, color-mix(in srgb, var(--gradient-end) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+                              iconSurface: 'linear-gradient(135deg, var(--gradient-end) 0%, var(--primary) 100%)',
                             }
                           ].map((phase, index) => (
                             <div
                               key={index}
-                              className={`group relative p-5 rounded-2xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-0.5 cursor-pointer ${`bg-gradient-to-br ${phase.gradient} border-[var(--card-border)] hover:border-[var(--card-border)]/50`
-                                }`}
-                            >                              {/* Floating icon */}
-                              <div className={`relative mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'
-                                }`}>                                <div className={`inline-flex w-11 h-11 items-center justify-center rounded-full ${phase.color === 'blue'
-                                        ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary-hover)] shadow-lg'
-                                        : phase.color === 'indigo'
-                                          ? 'bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)]/50 shadow-lg'
-                                          : phase.color === 'pink'
-                                            ? 'bg-gradient-to-br from-ds-pink-400 to-ds-pink-500 shadow-lg'
-                                            : 'bg-gradient-to-br from-ds-emerald-400 to-ds-emerald-600 shadow-lg'
-                                  } group-hover:scale-105 transition-transform duration-300`}>
-                                  <span className="material-symbols text-2xl text-white">{phase.icon}</span>
-                                  
+                              className="group relative p-5 rounded-2xl border border-[var(--card-border)] transition-transform duration-300 hover:-translate-y-0.5 cursor-pointer"
+                              style={{ backgroundImage: phase.surface }}
+                            >
+                              <div className={`relative mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
+                                <div
+                                  className="inline-flex w-11 h-11 items-center justify-center rounded-full shadow-lg group-hover:scale-105 transition-transform duration-300"
+                                  style={{ backgroundImage: phase.iconSurface, boxShadow: '0 12px 28px -18px color-mix(in srgb, var(--primary) 45%, transparent)' }}
+                                >
+                                  <Icon name={phase.icon} size="lg" className="text-white" />
                                 </div>
                               </div>
 
@@ -585,10 +575,6 @@ export default function AccessibilityClient() {
                                   <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]`}></div>
                                 </div>
                               )}
-
-                              {/* Hover glow effect */}
-                              <div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${`bg-gradient-to-br from-${phase.color}-400/10 to-transparent`
-                                }`}></div>
                             </div>
                           ))}
                         </div>

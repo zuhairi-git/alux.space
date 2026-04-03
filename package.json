@@ -7,10 +7,12 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "node scripts/validate-text-integrity.js",
     "build": "next build && node scripts/seo-build.js",
     "postbuild": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"" ,
     "build:clean": "Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue; echo done",
     "clean:out-cache": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"",
+    "lint:text": "node scripts/validate-text-integrity.js",
     "start": "next start",
     "lint": "next lint",
     "seo:audit": "node scripts/seo-dev.js audit",
@@ -18,7 +20,7 @@
     "seo:watch": "node scripts/seo-dev.js watch",
     "sitemap": "node -e \"require('./seo/sitemap.ts').generateSitemap()\"",
     "build:isolated": "node scripts/build-isolated.js",
-    "precommit": "npm run lint && npm run seo:audit"
+    "precommit": "npm run lint:text && npm run lint && npm run seo:audit"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",

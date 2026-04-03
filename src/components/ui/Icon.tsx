@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'display';
 type IconVariant = 'outline' | 'filled';
 /** decorative: aria-hidden="true" | standalone: renders aria-label, requires label prop */
 type IconPurpose = 'decorative' | 'standalone';
@@ -22,14 +22,14 @@ interface IconProps {
   style?: React.CSSProperties;
 }
 
-/** Maps size tokens to font-size class, opsz optical size axis, and weight axis */
-const sizeMap: Record<IconSize, { cls: string; opsz: number; wght: number }> = {
-  xs:    { cls: 'text-[14px]', opsz: 20, wght: 100 },
-  sm:    { cls: 'text-[16px]', opsz: 20, wght: 100 },
-  md:    { cls: 'text-[20px]', opsz: 24, wght: 100 },
-  lg:    { cls: 'text-[24px]', opsz: 24, wght: 100 },
-  xl:    { cls: 'text-[32px]', opsz: 40, wght: 100 },
-  '2xl': { cls: 'text-[48px]', opsz: 48, wght: 100 },
+const sizeMap: Record<IconSize, { fontSize: string; opsz: string; wght: number }> = {
+  xs:      { fontSize: 'var(--icon-size-xs)', opsz: 'var(--icon-opsz-xs)', wght: 100 },
+  sm:      { fontSize: 'var(--icon-size-sm)', opsz: 'var(--icon-opsz-sm)', wght: 100 },
+  md:      { fontSize: 'var(--icon-size-md)', opsz: 'var(--icon-opsz-md)', wght: 100 },
+  lg:      { fontSize: 'var(--icon-size-lg)', opsz: 'var(--icon-opsz-lg)', wght: 100 },
+  xl:      { fontSize: 'var(--icon-size-xl)', opsz: 'var(--icon-opsz-xl)', wght: 100 },
+  '2xl':   { fontSize: 'var(--icon-size-2xl)', opsz: 'var(--icon-opsz-2xl)', wght: 100 },
+  display: { fontSize: 'var(--icon-size-display)', opsz: 'var(--icon-opsz-display)', wght: 300 },
 };
 
 export default function Icon({
@@ -42,17 +42,16 @@ export default function Icon({
   style,
 }: IconProps) {
   const fill = variant === 'filled' ? 1 : 0;
-
-  // Only apply opsz-correct inline fontVariationSettings when size is explicitly provided.
-  // When size is omitted, the Tailwind .material-symbols plugin class handles it via CSS vars.
   const sizeEntry = size ? sizeMap[size] : undefined;
-  const inlineStyle = sizeEntry
-    ? { fontVariationSettings: `'FILL' ${fill}, 'wght' ${sizeEntry.wght}, 'GRAD' 0, 'opsz' ${sizeEntry.opsz}`, ...style }
-    : style;
+  const inlineStyle: React.CSSProperties = {
+    ...(sizeEntry ? { fontSize: sizeEntry.fontSize } : null),
+    fontVariationSettings: `'FILL' ${fill}, 'wght' ${sizeEntry?.wght ?? 'var(--material-symbols-weight)'}, 'GRAD' var(--material-symbols-grade), 'opsz' ${sizeEntry?.opsz ?? 'var(--material-symbols-optical-size)'}`,
+    ...style,
+  };
 
   return (
     <span
-      className={`material-symbols${sizeEntry ? ` ${sizeEntry.cls}` : ''} ${className}`}
+      className={`material-symbols ${className}`.trim()}
       style={inlineStyle}
       aria-hidden={purpose === 'decorative' ? 'true' : undefined}
       aria-label={purpose === 'standalone' ? label : undefined}

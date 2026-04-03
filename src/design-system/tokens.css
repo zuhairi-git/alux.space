@@ -964,4 +964,5 @@
   --icon-size-lg:  24px;  --icon-opsz-lg:  24;
   --icon-size-xl:  32px;  --icon-opsz-xl:  40;
   --icon-size-2xl: 48px;  --icon-opsz-2xl: 48;
+  --icon-size-display: clamp(2rem, 4vw, 2.75rem); --icon-opsz-display: 40;
 }

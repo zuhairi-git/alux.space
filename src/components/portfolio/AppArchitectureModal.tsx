@@ -36,7 +36,7 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                         <div className={`flex justify-between items-center p-4 sm:p-6 border-b shrink-0 ${isLight ? 'bg-white/80 border-ds-gray-200' : 'bg-black/40 border-ds-gray-800'} backdrop-blur-md z-20 relative`}>
                             <div className="flex items-center space-x-3">
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isColorful ? 'bg-primary-500/20 text-primary-400' : isLight ? 'bg-primary-100 text-primary-600' : 'bg-primary-900/50 text-primary-400'}`}>
-                                    <span className="material-symbols text-2xl">account_tree</span>
+                                    <Icon name="account_tree" size="lg" />
                                 </div>
                                 <div>
                                     <h3 className="text-lg sm:text-xl font-bold text-foreground">App Architecture</h3>
@@ -88,7 +88,7 @@ function WorkflowDiagram({ theme }: { theme: string }) {
             className={`flex items-start gap-4 p-5 sm:p-6 rounded-3xl shadow-md border backdrop-blur-md w-full ${isLight ? bgLight : bgDark} ${isLight ? 'border-black/5' : 'border-white/5'} ${isLarge ? 'md:w-[450px] mx-auto' : ''} z-10 relative`}
         >
             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${isLight ? colorLight : colorDark}`}>
-                <span className="material-symbols text-2xl">{icon}</span>
+                <Icon name={icon} size="lg" />
             </div>
             <div>
                 <h3 className="font-bold text-[15px] mb-1.5 text-foreground">{title}</h3>
@@ -116,11 +116,11 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <div className={`absolute top-0 left-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-0 left-1/2 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-0 right-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
             </div>
 
             {/* 2. Core Engine */}
@@ -138,14 +138,14 @@ function WorkflowDiagram({ theme }: { theme: string }) {
                 <div className={`absolute top-1/2 right-[37.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute top-1/2 right-[12.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
-                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
-                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
-                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
             </div>
 
             {/* 3. Features */}
@@ -167,11 +167,11 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
                 <div className={`absolute top-1/2 left-1/2 h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
                 <div className={`absolute top-0 h-full border-l-[2.5px] border-solid ${connectorsColor}`}></div>
-                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>Ã¢â€“Â¼</div>
+                <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
             </div>
 
             {/* 4. End User App */}

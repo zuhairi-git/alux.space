@@ -67,10 +67,6 @@ const BackgroundEffect = ({ type = 'particles', theme = 'dark' }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | undefined>(undefined);
 
-  if (type === 'none') {
-    return null;
-  }
-
   // Quantum animation effect
   useEffect(() => {
     if (!isQuantumBackground) {
@@ -201,6 +197,10 @@ const BackgroundEffect = ({ type = 'particles', theme = 'dark' }: Props) => {
       window.removeEventListener('resize', updateCanvasSize);
     };
   }, [isColorful, isLight, isQuantumBackground]);
+
+  if (type === 'none') {
+    return null;
+  }
 
   if (isLight) {
     return (

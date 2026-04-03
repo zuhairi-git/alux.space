@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t } from '@/design-system';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 interface ChapterDividerProps {
   title: string;
@@ -13,8 +14,11 @@ interface ChapterDividerProps {
 }
 
 const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id }) => {
-  // Generate ID from title if not provided
   const chapterId = id || title.toLowerCase().replace(/\s+/g, '-');
+  const topWashStyle = {
+    backgroundImage:
+      'linear-gradient(to bottom, color-mix(in srgb, var(--gradient-start) 8%, transparent) 0%, color-mix(in srgb, var(--gradient-mid) 4%, transparent) 42%, transparent 100%)',
+  } satisfies React.CSSProperties;
 
   return (
     <motion.div
@@ -25,35 +29,29 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
       transition={{ duration: durationSeconds.dramatic }}
       className="my-20 relative"
     >
-      {/* Abstract background shapes */}
-      <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-gradient-start to-gradient-mid blur-3xl"></div>
-        <div className="absolute top-10 -right-10 w-48 h-48 rounded-full bg-gradient-to-br from-gradient-mid to-gradient-end blur-3xl"></div>
-      </div>
-      
+      <div className="absolute inset-x-0 top-0 h-20 rounded-t-[2rem] pointer-events-none opacity-60" style={topWashStyle}></div>
+
       <div className="flex flex-col items-center relative z-10">
-        {/* Top design element - gradient line with dots */}
         <div className="flex items-center w-full max-w-xl mx-auto mb-8">
-          <div className="h-px flex-1 bg-gradient-to-r from-gradient-start to-gradient-mid opacity-30"></div>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gradient-start/45 to-gradient-mid/35"></div>
           <div className="px-3 flex items-center">
             {[...Array(3)].map((_, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 className="w-1 h-1 rounded-full bg-gradient-to-r from-gradient-start to-gradient-mid mx-1"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
+                animate={{ scale: [1, 1.18, 1], opacity: [0.55, 0.85, 0.55] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
                   repeatType: "reverse",
-                  delay: i * delaySeconds.lg
+                  delay: i * delaySeconds.lg,
                 }}
               ></motion.div>
             ))}
           </div>
-          <div className="h-px flex-1 bg-gradient-to-l from-gradient-start to-gradient-mid opacity-30"></div>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-gradient-start/45 to-gradient-mid/35"></div>
         </div>
-        
-        {/* Chapter number with unique styling */}
+
         <div className="relative mb-4">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -62,28 +60,26 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
             transition={{ ...t.enterSlow, delay: delaySeconds.md }}
             className="relative"
           >
-            {/* Subtle glow behind number/icon */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gradient-start to-gradient-mid opacity-10 blur-xl rounded-full"></div>
-            
-            {/* Chapter number or Icon */}
             <div className="relative z-10 flex items-center justify-center">
               {icon ? (
-                <span 
-                  className="material-symbols !text-[2rem] md:!text-[2.75rem] bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-40 leading-none" 
-                  style={{ fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40" }}
-                >
-                  {icon}
-                </span>
+                <Icon
+                  name={icon}
+                  size="display"
+                  className="bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent leading-none opacity-70"
+                  style={{ lineHeight: 1 }}
+                />
               ) : (
-                <span className="text-[2rem] md:text-[2.75rem] font-bold bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-30 leading-none">
+                <span
+                  className="font-bold bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-70 leading-none"
+                  style={{ fontSize: 'var(--icon-size-display)' }}
+                >
                   {number}
                 </span>
               )}
             </div>
           </motion.div>
         </div>
-        
-        {/* Chapter title with animated underline */}
+
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -94,9 +90,8 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             {title}
           </h2>
-          
-          {/* Animated underline */}
-          <motion.div 
+
+          <motion.div
             className="h-px w-0 bg-gradient-to-r from-gradient-mid to-gradient-end mx-auto"
             initial={{ width: "0%" }}
             whileInView={{ width: "50%" }}
@@ -104,30 +99,29 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
             transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
           ></motion.div>
         </motion.div>
-        
-        {/* Back to top link with subtle styling */}
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ ...t.enterSlow, delay: delaySeconds['3xl'] }}
           className="text-center"
         >
-          <Link 
-            href="#top" 
+          <Link
+            href="#top"
             className="inline-flex items-center text-xs text-foreground/60 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-gradient-start hover:to-gradient-mid transition duration-300"
           >
-            <motion.svg 
-              className="w-3 h-3 mr-1" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
+            <motion.svg
+              className="w-3 h-3 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
               animate={{ y: [0, -2, 0] }}
-              transition={{ 
-                duration: 1.5, 
+              transition={{
+                duration: 1.5,
                 repeat: Infinity,
-                repeatType: "loop" 
+                repeatType: "loop",
               }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>

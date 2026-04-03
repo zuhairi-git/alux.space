@@ -296,7 +296,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
               WebkitBackdropFilter: 'blur(80px) saturate(180%)',
             }}
           >
-            {/* Overview items Ã¢â‚¬â€ no category */}
+            {/* Overview items — no category */}
             {item.children.filter((c) => !c.category).map((child, idx) => (
               <Link
                 key={`ov-${idx}`}

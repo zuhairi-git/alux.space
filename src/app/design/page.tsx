@@ -2239,6 +2239,92 @@ function ChapterDividerSection() {
   );
 }
 
+function DoubleDiamondSection() {
+  const phases = [
+    {
+      title: 'Discover',
+      icon: 'search',
+      body: 'Research user needs, accessibility challenges, and current limitations in design systems.',
+      surface: 'linear-gradient(180deg, color-mix(in srgb, var(--primary) 12%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+      iconSurface: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-500) 100%)',
+    },
+    {
+      title: 'Define',
+      icon: 'target',
+      body: 'Synthesize insights into clear accessibility requirements and design principles.',
+      surface: 'linear-gradient(180deg, color-mix(in srgb, var(--gradient-start) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+      iconSurface: 'linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%)',
+    },
+    {
+      title: 'Develop',
+      icon: 'build',
+      body: 'Create accessible components, test with users, and iterate based on feedback.',
+      surface: 'linear-gradient(180deg, color-mix(in srgb, var(--gradient-mid) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+      iconSurface: 'linear-gradient(135deg, var(--gradient-mid) 0%, var(--gradient-end) 100%)',
+    },
+    {
+      title: 'Deliver',
+      icon: 'rocket_launch',
+      body: 'Launch the design system with documentation, training, and handoff support.',
+      surface: 'linear-gradient(180deg, color-mix(in srgb, var(--gradient-end) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 92%, transparent) 100%)',
+      iconSurface: 'linear-gradient(135deg, var(--gradient-end) 0%, var(--primary) 100%)',
+    },
+  ];
+
+  return (
+    <DemoSection code={`const phases = [
+  { title: 'Discover', icon: 'search' },
+  { title: 'Define', icon: 'target' },
+  { title: 'Develop', icon: 'build' },
+  { title: 'Deliver', icon: 'rocket_launch' },
+];
+
+<div className="rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--background)]/30 p-5">
+  {phases.map((phase) => (
+    <article key={phase.title} className="rounded-2xl border border-[var(--card-border)]">
+      <Icon name={phase.icon} size="lg" />
+    </article>
+  ))}
+</div>`}>
+      <div className="rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--background)]/30 p-5">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border bg-[var(--card-from-bg)] border-[var(--card-border)]">
+            <span className="text-xs font-medium text-[var(--primary)]">Problem Discovery</span>
+            <div className="w-px h-4 bg-[var(--card-border)]"></div>
+            <span className="text-xs font-medium text-[var(--primary)]">Solution Creation</span>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-5">
+          {phases.map((phase, index) => (
+            <article
+              key={phase.title}
+              className="group relative rounded-2xl border border-[var(--card-border)] p-5 transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ backgroundImage: phase.surface }}
+            >
+              <div className={`mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
+                <div
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full shadow-lg"
+                  style={{ backgroundImage: phase.iconSurface, boxShadow: '0 12px 28px -18px color-mix(in srgb, var(--primary) 45%, transparent)' }}
+                >
+                  <Icon name={phase.icon} size="lg" className="text-white" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-[var(--foreground)]">{phase.title}</h3>
+              <p className="text-sm leading-relaxed opacity-80 text-[var(--foreground)]">{phase.body}</p>
+              {index < phases.length - 1 ? (
+                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-0.5 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-30">
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]"></div>
+                </div>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
 function SelectSection() {
   const [selected, setSelected] = useState('');
   const options = [
@@ -2790,6 +2876,7 @@ const allSections: SectionDef[] = [
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
   { key: 'code-snippet', title: 'Code Snippet',            render: () => <CodeSnippetSection /> },
   { key: 'chapter-divider', title: 'Chapter Divider',      render: () => <ChapterDividerSection /> },
+  { key: 'double-diamond', title: 'Double Diamond',        render: () => <DoubleDiamondSection /> },
   { key: 'selects',    title: 'Selects',                   render: () => <SelectSection /> },
   { key: 'modals',     title: 'Modals',                     render: () => <ModalSection /> },
   { key: 'tabs',       title: 'Tabs',                       render: () => <TabsSection /> },
@@ -2842,6 +2929,7 @@ function OverviewGrid() {
         { key: 'buttons',         icon: 'smart_button',           label: 'Buttons' },
         { key: 'chapter-divider', icon: 'format_list_numbered',   label: 'Chapter Divider' },
         { key: 'code-snippet',    icon: 'code',                   label: 'Code Snippet' },
+        { key: 'double-diamond',  icon: 'diamond',                label: 'Double Diamond' },
         { key: 'dividers',        icon: 'horizontal_rule',        label: 'Dividers' },
         { key: 'icons',           icon: 'emoji_symbols',          label: 'Icons' },
         { key: 'inputs',          icon: 'text_fields',            label: 'Inputs' },
