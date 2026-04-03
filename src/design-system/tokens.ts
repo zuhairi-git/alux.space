@@ -317,6 +317,11 @@ export const duration = {
   glacial: '1000ms',
 } as const;
 
+export const motionDistance = {
+  reveal: 16,
+  revealStrong: 24,
+} as const;
+
 /** Numeric seconds — use with Framer Motion `transition.duration` */
 export const durationSeconds = {
   instant: 0.1,

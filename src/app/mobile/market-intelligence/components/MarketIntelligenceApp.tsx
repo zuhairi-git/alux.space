@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
+import { delaySeconds, durationSeconds, easing, motionDistance, stagger as motionStagger, transition as motionTransition } from '@/design-system';
 import { MobileIntroScreen, type MobileIntroConfig, iosTheme, androidTheme, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../../shared';
 
 const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
@@ -66,7 +67,7 @@ function AnimatedCounter({ value, prefix = '', suffix = '', decimals = 0, classN
     const [display, setDisplay] = useState(`${prefix}${(0).toFixed(decimals)}${suffix}`);
     useEffect(() => {
         const unsub = rounded.on('change', (v) => setDisplay(v));
-        const ctrl = animate(motionValue, value, { duration: 1.5, ease: [0.25, 1, 0.5, 1] });
+        const ctrl = animate(motionValue, value, { duration: durationSeconds.ultra, ease: easing.gentle.array });
         return () => { unsub(); ctrl.stop(); };
     }, [value, motionValue, rounded]);
     return <span className={className}>{display}</span>;
@@ -79,7 +80,7 @@ function PulseBeacon({ color = 'green', size = 'sm' }: { color?: string, size?: 
     const colorMap: Record<string, string> = { green: 'bg-ds-success', red: 'bg-ds-error', amber: 'bg-ds-warning', blue: 'bg-primary', purple: 'bg-primary' };
     return (
         <span className="relative inline-flex items-center justify-center">
-            <span className={`absolute ${ps} rounded-full ${colorMap[color] || colorMap.green} animate-ping opacity-30`} />
+            <span className={`absolute ${ps} rounded-full ${colorMap[color] || colorMap.green} opacity-20`} />
             <span className={`relative ${s} rounded-full ${colorMap[color] || colorMap.green}`} />
         </span>
     );
@@ -159,29 +160,6 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
 
     return (
         <div className={`flex flex-col h-full w-full relative ${bgClass} transition-colors duration-500 font-sans theme-${theme}`}>
-            {/* Ambient Background Effects - all themes */}
-            {!showIntro && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                    {isColorful ? (
-                        <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
-                            <div className="absolute top-1/3 -right-16 w-48 h-48 bg-primary/8 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }} />
-                            <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-ds-fuchsia-600/8 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
-                            <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-primary-600/6 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '6s' }} />
-                        </>
-                    ) : isLight ? (
-                        <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-400/[0.04] rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '8s' }} />
-                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-primary-400/[0.03] rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
-                        </>
-                    ) : (
-                        <>
-                            <div className="absolute -top-20 -left-20 w-60 h-60 bg-primary-600/[0.06] rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '8s' }} />
-                            <div className="absolute bottom-20 -right-16 w-48 h-48 bg-[var(--primary)]/[0.04] rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '3s' }} />
-                        </>
-                    )}
-                </div>
-            )}
             {/* Intro screen overlay */}
             <AnimatePresence>
                 {showIntro && (
@@ -189,7 +167,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                         key="intro"
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0, scale: 1.2, y: -30 }}
-                        transition={{ duration: 0.65, ease: [0.32, 0.72, 0, 1] }}
+                        transition={{ duration: durationSeconds.slower, ease: easing.gentle.array }}
                         className="absolute inset-0 z-50"
                     >
                         <MobileIntroScreen
@@ -234,7 +212,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     <div className="flex items-center space-x-2">
                         <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-primary/20 text-accent' : isIOS ? (isLight ? 'bg-black/5 text-ds-gray-900' : 'bg-white/10 text-ds-gray-100') : (isLight ? 'bg-primary-100/50 text-primary-900' : 'bg-primary-800/50 text-primary-200')}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                             <Icon name="auto_awesome" className="text-[20px]" />
-                            <span className="absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse shadow-sm" />
+                            <span className="absolute top-[9px] right-[9px] h-[5.5px] w-[5.5px] rounded-full bg-ds-warning shadow-sm" />
                         </motion.button>
                     </div>
                 </div>
@@ -286,23 +264,19 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
         { ticker: 'PLTR', change: '+8.7%', up: true }, { ticker: 'RIVN', change: '-7.3%', up: false },
     ];
 
-    const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
-    const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
+    const staggerCards = { hidden: {}, show: { transition: { staggerChildren: motionStagger.normal, delayChildren: delaySeconds.xs } } };
+    const fadeUp = {
+        hidden: { opacity: 0, y: motionDistance.revealStrong, scale: 0.96 },
+        show: { opacity: 1, y: 0, scale: 1, transition: motionTransition.springGentle },
+    };
 
     return (
-        <motion.div initial="hidden" animate="show" variants={stagger} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-5">
+        <motion.div initial="hidden" animate="show" variants={staggerCards} className="absolute inset-0 overflow-y-auto scrollbar-none pb-28 pt-[110px] px-4 space-y-5">
             {/* ── Portfolio Value Hero ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient accent line */}
                 <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r opacity-70 ${isColorful ? 'from-primary to-primary-dark' : isIOS ? 'from-primary to-primary-dark' : 'from-primary-500 to-primary-300'}`} />
-                {/* Shimmer sweep on card */}
-                <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%)' }}
-                    initial={{ x: '-100%' }}
-                    animate={{ x: '200%' }}
-                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', repeatDelay: 4, delay: 1 }}
-                />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/5 via-transparent to-transparent" />
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center space-x-2">
                         <PulseBeacon color="green" />
@@ -728,7 +702,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                     <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, type: 'spring', stiffness: 250, damping: 20, mass: 0.9 }}
                         className="flex flex-col items-center pt-[5vh] pb-8 shrink-0">
                         <div className="relative w-16 h-16 flex items-center justify-center mb-6">
-                            <div className={`absolute inset-0 rounded-full animate-ping opacity-15 bg-primary`} style={{ animationDuration: '2s', animationIterationCount: 2, animationFillMode: 'forwards' }} />
+                            <div className="absolute inset-0 rounded-full bg-primary opacity-10" />
                             <Icon name="auto_awesome" className="text-[36px] text-primary" />
                         </div>
                         <h3 className="font-bold text-lg mb-1">Market Copilot</h3>
@@ -858,7 +832,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                         <div className="absolute left-[14px] top-4 z-10">
                             <div className={`w-[16px] h-[16px] rounded-full border-[3px] ${isLight ? 'border-white' : isColorful ? 'border-ds-colorful-bg' : 'border-ds-dark-1'} ${dotColor(a.color)}`}>
                                 {a.priority === 'critical' && (
-                                    <div className={`absolute inset-[-4px] rounded-full ${dotColor(a.color)} animate-ping opacity-30`} />
+                                    <div className={`absolute inset-[-4px] rounded-full ${dotColor(a.color)} opacity-20`} />
                                 )}
                             </div>
                         </div>

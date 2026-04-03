@@ -59,10 +59,10 @@ const pageVariants = {
     exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -80 : 80, scale: 0.85, rotateY: dir > 0 ? -8 : 8, transition: { type: 'spring', stiffness: 260, damping: 28, mass: 0.8 } }),
 };
 
-// Floating orb component for ambient background animation
+// Floating orb component for static ambient background decoration
 function FloatingOrb({ size, color, startX, startY, delay }: { size: number, color: string, startX: string, startY: string, delay: number }) {
     return (
-        <motion.div
+        <div
             className="absolute rounded-full pointer-events-none"
             style={{
                 width: size,
@@ -70,21 +70,7 @@ function FloatingOrb({ size, color, startX, startY, delay }: { size: number, col
                 left: startX,
                 top: startY,
                 background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-                willChange: 'transform, opacity',
-            }}
-            initial={{ opacity: 0, scale: 0.3 }}
-            animate={{
-                opacity: [0, 0.6, 0.4, 0.7, 0.5],
-                scale: [0.3, 1.1, 0.9, 1.2, 1],
-                x: [0, 30, -20, 15, 0],
-                y: [0, -25, 15, -10, 0],
-            }}
-            transition={{
-                duration: 8 + delay * 2,
-                repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut',
-                delay: delay,
+                opacity: 0.65 - delay * 0.08,
             }}
         />
     );
@@ -182,9 +168,9 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             {/* Colorful ambient mesh - enhanced */}
             {selectedTheme === 'colorful' && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full bg-ds-fuchsia-600/25 blur-[100px] animate-pulse" style={{ animationDuration: '7s' }} />
-                    <div className="absolute -bottom-24 -right-16 w-[300px] h-[300px] rounded-full bg-ds-violet-600/20 blur-[100px] animate-pulse" style={{ animationDuration: '9s', animationDelay: '3s' }} />
-                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/10 blur-[100px] animate-pulse`} style={{ animationDuration: '11s', animationDelay: '5s' }} />
+                    <div className="absolute -left-24 -top-24 h-[340px] w-[340px] rounded-full bg-ds-fuchsia-600/25 blur-[100px]" />
+                    <div className="absolute -bottom-24 -right-16 h-[300px] w-[300px] rounded-full bg-ds-violet-600/20 blur-[100px]" />
+                    <div className="absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]" />
                 </div>
             )}
 

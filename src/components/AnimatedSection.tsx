@@ -2,8 +2,9 @@
 
 import { useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { delaySeconds, durationSeconds, easing, motionDistance, transition } from '@/design-system';
 
-type AnimationType = 'fade-in' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right';
+type AnimationType = 'fade-in' | 'slide-up' | 'slide-down';
 
 interface AnimatedSectionProps {
   id?: string;
@@ -33,8 +34,8 @@ export default function AnimatedSection({
   className,
   children,
   animation = 'fade-in',
-  delay = 0,
-  duration = 0.45,
+  delay = delaySeconds.none,
+  duration = durationSeconds.slow,
   once = true,
   role,
   'aria-label': ariaLabel,
@@ -42,8 +43,8 @@ export default function AnimatedSection({
   const ref = useRef(null);
   const skip = useReducedMotion(); // respects MotionConfig.reducedMotion
 
-  const y = animation === 'slide-up' ? 16 : animation === 'slide-down' ? -16 : 0;
-  const x = animation === 'slide-left' ? -16 : animation === 'slide-right' ? 16 : 0;
+  const revealOffset = motionDistance.reveal;
+  const y = animation === 'slide-up' ? revealOffset : animation === 'slide-down' ? -revealOffset : 0;
 
   return (
     <motion.section
@@ -53,10 +54,15 @@ export default function AnimatedSection({
       {...(skip
         ? {}
         : {
-            initial: { opacity: 0, y, x },
-            whileInView: { opacity: 1, y: 0, x: 0 },
+            initial: { opacity: 0, y },
+            whileInView: { opacity: 1, y: 0 },
             viewport: { once, margin: '-60px 0px' },
-            transition: { duration, delay, ease: [0.22, 1, 0.36, 1] },
+            transition: {
+              ...transition.enter,
+              duration,
+              delay,
+              ease: easing.out.array,
+            },
           })}
       role={role}
       aria-label={ariaLabel}

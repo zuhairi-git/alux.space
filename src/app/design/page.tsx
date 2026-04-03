@@ -28,7 +28,11 @@ import {
   Progress,
   Breadcrumb,
   Text,
+  delaySeconds,
+  durationSeconds,
+  easing,
   getByCategory,
+  motionDistance,
 } from '@/design-system';
 import type { ComponentEntry } from '@/design-system';
 import AnimatedSection from '@/components/AnimatedSection';
@@ -1190,26 +1194,28 @@ function ShadowsSection() {
 
 function MotionSection() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {[
-        { name: 'ease-out (smooth deceleration)', var: '--ease-out', dur: '--duration-normal' },
-        { name: 'ease-standard', var: '--ease-standard', dur: '--duration-normal' },
-        { name: 'ease-gentle (spring-like)', var: '--ease-gentle', dur: '--duration-slow' },
-      ].map(e => (
-        <div key={e.name} className="theme-card-flex p-4 rounded-xl group">
-          <span className="text-xs font-mono opacity-60 mb-2">{e.name}</span>
-          <div className="h-2 bg-foreground/15 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-primary rounded-full w-0 group-hover:w-full"
-              style={{
-                transitionProperty: 'width',
-                transitionDuration: `var(${e.dur})`,
-                transitionTimingFunction: `var(${e.var})`,
-              }}
-            />
+    <div className="space-y-4">
+      <div className="theme-card-flex rounded-xl p-4">
+        <p className="text-sm leading-6 opacity-80">
+          Motion is intentionally limited: the hero keeps the quantum canvas, count-up feedback stays available for KPI moments,
+          and in-page reveal uses AnimatedSection with token-driven fade, slide-up, and slide-down variants only. Background motion
+          is removed outside hero/header contexts.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {[
+          { name: 'ease-out', value: easing.out.css, token: '--ease-out' },
+          { name: 'gentle', value: easing.gentle.css, token: '--ease-gentle' },
+          { name: 'enter duration', value: `${durationSeconds.slow}s`, token: '--duration-slow' },
+          { name: 'reveal offset', value: `${motionDistance.reveal}px`, token: '--motion-reveal-offset' },
+        ].map(item => (
+          <div key={item.name} className="theme-card-flex p-4 rounded-xl group">
+            <span className="mb-1 text-xs font-mono opacity-60">{item.name}</span>
+            <span className="text-sm font-medium">{item.value}</span>
+            <span className="mt-2 text-[11px] font-mono opacity-45">{item.token}</span>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -2169,14 +2175,19 @@ function IconsSection() {
 
 function AnimationsSection() {
   return (
-    <DemoSection code={`import AnimatedSection from '@/components/AnimatedSection';
+    <DemoSection code={`import { delaySeconds } from '@/design-system';
+import AnimatedSection from '@/components/AnimatedSection';
 
-<AnimatedSection animation="slide-up" delay={0.1}>
+<AnimatedSection animation="slide-up" delay={delaySeconds.xs}>
   <div>Content slides up on scroll</div>
 </AnimatedSection>`}>
+      <div className="mb-4 text-sm opacity-70">
+        Approved reveal patterns: fade-in, slide-up, and slide-down. Use these for content entering the viewport; avoid decorative
+        looping background motion outside hero sections.
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {(['slide-up', 'slide-left', 'slide-right'] as const).map((anim, i) => (
-          <AnimatedSection key={anim} animation={anim} delay={i * 0.1} once={false}>
+        {(['fade-in', 'slide-up', 'slide-down'] as const).map((anim, i) => (
+          <AnimatedSection key={anim} animation={anim} delay={i * delaySeconds.xs} once={false}>
             <div className="theme-card-flex p-4 rounded-xl text-center">
               <span className="text-sm font-mono opacity-60">{anim}</span>
             </div>

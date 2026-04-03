@@ -20,14 +20,63 @@ interface QuantumParticle {
   superpositionState: number; // 0-1 for wave function collapse
 }
 
-const BackgroundEffect = ({ theme = 'dark' }: Props) => {
+function StaticConstellation({ theme }: { theme: Theme }) {
+  if (theme === 'light') {
+    return (
+      <svg className="absolute inset-0 h-full w-full opacity-20" viewBox="0 0 1000 1000">
+        <g>
+          <circle cx="500" cy="200" r="3" fill={palette.purple[500]} />
+          <circle cx="300" cy="400" r="3" fill={palette.yellow[500]} />
+          <circle cx="700" cy="400" r="3" fill={palette.pink[500]} />
+          <circle cx="400" cy="700" r="3" fill={palette.blue[500]} />
+          <circle cx="600" cy="700" r="3" fill={palette.purple[500]} />
+          <line x1="500" y1="200" x2="300" y2="400" stroke={palette.purple[500]} strokeWidth="0.5" opacity="0.4" />
+          <line x1="500" y1="200" x2="700" y2="400" stroke={palette.yellow[500]} strokeWidth="0.5" opacity="0.4" />
+          <line x1="300" y1="400" x2="400" y2="700" stroke={palette.pink[500]} strokeWidth="0.5" opacity="0.4" />
+          <line x1="700" y1="400" x2="600" y2="700" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.4" />
+          <line x1="300" y1="400" x2="700" y2="400" stroke={palette.purple[500]} strokeWidth="0.5" opacity="0.3" />
+          <line x1="400" y1="700" x2="600" y2="700" stroke={palette.yellow[500]} strokeWidth="0.5" opacity="0.3" />
+        </g>
+      </svg>
+    );
+  }
+
+  return (
+    <svg className="absolute inset-0 h-full w-full opacity-15" viewBox="0 0 1000 1000">
+      <g>
+        <circle cx="500" cy="200" r="2" fill={palette.blue[500]} />
+        <circle cx="300" cy="400" r="2" fill={palette.indigo[500]} />
+        <circle cx="700" cy="400" r="2" fill={palette.violet[500]} />
+        <circle cx="400" cy="700" r="2" fill={palette.blue[500]} />
+        <circle cx="600" cy="700" r="2" fill={palette.indigo[500]} />
+        <line x1="500" y1="200" x2="300" y2="400" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.3" />
+        <line x1="500" y1="200" x2="700" y2="400" stroke={palette.indigo[500]} strokeWidth="0.5" opacity="0.3" />
+        <line x1="300" y1="400" x2="400" y2="700" stroke={palette.violet[500]} strokeWidth="0.5" opacity="0.3" />
+        <line x1="700" y1="400" x2="600" y2="700" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.3" />
+        <line x1="300" y1="400" x2="700" y2="400" stroke={palette.indigo[500]} strokeWidth="0.5" opacity="0.2" />
+        <line x1="400" y1="700" x2="600" y2="700" stroke={palette.violet[500]} strokeWidth="0.5" opacity="0.2" />
+      </g>
+    </svg>
+  );
+}
+
+const BackgroundEffect = ({ type = 'particles', theme = 'dark' }: Props) => {
   const isLight = theme === 'light';
   const isColorful = theme === 'colorful';
+  const isQuantumBackground = type === 'particles';
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | undefined>(undefined);
 
+  if (type === 'none') {
+    return null;
+  }
+
   // Quantum animation effect
   useEffect(() => {
+    if (!isQuantumBackground) {
+      return undefined;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -151,46 +200,27 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
       }
       window.removeEventListener('resize', updateCanvasSize);
     };
-  }, [isLight, isColorful]);
+  }, [isColorful, isLight, isQuantumBackground]);
 
   if (isLight) {
     return (
       <div className="absolute inset-0 overflow-hidden bg-white">
-        {/* Quantum Canvas Layer */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full opacity-40"
-          style={{ pointerEvents: 'none' }}
-        />
-        
-        {/* Rotating neural network */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1000 1000">
-          <g className="animate-gentle-drift" style={{ transformOrigin: '500px 500px' }}>
-            <circle cx="500" cy="200" r="3" fill={palette.purple[500]} />
-            <circle cx="300" cy="400" r="3" fill={palette.yellow[500]} />
-            <circle cx="700" cy="400" r="3" fill={palette.pink[500]} />
-            <circle cx="400" cy="700" r="3" fill={palette.blue[500]} />
-            <circle cx="600" cy="700" r="3" fill={palette.purple[500]} />
-            <line x1="500" y1="200" x2="300" y2="400" stroke={palette.purple[500]} strokeWidth="0.5" opacity="0.4" />
-            <line x1="500" y1="200" x2="700" y2="400" stroke={palette.yellow[500]} strokeWidth="0.5" opacity="0.4" />
-            <line x1="300" y1="400" x2="400" y2="700" stroke={palette.pink[500]} strokeWidth="0.5" opacity="0.4" />
-            <line x1="700" y1="400" x2="600" y2="700" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.4" />
-            <line x1="300" y1="400" x2="700" y2="400" stroke={palette.purple[500]} strokeWidth="0.5" opacity="0.3" />
-            <line x1="400" y1="700" x2="600" y2="700" stroke={palette.yellow[500]} strokeWidth="0.5" opacity="0.3" />
-          </g>
-        </svg>
-        
-        {/* Code blocks falling */}
-        <div className="absolute top-0 left-1/4 text-primary-300 text-xs font-mono opacity-30 animate-matrix">const</div>
-        <div className="absolute top-0 left-1/3 text-ds-gold-300 text-xs font-mono opacity-30 animate-matrix animation-delay-2000">func</div>
-        <div className="absolute top-0 left-1/2 text-ds-pink-300 text-xs font-mono opacity-30 animate-matrix animation-delay-4000">{'=>'}</div>
-        <div className="absolute top-0 left-2/3 text-ds-blue-300 text-xs font-mono opacity-30 animate-matrix animation-delay-1000">return</div>
-        <div className="absolute top-0 right-1/4 text-primary-300 text-xs font-mono opacity-30 animate-matrix animation-delay-3000">async</div>
-        
-        {/* Pulsing nodes */}
-        <div className="absolute top-20 right-20 w-2 h-2 bg-primary-400 rounded-full animate-pulse-glow" />
-        <div className="absolute bottom-20 left-20 w-2 h-2 bg-ds-gold-400 rounded-full animate-pulse-glow animation-delay-1000" />
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-ds-pink-400 rounded-full animate-pulse-glow animation-delay-2000" />
+        {isQuantumBackground && (
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 h-full w-full opacity-40"
+            style={{ pointerEvents: 'none' }}
+          />
+        )}
+        <StaticConstellation theme={theme} />
+        <div className="absolute top-[10%] left-1/4 text-primary-300 text-xs font-mono opacity-25">const</div>
+        <div className="absolute top-[18%] left-1/3 text-ds-gold-300 text-xs font-mono opacity-25">func</div>
+        <div className="absolute top-[12%] left-1/2 text-ds-pink-300 text-xs font-mono opacity-25">{'=>'}</div>
+        <div className="absolute top-[20%] left-2/3 text-ds-blue-300 text-xs font-mono opacity-25">return</div>
+        <div className="absolute top-[16%] right-1/4 text-primary-300 text-xs font-mono opacity-25">async</div>
+        <div className="absolute right-20 top-20 h-2 w-2 rounded-full bg-primary-400 opacity-70" />
+        <div className="absolute bottom-20 left-20 h-2 w-2 rounded-full bg-ds-gold-400 opacity-70" />
+        <div className="absolute left-1/4 top-1/2 h-2 w-2 rounded-full bg-ds-pink-400 opacity-70" />
       </div>
     );
   }
@@ -198,29 +228,24 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
   if (isColorful) {
     return (
       <div className="absolute inset-0 overflow-hidden bg-[var(--color-colorful-bg)]">
-        {/* Quantum Canvas Layer */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full opacity-60"
-          style={{ pointerEvents: 'none' }}
-        />
-        
-        {/* Matrix code rain - Left side */}
-        <div className="absolute top-0 left-[5%] text-ds-cyan-400 text-sm font-mono opacity-40 animate-matrix">01</div>
-        <div className="absolute top-0 left-[12%] text-primary-400 text-sm font-mono opacity-40 animate-matrix animation-delay-1000">10</div>
-        <div className="absolute top-0 left-[18%] text-ds-pink-400 text-sm font-mono opacity-40 animate-matrix animation-delay-2000">11</div>
-        <div className="absolute top-0 left-[25%] text-ds-cyan-400 text-sm font-mono opacity-40 animate-matrix animation-delay-3000">00</div>
-        
-        {/* Matrix code rain - Right side */}
-        <div className="absolute top-0 right-[5%] text-primary-400 text-sm font-mono opacity-40 animate-matrix animation-delay-4000">01</div>
-        <div className="absolute top-0 right-[12%] text-ds-pink-400 text-sm font-mono opacity-40 animate-matrix animation-delay-5000">10</div>
-        <div className="absolute top-0 right-[18%] text-ds-cyan-400 text-sm font-mono opacity-40 animate-matrix animation-delay-6000">11</div>
-        <div className="absolute top-0 right-[25%] text-primary-400 text-sm font-mono opacity-40 animate-matrix animation-delay-2000">00</div>
-        
-        {/* Glowing data nodes */}
-        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-ds-cyan-400 rounded-full animate-pulse-glow" />
-        <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-primary-400 rounded-full animate-pulse-glow animation-delay-2000" />
-        <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-ds-pink-400 rounded-full animate-pulse-glow animation-delay-4000" />
+        {isQuantumBackground && (
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 h-full w-full opacity-60"
+            style={{ pointerEvents: 'none' }}
+          />
+        )}
+        <div className="absolute left-[5%] top-[8%] text-sm font-mono text-ds-cyan-400 opacity-35">01</div>
+        <div className="absolute left-[12%] top-[16%] text-sm font-mono text-primary-400 opacity-35">10</div>
+        <div className="absolute left-[18%] top-[12%] text-sm font-mono text-ds-pink-400 opacity-35">11</div>
+        <div className="absolute left-[25%] top-[20%] text-sm font-mono text-ds-cyan-400 opacity-35">00</div>
+        <div className="absolute right-[5%] top-[9%] text-sm font-mono text-primary-400 opacity-35">01</div>
+        <div className="absolute right-[12%] top-[18%] text-sm font-mono text-ds-pink-400 opacity-35">10</div>
+        <div className="absolute right-[18%] top-[13%] text-sm font-mono text-ds-cyan-400 opacity-35">11</div>
+        <div className="absolute right-[25%] top-[22%] text-sm font-mono text-primary-400 opacity-35">00</div>
+        <div className="absolute left-1/4 top-1/4 h-3 w-3 rounded-full bg-ds-cyan-400 opacity-80" />
+        <div className="absolute right-1/4 top-3/4 h-3 w-3 rounded-full bg-primary-400 opacity-80" />
+        <div className="absolute right-1/3 top-1/2 h-3 w-3 rounded-full bg-ds-pink-400 opacity-80" />
       </div>
     );
   }
@@ -228,39 +253,20 @@ const BackgroundEffect = ({ theme = 'dark' }: Props) => {
   // Dark theme (default)
   return (
     <div className="absolute inset-0 overflow-hidden bg-ds-gray-950">
-      {/* Quantum Canvas Layer */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-30"
-        style={{ pointerEvents: 'none' }}
-      />
-      
-      {/* Subtle rotating constellation */}
-      <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 1000 1000">
-        <g className="animate-gentle-drift" style={{ transformOrigin: '500px 500px' }}>
-          <circle cx="500" cy="200" r="2" fill={palette.blue[500]} />
-          <circle cx="300" cy="400" r="2" fill={palette.indigo[500]} />
-          <circle cx="700" cy="400" r="2" fill={palette.violet[500]} />
-          <circle cx="400" cy="700" r="2" fill={palette.blue[500]} />
-          <circle cx="600" cy="700" r="2" fill={palette.indigo[500]} />
-          <line x1="500" y1="200" x2="300" y2="400" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.3" />
-          <line x1="500" y1="200" x2="700" y2="400" stroke={palette.indigo[500]} strokeWidth="0.5" opacity="0.3" />
-          <line x1="300" y1="400" x2="400" y2="700" stroke={palette.violet[500]} strokeWidth="0.5" opacity="0.3" />
-          <line x1="700" y1="400" x2="600" y2="700" stroke={palette.blue[500]} strokeWidth="0.5" opacity="0.3" />
-          <line x1="300" y1="400" x2="700" y2="400" stroke={palette.indigo[500]} strokeWidth="0.5" opacity="0.2" />
-          <line x1="400" y1="700" x2="600" y2="700" stroke={palette.violet[500]} strokeWidth="0.5" opacity="0.2" />
-        </g>
-      </svg>
-      
-      {/* Code symbols falling gently */}
-      <div className="absolute top-0 left-1/4 text-ds-blue-800 text-xs font-mono opacity-20 animate-matrix">{'<>'}</div>
-      <div className="absolute top-0 left-1/2 text-ds-indigo-800 text-xs font-mono opacity-20 animate-matrix animation-delay-3000">{'{}'}</div>
-      <div className="absolute top-0 left-3/4 text-primary-800 text-xs font-mono opacity-20 animate-matrix animation-delay-5000">[]</div>
-      
-      {/* Subtle pulsing nodes */}
-      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-[var(--primary)] rounded-full animate-pulse-glow" />
-      <div className="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-ds-indigo-600 rounded-full animate-pulse-glow animation-delay-2000" />
-      <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse-glow animation-delay-4000" />
+      {isQuantumBackground && (
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 h-full w-full opacity-30"
+          style={{ pointerEvents: 'none' }}
+        />
+      )}
+      <StaticConstellation theme={theme} />
+      <div className="absolute left-1/4 top-[10%] text-xs font-mono text-ds-blue-800 opacity-20">{'<>'}</div>
+      <div className="absolute left-1/2 top-[18%] text-xs font-mono text-ds-indigo-800 opacity-20">{'{}'}</div>
+      <div className="absolute left-3/4 top-[13%] text-xs font-mono text-primary-800 opacity-20">[]</div>
+      <div className="absolute right-1/4 top-1/4 h-1.5 w-1.5 rounded-full bg-[var(--primary)] opacity-70" />
+      <div className="absolute bottom-1/4 left-1/4 h-1.5 w-1.5 rounded-full bg-ds-indigo-600 opacity-70" />
+      <div className="absolute left-1/3 top-1/2 h-1.5 w-1.5 rounded-full bg-primary-600 opacity-70" />
     </div>
   );
 };

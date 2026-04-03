@@ -925,6 +925,8 @@
   --duration-normal:   300ms;
   --duration-slow:     500ms;
   --duration-glacial:  1000ms;
+  --motion-reveal-offset: 16px;
+  --motion-reveal-offset-strong: 24px;
 
   --ease-out:          cubic-bezier(0.22, 1, 0.36, 1);
   --ease-standard:     cubic-bezier(0.4, 0, 0.2, 1);

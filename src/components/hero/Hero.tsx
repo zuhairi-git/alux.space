@@ -12,9 +12,9 @@ interface HeroProps {
 
 export default function Hero({ config }: HeroProps) {
   const { theme } = useTheme();
-  // Use modern-flow for light/dark themes regardless of the configured background effect
-  const backgroundEffect = (theme === 'light' || theme === 'dark') ? 'modern-flow' : config.backgroundEffect || 'none';
-    return (
+  const backgroundEffect = 'particles';
+
+  return (
     <section 
       className={`relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center`}
       role="banner"

@@ -15,6 +15,7 @@ export {
   radius,
   shadow,
   duration,
+  motionDistance,
   durationSeconds,
   delaySeconds,
   stagger,
