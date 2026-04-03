@@ -65,6 +65,7 @@ export default function TestimonialCarousel({
 
   const current = testimonials[active];
   const highlights = current.highlights ?? [];
+  const avatarShapeClass = 'rounded-[calc(var(--card-radius)-0.75rem)]';
 
   const variants = {
     enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 40 : -40 }),
@@ -104,7 +105,7 @@ export default function TestimonialCarousel({
             {/* Author — pinned to bottom */}
             <div className="flex items-center gap-4 flex-shrink-0 pt-4 border-t border-[var(--card-border)]">
               {/* Avatar */}
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[var(--gradient-start)]/30 to-[var(--gradient-end)]/30 border border-[var(--card-border)] flex items-center justify-center flex-shrink-0">
+              <div className={`w-10 h-10 ${avatarShapeClass} bg-gradient-to-tr from-[var(--gradient-start)]/30 to-[var(--gradient-end)]/30 border border-[var(--card-border)] flex items-center justify-center flex-shrink-0`}>
                 <span className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]">
                   {current.initials ?? current.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                 </span>
@@ -133,28 +134,25 @@ export default function TestimonialCarousel({
                 className="relative flex flex-col items-center gap-2 transition-all duration-300 focus:outline-none"
               >
                 <MotionDiv
-                  animate={{ scale: isActive ? 1.25 : 0.85, opacity: isActive ? 1 : 0.45 }}
+                  animate={{ opacity: isActive ? 1 : 0.45 }}
                   transition={{ duration: 0.3 }}
                   className={`
-                    rounded-full flex items-center justify-center font-bold
+                    ${avatarShapeClass} flex items-center justify-center font-bold
                     bg-gradient-to-tr from-[var(--gradient-start)]/30 to-[var(--gradient-end)]/30
-                    border-2 transition-colors duration-300
-                    ${isActive ? 'border-[var(--primary)] w-14 h-14 text-sm' : 'border-[var(--card-border)] w-10 h-10 text-xs'}
+                    border border-[var(--card-border)] transition-opacity duration-300 w-12 h-12 text-sm
                   `}
                 >
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]">
                     {initials}
                   </span>
                 </MotionDiv>
-                {isActive && (
-                  <MotionSpan
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-xs font-medium text-[var(--primary)] whitespace-nowrap"
-                  >
-                    {t.name}
-                  </MotionSpan>
-                )}
+                <MotionSpan
+                  animate={{ opacity: isActive ? 1 : 0.45 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-xs font-medium text-[var(--foreground)] whitespace-nowrap"
+                >
+                  {t.name}
+                </MotionSpan>
               </button>
             );
           })}

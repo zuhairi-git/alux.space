@@ -1324,6 +1324,29 @@ function BackgroundsSection() {
         </div>
       </div>
 
+      <div>
+        <h4 className="text-sm font-medium opacity-60 mb-4">Case Study Canvas</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-[1.2fr_1fr] gap-4 items-start">
+          <div className="relative overflow-hidden rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--background)] p-5">
+            <div className="absolute inset-0 bg-[linear-gradient(var(--grid-line-color)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line-color)_1px,transparent_1px)] bg-[size:48px_48px] opacity-80" />
+            <div className="relative grid gap-4 sm:grid-cols-2">
+              {['Problem framing', 'Trust layer'].map(label => (
+                <div key={label} className="rounded-2xl border border-[var(--card-border)] bg-gradient-to-br from-[var(--card-from-bg)] to-[var(--card-to-bg)] p-4 shadow-card">
+                  <div className="mb-3 h-[2px] rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)]" />
+                  <p className="text-sm font-semibold">{label}</p>
+                  <p className="mt-2 text-xs opacity-60">Use the grid token canvas and card surfaces only. Decorative blur orbs stay out of case-study backgrounds.</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-1">
+            <div className="text-sm font-semibold">Grid-only case study surface</div>
+            <div className="text-xs font-mono text-[var(--primary)]">--background · --grid-line-color · --card-from-bg · --card-to-bg · --card-border</div>
+            <div className="text-xs opacity-50 mt-1">Portfolio canvases like Market Intelligence should rely on tokenized grid structure and card gradients rather than decorative glow or blur backgrounds.</div>
+          </div>
+        </div>
+      </div>
+
       {/* Nav preview */}
       <div>
         <h4 className="text-sm font-medium opacity-60 mb-4">Nav Background Preview</h4>
@@ -1912,16 +1935,16 @@ function CardsMediaSection() {
   return (
     <div className="space-y-4">
       <p className="text-sm opacity-60">
-        Image-first cards with three layout variants.
+        Image-first cards with three layout variants. Use the same source that powers the Sharpened by the Machine blog entry to verify the crop stays full-bleed across card layouts.
       </p>
       <DemoSection code={`import { MediaCard } from '@/design-system';
 
 <MediaCard
   variant="basic"
-  title="Article Title"
-  description="Short description of the content."
-  imagePath="/images/blog/ai-brain.jpg"
-  tags={['Design', 'AI']}
+  title="Sharpened by the Machine"
+  description="Human-vs-machine framing image used in the live blog article."
+  imagePath="/images/blog/AI/female-ai.jpg"
+  tags={['AI', 'Editorial']}
 />
 // variant="overlay"  — text overlaid on image
 // variant="horizontal" — image left, content right`}>
@@ -1930,10 +1953,10 @@ function CardsMediaSection() {
             <MediaCard
               key={v}
               variant={v}
-              title={`${v.charAt(0).toUpperCase() + v.slice(1)} variant`}
-              description="A media card demonstrating the image layout pattern."
-              imagePath="/images/blog/ai-brain.jpg"
-              tags={['Design', 'UI']}
+              title="Sharpened by the Machine"
+              description="Shared image framing for the editorial card variants."
+              imagePath="/images/blog/AI/female-ai.jpg"
+              tags={['AI', v === 'overlay' ? 'Overlay' : v === 'horizontal' ? 'Horizontal' : 'Standard']}
             />
           ))}
         </div>
@@ -1956,7 +1979,6 @@ function CardsContentSection() {
     { title: 'Design & Prototyping', desc: 'Figma, Adobe CC, Design Systems',              icon: 'palette' },
     { title: 'User Research',        desc: 'Research and test management',                 icon: 'science' },
     { title: 'Development',          desc: 'React, WordPress, HubSpot',                   icon: 'code' },
-    { title: 'Agile Management',     desc: 'Scrum, Jira, Confluence, GitHub Copilot, GCP', icon: 'settings' },
   ];
 
   const domainItems = [
@@ -1969,11 +1991,11 @@ function CardsContentSection() {
       prop: 'viewMode="standard | overlay | featured"',
     },
     {
-      label: 'PortfolioCard',
-      icon: 'work',
-      desc: 'Project card with localized title/description, status badge, and tag chips.',
-      href: '/portfolio',
-      importLine: "import { PortfolioCard } from '@/design-system';",
+      label: 'StatusCard',
+      icon: 'dashboard',
+      desc: 'Status and system cards for published, archived, or upcoming states with semantic accents.',
+      href: '/design',
+      importLine: "import { StatusCard } from '@/design-system';",
       prop: 'displayState="published | archived | coming-soon"',
     },
     {
@@ -2112,7 +2134,10 @@ function TestimonialsSection() {
 <TestimonialCarousel testimonials={[
   { text: "...", name: "Fahad M", position: "IT Contractor", highlights: ["creative"] }
 ]} />`}>
-      <div className="py-4">
+      <div className="py-4 space-y-4">
+        <p className="text-sm opacity-60">
+          Testimonial selectors keep the same avatar shape, avatar size, and name size. Selection is expressed with opacity only.
+        </p>
         <TestimonialCarousel testimonials={samples} autoPlayInterval={5000} />
       </div>
     </DemoSection>
@@ -2178,7 +2203,7 @@ function AnimationsSection() {
     <DemoSection code={`import { delaySeconds } from '@/design-system';
 import AnimatedSection from '@/components/AnimatedSection';
 
-<AnimatedSection animation="slide-up" delay={delaySeconds.xs}>
+<AnimatedSection animation="slide-up" delay={delaySeconds.sm}>
   <div>Content slides up on scroll</div>
 </AnimatedSection>`}>
       <div className="mb-4 text-sm opacity-70">
@@ -2188,7 +2213,7 @@ import AnimatedSection from '@/components/AnimatedSection';
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {(['fade-in', 'slide-up', 'slide-down'] as const).map((anim, i) => (
           <AnimatedSection key={anim} animation={anim} delay={i * delaySeconds.xs} once={false}>
-            <div className="theme-card-flex p-4 rounded-xl text-center">
+            <div className="rounded-[var(--radius-lg)] border border-card-border bg-background-secondary p-6 text-center shadow-card">
               <span className="text-sm font-mono opacity-60">{anim}</span>
             </div>
           </AnimatedSection>

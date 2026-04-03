@@ -29,7 +29,7 @@ export default function AccessibilityClient() {
       en: {
         title: "Inclusive Design System",
         subtitle: "Accessibility-First Design Philosophy",
-        intro: "Building the future of inclusive digital productsÃ¢â‚¬â€from research to implementation. This system powers applications used by millions while ensuring no one is left behind.",
+        intro: "Building the future of inclusive digital products—from research to implementation. This system powers applications used by millions while ensuring no one is left behind.",
         projectType: "Project Type",
         projectTypeValues: "Scalable Design System",
         timeline: "Timeline",
@@ -214,7 +214,7 @@ export default function AccessibilityClient() {
       }, fi: {
         title: "Inklusiivinen suunnittelujÃƒÂ¤rjestelmÃƒÂ¤",
         subtitle: "Saavutettavuus-ensin filosofia",
-        intro: "Rakennamme inklusiivisten digitaalisten tuotteiden tulevaisuuttaÃ¢â‚¬â€tutkimuksesta toteutukseen. TÃƒÂ¤mÃƒÂ¤ jÃƒÂ¤rjestelmÃƒÂ¤ voimistaa miljoonien kÃƒÂ¤yttÃƒÂ¤jien sovelluksia varmistaen, ettÃƒÂ¤ ketÃƒÂ¤ÃƒÂ¤n ei jÃƒÂ¤tetÃƒÂ¤ jÃƒÂ¤lkeen.",
+        intro: "Rakennamme inklusiivisten digitaalisten tuotteiden tulevaisuutta—tutkimuksesta toteutukseen. TÃƒÂ¤mÃƒÂ¤ jÃƒÂ¤rjestelmÃƒÂ¤ voimistaa miljoonien kÃƒÂ¤yttÃƒÂ¤jien sovelluksia varmistaen, ettÃƒÂ¤ ketÃƒÂ¤ÃƒÂ¤n ei jÃƒÂ¤tetÃƒÂ¤ jÃƒÂ¤lkeen.",
         projectType: "Projektityyppi",
         projectTypeValues: "Skaalautuva suunnittelujÃƒÂ¤rjestelmÃƒÂ¤",
         timeline: "Aikataulu",
@@ -702,13 +702,13 @@ export default function AccessibilityClient() {
                                 <p className="text-xs font-mono uppercase tracking-widest opacity-40 mt-1">{persona.role}</p>
                               </div>
 
-                              {/* Traits Ã¢â‚¬â€ inline text, not pills */}
+                              {/* Traits — inline text, not pills */}
                               <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-current/[0.06]">
                                 <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-warning flex-shrink-0">Traits</span>
                                 <span className="text-sm opacity-60">{persona.traits.join(' Ã‚Â· ')}</span>
                               </div>
 
-                              {/* Detail columns Ã¢â‚¬â€ left-border accent, no boxes */}
+                              {/* Detail columns — left-border accent, no boxes */}
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 <div className="border-l-2 border-ds-emerald-600/30 pl-4">
                                   <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">Needs</h4>
@@ -908,7 +908,7 @@ export default function AccessibilityClient() {
                       <div className={`p-4 rounded-lg font-mono text-sm bg-[var(--background)]`}>
                         <div className={`text-[var(--foreground)]`}>
                           <span className="text-[var(--primary)]">npm run</span> <span className="text-ds-success">test:a11y</span><br />
-                          <span className="text-ds-gray-500"># Ã¢Å“â€¦ 0 accessibility violations found</span>
+                          <span className="text-ds-gray-500"># ✓ 0 accessibility violations found</span>
                         </div>
                       </div>
                     </div>

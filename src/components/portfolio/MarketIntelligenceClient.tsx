@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import { durationSeconds, delaySeconds, stagger, transition as t } from '@/design-system';
 import { usePathname } from 'next/navigation';
-import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import Navigation from '@/components/Navigation';
 import CaseStudyHero from './CaseStudyHero';
@@ -48,9 +47,7 @@ export default function MarketIntelligenceClient() {
         }
     }, []);
 
-    const { theme } = useTheme();
     const { locale } = useLanguage();
-    const isColorful = theme === 'colorful';
 
     // Get localized text content
     const getLocalizedContent = () => {
@@ -315,13 +312,6 @@ export default function MarketIntelligenceClient() {
                 {/* Ambient background grid */}
                 <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
                     <div className="absolute inset-0 bg-[linear-gradient(var(--grid-line-color)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line-color)_1px,transparent_1px)] bg-[size:60px_60px]" />
-                    {isColorful && (
-                        <>
-                            <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-[120px]" />
-                            <div className="absolute bottom-1/3 -right-40 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-[120px]" />
-                            <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-[var(--gradient-mid)]/10 rounded-full blur-[100px]" />
-                        </>
-                    )}
                 </div>
 
                 <Navigation />
@@ -461,8 +451,6 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2 }}
                                             className={`group p-6 md:p-8 rounded-3xl bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col ${i === 4 ? 'md:col-span-2' : ''}`}
                                         >
-                                            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-full blur-3xl group-hover:bg-[var(--primary)]/10 transition-colors duration-500 pointer-events-none" />
-                                            
                                             <div className="flex items-center gap-4 mb-5 relative z-10">
                                                 <span className="px-3.5 py-1.5 text-xs font-bold tracking-wider rounded-full bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 shadow-sm">
                                                     PHASE {item.index}

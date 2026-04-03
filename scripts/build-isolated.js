@@ -28,6 +28,7 @@ if (!fs.existsSync(BUILD_DIR)) {
     .trim();
   run(`git checkout ${branch}`, BUILD_DIR);
   run(`git reset --hard HEAD`, BUILD_DIR);
+  run('git clean -fd', BUILD_DIR);
   // Pull latest committed changes
   run('git pull --ff-only', BUILD_DIR);
   // Sync uncommitted changes to tracked files (staged + unstaged) via a temporary patch
