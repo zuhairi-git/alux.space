@@ -26,6 +26,20 @@ export interface ComponentEntry {
 export const componentRegistry: ComponentEntry[] = [
   // ─── Primitives ─────────────────────────────────────────
   {
+    name: 'BrandLogo',
+    path: 'src/components/ui/BrandLogo.tsx',
+    category: 'primitive',
+    props: [
+      { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Tokenized logo scale' },
+      { name: 'tone', type: "'primary' | 'accent' | 'foreground'", default: "'primary'", description: 'Theme-resolved logo color family' },
+      { name: 'label', type: "'none' | 'brand' | 'signature'", default: "'brand'", description: 'Controls wordmark rendering beside the emblem' },
+      { name: 'className', type: 'string', default: "''", description: 'Additional wrapper classes' },
+    ],
+    tokens: ['--primary', '--accent-text', '--foreground'],
+    a11y: ['Decorative logo mark is aria-hidden when used with adjacent text'],
+    variants: ['primary', 'accent', 'foreground', 'sm', 'md', 'lg', 'xl', 'mark only', 'wordmark', 'signature'],
+  },
+  {
     name: 'Icon',
     path: 'src/components/ui/Icon.tsx',
     category: 'primitive',

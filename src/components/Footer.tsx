@@ -2,12 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
+import BrandLogo from '@/components/ui/BrandLogo';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
 
 const Footer = () => {
@@ -91,14 +91,9 @@ const Footer = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <Image
-                src="/images/logo/AluxLogoLabel.svg"
-                alt="Alux Logo"
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain rounded-2xl filter drop-shadow-sm"
-                priority
-              />
+              <Link href={localizedHref('/')} aria-label="Alux home" className="inline-flex rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-ds-gray-900">
+                <BrandLogo size="lg" tone="primary" label="none" />
+              </Link>
             </motion.div>
             <h3 className="font-bold text-xl text-primary">Ali Al-Zuhairi</h3>
           </div>

@@ -17,6 +17,7 @@ import {
   Tooltip,
   Button,
   Badge,
+  BrandLogo,
   Input,
   Toggle,
   Avatar,
@@ -1823,6 +1824,60 @@ function AvatarsSection() {
   );
 }
 
+function LogoSection() {
+  return (
+    <DemoSection code={`import { BrandLogo } from '@/design-system';
+
+<BrandLogo />
+<BrandLogo size="lg" tone="accent" />
+<BrandLogo size="xl" label="signature" />`}>
+      <div className="space-y-6">
+        <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+          <h4 className="text-sm font-semibold mb-2">Shared Identity Primitive</h4>
+          <p className="text-sm opacity-70">
+            The logo is now a shared, token-driven component. Its emblem and wordmark resolve through semantic theme colors instead of a footer-local image treatment.
+          </p>
+        </div>
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Sizes &amp; Labels</h4>
+          <div className="grid gap-3 md:grid-cols-3">
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+              <div className="text-[11px] font-mono opacity-45 mb-4">size=&quot;sm&quot; label=&quot;brand&quot;</div>
+              <BrandLogo size="sm" tone="primary" />
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+              <div className="text-[11px] font-mono opacity-45 mb-4">size=&quot;lg&quot; label=&quot;none&quot;</div>
+              <BrandLogo size="lg" tone="primary" label="none" />
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+              <div className="text-[11px] font-mono opacity-45 mb-4">size=&quot;xl&quot; label=&quot;signature&quot;</div>
+              <BrandLogo size="xl" tone="primary" label="signature" />
+            </div>
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Theme-Resolved Tones</h4>
+          <div className="grid gap-3 md:grid-cols-3">
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+              <div className="text-[11px] font-mono opacity-45 mb-4">tone=&quot;primary&quot;</div>
+              <BrandLogo size="lg" tone="primary" />
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+              <div className="text-[11px] font-mono opacity-45 mb-4">tone=&quot;accent&quot;</div>
+              <BrandLogo size="lg" tone="accent" />
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+              <div className="text-[11px] font-mono opacity-45 mb-4">tone=&quot;foreground&quot;</div>
+              <BrandLogo size="lg" tone="foreground" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </DemoSection>
+  );
+}
+
 function DividersSection() {
   return (
     <DemoSection code={`import { Divider } from '@/design-system';
@@ -3095,6 +3150,7 @@ const allSections: SectionDef[] = [
   { key: 'inputs',     title: 'Inputs',                    render: () => <InputsSection /> },
   { key: 'toggles',    title: 'Toggles',                   render: () => <TogglesSection /> },
   { key: 'avatars',    title: 'Avatars',                   render: () => <AvatarsSection /> },
+  { key: 'logo',       title: 'Logo',                      render: () => <LogoSection /> },
   { key: 'dividers',   title: 'Dividers',                  render: () => <DividersSection /> },
   { key: 'tooltips',        title: 'Tooltips',                  render: () => <TooltipsSection /> },
   // -- Cards (per category) ----------------------------
@@ -3165,6 +3221,7 @@ function OverviewGrid() {
         { key: 'dividers',        icon: 'horizontal_rule',        label: 'Dividers' },
         { key: 'icons',           icon: 'emoji_symbols',          label: 'Icons' },
         { key: 'inputs',          icon: 'text_fields',            label: 'Inputs' },
+        { key: 'logo',            icon: 'branding_watermark',     label: 'Logo' },
         { key: 'modals',          icon: 'open_in_new',            label: 'Modals' },
         { key: 'podcast-player',  icon: 'podcasts',               label: 'Podcast Player' },
         { key: 'progress',        icon: 'donut_large',            label: 'Progress' },

@@ -49,6 +49,7 @@ const sidebarNav: NavGroup[] = [
       { label: 'Dividers',        section: 'dividers',        icon: 'horizontal_rule' },
       { label: 'Icons',           section: 'icons',           icon: 'emoji_symbols' },
       { label: 'Inputs',          section: 'inputs',          icon: 'text_fields' },
+      { label: 'Logo',            section: 'logo',            icon: 'branding_watermark' },
       { label: 'Modals',          section: 'modals',          icon: 'open_in_new' },
       { label: 'Podcast Player',  section: 'podcast-player',  icon: 'podcasts' },
       { label: 'Progress',        section: 'progress',        icon: 'donut_large' },
