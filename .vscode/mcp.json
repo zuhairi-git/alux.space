@@ -10,11 +10,14 @@
   "servers": {
     "figma": {
       "type": "stdio",
-      "command": "npx",
+      "command": "cmd",
       "args": [
+        "/c",
+        "npx",
         "-y",
-        "figma-developer-mcp",
-        "--figma-api-key=${input:figma-api-key}"
+        "figma-developer-mcp@0.6.4",
+        "--figma-api-key=${input:figma-api-key}",
+        "--stdio"
       ]
     }
   }
