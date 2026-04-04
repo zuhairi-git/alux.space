@@ -61,7 +61,17 @@ export { default as Divider }     from '@/components/ui/Divider';
 
 // ── Media & Identity ──────────────────────────────────────────────────────
 export { default as Avatar }         from '@/components/ui/Avatar';
-export { default as Icon }           from '@/components/ui/Icon';
+export { default as Icon, IconSurface } from '@/components/ui/Icon';
+export type {
+  IconProps,
+  IconPurpose,
+  IconSize,
+  IconSurfaceProps,
+  IconSurfaceSize,
+  IconSurfaceTone,
+  IconTone,
+  IconVariant,
+} from '@/components/ui/Icon';
 
 // ── Accessibility ─────────────────────────────────────────────────────────
 export { default as FocusTrap }   from '@/components/ui/FocusTrap';

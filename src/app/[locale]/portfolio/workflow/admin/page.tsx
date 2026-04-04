@@ -5,7 +5,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
 import type { Theme } from '@/context/ThemeContext';
-import Icon from '@/components/ui/Icon';
+import Icon, { IconSurface } from '@/components/ui/Icon';
 
 type Section = 'start' | 'dashboard' | 'users' | 'workspaces' | 'copilot-logs' | 'alerts-config' | 'analytics' | 'settings';
 
@@ -1734,9 +1734,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                 transition={{ delay: i * 0.08 + 0.2, type: 'spring', stiffness: 300, damping: 24 }}
                                                 className={`p-5 rounded-2xl flex gap-4 items-start ${cardClass}`}
                                             >
-                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}>
-                                                    <Icon name={stat.icon} className="text-white text-[18px]" />
-                                                </div>
+                                                <IconSurface name={stat.icon} surfaceSize="md" className={`shrink-0 bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                                 <div>
                                                     <div className="font-bold text-[15px]">{stat.label}</div>
                                                     <div className={`text-[12px] mt-0.5 ${muted}`}>{stat.sub}</div>
@@ -1772,9 +1770,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                 transition={{ delay: i * 0.08 + 0.15, type: 'spring', stiffness: 300, damping: 24 }}
                                                 className={`p-5 rounded-2xl flex gap-4 ${cardClass}`}
                                             >
-                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}>
-                                                    <Icon name={tip.icon} className="text-white text-[18px]" />
-                                                </div>
+                                                <IconSurface name={tip.icon} surfaceSize="md" className={`shrink-0 bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                                 <div>
                                                     <h4 className={`font-semibold text-[14px] mb-1 ${headingClass}`}>{tip.title}</h4>
                                                     <p className={`text-[13px] leading-relaxed ${muted}`}>{tip.body}</p>
@@ -1807,9 +1803,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                 transition={{ delay: i * 0.06 + 0.12, type: 'spring', stiffness: 340, damping: 26 }}
                                                 className={`flex items-center gap-3 p-4 rounded-2xl ${cardClass}`}
                                             >
-                                                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}>
-                                                    <Icon name={f.icon} className="text-white text-[16px]" />
-                                                </div>
+                                                <IconSurface name={f.icon} surfaceSize="sm" className={`shrink-0 bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                                 <div>
                                                     <div className="font-bold text-[13px]">{f.label}</div>
                                                     <div className={`text-[11px] leading-snug mt-0.5 ${muted}`}>{f.desc}</div>
@@ -1957,14 +1951,14 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             <motion.div key="m-step1" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
                                 className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
-                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="auto_awesome" className="text-white text-[16px]" /></div>
+                                    <IconSurface name="auto_awesome" surfaceSize="sm" className={`bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>AI Copilot</h2>
                                 </motion.div>
                                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Get the most from your AI assistant</motion.p>
                                 <div className="space-y-3">
                                     {AI_TIPS.map((tip, i) => (
                                         <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 + 0.12, type: 'spring', stiffness: 300, damping: 24 }} className={`p-4 rounded-2xl flex gap-4 ${cardClass}`}>
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}><Icon name={tip.icon} className="text-white text-[18px]" /></div>
+                                            <IconSurface name={tip.icon} surfaceSize="md" className={`shrink-0 bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                             <div className="min-w-0">
                                                 <h4 className={`font-semibold text-[14px] mb-0.5 ${headingClass}`}>{tip.title}</h4>
                                                 <p className={`text-[12px] leading-relaxed ${muted}`}>{tip.body}</p>
@@ -1978,14 +1972,14 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             <motion.div key="m-step2" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
                                 className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
-                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="apps" className="text-white text-[16px]" /></div>
+                                    <IconSurface name="apps" surfaceSize="sm" className={`bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>What&apos;s Inside</h2>
                                 </motion.div>
                                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>8 fully interactive sections</motion.p>
                                 <div className="space-y-2.5">
                                     {PORTAL_FEATURES.map((f, i) => (
                                         <motion.div key={i} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 + 0.1, type: 'spring', stiffness: 340, damping: 26 }} className={`flex items-center gap-4 p-4 rounded-2xl ${cardClass}`}>
-                                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accentGradient}`}><Icon name={f.icon} className="text-white text-[16px]" /></div>
+                                            <IconSurface name={f.icon} surfaceSize="sm" className={`shrink-0 bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                             <div>
                                                 <div className="font-bold text-[14px]">{f.label}</div>
                                                 <div className={`text-[12px] ${muted}`}>{f.desc}</div>
@@ -1999,7 +1993,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             <motion.div key="m-step3" custom={direction} variants={portalPageVariants} initial="enter" animate="center" exit="exit"
                                 className="absolute inset-0 overflow-y-auto no-scrollbar px-5 pt-2 pb-4">
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2.5 mb-1">
-                                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${accentGradient} flex items-center justify-center`}><Icon name="palette" className="text-white text-[16px]" /></div>
+                                    <IconSurface name="palette" surfaceSize="sm" className={`bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>Choose Your Look</h2>
                                 </motion.div>
                                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>

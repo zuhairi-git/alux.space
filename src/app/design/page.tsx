@@ -12,6 +12,7 @@ import {
   QuoteBlock,
   TestimonialCarousel,
   Icon,
+  IconSurface,
   Tooltip,
   Button,
   Badge,
@@ -2145,6 +2146,7 @@ function TestimonialsSection() {
 }
 
 function IconsSection() {
+  const { theme } = useTheme();
   const iconGroups = [
     {
       label: 'Navigation',
@@ -2172,27 +2174,198 @@ function IconsSection() {
     },
   ];
 
-  return (
-    <DemoSection code={`import { Icon } from '@/design-system';
+  const sizeScale = [
+    { token: 'xs', preview: 'xs' },
+    { token: 'sm', preview: 'sm' },
+    { token: 'md', preview: 'md' },
+    { token: 'lg', preview: 'lg' },
+    { token: 'xl', preview: 'xl' },
+    { token: '2xl', preview: '2xl' },
+    { token: 'display', preview: 'display' },
+  ] as const;
 
-<Icon name="home" />
-<Icon name="search" />
-<Icon name="settings" className="text-primary" />`}>
-      <div className="space-y-6">
+  const surfaceScale = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const toneScale = ['default', 'muted', 'primary', 'accent', 'inverse'] as const;
+  const surfaceTones = ['neutral', 'primary', 'accent', 'inverse'] as const;
+  const themeIcons = [
+    { themeKey: 'light', label: 'Light', icon: 'light_mode' },
+    { themeKey: 'dark', label: 'Dark', icon: 'dark_mode' },
+    { themeKey: 'colorful', label: 'Colorful', icon: 'palette' },
+  ] as const;
+
+  return (
+    <DemoSection code={`import { Icon, IconSurface } from '@/design-system';
+
+<Icon name="home" size="md" tone="primary" />
+<Icon name="light_mode" size="lg" tone="accent" variant="filled" />
+<IconSurface name="palette" surfaceSize="md" surfaceTone="primary" />
+<IconSurface name="dark_mode" surfaceSize="sm" surfaceTone="inverse" shape="circle" />`}>
+      <div className="space-y-8">
+        <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold">Shared Icon Standard</h4>
+              <p className="max-w-2xl text-sm opacity-70">
+                Material Symbols now scale through semantic size tokens, and boxed icons can inherit theme-resolved tones through the shared IconSurface primitive.
+              </p>
+            </div>
+            <Badge variant="glass">Current theme: {theme}</Badge>
+          </div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] opacity-45">Sizing</div>
+              <p className="text-sm opacity-70">Use size tokens so Material Symbols keeps the correct optical size at each scale.</p>
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] opacity-45">Surface Ratio</div>
+              <p className="text-sm opacity-70">Use IconSurface when the icon sits inside a chip, card badge, CTA bubble, or stat tile.</p>
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] opacity-45">Theme Tones</div>
+              <p className="text-sm opacity-70">Primary and accent tones resolve through the active theme, not hard-coded colors.</p>
+            </div>
+            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] opacity-45">Accessibility</div>
+              <p className="text-sm opacity-70">Decorative icons stay aria-hidden by default; standalone icons can expose a label.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h4 className="text-sm font-semibold">Semantic Size Scale</h4>
+                <p className="text-sm opacity-65">Use tokens instead of raw text classes for consistent glyph proportions.</p>
+              </div>
+              <Icon name="photo_size_select_large" tone="muted" />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {sizeScale.map(({ token, preview }) => (
+                <div key={token} className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4 text-center">
+                  <div className="flex min-h-16 items-center justify-center">
+                    <Icon name="stack_star" size={token} tone="primary" />
+                  </div>
+                  <div className="mt-2 text-sm font-medium">{preview}</div>
+                  <div className="text-xs font-mono opacity-55">size=&quot;{token}&quot;</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h4 className="text-sm font-semibold">Icon Surface Scale</h4>
+                <p className="text-sm opacity-65">Use tokenized boxes when the icon needs balanced padding inside a background.</p>
+              </div>
+              <Icon name="crop_square" tone="muted" />
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {surfaceScale.map(scale => (
+                <div key={scale} className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] px-4 py-4 text-center">
+                  <div className="flex items-center justify-center">
+                    <IconSurface name="token" surfaceSize={scale} surfaceTone="primary" />
+                  </div>
+                  <div className="mt-3 text-xs font-mono opacity-60">surfaceSize=&quot;{scale}&quot;</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h4 className="text-sm font-semibold">Theme-Resolved Tones</h4>
+                <p className="text-sm opacity-65">These tones follow the active theme through semantic tokens.</p>
+              </div>
+              <Icon name="colors" tone="accent" />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+              {toneScale.map(tone => (
+                <div key={tone} className={`rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4 text-center ${tone === 'inverse' ? 'bg-[var(--primary)] border-transparent' : ''}`}>
+                  <div className="flex items-center justify-center gap-3">
+                    <Icon name="contrast" tone={tone} size="lg" />
+                    <Icon name="contrast" tone={tone} variant="filled" size="lg" />
+                  </div>
+                  <div className={`mt-3 text-xs font-mono ${tone === 'inverse' ? 'text-[var(--text-on-primary)]/80' : 'opacity-60'}`}>tone=&quot;{tone}&quot;</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h4 className="text-sm font-semibold">Theme Icons</h4>
+                <p className="text-sm opacity-65">Use system icons that match the active theme state without hard-coding color values.</p>
+              </div>
+              <Icon name="routine" tone="muted" />
+            </div>
+            <div className="space-y-3">
+              {themeIcons.map(item => {
+                const isActive = item.themeKey === theme;
+                return (
+                  <div key={item.themeKey} className={`flex items-center justify-between rounded-xl border p-4 transition-colors ${isActive ? 'border-[var(--primary)] bg-[var(--primary)]/10' : 'border-[var(--card-border)] bg-[var(--background)]'}`}>
+                    <div className="flex items-center gap-3">
+                      <IconSurface
+                        name={item.icon}
+                        surfaceSize="sm"
+                        surfaceTone={isActive ? 'primary' : 'neutral'}
+                        shape="circle"
+                        tone={isActive ? 'inverse' : 'default'}
+                      />
+                      <div>
+                        <div className="text-sm font-medium">{item.label}</div>
+                        <div className="text-xs opacity-60">{isActive ? 'Current theme token family' : 'Available theme mode icon'}</div>
+                      </div>
+                    </div>
+                    {isActive && <Badge variant="accent">Active</Badge>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div>
+              <h4 className="text-sm font-semibold">Boxed Icon Tones</h4>
+              <p className="text-sm opacity-65">Use surface tones when icons need a background, not ad hoc width, height, and text-size utilities.</p>
+            </div>
+            <Icon name="deployed_code" tone="muted" />
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {surfaceTones.map(surfaceTone => (
+              <div key={surfaceTone} className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] px-4 py-4 text-center">
+                <div className="flex items-center justify-center">
+                  <IconSurface name="apps" surfaceSize="md" surfaceTone={surfaceTone} />
+                </div>
+                <div className="mt-3 text-xs font-mono opacity-60">surfaceTone=&quot;{surfaceTone}&quot;</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-6">
         {iconGroups.map(group => (
           <div key={group.label}>
             <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">{group.label}</h4>
             <div className="flex flex-wrap gap-3">
               {group.icons.map(name => (
                 <Tooltip key={name} text={name}>
-                  <div className="w-10 h-10 rounded-lg bg-foreground/8 flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors cursor-default">
-                    <Icon name={name} />
+                  <div className="cursor-default">
+                    <IconSurface name={name} surfaceSize="sm" surfaceTone="neutral" className="transition-colors hover:[background-color:color-mix(in_srgb,var(--primary)_14%,transparent)] hover:[border-color:color-mix(in_srgb,var(--primary)_22%,transparent)]" />
                   </div>
                 </Tooltip>
               ))}
             </div>
           </div>
         ))}
+        </div>
       </div>
     </DemoSection>
   );

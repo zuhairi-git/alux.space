@@ -965,4 +965,17 @@
   --icon-size-xl:  32px;  --icon-opsz-xl:  40;
   --icon-size-2xl: 48px;  --icon-opsz-2xl: 48;
   --icon-size-display: clamp(2rem, 4vw, 2.75rem); --icon-opsz-display: 40;
+
+  /* Icon surface sizes — standardized icon-to-padding ratios for boxed icons */
+  --icon-surface-size-xs: var(--space-6);
+  --icon-surface-size-sm: var(--space-8);
+  --icon-surface-size-md: var(--space-10);
+  --icon-surface-size-lg: var(--space-12);
+  --icon-surface-size-xl: var(--space-16);
+
+  --icon-surface-radius-xs: var(--radius-md);
+  --icon-surface-radius-sm: var(--radius-lg);
+  --icon-surface-radius-md: var(--radius-xl);
+  --icon-surface-radius-lg: var(--radius-xl);
+  --icon-surface-radius-xl: var(--radius-2xl);
 }
