@@ -58,9 +58,9 @@ const toneMap: Record<BrandLogoTone, { fill: string; text: string; shadow: strin
     shadow: 'color-mix(in srgb, var(--accent-text) 24%, transparent)',
   },
   foreground: {
-    fill: 'var(--foreground)',
-    text: 'var(--foreground)',
-    shadow: 'color-mix(in srgb, var(--foreground) 16%, transparent)',
+    fill: 'var(--color-gray-950)',
+    text: 'var(--color-white)',
+    shadow: 'color-mix(in srgb, var(--color-gray-950) 50%, transparent)',
   },
 };
 
