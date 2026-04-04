@@ -13,6 +13,7 @@ import {
   TestimonialCarousel,
   Icon,
   IconSurface,
+  ButtonIcon,
   Tooltip,
   Button,
   Badge,
@@ -1413,42 +1414,60 @@ function BackgroundsSection() {
 /* -- Component demo sections --------------------------- */
 
 function ButtonsSection() {
+  const iconButtonSizes = ['sm', 'md', 'lg'] as const;
+
   return (
-    <DemoSection code={`import { Button, Icon } from '@/design-system';
+    <DemoSection code={`import { Button, ButtonIcon } from '@/design-system';
 
 // Primary — filled, highest emphasis
 <Button variant="primary">Save changes</Button>
-<Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
+<Button variant="primary" leftIcon={<ButtonIcon name="add" />}>New project</Button>
 
 // Secondary — outlined, medium emphasis
 <Button variant="secondary">Cancel</Button>
-<Button variant="secondary" rightIcon={<Icon name="arrow_forward" />}>View all</Button>
+<Button variant="secondary" rightIcon={<ButtonIcon name="arrow_forward" />}>View all</Button>
 
 // Tertiary — text-only, low emphasis
 <Button variant="tertiary">Learn more</Button>
-<Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
+<Button variant="tertiary" leftIcon={<ButtonIcon name="info" />}>Details</Button>
 
-// Icon — square, icon-only
-<Button variant="icon" size="sm"><Icon name="close" /></Button>
-<Button variant="icon"><Icon name="more_vert" /></Button>
-<Button variant="icon" size="lg"><Icon name="settings" /></Button>
+// Icon-only buttons — tokenized square sizing
+<Button variant="icon" size="sm" aria-label="Close"><ButtonIcon name="close" emphasis="icon-only" /></Button>
+<Button variant="icon" aria-label="More actions"><ButtonIcon name="more_vert" emphasis="icon-only" /></Button>
+<Button variant="icon" size="lg" aria-label="Settings"><ButtonIcon name="settings" emphasis="icon-only" /></Button>
 
-// On-image — glass (primary-tinted frosted, white text) / overlay (dark frosted)
-<Button variant="glass" leftIcon={<Icon name="star" />}>Feature</Button>
-<Button variant="overlay" leftIcon={<Icon name="bookmark" />}>Save</Button>
+// On-image — glass / overlay plus DS-token icon button styling
+<Button variant="glass" leftIcon={<ButtonIcon name="star" />}>Feature</Button>
+<Button variant="overlay" leftIcon={<ButtonIcon name="bookmark" />}>Save</Button>
+<Button
+  variant="icon"
+  size="sm"
+  aria-label="Share"
+  className="border-[var(--btn-overlay-border)] bg-[var(--btn-overlay-bg)] text-[var(--btn-overlay-text)] backdrop-blur-sm hover:bg-[var(--btn-overlay-bg-hover)] hover:border-[var(--btn-overlay-border)]"
+>
+  <ButtonIcon name="share" emphasis="icon-only" />
+</Button>
 
 // States — loading is active (full opacity), disabled is inactive (dimmed)
 <Button loading>Saving…</Button>
 <Button variant="secondary" loading>Loading…</Button>
 <Button disabled>Disabled</Button>`}>
       <div className="space-y-6">
+        <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+          <div className="space-y-2">
+            <h4 className="text-sm font-semibold">Button Icon Standard</h4>
+            <p className="text-sm opacity-70">
+              Button icons now inherit tokenized DS sizing from the shared Button component. Use ButtonIcon for authored examples; existing Icon and material-symbols children inside Button slots are normalized automatically.
+            </p>
+          </div>
+        </div>
         {/* Primary */}
         <div>
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Primary — Filled</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="primary">Save changes</Button>
-            <Button variant="primary" leftIcon={<Icon name="add" />}>New project</Button>
-            <Button variant="primary" rightIcon={<Icon name="arrow_forward" />}>Get started</Button>
+            <Button variant="primary" leftIcon={<ButtonIcon name="add" />}>New project</Button>
+            <Button variant="primary" rightIcon={<ButtonIcon name="arrow_forward" />}>Get started</Button>
           </div>
         </div>
         <Divider />
@@ -1457,8 +1476,8 @@ function ButtonsSection() {
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Secondary — Outlined</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary">Cancel</Button>
-            <Button variant="secondary" leftIcon={<Icon name="download" />}>Export</Button>
-            <Button variant="secondary" rightIcon={<Icon name="arrow_forward" />}>View all</Button>
+            <Button variant="secondary" leftIcon={<ButtonIcon name="download" />}>Export</Button>
+            <Button variant="secondary" rightIcon={<ButtonIcon name="arrow_forward" />}>View all</Button>
           </div>
         </div>
         <Divider />
@@ -1467,20 +1486,31 @@ function ButtonsSection() {
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Tertiary — Text only</h4>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="tertiary">Learn more</Button>
-            <Button variant="tertiary" leftIcon={<Icon name="info" />}>Details</Button>
-            <Button variant="tertiary" rightIcon={<Icon name="open_in_new" />}>Open link</Button>
+            <Button variant="tertiary" leftIcon={<ButtonIcon name="info" />}>Details</Button>
+            <Button variant="tertiary" rightIcon={<ButtonIcon name="open_in_new" />}>Open link</Button>
           </div>
         </div>
         <Divider />
         {/* Icon */}
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon — Square</h4>
-          <div className="flex flex-wrap items-center gap-3">
-            <Button variant="icon" size="sm"><Icon name="close" /></Button>
-            <Button variant="icon"><Icon name="more_vert" /></Button>
-            <Button variant="icon" size="lg"><Icon name="settings" /></Button>
-            <Button variant="icon"><Icon name="share" /></Button>
-            <Button variant="icon"><Icon name="bookmark" /></Button>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Icon Buttons — Tokenized Square Sizes</h4>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {iconButtonSizes.map(size => (
+              <div key={size} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-4">
+                <div className="mb-3 text-[11px] font-mono opacity-50">size=&quot;{size}&quot;</div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button variant="icon" size={size} aria-label="Close">
+                    <ButtonIcon name="close" buttonSize={size} emphasis="icon-only" />
+                  </Button>
+                  <Button variant="icon" size={size} aria-label="Share">
+                    <ButtonIcon name="share" buttonSize={size} emphasis="icon-only" />
+                  </Button>
+                  <Button variant="icon" size={size} aria-label="Bookmark">
+                    <ButtonIcon name="bookmark" buttonSize={size} emphasis="icon-only" />
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <Divider />
@@ -1495,6 +1525,7 @@ function ButtonsSection() {
             <Button variant="secondary" size="md">Medium</Button>
             <Button variant="secondary" size="lg">Large</Button>
           </div>
+          <p className="text-[11px] opacity-40 mt-2">Inline button icons follow <span className="font-mono">--btn-content-icon-size-*</span>; icon-only buttons follow <span className="font-mono">--btn-icon-only-icon-size-*</span>.</p>
         </div>
         <Divider />
         {/* On-image */}
@@ -1509,12 +1540,14 @@ function ButtonsSection() {
             />
             <div className="absolute inset-0 bg-black/40" />
             <div className="relative z-10 flex flex-wrap gap-2 p-4 h-full items-end">
-              <Button variant="glass" size="sm" leftIcon={<Icon name="star" />}>Feature</Button>
-              <Button variant="overlay" size="sm" leftIcon={<Icon name="bookmark" />}>Save</Button>
-              <Button variant="icon" size="sm" className="text-white hover:bg-white/20 hover:border-white/40 border border-white/25 backdrop-blur-sm"><Icon name="share" /></Button>
+              <Button variant="glass" size="sm" leftIcon={<ButtonIcon name="star" buttonSize="sm" />}>Feature</Button>
+              <Button variant="overlay" size="sm" leftIcon={<ButtonIcon name="bookmark" buttonSize="sm" />}>Save</Button>
+              <Button variant="icon" size="sm" aria-label="Share" className="border-[var(--btn-overlay-border)] bg-[var(--btn-overlay-bg)] text-[var(--btn-overlay-text)] backdrop-blur-sm hover:bg-[var(--btn-overlay-bg-hover)] hover:border-[var(--btn-overlay-border)]">
+                <ButtonIcon name="share" buttonSize="sm" emphasis="icon-only" />
+              </Button>
             </div>
           </div>
-          <p className="text-[11px] opacity-40 mt-2">Glass is primary-tinted frosted with white text — for primary actions on images. Overlay is dark frosted for secondary/quiet actions. Icon buttons can be layered on top with a manual white border + blur.</p>
+          <p className="text-[11px] opacity-40 mt-2">Glass and overlay continue to handle text buttons. Icon-only buttons can use the same DS overlay tokens without raw color values.</p>
         </div>
         <Divider />
         {/* States */}
@@ -1527,7 +1560,7 @@ function ButtonsSection() {
                 <Button loading>Saving…</Button>
                 <Button variant="secondary" loading>Loading…</Button>
                 <Button variant="tertiary" loading>Processing…</Button>
-                <Button variant="icon" loading><Icon name="refresh" /></Button>
+                <Button variant="icon" loading aria-label="Refreshing"><ButtonIcon name="refresh" emphasis="icon-only" /></Button>
               </div>
             </div>
             <div>
@@ -1536,6 +1569,7 @@ function ButtonsSection() {
                 <Button disabled>Disabled</Button>
                 <Button variant="secondary" disabled>Disabled</Button>
                 <Button variant="tertiary" disabled>Disabled</Button>
+                <Button variant="icon" disabled aria-label="Disabled settings"><ButtonIcon name="settings" emphasis="icon-only" /></Button>
               </div>
             </div>
           </div>
@@ -1546,7 +1580,7 @@ function ButtonsSection() {
           <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Special — Cosmic</h4>
           <div className="flex flex-wrap gap-3">
             <Button variant="cosmic">Cosmic</Button>
-            <Button variant="cosmic" leftIcon={<Icon name="auto_awesome" />}>Magic</Button>
+            <Button variant="cosmic" leftIcon={<ButtonIcon name="auto_awesome" />}>Magic</Button>
           </div>
         </div>
       </div>

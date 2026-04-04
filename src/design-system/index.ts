@@ -33,7 +33,8 @@ export {
 export type { ComponentEntry, ComponentProp } from './components';
 
 // ── Actions & Inputs ──────────────────────────────────────────────────────
-export { default as Button }   from '@/components/ui/Button';
+export { default as Button, ButtonIcon }   from '@/components/ui/Button';
+export type { ButtonIconProps, ButtonProps, ButtonSize, ButtonVariant } from '@/components/ui/Button';
 export { default as Input }    from '@/components/ui/Input';
 export { default as Select }   from '@/components/ui/Select';
 export { default as Toggle }   from '@/components/ui/Toggle';

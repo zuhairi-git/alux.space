@@ -1,8 +1,9 @@
 'use client';
 
 import React, { forwardRef } from 'react';
+import Icon, { type IconProps, type IconSize, type IconTone } from './Icon';
 
-type ButtonVariant =
+export type ButtonVariant =
   | 'primary'    // Filled — highest emphasis
   | 'secondary'  // Outlined — medium emphasis
   | 'tertiary'   // Text-only — low emphasis
@@ -13,9 +14,9 @@ type ButtonVariant =
   | 'glass'      // Frosted-glass — for on-image placement
   | 'overlay';   // Dark frosted — for on-image placement
 
-type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -23,19 +24,62 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: React.ReactNode;
 }
 
+export interface ButtonIconProps extends Omit<IconProps, 'size'> {
+  buttonSize?: ButtonSize;
+  emphasis?: 'inline' | 'icon-only';
+  size?: IconSize;
+  tone?: IconTone;
+}
+
+const contentIconSizeMap: Record<ButtonSize, IconSize> = {
+  sm: 'sm',
+  md: 'sm',
+  lg: 'md',
+};
+
+const iconOnlyIconSizeMap: Record<ButtonSize, IconSize> = {
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+};
+
+function getButtonIconSize(buttonSize: ButtonSize, emphasis: 'inline' | 'icon-only') {
+  return emphasis === 'icon-only' ? iconOnlyIconSizeMap[buttonSize] : contentIconSizeMap[buttonSize];
+}
+
+export function ButtonIcon({
+  buttonSize = 'md',
+  emphasis = 'inline',
+  tone = 'current',
+  size,
+  ...props
+}: ButtonIconProps) {
+  return <Icon {...props} size={size ?? getButtonIconSize(buttonSize, emphasis)} tone={tone} />;
+}
+
 // Standard button sizes — height-anchored; precision padding for a premium feel
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'h-9  px-4   text-[13px] gap-1.5 rounded-md',
-  md: 'h-10 px-5   text-[14px] gap-2   rounded-md',
-  lg: 'h-12 px-6   text-[15px] gap-2.5 rounded-lg',
+  sm: 'h-[var(--btn-height-sm)] px-[var(--btn-padding-inline-sm)] text-[length:var(--btn-font-size-sm)] gap-[var(--btn-gap-sm)] rounded-[var(--btn-radius-sm)] [--button-icon-size:var(--btn-content-icon-size-sm)]',
+  md: 'h-[var(--btn-height-md)] px-[var(--btn-padding-inline-md)] text-[length:var(--btn-font-size-md)] gap-[var(--btn-gap-md)] rounded-[var(--btn-radius-md)] [--button-icon-size:var(--btn-content-icon-size-md)]',
+  lg: 'h-[var(--btn-height-lg)] px-[var(--btn-padding-inline-lg)] text-[length:var(--btn-font-size-lg)] gap-[var(--btn-gap-lg)] rounded-[var(--btn-radius-lg)] [--button-icon-size:var(--btn-content-icon-size-lg)]',
 };
 
 // Icon variant sizes — square; matching radius
 const iconSizeClasses: Record<ButtonSize, string> = {
-  sm: 'h-9  w-9  rounded-md',
-  md: 'h-10 w-10 rounded-md',
-  lg: 'h-12 w-12 rounded-lg',
+  sm: 'h-[var(--btn-icon-box-size-sm)] w-[var(--btn-icon-box-size-sm)] rounded-[var(--btn-radius-sm)] [--button-icon-size:var(--btn-icon-only-icon-size-sm)]',
+  md: 'h-[var(--btn-icon-box-size-md)] w-[var(--btn-icon-box-size-md)] rounded-[var(--btn-radius-md)] [--button-icon-size:var(--btn-icon-only-icon-size-md)]',
+  lg: 'h-[var(--btn-icon-box-size-lg)] w-[var(--btn-icon-box-size-lg)] rounded-[var(--btn-radius-lg)] [--button-icon-size:var(--btn-icon-only-icon-size-lg)]',
 };
+
+const buttonIconSlotClassName = [
+  'inline-flex shrink-0 items-center justify-center leading-none text-current',
+  '[&_svg]:h-[var(--button-icon-size)]',
+  '[&_svg]:w-[var(--button-icon-size)]',
+  '[&_svg]:shrink-0',
+  '[&_.material-symbols]:!text-[length:var(--button-icon-size)]',
+  '[&_.material-symbols]:leading-none',
+  '[&_.material-symbols]:text-current',
+].join(' ');
 
 const variantClasses: Record<ButtonVariant, string> = {
   // ── Primary: uses gradient token (solid in light/dark, vivid gradient in colorful) ──
@@ -134,6 +178,12 @@ function Spinner({ className = '' }: { className?: string }) {
   );
 }
 
+function ButtonIconSlot({ children }: { children: React.ReactNode }) {
+  if (!children) return null;
+
+  return <span className={buttonIconSlotClassName}>{children}</span>;
+}
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -151,6 +201,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const isDisabled = disabled;
     const isIcon = variant === 'icon';
+    const iconOnlyContent = children ?? leftIcon ?? rightIcon;
 
     return (
       <button
@@ -173,9 +224,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           .join(' ')}
         {...props}
       >
-        {loading ? <Spinner /> : leftIcon}
-        {children}
-        {!loading && rightIcon}
+        {isIcon ? (
+          loading ? <ButtonIconSlot><Spinner /></ButtonIconSlot> : <ButtonIconSlot>{iconOnlyContent}</ButtonIconSlot>
+        ) : (
+          <>
+            {loading ? <ButtonIconSlot><Spinner /></ButtonIconSlot> : <ButtonIconSlot>{leftIcon}</ButtonIconSlot>}
+            {children}
+            {!loading && <ButtonIconSlot>{rightIcon}</ButtonIconSlot>}
+          </>
+        )}
       </button>
     );
   },
