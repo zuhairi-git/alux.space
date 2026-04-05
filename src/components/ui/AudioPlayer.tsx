@@ -7,7 +7,6 @@ import { useIsMobile, useAnimationsDisabled } from '@/utils/deviceUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { durationSeconds, delaySeconds } from '@/design-system';
 import Badge from '@/components/ui/Badge';
-import Icon from '@/components/ui/Icon';
 import Button, { ButtonIcon } from './Button';
 
 interface AudioPlayerProps {

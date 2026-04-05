@@ -76,9 +76,6 @@ const buttonIconSlotClassName = [
   '[&_svg]:h-[var(--button-icon-size)]',
   '[&_svg]:w-[var(--button-icon-size)]',
   '[&_svg]:shrink-0',
-  '[&_.material-symbols]:!text-[length:var(--button-icon-size)]',
-  '[&_.material-symbols]:leading-none',
-  '[&_.material-symbols]:text-current',
 ].join(' ');
 
 const variantClasses: Record<ButtonVariant, string> = {

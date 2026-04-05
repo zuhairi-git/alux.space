@@ -56,11 +56,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
           onClick={() => trackEvent('blog_card_click', 'blog', `featured_${post.slug}_${post.tags[0] || 'uncategorized'}`)}
         >
           <div className="theme-card-flex p-0 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30">
-            <div className="flex flex-col md:flex-row md:items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.22fr)_minmax(0,0.98fr)]">
               {/* Image */}
-              <div className="relative w-full h-64 overflow-hidden shrink-0 bg-[var(--card-from-bg)] md:w-[55%] md:min-h-[360px] md:self-stretch">
+              <div className="relative w-full overflow-hidden bg-[var(--card-from-bg)] md:flex md:min-h-[100%] md:self-stretch">
                 <motion.div
-                  className="absolute inset-0 w-full h-full scale-[1.01]"
+                  className="relative h-64 w-full scale-[1.01] md:h-auto md:min-h-[360px] md:flex-1"
                   whileHover={{ scale: 1.03 }}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 >
@@ -82,7 +82,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
               </div>
 
               {/* Content */}
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
+              <div className="flex h-full flex-col justify-center p-8 md:p-10">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.slice(1, 4).map((tag, idx) => (
                     <Badge key={idx} variant="default">{tag}</Badge>

@@ -1458,7 +1458,7 @@ function ButtonsSection() {
           <div className="space-y-2">
             <h4 className="text-sm font-semibold">Button Icon Standard</h4>
             <p className="text-sm opacity-70">
-              Button icons now inherit tokenized DS sizing from the shared Button component. Use ButtonIcon for authored examples; existing Icon and material-symbols children inside Button slots are normalized automatically.
+              Button icons now inherit tokenized DS sizing from the shared Button component. Use ButtonIcon for authored examples; existing Icon children inside Button slots stay aligned with the same sizing rules.
             </p>
           </div>
         </div>
