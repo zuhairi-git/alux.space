@@ -28,9 +28,9 @@ type NotificationItem = {
     read: boolean;
 };
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // MAIN
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 export default function PortalPanel() {
     const [activeSection, setActiveSection] = useState<Section>('start');
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -296,7 +296,7 @@ export default function PortalPanel() {
                     <div className="flex items-center space-x-3 md:space-x-4 shrink-0">
                         <motion.button onClick={() => setShowSearch(true)} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`hidden md:flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-sm font-medium ${isLight ? 'bg-white/60 hover:bg-white shadow-sm border border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30 text-accent' : 'bg-white/5 hover:bg-white/10 border border-white/5'} transition-all cursor-pointer`}>
                             <Icon name="search" className="text-lg opacity-50" />
-                            <span className="opacity-50">Search anything... (Ctrl/âŒ˜K)</span>
+                            <span className="opacity-50">Search anything... (Ctrl/Cmd+K)</span>
                         </motion.button>
                         <motion.button onClick={() => setShowSearch(true)} aria-label="Search" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`flex md:hidden items-center justify-center w-10 h-10 rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30 text-accent' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="search" className="text-xl opacity-70" />
@@ -551,9 +551,9 @@ export default function PortalPanel() {
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // SHARED
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 type AIStampSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type AIStampVariant = 'primary' | 'secondary';
 
@@ -630,9 +630,9 @@ function KPICard({ icon, label, value, trend, trendUp, isLight, isColorful = fal
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // DASHBOARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function DashboardSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const recentActivity = [
         { user: 'Sara K.', action: 'Updated design system tokens', time: '5 min ago', icon: 'palette', color: 'text-primary', bg: 'bg-primary/10' },
@@ -773,9 +773,9 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // USERS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function UsersSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [showWizard, setShowWizard] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
@@ -1015,9 +1015,9 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // WORKSPACES
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function WorkspacesSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [showWizard, setShowWizard] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
@@ -1165,9 +1165,9 @@ function WorkspacesSection({ card, isLight, isColorful = false }: { card: string
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // COPILOT LOGS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function PortalLogsSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [expanded, setExpanded] = useState<number | null>(null);
     const logs = [
@@ -1215,9 +1215,9 @@ function PortalLogsSection({ card, isLight, isColorful = false }: { card: string
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // ALERTS CONFIG
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function AlertsConfigSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     const [toggles, setToggles] = useState<Record<string, boolean>>({ overdue: true, sprint: true, workspace: false, copilot: true, system: true });
 
@@ -1263,9 +1263,9 @@ function AlertsConfigSection({ card, isLight, isColorful = false }: { card: stri
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // ANALYTICS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function AnalyticsSection({ card, isLight, isColorful = false }: { card: string, isLight: boolean, isColorful?: boolean }) {
     return (
         <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="space-y-8">
@@ -1334,9 +1334,9 @@ function AnalyticsSection({ card, isLight, isColorful = false }: { card: string,
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // START SECTION (OVERVIEW)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function StartSection({ card, isLight, isColorful = false, setActiveSection }: { card: string, isLight: boolean, isColorful?: boolean, setActiveSection: (s: Section) => void }) {
     const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
@@ -1439,7 +1439,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
     );
 }
 // SETTINGS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }: { card: string, isLight: boolean, isColorful?: boolean, theme: Theme, setTheme: (val: Theme) => void }) {
     const [toggles, setToggles] = useState<Record<string, boolean>>({ sso: true, '2fa': true, copilot: true, analytics: true, beta: false });
 
@@ -1529,9 +1529,9 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
     );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 // PORTAL INTRO OVERLAY
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ===========================================================
 const PORTAL_STEPS = [
     {
         id: 'welcome',

@@ -56,9 +56,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
           onClick={() => trackEvent('blog_card_click', 'blog', `featured_${post.slug}_${post.tags[0] || 'uncategorized'}`)}
         >
           <div className="theme-card-flex p-0 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30">
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col md:flex-row md:items-stretch">
               {/* Image */}
-              <div className="relative w-full md:w-[55%] h-64 md:h-[360px] overflow-hidden bg-black shrink-0">
+              <div className="relative w-full h-64 overflow-hidden shrink-0 bg-[var(--card-from-bg)] md:w-[55%] md:min-h-[360px] md:self-stretch">
                 <motion.div
                   className="absolute inset-0 w-full h-full scale-[1.01]"
                   whileHover={{ scale: 1.03 }}
@@ -68,7 +68,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                     src={post.image}
                     alt=""
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 55vw"
                     priority
                   />

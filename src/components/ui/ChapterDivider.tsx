@@ -17,8 +17,27 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
   const chapterId = id || title.toLowerCase().replace(/\s+/g, '-');
   const topWashStyle = {
     backgroundImage:
-      'linear-gradient(to bottom, color-mix(in srgb, var(--gradient-start) 8%, transparent) 0%, color-mix(in srgb, var(--gradient-mid) 4%, transparent) 42%, transparent 100%)',
+      'linear-gradient(to bottom, color-mix(in srgb, var(--primary) 18%, transparent) 0%, color-mix(in srgb, var(--primary-glow) 16%, transparent) 38%, transparent 100%)',
   } satisfies React.CSSProperties;
+  const leadLineStyle = {
+    backgroundImage:
+      'linear-gradient(to right, transparent 0%, color-mix(in srgb, var(--primary) 42%, transparent) 52%, color-mix(in srgb, var(--primary-600) 72%, transparent) 100%)',
+  } satisfies React.CSSProperties;
+  const trailLineStyle = {
+    backgroundImage:
+      'linear-gradient(to left, transparent 0%, color-mix(in srgb, var(--primary) 42%, transparent) 52%, color-mix(in srgb, var(--primary-600) 72%, transparent) 100%)',
+  } satisfies React.CSSProperties;
+  const emblemSurfaceStyle = {
+    backgroundImage:
+      'linear-gradient(180deg, color-mix(in srgb, var(--primary) 14%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 94%, transparent) 100%)',
+    border: '1px solid color-mix(in srgb, var(--primary) 22%, var(--card-border))',
+    boxShadow: '0 20px 40px -28px color-mix(in srgb, var(--primary) 60%, transparent)',
+  } satisfies React.CSSProperties;
+  const titleAccentStyle = {
+    backgroundImage:
+      'linear-gradient(90deg, color-mix(in srgb, var(--primary-400) 48%, transparent) 0%, var(--primary) 48%, color-mix(in srgb, var(--primary-700) 58%, transparent) 100%)',
+  } satisfies React.CSSProperties;
+  const ornamentDots = ['var(--primary-300)', 'var(--primary)', 'var(--primary-700)'] as const;
 
   return (
     <motion.div
@@ -29,16 +48,17 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
       transition={{ duration: durationSeconds.dramatic }}
       className="my-20 relative"
     >
-      <div className="absolute inset-x-0 top-0 h-20 rounded-t-[2rem] pointer-events-none opacity-60" style={topWashStyle}></div>
+      <div className="absolute inset-x-0 top-0 h-24 rounded-t-[2rem] pointer-events-none opacity-80" style={topWashStyle}></div>
 
       <div className="flex flex-col items-center relative z-10">
         <div className="flex items-center w-full max-w-xl mx-auto mb-8">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gradient-start/45 to-gradient-mid/35"></div>
+          <div className="h-px flex-1" style={leadLineStyle}></div>
           <div className="px-3 flex items-center">
-            {[...Array(3)].map((_, i) => (
+            {ornamentDots.map((dotColor, i) => (
               <motion.div
-                key={i}
-                className="w-1 h-1 rounded-full bg-gradient-to-r from-gradient-start to-gradient-mid mx-1"
+                key={dotColor}
+                className="w-1.5 h-1.5 rounded-full mx-1"
+                style={{ backgroundColor: dotColor }}
                 animate={{ scale: [1, 1.18, 1], opacity: [0.55, 0.85, 0.55] }}
                 transition={{
                   duration: 2,
@@ -49,7 +69,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
               ></motion.div>
             ))}
           </div>
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-gradient-start/45 to-gradient-mid/35"></div>
+          <div className="h-px flex-1" style={trailLineStyle}></div>
         </div>
 
         <div className="relative mb-4">
@@ -60,20 +80,24 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
             transition={{ ...t.enterSlow, delay: delaySeconds.md }}
             className="relative"
           >
-            <div className="relative z-10 flex items-center justify-center">
+            <div
+              className="relative z-10 flex h-20 w-20 items-center justify-center rounded-[var(--icon-surface-radius-xl)]"
+              style={emblemSurfaceStyle}
+            >
               {icon ? (
                 <Icon
                   name={icon}
-                  size="display"
-                  className="bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent leading-none opacity-70"
+                  size="xl"
+                  tone="primary"
+                  className="leading-none opacity-90"
                   style={{ lineHeight: 1 }}
                 />
               ) : (
                 <span
-                  className="font-bold bg-gradient-to-br from-gradient-start to-gradient-mid bg-clip-text text-transparent opacity-70 leading-none"
-                  style={{ fontSize: 'var(--icon-size-display)' }}
+                  className="font-bold text-[var(--primary)] opacity-90 leading-none"
+                  style={{ fontSize: 'calc(var(--icon-size-display) - 0.75rem)' }}
                 >
-                  {number}
+                  {String(number ?? '').padStart(2, '0')}
                 </span>
               )}
             </div>
@@ -87,14 +111,15 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
           transition={{ ...t.enterSlow, delay: delaySeconds.lg }}
           className="text-center mb-6 relative"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-[0.01em] text-foreground mb-2">
             {title}
           </h2>
 
           <motion.div
-            className="h-px w-0 bg-gradient-to-r from-gradient-mid to-gradient-end mx-auto"
+            className="h-[2px] w-0 rounded-full mx-auto"
+            style={titleAccentStyle}
             initial={{ width: "0%" }}
-            whileInView={{ width: "50%" }}
+            whileInView={{ width: "56%" }}
             viewport={{ once: true }}
             transition={{ duration: durationSeconds.dramatic, delay: delaySeconds['2xl'] }}
           ></motion.div>
@@ -109,7 +134,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
         >
           <Link
             href="#top"
-            className="inline-flex items-center text-xs text-foreground/60 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-gradient-start hover:to-gradient-mid transition duration-300"
+            className="inline-flex items-center text-xs text-foreground/65 hover:text-[var(--primary)] transition duration-300"
           >
             <motion.svg
               className="w-3 h-3 mr-1"

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { delaySeconds, transition as t } from '@/design-system';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
+import { IconSurface } from '@/components/ui/Icon';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
@@ -115,6 +116,10 @@ export default function GameStrategyClient() {
 
   const activeP = personas[activePersona];
   const activeC = getColor(activeP.color);
+  const timelineRailStyle = {
+    backgroundImage:
+      'linear-gradient(to bottom, color-mix(in srgb, var(--primary) 32%, transparent) 0%, color-mix(in srgb, var(--primary) 16%, transparent) 72%, transparent 100%)',
+  } satisfies React.CSSProperties;
 
   // ── Market Research Data ─────────────────────────────────────────────────
 
@@ -499,11 +504,12 @@ export default function GameStrategyClient() {
             <CaseStudyItem>
               <div className="relative">
                 {/* Timeline line */}
-                <div className="absolute left-6 top-0 bottom-0 w-px hidden md:block bg-gradient-to-b from-primary/30 via-primary/20 to-transparent" />
+                <div className="absolute left-6 top-0 bottom-0 hidden w-px md:block" style={timelineRailStyle} />
 
                 <div className="space-y-6">
                   {developmentPhases.map((phase, i) => {
                     const c = getColor(phase.accent);
+                    const phaseNumber = String(i + 1).padStart(2, '0');
                     return (
                       <motion.div
                         key={i}
@@ -513,9 +519,17 @@ export default function GameStrategyClient() {
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.08 }}
                       >
-                        {/* Timeline dot / Number for Desktop */}
-                        <div className={`absolute -left-[3.4rem] top-4 w-8 h-8 rounded-full hidden md:flex items-center justify-center text-xs font-bold bg-primary text-white ring-4 ring-background`}>
-                          {String(i + 1).padStart(2, '0')}
+                        {/* Timeline marker for Desktop */}
+                        <div className="absolute -left-[4.85rem] top-3 hidden md:flex flex-col items-center gap-2">
+                          <IconSurface
+                            name={phase.icon}
+                            surfaceSize="md"
+                            surfaceTone="primary"
+                            className="shadow-[0_18px_34px_-24px_color-mix(in_srgb,var(--primary)_70%,transparent)]"
+                          />
+                          <span className="rounded-full border border-[color:color-mix(in_srgb,var(--primary)_20%,var(--card-border))] bg-[color:color-mix(in_srgb,var(--primary)_9%,transparent)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                            {phaseNumber}
+                          </span>
                         </div>
 
                         <div className="theme-card">
@@ -523,9 +537,17 @@ export default function GameStrategyClient() {
                             <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                               <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-3">
-                                  {/* Number for Mobile */}
-                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center md:hidden text-xs font-bold bg-primary text-white`}>
-                                    {String(i + 1).padStart(2, '0')}
+                                  {/* Marker for Mobile */}
+                                  <div className="md:hidden flex items-center gap-2">
+                                    <IconSurface
+                                      name={phase.icon}
+                                      surfaceSize="sm"
+                                      surfaceTone="primary"
+                                      className="shadow-[0_16px_28px_-24px_color-mix(in_srgb,var(--primary)_70%,transparent)]"
+                                    />
+                                    <span className="rounded-full border border-[color:color-mix(in_srgb,var(--primary)_20%,var(--card-border))] bg-[color:color-mix(in_srgb,var(--primary)_9%,transparent)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                                      {phaseNumber}
+                                    </span>
                                   </div>
                                   <div>
                                     <h4 className="text-base font-bold text-foreground">{phase.phase}</h4>

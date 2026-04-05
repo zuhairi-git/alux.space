@@ -15,52 +15,62 @@ export interface BrandLogoProps {
   textClassName?: string;
 }
 
-const sizeMap: Record<BrandLogoSize, { emblem: string; brandText: string; signatureText: string; gap: string; radius: string }> = {
+const sizeMap: Record<BrandLogoSize, { emblem: string; brandText: string; signatureText: string; gap: string; radius: string; markScale: string }> = {
   sm: {
-    emblem: '2.5rem',
+    emblem: 'var(--icon-surface-size-sm)',
     brandText: '0.95rem',
     signatureText: '0.8rem',
     gap: '0.625rem',
-    radius: '0.875rem',
+    radius: 'var(--icon-surface-radius-sm)',
+    markScale: '74%',
   },
   md: {
-    emblem: '3rem',
+    emblem: 'var(--icon-surface-size-md)',
     brandText: '1.1rem',
     signatureText: '0.95rem',
     gap: '0.75rem',
-    radius: '1rem',
+    radius: 'var(--icon-surface-radius-md)',
+    markScale: '75%',
   },
   lg: {
-    emblem: '4rem',
+    emblem: 'var(--icon-surface-size-lg)',
     brandText: '1.35rem',
     signatureText: '1.05rem',
     gap: '0.875rem',
-    radius: '1.25rem',
+    radius: 'var(--icon-surface-radius-lg)',
+    markScale: '76%',
   },
   xl: {
-    emblem: '5rem',
+    emblem: 'var(--icon-surface-size-xl)',
     brandText: '1.6rem',
     signatureText: '1.15rem',
     gap: '1rem',
-    radius: '1.5rem',
+    radius: 'var(--icon-surface-radius-xl)',
+    markScale: '78%',
   },
 };
 
-const toneMap: Record<BrandLogoTone, { fill: string; text: string; shadow: string }> = {
+const toneMap: Record<BrandLogoTone, { fill: string; text: string; shadow: string; surface: string; border: string }> = {
   primary: {
     fill: 'var(--primary)',
     text: 'var(--primary)',
     shadow: 'color-mix(in srgb, var(--primary) 24%, transparent)',
+    surface: 'linear-gradient(180deg, color-mix(in srgb, var(--primary) 16%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 96%, transparent) 100%)',
+    border: 'color-mix(in srgb, var(--primary) 24%, var(--card-border))',
   },
   accent: {
     fill: 'var(--accent-text)',
     text: 'var(--accent-text)',
     shadow: 'color-mix(in srgb, var(--accent-text) 24%, transparent)',
+    surface: 'linear-gradient(180deg, color-mix(in srgb, var(--accent-text) 16%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 96%, transparent) 100%)',
+    border: 'color-mix(in srgb, var(--accent-text) 22%, var(--card-border))',
   },
   foreground: {
-    fill: 'var(--color-gray-950)',
-    text: 'var(--color-white)',
-    shadow: 'color-mix(in srgb, var(--color-gray-950) 50%, transparent)',
+    fill: 'var(--foreground)',
+    text: 'var(--foreground)',
+    shadow: 'color-mix(in srgb, var(--foreground) 18%, transparent)',
+    surface: 'linear-gradient(180deg, color-mix(in srgb, var(--foreground) 10%, var(--card-from-bg)) 0%, color-mix(in srgb, var(--card-from-bg) 96%, transparent) 100%)',
+    border: 'color-mix(in srgb, var(--foreground) 12%, var(--card-border))',
   },
 };
 
@@ -81,11 +91,13 @@ function BrandLogoMark({ size, tone, className }: { size: BrandLogoSize; tone: B
         height: entry.emblem,
         borderRadius: entry.radius,
         overflow: 'hidden',
-        boxShadow: `0 14px 32px ${toneEntry.shadow}`,
+        backgroundImage: toneEntry.surface,
+        border: `1px solid ${toneEntry.border}`,
+        boxShadow: `0 16px 36px -24px ${toneEntry.shadow}`,
       }}
     >
-      <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
-        <rect width="512" height="512" fill={toneEntry.fill} />
+      <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: entry.markScale, height: entry.markScale, display: 'block' }}>
+        <rect width="512" height="512" rx="112" fill={toneEntry.fill} />
         <path d="M212.913 113.693L255.595 73.6293L248.982 262.991L203.682 230.243L212.913 113.693Z" fill="white" />
         <path d="M299.017 113.685L255.769 73.6402L262.382 263.002L308.318 230.232L299.017 113.685Z" fill="white" />
         <path d="M207.595 113.984L158 90.5647L202.374 229.083L207.595 113.984Z" fill="white" />

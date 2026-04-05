@@ -1835,7 +1835,7 @@ function LogoSection() {
         <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
           <h4 className="text-sm font-semibold mb-2">Shared Identity Primitive</h4>
           <p className="text-sm opacity-70">
-            The logo is now a shared, token-driven component. Its emblem and wordmark resolve through semantic theme colors instead of a footer-local image treatment.
+            The logo is now a shared, token-driven component. Its emblem uses the same surface proportions as the design system&apos;s boxed icon scale, so the mark feels native alongside IconSurface-based UI.
           </p>
         </div>
         <div>
@@ -1991,10 +1991,35 @@ import { SurfaceCard } from '@/design-system';
 
 function CardsTimelineSection() {
   const { theme } = useTheme();
+  const phaseTimeline = [
+    {
+      step: '01',
+      title: 'Concept',
+      icon: 'lightbulb',
+      body: 'Frame the player fantasy, audience, and launch strategy before writing production requirements.',
+    },
+    {
+      step: '02',
+      title: 'Prototype',
+      icon: 'science',
+      body: 'Validate the core loop with fast feedback and surface the interaction risks early.',
+    },
+    {
+      step: '03',
+      title: 'Launch',
+      icon: 'rocket_launch',
+      body: 'Carry the same marker treatment into rollout planning, KPI tracking, and live-ops checkpoints.',
+    },
+  ] as const;
+  const railStyle = {
+    backgroundImage:
+      'linear-gradient(to bottom, color-mix(in srgb, var(--primary) 30%, transparent) 0%, color-mix(in srgb, var(--primary) 14%, transparent) 72%, transparent 100%)',
+  } satisfies React.CSSProperties;
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <p className="text-sm opacity-60">
-        Animated entry cards with floating particles — designed for experience and education timelines.
+        Animated entry cards with floating particles and phase markers. The same tokenized surface treatment now anchors the Game Strategy timeline as well.
       </p>
       <DemoSection code={`import { TimelineCard } from '@/design-system';
 
@@ -2015,6 +2040,66 @@ function CardsTimelineSection() {
             location="Helsinki, Finland"
             description="Product vision, design system ownership, and developer handoff."
           />
+        </div>
+      </DemoSection>
+
+      <DemoSection code={`const phases = [
+  { step: '01', title: 'Concept', icon: 'lightbulb' },
+  { step: '02', title: 'Prototype', icon: 'science' },
+  { step: '03', title: 'Launch', icon: 'rocket_launch' },
+];
+
+<div className="relative">
+  {phases.map((phase) => (
+    <article key={phase.step} className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)]">
+      <IconSurface name={phase.icon} surfaceSize="md" surfaceTone="primary" />
+    </article>
+  ))}
+</div>`}>
+        <div className="rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+          <div className="mb-5">
+            <h4 className="text-sm font-semibold">Phase Timeline</h4>
+            <p className="mt-1 text-sm opacity-65">
+              Use IconSurface markers to keep roadmap and milestone timelines aligned with the rest of the DS.
+            </p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-6 top-0 bottom-0 hidden w-px md:block" style={railStyle} />
+            <div className="space-y-4">
+              {phaseTimeline.map((phase) => (
+                <article key={phase.step} className="relative rounded-2xl border border-[var(--card-border)] bg-[var(--background)]/55 p-5 md:ml-16">
+                  <div className="absolute -left-[4.9rem] top-4 hidden md:flex flex-col items-center gap-2">
+                    <IconSurface
+                      name={phase.icon}
+                      surfaceSize="md"
+                      surfaceTone="primary"
+                      className="shadow-[0_18px_34px_-24px_color-mix(in_srgb,var(--primary)_70%,transparent)]"
+                    />
+                    <span className="rounded-full border border-[color:color-mix(in_srgb,var(--primary)_20%,var(--card-border))] bg-[color:color-mix(in_srgb,var(--primary)_9%,transparent)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                      {phase.step}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="md:hidden flex items-center gap-2 pt-0.5">
+                      <IconSurface
+                        name={phase.icon}
+                        surfaceSize="sm"
+                        surfaceTone="primary"
+                        className="shadow-[0_16px_28px_-24px_color-mix(in_srgb,var(--primary)_70%,transparent)]"
+                      />
+                      <span className="rounded-full border border-[color:color-mix(in_srgb,var(--primary)_20%,var(--card-border))] bg-[color:color-mix(in_srgb,var(--primary)_9%,transparent)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                        {phase.step}
+                      </span>
+                    </div>
+                    <div>
+                      <h5 className="text-base font-semibold text-[var(--foreground)]">{phase.title}</h5>
+                      <p className="mt-2 text-sm leading-relaxed opacity-75">{phase.body}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </DemoSection>
     </div>
