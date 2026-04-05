@@ -92,7 +92,7 @@ const Footer = () => {
               transition={{ duration: 0.2 }}
             >
               <Link href={localizedHref('/')} aria-label="Alux home" className="inline-flex rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-ds-gray-900">
-                <BrandLogo size="lg" tone="primary" label="none" />
+                <BrandLogo size="lg" tone="primary" label="brand" />
               </Link>
             </motion.div>
             <h3 className="font-bold text-xl text-primary">Ali Al-Zuhairi</h3>

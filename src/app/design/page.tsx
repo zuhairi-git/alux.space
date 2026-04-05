@@ -1825,32 +1825,65 @@ function AvatarsSection() {
 }
 
 function LogoSection() {
+  const sizeLabelPairs = [
+    { size: 'sm' as const, label: 'none' as const },
+    { size: 'sm' as const, label: 'brand' as const },
+    { size: 'md' as const, label: 'none' as const },
+    { size: 'md' as const, label: 'brand' as const },
+    { size: 'lg' as const, label: 'none' as const },
+    { size: 'lg' as const, label: 'brand' as const },
+    { size: 'xl' as const, label: 'none' as const },
+    { size: 'xl' as const, label: 'brand' as const },
+  ];
+
   return (
     <DemoSection code={`import { BrandLogo } from '@/design-system';
 
-<BrandLogo />
-<BrandLogo size="lg" tone="accent" />
+<BrandLogo size="sm" label="none" />
+  <BrandLogo size="sm" label="brand" />
+  <BrandLogo size="md" label="none" />
+  <BrandLogo size="md" label="brand" />
+<BrandLogo size="lg" label="none" />
+  <BrandLogo size="lg" label="brand" />
+  <BrandLogo size="xl" label="none" />
+<BrandLogo size="xl" label="brand" />
 <BrandLogo size="xl" label="signature" />`}>
       <div className="space-y-6">
-        <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
-          <h4 className="text-sm font-semibold mb-2">Shared Identity Primitive</h4>
-          <p className="text-sm opacity-70">
-            The logo is now a shared, token-driven component. Its emblem uses the same surface proportions as the design system&apos;s boxed icon scale, so the mark feels native alongside IconSurface-based UI.
-          </p>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <h4 className="text-sm font-semibold mb-2">Shared Identity Primitive</h4>
+            <p className="text-sm opacity-70">
+              The logo component now renders the uploaded mark and full lockup directly, while preserving shared DS sizing and tone behavior.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <h4 className="text-sm font-semibold mb-2">Label Strategy</h4>
+            <p className="text-sm opacity-70">
+              Use `label=&quot;none&quot;` where the mark needs to sit inside compact surfaces. Use `label=&quot;brand&quot;` where the full logo should carry the placement on its own.
+            </p>
+          </div>
         </div>
         <div>
-          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Sizes &amp; Labels</h4>
-          <div className="grid gap-3 md:grid-cols-3">
-            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
-              <div className="text-[11px] font-mono opacity-45 mb-4">size=&quot;sm&quot; label=&quot;brand&quot;</div>
-              <BrandLogo size="sm" tone="primary" />
-            </div>
-            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
-              <div className="text-[11px] font-mono opacity-45 mb-4">size=&quot;lg&quot; label=&quot;none&quot;</div>
-              <BrandLogo size="lg" tone="primary" label="none" />
-            </div>
-            <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
-              <div className="text-[11px] font-mono opacity-45 mb-4">size=&quot;xl&quot; label=&quot;signature&quot;</div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">All Sizes / Brand And Mark</h4>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {sizeLabelPairs.map(({ size, label }) => (
+              <div key={`${size}-${label}`} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
+                <div className="text-[11px] font-mono opacity-45">size=&quot;{size}&quot; label=&quot;{label}&quot;</div>
+                <div className="mt-2 text-xs opacity-55">{label === 'none' ? 'Mark only' : 'Brand lockup'}</div>
+                <div className="mt-6 flex min-h-24 items-center">
+                  <BrandLogo size={size} tone="primary" label={label} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Divider />
+        <div>
+          <h4 className="text-xs font-medium opacity-50 uppercase tracking-wider mb-3">Signature Variant</h4>
+          <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5 sm:p-6">
+            <div className="text-[11px] font-mono opacity-45">size=&quot;xl&quot; label=&quot;signature&quot;</div>
+            <div className="mt-2 text-xs opacity-55">Extended authored lockup for personal identity placements.</div>
+            <div className="mt-6 flex min-h-24 items-center">
               <BrandLogo size="xl" tone="primary" label="signature" />
             </div>
           </div>
@@ -1861,15 +1894,15 @@ function LogoSection() {
           <div className="grid gap-3 md:grid-cols-3">
             <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
               <div className="text-[11px] font-mono opacity-45 mb-4">tone=&quot;primary&quot;</div>
-              <BrandLogo size="lg" tone="primary" />
+              <BrandLogo size="lg" tone="primary" label="brand" />
             </div>
             <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
               <div className="text-[11px] font-mono opacity-45 mb-4">tone=&quot;accent&quot;</div>
-              <BrandLogo size="lg" tone="accent" />
+              <BrandLogo size="lg" tone="accent" label="brand" />
             </div>
             <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] p-5">
               <div className="text-[11px] font-mono opacity-45 mb-4">tone=&quot;foreground&quot;</div>
-              <BrandLogo size="lg" tone="foreground" />
+              <BrandLogo size="lg" tone="foreground" label="brand" />
             </div>
           </div>
         </div>
