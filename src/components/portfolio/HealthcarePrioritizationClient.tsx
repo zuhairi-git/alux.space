@@ -191,7 +191,7 @@ export default function HealthcarePrioritizationClient() {
               {
                 label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                 icon: 'design_services',
-                href: 'https://ds.alux.space/',
+                href: '/design/',
                 variant: 'secondary',
               },
             ]}

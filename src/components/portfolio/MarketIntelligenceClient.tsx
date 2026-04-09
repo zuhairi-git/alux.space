@@ -339,7 +339,7 @@ export default function MarketIntelligenceClient() {
                                     label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                                     icon: 'design_services',
                                     variant: 'secondary',
-                                    href: 'https://ds.alux.space/',
+                                    href: '/design/',
                                 },
                             ]}
                             meta={[

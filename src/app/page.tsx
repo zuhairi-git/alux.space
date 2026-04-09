@@ -331,18 +331,16 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className={`p-8 rounded-3xl border bg-[var(--card-from-bg)] border-[var(--card-border)]`}
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-xl bg-[var(--primary)]/15 text-[var(--accent-text)]`}>
-                  <Icon name="psychology" size="lg" />
+              <div className="flex flex-col items-start">
+                <div className={`mb-4 p-4 rounded-2xl bg-[var(--primary)]/15 border border-[var(--card-border)] text-[var(--accent-text)]`}>
+                  <Icon name="psychology" size="xl" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">
-                    {locale === 'fi' ? 'Tekoälyn integrointi' : 'AI Integration'}
-                  </h3>
-                  <p className="opacity-70 leading-relaxed">
-                    {t('home.about.second')}
-                  </p>
-                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  {locale === 'fi' ? 'Tekoälyn integrointi' : 'AI Integration'}
+                </h3>
+                <p className="opacity-70 leading-relaxed">
+                  {t('home.about.second')}
+                </p>
               </div>
             </motion.div>
 
@@ -354,18 +352,16 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className={`p-8 rounded-3xl border bg-[var(--card-from-bg)] border-[var(--card-border)]`}
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-xl bg-[var(--primary)]/15 text-[var(--accent-text)]`}>
-                  <Icon name="explore" size="lg" />
+              <div className="flex flex-col items-start">
+                <div className={`mb-4 p-4 rounded-2xl bg-[var(--primary)]/15 border border-[var(--card-border)] text-[var(--accent-text)]`}>
+                  <Icon name="explore" size="xl" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">
-                    {locale === 'fi' ? 'Luova tutkimus' : 'Creative Exploration'}
-                  </h3>
-                  <p className="opacity-70 leading-relaxed">
-                    {t('home.about.third')}
-                  </p>
-                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  {locale === 'fi' ? 'Luova tutkimus' : 'Creative Exploration'}
+                </h3>
+                <p className="opacity-70 leading-relaxed">
+                  {t('home.about.third')}
+                </p>
               </div>
             </motion.div>
           </div>

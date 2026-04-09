@@ -451,7 +451,7 @@ export default function AccessibilityClient() {
                 label: locale === 'fi' ? 'Tarkastele suunnittelujärjestelmää' : 'Design System',
                 icon: 'design_services',
                 variant: 'primary',
-                href: 'https://ds.alux.space/',
+                href: '/design/',
               },
             ]}
             meta={[

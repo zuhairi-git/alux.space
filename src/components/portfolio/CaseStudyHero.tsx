@@ -128,6 +128,20 @@ export default function CaseStudyHero({
                 const icon = <Icon name={action.icon} />;
 
                 if (action.href) {
+                  if (action.href.startsWith('/')) {
+                    return (
+                      <Link
+                        key={i}
+                        href={action.href}
+                        className="w-full sm:w-auto"
+                      >
+                        <Button variant={variant} leftIcon={icon} className="w-full">
+                          {action.label}
+                        </Button>
+                      </Link>
+                    );
+                  }
+
                   return (
                     <a
                       key={i}

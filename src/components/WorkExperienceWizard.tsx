@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Icon } from '@/design-system';
 
 interface WorkPosition {
   title: string;
@@ -119,22 +120,23 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
-            className="inline-flex items-center gap-3 mb-6"
+            className="inline-flex items-center justify-center mb-6"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <motion.span 
-              className={`material-symbols text-4xl p-4 rounded-2xl ${colors.iconColor} bg-gradient-to-br ${colors.buttonBg} backdrop-blur-sm border ${colors.cardBorder}`}
+            <motion.div 
+              className={`p-4 rounded-2xl ${colors.iconColor} bg-gradient-to-br ${colors.buttonBg} backdrop-blur-sm border ${colors.cardBorder}`}
               animate={{ rotateY: [0, 360] }}
               transition={{ duration: 3, repeat: Infinity, repeatDelay: 5, ease: "easeInOut" }}
             >
-              work_history
-            </motion.span>
-            <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
-              {t('home.workExperience.title')}
-            </h3>
+              <Icon name="work_history" size="xl" />
+            </motion.div>
           </motion.div>
+
+          <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
+            {t('home.workExperience.title')}
+          </h3>
           
           <motion.div
             className={`mx-auto h-1.5 w-32 rounded-full bg-gradient-to-r ${colors.accentGradient}`}
