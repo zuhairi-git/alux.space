@@ -86,6 +86,7 @@ module.exports = {
         // ── Text-colour semantic tokens ───────────────────────────────────────────────
         'on-primary':              'rgb(var(--text-on-primary-rgb) / <alpha-value>)', // text-on-primary
         'on-dark':                 'rgb(var(--text-on-dark-rgb) / <alpha-value>)',    // text-on-dark
+        'on-cosmic':               'rgb(var(--text-on-cosmic-rgb) / <alpha-value>)',  // text-on-cosmic
         'ds-text-subtle':          'var(--text-subtle)',       // text-ds-text-subtle
         // ── Section backgrounds ───────────────────────────────────────────────────────
         'ds-section-alt':          'var(--section-alt)',
@@ -254,7 +255,7 @@ module.exports = {
         'gradient-hero-colorful': 'radial-gradient(circle at 50% 50%, rgba(128, 0, 255, 0.2), rgba(5, 0, 35, 0.95))',
         // Animated gradients
         'gradient-animated': 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
-        'gradient-cosmic': 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
+        'gradient-cosmic': 'var(--gradient-cosmic)',
         // Radial gradients for background effects
         'radial-blue': 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
         'radial-purple': 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
@@ -464,7 +465,7 @@ module.exports = {
         },
         
         '.text-gradient-colorful': {
-          background: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
+          background: 'var(--gradient-cosmic)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -536,10 +537,10 @@ module.exports = {
         },
         
         '.btn-cosmic': {
-          backgroundImage: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
+          backgroundImage: 'var(--gradient-cosmic)',
           backgroundSize: '200% 200%',
           animation: 'gradientShift 3s ease infinite',
-          color: 'white',
+          color: 'var(--text-on-cosmic)',
           padding: '0.75rem 1.5rem',
           borderRadius: theme('borderRadius.full'),
           fontWeight: '500',

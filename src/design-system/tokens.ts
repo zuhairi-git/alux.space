@@ -211,6 +211,7 @@ export const semantic = {
   gradientStart:    'var(--gradient-start)',
   gradientMid:      'var(--gradient-mid)',
   gradientEnd:      'var(--gradient-end)',
+  gradientCosmic:   'var(--gradient-cosmic)',
   cardFromBg:       'var(--card-from-bg)',
   cardToBg:         'var(--card-to-bg)',
   cardBorder:       'var(--card-border)',
@@ -238,6 +239,7 @@ export const semantic = {
   accentText2:      'var(--accent-text-2)',
   textOnPrimary:    'var(--text-on-primary)',   // text ON primary-fill buttons/badges
   textOnDark:       'var(--text-on-dark)',      // text ON dark/gradient surfaces
+  textOnCosmic:     'var(--text-on-cosmic)',    // text ON the fixed cosmic gradient
   textSubtle:       'var(--text-subtle)',       // decorative low-emphasis text
 } as const;
 

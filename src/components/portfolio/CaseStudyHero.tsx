@@ -13,7 +13,7 @@ interface HeroAction {
   icon: string;
   onClick?: () => void;
   href?: string;
-  variant?: 'primary' | 'secondary' | 'cosmic';
+  variant?: 'primary' | 'secondary' | 'cosmic' | 'prototype';
 }
 
 interface CaseStudyHeroProps {
@@ -120,9 +120,9 @@ export default function CaseStudyHero({
               className="flex flex-col sm:flex-row gap-3"
             >
               {actions.map((action, i) => {
-                // All hero buttons are on images — cosmic gradient for play/highlight actions,
-                // glass (primary-tinted + white text) for primary actions, overlay (dark frosted) for secondary
-                const variant = action.variant === 'cosmic' ? 'cosmic' as const
+                // All hero buttons are on images — prototype/highlight CTAs share the tokenized cosmic DS treatment,
+                // glass (primary-tinted + white text) for primary actions, overlay (dark frosted) for secondary.
+                const variant = action.variant === 'cosmic' || action.variant === 'prototype' ? 'cosmic' as const
                   : action.variant === 'secondary' ? 'overlay' as const
                   : 'glass' as const;
                 const icon = <Icon name={action.icon} />;

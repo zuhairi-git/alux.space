@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { durationSeconds, delaySeconds, stagger, transition as t } from '@/design-system';
+import { durationSeconds, delaySeconds, stagger, transition as t, getButtonClassName } from '@/design-system';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
@@ -251,7 +251,7 @@ export default function JobSeekingClient() {
                 {
                   label: locale === 'fi' ? 'Katso interaktiiviset prototyypit' : 'Play prototype',
                   icon: 'play_circle',
-                  variant: 'cosmic',
+                  variant: 'prototype',
                   onClick: () => document.getElementById('live-prototypes')?.scrollIntoView({ behavior: 'smooth' }),
                 },
                 {
@@ -652,8 +652,7 @@ export default function JobSeekingClient() {
                     borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
                     iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
                     badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
-                    buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
-                    buttonText: "text-[var(--primary)]",
+                    buttonVariant: 'cosmic' as const,
                   },
                   {
                     title: content.androidPrototype,
@@ -665,8 +664,7 @@ export default function JobSeekingClient() {
                     borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
                     iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",
                     badgeClass: "bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/30",
-                    buttonBg: "bg-[var(--primary)]/10 border border-[var(--primary)]/25 hover:bg-[var(--primary)]/20 hover:border-[var(--primary)]/50",
-                    buttonText: "text-[var(--primary)]",
+                    buttonVariant: 'cosmic' as const,
                   },
                 ].map((proto, index) => (
                   <motion.a
@@ -688,10 +686,10 @@ export default function JobSeekingClient() {
                     </div>
                     <h3 className="text-lg font-semibold text-primary mb-2">{proto.title}</h3>
                     <p className="text-opacity-80 text-sm mb-6 flex-grow">{proto.description}</p>
-                    <div className={`inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors self-start ${proto.buttonBg} ${proto.buttonText}`}>
+                    <span className={getButtonClassName({ variant: proto.buttonVariant, size: 'sm', className: 'pointer-events-none self-start gap-2' })}>
                       <span>{content.openPrototype}</span>
                       <Icon name="open_in_new" size="sm" variant="outline" className="group-hover:translate-x-0.5 transition-transform" />
-                    </div>
+                    </span>
                   </motion.a>
                 ))}
               </div>

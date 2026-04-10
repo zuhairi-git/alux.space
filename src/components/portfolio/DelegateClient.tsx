@@ -146,6 +146,7 @@ export default function DelegateClient() {
                                 {
                                     label: 'View Prototype',
                                     icon: 'smart_display',
+                                    variant: 'prototype',
                                     onClick: () => document.getElementById('prototype-embed')?.scrollIntoView({ behavior: 'smooth' }),
                                 }
                             ]}

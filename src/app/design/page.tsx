@@ -56,6 +56,7 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
       { name: '--muted-foreground',  label: 'Muted Text' },
       { name: '--accent-text',       label: 'Accent Text' },
       { name: '--accent-text-2',     label: 'Accent Text 2' },
+      { name: '--text-on-cosmic',    label: 'Text On Cosmic', description: 'Accessible foreground for the fixed cosmic gradient button and surface.' },
       { name: '--card-from-bg',      label: 'Card From' },
       { name: '--card-to-bg',        label: 'Card To' },
       { name: '--section-alt',      label: 'Section Alt' },
@@ -84,6 +85,7 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
       { name: '--gradient-start', label: 'Start' },
       { name: '--gradient-mid',   label: 'Mid' },
       { name: '--gradient-end',   label: 'End' },
+      { name: '--gradient-cosmic', label: 'Cosmic', description: 'Theme-invariant indigo → violet → blue gradient for premium actions.' },
     ],
   },
   {
@@ -1225,21 +1227,48 @@ function MotionSection() {
 
 function GradientsSection() {
   const gradients = [
-    { label: 'Primary', css: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))' },
-    { label: 'Card', css: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))' },
-    // eslint-disable-next-line design-system/no-hardcoded-colors
-    { label: 'Cosmic', css: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)' },
-    { label: 'Ember (Colorful)', css: 'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-700) 55%, var(--color-cobalt-700) 100%)' },
+    {
+      label: 'Primary',
+      css: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))',
+      token: '--gradient-start → --gradient-end',
+    },
+    {
+      label: 'Card',
+      css: 'linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg))',
+      token: '--card-from-bg → --card-to-bg',
+    },
+    {
+      label: 'Cosmic',
+      css: 'var(--gradient-cosmic)',
+      token: '--gradient-cosmic',
+      foreground: 'var(--text-on-cosmic)',
+      foregroundToken: '--text-on-cosmic',
+      note: 'Unchanged across themes. Darker stops keep the surface modern while the dedicated foreground token stays readable.',
+    },
+    {
+      label: 'Ember (Colorful)',
+      css: 'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-700) 55%, var(--color-cobalt-700) 100%)',
+      token: '--color-primary-400 → --color-cobalt-700',
+    },
   ];
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {gradients.map(g => (
         <div key={g.label} className="flex flex-col items-center gap-2">
           <div
-            className="w-full h-24 rounded-xl border border-[var(--card-border)]"
+            className="relative w-full h-24 rounded-xl border border-[var(--card-border)] overflow-hidden"
             style={{ background: g.css }}
-          />
+          >
+            {g.foreground ? (
+              <div className="absolute inset-0 flex items-end justify-between p-3" style={{ color: g.foreground }}>
+                <span className="text-sm font-semibold">Readable cosmic text</span>
+                <span className="text-[11px] font-mono opacity-80">{g.foregroundToken}</span>
+              </div>
+            ) : null}
+          </div>
           <span className="text-xs font-medium opacity-60">{g.label}</span>
+          <span className="text-[11px] font-mono opacity-45 text-center">{g.token}</span>
+          {g.note ? <span className="text-[11px] leading-5 opacity-55 text-center">{g.note}</span> : null}
         </div>
       ))}
     </div>

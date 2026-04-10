@@ -468,7 +468,7 @@ export const componentRegistry: ComponentEntry[] = [
       { name: 'leftIcon', type: 'React.ReactNode', default: 'undefined', description: 'Icon before label' },
       { name: 'rightIcon', type: 'React.ReactNode', default: 'undefined', description: 'Icon after label' },
     ],
-    tokens: ['--btn-height-*', '--btn-padding-inline-*', '--btn-gap-*', '--btn-radius-*', '--btn-content-icon-size-*', '--btn-icon-only-icon-size-*', '--btn-primary-bg', '--btn-primary-gradient', '--btn-overlay-*', '--foreground', '--primary'],
+    tokens: ['--btn-height-*', '--btn-padding-inline-*', '--btn-gap-*', '--btn-radius-*', '--btn-content-icon-size-*', '--btn-icon-only-icon-size-*', '--btn-primary-bg', '--btn-primary-gradient', '--btn-overlay-*', '--gradient-cosmic', '--text-on-cosmic', '--foreground', '--primary'],
     a11y: ['aria-disabled', 'aria-busy', 'focus-visible ring', 'select-none'],
     variants: ['primary', 'secondary', 'tertiary', 'icon', 'ghost', 'outline', 'cosmic', 'glass', 'overlay', 'tokenized inline icon sizes', 'tokenized icon-only sizes'],
   },

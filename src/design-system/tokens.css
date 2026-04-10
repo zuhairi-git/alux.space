@@ -439,6 +439,9 @@
   --badge-glass-border:     rgba(255, 255, 255, 0.20);
   --badge-glass-text:       var(--text-on-dark);
 
+  /* Cosmic gradient surface — theme-invariant art direction */
+  --gradient-cosmic:        linear-gradient(135deg, var(--color-indigo-800), var(--color-violet-700), var(--color-blue-700));
+
   /* Badge — accent (indigo, e.g. case-study category) */
   --badge-accent-bg:        rgba(79, 70, 229, 0.80);     /* indigo-600 */
   --badge-accent-border:    rgba(99, 102, 241, 0.50);    /* indigo-500 */
@@ -464,6 +467,8 @@
   --text-on-primary-rgb:    255 255 255;            /* Tailwind opacity-modifier channels  */
   --text-on-dark:           var(--color-white);     /* text ON dark / gradient surfaces    */
   --text-on-dark-rgb:       255 255 255;            /* Tailwind opacity-modifier channels  */
+  --text-on-cosmic:         var(--color-white);     /* theme-invariant cosmic foreground   */
+  --text-on-cosmic-rgb:     255 255 255;            /* white for Tailwind opacity          */
   --text-subtle:        var(--color-gray-400);      /* decorative low-emphasis (light theme: 3.0:1 — decorative only) */
 }
 

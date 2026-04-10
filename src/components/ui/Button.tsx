@@ -31,6 +31,14 @@ export interface ButtonIconProps extends Omit<IconProps, 'size'> {
   tone?: IconTone;
 }
 
+interface ButtonClassNameOptions {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  loading?: boolean;
+  disabled?: boolean;
+  className?: string;
+}
+
 const contentIconSizeMap: Record<ButtonSize, IconSize> = {
   sm: 'sm',
   md: 'sm',
@@ -130,9 +138,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 
   // ── Cosmic: animated gradient — special decoration ─────────
   cosmic: [
-    'bg-gradient-to-r from-[#00ffff] via-[#ff00cc] to-[#3b82f6]', // eslint-disable-line design-system/no-hardcoded-colors -- gradient art-direction literals; var() not usable inside Tailwind arbitrary value strings
+    '[background:var(--gradient-cosmic)]',
     'bg-[length:200%_200%] animate-gradient-shift',
-    'text-[var(--text-on-dark)] font-medium',
+    'text-[var(--text-on-cosmic)] font-medium',
     'rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5',
     'active:translate-y-0',
   ].join(' '),
@@ -155,6 +163,30 @@ const variantClasses: Record<ButtonVariant, string> = {
     'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),
 };
+
+export function getButtonClassName({
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  disabled = false,
+  className = '',
+}: ButtonClassNameOptions = {}) {
+  const isIcon = variant === 'icon';
+
+  return [
+    'inline-flex items-center justify-center shrink-0',
+    'transition-all duration-150 ease-out',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 focus-visible:ring-offset-2',
+    'cursor-pointer select-none',
+    isIcon ? iconSizeClasses[size] : sizeClasses[size],
+    variantClasses[variant],
+    disabled && 'opacity-50 pointer-events-none',
+    loading && !disabled && 'pointer-events-none',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+}
 
 function Spinner({ className = '' }: { className?: string }) {
   return (
@@ -206,19 +238,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isDisabled || loading}
         aria-disabled={isDisabled || loading}
         aria-busy={loading}
-        className={[
-          'inline-flex items-center justify-center shrink-0',
-          'transition-all duration-150 ease-out',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 focus-visible:ring-offset-2',
-          'cursor-pointer select-none',
-          isIcon ? iconSizeClasses[size] : sizeClasses[size],
-          variantClasses[variant],
-          isDisabled && 'opacity-50 pointer-events-none',
-          loading && !isDisabled && 'pointer-events-none',
-          className,
-        ]
-          .filter(Boolean)
-          .join(' ')}
+        className={getButtonClassName({ variant, size, loading, disabled: isDisabled, className })}
         {...props}
       >
         {isIcon ? (
