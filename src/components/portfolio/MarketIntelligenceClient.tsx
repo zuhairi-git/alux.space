@@ -478,7 +478,7 @@ export default function MarketIntelligenceClient() {
                                             description: locale === 'fi' ? 'Rakennettu iOS 26 Human Interface Guidelines -standardin mukaan — lasiset efektit, järjestelmävärit ja natiivi välilehtipalkkinavigointi.' : 'Built with iOS 26 Human Interface Guidelines — frosted glass vibrancy, SF system colors, and native tab bar navigation.',
                                             href: "/mobile/market-intelligence/ios",
                                             badge: 'iOS 26',
-                                            icon: (<Icon name="phone_iphone" size="lg" variant="outline" />),
+                                            icon: (<Icon name="ios" size="lg" variant="outline" />),
                                             gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
                                             borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
                                             iconBg: "bg-[var(--primary)]/10 text-[var(--primary)]",

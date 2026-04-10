@@ -646,7 +646,7 @@ export default function JobSeekingClient() {
                     title: content.iosPrototype,
                     description: content.iosPrototypeDesc,
                     href: "/mobile/jobseeking/ios",
-                    icon: (<Icon name="phone_iphone" size="lg" variant="outline" />),
+                    icon: (<Icon name="ios" size="lg" variant="outline" />),
                     badge: 'iOS 26',
                     gradient: "from-[var(--primary)]/8 to-[var(--primary)]/5",
                     borderColor: "border-[var(--primary)]/25 hover:border-[var(--primary)]/50",
