@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 @import "../design-system/tokens.css";
@@ -1504,7 +1504,7 @@ body {
 /* Reduced-motion safety net: override inline opacity:0 that SSR might emit */
 html[data-reduce-motion] [style*="opacity"] {
   opacity: 1 !important;
-  transform: none !important;
+  /* transform: none !important; Removed because it breaks Framer Motion layouts like the Hero stack */
 }
 
 /* GPU-hint for elements that will animate (desktop only) */
