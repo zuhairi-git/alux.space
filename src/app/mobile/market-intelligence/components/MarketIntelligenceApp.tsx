@@ -118,9 +118,9 @@ function AreaChart({ data, color, width = 300, height = 100, className = '' }: {
             {hoverIdx !== null && points[hoverIdx] && (
                 <>
                     <line x1={points[hoverIdx].x} y1={0} x2={points[hoverIdx].x} y2={height} stroke={color} strokeWidth="1" strokeDasharray="3,3" opacity="0.5" />
-                    <circle cx={points[hoverIdx].x} cy={points[hoverIdx].y} r="4" fill={color} stroke="white" strokeWidth="2" />
-                    <rect x={points[hoverIdx].x - 25} y={Math.max(0, points[hoverIdx].y - 24)} width="50" height="18" rx="6" fill="var(--color-gray-900)" fillOpacity="0.85" />
-                    <text x={points[hoverIdx].x} y={Math.max(0, points[hoverIdx].y - 24) + 13} fill="white" fontSize="10" fontWeight="600" textAnchor="middle">{data[hoverIdx].toLocaleString()}</text>
+                    <circle cx={points[hoverIdx].x} cy={points[hoverIdx].y} r="4" fill={color} stroke="var(--background)" strokeWidth="2" />
+                    <rect x={points[hoverIdx].x - 25} y={Math.max(0, points[hoverIdx].y - 24)} width="50" height="18" rx="6" fill="var(--foreground)" fillOpacity="0.85" />
+                    <text x={points[hoverIdx].x} y={Math.max(0, points[hoverIdx].y - 24) + 13} fill="var(--background)" fontSize="10" fontWeight="600" textAnchor="middle">{data[hoverIdx].toLocaleString()}</text>
                 </>
             )}
         </svg>
@@ -128,11 +128,66 @@ function AreaChart({ data, color, width = 300, height = 100, className = '' }: {
 }
 
 type TabType = 'dashboard' | 'markets' | 'copilot' | 'alerts' | 'profile';
+type MIThemeMode = 'dark' | 'light' | 'colorful';
 const MI_TAB_ORDER: readonly TabType[] = ['dashboard', 'markets', 'copilot', 'alerts', 'profile'] as const;
+
+function toMIThemeMode(theme: string): MIThemeMode {
+    return theme === 'light' || theme === 'dark' || theme === 'colorful' ? theme : 'colorful';
+}
+
+function getMIStyles(os: string, theme: string) {
+    const isIOS = os === 'ios';
+    const isLight = theme === 'light';
+    const isColorful = theme === 'colorful';
+    const cardRadius = isIOS ? 'rounded-[22px]' : 'rounded-[28px]';
+
+    return {
+        card: `${cardRadius} bg-[var(--card-from-bg)] border border-[var(--card-border)] ${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : 'backdrop-blur-xl'} shadow-lg`,
+        header: `${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : 'backdrop-blur-2xl'} bg-[var(--background)] border-b border-[var(--card-border)]`,
+        nav: `${isIOS ? 'pb-5 h-[82px] backdrop-blur-[30px] backdrop-saturate-[200%]' : 'h-20 pb-2 backdrop-blur-xl'} bg-[var(--background)] border-t border-[var(--card-border)]`,
+        avatarFrame: `${isIOS ? 'rounded-[16px]' : 'rounded-full'} border-2 border-[var(--card-border)] bg-[var(--card-from-bg)] shadow-sm`,
+        statusDot: `border-[var(--background)] bg-ds-success`,
+        aiButton: isColorful
+            ? 'bg-ds-card-colorful-from/80 border border-primary/15 text-primary'
+            : isLight
+                ? 'bg-primary-50/80 border border-primary-100 text-primary-600'
+                : 'bg-primary-950/45 border border-primary-800/50 text-primary-300',
+        accentGradient: 'from-primary to-primary-dark',
+        primaryAction: 'bg-primary text-on-primary',
+        secondaryAction: isColorful
+            ? 'bg-ds-card-colorful-from/80 border border-primary/15 text-primary'
+            : isLight
+                ? 'bg-primary-50/80 border border-primary-100 text-primary-600'
+                : 'bg-primary-950/45 border border-primary-800/50 text-primary-300',
+        subtleSurface: isColorful
+            ? 'bg-ds-card-colorful-from/80 border border-primary/15'
+            : isLight
+                ? 'bg-primary-50/70 border border-primary-100'
+                : 'bg-primary-950/35 border border-primary-800/40',
+        mutedText: 'text-muted-foreground',
+        titleText: 'text-foreground',
+        track: isLight ? 'bg-primary-100' : 'bg-primary-950/60',
+        modalOverlay: 'bg-ds-dark-1/50 backdrop-blur-md',
+        modal: `${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : ''} bg-[var(--card-from-bg)] border border-[var(--card-border)] text-foreground`,
+        modalItemActive: isColorful
+            ? 'bg-primary/20 border border-primary/30'
+            : isLight
+                ? 'bg-primary-50/90 border border-primary-100'
+                : 'bg-primary-950/50 border border-primary-800/50',
+        modalItemInactive: isColorful
+            ? 'bg-ds-card-colorful-from/70 border border-primary/15'
+            : 'bg-[var(--background)] border border-[var(--card-border)]',
+        botBubble: `${cardRadius} rounded-tl-md bg-[var(--card-from-bg)] border border-[var(--card-border)] text-foreground ${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : 'backdrop-blur-xl'} shadow-sm`,
+        inputArea: `${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : ''} bg-[var(--background)] border-t border-[var(--card-border)]`,
+        inputBox: `${isIOS ? 'rounded-full' : 'rounded-[28px]'} bg-[var(--card-from-bg)] border border-[var(--card-border)] text-foreground px-5 py-3 placeholder:text-muted-foreground`,
+        promptCard: `${isIOS ? 'rounded-[18px]' : 'rounded-[16px]'} bg-[var(--card-from-bg)] border border-[var(--card-border)]`,
+        navPill: isColorful ? 'bg-primary/25' : isLight ? 'bg-primary-100' : 'bg-primary-900/60',
+    };
+}
 
 export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android' }) {
     const os = initialOs;
-    const [theme, setTheme] = useState(initialOs === 'ios' ? 'colorful' : 'colorful');
+    const [theme, setTheme] = useState<MIThemeMode>(initialOs === 'ios' ? 'colorful' : 'colorful');
     const [showIntro, setShowIntro] = useState(true);
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
     const prevTabRef = useRef<TabType>('dashboard');
@@ -144,9 +199,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
         setActiveTab(newTab);
     }, []);
 
-    const isIOS = os === 'ios';
-    const isLight = theme === 'light';
-    const isColorful = theme === 'colorful';
+    const ui = getMIStyles(os, theme);
 
     const bgClass = 'bg-background text-foreground';
 
@@ -174,7 +227,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                             config={MARKET_INTELLIGENCE_INTRO}
                             theme={os === 'ios' ? iosTheme : androidTheme}
                             onComplete={(chosenTheme) => {
-                                setTheme(chosenTheme);
+                                setTheme(toMIThemeMode(chosenTheme));
                                 setShowIntro(false);
                             }}
                         />
@@ -183,34 +236,31 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
             </AnimatePresence>
 
             {/* Header */}
-            <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${isIOS
-                ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-black/5' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-primary/15' : 'bg-ds-dark-3/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-b border-white/5')
-                : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-2xl border-b border-primary-100/50 shadow-sm' : isColorful ? 'bg-ds-card-colorful-from/80 backdrop-blur-2xl border-b border-primary/20' : 'bg-ds-dark-3/90 backdrop-blur-2xl border-b border-ds-gray-600/50 shadow-md')
-                }`}>
+            <header className={`absolute top-0 w-full pt-12 pb-3 px-5 z-40 transition-all duration-300 ${ui.header}`}>
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center space-x-3.5">
                         <motion.button onClick={() => handleTabChange('profile')} className="relative group" whileTap={{ scale: 0.92 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
-                            <div className={`w-11 h-11 rounded-[16px] flex items-center justify-center overflow-hidden border-2 mb-0.5 ${isLight ? 'border-white shadow-sm' : 'border-ds-dark-3 shadow-md'} bg-gradient-to-tr from-ds-gray-50 to-ds-gray-200 dark:from-white/10 dark:to-white/20`}>
+                            <div className={`w-11 h-11 flex items-center justify-center overflow-hidden mb-0.5 ${ui.avatarFrame}`}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=f3f4f6" }} />
                             </div>
-                            <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${isLight ? 'border-white bg-ds-success' : 'border-ds-dark-2 bg-ds-success'}`}></div>
+                            <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${ui.statusDot}`}></div>
                         </motion.button>
                         <div className="flex flex-col justify-center">
                             <AnimatePresence mode="wait">
-                                <motion.span key={activeTab + "-sub"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>
+                                <motion.span key={activeTab + "-sub"} variants={headerSubVariants} initial="initial" animate="animate" exit="exit" className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${ui.mutedText}`}>
                                     {headerTitles[activeTab].sub}
                                 </motion.span>
                             </AnimatePresence>
                             <AnimatePresence mode="wait">
-                                <motion.h1 key={activeTab + "-title"} variants={headerTitleVariants} initial="initial" animate="animate" exit="exit" className={`text-[18px] font-extrabold tracking-tight leading-none ${isLight ? 'text-ds-gray-900' : 'text-ds-gray-100'}`}>
+                                <motion.h1 key={activeTab + "-title"} variants={headerTitleVariants} initial="initial" animate="animate" exit="exit" className={`text-[18px] font-extrabold tracking-tight leading-none ${ui.titleText}`}>
                                     {headerTitles[activeTab].title}
                                 </motion.h1>
                             </AnimatePresence>
                         </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${isColorful ? 'bg-primary/20 text-accent' : isIOS ? (isLight ? 'bg-black/5 text-ds-gray-900' : 'bg-white/10 text-ds-gray-100') : (isLight ? 'bg-primary-100/50 text-primary-900' : 'bg-primary-800/50 text-primary-200')}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
+                        <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${ui.aiButton}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                             <Icon name="auto_awesome" className="text-[20px]" />
                             <span className="absolute top-[9px] right-[9px] h-[5.5px] w-[5.5px] rounded-full bg-ds-warning shadow-sm" />
                         </motion.button>
@@ -247,10 +297,9 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
+    const ui = getMIStyles(os, theme);
     const [selectedTimeRange, setSelectedTimeRange] = useState('1D');
-    const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-primary-100/50' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-primary/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/40');
+    const card = ui.card;
 
     const watchlist = [
         { ticker: 'AAPL', name: 'Apple', price: '$198.11', numPrice: 198.11, change: '+2.4%', up: true, data: [140, 145, 142, 155, 160, 158, 170, 175, 180, 190, 185, 198] },
@@ -275,8 +324,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
             {/* ── Portfolio Value Hero ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient accent line */}
-                <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r opacity-70 ${isColorful ? 'from-primary to-primary-dark' : isIOS ? 'from-primary to-primary-dark' : 'from-primary-500 to-primary-300'}`} />
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/5 via-transparent to-transparent" />
+                <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r opacity-70 ${ui.accentGradient}`} />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center space-x-2">
                         <PulseBeacon color="green" />
@@ -285,7 +334,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                     <div className="flex space-x-1">
                         {['1D', '1W', '1M'].map(t => (
                             <button key={t} onClick={() => setSelectedTimeRange(t)}
-                                className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all ${selectedTimeRange === t ? (isIOS ? 'bg-primary text-white' : isColorful ? 'bg-primary text-white' : 'bg-primary text-white') : (isLight ? 'bg-black/5 text-ds-gray-500' : 'bg-white/8 text-ds-gray-400')}`}>
+                                className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all ${selectedTimeRange === t ? ui.primaryAction : ui.secondaryAction}`}>
                                 {t}
                             </button>
                         ))}
@@ -313,7 +362,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
             {/* ── AI Morning Briefing ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient side accent */}
-                <div className={`absolute top-4 bottom-4 left-0 w-[3px] rounded-full ${isIOS ? 'bg-gradient-to-b from-primary to-primary-dark' : 'bg-gradient-to-b from-primary-500 to-primary-300'}`} />
+                <div className={`absolute top-4 bottom-4 left-0 w-[3px] rounded-full bg-gradient-to-b ${ui.accentGradient}`} />
                 <div className="pl-3">
                     <div className="flex items-center space-x-2.5 mb-3">
                         <Icon name="auto_awesome" className={`text-xl ${isColorful ? 'text-primary' : 'text-primary-500'}`} />
@@ -347,7 +396,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                             </div>
                             <span className={`text-[11px] block mb-2 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{s.name}</span>
                             <Sparkline data={s.data} color={s.up ? 'var(--color-success)' : 'var(--color-error)'} width={120} height={28} />
-                            <span className={`text-[15px] font-semibold mt-2 block ${isLight ? 'text-ds-gray-900' : 'text-white'}`}>{s.price}</span>
+                            <span className="text-[15px] font-semibold mt-2 block text-foreground">{s.price}</span>
                         </motion.div>
                     ))}
                 </div>
@@ -369,7 +418,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                                 <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-[10px] font-bold ${m.up ? (isLight ? 'bg-ds-success/10 text-ds-success' : 'bg-ds-success/15 text-ds-success') : (isLight ? 'bg-ds-error/10 text-ds-error' : 'bg-ds-error/15 text-ds-error')}`}>{i + 1}</div>
                                 <span className="font-semibold text-[14px]">{m.ticker}</span>
                             </div>
-                            <div className="flex-1 mx-3 h-2.5 rounded-full overflow-hidden bg-black/5 dark:bg-white/5">
+                            <div className={`flex-1 mx-3 h-2.5 rounded-full overflow-hidden ${ui.track}`}>
                                 <motion.div initial={{ width: 0 }} animate={{ width: `${Math.min(Math.abs(parseFloat(m.change)) * 5, 100)}%` }} transition={{ delay: 0.4 + i * 0.08, duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                                     className={`h-full rounded-full ${m.up ? 'bg-gradient-to-r from-ds-success to-ds-success/60' : 'bg-gradient-to-r from-ds-error to-ds-error/60'}`} />
                             </div>
@@ -384,13 +433,13 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                 <h3 className="font-bold text-base mb-3 px-1">Quick Actions</h3>
                 <div className="grid grid-cols-2 gap-3">
                     {[
-                        { icon: 'bolt', label: 'Earnings', desc: 'Q3 reports', gradient: 'from-ds-success to-ds-cyan-400', lightBg: 'bg-ds-success/10 border-ds-success/20' },
-                        { icon: 'description', label: 'Filings', desc: 'SEC data', gradient: 'from-primary to-primary-dark', lightBg: 'bg-primary-100 border-primary-200' },
-                        { icon: 'analytics', label: 'Research', desc: 'Analyst notes', gradient: 'from-primary to-ds-fuchsia-400', lightBg: 'bg-primary/10 border-primary/20' },
-                        { icon: 'grid_view', label: 'Sectors', desc: 'Heatmap', gradient: 'from-primary to-primary-dark', lightBg: 'bg-primary/10 border-primary/20' },
+                        { icon: 'bolt', label: 'Earnings', desc: 'Q3 reports', gradient: 'from-ds-success to-ds-cyan-400' },
+                        { icon: 'description', label: 'Filings', desc: 'SEC data', gradient: 'from-primary to-primary-dark' },
+                        { icon: 'analytics', label: 'Research', desc: 'Analyst notes', gradient: 'from-primary to-ds-fuchsia-400' },
+                        { icon: 'grid_view', label: 'Sectors', desc: 'Heatmap', gradient: 'from-primary to-primary-dark' },
                     ].map((a) => (
                         <motion.button key={a.label} whileTap={{ scale: 0.96 }} onClick={() => onNavigate('copilot')}
-                            className={`relative overflow-hidden flex flex-col text-left p-4 rounded-[20px] transition-all ${isLight ? `${a.lightBg} border` : isColorful ? `bg-gradient-to-br ${a.gradient}/10 border border-white/5` : 'bg-white/[0.04] border border-white/5'}`}>
+                            className={`relative overflow-hidden flex flex-col text-left p-4 rounded-[20px] transition-all ${ui.subtleSurface}`}>
                             {/* Subtle gradient overlay on dark themes */}
                             {!isLight && <div className={`absolute inset-0 bg-gradient-to-br ${a.gradient} opacity-[0.06] rounded-[20px]`} />}
                             <div className="relative z-10">
@@ -414,15 +463,14 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
+    const ui = getMIStyles(os, theme);
     const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
     const [tickerExpanded, setTickerExpanded] = useState(false);
     const [alertSet, setAlertSet] = useState<string | null>(null);
     const [chartRange, setChartRange] = useState('1M');
     const [featuredIdx, setFeaturedIdx] = useState(0);
     useEffect(() => { setTickerExpanded(false); setAlertSet(null); }, [selectedTicker]);
-    const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] shadow-sm border border-primary-100/50' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-primary/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] shadow-lg border border-ds-gray-600/40');
+    const card = ui.card;
 
     const indices = [
         { name: 'S&P 500', value: '5,234.18', change: '+0.87%', up: true, data: [5100, 5120, 5150, 5180, 5200, 5210, 5190, 5220, 5234] },
@@ -472,7 +520,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
 
             {/* ── Featured Stock Chart ── */}
             <motion.div variants={fadeUp} className={`p-5 ${card} relative overflow-hidden`}>
-                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r opacity-50 ${isColorful ? 'from-primary to-primary-dark' : 'from-primary to-primary-dark'}`} />
+                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r opacity-50 ${ui.accentGradient}`} />
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <div className="flex items-center space-x-2 mb-1">
@@ -492,7 +540,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                     <div className="flex space-x-1.5">
                         {['1D', '1W', '1M', '3M', '1Y'].map(r => (
                             <button key={r} onClick={() => setChartRange(r)}
-                                className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${chartRange === r ? 'bg-primary text-white' : (isLight ? 'bg-black/5 text-ds-gray-500' : 'bg-white/8 text-ds-gray-400')}`}>
+                                className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${chartRange === r ? ui.primaryAction : ui.secondaryAction}`}>
                                 {r}
                             </button>
                         ))}
@@ -501,7 +549,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                     <div className="flex space-x-1.5">
                         {trending.slice(0, 4).map((t, i) => (
                             <button key={t.ticker} onClick={() => setFeaturedIdx(i)}
-                                className={`w-6 h-6 rounded-full text-[8px] font-bold flex items-center justify-center transition-all ${featuredIdx === i ? 'bg-primary text-white scale-110' : (isLight ? 'bg-black/5 text-ds-gray-500' : 'bg-white/8 text-ds-gray-400')}`}>
+                                className={`w-6 h-6 rounded-full text-[8px] font-bold flex items-center justify-center transition-all ${featuredIdx === i ? `${ui.primaryAction} scale-110` : ui.secondaryAction}`}>
                                 {t.ticker.slice(0, 2)}
                             </button>
                         ))}
@@ -590,7 +638,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
                                                 <div className="grid grid-cols-2 gap-2.5 mt-4 mb-4">
                                                     {metrics.map(m => (
-                                                        <div key={m.label} className={`p-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.06]'}`}>
+                                                        <div key={m.label} className={`p-3 rounded-2xl ${ui.subtleSurface}`}>
                                                             <span className="text-[11px] opacity-50 block mb-0.5">{m.label}</span>
                                                             <span className="text-[15px] font-bold">{m.value}</span>
                                                         </div>
@@ -600,7 +648,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                                     <Icon name="bar_chart" className="text-ds-success text-[20px] shrink-0" />
                                                     <div><span className="text-[11px] opacity-50 block">Analyst Consensus</span><span className="text-[14px] font-bold text-ds-success">{t.up ? 'Buy' : 'Hold'} · {t.up ? '72%' : '54%'} bullish</span></div>
                                                 </div>
-                                                <div className={`p-3 rounded-2xl mb-4 ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
+                                                <div className={`p-3 rounded-2xl mb-4 ${ui.subtleSurface}`}>
                                                     <div className="flex items-center space-x-1.5 mb-1"><Icon name="auto_awesome" className="text-[14px] text-primary" /><span className="text-[11px] font-bold opacity-50">AI Insight</span></div>
                                                     <p className={`text-[12px] leading-relaxed ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{t.up ? `${t.ticker} shows strong momentum with institutional buying pressure. Watch for resistance near ${metrics[2].value}.` : `${t.ticker} faces near-term headwinds. Support levels at ${metrics[3].value} remain key.`}</p>
                                                 </div>
@@ -612,7 +660,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                             <button key={label} onClick={() => {
                                                 if (label === 'Ask AI') { setSelectedTicker(null); onNavigate?.('copilot'); }
                                                 if (label === 'Add Alert') { setAlertSet(t.ticker); setTimeout(() => setAlertSet(null), 2500); }
-                                            }} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? 'bg-primary text-white' : label === 'Add Alert' && alertSet === t.ticker ? 'bg-ds-success text-white' : (isLight ? 'bg-ds-gray-100 text-ds-gray-800' : isColorful ? 'bg-white/10 text-white' : 'bg-white/10 text-white')}`}>
+                                            }} className={`py-3 rounded-2xl text-[13px] font-semibold transition-all active:scale-95 ${i === 0 ? ui.primaryAction : label === 'Add Alert' && alertSet === t.ticker ? 'bg-ds-success text-on-dark' : ui.secondaryAction}`}>
                                                 {label === 'Add Alert' && alertSet === t.ticker ? '✓ Alert Set' : label}
                                             </button>
                                         ))}
@@ -634,6 +682,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
+    const ui = getMIStyles(os, theme);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const [messages, setMessages] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState("");
@@ -672,20 +721,10 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         }, 20);
     };
 
-    const userBubble = isColorful
-        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg'
-        : isIOS
-            ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg'
-            : 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg';
-    const botBubble = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 text-ds-gray-900 rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 text-white rounded-[22px] rounded-tl-md shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : isColorful ? (isLight ? 'bg-ds-violet-100/90 backdrop-blur-xl border border-primary/20 text-primary-dark rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-card-colorful-from/60 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm') : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl border border-primary-100/50 text-primary-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/40 text-primary-200 rounded-[22px] rounded-tl-sm shadow-sm');
-    const inputArea = isIOS
-        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-primary/20' : 'bg-ds-dark-2/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/8')
-        : (isLight ? 'bg-ds-gray-100 rounded-t-[28px]' : isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : 'bg-ds-dark-3 rounded-t-[28px]');
-    const inputBox = isIOS
-        ? (isLight ? 'bg-black/5 rounded-full px-5 py-3 border border-black/5' : isColorful ? 'bg-primary/10 rounded-full px-5 py-3 border border-primary/20' : 'bg-white/8 rounded-full px-5 py-3 border border-white/8')
-        : isColorful ? (isLight ? 'bg-primary/20 text-primary-dark rounded-[28px] px-5 py-3' : 'bg-primary/15 text-white rounded-[28px] px-5 py-3') : (isLight ? 'bg-primary-100 text-primary-900 rounded-[28px] px-5 py-3' : 'bg-primary-800 text-primary-200 rounded-[28px] px-5 py-3');
+    const userBubble = `bg-primary text-on-primary rounded-[22px] rounded-tr-md shadow-lg`;
+    const botBubble = ui.botBubble;
+    const inputArea = ui.inputArea;
+    const inputBox = ui.inputBox;
 
     const prompts = [
         { icon: 'bolt', label: 'Earnings', prompt: 'Analyze AAPL Q3 Earnings Impact' },
@@ -709,12 +748,12 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                         <p className={`text-sm text-center max-w-[240px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>Ask anything about markets, earnings, filings, or macro trends.</p>
                     </motion.div>
                     <div className="w-full mt-auto pb-4 shrink-0">
-                        <label className={`text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 ${isLight ? 'text-black/40' : 'text-white/40'}`}>Suggested</label>
+                        <label className={`text-[10px] font-bold uppercase tracking-widest mb-3 block px-1 ${ui.mutedText}`}>Suggested</label>
                         <div className="grid grid-cols-2 gap-2.5">
                             {prompts.map((p, i) => (
                                 <motion.button key={p.label} whileTap={{ scale: 0.93 }} onClick={() => handleSend(p.prompt)}
                                     initial={{ opacity: 0, y: 24, scale: 0.88 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.2 + i * 0.1, type: 'spring', stiffness: 280, damping: 22 }}
-                                    className={`flex flex-col text-left p-3.5 rounded-[18px] transition-all ${isIOS ? (isLight ? 'bg-white/60 border border-black/5' : isColorful ? 'bg-ds-card-colorful-from/60 border border-primary/20' : 'bg-ds-dark-2/60 border border-white/8') : isColorful ? (isLight ? 'bg-primary/15 border border-primary/20' : 'bg-primary/10 border border-primary/20') : (isLight ? 'bg-primary-100 text-primary-900' : 'bg-primary-800 text-primary-200')}`}>
+                                    className={`flex flex-col text-left p-3.5 transition-all ${ui.promptCard}`}>
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${isColorful ? 'text-primary' : isIOS ? (isLight ? 'text-primary-500' : 'text-primary-400') : (isLight ? 'text-primary-500' : 'text-primary-400')}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
                                 </motion.button>
@@ -732,7 +771,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                                     <div className="mt-2 space-y-1.5 ml-1">
                                         {msg.citations.map((c, i) => (
                                             <motion.div key={i} initial={{ opacity: 0, x: -20, scale: 0.9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.15 + i * 0.12, type: 'spring', stiffness: 280, damping: 22 }}
-                                                className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${isLight ? 'bg-primary-400/8 border border-primary-400/10' : isColorful ? 'bg-primary/8 border border-primary/15' : 'bg-primary-600/20 border border-primary-500/15'}`}>
+                                                className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${ui.subtleSurface}`}>
                                                 <Icon name="verified" className="text-sm shrink-0 mt-0.5 text-primary" />
                                                 <div><span className="font-semibold block">{c.source}</span><span className={`${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{c.snippet}</span></div>
                                             </motion.div>
@@ -757,7 +796,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                                 { icon: 'add_comment', label: 'Follow-up' },
                             ].map((a) => (
                                 <motion.button key={a.label} whileTap={{ scale: 0.95 }}
-                                    className={`flex items-center space-x-1.5 px-3 py-2 rounded-2xl text-[12px] font-semibold ${isColorful ? (isLight ? 'bg-primary/20 text-primary-dark' : 'bg-primary/15 text-accent') : isIOS ? (isLight ? 'bg-black/5 text-primary-500' : 'bg-white/8 text-primary-400') : (isLight ? 'bg-primary-100 text-primary-900' : 'bg-primary-800 text-primary-200')}`}>
+                                    className={`flex items-center space-x-1.5 px-3 py-2 rounded-2xl text-[12px] font-semibold ${ui.secondaryAction}`}>
                                     <Icon name={a.icon} className="text-[14px]" /><span>{a.label}</span>
                                 </motion.button>
                             ))}
@@ -768,7 +807,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
             )}
             <div className={`px-4 pt-3 pb-[90px] flex items-end space-x-2 shrink-0 z-30 w-full ${inputArea}`}>
                 <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} placeholder="Ask about markets..." className={`flex-1 outline-none text-[14px] ${inputBox}`} />
-                <button onClick={() => handleSend()} disabled={!input.trim()} className={`w-10 h-10 flex justify-center items-center shrink-0 transition-opacity disabled:opacity-40 ${isColorful ? 'bg-primary text-white rounded-full' : isIOS ? 'bg-primary text-white rounded-full' : 'bg-primary text-white rounded-[14px]'}`}>
+                <button onClick={() => handleSend()} disabled={!input.trim()} className={`w-10 h-10 flex justify-center items-center shrink-0 transition-opacity disabled:opacity-40 ${ui.primaryAction} ${isIOS ? 'rounded-full' : 'rounded-[14px]'}`}>
                     <Icon name="arrow_upward" className="text-lg" />
                 </button>
             </div>
@@ -783,10 +822,9 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
+    const ui = getMIStyles(os, theme);
     const [expanded, setExpanded] = useState<number | null>(null);
-    const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] border border-primary-100/50 shadow-sm' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-primary/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] border border-ds-gray-600/40 shadow-lg');
+    const card = ui.card;
 
     const alerts = [
         { id: 1, priority: 'critical', icon: 'trending_down', title: 'TSLA Dropped 5.2%', desc: 'Pre-market trading indicates a significant drop ahead of SEC quarterly earnings disclosure.', detail: 'Tesla shares fell sharply after reports of slowing EV deliveries in China and increased competition from BYD. Analyst consensus has shifted to a Hold rating.', time: '10 min ago', color: 'red' },
@@ -824,13 +862,13 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
             {/* Timeline Alert Cards */}
             <div className="relative">
                 {/* Vertical timeline line */}
-                <div className={`absolute left-[21px] top-4 bottom-4 w-[2px] ${isLight ? 'bg-ds-gray-200' : 'bg-white/8'}`} />
+                <div className={`absolute left-[21px] top-4 bottom-4 w-[2px] ${ui.track}`} />
 
                 {alerts.map((a) => (
                     <motion.div key={a.id} variants={fadeUp} className="relative pl-12 pb-4">
                         {/* Timeline dot */}
                         <div className="absolute left-[14px] top-4 z-10">
-                            <div className={`w-[16px] h-[16px] rounded-full border-[3px] ${isLight ? 'border-white' : isColorful ? 'border-ds-colorful-bg' : 'border-ds-dark-1'} ${dotColor(a.color)}`}>
+                            <div className={`w-[16px] h-[16px] rounded-full border-[3px] border-[var(--background)] ${dotColor(a.color)}`}>
                                 {a.priority === 'critical' && (
                                     <div className={`absolute inset-[-4px] rounded-full ${dotColor(a.color)} opacity-20`} />
                                 )}
@@ -858,7 +896,7 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                                         <AnimatePresence>
                                             {expanded === a.id && (
                                                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ type: 'spring', stiffness: 340, damping: 30, mass: 0.9 }}>
-                                                    <p className={`text-[13px] leading-relaxed mt-2 pt-2 border-t ${isLight ? 'text-ds-gray-700 border-ds-gray-200' : 'text-ds-gray-300 border-white/5'}`}>{a.detail}</p>
+                                                    <p className={`text-[13px] leading-relaxed mt-2 pt-2 border-t border-[var(--card-border)] ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>{a.detail}</p>
                                                     <button className={`mt-3 flex items-center space-x-1.5 text-xs font-semibold ${isColorful ? 'text-accent' : 'text-primary-500'}`}>
                                                         <Icon name="auto_awesome" className="text-sm" /><span>Ask AI about this</span>
                                                     </button>
@@ -879,14 +917,13 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
 // ═══════════════════════════════════════════════════════════
 // PROFILE VIEW
 // ═══════════════════════════════════════════════════════════
-function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTheme: (t: string) => void }) {
+function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTheme: (t: MIThemeMode) => void }) {
     const isIOS = os === 'ios';
     const isLight = theme === 'light';
     const isColorful = theme === 'colorful';
+    const ui = getMIStyles(os, theme);
     const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
-    const card = isIOS
-        ? (isLight ? 'bg-white/50 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/50 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : isColorful ? 'bg-ds-card-colorful-from/35 backdrop-blur-[30px] backdrop-saturate-[200%] border border-primary/20 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'bg-ds-dark-2/55 backdrop-blur-[30px] backdrop-saturate-[200%] border border-white/8 rounded-[22px] shadow-[0_4px_20px_rgba(0,0,0,0.3)]')
-        : (isLight ? 'bg-ds-gray-50/90 backdrop-blur-xl rounded-[28px] border border-primary-100/50 shadow-sm' : isColorful ? 'bg-ds-card-colorful-from/60 backdrop-blur-xl rounded-[28px] shadow-lg border border-primary/20' : 'bg-ds-dark-3/90 backdrop-blur-xl rounded-[28px] border border-ds-gray-600/40 shadow-lg');
+    const card = ui.card;
 
     const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.06 } } };
     const fadeUp = { hidden: { opacity: 0, y: 36, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 24, mass: 0.85 } } };
@@ -896,7 +933,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
             {/* Header Row */}
             <motion.div variants={fadeUp} className="flex justify-between items-center px-1">
                 <h2 className="text-xl font-bold tracking-tight">My Space</h2>
-                <button onClick={() => setIsThemeModalOpen(true)} className={`w-9 h-9 rounded-full flex items-center justify-center ${isColorful ? 'bg-primary/20 text-primary' : isIOS ? (isLight ? 'bg-primary-100/60 text-primary-900' : 'bg-primary-800/40 text-primary-200') : (isLight ? 'bg-primary-100/50 text-primary-900' : 'bg-primary-800/50 text-primary-200')}`}>
+                <button onClick={() => setIsThemeModalOpen(true)} className={`w-9 h-9 rounded-full flex items-center justify-center ${ui.secondaryAction}`}>
                     <Icon name="settings" className="text-[18px]" />
                 </button>
             </motion.div>
@@ -905,12 +942,12 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
             <motion.div variants={fadeUp} className="flex flex-col items-center py-4">
                 <div className="relative mb-3">
                     <div className="w-24 h-24 rounded-full overflow-hidden p-[3px] bg-gradient-to-tr from-primary-400 to-primary-dark shadow-lg">
-                        <div className="w-full h-full rounded-full bg-white dark:bg-black/80 overflow-hidden">
+                        <div className="w-full h-full rounded-full bg-[var(--background)] overflow-hidden">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="Ali Al-Zuhairi" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Ali+Al-Zuhairi&background=f3f4f6" }} />
                         </div>
                     </div>
-                    <div className="absolute bottom-0 right-0 w-6 h-6 bg-ds-success border-[3px] border-white dark:border-ds-dark-2 rounded-full" />
+                    <div className="absolute bottom-0 right-0 w-6 h-6 bg-ds-success border-[3px] border-[var(--background)] rounded-full" />
                 </div>
                 <h2 className="font-bold text-2xl tracking-tight">Ali Al-Zuhairi</h2>
                 <p className={`text-sm font-medium mt-0.5 ${isColorful ? 'text-accent' : 'text-primary-500'}`}>Alux Space Founder</p>
@@ -964,7 +1001,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                 <div className="flex items-center space-x-5">
                     <div className="relative w-18 h-18 flex items-center justify-center shrink-0">
                         <svg className="w-[72px] h-[72px] transform -rotate-90" viewBox="0 0 36 36">
-                            <path className={isLight ? "text-ds-gray-200" : "text-white/10"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path className={isLight ? "text-ds-gray-200" : "text-primary-950"} stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "15, 100" }} transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.2 }} strokeDashoffset={"-85"} strokeLinecap="round" className="text-ds-warning" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "20, 100" }} transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.2 }} strokeDashoffset={"-65"} strokeLinecap="round" className="text-ds-pink-500" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <motion.path initial={{ strokeDasharray: "0, 100" }} animate={{ strokeDasharray: "65, 100" }} transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.2 }} strokeLinecap="round" className="text-primary-300" stroke="currentColor" strokeWidth="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -973,10 +1010,10 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                     </div>
                     <div className="flex-1 space-y-1.5">
                         {[{ label: 'Bullish', pct: 65, pctStr: '65%', color: 'bg-primary-300' }, { label: 'Bearish', pct: 20, pctStr: '20%', color: 'bg-ds-pink-500' }, { label: 'Neutral', pct: 15, pctStr: '15%', color: 'bg-ds-warning' }].map(s => (
-                            <div key={s.label} className={`flex justify-between text-[11px] items-center p-1.5 rounded-lg ${isLight ? 'bg-black/[0.03]' : 'bg-white/[0.04]'}`}>
+                            <div key={s.label} className={`flex justify-between text-[11px] items-center p-1.5 rounded-lg ${ui.subtleSurface}`}>
                                 <span className="opacity-70 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 ${s.color}`} />{s.label}</span>
                                 <div className="flex items-center space-x-2">
-                                    <div className={`w-12 h-1.5 rounded-full overflow-hidden ${isLight ? 'bg-ds-gray-200' : 'bg-white/10'}`}>
+                                    <div className={`w-12 h-1.5 rounded-full overflow-hidden ${ui.track}`}>
                                         <motion.div initial={{ width: 0 }} animate={{ width: `${s.pct}%` }} transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.9 }} className={`h-full rounded-full ${s.color}`} />
                                     </div>
                                     <span className="font-bold">{s.pctStr}</span>
@@ -993,21 +1030,21 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
             <AnimatePresence>
                 {isThemeModalOpen && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-auto">
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsThemeModalOpen(false)} className="absolute inset-0 bg-black/50 backdrop-blur-md" />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsThemeModalOpen(false)} className={`absolute inset-0 ${ui.modalOverlay}`} />
                         <motion.div initial={{ opacity: 0, scale: 0.7, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.7, y: 40 }}
                             transition={{ type: 'spring', stiffness: 280, damping: 24, mass: 0.85 }}
-                            className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${isIOS ? (isLight ? 'bg-white/80 backdrop-blur-[30px] backdrop-saturate-[200%]' : 'bg-ds-dark-2/80 backdrop-blur-[30px] backdrop-saturate-[200%] text-white') : (isLight ? 'bg-ds-gray-50' : 'bg-ds-dark-3 text-ds-gray-200')}`}>
+                            className={`relative w-[85%] max-w-sm rounded-[28px] p-6 shadow-2xl ${ui.modal}`}>
                             <div className="flex justify-between items-center mb-5">
                                 <h3 className="text-xl font-bold">App Theme</h3>
-                                <button onClick={() => setIsThemeModalOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/10"><Icon name="close" className="text-sm" /></button>
+                                <button onClick={() => setIsThemeModalOpen(false)} className={`w-8 h-8 flex items-center justify-center rounded-full ${ui.secondaryAction}`}><Icon name="close" className="text-sm" /></button>
                             </div>
                             <div className="space-y-2.5">
                                 {[{ value: 'light', label: 'Light', icon: 'light_mode', color: 'text-primary' }, { value: 'dark', label: 'Dark', icon: 'dark_mode', color: 'text-primary-400' }, { value: 'colorful', label: 'Colorful', icon: 'palette', color: 'text-primary' }].map(t => {
                                     const active = theme === t.value;
                                     return (
-                                        <motion.button key={t.value} onClick={() => { setTheme(t.value); setIsThemeModalOpen(false); }}
+                                        <motion.button key={t.value} onClick={() => { setTheme(toMIThemeMode(t.value)); setIsThemeModalOpen(false); }}
                                             whileTap={{ scale: 0.97 }}
-                                            className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all border ${active ? (isIOS ? (isLight ? 'bg-primary-500/10 border-primary-500/30' : 'bg-primary-400/20 border-primary-400/30') : (isLight ? 'bg-primary-100 border-primary-100' : 'bg-primary-800 border-primary-800')) : (isLight ? 'bg-black/[0.03] border-transparent' : 'bg-white/[0.04] border-transparent')}`}>
+                                            className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all ${active ? ui.modalItemActive : ui.modalItemInactive}`}>
                                             <div className="flex items-center space-x-3">
                                                 <Icon name={t.icon} className={active ? t.color : 'opacity-50'} />
                                                 <span className={`font-medium ${active ? 'font-bold' : ''}`}>{t.label}</span>
@@ -1029,12 +1066,8 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
 // NAVIGATION
 // ═══════════════════════════════════════════════════════════
 function BottomNav({ activeTab, setActiveTab, os, theme }: { activeTab: string, setActiveTab: (t: TabType) => void, os: string, theme: string }) {
-    const isIOS = os === 'ios';
-    const isLight = theme === 'light';
-    const isColorful = theme === 'colorful';
-    const navClass = isIOS
-        ? (isLight ? 'bg-white/40 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-black/5 pb-5 h-[82px]' : isColorful ? 'bg-ds-card-colorful-from/50 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-primary/15 pb-5 h-[82px]' : 'bg-ds-dark-2/45 backdrop-blur-[30px] backdrop-saturate-[200%] border-t border-white/5 pb-5 h-[82px]')
-        : (isLight ? 'bg-ds-gray-100/90 backdrop-blur-xl h-20 pb-2 border-t border-primary-100/50' : isColorful ? 'bg-ds-card-colorful-from/80 backdrop-blur-xl h-20 pb-2 border-t border-primary/20' : 'bg-ds-dark-3/90 backdrop-blur-xl h-20 pb-2 border-t border-ds-gray-600/50');
+    const ui = getMIStyles(os, theme);
+    const navClass = ui.nav;
 
     const tabs: { key: TabType, icon: string, label: string }[] = [
         { key: 'dashboard', icon: 'space_dashboard', label: 'Home' },
@@ -1079,7 +1112,7 @@ function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, lab
                 {active && (
                     <motion.div
                         layoutId="mi-nav-pill"
-                        className={`absolute inset-0 rounded-full ${isColorful ? (isLight ? 'bg-primary/25' : 'bg-primary/25') : (isLight ? 'bg-primary-100' : 'bg-primary-700')}`}
+                        className={`absolute inset-0 rounded-full ${getMIStyles(os, theme).navPill}`}
                         transition={{ type: 'spring', stiffness: 350, damping: 24, mass: 0.8 }}
                     />
                 )}
