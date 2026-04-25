@@ -122,7 +122,16 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
   const { trackEvent } = useAnalyticsTracking();
   const [activeIndex, setActiveIndex] = useState(1); // start with Workflow card active
   const [showCloud, setShowCloud] = useState(true);
+  const [hasBloomed, setHasBloomed] = useState(false);
   const wasDragging = React.useRef(false);
+
+  // After the initial bloom finishes, switch to the snappier interaction
+  // transition so clicks/dot-nav don't carry the staggered entry delay.
+  React.useEffect(() => {
+    const totalBloom = 1100 + (SHOWCASE_ITEMS.length - 1) * 120 + 150;
+    const timer = window.setTimeout(() => setHasBloomed(true), totalBloom);
+    return () => window.clearTimeout(timer);
+  }, []);
   const activeItem = SHOWCASE_ITEMS[activeIndex];
 
   const navigateToActiveItem = () => {
@@ -242,7 +251,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
             return (
               <MotionDiv
                 key={item.slug}
-                initial={{ opacity: 0, y: 60, scale: 0.8 }}
+                initial={{ opacity: 0, x: 0, y: 40, scale: 0.5, rotate: 0 }}
                 animate={{
                   opacity: distance > 2 ? 0.4 : 1,
                   x: cfg.x,
@@ -257,11 +266,17 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                   scale: isActive ? 1.08 : cfg.scale * 1.05,
                   zIndex: 20,
                   opacity: 1,
-                  transition: { duration: 0.4, ease: "easeOut" }
+                  // Premium ease-in-out — slow start, gentle settle
+                  transition: { duration: 0.65, ease: [0.65, 0, 0.35, 1] }
                 }}
                 transition={{
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1], // Soft, fluid, non-snappy deceleration
+                  // Bloom-from-center entry: cards fan out sequentially from
+                  // the front card outward, like petals opening.
+                  // After the initial bloom, switch to a smooth ease-in-out
+                  // for active-card swaps (no staggered delay).
+                  duration: hasBloomed ? 0.7 : 1.1,
+                  ease: hasBloomed ? [0.65, 0, 0.35, 1] : [0.22, 1, 0.36, 1],
+                  delay: hasBloomed ? 0 : 0.15 + Math.abs(index - 2) * 0.12,
                 }}
                 style={{ position: 'absolute', width: 380, height: 270 }}
                 className="cursor-pointer origin-bottom"
