@@ -105,13 +105,14 @@ const WORD_CLOUD = SHOWCASE_ITEMS.flatMap((item, cardIndex) =>
   }))
 );
 
-// Layered-stack config: cards sit in an overlapping pile, offset left↗ as index increases
+// Layered-stack config: cards sit in a chaotic overlapping pile.
+// On hover/active, the card flattens (rotate 0) and lifts forward.
 const STACK_CONFIG = [
-  { x:  90, y: -44, rotate:  7, scale: 0.88, zIndex: 1 },
-  { x:  45, y: -22, rotate:  3.5, scale: 0.94, zIndex: 2 },
-  { x:   0, y:   0, rotate:  0,   scale: 1.00, zIndex: 3 }, // front card
-  { x: -45, y: -22, rotate: -3.5, scale: 0.94, zIndex: 2 },
-  { x: -90, y: -44, rotate: -7, scale: 0.88, zIndex: 1 },
+  { x: 110, y: -10, rotate:  9,    scale: 0.86, zIndex: 1 },
+  { x:  60, y:  18, rotate: -5,    scale: 0.92, zIndex: 2 },
+  { x:   0, y:   0, rotate:  2.5,  scale: 1.00, zIndex: 3 }, // front card
+  { x: -55, y:  22, rotate: -7,    scale: 0.92, zIndex: 2 },
+  { x:-110, y: -14, rotate:  6,    scale: 0.86, zIndex: 1 },
 ];
 
 interface PortfolioFanProps { locale: string }
@@ -329,41 +330,41 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
           })}
 
           {/* Word cloud — keywords float around the card stack, each selects the relevant card */}
-          {WORD_CLOUD.map((w, wIdx) => {
-            const isActive = activeIndex === w.cardIndex;
-            return (
-              <MotionDiv
-                key={`w-${wIdx}`}
-                initial={{ opacity: 0, scale: 0.75 }}
-                animate={{
-                  opacity: showCloud ? (isActive ? 0.95 : 0.28) : 0,
-                  scale:   showCloud ? 1 : 0.75,
-                }}
-                transition={{ duration: 0.3, delay: showCloud ? wIdx * 0.025 : 0 }}
-                style={{
-                  position: 'absolute',
-                  left: w.x,
-                  top: w.y,
-                  zIndex: 20,
-                  pointerEvents: showCloud ? 'auto' : 'none',
-                }}
-                className="hidden lg:block"
-              >
-                <Button
-                  variant="tertiary"
-                  onClick={() => setActiveIndex(w.cardIndex)}
-                  className="!h-auto !min-h-0 !rounded-full !text-[10px] !font-medium !px-2.5 !py-1 !border whitespace-nowrap"
+          <AnimatePresence initial={false}>
+            {showCloud && WORD_CLOUD.map((w, wIdx) => {
+              const isActive = activeIndex === w.cardIndex;
+              return (
+                <MotionDiv
+                  key={`w-${wIdx}`}
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: isActive ? 0.95 : 0.28, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.75 }}
+                  transition={{ duration: 0.3, delay: wIdx * 0.025 }}
                   style={{
-                    color:       isActive ? w.accent : 'var(--foreground)',
-                    borderColor: isActive ? `${w.accent}66` : 'var(--card-border)',
-                    background:  isActive ? `${w.accent}1a` : 'var(--card-from-bg)',
+                    position: 'absolute',
+                    left: w.x,
+                    top: w.y,
+                    zIndex: 20,
                   }}
+                  className="hidden lg:block"
                 >
-                  {w.word}
-                </Button>
-              </MotionDiv>
-            );
-          })}
+                  <Button
+                    type="button"
+                    variant="tertiary"
+                    onClick={() => setActiveIndex(w.cardIndex)}
+                    className="!h-auto !min-h-0 !rounded-full !text-[10px] !font-medium !px-2.5 !py-1 !border whitespace-nowrap"
+                    style={{
+                      color:       isActive ? w.accent : 'var(--foreground)',
+                      borderColor: isActive ? `${w.accent}66` : 'var(--card-border)',
+                      background:  isActive ? `${w.accent}1a` : 'var(--card-from-bg)',
+                    }}
+                  >
+                    {w.word}
+                  </Button>
+                </MotionDiv>
+              );
+            })}
+          </AnimatePresence>
         </div>
 
         {/* Dot navigation */}
@@ -371,8 +372,11 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
 
         {/* Word cloud toggle */}
         <Button
+          type="button"
           variant="tertiary"
           onClick={() => setShowCloud(v => !v)}
+          aria-pressed={!showCloud}
+          aria-label={showCloud ? 'Hide portfolio keywords' : 'Show portfolio keywords'}
           className="!h-auto !min-h-0 !rounded-full !text-[10px] uppercase tracking-widest !px-2.5 !py-1 !border gap-1.5"
           style={{
             color:       'var(--muted-foreground)',
