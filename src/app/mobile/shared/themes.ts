@@ -84,6 +84,15 @@ export interface MobileTheme {
         infoIconBg: string;
         infoIconColor: string;
         askAiColor: string;
+        sectionHeader: (variant: 'success' | 'primary', isLight: boolean) => string;
+        mutedText: (isLight: boolean) => string;
+        secondaryAction: (isLight: boolean) => string;
+        successIconBg: string;
+        successIconColor: string;
+        successAction: string;
+        matchBadge: string;
+        statSurface: (isLight: boolean) => string;
+        statAccent: string;
     };
 
     // Profile-specific
@@ -158,7 +167,7 @@ export const androidTheme: MobileTheme = {
         avatarGradient: 'bg-gradient-to-tr from-primary-500 to-primary-300',
         avatarBorder: (isLight) => isLight ? 'border-ds-gray-200' : 'border-ds-gray-600',
         statusDot: (isLight) => isLight ? 'border-ds-gray-50 bg-ds-success' : 'border-ds-dark-1 bg-ds-success',
-        aiButton: (isLight) => isLight ? 'bg-primary-100/60 text-ds-gray-900' : 'bg-primary-700/50 text-primary-200',
+        aiButton: (isLight) => isLight ? 'bg-primary-100/60 text-primary-700' : 'bg-primary-900/45 text-primary-200',
         fallbackAvatar: '3b82f6',
     },
     radii: {
@@ -187,12 +196,23 @@ export const androidTheme: MobileTheme = {
         sheetAccent: 'var(--primary-300)',
         sheetBg: (isLight) => isLight ? 'bg-ds-gray-50' : 'bg-ds-dark-2',
         primaryButton: 'bg-primary text-white rounded-full',
-        secondaryButton: (isLight) => isLight ? 'bg-primary-100 text-ds-gray-900 rounded-full' : 'bg-white/10 text-white rounded-full',
+        secondaryButton: (isLight) => isLight ? 'bg-primary-100 text-primary-700 rounded-full' : 'bg-primary-900/45 text-primary-200 rounded-full',
     },
     notification: {
         headerAccent: () => 'text-xl font-medium text-primary-300',
         infoIconBg: 'bg-primary-300/10', infoIconColor: 'text-primary-300',
         askAiColor: 'text-primary-300',
+        sectionHeader: (variant) => variant === 'success'
+            ? 'bg-ds-success/10 border-b border-ds-success/20 text-ds-success'
+            : 'bg-primary-900/45 border-b border-primary-700/40 text-primary-200',
+        mutedText: (isLight) => isLight ? 'text-ds-gray-500' : 'text-ds-gray-400',
+        secondaryAction: (isLight) => isLight ? 'bg-primary-100/60 text-primary-700' : 'bg-primary-900/45 text-primary-200',
+        successIconBg: 'bg-ds-success/15',
+        successIconColor: 'text-ds-success',
+        successAction: 'bg-ds-success text-on-dark',
+        matchBadge: 'bg-ds-success/10 text-ds-success',
+        statSurface: (isLight) => isLight ? 'bg-primary-100/50' : 'bg-primary-900/35',
+        statAccent: 'text-primary-300',
     },
     profile: {
         roleColor: 'text-primary-300',
@@ -200,9 +220,9 @@ export const androidTheme: MobileTheme = {
         donutPrimary: 'text-primary-300', donutLabel: 'text-primary-300',
         engagementActiveBg: 'bg-primary-300',
         barGradients: ['from-primary-400 to-primary-600', 'from-primary-300 to-primary-500', 'from-primary-500 to-primary-700', 'from-primary-600 to-primary-800', 'from-primary-400 to-primary-700', 'from-primary-300 to-primary-600', 'from-primary-500 to-primary-800'],
-        settingsBg: (isLight) => isLight ? 'bg-ds-gray-200/50' : 'bg-ds-gray-600/40',
+        settingsBg: (isLight) => isLight ? 'bg-primary-100/60' : 'bg-primary-900/45',
         modalBg: (isLight) => isLight ? 'bg-ds-gray-50' : 'bg-ds-dark-2 text-ds-gray-200',
-        modalActiveItem: (isLight) => isLight ? 'bg-primary-100 border-primary-100' : 'bg-primary-700 border-primary-700',
+        modalActiveItem: (isLight) => isLight ? 'bg-primary-100 border-primary-200' : 'bg-primary-900/60 border-primary-700/50',
         checkColor: '',
     },
     dashboard: {
@@ -260,7 +280,7 @@ export const iosTheme: MobileTheme = {
         avatarGradient: 'bg-gradient-to-tr from-primary-500 to-primary-400',
         avatarBorder: (isLight) => isLight ? 'border-white/80 shadow-sm' : 'border-white/[0.08] shadow-md',
         statusDot: (isLight) => isLight ? 'border-white bg-ds-success' : 'border-ds-dark-1 bg-ds-success',
-        aiButton: (isLight) => isLight ? 'bg-ds-gray-900/[0.04] backdrop-blur-xl text-ds-gray-900' : 'bg-white/[0.08] backdrop-blur-xl text-ds-gray-100',
+        aiButton: (isLight) => isLight ? 'bg-primary-50/80 backdrop-blur-xl text-primary-600' : 'bg-primary-950/45 backdrop-blur-xl text-primary-300',
         fallbackAvatar: '3b82f6',
     },
     radii: {
@@ -289,12 +309,23 @@ export const iosTheme: MobileTheme = {
         sheetAccent: 'var(--primary-400)',
         sheetBg: (isLight) => isLight ? 'bg-ds-gray-100/95 backdrop-blur-2xl' : 'bg-ds-dark-3/95 backdrop-blur-2xl',
         primaryButton: 'bg-primary text-white rounded-full',
-        secondaryButton: (isLight) => isLight ? 'bg-ds-gray-200/80 text-primary-500 rounded-full' : 'bg-white/10 text-white rounded-full',
+        secondaryButton: (isLight) => isLight ? 'bg-primary-50/80 text-primary-600 rounded-full' : 'bg-primary-950/45 text-primary-300 rounded-full',
     },
     notification: {
         headerAccent: () => 'text-xl font-bold tracking-tight text-primary-400',
         infoIconBg: 'bg-primary-500/10', infoIconColor: 'text-primary-500',
         askAiColor: 'text-primary-500',
+        sectionHeader: (variant, isLight) => variant === 'success'
+            ? `bg-ds-success/10 border-b ${isLight ? 'border-ds-success/15' : 'border-ds-success/20'} text-ds-success`
+            : `bg-primary-500/10 border-b ${isLight ? 'border-primary-500/10' : 'border-primary-400/15'} text-primary-400`,
+        mutedText: (isLight) => isLight ? 'text-ds-gray-500' : 'text-ds-gray-400',
+        secondaryAction: (isLight) => isLight ? 'bg-primary-50/80 text-primary-600' : 'bg-primary-950/45 text-primary-300',
+        successIconBg: 'bg-ds-success/15',
+        successIconColor: 'text-ds-success',
+        successAction: 'bg-ds-success text-on-dark',
+        matchBadge: 'bg-ds-success/10 text-ds-success',
+        statSurface: (isLight) => isLight ? 'bg-primary-50/70' : 'bg-primary-950/35',
+        statAccent: 'text-primary-400',
     },
     profile: {
         roleColor: 'text-primary-400',
@@ -302,9 +333,9 @@ export const iosTheme: MobileTheme = {
         donutPrimary: 'text-primary-500', donutLabel: 'text-primary-500',
         engagementActiveBg: 'bg-primary-500',
         barGradients: ['from-primary-400 to-primary-600', 'from-primary-300 to-primary-500', 'from-ds-cyan-400 to-ds-cyan-500', 'from-ds-fuchsia-300 to-ds-fuchsia-700', 'from-ds-fuchsia-400 to-ds-fuchsia-600', 'from-ds-pink-400 to-ds-pink-500', 'from-ds-purple-400 to-ds-purple-600'],
-        settingsBg: (isLight) => isLight ? 'bg-black/[0.04] backdrop-blur-lg' : 'bg-white/[0.06] backdrop-blur-lg',
+        settingsBg: (isLight) => isLight ? 'bg-primary-50/80 backdrop-blur-lg' : 'bg-primary-950/45 backdrop-blur-lg',
         modalBg: (isLight) => isLight ? 'bg-white/90 backdrop-blur-2xl' : 'bg-ds-dark-3/95 backdrop-blur-2xl text-ds-gray-100',
-        modalActiveItem: (isLight) => isLight ? 'bg-ds-gray-200/80' : 'bg-white/[0.08]',
+        modalActiveItem: (isLight) => isLight ? 'bg-primary-50/90 border border-primary-100' : 'bg-primary-950/50 border border-primary-800/50',
         checkColor: 'text-primary-500',
     },
     dashboard: {

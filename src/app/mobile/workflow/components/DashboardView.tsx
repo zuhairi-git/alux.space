@@ -265,7 +265,7 @@ function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
 }) {
     return (
         <motion.div variants={fadeUp} className="flex justify-center">
-            <div className={`inline-flex items-center p-1 gap-0.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} ${isLight ? 'bg-black/[0.05]' : isColorful ? 'bg-white/[0.06] border border-primary/10' : 'bg-white/[0.08]'}`}>
+            <div className={`inline-flex items-center p-1 gap-0.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} ${isLight ? 'bg-primary-50/80 border border-primary-100' : isColorful ? 'bg-ds-card-colorful-from/80 border border-primary/15' : 'bg-primary-950/45 border border-primary-800/40'}`}>
                 {layoutMeta.map(l => {
                     const isActive = active === l.key;
                     return (
@@ -274,7 +274,7 @@ function LayoutPicker({ active, onChange, isLight, isColorful, theme }: {
                                 ? (isColorful ? 'text-accent' : isLight ? 'text-ds-gray-900' : 'text-white')
                                 : (isLight ? 'text-ds-gray-400' : 'text-white/30')}`}>
                             {isActive && (
-                                <motion.div layoutId="layout-pill" className={`absolute inset-0 ${theme.platform === 'ios' ? 'rounded-[10px]' : 'rounded-full'} ${isColorful ? 'bg-primary/25' : isLight ? 'bg-white shadow-sm' : 'bg-white/12'}`}
+                                <motion.div layoutId="layout-pill" className={`absolute inset-0 ${theme.platform === 'ios' ? 'rounded-[10px]' : 'rounded-full'} ${isLight ? 'bg-primary-100 shadow-sm' : 'bg-primary-900/60'}`}
                                     transition={{ type: 'spring', stiffness: 500, damping: 35 }} />
                             )}
                             <span className="relative z-10">{l.label}</span>
@@ -376,7 +376,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {actions.map((a, i) => (
                         <motion.button key={a.key} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.06 }}
-                            onClick={() => onAction(a.key)} className={`shrink-0 px-4 py-2.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} active:scale-95 transition-transform ${isLight ? 'bg-black/[0.04]' : isColorful ? 'bg-white/[0.06] border border-primary/10' : 'bg-white/[0.07]'}`}>
+                            onClick={() => onAction(a.key)} className={`shrink-0 px-4 py-2.5 ${theme.platform === 'ios' ? 'rounded-[14px]' : 'rounded-full'} active:scale-95 transition-transform ${isLight ? 'bg-primary-50/80 border border-primary-100' : isColorful ? 'bg-ds-card-colorful-from/80 border border-primary/15' : 'bg-primary-950/45 border border-primary-800/40'}`}>
                             <span className="text-[12px] font-semibold whitespace-nowrap">{a.label}</span>
                         </motion.button>
                     ))}

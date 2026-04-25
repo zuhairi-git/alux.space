@@ -30,6 +30,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
    bun dev
    ```
 
+4. Verify a production build locally:
+   ```bash
+   npm run build
+   ```
+   In this repo, local builds automatically run in an isolated `../build-runner` clone so the main workspace `.next` cache does not conflict with an active dev server. CI and isolated build environments still run a direct production build.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

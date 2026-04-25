@@ -15,7 +15,7 @@ interface ViewProps {
 type ActivePanel = 'cv' | 'shifts' | 'analytics' | null;
 
 export function ProfileView({ card, isLight, isColorful, theme, themeMode, setThemeMode }: ViewProps) {
-    const settingsBgClass = isColorful ? 'bg-white/10' : theme.profile.settingsBg(isLight);
+    const settingsBgClass = theme.profile.settingsBg(isLight);
     const [activePanel, setActivePanel] = useState<ActivePanel>(null);
     const sheetBg = isColorful ? 'bg-ds-colorful-bg/97 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
 

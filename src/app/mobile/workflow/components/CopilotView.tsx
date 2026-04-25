@@ -23,7 +23,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
         : theme.copilot.botBubble(isLight);
     const inputBarClass = isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
-        ? `bg-white/10 text-white ${theme.platform === 'ios' ? 'rounded-[18px]' : 'rounded-[24px]'} px-5 py-3 placeholder:text-white/40`
+        ? `bg-ds-card-colorful-from/80 border border-primary/15 text-white ${theme.platform === 'ios' ? 'rounded-[18px]' : 'rounded-[24px]'} px-5 py-3 placeholder:text-ds-gray-500`
         : theme.copilot.inputField(isLight);
     const promptCardClass = isColorful
         ? `${theme.platform === 'ios' ? 'rounded-[16px]' : 'rounded-[18px]'} bg-primary/10 text-white backdrop-blur-xl border border-primary/20`

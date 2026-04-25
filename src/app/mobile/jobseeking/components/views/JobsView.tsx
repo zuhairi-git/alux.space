@@ -32,9 +32,10 @@ const FILTERS = ['All', 'Weekend', 'Evening', 'Remote', 'Retail'];
 type SheetMode = 'detail' | 'form' | 'success';
 
 export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps) {
-    const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : theme.workspace.searchBar(isLight);
+    const searchBarClass = isColorful ? 'bg-ds-card-colorful-from/80 border border-primary/15 backdrop-blur-lg' : theme.workspace.searchBar(isLight);
     const sheetBgClass = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : theme.workspace.sheetBg(isLight);
     const primaryBtnClass = isColorful ? 'bg-primary text-white rounded-full' : theme.workspace.primaryButton;
+    const filterButtonClass = isColorful ? 'bg-ds-card-colorful-from/80 border border-primary/15 text-primary rounded-full' : theme.workspace.secondaryButton(isLight);
     const [activeFilter, setActiveFilter] = useState('All');
     const [selectedJob, setSelectedJob] = useState<typeof JOBS[0] | null>(null);
     const [sheetMode, setSheetMode] = useState<SheetMode>('detail');
@@ -67,7 +68,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex space-x-3 mb-6 overflow-x-auto no-scrollbar pb-1 -mx-5 px-5">
                 {FILTERS.map((filter) => (
                     <button key={filter} onClick={() => setActiveFilter(filter)}
-                        className={`whitespace-nowrap px-4 py-1.5 rounded-full text-[14px] font-medium transition-colors active:scale-95 ${filter === activeFilter ? primaryBtnClass : theme.workspace.secondaryButton(isLight)}`}>
+                        className={`whitespace-nowrap px-4 py-1.5 rounded-full text-[14px] font-medium transition-colors active:scale-95 ${filter === activeFilter ? primaryBtnClass : filterButtonClass}`}>
                         {filter}
                     </button>
                 ))}

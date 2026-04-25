@@ -25,7 +25,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     const promptIconColor = isColorful ? 'text-primary' : theme.copilot.promptIconColor;
     const inputBarClass = isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
-        ? 'bg-white/10 text-white border border-white/10'
+        ? 'bg-ds-card-colorful-from/80 text-white border border-primary/15'
         : theme.copilot.inputField(isLight);
     const bb = isColorful
         ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-primary/20 text-white rounded-2xl'

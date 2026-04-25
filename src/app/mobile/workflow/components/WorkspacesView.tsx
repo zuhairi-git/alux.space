@@ -17,7 +17,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
     const [sel, setSel] = useState<string | null>(null);
     const [expanded, setExpanded] = useState(false);
     const ws = theme.workspace;
-    const searchBarClass = isColorful ? 'bg-white/10 backdrop-blur-lg' : ws.searchBar(isLight);
+    const searchBarClass = isColorful ? 'bg-ds-card-colorful-from/80 border border-primary/15 backdrop-blur-lg' : ws.searchBar(isLight);
     const sheetBgClass = isColorful ? 'bg-ds-colorful-bg/95 backdrop-blur-2xl' : ws.sheetBg(isLight);
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, x: -20 }} variants={stagger} className={`absolute inset-0 ${theme.contentPaddingTop}`}>

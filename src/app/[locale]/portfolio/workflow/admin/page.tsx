@@ -462,17 +462,19 @@ export default function PortalPanel() {
                             <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-ds-gray-200/50' : 'border-white/10'}`}>
                                 <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
                                 <div className="flex items-center space-x-4">
-                                    <AIStamp isLight={isLight} size="md" className="shadow-lg" />
+                                    <div className="w-10 h-10 flex items-center justify-center text-[var(--primary)]">
+                                        <Icon name="auto_awesome" className="text-3xl" />
+                                    </div>
                                     <div>
                                         <h3 className={`font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${aiGradientSoft}`}>Copilot</h3>
                                         <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-ds-success mr-2 animate-pulse shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.8)]" /> Online & Ready</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <button className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-ds-gray-100' : 'hover:bg-white/10'}`} title="History">
+                                    <button className="w-10 h-10 flex items-center justify-center text-[var(--primary)] opacity-70 transition-opacity hover:opacity-100" title="History">
                                         <Icon name="history" className="text-xl opacity-60" />
                                     </button>
-                                    <button onClick={() => setShowCopilot(false)} className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${isLight ? 'hover:bg-ds-gray-100' : 'hover:bg-white/10'}`}>
+                                    <button onClick={() => setShowCopilot(false)} className="w-10 h-10 flex items-center justify-center text-[var(--primary)] opacity-70 transition-opacity hover:opacity-100">
                                         <Icon name="close" className="text-xl opacity-60" />
                                     </button>
                                 </div>
