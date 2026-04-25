@@ -251,13 +251,19 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                   scale: isActive ? 1.06 : cfg.scale,
                   zIndex: isActive ? 10 : cfg.zIndex,
                 }}
+                whileHover={{
+                  y: isActive ? cfg.y - 32 : cfg.y - 30,
+                  rotate: 0,
+                  scale: isActive ? 1.08 : cfg.scale * 1.05,
+                  zIndex: 20,
+                  opacity: 1,
+                  transition: { duration: 0.4, ease: "easeOut" }
+                }}
                 transition={{
-                  delay: 0.2 + index * 0.08,
-                  duration: 0.55,
-                  ease: [0.19, 1, 0.22, 1],
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1], // Soft, fluid, non-snappy deceleration
                 }}
                 style={{ position: 'absolute', width: 380, height: 270 }}
-                onHoverStart={() => setActiveIndex(index)}
                 className="cursor-pointer origin-bottom"
               >
                 <Link href={`/${locale}${item.slug}`} className="block w-full h-full">
