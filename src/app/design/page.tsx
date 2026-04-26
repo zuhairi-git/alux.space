@@ -1247,8 +1247,8 @@ function GradientsSection() {
     },
     {
       label: 'Ember (Colorful)',
-      css: 'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-700) 55%, var(--color-cobalt-700) 100%)',
-      token: '--color-primary-400 → --color-cobalt-700',
+      css: 'linear-gradient(135deg, var(--color-ember-400) 0%, var(--color-ember-600) 55%, var(--color-cobalt-700) 100%)',
+      token: '--color-ember-400 → --color-cobalt-700',
     },
   ];
   return (
