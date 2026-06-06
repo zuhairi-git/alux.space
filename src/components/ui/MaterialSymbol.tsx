@@ -11,8 +11,8 @@ export interface MaterialSymbolProps {
 }
 
 /**
- * Drop-in replacement for raw `<span className="material-symbols ...">{name}</span>` markup.
- * Renders the Font Awesome glyph that corresponds to the legacy Material Symbols name,
+ * Drop-in replacement for raw span icon elements using the legacy icon-naming convention.
+ * Renders the Font Awesome glyph that corresponds to the legacy semantic name,
  * so call sites that pass the icon name as text content keep working unchanged.
  */
 export default function MaterialSymbol({ children, className = '', style }: MaterialSymbolProps) {
