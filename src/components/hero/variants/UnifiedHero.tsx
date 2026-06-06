@@ -11,6 +11,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../../../seo/AnalyticsProvider';
 import { durationSeconds, delaySeconds, transition as t, Button, Icon, MotionDiv, MotionH1, MotionH2, MotionSpan, palette } from '@/design-system';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 // Published portfolio items to showcase in the hero stack
 const SHOWCASE_ITEMS = [
@@ -405,9 +406,9 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
             background:  showCloud ? 'var(--card-from-bg)' : 'transparent',
           }}
         >
-          <span className="material-symbols text-[13px]" aria-hidden="true">
+          <MaterialSymbol className="text-[13px]">
             {showCloud ? 'label_off' : 'label'}
-          </span>
+          </MaterialSymbol>
           {showCloud ? 'Hide keywords' : 'Show keywords'}
         </Button>
       </div>

@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { AudioMetadata } from '@/types/audio';
 import Badge from '@/components/ui/Badge';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface AudioCardProps {
   audio: AudioMetadata;
@@ -58,7 +59,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
               />
               {audio.featured && (
                 <div className="absolute top-1 right-1">
-                  <span className="material-symbols text-ds-gold-400 text-sm">star</span>
+                  <MaterialSymbol className="text-ds-gold-400 text-sm">star</MaterialSymbol>
                 </div>
               )}
             </div>
@@ -82,7 +83,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
                 {/* Play Icon Visual Indicator */}
                 {showPlayButton && (
                   <div className={`${PLAY_CLS} w-12 h-12 rounded-full`}>
-                    <span className="material-symbols text-xl">play_arrow</span>
+                    <MaterialSymbol className="text-xl">play_arrow</MaterialSymbol>
                   </div>
                 )}
               </div>
@@ -115,7 +116,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
           {showPlayButton && (
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
               <div className={`${PLAY_CLS} w-16 h-16 rounded-full`}>
-                <span className="material-symbols text-2xl">play_arrow</span>
+                <MaterialSymbol className="text-2xl">play_arrow</MaterialSymbol>
               </div>
             </div>
           )}
@@ -124,7 +125,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
           {audio.featured && (
             <div className="absolute top-3 right-3">
               <Badge variant="glass">
-                <span className="material-symbols text-sm leading-none">star</span>
+                <MaterialSymbol className="text-sm leading-none">star</MaterialSymbol>
                 Featured
               </Badge>
             </div>
@@ -162,7 +163,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
           {/* Meta Info */}
           <div className="flex items-center justify-between text-sm text-[var(--foreground)] opacity-50">
             <span className="flex items-center gap-1">
-              <span className="material-symbols text-sm">calendar_today</span>
+              <MaterialSymbol className="text-sm">calendar_today</MaterialSymbol>
               {new Date(audio.publishedDate).toLocaleDateString()}
             </span>
             <Badge variant={langBadgeVariant} size="sm">{langBadgeText}</Badge>

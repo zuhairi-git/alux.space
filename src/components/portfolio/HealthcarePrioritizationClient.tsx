@@ -8,6 +8,7 @@ import Navigation from '@/components/Navigation';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function HealthcarePrioritizationClient() {
   const { locale } = useLanguage();
@@ -274,7 +275,7 @@ export default function HealthcarePrioritizationClient() {
                         >
                           <div className="flex justify-between items-center mb-1">
                             <div className="flex items-center gap-2">
-                                <span className="material-symbols text-[14px] opacity-60">sell</span>
+                                <MaterialSymbol className="text-[14px] opacity-60">sell</MaterialSymbol>
                                 <span className="text-xs font-mono font-medium opacity-60">{item.id}</span>
                             </div>
                             <span className={`text-[10px] uppercase font-bold px-2.5 py-1 rounded-full ${

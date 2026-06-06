@@ -6,6 +6,7 @@ import { delaySeconds, transition as t } from '@/design-system';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import { IconSurface } from '@/components/ui/Icon';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
@@ -828,7 +829,7 @@ export default function GameStrategyClient() {
                         <div key={i} className={`p-5 rounded-xl ${surfaceBg}`}>
                           <div className="flex items-center gap-3 mb-4">
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${c.iconBg}`}>
-                              <span className={`material-symbols text-sm ${c.iconText}`}>{col.icon}</span>
+                              <MaterialSymbol className={`text-sm ${c.iconText}`}>{col.icon}</MaterialSymbol>
                             </div>
                             <h5 className="text-sm font-bold text-foreground">{col.title}</h5>
                           </div>
@@ -836,7 +837,7 @@ export default function GameStrategyClient() {
                             {col.connections.map((conn, j) => (
                               <div key={j} className="flex items-center gap-2 text-xs">
                                 <span className={`flex-shrink-0 px-2 py-1 rounded ${c.iconBg} ${c.iconText} font-medium`}>{conn.from}</span>
-                                <span className="material-symbols text-sm text-[var(--muted-foreground)]">arrow_forward</span>
+                                <MaterialSymbol className="text-sm text-[var(--muted-foreground)]">arrow_forward</MaterialSymbol>
                                 <span className="text-[var(--muted-foreground)]">{conn.to}</span>
                               </div>
                             ))}
@@ -871,7 +872,7 @@ export default function GameStrategyClient() {
                     >
                       <div className="theme-card-content p-6 text-center">
                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 ${c.iconBg}`}>
-                          <span className={`material-symbols text-2xl ${c.iconText}`}>{takeaway.icon}</span>
+                          <MaterialSymbol className={`text-2xl ${c.iconText}`}>{takeaway.icon}</MaterialSymbol>
                         </div>
                         <h4 className="text-lg font-bold mb-2 text-foreground">{takeaway.title}</h4>
                         <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{takeaway.desc}</p>

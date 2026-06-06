@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/ui/Icon';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 type AlertVariant = 'info' | 'success' | 'warning' | 'error';
 
@@ -73,9 +74,9 @@ export default function Alert({
       ].join(' ')}
     >
       {/* Icon */}
-      <span className={`material-symbols text-xl shrink-0 mt-0.5 ${styles.text}`} aria-hidden="true">
+      <MaterialSymbol className={`text-xl shrink-0 mt-0.5 ${styles.text}`}>
         {styles.icon}
-      </span>
+      </MaterialSymbol>
 
       {/* Content */}
       <div className="flex-1 min-w-0">

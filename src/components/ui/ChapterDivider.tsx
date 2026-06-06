@@ -9,7 +9,7 @@ import Icon from '@/components/ui/Icon';
 interface ChapterDividerProps {
   title: string;
   number?: number; // Optional since we can use icon
-  icon?: string; // Material Symbols icon name
+  icon?: string; // Semantic icon name (translated to Font Awesome glyph)
   id?: string;
 }
 

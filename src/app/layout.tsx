@@ -13,8 +13,8 @@ import { AnalyticsProvider } from "../../seo/AnalyticsProvider";
 import SmoothMotionProvider from "@/components/SmoothMotionProvider";
 import { structuredDataGenerator } from "../../seo/structured-data";
 
-// Add Material Symbols stylesheet with better support for all languages including RTL
-const materialSymbolsUrl = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0&display=swap';
+// Self-hosted Font Awesome kit (Duotone Thin) — see public/fa-kit-60396e54cd-web
+const fontAwesomeBase = '/fa-kit-60396e54cd-web/css';
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -144,7 +144,8 @@ export default function RootLayout({
             via useSyncExternalStore — zero-gap, no flicker.
             Note: mobile animations are now ENABLED — only prefers-reduced-motion disables them. */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement,w=window,m=w.innerWidth<=768,r=w.matchMedia("(prefers-reduced-motion:reduce)").matches;if(m)d.setAttribute("data-mobile-device","");if(r)d.setAttribute("data-reduce-motion","");w.__ALUX_DISABLE_ANIM=r}catch(e){}})()` }} />
-        <link href={materialSymbolsUrl} rel="stylesheet" />
+        <link href={`${fontAwesomeBase}/fontawesome.css`} rel="stylesheet" />
+        <link href={`${fontAwesomeBase}/duotone-thin.min.css`} rel="stylesheet" />
         {/* Additional favicon meta tags for better browser support */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2" />

@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
 import { delaySeconds, durationSeconds, easing, motionDistance, stagger as motionStagger, transition as motionTransition } from '@/design-system';
 import { MobileIntroScreen, type MobileIntroConfig, iosTheme, androidTheme, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants } from '../../shared';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
+import { resolveFontAwesomeName } from '@/components/ui/Icon';
 
 const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
     appName: 'Market Intelligence',
@@ -37,7 +39,7 @@ const MARKET_INTELLIGENCE_INTRO: MobileIntroConfig = {
 };
 
 const Icon = ({ name, className = "" }: { name: string, className?: string }) => (
-    <span className={`material-symbols ${className}`}>{name}</span>
+    <MaterialSymbol className={className}>{name}</MaterialSymbol>
 );
 
 // Sparkline SVG component for mini charts
@@ -1097,10 +1099,9 @@ function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, lab
                 <motion.span
                     animate={{ scale: active ? 1.25 : 1, y: active ? -2 : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                    className={`material-symbols text-[26px] mb-0.5 transition-colors duration-200 ${active ? `${activeColor} font-variation-fill` : (isLight ? 'text-ds-gray-400' : 'text-ds-gray-400')}`}
-                >
-                    {icon}
-                </motion.span>
+                    className={`icon-glyph fa-duotone fa-thin fa-${resolveFontAwesomeName(icon)} text-[26px] mb-0.5 transition-colors duration-200 ${active ? `${activeColor} fa-swap-opacity` : (isLight ? 'text-ds-gray-400' : 'text-ds-gray-400')}`}
+                    aria-hidden="true"
+                />
                 <motion.span animate={{ opacity: active ? 1 : 0.6 }} className={`text-[10px] font-medium transition-colors duration-200 ${active ? activeColor : (isLight ? 'text-ds-gray-400' : 'text-ds-gray-400')}`}>{label}</motion.span>
             </motion.button>
         );
@@ -1119,10 +1120,9 @@ function NavBtn({ icon, label, active, onClick, os, theme }: { icon: string, lab
                 <motion.span
                     animate={{ scale: active ? 1.2 : 1 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                    className={`relative material-symbols text-[22px] transition-colors duration-200 ${iconColor} ${active ? 'font-variation-fill' : ''}`}
-                >
-                    {icon}
-                </motion.span>
+                    className={`relative icon-glyph fa-duotone fa-thin fa-${resolveFontAwesomeName(icon)} text-[22px] transition-colors duration-200 ${iconColor} ${active ? 'fa-swap-opacity' : ''}`}
+                    aria-hidden="true"
+                />
             </div>
             <motion.span animate={{ opacity: active ? 1 : 0.6 }} className={`text-[11px] mt-0.5 font-medium transition-colors duration-200 ${iconColor}`}>{label}</motion.span>
         </motion.button>

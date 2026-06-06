@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 type AvatarStatus = 'online' | 'offline' | 'away' | undefined;
@@ -66,9 +67,9 @@ export default function Avatar({
             {initials.slice(0, 2).toUpperCase()}
           </span>
         ) : (
-          <span className={`material-symbols text-[var(--primary)] opacity-60 ${s.text}`} aria-hidden="true">
+          <MaterialSymbol className={`text-[var(--primary)] opacity-60 ${s.text}`}>
             person
-          </span>
+          </MaterialSymbol>
         )}
       </div>
 

@@ -35,9 +35,7 @@ body {
   p  { line-height: var(--leading-normal); }
 }
 
-.material-symbols {
-  font-family: var(--material-symbols);
-  font-weight: var(--material-symbols-weight);
+.icon-glyph {
   font-style: normal;
   font-size: 24px;
   line-height: 1;
@@ -53,11 +51,6 @@ body {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  font-variation-settings:
-    'FILL' var(--material-symbols-fill),
-    'wght' var(--material-symbols-weight),
-    'GRAD' var(--material-symbols-grade),
-    'opsz' var(--material-symbols-optical-size);
 }
 
 /* Remove all .rtl-flex-row-reverse, .font-arabic, and RTL/Arabic-specific classes */
@@ -1085,7 +1078,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.social-icon .material-symbols {
+.social-icon .icon-glyph {
   font-size: 1.25rem;
 }
 
@@ -1109,7 +1102,7 @@ body {
   color: var(--primary);
 }
 
-.back-button .material-symbols {
+.back-button .icon-glyph {
   font-size: 1.25rem;
 }
 

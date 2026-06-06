@@ -11,6 +11,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 // --- Types ---
 
@@ -276,9 +277,9 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
           />
         )}
         <span className="relative z-10 flex items-center gap-2">
-          {/* <span className="material-symbols text-[18px]">{item.icon}</span> */}
+          {/* <MaterialSymbol className="text-[18px]">{item.icon}</MaterialSymbol> */}
           {t(item.labelKey)}
-          {item.children && <span className="material-symbols text-[14px]" aria-hidden="true">expand_more</span>}
+          {item.children && <MaterialSymbol className="text-[14px]">expand_more</MaterialSymbol>}
         </span>
       </Link>
 
@@ -309,7 +310,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                 }`}
               >
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-[var(--card-from-bg)]`}>
-                  <span className="material-symbols text-[15px]" aria-hidden="true">{child.icon}</span>
+                  <MaterialSymbol className="text-[15px]">{child.icon}</MaterialSymbol>
                 </div>
                 <span className="flex-1 font-medium">{t(child.labelKey)}</span>
               </Link>
@@ -333,7 +334,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                     }`}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-ds-violet-500/15">
-                      <span className="material-symbols text-[15px] text-ds-violet-400" aria-hidden="true">{child.icon}</span>
+                      <MaterialSymbol className="text-[15px] text-ds-violet-400">{child.icon}</MaterialSymbol>
                     </div>
                     <span className="flex-1 font-medium">{t(child.labelKey)}</span>
                   </Link>
@@ -359,7 +360,7 @@ const DesktopNavItem = ({ item, theme, t, localizedHref, trackEvent, isActive, h
                     }`}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-ds-cyan-500/15">
-                      <span className="material-symbols text-[15px] text-ds-cyan-400" aria-hidden="true">{child.icon}</span>
+                      <MaterialSymbol className="text-[15px] text-ds-cyan-400">{child.icon}</MaterialSymbol>
                     </div>
                     <span className="flex-1 font-medium">{t(child.labelKey)}</span>
                   </Link>
@@ -442,7 +443,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
             `}
             aria-label="Menu"
           >
-            <span className="material-symbols text-2xl" aria-hidden="true">{isMenuOpen ? 'close' : 'grid_view'}</span>
+            <MaterialSymbol className="text-2xl">{isMenuOpen ? 'close' : 'grid_view'}</MaterialSymbol>
           </button>
 
           <MobileDockItem
@@ -507,21 +508,21 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                               ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
                               : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800')
                           }`}>
-                            <span aria-hidden="true" className={`material-symbols text-xl ${
+                            <MaterialSymbol className={`text-xl ${
                               itemIsActive
                                 ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
                                 : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-600' : 'text-ds-gray-400')
-                            }`}>{item.icon}</span>
+                            }`}>{item.icon}</MaterialSymbol>
                           </div>
                           <span className="flex-1 font-semibold text-[15px]">{t(item.labelKey)}</span>
                           <motion.span
                             animate={{ rotate: isExpanded ? 180 : 0 }}
                             transition={{ duration: 0.2 }}
                             aria-hidden="true"
-                            className={`material-symbols text-[18px] shrink-0 ${
+                            className={`icon-glyph fa-duotone fa-thin fa-chevron-down shrink-0 text-[18px] ${
                               theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-400' : 'text-white/30'
                             }`}
-                          >expand_more</motion.span>
+                          />
                         </button>
                         <AnimatePresence>
                           {isExpanded && (
@@ -561,11 +562,11 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                                         : child.category === 'prototype' ? 'bg-ds-cyan-500/15'
                                         : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800')
                                       }`}>
-                                        <span aria-hidden="true" className={`material-symbols text-[13px] ${
+                                        <MaterialSymbol className={`text-[13px] ${
                                           child.category === 'case-study' ? 'text-ds-violet-400'
                                           : child.category === 'prototype' ? 'text-ds-cyan-400'
                                           : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-500' : 'text-ds-gray-400')
-                                        }`}>{child.icon}</span>
+                                        }`}>{child.icon}</MaterialSymbol>
                                       </div>
                                       <span className="flex-1">{t(child.labelKey)}</span>
                                       {child.category === 'case-study' && (
@@ -601,11 +602,11 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                           ? (theme === 'colorful' ? 'bg-[var(--primary)]/20' : theme === 'light' ? 'bg-primary/20' : 'bg-primary/30')
                           : (theme === 'colorful' ? 'bg-[var(--card-from-bg)]' : theme === 'light' ? 'bg-ds-gray-100' : 'bg-ds-gray-800')
                       }`}>
-                        <span aria-hidden="true" className={`material-symbols text-xl ${
+                        <MaterialSymbol className={`text-xl ${
                           itemIsActive
                             ? (theme === 'colorful' ? 'text-[var(--primary)]' : theme === 'light' ? 'text-accent' : 'text-accent')
                             : (theme === 'colorful' ? 'text-[var(--muted-foreground)]' : theme === 'light' ? 'text-ds-gray-600' : 'text-ds-gray-400')
-                        }`}>{item.icon}</span>
+                        }`}>{item.icon}</MaterialSymbol>
                       </div>
                       <span className="flex-1 font-semibold text-[15px]">{t(item.labelKey)}</span>
                     </Link>
@@ -650,9 +651,9 @@ const MobileDockItem = ({ href, icon, label, isActive, theme, localizedHref }: M
         }
       `}
     >
-      <span aria-hidden="true" className={`material-symbols text-2xl transition-transform ${isActive ? '-translate-y-1' : ''}`}>
+      <MaterialSymbol className={`text-2xl transition-transform ${isActive ? '-translate-y-1' : ''}`}>
         {icon}
-      </span>
+      </MaterialSymbol>
       {/* <span className="text-[10px] font-medium">{label}</span> */}
       {isActive && (
         <motion.div

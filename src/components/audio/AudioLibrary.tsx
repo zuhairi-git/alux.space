@@ -6,6 +6,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { audioLibrary, audioLibraryConfig, getAudioCategories, getAudioTags, searchAudio } from '@/data/audioLibrary';
 import AudioCard from './AudioCard';
 import { Button } from '@/design-system';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 const AudioLibrary: React.FC = () => {
   const { theme } = useTheme();
@@ -197,7 +198,7 @@ const AudioLibrary: React.FC = () => {
                   }`}
                   aria-label="Grid view"
                 >
-                  <span className="material-symbols text-lg pt-1">grid_view</span>
+                  <MaterialSymbol className="text-lg pt-1">grid_view</MaterialSymbol>
                 </button>
                 {/* eslint-disable-next-line design-system/no-raw-html-elements -- view mode toggle with custom active/inactive theme styles */}
                 <button
@@ -209,7 +210,7 @@ const AudioLibrary: React.FC = () => {
                   }`}
                   aria-label="List view"
                 >
-                  <span className="material-symbols text-lg pt-1">list</span>
+                  <MaterialSymbol className="text-lg pt-1">list</MaterialSymbol>
                 </button>
               </div>
 
@@ -218,7 +219,7 @@ const AudioLibrary: React.FC = () => {
                 variant="secondary"
                 onClick={() => setShowFilters(!showFilters)}
               >
-                <span className="material-symbols text-lg">filter_list</span>
+                <MaterialSymbol className="text-lg">filter_list</MaterialSymbol>
                 <span className="hidden sm:inline">Filters</span>
                 {hasActiveFilters && (
                   <div className="w-2 h-2 bg-ds-error rounded-full"></div>
@@ -259,9 +260,9 @@ const AudioLibrary: React.FC = () => {
                             : 'bg-black/20 border-ds-gray-600 text-white'
                         } focus:ring-2 focus:ring-primary focus:border-transparent`}
                       />
-                      <span className="absolute left-3 top-2.5 material-symbols text-ds-gray-400">
+                      <MaterialSymbol className="absolute left-3 top-2.5 text-ds-gray-400">
                         search
-                      </span>
+                      </MaterialSymbol>
                     </div>
                   </div>
 
@@ -340,7 +341,7 @@ const AudioLibrary: React.FC = () => {
                     <Button
                       variant="secondary"
                       onClick={clearAllFilters}
-                      leftIcon={<span className="material-symbols text-lg">clear</span>}
+                      leftIcon={<MaterialSymbol className="text-lg">clear</MaterialSymbol>}
                     >
                       Clear All Filters
                     </Button>
@@ -371,7 +372,7 @@ const AudioLibrary: React.FC = () => {
               className="text-center py-12"
             >
               <div className="w-16 h-16 mx-auto mb-4 opacity-50">
-                <span className="material-symbols text-6xl text-ds-gray-400">audio_file</span>
+                <MaterialSymbol className="text-6xl text-ds-gray-400">audio_file</MaterialSymbol>
               </div>
               <h3 className={`text-xl font-semibold mb-2 ${textStyles.title}`}>
                 No audio files found

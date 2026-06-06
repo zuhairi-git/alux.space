@@ -33,9 +33,9 @@ const CardContent: React.FC<CardContentProps> = ({
           <Icon name={icon} size="xl" />
         </div>
       ) : icon ? (
-        <span className={`material-symbols text-3xl p-3 rounded-lg ${iconClassName}`}>
+        <div className={`text-3xl p-3 rounded-lg ${iconClassName}`}>
           {icon}
-        </span>
+        </div>
       ) : null}
       
       <div className="flex-1">        <div className="flex flex-col md:flex-row justify-between mb-4">

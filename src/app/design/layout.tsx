@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useState, useCallback, Suspense, useMemo, useRef } from 'react';
 import ThemeSwitch from '@/components/ThemeSwitch';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 /* ── Sidebar nav structure ──────────────────────────────── */
 
@@ -141,13 +142,13 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
           className="p-1.5 rounded-lg hover:bg-foreground/8 transition-colors"
           aria-label="Toggle sidebar"
         >
-          <span className="material-symbols text-xl">{sidebarOpen ? 'close' : 'menu'}</span>
+          <MaterialSymbol className="text-xl">{sidebarOpen ? 'close' : 'menu'}</MaterialSymbol>
         </button>
         <h1 className="font-heading text-lg font-bold flex-1" style={{ textShadow: 'none' }}>
           Design System
         </h1>
         <Link href="/" className="p-1.5 rounded-lg hover:bg-foreground/8 transition-colors opacity-60 hover:opacity-100" aria-label="Back to site">
-          <span className="material-symbols text-xl">home</span>
+          <MaterialSymbol className="text-xl">home</MaterialSymbol>
         </Link>
         <ThemeSwitch />
       </div>
@@ -176,7 +177,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
           {/* Search input */}
           <div className="shrink-0 px-3 pb-3">
             <div className="relative">
-              <span className="material-symbols absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] opacity-40 pointer-events-none">search</span>
+              <MaterialSymbol className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] opacity-40 pointer-events-none">search</MaterialSymbol>
               <input
                 ref={searchRef}
                 type="search"
@@ -192,7 +193,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-[14px] opacity-40 hover:opacity-80 transition-opacity"
                   aria-label="Clear search"
                 >
-                  <span className="material-symbols text-[16px]">close</span>
+                  <MaterialSymbol className="text-[16px]">close</MaterialSymbol>
                 </button>
               )}
             </div>
@@ -227,7 +228,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
                             }
                           `}
                         >
-                          <span className="material-symbols text-[18px]">{item.icon}</span>
+                          <MaterialSymbol className="text-[18px]">{item.icon}</MaterialSymbol>
                           {item.label}
                         </Link>
                       </li>
@@ -246,7 +247,7 @@ function DesignLayoutInner({ children }: { children: React.ReactNode }) {
                 className="p-1.5 rounded-lg opacity-60 hover:opacity-100 hover:bg-foreground/8 transition-colors"
                 aria-label="Back to site"
               >
-                <span className="material-symbols text-[20px]">home</span>
+                <MaterialSymbol className="text-[20px]">home</MaterialSymbol>
               </Link>
               <ThemeSwitch />
             </div>

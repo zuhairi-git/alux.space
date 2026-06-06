@@ -12,6 +12,7 @@ import { AudioMetadata } from '@/types/audio';
 import { getRelatedAudio, getAudioLanguages, getAudioVersion } from '@/data/audioLibrary';
 import AudioPlayer from '@/components/ui/AudioPlayer';
 import AudioCard from './AudioCard';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface AudioPageProps {
   audio: AudioMetadata;
@@ -193,7 +194,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
           href={`/${params.locale || locale}/audio`}
           className={`inline-flex items-center gap-2 ${textStyles.accent} ${getLinkStyles()}`}
         >
-          <span className="material-symbols text-lg">arrow_back</span>
+          <MaterialSymbol className="text-lg">arrow_back</MaterialSymbol>
           Back to Audio Library
         </Link>
       </div>
@@ -220,7 +221,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
               {audio.featured && (
                 <div className="absolute top-4 right-4">
                   <div className="bg-ds-gold-400 text-ds-gold-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
-                    <span className="material-symbols text-sm">star</span>
+                    <MaterialSymbol className="text-sm">star</MaterialSymbol>
                     Featured
                   </div>
                 </div>
@@ -248,11 +249,11 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
               {/* Author & Meta */}
               <div className={`flex items-center gap-6 mb-6 ${textStyles.muted}`}>
                 <span className="flex items-center gap-2">
-                  <span className="material-symbols text-lg">person</span>
+                  <MaterialSymbol className="text-lg">person</MaterialSymbol>
                   {audio.author}
                 </span>
                 <span className="flex items-center gap-2">
-                  <span className="material-symbols text-lg">calendar_today</span>
+                  <MaterialSymbol className="text-lg">calendar_today</MaterialSymbol>
                   {new Date(audio.publishedDate).toLocaleDateString()}
                 </span>
               </div>
@@ -308,7 +309,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                 <Button
                   variant="primary"
                   onClick={handlePlayButtonClick}
-                  leftIcon={<span className="material-symbols text-lg">play_arrow</span>}
+                  leftIcon={<MaterialSymbol className="text-lg">play_arrow</MaterialSymbol>}
                 >
                   Play Audio
                 </Button>
@@ -316,7 +317,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                 <Button
                   variant="secondary"
                   onClick={handleShare}
-                  leftIcon={<span className="material-symbols text-lg">share</span>}
+                  leftIcon={<MaterialSymbol className="text-lg">share</MaterialSymbol>}
                 >
                   Share
                 </Button>
@@ -324,7 +325,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
                 <Button
                   variant="secondary"
                   onClick={downloadAudio}
-                  leftIcon={<span className="material-symbols text-lg">download</span>}
+                  leftIcon={<MaterialSymbol className="text-lg">download</MaterialSymbol>}
                 >
                   Download
                 </Button>

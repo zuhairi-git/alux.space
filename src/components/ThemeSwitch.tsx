@@ -6,6 +6,7 @@ import { useTheme } from '@/context/ThemeContext';
 import type { Theme } from '@/context/ThemeContext';
 import Tooltip from './ui/Tooltip';
 import { LiveRegion } from './ui/LiveRegion';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
@@ -54,15 +55,14 @@ export default function ThemeSwitch() {
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 />
               )}
-              <span className={`
-                material-symbols text-[18px] relative z-10 
-                ${isActive 
-                  ? (t.value === 'colorful' ? 'text-white' : t.value === 'light' ? 'text-[var(--primary)]' : 'text-[var(--primary)]') 
+              <MaterialSymbol className={`text-[18px] relative z-10
+                ${isActive
+                  ? (t.value === 'colorful' ? 'text-white' : t.value === 'light' ? 'text-[var(--primary)]' : 'text-[var(--primary)]')
                   : ''
-                }
-              `}>
+                }`}
+              >
                 {t.icon}
-              </span>
+              </MaterialSymbol>
             </button>
           </Tooltip>
         );

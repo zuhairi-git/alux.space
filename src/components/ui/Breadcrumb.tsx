@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export interface BreadcrumbItem {
   label: string;
@@ -20,9 +21,9 @@ export default function Breadcrumb({
   className = '',
 }: BreadcrumbProps) {
   const separatorEl = separator || (
-    <span className="material-symbols text-[14px] opacity-30" aria-hidden="true">
+    <MaterialSymbol className="text-[14px] opacity-30">
       chevron_right
-    </span>
+    </MaterialSymbol>
   );
 
   return (

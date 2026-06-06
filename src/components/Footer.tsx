@@ -9,6 +9,7 @@ import { useTranslations } from '@/hooks/useTranslations';
 import { i18n } from '@/i18n';
 import BrandLogo from '@/components/ui/BrandLogo';
 import { useAnalyticsTracking } from '../../seo/AnalyticsProvider';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 const Footer = () => {
   const pathname = usePathname();
@@ -127,7 +128,7 @@ const Footer = () => {
                 aria-label={`${t('footer.aria.socialPlatform')} GitHub`}
                 onClick={() => handleSocialClick('GitHub', 'https://github.com/')}
               >
-                <span className="material-symbols material-symbols-rounded text-xl" aria-hidden="true">code</span>
+                <MaterialSymbol className="text-xl">code</MaterialSymbol>
               </motion.a>
             </div>
           </nav>

@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@/design-system';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface WorkPosition {
   title: string;
@@ -191,9 +192,9 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
-                        <span className={`material-symbols text-3xl md:text-4xl ${colors.iconColor}`}>
+                        <MaterialSymbol className={`text-3xl md:text-4xl ${colors.iconColor}`}>
                           {getStepIcon(currentStep)}
-                        </span>
+                        </MaterialSymbol>
                       </motion.div>
 
                       {/* Content */}
@@ -217,12 +218,12 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                         >
                           {position.company && (
                             <div className="flex items-center gap-2">
-                              <span className={`material-symbols text-xl ${colors.iconColor}`}>business</span>
+                              <MaterialSymbol className={`text-xl ${colors.iconColor}`}>business</MaterialSymbol>
                               <span className="text-foreground font-medium">{position.company}</span>
                             </div>
                           )}
                           <div className="flex items-center gap-2">
-                            <span className={`material-symbols text-xl ${colors.iconColor}`}>schedule</span>
+                            <MaterialSymbol className={`text-xl ${colors.iconColor}`}>schedule</MaterialSymbol>
                             <span className="text-muted-foreground">{position.period}</span>
                           </div>
                         </motion.div>
@@ -309,11 +310,11 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                         ? `bg-gradient-to-r ${colors.accentGradient} ${colors.cardGlow}`
                         : `${colors.buttonBg} border ${colors.cardBorder}`
                     }`}>
-                      <span className={`material-symbols text-lg ${
+                      <MaterialSymbol className={`text-lg ${
                         index <= currentStep ? 'text-white' : colors.iconColor
                       }`}>
                         {getStepIcon(index)}
-                      </span>
+                      </MaterialSymbol>
                     </div>
                     <div className="text-xs text-center text-muted-foreground max-w-[80px] group-hover:text-foreground transition-colors">
                       {pos.period.split(' - ')[0]}

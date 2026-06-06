@@ -153,7 +153,7 @@ export const androidTheme: MobileTheme = {
         colorful: 'bg-ds-card-colorful-from/80 backdrop-blur-xl border-primary/20',
     },
     navTab: {
-        active: (isLight) => isLight ? 'text-ds-gray-900 font-variation-fill' : 'text-primary-200 font-variation-fill',
+        active: (isLight) => isLight ? 'text-ds-gray-900 fa-swap-opacity' : 'text-primary-200 fa-swap-opacity',
         inactive: (isLight) => isLight ? 'text-ds-gray-600' : 'text-ds-gray-300',
         pill: (isLight) => isLight ? 'bg-primary-100' : 'bg-primary-700',
         iconSize: 'text-[24px]',

@@ -9,6 +9,7 @@ import Badge from '@/components/ui/Badge';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
 import { formatDate, toISOString } from '@/utils/dateUtils';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface BlogCardProps {
   post: {
@@ -105,11 +106,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
 
                 <div className="flex items-center gap-5 text-sm text-[var(--muted-foreground)] mt-auto">
                   <div className="flex items-center gap-1.5">
-                    <span className="material-symbols text-sm" aria-hidden="true">calendar_today</span>
+                    <MaterialSymbol className="text-sm">calendar_today</MaterialSymbol>
                     <time dateTime={isoDate}>{displayDate}</time>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <span className="material-symbols text-sm" aria-hidden="true">schedule</span>
+                    <MaterialSymbol className="text-sm">schedule</MaterialSymbol>
                     <span>{post.readTime}</span>
                   </div>
                 </div>
@@ -297,7 +298,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             {/* Date and read time */}
             <div className="text-xs mt-auto pt-4 flex items-center justify-between border-t border-current/8">
               <div className="flex items-center gap-1.5">
-                <span className="material-symbols text-sm opacity-40" aria-hidden="true">calendar_today</span>
+                <MaterialSymbol className="text-sm opacity-40">calendar_today</MaterialSymbol>
                 <time 
                   dateTime={isoDate}
                   className="text-[var(--muted-foreground)]"
@@ -306,7 +307,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                 </time>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="material-symbols text-sm opacity-40" aria-hidden="true">schedule</span>
+                <MaterialSymbol className="text-sm opacity-40">schedule</MaterialSymbol>
                 <span className="text-[var(--muted-foreground)]">
                   {post.readTime}
                 </span>

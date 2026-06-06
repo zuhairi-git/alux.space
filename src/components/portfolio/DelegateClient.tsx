@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function DelegateClient() {
         const { locale } = useLanguage();
@@ -191,7 +192,7 @@ export default function DelegateClient() {
                                     "Error states are the most important screens to design — they define whether a user will ever delegate again."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
-                                        <span className="material-symbols text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>
+                                        <MaterialSymbol className="text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</MaterialSymbol>
                                         <p className="text-lg font-medium text-primary italic relative z-10">&quot;{insight}&quot;</p>
                                     </motion.div>
                                 ))}
@@ -202,7 +203,7 @@ export default function DelegateClient() {
                         {/* TODO: Embed Figma prototype */}
                         <CaseStudySection title="Interactive Prototype"  accent="primary" number={3} id="prototype-embed">
                             <div className="w-full h-[600px] rounded-2xl border-2 border-dashed border-ds-gray-500/30 flex flex-col items-center justify-center bg-black/5">
-                                <span className="material-symbols text-6xl text-ds-gray-400 mb-4">design_services</span>
+                                <MaterialSymbol className="text-6xl text-ds-gray-400 mb-4">design_services</MaterialSymbol>
                                 <p className="text-lg text-primary font-medium">Figma Prototype Placeholder</p>
                                 <p className="text-sm opacity-60 mt-2">Replace with actual Figma embed iframe</p>
                             </div>

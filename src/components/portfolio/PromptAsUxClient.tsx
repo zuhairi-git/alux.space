@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function PromptAsUxClient() {
         const { locale } = useLanguage();
@@ -183,7 +184,7 @@ export default function PromptAsUxClient() {
                                     "The best prompts are invisible — the user just gets what they needed."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
-                                        <span className="material-symbols text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</span>
+                                        <MaterialSymbol className="text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</MaterialSymbol>
                                         <p className="text-lg font-medium text-primary italic relative z-10">&quot;{insight}&quot;</p>
                                     </motion.div>
                                 ))}

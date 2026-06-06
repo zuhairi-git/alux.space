@@ -8,6 +8,7 @@ import Navigation from '@/components/Navigation';
 import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function AccessibilityClient() {
   useEffect(() => {
@@ -780,7 +781,7 @@ export default function AccessibilityClient() {
                     ].map((req, index) => (
                       <div key={index} className={`p-5 rounded-2xl bg-[var(--card-from-bg)]`}>
                         <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${req.gradient} flex items-center justify-center mb-3`}>
-                            <span className="material-symbols text-white text-xl">{req.icon}</span>
+                            <MaterialSymbol className="text-white text-xl">{req.icon}</MaterialSymbol>
                           </div>
                         <h3 className={`text-lg font-bold mb-3 text-[var(--foreground)]`}>{req.title}</h3>
                         <p className={`opacity-80 text-[var(--foreground)]`}>{req.desc}</p>

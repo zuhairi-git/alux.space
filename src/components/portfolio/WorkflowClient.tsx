@@ -12,6 +12,7 @@ import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 import Icon from '@/components/ui/Icon';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function WorkflowClient() {
 
@@ -357,7 +358,7 @@ export default function WorkflowClient() {
                         transition={{ delay: index * 0.1 }}
                       >
                         <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full group-hover:bg-primary/15 transition-colors">
-                          <span className="material-symbols text-xl">{item.icon}</span>
+                          <MaterialSymbol className="text-xl">{item.icon}</MaterialSymbol>
                         </div>
                         <div>
                           <h4 className="text-base font-medium text-primary mb-1">{item.title}</h4>
@@ -491,7 +492,7 @@ export default function WorkflowClient() {
                         transition={{ delay: index * 0.08 }}
                       >
                         <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full group-hover:bg-primary/15 transition-colors">
-                          <span className="material-symbols text-xl">{req.icon}</span>
+                          <MaterialSymbol className="text-xl">{req.icon}</MaterialSymbol>
                         </div>
                         <div>
                           <h4 className="text-base font-semibold text-primary mb-1">{req.title}</h4>
@@ -534,7 +535,7 @@ export default function WorkflowClient() {
                           className="theme-card-flex p-3 rounded-lg flex items-center gap-3 hover:border-primary/20 transition-colors"
                         >
                           <div className="h-8 w-8 flex items-center justify-center text-primary bg-primary/10 rounded-full flex-shrink-0">
-                            <span className="material-symbols text-base">{focus.icon}</span>
+                            <MaterialSymbol className="text-base">{focus.icon}</MaterialSymbol>
                           </div>
                           <span className="opacity-80 text-sm">{focus.area}</span>
                         </div>
@@ -583,7 +584,7 @@ export default function WorkflowClient() {
                   >
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-primary bg-primary/10 rounded-full">
-                        <span className="material-symbols text-xl">{item.icon}</span>
+                        <MaterialSymbol className="text-xl">{item.icon}</MaterialSymbol>
                       </div>
                       <div className="flex-grow">
                         <h3 className="text-base font-semibold text-primary mb-1">{item.title}</h3>

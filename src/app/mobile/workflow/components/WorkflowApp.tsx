@@ -4,6 +4,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon, type TabType, getTabDirection, getTabTransitionVariants, headerSubVariants, headerTitleVariants, MobileIntroScreen, type MobileIntroConfig } from '../../shared';
 import type { MobileTheme } from '../../shared';
+import { resolveFontAwesomeName } from '@/components/ui/Icon';
 import { DashboardView } from './DashboardView';
 import { WorkspacesView } from './WorkspacesView';
 import { CopilotView } from './CopilotView';
@@ -186,10 +187,9 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                                         <motion.span
                                             animate={{ scale: a ? 1.1 : 1 }}
                                             transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                            className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
-                                        >
-                                            {ic}
-                                        </motion.span>
+                                            className={`icon-glyph fa-duotone fa-thin fa-${resolveFontAwesomeName(ic)} ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-accent' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                            aria-hidden="true"
+                                        />
                                     </div>
                                 </div>
                             ) : (
@@ -197,10 +197,9 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                                 <motion.span
                                     animate={{ scale: a ? 1.12 : 1, y: a ? -1 : 0 }}
                                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                                    className={`material-symbols ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
-                                >
-                                    {ic}
-                                </motion.span>
+                                    className={`icon-glyph fa-duotone fa-thin fa-${resolveFontAwesomeName(ic)} ${theme.navTab.iconSize} transition-colors duration-200 ${a ? (isColorful ? 'text-primary' : theme.navTab.active(isLight)) : theme.navTab.inactive(isLight)}`}
+                                    aria-hidden="true"
+                                />
                             )}
                             <motion.span
                                 animate={{ opacity: a ? 1 : 0.6 }}

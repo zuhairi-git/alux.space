@@ -10,6 +10,7 @@ import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useTheme } from '@/context/ThemeContext';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface PortfolioItem {
   title: {
@@ -154,7 +155,7 @@ export default function PortfolioClient({ items }: Props) {
             className="mb-3"
           >
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] opacity-40 mb-4">
-              <span className="material-symbols text-sm">work</span>
+              <MaterialSymbol className="text-sm">work</MaterialSymbol>
               {locale === 'fi' ? 'Valitut teokset' : 'Selected Works'}
             </span>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.1]">
@@ -207,7 +208,7 @@ export default function PortfolioClient({ items }: Props) {
                         }`}
                     >
                       <span className="flex items-center gap-2">
-                        <span className="material-symbols text-sm hidden sm:inline">{tab.icon}</span>
+                        <MaterialSymbol className="text-sm hidden sm:inline">{tab.icon}</MaterialSymbol>
                         {tab.label}
                       </span>
                       <span className={`ml-1.5 text-xs tabular-nums ${isActive ? 'opacity-50' : 'opacity-30'}`}>
@@ -245,7 +246,7 @@ export default function PortfolioClient({ items }: Props) {
                         : getToggleInactiveText()
                       }`}
                   >
-                    <span className="material-symbols text-[16px]">{mode === 'standard' ? 'grid_view' : 'layers'}</span>
+                    <MaterialSymbol className="text-[16px]">{mode === 'standard' ? 'grid_view' : 'layers'}</MaterialSymbol>
                     <span className="hidden sm:inline">{getViewModeText(mode)}</span>
                     {isActive && (
                       <motion.div
@@ -351,7 +352,7 @@ export default function PortfolioClient({ items }: Props) {
                 exit={{ opacity: 0 }}
                 className="text-center py-24"
               >
-                <span className="material-symbols text-5xl opacity-20 mb-4 block">folder_open</span>
+                <MaterialSymbol className="text-5xl opacity-20 mb-4 block">folder_open</MaterialSymbol>
                 <p className="text-lg opacity-50">{getNoItemsText()}</p>
               </motion.div>
             )}

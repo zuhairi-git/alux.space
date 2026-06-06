@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import { MotionDiv, Button } from '@/design-system';
 import type { Testimonial } from './TestimonialCarousel';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 // Words to exclude from the cloud
 const STOP_WORDS = new Set([
@@ -110,9 +111,9 @@ export default function TestimonialWordCloud({ testimonials }: Props) {
           background:  visible ? 'var(--card-from-bg)' : 'transparent',
         }}
       >
-        <span className="material-symbols text-[13px]" aria-hidden="true">
+        <MaterialSymbol className="text-[13px]">
           {visible ? 'label_off' : 'label'}
-        </span>
+        </MaterialSymbol>
         {visible ? 'Hide keywords' : 'Show keywords'}
       </Button>
     </div>

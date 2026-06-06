@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback, forwardRef } from 'react';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export interface SelectOption {
   value: string;
@@ -151,12 +152,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             <span className={selectedOption ? '' : 'opacity-50'}>
               {selectedOption?.label ?? placeholder}
             </span>
-            <span
-              className={`material-symbols text-[18px] opacity-50 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-              aria-hidden="true"
+            <MaterialSymbol
+              className={`text-[18px] opacity-50 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
             >
               expand_more
-            </span>
+            </MaterialSymbol>
           </button>
 
           {open && (

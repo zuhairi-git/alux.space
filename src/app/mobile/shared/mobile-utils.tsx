@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import type { Transition, Variants } from 'framer-motion';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export const Icon = ({ name, className = "" }: { name: string, className?: string }) => (
-    <span className={`material-symbols ${className}`}>{name}</span>
+    <MaterialSymbol className={className}>{name}</MaterialSymbol>
 );
 
 export const Sparkline = ({ data, color, width = 80, height = 32 }: { data: number[], color: string, width?: number, height?: number }) => {

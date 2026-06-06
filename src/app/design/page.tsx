@@ -38,6 +38,7 @@ import {
   motionDistance,
 } from '@/design-system';
 import type { ComponentEntry } from '@/design-system';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 import AnimatedSection from '@/components/AnimatedSection';
 import CodeSnippet from '@/components/CodeSnippet';
 import PodcastPlayer from '@/components/PodcastPlayer';
@@ -457,7 +458,7 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
           <h4 className="font-semibold text-base">{entry.name}</h4>
           <span className="text-xs opacity-50 font-mono">{entry.path}</span>
         </div>
-        <span className="material-symbols text-sm opacity-40">{open ? 'expand_less' : 'expand_more'}</span>
+        <MaterialSymbol className="text-sm opacity-40">{open ? 'expand_less' : 'expand_more'}</MaterialSymbol>
       </button>
 
       {open && (
@@ -518,7 +519,7 @@ function DemoSection({ children, code, language = 'tsx' }: { children: React.Rea
           onClick={() => setShowCode(!showCode)}
           className="inline-flex items-center gap-1.5 text-xs font-medium text-primary opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
         >
-          <span className="material-symbols text-sm">{showCode ? 'visibility_off' : 'code'}</span>
+          <MaterialSymbol className="text-sm">{showCode ? 'visibility_off' : 'code'}</MaterialSymbol>
           {showCode ? 'Hide code' : 'View code'}
         </button>
       </div>
@@ -1714,7 +1715,7 @@ function BadgesSection() {
             boxShadow: '0 0 14px var(--color-success-bg)',
           }}
         >
-          <span className="material-symbols !text-[11px]" aria-hidden="true">verified</span>
+          <MaterialSymbol className="!text-[11px]">verified</MaterialSymbol>
           Accomplished
         </span>
         {/* In Progress */}
@@ -1741,7 +1742,7 @@ function BadgesSection() {
             borderColor: 'var(--color-info-border)',
           }}
         >
-          <span className="material-symbols !text-[11px]" aria-hidden="true">schedule</span>
+          <MaterialSymbol className="!text-[11px]">schedule</MaterialSymbol>
           Coming Soon
         </span>
       </div>
@@ -1764,13 +1765,13 @@ function InputsSection() {
         <Input
           label="Search"
           placeholder="Search..."
-          leftIcon={<span className="material-symbols text-[18px]">search</span>}
+          leftIcon={<MaterialSymbol className="text-[18px]">search</MaterialSymbol>}
         />
         <Input
           label="Password"
           type="password"
           placeholder="Enter password"
-          rightIcon={<span className="material-symbols text-[18px]">visibility</span>}
+          rightIcon={<MaterialSymbol className="text-[18px]">visibility</MaterialSymbol>}
         />
         <Input
           label="Name"
@@ -2307,9 +2308,9 @@ function CardsContentSection() {
               href={item.href}
               className="theme-card-flex p-5 rounded-xl hover:border-primary/40 transition-colors group"
             >
-              <span className="material-symbols text-2xl text-primary/60 group-hover:text-primary mb-3 block">
+              <MaterialSymbol className="text-2xl text-primary/60 group-hover:text-primary mb-3 block">
                 {item.icon}
-              </span>
+              </MaterialSymbol>
               <h4 className="font-semibold text-sm font-mono mb-1">{item.label}</h4>
               <p className="text-xs opacity-60 leading-relaxed mb-3">{item.desc}</p>
               <code className="text-[10px] px-1.5 py-0.5 rounded bg-foreground/8 font-mono block truncate opacity-70 mb-1">
@@ -2320,7 +2321,7 @@ function CardsContentSection() {
               </code>
               <span className="text-xs text-primary mt-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 View live examples{' '}
-                <span className="material-symbols text-sm">arrow_forward</span>
+                <MaterialSymbol className="text-sm">arrow_forward</MaterialSymbol>
               </span>
             </a>
           ))}
@@ -2442,7 +2443,7 @@ function IconsSection() {
             <div className="space-y-2">
               <h4 className="text-sm font-semibold">Shared Icon Standard</h4>
               <p className="max-w-2xl text-sm opacity-70">
-                Material Symbols now scale through semantic size tokens, and boxed icons can inherit theme-resolved tones through the shared IconSurface primitive.
+                Font Awesome glyphs now scale through semantic size tokens, and boxed icons can inherit theme-resolved tones through the shared IconSurface primitive.
               </p>
             </div>
             <Badge variant="glass">Current theme: {theme}</Badge>
@@ -2450,7 +2451,7 @@ function IconsSection() {
           <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4">
               <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] opacity-45">Sizing</div>
-              <p className="text-sm opacity-70">Use size tokens so Material Symbols keeps the correct optical size at each scale.</p>
+              <p className="text-sm opacity-70">Use size tokens so Font Awesome glyphs keep the correct optical size at each scale.</p>
             </div>
             <div className="rounded-xl border border-[var(--card-border)] bg-[var(--background)] p-4">
               <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] opacity-45">Surface Ratio</div>
@@ -3128,7 +3129,7 @@ function ContributingSection() {
       {steps.map(step => (
         <div key={step.title} className="theme-card-flex p-5 rounded-xl">
           <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols text-primary text-xl">{step.icon}</span>
+            <MaterialSymbol className="text-primary text-xl">{step.icon}</MaterialSymbol>
             <h4 className="text-sm font-semibold">{step.title}</h4>
           </div>
           <ol className="list-decimal list-inside space-y-1 text-sm opacity-70">
@@ -3145,7 +3146,7 @@ function LintRulesSection() {
     <div className="space-y-4">
       <div className="theme-card-flex p-5 rounded-xl space-y-3">
         <div className="flex items-center gap-2">
-          <span className="material-symbols text-primary">rule</span>
+          <MaterialSymbol className="text-primary">rule</MaterialSymbol>
           <h4 className="text-sm font-semibold">design-system/no-hardcoded-colors</h4>
         </div>
         <div className="grid grid-cols-2 gap-4 text-sm">
@@ -3184,7 +3185,7 @@ function LintRulesSection() {
             'Build passes: npm run build',
           ].map(item => (
             <li key={item} className="flex items-start gap-2">
-              <span className="material-symbols text-[16px] text-primary mt-0.5">check_box_outline_blank</span>
+              <MaterialSymbol className="text-[16px] text-primary mt-0.5">check_box_outline_blank</MaterialSymbol>
               <span className="opacity-70">{item}</span>
             </li>
           ))}
@@ -3231,7 +3232,7 @@ function BackgroundPreviewToggle({
         }`}
         aria-pressed={mode === 'theme'}
       >
-        <span className="material-symbols text-sm">palette</span>
+        <MaterialSymbol className="text-sm">palette</MaterialSymbol>
         Theme BG
       </button>
       <button
@@ -3243,7 +3244,7 @@ function BackgroundPreviewToggle({
         }`}
         aria-pressed={mode === 'image'}
       >
-        <span className="material-symbols text-sm">image</span>
+        <MaterialSymbol className="text-sm">image</MaterialSymbol>
         Image BG
       </button>
     </div>
@@ -3307,7 +3308,7 @@ const allSections: SectionDef[] = [
   { key: 'cards-content',  title: 'Cards — Content',           render: () => <CardsContentSection /> },
   { key: 'quotes',         title: 'QuoteBlock Variants',       render: () => <QuotesSection /> },
   { key: 'testimonials',   title: 'Testimonial Carousel',      render: () => <TestimonialsSection /> },
-  { key: 'icons',      title: 'Icons (Material Symbols)',   render: () => <IconsSection /> },
+  { key: 'icons',      title: 'Icons (Font Awesome)',   render: () => <IconsSection /> },
   { key: 'animations', title: 'AnimatedSection',           render: () => <AnimationsSection /> },
   { key: 'code-snippet', title: 'Code Snippet',            render: () => <CodeSnippetSection /> },
   { key: 'chapter-divider', title: 'Chapter Divider',      render: () => <ChapterDividerSection /> },
@@ -3426,9 +3427,9 @@ function OverviewGrid() {
                 className="theme-card-flex p-4 rounded-xl flex flex-col items-center gap-2 text-center
                            hover:border-primary/40 transition-colors group"
               >
-                <span className="material-symbols text-2xl opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all">
+                <MaterialSymbol className="text-2xl opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all">
                   {item.icon}
-                </span>
+                </MaterialSymbol>
                 <span className="text-sm font-medium">{item.label}</span>
               </a>
             ))}

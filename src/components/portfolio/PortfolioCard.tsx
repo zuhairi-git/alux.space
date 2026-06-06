@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAnalyticsTracking } from '../../../seo/AnalyticsProvider';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface PortfolioCardProps {
   item: {
@@ -89,14 +90,14 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
     if (item.category === 'case-study') {
       return (
         <Badge variant="accent">
-          <span className="material-symbols !text-[12px]">school</span>
+          <MaterialSymbol className="!text-[12px]">school</MaterialSymbol>
           {locale === 'fi' ? 'Tapaustutkimus' : 'Case Study'}
         </Badge>
       );
     }
     return (
       <Badge variant="info">
-        <span className="material-symbols !text-[12px]">devices</span>
+        <MaterialSymbol className="!text-[12px]">devices</MaterialSymbol>
         {locale === 'fi' ? 'Prototyyppi' : 'Prototype'}
       </Badge>
     );
@@ -169,13 +170,13 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                     className="uppercase tracking-widest"
                   >
                     {item.status.type === 'accomplished' && (
-                      <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
+                      <MaterialSymbol className="!text-[10px]">verified</MaterialSymbol>
                     )}
                     {getStatus()}
                   </Badge>
                   <div className="flex items-center gap-2 text-on-dark/60 text-xs font-medium group-hover:text-on-dark transition-colors duration-200">
                     <span>{locale === 'fi' ? 'Tutustu' : 'Explore project'}</span>
-                    <span className="material-symbols text-sm transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+                    <MaterialSymbol className="text-sm transition-transform duration-200 group-hover:translate-x-1">arrow_forward</MaterialSymbol>
                   </div>
                 </div>
               </div>
@@ -255,11 +256,11 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, viewMode = 'standar
                   className="uppercase tracking-widest"
                 >
                   {item.status.type === 'accomplished' && (
-                    <span className="material-symbols !text-[10px]" aria-hidden="true">verified</span>
+                    <MaterialSymbol className="!text-[10px]">verified</MaterialSymbol>
                   )}
                   {getStatus()}
                 </Badge>
-                <span className="material-symbols text-lg text-[var(--muted-foreground)] group-hover:text-primary transition-all duration-200 group-hover:translate-x-0.5">arrow_forward</span>
+                <MaterialSymbol className="text-lg text-[var(--muted-foreground)] group-hover:text-primary transition-all duration-200 group-hover:translate-x-0.5">arrow_forward</MaterialSymbol>
               </div>
             </div>
           </div>

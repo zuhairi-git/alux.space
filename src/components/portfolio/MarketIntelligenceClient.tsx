@@ -10,6 +10,7 @@ import CaseStudyHero from './CaseStudyHero';
 import CaseStudySection, { CaseStudyItem } from './CaseStudySection';
 import CaseStudyProgress from './CaseStudyProgress';
 import Icon from '@/components/ui/Icon';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 // Animated counter component for live metrics feel
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
@@ -679,7 +680,7 @@ export default function MarketIntelligenceClient() {
                                             {/* Mini audio briefing card */}
                                             <div className="px-3.5 py-3 rounded-xl bg-[var(--card-to-bg)] border border-[var(--card-border)] flex items-center gap-3">
                                                 <div className="w-9 h-9 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 flex items-center justify-center shrink-0">
-                                                    <span className="material-symbols text-sm" aria-hidden="true">play_arrow</span>
+                                                    <MaterialSymbol className="text-sm">play_arrow</MaterialSymbol>
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <p className="text-xs font-semibold text-[var(--foreground)] truncate">

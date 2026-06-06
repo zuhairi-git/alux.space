@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { durationSeconds, delaySeconds, transition as t, Button, Icon } from '@/design-system';
 import Badge from '@/components/ui/Badge';
 import { useLanguage } from '@/context/LanguageContext';
+import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 interface HeroAction {
   label: string;
@@ -189,9 +190,9 @@ export default function CaseStudyHero({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: durationSeconds.ease, delay: 0.35 + i * 0.07 }}
             >
-              <span className="material-symbols text-lg mt-0.5 flex-shrink-0 text-primary/50">
+              <MaterialSymbol className="text-lg mt-0.5 flex-shrink-0 text-primary/50">
                 {item.icon}
-              </span>
+              </MaterialSymbol>
               <div>
                 <span className="text-[11px] font-medium uppercase tracking-wider text-foreground/40">
                   {item.label}
