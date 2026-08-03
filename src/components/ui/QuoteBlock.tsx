@@ -38,7 +38,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         />
           
           {author && (
-          <footer className="text-right mt-2">
+          <footer className="text-end mt-2">
             <cite className="font-medium text-[var(--primary)]">— {author}</cite>
           </footer>
         )}
@@ -57,7 +57,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
         role="region"
         aria-label="Quote"
       >
-        <div className="py-6 px-6 border-l-4 border-[var(--primary)]/50 bg-[var(--card-from-bg)] rounded-r-md">
+        <div className="py-6 px-6 border-s-4 border-[var(--primary)]/50 bg-[var(--card-from-bg)] rounded-e-md">
           <blockquote 
             className="text-xl md:text-2xl leading-relaxed mb-3 text-[var(--foreground)]" 
             dangerouslySetInnerHTML={{ __html: quoteHtml }}
@@ -66,7 +66,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
           />
           
           {author && (
-            <footer className="text-right">
+            <footer className="text-end">
               <cite className="font-medium text-[var(--primary)]">— {author}</cite>
             </footer>
           )}
@@ -86,7 +86,7 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
       aria-label="Quote"
     >
       {/* Decorative elements — clipped inside the wrapper */}
-      <div className="absolute top-0 left-0" aria-hidden="true">
+      <div className="absolute top-0 start-0" aria-hidden="true">
         <svg 
           className="w-12 h-12 md:w-16 md:h-16 text-primary opacity-20" 
           fill="currentColor" 
@@ -98,25 +98,25 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ quote, author, variant, cite, l
       </div>
       
       <div 
-        className="py-8 px-7 md:px-12 border-l-4 border-primary/50 bg-gradient-to-r from-primary/10 to-transparent rounded-r-xl relative overflow-hidden"
+        className="py-8 px-7 md:px-12 border-s-4 border-primary/50 bg-gradient-to-r from-primary/10 to-transparent rounded-e-xl relative overflow-hidden"
       >
         {/* Background decorative line */}
         <div 
-          className="absolute h-px w-full top-1/2 -right-4 bg-gradient-to-l from-transparent via-primary/20 to-transparent"
+          className="absolute h-px w-full top-1/2 -end-4 bg-gradient-to-l from-transparent via-primary/20 to-transparent"
           aria-hidden="true"
         />
         
         <blockquote 
-          className="text-left text-xl md:text-2xl leading-relaxed mb-4 relative z-10" 
+          className="text-start text-xl md:text-2xl leading-relaxed mb-4 relative z-10" 
           dangerouslySetInnerHTML={{ __html: quoteHtml }}
           lang={lang}
           cite={cite}
         />
         
         {author && (
-          <footer className="text-right">
+          <footer className="text-end">
             <cite className="flex items-center justify-end font-medium text-primary">
-              <span className="mr-2 inline-block w-8 h-px bg-primary/50" />
+              <span className="me-2 inline-block w-8 h-px bg-primary/50" />
               {author}
             </cite>
           </footer>

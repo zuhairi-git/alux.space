@@ -185,7 +185,7 @@ export default function PromptForgeClient() {
                                     "The real skill is knowing what to ask, not what to draw."
                                 ].map((insight, index) => (
                                     <motion.div key={index} className="theme-card-flex p-8 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
-                                        <MaterialSymbol className="text-4xl text-[var(--primary)]/10 absolute -top-2 -right-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</MaterialSymbol>
+                                        <MaterialSymbol className="text-4xl text-[var(--primary)]/10 absolute -top-2 -end-2 transform group-hover:scale-110 transition-transform duration-500">format_quote</MaterialSymbol>
                                         <p className="text-lg font-medium text-primary italic relative z-10">&quot;{insight}&quot;</p>
                                     </motion.div>
                                 ))}

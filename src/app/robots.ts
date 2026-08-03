@@ -14,6 +14,8 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
         disallow: [
           '/api/',
+          '/admin/',
+          '/design/',
           '/portfolio/workflow/admin/',
           '/_next/',
           '/private/',
@@ -41,6 +43,8 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 2,
         disallow: [
           '/api/',
+          '/admin/',
+          '/design/',
           '/portfolio/workflow/admin/',
           '/private/',
           '/temp/',
@@ -61,6 +65,8 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
         disallow: [
           '/api/',
+          '/admin/',
+          '/design/',
           '/portfolio/workflow/admin/',
           '/private/',
         ],
@@ -83,6 +89,8 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 3,
         disallow: [
           '/api/',
+          '/admin/',
+          '/design/',
           '/portfolio/workflow/admin/',
           '/_next/',
           '/private/',

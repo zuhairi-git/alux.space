@@ -422,7 +422,7 @@ export default function WorkflowClient() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                            <div className="border-l-2 border-primary/20 pl-4">
+                            <div className="border-s-2 border-primary/20 ps-4">
                               <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
@@ -431,7 +431,7 @@ export default function WorkflowClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-primary/20 pl-4">
+                            <div className="border-s-2 border-primary/20 ps-4">
                               <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 mb-3">{locale === 'fi' ? "Tavoitteet" : "Goals"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.goals.map((goal, i) => (
@@ -440,7 +440,7 @@ export default function WorkflowClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-primary/20 pl-4">
+                            <div className="border-s-2 border-primary/20 ps-4">
                               <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary/80 mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.painPoints.map((point, i) => (
@@ -507,7 +507,7 @@ export default function WorkflowClient() {
                   <h3 className="text-lg font-semibold text-primary mb-5">{content.userTesting}</h3>
                   <div className="mb-8">
                     <h4 className="text-sm font-medium text-primary mb-3">{content.testScenario}</h4>
-                    <p className="opacity-70 text-sm leading-relaxed pl-3 border-l-2 border-primary/20">{content.testScenarioValue}</p>
+                    <p className="opacity-70 text-sm leading-relaxed ps-3 border-s-2 border-primary/20">{content.testScenarioValue}</p>
                   </div>
 
                   <div>
@@ -596,7 +596,7 @@ export default function WorkflowClient() {
                                 {content.completed}
                               </span>
                             </div>
-                            <div className="text-right">
+                            <div className="text-end">
                               <span className="text-xs font-semibold inline-block text-primary">
                                 {item.progress}%
                               </span>

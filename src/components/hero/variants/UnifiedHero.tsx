@@ -216,12 +216,12 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                 <Image src={activeItem.src} alt={activeItem.title} fill className="object-cover object-top" sizes="(max-width: 400px) 100vw, 380px" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }} />
                 <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl" style={{ background: activeItem.accent }} />
-                <div className="absolute top-3 right-3">
+                <div className="absolute top-3 end-3">
                   <span className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${activeItem.accent}33`, color: activeItem.accent, border: `1px solid ${activeItem.accent}55` }}>
                     {activeItem.num}
                   </span>
                 </div>
-                <div className="absolute top-3 left-3">
+                <div className="absolute top-3 start-3">
                   <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
                     {activeItem.type}
                   </span>
@@ -316,7 +316,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                     )}
 
                     {/* Index number — top-right */}
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                    <div className="absolute top-3 end-3 flex items-center gap-1.5">
                       <span
                         className="text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full"
                         style={{ background: `${item.accent}33`, color: item.accent, border: `1px solid ${item.accent}55` }}
@@ -326,7 +326,7 @@ const PortfolioFan: React.FC<PortfolioFanProps> = ({ locale }) => {
                     </div>
 
                     {/* Type pill — top-left */}
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-3 start-3">
                       <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 backdrop-blur-sm border border-white/15">
                         {item.type}
                       </span>
@@ -451,20 +451,20 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
           transition={t.snap}
         >
           <MotionDiv
-            className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
+            className="absolute top-4 start-4 md:top-10 md:start-10 w-16 h-16 md:w-24 md:h-24"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ ...t.snap, delay: delaySeconds.xs }}
           >
-            <div className={`w-full h-full border-t-2 border-l-2 ${isColorful ? 'border-ds-cyan-400/30' : 'border-[var(--primary)]/30'} rounded-tl-lg`} />
+            <div className={`w-full h-full border-t-2 border-s-2 ${isColorful ? 'border-ds-cyan-400/30' : 'border-[var(--primary)]/30'} rounded-ss-lg`} />
           </MotionDiv>
           <MotionDiv
-            className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
+            className="absolute bottom-4 end-4 md:bottom-10 md:end-10 w-16 h-16 md:w-24 md:h-24"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ ...t.snap, delay: delaySeconds.xs }}
           >
-            <div className={`w-full h-full border-b-2 border-r-2 ${isColorful ? 'border-[var(--primary)]/30' : 'border-primary-400/30'} rounded-br-lg`} />
+            <div className={`w-full h-full border-b-2 border-e-2 ${isColorful ? 'border-[var(--primary)]/30' : 'border-primary-400/30'} rounded-ee-lg`} />
           </MotionDiv>
         </MotionDiv>
       </AnimatePresence>
@@ -473,7 +473,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 min-h-[calc(100vh-8rem)] py-16 lg:py-0">
 
         {/* ── LEFT: Text content ─────────────────────────────── */}
-        <div className="flex-1 lg:max-w-[48%] flex flex-col items-center lg:items-start justify-center text-center lg:text-left space-y-6">
+        <div className="flex-1 lg:max-w-[48%] flex flex-col items-center lg:items-start justify-center text-center lg:text-start space-y-6">
 
           {/* Role badge */}
           <MotionDiv
@@ -504,7 +504,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * delaySeconds.md, duration: durationSeconds.dramatic, ease: [0.19, 1, 0.22, 1] }}
-                    className="inline-block mr-3 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]"
+                    className="inline-block me-3 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]"
                   >
                     {word}
                   </MotionSpan>
@@ -579,7 +579,7 @@ const UnifiedHero: React.FC<HeroConfig> = ({ title, subtitle, cta }) => {
               { value: '10+', label: locale === 'fi' ? 'vuotta' : 'yrs exp' },
               { value: '20+', label: locale === 'fi' ? 'projektia' : 'projects' },
             ].map((stat) => (
-              <div key={stat.label} className="text-center lg:text-left">
+              <div key={stat.label} className="text-center lg:text-start">
                 <div className="text-2xl font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
                   {stat.value}
                 </div>

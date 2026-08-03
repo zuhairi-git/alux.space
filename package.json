@@ -7,13 +7,14 @@
   },
   "scripts": {
     "dev": "node scripts/dev-with-open.js",
-    "prebuild": "node scripts/validate-text-integrity.js",
+    "prebuild": "node scripts/validate-text-integrity.js && node scripts/validate-locales.js",
     "build": "node scripts/run-build.js",
-    "build:direct": "next build && node scripts/seo-build.js",
-    "postbuild": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"" ,
+    "build:direct": "next build && node scripts/inject-html-lang.js && node scripts/seo-build.js",
+    "postbuild": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"",
     "build:clean": "Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue; echo done",
     "clean:out-cache": "node -e \"const fs = require('fs'); fs.rmSync('out/cache', { recursive: true, force: true });\"",
     "lint:text": "node scripts/validate-text-integrity.js",
+    "lint:locales": "node scripts/validate-locales.js",
     "start": "next start",
     "lint": "next lint",
     "seo:audit": "node scripts/seo-dev.js audit",
@@ -21,7 +22,7 @@
     "seo:watch": "node scripts/seo-dev.js watch",
     "sitemap": "node -e \"require('./seo/sitemap.ts').generateSitemap()\"",
     "build:isolated": "node scripts/build-isolated.js",
-    "precommit": "npm run lint:text && npm run lint && npm run seo:audit"
+    "precommit": "npm run lint:text && npm run lint:locales && npm run lint && npm run seo:audit"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
@@ -33,7 +34,6 @@
     "gtag": "^1.0.1",
     "jspdf": "^4.0.0",
     "next": "15.3.0",
-    "next-intl": "^4.1.0",
     "next-share": "^0.27.0",
     "node-fetch": "^3.3.2",
     "pptxgenjs": "^4.0.1",

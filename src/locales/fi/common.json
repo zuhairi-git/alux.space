@@ -118,13 +118,14 @@
     }
   },
   "languageSwitcher": {
-    "title": "Kieli",
-    "en": "Englanti",
-    "fi": "Suomi"
+    "title": "Kieli"
   },
   "theme": {
     "light": "Vaalea teema",
     "dark": "Tumma teema",
     "colorful": "Värikäs teema"
+  },
+  "translationBadge": {
+    "machineTranslated": "Käännetty tekoälyllä"
   }
 }

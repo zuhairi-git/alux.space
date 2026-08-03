@@ -60,7 +60,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
             {/* ─── Profile Card ─── */}
             <motion.div variants={sectionVariants} initial="hidden" animate="visible"
                 className={`${card} p-6 flex flex-col items-center mb-5 relative overflow-hidden`}>
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-ds-cyan-500/10 to-transparent pointer-events-none" />
+                <div className="absolute top-0 end-0 w-20 h-20 bg-gradient-to-bl from-ds-cyan-500/10 to-transparent pointer-events-none" />
                 {/* Avatar + score ring */}
                 <div className="relative mb-4">
                     <div className="relative w-[88px] h-[88px]">
@@ -84,7 +84,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="Ali Al-Zuhairi" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${isColorful ? 'f59e0b' : theme.accent.fallbackAvatar}&color=fff` }} />
                         </div>
                     </div>
-                    <div className={`absolute -bottom-1 -right-1 w-7 h-7 rounded-xl flex items-center justify-center text-[11px] font-black text-white shadow-lg ${profileScore >= 80 ? 'bg-ds-cyan-500' : 'bg-primary'}`}>{profileScore}</div>
+                    <div className={`absolute -bottom-1 -end-1 w-7 h-7 rounded-xl flex items-center justify-center text-[11px] font-black text-white shadow-lg ${profileScore >= 80 ? 'bg-ds-cyan-500' : 'bg-primary'}`}>{profileScore}</div>
                 </div>
                 <h2 className={`text-[22px] font-bold tracking-tight mb-0.5`}>Ali Al-Zuhairi</h2>
                 <div className={`text-[14px] font-medium mb-4 ${theme.profile.roleColor}`}>Hospitality & Retail Enthusiast</div>
@@ -190,7 +190,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             className={`w-full flex items-center justify-between p-4 active:bg-black/5 dark:active:bg-white/5 transition-colors ${i !== 0 ? 'border-t border-black/5 border-white/5' : ''}`}
                         >
                             <div className="flex items-center">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 ${themeMode === t.value ? theme.profile.engagementActiveBg : theme.profile.settingsBg(isLight)}`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center me-4 ${themeMode === t.value ? theme.profile.engagementActiveBg : theme.profile.settingsBg(isLight)}`}>
                                     <Icon name={t.icon} className={`text-[18px] ${themeMode === t.value ? 'text-white' : ''}`} />
                                 </div>
                                 <span className={`text-[16px] font-medium ${isLight ? 'text-ds-gray-800' : 'text-ds-gray-100'}`}>{t.label}</span>
@@ -207,9 +207,9 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50">
                         <div className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setActivePanel(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 max-h-[88vh] overflow-y-auto no-scrollbar ${sheetBg}`}>
+                            className={`absolute bottom-0 start-0 end-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 max-h-[88vh] overflow-y-auto no-scrollbar ${sheetBg}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
-                            <button onClick={() => setActivePanel(null)} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95">
+                            <button onClick={() => setActivePanel(null)} className="absolute top-5 end-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95">
                                 <Icon name="close" className="text-[16px] opacity-60" />
                             </button>
 
@@ -217,7 +217,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             {activePanel === 'cv' && (
                                 <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
                                     <div className="flex items-center mb-5">
-                                        <div className={`w-9 h-9 rounded-2xl bg-ds-cyan-500/20 flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/20'}`}>
+                                        <div className={`w-9 h-9 rounded-2xl bg-ds-cyan-500/20 flex items-center justify-center me-3 ${isColorful ? 'bg-primary/15' : 'bg-ds-cyan-500/20'}`}>
                                             <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-ds-cyan-400'}`} />
                                         </div>
                                         <div>
@@ -248,7 +248,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             {activePanel === 'shifts' && (
                                 <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
                                     <div className="flex items-center mb-4">
-                                        <div className="w-9 h-9 rounded-2xl bg-primary/20 flex items-center justify-center mr-3">
+                                        <div className="w-9 h-9 rounded-2xl bg-primary/20 flex items-center justify-center me-3">
                                             <Icon name="schedule" className="text-[18px] text-ds-gold-400" />
                                         </div>
                                         <h3 className="text-[18px] font-bold">Manage Shifts</h3>
@@ -282,7 +282,7 @@ export function ProfileView({ card, isLight, isColorful, theme, themeMode, setTh
                             {activePanel === 'analytics' && (
                                 <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
                                     <div className="flex items-center mb-5">
-                                        <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 bg-primary/15`}>
+                                        <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 bg-primary/15`}>
                                             <Icon name="insights" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-primary'}`} />
                                         </div>
                                         <h3 className="text-[18px] font-bold">My Analytics</h3>

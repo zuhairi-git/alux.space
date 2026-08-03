@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages } from '@/i18n';
 import DelegateClient from '@/components/portfolio/DelegateClient';
 
 // Required for static site generation with internationalized routes
@@ -47,10 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         },
         alternates: {
             canonical: `${baseUrl}/${locale}/portfolio/delegate`,
-            languages: i18n.locales.reduce((acc, lang) => {
-                acc[lang] = `${baseUrl}/${lang}/portfolio/delegate`;
-                return acc;
-            }, {} as Record<string, string>),
+            languages: alternateLanguages(baseUrl, '/portfolio/delegate'),
         }
     };
 }

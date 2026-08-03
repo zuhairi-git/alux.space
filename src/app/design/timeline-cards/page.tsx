@@ -13,7 +13,7 @@ export default function TimelineCardsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
           <div className="inline-flex items-center px-3 py-1.5 mb-4 text-sm font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 rounded-full shadow-sm">
-            <Icon name="rocket_launch" size="sm" className="mr-2" /> Timeline Cards
+            <Icon name="rocket_launch" size="sm" className="me-2" /> Timeline Cards
           </div>
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-ds-gray-950 dark:text-white mb-4" style={{ textShadow: 'none' }}>Timeline Cards</h2>
           <p className="font-body text-lg text-ds-gray-700 dark:text-ds-gray-300 max-w-3xl">

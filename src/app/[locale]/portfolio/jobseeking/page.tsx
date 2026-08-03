@@ -1,6 +1,6 @@
 import JobSeekingClient from '@/components/portfolio/JobSeekingClient';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages } from '@/i18n';
 
 // Required for static site generation with internationalized routes
 export function generateStaticParams() {
@@ -53,10 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/portfolio/jobseeking`,
-      languages: i18n.locales.reduce((acc, lang) => {
-        acc[lang] = `${baseUrl}/${lang}/portfolio/jobseeking`;
-        return acc;
-      }, {} as Record<string, string>),
+      languages: alternateLanguages(baseUrl, '/portfolio/jobseeking'),
     }
   };
 }

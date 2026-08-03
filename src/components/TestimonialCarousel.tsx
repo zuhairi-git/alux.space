@@ -91,12 +91,12 @@ export default function TestimonialCarousel({
             {/* Decorative open-quote mark — inside card, clipped safely */}
             <span
               aria-hidden="true"
-              className="absolute -top-4 -left-2 text-[9rem] md:text-[12rem] leading-none font-serif text-[var(--primary)] opacity-10 select-none pointer-events-none"
+              className="absolute -top-4 -start-2 text-[9rem] md:text-[12rem] leading-none font-serif text-[var(--primary)] opacity-10 select-none pointer-events-none"
             >
               &ldquo;
             </span>
             {/* Quote text — scrollable if text overflows */}
-            <div className="flex-1 overflow-y-auto pr-1 mb-6 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto pe-1 mb-6 scrollbar-thin">
               <p className="text-xs md:text-sm leading-relaxed text-foreground">
                 {highlightText(current.text, highlights)}
               </p>

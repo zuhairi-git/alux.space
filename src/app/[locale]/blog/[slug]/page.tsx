@@ -7,7 +7,7 @@ import { posts } from '../../../blog/posts/data';
 import BlogPostBackground from '@/components/blog/BlogPostBackground';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages, getLocaleConfig } from '@/i18n';
 import { notFound } from 'next/navigation';
 
 export function generateStaticParams() {
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: 'article',
       url: postUrl,
       siteName: 'Ali Al-Zuhairi',
-      locale: locale === 'en' ? 'en_US' : 'fi_FI',
+      locale: getLocaleConfig(locale).ogLocale,
       publishedTime: localeContent.publishedDate,
       authors: ['Ali Al-Zuhairi'],
       tags: post.tags || [],
@@ -89,10 +89,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     alternates: {
       canonical: postUrl,
-      languages: {
-        'en': `${baseUrl}/en/blog/${slug}`,
-        'fi': `${baseUrl}/fi/blog/${slug}`,
-      },
+      languages: alternateLanguages(baseUrl, `/blog/${slug}`),
     },
   };
 }
@@ -229,7 +226,7 @@ function BlogPostContent({ post, shareUrl, locale }: { post: typeof posts[0], sh
               <div className="relative rounded-2xl overflow-hidden border border-[var(--card-border)] bg-[var(--card-from-bg)] p-6 md:p-8">
                 {/* Decorative gradient accent */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)] to-transparent opacity-60" aria-hidden="true" />
-                <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-[var(--primary-glow)] blur-3xl opacity-10 pointer-events-none" aria-hidden="true" />
+                <div className="absolute -top-24 -end-24 w-64 h-64 rounded-full bg-[var(--primary-glow)] blur-3xl opacity-10 pointer-events-none" aria-hidden="true" />
 
                 <div className="relative flex flex-col sm:flex-row gap-6 items-start">
                   {/* Avatar */}

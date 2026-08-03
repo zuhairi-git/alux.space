@@ -274,8 +274,8 @@ export function WorkExperienceWizard({ workContent, theme, t }: WorkExperienceWi
                       </div>
 
                       {/* Decorative elements */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--gradient-mid)]/10 to-transparent rounded-bl-full" />
-                      <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-[var(--gradient-end)]/10 to-transparent rounded-tr-full" />
+                      <div className="absolute top-0 end-0 w-32 h-32 bg-gradient-to-br from-[var(--gradient-mid)]/10 to-transparent rounded-es-full" />
+                      <div className="absolute bottom-0 start-0 w-40 h-40 bg-gradient-to-tr from-[var(--gradient-end)]/10 to-transparent rounded-se-full" />
                     </div>
                   );
                 })()}

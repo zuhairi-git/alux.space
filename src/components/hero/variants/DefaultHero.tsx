@@ -34,24 +34,24 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
       className={`container mx-auto px-4 relative z-10`}
     >
       {/* Decorative accents */}      <motion.div
-        className="absolute top-4 left-4 md:top-10 md:left-10 w-16 h-16 md:w-24 md:h-24"
+        className="absolute top-4 start-4 md:top-10 md:start-10 w-16 h-16 md:w-24 md:h-24"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ ...t.snap, delay: delaySeconds.xs }}
       >
-        <div className="w-full h-full border-t-2 border-l-2 border-[var(--primary)]/30 rounded-tl-lg" />
+        <div className="w-full h-full border-t-2 border-s-2 border-[var(--primary)]/30 rounded-ss-lg" />
       </motion.div>
       
       <motion.div
-        className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-24 md:h-24"
+        className="absolute bottom-4 end-4 md:bottom-10 md:end-10 w-16 h-16 md:w-24 md:h-24"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ ...t.snap, delay: delaySeconds.xs }}
       >
-        <div className="w-full h-full border-b-2 border-r-2 border-primary-400/30 rounded-br-lg" />
+        <div className="w-full h-full border-b-2 border-e-2 border-primary-400/30 rounded-ee-lg" />
       </motion.div>
         <motion.div 
-        className="absolute -left-20 top-[40%] hidden md:block" 
+        className="absolute -start-20 top-[40%] hidden md:block" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: durationSeconds.slow, delay: delaySeconds.md }}
@@ -63,7 +63,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
       </motion.div>
       
       <motion.div 
-        className="absolute -right-20 top-[40%] hidden md:block" 
+        className="absolute -end-20 top-[40%] hidden md:block" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: durationSeconds.slow, delay: delaySeconds.md }}
@@ -77,7 +77,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
       <div className={`flex flex-col items-center justify-center my-8 text-center max-w-4xl mx-auto relative`}>
         {/* Subtle dot grid behind the title */}
         <div className="absolute inset-0 -z-10 opacity-20 overflow-hidden">
-          <div className="absolute top-0 left-[20%] w-3/5 h-full" 
+          <div className="absolute top-0 start-[20%] w-3/5 h-full" 
                style={{ backgroundImage: `radial-gradient(circle, rgba(${themeRgb.dark.dotGrid}, 0.2) 1px, transparent 1px)`, backgroundSize: '30px 30px' }}>
           </div>
         </div>
@@ -157,10 +157,10 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delaySeconds.xl }}
-          className="relative max-w-2xl mx-auto mt-16 p-8 rounded-lg bg-white/5 backdrop-blur-sm text-center border-t border-l border-white/10"
+          className="relative max-w-2xl mx-auto mt-16 p-8 rounded-lg bg-white/5 backdrop-blur-sm text-center border-t border-s border-white/10"
         >
           {/* Decorative elements */}          <motion.div 
-            className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20"
+            className="absolute -top-4 -start-4 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--primary)]/20 to-[var(--gradient-mid)]/20"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5]
@@ -173,7 +173,7 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           />
           
           <motion.div 
-            className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-primary-400/20 to-[var(--primary)]/20"
+            className="absolute -bottom-4 -end-4 w-8 h-8 rounded-full bg-gradient-to-br from-primary-400/20 to-[var(--primary)]/20"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5]
@@ -187,9 +187,9 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPo
           />
           
           <p className="italic text-ds-gray-300 relative">
-            <span className="absolute -left-4 top-0 text-[var(--accent-text)] text-4xl opacity-80">&ldquo;</span>
+            <span className="absolute -start-4 top-0 text-[var(--accent-text)] text-4xl opacity-80">&ldquo;</span>
             {quote.text}
-            <span className="absolute -bottom-4 right-0 text-[var(--accent-text)] text-4xl opacity-80">&rdquo;</span>
+            <span className="absolute -bottom-4 end-0 text-[var(--accent-text)] text-4xl opacity-80">&rdquo;</span>
             <motion.span 
               className="block text-[var(--accent-text)] mt-6 text-center"
               initial={{ x: -10, opacity: 0 }}

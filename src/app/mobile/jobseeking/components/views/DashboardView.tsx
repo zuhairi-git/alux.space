@@ -53,7 +53,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
     if (step === 'preview') return (
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-4">
-                <button onClick={() => setStep('edit')} className="mr-3 opacity-60 active:opacity-40"><Icon name="arrow_back" className="text-[20px]" /></button>
+                <button onClick={() => setStep('edit')} className="me-3 opacity-60 active:opacity-40"><Icon name="arrow_back" className="text-[20px]" /></button>
                 <h3 className="text-[18px] font-bold flex-1">AI Preview</h3>
                 <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ds-success/15 text-ds-emerald-400">+23 pts</span>
             </div>
@@ -74,7 +74,7 @@ function CVBuilderSheet({ isLight, isColorful, theme, onClose }: { isLight: bool
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/15' : isLight ? 'bg-ds-cyan-400/15' : 'bg-ds-cyan-500/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 ${isColorful ? 'bg-primary/15' : isLight ? 'bg-ds-cyan-400/15' : 'bg-ds-cyan-500/15'}`}>
                     <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-ds-cyan-400'}`} />
                 </div>
                 <div>
@@ -146,7 +146,7 @@ function ShiftManagerSheet({ isLight, isColorful, theme, onClose }: { isLight: b
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-4">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary/10' : 'bg-primary/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary/10' : 'bg-primary/15'}`}>
                     <Icon name="schedule" className="text-[18px] text-ds-gold-400" />
                 </div>
                 <div>
@@ -203,7 +203,7 @@ function AnalyticsSheet({ isLight, isColorful, theme }: { isLight: boolean; isCo
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-ds-success/20' : isLight ? 'bg-ds-emerald-600/10' : 'bg-ds-success/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 ${isColorful ? 'bg-ds-success/20' : isLight ? 'bg-ds-emerald-600/10' : 'bg-ds-success/15'}`}>
                     <Icon name="insights" className="text-[18px] text-ds-emerald-400" />
                 </div>
                 <div>
@@ -329,8 +329,8 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                 className={`relative overflow-hidden rounded-[28px] p-5 mb-5 bg-gradient-to-br from-primary/20 to-primary-dark/20 border border-primary/20`}
             >
                 {/* Decorative blobs */}
-                <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-ds-cyan-400/20 to-transparent rounded-bl-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
+                <div className="absolute top-0 end-0 w-28 h-28 bg-gradient-to-bl from-ds-cyan-400/20 to-transparent rounded-es-full pointer-events-none" />
+                <div className="absolute bottom-0 start-0 w-20 h-20 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
                 <div className="flex items-center gap-4 relative z-10">
                     {/* Circular score ring */}
                     <div className="relative w-[68px] h-[68px] shrink-0">
@@ -370,9 +370,9 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
             <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1, type: 'spring', stiffness: 350, damping: 30 }}
                 className={`${card} p-5 mb-5 relative overflow-hidden`}
             >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-ds-fuchsia-500/15 to-transparent rounded-bl-full pointer-events-none" />
+                <div className="absolute top-0 end-0 w-24 h-24 bg-gradient-to-bl from-ds-fuchsia-500/15 to-transparent rounded-es-full pointer-events-none" />
                 <div className="flex items-center mb-3">
-                    <Icon name="auto_awesome" className={`text-[18px] mr-2 ${accentColor}`} />
+                    <Icon name="auto_awesome" className={`text-[18px] me-2 ${accentColor}`} />
                     <h2 className="text-[12px] font-bold tracking-widest uppercase text-[var(--muted-foreground)]">Daily Match Briefing</h2>
                 </div>
                 <p className="text-[16px] leading-relaxed font-semibold mb-3">
@@ -380,10 +380,10 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                 </p>
                 <div className="flex gap-2">
                     <button onClick={() => onNav?.('jobs')} className={`flex items-center px-3 py-1.5 rounded-full text-[12px] font-semibold ${isLight ? 'bg-black/5 text-ds-gray-700' : 'bg-white/8 text-white/70'} active:scale-95`}>
-                        <Icon name="work" className="text-[14px] mr-1.5" />View Jobs
+                        <Icon name="work" className="text-[14px] me-1.5" />View Jobs
                     </button>
                     <button onClick={() => onNav?.('copilot')} className={`flex items-center px-3 py-1.5 rounded-full text-[12px] font-semibold ${followUpColor} ${isLight ? 'bg-black/5' : 'bg-white/8'} active:scale-95`}>
-                        <Icon name="smart_toy" className="text-[14px] mr-1.5" />Ask Copilot
+                        <Icon name="smart_toy" className="text-[14px] me-1.5" />Ask Copilot
                     </button>
                 </div>
             </motion.div>
@@ -393,7 +393,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                 {quickActions.map((action, i) => (
                     <motion.button key={i} variants={itemVariants} whileTap={{ scale: 0.94 }}
                         onClick={() => action.key ? setActiveSheet(action.key) : onNav?.(action.navTo ?? 'jobs')}
-                        className={`flex flex-col text-left p-4 ${theme.platform === 'android' ? 'rounded-[22px]' : 'rounded-[20px]'} bg-gradient-to-br ${action.bg} ${action.glow ? `shadow-lg ${action.glow}` : ''} border ${isLight ? 'border-black/5' : 'border-white/8'} active:brightness-110 transition-all`}
+                        className={`flex flex-col text-start p-4 ${theme.platform === 'android' ? 'rounded-[22px]' : 'rounded-[20px]'} bg-gradient-to-br ${action.bg} ${action.glow ? `shadow-lg ${action.glow}` : ''} border ${isLight ? 'border-black/5' : 'border-white/8'} active:brightness-110 transition-all`}
                     >
                         {/* Icon bubble */}
                         <div className={`w-10 h-10 rounded-2xl bg-gradient-to-br ${action.gradient} flex items-center justify-center mb-3 shadow-md`}>
@@ -432,7 +432,7 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                             </div>
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-center justify-between mb-0.5">
-                                    <h4 className="font-semibold text-[15px] truncate mr-2">{item.role}</h4>
+                                    <h4 className="font-semibold text-[15px] truncate me-2">{item.role}</h4>
                                     <span className={`text-[11px] font-bold px-2 py-0.5 rounded-lg border shrink-0 ${statusStyle}`}>{item.status}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
@@ -454,9 +454,9 @@ export function DashboardView({ card, isLight, isColorful, theme, onNav }: ViewP
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-50">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setActiveSheet(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 max-h-[85vh] overflow-y-auto no-scrollbar ${sheetBg}`}>
+                            className={`absolute bottom-0 start-0 end-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 max-h-[85vh] overflow-y-auto no-scrollbar ${sheetBg}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
-                            <button onClick={() => setActiveSheet(null)} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95 z-10">
+                            <button onClick={() => setActiveSheet(null)} className="absolute top-5 end-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95 z-10">
                                 <Icon name="close" className="text-[16px] opacity-60" />
                             </button>
                             {activeSheet === 'cv' && <CVBuilderSheet isLight={isLight} isColorful={isColorful ?? false} theme={theme} onClose={() => setActiveSheet(null)} />}

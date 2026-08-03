@@ -53,7 +53,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               repeat: Infinity,
               repeatType: "reverse"
             }}
-            className="absolute -top-20 -left-10 md:-left-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-ds-cyan-500/30 to-primary-500/30 blur-sm"
+            className="absolute -top-20 -start-10 md:-start-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-ds-cyan-500/30 to-primary-500/30 blur-sm"
           />
           
           {/* Rotating square decoration */}
@@ -66,7 +66,7 @@ const CreativeHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showP
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute top-10 -right-10 md:-right-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-ds-fuchsia-500/20 to-ds-cyan-500/20 blur-sm"
+            className="absolute top-10 -end-10 md:-end-20 w-20 h-20 md:w-32 md:h-32 rounded-md bg-gradient-to-r from-ds-fuchsia-500/20 to-ds-cyan-500/20 blur-sm"
           />
           
           {/* Main Title with 3D Effect */}

@@ -168,8 +168,8 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
             {/* Colorful ambient mesh - enhanced */}
             {selectedTheme === 'colorful' && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div className="absolute -left-24 -top-24 h-[340px] w-[340px] rounded-full bg-ds-fuchsia-600/25 blur-[100px]" />
-                    <div className="absolute -bottom-24 -right-16 h-[300px] w-[300px] rounded-full bg-ds-violet-600/20 blur-[100px]" />
+                    <div className="absolute -start-24 -top-24 h-[340px] w-[340px] rounded-full bg-ds-fuchsia-600/25 blur-[100px]" />
+                    <div className="absolute -bottom-24 -end-16 h-[300px] w-[300px] rounded-full bg-ds-violet-600/20 blur-[100px]" />
                     <div className="absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]" />
                 </div>
             )}
@@ -316,7 +316,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.08 }}
-                                className={`text-[13px] mb-5 pl-1 ${muted}`}
+                                className={`text-[13px] mb-5 ps-1 ${muted}`}
                             >
                                 Here&apos;s how to get the most from your AI assistant
                             </motion.p>
@@ -385,7 +385,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.08 }}
-                                className={`text-[13px] mb-5 pl-1 ${muted}`}
+                                className={`text-[13px] mb-5 ps-1 ${muted}`}
                             >
                                 Everything you need, in one beautifully designed app
                             </motion.p>
@@ -442,7 +442,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.08 }}
-                                className={`text-[13px] mb-6 pl-1 ${muted}`}
+                                className={`text-[13px] mb-6 ps-1 ${muted}`}
                             >
                                 Pick a theme — you can always change it in your Profile
                             </motion.p>
@@ -466,7 +466,7 @@ export function MobileIntroScreen({ config, theme, onComplete }: MobileIntroScre
                                             }`}
                                             style={selected ? { borderColor: accentColor, backgroundColor: `${accentColor}12` } : {}}
                                         >
-                                            <div className="flex-1 text-left min-w-0">
+                                            <div className="flex-1 text-start min-w-0">
                                                 <div className="flex items-center gap-2 mb-0.5">
                                                     <span style={selected ? { color: accentColor } : undefined}>
                                                         <Icon

@@ -50,7 +50,7 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="fixed left-4 top-1/2 transform -translate-y-1/2 hidden lg:flex flex-col gap-3 z-10"
+          className="fixed start-4 top-1/2 transform -translate-y-1/2 hidden lg:flex flex-col gap-3 z-10"
           role="complementary"
           aria-label={t('blog.aria.socialShare')}
         >

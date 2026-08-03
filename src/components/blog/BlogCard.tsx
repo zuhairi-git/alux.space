@@ -75,7 +75,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                   />
                 </motion.div>
                 {/* Category badge */}
-                <div className="absolute top-4 left-4 z-10">
+                <div className="absolute top-4 start-4 z-10">
                   <Badge variant="gradient">
                     {post.tags[0] || 'Blog'}
                   </Badge>
@@ -170,7 +170,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
           >
             <div className="relative h-full flex flex-col justify-end p-7 z-10">
               {/* Badge */}
-              <div className="absolute top-4 right-4">
+              <div className="absolute top-4 end-4">
                 <Badge variant="gradient" aria-label={`Category: ${post.tags[0] || 'Blog'}`}>
                   {post.tags[0] || 'Blog'}
                 </Badge>
@@ -207,7 +207,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
                   className="flex items-center text-on-dark/60"
                   aria-label={`Reading time: ${post.readTime}`}
                 >
-                  <svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <svg className="w-4 h-4 me-1.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                   </svg>
                   {post.readTime}
@@ -262,7 +262,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode = 'standard' }) => {
             </motion.div>
             
             {/* Category badge */}
-            <div className="absolute top-3 right-3 z-10">
+            <div className="absolute top-3 end-3 z-10">
               <Badge variant="gradient" aria-label={`Category: ${post.tags[0] || 'Blog'}`}>
                 {post.tags[0] || 'Blog'}
               </Badge>

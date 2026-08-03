@@ -38,7 +38,7 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: durationSeconds.ease, delay: delaySeconds.xs }}
-          className="text-left"
+          className="text-start"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] animate-gradient">
@@ -70,11 +70,11 @@ const DesignHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta, showPod
           {quote && (
             <div className="bg-ds-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-ds-gray-700/50">
               <p className="text-lg text-ds-gray-300 italic relative">
-                <span className="absolute -left-4 top-0 text-[var(--accent-text)] text-3xl">&ldquo;</span>
+                <span className="absolute -start-4 top-0 text-[var(--accent-text)] text-3xl">&ldquo;</span>
                 {quote.text}
-                <span className="absolute -bottom-4 right-0 text-[var(--accent-text)] text-3xl">&rdquo;</span>
+                <span className="absolute -bottom-4 end-0 text-[var(--accent-text)] text-3xl">&rdquo;</span>
               </p>
-              <p className="text-[var(--accent-text)] mt-6 text-right">— {quote.author}</p>
+              <p className="text-[var(--accent-text)] mt-6 text-end">— {quote.author}</p>
             </div>
           )}        </motion.div>
       </div>

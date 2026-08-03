@@ -423,15 +423,15 @@ export default function JobSeekingClient() {
                       <div className="mb-4 font-bold text-lg text-primary">{content.objectivesLabel}</div>
                       <ul className="space-y-3">
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Mittaa sovellustietoisuutta ja käyttöä' : 'Gauge app awareness and usage'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Tunnista käyttäjien kipupisteet' : 'Identify user pain points'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Kerää käyttökokemuksen parannusehdotuksia' : 'Gather UX improvement suggestions'}</span>
                         </li>
                       </ul>
@@ -441,19 +441,19 @@ export default function JobSeekingClient() {
                       <div className="mb-4 font-bold text-lg text-primary">{content.methods}</div>
                       <ul className="space-y-3 mb-6">
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Haastattelut (puolistrukturoidut)' : 'Interviews (semi-structured)'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Kyselyt (sekalaiset kysymykset)' : 'Surveys (mixed questions)'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Sovelluksen käytön seuranta' : 'App usage tracking'}</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="mr-2 opacity-60">•</span>
+                          <span className="me-2 opacity-60">•</span>
                           <span className="opacity-80 leading-relaxed">{locale === 'fi' ? 'Temaattinen ja kvantitatiivinen data-analyysi' : 'Thematic and quantitative data analysis'}</span>
                         </li>
                       </ul>
@@ -475,7 +475,7 @@ export default function JobSeekingClient() {
               <div className="theme-card">
                 <div className="theme-card-content p-8">
                   <div className="flex items-center mb-4">
-                    <div className="h-12 w-12 flex items-center justify-center text-primary bg-primary/10 rounded-full mr-4">
+                    <div className="h-12 w-12 flex items-center justify-center text-primary bg-primary/10 rounded-full me-4">
                       <Icon name="route" size="lg" />
                     </div>
                     <h3 className="text-2xl font-bold text-primary">{content.userFlow}</h3>
@@ -544,7 +544,7 @@ export default function JobSeekingClient() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="border-l-2 border-ds-success/30 pl-4">
+                            <div className="border-s-2 border-ds-success/30 ps-4">
                               <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">{locale === 'fi' ? "Tarpeet" : "Needs"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.needs.map((need, i) => (
@@ -553,7 +553,7 @@ export default function JobSeekingClient() {
                               </ul>
                             </div>
 
-                            <div className="border-l-2 border-ds-error/30 pl-4">
+                            <div className="border-s-2 border-ds-error/30 ps-4">
                               <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-error mb-3">{locale === 'fi' ? "Kipupisteet" : "Pain Points"}</h4>
                               <ul className="space-y-1.5">
                                 {persona.painPoints.map((point, i) => (

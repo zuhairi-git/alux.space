@@ -211,7 +211,7 @@ export default function PortfolioClient({ items }: Props) {
                         <MaterialSymbol className="text-sm hidden sm:inline">{tab.icon}</MaterialSymbol>
                         {tab.label}
                       </span>
-                      <span className={`ml-1.5 text-xs tabular-nums ${isActive ? 'opacity-50' : 'opacity-30'}`}>
+                      <span className={`ms-1.5 text-xs tabular-nums ${isActive ? 'opacity-50' : 'opacity-30'}`}>
                         {tab.count}
                       </span>
                       {isActive && (

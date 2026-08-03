@@ -88,7 +88,7 @@ export default function Alert({
 
       {/* Dismiss button */}
       {dismissible && (
-        <Button variant="icon" size="sm" onClick={handleDismiss} aria-label="Dismiss alert" className="shrink-0 -mr-1 -mt-0.5">
+        <Button variant="icon" size="sm" onClick={handleDismiss} aria-label="Dismiss alert" className="shrink-0 -me-1 -mt-0.5">
           <Icon name="close" />
         </Button>
       )}

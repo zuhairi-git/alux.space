@@ -33,7 +33,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
     const pingBgClass = isColorful ? 'bg-primary' : theme.copilot.pingBg;
     const heroGradientClass = isColorful ? 'bg-gradient-to-br from-primary to-primary-dark' : theme.copilot.heroGradient;
     const userBubbleClass = isColorful
-        ? `bg-gradient-to-br from-primary to-primary-dark text-white ${theme.platform === 'ios' ? 'rounded-[22px] rounded-tr-md' : 'rounded-[24px] rounded-tr-md'} shadow-[0_2px_8px_rgba(255,140,66,0.25)]`
+        ? `bg-gradient-to-br from-primary to-primary-dark text-white ${theme.platform === 'ios' ? 'rounded-[22px] rounded-se-md' : 'rounded-[24px] rounded-se-md'} shadow-[0_2px_8px_rgba(255,140,66,0.25)]`
         : theme.copilot.userBubble;
     const defaultMessages: Message[] = [
         {
@@ -104,7 +104,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                         <div className="grid grid-cols-2 gap-3">
                             {suggestedPrompts.map((p, i) => (
                                 <motion.button key={i} whileTap={{ scale: 0.95 }} onClick={() => handleSend(p.prompt)}
-                                    className={`flex flex-col text-left p-3.5 ${promptCardClass}`}
+                                    className={`flex flex-col text-start p-3.5 ${promptCardClass}`}
                                 >
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${promptIconColor}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
@@ -118,7 +118,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                     {messages.map((msg) => (
                         <motion.div key={msg.id} initial={{ opacity: 0, y: 10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} className={`mb-6 flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                             {msg.sender === 'bot' && (
-                                <div className={`mr-3 mt-1 shrink-0 `}>
+                                <div className={`me-3 mt-1 shrink-0 `}>
                                     <Icon name="auto_awesome" className={`text-[16px] text-primary`} />
                                 </div>
                             )}
@@ -128,7 +128,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
                                     <div className="mt-3 pt-3 border-t border-black/5 border-white/10 flex gap-2 overflow-x-auto no-scrollbar pb-1">
                                         {msg.citations.map((cit, i) => (
                                             <div key={i} className={`flex items-center whitespace-nowrap px-2.5 py-1.5 rounded-lg text-[11px] font-semibold ${theme.copilot.citationCard(isLight)}`}>
-                                                <Icon name="work" className={`text-[13px] mr-1.5 ${theme.copilot.citationIcon}`} />
+                                                <Icon name="work" className={`text-[13px] me-1.5 ${theme.copilot.citationIcon}`} />
                                                 <span>{cit.title}</span>
                                             </div>
                                         ))}
@@ -140,7 +140,7 @@ export function CopilotView({ isLight, isColorful, theme }: ViewProps) {
 
                     {isTyping && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start mb-6">
-                            <div className={`mr-3 mt-1 shrink-0`}>
+                            <div className={`me-3 mt-1 shrink-0`}>
                                 <Icon name="auto_awesome" className={`text-[16px] text-primary`} />
                             </div>
                             <div className={`px-5 py-3.5 flex items-center space-x-1.5 w-[72px] h-[48px] ${bb}`}>

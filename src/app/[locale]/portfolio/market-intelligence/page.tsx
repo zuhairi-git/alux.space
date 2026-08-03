@@ -1,6 +1,6 @@
 import MarketIntelligenceClient from '@/components/portfolio/MarketIntelligenceClient';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages } from '@/i18n';
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({
@@ -55,10 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/portfolio/market-intelligence`,
-      languages: {
-        en: `${baseUrl}/en/portfolio/market-intelligence`,
-        fi: `${baseUrl}/fi/portfolio/market-intelligence`,
-      },
+      languages: alternateLanguages(baseUrl, '/portfolio/market-intelligence'),
     },
   };
 }

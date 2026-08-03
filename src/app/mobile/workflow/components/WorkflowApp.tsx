@@ -106,7 +106,7 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>
-                            <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-[2px] ${theme.accent.statusDot(isLight)}`} />
+                            <div className={`absolute -bottom-0.5 -end-0.5 w-3.5 h-3.5 rounded-full border-[2px] ${theme.accent.statusDot(isLight)}`} />
                         </motion.button>
                         <div className="flex flex-col">
                             <AnimatePresence mode="wait">
@@ -142,7 +142,7 @@ export function WorkflowApp({ theme }: WorkflowAppProps) {
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >
                         <Icon name="auto_awesome" className="text-[20px]" />
-                        <span className={`absolute top-[8px] right-[8px] w-[5px] h-[5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-sm' : ''}`} />
+                        <span className={`absolute top-[8px] end-[8px] w-[5px] h-[5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-sm' : ''}`} />
                     </motion.button>
                 </div>
             </header>

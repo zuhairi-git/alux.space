@@ -213,7 +213,7 @@ function formatRegularContent(content: string) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delaySeconds.xs }}
-          className="list-disc pl-6 mb-6 space-y-2"
+          className="list-disc ps-6 mb-6 space-y-2"
         >
           {items.map((item, i) => (
             <li key={i} className="text-foreground">
@@ -234,7 +234,7 @@ function formatRegularContent(content: string) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delaySeconds.xs }}
-          className="list-decimal pl-6 mb-6 space-y-2"
+          className="list-decimal ps-6 mb-6 space-y-2"
         >
           {items.map((item, i) => (
             <li key={i} className="text-foreground">

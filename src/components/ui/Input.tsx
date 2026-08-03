@@ -33,7 +33,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         <div className="relative">
           {leftIcon && (
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-40 pointer-events-none">
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-40 pointer-events-none">
               {leftIcon}
             </span>
           )}
@@ -56,8 +56,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 ? 'border-[var(--color-error)] focus:ring-[var(--color-error)]/30 focus:border-[var(--color-error)]'
                 : 'border-[var(--card-border)] hover:border-[var(--btn-primary-bg)]/40 focus:border-[var(--btn-primary-bg)] focus:ring-[var(--btn-primary-bg)]/25',
               disabled && 'opacity-50 cursor-not-allowed',
-              leftIcon ? 'pl-10' : '',
-              rightIcon ? 'pr-10' : '',
+              leftIcon ? 'ps-10' : '',
+              rightIcon ? 'pe-10' : '',
             ]
               .filter(Boolean)
               .join(' ')}
@@ -65,7 +65,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           />
 
           {rightIcon && (
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-40 pointer-events-none">
+            <span className="absolute end-3 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-40 pointer-events-none">
               {rightIcon}
             </span>
           )}

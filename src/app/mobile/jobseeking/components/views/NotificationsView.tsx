@@ -44,7 +44,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                         <div className={`px-4 py-2 flex items-center gap-2 ${successHeaderClass}`}>
                             <div className="w-1.5 h-1.5 rounded-full bg-ds-success animate-pulse" />
                             <span className="text-[11px] font-bold uppercase tracking-wider">Action Required</span>
-                            <span className={`ml-auto text-[11px] ${mutedTextClass}`}>Just now</span>
+                            <span className={`ms-auto text-[11px] ${mutedTextClass}`}>Just now</span>
                         </div>
                         <div className="p-4">
                             <div className="flex items-start gap-3">
@@ -75,7 +75,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                         <div className={`px-4 py-2 flex items-center gap-2 ${primaryHeaderClass}`}>
                             <Icon name="auto_awesome" className="text-[13px]" />
                             <span className="text-[11px] font-bold uppercase tracking-wider">New AI Match</span>
-                            <span className={`ml-auto text-[11px] ${mutedTextClass}`}>2h ago</span>
+                            <span className={`ms-auto text-[11px] ${mutedTextClass}`}>2h ago</span>
                         </div>
                         <div className="p-4">
                             <div className="flex items-start gap-3">
@@ -102,7 +102,7 @@ export function NotificationsView({ card, isLight, isColorful, theme, onNav }: V
                         <div className={`px-4 py-2 flex items-center gap-2 ${primaryHeaderClass}`}>
                             <Icon name="insights" className="text-[13px]" />
                             <span className="text-[11px] font-bold uppercase tracking-wider">Weekly Insights</span>
-                            <span className={`ml-auto text-[11px] ${mutedTextClass}`}>1d ago</span>
+                            <span className={`ms-auto text-[11px] ${mutedTextClass}`}>1d ago</span>
                         </div>
                         <div className="p-4">
                             <div className="grid grid-cols-3 gap-2 mb-3">

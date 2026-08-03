@@ -91,7 +91,7 @@ export default function Tabs({ tabs, defaultTab, onChange, className = '' }: Tab
               {/* Active indicator */}
               {isActive && (
                 <span
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--btn-primary-bg)] rounded-full"
+                  className="absolute bottom-0 start-0 end-0 h-0.5 bg-[var(--btn-primary-bg)] rounded-full"
                   aria-hidden="true"
                 />
               )}

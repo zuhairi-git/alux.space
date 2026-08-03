@@ -1,21 +1,11 @@
-'use client';
+import type { Metadata } from 'next';
+import LocaleRedirect from '@/components/ui/LocaleRedirect';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+/** Internal portal entry point — never indexed. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
-export default function RootAdminRedirect() {
-    const router = useRouter();
-
-    useEffect(() => {
-        router.replace('/en/portfolio/workflow/admin');
-    }, [router]);
-
-    return (
-        <div className="min-h-screen bg-background flex items-center justify-center">
-            <div className="text-center">
-                <div className="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-ds-gray-400 font-medium">Redirecting to Portal...</p>
-            </div>
-        </div>
-    );
+export default function AdminRedirectPage() {
+  return <LocaleRedirect path="/portfolio/workflow/admin" />;
 }

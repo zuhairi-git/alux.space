@@ -51,10 +51,10 @@ const ImageSection: React.FC<ImageSectionProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         
         {/* Decorative corner accents */}
-        <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-white/30 rounded-tl-md"></div>
-        <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-white/30 rounded-tr-md"></div>
-        <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-white/30 rounded-bl-md"></div>
-        <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-white/30 rounded-br-md"></div>
+        <div className="absolute top-3 start-3 w-6 h-6 border-t-2 border-s-2 border-white/30 rounded-ss-md"></div>
+        <div className="absolute top-3 end-3 w-6 h-6 border-t-2 border-e-2 border-white/30 rounded-se-md"></div>
+        <div className="absolute bottom-3 start-3 w-6 h-6 border-b-2 border-s-2 border-white/30 rounded-es-md"></div>
+        <div className="absolute bottom-3 end-3 w-6 h-6 border-b-2 border-e-2 border-white/30 rounded-ee-md"></div>
       </div>
       
       {caption && (

@@ -424,19 +424,19 @@ function PropsTable({ entry }: { entry: ComponentEntry }) {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="text-left border-b border-[var(--card-border)]">
-            <th className="py-1.5 pr-4 font-medium">Prop</th>
-            <th className="py-1.5 pr-4 font-medium">Type</th>
-            <th className="py-1.5 pr-4 font-medium">Default</th>
+          <tr className="text-start border-b border-[var(--card-border)]">
+            <th className="py-1.5 pe-4 font-medium">Prop</th>
+            <th className="py-1.5 pe-4 font-medium">Type</th>
+            <th className="py-1.5 pe-4 font-medium">Default</th>
             <th className="py-1.5 font-medium">Description</th>
           </tr>
         </thead>
         <tbody>
           {entry.props.map(p => (
             <tr key={p.name} className="border-b border-[var(--card-border)]/60">
-              <td className="py-1.5 pr-4 font-mono text-xs text-primary">{p.name}</td>
-              <td className="py-1.5 pr-4 font-mono text-xs opacity-70">{p.type}</td>
-              <td className="py-1.5 pr-4 text-xs opacity-60">{p.default}</td>
+              <td className="py-1.5 pe-4 font-mono text-xs text-primary">{p.name}</td>
+              <td className="py-1.5 pe-4 font-mono text-xs opacity-70">{p.type}</td>
+              <td className="py-1.5 pe-4 text-xs opacity-60">{p.default}</td>
               <td className="py-1.5 text-xs">{p.description}</td>
             </tr>
           ))}
@@ -452,7 +452,7 @@ function ComponentCard({ entry }: { entry: ComponentEntry }) {
     <div className="theme-card-flex p-5 rounded-xl">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between text-left"
+        className="w-full flex items-center justify-between text-start"
       >
         <div>
           <h4 className="font-semibold text-base">{entry.name}</h4>
@@ -552,17 +552,17 @@ function StateBadgesShowcase() {
       <table className="w-full text-xs border-collapse">
         <thead>
           <tr className="border-b border-[var(--card-border)] bg-[var(--card-from-bg)]">
-            <th className="text-left font-mono font-normal opacity-40 py-3 pr-4 pl-4 w-20" />
+            <th className="text-start font-mono font-normal opacity-40 py-3 pe-4 ps-4 w-20" />
             <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Filled</th>
             <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">Outline</th>
             <th className="font-mono font-normal opacity-40 py-3 px-4 text-center">With dot</th>
-            <th className="text-left font-mono font-normal opacity-40 py-3 pl-4 pr-4">Token stem</th>
+            <th className="text-start font-mono font-normal opacity-40 py-3 ps-4 pe-4">Token stem</th>
           </tr>
         </thead>
         <tbody>
           {states.map(s => (
             <tr key={s.key} className="border-t border-[var(--card-border)]">
-              <td className="py-3 pr-4 pl-4 opacity-60 font-medium">{s.label}</td>
+              <td className="py-3 pe-4 ps-4 opacity-60 font-medium">{s.label}</td>
               {/* Filled — uses exact Badge component, identical to real usage */}
               <td className="py-3 px-4 text-center">
                 <Badge variant={s.key}>{s.label}</Badge>
@@ -584,7 +584,7 @@ function StateBadgesShowcase() {
               <td className="py-3 px-4 text-center">
                 <Badge variant={s.key} dot>{s.dotLabel}</Badge>
               </td>
-              <td className="py-3 pl-4 opacity-35 font-mono text-[10px]">--color-{s.key}-*</td>
+              <td className="py-3 ps-4 opacity-35 font-mono text-[10px]">--color-{s.key}-*</td>
             </tr>
           ))}
         </tbody>
@@ -712,7 +712,7 @@ function TonalPaletteStrip({ role, label, description }: { role: string; label: 
             {/* "40" default marker */}
             {tone === 40 && (
               <span
-                className="absolute top-1 left-0 right-0 text-center text-[7px] font-bold uppercase tracking-widest leading-none select-none"
+                className="absolute top-1 start-0 end-0 text-center text-[7px] font-bold uppercase tracking-widest leading-none select-none"
                 style={{ color: 'rgba(255,255,255,0.55)' }}
               >
                 default
@@ -787,10 +787,10 @@ var(--palette-secondary-70)`}</pre>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left border-b border-[var(--card-border)]">
-                <th className="py-1.5 pr-4 font-medium">Role</th>
-                <th className="py-1.5 pr-4 font-medium">Token prefix</th>
-                <th className="py-1.5 pr-4 font-medium">Light default (tone)</th>
+              <tr className="text-start border-b border-[var(--card-border)]">
+                <th className="py-1.5 pe-4 font-medium">Role</th>
+                <th className="py-1.5 pe-4 font-medium">Token prefix</th>
+                <th className="py-1.5 pe-4 font-medium">Light default (tone)</th>
                 <th className="py-1.5 font-medium">Dark default (tone)</th>
               </tr>
             </thead>
@@ -803,9 +803,9 @@ var(--palette-secondary-70)`}</pre>
                 { role: 'neutral',   prefix: '--palette-neutral-{tone}',   light: '40', dark: '80' },
               ].map(r => (
                 <tr key={r.role} className="border-b border-[var(--card-border)]/60">
-                  <td className="py-1.5 pr-4 font-medium capitalize">{r.role}</td>
-                  <td className="py-1.5 pr-4 font-mono text-xs text-[var(--primary)]">{r.prefix}</td>
-                  <td className="py-1.5 pr-4 text-xs">
+                  <td className="py-1.5 pe-4 font-medium capitalize">{r.role}</td>
+                  <td className="py-1.5 pe-4 font-mono text-xs text-[var(--primary)]">{r.prefix}</td>
+                  <td className="py-1.5 pe-4 text-xs">
                     <span className="inline-flex items-center gap-1.5">
                       <span
                         className="w-3 h-3 rounded-sm border border-[var(--card-border)] inline-block"
@@ -952,9 +952,9 @@ function TextColorsSection() {
       <div className="p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] text-sm opacity-70 leading-relaxed">
         Semantic text-colour tokens — use these instead of raw hex or opacity hacks.
         Three token families:
-        <strong className="opacity-100 ml-1">on-surface</strong> (foreground, muted, accent),
-        <strong className="opacity-100 ml-1">on-coloured</strong> (on-primary, on-dark), and
-        <strong className="opacity-100 ml-1">low-emphasis</strong> (subtle).
+        <strong className="opacity-100 ms-1">on-surface</strong> (foreground, muted, accent),
+        <strong className="opacity-100 ms-1">on-coloured</strong> (on-primary, on-dark), and
+        <strong className="opacity-100 ms-1">low-emphasis</strong> (subtle).
         All resolve correctly across all three themes.
       </div>
 
@@ -963,10 +963,10 @@ function TextColorsSection() {
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b border-[var(--card-border)] bg-[var(--card-from-bg)]">
-              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 w-44">Preview</th>
-              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50">Token</th>
-              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 hidden md:table-cell">Tailwind utility</th>
-              <th className="text-left py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 hidden lg:table-cell">Usage</th>
+              <th className="text-start py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 w-44">Preview</th>
+              <th className="text-start py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50">Token</th>
+              <th className="text-start py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 hidden md:table-cell">Tailwind utility</th>
+              <th className="text-start py-3 px-4 font-medium text-xs uppercase tracking-wider opacity-50 hidden lg:table-cell">Usage</th>
             </tr>
           </thead>
           <tbody>
@@ -1066,7 +1066,7 @@ function TypographySection() {
         <div className="space-y-3">
           {['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'].map(size => (
             <div key={size} className="flex items-baseline gap-4 group">
-              <span className="w-12 text-right text-xs opacity-50 font-mono">{size}</span>
+              <span className="w-12 text-end text-xs opacity-50 font-mono">{size}</span>
               <span style={{ fontSize: `var(--font-size-${size})` }}>
                 The quick brown fox
               </span>
@@ -1087,7 +1087,7 @@ function TypographySection() {
             { label: 'Bold (700)', weight: 'var(--font-bold)' },
           ].map(w => (
             <div key={w.label} className="flex items-baseline gap-4">
-              <span className="w-28 text-right text-xs opacity-50 font-mono">{w.label}</span>
+              <span className="w-28 text-end text-xs opacity-50 font-mono">{w.label}</span>
               <span className="text-lg" style={{ fontWeight: w.weight }}>
                 The quick brown fox jumps over the lazy dog
               </span>
@@ -1147,7 +1147,7 @@ function TextSection() {
       <div className="space-y-4">
         {variants.map(({ variant, label, sample }) => (
           <div key={variant} className="flex items-baseline gap-4 group">
-            <span className="w-20 flex-shrink-0 text-right text-xs font-mono opacity-40">{label}</span>
+            <span className="w-20 flex-shrink-0 text-end text-xs font-mono opacity-40">{label}</span>
             <div className="flex-1 min-w-0">
               <Text variant={variant}>{sample}</Text>
             </div>
@@ -2127,11 +2127,11 @@ function CardsTimelineSection() {
             </p>
           </div>
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 hidden w-px md:block" style={railStyle} />
+            <div className="absolute start-6 top-0 bottom-0 hidden w-px md:block" style={railStyle} />
             <div className="space-y-4">
               {phaseTimeline.map((phase) => (
-                <article key={phase.step} className="relative rounded-2xl border border-[var(--card-border)] bg-[var(--background)]/55 p-5 md:ml-16">
-                  <div className="absolute -left-[4.9rem] top-4 hidden md:flex flex-col items-center gap-2">
+                <article key={phase.step} className="relative rounded-2xl border border-[var(--card-border)] bg-[var(--background)]/55 p-5 md:ms-16">
+                  <div className="absolute -start-[4.9rem] top-4 hidden md:flex flex-col items-center gap-2">
                     <IconSurface
                       name={phase.icon}
                       surfaceSize="md"
@@ -2263,10 +2263,10 @@ function CardsContentSection() {
               </div>
               <div className="text-4xl font-bold leading-none bg-gradient-to-r bg-clip-text text-transparent from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] mb-2">
                 {item.years}
-                <span className="text-base ml-1 text-[var(--muted-foreground)]">yrs</span>
+                <span className="text-base ms-1 text-[var(--muted-foreground)]">yrs</span>
               </div>
               <div className="text-sm font-semibold leading-tight text-foreground">{item.title}</div>
-              <div className="absolute bottom-0 left-[15%] right-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
+              <div className="absolute bottom-0 start-[15%] end-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
             </div>
           ))}
         </div>
@@ -2289,7 +2289,7 @@ function CardsContentSection() {
                 <h4 className="text-base font-semibold mb-1 leading-tight text-foreground">{item.title}</h4>
                 <p className="text-xs leading-relaxed text-[var(--muted-foreground)]">{item.desc}</p>
               </div>
-              <div className="absolute bottom-0 left-[15%] right-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
+              <div className="absolute bottom-0 start-[15%] end-[15%] h-px scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 bg-[var(--primary)]" />
             </div>
           ))}
         </div>
@@ -2666,9 +2666,9 @@ function ChapterDividerSection() {
 <ChapterDivider title="Architecture" icon="architecture" />`}>
       <div className="space-y-6">
         <ChapterDivider title="Getting Started" number={1} />
-        <p className="text-sm opacity-60 pl-4">Section content would go here...</p>
+        <p className="text-sm opacity-60 ps-4">Section content would go here...</p>
         <ChapterDivider title="Architecture" icon="architecture" />
-        <p className="text-sm opacity-60 pl-4">More content...</p>
+        <p className="text-sm opacity-60 ps-4">More content...</p>
       </div>
     </DemoSection>
   );
@@ -2737,7 +2737,7 @@ function DoubleDiamondSection() {
               className="group relative rounded-2xl border border-[var(--card-border)] p-5 transition-transform duration-300 hover:-translate-y-0.5"
               style={{ backgroundImage: phase.surface }}
             >
-              <div className={`mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
+              <div className={`mb-4 ${index % 2 === 0 ? 'text-start' : 'text-end'}`}>
                 <div
                   className="inline-flex h-11 w-11 items-center justify-center rounded-full shadow-lg"
                   style={{ backgroundImage: phase.iconSurface, boxShadow: '0 12px 28px -18px color-mix(in srgb, var(--primary) 45%, transparent)' }}
@@ -2748,8 +2748,8 @@ function DoubleDiamondSection() {
               <h3 className="text-lg font-bold mb-2 text-[var(--foreground)]">{phase.title}</h3>
               <p className="text-sm leading-relaxed opacity-80 text-[var(--foreground)]">{phase.body}</p>
               {index < phases.length - 1 ? (
-                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-0.5 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-30">
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]"></div>
+                <div className="hidden lg:block absolute -end-3 top-1/2 -translate-y-1/2 w-5 h-0.5 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-30">
+                  <div className="absolute end-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]"></div>
                 </div>
               ) : null}
             </article>
@@ -3021,9 +3021,9 @@ function ConventionsSection() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left border-b border-[var(--card-border)]">
-                <th className="py-1.5 pr-4 font-medium">Context</th>
-                <th className="py-1.5 pr-4 font-medium">Use</th>
+              <tr className="text-start border-b border-[var(--card-border)]">
+                <th className="py-1.5 pe-4 font-medium">Context</th>
+                <th className="py-1.5 pe-4 font-medium">Use</th>
                 <th className="py-1.5 font-medium">Avoid</th>
               </tr>
             </thead>
@@ -3037,8 +3037,8 @@ function ConventionsSection() {
               ].map(([ctx, use, avoid]) => (
               /* eslint-enable design-system/no-hardcoded-colors */
                 <tr key={ctx} className="border-b border-[var(--card-border)]/60">
-                  <td className="py-1.5 pr-4 font-sans text-sm">{ctx}</td>
-                  <td className="py-1.5 pr-4 text-[var(--color-success)]">{use}</td>
+                  <td className="py-1.5 pe-4 font-sans text-sm">{ctx}</td>
+                  <td className="py-1.5 pe-4 text-[var(--color-success)]">{use}</td>
                   <td className="py-1.5 text-[var(--color-error)] line-through opacity-70">{avoid}</td>
                 </tr>
               ))}

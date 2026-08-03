@@ -8,7 +8,7 @@ import BackToTop from "@/components/ui/BackToTop";
 import TranslationBadge from "@/components/ui/TranslationBadge";
 import Footer from "@/components/Footer";
 import SkipLinks from "@/components/ui/SkipLinks";
-import { i18n } from '../i18n';
+import { i18n, getLocaleConfig } from '../i18n';
 import { AnalyticsProvider } from "../../seo/AnalyticsProvider";
 import SmoothMotionProvider from "@/components/SmoothMotionProvider";
 import { structuredDataGenerator } from "../../seo/structured-data";
@@ -37,94 +37,73 @@ const tajawal = Tajawal({
   display: 'swap',
 });
 
-export async function generateMetadata({ params }: { params: { locale?: string } }): Promise<Metadata> {
-  const locale = params.locale || i18n.defaultLocale;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
-  const localeSpecificMetadata = {
-    en: {
-      title: 'Ali Al-Zuhairi - Product Owner & Design Leader',
-      description: 'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation. Based in Helsinki, Finland.',
-      keywords: 'Product Owner, Design Leader, UX Design, UI Design, Agile, Scrum, Helsinki, Finland, Digital Innovation, User Experience, Design Thinking',
-    },
-    fi: {
-      title: 'Ali Al-Zuhairi - Tuoteomistaja & Design-johtaja',
-      description: 'Tuoteomistaja ja design-johtaja, jolla on asiantuntemusta UX-suunnittelussa, ketterissä menetelmissä ja luovassa innovaatiossa. Toimii Helsingissä, Suomessa.',
-      keywords: 'Tuoteomistaja, Design-johtaja, UX-suunnittelu, UI-suunnittelu, Agile, Scrum, Helsinki, Suomi, Digitaalinen innovaatio, Käyttäjäkokemus, Muotoilumenetelmät',
-    }
-  };
-
-  const metadata = localeSpecificMetadata[locale as keyof typeof localeSpecificMetadata] || localeSpecificMetadata.en;
-
-  const alternateLanguages = i18n.locales.reduce((acc, lang) => {
-    acc[lang] = `${baseUrl}/${lang}`;
-    return acc;
-  }, {} as Record<string, string>);
-  return {
-    metadataBase: new URL(baseUrl),
-    title: {
-      default: metadata.title,
-      template: `%s | ${metadata.title.split(' - ')[0]}`
-    },
-    description: metadata.description,
-    keywords: metadata.keywords,
-    authors: [{ name: 'Ali Al-Zuhairi', url: baseUrl }],
-    creator: 'Ali Al-Zuhairi',
-    robots: {
+/**
+ * Locale-neutral document defaults.
+ *
+ * This layout sits above the [locale] segment and therefore has no access to
+ * the active locale — anything language-specific (title, description, OG,
+ * canonical, hreflang) belongs in src/app/[locale]/layout.tsx or the individual
+ * pages, which do know it. Deliberately no `alternates.canonical` here: a
+ * canonical set on the root layout is inherited by every page that doesn't
+ * override it, which would point unrelated pages at the homepage.
+ */
+export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Ali Al-Zuhairi - Product Owner & Design Leader',
+    template: '%s | Ali Al-Zuhairi',
+  },
+  description:
+    'Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation. Based in Helsinki, Finland.',
+  authors: [{ name: 'Ali Al-Zuhairi', url: baseUrl }],
+  creator: 'Ali Al-Zuhairi',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
-    icons: {
-      icon: [
-        { url: '/favicon.ico?v=2', sizes: 'any' },
-        { url: '/favicon.png?v=2', type: 'image/png' }
-      ],
-      apple: '/favicon.png?v=2',
-      shortcut: '/favicon.ico?v=2',
-    },
-    openGraph: {
-      title: metadata.title,
-      description: metadata.description,
-      type: 'website',
-      url: `${baseUrl}/${locale}`,
-      siteName: 'Ali Al-Zuhairi',
-      locale: locale === 'en' ? 'en_US' : 'fi_FI',
-      alternateLocale: i18n.locales.filter(l => l !== locale).map(l =>
-        l === 'en' ? 'en_US' : 'fi_FI'
-      ), images: [
-        {
-          url: `${baseUrl}/images/main.jpg`,
-          width: 1200,
-          height: 630,
-          alt: metadata.title,
-          type: 'image/jpeg'
-        }
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: metadata.title,
-      description: metadata.description,
-      creator: '@alialzuhairi',
-      site: '@alialzuhairi',
-      images: [`${baseUrl}/images/main.jpg`],
-    },
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages: alternateLanguages,
-    },
-    verification: {
-      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-    },
-  };
-}
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=2', sizes: 'any' },
+      { url: '/favicon.png?v=2', type: 'image/png' },
+    ],
+    apple: '/favicon.png?v=2',
+    shortcut: '/favicon.ico?v=2',
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+};
+
+/**
+ * Pre-paint locale bootstrap.
+ *
+ * Static export means there is no middleware and no request-time render, so the
+ * <html> element below can't be given lang/dir from the route. `next build`
+ * bakes the correct values into every emitted file (scripts/inject-html-lang.js);
+ * this script covers `next dev` and any client-side navigation, and runs before
+ * first paint so an RTL locale never flashes LTR.
+ */
+const localeDirectionMap = Object.fromEntries(
+  i18n.locales.map((locale) => {
+    const config = getLocaleConfig(locale);
+    return [locale, [config.htmlLang, config.dir]];
+  })
+);
+
+const localeBootstrapScript = `(function(){try{var m=${JSON.stringify(
+  localeDirectionMap
+)},s=location.pathname.split("/").filter(Boolean)[0],c=m[s]||m[${JSON.stringify(
+  i18n.defaultLocale
+)}];var d=document.documentElement;d.setAttribute("lang",c[0]);d.setAttribute("dir",c[1]);}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -137,8 +116,14 @@ export default function RootLayout({
   });
 
   return (
+    // lang/dir are intentionally not set here — see localeBootstrapScript above.
+    // suppressHydrationWarning keeps React quiet about the attributes the build
+    // step and the bootstrap script write onto this element.
     <html suppressHydrationWarning>
       <head>
+        {/* Blocking script: resolve locale from the URL and set lang/dir BEFORE
+            first paint, so RTL locales never flash left-to-right. */}
+        <script dangerouslySetInnerHTML={{ __html: localeBootstrapScript }} />
         {/* Blocking script: detect mobile + reduced-motion BEFORE first paint.
             Sets window.__ALUX_DISABLE_ANIM which SmoothMotionProvider reads
             via useSyncExternalStore — zero-gap, no flicker.

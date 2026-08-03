@@ -58,7 +58,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
                 onError={() => setImageError(true)}
               />
               {audio.featured && (
-                <div className="absolute top-1 right-1">
+                <div className="absolute top-1 end-1">
                   <MaterialSymbol className="text-ds-gold-400 text-sm">star</MaterialSymbol>
                 </div>
               )}
@@ -123,7 +123,7 @@ const AudioCard: React.FC<AudioCardProps> = ({
 
           {/* Featured Badge — on image */}
           {audio.featured && (
-            <div className="absolute top-3 right-3">
+            <div className="absolute top-3 end-3">
               <Badge variant="glass">
                 <MaterialSymbol className="text-sm leading-none">star</MaterialSymbol>
                 Featured

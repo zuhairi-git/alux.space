@@ -76,7 +76,7 @@ const BackToTop: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             whileFocus={{ scale: 1.1 }}
-            className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-br from-gradient-start to-gradient-mid text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
+            className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-br from-gradient-start to-gradient-mid text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
             aria-label={text.label}
             title={text.label}
             type="button"

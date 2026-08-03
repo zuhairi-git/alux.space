@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 @import "../design-system/tokens.css";
@@ -11,10 +10,29 @@
    tokens file instead.
    ------------------------------------------------------- */
 
+/* -------------------------------------------------------
+   Typeface selection is locale-driven.
+
+   Poppins and Roboto have no Arabic glyphs, so an Arabic page styled with them
+   silently falls back to whatever the OS picks — inconsistent and usually ugly.
+   `:lang()` reads the <html lang> attribute, which is set at build time by
+   scripts/inject-html-lang.js and kept current by LanguageContext, so the right
+   family is in effect from first paint with no JS branching in components.
+   ------------------------------------------------------- */
+:root {
+  --font-body: var(--font-roboto);
+  --font-heading: var(--font-poppins);
+}
+
+:root:lang(ar) {
+  --font-body: var(--font-tajawal);
+  --font-heading: var(--font-tajawal);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-roboto);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -23,7 +41,7 @@ body {
 /* Base heading element styles — sit in @layer base so Tailwind utilities still win */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-poppins);
+    font-family: var(--font-heading);
     line-height: var(--leading-tight);
     letter-spacing: var(--ls-tight);
     color: var(--foreground);
@@ -1530,4 +1548,74 @@ html[data-reduce-motion] [style*="opacity"] {
 
 .animation-delay-6000 {
   animation-delay: 6s;
+}
+/* -------------------------------------------------------
+   RTL support
+
+   Layout flipping is handled by CSS logical properties — the Tailwind
+   `ms-/me-`, `ps-/pe-`, `start-/end-`, `text-start/text-end`, `border-s/border-e`
+   and `rounded-s/rounded-e` utilities all mirror automatically from <html dir>.
+   Prefer those over `ml-/mr-`, `left-/right-`, `text-left/text-right` etc.
+
+   What logical properties can NOT flip is everything below: glyphs that encode a
+   direction, and transforms written in physical pixels.
+   ------------------------------------------------------- */
+
+/* Directional glyphs must mirror, or "next" points backwards in Arabic.
+   Names are the resolved Font Awesome glyphs from src/components/ui/Icon.tsx. */
+[dir="rtl"] .fa-arrow-left,
+[dir="rtl"] .fa-arrow-right,
+[dir="rtl"] .fa-chevron-left,
+[dir="rtl"] .fa-chevron-right,
+[dir="rtl"] .fa-arrow-right-from-bracket,
+[dir="rtl"] .fa-arrow-up-right-from-square,
+[dir="rtl"] .fa-magnifying-glass-arrow-right,
+[dir="rtl"] .fa-right-left,
+[dir="rtl"] .fa-quote-left,
+[dir="rtl"] .fa-quote-right {
+  transform: scaleX(-1);
+}
+
+/* Glyphs that must NOT mirror even though their name contains a direction:
+   rotational icons read the same either way, and mirroring them inverts the
+   meaning (undo becomes redo). */
+[dir="rtl"] .fa-clock-rotate-left,
+[dir="rtl"] .fa-rotate-left,
+[dir="rtl"] .fa-arrows-rotate {
+  transform: none;
+}
+
+/* Escape hatches for the rare case where content must keep a fixed direction
+   (code samples, phone numbers, URLs) or must mirror manually. */
+.force-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.force-rtl {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Code and preformatted text stay left-to-right inside RTL prose — reversing a
+   snippet makes it unreadable. */
+[dir="rtl"] pre,
+[dir="rtl"] code,
+[dir="rtl"] kbd,
+[dir="rtl"] samp {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+/* Progress/scroll indicators are anchored with physical `left` by several
+   components; anchor them to the inline start instead. */
+[dir="rtl"] .progress-bar-track,
+[dir="rtl"] .progress-bar-fill {
+  left: auto;
+  right: 0;
 }

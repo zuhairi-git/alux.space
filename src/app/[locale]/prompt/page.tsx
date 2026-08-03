@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
-import PromptPageContent from '../../prompt/page';
+import { i18n, alternateLanguages } from '@/i18n';
+import PromptPageContent from '@/components/prompt/PromptGallery';
 
 // Required for static site generation with internationalized routes
 export function generateStaticParams() {
@@ -29,10 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: metadata.description,
     alternates: {
       canonical: `${baseUrl}/${locale}/prompt`,
-      languages: i18n.locales.reduce((acc, lang) => {
-        acc[lang] = `${baseUrl}/${lang}/prompt`;
-        return acc;
-      }, {} as Record<string, string>),
+      languages: alternateLanguages(baseUrl, '/prompt'),
     }
   };
 }

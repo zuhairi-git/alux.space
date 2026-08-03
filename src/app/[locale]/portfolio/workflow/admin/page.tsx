@@ -134,10 +134,10 @@ export default function PortalPanel() {
 
     const bg = 'bg-background text-foreground';
     const sidebarBg = isLight
-        ? 'bg-white/40 backdrop-blur-3xl border-r border-white/60'
+        ? 'bg-white/40 backdrop-blur-3xl border-e border-white/60'
         : isColorful
-            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-r border-primary/30 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]'
-            : 'bg-white/[0.02] backdrop-blur-3xl border-r border-white/10 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]';
+            ? 'bg-[var(--color-colorful-bg)]/80 backdrop-blur-3xl border-e border-primary/30 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]'
+            : 'bg-white/[0.02] backdrop-blur-3xl border-e border-white/10 shadow-[2px_0_8px_0_var(--sidebar-edge-shadow-color)]';
     const headerBg = isLight
         ? 'bg-white/40 backdrop-blur-2xl border-b border-white/60'
         : isColorful
@@ -179,7 +179,7 @@ export default function PortalPanel() {
             </AnimatePresence>
 
             {/* Desktop Sidebar */}
-            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[80px]' : 'w-[280px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-500 fixed left-0 top-0 h-screen z-40`}>
+            <aside className={`hidden md:flex ${sidebarCollapsed ? 'w-[80px]' : 'w-[280px]'} ${sidebarBg} flex-col shrink-0 transition-all duration-500 fixed start-0 top-0 h-screen z-40`}>
                 <div className={`flex items-center h-20 px-5 ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
                     {!sidebarCollapsed && (
                         <div className="flex items-center space-x-2">
@@ -209,7 +209,7 @@ export default function PortalPanel() {
                                 {active && (
                                     <motion.div layoutId="activeNav" className={`absolute inset-0 ${isColorful ? 'bg-primary/20 border border-primary/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
                                 )}
-                                <Icon name={s.icon} className={`text-[22px] ${sidebarCollapsed ? '' : 'mr-3'} ${active ? (isColorful ? 'text-primary' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
+                                <Icon name={s.icon} className={`text-[22px] ${sidebarCollapsed ? '' : 'me-3'} ${active ? (isColorful ? 'text-primary' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
                                 {!sidebarCollapsed && <span className="relative z-10">{s.label}</span>}
                             </button>
                         );
@@ -217,7 +217,7 @@ export default function PortalPanel() {
                 </nav>
                 <div className={`px-3 py-4 border-t ${isLight ? 'border-ds-gray-200/60' : isColorful ? 'border-primary/20' : 'border-white/5'}`}>
                     <a href="../" className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-0' : 'px-4'} py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-accent/70 hover:bg-primary/10' : isLight ? 'text-ds-gray-500 hover:bg-white/50' : 'text-ds-gray-500 hover:bg-white/5'}`}>
-                        <Icon name="arrow_back" className={`text-[20px] ${sidebarCollapsed ? '' : 'mr-3'} opacity-60 group-hover:opacity-100 transition-opacity`} />
+                        <Icon name="arrow_back" className={`text-[20px] ${sidebarCollapsed ? '' : 'me-3'} opacity-60 group-hover:opacity-100 transition-opacity`} />
                         {!sidebarCollapsed && <span>Back to Case Study</span>}
                     </a>
                 </div>
@@ -239,7 +239,7 @@ export default function PortalPanel() {
                             animate={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className={`fixed inset-y-0 left-0 z-50 w-[280px] ${sidebarBg} flex flex-col md:hidden`}
+                            className={`fixed inset-y-0 start-0 z-50 w-[280px] ${sidebarBg} flex flex-col md:hidden`}
                         >
                             <div className="flex items-center justify-between h-20 px-5">
                                 <div className="flex items-center space-x-2">
@@ -266,7 +266,7 @@ export default function PortalPanel() {
                                             {active && (
                                                 <motion.div layoutId="activeNavMobile" className={`absolute inset-0 ${isColorful ? 'bg-primary/20 border border-primary/30' : isLight ? 'bg-white/80 border border-white' : 'bg-primary/20 border border-[var(--primary)]/20'} rounded-2xl -z-10`} />
                                             )}
-                                            <Icon name={s.icon} className={`text-[22px] mr-3 ${active ? (isColorful ? 'text-primary' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
+                                            <Icon name={s.icon} className={`text-[22px] me-3 ${active ? (isColorful ? 'text-primary' : 'text-accent') : 'opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all'}`} />
                                             <span className="relative z-10">{s.label}</span>
                                         </button>
                                     );
@@ -274,7 +274,7 @@ export default function PortalPanel() {
                             </nav>
                             <div className={`px-3 py-4 border-t ${isLight ? 'border-ds-gray-200/60' : isColorful ? 'border-primary/20' : 'border-white/5'}`}>
                                 <a href="../" onClick={() => setMobileSidebarOpen(false)} className={`w-full flex items-center px-4 py-3 rounded-2xl transition-all duration-300 text-[13px] font-medium group ${isColorful ? 'text-accent/70 hover:bg-primary/10' : isLight ? 'text-ds-gray-500 hover:bg-white/50' : 'text-ds-gray-500 hover:bg-white/5'}`}>
-                                    <Icon name="arrow_back" className="text-[20px] mr-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                    <Icon name="arrow_back" className="text-[20px] me-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                                     <span>Back to Case Study</span>
                                 </a>
                             </div>
@@ -284,11 +284,11 @@ export default function PortalPanel() {
             </AnimatePresence>
 
             {/* Main Content */}
-            <div className={`flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0 relative z-10 ${sidebarCollapsed ? 'md:ml-[80px]' : 'md:ml-[280px]'}`}>
+            <div className={`flex-1 flex flex-col min-h-screen overflow-x-hidden min-w-0 relative z-10 ${sidebarCollapsed ? 'md:ms-[80px]' : 'md:ms-[280px]'}`}>
                 {/* Top Bar */}
-                <header className={`h-20 flex items-center justify-between px-5 md:px-10 fixed top-0 left-0 right-0 z-30 ${sidebarCollapsed ? 'md:left-[80px]' : 'md:left-[280px]'} ${headerBg}`}>
+                <header className={`h-20 flex items-center justify-between px-5 md:px-10 fixed top-0 start-0 end-0 z-30 ${sidebarCollapsed ? 'md:start-[80px]' : 'md:start-[280px]'} ${headerBg}`}>
                     <div className="flex items-center">
-                        <button onClick={() => setMobileSidebarOpen(true)} aria-label="Open navigation" className={`md:hidden mr-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
+                        <button onClick={() => setMobileSidebarOpen(true)} aria-label="Open navigation" className={`md:hidden me-4 w-10 h-10 flex items-center justify-center rounded-2xl ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                             <Icon name="menu" className="text-xl" />
                         </button>
                         <h1 className="text-xl md:text-2xl font-black capitalize tracking-tight">{activeSection.replace('-', ' ')}</h1>
@@ -304,23 +304,23 @@ export default function PortalPanel() {
                         {/* AI Copilot — mobile only, replaces floating button */}
                         <motion.button onClick={() => setShowCopilot(true)} aria-label="Open AI Copilot" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="relative flex md:hidden items-center justify-center w-10 h-10 rounded-2xl overflow-hidden transition-all bg-gradient-to-br from-[var(--primary)] to-[var(--gradient-mid)] shadow-lg shadow-[var(--primary)]/30">
                             <Icon name="auto_awesome" className="text-xl text-white" />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-ds-gold-400 rounded-full animate-pulse" />
+                            <span className="absolute top-2 end-2 w-2 h-2 bg-ds-gold-400 rounded-full animate-pulse" />
                         </motion.button>
                         <div className="relative">
                             <motion.button onClick={toggleNotifications} aria-label="Notifications" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className={`relative w-10 h-10 rounded-2xl flex items-center justify-center ${isLight ? 'bg-white/60 hover:bg-white shadow-sm' : isColorful ? 'bg-[var(--color-colorful-bg)]/80 hover:bg-[var(--color-colorful-bg)] border border-primary/30 text-accent' : 'bg-white/5 hover:bg-white/10'} transition-all`}>
                                 <Icon name="notifications" className="text-xl opacity-70" />
-                                {unreadNotifications > 0 && <span className={`absolute top-2 right-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-primary' : 'bg-[var(--primary)]'}`} />}
+                                {unreadNotifications > 0 && <span className={`absolute top-2 end-2 w-2.5 h-2.5 border-2 border-transparent rounded-full animate-pulse ${isColorful ? 'bg-primary' : 'bg-[var(--primary)]'}`} />}
                             </motion.button>
                             <AnimatePresence>
                                 {showNotifications && (
-                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] left-3 right-3 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-ds-gray-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={notificationsRef} initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} className={`fixed top-[5rem] start-3 end-3 sm:absolute sm:start-auto sm:end-0 sm:top-full sm:mt-2 sm:w-[22rem] sm:max-w-[22rem] rounded-3xl shadow-2xl overflow-hidden z-[60] border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-ds-gray-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
                                         <div className={`p-4 border-b flex items-center justify-between ${isLight ? 'border-ds-gray-100' : 'border-white/10'}`}>
                                             <h3 className="font-bold">Notifications</h3>
                                             <button onClick={markAllNotificationsAsRead} className="text-xs font-bold opacity-70 hover:opacity-100 transition-opacity">Mark all read</button>
                                         </div>
                                         <div className="max-h-80 overflow-y-auto p-2 space-y-1">
                                             {notifications.map(item => (
-                                                <button key={item.id} onClick={() => markNotificationAsRead(item.id)} className={`w-full text-left p-3 rounded-2xl transition-all ${item.read ? (isLight ? 'hover:bg-ds-gray-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5') : (isLight ? 'bg-primary/5 hover:bg-primary/10' : isColorful ? 'bg-primary/15 hover:bg-primary/20' : 'bg-primary/10 hover:bg-primary/15')}`}>
+                                                <button key={item.id} onClick={() => markNotificationAsRead(item.id)} className={`w-full text-start p-3 rounded-2xl transition-all ${item.read ? (isLight ? 'hover:bg-ds-gray-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5') : (isLight ? 'bg-primary/5 hover:bg-primary/10' : isColorful ? 'bg-primary/15 hover:bg-primary/20' : 'bg-primary/10 hover:bg-primary/15')}`}>
                                                     <div className="flex items-start justify-between gap-3">
                                                         <div>
                                                             <p className="text-sm font-bold">{item.title}</p>
@@ -343,14 +343,14 @@ export default function PortalPanel() {
                             </motion.button>
                             <AnimatePresence>
                                 {showProfileMenu && (
-                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute right-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-ds-gray-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
+                                    <motion.div ref={profileMenuRef} initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} className={`absolute end-0 mt-3 w-64 rounded-3xl shadow-2xl overflow-hidden z-50 border backdrop-blur-3xl ${isLight ? 'bg-white/90 border-white shadow-ds-gray-200/50' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-primary/30 shadow-primary/30 text-accent' : 'bg-[var(--color-dark-3)]/90 border-white/10 shadow-black/50'}`}>
                                             <div className={`p-5 border-b ${isLight ? 'border-ds-gray-100' : isColorful ? 'border-primary/30' : 'border-white/5'}`}>
                                                 <p className="font-bold text-base">Ali Al-Zuhairi</p>
                                                 <p className="text-xs font-medium opacity-60 mt-1">admin@alux.space</p>
                                             </div>
                                             <div className="p-3 space-y-1">
                                                 <button onClick={() => { setActiveSection('settings'); setShowProfileMenu(false); }} className={`w-full flex items-center px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isLight ? 'hover:bg-ds-gray-50' : isColorful ? 'hover:bg-primary/10' : 'hover:bg-white/5'}`}>
-                                                    <Icon name="settings" className={`mr-3 text-xl ${isLight ? 'text-ds-gray-400' : isColorful ? 'text-accent/70' : 'text-ds-gray-400'}`} />
+                                                    <Icon name="settings" className={`me-3 text-xl ${isLight ? 'text-ds-gray-400' : isColorful ? 'text-accent/70' : 'text-ds-gray-400'}`} />
                                                     Settings
                                                 </button>
                                                 <div className={`px-3 py-3 rounded-2xl ${isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-primary/5 border border-primary/30' : 'bg-white/5'}`}>
@@ -415,7 +415,7 @@ export default function PortalPanel() {
                                             setShowSearch(false);
                                             setSearchQuery('');
                                         }}
-                                        className={`w-full text-left p-3 rounded-2xl flex items-center justify-between transition-colors ${isLight ? 'hover:bg-ds-gray-100' : isColorful ? 'hover:bg-primary-900/40' : 'hover:bg-white/10'}`}
+                                        className={`w-full text-start p-3 rounded-2xl flex items-center justify-between transition-colors ${isLight ? 'hover:bg-ds-gray-100' : isColorful ? 'hover:bg-primary-900/40' : 'hover:bg-white/10'}`}
                                     >
                                         <div className="flex items-center gap-3">
                                             <Icon name={section.icon} className="text-lg opacity-70" />
@@ -435,7 +435,7 @@ export default function PortalPanel() {
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowCopilot(true)}
-                className="hidden md:block fixed bottom-24 right-6 w-16 h-16 z-50 group overflow-visible"
+                className="hidden md:block fixed bottom-24 end-6 w-16 h-16 z-50 group overflow-visible"
             >
                 <span className={`absolute inset-0 rounded-[1.6rem] opacity-40 blur-xl group-hover:opacity-60 transition-opacity duration-500 animate-pulse bg-gradient-to-r ${aiGradientGlow}`} />
                 <AIStamp isLight={isLight} size="lg" className="relative shadow-2xl" />
@@ -457,17 +457,17 @@ export default function PortalPanel() {
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-l border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-l border-primary/30 text-accent' : 'bg-[var(--color-dark-1)]/80 border-l border-white/10'}`}
+                            className={`w-full sm:max-w-md h-full shadow-2xl flex flex-col relative backdrop-blur-3xl ${isLight ? 'bg-white/80 border-s border-white' : isColorful ? 'bg-[var(--color-colorful-bg)]/90 border-s border-primary/30 text-accent' : 'bg-[var(--color-dark-1)]/80 border-s border-white/10'}`}
                         >
                             <div className={`flex items-center justify-between p-5 md:p-6 border-b relative overflow-hidden z-10 ${isLight ? 'border-ds-gray-200/50' : 'border-white/10'}`}>
-                                <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
+                                <div className={`absolute top-0 start-0 w-full h-1.5 bg-gradient-to-r ${aiGradientStrong}`} />
                                 <div className="flex items-center space-x-4">
                                     <div className="w-10 h-10 flex items-center justify-center text-[var(--primary)]">
                                         <Icon name="auto_awesome" className="text-3xl" />
                                     </div>
                                     <div>
                                         <h3 className={`font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${aiGradientSoft}`}>Copilot</h3>
-                                        <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-ds-success mr-2 animate-pulse shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.8)]" /> Online & Ready</p>
+                                        <p className="text-xs font-medium opacity-60 flex items-center mt-1"><span className="w-2 h-2 rounded-full bg-ds-success me-2 animate-pulse shadow-[0_0_8px_rgb(var(--color-success-rgb)_/_0.8)]" /> Online & Ready</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
@@ -487,11 +487,11 @@ export default function PortalPanel() {
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} key={i} className={`flex flex-col ${h.role === 'user' ? 'items-end' : 'items-start'} relative z-10`}>
                                         <div className={`flex w-full ${h.role === 'user' ? 'items-end justify-end' : 'items-start justify-start'}`}>
                                             {h.role === 'ai' && (
-                                                <AIStamp isLight={isLight} size="md" variant="secondary" className="mr-3 mt-1" />
+                                                <AIStamp isLight={isLight} size="md" variant="secondary" className="me-3 mt-1" />
                                             )}
-                                            <div className={`flex flex-col ${h.role === 'user' ? 'items-end ml-auto' : 'items-start'}`}>
-                                                {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ml-1 tracking-wider uppercase">Portal AI</span>}
-                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-br-sm shadow-[var(--primary)]/20` : isLight ? 'bg-white border border-ds-gray-100 text-ds-gray-800 rounded-bl-sm shadow-ds-gray-200/50' : 'bg-white/5 border border-white/10 text-ds-gray-200 rounded-bl-sm shadow-black/50 backdrop-blur-xl'} relative`}>
+                                            <div className={`flex flex-col ${h.role === 'user' ? 'items-end ms-auto' : 'items-start'}`}>
+                                                {h.role === 'ai' && <span className="text-[11px] font-bold opacity-50 mb-1.5 ms-1 tracking-wider uppercase">Portal AI</span>}
+                                                <div className={`max-w-[85%] p-4 rounded-3xl text-[14px] font-medium leading-relaxed shadow-sm ${h.role === 'user' ? `bg-gradient-to-r ${aiGradientSoft} text-white rounded-ee-sm shadow-[var(--primary)]/20` : isLight ? 'bg-white border border-ds-gray-100 text-ds-gray-800 rounded-es-sm shadow-ds-gray-200/50' : 'bg-white/5 border border-white/10 text-ds-gray-200 rounded-es-sm shadow-black/50 backdrop-blur-xl'} relative`}>
                                                     {h.msg}
                                                     {h.role === 'ai' && i === copilotHistory.length - 1 && (
                                                         <div className="flex items-center space-x-3 mt-4 pt-3 border-t border-current/10">
@@ -514,7 +514,7 @@ export default function PortalPanel() {
                                             { icon: 'security', label: 'Audit recent admin actions', color: 'text-[var(--color-cobalt-700)]', bg: 'bg-[var(--color-cobalt-700)]/10' },
                                             { icon: 'speed', label: 'Optimize query performance', color: 'text-ds-warning', bg: 'bg-ds-gold-600/10' }
                                         ].map(opt => (
-                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-left rounded-2xl transition-all duration-300 ${isLight ? `bg-white/60 border border-white ${aiHoverBorder} hover:shadow-lg` : `bg-white/5 border border-white/5 ${isColorful ? 'hover:border-primary/50' : 'hover:border-[var(--primary)]/50'} hover:bg-white/10`} text-[14px] font-medium backdrop-blur-xl`}>
+                                            <button key={opt.label} onClick={() => { setCopilotMsg(opt.label); }} className={`flex items-center space-x-4 p-4 text-start rounded-2xl transition-all duration-300 ${isLight ? `bg-white/60 border border-white ${aiHoverBorder} hover:shadow-lg` : `bg-white/5 border border-white/5 ${isColorful ? 'hover:border-primary/50' : 'hover:border-[var(--primary)]/50'} hover:bg-white/10`} text-[14px] font-medium backdrop-blur-xl`}>
                                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${opt.bg} ${opt.color}`}>
                                                     <Icon name={opt.icon} className="text-xl" />
                                                 </div>
@@ -665,9 +665,9 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                     <div className="relative h-52">
                         {/* Horizontal grid lines */}
                         {[25, 50, 75].map(pct => (
-                            <div key={pct} className="absolute left-0 right-0 flex items-center" style={{ bottom: `${pct}%` }}>
+                            <div key={pct} className="absolute start-0 end-0 flex items-center" style={{ bottom: `${pct}%` }}>
                                 <div className={`w-full h-px ${isLight ? 'bg-ds-gray-100' : isColorful ? 'bg-orange-500/[0.07]' : 'bg-white/[0.05]'}`} />
-                                <span className={`absolute right-0 text-[10px] font-medium -translate-y-3 ${isLight ? 'text-ds-gray-300' : 'text-white/20'}`}>{pct}%</span>
+                                <span className={`absolute end-0 text-[10px] font-medium -translate-y-3 ${isLight ? 'text-ds-gray-300' : 'text-white/20'}`}>{pct}%</span>
                             </div>
                         ))}
                         {/* Bars */}
@@ -739,7 +739,7 @@ function DashboardSection({ card, isLight, isColorful = false }: { card: string,
                         <div className="flex-1 w-full space-y-3">
                             {[{ label: 'Sprint Queries', pct: '35%', color: 'bg-[var(--primary)]' }, { label: 'Design Reviews', pct: '25%', color: 'bg-primary-dark' }, { label: 'Analytics', pct: '20%', color: 'bg-ds-gold-400' }, { label: 'General', pct: '20%', color: 'bg-ds-pink-400' }].map(s => (
                                 <motion.div key={s.label} whileHover={{ scale: 1.02, x: 4 }} className={`flex justify-between text-sm font-medium items-center p-3 rounded-xl cursor-pointer ${isLight ? 'bg-white/50 hover:bg-white shadow-sm' : isColorful ? 'bg-primary/5 hover:bg-primary/10' : 'bg-white/[0.03] hover:bg-white/[0.08]'} transition-all`}>
-                                    <span className="flex items-center"><span className={`w-3 h-3 rounded-full mr-3 shadow-sm ${s.color}`} />{s.label}</span>
+                                    <span className="flex items-center"><span className={`w-3 h-3 rounded-full me-3 shadow-sm ${s.color}`} />{s.label}</span>
                                     <span className="font-bold">{s.pct}</span>
                                 </motion.div>
                             ))}
@@ -834,7 +834,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                     <div className="flex items-center gap-2 mt-1">
                                         <span className={`w-2 h-2 rounded-full shrink-0 ${statusDot(u.status)}`} />
                                         <span className={`text-[12px] font-medium ${isLight ? 'text-ds-gray-500' : isColorful ? 'text-accent/60' : 'text-ds-gray-400'}`}>{u.status}</span>
-                                        <span className={`text-[11px] opacity-50 ml-auto`}>{u.lastActive}</span>
+                                        <span className={`text-[11px] opacity-50 ms-auto`}>{u.lastActive}</span>
                                     </div>
                                 </div>
                                 <Icon name={expandedCard === i ? 'expand_less' : 'expand_more'} className="text-xl opacity-50 shrink-0" />
@@ -866,12 +866,12 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                 <div className="hidden sm:block overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
                     <table className="w-full min-w-[700px]">
                         <thead>
-                            <tr className={`text-left text-sm font-bold uppercase tracking-wider ${isLight ? 'text-ds-gray-400' : isColorful ? 'text-accent/50' : 'text-ds-gray-500'}`}>
+                            <tr className={`text-start text-sm font-bold uppercase tracking-wider ${isLight ? 'text-ds-gray-400' : isColorful ? 'text-accent/50' : 'text-ds-gray-500'}`}>
                                 <th className="pb-5">User</th>
                                 <th className="pb-5">Role</th>
                                 <th className="pb-5">Status</th>
                                 <th className="pb-5">Last Active</th>
-                                <th className="pb-5 text-right">Actions</th>
+                                <th className="pb-5 text-end">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/10">
@@ -895,9 +895,9 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                                 </div>
                                             </td>
                                             <td className="py-4"><span className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${roleBadge(u.role)}`}>{u.role}</span></td>
-                                            <td className="py-4"><span className="flex items-center text-sm font-medium"><span className={`w-2.5 h-2.5 rounded-full mr-3 ${statusDot(u.status)}`} />{u.status}</span></td>
+                                            <td className="py-4"><span className="flex items-center text-sm font-medium"><span className={`w-2.5 h-2.5 rounded-full me-3 ${statusDot(u.status)}`} />{u.status}</span></td>
                                             <td className="py-4 text-sm font-medium opacity-60">{u.lastActive}</td>
-                                            <td className="py-4 text-right">
+                                            <td className="py-4 text-end">
                                                 <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={`w-9 h-9 rounded-xl inline-flex items-center justify-center ${isLight ? 'hover:bg-ds-gray-100' : 'hover:bg-white/10'} transition-colors`}>
                                                     <Icon name={expanded ? "expand_less" : "expand_more"} className="text-xl opacity-60" />
                                                 </motion.button>
@@ -915,7 +915,7 @@ function UsersSection({ card, isLight, isColorful = false }: { card: string, isL
                                                                     <p className="text-[13px] font-medium opacity-70 leading-relaxed max-w-3xl">{u.name} is highly engaged with design system components. They frequently use the AI Copilot for syntax validation. Consider offering them early access to the new Design Tokens beta feature.</p>
                                                                     <div className="flex space-x-3 mt-4">
                                                                         <button className={`text-xs font-bold px-4 py-2 rounded-xl ${isLight ? 'bg-white border border-ds-gray-200 hover:bg-ds-gray-50' : isColorful ? 'bg-primary/10 border border-primary/20 hover:bg-primary/20' : 'bg-white/5 border border-white/10 hover:bg-white/10'} transition-colors`}>View Full Profile</button>
-                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] hover:shadow-lg hover:shadow-[var(--primary)]/20 transition-all flex items-center`}><Icon name="mail" className="text-[16px] mr-2" /> Message</button>
+                                                                        <button className={`text-xs font-bold px-4 py-2 rounded-xl text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] hover:shadow-lg hover:shadow-[var(--primary)]/20 transition-all flex items-center`}><Icon name="mail" className="text-[16px] me-2" /> Message</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1194,7 +1194,7 @@ function PortalLogsSection({ card, isLight, isColorful = false }: { card: string
                                 </div>
                                 <div>
                                     <span className="font-bold text-[15px]">{log.user}</span>
-                                    <span className="text-xs font-medium opacity-50 ml-3">{log.time}</span>
+                                    <span className="text-xs font-medium opacity-50 ms-3">{log.time}</span>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
@@ -1248,8 +1248,8 @@ function AlertsConfigSection({ card, isLight, isColorful = false }: { card: stri
                                 </div>
                                 <p className="text-[14px] font-medium opacity-60 mb-3">{r.desc}</p>
                                 <div className="flex items-center space-x-6 text-xs font-bold opacity-70">
-                                    <span className="flex items-center"><Icon name="bolt" className="text-[16px] mr-1.5" />{r.trigger}</span>
-                                    <span className="flex items-center"><Icon name="send" className="text-[16px] mr-1.5" />{r.channel}</span>
+                                    <span className="flex items-center"><Icon name="bolt" className="text-[16px] me-1.5" />{r.trigger}</span>
+                                    <span className="flex items-center"><Icon name="send" className="text-[16px] me-1.5" />{r.channel}</span>
                                 </div>
                             </div>
                             <button onClick={() => setToggles(prev => ({ ...prev, [r.id]: !prev[r.id] }))}
@@ -1381,7 +1381,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
 
             {/* AI Daily Summary Block */}
             <motion.div variants={itemVariants} className={`${card} relative overflow-hidden`}>
-                <div className={`absolute top-0 right-0 w-80 h-80 bg-[var(--primary)] opacity-10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none`} />
+                <div className={`absolute top-0 end-0 w-80 h-80 bg-[var(--primary)] opacity-10 blur-[100px] rounded-full -me-20 -mt-20 pointer-events-none`} />
 
                 <div className="flex items-start md:items-center space-x-5 mb-6 relative z-10">
                     <AIStamp isLight={isLight} size="md" variant="secondary" />
@@ -1407,7 +1407,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                     <motion.div key={i} variants={itemVariants} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveSection(action.nav)}
                         className={`group flex items-center gap-4 px-5 py-4 ${card} cursor-pointer relative overflow-hidden transition-all duration-300`}>
-                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500 rounded-full -mr-6 -mt-6 pointer-events-none`} />
+                        <div className={`absolute top-0 end-0 w-24 h-24 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500 rounded-full -me-6 -mt-6 pointer-events-none`} />
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-[14px] leading-tight">{action.title}</h3>
                             <p className={`text-xs font-medium truncate mt-0.5 ${isLight ? 'text-ds-gray-500' : isColorful ? 'text-accent/60' : 'opacity-60'}`}>{action.desc}</p>
@@ -1420,7 +1420,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
             {/* Floating Input */}
             <motion.div variants={itemVariants} className="pt-6">
                 <div className="relative flex items-center p-2 rounded-3xl transition-all duration-300 border border-[var(--card-border)] backdrop-blur-2xl bg-[var(--background)] focus-within:border-[var(--btn-primary-bg)] focus-within:shadow-[0_0_0_4px_var(--primary-glow)]">
-                    <div className="pl-3 pr-2">
+                    <div className="ps-3 pe-2">
                         <AIStamp isLight={isLight} size="sm" variant="secondary" />
                     </div>
                     <input
@@ -1428,7 +1428,7 @@ function StartSection({ card, isLight, isColorful = false, setActiveSection }: {
                         placeholder="Ask AI to find a file, summarize a workspace, or draft an email&hellip;"
                         className="w-full bg-transparent py-3 outline-none text-[15px] font-medium text-[var(--foreground)] placeholder:text-[var(--foreground)]/40"
                     />
-                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--gradient-mid)] text-white flex items-center justify-center hover:shadow-lg hover:shadow-[var(--primary)]/30 transition-all shrink-0 ml-2">
+                    <button className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--gradient-mid)] text-white flex items-center justify-center hover:shadow-lg hover:shadow-[var(--primary)]/30 transition-all shrink-0 ms-2">
                         <Icon name="arrow_upward" className="text-xl" />
                     </button>
                 </div>
@@ -1501,7 +1501,7 @@ function SettingsSection({ card, isLight, isColorful = false, theme, setTheme }:
                                             <span className="text-[13px] font-medium opacity-60 mt-1 block">{item.desc}</span>
                                         </div>
                                         <button onClick={() => setToggles(prev => ({ ...prev, [item.id]: !prev[item.id] }))}
-                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ml-6 ${toggles[item.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-ds-gray-200' : isColorful ? 'bg-primary/20' : 'bg-white/10')}`}>
+                                            className={`w-14 h-8 rounded-full transition-colors relative shrink-0 ms-6 ${toggles[item.id] ? 'bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)]' : (isLight ? 'bg-ds-gray-200' : isColorful ? 'bg-primary/20' : 'bg-white/10')}`}>
                                             <motion.div animate={{ x: toggles[item.id] ? 26 : 4 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                                                 className="absolute top-1 w-6 h-6 rounded-full bg-white shadow-md" />
                                         </button>
@@ -1642,7 +1642,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
             {/* â”€â”€ DESKTOP SPLIT LAYOUT â”€â”€ */}
             <div className="hidden md:flex flex-1 min-h-0">
                 {/* Left panel — fixed hero */}
-                <div className="w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative border-r border-[var(--card-border)]">
+                <div className="w-[380px] xl:w-[420px] shrink-0 flex flex-col items-center justify-center px-12 py-16 relative border-e border-[var(--card-border)]">
                     <motion.div
                         key={selectedTheme + '-icon'}
                         initial={{ scale: 0.7, opacity: 0 }}
@@ -1696,7 +1696,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                             >
                                 <Icon name={s.icon} className={`text-[18px] ${i === step ? 'text-[var(--primary)]' : 'opacity-40'}`} />
                                 <span className={i === step ? 'font-bold' : ''}>{s.title}</span>
-                                {i < step && <Icon name="check" className="ml-auto text-[16px] text-[var(--primary)]" />}
+                                {i < step && <Icon name="check" className="ms-auto text-[16px] text-[var(--primary)]" />}
                             </button>
                         ))}
                     </div>
@@ -1842,7 +1842,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: i * 0.1 + 0.1 }}
                                                     onClick={() => setSelectedTheme(t.v)}
-                                                    className={`w-full flex items-center gap-5 p-5 rounded-2xl border-2 transition-all duration-200 text-left ${
+                                                    className={`w-full flex items-center gap-5 p-5 rounded-2xl border-2 transition-all duration-200 text-start ${
                                                         selected
                                                             ? 'border-[var(--primary)] bg-[var(--primary)]/10'
                                                             : 'border-[var(--card-border)] bg-[var(--primary)]/[0.02] hover:border-[var(--primary)]/40'
@@ -1956,7 +1956,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     <IconSurface name="auto_awesome" surfaceSize="sm" className={`bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>AI Copilot</h2>
                                 </motion.div>
-                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Get the most from your AI assistant</motion.p>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 ps-1 ${muted}`}>Get the most from your AI assistant</motion.p>
                                 <div className="space-y-3">
                                     {AI_TIPS.map((tip, i) => (
                                         <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 + 0.12, type: 'spring', stiffness: 300, damping: 24 }} className={`p-4 rounded-2xl flex gap-4 ${cardClass}`}>
@@ -1977,7 +1977,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     <IconSurface name="apps" surfaceSize="sm" className={`bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>What&apos;s Inside</h2>
                                 </motion.div>
-                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>8 fully interactive sections</motion.p>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 ps-1 ${muted}`}>8 fully interactive sections</motion.p>
                                 <div className="space-y-2.5">
                                     {PORTAL_FEATURES.map((f, i) => (
                                         <motion.div key={i} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 + 0.1, type: 'spring', stiffness: 340, damping: 26 }} className={`flex items-center gap-4 p-4 rounded-2xl ${cardClass}`}>
@@ -1998,7 +1998,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                     <IconSurface name="palette" surfaceSize="sm" className={`bg-gradient-to-br ${accentGradient}`} iconClassName="text-white" />
                                     <h2 className={`text-[20px] font-extrabold tracking-tight ${headingClass}`}>Choose Your Look</h2>
                                 </motion.div>
-                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 pl-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>
+                                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} className={`text-[13px] mb-5 ps-1 ${muted}`}>Pick a theme — changeable anytime from the profile menu</motion.p>
                                 <div className="space-y-3">
                                     {PORTAL_THEMES.map((t, i) => {
                                         const selected = selectedTheme === t.v;
@@ -2009,7 +2009,7 @@ function PortalIntroOverlay({ onComplete, currentTheme }: PortalIntroOverlayProp
                                                         ? 'border-[var(--primary)] bg-[var(--primary)]/10'
                                                         : 'border-[var(--card-border)] bg-[var(--primary)]/[0.02] hover:border-[var(--primary)]/40'
                                                 }`}>
-                                                <div className="flex-1 text-left">
+                                                <div className="flex-1 text-start">
                                                     <div className="flex items-center gap-2 mb-0.5">
                                                         <Icon name={t.icon} className={`text-[18px] ${selected ? 'text-[var(--primary)]' : ''}`} />
                                                         <span className="font-bold text-[15px]">{t.label}</span>

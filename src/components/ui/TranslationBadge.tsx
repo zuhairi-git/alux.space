@@ -3,9 +3,17 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { useState, useRef, useEffect } from 'react';
 import Icon from '@/components/ui/Icon';
+import { useTranslations } from '@/hooks/useTranslations';
 
+/**
+ * Discloses that the current language is machine-translated.
+ *
+ * Which locales get the badge comes from `machineTranslated` in src/i18n.ts,
+ * so a new language declares its own status instead of being hard-coded here.
+ */
 export default function TranslationBadge() {
-  const { locale } = useLanguage();
+  const { locale, config } = useLanguage();
+  const { t } = useTranslations(locale);
   const [isHovered, setIsHovered] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -23,8 +31,8 @@ export default function TranslationBadge() {
     };
   }, []);
 
-  // Only show on Finnish pages - moved after all hooks
-  if (locale !== 'fi') {
+  // Placed after all hooks so hook order stays stable across locales.
+  if (!config.machineTranslated) {
     return null;
   }
 
@@ -83,7 +91,7 @@ export default function TranslationBadge() {
         {isExpanded ? (
           <span className="whitespace-nowrap flex items-center gap-2">
             <Icon name="auto_awesome" size="sm" />
-            Translated with AI
+            {t('translationBadge.machineTranslated')}
           </span>
         ) : (
           <Icon name="auto_awesome" size="sm" />

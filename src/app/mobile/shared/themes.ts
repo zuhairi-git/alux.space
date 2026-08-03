@@ -175,8 +175,8 @@ export const androidTheme: MobileTheme = {
         modal: 'rounded-[28px]', sendButton: 'rounded-[16px]', sendButtonBg: 'bg-primary', sheetButton: 'rounded-2xl',
     },
     copilot: {
-        userBubble: 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[24px] rounded-tr-md shadow-lg',
-        botBubble: (isLight) => isLight ? 'bg-ds-gray-50/95 backdrop-blur-xl border border-ds-gray-200/60 text-ds-gray-900 rounded-[24px] rounded-tl-sm shadow-[0_1px_3px_rgba(0,0,0,0.08)]' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/30 text-primary-200 rounded-[24px] rounded-tl-sm shadow-sm',
+        userBubble: 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[24px] rounded-se-md shadow-lg',
+        botBubble: (isLight) => isLight ? 'bg-ds-gray-50/95 backdrop-blur-xl border border-ds-gray-200/60 text-ds-gray-900 rounded-[24px] rounded-ss-sm shadow-[0_1px_3px_rgba(0,0,0,0.08)]' : 'bg-ds-dark-3/90 backdrop-blur-xl border border-ds-gray-600/30 text-primary-200 rounded-[24px] rounded-ss-sm shadow-sm',
         inputBar: (isLight) => isLight ? 'bg-ds-gray-100 rounded-t-[28px]' : 'bg-ds-dark-2 rounded-t-[28px]',
         inputField: (isLight) => isLight ? 'bg-ds-gray-200 text-ds-gray-900 rounded-[28px] px-5 py-3.5' : 'bg-ds-gray-600 text-primary-200 rounded-[28px] px-5 py-3.5',
         promptCard: (isLight) => isLight ? 'bg-primary-100 text-ds-gray-900 rounded-[16px]' : 'bg-primary-700 text-primary-200 rounded-[16px]',
@@ -288,8 +288,8 @@ export const iosTheme: MobileTheme = {
         modal: 'rounded-[22px]', sendButton: 'rounded-full', sendButtonBg: 'bg-primary', sheetButton: 'rounded-[14px]',
     },
     copilot: {
-        userBubble: 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg',
-        botBubble: (isLight) => isLight ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 text-ds-gray-900 rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-2/60 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] text-ds-gray-100 rounded-[22px] rounded-tl-sm shadow-sm',
+        userBubble: 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-se-md shadow-lg',
+        botBubble: (isLight) => isLight ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 text-ds-gray-900 rounded-[22px] rounded-ss-sm shadow-sm' : 'bg-ds-dark-2/60 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] text-ds-gray-100 rounded-[22px] rounded-ss-sm shadow-sm',
         inputBar: (isLight) => isLight ? 'bg-ds-gray-100/80 backdrop-blur-xl rounded-t-[28px]' : 'bg-ds-dark-2/80 backdrop-blur-xl rounded-t-[28px]',
         inputField: (isLight) => isLight ? 'bg-ds-gray-200/80 rounded-[18px] px-5 py-3 text-ds-gray-900' : 'bg-ds-dark-3/80 rounded-[18px] px-5 py-3 text-ds-gray-100',
         promptCard: (isLight) => isLight ? 'bg-white/50 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/60 rounded-[16px]' : 'bg-ds-dark-2/60 backdrop-blur-[24px] backdrop-saturate-[200%] border border-white/[0.06] rounded-[16px]',

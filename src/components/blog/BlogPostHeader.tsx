@@ -143,7 +143,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           </div>
           <span className="flex items-center" role="doc-dateline">
             <svg 
-              className="w-5 h-5 mr-2 text-primary" 
+              className="w-5 h-5 me-2 text-primary" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               aria-hidden="true"
@@ -154,7 +154,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           </span>
           <span className="flex items-center">
             <svg 
-              className="w-5 h-5 mr-2 text-primary" 
+              className="w-5 h-5 me-2 text-primary" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               aria-hidden="true"
@@ -205,7 +205,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delaySeconds.xl }}
-            className="absolute top-4 left-4 z-10"
+            className="absolute top-4 start-4 z-10"
           >
             <Badge variant="overlay" className="italic font-normal">
               Image by Freepik

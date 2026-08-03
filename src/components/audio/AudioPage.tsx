@@ -219,7 +219,7 @@ const AudioPage: React.FC<AudioPageProps> = ({ audio: originalAudio, onPlayAudio
               />
               
               {audio.featured && (
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 end-4">
                   <div className="bg-ds-gold-400 text-ds-gold-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
                     <MaterialSymbol className="text-sm">star</MaterialSymbol>
                     Featured

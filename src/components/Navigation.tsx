@@ -172,7 +172,7 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
       <Link
         href={localizedHref('/')}
         className={`
-          flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg ml-1 mr-2 shadow-md transition-all duration-300
+          flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg ms-1 me-2 shadow-md transition-all duration-300
           ${theme === 'colorful'
             ? 'bg-gradient-to-br from-primary to-[var(--color-cobalt-700)] text-white shadow-primary/25'
             : theme === 'light'
@@ -207,7 +207,7 @@ const DesktopNav = ({ hidden, theme, t, localizedHref, trackEvent, pathname, isN
       <div className="w-px h-6 mx-2 bg-[var(--card-border)]" />
 
       {/* Settings */}
-      <div className="flex items-center gap-1 pr-2">
+      <div className="flex items-center gap-1 pe-2">
         <LanguageSwitcher />
         <ThemeSwitch />
       </div>
@@ -400,7 +400,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
         animate={hidden && !isMenuOpen ? "hidden" : "visible"}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`
-          md:hidden fixed bottom-6 left-4 right-4 z-50 h-16 rounded-2xl border backdrop-blur-xl shadow-lg shadow-black/10 flex items-center justify-between px-2
+          md:hidden fixed bottom-6 start-4 end-4 z-50 h-16 rounded-2xl border backdrop-blur-xl shadow-lg shadow-black/10 flex items-center justify-between px-2
           ${theme === 'colorful'
             ? 'bg-[var(--background)]/80 border-[var(--card-border)]'
             : theme === 'light'
@@ -497,7 +497,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                         {/* eslint-disable-next-line design-system/no-raw-html-elements -- nav menu item with custom active/theme styles and icon layout */}
                         <button
                           onClick={() => setExpandedItem(isExpanded ? null : item.href)}
-                          className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-left ${
+                          className={`w-full flex items-center gap-4 px-3 py-3 rounded-2xl transition-all active:scale-[0.98] text-start ${
                             itemIsActive
                               ? (theme === 'colorful' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : theme === 'light' ? 'bg-primary/10 text-accent' : 'bg-primary/15 text-accent')
                               : (theme === 'colorful' ? 'text-[var(--foreground)]/80 hover:bg-[var(--primary)]/10' : theme === 'light' ? 'text-ds-gray-800 hover:bg-ds-gray-50' : 'text-ds-gray-200 hover:bg-ds-gray-800/50')
@@ -533,7 +533,7 @@ const MobileNav = ({ hidden, theme, t, localizedHref, pathname, isNavItemActive 
                               transition={{ duration: 0.22, ease: 'easeInOut' }}
                               className="overflow-hidden"
                             >
-                              <div className="pt-1 pb-2 pl-4 pr-1 flex flex-col gap-0.5">
+                              <div className="pt-1 pb-2 ps-4 pe-1 flex flex-col gap-0.5">
                                 {item.children.map((child, cidx) => {
                                   const childIsActive = pathname.split('#')[0] === localizedHref(child.href).split('#')[0];
                                   return (

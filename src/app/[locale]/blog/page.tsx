@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import ClientBlogPage from '@/components/blog/ClientBlogPage';
 import { posts } from '../../blog/posts/data';
 import Navigation from '@/components/Navigation';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages, getLocaleConfig } from '@/i18n';
 
 // Add the required generateStaticParams function for static site generation
 export function generateStaticParams() {
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       url: url,
       siteName: 'Ali Al-Zuhairi',
-      locale: locale === 'en' ? 'en_US' : 'fi_FI',
+      locale: getLocaleConfig(locale).ogLocale,
       images: [
         {
           url: ogImage,
@@ -60,10 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       canonical: url,
-      languages: i18n.locales.reduce((acc, lang) => {
-        acc[lang] = `${baseUrl}/${lang}/blog`;
-        return acc;
-      }, {} as Record<string, string>),
+      languages: alternateLanguages(baseUrl, '/blog'),
     }
   };
 }

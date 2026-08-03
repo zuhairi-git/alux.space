@@ -245,7 +245,7 @@ const materialToFontAwesome: Record<string, string> = {
   speed: 'gauge-high',
   sports_esports: 'gamepad',
   store: 'store',
-  swap_horiz: 'right-left',
+  swap_horiz: 'end-left',
   swords: 'swords',
   sync_alt: 'arrows-rotate',
   tab: 'window-restore',

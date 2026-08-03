@@ -60,7 +60,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
                 className={`flex items-center px-4 py-3 mb-6 ${theme.radii.search} ${searchBarClass}`}
             >
-                <Icon name="search" className={`text-[20px] mr-3 ${theme.workspace.searchText(isLight)}`} />
+                <Icon name="search" className={`text-[20px] me-3 ${theme.workspace.searchText(isLight)}`} />
                 <input type="text" placeholder="Search jobs, skills, companies..." className="bg-transparent border-none outline-none flex-1 text-[16px] placeholder:opacity-40" readOnly />
             </motion.div>
 
@@ -112,7 +112,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                     <Icon name="payments" className={`text-[14px] ${isLight ? 'text-ds-gray-400' : 'text-white/30'}`} />
                                     <span className={`text-[12px] font-semibold ${isLight ? 'text-ds-gray-700' : 'text-white/70'}`}>{job.wage}</span>
                                 </div>
-                                <span className={`ml-auto text-[11px] font-medium px-2 py-0.5 rounded-full ${isLight ? 'bg-ds-gray-100 text-ds-gray-500' : 'bg-white/8 text-white/40'}`}>{job.type}</span>
+                                <span className={`ms-auto text-[11px] font-medium px-2 py-0.5 rounded-full ${isLight ? 'bg-ds-gray-100 text-ds-gray-500' : 'bg-white/8 text-white/40'}`}>{job.type}</span>
                             </div>
                         </div>
 
@@ -140,7 +140,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-50">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setSelectedJob(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} p-6 pb-10 ${sheetBgClass}`}>
+                            className={`absolute bottom-0 start-0 end-0 ${theme.radii.sheet} p-6 pb-10 ${sheetBgClass}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
 
                             {/* SUCCESS */}
@@ -162,11 +162,11 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                             {sheetMode === 'form' && (
                                 <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
                                     <div className="flex items-center mb-5">
-                                        <button onClick={() => setSheetMode('detail')} className="mr-3 opacity-60 active:opacity-40">
+                                        <button onClick={() => setSheetMode('detail')} className="me-3 opacity-60 active:opacity-40">
                                             <Icon name="arrow_back" className="text-[20px]" />
                                         </button>
                                         <h3 className="text-[18px] font-bold">Quick Apply</h3>
-                                        <span className={`ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full bg-primary/15 text-primary`}>{selectedJob.match}% match</span>
+                                        <span className={`ms-auto text-[12px] font-semibold px-2.5 py-1 rounded-full bg-primary/15 text-primary`}>{selectedJob.match}% match</span>
                                     </div>
                                     <div className="space-y-3 mb-5">
                                         {[
@@ -175,7 +175,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                                             { label: 'Available From', value: `${selectedJob.type} shifts · Immediate`, icon: 'event_available' },
                                         ].map((f) => (
                                             <div key={f.label} className={`flex items-center px-4 py-3 rounded-2xl ${isLight ? 'bg-black/[0.04]' : 'bg-white/[0.05]'}`}>
-                                                <Icon name={f.icon} className="text-[16px] opacity-40 mr-3" />
+                                                <Icon name={f.icon} className="text-[16px] opacity-40 me-3" />
                                                 <div className="flex-1">
                                                     <span className="text-[10px] opacity-50 block">{f.label}</span>
                                                     <span className="text-[14px] font-semibold">{f.value}</span>
@@ -203,7 +203,7 @@ export function JobsView({ card, isLight, isColorful, theme, onNav }: ViewProps)
                             {sheetMode === 'detail' && (
                                 <>
                                     <div className="flex items-start mb-5">
-                                        <div className={`w-14 h-14 rounded-[18px] flex items-center justify-center mr-4 ${isColorful ? 'bg-primary/15' : theme.workspace.iconBg(isLight)}`}>
+                                        <div className={`w-14 h-14 rounded-[18px] flex items-center justify-center me-4 ${isColorful ? 'bg-primary/15' : theme.workspace.iconBg(isLight)}`}>
                                             <Icon name="work" className={`text-2xl ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
                                         </div>
                                         <div className="flex-1">

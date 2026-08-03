@@ -82,9 +82,9 @@ export function useScreenAwareDropdown<T extends HTMLElement = HTMLElement>({
     
     // Horizontal positioning
     if (position.horizontal === 'left') {
-      classes.push('right-0');
+      classes.push('end-0');
     } else {
-      classes.push('left-0');
+      classes.push('start-0');
     }
     
     // Vertical positioning

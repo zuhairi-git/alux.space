@@ -505,7 +505,7 @@ export default function GameStrategyClient() {
             <CaseStudyItem>
               <div className="relative">
                 {/* Timeline line */}
-                <div className="absolute left-6 top-0 bottom-0 hidden w-px md:block" style={timelineRailStyle} />
+                <div className="absolute start-6 top-0 bottom-0 hidden w-px md:block" style={timelineRailStyle} />
 
                 <div className="space-y-6">
                   {developmentPhases.map((phase, i) => {
@@ -514,14 +514,14 @@ export default function GameStrategyClient() {
                     return (
                       <motion.div
                         key={i}
-                        className="md:ml-16 relative"
+                        className="md:ms-16 relative"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.08 }}
                       >
                         {/* Timeline marker for Desktop */}
-                        <div className="absolute -left-[4.85rem] top-3 hidden md:flex flex-col items-center gap-2">
+                        <div className="absolute -start-[4.85rem] top-3 hidden md:flex flex-col items-center gap-2">
                           <IconSurface
                             name={phase.icon}
                             surfaceSize="md"

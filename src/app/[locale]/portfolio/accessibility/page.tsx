@@ -1,6 +1,6 @@
 import AccessibilityClient from '@/components/portfolio/AccessibilityClient';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages } from '@/i18n';
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({
@@ -54,10 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/portfolio/accessibility`,
-      languages: {
-        en: `${baseUrl}/en/portfolio/accessibility`,
-        fi: `${baseUrl}/fi/portfolio/accessibility`,
-      },
+      languages: alternateLanguages(baseUrl, '/portfolio/accessibility'),
     },
   };
 }

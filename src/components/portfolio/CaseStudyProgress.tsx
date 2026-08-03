@@ -8,7 +8,7 @@ import { useLanguage } from '@/context/LanguageContext';
 export default function CaseStudyProgress() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const { locale } = useLanguage();
+  const { locale, isRtl } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -29,7 +29,7 @@ export default function CaseStudyProgress() {
 
   return (
     <div
-      className="fixed top-0 left-0 w-full h-1 z-50"
+      className="fixed top-0 start-0 w-full h-1 z-50"
       role="progressbar"
       aria-label={locale === 'fi' ? 'Lukemisen edistyminen' : 'Reading progress'}
       aria-valuemin={0}
@@ -38,7 +38,9 @@ export default function CaseStudyProgress() {
     >
       <motion.div
         className="h-full bg-gradient-to-r from-primary via-primary-500 to-ds-pink-500"
-        style={{ scaleX: scrollProgress, transformOrigin: '0%' }}
+        // transform-origin is resolved against the box, not the writing
+        // direction, so RTL has to anchor the bar to the right edge itself.
+        style={{ scaleX: scrollProgress, transformOrigin: isRtl ? '100%' : '0%' }}
         transition={{ duration: durationSeconds.instant }}
       />
     </div>

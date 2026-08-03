@@ -59,8 +59,8 @@ export default function AppArchitectureModal({ isOpen, onClose, theme }: AppArch
                         <div className="flex-1 overflow-auto relative custom-scrollbar">
                             {/* Ambient Background Glows */}
                             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                                <div className={`absolute top-0 -left-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-primary-600' : 'bg-ds-indigo-600'}`}></div>
-                                <div className={`absolute bottom-0 -right-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-ds-success' : 'bg-ds-cyan-500'}`}></div>
+                                <div className={`absolute top-0 -start-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-primary-600' : 'bg-ds-indigo-600'}`}></div>
+                                <div className={`absolute bottom-0 -end-64 w-96 h-96 rounded-full blur-3xl opacity-20 ${isColorful ? 'bg-ds-success' : 'bg-ds-cyan-500'}`}></div>
                             </div>
 
                             <WorkflowDiagram theme={theme} />
@@ -112,14 +112,14 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* Connector 1 */}
             <div className="hidden md:block w-full h-16 relative z-0">
-                <div className={`absolute top-1/2 left-[16.66%] right-[16.66%] border-t-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-0 left-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-0 left-1/2 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-0 right-[16.66%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 start-[16.66%] end-[16.66%] border-t-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-0 start-[16.66%] h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-0 left-1/2 h-full border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-0 end-[16.66%] h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
-                <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-0 h-full border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
             </div>
 
@@ -130,21 +130,21 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* Connector 2 */}
             <div className="hidden md:block w-full h-16 relative z-0">
-                <div className={`absolute top-1/2 left-[12.5%] right-[12.5%] border-t-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-0 left-1/2 h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 start-[12.5%] end-[12.5%] border-t-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-0 left-1/2 h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
 
-                <div className={`absolute top-1/2 left-[12.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-1/2 left-[37.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-1/2 right-[37.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
-                <div className={`absolute top-1/2 right-[12.5%] h-1/2 border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 start-[12.5%] h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 start-[37.5%] h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 end-[37.5%] h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 end-[12.5%] h-1/2 border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
 
-                <div className={`absolute bottom-0 left-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 left-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 right-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
-                <div className={`absolute bottom-0 right-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 start-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 start-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 end-[37.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
+                <div className={`absolute bottom-0 end-[12.5%] -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
-                <div className={`absolute top-0 h-full border-l-[2.5px] border-dashed ${connectorsColor}`}></div>
+                <div className={`absolute top-0 h-full border-s-[2.5px] border-dashed ${connectorsColor}`}></div>
                 <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
             </div>
 
@@ -158,19 +158,19 @@ function WorkflowDiagram({ theme }: { theme: string }) {
 
             {/* Connector 3 */}
             <div className="hidden md:block w-full h-16 relative z-0">
-                <div className={`absolute top-1/2 left-[12.5%] right-[12.5%] border-t-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 start-[12.5%] end-[12.5%] border-t-[2.5px] border-solid ${connectorsColor}`}></div>
 
-                <div className={`absolute top-0 left-[12.5%] h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
-                <div className={`absolute top-0 left-[37.5%] h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
-                <div className={`absolute top-0 right-[37.5%] h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
-                <div className={`absolute top-0 right-[12.5%] h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-0 start-[12.5%] h-1/2 border-s-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-0 start-[37.5%] h-1/2 border-s-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-0 end-[37.5%] h-1/2 border-s-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-0 end-[12.5%] h-1/2 border-s-[2.5px] border-solid ${connectorsColor}`}></div>
 
-                <div className={`absolute top-1/2 left-1/2 h-1/2 border-l-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-1/2 left-1/2 h-1/2 border-s-[2.5px] border-solid ${connectorsColor}`}></div>
 
                 <div className={`absolute bottom-0 left-1/2 -translate-x-[6px] translate-y-1/2 text-sm ${arrowColor}`}>▼</div>
             </div>
             <div className="md:hidden h-12 relative flex justify-center w-full z-0">
-                <div className={`absolute top-0 h-full border-l-[2.5px] border-solid ${connectorsColor}`}></div>
+                <div className={`absolute top-0 h-full border-s-[2.5px] border-solid ${connectorsColor}`}></div>
                 <div className={`absolute bottom-0 -translate-x-1/2 translate-y-[6px] text-sm ${arrowColor}`}>▼</div>
             </div>
 

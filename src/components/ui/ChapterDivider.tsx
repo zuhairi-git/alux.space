@@ -137,7 +137,7 @@ const ChapterDivider: React.FC<ChapterDividerProps> = ({ title, number, icon, id
             className="inline-flex items-center text-xs text-foreground/65 hover:text-[var(--primary)] transition duration-300"
           >
             <motion.svg
-              className="w-3 h-3 mr-1"
+              className="w-3 h-3 me-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

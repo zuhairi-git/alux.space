@@ -16,10 +16,10 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
     const [msgs, setMsgs] = useState<{ id: number, role: 'user' | 'assistant', text: string, citations?: { source: string, snippet: string }[] }[]>([]);
     const [input, setInput] = useState(""); const [typing, setTyping] = useState(false); const [stream, setStream] = useState("");
     const ub = isColorful
-        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-tr-md shadow-lg'
+        ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-[22px] rounded-se-md shadow-lg'
         : theme.copilot.userBubble;
     const bb = isColorful
-        ? `${theme.platform === 'ios' ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm' : 'bg-ds-dark-1/40 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-tl-sm shadow-sm'}`
+        ? `${theme.platform === 'ios' ? 'bg-ds-card-colorful-from/60 backdrop-blur-[20px] border border-primary/20 text-white rounded-[22px] rounded-ss-sm shadow-sm' : 'bg-ds-dark-1/40 backdrop-blur-xl border border-primary/20 text-white rounded-[22px] rounded-ss-sm shadow-sm'}`
         : theme.copilot.botBubble(isLight);
     const inputBarClass = isColorful ? 'bg-ds-colorful-bg/90 rounded-t-[28px]' : theme.copilot.inputBar(isLight);
     const inputFieldClass = isColorful
@@ -49,7 +49,7 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
                     <div className="w-full mt-auto pb-5 shrink-0">
                         <label className={`text-[11px] font-bold uppercase tracking-widest mb-4 block px-1 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>Suggested</label>
                         <div className="grid grid-cols-2 gap-3">
-                            {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-left p-4 ${promptCardClass}`}><Icon name={p.icon} className={`mb-2 text-xl ${promptIconColor}`} /><span className="font-semibold text-[14px]">{p.label}</span></motion.button>))}
+                            {suggestedPrompts.map((p, i) => (<motion.button key={p.label} whileTap={{ scale: 0.96 }} onClick={() => send(p.prompt)} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.06 }} className={`flex flex-col text-start p-4 ${promptCardClass}`}><Icon name={p.icon} className={`mb-2 text-xl ${promptIconColor}`} /><span className="font-semibold text-[14px]">{p.label}</span></motion.button>))}
                         </div>
                     </div>
                 </div>
@@ -57,9 +57,9 @@ export function CopilotView({ isLight, isColorful = false, theme }: CopilotViewP
                 <div className="flex-1 overflow-y-auto p-5 space-y-4 scrollbar-none pb-24">
                     {msgs.map(m => (<motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className="flex flex-col max-w-[85%]"><div className={`px-5 py-3.5 text-[15px] leading-[1.7] ${m.role === 'user' ? ub : bb}`}>{m.text}</div>
-                            {m.role === 'assistant' && m.citations && <div className="mt-2.5 space-y-2 ml-1">{m.citations.map((c, i) => (<motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }} className={`flex items-start space-x-2.5 p-3 rounded-xl text-[12px] ${theme.copilot.citationCard(isLight)}`}><Icon name="verified" className={`text-[15px] shrink-0 mt-0.5 ${theme.copilot.citationIcon}`} /><div><span className="font-semibold block">{c.source}</span><span className="text-ds-gray-400">{c.snippet}</span></div></motion.div>))}</div>}
+                            {m.role === 'assistant' && m.citations && <div className="mt-2.5 space-y-2 ms-1">{m.citations.map((c, i) => (<motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }} className={`flex items-start space-x-2.5 p-3 rounded-xl text-[12px] ${theme.copilot.citationCard(isLight)}`}><Icon name="verified" className={`text-[15px] shrink-0 mt-0.5 ${theme.copilot.citationIcon}`} /><div><span className="font-semibold block">{c.source}</span><span className="text-ds-gray-400">{c.snippet}</span></div></motion.div>))}</div>}
                         </div></motion.div>))}
-                    {typing && stream && <div className="flex justify-start"><div className={`max-w-[85%] px-5 py-3.5 text-[15px] leading-[1.7] ${bb}`}>{stream}<span className="inline-block w-0.5 h-4 ml-0.5 bg-current animate-pulse align-text-bottom" /></div></div>}
+                    {typing && stream && <div className="flex justify-start"><div className={`max-w-[85%] px-5 py-3.5 text-[15px] leading-[1.7] ${bb}`}>{stream}<span className="inline-block w-0.5 h-4 ms-0.5 bg-current animate-pulse align-text-bottom" /></div></div>}
                     {typing && !stream && <div className="flex justify-start"><div className={`px-5 py-3.5 flex space-x-2 ${bb}`}><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '150ms' }} /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '300ms' }} /></div></div>}
                     <div ref={ref} className="pb-5" />
                 </div>

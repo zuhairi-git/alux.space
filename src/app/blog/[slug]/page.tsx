@@ -1,88 +1,36 @@
-import { posts } from '../posts/data';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import LocaleRedirect from '@/components/ui/LocaleRedirect';
 import { i18n } from '@/i18n';
-import { redirect } from 'next/navigation';
+import { posts } from '../posts/data';
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
 
 export function generateStaticParams() {
-  // Generate paths for all posts
-  const paths: { slug: string }[] = [];
-  
-  // For direct /blog/[slug] access (non-localized route)
-  posts.forEach((post) => {
-    paths.push({ slug: post.slug });
-  });
-  
-  return paths;
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
-// Updated Props type to match Next.js expectations
-type Props = {
+/**
+ * Legacy un-prefixed post URL. These were shared publicly before the locale
+ * prefix existed, so they redirect rather than 404 — the canonical points at
+ * the localised article.
+ */
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+}): Promise<Metadata> {
   const { slug } = await params;
-  const locale = i18n.defaultLocale;
-  const post = posts.find((p) => p.slug === slug);
-  
-  if (!post) {
-    return {
-      title: 'Post Not Found',
-    };
-  }
-  
-  // Safer content access
-  if (!post.content) {
-    return {
-      title: 'Post Content Not Available',
-      description: 'Content structure is missing',
-    };
-  }
-  
-  // Get content for current locale or fall back to English
-  const localeContent = post.content[locale as keyof typeof post.content] || post.content.en || {
-    title: 'Content Not Available',
-    description: 'This content is not available in your language.',
-  };
-    const imageUrl = post.image.startsWith('http') ? post.image : `https://alux.space${post.image}`;
-  
   return {
-    title: localeContent.title || 'Blog Post',
-    description: localeContent.description || '',
-    openGraph: {
-      title: localeContent.title,
-      description: localeContent.description,
-      type: 'article',
-      url: `https://alux.space/blog/${slug}`,
-      siteName: 'Ali Al-Zuhairi',
-      locale: 'en_US',
-      publishedTime: localeContent.publishedDate,
-      authors: ['Ali Al-Zuhairi'],
-      tags: post.tags || [],
-      images: [{ 
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: localeContent.title,
-        type: 'image/jpeg'
-      }]
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: localeContent.title,
-      description: localeContent.description,
-      creator: '@alialzuhairi',
-      site: '@alialzuhairi',
-      images: [imageUrl],
-    }
+    robots: { index: false, follow: true },
+    alternates: { canonical: `${baseUrl}/${i18n.defaultLocale}/blog/${slug}` },
   };
 }
 
-export default async function BlogPost({ params }: Props) {
+export default async function BlogPostRedirectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const locale = i18n.defaultLocale;
-  
-  // Redirect to the localized version of the blog post
-  redirect(`/${locale}/blog/${slug}`);
+  return <LocaleRedirect path={`/blog/${slug}`} />;
 }

@@ -187,7 +187,7 @@ export default function ClientBlogPage({ posts }: ClientBlogPageProps) {
             <select
               value={filter || ''}
               onChange={(e) => setFilter(e.target.value || null)}
-              className="bg-transparent border border-current/15 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary appearance-none cursor-pointer pr-8 min-w-[180px]"
+              className="bg-transparent border border-current/15 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary appearance-none cursor-pointer pe-8 min-w-[180px]"
               aria-label={t('blog.aria.categoryFilter')}
               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M3 5l3 3 3-3'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center' }}
             >

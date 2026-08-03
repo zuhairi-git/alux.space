@@ -33,8 +33,8 @@ const thumbTranslate: Record<ToggleSize, string> = {
 
 /* Padding inside the track (space between edge and thumb) */
 const thumbOffset: Record<ToggleSize, string> = {
-  sm: 'top-[3px] left-[3px]',
-  md: 'top-[3px] left-[2px]',
+  sm: 'top-[3px] start-[3px]',
+  md: 'top-[3px] start-[2px]',
 };
 
 export default function Toggle({

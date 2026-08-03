@@ -1,6 +1,6 @@
 import GameStrategyClient from '@/components/portfolio/GameStrategyClient';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages } from '@/i18n';
 
 export function generateStaticParams() {
   return i18n.locales.map(locale => ({ locale }));
@@ -39,10 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/portfolio/game-strategy`,
-      languages: i18n.locales.reduce((acc, lang) => {
-        acc[lang] = `${baseUrl}/${lang}/portfolio/game-strategy`;
-        return acc;
-      }, {} as Record<string, string>),
+      languages: alternateLanguages(baseUrl, '/portfolio/game-strategy'),
     }
   };
 }

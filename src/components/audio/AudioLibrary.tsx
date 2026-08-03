@@ -254,13 +254,13 @@ const AudioLibrary: React.FC = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search audio files..."
-                        className={`w-full px-4 py-2 pl-10 rounded-lg border ${
+                        className={`w-full px-4 py-2 ps-10 rounded-lg border ${
                           isLight 
                             ? 'bg-white border-ds-gray-300 text-ds-gray-900' 
                             : 'bg-black/20 border-ds-gray-600 text-white'
                         } focus:ring-2 focus:ring-primary focus:border-transparent`}
                       />
-                      <MaterialSymbol className="absolute left-3 top-2.5 text-ds-gray-400">
+                      <MaterialSymbol className="absolute start-3 top-2.5 text-ds-gray-400">
                         search
                       </MaterialSymbol>
                     </div>

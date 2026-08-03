@@ -501,7 +501,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
     >      {/* Dynamic background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none rounded-2xl" style={{ zIndex: -1 }}>
         <motion.div 
-          className={`absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-gradient-start/5 via-gradient-mid/5 to-gradient-end/5 blur-3xl`}
+          className={`absolute -top-32 -start-32 w-96 h-96 rounded-full bg-gradient-to-br from-gradient-start/5 via-gradient-mid/5 to-gradient-end/5 blur-3xl`}
           animate={isPlaying && !animationsDisabled ? {
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
@@ -513,7 +513,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           }}
         />
         <motion.div 
-          className={`absolute bottom-16 -right-32 w-80 h-80 rounded-full bg-gradient-to-br from-gradient-start/5 via-gradient-mid/5 to-gradient-end/5 blur-3xl`}
+          className={`absolute bottom-16 -end-32 w-80 h-80 rounded-full bg-gradient-to-br from-gradient-start/5 via-gradient-mid/5 to-gradient-end/5 blur-3xl`}
           animate={isPlaying && !animationsDisabled ? {
             scale: [1, 1.1, 1],
             rotate: [360, 180, 0],
@@ -646,8 +646,15 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
           />
         )}
       </motion.div>      {/* Enhanced progress bar with buffering and preview - Mobile optimized */}
-      <div className="relative mb-4 z-10">
-        <motion.div 
+      {/*
+        Pinned to LTR even in RTL locales. Every seek handler below derives its
+        position from `clientX - rect.left`, and the buffered/preview markers are
+        placed with physical `left` percentages — mirroring the bar without
+        mirroring that maths would make the scrubber seek backwards. Media
+        timelines also read left-to-right by convention in RTL UIs.
+      */}
+      <div className="relative mb-4 z-10" dir="ltr">
+        <motion.div
           className={`relative ${isMobile ? 'h-4 py-2' : 'h-3'} bg-ds-gray-200 dark:bg-ds-gray-700 rounded-full overflow-hidden cursor-pointer group`}
           onMouseMove={!isMobile ? handleProgressBarHover : undefined}
           onMouseLeave={!isMobile ? handleProgressBarLeave : undefined}
@@ -729,7 +736,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                 style={{ left: `${(previewTime / duration) * 100}%`, transform: 'translateX(-50%)' }}
               >
                 {formatTime(previewTime)}
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-foreground" />
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-s-2 border-e-2 border-t-4 border-transparent border-t-foreground" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -987,35 +994,35 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
                       <div className="space-y-2">
                         <button
                           onClick={copyAudioLink}
-                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-left text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
+                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-start text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
                         >
                           {t('blog.aria.copyAudioLink')}
                         </button>
 
                         <button
                           onClick={() => shareToSocialMedia('twitter')}
-                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-left text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
+                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-start text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
                         >
                           Share on Twitter
                         </button>
 
                         <button
                           onClick={() => shareToSocialMedia('whatsapp')}
-                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-left text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
+                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-start text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
                         >
                           Share on WhatsApp
                         </button>
 
                         <button
                           onClick={() => shareToSocialMedia('linkedin')}
-                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-left text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
+                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-start text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
                         >
                           Share on LinkedIn
                         </button>
 
                         <button
                           onClick={() => shareToSocialMedia('facebook')}
-                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-left text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
+                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-start text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
                         >
                           Share on Facebook
                         </button>
@@ -1024,7 +1031,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
 
                         <button
                           onClick={downloadAudio}
-                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-left text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
+                          className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--card-from-bg)] px-4 py-3 text-start text-sm font-medium text-[var(--muted-foreground)] transition-all duration-200 hover:scale-105 hover:bg-[var(--card-to-bg)] hover:text-[var(--foreground)]"
                         >
                           {t('blog.aria.downloadAudio')}
                         </button>
@@ -1086,7 +1093,7 @@ const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ src, title, 
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="absolute top-4 right-4 px-4 py-2 rounded-xl text-sm font-medium backdrop-blur-md bg-[var(--color-success-bg)] text-[var(--color-success)] border border-[var(--color-success-border)] shadow-xl z-50"
+            className="absolute top-4 end-4 px-4 py-2 rounded-xl text-sm font-medium backdrop-blur-md bg-[var(--color-success-bg)] text-[var(--color-success)] border border-[var(--color-success-border)] shadow-xl z-50"
           >
             ✓ {t('blog.aria.audioLinkCopied')}
           </motion.div>

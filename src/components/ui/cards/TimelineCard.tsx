@@ -192,7 +192,7 @@ export default function TimelineCard({
           </div>
           
           <div className="flex items-center justify-center mb-4 text-center">
-            <Icon name="location_on" size="xs" className={`mr-1 flex-shrink-0 ${getMetaStyles()}`} />
+            <Icon name="location_on" size="xs" className={`me-1 flex-shrink-0 ${getMetaStyles()}`} />
             <span className={getMetaStyles()}>{location}</span>
           </div>
           

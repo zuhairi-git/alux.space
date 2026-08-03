@@ -40,7 +40,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
                                 onClick={() => setSel(sel === w.id ? null : w.id)} className={`w-full flex items-center justify-between p-4.5 ${card} active:scale-[0.98]`}>
                                 <div className="flex items-center space-x-3.5">
                                     <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${isColorful ? 'bg-primary/20' : ws.iconBg(isLight)}`}><Icon name={w.icon} className={`text-xl ${isColorful ? 'text-primary' : ws.iconColor(isLight)}`} /></div>
-                                    <div className="text-left"><span className="font-semibold text-[15px] block">{w.name}</span><span className={`text-[12px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{w.members} members · {w.docs} docs</span></div>
+                                    <div className="text-start"><span className="font-semibold text-[15px] block">{w.name}</span><span className={`text-[12px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{w.members} members · {w.docs} docs</span></div>
                                 </div>
                                 <div className="flex items-center space-x-2.5">
                                     <Sparkline data={w.data} color={w.activity > 70 ? ws.sparklineHigh : ws.sparklineMid} width={44} height={18} />
@@ -58,7 +58,7 @@ export function WorkspacesView({ card, isLight, isColorful = false, theme, onNav
                     <motion.div key="ws-sheet" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-[60]">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => { setSel(null); setExpanded(false); }} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.radii.sheet} pt-5 pb-10 ${sheetBgClass}`}>
+                            className={`absolute bottom-0 start-0 end-0 ${theme.radii.sheet} pt-5 pb-10 ${sheetBgClass}`}>
                             {/* Drag handle — tap to expand */}
                             <button onClick={() => setExpanded(e => !e)} className="w-full flex flex-col items-center pb-5 active:opacity-70">
                                 <div className="w-10 h-1 rounded-full bg-ds-gray-400/30" />

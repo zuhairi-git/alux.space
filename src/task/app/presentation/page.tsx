@@ -9,8 +9,8 @@ import { exportToWord, exportToPowerPoint, exportToPDF } from './exportUtils';
 const TitleSlide = () => (
   <div data-slide="1" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-ds-gray-50 via-white to-ds-blue-50 relative overflow-y-auto overflow-x-hidden px-4 sm:px-8 py-32 sm:py-40">
     {/* Floating Orbs */}
-    <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-ds-blue-200/40 to-primary-200/40 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-ds-cyan-400/20 to-ds-cyan-200/40 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 end-20 w-96 h-96 bg-gradient-to-br from-ds-blue-200/40 to-primary-200/40 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 start-32 w-80 h-80 bg-gradient-to-tr from-ds-cyan-400/20 to-ds-cyan-200/40 rounded-full blur-3xl"></div>
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary-100/20 to-ds-pink-100/20 rounded-full blur-3xl"></div>
     
     <div className="text-center space-y-6 sm:space-y-8 lg:space-y-12 px-4 sm:px-8 lg:px-16 z-10 max-w-7xl mx-auto">
@@ -55,8 +55,8 @@ const TitleSlide = () => (
 const AgendaSlide = () => (
   <div data-slide="2" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute top-32 right-20 w-72 h-72 bg-gradient-to-br from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-ds-blue-200/30 to-ds-cyan-400/15 rounded-full blur-3xl"></div>
+    <div className="absolute top-32 end-20 w-72 h-72 bg-gradient-to-br from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 start-20 w-96 h-96 bg-gradient-to-tr from-ds-blue-200/30 to-ds-cyan-400/15 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Header */}
@@ -91,7 +91,7 @@ const AgendaSlide = () => (
                 <span className={`text-2xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>{item.number}</span>
                 <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold text-ds-gray-900">{item.title}</h3>
               </div>
-              <p className="text-ds-gray-600 text-sm sm:text-base lg:text-xl leading-relaxed sm:pl-12 lg:pl-16">{item.desc}</p>
+              <p className="text-ds-gray-600 text-sm sm:text-base lg:text-xl leading-relaxed sm:ps-12 lg:ps-16">{item.desc}</p>
             </div>
           </div>
         ))}
@@ -103,7 +103,7 @@ const AgendaSlide = () => (
 const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: () => void }) => (
   <div data-slide="3" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
     {/* Floating Orbs */}
-    <div className="absolute bottom-32 left-32 w-96 h-96 bg-gradient-to-tr from-ds-blue-200/30 to-ds-cyan-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 start-32 w-96 h-96 bg-gradient-to-tr from-ds-blue-200/30 to-ds-cyan-200/30 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10">
       {/* Header */}
@@ -154,7 +154,7 @@ const BacklogContextSlide = ({ onShowRejectionModal }: { onShowRejectionModal?: 
                     <Image src={item.icon} alt={item.label} width={16} height={16} />
                   </div>
                   <span className="font-medium text-ds-gray-900 text-sm">{item.label}</span>
-                  <span className={`px-2 py-0.5 rounded text-xs font-medium ${item.badgeBg} text-white ml-auto`}>
+                  <span className={`px-2 py-0.5 rounded text-xs font-medium ${item.badgeBg} text-white ms-auto`}>
                     {item.priority}
                   </span>
                 </div>
@@ -361,8 +361,8 @@ const PriorityItem = ({ rank, title, reasoning, color, iconPath }: any) => {
 const ConflictScenarioSlide = () => (
   <div data-slide="5" className="flex flex-col h-full bg-gradient-to-br from-ds-gray-50 via-white to-ds-pink-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-ds-error/10 to-[#ffb07a]/10 rounded-full blur-3xl"></div>
+    <div className="absolute top-32 end-32 w-96 h-96 bg-gradient-to-bl from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 start-20 w-80 h-80 bg-gradient-to-tr from-ds-error/10 to-[#ffb07a]/10 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10">
       {/* Title */}
@@ -386,7 +386,7 @@ const ConflictScenarioSlide = () => (
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ds-gray-900">QA Team</h3>
           </div>
           
-          <div className="bg-gradient-to-br from-ds-error/5 to-ds-error/5 border-l-4 border-ds-error rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-ds-error/5 to-ds-error/5 border-s-4 border-ds-error rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
             <p className="text-base sm:text-lg lg:text-xl font-semibold text-ds-gray-900 mb-2 sm:mb-3">Position:</p>
             <p className="text-ds-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
               &quot;Delay the release due to incomplete verification documentation&quot;
@@ -425,7 +425,7 @@ const ConflictScenarioSlide = () => (
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ds-gray-900">CTO</h3>
           </div>
           
-          <div className="bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 border-l-4 border-ds-blue-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 border-s-4 border-ds-blue-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
             <p className="text-base sm:text-lg lg:text-xl font-semibold text-ds-gray-900 mb-2 sm:mb-3">Position:</p>
             <p className="text-ds-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
               &quot;Release on schedule to maintain momentum and commitments&quot;
@@ -463,8 +463,8 @@ const ConflictScenarioSlide = () => (
 const ResolutionSlide = () => (
   <div data-slide="6" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-cyan-400/5 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 overflow-y-auto overflow-x-hidden relative">
     {/* Animated Background Elements */}
-    <div className="absolute top-20 right-20 w-[500px] h-[500px] bg-gradient-to-br from-ds-cyan-400/15 via-ds-cyan-200/30 to-ds-blue-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-200/20 via-ds-pink-200/20 to-ds-blue-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 end-20 w-[500px] h-[500px] bg-gradient-to-br from-ds-cyan-400/15 via-ds-cyan-200/30 to-ds-blue-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 start-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-200/20 via-ds-pink-200/20 to-ds-blue-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-7xl w-full mx-auto z-10 relative">
       {/* Header Section */}
@@ -580,8 +580,8 @@ const ResolutionSlide = () => (
 const PreventionSlide = () => (
   <div data-slide="7" className="flex flex-col h-full bg-gradient-to-br from-white via-ds-gray-50 to-ds-blue-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute top-32 right-32 w-96 h-96 bg-gradient-to-bl from-ds-blue-200/30 to-ds-cyan-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-primary-200/20 to-ds-pink-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute top-32 end-32 w-96 h-96 bg-gradient-to-bl from-ds-blue-200/30 to-ds-cyan-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 start-20 w-80 h-80 bg-gradient-to-tr from-primary-200/20 to-ds-pink-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Title */}
@@ -613,7 +613,7 @@ const PreventionSlide = () => (
         {/* Two-Phase Approach */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mt-8 sm:mt-12 lg:mt-16">
           {/* Phase 1 */}
-          <div className="bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 border-l-4 border-ds-blue-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-ds-blue-50 to-ds-blue-100/50 border-s-4 border-ds-blue-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 shadow-xl">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
               <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-ds-blue-500 to-ds-blue-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-xl sm:text-2xl shadow-lg">
                 1
@@ -646,7 +646,7 @@ const PreventionSlide = () => (
           </div>
 
           {/* Phase 2 */}
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 border-l-4 border-primary-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 border-s-4 border-primary-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 shadow-xl">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 lg:mb-6">
               <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center font-black text-xl sm:text-2xl shadow-lg">
                 2
@@ -686,8 +686,8 @@ const PreventionSlide = () => (
 const ReflectionSlide = () => (
   <div data-slide="8" className="flex flex-col h-full bg-gradient-to-br from-ds-gray-50 via-white to-primary-50/30 p-6 sm:p-12 lg:p-20 pb-40 sm:pb-28 lg:pb-32 relative overflow-y-auto overflow-x-hidden">
     {/* Floating Orbs */}
-    <div className="absolute bottom-32 right-32 w-96 h-96 bg-gradient-to-tl from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
-    <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-br from-ds-blue-200/20 to-ds-cyan-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 end-32 w-96 h-96 bg-gradient-to-tl from-primary-200/30 to-ds-pink-200/30 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 start-20 w-80 h-80 bg-gradient-to-br from-ds-blue-200/20 to-ds-cyan-200/20 rounded-full blur-3xl"></div>
     
     <div className="max-w-6xl w-full mx-auto z-10">
       {/* Title */}
@@ -765,8 +765,8 @@ const ReflectionSlide = () => (
 const ThankYouSlide = () => (
   <div data-slide="9" className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-primary-100 via-ds-pink-50 to-ds-blue-100 relative overflow-y-auto overflow-x-hidden pb-40 sm:pb-24">
     {/* Floating Orbs */}
-    <div className="absolute top-20 right-32 w-96 h-96 bg-gradient-to-br from-primary-300/40 to-ds-pink-300/40 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tr from-ds-blue-300/40 to-ds-cyan-300/40 rounded-full blur-3xl"></div>
+    <div className="absolute top-20 end-32 w-96 h-96 bg-gradient-to-br from-primary-300/40 to-ds-pink-300/40 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-32 start-32 w-80 h-80 bg-gradient-to-tr from-ds-blue-300/40 to-ds-cyan-300/40 rounded-full blur-3xl"></div>
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-ds-pink-200/30 to-primary-200/30 rounded-full blur-3xl"></div>
     
     <div className="text-center space-y-8 sm:space-y-12 lg:space-y-16 z-10 max-w-5xl mx-auto px-6 sm:px-12 lg:px-16">
@@ -1007,14 +1007,14 @@ export default function Presentation() {
 
       {/* Slide Counter */}
       {!printMode && (
-        <div className="fixed top-6 sm:top-6 lg:top-8 right-6 sm:right-6 lg:right-8 bg-white/95 backdrop-blur-sm border border-ds-gray-200 text-ds-gray-800 px-4 sm:px-4 lg:px-5 py-2 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl text-sm sm:text-sm font-semibold shadow-lg z-50">
+        <div className="fixed top-6 sm:top-6 lg:top-8 end-6 sm:end-6 lg:end-8 bg-white/95 backdrop-blur-sm border border-ds-gray-200 text-ds-gray-800 px-4 sm:px-4 lg:px-5 py-2 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl text-sm sm:text-sm font-semibold shadow-lg z-50">
           {currentSlide + 1} / {slides.length}
         </div>
       )}
 
       {/* Keyboard Hints - Hidden on mobile, shown on larger screens */}
       {!printMode && (
-        <div className="hidden lg:flex fixed bottom-8 lg:bottom-10 left-6 lg:left-8 bg-white/95 backdrop-blur-sm border border-ds-gray-200 text-ds-gray-700 px-4 lg:px-4 py-2 rounded-lg lg:rounded-xl text-xs items-center gap-3 lg:gap-3 shadow-lg z-50">
+        <div className="hidden lg:flex fixed bottom-8 lg:bottom-10 start-6 lg:start-8 bg-white/95 backdrop-blur-sm border border-ds-gray-200 text-ds-gray-700 px-4 lg:px-4 py-2 rounded-lg lg:rounded-xl text-xs items-center gap-3 lg:gap-3 shadow-lg z-50">
           <span className="text-ds-gray-500">Navigation:</span>
           <span className="bg-ds-gray-100 px-2 py-1 rounded border border-ds-gray-300">←</span>
           <span className="bg-ds-gray-100 px-2 py-1 rounded border border-ds-gray-300">→</span>

@@ -213,14 +213,14 @@ const BackgroundEffect = ({ type = 'particles', theme = 'dark' }: Props) => {
           />
         )}
         <StaticConstellation theme={theme} />
-        <div className="absolute top-[10%] left-1/4 text-primary-300 text-xs font-mono opacity-25">const</div>
-        <div className="absolute top-[18%] left-1/3 text-ds-gold-300 text-xs font-mono opacity-25">func</div>
+        <div className="absolute top-[10%] start-1/4 text-primary-300 text-xs font-mono opacity-25">const</div>
+        <div className="absolute top-[18%] start-1/3 text-ds-gold-300 text-xs font-mono opacity-25">func</div>
         <div className="absolute top-[12%] left-1/2 text-ds-pink-300 text-xs font-mono opacity-25">{'=>'}</div>
-        <div className="absolute top-[20%] left-2/3 text-ds-blue-300 text-xs font-mono opacity-25">return</div>
-        <div className="absolute top-[16%] right-1/4 text-primary-300 text-xs font-mono opacity-25">async</div>
-        <div className="absolute right-20 top-20 h-2 w-2 rounded-full bg-primary-400 opacity-70" />
-        <div className="absolute bottom-20 left-20 h-2 w-2 rounded-full bg-ds-gold-400 opacity-70" />
-        <div className="absolute left-1/4 top-1/2 h-2 w-2 rounded-full bg-ds-pink-400 opacity-70" />
+        <div className="absolute top-[20%] start-2/3 text-ds-blue-300 text-xs font-mono opacity-25">return</div>
+        <div className="absolute top-[16%] end-1/4 text-primary-300 text-xs font-mono opacity-25">async</div>
+        <div className="absolute end-20 top-20 h-2 w-2 rounded-full bg-primary-400 opacity-70" />
+        <div className="absolute bottom-20 start-20 h-2 w-2 rounded-full bg-ds-gold-400 opacity-70" />
+        <div className="absolute start-1/4 top-1/2 h-2 w-2 rounded-full bg-ds-pink-400 opacity-70" />
       </div>
     );
   }
@@ -235,17 +235,17 @@ const BackgroundEffect = ({ type = 'particles', theme = 'dark' }: Props) => {
             style={{ pointerEvents: 'none' }}
           />
         )}
-        <div className="absolute left-[5%] top-[8%] text-sm font-mono text-ds-cyan-400 opacity-35">01</div>
-        <div className="absolute left-[12%] top-[16%] text-sm font-mono text-primary-400 opacity-35">10</div>
-        <div className="absolute left-[18%] top-[12%] text-sm font-mono text-ds-pink-400 opacity-35">11</div>
-        <div className="absolute left-[25%] top-[20%] text-sm font-mono text-ds-cyan-400 opacity-35">00</div>
-        <div className="absolute right-[5%] top-[9%] text-sm font-mono text-primary-400 opacity-35">01</div>
-        <div className="absolute right-[12%] top-[18%] text-sm font-mono text-ds-pink-400 opacity-35">10</div>
-        <div className="absolute right-[18%] top-[13%] text-sm font-mono text-ds-cyan-400 opacity-35">11</div>
-        <div className="absolute right-[25%] top-[22%] text-sm font-mono text-primary-400 opacity-35">00</div>
-        <div className="absolute left-1/4 top-1/4 h-3 w-3 rounded-full bg-ds-cyan-400 opacity-80" />
-        <div className="absolute right-1/4 top-3/4 h-3 w-3 rounded-full bg-primary-400 opacity-80" />
-        <div className="absolute right-1/3 top-1/2 h-3 w-3 rounded-full bg-ds-pink-400 opacity-80" />
+        <div className="absolute start-[5%] top-[8%] text-sm font-mono text-ds-cyan-400 opacity-35">01</div>
+        <div className="absolute start-[12%] top-[16%] text-sm font-mono text-primary-400 opacity-35">10</div>
+        <div className="absolute start-[18%] top-[12%] text-sm font-mono text-ds-pink-400 opacity-35">11</div>
+        <div className="absolute start-[25%] top-[20%] text-sm font-mono text-ds-cyan-400 opacity-35">00</div>
+        <div className="absolute end-[5%] top-[9%] text-sm font-mono text-primary-400 opacity-35">01</div>
+        <div className="absolute end-[12%] top-[18%] text-sm font-mono text-ds-pink-400 opacity-35">10</div>
+        <div className="absolute end-[18%] top-[13%] text-sm font-mono text-ds-cyan-400 opacity-35">11</div>
+        <div className="absolute end-[25%] top-[22%] text-sm font-mono text-primary-400 opacity-35">00</div>
+        <div className="absolute start-1/4 top-1/4 h-3 w-3 rounded-full bg-ds-cyan-400 opacity-80" />
+        <div className="absolute end-1/4 top-3/4 h-3 w-3 rounded-full bg-primary-400 opacity-80" />
+        <div className="absolute end-1/3 top-1/2 h-3 w-3 rounded-full bg-ds-pink-400 opacity-80" />
       </div>
     );
   }
@@ -261,12 +261,12 @@ const BackgroundEffect = ({ type = 'particles', theme = 'dark' }: Props) => {
         />
       )}
       <StaticConstellation theme={theme} />
-      <div className="absolute left-1/4 top-[10%] text-xs font-mono text-ds-blue-800 opacity-20">{'<>'}</div>
+      <div className="absolute start-1/4 top-[10%] text-xs font-mono text-ds-blue-800 opacity-20">{'<>'}</div>
       <div className="absolute left-1/2 top-[18%] text-xs font-mono text-ds-indigo-800 opacity-20">{'{}'}</div>
-      <div className="absolute left-3/4 top-[13%] text-xs font-mono text-primary-800 opacity-20">[]</div>
-      <div className="absolute right-1/4 top-1/4 h-1.5 w-1.5 rounded-full bg-[var(--primary)] opacity-70" />
-      <div className="absolute bottom-1/4 left-1/4 h-1.5 w-1.5 rounded-full bg-ds-indigo-600 opacity-70" />
-      <div className="absolute left-1/3 top-1/2 h-1.5 w-1.5 rounded-full bg-primary-600 opacity-70" />
+      <div className="absolute start-3/4 top-[13%] text-xs font-mono text-primary-800 opacity-20">[]</div>
+      <div className="absolute end-1/4 top-1/4 h-1.5 w-1.5 rounded-full bg-[var(--primary)] opacity-70" />
+      <div className="absolute bottom-1/4 start-1/4 h-1.5 w-1.5 rounded-full bg-ds-indigo-600 opacity-70" />
+      <div className="absolute start-1/3 top-1/2 h-1.5 w-1.5 rounded-full bg-primary-600 opacity-70" />
     </div>
   );
 };

@@ -119,7 +119,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=Ali&background=${isColorful ? 'f59e0b' : theme.accent.fallbackAvatar}&color=fff` }} />
                             </div>
-                            <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${theme.accent.statusDot(isLight)}`} />
+                            <div className={`absolute -bottom-0.5 -end-0.5 w-4 h-4 rounded-full border-[2.5px] ${theme.accent.statusDot(isLight)}`} />
                         </motion.button>
                         <div className="flex flex-col">
                             <AnimatePresence mode="wait">
@@ -132,7 +132,7 @@ export function JobSeekingApp({ theme }: JobSeekingAppProps) {
                     </div>
                     <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${theme.accent.aiButton(isLight)}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                         <Icon name="auto_awesome" className="text-[20px]" />
-                        <span className={`absolute top-[9px] right-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_8px_var(--color-warning)]' : ''}`} />
+                        <span className={`absolute top-[9px] end-[9px] w-[5.5px] h-[5.5px] bg-ds-warning rounded-full animate-pulse ${theme.platform === 'ios' ? 'shadow-[0_0_8px_var(--color-warning)]' : ''}`} />
                     </motion.button>
                 </div>
             </header>

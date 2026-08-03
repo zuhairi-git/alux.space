@@ -1,55 +1,54 @@
 import React from 'react';
 import { Metadata } from 'next';
-import HomePage from '../page';
-import { i18n } from '@/i18n';
-import Link from 'next/link';
+import HomePage from '@/components/home/HomePage';
+import { i18n, getLocaleConfig, alternateLanguages } from '@/i18n';
 
 // Required for static site generation with internationalized routes
 export function generateStaticParams() {
-  return i18n.locales.map(locale => ({ locale }));
+  return i18n.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://alux.space';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale } = await params;
-  
-  const localizedMetadata = {
+  const config = getLocaleConfig(locale);
+
+  const localizedMetadata: Record<string, { title: string; description: string }> = {
     en: {
       title: 'Ali Al-Zuhairi | Product Designer & UX Leader',
-      description: 'Personal portfolio showcasing product design, UX leadership, and creative project work.',
-    },    fi: {
+      description:
+        'Personal portfolio showcasing product design, UX leadership, and creative project work.',
+    },
+    fi: {
       title: 'Ali Al-Zuhairi | Tuotesuunnittelija & UX-johtaja',
-      description: 'Henkilökohtainen portfolio, joka esittelee tuotesuunnittelua, UX-johtajuutta ja luovia projektitöitä.',
-    }
+      description:
+        'Henkilökohtainen portfolio, joka esittelee tuotesuunnittelua, UX-johtajuutta ja luovia projektitöitä.',
+    },
   };
-  
-  const metadata = localizedMetadata[locale as keyof typeof localizedMetadata] || localizedMetadata.en;
-  
+
+  const metadata = localizedMetadata[config.code] ?? localizedMetadata.en;
+
   return {
     title: metadata.title,
     description: metadata.description,
+    openGraph: {
+      title: metadata.title,
+      description: metadata.description,
+      url: `${baseUrl}/${config.code}`,
+      locale: config.ogLocale,
+    },
+    alternates: {
+      canonical: `${baseUrl}/${config.code}`,
+      languages: alternateLanguages(baseUrl),
+    },
   };
 }
 
-export default async function LocalizedHomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  
-  return (
-    <>
-      {/* Test language navigation links */}
-      <div className="hidden fixed top-24 right-4 z-50 bg-black bg-opacity-50 p-2 rounded">
-        <div className="flex flex-col gap-2">
-          {i18n.locales.map((lang) => (
-            <Link 
-              key={lang} 
-              href={`/${lang}/blog`} 
-              className={`text-white px-3 py-1 rounded ${locale === lang ? 'bg-[var(--btn-primary-bg)]' : 'bg-ds-gray-700'}`}
-            >
-              {lang.toUpperCase()} Blog
-            </Link>        ))}
-        </div>
-      </div>
-      
-      <HomePage />
-    </>
-  );
+export default function LocalizedHomePage() {
+  return <HomePage />;
 }

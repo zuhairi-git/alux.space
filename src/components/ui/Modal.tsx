@@ -149,7 +149,7 @@ export default function Modal({
 
         {/* Close button if no title */}
         {!title && (
-          <Button variant="icon" size="sm" onClick={onClose} aria-label="Close dialog" className="absolute top-3 right-3">
+          <Button variant="icon" size="sm" onClick={onClose} aria-label="Close dialog" className="absolute top-3 end-3">
             <Icon name="close" />
           </Button>
         )}

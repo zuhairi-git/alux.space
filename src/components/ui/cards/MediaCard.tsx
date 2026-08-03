@@ -140,7 +140,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
               
               {/* Attribution */}
               {imageAttribution && (
-                <div className="absolute bottom-2 left-4 text-xs text-on-dark/70">
+                <div className="absolute bottom-2 start-4 text-xs text-on-dark/70">
                   Photo by{' '}
                   <a
                     href={imageAttribution.link}

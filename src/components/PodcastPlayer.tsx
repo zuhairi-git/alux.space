@@ -581,7 +581,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           >            {/* Refined animated background elements */}
             <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-2xl">
               <motion.div 
-                className={`absolute top-4 left-4 w-8 h-8 rounded-full ${
+                className={`absolute top-4 start-4 w-8 h-8 rounded-full ${
                   isLight ? 'bg-primary-300/40' : 'bg-[var(--primary)]/25'
                 } blur-sm`}
                 animate={{ 
@@ -592,7 +592,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div 
-                className={`absolute bottom-6 right-5 w-6 h-6 rounded-full bg-[var(--primary)]/25 blur-sm`}
+                className={`absolute bottom-6 end-5 w-6 h-6 rounded-full bg-[var(--primary)]/25 blur-sm`}
                 animate={{ 
                   scale: isPlaying ? [1, 1.4, 1] : 1,
                   opacity: isPlaying ? [0.3, 0.6, 0.3] : 0.3,
@@ -601,7 +601,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 transition={{ duration: 4, repeat: Infinity, delay: 0.5, ease: "easeInOut" }}
               />
               <motion.div 
-                className={`absolute top-1/3 right-3 w-4 h-4 rounded-full ${
+                className={`absolute top-1/3 end-3 w-4 h-4 rounded-full ${
                   isLight ? 'bg-ds-pink-300/40' : 'bg-[var(--gradient-end)]/20'
                 } blur-sm`}
                 animate={{ 
@@ -624,7 +624,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                 
                 {/* Subtle geometric shapes */}
                 <motion.div 
-                  className={`absolute -top-8 -right-8 w-24 h-24 rounded-full ${
+                  className={`absolute -top-8 -end-8 w-24 h-24 rounded-full ${
                     isLight ? 'bg-primary-200/30' : 'bg-primary-400/20'
                   } blur-xl`}
                   animate={{ 
@@ -634,7 +634,7 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
                   transition={{ duration: 4, repeat: Infinity }}
                 />
                 <motion.div 
-                  className={`absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-[var(--primary-glow)] blur-lg`}
+                  className={`absolute -bottom-6 -start-6 w-20 h-20 rounded-full bg-[var(--primary-glow)] blur-lg`}
                   animate={{ 
                     scale: isPlaying ? [1, 1.2, 1] : 1,
                     opacity: isPlaying ? [0.2, 0.4, 0.2] : 0.2 
@@ -831,7 +831,13 @@ const PodcastPlayer: React.FC<PodcastPlayerProps> = ({ initialEpisodeId }) => {
           </p>
         </div>
       </div>      {/* Progress Section - Modern Mobile Style */}
-      <div className="px-4 pb-3 relative z-15">{/* Main progress bar - Enhanced for mobile touch */}
+      {/*
+        dir="ltr" is deliberate: the seek handlers below all compute position as
+        `clientX - rect.left`, so mirroring the bar in RTL would make dragging
+        seek in the opposite direction. Media timelines conventionally stay
+        left-to-right in RTL interfaces.
+      */}
+      <div className="px-4 pb-3 relative z-15" dir="ltr">{/* Main progress bar - Enhanced for mobile touch */}
         <div className="relative w-full mb-3">
           <div 
             ref={progressRef}

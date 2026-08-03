@@ -86,6 +86,9 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, className = '', id })
         return 'bottom-full left-1/2 -translate-x-1/2 mb-2';
       case 'bottom':
         return 'top-full left-1/2 -translate-x-1/2 mt-2';
+      // Physical, not logical, on purpose: `position` is chosen from raw
+      // viewport coordinates above, so a logical class would place the tooltip
+      // on the side we just measured as having no room whenever dir is RTL.
       case 'left':
         return 'right-full top-1/2 -translate-y-1/2 mr-2';
       case 'right':
@@ -148,6 +151,7 @@ const getArrowPositionClasses = (position: string) => {
       return 'bottom-[-4px] left-1/2 -translate-x-1/2';
     case 'bottom':
       return 'top-[-4px] left-1/2 -translate-x-1/2';
+    // Physical to match getPositionClasses — see the note there.
     case 'left':
       return 'right-[-4px] top-1/2 -translate-y-1/2';
     case 'right':

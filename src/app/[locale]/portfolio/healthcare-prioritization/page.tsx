@@ -1,6 +1,6 @@
 import HealthcarePrioritizationClient from '@/components/portfolio/HealthcarePrioritizationClient';
 import { Metadata } from 'next';
-import { i18n } from '@/i18n';
+import { i18n, alternateLanguages } from '@/i18n';
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({
@@ -55,10 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/portfolio/healthcare-prioritization`,
-      languages: {
-        en: `${baseUrl}/en/portfolio/healthcare-prioritization`,
-        fi: `${baseUrl}/fi/portfolio/healthcare-prioritization`,
-      },
+      languages: alternateLanguages(baseUrl, '/portfolio/healthcare-prioritization'),
     },
   };
 }

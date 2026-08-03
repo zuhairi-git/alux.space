@@ -1,5 +1,5 @@
-'use client';;
-import React, { useEffect } from 'react';
+'use client';
+import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { delaySeconds, Icon, stagger, transition as t } from '@/design-system';
@@ -11,17 +11,8 @@ import CaseStudyProgress from './CaseStudyProgress';
 import MaterialSymbol from '@/components/ui/MaterialSymbol';
 
 export default function AccessibilityClient() {
-  useEffect(() => {
-    // Ensure Tajawal font is loaded
-    const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap';
-    link.rel = 'stylesheet';
-    if (!document.querySelector(`link[href="${link.href}"]`)) {
-      document.head.appendChild(link);
-    }
-  }, []);
-
-  
+  // Tajawal is self-hosted by next/font in the root layout and exposed as
+  // --font-tajawal — no runtime <link> injection needed.
   const { locale } = useLanguage();
 
   // Get localized text content
@@ -497,7 +488,7 @@ export default function AccessibilityClient() {
                   <h2 className={`text-2xl font-bold mt-16 mb-6 text-[var(--foreground)]`}>{content.designProcess}</h2>
 
                   <div className={`p-6 rounded-2xl mb-6 bg-[var(--card-from-bg)]`}>                    <div className="flex items-center mb-6">
-                      <span className={`text-sm font-medium mr-3 opacity-80 text-[var(--foreground)]`}>{content.designModel}</span>
+                      <span className={`text-sm font-medium me-3 opacity-80 text-[var(--foreground)]`}>{content.designModel}</span>
                       <span className={`text-lg font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent`}>
                         {content.doubleD}
                       </span>
@@ -550,7 +541,7 @@ export default function AccessibilityClient() {
                               className="group relative p-5 rounded-2xl border border-[var(--card-border)] transition-transform duration-300 hover:-translate-y-0.5 cursor-pointer"
                               style={{ backgroundImage: phase.surface }}
                             >
-                              <div className={`relative mb-4 ${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
+                              <div className={`relative mb-4 ${index % 2 === 0 ? 'text-start' : 'text-end'}`}>
                                 <div
                                   className="inline-flex w-11 h-11 items-center justify-center rounded-full shadow-lg group-hover:scale-105 transition-transform duration-300"
                                   style={{ backgroundImage: phase.iconSurface, boxShadow: '0 12px 28px -18px color-mix(in srgb, var(--primary) 45%, transparent)' }}
@@ -572,8 +563,8 @@ export default function AccessibilityClient() {
 
                               {/* Connection indicator */}
                               {index < 3 && (
-                                <div className={`hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-30`}>
-                                  <div className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]`}></div>
+                                <div className={`hidden lg:block absolute -end-3 top-1/2 transform -translate-y-1/2 w-5 h-0.5 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-30`}>
+                                  <div className={`absolute end-0 top-1/2 transform -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--primary)]`}></div>
                                 </div>
                               )}
                             </div>
@@ -709,9 +700,9 @@ export default function AccessibilityClient() {
                                 <span className="text-sm opacity-60">{persona.traits.join(' · ')}</span>
                               </div>
 
-                              {/* Detail columns — left-border accent, no boxes */}
+                              {/* Detail columns — inline-start border accent, no boxes */}
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                                <div className="border-l-2 border-ds-emerald-600/30 pl-4">
+                                <div className="border-s-2 border-ds-emerald-600/30 ps-4">
                                   <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-success mb-3">Needs</h4>
                                   <ul className="space-y-1.5">
                                     {persona.needs.map((need, i) => (
@@ -720,7 +711,7 @@ export default function AccessibilityClient() {
                                   </ul>
                                 </div>
 
-                                <div className="border-l-2 border-[var(--primary)]/30 pl-4">
+                                <div className="border-s-2 border-[var(--primary)]/30 ps-4">
                                   <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--primary)] mb-3">Goals</h4>
                                   <ul className="space-y-1.5">
                                     {persona.goals.map((goal, i) => (
@@ -729,7 +720,7 @@ export default function AccessibilityClient() {
                                   </ul>
                                 </div>
 
-                                <div className="border-l-2 border-ds-pink-500/30 pl-4">
+                                <div className="border-s-2 border-ds-pink-500/30 ps-4">
                                   <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-ds-pink-500 mb-3">Pain Points</h4>
                                   <ul className="space-y-1.5">
                                     {persona.pains.map((pain, i) => (

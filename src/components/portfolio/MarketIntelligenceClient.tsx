@@ -39,15 +39,8 @@ function PulseDot({ color = 'bg-[var(--primary)]' }: { color?: string }) {
 }
 
 export default function MarketIntelligenceClient() {
-    useEffect(() => {
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap';
-        link.rel = 'stylesheet';
-        if (!document.querySelector(`link[href="${link.href}"]`)) {
-            document.head.appendChild(link);
-        }
-    }, []);
-
+    // Tajawal is self-hosted by next/font in the root layout and exposed as
+    // --font-tajawal — no runtime <link> injection needed.
     const { locale } = useLanguage();
 
     // Get localized text content
@@ -380,7 +373,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -3, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="relative group p-7 rounded-2xl border overflow-hidden transition-all duration-500 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                             <h3 className="text-xl font-bold mb-3 text-[var(--foreground)]">{card.title}</h3>
                                             <p className="leading-relaxed text-[var(--muted-foreground)]">{card.desc}</p>
@@ -410,7 +403,7 @@ export default function MarketIntelligenceClient() {
                                             className={`group p-6 rounded-3xl bg-[var(--card-from-bg)] border border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${index === 4 ? 'sm:col-span-2 lg:col-span-2' : ''}`}
                                         >
                                             {/* Large background number */}
-                                            <div className="absolute -bottom-4 -right-4 text-[var(--primary)]/5 text-[6rem] font-black pointer-events-none group-hover:text-[var(--primary)]/10 group-hover:scale-110 transition-all duration-500">
+                                            <div className="absolute -bottom-4 -end-4 text-[var(--primary)]/5 text-[6rem] font-black pointer-events-none group-hover:text-[var(--primary)]/10 group-hover:scale-110 transition-all duration-500">
                                                 {index + 1}
                                             </div>
                                             
@@ -429,7 +422,7 @@ export default function MarketIntelligenceClient() {
                         {/* ═══ SECTION 2: STRATEGIC RATIONALE ═══ */}
                         <CaseStudySection title={content.rationaleTitle} number={2} accent="primary">
                             <CaseStudyItem>
-                                <div className="mb-12 border-l-[3px] border-[var(--primary)]/40 pl-6 py-1">
+                                <div className="mb-12 border-s-[3px] border-[var(--primary)]/40 ps-6 py-1">
                                     <p className="text-lg max-w-3xl text-[var(--muted-foreground)] leading-relaxed">
                                         {content.rationaleSubtitle}
                                     </p>
@@ -558,7 +551,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat1Title}</h4>
@@ -568,17 +561,17 @@ export default function MarketIntelligenceClient() {
                                             {/* Mini chat mockup */}
                                             <div className="space-y-2.5">
                                                 <div className="flex justify-end">
-                                                    <div className="bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary)] text-xs px-3 py-1.5 rounded-2xl rounded-tr-sm font-medium max-w-[85%]">
+                                                    <div className="bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary)] text-xs px-3 py-1.5 rounded-2xl rounded-se-sm font-medium max-w-[85%]">
                                                         {locale === 'fi' ? 'Näytä AAPL Q3 tulokset' : 'Show AAPL Q3 earnings highlights'}
                                                     </div>
                                                 </div>
                                                 <div className="flex gap-2 items-start">
-                                                    <div className="bg-[var(--card-to-bg)] border border-[var(--card-border)] text-[var(--foreground)] text-xs px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[85%]">
+                                                    <div className="bg-[var(--card-to-bg)] border border-[var(--card-border)] text-[var(--foreground)] text-xs px-3 py-1.5 rounded-2xl rounded-ss-sm max-w-[85%]">
                                                         <span className="opacity-80">{locale === 'fi' ? 'Liikevaihto kasvoi 8 % YoY...' : 'Revenue grew 8% YoY to $94.9B...'}</span>
-                                                        <span className="ml-1 text-[var(--primary)] font-semibold">[1]</span>
+                                                        <span className="ms-1 text-[var(--primary)] font-semibold">[1]</span>
                                                     </div>
                                                 </div>
-                                                <div className="flex gap-1.5 pl-2">
+                                                <div className="flex gap-1.5 ps-2">
                                                     <span className="text-[10px] text-[var(--muted-foreground)] border border-[var(--card-border)] px-2 py-0.5 rounded-full">Apple 10-Q ↗</span>
                                                 </div>
                                             </div>
@@ -593,7 +586,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat2Title}</h4>
@@ -618,7 +611,7 @@ export default function MarketIntelligenceClient() {
                                                                 transition={{ type: 'spring', stiffness: 80, damping: 18, delay: 0.3 }}
                                                             />
                                                         </div>
-                                                        <span className="text-[11px] font-semibold text-[var(--foreground)] tabular-nums w-8 text-right">{s.pct}%</span>
+                                                        <span className="text-[11px] font-semibold text-[var(--foreground)] tabular-nums w-8 text-end">{s.pct}%</span>
                                                     </div>
                                                 ))}
                                                 <p className="text-[10px] text-[var(--muted-foreground)] flex items-center gap-1.5 pt-1">
@@ -637,7 +630,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat3Title}</h4>
@@ -670,7 +663,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 24 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 transition-all duration-300"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="flex items-start gap-3 mb-5">
                                                 <div>
                                                     <h4 className="font-bold text-[var(--foreground)]">{content.feat4Title}</h4>
@@ -718,7 +711,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="relative group p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-md"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <h3 className="text-lg font-bold mb-3 text-[var(--foreground)]">{platform.title}</h3>
                                             <p className="leading-relaxed text-[var(--muted-foreground)]">{platform.desc}</p>
                                         </motion.div>
@@ -746,7 +739,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="group relative flex items-center gap-3 p-4 rounded-xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 shadow-sm hover:shadow-md"
                                         >
-                                            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                                            <div className="absolute bottom-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
                                             <p className="font-medium text-sm text-[var(--foreground)]/80">{flow}</p>
                                         </motion.div>
                                     ))}
@@ -773,7 +766,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                             <h3 className="text-lg font-bold mb-3 text-[var(--foreground)]">{item.title}</h3>
                                             <p className="leading-relaxed text-sm text-[var(--muted-foreground)]">{item.desc}</p>
                                         </motion.div>
@@ -801,7 +794,7 @@ export default function MarketIntelligenceClient() {
                                             whileHover={{ y: -3, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
                                             className="group relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 bg-[var(--card-from-bg)] border-[var(--card-border)] hover:border-[var(--primary)]/30 hover:shadow-lg"
                                         >
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r from-[var(--primary)] to-[var(--gradient-mid)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <p className="font-semibold mb-4 text-sm text-[var(--foreground)]/80">{metric.text}</p>
 
                                             {/* Animated progress bar */}
@@ -814,7 +807,7 @@ export default function MarketIntelligenceClient() {
                                                     transition={{ type: "spring", stiffness: 60, damping: 18, mass: 1, delay: delaySeconds.md + index * stagger.relaxed }}
                                                 />
                                             </div>
-                                            <div className="mt-2 text-right text-xs font-medium tabular-nums text-[var(--muted-foreground)]">
+                                            <div className="mt-2 text-end text-xs font-medium tabular-nums text-[var(--muted-foreground)]">
                                                 <AnimatedCounter target={metric.value} suffix="%" />
                                             </div>
                                         </motion.div>

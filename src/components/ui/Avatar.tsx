@@ -76,7 +76,7 @@ export default function Avatar({
       {status && (
         <span
           className={[
-            'absolute bottom-0 right-0 rounded-full',
+            'absolute bottom-0 end-0 rounded-full',
             'border-[var(--background)]',
             s.statusDot,
             statusColors[status],

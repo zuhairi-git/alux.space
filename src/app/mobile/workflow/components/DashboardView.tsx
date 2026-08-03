@@ -35,7 +35,7 @@ function NewDocSheet({ isLight, isColorful, theme, onClose }: { isLight: boolean
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary-400/10' : 'bg-primary-500/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary-400/10' : 'bg-primary-500/15'}`}>
                     <Icon name="edit_document" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-primary-400'}`} />
                 </div>
                 <h3 className="text-[18px] font-bold">New Document</h3>
@@ -87,7 +87,7 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
             <h3 className="text-xl font-bold mb-1">You&apos;re Live!</h3>
             <p className={`text-[13px] text-center mb-6 ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>You&apos;ve joined the session. Your camera and mic are ready.</p>
             <div className="flex gap-3">
-                <button className="px-5 py-2.5 rounded-2xl bg-ds-error/15 text-ds-error font-semibold text-[13px]"><Icon name="mic_off" className="mr-1" />Mute</button>
+                <button className="px-5 py-2.5 rounded-2xl bg-ds-error/15 text-ds-error font-semibold text-[13px]"><Icon name="mic_off" className="me-1" />Mute</button>
                 <button onClick={onClose} className="px-5 py-2.5 rounded-2xl bg-ds-success text-white font-semibold text-[13px]">Enter Room</button>
             </div>
         </motion.div>
@@ -95,7 +95,7 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary-100' : 'bg-primary-500/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary-100' : 'bg-primary-500/15'}`}>
                     <Icon name="groups" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-primary-400'}`} />
                 </div>
                 <h3 className="text-[18px] font-bold">Join Live Session</h3>
@@ -104,8 +104,8 @@ function JoinRoomSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
                 <p className={`text-[12px] font-bold uppercase tracking-wider opacity-50 px-1 mb-2`}>Active Rooms</p>
                 {liveRooms.map((room, i) => (
                     <motion.button key={i} whileTap={{ scale: 0.98 }} onClick={() => setJoined(true)}
-                        className={`w-full flex items-center text-left p-4 rounded-2xl ${isLight ? 'bg-black/[0.04] hover:bg-black/[0.07]' : 'bg-white/[0.06] hover:bg-white/[0.09]'} transition-colors`}>
-                        <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 mr-3 ${colorMap[room.color]}`}>
+                        className={`w-full flex items-center text-start p-4 rounded-2xl ${isLight ? 'bg-black/[0.04] hover:bg-black/[0.07]' : 'bg-white/[0.06] hover:bg-white/[0.09]'} transition-colors`}>
+                        <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 me-3 ${colorMap[room.color]}`}>
                             <Icon name={room.tag === 'Live' ? 'radio_button_checked' : 'schedule'} className="text-[18px]" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -149,7 +149,7 @@ function ScheduleSheet({ isLight, isColorful, theme, onClose }: { isLight: boole
     return (
         <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center mb-5">
-                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center mr-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary-400/10' : 'bg-primary-500/15'}`}>
+                <div className={`w-9 h-9 rounded-2xl flex items-center justify-center me-3 ${isColorful ? 'bg-primary/20' : isLight ? 'bg-primary-400/10' : 'bg-primary-500/15'}`}>
                     <Icon name="calendar_today" className={`text-[18px] ${isColorful ? 'text-primary' : 'text-primary-400'}`} />
                 </div>
                 <h3 className="text-[18px] font-bold">Schedule Meeting</h3>
@@ -311,12 +311,12 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
     return (
         <motion.div initial="hidden" animate="show" exit={{ opacity: 0, scale: 0.97 }} variants={stagger} className="space-y-3">
             {/* AI Hero — full width */}
-            <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-left p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
-                <div className={`absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br from-primary-500/10 to-primary/10 blur-2xl group-active:scale-110 transition-transform`} />
+            <motion.button variants={fadeUp} onClick={() => onNav('copilot')} className={`w-full text-start p-5 ${card} relative overflow-hidden group active:scale-[0.98] transition-transform`}>
+                <div className={`absolute -top-8 -end-8 w-28 h-28 rounded-full bg-gradient-to-br from-primary-500/10 to-primary/10 blur-2xl group-active:scale-110 transition-transform`} />
                 <div className="flex items-center space-x-2.5 mb-3 relative z-10">
                     <Icon name="auto_awesome" className={`text-xl ${isColorful ? 'text-primary' : 'text-primary-500'}`} />
                     <span className={`text-[10px] font-bold uppercase tracking-[0.15em] ${accent}`}>AI Briefing</span>
-                    <span className="ml-auto text-[10px] font-medium opacity-30">Just now</span>
+                    <span className="ms-auto text-[10px] font-medium opacity-30">Just now</span>
                 </div>
                 <p className={`text-[14px] leading-[1.7] relative z-10 ${isLight ? 'text-ds-gray-700' : 'text-ds-gray-300'}`}>
                     Your team had a <span className={`font-semibold ${highlight}`}>productive sprint</span> — 14 docs updated, 3 design reviews completed. <span className="font-semibold">2 pending approvals</span> await.
@@ -329,7 +329,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
             {/* Bento Grid — 4 columns, asymmetric tiles */}
             <div className="grid grid-cols-4 gap-2.5">
                 {/* Workspace 1 — 2 cols, tall */}
-                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 row-span-2 text-left p-4 ${card} active:scale-[0.97] transition-transform`}>
+                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 row-span-2 text-start p-4 ${card} active:scale-[0.97] transition-transform`}>
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
                         <Icon name={workspaces[0].icon} className={`text-xl ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
                     </div>
@@ -343,7 +343,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 </motion.button>
 
                 {/* Workspace 2 — 2 cols, short */}
-                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
+                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-start p-3.5 ${card} active:scale-[0.97] transition-transform`}>
                     <div className="flex items-center gap-2.5 mb-2">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
                             <Icon name={workspaces[1].icon} className={`text-[16px] ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
@@ -357,7 +357,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                 </motion.button>
 
                 {/* Workspace 3 — 2 cols, short */}
-                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-left p-3.5 ${card} active:scale-[0.97] transition-transform`}>
+                <motion.button variants={fadeUp} onClick={() => onNav('workspaces')} className={`col-span-2 text-start p-3.5 ${card} active:scale-[0.97] transition-transform`}>
                     <div className="flex items-center gap-2.5 mb-2">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
                             <Icon name={workspaces[2].icon} className={`text-[16px] ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
@@ -397,7 +397,7 @@ function BentoLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[12px] font-bold ${d.teamColorMap[a.color] || 'bg-ds-gray-500/15 text-ds-gray-400'}`}>{a.user[0]}</div>
                                 <span className="text-[13px] truncate"><span className="font-semibold">{a.user}</span> {a.action}</span>
                             </div>
-                            <span className="text-[11px] text-ds-gray-500 shrink-0 ml-2">{a.time}</span>
+                            <span className="text-[11px] text-ds-gray-500 shrink-0 ms-2">{a.time}</span>
                         </motion.button>
                     ))}
                 </div>
@@ -440,7 +440,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
                 <div className="flex space-x-3.5 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
                     {workspaces.slice(0, 4).map((ws, i) => (
                         <motion.button key={ws.id} initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 + i * 0.07, type: 'spring', stiffness: 400, damping: 30 }}
-                            onClick={() => onNav('workspaces')} className={`shrink-0 w-[160px] p-5 ${card} active:scale-[0.97] transition-transform text-left`}>
+                            onClick={() => onNav('workspaces')} className={`shrink-0 w-[160px] p-5 ${card} active:scale-[0.97] transition-transform text-start`}>
                             <div className="flex justify-between items-start mb-1.5">
                                 <span className="font-bold text-[14px] truncate max-w-[80px]">{ws.name.split(' ')[0]}</span>
                                 <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${ws.status === 'Active' ? theme.workspace.statusActive : ws.status === 'Review' ? 'bg-ds-warning/15 text-ds-warning' : 'bg-ds-gray-500/15 text-ds-gray-400'}`}>{ws.status}</span>
@@ -464,7 +464,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[12px] font-bold ${d.teamColorMap[a.color] || 'bg-ds-gray-500/15 text-ds-gray-400'}`}>{a.user[0]}</div>
                                 <span className="text-[14px] truncate"><span className="font-semibold">{a.user}</span> {a.action}</span>
                             </div>
-                            <span className="text-[12px] text-ds-gray-500 shrink-0 ml-2">{a.time}</span>
+                            <span className="text-[12px] text-ds-gray-500 shrink-0 ms-2">{a.time}</span>
                         </motion.button>
                     ))}
                 </div>
@@ -476,7 +476,7 @@ function FeedLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layou
                 <div className="grid grid-cols-2 gap-3.5">
                     {actions.map(a => (
                         <motion.button key={a.label} whileTap={{ scale: 0.96 }} onClick={() => onAction(a.key)}
-                            className={`flex flex-col text-left p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} ${d.quickActionBg(isLight, a.color)}`}>
+                            className={`flex flex-col text-start p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} ${d.quickActionBg(isLight, a.color)}`}>
                             <span className="font-semibold text-[15px] mb-1">{a.label}</span>
                             <span className="text-[12px] opacity-50">{a.desc}</span>
                         </motion.button>
@@ -516,7 +516,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                         </p>
                     </div>
                     <button onClick={() => onNav('copilot')} className={`mt-6 w-full py-4 rounded-2xl text-[15px] font-bold active:scale-[0.97] transition-transform ${isColorful ? 'bg-gradient-to-r from-primary to-primary-dark text-white' : theme.workspace.primaryButton}`}>
-                        <Icon name="auto_awesome" className="mr-2 text-[16px]" />Ask Copilot
+                        <Icon name="auto_awesome" className="me-2 text-[16px]" />Ask Copilot
                     </button>
                 </div>
             ),
@@ -538,7 +538,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isColorful ? 'bg-primary/20' : theme.workspace.iconBg(isLight)}`}>
                                         <Icon name={ws.icon} className={`text-lg ${isColorful ? 'text-primary' : theme.workspace.iconColor(isLight)}`} />
                                     </div>
-                                    <div className="text-left">
+                                    <div className="text-start">
                                         <span className="font-semibold text-[14px] block">{ws.name}</span>
                                         <span className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{ws.members} members · {ws.docs} docs</span>
                                     </div>
@@ -567,7 +567,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                             <motion.button key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
                                 onClick={() => onNav('workspaces')} className="w-full flex items-start gap-3.5 active:opacity-70">
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[12px] font-bold ${d.teamColorMap[a.color] || 'bg-ds-gray-500/15 text-ds-gray-400'}`}>{a.user[0]}</div>
-                                <div className="flex-1 text-left">
+                                <div className="flex-1 text-start">
                                     <span className="text-[14px] block"><span className="font-semibold">{a.user}</span> {a.action}</span>
                                     <span className={`text-[12px] mt-1 block ${isLight ? 'text-ds-gray-400' : 'text-white/30'}`}>{a.time} ago</span>
                                 </div>
@@ -589,7 +589,7 @@ function CardsLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                     <div className="flex-1 grid grid-cols-2 gap-3 content-start">
                         {actions.map((a, i) => (
                             <motion.button key={a.key} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.08 }}
-                                onClick={() => onAction(a.key)} className={`flex flex-col items-start text-left p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} active:scale-95 transition-transform ${d.quickActionBg(isLight, a.color)}`}>
+                                onClick={() => onAction(a.key)} className={`flex flex-col items-start text-start p-5 ${theme.platform === 'android' ? 'rounded-[20px]' : 'rounded-[18px]'} active:scale-95 transition-transform ${d.quickActionBg(isLight, a.color)}`}>
                                 <span className="font-semibold text-[14px] mb-1">{a.label}</span>
                                 <span className="text-[11px] opacity-50">{a.desc}</span>
                             </motion.button>
@@ -730,7 +730,7 @@ function PulseLayout({ card, isLight, isColorful, theme, onNav, onAction }: Layo
                     <motion.button key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.05 }}
                         onClick={() => onNav('workspaces')} className="w-full flex items-center gap-3 py-2 active:opacity-70">
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold ${d.teamColorMap[a.color]}`}>{a.user[0]}</div>
-                        <span className="text-[12px] truncate flex-1 text-left"><span className="font-semibold">{a.user}</span> {a.action}</span>
+                        <span className="text-[12px] truncate flex-1 text-start"><span className="font-semibold">{a.user}</span> {a.action}</span>
                         <span className="text-[10px] opacity-40 shrink-0">{a.time}</span>
                     </motion.button>
                 ))}
@@ -770,9 +770,9 @@ export function DashboardView({ card, isLight, isColorful = false, onNav, theme 
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="absolute inset-0 z-50">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-ds-dark-1/40 backdrop-blur-sm" onClick={() => setActiveAction(null)} />
                         <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', stiffness: 340, damping: 32, mass: 1 }}
-                            className={`absolute bottom-0 left-0 right-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 overflow-y-auto max-h-[85%] ${sheetBg}`}>
+                            className={`absolute bottom-0 start-0 end-0 ${theme.platform === 'ios' ? 'rounded-t-[32px]' : 'rounded-t-[28px]'} p-6 pb-10 overflow-y-auto max-h-[85%] ${sheetBg}`}>
                             <div className="w-10 h-1 rounded-full bg-ds-gray-400/30 mx-auto mb-5" />
-                            <button onClick={() => setActiveAction(null)} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95">
+                            <button onClick={() => setActiveAction(null)} className="absolute top-5 end-5 w-8 h-8 rounded-full bg-ds-gray-500/20 flex items-center justify-center active:scale-95">
                                 <Icon name="close" className="text-[16px] opacity-60" />
                             </button>
                             {activeAction === 'new-doc' && <NewDocSheet isLight={isLight} isColorful={isColorful} theme={theme} onClose={() => setActiveAction(null)} />}

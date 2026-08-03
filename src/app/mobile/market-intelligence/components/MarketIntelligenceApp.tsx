@@ -179,7 +179,7 @@ function getMIStyles(os: string, theme: string) {
         modalItemInactive: isColorful
             ? 'bg-ds-card-colorful-from/70 border border-primary/15'
             : 'bg-[var(--background)] border border-[var(--card-border)]',
-        botBubble: `${cardRadius} rounded-tl-md bg-[var(--card-from-bg)] border border-[var(--card-border)] text-foreground ${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : 'backdrop-blur-xl'} shadow-sm`,
+        botBubble: `${cardRadius} rounded-ss-md bg-[var(--card-from-bg)] border border-[var(--card-border)] text-foreground ${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : 'backdrop-blur-xl'} shadow-sm`,
         inputArea: `${isIOS ? 'backdrop-blur-[30px] backdrop-saturate-[200%]' : ''} bg-[var(--background)] border-t border-[var(--card-border)]`,
         inputBox: `${isIOS ? 'rounded-full' : 'rounded-[28px]'} bg-[var(--card-from-bg)] border border-[var(--card-border)] text-foreground px-5 py-3 placeholder:text-muted-foreground`,
         promptCard: `${isIOS ? 'rounded-[18px]' : 'rounded-[16px]'} bg-[var(--card-from-bg)] border border-[var(--card-border)]`,
@@ -246,7 +246,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="User" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=f3f4f6" }} />
                             </div>
-                            <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-[2.5px] ${ui.statusDot}`}></div>
+                            <div className={`absolute -bottom-0.5 -end-0.5 w-4 h-4 rounded-full border-[2.5px] ${ui.statusDot}`}></div>
                         </motion.button>
                         <div className="flex flex-col justify-center">
                             <AnimatePresence mode="wait">
@@ -264,7 +264,7 @@ export function MarketIntelligenceApp({ os: initialOs }: { os: 'ios' | 'android'
                     <div className="flex items-center space-x-2">
                         <motion.button onClick={() => handleTabChange('copilot')} className={`relative w-10 h-10 rounded-full flex justify-center items-center ${ui.aiButton}`} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>
                             <Icon name="auto_awesome" className="text-[20px]" />
-                            <span className="absolute top-[9px] right-[9px] h-[5.5px] w-[5.5px] rounded-full bg-ds-warning shadow-sm" />
+                            <span className="absolute top-[9px] end-[9px] h-[5.5px] w-[5.5px] rounded-full bg-ds-warning shadow-sm" />
                         </motion.button>
                     </div>
                 </div>
@@ -326,7 +326,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
             {/* ── Portfolio Value Hero ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient accent line */}
-                <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r opacity-70 ${ui.accentGradient}`} />
+                <div className={`absolute top-0 start-6 end-6 h-[2px] rounded-full bg-gradient-to-r opacity-70 ${ui.accentGradient}`} />
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center space-x-2">
@@ -364,8 +364,8 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
             {/* ── AI Morning Briefing ── */}
             <motion.div variants={fadeUp} className={`relative overflow-hidden p-5 ${card}`}>
                 {/* Gradient side accent */}
-                <div className={`absolute top-4 bottom-4 left-0 w-[3px] rounded-full bg-gradient-to-b ${ui.accentGradient}`} />
-                <div className="pl-3">
+                <div className={`absolute top-4 bottom-4 start-0 w-[3px] rounded-full bg-gradient-to-b ${ui.accentGradient}`} />
+                <div className="ps-3">
                     <div className="flex items-center space-x-2.5 mb-3">
                         <Icon name="auto_awesome" className={`text-xl ${isColorful ? 'text-primary' : 'text-primary-500'}`} />
                         <span className={`text-xs font-bold uppercase tracking-widest ${isColorful ? 'text-accent' : isLight ? 'text-primary-500' : isIOS ? 'text-primary-400' : 'text-primary-300'}`}>AI Morning Briefing</span>
@@ -391,7 +391,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                             whileTap={{ scale: 0.95 }}
                             className={`shrink-0 w-[155px] p-4 ${card} cursor-pointer relative overflow-hidden`}>
                             {/* Subtle top gradient accent */}
-                            <div className={`absolute top-0 left-0 right-0 h-[2px] ${s.up ? 'bg-gradient-to-r from-ds-success/60 to-ds-success/30' : 'bg-gradient-to-r from-ds-error/60 to-ds-error/30'}`} />
+                            <div className={`absolute top-0 start-0 end-0 h-[2px] ${s.up ? 'bg-gradient-to-r from-ds-success/60 to-ds-success/30' : 'bg-gradient-to-r from-ds-error/60 to-ds-error/30'}`} />
                             <div className="flex justify-between items-start mb-1">
                                 <span className="font-bold text-[15px]">{s.ticker}</span>
                                 <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${s.up ? 'bg-ds-success/15 text-ds-success' : 'bg-ds-error/15 text-ds-error'}`}>{s.change}</span>
@@ -410,7 +410,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                     <h3 className="font-bold text-[15px]">Market Movers</h3>
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center space-x-1 ${isColorful ? 'bg-primary/20 text-accent' : isLight ? 'bg-primary-100 text-primary-500' : 'bg-primary-500/10 text-primary-400'}`}>
                         <PulseBeacon color="blue" size="sm" />
-                        <span className="ml-1">Live</span>
+                        <span className="ms-1">Live</span>
                     </span>
                 </div>
                 <div className="space-y-2.5">
@@ -424,7 +424,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                                 <motion.div initial={{ width: 0 }} animate={{ width: `${Math.min(Math.abs(parseFloat(m.change)) * 5, 100)}%` }} transition={{ delay: 0.4 + i * 0.08, duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                                     className={`h-full rounded-full ${m.up ? 'bg-gradient-to-r from-ds-success to-ds-success/60' : 'bg-gradient-to-r from-ds-error to-ds-error/60'}`} />
                             </div>
-                            <span className={`font-bold text-[13px] w-16 text-right ${m.up ? 'text-ds-success' : 'text-ds-error'}`}>{m.change}</span>
+                            <span className={`font-bold text-[13px] w-16 text-end ${m.up ? 'text-ds-success' : 'text-ds-error'}`}>{m.change}</span>
                         </motion.div>
                     ))}
                 </div>
@@ -441,7 +441,7 @@ function DashboardView({ os, theme, onNavigate }: { os: string, theme: string, o
                         { icon: 'grid_view', label: 'Sectors', desc: 'Heatmap', gradient: 'from-primary to-primary-dark' },
                     ].map((a) => (
                         <motion.button key={a.label} whileTap={{ scale: 0.96 }} onClick={() => onNavigate('copilot')}
-                            className={`relative overflow-hidden flex flex-col text-left p-4 rounded-[20px] transition-all ${ui.subtleSurface}`}>
+                            className={`relative overflow-hidden flex flex-col text-start p-4 rounded-[20px] transition-all ${ui.subtleSurface}`}>
                             {/* Subtle gradient overlay on dark themes */}
                             {!isLight && <div className={`absolute inset-0 bg-gradient-to-br ${a.gradient} opacity-[0.06] rounded-[20px]`} />}
                             <div className="relative z-10">
@@ -522,7 +522,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
 
             {/* ── Featured Stock Chart ── */}
             <motion.div variants={fadeUp} className={`p-5 ${card} relative overflow-hidden`}>
-                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r opacity-50 ${ui.accentGradient}`} />
+                <div className={`absolute top-0 start-0 end-0 h-[2px] bg-gradient-to-r opacity-50 ${ui.accentGradient}`} />
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <div className="flex items-center space-x-2 mb-1">
@@ -571,7 +571,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                 : (isLight ? 'bg-ds-error/10 border border-ds-error/20' : 'bg-ds-error/25 border border-ds-error/20')
                                 }`}>
                             {/* Weight indicator bar */}
-                            <div className={`absolute bottom-0 left-0 h-1 rounded-full transition-all ${s.up ? 'bg-ds-success/30' : 'bg-ds-error/30'}`} style={{ width: `${s.weight * 3}%` }} />
+                            <div className={`absolute bottom-0 start-0 h-1 rounded-full transition-all ${s.up ? 'bg-ds-success/30' : 'bg-ds-error/30'}`} style={{ width: `${s.weight * 3}%` }} />
                             <span className="font-bold text-[13px] block">{i === 0 ? s.name : s.short}</span>
                             <span className={`text-[12px] font-semibold ${s.up ? 'text-ds-success' : 'text-ds-error'}`}>{s.change}</span>
                             {i === 0 && <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-ds-gray-400' : 'text-ds-gray-500'}`}>{s.weight}% of market</span>}
@@ -591,14 +591,14 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                             className={`w-full flex items-center justify-between p-4 transition-all ${card}`}>
                             <div className="flex items-center space-x-3">
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-[11px] ${isIOS ? (t.up ? 'bg-primary-500/10 text-primary-500' : 'bg-ds-error/10 text-ds-error') : (t.up ? 'bg-primary-300 text-primary-900' : 'bg-ds-error/25 text-ds-error')}`}>{t.ticker.slice(0, 3)}</div>
-                                <div className="text-left">
+                                <div className="text-start">
                                     <span className="font-semibold text-[14px] block">{t.ticker}</span>
                                     <span className={`text-[11px] ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{t.name}</span>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
                                 <Sparkline data={t.data} color={t.up ? 'var(--color-success)' : 'var(--color-error)'} width={60} height={24} />
-                                <div className="text-right">
+                                <div className="text-end">
                                     <span className="font-semibold text-[14px] block">{t.price}</span>
                                     <span className={`text-[11px] font-bold ${t.up ? 'text-ds-success' : 'text-ds-error'}`}>{t.change}</span>
                                 </div>
@@ -622,7 +622,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-50">
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} className="absolute inset-0 bg-ds-dark-1/50 backdrop-blur-md" onClick={() => setSelectedTicker(null)} />
                             <motion.div initial={{ y: '100%', scale: 0.95, opacity: 0 }} animate={{ y: 0, scale: 1, opacity: 1 }} exit={{ y: '100%', scale: 0.95, opacity: 0 }} transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 1 }}
-                                className={`absolute bottom-0 left-0 right-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-2') : (isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-3')}`}>
+                                className={`absolute bottom-0 start-0 end-0 rounded-t-[32px] pt-4 pb-28 ${isIOS ? (isLight ? 'bg-white' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-2') : (isLight ? 'bg-ds-gray-50' : isColorful ? 'bg-ds-card-colorful-from' : 'bg-ds-dark-3')}`}>
                                 {/* Drag handle — tap to expand */}
                                 <button onClick={() => setTickerExpanded(e => !e)} className="w-full flex flex-col items-center pb-4 active:opacity-70">
                                     <div className="w-10 h-1 rounded-full bg-ds-gray-400/30" />
@@ -631,7 +631,7 @@ function MarketsView({ os, theme, onNavigate }: { os: string, theme: string, onN
                                 <div className="px-6">
                                     <div className="flex justify-between items-start mb-4">
                                         <div><h3 className="text-2xl font-bold">{t.ticker}</h3><p className={`text-sm ${isLight ? 'text-ds-gray-500' : 'text-ds-gray-400'}`}>{t.name}</p></div>
-                                        <div className="text-right"><span className="text-2xl font-bold">{t.price}</span><span className={`block text-sm font-bold ${t.up ? 'text-ds-success' : 'text-ds-error'}`}>{t.change}</span></div>
+                                        <div className="text-end"><span className="text-2xl font-bold">{t.price}</span><span className={`block text-sm font-bold ${t.up ? 'text-ds-success' : 'text-ds-error'}`}>{t.change}</span></div>
                                     </div>
                                     <Sparkline data={t.data} color={t.up ? 'var(--color-success)' : 'var(--color-error)'} width={340} height={80} />
                                     {/* Expandable metrics */}
@@ -723,7 +723,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
         }, 20);
     };
 
-    const userBubble = `bg-primary text-on-primary rounded-[22px] rounded-tr-md shadow-lg`;
+    const userBubble = `bg-primary text-on-primary rounded-[22px] rounded-se-md shadow-lg`;
     const botBubble = ui.botBubble;
     const inputArea = ui.inputArea;
     const inputBox = ui.inputBox;
@@ -755,7 +755,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             {prompts.map((p, i) => (
                                 <motion.button key={p.label} whileTap={{ scale: 0.93 }} onClick={() => handleSend(p.prompt)}
                                     initial={{ opacity: 0, y: 24, scale: 0.88 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.2 + i * 0.1, type: 'spring', stiffness: 280, damping: 22 }}
-                                    className={`flex flex-col text-left p-3.5 transition-all ${ui.promptCard}`}>
+                                    className={`flex flex-col text-start p-3.5 transition-all ${ui.promptCard}`}>
                                     <Icon name={p.icon} className={`mb-1.5 text-lg ${isColorful ? 'text-primary' : isIOS ? (isLight ? 'text-primary-500' : 'text-primary-400') : (isLight ? 'text-primary-500' : 'text-primary-400')}`} />
                                     <span className="font-semibold text-[13px]">{p.label}</span>
                                 </motion.button>
@@ -770,7 +770,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                             <div className="flex flex-col max-w-[88%]">
                                 <div className={`px-4 py-3 text-[14px] leading-relaxed ${msg.role === 'user' ? userBubble : botBubble}`}>{msg.text}</div>
                                 {msg.role === 'assistant' && msg.citations && (
-                                    <div className="mt-2 space-y-1.5 ml-1">
+                                    <div className="mt-2 space-y-1.5 ms-1">
                                         {msg.citations.map((c, i) => (
                                             <motion.div key={i} initial={{ opacity: 0, x: -20, scale: 0.9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.15 + i * 0.12, type: 'spring', stiffness: 280, damping: 22 }}
                                                 className={`flex items-start space-x-2 p-2.5 rounded-xl text-[11px] ${ui.subtleSurface}`}>
@@ -784,7 +784,7 @@ function CopilotView({ os, theme }: { os: string, theme: string }) {
                         </motion.div>
                     ))}
                     {isTyping && streamText && (
-                        <div className="flex justify-start"><div className={`max-w-[88%] px-4 py-3 text-[14px] leading-relaxed ${botBubble}`}>{streamText}<span className="inline-block w-0.5 h-4 ml-0.5 bg-current animate-pulse align-text-bottom" /></div></div>
+                        <div className="flex justify-start"><div className={`max-w-[88%] px-4 py-3 text-[14px] leading-relaxed ${botBubble}`}>{streamText}<span className="inline-block w-0.5 h-4 ms-0.5 bg-current animate-pulse align-text-bottom" /></div></div>
                     )}
                     {isTyping && !streamText && (
                         <div className="flex justify-start"><div className={`px-4 py-3 flex space-x-1.5 ${botBubble}`}><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '150ms' }} /><div className="w-2 h-2 rounded-full bg-current opacity-40 animate-bounce" style={{ animationDelay: '300ms' }} /></div></div>
@@ -864,12 +864,12 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
             {/* Timeline Alert Cards */}
             <div className="relative">
                 {/* Vertical timeline line */}
-                <div className={`absolute left-[21px] top-4 bottom-4 w-[2px] ${ui.track}`} />
+                <div className={`absolute start-[21px] top-4 bottom-4 w-[2px] ${ui.track}`} />
 
                 {alerts.map((a) => (
-                    <motion.div key={a.id} variants={fadeUp} className="relative pl-12 pb-4">
+                    <motion.div key={a.id} variants={fadeUp} className="relative ps-12 pb-4">
                         {/* Timeline dot */}
-                        <div className="absolute left-[14px] top-4 z-10">
+                        <div className="absolute start-[14px] top-4 z-10">
                             <div className={`w-[16px] h-[16px] rounded-full border-[3px] border-[var(--background)] ${dotColor(a.color)}`}>
                                 {a.priority === 'critical' && (
                                     <div className={`absolute inset-[-4px] rounded-full ${dotColor(a.color)} opacity-20`} />
@@ -883,15 +883,15 @@ function AlertsView({ os, theme }: { os: string, theme: string }) {
                             whileTap={{ scale: 0.98 }}
                             className={`p-4 ${card} cursor-pointer relative overflow-hidden`}>
                             {/* Priority color accent */}
-                            <div className={`absolute top-0 left-0 w-1 h-full rounded-full ${dotColor(a.color)}`} />
-                            <div className="pl-2">
+                            <div className={`absolute top-0 start-0 w-1 h-full rounded-full ${dotColor(a.color)}`} />
+                            <div className="ps-2">
                                 <div className="flex items-start space-x-3">
                                     <div className={`w-10 h-10 shrink-0 rounded-2xl flex justify-center items-center ${a.color === 'red' ? (isLight ? 'bg-ds-error/10 text-ds-error' : 'bg-ds-error/15 text-ds-error') : a.color === 'amber' ? (isLight ? 'bg-ds-warning/10 text-ds-warning' : 'bg-ds-warning/15 text-ds-warning') : a.color === 'green' ? (isLight ? 'bg-ds-success/10 text-ds-success' : 'bg-ds-success/15 text-ds-success') : a.color === 'blue' ? (isColorful ? (isLight ? 'bg-primary/20 text-primary-dark' : 'bg-primary/20 text-primary') : (isLight ? 'bg-primary-100 text-primary-500' : 'bg-primary-500/15 text-primary-400')) : 'bg-primary/10 text-primary'}`}>
                                         <Icon name={a.icon} className="text-xl" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between mb-1">
-                                            <h3 className="font-semibold text-[14px] truncate pr-2">{a.title}</h3>
+                                            <h3 className="font-semibold text-[14px] truncate pe-2">{a.title}</h3>
                                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${priorityBadge(a.priority)}`}>{a.priority}</span>
                                         </div>
                                         <p className={`text-[13px] leading-relaxed ${isLight ? 'text-ds-gray-600' : 'text-ds-gray-400'}`}>{a.desc}</p>
@@ -949,7 +949,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                             <img src="/images/me/ali.png" className="w-full h-full object-cover scale-110" alt="Ali Al-Zuhairi" onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=Ali+Al-Zuhairi&background=f3f4f6" }} />
                         </div>
                     </div>
-                    <div className="absolute bottom-0 right-0 w-6 h-6 bg-ds-success border-[3px] border-[var(--background)] rounded-full" />
+                    <div className="absolute bottom-0 end-0 w-6 h-6 bg-ds-success border-[3px] border-[var(--background)] rounded-full" />
                 </div>
                 <h2 className="font-bold text-2xl tracking-tight">Ali Al-Zuhairi</h2>
                 <p className={`text-sm font-medium mt-0.5 ${isColorful ? 'text-accent' : 'text-primary-500'}`}>Alux Space Founder</p>
@@ -972,7 +972,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
 
             {/* Portfolio Performance */}
             <motion.div variants={fadeUp} className={`p-5 ${card} relative overflow-hidden`}>
-                <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r opacity-50 from-primary to-primary-dark`} />
+                <div className={`absolute top-0 start-6 end-6 h-[2px] rounded-full bg-gradient-to-r opacity-50 from-primary to-primary-dark`} />
                 <div className="flex justify-between items-start mb-4">
                     <div><h4 className="font-semibold text-[15px]">Portfolio Performance</h4><p className="text-[11px] opacity-50 mt-0.5">Last 30 days</p></div>
                     <span className={`text-xs font-bold px-2 py-1 rounded-lg flex items-center space-x-1 ${isIOS ? 'bg-ds-success/10 text-ds-success' : 'bg-ds-success/10 text-ds-success'}`}>
@@ -1013,7 +1013,7 @@ function ProfileView({ os, theme, setTheme }: { os: string, theme: string, setTh
                     <div className="flex-1 space-y-1.5">
                         {[{ label: 'Bullish', pct: 65, pctStr: '65%', color: 'bg-primary-300' }, { label: 'Bearish', pct: 20, pctStr: '20%', color: 'bg-ds-pink-500' }, { label: 'Neutral', pct: 15, pctStr: '15%', color: 'bg-ds-warning' }].map(s => (
                             <div key={s.label} className={`flex justify-between text-[11px] items-center p-1.5 rounded-lg ${ui.subtleSurface}`}>
-                                <span className="opacity-70 flex items-center font-medium"><span className={`w-2 h-2 rounded-full mr-2 ${s.color}`} />{s.label}</span>
+                                <span className="opacity-70 flex items-center font-medium"><span className={`w-2 h-2 rounded-full me-2 ${s.color}`} />{s.label}</span>
                                 <div className="flex items-center space-x-2">
                                     <div className={`w-12 h-1.5 rounded-full overflow-hidden ${ui.track}`}>
                                         <motion.div initial={{ width: 0 }} animate={{ width: `${s.pct}%` }} transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.9 }} className={`h-full rounded-full ${s.color}`} />

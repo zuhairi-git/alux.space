@@ -1,4 +1,5 @@
 import type { TranslationObject } from '../types/translations';
+import { i18n, getLocaleConfig } from '../i18n';
 
 // Import translation data
 import enTranslations from '../locales/en/common.json';
@@ -43,18 +44,19 @@ export function getTranslation(
   placeholders?: Record<string, string | number>
 ): string {
   const translations = loadTranslations();
-  
-  // Default to English if locale doesn't exist
-  const safeLocale = translations[locale] ? locale : 'en';
+  const fallbackLocale = i18n.defaultLocale;
+
+  const safeLocale = translations[locale] ? locale : fallbackLocale;
   const keys = key.split('.');
-  
+
   // First try in the specified locale
   const translation = getNestedTranslation(translations[safeLocale], keys);
-  
-  // If not found and locale isn't English, try English as fallback
-  const fallback = 
-    !translation && safeLocale !== 'en' 
-      ? getNestedTranslation(translations.en, keys) 
+
+  // Then fall back to the default locale so a partially translated language
+  // degrades to readable text rather than to a raw dotted key.
+  const fallback =
+    !translation && safeLocale !== fallbackLocale
+      ? getNestedTranslation(translations[fallbackLocale], keys)
       : null;
   
   // Use translation, fallback, or key as last resort
@@ -87,23 +89,38 @@ const dateFormats: Record<string, DateFormatOptions> = {
 };
 
 export function formatDate(
-  locale: string, 
+  locale: string,
   date: Date | string | number,
   format: keyof typeof dateFormats | DateFormatOptions = 'short'
 ): string {
-  // Map locale codes to those expected by Intl
-  const localeMap: Record<string, string> = {
-    en: 'en-US',
-    fi: 'fi-FI',
-  };
-  
+  // The Intl tag (and, for Arabic, the numbering system) comes from
+  // LOCALE_CONFIG so adding a language never means editing a second map.
+  const intlLocale = getLocaleConfig(locale).dateLocale;
+
   const dateObj = date instanceof Date ? date : new Date(date);
   const options: DateFormatOptions = typeof format === 'string' ? dateFormats[format] : format;
-  
+
   try {
-    return new Intl.DateTimeFormat(localeMap[locale] || locale, options).format(dateObj);
+    return new Intl.DateTimeFormat(intlLocale, options).format(dateObj);
   } catch (error) {
     console.error('Error formatting date:', error);
     return new Intl.DateTimeFormat('en-US', options).format(dateObj);
+  }
+}
+
+/**
+ * Locale-aware number formatting, so counts and stats match the numbering
+ * system the date formatter uses instead of always rendering as en-US.
+ */
+export function formatNumber(
+  locale: string,
+  value: number,
+  options?: Intl.NumberFormatOptions
+): string {
+  try {
+    return new Intl.NumberFormat(getLocaleConfig(locale).dateLocale, options).format(value);
+  } catch (error) {
+    console.error('Error formatting number:', error);
+    return new Intl.NumberFormat('en-US', options).format(value);
   }
 }
