@@ -9,15 +9,15 @@ const STORAGE_KEY = 'home-design';
 
 /**
  * Homepage entry point. Two coexisting designs:
- *   - classic — the original animated homepage (default, matches SSG output)
- *   - modern  — profile-first, minimal-motion redesign
+ *   - modern  — profile-first, minimal-motion redesign (default, matches SSG output)
+ *   - classic — the original animated homepage
  *
  * The visitor's choice is kept in localStorage and applied after
  * hydration, so the server-rendered markup always matches the first
  * client render.
  */
 export default function HomePage() {
-  const [design, setDesign] = useState<HomeDesign>('classic');
+  const [design, setDesign] = useState<HomeDesign>('modern');
 
   useEffect(() => {
     try {
