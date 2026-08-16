@@ -16,25 +16,23 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/ali-zuhairi/';
 /**
  * Modern profile-first homepage.
  *
- * Design intent: energetic and playful through color, hue-tinted cards
- * and data-viz details — not through motion. Icons stay neutral
- * (accent-on-tint) and untilted. The only animations are two status-dot
- * pulses (disabled under prefers-reduced-motion); everything else is
- * plain CSS hover transitions, so the page stays calm on mobile and
- * desktop alike.
+ * Design intent: typography-led and airy — bare accent icons, hairline
+ * dividers and gradient numerals instead of nested chip/panel chrome.
+ * Color is reserved for meaning: the gradient career timeline, the focus
+ * numerals and the single cosmic podcast tile. The only animations are a
+ * few status-dot pulses (disabled under prefers-reduced-motion);
+ * everything else is plain CSS hover transitions, so the page stays calm
+ * on mobile and desktop alike.
+ *
+ * Bento rhythm: 4+2 (about / now), full-width career timeline, 3+3
+ * (skills / focus), 4+2 (podcast / languages), full-width toolbox. The
+ * podcast tile is the grid's single cosmic-gradient accent — every other
+ * tile sits on the flat card surface so the eye lands there last.
  *
  * Section ids mirror the classic design (work-experience, digital-dreams,
  * strengths-skills, podcast, testimonials) so the navigation hash links
  * keep working on both designs.
  */
-
-/** Per-item hue tints cycled across chips and card washes (not icons). */
-const CHIP_HUES = [
-  'bg-[var(--color-violet-500)]/12 border-[var(--color-violet-400)]/30',
-  'bg-[var(--color-pink-500)]/12 border-[var(--color-pink-400)]/30',
-  'bg-[var(--color-cyan-500)]/12 border-[var(--color-cyan-400)]/30',
-  'bg-[var(--color-ember-500)]/12 border-[var(--color-ember-400)]/30',
-];
 
 interface Copy {
   availability: string;
@@ -55,13 +53,13 @@ interface Copy {
   nowSince: string;
   nowPoints: string[];
   careerTitle: string;
-  career: { role: string; company: string; period: string }[];
+  career: { role: string; company: string; period: string; duration: string }[];
   skillsTitle: string;
   skills: { label: string; icon: string }[];
   focusTitle: string;
-  focus: { label: string; icon: string }[];
+  focus: string[];
   toolboxTitle: string;
-  tools: string[];
+  toolGroups: { label: string; icon: string; tools: string[] }[];
   languagesTitle: string;
   languages: { code: string; name: string }[];
   podcastTitle: string;
@@ -99,9 +97,9 @@ const COPY: Record<'en' | 'fi', Copy> = {
     nowPoints: ['International multi-team coordination', 'End-to-end platform design'],
     careerTitle: 'Career path',
     career: [
-      { role: 'Product Owner & Designer', company: 'Webropol, Helsinki', period: '2023 – Present' },
-      { role: 'Product Designer', company: 'Reslink Solutions, Espoo', period: '2016 – 2023' },
-      { role: 'UI/UX Designer', company: 'Reslink Solutions, Helsinki', period: '2014 – 2016' },
+      { role: 'Product Owner & Designer', company: 'Webropol, Helsinki', period: '2023 – Present', duration: '3+ yrs' },
+      { role: 'Product Designer', company: 'Reslink Solutions, Espoo', period: '2016 – 2023', duration: '7 yrs' },
+      { role: 'UI/UX Designer', company: 'Reslink Solutions, Helsinki', period: '2014 – 2016', duration: '2 yrs' },
     ],
     skillsTitle: 'Strengths & skills',
     skills: [
@@ -114,15 +112,19 @@ const COPY: Record<'en' | 'fi', Copy> = {
     ],
     focusTitle: 'Focus areas',
     focus: [
-      { label: 'AI Integration', icon: 'smart_toy' },
-      { label: 'Design Systems', icon: 'design_services' },
-      { label: 'Product Strategy', icon: 'trending_up' },
-      { label: 'UX Research & Testing', icon: 'science' },
-      { label: 'Team Building', icon: 'handshake' },
-      { label: 'Workshops & Facilitation', icon: 'school' },
+      'AI Integration',
+      'Design Systems',
+      'Product Strategy',
+      'UX Research & Testing',
+      'Team Building',
+      'Workshops & Facilitation',
     ],
     toolboxTitle: 'Toolbox',
-    tools: ['Figma', 'Adobe CC', 'React', 'WordPress', 'HubSpot', 'Scrum', 'Jira', 'Confluence', 'GitHub Copilot', 'GCP', 'Prompt Engineering'],
+    toolGroups: [
+      { label: 'Design', icon: 'palette', tools: ['Figma', 'Figma Make', 'Adobe CC', 'Claude Design'] },
+      { label: 'AI & Development', icon: 'smart_toy', tools: ['GitHub Copilot', 'Claude Code', 'Antigravity', 'Context Engineering', 'React', 'GCP', 'Azure'] },
+      { label: 'Product & Agile', icon: 'checklist', tools: ['HubSpot', 'Scrum', 'Jira', 'Confluence'] },
+    ],
     languagesTitle: 'Languages',
     languages: [
       { code: 'EN', name: 'English' },
@@ -162,9 +164,9 @@ const COPY: Record<'en' | 'fi', Copy> = {
     nowPoints: ['Kansainvälinen monitiimikoordinaatio', 'Alustan päästä päähän -suunnittelu'],
     careerTitle: 'Urapolku',
     career: [
-      { role: 'Tuoteomistaja & suunnittelija', company: 'Webropol, Helsinki', period: '2023 – nykyhetki' },
-      { role: 'Tuotesuunnittelija', company: 'Reslink Solutions, Espoo', period: '2016 – 2023' },
-      { role: 'UI/UX-suunnittelija', company: 'Reslink Solutions, Helsinki', period: '2014 – 2016' },
+      { role: 'Tuoteomistaja & suunnittelija', company: 'Webropol, Helsinki', period: '2023 – nykyhetki', duration: '3+ v' },
+      { role: 'Tuotesuunnittelija', company: 'Reslink Solutions, Espoo', period: '2016 – 2023', duration: '7 v' },
+      { role: 'UI/UX-suunnittelija', company: 'Reslink Solutions, Helsinki', period: '2014 – 2016', duration: '2 v' },
     ],
     skillsTitle: 'Vahvuudet & taidot',
     skills: [
@@ -177,15 +179,19 @@ const COPY: Record<'en' | 'fi', Copy> = {
     ],
     focusTitle: 'Painopistealueet',
     focus: [
-      { label: 'Tekoälyn integrointi', icon: 'smart_toy' },
-      { label: 'Designjärjestelmät', icon: 'design_services' },
-      { label: 'Tuotestrategia', icon: 'trending_up' },
-      { label: 'UX-tutkimus & testaus', icon: 'science' },
-      { label: 'Tiimin rakentaminen', icon: 'handshake' },
-      { label: 'Työpajat & fasilitointi', icon: 'school' },
+      'Tekoälyn integrointi',
+      'Designjärjestelmät',
+      'Tuotestrategia',
+      'UX-tutkimus & testaus',
+      'Tiimin rakentaminen',
+      'Työpajat & fasilitointi',
     ],
     toolboxTitle: 'Työkalupakki',
-    tools: ['Figma', 'Adobe CC', 'React', 'WordPress', 'HubSpot', 'Scrum', 'Jira', 'Confluence', 'GitHub Copilot', 'GCP', 'Prompt Engineering'],
+    toolGroups: [
+      { label: 'Suunnittelu', icon: 'palette', tools: ['Figma', 'Figma Make', 'Adobe CC', 'Claude Design'] },
+      { label: 'Tekoäly & kehitys', icon: 'smart_toy', tools: ['GitHub Copilot', 'Claude Code', 'Antigravity', 'Context Engineering', 'React', 'GCP', 'Azure'] },
+      { label: 'Tuote & ketteryys', icon: 'checklist', tools: ['HubSpot', 'Scrum', 'Jira', 'Confluence'] },
+    ],
     languagesTitle: 'Kielet',
     languages: [
       { code: 'EN', name: 'englanti' },
@@ -298,10 +304,8 @@ const Tile = ({
 );
 
 const TileTitle = ({ icon, text }: { icon: string; text: string }) => (
-  <h3 className="flex items-center gap-2.5 text-sm font-semibold uppercase tracking-wider text-[var(--muted-foreground)] mb-4">
-    <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--primary)]/10">
-      <Icon name={icon} size="sm" className="text-[var(--accent-text)]" />
-    </span>
+  <h3 className="flex items-center gap-2.5 text-sm font-semibold uppercase tracking-wider text-[var(--muted-foreground)] mb-5">
+    <Icon name={icon} size="sm" className="text-[var(--accent-text)]" />
     {text}
   </h3>
 );
@@ -513,9 +517,7 @@ export default function HomeModern() {
               </h3>
               <p className="text-lg font-semibold leading-snug">{c.nowRole}</p>
               <p className="text-sm text-[var(--muted-foreground)] mb-1">{c.nowCompany}</p>
-              <p className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[var(--primary)]/15 text-[var(--accent-text)] mb-4">
-                {c.nowSince}
-              </p>
+              <p className="text-xs font-bold text-[var(--accent-text)] mb-4">{c.nowSince}</p>
               <ul className="space-y-2">
                 {c.nowPoints.map((point) => (
                   <li key={point} className="flex items-start gap-2 text-sm text-[var(--foreground)]/80">
@@ -526,114 +528,173 @@ export default function HomeModern() {
               </ul>
             </Tile>
 
-            {/* Career path — gradient timeline */}
-            <Tile id="work-experience" className="md:col-span-3">
+            {/* Career path — horizontal gradient timeline (vertical on mobile) */}
+            <Tile id="work-experience" className="md:col-span-6">
+              <span className="absolute -end-6 -bottom-8 opacity-[0.06] text-[var(--primary)] pointer-events-none" aria-hidden="true">
+                <Icon name="route" style={{ fontSize: '10rem' }} />
+              </span>
               <TileTitle icon="work_history" text={c.careerTitle} />
-              <ol className="relative ms-2 space-y-6">
+              <ol className="relative grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-x-8 mt-5">
+                {/* Connecting line — vertical on mobile, horizontal on desktop */}
                 <div
-                  className="absolute start-[5px] top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-[var(--gradient-start)] via-[var(--gradient-mid)] to-transparent"
+                  className="md:hidden absolute start-[7px] top-1 bottom-1 w-0.5 rounded-full bg-gradient-to-b from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]"
                   aria-hidden="true"
                 />
-                {c.career.map((entry, index) => (
-                  <li key={entry.period} className="ps-6 relative">
-                    <span
-                      className={`absolute start-0 top-1 w-3 h-3 rounded-full ${index === 0 ? 'bg-[var(--primary)]' : 'bg-[var(--primary)]/40'}`}
-                      aria-hidden="true"
-                    />
-                    <p className="font-semibold leading-snug">{entry.role}</p>
-                    <p className="text-sm text-[var(--muted-foreground)]">{entry.company}</p>
-                    <p className="text-xs font-bold text-[var(--accent-text)] mt-0.5">{entry.period}</p>
-                  </li>
-                ))}
+                <div
+                  className="hidden md:block absolute top-[7px] start-1 end-1 h-0.5 rounded-full bg-gradient-to-r rtl:bg-gradient-to-l from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]"
+                  aria-hidden="true"
+                />
+                {c.career.map((entry, index) => {
+                  const isCurrent = index === 0;
+                  return (
+                    <li key={entry.period} className="relative ps-8 md:ps-0 md:pt-9">
+                      <span className="absolute start-0 top-0.5 md:top-0 flex w-4 h-4" aria-hidden="true">
+                        {isCurrent && (
+                          <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-40" />
+                        )}
+                        <span
+                          className={`relative inline-flex w-4 h-4 rounded-full border-2 ${
+                            isCurrent
+                              ? 'bg-[var(--primary)] border-[var(--primary)]'
+                              : 'bg-[var(--card-from-bg)] border-[var(--primary)]/60'
+                          }`}
+                        />
+                      </span>
+                      {/* Current role gets a tinted highlight panel */}
+                      <div className={isCurrent ? 'rounded-2xl border bg-[var(--primary)]/10 border-[var(--primary)]/25 p-4' : ''}>
+                        <p className="text-xs font-bold text-[var(--accent-text)]">
+                          {entry.period}
+                          <span className="font-semibold text-[var(--muted-foreground)]"> · {entry.duration}</span>
+                        </p>
+                        <p className="font-semibold leading-snug mt-1.5">{entry.role}</p>
+                        <p className="text-sm text-[var(--muted-foreground)]">{entry.company}</p>
+                      </div>
+                    </li>
+                  );
+                })}
               </ol>
             </Tile>
 
-            {/* Skills */}
-            <Tile id="strengths-skills" className="md:col-span-3">
+            {/* Skills — bare icon rows with hairline dividers */}
+            <Tile id="strengths-skills" className="md:col-span-3 flex flex-col">
               <TileTitle icon="psychology" text={c.skillsTitle} />
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {c.skills.map((skill, index) => (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 my-auto">
+                {c.skills.map((skill) => (
                   <li
                     key={skill.label}
-                    className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 border text-sm font-medium text-[var(--foreground)]/85 ${CHIP_HUES[index % CHIP_HUES.length]}`}
+                    className="flex items-center gap-3.5 py-2.5 border-b border-[var(--card-border)] last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 text-sm font-medium"
                   >
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg shrink-0 bg-[var(--primary)]/10">
-                      <Icon name={skill.icon} size="xs" className="text-[var(--accent-text)]" />
-                    </span>
+                    <Icon name={skill.icon} size="sm" className="text-[var(--accent-text)] shrink-0" />
                     {skill.label}
                   </li>
                 ))}
               </ul>
             </Tile>
 
-            {/* Focus areas */}
-            <Tile className="md:col-span-2">
+            {/* Focus areas — numbered editorial list */}
+            <Tile className="md:col-span-3 flex flex-col">
               <TileTitle icon="rocket_launch" text={c.focusTitle} />
-              <ul className="space-y-2.5">
-                {c.focus.map((item) => (
-                  <li key={item.label} className="flex items-center gap-2.5 text-sm font-medium">
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg shrink-0 bg-[var(--primary)]/10">
-                      <Icon name={item.icon} size="xs" className="text-[var(--accent-text)]" />
+              <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 my-auto">
+                {c.focus.map((label, index) => (
+                  <li
+                    key={label}
+                    className="flex items-center gap-3.5 py-2.5 border-b border-[var(--card-border)] last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0"
+                  >
+                    <span
+                      className="w-7 shrink-0 text-lg font-black leading-none bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-mid)] bg-clip-text text-transparent"
+                      aria-hidden="true"
+                    >
+                      {String(index + 1).padStart(2, '0')}
                     </span>
-                    {item.label}
+                    <span className="text-sm font-medium">{label}</span>
+                  </li>
+                ))}
+              </ol>
+            </Tile>
+
+            {/* Podcast — the grid's single cosmic-gradient accent tile */}
+            <div
+              id="podcast"
+              className="md:col-span-4 relative overflow-hidden rounded-3xl p-6 md:p-7 [background:var(--gradient-cosmic)] transition-shadow duration-300 hover:shadow-lg hover:shadow-[var(--card-shadow-color)]"
+            >
+              <span className="absolute -end-5 -bottom-7 opacity-10 text-[var(--text-on-cosmic)] pointer-events-none" aria-hidden="true">
+                <Icon name="podcasts" style={{ fontSize: '8rem' }} />
+              </span>
+              <div className="relative z-10">
+                <h3 className="flex items-center gap-2.5 text-sm font-semibold uppercase tracking-wider text-[var(--text-on-cosmic)]/85 mb-5">
+                  <Icon name="podcasts" size="sm" className="text-[var(--text-on-cosmic)]" />
+                  {c.podcastTitle}
+                </h3>
+                <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
+                  <div className="flex-1 min-w-[15rem]">
+                    {/* Static equalizer bars — "on air" energy without animation */}
+                    <div className="flex items-end gap-1 h-6 mb-3" aria-hidden="true">
+                      {[10, 22, 14, 24, 8, 18, 12, 20, 9].map((barHeight, index) => (
+                        <span
+                          key={index}
+                          style={{ height: barHeight }}
+                          className="w-1.5 rounded-full bg-[var(--text-on-cosmic)]/80"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm text-[var(--text-on-cosmic)]/85">{c.podcastText}</p>
+                  </div>
+                  <Link
+                    href={href('/audio')}
+                    onClick={() => trackEvent('podcast_teaser_click', 'homepage_modern', 'audio')}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-[var(--color-white)] text-[var(--color-gray-900)] hover:opacity-90 transition-opacity duration-300"
+                  >
+                    {c.podcastCta}
+                    <Icon name="arrow_forward" size="xs" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Languages — bare code + name rows */}
+            <Tile className="md:col-span-2 flex flex-col">
+              <TileTitle icon="language" text={c.languagesTitle} />
+              <ul className="my-auto">
+                {c.languages.map((lang) => (
+                  <li
+                    key={lang.code}
+                    className="flex items-baseline gap-3 py-2.5 border-b border-[var(--card-border)] last:border-b-0 text-[15px] font-medium"
+                  >
+                    <span className="w-8 shrink-0 text-[10px] font-bold tracking-widest text-[var(--accent-text)]">
+                      {lang.code}
+                    </span>
+                    {lang.name}
                   </li>
                 ))}
               </ul>
             </Tile>
 
-            {/* Toolbox */}
-            <Tile className="md:col-span-2">
+            {/* Toolbox — editorial rows: label column + middot-separated tool names */}
+            <Tile className="md:col-span-6">
               <TileTitle icon="build" text={c.toolboxTitle} />
-              <div className="flex flex-wrap gap-1.5">
-                {c.tools.map((tool, index) => (
-                  <span
-                    key={tool}
-                    className={`px-2.5 py-1 rounded-full text-xs font-semibold border text-[var(--foreground)]/85 ${CHIP_HUES[index % CHIP_HUES.length]}`}
-                  >
-                    {tool}
-                  </span>
+              <div className="divide-y divide-[var(--card-border)]">
+                {c.toolGroups.map((group) => (
+                  <div key={group.label} className="flex flex-col md:flex-row md:items-baseline gap-1.5 md:gap-8 py-4 first:pt-0 last:pb-0">
+                    <p className="flex items-center gap-2 md:w-48 shrink-0 text-[11px] font-bold uppercase tracking-wider text-[var(--muted-foreground)]">
+                      <Icon name={group.icon} size="xs" className="text-[var(--accent-text)]" />
+                      {group.label}
+                    </p>
+                    <p className="text-sm md:text-[15px] font-medium leading-relaxed">
+                      {group.tools.map((tool, toolIndex) => (
+                        <React.Fragment key={tool}>
+                          {toolIndex > 0 && (
+                            <span className="mx-2.5 text-[var(--accent-text)]" aria-hidden="true">
+                              ·
+                            </span>
+                          )}
+                          <span className="whitespace-nowrap">{tool}</span>
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  </div>
                 ))}
               </div>
             </Tile>
-
-            {/* Languages + podcast teaser */}
-            <div className="md:col-span-2 flex flex-col gap-4 md:gap-5">
-              <Tile className="flex-1">
-                <TileTitle icon="language" text={c.languagesTitle} />
-                <ul className="space-y-2">
-                  {c.languages.map((lang) => (
-                    <li key={lang.code} className="flex items-center gap-2.5 text-sm font-medium">
-                      <span className="inline-flex items-center justify-center w-8 h-6 rounded-md text-[10px] font-bold bg-[var(--primary)]/10 text-[var(--accent-text)]">
-                        {lang.code}
-                      </span>
-                      {lang.name}
-                    </li>
-                  ))}
-                </ul>
-              </Tile>
-              <Tile id="podcast" className="flex-1">
-                <TileTitle icon="podcasts" text={c.podcastTitle} />
-                {/* Static equalizer bars — "on air" energy without animation */}
-                <div className="flex items-end gap-1 h-6 mb-3" aria-hidden="true">
-                  {[10, 22, 14, 24, 8, 18, 12, 20, 9].map((barHeight, index) => (
-                    <span
-                      key={index}
-                      style={{ height: barHeight }}
-                      className="w-1.5 rounded-full bg-gradient-to-t from-[var(--gradient-start)] to-[var(--gradient-mid)]"
-                    />
-                  ))}
-                </div>
-                <p className="text-sm text-[var(--muted-foreground)] mb-3">{c.podcastText}</p>
-                <Link
-                  href={href('/audio')}
-                  onClick={() => trackEvent('podcast_teaser_click', 'homepage_modern', 'audio')}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent-text)] hover:text-[var(--primary)] transition-colors"
-                >
-                  {c.podcastCta}
-                  <Icon name="arrow_forward" size="xs" />
-                </Link>
-              </Tile>
-            </div>
           </div>
         </div>
       </section>
