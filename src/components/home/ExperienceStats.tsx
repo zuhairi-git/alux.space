@@ -54,18 +54,18 @@ const HUES: Record<'violet' | 'pink' | 'cyan' | 'ember', StatHue> = {
 };
 
 interface Stat {
-  years: number;
-  plus?: boolean;
+  /** Year the discipline started — the displayed count is derived from it. */
+  since: number;
   icon: string;
   hue: keyof typeof HUES;
   label: { en: string; fi: string };
 }
 
 const STATS: Stat[] = [
-  { years: 10, plus: true, icon: 'palette', hue: 'violet', label: { en: 'Product Design', fi: 'Tuotesuunnittelu' } },
-  { years: 8, icon: 'group', hue: 'pink', label: { en: 'Product Management', fi: 'Tuotehallinta' } },
-  { years: 8, icon: 'psychology', hue: 'cyan', label: { en: 'UX Research', fi: 'UX-tutkimus' } },
-  { years: 5, icon: 'code', hue: 'ember', label: { en: 'Frontend Development', fi: 'Frontend-kehitys' } },
+  { since: 2016, icon: 'palette', hue: 'violet', label: { en: 'Product Design', fi: 'Tuotesuunnittelu' } },
+  { since: 2018, icon: 'group', hue: 'pink', label: { en: 'Product Management', fi: 'Tuotehallinta' } },
+  { since: 2018, icon: 'psychology', hue: 'cyan', label: { en: 'UX Research', fi: 'UX-tutkimus' } },
+  { since: 2019, icon: 'code', hue: 'ember', label: { en: 'Frontend Development', fi: 'Frontend-kehitys' } },
 ];
 
 export default function ExperienceStats() {
@@ -73,12 +73,15 @@ export default function ExperienceStats() {
   const isFi = locale === 'fi';
   const yearsWord = isFi ? 'vuotta' : 'years';
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
       {STATS.map((stat) => {
         const hue = HUES[stat.hue];
         const label = isFi ? stat.label.fi : stat.label.en;
-        const value = `${stat.years}${stat.plus ? '+' : ''}`;
+        const years = currentYear - stat.since;
+        const value = `${years}`;
         return (
           <div
             key={stat.label.en}
@@ -110,7 +113,7 @@ export default function ExperienceStats() {
                 {Array.from({ length: MAX_YEARS }, (_, i) => (
                   <span
                     key={i}
-                    className={`h-1.5 flex-1 rounded-full ${i < stat.years ? hue.chip : 'bg-[var(--stepper-inactive-color)]'}`}
+                    className={`h-1.5 flex-1 rounded-full ${i < Math.min(years, MAX_YEARS) ? hue.chip : 'bg-[var(--stepper-inactive-color)]'}`}
                   />
                 ))}
               </div>
