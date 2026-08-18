@@ -439,7 +439,8 @@
   --badge-glass-border:     rgba(255, 255, 255, 0.20);
   --badge-glass-text:       var(--text-on-dark);
 
-  /* Cosmic gradient surface — theme-invariant art direction */
+  /* Cosmic gradient surface — themed per palette; keep every stop dark
+     enough that --text-on-cosmic (white) holds ≥4.5:1 on top of it */
   --gradient-cosmic:        linear-gradient(135deg, var(--color-indigo-800), var(--color-violet-700), var(--color-blue-700));
 
   /* Badge — accent (indigo, e.g. case-study category) */
@@ -619,6 +620,8 @@
   --chart-bar-gradient:  linear-gradient(to top, var(--color-emerald-400), rgba(52, 211, 153, 0.15));
   --row-hover-bg:        rgba(255, 255, 255, 0.05);
   --stepper-inactive-color: rgba(255, 255, 255, 0.15);
+  /* Cosmic surface — emerald depths (white text: emerald-700 = 5.5:1 ✓ AA) */
+  --gradient-cosmic:     linear-gradient(135deg, var(--color-emerald-950), var(--color-emerald-700), var(--color-emerald-900));
   /* Accent text */
   --accent-text:           var(--primary-400);
   --accent-text-2:         var(--color-emerald-300);
@@ -739,6 +742,8 @@
   --chart-bar-gradient:  linear-gradient(to top, var(--color-purple-400), rgba(167, 139, 250, 0.25));
   --row-hover-bg:        rgba(167, 139, 250, 0.08);
   --stepper-inactive-color: rgba(196, 181, 253, 0.20);
+  /* Cosmic surface — aurora sweep (white text: pink-600 = 4.6:1 ✓ AA) */
+  --gradient-cosmic:     linear-gradient(135deg, var(--color-violet-800), var(--color-pink-600), var(--color-blue-700));
   /* Accent text */
   --accent-text:           var(--primary-300);               /* #c4b5fd — 9.6:1 ✓ AAA */
   --accent-text-2:         var(--color-pink-400);            /* #f472b6 — 6.6:1 ✓ AA */

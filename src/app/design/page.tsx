@@ -57,7 +57,7 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
       { name: '--muted-foreground',  label: 'Muted Text' },
       { name: '--accent-text',       label: 'Accent Text' },
       { name: '--accent-text-2',     label: 'Accent Text 2' },
-      { name: '--text-on-cosmic',    label: 'Text On Cosmic', description: 'Accessible foreground for the fixed cosmic gradient button and surface.' },
+      { name: '--text-on-cosmic',    label: 'Text On Cosmic', description: 'Accessible foreground for the cosmic gradient button and surface.' },
       { name: '--card-from-bg',      label: 'Card From' },
       { name: '--card-to-bg',        label: 'Card To' },
       { name: '--section-alt',      label: 'Section Alt' },
@@ -86,7 +86,7 @@ const semanticColorGroups: { group: string; tokens: { name: string; label: strin
       { name: '--gradient-start', label: 'Start' },
       { name: '--gradient-mid',   label: 'Mid' },
       { name: '--gradient-end',   label: 'End' },
-      { name: '--gradient-cosmic', label: 'Cosmic', description: 'Theme-invariant indigo → violet → blue gradient for premium actions.' },
+      { name: '--gradient-cosmic', label: 'Cosmic', description: 'Theme-aware premium gradient — indigo/violet (light), emerald depths (dark), aurora sweep (colorful).' },
     ],
   },
   {
@@ -1244,7 +1244,7 @@ function GradientsSection() {
       token: '--gradient-cosmic',
       foreground: 'var(--text-on-cosmic)',
       foregroundToken: '--text-on-cosmic',
-      note: 'Unchanged across themes. Darker stops keep the surface modern while the dedicated foreground token stays readable.',
+      note: 'Adapts to the active theme. Darker stops keep the surface modern while the dedicated foreground token stays readable.',
     },
     {
       label: 'Ember (Colorful)',
